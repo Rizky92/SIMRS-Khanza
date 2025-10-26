@@ -47,7 +47,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement pspoli,psobat,pspenjab;
     private ResultSet rspoli,rsobat,rspenjab;
-    private int i=0,a=0,c;   
+    private int i=0,a=0,c;
     private DlgCariPoli poli=new DlgCariPoli(null,false);
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
@@ -55,7 +55,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
     private DlgCariKategori kategori = new DlgCariKategori(null, false);
     private DlgCariGolongan golongan = new DlgCariGolongan(null, false);
     private StringBuilder htmlContent;
-    
+
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -74,7 +74,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                 if(poli.getTable().getSelectedRow()!= -1){
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     nmpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kdpoli.requestFocus();
             }
             @Override
@@ -86,7 +86,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -97,7 +97,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -108,8 +108,8 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -122,7 +122,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -133,7 +133,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -144,8 +144,8 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -158,7 +158,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         jenis.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -180,7 +180,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         golongan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -204,7 +204,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kategori.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -228,7 +228,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -244,10 +244,10 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
         LoadHTML1.setDocument(doc);
-        
+
         ChkInput.setSelected(false);
         isForm();
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -702,8 +702,8 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                 ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -712,8 +712,8 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                 ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("rl4a.html");            
+
+            File f = new File("rl4a.html");
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             if(TabRawat.getSelectedIndex()==0){
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
@@ -723,7 +723,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA 10 OBAT TERBANYAK POLI<br>PERIODE REGISTRASI PASIEN "+Tgl1.getSelectedItem()+" - "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA 10 OBAT TERBANYAK POLI<br>PERIODE REGISTRASI PASIEN "+Tgl1.getSelectedItem()+" - "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -737,20 +737,20 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA 10 OBAT TERBANYAK POLI<br>PERIODE REGISTRASI PASIEN "+Tgl1.getSelectedItem()+" - "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA 10 OBAT TERBANYAK POLI<br>PERIODE REGISTRASI PASIEN "+Tgl1.getSelectedItem()+" - "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
                 bw.close();
-            }                
+            }
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -758,17 +758,17 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
         }else{
             //Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,BtnAll);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==0){
@@ -813,7 +813,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        
+
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
@@ -988,13 +988,13 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
     private widget.panelisi panelGlass5;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
-        try{   
+    public void tampil(){
+        try{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             htmlContent = new StringBuilder();
             pspoli=koneksi.prepareStatement("select kd_poli,nm_poli from poliklinik where concat(kd_poli,nm_poli) like ?");
             try {
-                pspoli.setString(1,"%"+kdpoli.getText()+nmpoli.getText()+"%"); 
+                pspoli.setString(1,"%"+kdpoli.getText()+nmpoli.getText()+"%");
                 rspoli=pspoli.executeQuery();
                 i=1;
                 if(rspoli.next()){
@@ -1016,11 +1016,11 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                             "<td align='center' valign='middle'></td>"+
                             "<td align='left' valign='middle'>"
                     );
-                    
+
                     c=0;
                     pspenjab=koneksi.prepareStatement("select kd_pj,png_jawab from penjab where concat(kd_pj, png_jawab) like ?");
                     try {
-                        pspenjab.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%"); 
+                        pspenjab.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
                         rspenjab=pspenjab.executeQuery();
                         while(rspenjab.next()){
                             psobat=koneksi.prepareStatement(
@@ -1034,7 +1034,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                                 "and reg_periksa.tgl_registrasi between ? and ? and concat(reg_periksa.kd_dokter,dokter.nm_dokter) like ? "+
                                 "and concat(databarang.kdjns,jenis.nama) like ? and concat(databarang.kode_kategori,kategori_barang.nama) like ? "+
                                 "and concat(databarang.kode_golongan,golongan_barang.nama) like ? "+
-                                "group by detail_pemberian_obat.kode_brng order by jml desc limit 10");   
+                                "group by detail_pemberian_obat.kode_brng order by jml desc limit 10");
                             try {
                                 psobat.setString(1,rspenjab.getString("kd_pj"));
                                 psobat.setString(2,rspoli.getString("kd_poli"));
@@ -1112,7 +1112,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                             "</td>"+
                         "</tr>"
                     );
-                   
+
                     i++;
                 }
             } catch (Exception e) {
@@ -1124,26 +1124,26 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                 if(pspoli!=null){
                     pspoli.close();
                 }
-            }   
+            }
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                        htmlContent.toString()+
                       "</table>"+
                     "</html>");
-            this.setCursor(Cursor.getDefaultCursor());             
+            this.setCursor(Cursor.getDefaultCursor());
         }catch(SQLException e){
             System.out.println("Catatan  "+e);
-        }  
+        }
     }
 
-    public void tampil2(){        
-        try{   
+    public void tampil2(){
+        try{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             htmlContent = new StringBuilder();
             pspoli=koneksi.prepareStatement("select kd_poli,nm_poli from poliklinik where concat(kd_poli,nm_poli) like ?");
             try {
-                pspoli.setString(1,"%"+kdpoli.getText()+nmpoli.getText()+"%"); 
+                pspoli.setString(1,"%"+kdpoli.getText()+nmpoli.getText()+"%");
                 rspoli=pspoli.executeQuery();
                 i=1;
                 if(rspoli.next()){
@@ -1165,11 +1165,11 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                             "<td align='center' valign='middle'></td>"+
                             "<td align='left' valign='middle'>"
                     );
-                    
+
                     c=0;
                     pspenjab=koneksi.prepareStatement("select kd_pj,png_jawab from penjab where concat(kd_pj, png_jawab) like ?");
                     try {
-                        pspenjab.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%"); 
+                        pspenjab.setString(1,"%"+kdpenjab.getText()+nmpenjab.getText()+"%");
                         rspenjab=pspenjab.executeQuery();
                         while(rspenjab.next()){
                             psobat=koneksi.prepareStatement(
@@ -1183,7 +1183,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                                 "and reg_periksa.tgl_registrasi between ? and ?  and concat(reg_periksa.kd_dokter,dokter.nm_dokter) like ? "+
                                 "and concat(databarang.kdjns,jenis.nama) like ? and concat(databarang.kode_kategori,kategori_barang.nama) like ? "+
                                 "and concat(databarang.kode_golongan,golongan_barang.nama) like ? "+
-                                "group by detail_pemberian_obat.kode_brng order by biaya desc limit 10");   
+                                "group by detail_pemberian_obat.kode_brng order by biaya desc limit 10");
                             try {
                                 psobat.setString(1,rspenjab.getString("kd_pj"));
                                 psobat.setString(2,rspoli.getString("kd_poli"));
@@ -1261,7 +1261,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                             "</td>"+
                         "</tr>"
                     );
-                   
+
                     i++;
                 }
             } catch (Exception e) {
@@ -1273,7 +1273,7 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                 if(pspoli!=null){
                     pspoli.close();
                 }
-            }   
+            }
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1281,22 +1281,22 @@ public final class Dlg10ObatTerbanyakPoli extends javax.swing.JDialog {
                       "</table>"+
                     "</html>");
             htmlContent=null;
-            this.setCursor(Cursor.getDefaultCursor());             
+            this.setCursor(Cursor.getDefaultCursor());
         }catch(SQLException e){
             System.out.println("Catatan  "+e);
-        } 
+        }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,96));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }

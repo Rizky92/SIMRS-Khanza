@@ -81,8 +81,8 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
 
         kdpenyakit.setDocument(new batasInput((byte)30).getKata(kdpenyakit));
-        nmpenyakit.setDocument(new batasInput((byte)30).getKata(nmpenyakit)); 
-        
+        nmpenyakit.setDocument(new batasInput((byte)30).getKata(nmpenyakit));
+
         penyakit.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -90,10 +90,10 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -105,7 +105,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         try {
             ps=koneksi.prepareStatement("select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
                 "kategori_penyakit.nm_kategori,kategori_penyakit.ciri_umum from kategori_penyakit inner join penyakit inner join penyakit_pd3i "+
@@ -182,7 +182,6 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 12, 65, 23);
 
-        kdpenyakit.setHighlighter(null);
         kdpenyakit.setName("kdpenyakit"); // NOI18N
         kdpenyakit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -314,7 +313,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
             tampil();
             emptTeks();
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -322,17 +321,17 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,nmpenyakit,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tabMode.getRowCount()==0){
@@ -345,7 +344,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
             tampil();
             emptTeks();
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -353,7 +352,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnKeluar);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         if(tabMode.getRowCount()==0){
@@ -362,13 +361,13 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         }else if(! (tabMode.getRowCount()==0)) {
             dispose();
         }
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnBatal,BtnKeluar);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -377,7 +376,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbAdminMouseClicked
+    }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -388,9 +387,9 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbAdminKeyPressed
+    }//GEN-LAST:event_tbAdminKeyPressed
 
-private void kdpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpenyakitKeyPressed
+    private void kdpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpenyakitKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select penyakit.nm_penyakit from penyakit where penyakit.kd_penyakit=?", nmpenyakit,kdpenyakit.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -398,22 +397,22 @@ private void kdpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         }else{
             Valid.pindah(evt, kdpenyakit,BtnSimpan);
         }
-}//GEN-LAST:event_kdpenyakitKeyPressed
+    }//GEN-LAST:event_kdpenyakitKeyPressed
 
-private void nmpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmpenyakitKeyPressed
+    private void nmpenyakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmpenyakitKeyPressed
         Valid.pindah(evt,kdpenyakit,BtnSimpan);
-}//GEN-LAST:event_nmpenyakitKeyPressed
+    }//GEN-LAST:event_nmpenyakitKeyPressed
 
-private void btnBangsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalActionPerformed
+    private void btnBangsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalActionPerformed
         penyakit.isCek();
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);
-}//GEN-LAST:event_btnBangsalActionPerformed
+    }//GEN-LAST:event_btnBangsalActionPerformed
 
-private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalKeyPressed
+    private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalKeyPressed
         Valid.pindah(evt,kdpenyakit,BtnSimpan);
-}//GEN-LAST:event_btnBangsalKeyPressed
+    }//GEN-LAST:event_btnBangsalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -453,7 +452,7 @@ private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             rs=ps.executeQuery();
             while(rs.next()){
                 tabMode.addRow(new Object[]{rs.getString(1),

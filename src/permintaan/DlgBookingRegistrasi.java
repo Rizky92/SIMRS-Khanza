@@ -167,7 +167,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 column.setMaxWidth(0);
             }else if(i==27){
                 if (BOOKINGLANGSUNGREGISTRASI) {
-                    column.setPreferredWidth(130);
+                    column.setPreferredWidth(110);
                     column.setMinWidth(0);
                     column.setMaxWidth(Integer.MAX_VALUE);
                 } else {
@@ -798,7 +798,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 55, 23);
 
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -814,19 +813,16 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         jLabel9.setBounds(0, 40, 55, 23);
 
         NmDokter.setEditable(false);
-        NmDokter.setHighlighter(null);
         NmDokter.setName("NmDokter"); // NOI18N
         FormInput.add(NmDokter);
         NmDokter.setBounds(151, 40, 311, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(151, 10, 311, 23);
 
         KdDokter.setEditable(false);
-        KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
         FormInput.add(KdDokter);
         KdDokter.setBounds(59, 40, 90, 23);
@@ -854,13 +850,11 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         jLabel11.setBounds(0, 70, 121, 23);
 
         KdPoli.setEditable(false);
-        KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         FormInput.add(KdPoli);
         KdPoli.setBounds(125, 70, 70, 23);
 
         NmPoli.setEditable(false);
-        NmPoli.setHighlighter(null);
         NmPoli.setName("NmPoli"); // NOI18N
         FormInput.add(NmPoli);
         NmPoli.setBounds(198, 70, 263, 23);
@@ -905,7 +899,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         FormInput.add(TanggalPeriksa);
         TanggalPeriksa.setBounds(590, 10, 120, 23);
 
-        NoReg.setHighlighter(null);
         NoReg.setName("NoReg"); // NOI18N
         NoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -943,7 +936,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         jLabel19.setBounds(0, 100, 121, 23);
 
         kdpnj.setEditable(false);
-        kdpnj.setHighlighter(null);
         kdpnj.setName("kdpnj"); // NOI18N
         kdpnj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -981,7 +973,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         jLabel20.setBounds(506, 100, 80, 23);
 
         Kuota.setEditable(false);
-        Kuota.setHighlighter(null);
         Kuota.setName("Kuota"); // NOI18N
         Kuota.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1205,7 +1196,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 dokter.setLocationRelativeTo(internalFrame1);
                 dokter.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed

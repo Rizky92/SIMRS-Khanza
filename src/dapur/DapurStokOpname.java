@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -43,7 +43,7 @@ import javax.swing.table.TableColumn;
 public final class DapurStokOpname extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
-    private validasi Valid=new validasi();  
+    private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement pstampil;
     private ResultSet rstampil;
@@ -97,12 +97,12 @@ public final class DapurStokOpname extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Kdbar.setDocument(new batasInput((byte)15).getKata(Kdbar));
         Stok.setDocument(new batasInput((byte)10).getKata(Stok));
         Real.setDocument(new batasInput((byte)10).getOnlyAngka(Real));
         Keterangan.setDocument(new batasInput((byte)60).getKata(Keterangan));
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -126,8 +126,8 @@ public final class DapurStokOpname extends javax.swing.JDialog {
                 }
             });
         }
-        
-    } 
+
+    }
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
     double total=0,totalreal=0,totallebih=0;
 
@@ -190,7 +190,6 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         BtnKeluar = new widget.Button();
 
         Kd2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -218,7 +217,6 @@ public final class DapurStokOpname extends javax.swing.JDialog {
 
         Stok.setEditable(false);
         Stok.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Stok.setHighlighter(null);
         Stok.setName("Stok"); // NOI18N
         Stok.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -257,7 +255,6 @@ public final class DapurStokOpname extends javax.swing.JDialog {
 
         Harga.setEditable(false);
         Harga.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Harga.setHighlighter(null);
         Harga.setName("Harga"); // NOI18N
         panelisi4.add(Harga);
         Harga.setBounds(410, 10, 110, 23);
@@ -270,7 +267,6 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         label36.setBounds(130, 40, 40, 23);
 
         Real.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Real.setHighlighter(null);
         Real.setName("Real"); // NOI18N
         Real.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -282,7 +278,6 @@ public final class DapurStokOpname extends javax.swing.JDialog {
 
         Selisih.setEditable(false);
         Selisih.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Selisih.setHighlighter(null);
         Selisih.setName("Selisih"); // NOI18N
         panelisi4.add(Selisih);
         Selisih.setBounds(284, 40, 55, 23);
@@ -303,7 +298,6 @@ public final class DapurStokOpname extends javax.swing.JDialog {
 
         Nominal.setEditable(false);
         Nominal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Nominal.setHighlighter(null);
         Nominal.setName("Nominal"); // NOI18N
         Nominal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -314,7 +308,6 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         Nominal.setBounds(578, 40, 130, 23);
 
         Keterangan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -581,7 +574,7 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         Valid.hapusTable(tabMode,Kdbar,"dapuropname","tanggal='"+Tanggal.getSelectedItem()+"' and kode_brng");
         BtnCariActionPerformed(evt);
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -589,17 +582,17 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -607,24 +600,24 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         if(tbKamar.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tbKamar.getRowCount()!=0){   
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tbKamar.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptOpnameDapur.jasper","report","::[ Stok Opname Barang Dapur Kering & Basah ]::","select dapuropname.kode_brng, dapurbarang.nama_brng,dapuropname.h_beli, dapurbarang.kode_sat, dapuropname.tanggal, dapuropname.stok, "+
                   "dapuropname.real, dapuropname.selisih,dapuropname.lebih, (dapuropname.real*dapuropname.h_beli) as totalreal,dapuropname.nomihilang,dapuropname.nomilebih,dapuropname.keterangan "+
                   "from dapuropname inner join dapurbarang on dapuropname.kode_brng=dapurbarang.kode_brng "+
                   "where dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%' and dapuropname.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and "+
-                  "(dapuropname.kode_brng like '%"+TCari.getText().trim()+"%' or dapurbarang.nama_brng like '%"+TCari.getText().trim()+"%' or dapuropname.kode_brng like '%"+TCari.getText().trim()+"%' or dapurbarang.kode_sat like '%"+TCari.getText().trim()+"%' or "+ 
+                  "(dapuropname.kode_brng like '%"+TCari.getText().trim()+"%' or dapurbarang.nama_brng like '%"+TCari.getText().trim()+"%' or dapuropname.kode_brng like '%"+TCari.getText().trim()+"%' or dapurbarang.kode_sat like '%"+TCari.getText().trim()+"%' or "+
                   "dapuropname.keterangan like '%"+TCari.getText().trim()+"%') order by dapuropname.tanggal",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -632,7 +625,7 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -644,11 +637,11 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -656,7 +649,7 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tbKamar.getRowCount()!=0){
@@ -665,7 +658,7 @@ public final class DapurStokOpname extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tbKamar.getRowCount()!=0){
@@ -676,7 +669,7 @@ public final class DapurStokOpname extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed
         // TODO add your handling code here:
@@ -697,21 +690,21 @@ public final class DapurStokOpname extends javax.swing.JDialog {
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
-private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
+    private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
         Valid.pindah(evt,Real,Tanggal);
-}//GEN-LAST:event_KeteranganKeyPressed
+    }//GEN-LAST:event_KeteranganKeyPressed
 
-private void NominalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NominalKeyPressed
+    private void NominalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NominalKeyPressed
         // TODO add your handling code here:
-}//GEN-LAST:event_NominalKeyPressed
+    }//GEN-LAST:event_NominalKeyPressed
 
-private void RealKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RealKeyPressed
+    private void RealKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RealKeyPressed
         Valid.pindah(evt,Kdbar,Keterangan);
-}//GEN-LAST:event_RealKeyPressed
+    }//GEN-LAST:event_RealKeyPressed
 
-private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StokKeyPressed
+    private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_StokKeyPressed
         Valid.pindah(evt,TCari,Tanggal);
-}//GEN-LAST:event_StokKeyPressed
+    }//GEN-LAST:event_StokKeyPressed
 
     private void kdjenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdjenisKeyPressed
         // TODO add your handling code here:
@@ -788,12 +781,12 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
         total=0;
         totalreal=0;
         totallebih=0;
-        try{     
+        try{
             pstampil=koneksi.prepareStatement("select dapuropname.kode_brng, dapurbarang.nama_brng,dapuropname.h_beli, dapurbarang.kode_sat, dapuropname.tanggal, dapuropname.stok, "+
                      "dapuropname.real, dapuropname.selisih,dapuropname.lebih, (dapuropname.real*dapuropname.h_beli) as totalreal,dapuropname.nomihilang,dapuropname.nomilebih,dapuropname.keterangan "+
                      "from dapuropname inner join dapurbarang on dapuropname.kode_brng=dapurbarang.kode_brng where dapurbarang.jenis like ? and dapuropname.tanggal between ? and ? and "+
                      "(dapuropname.kode_brng like ? or dapurbarang.nama_brng like ? or dapuropname.kode_brng like ? or dapurbarang.kode_sat like ? or dapuropname.keterangan like ?) order by dapuropname.tanggal");
-            try {                
+            try {
                 pstampil.setString(1,"%"+Jenis.getSelectedItem().toString().replaceAll("Semua","")+"%");
                 pstampil.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 pstampil.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -804,8 +797,8 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
                 pstampil.setString(8,"%"+TCari.getText().trim()+"%");
                 rstampil=pstampil.executeQuery();
                 total=0;
-                while(rstampil.next()){                
-                    totalreal=totalreal+rstampil.getDouble(10); 
+                while(rstampil.next()){
+                    totalreal=totalreal+rstampil.getDouble(10);
                     total=total+rstampil.getDouble(11);
                     totallebih=totallebih+rstampil.getDouble(12);
                     tabMode.addRow(new Object[]{rstampil.getString(1),
@@ -841,7 +834,7 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
         Stok.setText("0");
         Harga.setText("0");
         Real.setText("0");
-        Selisih.setText("0");        
+        Selisih.setText("0");
         Keterangan.setText("");
         Tanggal.setDate(new Date());
         Nominal.setText("0");
@@ -855,10 +848,10 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
             Kd2.setText(tbKamar.getValueAt(row,0).toString());
             Nmbar.setText(tbKamar.getValueAt(row,1).toString());
             Stok.setText(tbKamar.getValueAt(row,5).toString());
-            Real.setText(tbKamar.getValueAt(row,6).toString());            
-            Selisih.setText(tbKamar.getValueAt(row,7).toString());        
-            Nominal.setText(tbKamar.getValueAt(row,8).toString());      
-            Keterangan.setText(tbKamar.getValueAt(row,9).toString());      
+            Real.setText(tbKamar.getValueAt(row,6).toString());
+            Selisih.setText(tbKamar.getValueAt(row,7).toString());
+            Nominal.setText(tbKamar.getValueAt(row,8).toString());
+            Keterangan.setText(tbKamar.getValueAt(row,9).toString());
             Valid.SetTgl(Tanggal,tbKamar.getValueAt(row,4).toString());
         }
     }
@@ -870,10 +863,10 @@ private void StokKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Stok
     public JButton getButton(){
         return BtnKeluar;
     }
-    
-        
+
+
     public void isCek(){
         BtnHapus.setEnabled(akses.getdapur_opname());
-        BtnPrint.setEnabled(akses.getdapur_opname()); 
+        BtnPrint.setEnabled(akses.getdapur_opname());
     }
 }

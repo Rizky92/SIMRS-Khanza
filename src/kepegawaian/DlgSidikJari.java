@@ -49,7 +49,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
     public DlgSidikJari(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"ID","NIP","Nama Pegawai","Template Sidik Jari"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -72,7 +72,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -95,7 +95,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         try{
             ps=koneksi.prepareStatement("select  pegawai.id,pegawai.nik,pegawai.nama,sidikjari.sidikjari  from pegawai "+
                     "inner join sidikjari on pegawai.id=sidikjari.id where  pegawai.stts_aktif<>'KELUAR' and pegawai.nik like ? or  pegawai.stts_aktif<>'KELUAR' and pegawai.nama like ? "+
@@ -104,7 +104,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
             System.out.println(ex);
         }
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -281,7 +281,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
             Sequel.meghapus("sidikjari","id",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
             tampil();
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -289,17 +289,17 @@ public final class DlgSidikJari extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari,BtnPrint);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -309,27 +309,27 @@ public final class DlgSidikJari extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){              
+        }else if(tabMode.getRowCount()!=0){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptSidikJari.jasper","report","::[ Data Sidik Jari ]::",
                     "select  pegawai.id,pegawai.nik,pegawai.nama,sidikjari.sidikjari  from pegawai "+
                     "inner join sidikjari on pegawai.id=sidikjari.id where pegawai.nik like '%"+TCari.getText().trim()+"%' "+
                     "or pegawai.nama like '%"+TCari.getText().trim()+"%' order by pegawai.nik",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         Valid.pindah(evt,BtnHapus,BtnKeluar);
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -339,11 +339,11 @@ public final class DlgSidikJari extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -351,16 +351,16 @@ public final class DlgSidikJari extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyReleased
         // TODO add your handling code here:
-}//GEN-LAST:event_BtnCariKeyReleased
+    }//GEN-LAST:event_BtnCariKeyReleased
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -369,7 +369,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     /**
     * @param args the command line arguments
@@ -405,7 +405,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             rs=ps.executeQuery();
@@ -421,7 +421,7 @@ public final class DlgSidikJari extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-       
+
      public void isCek(){
         BtnHapus.setEnabled(akses.getsidikjari());
         BtnPrint.setEnabled(akses.getsidikjari());

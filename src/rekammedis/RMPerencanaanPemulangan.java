@@ -53,18 +53,18 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
     private StringBuilder htmlContent;
     private String pilihan="";
     private String finger="",lokasifile="";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMPerencanaanPemulangan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Masuk Dirawat","Rencana Pulang","Diagnosa Medis","Alasan Masuk / Dirawat",
             "Pengaruh RI Pasien & Keluarga","Keterangan Pengaruh RI Pasien & Keluarga","Pengaruh RI Pekerjaan/Sekolah","Keterangan Pengaruh RI Pekerjaan/Sekolah",
-            "Pengaruh RI Keuangan","Keterangan Pengaruh RI Keuangan","Antisipasi Masalah","Keterangan Antisipasi Masalah","Bantuan Diperlukan","Keterangan Bantuan Diperlukan", 
+            "Pengaruh RI Keuangan","Keterangan Pengaruh RI Keuangan","Antisipasi Masalah","Keterangan Antisipasi Masalah","Bantuan Diperlukan","Keterangan Bantuan Diperlukan",
             "Membantu Keperluan","Keterangan Yang Membantu Keperluan","Tinggal Sendiri","Keterangan Pasien Tinggal Sendiri","Peralatan Medis","Keterangan Peralatan Medis",
             "Alat Bantu","Keterangan Memerlukan Alat Bantu","Perawatan Khusus","Keterangan Perawatan Khusus","Memenuhi Kebutuhan","Keterangan Memenuhi Kebutuhan",
             "Nyeri Kronis","Keterangan Nyeri Kronis","Edukasi Kesehatan","Keterangan Edukasi Kesehatan","Keterampilkan Khusus","Keterangan Keterampilkan Khusus",
@@ -72,7 +72,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
-        
+
         tbObat.setModel(tabMode);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -162,7 +162,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         DiagnosaMedis.setDocument(new batasInput((int)50).getKata(DiagnosaMedis));
         AlasanMasuk.setDocument(new batasInput((int)150).getKata(AlasanMasuk));
@@ -182,10 +182,10 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         KeteranganKeterampilanKhusus.setDocument(new batasInput((int)100).getKata(KeteranganKeterampilanKhusus));
         SaksiKeluarga.setDocument(new batasInput((int)50).getKata(SaksiKeluarga));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -208,7 +208,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -231,7 +231,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML2.setEditable(true);
         LoadHTML2.setEditorKit(kit);
@@ -537,7 +537,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(jSeparator14);
         jSeparator14.setBounds(0, 861, 880, 0);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -548,13 +547,11 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         TNoRw.setBounds(74, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(309, 10, 260, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 100, 23);
@@ -565,13 +562,11 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         jLabel8.setBounds(580, 10, 60, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
         Jk.setBounds(774, 10, 80, 23);
@@ -622,7 +617,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(jSeparator1);
         jSeparator1.setBounds(0, 100, 880, 1);
 
-        KeteranganTinggalSendiri.setHighlighter(null);
         KeteranganTinggalSendiri.setName("KeteranganTinggalSendiri"); // NOI18N
         KeteranganTinggalSendiri.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -686,7 +680,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(jLabel42);
         jLabel42.setBounds(460, 780, 110, 23);
 
-        SaksiKeluarga.setHighlighter(null);
         SaksiKeluarga.setName("SaksiKeluarga"); // NOI18N
         SaksiKeluarga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -697,7 +690,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         SaksiKeluarga.setBounds(574, 780, 280, 23);
 
         MasukDirawat.setEditable(false);
-        MasukDirawat.setHighlighter(null);
         MasukDirawat.setName("MasukDirawat"); // NOI18N
         FormInput.add(MasukDirawat);
         MasukDirawat.setBounds(98, 40, 131, 23);
@@ -713,7 +705,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(jLabel40);
         jLabel40.setBounds(453, 40, 100, 23);
 
-        DiagnosaMedis.setHighlighter(null);
         DiagnosaMedis.setName("DiagnosaMedis"); // NOI18N
         DiagnosaMedis.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -728,7 +719,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(jLabel41);
         jLabel41.setBounds(0, 70, 137, 23);
 
-        AlasanMasuk.setHighlighter(null);
         AlasanMasuk.setName("AlasanMasuk"); // NOI18N
         AlasanMasuk.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -749,7 +739,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(jLabel43);
         jLabel43.setBounds(0, 120, 180, 23);
 
-        KeteranganPengaruhRIKeluarga.setHighlighter(null);
         KeteranganPengaruhRIKeluarga.setName("KeteranganPengaruhRIKeluarga"); // NOI18N
         KeteranganPengaruhRIKeluarga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -784,7 +773,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(PengaruhRIPekerjaanSekolah);
         PengaruhRIPekerjaanSekolah.setBounds(184, 150, 80, 23);
 
-        KeteranganPengaruhRIPekerjaanSekolah.setHighlighter(null);
         KeteranganPengaruhRIPekerjaanSekolah.setName("KeteranganPengaruhRIPekerjaanSekolah"); // NOI18N
         KeteranganPengaruhRIPekerjaanSekolah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -809,7 +797,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(PengaruhRIKeuangan);
         PengaruhRIKeuangan.setBounds(184, 180, 80, 23);
 
-        KeteranganPengaruhRIKeuangan.setHighlighter(null);
         KeteranganPengaruhRIKeuangan.setName("KeteranganPengaruhRIKeuangan"); // NOI18N
         KeteranganPengaruhRIKeuangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -835,7 +822,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(AntisipasiMasalah);
         AntisipasiMasalah.setBounds(40, 230, 80, 23);
 
-        KeteranganAntisipasiMasalah.setHighlighter(null);
         KeteranganAntisipasiMasalah.setName("KeteranganAntisipasiMasalah"); // NOI18N
         KeteranganAntisipasiMasalah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -861,7 +847,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(BantuanDiperlukan);
         BantuanDiperlukan.setBounds(40, 280, 160, 23);
 
-        KeteranganBantuanDiperlukan.setHighlighter(null);
         KeteranganBantuanDiperlukan.setName("KeteranganBantuanDiperlukan"); // NOI18N
         KeteranganBantuanDiperlukan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -887,7 +872,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(YangMembantuKeperluan);
         YangMembantuKeperluan.setBounds(40, 330, 80, 23);
 
-        KeteranganYangMembantuKeperluan.setHighlighter(null);
         KeteranganYangMembantuKeperluan.setName("KeteranganYangMembantuKeperluan"); // NOI18N
         KeteranganYangMembantuKeperluan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -919,7 +903,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(PeralatanMedis);
         PeralatanMedis.setBounds(40, 430, 80, 23);
 
-        KeteranganPeralatanMedis.setHighlighter(null);
         KeteranganPeralatanMedis.setName("KeteranganPeralatanMedis"); // NOI18N
         KeteranganPeralatanMedis.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -945,7 +928,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(AlatBantu);
         AlatBantu.setBounds(40, 480, 80, 23);
 
-        KeteranganAlatBantu.setHighlighter(null);
         KeteranganAlatBantu.setName("KeteranganAlatBantu"); // NOI18N
         KeteranganAlatBantu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -971,7 +953,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(PerawatanKhusus);
         PerawatanKhusus.setBounds(40, 530, 80, 23);
 
-        KeteranganPerawatanKhusus.setHighlighter(null);
         KeteranganPerawatanKhusus.setName("KeteranganPerawatanKhusus"); // NOI18N
         KeteranganPerawatanKhusus.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -997,7 +978,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(MemenuhiKebutuhan);
         MemenuhiKebutuhan.setBounds(40, 580, 80, 23);
 
-        KeteranganMemenuhiKebutuhan.setHighlighter(null);
         KeteranganMemenuhiKebutuhan.setName("KeteranganMemenuhiKebutuhan"); // NOI18N
         KeteranganMemenuhiKebutuhan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1023,7 +1003,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(NyeriKronis);
         NyeriKronis.setBounds(40, 630, 80, 23);
 
-        KeteranganNyeriKronis.setHighlighter(null);
         KeteranganNyeriKronis.setName("KeteranganNyeriKronis"); // NOI18N
         KeteranganNyeriKronis.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1049,7 +1028,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(EdukasiPasien);
         EdukasiPasien.setBounds(40, 680, 80, 23);
 
-        KeteranganEdukasiPasien.setHighlighter(null);
         KeteranganEdukasiPasien.setName("KeteranganEdukasiPasien"); // NOI18N
         KeteranganEdukasiPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1075,7 +1053,6 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         FormInput.add(KeterampilanKhusus);
         KeterampilanKhusus.setBounds(40, 730, 80, 23);
 
-        KeteranganKeterampilanKhusus.setHighlighter(null);
         KeteranganKeterampilanKhusus.setName("KeteranganKeterampilanKhusus"); // NOI18N
         KeteranganKeterampilanKhusus.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1316,7 +1293,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1324,17 +1301,17 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,SaksiKeluarga,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -1349,9 +1326,9 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }              
-            
-}//GEN-LAST:event_BtnHapusActionPerformed
+        }
+
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1359,7 +1336,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRM.getText().trim().equals("")){
@@ -1387,7 +1364,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1395,17 +1372,17 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1414,19 +1391,19 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                         ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                         ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
                 );
                 bg.close();
 
-                File f;            
-                BufferedWriter bw; 
-                
+                File f;
+                BufferedWriter bw;
+
                 if(TCari.getText().trim().equals("")){
                     ps=koneksi.prepareStatement(
                             "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
@@ -1478,13 +1455,13 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                         ps.setString(5,"%"+TCari.getText()+"%");
                         ps.setString(6,"%"+TCari.getText()+"%");
                         ps.setString(7,"%"+TCari.getText()+"%");
-                    } 
+                    }
                     rs=ps.executeQuery();
                     pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "<tr class='isi'>"+
                                         "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Rawat</td>"+
                                         "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.RM</td>"+
@@ -1574,24 +1551,24 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                                         "</tr>"
                                     );
                                 }
-                                f = new File("RencanaPemulangan.html");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("RencanaPemulangan.html");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write("<html>"+
                                             "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                             "<body>"+
                                                 "<table width='5500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                     htmlContent.toString()+
                                                 "</table>"+
-                                            "</body>"+                   
+                                            "</body>"+
                                          "</html>"
                                 );
 
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 2 (WPS)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "<tr class='isi'>"+
                                         "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.Rawat</td>"+
                                         "<td valign='middle' bgcolor='#FFFAF8' align='center'>No.RM</td>"+
@@ -1681,39 +1658,39 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                                         "</tr>"
                                     );
                                 }
-                                f = new File("RencanaPemulangan.wps");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("RencanaPemulangan.wps");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write("<html>"+
                                             "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                             "<body>"+
                                                 "<table width='5500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                     htmlContent.toString()+
                                                 "</table>"+
-                                            "</body>"+                   
+                                            "</body>"+
                                          "</html>"
                                 );
 
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
                             break;
                         case "Laporan 3 (CSV)":
                                 htmlContent = new StringBuilder();
-                                htmlContent.append(                             
+                                htmlContent.append(
                                     "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"Masuk Dirawat\";\"Rencana Pulang\";\"Diagnosa Medis\";\"Alasan Masuk / Dirawat\";\"Pengaruh RI Pasien & Keluarga\";\"Keterangan Pengaruh RI Pasien & Keluarga\";\"Pengaruh RI Pekerjaan/Sekolah\";\"Keterangan Pengaruh RI Pekerjaan/Sekolah\";\"Pengaruh RI Keuangan\";\"Keterangan Pengaruh RI Keuangan\";\"Antisipasi Masalah\";\"Keterangan Antisipasi Masalah\";\"Bantuan Diperlukan\";\"Keterangan Bantuan Diperlukan\";\"Membantu Keperluan\";\"Keterangan Yang Membantu Keperluan\";\"Tinggal Sendiri\";\"Keterangan Pasien Tinggal Sendiri\";\"Peralatan Medis\";\"Keterangan Peralatan Medis\";\"Alat Bantu\";\"Keterangan Memerlukan Alat Bantu\";\"Perawatan Khusus\";\"Keterangan Perawatan Khusus\";\"Memenuhi Kebutuhan\";\"Keterangan Memenuhi Kebutuhan\";\"Nyeri Kronis\";\"Keterangan Nyeri Kronis\";\"Edukasi Kesehatan\";\"Keterangan Edukasi Kesehatan\";\"Keterampilkan Khusus\";\"Keterangan Keterampilkan Khusus\";\"Pasien/Keluarga\";\"NIP\";\"Nama Petugas\"\n"
-                                ); 
+                                );
                                 while(rs.next()){
                                     htmlContent.append(
                                         "\""+rs.getString("no_rawat")+"\";\""+rs.getString("no_rkm_medis")+"\";\""+rs.getString("nm_pasien")+"\";\""+rs.getString("tgl_lahir")+"\";\""+rs.getString("jk")+"\";\""+rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg")+"\";\""+rs.getString("rencana_pulang")+"\";\""+rs.getString("diagnosa_medis")+"\";\""+rs.getString("alasan_masuk")+"\";\""+rs.getString("pengaruh_ri_pasien_dan_keluarga")+"\";\""+rs.getString("keterangan_pengaruh_ri_pasien_dan_keluarga")+"\";\""+rs.getString("pengaruh_ri_pekerjaan_sekolah")+"\";\""+rs.getString("keterangan_pengaruh_ri_pekerjaan_sekolah")+"\";\""+rs.getString("pengaruh_ri_keuangan")+"\";\""+rs.getString("keterangan_pengaruh_ri_keuangan")+"\";\""+rs.getString("antisipasi_masalah_saat_pulang")+"\";\""+rs.getString("keterangan_antisipasi_masalah_saat_pulang")+"\";\""+rs.getString("bantuan_diperlukan_dalam")+"\";\""+rs.getString("keterangan_bantuan_diperlukan_dalam")+"\";\""+rs.getString("adakah_yang_membantu_keperluan")+"\";\""+rs.getString("keterangan_adakah_yang_membantu_keperluan")+"\";\""+rs.getString("pasien_tinggal_sendiri")+"\";\""+rs.getString("keterangan_pasien_tinggal_sendiri")+"\";\""+rs.getString("pasien_menggunakan_peralatan_medis")+"\";\""+rs.getString("keterangan_pasien_menggunakan_peralatan_medis")+"\";\""+rs.getString("pasien_memerlukan_alat_bantu")+"\";\""+rs.getString("keterangan_pasien_memerlukan_alat_bantu")+"\";\""+rs.getString("memerlukan_perawatan_khusus")+"\";\""+rs.getString("keterangan_memerlukan_perawatan_khusus")+"\";\""+rs.getString("bermasalah_memenuhi_kebutuhan")+"\";\""+rs.getString("keterangan_bermasalah_memenuhi_kebutuhan")+"\";\""+rs.getString("memiliki_nyeri_kronis")+"\";\""+rs.getString("keterangan_memiliki_nyeri_kronis")+"\";\""+rs.getString("memerlukan_edukasi_kesehatan")+"\";\""+rs.getString("keterangan_memerlukan_edukasi_kesehatan")+"\";\""+rs.getString("memerlukan_keterampilkan_khusus")+"\";\""+rs.getString("keterangan_memerlukan_keterampilkan_khusus")+"\";\""+rs.getString("nama_pasien_keluarga")+"\";\""+rs.getString("nip")+"\";\""+rs.getString("nama")+"\"\n"
                                     );
                                 }
-                                f = new File("RencanaPemulangan.csv");            
-                                bw = new BufferedWriter(new FileWriter(f));            
+                                f = new File("RencanaPemulangan.csv");
+                                bw = new BufferedWriter(new FileWriter(f));
                                 bw.write(htmlContent.toString());
 
-                                bw.close();                         
+                                bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
-                            break; 
-                    }           
+                            break;
+                    }
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
                 } finally{
@@ -1729,7 +1706,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1737,7 +1714,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1747,11 +1724,11 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1759,12 +1736,12 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1773,7 +1750,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1786,7 +1763,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 TabRawat.setSelectedIndex(0);
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1803,7 +1780,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==1){
@@ -1860,7 +1837,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 Sequel.queryu("delete from bukti_perencanaan_pemulangan_saksikeluarga where no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'");
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Pernyataan terlebih dahulu..!!");
-            }   
+            }
         }
     }//GEN-LAST:event_btnAmbilActionPerformed
 
@@ -2187,7 +2164,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                         "reg_periksa.tgl_registrasi between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
                         "perencanaan_pemulangan.nip like ? or petugas.nama like ?) order by reg_periksa.tgl_registrasi");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
@@ -2200,7 +2177,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -2213,7 +2190,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                         rs.getString("keterangan_pasien_memerlukan_alat_bantu"),rs.getString("memerlukan_perawatan_khusus"),rs.getString("keterangan_memerlukan_perawatan_khusus"),rs.getString("bermasalah_memenuhi_kebutuhan"),
                         rs.getString("keterangan_bermasalah_memenuhi_kebutuhan"),rs.getString("memiliki_nyeri_kronis"),rs.getString("keterangan_memiliki_nyeri_kronis"),rs.getString("memerlukan_edukasi_kesehatan"),
                         rs.getString("keterangan_memerlukan_edukasi_kesehatan"),rs.getString("memerlukan_keterampilkan_khusus"),rs.getString("keterangan_memerlukan_keterampilkan_khusus"),rs.getString("nama_pasien_keluarga"),
-                        rs.getString("nip"),rs.getString("nama")             
+                        rs.getString("nip"),rs.getString("nama")
                     });
                 }
             } catch (Exception e) {
@@ -2226,7 +2203,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -2270,15 +2247,15 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
         SaksiKeluarga.setText("");
         TabRawat.setSelectedIndex(0);
         DiagnosaMedis.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan")); 
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString().replaceAll("L","Laki-laki").replaceAll("P","Perempuan"));
             MasukDirawat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             DiagnosaMedis.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             AlasanMasuk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
@@ -2351,14 +2328,14 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getperencanaan_pemulangan());
         BtnHapus.setEnabled(akses.getperencanaan_pemulangan());
@@ -2373,9 +2350,9 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }            
+        }
     }
-    
+
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
@@ -2415,17 +2392,17 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                TabRawat.setSelectedIndex(1);
         }
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(430,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -2445,7 +2422,7 @@ public final class RMPerencanaanPemulangan extends javax.swing.JDialog {
                         }else{
                             lokasifile=rs.getString("photo");
                             LoadHTML2.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/perencanaanpemulangan/"+rs.getString("photo")+"' alt='photo' width='450' height='500'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         lokasifile="";
                         LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");

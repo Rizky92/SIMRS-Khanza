@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -83,18 +83,18 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class, 
-                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
-                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
-                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
-                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
-                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
-                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
-                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class, 
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
+                java.lang.Boolean.class, java.lang.Boolean.class, java.lang.Boolean.class,
                 java.lang.Boolean.class
              };
              @Override
@@ -190,8 +190,8 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class,warna);
 
         kdgudang.setDocument(new batasInput((byte)5).getKata(kdgudang));
-        catatan.setDocument(new batasInput((byte)60).getKata(catatan));  
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        catatan.setDocument(new batasInput((byte)60).getKata(catatan));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -213,10 +213,10 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
                     }
                 }
             });
-        }       
-        
+        }
+
         TCari.requestFocus();
-        
+
         bangsal.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -224,10 +224,10 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                   
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 kdgudang.requestFocus();
                 tampil();
             }
@@ -240,7 +240,7 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         aturan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -248,9 +248,9 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(aturan.getTable().getSelectedRow()!= -1){  
+                if(aturan.getTable().getSelectedRow()!= -1){
                     tbDokter.setValueAt(aturan.getTable().getValueAt(aturan.getTable().getSelectedRow(),0).toString(),tbDokter.getSelectedRow(),12);
-                }   
+                }
                 tbDokter.requestFocus();
             }
             @Override
@@ -262,9 +262,9 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jam();
-           
+
         try {
             psrekening=koneksi.prepareStatement("select * from set_akun_ranap");
             try {
@@ -284,9 +284,9 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
                 if(psrekening!=null){
                     psrekening.close();
                 }
-            }    
-            tampilkan_ppnobat_ranap=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ranap from set_nota"); 
-            
+            }
+            tampilkan_ppnobat_ranap=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ranap from set_nota");
+
             try {
                 aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
             } catch (Exception e) {
@@ -296,14 +296,14 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         try {
             hppfarmasi=koneksiDB.HPPFARMASI();
         } catch (Exception e) {
             hppfarmasi="dasar";
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -377,7 +377,6 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
         });
         Popup.add(ppBersihkan);
 
-        kelas.setHighlighter(null);
         kelas.setName("kelas"); // NOI18N
         kelas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -385,7 +384,6 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
             }
         });
 
-        KdPj.setHighlighter(null);
         KdPj.setName("KdPj"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -742,18 +740,18 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
-}//GEN-LAST:event_BtnKeluarActionPerformed
+            dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnCari,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -766,7 +764,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
             }
         }
-        
+
         if(nmgudang.getText().trim().equals("")||kdgudang.getText().trim().equals("")){
             Valid.textKosong(kdgudang,"Gudang");
         }else if(catatan.getText().trim().equals("")){
@@ -776,7 +774,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(tbDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data kosong..!!!!");
             tbDokter.requestFocus();
-        }else{            
+        }else{
             if(Sequel.cariRegistrasi(norawat.getText())>0){
                 JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                 TCari.requestFocus();
@@ -788,9 +786,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Sequel.AutoComitFalse();
                         sukses=true;
                         ttlhpp=0;ttljual=0;
-                        for(i=0;i<tbDokter.getRowCount();i++){  
+                        for(i=0;i<tbDokter.getRowCount();i++){
                            if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                                if(Sequel.menyimpantf2("stok_obat_pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Stok Obat Pasien",33,new String[]{                            
+                                if(Sequel.menyimpantf2("stok_obat_pasien","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Stok Obat Pasien",33,new String[]{
                                     Valid.SetTgl(Tgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),norawat.getText(),tabMode.getValueAt(i,1).toString(),
                                     tabMode.getValueAt(i,0).toString(),kdgudang.getText(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString(),tabMode.getValueAt(i,12).toString(),
                                     tabMode.getValueAt(i,13).toString(),tabMode.getValueAt(i,14).toString(),tabMode.getValueAt(i,15).toString(),tabMode.getValueAt(i,16).toString(),tabMode.getValueAt(i,17).toString(),
@@ -807,19 +805,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             ""+tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,11).toString()
                                         });
                                         Trackobat.catatRiwayat(tabMode.getValueAt(i,1).toString(),0,Valid.SetAngka(tabMode.getValueAt(i,0).toString()),"Stok Pasien Ranap",akses.getkode(),kdgudang.getText(),"Simpan",tabMode.getValueAt(i,10).toString(),tabMode.getValueAt(i,11).toString(),norawat.getText()+" "+nm_pasien.getText());
-                                        Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tabMode.getValueAt(i,0).toString()+"','"+tabMode.getValueAt(i,10).toString()+"','"+tabMode.getValueAt(i,11).toString()+"'", 
+                                        Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tabMode.getValueAt(i,0).toString()+"','"+tabMode.getValueAt(i,10).toString()+"','"+tabMode.getValueAt(i,11).toString()+"'",
                                                         "stok=stok-'"+tabMode.getValueAt(i,0).toString()+"'","kode_brng='"+tabMode.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='"+tabMode.getValueAt(i,10).toString()+"' and no_faktur='"+tabMode.getValueAt(i,11).toString()+"'");
                                     }else{
                                         Trackobat.catatRiwayat(tabMode.getValueAt(i,1).toString(),0,Valid.SetAngka(tabMode.getValueAt(i,0).toString()),"Stok Pasien Ranap",akses.getkode(),kdgudang.getText(),"Simpan","","",norawat.getText()+" "+nm_pasien.getText());
-                                        Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tabMode.getValueAt(i,0).toString()+"','',''", 
+                                        Sequel.menyimpan("gudangbarang","'"+tabMode.getValueAt(i,1).toString()+"','"+kdgudang.getText()+"','-"+tabMode.getValueAt(i,0).toString()+"','',''",
                                                         "stok=stok-'"+tabMode.getValueAt(i,0).toString()+"'","kode_brng='"+tabMode.getValueAt(i,1).toString()+"' and kd_bangsal='"+kdgudang.getText()+"' and no_batch='' and no_faktur=''");
-                                    }   
+                                    }
                                 }else{
                                     sukses=false;
-                                }                            
+                                }
                            }
-                        }  
-                        
+                        }
+
                         if(!nopermintaan.equals("")){
                             Sequel.mengedit("permintaan_stok_obat_pasien","no_permintaan='"+nopermintaan+"'","tgl_validasi='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"',jam_validasi='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"',status='Sudah'");
                         }
@@ -827,15 +825,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(sukses==true){
                             Sequel.deleteTampJurnal();
                             if(ttljual>0){
-                                Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", ttljual, 0);
-                                Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", 0, ttljual);
+                                if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", ttljual, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", 0, ttljual);
                             }
                             if(ttlhpp>0){
-                                Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
-                                Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", 0, ttlhpp);
+                                if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", 0, ttlhpp);
                             }
-                            sukses=jur.simpanJurnal(norawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());  
-                        }                                                 
+                            if (sukses) sukses = jur.simpanJurnal(norawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());
+                        }
 
                         if(sukses==true){
                             Sequel.Commit();
@@ -844,37 +842,37 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             sukses=false;
                             JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                             Sequel.RollBack();
-                        }   
+                        }
                         Sequel.AutoComitTrue();
 
                         if(sukses==true){
-                            for(index=0;index<tbDokter.getRowCount();index++){   
-                                tbDokter.setValueAt("",index,0); 
-                                tbDokter.setValueAt(0,index,9);  
+                            for(index=0;index<tbDokter.getRowCount();index++){
+                                tbDokter.setValueAt("",index,0);
+                                tbDokter.setValueAt(0,index,9);
                                 tbDokter.setValueAt(false,index,13);
                                 tbDokter.setValueAt(false,index,14);
                                 tbDokter.setValueAt(false,index,15);
-                                tbDokter.setValueAt(false,index,16);  
-                                tbDokter.setValueAt(false,index,17);  
-                                tbDokter.setValueAt(false,index,18);  
-                                tbDokter.setValueAt(false,index,19);  
-                                tbDokter.setValueAt(false,index,20);  
-                                tbDokter.setValueAt(false,index,21);  
-                                tbDokter.setValueAt(false,index,22);  
-                                tbDokter.setValueAt(false,index,23);  
-                                tbDokter.setValueAt(false,index,24);  
-                                tbDokter.setValueAt(false,index,25);  
-                                tbDokter.setValueAt(false,index,26);  
-                                tbDokter.setValueAt(false,index,27);  
-                                tbDokter.setValueAt(false,index,28);  
-                                tbDokter.setValueAt(false,index,29);  
-                                tbDokter.setValueAt(false,index,30);  
-                                tbDokter.setValueAt(false,index,31);  
-                                tbDokter.setValueAt(false,index,32);  
-                                tbDokter.setValueAt(false,index,33);  
-                                tbDokter.setValueAt(false,index,34);  
-                                tbDokter.setValueAt(false,index,35);  
-                                tbDokter.setValueAt(false,index,36);  
+                                tbDokter.setValueAt(false,index,16);
+                                tbDokter.setValueAt(false,index,17);
+                                tbDokter.setValueAt(false,index,18);
+                                tbDokter.setValueAt(false,index,19);
+                                tbDokter.setValueAt(false,index,20);
+                                tbDokter.setValueAt(false,index,21);
+                                tbDokter.setValueAt(false,index,22);
+                                tbDokter.setValueAt(false,index,23);
+                                tbDokter.setValueAt(false,index,24);
+                                tbDokter.setValueAt(false,index,25);
+                                tbDokter.setValueAt(false,index,26);
+                                tbDokter.setValueAt(false,index,27);
+                                tbDokter.setValueAt(false,index,28);
+                                tbDokter.setValueAt(false,index,29);
+                                tbDokter.setValueAt(false,index,30);
+                                tbDokter.setValueAt(false,index,31);
+                                tbDokter.setValueAt(false,index,32);
+                                tbDokter.setValueAt(false,index,33);
+                                tbDokter.setValueAt(false,index,34);
+                                tbDokter.setValueAt(false,index,35);
+                                tbDokter.setValueAt(false,index,36);
                             }
                             ttl=0;
                             ttlhpp=0;
@@ -901,7 +899,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
-private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             tampil();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -911,64 +909,64 @@ private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCa
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbDokter.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
-private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+    private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCari1ActionPerformed
+    }//GEN-LAST:event_BtnCari1ActionPerformed
 
-private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
+    private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
         }else{
             Valid.pindah(evt, TCari, BtnSimpan);
         }
-}//GEN-LAST:event_BtnCari1KeyPressed
+    }//GEN-LAST:event_BtnCari1KeyPressed
 
-private void catatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_catatanKeyPressed
+    private void catatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_catatanKeyPressed
         Valid.pindah(evt, kdgudang,BtnSimpan);
-}//GEN-LAST:event_catatanKeyPressed
+    }//GEN-LAST:event_catatanKeyPressed
 
-private void TglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglKeyPressed
+    private void TglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglKeyPressed
         Valid.pindah(evt,TCari,kdgudang);
-}//GEN-LAST:event_TglKeyPressed
+    }//GEN-LAST:event_TglKeyPressed
 
-private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+    private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
             int row2=tbDokter.getRowCount();
-            for(int r=0;r<row2;r++){ 
+            for(int r=0;r<row2;r++){
                 tbDokter.setValueAt("",r,0);
             }
-            
+
             LTotal.setText("0");
             LPpn.setText("0");
             LTotalTagihan.setText("0");
-}//GEN-LAST:event_ppBersihkanActionPerformed
+    }//GEN-LAST:event_ppBersihkanActionPerformed
 
-private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
+    private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));  
+        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
         tampil();
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));  
+        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
         tampil();
         Tgl.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));  
+        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
         tampil();
         BtnSimpan.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         BtnGudangActionPerformed(null);
     }
-}//GEN-LAST:event_kdgudangKeyPressed
+    }//GEN-LAST:event_kdgudangKeyPressed
 
-private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
+    private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
     bangsal.isCek();
     bangsal.emptTeks();
     bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     bangsal.setLocationRelativeTo(internalFrame1);
     bangsal.setAlwaysOnTop(false);
     bangsal.setVisible(true);
-}//GEN-LAST:event_BtnGudangActionPerformed
+    }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1010,13 +1008,13 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     aturan.setLocationRelativeTo(internalFrame1);
                     aturan.setVisible(true);
                 }
-            } 
+            }
         }
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tabMode.getRowCount()!=0){
-            try {                  
+            try {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
@@ -1038,15 +1036,15 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
         if(tabMode.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                try {                                     
-                    getData();                     
+                try {
+                    getData();
                     TCari.setText("");
                     TCari.requestFocus();
                 } catch (java.lang.NullPointerException e) {
                 }
             }else if((evt.getKeyCode()==KeyEvent.VK_RIGHT)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
-                try {                                     
-                    getData();           
+                try {
+                    getData();
                 } catch (java.lang.NullPointerException e) {
                 }
             }
@@ -1215,8 +1213,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         jam22=new boolean[jml];
         jam23=null;
         jam23=new boolean[jml];
-        
-        index=0;        
+
+        index=0;
         for(i=0;i<tbDokter.getRowCount();i++){
             if(!tbDokter.getValueAt(i,0).toString().equals("")){
                 keranap[index]=tbDokter.getValueAt(i,0).toString();
@@ -1259,7 +1257,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 index++;
             }
         }
-        
+
         Valid.tabelKosong(tabMode);
         for(i=0;i<jml;i++){
             tabMode.addRow(new Object[]{
@@ -1267,7 +1265,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 jam00[i],jam01[i],jam02[i],jam03[i],jam04[i],jam05[i],jam06[i],jam07[i],jam08[i],jam09[i],jam10[i],jam11[i],jam12[i],jam13[i],jam14[i],
                 jam15[i],jam16[i],jam17[i],jam18[i],jam19[i],jam20[i],jam21[i],jam22[i],jam23[i]});
         }
-        try{  
+        try{
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
                     pstampil=koneksi.prepareStatement("select data_batch.kode_brng, databarang.nama_brng,jenis.nama,"+
@@ -1279,7 +1277,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             " where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and databarang.kode_brng like ? or "+
                             " gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and databarang.nama_brng like ? or "+
                             " gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and databarang.kode_sat like ? or "+
-                            " gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and jenis.nama like ? order by databarang.nama_brng");  
+                            " gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and jenis.nama like ? order by databarang.nama_brng");
                     try{
                         pstampil.setDouble(1,kenaikan);
                         pstampil.setString(2,kdgudang.getText());
@@ -1303,7 +1301,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                    false,false,false,false,false,false,false,false,false,false,false,
                                    false,false,false,false,false,false,false,false,false,false
                                 });
-                        }                  
+                        }
                     }catch(Exception e){
                         System.out.println("Notif Data Barang : "+e);
                     }finally{
@@ -1313,7 +1311,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         if(pstampil!=null){
                             pstampil.close();
                         }
-                    } 
+                    }
                 }else{
                     pstampil=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama,"+
                             " databarang.kapasitas,databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
@@ -1323,7 +1321,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and databarang.kode_brng like ? or "+
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and databarang.nama_brng like ? or "+
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and databarang.kode_sat like ? or "+
-                            " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and jenis.nama like ? order by databarang.nama_brng");  
+                            " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and jenis.nama like ? order by databarang.nama_brng");
                     try{
                         pstampil.setDouble(1,kenaikan);
                         pstampil.setString(2,kdgudang.getText());
@@ -1346,7 +1344,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                    false,false,false,false,false,false,false,false,false,false,
                                    false,false,false,false,false,false,false,false,false,false
                                 });
-                        }                  
+                        }
                     }catch(Exception e){
                         System.out.println("Notif Data Barang : "+e);
                     }finally{
@@ -1370,7 +1368,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             " where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and databarang.kode_brng like ? or "+
                             " gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and databarang.nama_brng like ? or "+
                             " gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and databarang.kode_sat like ? or "+
-                            " gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and jenis.nama like ? order by databarang.nama_brng");  
+                            " gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and jenis.nama like ? order by databarang.nama_brng");
                     try{
                         pstampil.setString(1,kdgudang.getText());
                         pstampil.setString(2,"%"+TCari.getText().trim()+"%");
@@ -1479,7 +1477,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                    false,false,false,false,false,false,false,false,false,false
                                 });
                             }
-                        }                  
+                        }
                     }catch(Exception e){
                         System.out.println("Notif Data Barang : "+e);
                     }finally{
@@ -1489,7 +1487,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         if(pstampil!=null){
                             pstampil.close();
                         }
-                    } 
+                    }
                 }else{
                     pstampil=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama,"+
                             " databarang.kapasitas,databarang.kode_sat,databarang.kelas1,"+
@@ -1500,7 +1498,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and databarang.kode_brng like ? or "+
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and databarang.nama_brng like ? or "+
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and databarang.kode_sat like ? or "+
-                            " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and jenis.nama like ? order by databarang.nama_brng");                
+                            " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and gudangbarang.stok>0 and databarang.status='1' and gudangbarang.kd_bangsal=? and jenis.nama like ? order by databarang.nama_brng");
                     try{
                         pstampil.setString(1,kdgudang.getText());
                         pstampil.setString(2,"%"+TCari.getText().trim()+"%");
@@ -1601,7 +1599,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                    false,false,false,false,false,false,false,false,false,false
                                 });
                             }
-                        }                  
+                        }
                     }catch(Exception e){
                         System.out.println("Notif Data Barang : "+e);
                     }finally{
@@ -1611,19 +1609,19 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         if(pstampil!=null){
                             pstampil.close();
                         }
-                    }   
+                    }
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
-    
+
     public void tampil2(String nopermintaan) {
         this.nopermintaan=nopermintaan;
         Valid.tabelKosong(tabMode);
-        try{  
+        try{
             if(kenaikan>0){
                 if(aktifkanbatch.equals("yes")){
                     pstampil=koneksi.prepareStatement("select data_batch.kode_brng, databarang.nama_brng,jenis.nama,"+
@@ -1647,7 +1645,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             " gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.nama_brng like ? or "+
                             " gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.kode_sat like ? or "+
                             " gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and jenis.nama like ? "+
-                            " group by databarang.kode_brng order by data_batch.tgl_kadaluarsa desc");  
+                            " group by databarang.kode_brng order by data_batch.tgl_kadaluarsa desc");
                     try{
                         pstampil.setDouble(1,kenaikan);
                         pstampil.setString(2,kdgudang.getText());
@@ -1680,7 +1678,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                rstampil.getBoolean("jam20"),rstampil.getBoolean("jam21"),rstampil.getBoolean("jam22"),
                                rstampil.getBoolean("jam23")
                             });
-                        }                  
+                        }
                     }catch(Exception e){
                         System.out.println("Notif Data Barang : "+e);
                     }finally{
@@ -1690,7 +1688,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         if(pstampil!=null){
                             pstampil.close();
                         }
-                    } 
+                    }
                 }else{
                     pstampil=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama,"+
                             " databarang.kapasitas,databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,"+
@@ -1710,7 +1708,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.kode_brng like ? or "+
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.nama_brng like ? or "+
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.kode_sat like ? or "+
-                            " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and jenis.nama like ? order by databarang.nama_brng");  
+                            " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and jenis.nama like ? order by databarang.nama_brng");
                     try{
                         pstampil.setDouble(1,kenaikan);
                         pstampil.setString(2,kdgudang.getText());
@@ -1743,7 +1741,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                rstampil.getBoolean("jam20"),rstampil.getBoolean("jam21"),rstampil.getBoolean("jam22"),
                                rstampil.getBoolean("jam23")
                             });
-                        }                  
+                        }
                     }catch(Exception e){
                         System.out.println("Notif Data Barang : "+e);
                     }finally{
@@ -1779,7 +1777,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             " gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.nama_brng like ? or "+
                             " gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.kode_sat like ? or "+
                             " gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and jenis.nama like ? "+
-                            " group by databarang.kode_brng order by data_batch.tgl_kadaluarsa desc");  
+                            " group by databarang.kode_brng order by data_batch.tgl_kadaluarsa desc");
                     try{
                         pstampil.setString(1,kdgudang.getText());
                         pstampil.setString(2,nopermintaan);
@@ -1911,7 +1909,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                    rstampil.getBoolean("jam23")
                                 });
                             }
-                        }                  
+                        }
                     }catch(Exception e){
                         System.out.println("Notif Data Barang : "+e);
                     }finally{
@@ -1921,7 +1919,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         if(pstampil!=null){
                             pstampil.close();
                         }
-                    } 
+                    }
                 }else{
                     pstampil=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama,"+
                             " databarang.kapasitas,databarang.kode_sat,databarang.kelas1,"+
@@ -1943,7 +1941,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.kode_brng like ? or "+
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.nama_brng like ? or "+
                             " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and databarang.kode_sat like ? or "+
-                            " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and jenis.nama like ? order by databarang.nama_brng");                
+                            " gudangbarang.no_batch='' and gudangbarang.no_faktur='' and databarang.status='1' and gudangbarang.kd_bangsal=? and detail_permintaan_stok_obat_pasien.no_permintaan=? and jenis.nama like ? order by databarang.nama_brng");
                     try{
                         pstampil.setString(1,kdgudang.getText());
                         pstampil.setString(2,nopermintaan);
@@ -2075,7 +2073,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                    rstampil.getBoolean("jam23")
                                 });
                             }
-                        }                  
+                        }
                     }catch(Exception e){
                         System.out.println("Notif Data Barang : "+e);
                     }finally{
@@ -2085,12 +2083,12 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         if(pstampil!=null){
                             pstampil.close();
                         }
-                    }   
+                    }
                 }
-            } 
-            
+            }
+
             ttl=0;
-            for(int r=0;r<tabMode.getRowCount();r++){ 
+            for(int r=0;r<tabMode.getRowCount();r++){
                  y=0;
                  try {
                      y=Double.parseDouble(tabMode.getValueAt(r,0).toString())*
@@ -2113,9 +2111,9 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             System.out.println("Notifikasi : "+e);
         }
     }
-     
+
     public void isCek(){
-        BtnSimpan.setEnabled(akses.getstok_obat_pasien());   
+        BtnSimpan.setEnabled(akses.getstok_obat_pasien());
         TCari.setText("");
         TCari.requestFocus();
     }
@@ -2139,23 +2137,23 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             Jeniskelas.setSelectedItem("VIP");
         }else if(kelas.getText().equals("Kelas VVIP")){
             Jeniskelas.setSelectedItem("VVIP");
-        }    
-        
+        }
+
         this.nopermintaan="";
         kenaikan=Sequel.cariIsiAngka2("select (set_harga_obat_ranap.hargajual/100) from set_harga_obat_ranap where set_harga_obat_ranap.kd_pj=? and set_harga_obat_ranap.kelas=?",KdPj.getText(),kelas.getText());
         kdgudang.setText(akses.getkdbangsal());
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));  
+        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
     }
 
     private void getData() {
         int row=tbDokter.getSelectedRow();
         if(nmgudang.getText().trim().equals("")){
              Valid.textKosong(kdgudang,"Asal Stok");
-        }else if(row!= -1){            
+        }else if(row!= -1){
              if(!tabMode.getValueAt(row,0).toString().equals("")){
                 try {
                     if(Double.parseDouble(tabMode.getValueAt(row,0).toString())>0){
-                        stokobat=0;   
+                        stokobat=0;
                         if(aktifkanbatch.equals("yes")){
                             pstampil=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch=? and gudangbarang.no_faktur=?");
                             try {
@@ -2176,7 +2174,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 if(pstampil!=null){
                                     pstampil.close();
                                 }
-                            }  
+                            }
                         }else{
                             pstampil=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
                             try {
@@ -2195,7 +2193,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 if(pstampil!=null){
                                     pstampil.close();
                                 }
-                            }  
+                            }
                         }
 
                         tbDokter.setValueAt(stokobat,row,6);
@@ -2205,27 +2203,27 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         } catch (Exception e) {
                             y=0;
                         }
-                        
+
                         if(stokobat<y){
                               JOptionPane.showMessageDialog(null,"Maaf, Stok tidak cukup....!!!");
                               TCari.requestFocus();
-                              tabMode.setValueAt("", row,0); 
-                              tabMode.setValueAt(0, row,9); 
+                              tabMode.setValueAt("", row,0);
+                              tabMode.setValueAt(0, row,9);
                         }else{
                               y=Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),0).toString())*
                                   Double.parseDouble(tabMode.getValueAt(tbDokter.getSelectedRow(),7).toString());
                               tbDokter.setValueAt(y,tbDokter.getSelectedRow(),9);
                               TCari.setText("");
-                        } 
+                        }
                     }
                 } catch (Exception e) {
                     tabMode.setValueAt("", row,0);
                     tabMode.setValueAt(0, row,9);
-                }                                       
-             } 
-             
+                }
+             }
+
              ttl=0;
-             for(int r=0;r<tabMode.getRowCount();r++){ 
+             for(int r=0;r<tabMode.getRowCount();r++){
                  y=0;
                  try {
                      y=Double.parseDouble(tabMode.getValueAt(r,0).toString())*
@@ -2245,7 +2243,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
              LTotalTagihan.setText(Valid.SetAngka(ttl));
         }
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -2304,27 +2302,27 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private void pilihancetak() {
         pilihanetiket = (String)JOptionPane.showInputDialog(null,"Silahkan pilih cetak aturan pakai..!!","Cetak Aturan Pakai",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Cetak Aturan Pakai Model 1","Cetak Aturan Pakai Model 2","Cetak Aturan Pakai Model 3","Cetak Label Obat","Cetak Label Obat 2","Cetak Aturan Pakai Model 1 & Cetak Label Obat","Cetak Aturan Pakai Model 2 & Cetak Label Obat","Cetak Aturan Pakai Model 3 & Cetak Label Obat","Cetak Aturan Pakai Model 1 & Cetak Label Obat 2","Cetak Aturan Pakai Model 2 & Cetak Label Obat 2","Cetak Aturan Pakai Model 3 & Cetak Label Obat 2"},"Cetak Aturan Pakai Model 1");
         switch (pilihanetiket) {
-            case "Cetak Aturan Pakai Model 1": 
+            case "Cetak Aturan Pakai Model 1":
                 aturanpakai1();
                 break;
-            case "Cetak Aturan Pakai Model 2": 
+            case "Cetak Aturan Pakai Model 2":
                 aturanpakai2();
                 break;
-            case "Cetak Aturan Pakai Model 3": 
+            case "Cetak Aturan Pakai Model 3":
                 aturanpakai3();
                 break;
-            case "Cetak Label Obat": 
+            case "Cetak Label Obat":
                 cetaklabel1();
                 break;
             case "Cetak Aturan Pakai Model 1 & Cetak Label Obat":
                 aturanpakai1();
                 cetaklabel1();
                 break;
-            case "Cetak Aturan Pakai Model 2 & Cetak Label Obat": 
+            case "Cetak Aturan Pakai Model 2 & Cetak Label Obat":
                 aturanpakai2();
                 cetaklabel1();
                 break;
-            case "Cetak Aturan Pakai Model 3 & Cetak Label Obat": 
+            case "Cetak Aturan Pakai Model 3 & Cetak Label Obat":
                 aturanpakai3();
                 cetaklabel1();
                 break;
@@ -2335,11 +2333,11 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 aturanpakai1();
                 cetaklabel2();
                 break;
-            case "Cetak Aturan Pakai Model 2 & Cetak Label Obat 2" : 
+            case "Cetak Aturan Pakai Model 2 & Cetak Label Obat 2" :
                 aturanpakai2();
                 cetaklabel2();
                 break;
-            case "Cetak Aturan Pakai Model 3 & Cetak Label Obat 2" : 
+            case "Cetak Aturan Pakai Model 3 & Cetak Label Obat 2" :
                 aturanpakai3();
                 cetaklabel2();
                 break;
@@ -2349,18 +2347,18 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
 
     private void aturanpakai1() {
-        Map<String, Object> param = new HashMap<>();  
+        Map<String, Object> param = new HashMap<>();
         param.put("namars",akses.getnamars());
         param.put("alamatrs",akses.getalamatrs());
         param.put("kotars",akses.getkabupatenrs());
         param.put("propinsirs",akses.getpropinsirs());
         param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs());   
+        param.put("emailrs",akses.getemailrs());
 
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam00='true'")>0){
-            param.put("waktu","JAM 00");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 00");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2369,10 +2367,10 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join databarang on stok_obat_pasien.kode_brng=databarang.kode_brng "+
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam00='true'",param);
-        }   
+        }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam01='true'")>0){
-            param.put("waktu","JAM 01");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 01");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2383,8 +2381,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam01='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam02='true'")>0){
-            param.put("waktu","JAM 02");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 02");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2395,8 +2393,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam02='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam03='true'")>0){
-            param.put("waktu","JAM 03");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 03");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2407,8 +2405,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam03='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam04='true'")>0){
-            param.put("waktu","JAM 04");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 04");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2419,8 +2417,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam04='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam05='true'")>0){
-            param.put("waktu","JAM 05");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 05");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2431,8 +2429,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam05='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam06='true'")>0){
-            param.put("waktu","JAM 06");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 06");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2443,8 +2441,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam06='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam07='true'")>0){
-            param.put("waktu","JAM 07");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 07");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2455,8 +2453,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam07='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam08='true'")>0){
-            param.put("waktu","JAM 08");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 08");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2467,8 +2465,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam08='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam09='true'")>0){
-            param.put("waktu","JAM 09");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 09");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2479,8 +2477,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam09='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam10='true'")>0){
-            param.put("waktu","JAM 10");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 10");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2491,8 +2489,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam10='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam11='true'")>0){
-            param.put("waktu","JAM 11");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 11");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2503,8 +2501,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam11='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam12='true'")>0){
-            param.put("waktu","JAM 12");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 12");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2515,8 +2513,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam12='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam13='true'")>0){
-            param.put("waktu","JAM 13");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 13");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2527,8 +2525,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam13='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam14='true'")>0){
-            param.put("waktu","JAM 14");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 14");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2539,8 +2537,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam14='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam15='true'")>0){
-            param.put("waktu","JAM 15");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 15");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2551,8 +2549,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam15='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam16='true'")>0){
-            param.put("waktu","JAM 16");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 16");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2563,8 +2561,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam16='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam17='true'")>0){
-            param.put("waktu","JAM 17");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 17");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2575,8 +2573,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam17='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam18='true'")>0){
-            param.put("waktu","JAM 18");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 18");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2587,8 +2585,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam18='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam19='true'")>0){
-            param.put("waktu","JAM 19");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 19");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2599,8 +2597,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam19='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam20='true'")>0){
-            param.put("waktu","JAM 20");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 20");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2611,8 +2609,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam20='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam21='true'")>0){
-            param.put("waktu","JAM 21");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 21");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2623,8 +2621,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam21='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam22='true'")>0){
-            param.put("waktu","JAM 22");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 22");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2635,8 +2633,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam22='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam23='true'")>0){
-            param.put("waktu","JAM 23");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 23");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2651,16 +2649,16 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void aturanpakai2() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        Map<String, Object> param = new HashMap<>();  
+        Map<String, Object> param = new HashMap<>();
         param.put("namars",akses.getnamars());
         param.put("alamatrs",akses.getalamatrs());
         param.put("kotars",akses.getkabupatenrs());
         param.put("propinsirs",akses.getpropinsirs());
         param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs()); 
+        param.put("emailrs",akses.getemailrs());
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam00='true'")>0){
-            param.put("waktu","JAM 00");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 00");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2669,10 +2667,10 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join databarang on stok_obat_pasien.kode_brng=databarang.kode_brng "+
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam00='true'",param);
-        }   
+        }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam01='true'")>0){
-            param.put("waktu","JAM 01");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 01");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2683,8 +2681,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam01='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam02='true'")>0){
-            param.put("waktu","JAM 02");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 02");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2695,8 +2693,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam02='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam03='true'")>0){
-            param.put("waktu","JAM 03");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 03");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2707,8 +2705,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam03='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam04='true'")>0){
-            param.put("waktu","JAM 04");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 04");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2719,8 +2717,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam04='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam05='true'")>0){
-            param.put("waktu","JAM 05");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 05");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2731,8 +2729,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam05='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam06='true'")>0){
-            param.put("waktu","JAM 06");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 06");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2743,8 +2741,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam06='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam07='true'")>0){
-            param.put("waktu","JAM 07");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 07");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2755,8 +2753,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam07='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam08='true'")>0){
-            param.put("waktu","JAM 08");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 08");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2767,8 +2765,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam08='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam09='true'")>0){
-            param.put("waktu","JAM 09");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 09");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2779,8 +2777,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam09='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam10='true'")>0){
-            param.put("waktu","JAM 10");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 10");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2791,8 +2789,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam10='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam11='true'")>0){
-            param.put("waktu","JAM 11");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 11");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2803,8 +2801,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam11='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam12='true'")>0){
-            param.put("waktu","JAM 12");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 12");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2815,8 +2813,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam12='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam13='true'")>0){
-            param.put("waktu","JAM 13");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 13");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2827,8 +2825,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam13='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam14='true'")>0){
-            param.put("waktu","JAM 14");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 14");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2839,8 +2837,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam14='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam15='true'")>0){
-            param.put("waktu","JAM 15");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 15");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2851,8 +2849,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam15='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam16='true'")>0){
-            param.put("waktu","JAM 16");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 16");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2863,8 +2861,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam16='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam17='true'")>0){
-            param.put("waktu","JAM 17");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 17");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2875,8 +2873,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam17='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam18='true'")>0){
-            param.put("waktu","JAM 18");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 18");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2887,8 +2885,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam18='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam19='true'")>0){
-            param.put("waktu","JAM 19");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 19");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2899,8 +2897,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam19='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam20='true'")>0){
-            param.put("waktu","JAM 20");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 20");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2911,8 +2909,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam20='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam21='true'")>0){
-            param.put("waktu","JAM 21");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 21");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2923,8 +2921,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam21='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam22='true'")>0){
-            param.put("waktu","JAM 22");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 22");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2935,8 +2933,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam22='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam23='true'")>0){
-            param.put("waktu","JAM 23");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 23");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2950,17 +2948,17 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
 
     private void aturanpakai3() {
-        Map<String, Object> param = new HashMap<>();  
+        Map<String, Object> param = new HashMap<>();
         param.put("namars",akses.getnamars());
         param.put("alamatrs",akses.getalamatrs());
         param.put("kotars",akses.getkabupatenrs());
         param.put("propinsirs",akses.getpropinsirs());
         param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs()); 
+        param.put("emailrs",akses.getemailrs());
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam00='true'")>0){
-            param.put("waktu","JAM 00");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 00");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2969,10 +2967,10 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join databarang on stok_obat_pasien.kode_brng=databarang.kode_brng "+
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam00='true'",param);
-        }   
+        }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam01='true'")>0){
-            param.put("waktu","JAM 01");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 01");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2983,8 +2981,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam01='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam02='true'")>0){
-            param.put("waktu","JAM 02");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 02");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -2995,8 +2993,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam02='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam03='true'")>0){
-            param.put("waktu","JAM 03");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 03");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3007,8 +3005,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam03='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam04='true'")>0){
-            param.put("waktu","JAM 04");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 04");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3019,8 +3017,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam04='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam05='true'")>0){
-            param.put("waktu","JAM 05");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 05");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3031,8 +3029,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam05='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam06='true'")>0){
-            param.put("waktu","JAM 06");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 06");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3043,8 +3041,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam06='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam07='true'")>0){
-            param.put("waktu","JAM 07");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 07");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3055,8 +3053,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam07='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam08='true'")>0){
-            param.put("waktu","JAM 08");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 08");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3067,8 +3065,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam08='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam09='true'")>0){
-            param.put("waktu","JAM 09");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 09");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3079,8 +3077,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam09='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam10='true'")>0){
-            param.put("waktu","JAM 10");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 10");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3091,8 +3089,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam10='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam11='true'")>0){
-            param.put("waktu","JAM 11");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 11");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3103,8 +3101,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam11='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam12='true'")>0){
-            param.put("waktu","JAM 12");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 12");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3115,8 +3113,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam12='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam13='true'")>0){
-            param.put("waktu","JAM 13");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 13");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3127,8 +3125,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam13='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam14='true'")>0){
-            param.put("waktu","JAM 14");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 14");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3139,8 +3137,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam14='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam15='true'")>0){
-            param.put("waktu","JAM 15");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 15");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3151,8 +3149,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam15='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam16='true'")>0){
-            param.put("waktu","JAM 16");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 16");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3163,8 +3161,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam16='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam17='true'")>0){
-            param.put("waktu","JAM 17");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 17");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3175,8 +3173,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam17='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam18='true'")>0){
-            param.put("waktu","JAM 18");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 18");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3187,8 +3185,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam18='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam19='true'")>0){
-            param.put("waktu","JAM 19");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 19");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3199,8 +3197,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam19='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam20='true'")>0){
-            param.put("waktu","JAM 20");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 20");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3211,8 +3209,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam20='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam21='true'")>0){
-            param.put("waktu","JAM 21");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 21");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3223,8 +3221,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam21='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam22='true'")>0){
-            param.put("waktu","JAM 22");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 22");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3235,8 +3233,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam22='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam23='true'")>0){
-            param.put("waktu","JAM 23");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 23");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptItemStokPasien3.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3250,16 +3248,16 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }
 
     private void cetaklabel1() {
-        Map<String, Object> param = new HashMap<>();  
+        Map<String, Object> param = new HashMap<>();
         param.put("namars",akses.getnamars());
         param.put("alamatrs",akses.getalamatrs());
         param.put("kotars",akses.getkabupatenrs());
         param.put("propinsirs",akses.getpropinsirs());
         param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs()); 
+        param.put("emailrs",akses.getemailrs());
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>''")>0){
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien.jasper","report","::[ Label Obat Stok Pasien ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3272,22 +3270,22 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join databarang on stok_obat_pasien.kode_brng=databarang.kode_brng "+
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>''",param);
-        }           
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
 
     private void cetaklabel2() {
-        Map<String, Object> param = new HashMap<>();  
+        Map<String, Object> param = new HashMap<>();
         param.put("namars",akses.getnamars());
         param.put("alamatrs",akses.getalamatrs());
         param.put("kotars",akses.getkabupatenrs());
         param.put("propinsirs",akses.getpropinsirs());
         param.put("kontakrs",akses.getkontakrs());
-        param.put("emailrs",akses.getemailrs()); 
+        param.put("emailrs",akses.getemailrs());
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam00='true'")>0){
-            param.put("waktu","JAM 00");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 00");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3296,10 +3294,10 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "inner join databarang on stok_obat_pasien.kode_brng=databarang.kode_brng "+
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam00='true'",param);
-        }   
+        }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam01='true'")>0){
-            param.put("waktu","JAM 01");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 01");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3310,8 +3308,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam01='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam02='true'")>0){
-            param.put("waktu","JAM 02");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 02");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3322,8 +3320,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam02='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam03='true'")>0){
-            param.put("waktu","JAM 03");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 03");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3334,8 +3332,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam03='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam04='true'")>0){
-            param.put("waktu","JAM 04");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 04");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3346,8 +3344,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam04='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam05='true'")>0){
-            param.put("waktu","JAM 05");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 05");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3358,8 +3356,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam05='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam06='true'")>0){
-            param.put("waktu","JAM 06");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 06");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3370,8 +3368,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam06='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam07='true'")>0){
-            param.put("waktu","JAM 07");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 07");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3382,8 +3380,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam07='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam08='true'")>0){
-            param.put("waktu","JAM 08");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 08");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3394,8 +3392,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam08='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam09='true'")>0){
-            param.put("waktu","JAM 09");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 09");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3406,8 +3404,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam09='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam10='true'")>0){
-            param.put("waktu","JAM 10");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 10");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3418,8 +3416,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam10='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam11='true'")>0){
-            param.put("waktu","JAM 11");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 11");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3430,8 +3428,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam11='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam12='true'")>0){
-            param.put("waktu","JAM 12");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 12");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3442,8 +3440,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam12='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam13='true'")>0){
-            param.put("waktu","JAM 13");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 13");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3454,8 +3452,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam13='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam14='true'")>0){
-            param.put("waktu","JAM 14");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 14");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3466,8 +3464,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam14='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam15='true'")>0){
-            param.put("waktu","JAM 15");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 15");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3478,8 +3476,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam15='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam16='true'")>0){
-            param.put("waktu","JAM 16");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 16");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3490,8 +3488,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam16='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam17='true'")>0){
-            param.put("waktu","JAM 17");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 17");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3502,8 +3500,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam17='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam18='true'")>0){
-            param.put("waktu","JAM 18");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 18");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3514,8 +3512,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam18='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam19='true'")>0){
-            param.put("waktu","JAM 19");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 19");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3526,8 +3524,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam19='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam20='true'")>0){
-            param.put("waktu","JAM 20");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 20");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3538,8 +3536,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam20='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam21='true'")>0){
-            param.put("waktu","JAM 21");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 21");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3550,8 +3548,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam21='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam22='true'")>0){
-            param.put("waktu","JAM 22");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 22");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3562,8 +3560,8 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 "where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam22='true'",param);
         }
         if(Sequel.cariInteger("select count(*) from stok_obat_pasien where stok_obat_pasien.no_rawat='"+norawat.getText()+"' and stok_obat_pasien.tanggal='"+Valid.SetTgl(Tgl.getSelectedItem()+"")+"' and stok_obat_pasien.jam='"+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"' and stok_obat_pasien.aturan_pakai<>'' and stok_obat_pasien.jam23='true'")>0){
-            param.put("waktu","JAM 23");  
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("waktu","JAM 23");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLabelDaftarObatStokPasien2.jasper","report","::[ Aturan Pakai Obat ]::",
                 "select stok_obat_pasien.tanggal,stok_obat_pasien.jam, stok_obat_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
                 "stok_obat_pasien.kode_brng,databarang.nama_brng, stok_obat_pasien.jumlah,stok_obat_pasien.kd_bangsal,"+
@@ -3575,5 +3573,5 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
- 
+
 }

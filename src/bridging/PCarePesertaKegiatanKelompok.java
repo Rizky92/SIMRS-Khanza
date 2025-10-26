@@ -68,7 +68,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
     private final Properties prop = new Properties();
     private ApiPcare api=new ApiPcare();
     private StringBuilder htmlContent;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -86,11 +86,11 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,
                  java.lang.String.class,java.lang.String.class,java.lang.Double.class,
                  java.lang.String.class,java.lang.String.class,java.lang.String.class
-             };  
+             };
              @Override
              public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             } 
+             }
         };
         tbDokter.setModel(tabMode);
 
@@ -127,7 +127,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -150,16 +150,16 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml")); 
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
             link=prop.getProperty("URLAPIPCARE");
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML1.setEditable(true);
         LoadHTML1.setEditorKit(kit);
@@ -434,7 +434,7 @@ public class PCarePesertaKegiatanKelompok extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void DTPCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari1KeyPressed
@@ -486,26 +486,26 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 TCari.requestFocus();
-            }else if(tabMode.getRowCount()!=0){            
-                    Map<String, Object> param = new HashMap<>();    
+            }else if(tabMode.getRowCount()!=0){
+                    Map<String, Object> param = new HashMap<>();
                     param.put("namars",akses.getnamars());
                     param.put("alamatrs",akses.getalamatrs());
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                     param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                    param.put("parameter","%"+TCari.getText()+"%"); 
-                    Valid.MyReport("rptPCarePesertaKegiatanKelompok.jasper","report","::[ Data Kegiatan Kelompok PCare ]::",param);            
+                    param.put("parameter","%"+TCari.getText()+"%");
+                    Valid.MyReport("rptPCarePesertaKegiatanKelompok.jasper","report","::[ Data Kegiatan Kelompok PCare ]::",param);
             }
             this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==1){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -517,8 +517,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 );
                 bg.close();
 
-                File f = new File("PesertaKegiatanKelompokPCare.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("PesertaKegiatanKelompokPCare.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML1.getText().replaceAll("<head>","<head>"+
                         "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -527,18 +527,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                    "<font size='2' face='Tahoma'>Detail Peserta Kegiatan Kelompok PCARE Tanggal Pelayanan "+DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem()+"<br><br></font>"+        
+                                    "<font size='2' face='Tahoma'>Detail Peserta Kegiatan Kelompok PCARE Tanggal Pelayanan "+DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem()+"<br><br></font>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }
             this.setCursor(Cursor.getDefaultCursor());
-        }            
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -559,15 +559,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,BtnHapus);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+    private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
     if(TabRawat.getSelectedIndex()==0){
         if(tbDokter.getSelectedRow()!= -1){
             try {
                 bodyWithDeleteRequest();
             }catch (Exception ex) {
-                System.out.println("Notifikasi Bridging : "+ex);                    
-            }            
-        }else{            
+                System.out.println("Notifikasi Bridging : "+ex);
+            }
+        }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data peserta...!!!!");
             TCari.requestFocus();
         }
@@ -575,16 +575,16 @@ private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Peserta..!!!");
         TabRawat.setSelectedIndex(0);
         TCari.requestFocus();
-    }         
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
-private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
+    private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnHapusActionPerformed(null);
         }else{
             Valid.pindah(evt, TCari,BtnAll);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -720,7 +720,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -737,7 +737,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='14%'>Lokasi</td>"+
                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='12%'>Keterangan</td>"+
                     "<td valign='top' bgcolor='#FFFAFA' align='center' width='6%'>Biaya</td>"+
-                "</tr>"); 
+                "</tr>");
             ps=koneksi.prepareStatement(
                    "select eduId,tglPelayanan,nmKegiatan,nmKelompok,materi, "+
                    "pembicara,lokasi,keterangan,biaya from pcare_kegiatan_kelompok where "+
@@ -833,7 +833,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                                 "</table>"+
                             "</td>"+
                         "</tr>"
-                    );                    
+                    );
                     i++;
                 }
             } catch (Exception e) {
@@ -846,7 +846,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     ps2.close();
                 }
             }
-            
+
             LoadHTML1.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -856,16 +856,16 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             htmlContent=null;
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
-        this.setCursor(Cursor.getDefaultCursor());          
+        }
+        this.setCursor(Cursor.getDefaultCursor());
     }
 
-    
+
     public void isCek(){
         BtnHapus.setEnabled(akses.getpcare_peserta_kegiatan_kelompok());
         BtnPrint.setEnabled(akses.getpcare_peserta_kegiatan_kelompok());
     }
- 
+
     public static class HttpEntityEnclosingDeleteRequest extends HttpEntityEnclosingRequestBase {
         public HttpEntityEnclosingDeleteRequest(final URI uri) {
             super();
@@ -892,7 +892,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         sslContext.init(null,trustManagers , new SecureRandom());
         SSLSocketFactory sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
         Scheme scheme=new Scheme("https",443,sslFactory);
-    
+
         HttpComponentsClientHttpRequestFactory factory=new HttpComponentsClientHttpRequestFactory(){
             @Override
             protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
@@ -904,20 +904,20 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         };
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         restTemplate.setRequestFactory(factory);
-        
+
         try {
             URL = link+"/kelompok/peserta/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString();
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("X-timestamp",utc);            
+            headers.add("X-timestamp",utc);
             headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
             requestEntity = new HttpEntity(headers);
             System.out.println("X-cons-id : "+koneksiDB.CONSIDAPIPCARE());
-            System.out.println("X-timestamp : "+utc);            
+            System.out.println("X-timestamp : "+utc);
             System.out.println("X-signature : "+api.getHmac());
             System.out.println("X-authorization : Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             System.out.println("user_key : "+koneksiDB.USERKEYAPIPCARE());
@@ -931,7 +931,7 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
                     tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString()
                 })==true){
                     tampil();
-                }                    
+                }
             }else{
                 JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }
@@ -952,6 +952,6 @@ private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             }else if(ex.toString().contains("204")){
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
-        }  
+        }
     }
 }

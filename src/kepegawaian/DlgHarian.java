@@ -53,7 +53,7 @@ public final class DlgHarian extends javax.swing.JDialog {
     private DlgBarcode bar=new DlgBarcode(null,false);
     private String[] id;
     private String[] tgl;
-    
+
     int no=0,i=0,toleransi=0,terlambat1=0,terlambat2=0;
     /** Creates new form DlgBangsal
      * @param parent
@@ -96,7 +96,7 @@ public final class DlgHarian extends javax.swing.JDialog {
 
         Nik.setDocument(new batasInput((int)25).getKata(Nik));
         catatan.setDocument(new batasInput((int)100).getKata(catatan));
-        
+
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -119,11 +119,11 @@ public final class DlgHarian extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         Valid.loadCombo(Departemen,"nama","departemen");
         Departemen.addItem("Semua");
-        Departemen.setSelectedItem("Semua");        
-        
+        Departemen.setSelectedItem("Semua");
+
         bar.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -131,13 +131,13 @@ public final class DlgHarian extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bar.getTable().getSelectedRow()!= -1){                   
-                    Idpresensi.setText(bar.getTable().getValueAt(bar.getTable().getSelectedRow(),0).toString());                        
-                    Nik.setText(bar.getTable().getValueAt(bar.getTable().getSelectedRow(),1).toString());                        
-                    Nm.setText(bar.getTable().getValueAt(bar.getTable().getSelectedRow(),2).toString());                        
-                }  
+                if(bar.getTable().getSelectedRow()!= -1){
+                    Idpresensi.setText(bar.getTable().getValueAt(bar.getTable().getSelectedRow(),0).toString());
+                    Nik.setText(bar.getTable().getValueAt(bar.getTable().getSelectedRow(),1).toString());
+                    Nm.setText(bar.getTable().getValueAt(bar.getTable().getSelectedRow(),2).toString());
+                }
                 catatan.requestFocus();
-                
+
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -146,23 +146,23 @@ public final class DlgHarian extends javax.swing.JDialog {
             @Override
             public void windowActivated(WindowEvent e) {}
             @Override
-            public void windowDeactivated(WindowEvent e) {}            
+            public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    bar.dispose();                    
+                    bar.dispose();
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
-        
+        });
+
+
         try {
             ps=koneksi.prepareStatement(
                 "select  pegawai.id, pegawai.nik, pegawai.nama, rekap_presensi.shift, rekap_presensi.jam_datang, "+
@@ -170,7 +170,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                 "rekap_presensi.keterangan from pegawai inner join rekap_presensi inner join departemen "+
                 "on pegawai.departemen=departemen.dep_id and pegawai.id=rekap_presensi.id where "+
                 " pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and pegawai.nik like ? and rekap_presensi.jam_datang between ? and ?  "+
-                "or  pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and pegawai.nama like ? and  rekap_presensi.jam_datang between ? and ?  "+                   
+                "or  pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and pegawai.nama like ? and  rekap_presensi.jam_datang between ? and ?  "+
                 "or  pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and rekap_presensi.shift like ? and  rekap_presensi.jam_datang between ? and ?  "+
                 "or  pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and rekap_presensi.status like ? and  rekap_presensi.jam_datang between ? and ?  "+
                 "or  pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and rekap_presensi.keterlambatan like ? and  rekap_presensi.jam_datang between ? and ?  "+
@@ -192,9 +192,9 @@ public final class DlgHarian extends javax.swing.JDialog {
         }
     }
 
-    
-    
-    
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -719,11 +719,11 @@ public final class DlgHarian extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -731,7 +731,7 @@ public final class DlgHarian extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseActionPerformed
         emptTeks();
@@ -891,14 +891,14 @@ public final class DlgHarian extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tbBangsal.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();   
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 String say=" rekap_presensi.jam_datang between '"+Valid.SetTgl(tglCari.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(tglCari2.getSelectedItem()+"")+" 23:59:59' ";
                 try{
                       param.put("keterlambatan",Sequel.cariIsi("select concat(round((sum(TIME_TO_SEC(`keterlambatan`))-mod(sum(TIME_TO_SEC(`keterlambatan`)),3600))/3600),':',round((mod(sum(TIME_TO_SEC(`keterlambatan`)),3600)-mod(mod(sum(TIME_TO_SEC(`keterlambatan`)),3600),60))/60),':',round(mod(mod(sum(TIME_TO_SEC(`keterlambatan`)),3600),60)))"+
@@ -909,7 +909,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                             "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                             "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                             "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                            "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say)); 
+                            "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say));
                       param.put("durasi",Sequel.cariIsi("select concat(round((sum(TIME_TO_SEC(`durasi`))-mod(sum(TIME_TO_SEC(`durasi`)),3600))/3600),':',round((mod(sum(TIME_TO_SEC(`durasi`)),3600)-mod(mod(sum(TIME_TO_SEC(`durasi`)),3600),60))/60),':',round(mod(mod(sum(TIME_TO_SEC(`durasi`)),3600),60)))"+
                             " from pegawai inner join rekap_presensi inner join departemen on pegawai.departemen=departemen.dep_id and pegawai.id=rekap_presensi.id  where "+
                             " departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and pegawai.nik like '%"+TCari.getText().trim()+"%' and "+say+
@@ -918,7 +918,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                             "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                             "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.durasi like '%"+TCari.getText().trim()+"%' and "+say+
                             "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                            "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say)); 
+                            "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say));
                       pilih = (String)JOptionPane.showInputDialog(null,"Urutkan berdasakan","Laporan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"NIP","Nama","Shift","Jam Datang","Jam Pulang","Status","Keterlambatan","Durasi","Catatan"},"NIP");
                       switch (pilih) {
                             case "NIP":
@@ -934,7 +934,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by pegawai.nik  ",param);            
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by pegawai.nik  ",param);
                                  this.setCursor(Cursor.getDefaultCursor()); break;
                             case "Nama":
                                   this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -949,7 +949,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by pegawai.nama  ",param);            
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by pegawai.nama  ",param);
                                   this.setCursor(Cursor.getDefaultCursor());
                                   break;
                             case "Shift":
@@ -965,7 +965,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.shift  ",param);            
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.shift  ",param);
                                   this.setCursor(Cursor.getDefaultCursor());
                                   break;
                             case "Jam Datang":
@@ -981,7 +981,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.jam_datang  ",param); 
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.jam_datang  ",param);
                                   this.setCursor(Cursor.getDefaultCursor());
                                   break;
                             case "Jam Pulang":
@@ -997,7 +997,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.jam_pulang  ",param); 
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.jam_pulang  ",param);
                                   this.setCursor(Cursor.getDefaultCursor());
                                   break;
                             case "Status":
@@ -1013,7 +1013,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.status  ",param); 
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.status  ",param);
                                   this.setCursor(Cursor.getDefaultCursor());
                                   break;
                             case "Keterlambatan":
@@ -1029,7 +1029,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.keterlambatan ",param); 
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.keterlambatan ",param);
                                   this.setCursor(Cursor.getDefaultCursor());
                                   break;
                             case "Durasi":
@@ -1045,7 +1045,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.durasi ",param); 
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.durasi ",param);
                                   this.setCursor(Cursor.getDefaultCursor());
                                   break;
                             case "Catatan":
@@ -1061,13 +1061,13 @@ public final class DlgHarian extends javax.swing.JDialog {
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.status like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.keterlambatan like '%"+TCari.getText().trim()+"%' and "+say+
                                         "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_datang like '%"+TCari.getText().trim()+"%' and "+say+
-                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.keterangan ",param); 
+                                        "or departemen.nama like '%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%' and rekap_presensi.jam_pulang like '%"+TCari.getText().trim()+"%' and "+say+" order by rekap_presensi.keterangan ",param);
                                   this.setCursor(Cursor.getDefaultCursor());
                                   break;
                       }
                 }catch(Exception e){
                       System.out.println(e);
-                }                   
+                }
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -1211,7 +1211,7 @@ public final class DlgHarian extends javax.swing.JDialog {
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps.setString(1,"%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             ps.setString(3,Valid.SetTgl(tglCari.getSelectedItem()+"")+" 00:00:00");
@@ -1242,14 +1242,14 @@ public final class DlgHarian extends javax.swing.JDialog {
             ps.setString(28,Valid.SetTgl(tglCari2.getSelectedItem()+"")+" 23:59:59");
             rs=ps.executeQuery();
             rs.last();
-            
+
             id=new String[rs.getRow()];
             tgl=new String[rs.getRow()];
-            
+
             rs.beforeFirst();
-            
+
             i=0;
-            
+
             while(rs.next()){
                 String[] data={rs.getString(2),
                                rs.getString(3),
@@ -1281,8 +1281,8 @@ public final class DlgHarian extends javax.swing.JDialog {
         Detik2.setSelectedItem("00");
         catatan.setText("");
     }
-    
-    
+
+
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
@@ -1299,8 +1299,8 @@ public final class DlgHarian extends javax.swing.JDialog {
                 Jam.setSelectedItem("00");
                 Menit.setSelectedItem("00");
                 Detik.setSelectedItem("00");
-            }            
-                        
+            }
+
             if(!tbBangsal.getValueAt(row,4).toString().equals("")){
                 Jam2.setSelectedItem(tbBangsal.getValueAt(row,4).toString().substring(11,13));
                 Menit2.setSelectedItem(tbBangsal.getValueAt(row,4).toString().substring(14,16));
@@ -1311,7 +1311,7 @@ public final class DlgHarian extends javax.swing.JDialog {
                 Detik2.setSelectedItem("00");
             }
             catatan.setText(tbBangsal.getValueAt(row,8).toString());
-            
+
             try {
                 tglMasuk.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(
                                 tbBangsal.getValueAt(row,3).toString().substring(0,4)+"-"+
@@ -1320,7 +1320,7 @@ public final class DlgHarian extends javax.swing.JDialog {
             } catch (ParseException ex) {
                 Logger.getLogger(DlgHarian.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
+
             try {
                 tglPulang.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(
                                 tbBangsal.getValueAt(row,4).toString().substring(0,4)+"-"+
@@ -1329,10 +1329,10 @@ public final class DlgHarian extends javax.swing.JDialog {
             } catch (ParseException ex) {
                 Logger.getLogger(DlgHarian.class.getName()).log(Level.SEVERE, null, ex);
             }
-            
-        }        
+
+        }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpresensi_harian());
         BtnHapus.setEnabled(akses.getpresensi_harian());

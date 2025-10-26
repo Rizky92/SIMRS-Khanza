@@ -29,13 +29,13 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb(); 
+    private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
     private ResultSet rs;
     private boolean ceksukses=false;
     private int i=0;
 
-    /** 
+    /**
      * @param parent
      * @param modal */
     public DlgRiwayatBarangMedis(java.awt.Frame parent, boolean modal) {
@@ -85,8 +85,8 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
                 column.setPreferredWidth(300);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());         
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -109,8 +109,8 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-    }    
+        }
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -368,7 +368,7 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -377,14 +377,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(nmbar.getText().trim().equals("")&&NmGudang.getText().trim().equals("")&&TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptRiwayatBarangMedis.jasper","report","::[ Riwayat Obat, Alkes & BHP ]::",
                     "select riwayat_barang_medis.kode_brng,databarang.nama_brng,"+
@@ -417,10 +417,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "riwayat_barang_medis.no_faktur like '%"+TCari.getText().trim()+"%' or bangsal.nm_bangsal like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.kd_bangsal like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.status like '%"+TCari.getText().trim()+"%' or "+
                         "riwayat_barang_medis.keterangan like '%"+TCari.getText().trim()+"%' or riwayat_barang_medis.posisi like '%"+TCari.getText().trim()+"%') order by riwayat_barang_medis.tanggal,riwayat_barang_medis.jam ",param);
             }
-                
+
             this.setCursor(Cursor.getDefaultCursor());
         }
-        
+
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -452,7 +452,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         prosesCari();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
@@ -486,10 +486,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgRiwayatBarangMedis")){
-                    if(barang.getTable().getSelectedRow()!= -1){                   
-                        kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                    if(barang.getTable().getSelectedRow()!= -1){
+                        kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                         nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                    }  
+                    }
                     kdbar.requestFocus();
                 }
             }
@@ -502,7 +502,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -510,8 +510,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(akses.getform().equals("DlgRiwayatBarangMedis")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        barang.dispose();                    
-                    }                
+                        barang.dispose();
+                    }
                 }
             }
             @Override
@@ -531,7 +531,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         nmbar.setText("");
         KdGudang.setText("");
         NmGudang.setText("");
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         prosesCari();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnAllActionPerformed
@@ -555,10 +555,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgRiwayatBarangMedis")){
-                    if(bangsal.getTable().getSelectedRow()!= -1){                   
+                    if(bangsal.getTable().getSelectedRow()!= -1){
                         KdGudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                         NmGudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     KdGudang.requestFocus();
                 }
             }
@@ -630,11 +630,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private synchronized void prosesCari() {
         if(ceksukses==false){
             ceksukses=true;
-            Valid.tabelKosong(tabMode); 
+            Valid.tabelKosong(tabMode);
             new SwingWorker<Void, Void>() {
                 @Override
                 protected Void doInBackground() throws Exception {
-                    try{   
+                    try{
                         if(nmbar.getText().trim().equals("")&&NmGudang.getText().trim().equals("")&&TCari.getText().trim().equals("")){
                             ps=koneksi.prepareStatement(
                                  "select riwayat_barang_medis.kode_brng,databarang.nama_brng,"+
@@ -687,7 +687,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                  ps.setString(13,"%"+TCari.getText().trim()+"%");
                                  ps.setString(14,"%"+TCari.getText().trim()+"%");
                             }
-                            rs=ps.executeQuery(); 
+                            rs=ps.executeQuery();
                             i=0;
                             while(rs.next()){
                                 Object[] row = new Object[]{
@@ -699,10 +699,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                      rs.getString("kd_bangsal")+" "+rs.getString("nm_bangsal"),
                                      rs.getString("status"),rs.getString("no_batch"),
                                      rs.getString("no_faktur"),rs.getString("keterangan")
-                                }; 
+                                };
                                 i++;
                                 SwingUtilities.invokeLater(() -> tabMode.addRow(row));
-                            }    
+                            }
                          } catch (Exception e) {
                              System.out.println("Notifikasi Data Barang : "+e);
                          } finally{
@@ -712,7 +712,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                              if(ps!=null){
                                  ps.close();
                              }
-                         }                
+                         }
                      }catch(Exception e){
                          System.out.println("Notifikasi : "+e);
                      }
@@ -726,9 +726,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }.execute();
         }
     }
-    
+
     public void isCek(){
          BtnPrint.setEnabled(akses.getriwayat_obat_alkes_bhp());
     }
-    
+
 }

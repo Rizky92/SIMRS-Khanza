@@ -112,8 +112,8 @@ public final class DlgRekapMutasiBerkas extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-    }    
+        }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -298,14 +298,14 @@ public final class DlgRekapMutasiBerkas extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-             Map<String, Object> param = new HashMap<>();     
+             Map<String, Object> param = new HashMap<>();
              param.put("namars",akses.getnamars());
              param.put("alamatrs",akses.getalamatrs());
              param.put("kotars",akses.getkabupatenrs());
              param.put("propinsirs",akses.getpropinsirs());
              param.put("kontakrs",akses.getkontakrs());
-             param.put("emailrs",akses.getemailrs());   
-             param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+             param.put("emailrs",akses.getemailrs());
+             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
              Valid.MyReportqry("rptRekapMutasiBerkas.jasper","report","::[ Laporan Rekap Mutasi Berkas ]::","select mutasi_berkas.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,mutasi_berkas.status,reg_periksa.tgl_registrasi,reg_periksa.jam_reg, "+
                 "mutasi_berkas.dikirim,mutasi_berkas.diterima,mutasi_berkas.kembali,mutasi_berkas.tidakada,mutasi_berkas.ranap,reg_periksa.status_lanjut "+
                 "from mutasi_berkas inner join reg_periksa inner join pasien on mutasi_berkas.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis where "+
@@ -316,7 +316,7 @@ public final class DlgRekapMutasiBerkas extends javax.swing.JDialog {
                 "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and reg_periksa.status_lanjut like '%"+TCari.getText().trim()+"%' order by reg_periksa.tgl_registrasi desc ",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -324,31 +324,31 @@ public final class DlgRekapMutasiBerkas extends javax.swing.JDialog {
         }else{
             //Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
        tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             Valid.pindah(evt, TCari, BtnPrint);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -373,7 +373,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
-            
+
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -417,10 +417,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
-        try{   
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-            Valid.tabelKosong(tabMode);   
+    public void tampil(){
+        try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
                 "select mutasi_berkas.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,mutasi_berkas.status,reg_periksa.tgl_registrasi,reg_periksa.jam_reg, "+
                 "mutasi_berkas.dikirim,mutasi_berkas.diterima,mutasi_berkas.kembali,mutasi_berkas.tidakada,mutasi_berkas.ranap,reg_periksa.status_lanjut "+
@@ -455,7 +455,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         rs.getString("dikirim"),rs.getString("diterima"),rs.getString("kembali"),rs.getString("tidakada"),
                         rs.getString("ranap"),rs.getString("status_lanjut")
                     });
-                }        
+                }
                 LCount.setText(""+tabMode.getRowCount());
             } catch (Exception e) {
                 System.out.println("Notif : "+e);

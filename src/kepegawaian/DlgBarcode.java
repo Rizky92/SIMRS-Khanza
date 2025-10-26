@@ -50,7 +50,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
     public DlgBarcode(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"ID","NIP","Nama Pegawai","Barcode"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -75,7 +75,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         Bcd.setDocument(new batasInput((int)25).getKata(Bcd));
-        
+
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -98,10 +98,10 @@ public final class DlgBarcode extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -446,7 +446,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
             tampil();
             emptTeks();
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -454,24 +454,24 @@ public final class DlgBarcode extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Bcd,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         Valid.hapusTable(tabMode,Id,"barcode","id");
         tampil();
         emptTeks();
-        
-}//GEN-LAST:event_BtnHapusActionPerformed
+
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -479,7 +479,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
          if(Id.getText().trim().equals("")){
@@ -491,7 +491,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
             tampil();
             emptTeks();
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -499,17 +499,17 @@ public final class DlgBarcode extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -520,27 +520,27 @@ public final class DlgBarcode extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            if(TCari.getText().trim().equals("")){                
+            if(TCari.getText().trim().equals("")){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptBarcode.jasper","report","::[ Kartu Barcode ]::",param);
-            }else if(! TCari.getText().trim().equals("")){                
+            }else if(! TCari.getText().trim().equals("")){
                 Map<String, Object> param = new HashMap<>();
-                param.put("parameter","%"+TCari.getText().trim()+"%");     
+                param.put("parameter","%"+TCari.getText().trim()+"%");
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptBarcode.jasper","report","::[ Kartu Barcode ]::","select pegawai.id, "+
                                 "pegawai.nik,"+
                                 "pegawai.nama,"+
@@ -558,11 +558,11 @@ public final class DlgBarcode extends javax.swing.JDialog {
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         Valid.pindah(evt,BtnEdit,BtnKeluar);
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -572,11 +572,11 @@ public final class DlgBarcode extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -584,16 +584,16 @@ public final class DlgBarcode extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnCariKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyReleased
         // TODO add your handling code here:
-}//GEN-LAST:event_BtnCariKeyReleased
+    }//GEN-LAST:event_BtnCariKeyReleased
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -602,7 +602,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -610,9 +610,9 @@ public final class DlgBarcode extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-            
+
         }
-}//GEN-LAST:event_tbBangsalMouseClicked
+    }//GEN-LAST:event_tbBangsalMouseClicked
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -622,10 +622,10 @@ public final class DlgBarcode extends javax.swing.JDialog {
                 } catch (java.lang.NullPointerException e) {
                 }
             }
-            
+
 
         }
-}//GEN-LAST:event_tbBangsalKeyPressed
+    }//GEN-LAST:event_tbBangsalKeyPressed
 
     private void NikKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NikKeyPressed
         Valid.pindah(evt,Id,Nm);
@@ -691,7 +691,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
 
     public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{ 
+        try{
             ps=koneksi.prepareStatement("select  pegawai.id,pegawai.nik,pegawai.nama,barcode.barcode  from pegawai "+
                     "left outer join barcode on pegawai.id=barcode.id where pegawai.stts_aktif<>'KELUAR' and pegawai.nik like ? or  pegawai.stts_aktif<>'KELUAR' and pegawai.nama like ? "+
                     "or  pegawai.stts_aktif<>'KELUAR' and barcode.barcode like ? ");
@@ -737,7 +737,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
             Nik.setText(tbBangsal.getValueAt(row,1).toString());
             Nm.setText(tbBangsal.getValueAt(row,2).toString());
             Bcd.setText(tbBangsal.getValueAt(row,3).toString());
-        }  
+        }
     }
 
     public JTextField getTextField(){
@@ -747,7 +747,7 @@ public final class DlgBarcode extends javax.swing.JDialog {
     public JTable getTable(){
         return tbBangsal;
     }
-       
+
      public void isCek(){
         BtnSimpan.setEnabled(akses.getbarcode());
         BtnHapus.setEnabled(akses.getbarcode());

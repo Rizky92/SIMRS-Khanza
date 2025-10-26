@@ -36,15 +36,15 @@ public class LaporanBulananIRJ extends javax.swing.JDialog {
                 ttltglbaru11=0,ttltglbaru12=0,ttltglbaru13=0,ttltglbaru14=0,ttltglbaru15=0,ttltglbaru16=0,ttltglbaru17=0,ttltglbaru18=0,ttltglbaru19=0,ttltglbaru20=0,
                 ttltglbaru21=0,ttltglbaru22=0,ttltglbaru23=0,ttltglbaru24=0,ttltglbaru25=0,ttltglbaru26=0,ttltglbaru27=0,ttltglbaru28=0,ttltglbaru29=0,ttltglbaru30=0,
                 ttltglbaru31=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public LaporanBulananIRJ(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -76,7 +76,7 @@ public class LaporanBulananIRJ extends javax.swing.JDialog {
         LoadHTML4.setDocument(doc);
         LoadHTML5.setDocument(doc);
         LoadHTML6.setDocument(doc);
-        
+
         Valid.LoadTahun(Tahun);
     }
     private int i=0;
@@ -300,24 +300,24 @@ public class LaporanBulananIRJ extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            File g = new File("file2.css");            
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi5 td{font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("LaporanTahunanIRJ.html");            
+
+            File f = new File("LaporanTahunanIRJ.html");
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             if(TabRawat.getSelectedIndex()==0){
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
@@ -327,7 +327,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -341,7 +341,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -355,7 +355,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -369,7 +369,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -383,7 +383,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -397,7 +397,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -411,18 +411,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN BULANAN INSTALASI RAWAT JALAN PERIODE "+Tahun.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
                 bw.close();
-            }                          
+            }
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -444,17 +444,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,Tahun);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         TabRawatMouseClicked(null);
-}//GEN-LAST:event_btnCariActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
+    private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, Tahun, BtnPrint);
         }
-}//GEN-LAST:event_btnCariKeyPressed
+    }//GEN-LAST:event_btnCariKeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==0){
@@ -478,12 +478,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85%' colspan='32'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>01-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>02-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
@@ -518,8 +518,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>31-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
-            
+            );
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='1800px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -528,7 +528,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_formWindowOpened
 
@@ -584,7 +584,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85%' colspan='32'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>01-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>02-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
@@ -619,7 +619,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>31-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                     "where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi between ? and ? group by reg_periksa.kd_poli order by reg_periksa.kd_poli");
@@ -663,7 +663,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     tgl29=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-29' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     tgl30=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-30' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     tgl31=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-31' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
-                    
+
                     ttltgl1=ttltgl1+tgl1;
                     ttltgl2=ttltgl2+tgl2;
                     ttltgl3=ttltgl3+tgl3;
@@ -695,7 +695,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttltgl29=ttltgl29+tgl29;
                     ttltgl30=ttltgl30+tgl30;
                     ttltgl31=ttltgl31+tgl31;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'>"+i+"</td>"+
@@ -736,7 +736,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     );
                     i++;
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -794,10 +794,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari2() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -806,7 +806,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85%' colspan='32'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>01-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>02-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
@@ -841,7 +841,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>31-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                     "where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi between ? and ? group by reg_periksa.kd_poli order by reg_periksa.kd_poli");
@@ -885,7 +885,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     tgl29=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-29' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     tgl30=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-30' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     tgl31=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-31' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
-                    
+
                     ttltgl1=ttltgl1+tgl1;
                     ttltgl2=ttltgl2+tgl2;
                     ttltgl3=ttltgl3+tgl3;
@@ -917,7 +917,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttltgl29=ttltgl29+tgl29;
                     ttltgl30=ttltgl30+tgl30;
                     ttltgl31=ttltgl31+tgl31;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+i+"</td>"+
@@ -1047,7 +1047,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     }
                     i++;
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -1106,11 +1106,11 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-        this.setCursor(Cursor.getDefaultCursor());   
+        this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    
-    
+
+
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getlaporan_tahunan_irj());
     }
@@ -1123,7 +1123,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85%' colspan='32'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>01-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>02-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
@@ -1158,7 +1158,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>31-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                     "where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi between ? and ? group by reg_periksa.kd_poli order by reg_periksa.kd_poli");
@@ -1205,7 +1205,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     tgl29=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-29' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     tgl30=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-30' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     tgl31=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-31' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
-                    
+
                     ttltgl1=ttltgl1+tgl1;
                     ttltgl2=ttltgl2+tgl2;
                     ttltgl3=ttltgl3+tgl3;
@@ -1237,7 +1237,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttltgl29=ttltgl29+tgl29;
                     ttltgl30=ttltgl30+tgl30;
                     ttltgl31=ttltgl31+tgl31;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+i+"</td>"+
@@ -1276,7 +1276,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+(tgl1+tgl2+tgl3+tgl4+tgl5+tgl6+tgl7+tgl8+tgl9+tgl10+tgl11+tgl12+tgl13+tgl14+tgl15+tgl16+tgl17+tgl18+tgl19+tgl20+tgl21+tgl22+tgl23+tgl24+tgl25+tgl26+tgl27+tgl28+tgl29+tgl30+tgl31)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     tglbaru1=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-01' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
                     tglbaru2=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-02' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
                     tglbaru3=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-03' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
@@ -1308,7 +1308,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     tglbaru29=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-29' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
                     tglbaru30=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-30' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
                     tglbaru31=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-31' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
-                    
+
                     ttltglbaru1=ttltglbaru1+tglbaru1;
                     ttltglbaru2=ttltglbaru2+tglbaru2;
                     ttltglbaru3=ttltglbaru3+tglbaru3;
@@ -1340,7 +1340,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttltglbaru29=ttltglbaru29+tglbaru29;
                     ttltglbaru30=ttltglbaru30+tglbaru30;
                     ttltglbaru31=ttltglbaru31+tglbaru31;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'></td>"+
@@ -1379,7 +1379,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+(tglbaru1+tglbaru2+tglbaru3+tglbaru4+tglbaru5+tglbaru6+tglbaru7+tglbaru8+tglbaru9+tglbaru10+tglbaru11+tglbaru12+tglbaru13+tglbaru14+tglbaru15+tglbaru16+tglbaru17+tglbaru18+tglbaru19+tglbaru20+tglbaru21+tglbaru22+tglbaru23+tglbaru24+tglbaru25+tglbaru26+tglbaru27+tglbaru28+tglbaru29+tglbaru30+tglbaru31)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'></td>"+
@@ -1421,11 +1421,11 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "</td>"+
                         "</tr>"
                     );
-                    
-                    
+
+
                     i++;
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -1561,9 +1561,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-        this.setCursor(Cursor.getDefaultCursor());   
+        this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari4() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -1572,7 +1572,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85%' colspan='32'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>01-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>02-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
@@ -1607,7 +1607,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>31-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                     "where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi between ? and ? group by reg_periksa.kd_poli order by reg_periksa.kd_poli");
@@ -1654,7 +1654,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     tgl29=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-29' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     tgl30=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-30' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     tgl31=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-31' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
-                    
+
                     ttltgl1=ttltgl1+tgl1;
                     ttltgl2=ttltgl2+tgl2;
                     ttltgl3=ttltgl3+tgl3;
@@ -1686,7 +1686,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttltgl29=ttltgl29+tgl29;
                     ttltgl30=ttltgl30+tgl30;
                     ttltgl31=ttltgl31+tgl31;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+i+"</td>"+
@@ -1725,7 +1725,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+(tgl1+tgl2+tgl3+tgl4+tgl5+tgl6+tgl7+tgl8+tgl9+tgl10+tgl11+tgl12+tgl13+tgl14+tgl15+tgl16+tgl17+tgl18+tgl19+tgl20+tgl21+tgl22+tgl23+tgl24+tgl25+tgl26+tgl27+tgl28+tgl29+tgl30+tgl31)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     tglbaru1=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-01' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='L'");
                     tglbaru2=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-02' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='L'");
                     tglbaru3=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-03' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='L'");
@@ -1757,7 +1757,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     tglbaru29=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-29' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='L'");
                     tglbaru30=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-30' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='L'");
                     tglbaru31=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-31' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='L'");
-                    
+
                     ttltglbaru1=ttltglbaru1+tglbaru1;
                     ttltglbaru2=ttltglbaru2+tglbaru2;
                     ttltglbaru3=ttltglbaru3+tglbaru3;
@@ -1789,7 +1789,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttltglbaru29=ttltglbaru29+tglbaru29;
                     ttltglbaru30=ttltglbaru30+tglbaru30;
                     ttltglbaru31=ttltglbaru31+tglbaru31;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'></td>"+
@@ -1828,7 +1828,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+(tglbaru1+tglbaru2+tglbaru3+tglbaru4+tglbaru5+tglbaru6+tglbaru7+tglbaru8+tglbaru9+tglbaru10+tglbaru11+tglbaru12+tglbaru13+tglbaru14+tglbaru15+tglbaru16+tglbaru17+tglbaru18+tglbaru19+tglbaru20+tglbaru21+tglbaru22+tglbaru23+tglbaru24+tglbaru25+tglbaru26+tglbaru27+tglbaru28+tglbaru29+tglbaru30+tglbaru31)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'></td>"+
@@ -1870,11 +1870,11 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "</td>"+
                         "</tr>"
                     );
-                    
-                    
+
+
                     i++;
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -2010,9 +2010,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-        this.setCursor(Cursor.getDefaultCursor());   
+        this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari5() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -2021,7 +2021,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Uraian</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85%' colspan='32'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>01-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>02-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
@@ -2056,7 +2056,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>31-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_pj,penjab.png_jawab from reg_periksa inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                     "where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi between ? and ? group by reg_periksa.kd_pj order by reg_periksa.kd_pj");
@@ -2100,7 +2100,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     tgl29=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-29' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
                     tgl30=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-30' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
                     tgl31=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-31' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
-                    
+
                     ttltgl1=ttltgl1+tgl1;
                     ttltgl2=ttltgl2+tgl2;
                     ttltgl3=ttltgl3+tgl3;
@@ -2132,7 +2132,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttltgl29=ttltgl29+tgl29;
                     ttltgl30=ttltgl30+tgl30;
                     ttltgl31=ttltgl31+tgl31;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'>"+i+"</td>"+
@@ -2173,7 +2173,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     );
                     i++;
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -2234,7 +2234,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari6() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -2243,7 +2243,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Uraian</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85%' colspan='32'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>01-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>02-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
@@ -2278,7 +2278,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>31-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_pj,penjab.png_jawab from reg_periksa inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                     "where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi between ? and ? group by reg_periksa.kd_pj order by reg_periksa.kd_pj");
@@ -2322,7 +2322,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     tgl29=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-29' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
                     tgl30=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-30' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
                     tgl31=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-31' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
-                    
+
                     ttltgl1=ttltgl1+tgl1;
                     ttltgl2=ttltgl2+tgl2;
                     ttltgl3=ttltgl3+tgl3;
@@ -2354,7 +2354,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttltgl29=ttltgl29+tgl29;
                     ttltgl30=ttltgl30+tgl30;
                     ttltgl31=ttltgl31+tgl31;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+i+"</td>"+
@@ -2393,7 +2393,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+(tgl1+tgl2+tgl3+tgl4+tgl5+tgl6+tgl7+tgl8+tgl9+tgl10+tgl11+tgl12+tgl13+tgl14+tgl15+tgl16+tgl17+tgl18+tgl19+tgl20+tgl21+tgl22+tgl23+tgl24+tgl25+tgl26+tgl27+tgl28+tgl29+tgl30+tgl31)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     ps2=koneksi.prepareStatement("select poliklinik.kd_poli,poliklinik.nm_poli from poliklinik where poliklinik.kd_poli<>'IGDK' order by poliklinik.kd_poli");
                     try {
                         rs2=ps2.executeQuery();
@@ -2482,7 +2482,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     }
                     i++;
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -2543,7 +2543,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari7() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
@@ -2552,7 +2552,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85%' colspan='32'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>01-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>02-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
@@ -2587,13 +2587,13 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>31-"+Bulan.getSelectedItem()+"-"+Tahun.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );  
-            
+            );
+
             ttltgl1=0;ttltgl2=0;ttltgl3=0;ttltgl4=0;ttltgl5=0;ttltgl6=0;ttltgl7=0;ttltgl8=0;ttltgl9=0;ttltgl10=0;
             ttltgl11=0;ttltgl12=0;ttltgl13=0;ttltgl14=0;ttltgl15=0;ttltgl16=0;ttltgl17=0;ttltgl18=0;ttltgl19=0;ttltgl20=0;
             ttltgl21=0;ttltgl22=0;ttltgl23=0;ttltgl24=0;ttltgl25=0;ttltgl26=0;ttltgl27=0;ttltgl28=0;ttltgl29=0;ttltgl30=0;
             ttltgl31=0;
-            
+
             tgl1=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-01' and reg_periksa.stts='Batal' and reg_periksa.kd_poli<>'IGDK'");
             tgl2=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-02' and reg_periksa.stts='Batal' and reg_periksa.kd_poli<>'IGDK'");
             tgl3=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-03' and reg_periksa.stts='Batal' and reg_periksa.kd_poli<>'IGDK'");
@@ -2696,7 +2696,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(tgl1+tgl2+tgl3+tgl4+tgl5+tgl6+tgl7+tgl8+tgl9+tgl10+tgl11+tgl12+tgl13+tgl14+tgl15+tgl16+tgl17+tgl18+tgl19+tgl20+tgl21+tgl22+tgl23+tgl24+tgl25+tgl26+tgl27+tgl28+tgl29+tgl30+tgl31)+"</td>"+
                 "</tr>"
             );
-            
+
             tgl1=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-01' and reg_periksa.stts='Dirujuk' and reg_periksa.kd_poli<>'IGDK'");
             tgl2=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-02' and reg_periksa.stts='Dirujuk' and reg_periksa.kd_poli<>'IGDK'");
             tgl3=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-03' and reg_periksa.stts='Dirujuk' and reg_periksa.kd_poli<>'IGDK'");
@@ -2799,7 +2799,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(tgl1+tgl2+tgl3+tgl4+tgl5+tgl6+tgl7+tgl8+tgl9+tgl10+tgl11+tgl12+tgl13+tgl14+tgl15+tgl16+tgl17+tgl18+tgl19+tgl20+tgl21+tgl22+tgl23+tgl24+tgl25+tgl26+tgl27+tgl28+tgl29+tgl30+tgl31)+"</td>"+
                 "</tr>"
             );
-            
+
             tgl1=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-01' and reg_periksa.stts='Meninggal' and reg_periksa.kd_poli<>'IGDK'");
             tgl2=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-02' and reg_periksa.stts='Meninggal' and reg_periksa.kd_poli<>'IGDK'");
             tgl3=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-03' and reg_periksa.stts='Meninggal' and reg_periksa.kd_poli<>'IGDK'");
@@ -2902,7 +2902,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(tgl1+tgl2+tgl3+tgl4+tgl5+tgl6+tgl7+tgl8+tgl9+tgl10+tgl11+tgl12+tgl13+tgl14+tgl15+tgl16+tgl17+tgl18+tgl19+tgl20+tgl21+tgl22+tgl23+tgl24+tgl25+tgl26+tgl27+tgl28+tgl29+tgl30+tgl31)+"</td>"+
                 "</tr>"
             );
-            
+
             tgl1=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-01' and reg_periksa.stts='Pulang Paksa' and reg_periksa.kd_poli<>'IGDK'");
             tgl2=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-02' and reg_periksa.stts='Pulang Paksa' and reg_periksa.kd_poli<>'IGDK'");
             tgl3=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-03' and reg_periksa.stts='Pulang Paksa' and reg_periksa.kd_poli<>'IGDK'");
@@ -3005,7 +3005,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(tgl1+tgl2+tgl3+tgl4+tgl5+tgl6+tgl7+tgl8+tgl9+tgl10+tgl11+tgl12+tgl13+tgl14+tgl15+tgl16+tgl17+tgl18+tgl19+tgl20+tgl21+tgl22+tgl23+tgl24+tgl25+tgl26+tgl27+tgl28+tgl29+tgl30+tgl31)+"</td>"+
                 "</tr>"
             );
-            
+
             tgl1=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-01' and reg_periksa.stts in ('Belum','Sudah','Berkas Diterima','Dirawat') and reg_periksa.kd_poli<>'IGDK'");
             tgl2=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-02' and reg_periksa.stts in ('Belum','Sudah','Berkas Diterima','Dirawat') and reg_periksa.kd_poli<>'IGDK'");
             tgl3=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.tgl_registrasi='"+Tahun.getSelectedItem()+"-"+Bulan.getSelectedItem()+"-03' and reg_periksa.stts in ('Belum','Sudah','Berkas Diterima','Dirawat') and reg_periksa.kd_poli<>'IGDK'");
@@ -3108,7 +3108,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(tgl1+tgl2+tgl3+tgl4+tgl5+tgl6+tgl7+tgl8+tgl9+tgl10+tgl11+tgl12+tgl13+tgl14+tgl15+tgl16+tgl17+tgl18+tgl19+tgl20+tgl21+tgl22+tgl23+tgl24+tgl25+tgl26+tgl27+tgl28+tgl29+tgl30+tgl31)+"</td>"+
                 "</tr>"
             );
-            
+
             htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFFF8' align='right' colspan='2'>JUMLAH : </td>"+
@@ -3146,7 +3146,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+(ttltgl1+ttltgl2+ttltgl3+ttltgl4+ttltgl5+ttltgl6+ttltgl7+ttltgl8+ttltgl9+ttltgl10+ttltgl11+ttltgl12+ttltgl13+ttltgl14+ttltgl15+ttltgl16+ttltgl17+ttltgl18+ttltgl19+ttltgl20+ttltgl21+ttltgl22+ttltgl23+ttltgl24+ttltgl25+ttltgl26+ttltgl27+ttltgl28+ttltgl29+ttltgl30+ttltgl31)+"</td>"+
                 "</tr>"
             );
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='1800px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -3156,6 +3156,6 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
-        this.setCursor(Cursor.getDefaultCursor()); 
+        this.setCursor(Cursor.getDefaultCursor());
     }
 }

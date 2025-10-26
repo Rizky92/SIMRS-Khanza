@@ -44,7 +44,7 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
     public InventoryNilaiPenerimaanVendorFarmasiPerBulan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"Kode Suplier","Nama Suplier","Januari","Februari","Maret","April","Mei","Juni","Juli","Agustus","September","Oktober","November","Desember","Total"};
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -79,8 +79,8 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
         kdbar.setDocument(new batasInput((byte)15).getKata(kdbar));
         KdIF.setDocument(new batasInput((byte)15).getKata(KdIF));
         kdjenis.setDocument(new batasInput((byte)4).getKata(kdjenis));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -103,7 +103,7 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
                 }
             });
         }
-        
+
         barang.jenis.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -112,12 +112,12 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("InventoryNilaiPenerimaanVendorFarmasiPerBulan")){
-                    if(barang.jenis.getTable().getSelectedRow()!= -1){                          
-                        kdjenis.setText(barang.jenis.getTable().getValueAt(barang.jenis.getTable().getSelectedRow(),0).toString());                    
-                        nmjenis.setText(barang.jenis.getTable().getValueAt(barang.jenis.getTable().getSelectedRow(),1).toString());                        
-                    }                    
+                    if(barang.jenis.getTable().getSelectedRow()!= -1){
+                        kdjenis.setText(barang.jenis.getTable().getValueAt(barang.jenis.getTable().getSelectedRow(),0).toString());
+                        nmjenis.setText(barang.jenis.getTable().getValueAt(barang.jenis.getTable().getSelectedRow(),1).toString());
+                    }
                     kdjenis.requestFocus();
-                }                   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -127,8 +127,8 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -137,10 +137,10 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("InventoryNilaiPenerimaanVendorFarmasiPerBulan")){
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }            
+                    }
                     kdptg.requestFocus();
                 }
             }
@@ -152,8 +152,8 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });        
-        
+        });
+
         barang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -162,10 +162,10 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("InventoryNilaiPenerimaanVendorFarmasiPerBulan")){
-                    if(barang.getTable().getSelectedRow()!= -1){                   
-                        kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                    if(barang.getTable().getSelectedRow()!= -1){
+                        kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                         nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                    }   
+                    }
                     kdbar.requestFocus();
                 }
             }
@@ -178,7 +178,7 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -188,12 +188,12 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         barang.dispose();
                     }
-                }                                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         barang.industri.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -202,10 +202,10 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("InventoryNilaiPenerimaanVendorFarmasiPerBulan")){
-                    if(barang.industri.getTable().getSelectedRow()!= -1){                   
-                        KdIF.setText(barang.industri.getTable().getValueAt(barang.industri.getTable().getSelectedRow(),0).toString());                    
-                        NmIF.setText(barang.industri.getTable().getValueAt(barang.industri.getTable().getSelectedRow(),1).toString());                                        
-                    }   
+                    if(barang.industri.getTable().getSelectedRow()!= -1){
+                        KdIF.setText(barang.industri.getTable().getValueAt(barang.industri.getTable().getSelectedRow(),0).toString());
+                        NmIF.setText(barang.industri.getTable().getValueAt(barang.industri.getTable().getSelectedRow(),1).toString());
+                    }
                     KdIF.requestFocus();
                 }
             }
@@ -218,7 +218,7 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.industri.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -227,13 +227,13 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
                 if(akses.getform().equals("InventoryNilaiPenerimaanVendorFarmasiPerBulan")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         barang.industri.dispose();
-                    }      
+                    }
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         Valid.LoadTahun(ThnCari);
     }
 
@@ -583,18 +583,18 @@ public class InventoryNilaiPenerimaanVendorFarmasiPerBulan extends javax.swing.J
         barang.industri.dispose();
         barang.jenis.dispose();
         barang.dispose();
-        dispose();  
-}//GEN-LAST:event_BtnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangActionPerformed
@@ -620,10 +620,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void kdbarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select databarang.nama_brng from databarang where databarang.kode_brng=?", nmbar,kdbar.getText());
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){            
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select databarang.nama_brng from databarang where databarang.kode_brng=?", nmbar,kdbar.getText());
             kdjenis.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){            
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select databarang.nama_brng from databarang where databarang.kode_brng=?", nmbar,kdbar.getText());
             TCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -633,13 +633,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdjenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdjenisKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Sequel.cariIsi("select jenis.nama from jenis where jenis.kdjns=?", nmjenis,kdjenis.getText());         
+            Sequel.cariIsi("select jenis.nama from jenis where jenis.kdjns=?", nmjenis,kdjenis.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             Sequel.cariIsi("select jenis.nama from jenis where jenis.kdjns=?", nmjenis,kdjenis.getText());
             kdptg.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Sequel.cariIsi("select jenis.nama from jenis where jenis.kdjns=?", nmjenis,kdjenis.getText());
-            kdbar.requestFocus();   
+            kdbar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnSatuanActionPerformed(null);
         }
@@ -699,7 +699,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
@@ -715,16 +715,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','"+
                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"','"+
                                 Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"','"+
-                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan"); 
+                                Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
             }
-            Map<String, Object> param = new HashMap<>();    
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptInventoryNilaiPenerimaanVendorFarmasiPerBulan.jasper","report","::[ Nilai Penerimaan Vendor Farmasi Per Bulan ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -843,7 +843,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement(
                     "select datasuplier.kode_suplier,datasuplier.nama_suplier from datasuplier where "+
                     "datasuplier.kode_suplier like ? or datasuplier.nama_suplier like ? order by datasuplier.nama_suplier");
@@ -864,7 +864,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(!kdbar.getText().equals("")){
                     kodebarang=" and databarang.kode_brng='"+kdbar.getText()+"' ";
                 }
-                
+
                 totaltagihan=0;totaljanuari=0;totalfebruari=0;totalmaret=0;totalapril=0;totalmei=0;totaljuni=0;totaljuli=0;
                 totalagustus=0;totalseptember=0;totaloktober=0;totalnovember=0;totaldesember=0;
                 while(rs.next()){
@@ -875,7 +875,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-01' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totaljanuari=totaljanuari+januari;
-                    
+
                     februari=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -883,7 +883,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-02' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totalfebruari=totalfebruari+februari;
-                    
+
                     maret=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -891,7 +891,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-03' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totalmaret=totalmaret+maret;
-                    
+
                     april=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -899,7 +899,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-04' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totalapril=totalapril+april;
-                    
+
                     mei=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -907,7 +907,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-05' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totalmei=totalmei+mei;
-                    
+
                     juni=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -915,7 +915,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-06' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totaljuni=totaljuni+juni;
-                    
+
                     juli=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -923,7 +923,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-07' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totaljuli=totaljuli+juli;
-                    
+
                     agustus=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -931,7 +931,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-08' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totalagustus=totalagustus+agustus;
-                    
+
                     september=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -939,7 +939,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-09' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totalseptember=totalseptember+september;
-                    
+
                     oktober=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -947,7 +947,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-10' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totaloktober=totaloktober+oktober;
-                    
+
                     november=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -955,7 +955,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-11' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totalnovember=totalnovember+november;
-                    
+
                     desember=Sequel.cariIsiAngka("select sum(detailpesan.total) as total from pemesanan "+
                             "inner join detailpesan on pemesanan.no_faktur=detailpesan.no_faktur "+
                             "inner join databarang on detailpesan.kode_brng=databarang.kode_brng "+
@@ -963,10 +963,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             "left(pemesanan.tgl_pesan,7)='"+ThnCari.getSelectedItem().toString()+"-12' "+
                             nip+kodeindustri+kodejenis+kodebarang);
                     totaldesember=totaldesember+desember;
-                    
+
                     tagihan=januari+februari+maret+april+mei+juni+juli+agustus+september+oktober+november+desember;
                     totaltagihan=totaltagihan+tagihan;
-                    
+
                     tabMode.addRow(new Object[]{
                         rs.getString("kode_suplier"),rs.getString("nama_suplier"),januari,februari,maret,april,mei,juni,juli,agustus,september,oktober,november,desember,tagihan
                     });
@@ -979,22 +979,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
-                
+
             }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
 
     public void emptTeks() {
         kdbar.setText("");
         nmbar.setText("");
         kdjenis.setText("");
-        kdbar.requestFocus();        
+        kdbar.requestFocus();
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getnilai_penerimaan_vendor_farmasi_perbulan());
     }
-    
+
 }
