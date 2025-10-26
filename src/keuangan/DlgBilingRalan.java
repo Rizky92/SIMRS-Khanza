@@ -373,7 +373,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     @Override
                     public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
                         if (text == null) return;
-                        if (fb.getDocument().getLength() + text.length() <= 20) {
+                        if (fb.getDocument().getLength() + text.length() <= 30) {
                             super.replace(fb, offset, length, text, attrs);
                         }
                     }
@@ -381,7 +381,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     @Override
                     public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
                         if (string == null) return;
-                        if (fb.getDocument().getLength() + string.length() <= 20) {
+                        if (fb.getDocument().getLength() + string.length() <= 30) {
                             super.insertString(fb, offset, string, attr);
                         }
                     }
