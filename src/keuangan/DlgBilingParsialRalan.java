@@ -21,11 +21,17 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import javax.swing.DefaultCellEditor;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 
@@ -207,28 +213,26 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
 
-        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)"}){
-            @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if ((colIndex==2)) {
-                    a=true;
-                }
-                return a;
+        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)", "Keterangan"}){
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return colIndex == 2
+                    || colIndex == 5;
             }
-             Class[] types = new Class[] {
+            Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
+                java.lang.Object.class, java.lang.Object.class, java.lang.String.class
+            };
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbAkunBayar.setModel(tabModeAkunBayar);
         tbAkunBayar.setPreferredScrollableViewportSize(new Dimension(800,800));
         tbAkunBayar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 5; i++) {
+        for (i = 0; i < 6; i++) {
             TableColumn column = tbAkunBayar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(405);
@@ -241,6 +245,31 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                 column.setPreferredWidth(60);
             }else if(i==4){
                 column.setPreferredWidth(110);
+            }else if(i==5){
+                column.setPreferredWidth(120);
+                DefaultCellEditor editor = (DefaultCellEditor) column.getCellEditor();
+                if (editor == null) {
+                    editor = (DefaultCellEditor) tbAkunBayar.getDefaultEditor(String.class);
+                }
+                JTextField txt = (JTextField) editor.getComponent();
+                ((AbstractDocument) txt.getDocument()).setDocumentFilter(new DocumentFilter() {
+                    @Override
+                    public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                        if (text == null) return;
+                        if (fb.getDocument().getLength() + text.length() <= 30) {
+                            super.replace(fb, offset, length, text, attrs);
+                        }
+                    }
+
+                    @Override
+                    public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                        if (string == null) return;
+                        if (fb.getDocument().getLength() + string.length() <= 30) {
+                            super.insertString(fb, offset, string, attr);
+                        }
+                    }
+                });
+                column.setCellEditor(editor);
             }
         }
         warna.kolom=2;
@@ -3479,7 +3508,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
             try {
                 Valid.tabelKosong(tabModeAkunBayar);
                 psakunbayar=koneksi.prepareStatement(
-                        "select akun_bayar.nama_bayar,akun_bayar.kd_rek,akun_bayar.ppn from akun_bayar "+
+                        "select akun_bayar.nama_bayar,akun_bayar.kd_rek,akun_bayar.ppn, detail_nota_jalan.keterangan from akun_bayar "+
                         "inner join detail_nota_jalan on akun_bayar.nama_bayar=detail_nota_jalan.nama_bayar "+
                         "where detail_nota_jalan.no_rawat=? and akun_bayar.nama_bayar like ? order by akun_bayar.nama_bayar");
                 try{
@@ -3487,7 +3516,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                     psakunbayar.setString(2,"%"+TCari.getText()+"%");
                     rsakunbayar=psakunbayar.executeQuery();
                     while(rsakunbayar.next()){
-                        tabModeAkunBayar.addRow(new Object[]{rsakunbayar.getString(1),rsakunbayar.getString(2),"",rsakunbayar.getDouble(3),""});
+                        tabModeAkunBayar.addRow(new Object[]{rsakunbayar.getString(1),rsakunbayar.getString(2),"",rsakunbayar.getDouble(3),"", rsakunbayar.getString("keterangan")});
                     }
                 }catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -6002,22 +6031,30 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                             }
 
                             if(countbayar>1){
-                                if(Sequel.menyimpantf("detail_nota_jalan","?,?,?,?",4,new String[]{
-                                        TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar)
-                                    },"no_rawat=? and nama_bayar=?","besarppn=besarppn+?,besar_bayar=besar_bayar+?",4,new String[]{
-                                        Double.toString(besarppn),Double.toString(itembayar),TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString()
-                                    })==true){
+                                if (Sequel.menyimpantfSmc("detail_nota_jalan", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString())) {
+                                    if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
+                                } else {
+                                    if (Sequel.mengupdatetfSmc("detail_nota_jalan", "besarppn = besarppn + ?, besar_bayar = besar_bayar + ?, keterangan = ?",
+                                        "no_rawat = ? and nama_bayar = ?", Double.toString(besarppn), Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString(),
+                                        TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString()
+                                    )) {
                                         if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
-                                }else{
-                                    sukses=false;
+                                    } else {
+                                        sukses = false;
+                                    }
                                 }
                             }else if(countbayar==1){
-                                if(Sequel.menyimpantf("detail_nota_jalan","?,?,?,?",4,new String[]{
-                                        TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(total)
-                                    },"no_rawat=? and nama_bayar=?","besarppn=besarppn+?,besar_bayar=besar_bayar+?",4,new String[]{
-                                        Double.toString(besarppn),Double.toString(total),TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString()
-                                    })==true){
+                                if (Sequel.menyimpantfSmc("detail_nota_jalan", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(total), tbAkunBayar.getValueAt(r, 5).toString())) {
+                                    if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), total, 0);
+                                } else {
+                                    if (Sequel.mengupdatetfSmc("detail_nota_jalan", "besarppn = besarppn + ?, besar_bayar = besar_bayar + ?, keterangan = ?",
+                                        "no_rawat = ? and nama_bayar = ?", Double.toString(besarppn), Double.toString(total), tbAkunBayar.getValueAt(r, 5).toString(),
+                                        TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString()
+                                    )) {
                                         if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), total, 0);
+                                    } else {
+                                        sukses = false;
+                                    }
                                 }
                             }else{
                                 sukses=false;
@@ -7033,24 +7070,34 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                             }
 
                             if(countbayar>1){
-                                if(Sequel.menyimpantf("detail_nota_jalan","?,?,?,?",4,new String[]{
-                                        TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(-besarppn),Double.toString(-itembayar)
-                                    },"no_rawat=? and nama_bayar=?","besarppn=besarppn-?,besar_bayar=besar_bayar-?",4,new String[]{
-                                        Double.toString(besarppn),Double.toString(itembayar),TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString()
-                                    })==true){
+                                if (Sequel.menyimpantfSmc("detail_nota_jalan", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(-besarppn), Double.toString(-itembayar), tbAkunBayar.getValueAt(r, 5).toString())) {
+                                    if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, itembayar);
+                                } else {
+                                    if (Sequel.mengupdatetfSmc("detail_nota_jalan", "besarppn = besarppn - ?, besar_bayar = besar_bayar = ?, keterangan = ?",
+                                        "no_rawat = ? and nama_bayar = ?", Double.toString(-besarppn), Double.toString(-itembayar), tbAkunBayar.getValueAt(r, 5).toString(),
+                                        TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString()
+                                    )) {
                                         if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, itembayar);
+                                    } else {
+                                        sukses = false;
                                     }
-                                }else if(countbayar==1){
-                                    if(Sequel.menyimpantf("detail_nota_jalan","?,?,?,?",4,new String[]{
-                                        TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(-besarppn),Double.toString(-total)
-                                    },"no_rawat=? and nama_bayar=?","besarppn=besarppn-?,besar_bayar=besar_bayar-?",4,new String[]{
-                                        Double.toString(besarppn),Double.toString(total),TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString()
-                                    })==true){
+                                }
+                            }else if(countbayar==1){
+                                if (Sequel.menyimpantfSmc("detail_nota_jalan", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(-besarppn), Double.toString(-total), tbAkunBayar.getValueAt(r, 5).toString())) {
+                                    if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, total);
+                                } else {
+                                    if (Sequel.mengupdatetfSmc("detail_nota_jalan", "besarppn = besarppn - ?, besar_bayar = besar_bayar = ?, keterangan = ?",
+                                        "no_rawat = ? and nama_bayar = ?", Double.toString(-besarppn), Double.toString(-total), tbAkunBayar.getValueAt(r, 5).toString(),
+                                        TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString()
+                                    )) {
                                         if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, total);
+                                    } else {
+                                        sukses = false;
                                     }
                                 }
                             }
                         }
+                    }
 
                     if((ttlRalan_Dokter+ttlRalan_Dokter_Param+ttlRalan_Paramedis-Suspen_Tindakan_Ralan)>0){
                         if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Tindakan Ralan", (ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis) - Suspen_Tindakan_Ralan, 0);
