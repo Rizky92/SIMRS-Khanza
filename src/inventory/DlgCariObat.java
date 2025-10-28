@@ -3542,7 +3542,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 cmbJam.setEnabled(false);
                 cmbMnt.setEnabled(false);
                 cmbDtk.setEnabled(false);
-                ChkNoResep.setEnabled(false);
             }
         }
     }
