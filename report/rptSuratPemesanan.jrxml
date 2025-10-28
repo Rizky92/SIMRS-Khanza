@@ -631,7 +631,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Direktur]]></text>
+				<text><![CDATA[PLT DIREKTUR]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="1" y="236" width="138" height="10" uuid="5db4880f-6ab9-4b89-84fc-fcb87265dabd"/>

@@ -382,7 +382,7 @@
 					<font fontName="Tahoma" size="9" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[DIREKTUR]]></text>
+				<text><![CDATA[PLT DIREKTUR]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="16" y="513" width="179" height="12" uuid="de12c71c-2227-4b69-9f56-4ea8ff2ca4ca"/>

@@ -398,7 +398,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[DIREKTUR]]></text>
+				<text><![CDATA[PLT DIREKTUR]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="80" width="121" height="11" uuid="b5b70a0f-8ee8-495e-a884-68f51e85ca21">

@@ -399,7 +399,7 @@ and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori]]
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PLT DIREKTUR " + $P{namars}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
