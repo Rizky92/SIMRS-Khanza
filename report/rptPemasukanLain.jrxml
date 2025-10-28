@@ -380,7 +380,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[ dr. TEGUH NURWANTO, MARS]]></text>
+				<text><![CDATA[ Ns. YULIANA PABIBAK, S.Kep]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="30" y="94" width="111" height="11" uuid="3af9285d-6603-4aa0-9c45-e5e2320003d3">

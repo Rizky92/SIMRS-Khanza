@@ -16,9 +16,9 @@
 ipsrspemesanan.tgl_tempo, bayar_pemesanan_non_medis.no_faktur,
 ipsrssuplier.nama_suplier,bayar_pemesanan_non_medis.nama_bayar,bayar_pemesanan_non_medis.no_bukti,
 bayar_pemesanan_non_medis.besar_bayar,bayar_pemesanan_non_medis.keterangan,
-bayar_pemesanan_non_medis.nip,petugas.nama from bayar_pemesanan_non_medis inner join petugas 
-inner join ipsrspemesanan inner join ipsrssuplier on bayar_pemesanan_non_medis.nip=petugas.nip 
-and bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur 
+bayar_pemesanan_non_medis.nip,petugas.nama from bayar_pemesanan_non_medis inner join petugas
+inner join ipsrspemesanan inner join ipsrssuplier on bayar_pemesanan_non_medis.nip=petugas.nip
+and bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur
 and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 	</queryString>
 	<field name="tgl_bayar" class="java.sql.Date">
@@ -449,7 +449,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[dr. TEGUH NURWANTO, MARS]]></text>
+				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="676" y="94" width="121" height="11" uuid="bdffba95-93fd-4328-8fcc-effb50e99a9c">

@@ -16,9 +16,9 @@
 pemesanan.tgl_tempo, bayar_pemesanan.no_faktur,
 datasuplier.nama_suplier,bayar_pemesanan.nama_bayar,bayar_pemesanan.no_bukti,
 bayar_pemesanan.besar_bayar,bayar_pemesanan.keterangan,
-bayar_pemesanan.nip,petugas.nama from bayar_pemesanan inner join petugas 
-inner join pemesanan inner join datasuplier on bayar_pemesanan.nip=petugas.nip 
-and bayar_pemesanan.no_faktur=pemesanan.no_faktur 
+bayar_pemesanan.nip,petugas.nama from bayar_pemesanan inner join petugas
+inner join pemesanan inner join datasuplier on bayar_pemesanan.nip=petugas.nip
+and bayar_pemesanan.no_faktur=pemesanan.no_faktur
 and pemesanan.kode_suplier=datasuplier.kode_suplier]]>
 	</queryString>
 	<field name="tgl_bayar" class="java.sql.Date">
@@ -465,7 +465,7 @@ and pemesanan.kode_suplier=datasuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[dr. TEGUH NURWANTO, MARS]]></text>
+				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="676" y="94" width="121" height="11" uuid="54b56ea8-9af3-42b0-91ca-0b08fd410234">
