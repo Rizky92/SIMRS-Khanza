@@ -2172,6 +2172,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 cmbMnt.setEnabled(false);
                 cmbDtk.setEnabled(false);
                 ChkRM.setEnabled(false);
+                NoResep.setEnabled(false);
             }
         }
     }
