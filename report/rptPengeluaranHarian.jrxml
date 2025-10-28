@@ -22,9 +22,9 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
-		<![CDATA[select pengeluaran_harian.no_keluar,pengeluaran_harian.tanggal, pengeluaran_harian.keterangan, pengeluaran_harian.biaya, pengeluaran_harian.nip, 
-petugas.nama,pengeluaran_harian.kode_kategori,kategori_pengeluaran_harian.nama_kategori 
-from pengeluaran_harian inner join petugas inner join kategori_pengeluaran_harian on pengeluaran_harian.nip=petugas.nip 
+		<![CDATA[select pengeluaran_harian.no_keluar,pengeluaran_harian.tanggal, pengeluaran_harian.keterangan, pengeluaran_harian.biaya, pengeluaran_harian.nip,
+petugas.nama,pengeluaran_harian.kode_kategori,kategori_pengeluaran_harian.nama_kategori
+from pengeluaran_harian inner join petugas inner join kategori_pengeluaran_harian on pengeluaran_harian.nip=petugas.nip
 and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori]]>
 	</queryString>
 	<field name="no_keluar" class="java.lang.String">
@@ -389,7 +389,7 @@ and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori]]
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[ dr. TEGUH NURWANTO, MARS]]></text>
+				<text><![CDATA[ Ns. YULIANA PABIBAK, S.Kep]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="605" y="94" width="170" height="11" uuid="1a4a2290-ee9e-41ba-a2a5-0a68d62cbfb0">
@@ -399,7 +399,7 @@ and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori]]
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PLT DIREKTUR " + $P{namars}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
