@@ -1065,16 +1065,36 @@ public class SuratKontrol extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             if(tbObat.getSelectedRow()!= -1){
-                if(Sequel.queryu2tf("delete from skdp_bpjs where tahun=? and no_antrian=?",2,new String[]{
-                    tbObat.getValueAt(tbObat.getSelectedRow(),0).toString(),tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()
-                })==true){
+                if (Sequel.menghapustfSmc("skdp_bpjs", "tahun = ? and no_antrian = ?",
+                    tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
+                    tbObat.getValueAt(tbObat.getSelectedRow(), 11).toString()
+                )) {
                     if (JADIKANBOOKINGSURATKONTROL) {
-                        Sequel.menghapusSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
-                            tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
-                        );
+                        if (BOOKINGLANGSUNGREGISTRASI) {
+                            norawat = Sequel.cariIsiSmc("select booking_registrasi.no_rawat from booking_registrasi where " +
+                                "booking_registrasi.no_rkm_medis = ? and booking_registrasi.tanggal_periksa = ?",
+                                tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(),
+                                tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                            );
+
+                            if (!norawat.isBlank()) {
+                                Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
+                                    tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(),
+                                    tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                );
+                                Sequel.menghapustfSmc("reg_periksa", "no_rawat = ? and no_rkm_medis = ? and tgl_registrasi = ? and status_lanjut = 'Ralan' " +
+                                    "and stts = 'Belum' and not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
+                                    norawat, tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                                );
+                            }
+                        } else {
+                            Sequel.menghapusSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
+                                tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 9).toString()
+                            );
+                        }
                     }
                     tabMode.removeRow(tbObat.getSelectedRow());
-                    LCount.setText(""+tabMode.getRowCount());
+                    LCount.setText("" + tabMode.getRowCount());
                     emptTeks();
                 }
             }else{
