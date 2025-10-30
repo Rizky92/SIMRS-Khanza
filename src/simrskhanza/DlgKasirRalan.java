@@ -8103,78 +8103,78 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }else{
                 if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus semua?\nAksi ini tidak bisa dikembalikan..!!", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                     Sequel.AutoComitFalse();
-                    Sequel.menghapusIgnoreSmc("operasi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("laporan_operasi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("saran_kesan_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("beri_obat_operasi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("billing", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pengurangan_biaya", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("nota_inap", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("nota_jalan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("deposit", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_beri_diet", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("diagnosa_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("dpjp_ranap", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("hemodialisa", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("kamar_inap", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pengurangan_biaya", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("piutang_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("prosedur_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("ranap_gabung", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rvp_klaim_bpjs", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rujuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rujuk_masuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("tambahan_biaya", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_inap_dr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_inap_pr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_jl_pr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pemeriksaan_ralan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pemeriksaan_ranap", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_periksa_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("periksa_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("beri_bhp_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("periksa_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("aturan_pakai", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_pemberian_obat", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("tagihan_obat_langsung", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("resep_obat", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("resep_pulang", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("returpasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("stok_obat_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_nota_jalan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_piutang_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("mutasi_berkas", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("gambar_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("hasil_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_obat_racikan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("obat_racikan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("booking_operasi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("catatan_perawatan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("permintaan_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("permintaan_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pcare_pendaftaran", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_penagihan_piutang", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("permintaan_stok_obat_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_detail_periksa_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_detail_periksa_lab_perujuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_dokter_anak", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_dokter_anestesi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_dokter_pjanak", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_dokter_umum", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_operator1", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_operator2", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_operator3", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_periksa_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_periksa_lab_perujuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_periksa_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_periksa_radiologi_perujuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_rawat_inap_dr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("operasi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("laporan_operasi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("saran_kesan_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("beri_obat_operasi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("billing", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pengurangan_biaya", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("nota_inap", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("nota_jalan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("deposit", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_beri_diet", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("diagnosa_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("dpjp_ranap", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("hemodialisa", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("kamar_inap", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pengurangan_biaya", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("piutang_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("prosedur_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("ranap_gabung", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rvp_klaim_bpjs", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rujuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rujuk_masuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("tambahan_biaya", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_jl_pr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pemeriksaan_ralan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pemeriksaan_ranap", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_periksa_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("periksa_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("beri_bhp_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("periksa_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("aturan_pakai", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_pemberian_obat", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("tagihan_obat_langsung", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("resep_obat", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("resep_pulang", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("returpasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("stok_obat_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_nota_jalan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_piutang_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("mutasi_berkas", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("gambar_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("hasil_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_obat_racikan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("obat_racikan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("booking_operasi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("catatan_perawatan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("permintaan_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("permintaan_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pcare_pendaftaran", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_penagihan_piutang", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("permintaan_stok_obat_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_detail_periksa_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_detail_periksa_lab_perujuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_dokter_anak", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_dokter_anestesi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_dokter_pjanak", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_dokter_umum", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_operator1", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_operator2", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_operator3", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_periksa_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_periksa_lab_perujuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_periksa_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_periksa_radiologi_perujuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_rawat_inap_dr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
                     if (Sequel.menghapustfSmc("reg_periksa", "no_rawat = ?", TNoRw.getText())) {
                         if(tbKasirRalan.getSelectedRow()>-1){
                             tabModekasir.removeRow(tbKasirRalan.getSelectedRow());
@@ -15654,7 +15654,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalMedisRalanActionPerformed
+    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -15676,7 +15676,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalMedisRalanActionPerformed
+    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();

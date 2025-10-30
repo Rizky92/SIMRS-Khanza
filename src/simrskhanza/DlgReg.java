@@ -16188,7 +16188,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
-    private void MnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+    private void MnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -16234,7 +16234,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
-    private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+    private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -16370,7 +16370,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalMedisRalanActionPerformed
+    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -16392,7 +16392,7 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianAwalMedisRalanActionPerformed
+    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {                                                          
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -19336,8 +19336,7 @@ public final class DlgReg extends javax.swing.JDialog {
         if (akses.getadmin()) {
             Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString());
         } else {
-            if (
-                Sequel.cariExistsSmc("select * from pemeriksaan_ralan where no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString()) ||
+            if (Sequel.cariExistsSmc("select * from pemeriksaan_ralan where no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString()) ||
                 Sequel.cariIsiSmc("select stts from reg_periksa where no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString()).equalsIgnoreCase("sudah")
             ) {
                 JOptionPane.showMessageDialog(null, "Maaf, pasien sudah menerima pelayanan...!!!!");
@@ -19348,6 +19347,11 @@ public final class DlgReg extends javax.swing.JDialog {
                     tbPetugas.setValueAt(tglsekarang.substring(11), tbPetugas.getSelectedRow(), 4);
                     if (BOOKINGLANGSUNGREGISTRASI) {
                         Sequel.mengupdateSmc("booking_registrasi", "waktu_kunjungan = now(), status = 'Checkin'", "no_rawat = ?", tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 2).toString());
+                        if (koneksiDB.JADIKANBOOKINGSURATKONTROL().equals("yes")) {
+                            Sequel.mengupdatetfSmc("skdp_bpjs", "status = 'Sudah Periksa'", "no_rkm_medis = ? and tanggal_datang = current_date() and kd_dokter = ?",
+                                tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 7).toString(), tbPetugas.getValueAt(tbPetugas.getSelectedRow(), 5).toString()
+                            );
+                        }
                     }
                 }
             }
