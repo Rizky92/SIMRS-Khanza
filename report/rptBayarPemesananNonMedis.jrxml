@@ -419,7 +419,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
+				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="94" width="121" height="11" uuid="e821ce07-6d3e-40cd-99ec-4afcf9a23cc3">
@@ -429,7 +429,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[MANAGER KEUANGAN]]></text>
+				<text><![CDATA[KABAG KEUANGAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="711" y="29" width="50" height="11" uuid="69360437-8cb7-4f4e-b3aa-237579bfb78c">

@@ -390,7 +390,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[MANAGER KEUANGAN]]></text>
+				<text><![CDATA[KABAG KEUANGAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="30" y="80" width="110" height="11" uuid="acff0849-f1b2-489e-9d35-6ddb28901395">
@@ -400,7 +400,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
+				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="605" y="94" width="170" height="11" uuid="916dd5ef-30bb-4707-b3e1-b66d8837f571">

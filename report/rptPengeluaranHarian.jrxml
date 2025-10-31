@@ -349,7 +349,7 @@ and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori]]
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[MANAGER KEUANGAN]]></text>
+				<text><![CDATA[KABAG KEUANGAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="17" y="80" width="137" height="11" uuid="dede0247-bd61-4e62-b0d5-75760b0d1363">

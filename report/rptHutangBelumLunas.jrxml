@@ -401,7 +401,7 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="110">
+		<band height="107">
 			<staticText>
 				<reportElement x="768" y="31" width="179" height="11" uuid="028bd48a-6db5-4f19-84af-5b668a735a61">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -438,7 +438,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[MANAGER KEUANGAN]]></text>
+				<text><![CDATA[KABAG KEUANGAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="54" y="80" width="121" height="11" uuid="cf142623-467d-46e0-a883-ff81feab9ce9">
@@ -448,7 +448,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
+				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="89" y="29" width="50" height="11" uuid="f0b5227e-1d01-4928-8b94-c6b6d266e3b1">
