@@ -1196,6 +1196,10 @@ ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `no_npwp` varchar(30) N
 
 ALTER TABLE `perusahaan_pasien` MODIFY COLUMN IF EXISTS `nama_perusahaan` varchar(120) NULL DEFAULT NULL AFTER `kode_perusahaan`;
 
+ALTER TABLE `prosedur_pasien` DROP PRIMARY KEY IF EXISTS;
+
+ALTER TABLE `prosedur_pasien` ADD PRIMARY KEY IF NOT EXISTS (`no_rawat`, `kode`, `status`, `prioritas`) USING BTREE;
+
 CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response2`  (
   `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
   `no_rawat` varchar(17) NOT NULL,
@@ -1294,10 +1298,10 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_lab_loinc`  (
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_lab_snomed`  (
-  `code` varchar(30) NOT NULL,
+  `code` varchar(40) NOT NULL,
   `system` varchar(100) NOT NULL,
-  `display` varchar(300) NULL DEFAULT NULL,
-  `display_ind` varchar(300) NULL DEFAULT NULL,
+  `display` varchar(600) NULL DEFAULT NULL,
+  `display_ind` varchar(600) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
   INDEX `display`(`display`) USING BTREE,
   INDEX `display_ind`(`display_ind`) USING BTREE
@@ -1515,6 +1519,8 @@ CREATE TABLE IF NOT EXISTS `temporary_besar`  (
   INDEX `userid`(`userid`) USING BTREE,
   INDEX `ipaddress`(`ipaddress`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `trackersql` ADD INDEX IF NOT EXISTS `trackersql_tanggal_IDX`(`tanggal`) USING BTREE;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `edit_hapus_spo_medis` enum('true','false') NULL DEFAULT NULL AFTER `penatalaksanaan_terapi_okupasi`;
 
