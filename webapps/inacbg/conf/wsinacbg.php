@@ -204,8 +204,8 @@
     function UpdateDataKlaim($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
-                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){	
-        
+                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){
+
         $prosedur_non_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan not like '%terapi%'")+
                             getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan not like '%terapi%'");
         if($prosedur_non_bedah==""){
@@ -433,8 +433,8 @@
     function UpdateDataKlaimInternal($nomor_sep,$nomor_kartu,$tgl_masuk,$tgl_pulang,$jenis_rawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
                             $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
-                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){	
-        
+                            $tarif_poli_eks,$nama_dokter,$kode_tarif,$payor_id,$payor_cd,$cob_cd,$coder_nik,$norawat,$sistole,$diastole,$asalrujukan){
+
         $prosedur_non_bedah=getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ralan Dokter Paramedis' and nm_perawatan not like '%terapi%'")+
                             getOne("select if(sum(totalbiaya)='','0',sum(totalbiaya)) from billing where no_rawat='".$norawat."' and status='Ranap Dokter Paramedis' and nm_perawatan not like '%terapi%'");
         if($prosedur_non_bedah==""){
@@ -1000,8 +1000,8 @@
             echo "\n<br>Respon Grouping INACBG : ".$msg['metadata']['message'];
         }
     }
-    
-    function InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg){	
+
+    function InacBGToDRG($nomor_sep,$diagnosainacbg,$procedureinacbg){
         $request ='{
                     "metadata": {
                         "method": "idrg_to_inacbg_import"
@@ -1036,7 +1036,7 @@
                 $msg= Request($request);
                 echo "\n<br>Respon Set Diagnosa CBG : ".$msg['metadata']['message'];
             }
-               
+
             if($procedureinacbg!=""){
                 $request ='{
                                 "metadata": {
@@ -1603,7 +1603,7 @@
         $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $tarif_poli_eks, $cara_masuk,
         $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd, $coder_nik, $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan,
         $penunjang, $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat, $obat_kronis, $obat_kemoterapi, $alkes, $bmhp,
-        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0", $nomor_sitb = ''
+        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0"
     ) {
         $request = [
             'metadata' => [
@@ -1681,10 +1681,6 @@
             ];
         }
 
-        /* if (!empty($nomor_sitb)) {
-            ValidasiRegistrasiSITBSmc($nomor_sep, $nomor_rm, $nomor_sitb);
-        } */
-
         bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
         InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
 
@@ -1703,7 +1699,7 @@
             ],
             'data' => [
                 'nomor_sep' => $nomor_sep,
-                'nomor_registrasi_sitb' => $nomor_sitb,
+                'nomor_register_sitb' => $nomor_sitb,
             ],
         ];
 
@@ -1726,8 +1722,8 @@
             ];
         }
 
-        bukaquery2(sprintf("insert into inacbg_pasien_tb_smc values ('%s', '%s', '%s') on duplicate key update no_sitb = values(no_sitb), status_validasi = values(status_validasi)",
-            $nomor_rm, $nomor_sitb, $msg['response']['status'].' - '.$msg['response']['detail']
+        bukaquery2(sprintf("insert into inacbg_pasien_tb_smc values ('%s', '%s', '%s', '%s') on duplicate key update no_rkm_medis = values(no_rkm_medis), no_sitb = values(no_sitb), status_validasi = values(status_validasi)",
+            $nomor_sep, $nomor_rm, $nomor_sitb, $msg['response']['status'].' - '.$msg['response']['detail']
         ));
 
         return [
@@ -1777,6 +1773,9 @@
 
     function SetProsedurIdrgSmc($nomor_sep, $prosedur)
     {
+        if (empty($prosedur)) {
+            $prosedur = '#';
+        }
         $request = [
             'metadata' => [
                 'method' => 'idrg_procedure_set',

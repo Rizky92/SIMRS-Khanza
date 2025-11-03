@@ -135,14 +135,13 @@
                                 }
 
                                 $baris = mysqli_fetch_array(bukaquery(<<<SQL
-                                    select bridging_sep.no_sep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang)
-                                    as tglpulang, reg_periksa.*, pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, pasien.no_ktp,
-                                    '' as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab
+                                    select bridging_sep.no_sep, bridging_sep.tglsep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang) as tglpulang, reg_periksa.*,
+                                    pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, pasien.no_ktp, (select inacbg_pasien_tb_smc.no_sitb from inacbg_pasien_tb_smc
+                                    where inacbg_pasien_tb_smc.no_rkm_medis = reg_periksa.no_rkm_medis limit 1) as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab
                                     from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs
                                     join dokter on maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter
                                     join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat
                                     join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
-                                    left join inacbg_pasien_tb_smc on reg_periksa.no_rkm_medis = inacbg_pasien_tb_smc.no_rkm_medis
                                     join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli
                                     join penjab on reg_periksa.kd_pj = penjab.kd_pj
                                     where bridging_sep.no_sep = '$nosep'
@@ -160,7 +159,7 @@
                                 $jk             = $baris['jk'];
                                 $almt_pj        = $baris['almt_pj'];
                                 $norawat        = $baris['no_rawat'];
-                                $tgl_registrasi = $baris['tgl_registrasi'];
+                                $tgl_registrasi = $baris['tglsep'];
                                 $tgl_keluar     = $baris['tgl_registrasi'];
                                 $jam_reg        = $baris['jam_reg'];
                                 $nm_poli        = $baris['nm_poli'];
@@ -176,20 +175,20 @@
                                     $jnsrawat = '1';
                                     $tensi = explode('/', getOne("(select tensi from pemeriksaan_ranap where no_rawat = '$norawat' order by tgl_perawatan desc, jam_rawat desc) union all (select '120/90' as tensi)"));
                                     if (! empty($tensi[0])) {
-                                        $sistole = $tensi[0];
+                                        $sistole = trim($tensi[0]);
                                     }
                                     if (! empty($tensi[1])) {
-                                        $diastole = $tensi[1];
+                                        $diastole = trim($tensi[1]);
                                     }
                                     $tgl_keluar = getOne("select tgl_keluar from kamar_inap where no_rawat = '$norawat' order by tgl_keluar desc limit 1");
                                 } else {
                                     $jnsrawat = '2';
                                     $tensi = explode('/', getOne("(select tensi from pemeriksaan_ralan where no_rawat = '$norawat' order by tgl_perawatan desc, jam_rawat desc) union all (select '120/90' as tensi)"));
                                     if (! empty($tensi[0])) {
-                                        $sistole = $tensi[0];
+                                        $sistole = trim($tensi[0]);
                                     }
                                     if (! empty($tensi[1])) {
-                                        $diastole = $tensi[1];
+                                        $diastole = trim($tensi[1]);
                                     }
                                 }
 
@@ -485,15 +484,13 @@
                                     </select>
                                 </td>
                             </tr>
-							<?php
-							/* <tr class="head">
+							<tr class="head">
                                 <td width="28%">No. Regist SITB</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
                                     <input name="no_sitb" class="text inputbox" type="text" style="font-family: Tahoma; width: 95%" value="<?= $no_sitb ?>" size="20" maxlength="20">
                                 </td>
-                            </tr> */
-							?>
+                            </tr>
                             <tr class="head">
                                 <td width="28%">Dializer Single Use</td>
                                 <td width="1%">:</td>
@@ -1973,6 +1970,7 @@
                 <?php endif; ?>
             </div>
             <?php
+                $BtnSimpan = $_POST['BtnSimpan'] ?? null;
                 if (isset($BtnSimpan)) {
                     if ($grouper === 'idrg') {
                         $validasi                  = 0;
@@ -2072,12 +2070,15 @@
                                             $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang, $radiologi,
                                             $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
                                             $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole,
-                                            $dializer_single_use, $no_sitb
+                                            $dializer_single_use
                                         );
                                     }
 
                                     if ($success === true) {
                                         $set_diagnosa = SetDiagnosaIdrgSmc($nosep, $diagnosa_idrg);
+                                        if (!empty($no_sitb)) {
+                                            ValidasiRegistrasiSITBSmc($nosep, $no_rkm_medis, $no_sitb);
+                                        }
                                         $set_prosedur = SetProsedurIdrgSmc($nosep, $prosedur_idrg);
 
                                         if ($set_diagnosa['success'] === false) {
