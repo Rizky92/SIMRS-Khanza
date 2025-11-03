@@ -371,7 +371,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         } catch (Exception e) {
             RESEPRAJALKEPLAN="no";
         }
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -2160,9 +2160,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 }
             }else if(status.equals("ranap")){
                 bangsal=akses.getkdbangsal();
-            } 
-        } 
-        
+            }
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 DTPBeri.setEditable(false);
