@@ -1051,6 +1051,7 @@ import setting.DlgAdmin;
 import setting.DlgBiayaHarian;
 import setting.DlgBiayaSekaliMasuk;
 import setting.DlgClosingKasir;
+import setting.DlgEEksekutif;
 import setting.DlgJamDietPasien;
 import setting.DlgPasswordBPJS;
 import setting.DlgPenelusuranLogin;
@@ -23347,6 +23348,19 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
+    private void btnEEksekutifActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgEEksekutif admin=new DlgEEksekutif(this,false);
+        admin.tampil();
+        admin.emptTeks();
+        admin.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        admin.setLocationRelativeTo(PanelUtama);
+        admin.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -24061,7 +24075,8 @@ public class frmUtama extends javax.swing.JFrame {
             btnSuratPernyataanMemilihDPJP,btnSkriningInstrumenMentalEmosional,btnChecklistKriteriaMasukNICU,btnChecklistKriteriaKeluarNICU,btnPenilaianAwalMedisRanapPsikiatri,
             btnLabKeslingPelanggan,btnChecklistKriteriaMasukPICU,btnChecklistKriteriaKeluarPICU,btnLabKeslingSampelBakuMutu,btnSkriningInstrumenAMT,btnLabKeslingParameterPengujian,
             btnLabKeslingNilaiNormalBakuMutu,btnSkriningPneumoniaSeverityIndex,btnPenilaianAwalMedisRalanJantung,btnPenilaianAwalMedisRalanUrologi,btnHasilPemeriksaanTreadmill,
-            btnHasilPemeriksaanECHOPediatrik,btnMasterTemplateInformasiEdukasi,btnSkriningInstrumenESAT,btnLabKeslingPermintaanPengujianSampel,btnPenilaianAwalMedisRanapJantung;
+            btnHasilPemeriksaanECHOPediatrik,btnMasterTemplateInformasiEdukasi,btnSkriningInstrumenESAT,btnLabKeslingPermintaanPengujianSampel,btnPenilaianAwalMedisRanapJantung,
+            btnEEksekutif;
 
     public void isWall(){
         try{
@@ -29870,6 +29885,11 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
+            if(akses.gete_eksekutif()==true){
+                Panelmenu.add(btnEEksekutif);
+                jmlmenu++;
+            }
+
             if(akses.gettracer_login()==true){
                 Panelmenu.add(btnTracker);
                 jmlmenu++;
@@ -35608,6 +35628,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getuser()==true){
             Panelmenu.add(btnUser);
+            jmlmenu++;
+        }
+
+        if(akses.gete_eksekutif()==true){
+            Panelmenu.add(btnEEksekutif);
             jmlmenu++;
         }
 
@@ -43633,6 +43658,13 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
+        if(akses.gete_eksekutif()==true){
+            if(btnEEksekutif.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnEEksekutif);
+                jmlmenu++;
+            }
+        }
+
         if(akses.getuser()==true){
             if(btnUserSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnUserSmc);
@@ -49371,6 +49403,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRanapJantung.setName("btnPenilaianAwalMedisRanapJantung");
         btnPenilaianAwalMedisRanapJantung.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRanapJantung.addActionListener(this::btnPenilaianAwalMedisRanapJantungActionPerformed);
+
+        btnEEksekutif = new widget.ButtonBig();
+        btnEEksekutif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2169607_bar_chart_financial_graph_graphic_icon.png")));
+        btnEEksekutif.setText("Set E-Eksekutif");
+        btnEEksekutif.setIconTextGap(0);
+        btnEEksekutif.setName("btnEEksekutif");
+        btnEEksekutif.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnEEksekutif.addActionListener(this::btnEEksekutifActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep;
