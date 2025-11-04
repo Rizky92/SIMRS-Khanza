@@ -269,7 +269,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_pasien_tb_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `no_rkm_medis` varchar(15) NOT NULL,
   `no_sitb` varchar(30) NOT NULL,
-  `status_validasi` varchar(50) NULL DEFAULT NULL,
+  `status_validasi` varchar(80) NULL DEFAULT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
   INDEX `inacbg_pasien_tb_smc_ibfk_2`(`no_rkm_medis`) USING BTREE,
   CONSTRAINT `inacbg_pasien_tb_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE,
@@ -1270,6 +1270,8 @@ ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder2` v
 ALTER TABLE `resume_pasien_ranap` MODIFY COLUMN IF EXISTS `prosedur_sekunder3` varchar(200) NOT NULL AFTER `kd_prosedur_sekunder2`;
 
 ALTER TABLE `riwayat_barang_medis` MODIFY COLUMN IF EXISTS `keterangan` varchar(500) NOT NULL AFTER `no_faktur`;
+
+ALTER TABLE `riwayat_barang_medis` ADD INDEX IF NOT EXISTS `riwayat_barang_medis_ibfk_2`(`tanggal`) USING BTREE;
 
 ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `saran` varchar(1000) NULL DEFAULT NULL AFTER `jam`;
 
