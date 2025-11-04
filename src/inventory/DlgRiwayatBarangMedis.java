@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -186,6 +187,7 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
         label17.setPreferredSize(new java.awt.Dimension(55, 23));
         panelisi4.add(label17);
 
+        kdbar.setEditable(false);
         kdbar.setName("kdbar"); // NOI18N
         kdbar.setPreferredSize(new java.awt.Dimension(80, 23));
         kdbar.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -201,7 +203,6 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
         panelisi4.add(nmbar);
 
         btnBarang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnBarang.setMnemonic('1');
         btnBarang.setToolTipText("Alt+1");
         btnBarang.setName("btnBarang"); // NOI18N
         btnBarang.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -217,6 +218,7 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
         label19.setPreferredSize(new java.awt.Dimension(75, 23));
         panelisi4.add(label19);
 
+        KdGudang.setEditable(false);
         KdGudang.setName("KdGudang"); // NOI18N
         KdGudang.setPreferredSize(new java.awt.Dimension(80, 23));
         KdGudang.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -232,7 +234,6 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
         panelisi4.add(NmGudang);
 
         btnBarang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnBarang1.setMnemonic('1');
         btnBarang1.setToolTipText("Alt+1");
         btnBarang1.setName("btnBarang1"); // NOI18N
         btnBarang1.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -285,7 +286,6 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
         panelisi1.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('2');
         BtnCari.setToolTipText("Alt+2");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -302,7 +302,6 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
         panelisi1.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('A');
         BtnAll.setToolTipText("Alt+A");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -324,7 +323,6 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
         panelisi1.add(label9);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('P');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+P");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -342,7 +340,6 @@ public class DlgRiwayatBarangMedis extends javax.swing.JDialog {
         panelisi1.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -628,95 +625,59 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private synchronized void prosesCari() {
-        if(ceksukses==false){
-            ceksukses=true;
+        if (!ceksukses) {
+            ceksukses = true;
             Valid.tabelKosong(tabMode);
-            new SwingWorker<Void, Void>() {
+            new SwingWorker<Void, Object[]>() {
                 @Override
-                protected Void doInBackground() throws Exception {
-                    try{
-                        if(nmbar.getText().trim().equals("")&&NmGudang.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                            ps=koneksi.prepareStatement(
-                                 "select riwayat_barang_medis.kode_brng,databarang.nama_brng,"+
-                                 "riwayat_barang_medis.stok_awal,riwayat_barang_medis.masuk,"+
-                                 "riwayat_barang_medis.keluar,riwayat_barang_medis.stok_akhir,"+
-                                 "riwayat_barang_medis.posisi,riwayat_barang_medis.tanggal,"+
-                                 "riwayat_barang_medis.jam,riwayat_barang_medis.petugas,"+
-                                 "riwayat_barang_medis.kd_bangsal,bangsal.nm_bangsal,"+
-                                 "riwayat_barang_medis.status,riwayat_barang_medis.no_batch,"+
-                                 "riwayat_barang_medis.no_faktur,riwayat_barang_medis.keterangan "+
-                                 "from riwayat_barang_medis inner join bangsal on riwayat_barang_medis.kd_bangsal=bangsal.kd_bangsal "+
-                                 "inner join databarang on riwayat_barang_medis.kode_brng=databarang.kode_brng "+
-                                 "where riwayat_barang_medis.tanggal between ? and ? order by riwayat_barang_medis.tanggal,riwayat_barang_medis.jam ");
-                        }else{
-                            ps=koneksi.prepareStatement(
-                                 "select riwayat_barang_medis.kode_brng,databarang.nama_brng,"+
-                                 "riwayat_barang_medis.stok_awal,riwayat_barang_medis.masuk,"+
-                                 "riwayat_barang_medis.keluar,riwayat_barang_medis.stok_akhir,"+
-                                 "riwayat_barang_medis.posisi,riwayat_barang_medis.tanggal,"+
-                                 "riwayat_barang_medis.jam,riwayat_barang_medis.petugas,"+
-                                 "riwayat_barang_medis.kd_bangsal,bangsal.nm_bangsal,"+
-                                 "riwayat_barang_medis.status,riwayat_barang_medis.no_batch,"+
-                                 "riwayat_barang_medis.no_faktur,riwayat_barang_medis.keterangan "+
-                                 "from riwayat_barang_medis inner join bangsal on riwayat_barang_medis.kd_bangsal=bangsal.kd_bangsal "+
-                                 "inner join databarang on riwayat_barang_medis.kode_brng=databarang.kode_brng "+
-                                 "where riwayat_barang_medis.tanggal between ? and ? and databarang.nama_brng like ? and bangsal.nm_bangsal like ? and "+
-                                 "(riwayat_barang_medis.kode_brng like ? or databarang.nama_brng like ? or riwayat_barang_medis.petugas like ? or "+
-                                 "bangsal.nm_bangsal like ? or riwayat_barang_medis.no_batch like ? or riwayat_barang_medis.no_faktur like ? or "+
-                                 "riwayat_barang_medis.kd_bangsal like ? or riwayat_barang_medis.status like ? or riwayat_barang_medis.keterangan like ? or "+
-                                 "riwayat_barang_medis.posisi like ?) "+"order by riwayat_barang_medis.tanggal,riwayat_barang_medis.jam ");
+                protected Void doInBackground() {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select r.*, o.nama_brng, g.nm_bangsal from riwayat_barang_medis r use index (riwayat_barang_medis_ibfk_2) join bangsal g on r.kd_bangsal = g.kd_bangsal join " +
+                        "databarang o on r.kode_brng = o.kode_brng where r.tanggal between ? and ? and r.kd_bangsal like ? and r.kode_brng like ? " + (TCari.getText().isBlank() ? "" :
+                        "and (r.kode_brng like ? or o.nama_brng like ? or r.petugas like ? or g.nm_bangsal like ? or r.no_batch like ? or r.no_faktur like ? or r.kd_bangsal like ? or " +
+                        "r.status like ? or r.keterangan like ? or r.posisi like ?) ") + "order by r.tanggal, r.jam"
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, Valid.getTglSmc(Tgl1));
+                        ps.setString(++p, Valid.getTglSmc(Tgl2));
+                        ps.setString(++p, KdGudang.getText() + "%");
+                        ps.setString(++p, kdbar.getText() + "%");
+                        if (!TCari.getText().isBlank()) {
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
                         }
-
-                        try {
-                            if(nmbar.getText().trim().equals("")&&NmGudang.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                            }else{
-                                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
-                                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
-                                 ps.setString(3,"%"+nmbar.getText()+"%");
-                                 ps.setString(4,"%"+NmGudang.getText()+"%");
-                                 ps.setString(5,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(6,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(7,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(8,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(9,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(10,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(11,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(12,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(13,"%"+TCari.getText().trim()+"%");
-                                 ps.setString(14,"%"+TCari.getText().trim()+"%");
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    rs.getString("kode_brng") + " " + rs.getString("nama_brng"),
+                                    rs.getString("stok_awal"), rs.getString("masuk"),
+                                    rs.getString("keluar"), rs.getString("stok_akhir"),
+                                    rs.getString("posisi"), rs.getString("tanggal"),
+                                    rs.getString("jam"), rs.getString("petugas"),
+                                    rs.getString("kd_bangsal") + " " + rs.getString("nm_bangsal"),
+                                    rs.getString("status"), rs.getString("no_batch"),
+                                    rs.getString("no_faktur"), rs.getString("keterangan")
+                                });
                             }
-                            rs=ps.executeQuery();
-                            i=0;
-                            while(rs.next()){
-                                Object[] row = new Object[]{
-                                     rs.getString("kode_brng")+" "+rs.getString("nama_brng"),
-                                     rs.getString("stok_awal"),rs.getString("masuk"),
-                                     rs.getString("keluar"),rs.getString("stok_akhir"),
-                                     rs.getString("posisi"),rs.getString("tanggal"),
-                                     rs.getString("jam"),rs.getString("petugas"),
-                                     rs.getString("kd_bangsal")+" "+rs.getString("nm_bangsal"),
-                                     rs.getString("status"),rs.getString("no_batch"),
-                                     rs.getString("no_faktur"),rs.getString("keterangan")
-                                };
-                                i++;
-                                SwingUtilities.invokeLater(() -> tabMode.addRow(row));
-                            }
-                         } catch (Exception e) {
-                             System.out.println("Notifikasi Data Barang : "+e);
-                         } finally{
-                             if(rs!=null){
-                                 rs.close();
-                             }
-                             if(ps!=null){
-                                 ps.close();
-                             }
-                         }
-                     }catch(Exception e){
-                         System.out.println("Notifikasi : "+e);
-                     }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    
                     return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
                 }
 
                 @Override
@@ -728,7 +689,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
 
     public void isCek(){
-         BtnPrint.setEnabled(akses.getriwayat_obat_alkes_bhp());
+        BtnPrint.setEnabled(akses.getriwayat_obat_alkes_bhp());
     }
-
 }

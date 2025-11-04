@@ -16,6 +16,7 @@ truncate table `antrilayanankedokteranfisikrehabilitasi`;
 truncate table `antrilayananprogramkfr`;
 truncate table `antriloket`;
 truncate table `antriloketcetak_smc`;
+truncate table `antriloketfarmasi_smc`;
 truncate table `antriloketcetak`;
 truncate table `antriloketsmc`;
 truncate table `antripelaksanaanedukasi`;
