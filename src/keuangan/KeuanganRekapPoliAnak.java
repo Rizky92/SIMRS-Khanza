@@ -53,7 +53,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
             ttlh29st1p=0,ttlt1s4l=0,ttlt1s4p=0,ttlt5s14l=0,ttlt5s14p=0;
     private String h0s6l="",h0s6p="",h7s28l="",h7s28p="",h29st1l="",h29st1p="",
             t1s4l="",t1s4p="",t5s14l="",t5s14p="";
-    
+
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -63,7 +63,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -85,8 +85,8 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -97,7 +97,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -108,8 +108,8 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -120,7 +120,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -131,8 +131,8 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -145,7 +145,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         LoadHTML.setEditable(true);
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditorKit(kit);
@@ -158,7 +158,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -423,18 +423,18 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("sensusdokter.html");            
+
+            File f = new File("sensusdokter.html");
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -443,20 +443,20 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                    "<font size='2' face='Tahoma'>REKAP HARIAN POLI ANAK<br><br></font>"+        
+                                    "<font size='2' face='Tahoma'>REKAP HARIAN POLI ANAK<br><br></font>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
             bw.close();
-            
+
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -464,17 +464,17 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
         }else{
             //Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TKd);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -617,7 +617,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
     private widget.panelisi panelisi4;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
+    public void tampil(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try{
             ttlh0s6l=0;ttlh0s6p=0;ttlh7s28l=0;ttlh7s28p=0;ttlh29st1l=0;
@@ -638,12 +638,12 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                             "inner join dokter inner join poliklinik on reg_periksa.kd_dokter=dokter.kd_dokter "+
                             "and reg_periksa.kd_poli=poliklinik.kd_poli "+
                             "where poliklinik.nm_poli like '%anak%' and tgl_registrasi=? and dokter.nm_dokter like ? group by reg_periksa.kd_dokter");
-                    try {                        
+                    try {
                         psdokter.setString(1,rstanggal.getString("tgl_registrasi"));
                         psdokter.setString(2,"%"+nmdokter.getText().trim()+"%");
                         rsdokter=psdokter.executeQuery();
                         while(rsdokter.next()){
-                            htmlContent.append(                                
+                            htmlContent.append(
                                 "<tr class='isi2'>"+
                                     "<td valign='top' align='left'>TANGGAL : "+rstanggal.getString("tanggal")+" &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;DOKTER : "+rsdokter.getString("kd_dokter")+" "+rsdokter.getString("nm_dokter")+"</td>"+
                                 "</tr>"+
@@ -835,7 +835,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                                     }
                                     htmlContent.append(
                                                 "</table>"+
-                                            "</td>"+                                                        
+                                            "</td>"+
                                             "<td valign='top' align='center'>"+Sequel.cariIsi("select lingkar_perut  from pemeriksaan_ralan where no_rawat=?",rsreg.getString("no_rawat"))+"</td>"+
                                         "</tr>");
                                     i++;
@@ -887,11 +887,11 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                                     "<td valign='top' align='center'></td>"+
                                     "<td valign='top' align='center'></td>"+
                                 "</tr>"
-                            ); 
+                            );
                             htmlContent.append(
                                     "</table>"+
-                                "</tr>");                                                            
-                        }                        
+                                "</tr>");
+                        }
                     } catch (Exception e) {
                         System.out.println("keuangan.DlgRekapPoliAnak.tampil() : "+e);
                     } finally{
@@ -901,8 +901,8 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                         if(psdokter!=null){
                             psdokter.close();
                         }
-                    }                                                        
-                }                                     
+                    }
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi Cari Tanggal : "+e);
             } finally{
@@ -959,7 +959,7 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
                             "</tr>"+
                          "</table>"+
                     "</tr>");
-            } 
+            }
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -972,6 +972,6 @@ public final class KeuanganRekapPoliAnak extends javax.swing.JDialog {
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-    
+
 
 }

@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -133,8 +133,8 @@ public final class DlgPetugas extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         jabatan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -142,10 +142,10 @@ public final class DlgPetugas extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jabatan.getTable().getSelectedRow()!= -1){                   
+                if(jabatan.getTable().getSelectedRow()!= -1){
                     KdJbtn.setText(jabatan.getTable().getValueAt(jabatan.getTable().getSelectedRow(),0).toString());
                     TJbtn.setText(jabatan.getTable().getValueAt(jabatan.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KdJbtn.requestFocus();
             }
             @Override
@@ -157,7 +157,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-                
+
         pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -165,14 +165,14 @@ public final class DlgPetugas extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     TNip.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                     TNm.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     CmbJk.setSelectedItem(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),2).toString().replaceAll("Wanita","PEREMPUAN").replaceAll("Pria","LAKI-LAKI"));
                     TTmp.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),11).toString());
                     TAlmt.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),13).toString());
                     Valid.SetTgl(DTPLahir,pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),12).toString());
-                }   
+                }
                 TNip.requestFocus();
             }
             @Override
@@ -184,7 +184,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -192,15 +192,15 @@ public final class DlgPetugas extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pegawai.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
-    
+
     private DlgCariJabatan jabatan=new DlgCariJabatan(null,false);
 
     /** This method is called from within the constructor to
@@ -649,7 +649,6 @@ public final class DlgPetugas extends javax.swing.JDialog {
         FormInput.add(CmbJk);
         CmbJk.setBounds(99, 72, 140, 23);
 
-        TNm.setHighlighter(null);
         TNm.setName("TNm"); // NOI18N
         TNm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -750,7 +749,6 @@ public final class DlgPetugas extends javax.swing.JDialog {
         FormInput.add(TJbtn);
         TJbtn.setBounds(603, 102, 242, 23);
 
-        TAlmt.setHighlighter(null);
         TAlmt.setName("TAlmt"); // NOI18N
         TAlmt.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -760,7 +758,6 @@ public final class DlgPetugas extends javax.swing.JDialog {
         FormInput.add(TAlmt);
         TAlmt.setBounds(515, 42, 360, 23);
 
-        TTlp.setHighlighter(null);
         TTlp.setName("TTlp"); // NOI18N
         TTlp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -770,7 +767,6 @@ public final class DlgPetugas extends javax.swing.JDialog {
         FormInput.add(TTlp);
         TTlp.setBounds(515, 72, 120, 23);
 
-        TNip.setHighlighter(null);
         TNip.setName("TNip"); // NOI18N
         TNip.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -780,7 +776,6 @@ public final class DlgPetugas extends javax.swing.JDialog {
         FormInput.add(TNip);
         TNip.setBounds(99, 12, 200, 23);
 
-        KdJbtn.setHighlighter(null);
         KdJbtn.setName("KdJbtn"); // NOI18N
         KdJbtn.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -819,7 +814,6 @@ public final class DlgPetugas extends javax.swing.JDialog {
         FormInput.add(jLabel23);
         jLabel23.setBounds(631, 72, 50, 23);
 
-        Email.setHighlighter(null);
         Email.setName("Email"); // NOI18N
         Email.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -861,47 +855,47 @@ public final class DlgPetugas extends javax.swing.JDialog {
 
     private void TTmpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTmpKeyPressed
         Valid.pindah(evt,CMbGd,DTPLahir);
-}//GEN-LAST:event_TTmpKeyPressed
+    }//GEN-LAST:event_TTmpKeyPressed
 
     private void CmbJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbJkKeyPressed
         Valid.pindah(evt,TNm,CMbGd);
-}//GEN-LAST:event_CmbJkKeyPressed
+    }//GEN-LAST:event_CmbJkKeyPressed
 
     private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
         Valid.pindah(evt,TNip,CmbJk);
-}//GEN-LAST:event_TNmKeyPressed
+    }//GEN-LAST:event_TNmKeyPressed
 
     private void CMbGdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CMbGdKeyPressed
         Valid.pindah(evt,CmbJk,TTmp);
-}//GEN-LAST:event_CMbGdKeyPressed
+    }//GEN-LAST:event_CMbGdKeyPressed
 
     private void DTPLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPLahirKeyPressed
         Valid.pindah(evt,TTmp,cmbAgama);
-}//GEN-LAST:event_DTPLahirKeyPressed
+    }//GEN-LAST:event_DTPLahirKeyPressed
 
     private void cmbAgamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbAgamaKeyPressed
         Valid.pindah(evt,DTPLahir,CmbStts);
-}//GEN-LAST:event_cmbAgamaKeyPressed
+    }//GEN-LAST:event_cmbAgamaKeyPressed
 
     private void CmbSttsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbSttsKeyPressed
         Valid.pindah(evt,cmbAgama,TAlmt);
-}//GEN-LAST:event_CmbSttsKeyPressed
+    }//GEN-LAST:event_CmbSttsKeyPressed
 
     private void TAlmtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TAlmtKeyPressed
         Valid.pindah(evt,CmbStts,TTlp);
-}//GEN-LAST:event_TAlmtKeyPressed
+    }//GEN-LAST:event_TAlmtKeyPressed
 
     private void TTlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTlpKeyPressed
         Valid.pindah(evt,TAlmt,KdJbtn);
-}//GEN-LAST:event_TTlpKeyPressed
+    }//GEN-LAST:event_TTlpKeyPressed
 
     private void TNipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNipKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_UP){  
+        if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnCariPegawaiActionPerformed(null);
         }else{
             Valid.pindah(evt,TCari,TNm,TCari);
         }
-}//GEN-LAST:event_TNipKeyPressed
+    }//GEN-LAST:event_TNipKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNip.getText().trim().equals("")){
@@ -940,9 +934,9 @@ public final class DlgPetugas extends javax.swing.JDialog {
                 emptTeks();
             } catch (Exception ex) {
                 System.out.println("Notif : "+ex);
-            }            
+            }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -950,19 +944,19 @@ public final class DlgPetugas extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,KdJbtn,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
-        emptTeks();        
-}//GEN-LAST:event_BtnBatalActionPerformed
+        isForm();
+        emptTeks();
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         try {
@@ -975,8 +969,8 @@ public final class DlgPetugas extends javax.swing.JDialog {
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
-        } 
-}//GEN-LAST:event_BtnHapusActionPerformed
+        }
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -984,7 +978,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(tabMode.getRowCount()==0){
@@ -992,14 +986,14 @@ public final class DlgPetugas extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Map<String, Object> param = new HashMap<>();  
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptPetugas.jasper","report","::[ Data Petugas ]::","select petugas.nip,petugas.nama,petugas.jk,petugas.tmp_lahir,petugas.tgl_lahir, "+
                     "petugas.gol_darah,petugas.agama,petugas.stts_nikah,petugas.alamat,jabatan.nm_jbtn,petugas.no_telp "+
                     "from petugas inner join jabatan on jabatan.kd_jbtn=petugas.kd_jbtn "+
@@ -1015,8 +1009,8 @@ public final class DlgPetugas extends javax.swing.JDialog {
                     " petugas.status='1' and petugas.jk like '%"+cmbCrJk.getSelectedItem().toString().replaceAll("LAKI-LAKI","L").replaceAll("PEREMPUAN","P").trim()+"%' and petugas.gol_darah like '%"+CmbCrGd.getSelectedItem().toString().trim()+"%' and petugas.stts_nikah like '%"+CmbCrStts.getSelectedItem().toString().trim()+"%' and jabatan.nm_jbtn like '%"+TCari.getText().trim()+"%' order by petugas.nip",param);
                 this.setCursor(Cursor.getDefaultCursor());
         }
-        
-}//GEN-LAST:event_BtnPrintActionPerformed
+
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1024,17 +1018,17 @@ public final class DlgPetugas extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         CmbCrStts.setSelectedIndex(0);
@@ -1042,7 +1036,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
         CmbCrGd.setSelectedIndex(0);
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1050,7 +1044,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNip.getText().trim().equals("")){
@@ -1079,9 +1073,9 @@ public final class DlgPetugas extends javax.swing.JDialog {
                 emptTeks();
             } catch (SQLException ex) {
                 return;
-            }            
+            }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1089,7 +1083,7 @@ public final class DlgPetugas extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1099,11 +1093,11 @@ public final class DlgPetugas extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1111,23 +1105,23 @@ public final class DlgPetugas extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void cmbCrJkItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbCrJkItemStateChanged
         tampil();
-}//GEN-LAST:event_cmbCrJkItemStateChanged
+    }//GEN-LAST:event_cmbCrJkItemStateChanged
 
     private void cmbCrJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbCrJkKeyPressed
         Valid.pindah(evt,BtnAll, CmbCrGd);
-}//GEN-LAST:event_cmbCrJkKeyPressed
+    }//GEN-LAST:event_cmbCrJkKeyPressed
 
     private void CmbCrGdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbCrGdKeyPressed
         Valid.pindah(evt,cmbCrJk, CmbCrStts);
-}//GEN-LAST:event_CmbCrGdKeyPressed
+    }//GEN-LAST:event_CmbCrGdKeyPressed
 
     private void CmbCrSttsKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbCrSttsKeyPressed
         Valid.pindah(evt,CmbCrGd,TCari);
-}//GEN-LAST:event_CmbCrSttsKeyPressed
+    }//GEN-LAST:event_CmbCrSttsKeyPressed
 
     private void tbPetugasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPetugasMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1136,28 +1130,28 @@ public final class DlgPetugas extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbPetugasMouseClicked
+    }//GEN-LAST:event_tbPetugasMouseClicked
 
-private void KdJbtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdJbtnKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){            
+    private void KdJbtnKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdJbtnKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select jabatan.nm_jbtn from jabatan where jabatan.kd_jbtn=?",TJbtn,KdJbtn.getText());
-        }else if(evt.getKeyCode()==KeyEvent.VK_UP){  
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnJabatanActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,TTlp,BtnSimpan);
         }
-}//GEN-LAST:event_KdJbtnKeyPressed
+    }//GEN-LAST:event_KdJbtnKeyPressed
 
-private void btnJabatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJabatanActionPerformed
+    private void btnJabatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJabatanActionPerformed
         jabatan.isCek();
         jabatan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         jabatan.setLocationRelativeTo(internalFrame1);
         jabatan.setVisible(true);
-}//GEN-LAST:event_btnJabatanActionPerformed
+    }//GEN-LAST:event_btnJabatanActionPerformed
 
-private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
-}//GEN-LAST:event_ChkInputActionPerformed
+    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
+  isForm();
+    }//GEN-LAST:event_ChkInputActionPerformed
 
     private void BtnCariPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariPegawaiActionPerformed
         pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1184,7 +1178,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }            
+            }
         }
     }//GEN-LAST:event_tbPetugasKeyReleased
 
@@ -1400,7 +1394,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
 
             TTmp.setText(tbPetugas.getValueAt(row,3).toString());
-            
+
             CMbGd.setSelectedItem(tbPetugas.getValueAt(row,5).toString());
             cmbAgama.setSelectedItem(tbPetugas.getValueAt(row,6).toString());
             CmbStts.setSelectedItem(tbPetugas.getValueAt(row,7).toString());
@@ -1426,21 +1420,21 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     public JTable getTable(){
         return tbPetugas;
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,158));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpetugas());
         BtnHapus.setEnabled(akses.getpetugas());
@@ -1450,6 +1444,6 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             MnRestore.setEnabled(true);
         }else{
             MnRestore.setEnabled(false);
-        } 
+        }
     }
 }

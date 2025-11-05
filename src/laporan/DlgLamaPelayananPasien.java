@@ -28,15 +28,15 @@ public class DlgLamaPelayananPasien extends javax.swing.JDialog {
     private double ttlJRsdSB=0,ttlJRsdBP=0,JRsdDP=0,ttlJRsdDP=0,JRsdRDk=0,ttlJRsdRDk=0,JRsdRDv=0,ttlJRsdRDv=0,ttlJRsdTB=0,ttlSBsdBP=0,ttlSBsdDP=0,SBsdDP=0,ttlSBsdRDk=0,SBsdRDk=0,
             ttlSBsdRDv=0,SBsdRDv=0,ttlSBsdTB=0,BPsdDP=0,ttlBPsdDP=0,BPsdRDk=0,ttlBPsdRDk=0,BPsdRDv=0,ttlBPsdRDv=0,ttlBPsdTB=0,DPsdRDk=0,ttlDPsdRDk=0,DPsdRDv=0,ttlDPsdRDv=0,
             DPsdTB=0,ttlDPsdTB=0,RDksdRDv=0,ttlRDksdRDv=0,RDksdTB=0,ttlRDksdTB=0,RDvsdTB=0,ttlRDvsdTB=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgLamaPelayananPasien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -225,25 +225,25 @@ public class DlgLamaPelayananPasien extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("LamaPelayananPasien.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("LamaPelayananPasien.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='2450px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                             "<tr class='isi2'>"+
@@ -251,17 +251,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                    "<font size='2' face='Tahoma'>LAMA PELAYANAN PASIEN RAWAT JALAN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                    "<font size='2' face='Tahoma'>LAMA PELAYANAN PASIEN RAWAT JALAN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -283,21 +283,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,Tgl1);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
     prosesCari();
-}//GEN-LAST:event_btnCariActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
+    private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, Tgl2, BtnPrint);
         }
-}//GEN-LAST:event_btnCariKeyPressed
+    }//GEN-LAST:event_btnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         htmlContent = new StringBuilder();
-        htmlContent.append(   
+        htmlContent.append(
             "<tr class='isi'>"+
                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85px'>No.Rawat</td>"+
                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='55px'>No.RM</td>"+
@@ -334,7 +334,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='60px'>R.Dk. s.d. T.B.</td>"+
                 "<td valign='middle' bgcolor='#FFFAFA' align='center' width='60px'>R.Dv. s.d. T.B.</td>"+
             "</tr>"
-        ); 
+        );
         LoadHTML.setText(
                 "<html>"+
                   "<table width='2400px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -405,7 +405,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(   
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='90px'>No.Rawat</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='55px'>No.RM</td>"+
@@ -442,7 +442,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='60px'>R.Dk. s.d. T.B.</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='60px'>R.Dv. s.d. T.B.</td>"+
                 "</tr>"
-            );            
+            );
             ps=koneksi.prepareStatement("select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,poliklinik.nm_poli,dokter.nm_dokter,date_format(reg_periksa.tgl_registrasi,'%d/%m/%Y') as tgl_registrasi,reg_periksa.jam_reg,"+
                     "date_format(mutasi_berkas.dikirim,'%H:%i:%s')as dikirim,date_format(mutasi_berkas.diterima,'%H:%i:%s')as diterima,date_format(nota_jalan.jam,'%H:%i:%s')as jambilling,"+
                     "round((TIME_TO_SEC(date_format(mutasi_berkas.dikirim,'%H:%i:%s'))-TIME_TO_SEC(reg_periksa.jam_reg))/60,2) as JRsdSB,"+
@@ -509,7 +509,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttlRDksdTB=ttlRDksdTB+RDksdTB;
                     RDvsdTB=Sequel.cariIsiAngka("select ifnull(round((TIME_TO_SEC('"+rs.getString("jambilling")+"')-TIME_TO_SEC('"+resepdivalidasi+"'))/60,2),'')");
                     ttlRDvsdTB=ttlRDvsdTB+RDvsdTB;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'>"+rs.getString("no_rawat")+"</td>"+
@@ -539,13 +539,13 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+BPsdDP+"</td>"+
                             "<td valign='middle' align='center'>"+BPsdRDk+"</td>"+
                             "<td valign='middle' align='center'>"+BPsdRDv+"</td>"+
-                            "<td valign='middle' align='center'>"+rs.getString("BPsdTB")+"</td>"+     
-                            "<td valign='middle' align='center'>"+DPsdRDk+"</td>"+   
-                            "<td valign='middle' align='center'>"+DPsdRDv+"</td>"+   
-                            "<td valign='middle' align='center'>"+DPsdTB+"</td>"+ 
-                            "<td valign='middle' align='center'>"+RDksdRDv+"</td>"+ 
-                            "<td valign='middle' align='center'>"+RDksdTB+"</td>"+ 
-                            "<td valign='middle' align='center'>"+RDvsdTB+"</td>"+ 
+                            "<td valign='middle' align='center'>"+rs.getString("BPsdTB")+"</td>"+
+                            "<td valign='middle' align='center'>"+DPsdRDk+"</td>"+
+                            "<td valign='middle' align='center'>"+DPsdRDv+"</td>"+
+                            "<td valign='middle' align='center'>"+DPsdTB+"</td>"+
+                            "<td valign='middle' align='center'>"+RDksdRDv+"</td>"+
+                            "<td valign='middle' align='center'>"+RDksdTB+"</td>"+
+                            "<td valign='middle' align='center'>"+RDvsdTB+"</td>"+
                         "</tr>"
                     );
                     i++;
@@ -597,10 +597,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
-    
+
+
 }

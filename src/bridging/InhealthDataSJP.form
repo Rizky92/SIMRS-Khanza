@@ -209,9 +209,6 @@
     </Container>
     <Component class="widget.TextBox" name="NoBalasan">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="NoBalasan" noResource="true"/>
       </Properties>
     </Component>
@@ -690,9 +687,6 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
                     </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TNoRw" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -707,9 +701,6 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
                     </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TPasien" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -720,9 +711,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="TNoRM">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TNoRM" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -747,9 +735,6 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                    </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="NoKartu" noResource="true"/>
                   </Properties>
@@ -855,9 +840,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="NoRujukan">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NoRujukan" noResource="true"/>
                   </Properties>
                   <Events>
@@ -886,9 +868,6 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
                     </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TglLahir" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -913,9 +892,6 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                    </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="JK" noResource="true"/>
                   </Properties>
@@ -942,9 +918,6 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
                     </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KdPPK" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -958,9 +931,6 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                    </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="NmPPK" noResource="true"/>
                   </Properties>
@@ -995,9 +965,6 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
                     </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NmPpkRujukan" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -1010,9 +977,6 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                    </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="KdPpkRujukan" noResource="true"/>
                   </Properties>
@@ -1052,9 +1016,6 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
                     </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KdPenyakit" noResource="true"/>
                   </Properties>
                   <Events>
@@ -1071,9 +1032,6 @@
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                    </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="NmPenyakit" noResource="true"/>
                   </Properties>
@@ -1127,9 +1085,6 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
                     </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NmPenyakit2" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -1142,9 +1097,6 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                    </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="KdPenyakit2" noResource="true"/>
                   </Properties>
@@ -1183,9 +1135,6 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
-                    </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
                     </Property>
                     <Property name="name" type="java.lang.String" value="KdPoli" noResource="true"/>
                   </Properties>
@@ -1274,9 +1223,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Catatan">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Catatan" noResource="true"/>
                   </Properties>
                   <Events>
@@ -1332,9 +1278,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="LokasiLaka">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="LokasiLaka" noResource="true"/>
                   </Properties>
                   <Events>
@@ -1397,9 +1340,6 @@
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="f0" green="fa" red="f5" type="rgb"/>
                     </Property>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NmPoli" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -1429,9 +1369,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="KdJenpel">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KdJenpel" noResource="true"/>
                   </Properties>
                   <Events>

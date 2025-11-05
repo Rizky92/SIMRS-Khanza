@@ -65,7 +65,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
                 }
                 return a;
             }
-              
+
             Class[] types = new Class[]{
                 java.lang.Boolean.class,java.lang.String.class,java.lang.String.class
             };
@@ -94,7 +94,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
 
         norm.setDocument(new batasInput((byte)10).getKata(norm));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         tabMode2=new DefaultTableModel(null,new Object[]{
                 "No.KTP/Paspor","No.RM","Nama Pasien","Tgl.Masuk","Kode ICD X","Nama Penyakit","Status"
             }){
@@ -124,7 +124,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari2.setDocument(new batasInput((byte)100).getKata(TCari2));    
+        TCari2.setDocument(new batasInput((byte)100).getKata(TCari2));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -167,7 +167,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         pasien.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -175,11 +175,11 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pasien.getTable().getSelectedRow()!= -1){   
+                if(pasien.getTable().getSelectedRow()!= -1){
                     norm.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),1).toString());
                     nmpasien.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),2).toString());
                     norm.requestFocus();
-                }        
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -189,8 +189,8 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         pasien.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -203,7 +203,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         try {
             link=koneksiDB.URLAPICORONA();
             idrs=koneksiDB.IDCORONA();
@@ -635,18 +635,18 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
-}//GEN-LAST:event_BtnKeluarActionPerformed
+            dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnSimpan,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -660,8 +660,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     try {
                         headers = new HttpHeaders();
                         headers.add("X-rs-id",idrs);
-                        headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-                        headers.add("X-pass",api.getHmac()); 
+                        headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+                        headers.add("X-pass",api.getHmac());
                         body="{" +
                                 "\"nomr\" : \""+norm.getText()+"\"," +
                                 "\"icd\"  : \""+tbDokter.getValueAt(i,1).toString()+"\"," +
@@ -682,7 +682,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     JOptionPane.showMessageDialog(rootPane,list.path("message").asText());
                                 }
                             }
-                        }         
+                        }
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                         if(ex.toString().contains("UnknownHostException")){
@@ -694,10 +694,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }else if(ex.toString().contains("502")){
                             JOptionPane.showMessageDialog(rootPane,"Server kemenkes lelah broo....!");
                         }
-                    } 
+                    }
                 }
             }
-        }   
+        }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
@@ -708,7 +708,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
-private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             tampil();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -718,33 +718,33 @@ private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCa
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbDokter.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
-private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+    private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
     if(TCari.getText().trim().equals("")){
         JOptionPane.showMessageDialog(rootPane,"Silahkan masukkan kode ICD");
     }else{
         tampil();
-    }   
-}//GEN-LAST:event_BtnCari1ActionPerformed
+    }
+    }//GEN-LAST:event_BtnCari1ActionPerformed
 
-private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
+    private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCari1ActionPerformed(null);
         }else{
             Valid.pindah(evt, BtnSimpan, BtnKeluar);
         }
-}//GEN-LAST:event_BtnCari1KeyPressed
+    }//GEN-LAST:event_BtnCari1KeyPressed
 
-private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){ 
+    private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+            for(i=0;i<tbDokter.getRowCount();i++){
                 tbDokter.setValueAt("",i,0);
                 tbDokter.setValueAt("0",i,4);
             }
-}//GEN-LAST:event_ppBersihkanActionPerformed
+    }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_normKeyPressed
-        
+
     }//GEN-LAST:event_normKeyPressed
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
@@ -758,7 +758,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     }//GEN-LAST:event_btnPetugasActionPerformed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
-        
+
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void TabSettingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabSettingMouseClicked
@@ -814,11 +814,11 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             try {
                 headers = new HttpHeaders();
                 headers.add("X-rs-id",idrs);
-                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-                headers.add("X-pass",api.getHmac()); 
-                headers.add("nomr",tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()); 
-                headers.add("icd",tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString()); 
-                headers.add("level",tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString().replaceAll("Primer","1").replaceAll("Sekunder","2")); 
+                headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+                headers.add("X-pass",api.getHmac());
+                headers.add("nomr",tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
+                headers.add("icd",tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString());
+                headers.add("level",tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString().replaceAll("Primer","1").replaceAll("Sekunder","2"));
                 requestEntity = new HttpEntity(headers);
                 root = mapper.readTree(api.getRest().exchange(link+"/Pasien/diagnosis", HttpMethod.DELETE, requestEntity, String.class).getBody());
                 response = root.path("diagnosis");
@@ -834,7 +834,7 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                             JOptionPane.showMessageDialog(rootPane,list.path("message").asText());
                         }
                     }
-                }       
+                }
             } catch (Exception ex) {
                 System.out.println("Notifikasi : "+ex);
                 if(ex.toString().contains("UnknownHostException")){
@@ -966,11 +966,11 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 jml++;
             }
         }
-        
+
         kodepenyakit=new String[jml];
         namapenyakit=new String[jml];
         pilihan=new boolean[jml];
-        index=0;        
+        index=0;
         for(i=0;i<tbDokter.getRowCount();i++){
             if(tbDokter.getValueAt(i,0).toString().equals("true")){
                 pilihan[index]=true;
@@ -979,19 +979,19 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 index++;
             }
         }
-        
+
         Valid.tabelKosong(tabMode);
-        
+
         for(i=0;i<jml;i++){
             tabMode.addRow(new Object[]{pilihan[i],kodepenyakit[i],namapenyakit[i]});
         }
-        
+
         try {
             headers = new HttpHeaders();
             headers.add("X-rs-id",idrs);
-            headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString())); 
-            headers.add("X-pass",api.getHmac()); 
-            headers.add("icd",TCari.getText()); 
+            headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+            headers.add("X-pass",api.getHmac());
+            headers.add("icd",TCari.getText());
 	   requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(link+"/Referensi/icd", HttpMethod.POST, requestEntity, String.class).getBody());
             response = root.path("icd - "+TCari.getText());
@@ -1014,14 +1014,14 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                 JOptionPane.showMessageDialog(rootPane,"Server kemenkes lelah broo....!");
             }
         }
-        
+
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdiagnosa_pasien_corona());
         BtnHapus.setEnabled(akses.getdiagnosa_pasien_corona());
     }
-    
+
     public void tampil2() {
         Valid.tabelKosong(tabMode2);
         try{
@@ -1075,5 +1075,5 @@ private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         DTPCari1.setDate(tglmasuk);
         DTPCari2.setDate(tglkeluar);
     }
- 
+
 }

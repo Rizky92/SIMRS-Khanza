@@ -76,7 +76,7 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -98,7 +98,7 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
 
@@ -264,11 +264,11 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -276,12 +276,12 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -289,7 +289,7 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -297,7 +297,7 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -308,22 +308,22 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         SKPKategoriPenilaian form=new SKPKategoriPenilaian(null,false);
         form.emptTeks();
         form.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
         form.setLocationRelativeTo(internalFrame1);
         form.setAlwaysOnTop(false);
         form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -374,7 +374,7 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             file=new File("./cache/skpkategoripenilaian.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -402,14 +402,14 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
-            
+            }
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"skp_kategori_penilaian\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -425,11 +425,11 @@ public final class DlgCariSKPKategoriPenilaian extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
        BtnTambah.setEnabled(akses.getkamar());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/skpkategoripenilaian.iyem");

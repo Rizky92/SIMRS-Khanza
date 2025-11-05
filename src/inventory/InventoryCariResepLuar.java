@@ -55,7 +55,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
     private int i=0,pilihan=0;
     private DateFormat format=new SimpleDateFormat("yyyy-MM-dd");
 
-    /** Creates new form DlgResepObat 
+    /** Creates new form DlgResepObat
      *@param parent
      *@param modal*/
     public InventoryCariResepLuar(java.awt.Frame parent, boolean modal) {
@@ -87,7 +87,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             }
         }
         tbResep.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabmodeUbahRacikan=new DefaultTableModel(null,new Object[]{
                 "Kode Barang","Nama Barang","Jumlah","Aturan Pakai"
             }){
@@ -147,7 +147,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             }
         }
         tbTambahan1.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -170,8 +170,8 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         aturanpakai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -179,7 +179,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(aturanpakai.getTable().getSelectedRow()!= -1){ 
+                if(aturanpakai.getTable().getSelectedRow()!= -1){
                     if(pilihan==1){
                         tbTambahan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.getSelectedRow(),5);
                         tbTambahan.requestFocus();
@@ -187,7 +187,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                         tbTambahan1.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.getSelectedRow(),5);
                         tbTambahan1.requestFocus();
                     }
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -198,9 +198,9 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         Valid.SetTgl2(DTPCari1,format.format(new Date())+" 00:00:00");
-        Valid.SetTgl2(DTPCari2,format.format(new Date())+" 23:59:59"); 
+        Valid.SetTgl2(DTPCari2,format.format(new Date())+" 23:59:59");
     }
 
     /** This method is called from within the constructor to
@@ -660,9 +660,9 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                 tampil();
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus resep. Pilih dulu data yang mau dihapus. Klik data Nomor Resep untuk memilih...!!!!");
-            }   
+            }
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -670,45 +670,45 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnResep,BtnPrint);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary_resep where temp37='"+akses.getalamatip()+"'");
-            
-            for(int i=0;i<tabMode.getRowCount();i++){  
+
+            for(int i=0;i<tabMode.getRowCount();i++){
                 Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
                     ""+i,tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
                     tabMode.getValueAt(i,3).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
                 });
             }
-            
-            Map<String, Object> param = new HashMap<>();  
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptResepLuar.jasper","report","::[ Daftar Resep Obat Yang Ditebus Keluar Oleh Pasien ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
-}//GEN-LAST:event_BtnPrintActionPerformed
+        }
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -716,7 +716,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
          if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -726,11 +726,11 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -738,12 +738,12 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        tampil();        
-}//GEN-LAST:event_BtnAllActionPerformed
+        tampil();
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -752,7 +752,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void NoResepUbah3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoResepUbah3KeyPressed
         Valid.pindah(evt, BtnKeluarInput3, BtnSimpanInput3);
@@ -768,7 +768,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                     NoResepUbah3.getText(),tbTambahan.getValueAt(i,0).toString(),tbTambahan.getValueAt(i,2).toString(),tbTambahan.getValueAt(i,3).toString()
                 });
             }
-            
+
             tampil();
             WindowInput3.dispose();
         }
@@ -789,7 +789,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                     aturanpakai.setVisible(true);
                 }
             }
-        }            
+        }
     }//GEN-LAST:event_tbTambahanKeyPressed
 
     private void tbTambahan1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbTambahan1KeyPressed
@@ -803,7 +803,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                     aturanpakai.setVisible(true);
                 }
             }
-        } 
+        }
     }//GEN-LAST:event_tbTambahan1KeyPressed
 
     private void NoResepUbah4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoResepUbah4KeyPressed
@@ -819,7 +819,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                     tbTambahan1.getValueAt(i,2).toString(),tbTambahan1.getValueAt(i,1).toString(),NoResepUbah4.getText(),tbTambahan1.getValueAt(i,0).toString()
                 });
             }
-            
+
             tampil();
             WindowInput4.dispose();
         }
@@ -865,7 +865,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
              TCari.requestFocus();
         }else if(tbResep.getSelectedRow()>-1){
             if(!tbResep.getValueAt(tbResep.getSelectedRow(),0).toString().equals("")){
-                try{  
+                try{
                     ps=koneksi.prepareStatement("select resep_luar.no_resep,resep_luar.tgl_perawatan,resep_luar.jam,reg_periksa.kd_pj,"+
                             " resep_luar.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_luar.kd_dokter,dokter.nm_dokter "+
                             " from resep_luar inner join reg_periksa on resep_luar.no_rawat=reg_periksa.no_rawat "+
@@ -918,13 +918,13 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                                         "resep_luar_racikan_detail inner join databarang on resep_luar_racikan_detail.kode_brng=databarang.kode_brng "+
                                         "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat where resep_luar_racikan_detail.no_resep=? and "+
                                         "resep_luar_racikan_detail.no_racik=? order by databarang.kode_brng");
-                                    try{ 
+                                    try{
                                         ps2.setString(1,rs.getString("no_resep"));
                                         ps2.setString(2,rsracikan.getString("no_racik"));
                                         rs2=ps2.executeQuery();
                                         while(rs2.next()){
                                             rincianobat=rs2.getString("nama_brng")+" "+rs2.getString("jml")+" "+rs2.getString("satuan")+","+rincianobat;
-                                        }                                
+                                        }
                                     } catch (Exception e) {
                                         System.out.println("Notifikasi Detail Racikan : "+e);
                                     } finally{
@@ -935,9 +935,9 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                                             ps2.close();
                                         }
                                     }
-                                    
+
                                     rincianobat = rincianobat.substring(0,rincianobat.length() - 1);
-                                    
+
                                     Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
                                         ""+i,rsracikan.getString("no_racik")+". "+rsracikan.getString("nama_racik")+" ("+rincianobat+")",rsracikan.getString("aturan_pakai"),rsracikan.getString("jml_dr"),rsracikan.getString("metode"),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
                                     });
@@ -953,14 +953,14 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                                     psracikan.close();
                                 }
                             }
-                            Map<String, Object> param = new HashMap<>();  
+                            Map<String, Object> param = new HashMap<>();
                             param.put("namars",akses.getnamars());
                             param.put("alamatrs",akses.getalamatrs());
                             param.put("kotars",akses.getkabupatenrs());
                             param.put("propinsirs",akses.getpropinsirs());
                             param.put("emailrs",akses.getemailrs());
                             param.put("kontakrs",akses.getkontakrs());
-                            param.put("penanggung",Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?",rs.getString("kd_pj")));               
+                            param.put("penanggung",Sequel.cariIsi("select penjab.png_jawab from penjab where penjab.kd_pj=?",rs.getString("kd_pj")));
                             param.put("propinsirs",akses.getpropinsirs());
                             param.put("tanggal",Valid.SetTgl(rs.getString("tgl_perawatan")+""));
                             param.put("norawat",rs.getString("no_rawat"));
@@ -969,13 +969,13 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                             param.put("peresep",rs.getString("nm_dokter"));
                             param.put("noresep",rs.getString("no_resep"));
                             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",rs.getString("kd_dokter"));
-                            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+rs.getString("nm_dokter")+"\nID "+(finger.equals("")?rs.getString("kd_dokter"):finger)+"\n"+Valid.SetTgl(rs.getString("tgl_perawatan")+""));  
+                            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+rs.getString("nm_dokter")+"\nID "+(finger.equals("")?rs.getString("kd_dokter"):finger)+"\n"+Valid.SetTgl(rs.getString("tgl_perawatan")+""));
                             param.put("jam",rs.getString("jam"));
-                            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
 
                             Valid.MyReportqry("rptLembarResepLuar.jasper","report","::[ Lembar Resep Obat Yang Ditebus Keluar Oleh Pasien ]::","select * from temporary_resep where temporary_resep.temp37='"+akses.getalamatip()+"' order by temporary_resep.no",param);
                             this.setCursor(Cursor.getDefaultCursor());
-                        }          
+                        }
                     } catch(Exception ex){
                         System.out.println("Notifikasi : "+ex);
                     } finally{
@@ -985,13 +985,13 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                         if(ps!=null){
                             ps.close();
                         }
-                    }                
+                    }
                 }catch(Exception e){
                     System.out.println("Notifikasi : "+e);
                 }
             }else{
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal mencetak resep. Pilih dulu data yang mau dicetak. Klik data Nomor Resep untuk memilih...!!!!");
-            }   
+            }
         }
     }//GEN-LAST:event_BtnResepActionPerformed
 
@@ -1057,7 +1057,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{  
+        try{
             ps=koneksi.prepareStatement("select resep_luar.no_resep,resep_luar.tgl_perawatan,resep_luar.jam,"+
                     " resep_luar.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,resep_luar.kd_dokter,dokter.nm_dokter "+
                     " from resep_luar inner join reg_periksa on resep_luar.no_rawat=reg_periksa.no_rawat "+
@@ -1081,7 +1081,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                         rs.getString("no_rawat")+" "+rs.getString("no_rkm_medis")+" "+rs.getString("nm_pasien"),
                         rs.getString("nm_dokter")
                     });
-                    tabMode.addRow(new Object[]{"","Jumlah","Nama Obat","Aturan Pakai"});                
+                    tabMode.addRow(new Object[]{"","Jumlah","Nama Obat","Aturan Pakai"});
                     ps2=koneksi.prepareStatement(
                         "select databarang.kode_brng,databarang.nama_brng,resep_luar_obat.jml,kodesatuan.satuan,"+
                         "resep_luar_obat.aturan_pakai from resep_luar_obat inner join databarang on resep_luar_obat.kode_brng=databarang.kode_brng "+
@@ -1104,7 +1104,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                             ps2.close();
                         }
                     }
-                    
+
                     psracikan=koneksi.prepareStatement(
                             "select resep_luar_racikan.no_racik,resep_luar_racikan.nama_racik,"+
                             "resep_luar_racikan.kd_racik,metode_racik.nm_racik as metode,"+
@@ -1119,13 +1119,13 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                             tabMode.addRow(new Object[]{
                                 "",rsracikan.getString("jml_dr")+" "+rsracikan.getString("metode"),rsracikan.getString("no_racik")+". "+rsracikan.getString("nama_racik")+", Keterangan : "+rsracikan.getString("keterangan"),rsracikan.getString("aturan_pakai")
                             });
-                            
+
                             ps2=koneksi.prepareStatement(
                                 "select databarang.kode_brng,databarang.nama_brng,resep_luar_racikan_detail.jml,kodesatuan.satuan from "+
                                 "resep_luar_racikan_detail inner join databarang on resep_luar_racikan_detail.kode_brng=databarang.kode_brng "+
                                 "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat where resep_luar_racikan_detail.no_resep=? and "+
                                 "resep_luar_racikan_detail.no_racik=? order by databarang.kode_brng");
-                            try{ 
+                            try{
                                 ps2.setString(1,rs.getString("no_resep"));
                                 ps2.setString(2,rsracikan.getString("no_racik"));
                                 rs2=ps2.executeQuery();
@@ -1133,7 +1133,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                                     tabMode.addRow(new Object[]{
                                         "","   "+rs2.getString("jml")+" "+rs2.getString("satuan"),"   "+rs2.getString("nama_brng"),""
                                     });
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi Detail Racikan : "+e);
                             } finally{
@@ -1155,7 +1155,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                             psracikan.close();
                         }
                     }
-                }   
+                }
                 rs.last();
                 LCount.setText(""+rs.getRow());
             } catch(Exception ex){
@@ -1167,12 +1167,12 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     private void tampilresep() {
         Valid.tabelKosong(tabmodeUbahRacikan);
         try {
@@ -1199,9 +1199,9 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
     }
-    
+
     private void tampilresep2() {
         Valid.tabelKosong(tabmodeUbahRacikan2);
         try {
@@ -1236,7 +1236,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         Valid.SetTgl2(DTPCari1,format.format(tgl1)+" 00:00:00");
         Valid.SetTgl2(DTPCari2,format.format(tgl1)+" 23:59:59");
     }
-    
+
     public void isCek(){
         BtnHapus.setEnabled(akses.getresep_luar());
         BtnPrint.setEnabled(akses.getresep_luar());

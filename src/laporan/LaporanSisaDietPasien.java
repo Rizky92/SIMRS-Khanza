@@ -44,7 +44,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
     public LaporanSisaDietPasien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Rawat","Nama Pasien","Kamar","Tanggal","Waktu","Jam","Karbohidrat(%)","Hewani(%)","Nabati(%)","Sayur(%)","Buah(%)","Kode Kamar"
             }){
@@ -112,11 +112,11 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         bangsal.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -125,10 +125,10 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("LaporanSisaDietPasien")){
-                    if(bangsal.getTable().getSelectedRow()!= -1){                          
+                    if(bangsal.getTable().getSelectedRow()!= -1){
                         NmBangsalCari.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                        NmBangsalCari.requestFocus();                           
-                    }                         
+                        NmBangsalCari.requestFocus();
+                    }
                 }
             }
             @Override
@@ -140,7 +140,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jamdiet.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -149,16 +149,16 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("LaporanSisaDietPasien")){
-                    if(jamdiet.getTable().getSelectedRow()!= -1){  
+                    if(jamdiet.getTable().getSelectedRow()!= -1){
                         if(pilih==1){
                             WaktuDiet.setText(jamdiet.getTable().getValueAt(jamdiet.getTable().getSelectedRow(),0).toString());
                             JamDiet.setText(jamdiet.getTable().getValueAt(jamdiet.getTable().getSelectedRow(),1).toString());
                         }else if(pilih==2){
                             WaktuDiet2.setText(jamdiet.getTable().getValueAt(jamdiet.getTable().getSelectedRow(),0).toString());
                             JamDiet2.setText(jamdiet.getTable().getValueAt(jamdiet.getTable().getSelectedRow(),1).toString());
-                            BtnJam2.requestFocus(); 
-                        }                             
-                    }                         
+                            BtnJam2.requestFocus();
+                        }
+                    }
                 }
             }
             @Override
@@ -171,7 +171,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
     }
-    
+
     private DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
     private DlgCariJamDiet jamdiet=new DlgCariJamDiet(null,false);
     /** This method is called from within the constructor to
@@ -241,7 +241,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         tbDataDiet = new widget.Table();
 
         Ruang.setEditable(false);
-        Ruang.setHighlighter(null);
         Ruang.setName("Ruang"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -392,7 +391,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         panelGlass9.add(jLabel11);
 
         WaktuDiet2.setEditable(false);
-        WaktuDiet2.setHighlighter(null);
         WaktuDiet2.setName("WaktuDiet2"); // NOI18N
         WaktuDiet2.setPreferredSize(new java.awt.Dimension(90, 23));
         WaktuDiet2.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -403,7 +401,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         panelGlass9.add(WaktuDiet2);
 
         JamDiet2.setEditable(false);
-        JamDiet2.setHighlighter(null);
         JamDiet2.setName("JamDiet2"); // NOI18N
         JamDiet2.setPreferredSize(new java.awt.Dimension(80, 23));
         panelGlass9.add(JamDiet2);
@@ -431,7 +428,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         panelGlass9.add(jLabel12);
 
         NmBangsalCari.setEditable(false);
-        NmBangsalCari.setHighlighter(null);
         NmBangsalCari.setName("NmBangsalCari"); // NOI18N
         NmBangsalCari.setPreferredSize(new java.awt.Dimension(310, 23));
         panelGlass9.add(NmBangsalCari);
@@ -555,7 +551,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 12, 74, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -566,7 +561,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         TNoRw.setBounds(78, 12, 125, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(205, 12, 290, 23);
@@ -577,25 +571,21 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         jLabel10.setBounds(0, 42, 74, 23);
 
         Kamar.setEditable(false);
-        Kamar.setHighlighter(null);
         Kamar.setName("Kamar"); // NOI18N
         FormInput.add(Kamar);
         Kamar.setBounds(497, 12, 243, 23);
 
         WaktuDiet.setEditable(false);
-        WaktuDiet.setHighlighter(null);
         WaktuDiet.setName("WaktuDiet"); // NOI18N
         FormInput.add(WaktuDiet);
         WaktuDiet.setBounds(181, 42, 75, 23);
 
         JamDiet.setEditable(false);
-        JamDiet.setHighlighter(null);
         JamDiet.setName("JamDiet"); // NOI18N
         FormInput.add(JamDiet);
         JamDiet.setBounds(258, 42, 75, 23);
 
         Tanggal.setEditable(false);
-        Tanggal.setHighlighter(null);
         Tanggal.setName("Tanggal"); // NOI18N
         FormInput.add(Tanggal);
         Tanggal.setBounds(78, 42, 101, 23);
@@ -605,7 +595,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(179, 70, 100, 23);
 
-        Karbo.setHighlighter(null);
         Karbo.setName("Karbo"); // NOI18N
         Karbo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -620,7 +609,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         FormInput.add(jLabel14);
         jLabel14.setBounds(0, 70, 74, 23);
 
-        Sayur.setHighlighter(null);
         Sayur.setName("Sayur"); // NOI18N
         Sayur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -635,7 +623,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         FormInput.add(jLabel15);
         jLabel15.setBounds(360, 40, 110, 23);
 
-        Hewani.setHighlighter(null);
         Hewani.setName("Hewani"); // NOI18N
         Hewani.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -650,7 +637,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         FormInput.add(jLabel16);
         jLabel16.setBounds(390, 70, 80, 23);
 
-        Buah.setHighlighter(null);
         Buah.setName("Buah"); // NOI18N
         Buah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -665,7 +651,6 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         FormInput.add(jLabel17);
         jLabel17.setBounds(580, 40, 90, 23);
 
-        Nabati.setHighlighter(null);
         Nabati.setName("Nabati"); // NOI18N
         Nabati.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -735,10 +720,10 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,WaktuDiet,TCari);
         }
-}//GEN-LAST:event_TNoRwKeyPressed
+    }//GEN-LAST:event_TNoRwKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -765,7 +750,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
                 hitung();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -773,19 +758,19 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,TPasien,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
-}//GEN-LAST:event_BtnBatalActionPerformed
+        isForm();
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tabMode.getRowCount()==0){
@@ -805,7 +790,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -813,17 +798,17 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnPrint);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -831,19 +816,19 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();  
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());  
-            param.put("karbo",(karbo/i)+"");   
-            param.put("hewani",(hewani/i)+"");   
-            param.put("nabati",(nabati/i)+"");   
-            param.put("sayur",(sayur/i)+"");   
-            param.put("buah",(buah/i)+"");    
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("karbo",(karbo/i)+"");
+            param.put("hewani",(hewani/i)+"");
+            param.put("nabati",(nabati/i)+"");
+            param.put("sayur",(sayur/i)+"");
+            param.put("buah",(buah/i)+"");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptSisaDiet.jasper","report","::[ Data Pemberian Diet ]::",
                 "select sisa_diet_pasien.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(sisa_diet_pasien.kd_kamar,', ',bangsal.nm_bangsal) as namakamar,"+
                 "sisa_diet_pasien.tanggal,sisa_diet_pasien.waktu,jam_diet_pasien.jam,sisa_diet_pasien.kd_kamar,sisa_diet_pasien.karbohidrat,"+
@@ -858,7 +843,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
                 "order by bangsal.nm_bangsal" ,param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -866,7 +851,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -876,11 +861,11 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
        tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -888,7 +873,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
@@ -896,7 +881,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         WaktuDiet2.setText("");
         JamDiet2.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -905,7 +890,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbDataDietMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDataDietMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -914,7 +899,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbDataDietMouseClicked
+    }//GEN-LAST:event_tbDataDietMouseClicked
 
     private void tbDataDietKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDataDietKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -925,11 +910,11 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbDataDietKeyPressed
+    }//GEN-LAST:event_tbDataDietKeyPressed
 
-private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();                
-}//GEN-LAST:event_ChkInputActionPerformed
+    private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
+  isForm();
+    }//GEN-LAST:event_ChkInputActionPerformed
 
     private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
         akses.setform("LaporanSisaDietPasien");
@@ -945,7 +930,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     }//GEN-LAST:event_BtnSeek2KeyPressed
 
     private void BtnJam2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJam2ActionPerformed
-        akses.setform("LaporanSisaDietPasien");  
+        akses.setform("LaporanSisaDietPasien");
         pilih=2;
         jamdiet.emptTeks();
         jamdiet.isCek();
@@ -1057,7 +1042,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private widget.Table tbDataDiet;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {   
+    public void tampil() {
         try{
             Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
@@ -1099,13 +1084,13 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
             hitung();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void hitung(){
         hewani=0;nabati=0;karbo=0;sayur=0;buah=0;x=0;
         for(i=0;i<tabMode.getRowCount();i++){
@@ -1128,7 +1113,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             });
         }
     }
-    
+
     public void emptTeks() {
         Hewani.setText("0");
         Nabati.setText("0");
@@ -1141,10 +1126,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     private void getData() {
         if(tbDataDiet.getSelectedRow()!= -1){
             if(!tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),0).toString().equals("")){
-                TNoRw.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),0).toString()); 
-                TPasien.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),1).toString());    
-                Ruang.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),2).toString());      
-                Tanggal.setText(Valid.SetTgl3(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),3).toString()));           
+                TNoRw.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),0).toString());
+                TPasien.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),1).toString());
+                Ruang.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),2).toString());
+                Tanggal.setText(Valid.SetTgl3(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),3).toString()));
                 WaktuDiet.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),4).toString());
                 JamDiet.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),5).toString());
                 Karbo.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),6).toString());
@@ -1154,10 +1139,10 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 Buah.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),10).toString());
                 Kamar.setText(tbDataDiet.getValueAt(tbDataDiet.getSelectedRow(),11).toString());
             }else{
-                TNoRw.setText(""); 
-                TPasien.setText("");    
-                Ruang.setText("");      
-                Tanggal.setText("");           
+                TNoRw.setText("");
+                TPasien.setText("");
+                Ruang.setText("");
+                Tanggal.setText("");
                 WaktuDiet.setText("");
                 JamDiet.setText("");
                 Karbo.setText("");
@@ -1169,7 +1154,7 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
         }
     }
-    
+
     private void isRawat() {
          Sequel.cariIsi("select pasien.nm_pasien from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis where reg_periksa.no_rawat=? ",TPasien,TNoRw.getText());
          Sequel.cariIsi("select kamar_inap.kd_kamar from kamar_inap where kamar_inap.no_rawat=? order by kamar_inap.tgl_masuk desc limit 1",Kamar,TNoRw.getText());
@@ -1189,21 +1174,21 @@ private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,128));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsisa_diet_pasien());
         BtnHapus.setEnabled(akses.getsisa_diet_pasien());

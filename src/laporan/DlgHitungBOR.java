@@ -46,6 +46,7 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
     private int i=0,kamar=0,jumlahhari=0;
     private double hari;
     private DlgCariBangsal ruang=new DlgCariBangsal(null,false);
+    private String filter="";
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -88,7 +89,7 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
         }
 
         Tabel1.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new String[]{"No","No.Rawat","Nomer RM","Nama Pasien","Kamar","Tgl.Masuk","Tgl.Keluar","Lama","Status"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -122,7 +123,7 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
         }
 
         Tabel2.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -130,11 +131,11 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){   
-                    TKd.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());  
-                    Kamar.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());  
+                if(ruang.getTable().getSelectedRow()!= -1){
+                    TKd.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
+                    Kamar.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
                     Kamar.requestFocus();
-                }                      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -145,8 +146,8 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
-    }    
+
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -158,6 +159,13 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
     private void initComponents() {
 
         TKd = new widget.TextBox();
+        jPopupMenu1 = new javax.swing.JPopupMenu();
+        MnKelas1 = new javax.swing.JMenuItem();
+        MnKelas2 = new javax.swing.JMenuItem();
+        MnKelas3 = new javax.swing.JMenuItem();
+        MnKelasVIP = new javax.swing.JMenuItem();
+        MnKelasVVIP = new javax.swing.JMenuItem();
+        MnKelasUtama = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         panelGlass5 = new widget.panelisi();
         label11 = new widget.Label();
@@ -182,6 +190,92 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
 
         TKd.setForeground(new java.awt.Color(255, 255, 255));
         TKd.setName("TKd"); // NOI18N
+
+        jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        MnKelas1.setBackground(new java.awt.Color(255, 255, 254));
+        MnKelas1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKelas1.setForeground(new java.awt.Color(50, 50, 50));
+        MnKelas1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKelas1.setText("Filter Kamar Kelas 1");
+        MnKelas1.setName("MnKelas1"); // NOI18N
+        MnKelas1.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnKelas1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKelas1ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnKelas1);
+
+        MnKelas2.setBackground(new java.awt.Color(255, 255, 254));
+        MnKelas2.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKelas2.setForeground(new java.awt.Color(50, 50, 50));
+        MnKelas2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKelas2.setText("Filter Kamar Kelas 2");
+        MnKelas2.setName("MnKelas2"); // NOI18N
+        MnKelas2.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnKelas2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKelas2ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnKelas2);
+
+        MnKelas3.setBackground(new java.awt.Color(255, 255, 254));
+        MnKelas3.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKelas3.setForeground(new java.awt.Color(50, 50, 50));
+        MnKelas3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKelas3.setText("Filter Kamar Kelas 3");
+        MnKelas3.setName("MnKelas3"); // NOI18N
+        MnKelas3.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnKelas3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKelas3ActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnKelas3);
+
+        MnKelasVIP.setBackground(new java.awt.Color(255, 255, 254));
+        MnKelasVIP.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKelasVIP.setForeground(new java.awt.Color(50, 50, 50));
+        MnKelasVIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKelasVIP.setText("Filter Kamar Kelas VIP");
+        MnKelasVIP.setName("MnKelasVIP"); // NOI18N
+        MnKelasVIP.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnKelasVIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKelasVIPActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnKelasVIP);
+
+        MnKelasVVIP.setBackground(new java.awt.Color(255, 255, 254));
+        MnKelasVVIP.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKelasVVIP.setForeground(new java.awt.Color(50, 50, 50));
+        MnKelasVVIP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKelasVVIP.setText("Filter Kamar Kelas VVIP");
+        MnKelasVVIP.setName("MnKelasVVIP"); // NOI18N
+        MnKelasVVIP.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnKelasVVIP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKelasVVIPActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnKelasVVIP);
+
+        MnKelasUtama.setBackground(new java.awt.Color(255, 255, 254));
+        MnKelasUtama.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnKelasUtama.setForeground(new java.awt.Color(50, 50, 50));
+        MnKelasUtama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnKelasUtama.setText("Filter Kamar Kelas Utama");
+        MnKelasUtama.setName("MnKelasUtama"); // NOI18N
+        MnKelasUtama.setPreferredSize(new java.awt.Dimension(180, 26));
+        MnKelasUtama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnKelasUtamaActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnKelasUtama);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -336,9 +430,11 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setLayout(new java.awt.BorderLayout(1, 1));
 
+        Scroll.setComponentPopupMenu(jPopupMenu1);
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
+        Tabel1.setComponentPopupMenu(jPopupMenu1);
         Tabel1.setName("Tabel1"); // NOI18N
         Scroll.setViewportView(Tabel1);
 
@@ -351,9 +447,11 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
         internalFrame3.setName("internalFrame3"); // NOI18N
         internalFrame3.setLayout(new java.awt.BorderLayout(1, 1));
 
+        Scroll1.setComponentPopupMenu(jPopupMenu1);
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
+        Tabel2.setComponentPopupMenu(jPopupMenu1);
         Tabel2.setName("Tabel2"); // NOI18N
         Tabel2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -385,18 +483,18 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 //TCari.requestFocus();
             }else if(tabMode.getRowCount()!=0){
-                
-                Map<String, Object> param = new HashMap<>();         
+
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()); 
-                param.put("tanggal",Tgl2.getDate());   
+                param.put("emailrs",akses.getemailrs());
+                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
+                param.put("tanggal",Tgl2.getDate());
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                for(int r=0;r<tabMode.getRowCount();r++){ 
+                for(int r=0;r<tabMode.getRowCount();r++){
                     if(!Tabel1.getValueAt(r,0).toString().contains(">>")){
                         Sequel.menyimpan("temporary","'"+r+"','"+
                                         tabMode.getValueAt(r,0).toString()+"','"+
@@ -408,9 +506,9 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                                         tabMode.getValueAt(r,6).toString()+"','"+
                                         tabMode.getValueAt(r,7).toString()+"','"+
                                         tabMode.getValueAt(r,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                    }                    
+                    }
                 }
-                   
+
                 Valid.MyReportqry("rptHitungBor.jasper","report","::[ Data Hitung BOR ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }
         }else if(TabRawat.getSelectedIndex()==1){
@@ -418,18 +516,18 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 //TCari.requestFocus();
             }else if(tabMode2.getRowCount()!=0){
-                
-                Map<String, Object> param = new HashMap<>();         
+
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()); 
-                param.put("tanggal",Tgl2.getDate());   
+                param.put("emailrs",akses.getemailrs());
+                param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
+                param.put("tanggal",Tgl2.getDate());
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                for(int r=0;r<tabMode2.getRowCount();r++){ 
+                for(int r=0;r<tabMode2.getRowCount();r++){
                     if(!Tabel2.getValueAt(r,0).toString().contains(">>")){
                         Sequel.menyimpan("temporary","'"+r+"','"+
                                         tabMode2.getValueAt(r,0).toString()+"','"+
@@ -441,15 +539,15 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
                                         tabMode2.getValueAt(r,6).toString()+"','"+
                                         tabMode2.getValueAt(r,7).toString()+"','"+
                                         tabMode2.getValueAt(r,8).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi");
-                    }                    
+                    }
                 }
-                   
+
                 Valid.MyReportqry("rptHitungBor.jasper","report","::[ Data Hitung BOR ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }
         }
-            
+
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -457,35 +555,35 @@ public final class DlgHitungBOR extends javax.swing.JDialog {
         }else{
             //Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TKd);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     if(TabRawat.getSelectedIndex()==0){
         tampil();
     }else if(TabRawat.getSelectedIndex()==1){
         tampil2();
     }
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             Valid.pindah(evt, TKd, BtnPrint);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -518,6 +616,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TKd.setText("");
         Kamar.setText("");
+        filter="";
         if(TabRawat.getSelectedIndex()==0){
             tampil();
         }else if(TabRawat.getSelectedIndex()==1){
@@ -532,6 +631,60 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             Valid.pindah(evt, BtnCari, BtnKeluar);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
+
+    private void MnKelas1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKelas1ActionPerformed
+        filter="and kamar.kelas='Kelas 1' ";
+        if(TabRawat.getSelectedIndex()==0){
+            tampil();
+        }else if(TabRawat.getSelectedIndex()==1){
+            tampil2();
+        }
+    }//GEN-LAST:event_MnKelas1ActionPerformed
+
+    private void MnKelas2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKelas2ActionPerformed
+        filter="and kamar.kelas='Kelas 2' ";
+        if(TabRawat.getSelectedIndex()==0){
+            tampil();
+        }else if(TabRawat.getSelectedIndex()==1){
+            tampil2();
+        }
+    }//GEN-LAST:event_MnKelas2ActionPerformed
+
+    private void MnKelas3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKelas3ActionPerformed
+        filter="and kamar.kelas='Kelas 3' ";
+        if(TabRawat.getSelectedIndex()==0){
+            tampil();
+        }else if(TabRawat.getSelectedIndex()==1){
+            tampil2();
+        }
+    }//GEN-LAST:event_MnKelas3ActionPerformed
+
+    private void MnKelasVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKelasVIPActionPerformed
+        filter="and kamar.kelas='Kelas VIP' ";
+        if(TabRawat.getSelectedIndex()==0){
+            tampil();
+        }else if(TabRawat.getSelectedIndex()==1){
+            tampil2();
+        }
+    }//GEN-LAST:event_MnKelasVIPActionPerformed
+
+    private void MnKelasVVIPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKelasVVIPActionPerformed
+        filter="and kamar.kelas='Kelas VVIP' ";
+        if(TabRawat.getSelectedIndex()==0){
+            tampil();
+        }else if(TabRawat.getSelectedIndex()==1){
+            tampil2();
+        }
+    }//GEN-LAST:event_MnKelasVVIPActionPerformed
+
+    private void MnKelasUtamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKelasUtamaActionPerformed
+        filter="and kamar.kelas='Kelas Utama' ";
+        if(TabRawat.getSelectedIndex()==0){
+            tampil();
+        }else if(TabRawat.getSelectedIndex()==1){
+            tampil2();
+        }
+    }//GEN-LAST:event_MnKelasUtamaActionPerformed
 
     /**
     * @param args the command line arguments
@@ -556,6 +709,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Button BtnPrint;
     private widget.Button BtnSeek6;
     private widget.TextBox Kamar;
+    private javax.swing.JMenuItem MnKelas1;
+    private javax.swing.JMenuItem MnKelas2;
+    private javax.swing.JMenuItem MnKelas3;
+    private javax.swing.JMenuItem MnKelasUtama;
+    private javax.swing.JMenuItem MnKelasVIP;
+    private javax.swing.JMenuItem MnKelasVVIP;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
     private widget.TextBox TKd;
@@ -569,16 +728,17 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.InternalFrame internalFrame3;
     private widget.Label jLabel17;
     private widget.Label jLabel7;
+    private javax.swing.JPopupMenu jPopupMenu1;
     private widget.Label label11;
     private widget.Label label18;
     private widget.panelisi panelGlass5;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
-        try{   
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-            Valid.tabelKosong(tabMode);   
-            
+    public void tampil(){
+        try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosong(tabMode);
+
             ps=koneksi.prepareStatement(
                        "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(kamar_inap.kd_kamar,' ',bangsal.nm_bangsal) as kamar," +
                        "kamar_inap.tgl_masuk,if(kamar_inap.tgl_keluar='0000-00-00',current_date(),kamar_inap.tgl_keluar) as tgl_keluar,kamar_inap.lama,kamar_inap.stts_pulang "+
@@ -586,8 +746,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                        "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                        "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
                        "inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal " +
-                       "where kamar_inap.tgl_masuk between ? and ? "+(Kamar.getText().equals("")?"":"and bangsal.nm_bangsal=?")+" order by kamar_inap.tgl_masuk");  
-            
+                       "where kamar_inap.tgl_masuk between ? and ? "+filter+(Kamar.getText().equals("")?"":"and bangsal.nm_bangsal=?")+" order by kamar_inap.tgl_masuk");
+
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -595,7 +755,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(3,Kamar.getText().trim());
                 }
                 rs=ps.executeQuery();
-                i=1;  
+                i=1;
                 hari=0;
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -613,7 +773,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     tabMode.addRow(new Object[]{"","","","Jumlah Kamar",":","","",kamar,""});
                     tabMode.addRow(new Object[]{"","","","Jumlah Hari Dalam Periode",":","","",jumlahhari,""});
                     tabMode.addRow(new Object[]{"","","","Perhitungan BOR ",": ("+hari+"/("+kamar+" X "+jumlahhari+")) X 100%","","",Valid.SetAngka4((hari/(kamar*jumlahhari))*100)+" %",""});
-                }                    
+                }
             } catch (Exception e) {
                 System.out.println("laporan.DlgHitungBOR.tampil() : "+e);
             } finally{
@@ -629,12 +789,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil2(){        
-        try{   
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-            Valid.tabelKosong(tabMode2);   
-            
+
+    public void tampil2(){
+        try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosong(tabMode2);
+
             ps=koneksi.prepareStatement(
                        "select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(kamar_inap.kd_kamar,' ',bangsal.nm_bangsal) as kamar," +
                        "kamar_inap.tgl_masuk,if(kamar_inap.tgl_keluar='0000-00-00',current_date(),kamar_inap.tgl_keluar) as tgl_keluar,kamar_inap.lama,kamar_inap.stts_pulang "+
@@ -642,8 +802,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                        "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                        "inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
                        "inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal  " +
-                       "where kamar_inap.tgl_keluar between ? and ? "+(Kamar.getText().equals("")?"":"and bangsal.nm_bangsal=?")+" order by kamar_inap.tgl_keluar");  
-            
+                       "where kamar_inap.tgl_keluar between ? and ? "+filter+(Kamar.getText().equals("")?"":"and bangsal.nm_bangsal=?")+" order by kamar_inap.tgl_keluar");
+
             try {
                 ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
@@ -651,7 +811,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(3,Kamar.getText().trim());
                 }
                 rs=ps.executeQuery();
-                i=1;  
+                i=1;
                 hari=0;
                 while(rs.next()){
                     tabMode2.addRow(new Object[]{
@@ -669,7 +829,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     tabMode2.addRow(new Object[]{"","","","Jumlah Kamar",":","","",kamar,""});
                     tabMode2.addRow(new Object[]{"","","","Jumlah Hari Dalam Periode",":","","",jumlahhari,""});
                     tabMode2.addRow(new Object[]{"","","","Perhitungan BOR ",": ("+hari+"/("+kamar+" X "+jumlahhari+")) X 100%","","",Valid.SetAngka4((hari/(kamar*jumlahhari))*100)+" %",""});
-                }                    
+                }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{

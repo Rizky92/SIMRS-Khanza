@@ -52,8 +52,8 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
                 java.lang.Double.class, java.lang.Object.class
              };
              @Override
@@ -90,9 +90,9 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
         }
 
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -114,9 +114,9 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
                     }
                 }
             });
-        } 
+        }
     }
-    
+
 
 
     /** This method is called from within the constructor to
@@ -282,11 +282,11 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -294,12 +294,12 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -307,7 +307,7 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -315,7 +315,7 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -326,21 +326,21 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         //bangsal.setModal(true);
         bangsal.emptTeks();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         bangsal.setLocationRelativeTo(internalFrame1);
         bangsal.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -391,14 +391,14 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
                        "inhealth_jenpel_ruang_rawat.tarif,trf_kamar,kamar.status from inhealth_jenpel_ruang_rawat inner join kamar inner join bangsal "+
                        "on inhealth_jenpel_ruang_rawat.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal "+
                        "where inhealth_jenpel_ruang_rawat.kd_kamar like ? or bangsal.nm_bangsal like ? "+
-                       "or inhealth_jenpel_ruang_rawat.kode_jenpel_ruang_rawat like ? or inhealth_jenpel_ruang_rawat.nama_jenpel_ruang_rawat like ? order by inhealth_jenpel_ruang_rawat.kd_kamar"); 
-            try {                
+                       "or inhealth_jenpel_ruang_rawat.kode_jenpel_ruang_rawat like ? or inhealth_jenpel_ruang_rawat.nama_jenpel_ruang_rawat like ? order by inhealth_jenpel_ruang_rawat.kd_kamar");
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
                 ps.setString(4,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),
                         rs.getString(4),rs.getString(5),rs.getDouble(6),
@@ -428,8 +428,8 @@ public final class InhealthCariReferensiJenpelRuang extends javax.swing.JDialog 
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
        BtnTambah.setEnabled(akses.getinhealth_referensi_jenpel_ruang_rawat());
     }
 }

@@ -49,7 +49,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
     private double material=0,bhp=0,jmdokter=0,jmpetugas=0,jmperujuk=0,kso=0,
-            menejemen=0,total=0,biayaoperator1=0,biayaoperator2=0, 
+            menejemen=0,total=0,biayaoperator1=0,biayaoperator2=0,
             biayaoperator3=0,biayaasisten_operator1=0,biayaasisten_operator2=0,
             biayaasisten_operator3=0,biayainstrumen=0,biayadokter_anak=0,
             biayaperawaat_resusitas=0,biayadokter_anestesi=0,biayaasisten_anestesi=0,
@@ -69,7 +69,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(885,674);
-        
+
         tabModeRalanDokter=new DefaultTableModel(null,new Object[]{
             "No.","Kode Tindakan","Perawatan/Tindakan","Jasa Sarana","Paket BHP","JM Dokter","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -112,7 +112,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbRalanDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRalanParamedis=new DefaultTableModel(null,new Object[]{
             "No.","Kode Tindakan","Perawatan/Tindakan","Jasa Sarana","Paket BHP","JM Paramedis","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -155,7 +155,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbRalanParamedis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRalanDokterParamedis=new DefaultTableModel(null,new Object[]{
             "No.","Kode Tindakan","Perawatan/Tindakan","Jasa Sarana","Paket BHP","JM Dokter","JM Paramedis","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -200,7 +200,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbRalanDokterParamedis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRanapDokter=new DefaultTableModel(null,new Object[]{
             "No.","Kode Tindakan","Perawatan/Tindakan","Jasa Sarana","Paket BHP","JM Dokter","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -244,7 +244,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbRanapDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRanapParamedis=new DefaultTableModel(null,new Object[]{
             "No.","Kode Tindakan","Perawatan/Tindakan","Jasa Sarana","Paket BHP","JM Paramedis","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -288,7 +288,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbRanapParamedis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRanapDokterParamedis=new DefaultTableModel(null,new Object[]{
             "No.","Kode Tindakan","Perawatan/Tindakan","Jasa Sarana","Paket BHP","JM Dokter","JM Paramedis","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -333,7 +333,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbRanapDokterParamedis.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRadiologi=new DefaultTableModel(null,new Object[]{
             "No.","Kode","Pemeriksaan","Jasa Sarana","Paket BHP","JM P.J.Rad","JM Petugas","JM Perujuk","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -381,7 +381,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbRadiologi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeLaborat=new DefaultTableModel(null,new Object[]{
             "No.","Kode","Pemeriksaan","Jasa Sarana","Paket BHP","JM P.J.Lab","JM Petugas","JM Perujuk","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -429,7 +429,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbLaborat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailLaborat=new DefaultTableModel(null,new Object[]{
             "No.","Id","Pemeriksaan","Jasa Sarana","Paket BHP","JM P.J.Lab","JM Petugas","JM Perujuk","KSO","Menejemen","Total","Jumlah"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -477,12 +477,12 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbDetailLaborat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeOperasi=new DefaultTableModel(null,new Object[]{
             "No.","Kode Paket","Paket Operasi/VK","JM Operator 1","JM Operator 2","JM Operator 3","JM AO 1",
             "JM AO 2","JM AO 3","JM Instrumen","JM dr Anak","JM P.R.","JM dr Anastesi","JM A.A. 1","JM A.A. 2",
-            "JM Bidan 1","JM Bidan 2","JM Bidan 3","JM P.L.","JM Onloop 1","JM Onloop 2","JM Onloop 3","JM Onloop 4", 
-            "JM Onloop 5","JM dr P.J. Anak","JM dr Umum","Sewa Alat","Sewa OK/VK","Akomodasi","N.M.S.","Sarpras","Total","Jumlah" 
+            "JM Bidan 1","JM Bidan 2","JM Bidan 3","JM P.L.","JM Onloop 1","JM Onloop 2","JM Onloop 3","JM Onloop 4",
+            "JM Onloop 5","JM dr P.J. Anak","JM dr Umum","Sewa Alat","Sewa OK/VK","Akomodasi","N.M.S.","Sarpras","Total","Jumlah"
         }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
@@ -524,9 +524,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             }
         }
         tbOperasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -579,7 +579,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                         default:
                             break;
                     }
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -589,8 +589,8 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -603,7 +603,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -656,7 +656,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                         default:
                             break;
                     }
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -666,8 +666,8 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         petugas.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -680,7 +680,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -708,7 +708,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                         default:
                             break;
                     }
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -719,7 +719,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -782,7 +782,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                         default:
                             break;
                     }
-                }      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -792,8 +792,8 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -806,8 +806,8 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
-            
+
+
         ChkInput.setSelected(false);
         isForm();
         ChkInput1.setSelected(false);
@@ -828,11 +828,11 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
         isForm9();
         ChkInput10.setSelected(false);
         isForm10();
-        
+
         Valid.SetTgl2(Tgl1,format.format(new Date())+" 00:00:00");
         Valid.SetTgl2(Tgl2,format.format(new Date())+" 23:59:59");
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -2576,13 +2576,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,Tgl1,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2628,7 +2628,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     }//GEN-LAST:event_Tgl1KeyPressed
 
     private void Tgl2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl2KeyPressed
-        
+
     }//GEN-LAST:event_Tgl2KeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
@@ -2641,7 +2641,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 break;
             case 2:
                 tampil3();
-                break; 
+                break;
             case 3:
                 tampil4();
                 break;
@@ -3168,7 +3168,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
     private widget.Table tbRanapParamedis;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){     
+    public void tampil(){
         Valid.tabelKosong(tabModeRalanDokter);
         try{
             if(KdDokterRalanDokter.getText().equals("")&&NmDokterRalanDokter.getText().equals("")&&KdPoliRalanDokter.getText().equals("")&&NmPoliRalanDokter.getText().equals("")&&KdCaraBayarRalanDokter.getText().equals("")&&NmCaraBayarRalanDokter.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -3253,7 +3253,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                        " group by rawat_jl_dr.kd_jenis_prw order by rawat_jl_dr.kd_jenis_prw asc");
                 }
             }
-            
+
             try {
                 if(KdDokterRalanDokter.getText().equals("")&&NmDokterRalanDokter.getText().equals("")&&KdPoliRalanDokter.getText().equals("")&&NmPoliRalanDokter.getText().equals("")&&KdCaraBayarRalanDokter.getText().equals("")&&NmCaraBayarRalanDokter.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -3267,7 +3267,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 item=0;
@@ -3299,13 +3299,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
 
-    public void tampil2(){     
+    public void tampil2(){
         Valid.tabelKosong(tabModeRalanParamedis);
         try{
             if(KdPetugasRalanParamedis.getText().equals("")&&NmPetugasRalanParamedis.getText().equals("")&&KdPoliRalanParamedis.getText().equals("")&&NmPoliRalanParamedis.getText().equals("")&&KdCaraBayarRalanParamedis.getText().equals("")&&NmCaraBayarRalanParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -3390,7 +3390,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            " group by rawat_jl_pr.kd_jenis_prw order by rawat_jl_pr.kd_jenis_prw asc");
                 }
             }
-                
+
             try {
                 if(KdPetugasRalanParamedis.getText().equals("")&&NmPetugasRalanParamedis.getText().equals("")&&KdPoliRalanParamedis.getText().equals("")&&NmPoliRalanParamedis.getText().equals("")&&KdCaraBayarRalanParamedis.getText().equals("")&&NmCaraBayarRalanParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -3404,7 +3404,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmpetugas=0;kso=0;menejemen=0;total=0;item=0;
@@ -3435,13 +3435,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil3(){     
+
+    public void tampil3(){
         Valid.tabelKosong(tabModeRalanDokterParamedis);
         try{
             if(KdDokterRalanDokterParamedis.getText().equals("")&&NmDokterRalanDokterParamedis.getText().equals("")&&KdPetugasRalanDokterParamedis.getText().equals("")&&NmPetugasRalanDokterParamedis.getText().equals("")&&KdPoliRalanDokterParamedis.getText().equals("")&&NmPoliRalanDokterParamedis.getText().equals("")&&KdCaraBayarRalanDokterParamedis.getText().equals("")&&NmCaraBayarRalanDokterParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -3530,9 +3530,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join petugas on rawat_jl_drpr.nip=petugas.nip "+
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(rawat_jl_drpr.tgl_perawatan,' ',rawat_jl_drpr.jam_rawat) between ? and ? and concat(rawat_jl_drpr.kd_dokter,dokter.nm_dokter) like ? and concat(reg_periksa.kd_poli,poliklinik.nm_poli) like ? and concat(rawat_jl_drpr.nip,petugas.nama) like ? and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and (rawat_jl_drpr.no_rawat like ? or poliklinik.nm_poli like ?) "+
                            " group by rawat_jl_drpr.kd_jenis_prw order by rawat_jl_drpr.kd_jenis_prw asc");
-                }   
+                }
             }
-                
+
             try {
                 if(KdDokterRalanDokterParamedis.getText().equals("")&&NmDokterRalanDokterParamedis.getText().equals("")&&KdPetugasRalanDokterParamedis.getText().equals("")&&NmPetugasRalanDokterParamedis.getText().equals("")&&KdPoliRalanDokterParamedis.getText().equals("")&&NmPoliRalanDokterParamedis.getText().equals("")&&KdCaraBayarRalanDokterParamedis.getText().equals("")&&NmCaraBayarRalanDokterParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -3547,7 +3547,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                     ps.setString(8,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmdokter=0;jmpetugas=0;kso=0;menejemen=0;total=0;item=0;
@@ -3579,13 +3579,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil4(){     
+
+    public void tampil4(){
         Valid.tabelKosong(tabModeOperasi);
         try{
             if(KdOperatorOperasi.getText().equals("")&&NmOperatorOperasi.getText().equals("")&&KdAsistenOperasi.getText().equals("")&&NmAsistenOperasi.getText().equals("")&&KdCaraBayarOperasi.getText().equals("")&&NmCaraBayarOperasi.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -3637,7 +3637,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join dokter as operator1 on operator1.kd_dokter=operasi.operator1 "+
                            "inner join petugas as asisten_operator1 on asisten_operator1.nip=operasi.asisten_operator1 "+
                            "where operasi.tgl_operasi between ? and ? and concat(operasi.operator1,operator1.nm_dokter) like ? and concat(operasi.asisten_operator1,asisten_operator1.nama) like ? and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and (operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?) "+
-                           "group by operasi.kode_paket order by operasi.kode_paket desc");    
+                           "group by operasi.kode_paket order by operasi.kode_paket desc");
                 }else if(cmbStatus.getSelectedItem().equals("Piutang Belum Lunas")){
                     ps=koneksi.prepareStatement(
                            "select operasi.kode_paket,paket_operasi.nm_perawatan,"+
@@ -3740,9 +3740,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join petugas as asisten_operator1 on asisten_operator1.nip=operasi.asisten_operator1 "+
                            "where reg_periksa.status_bayar='Belum Bayar' and operasi.tgl_operasi between ? and ? and concat(operasi.operator1,operator1.nm_dokter) like ? and concat(operasi.asisten_operator1,asisten_operator1.nama) like ? and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and (operasi.kode_paket like ? or paket_operasi.nm_perawatan like ?)  "+
                            "group by operasi.kode_paket order by operasi.kode_paket desc");
-                }   
+                }
             }
-                
+
             try {
                 if(KdOperatorOperasi.getText().equals("")&&NmOperatorOperasi.getText().equals("")&&KdAsistenOperasi.getText().equals("")&&NmAsistenOperasi.getText().equals("")&&KdCaraBayarOperasi.getText().equals("")&&NmCaraBayarOperasi.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -3756,10 +3756,10 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
-                total=0;biayaoperator1=0;biayaoperator2=0; 
+                total=0;biayaoperator1=0;biayaoperator2=0;
                 biayaoperator3=0;biayaasisten_operator1=0;biayaasisten_operator2=0;
                 biayaasisten_operator3=0;biayainstrumen=0;biayadokter_anak=0;
                 biayaperawaat_resusitas=0;biayadokter_anestesi=0;biayaasisten_anestesi=0;
@@ -3768,7 +3768,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 bagian_rs=0;biaya_omloop=0;biaya_omloop2=0;biaya_omloop3=0;
                 biaya_omloop4=0;biaya_omloop5=0;biayasarpras=0;biaya_dokter_pjanak=0;
                 biaya_dokter_umum=0;item=0;
-                while(rs.next()){  
+                while(rs.next()){
                     biayaoperator1=biayaoperator1+rs.getDouble("biayaoperator1");
                     biayaoperator2=biayaoperator2+rs.getDouble("biayaoperator2");
                     biayaoperator3=biayaoperator3+rs.getDouble("biayaoperator3");
@@ -3841,13 +3841,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil5(){     
+
+    public void tampil5(){
         Valid.tabelKosong(tabModeRanapDokter);
         try{
             if(KdDokterRanapDokter.getText().equals("")&&NmDokterRanapDokter.getText().equals("")&&KdCaraBayarRanapDokter.getText().equals("")&&NmCaraBayarRanapDokter.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -3926,7 +3926,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            " group by rawat_inap_dr.kd_jenis_prw order by rawat_inap_dr.kd_jenis_prw asc");
                 }
             }
-                
+
             try {
                 if(KdDokterRanapDokter.getText().equals("")&&NmDokterRanapDokter.getText().equals("")&&KdCaraBayarRanapDokter.getText().equals("")&&NmCaraBayarRanapDokter.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -3939,7 +3939,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmdokter=0;kso=0;menejemen=0;total=0;item=0;
@@ -3970,13 +3970,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil6(){     
+
+    public void tampil6(){
         Valid.tabelKosong(tabModeRanapParamedis);
         try{
             if(KdPetugasRanapParamedis.getText().equals("")&&NmPetugasRanapParamedis.getText().equals("")&&KdCaraBayarRanapParamedis.getText().equals("")&&NmCaraBayarRanapParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -4053,9 +4053,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(rawat_inap_pr.tgl_perawatan,' ',rawat_inap_pr.jam_rawat) between ? and ? and concat(rawat_inap_pr.nip,petugas.nama) like ? and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and (rawat_inap_pr.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? ) "+
                            " group by rawat_inap_pr.kd_jenis_prw order by rawat_inap_pr.kd_jenis_prw asc");
-                }     
+                }
             }
-                
+
             try {
                 if(KdPetugasRanapParamedis.getText().equals("")&&NmPetugasRanapParamedis.getText().equals("")&&KdCaraBayarRanapParamedis.getText().equals("")&&NmCaraBayarRanapParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -4068,7 +4068,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmpetugas=0;kso=0;menejemen=0;total=0;item=0;
@@ -4099,13 +4099,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil7(){     
+
+    public void tampil7(){
         Valid.tabelKosong(tabModeRanapDokterParamedis);
         try{
             if(KdDokterRanapDokterParamedis.getText().equals("")&&NmDokterRanapDokterParamedis.getText().equals("")&&KdPetugasRanapDokterParamedis.getText().equals("")&&NmPetugasRanapDokterParamedis.getText().equals("")&&KdCaraBayarRanapDokterParamedis.getText().equals("")&&NmCaraBayarRanapDokterParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -4194,9 +4194,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join petugas on rawat_inap_drpr.nip=petugas.nip  "+
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(rawat_inap_drpr.tgl_perawatan,' ',rawat_inap_drpr.jam_rawat) between ? and ? and concat(rawat_inap_drpr.kd_dokter,dokter.nm_dokter) like ? and concat(rawat_inap_drpr.nip,petugas.nama) like ? and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and (rawat_inap_drpr.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? )  "+
                            " group by rawat_inap_drpr.kd_jenis_prw order by rawat_inap_drpr.kd_jenis_prw asc");
-                }    
+                }
             }
-                
+
             try {
                 if(KdDokterRanapDokterParamedis.getText().equals("")&&NmDokterRanapDokterParamedis.getText().equals("")&&KdPetugasRanapDokterParamedis.getText().equals("")&&NmPetugasRanapDokterParamedis.getText().equals("")&&KdCaraBayarRanapDokterParamedis.getText().equals("")&&NmCaraBayarRanapDokterParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -4210,7 +4210,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmdokter=0;jmpetugas=0;kso=0;menejemen=0;total=0;item=0;
@@ -4242,14 +4242,14 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
 
-    
-    public void tampil8(){     
+
+    public void tampil8(){
         Valid.tabelKosong(tabModeRadiologi);
         try{
             if(KdDokterPerujukRad.getText().equals("")&&NmDokterPerujukRad.getText().equals("")&&KdPetugasRad.getText().equals("")&&NmPetugasRad.getText().equals("")&&KdCaraBayarRad.getText().equals("")&&NmCaraBayarRad.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -4345,9 +4345,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(periksa_radiologi.tgl_periksa,' ',periksa_radiologi.jam) between ? and ? and concat(periksa_radiologi.dokter_perujuk,perujuk.nm_dokter) like ? and concat(periksa_radiologi.nip,petugas.nama) like ? and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and (periksa_radiologi.kd_jenis_prw like ? or jns_perawatan_radiologi.nm_perawatan like ? ) "+
                            " group by periksa_radiologi.kd_jenis_prw order by periksa_radiologi.kd_jenis_prw");
                 }
-                    
-            }    
-                
+
+            }
+
             try {
                 if(KdDokterPerujukRad.getText().equals("")&&NmDokterPerujukRad.getText().equals("")&&KdPetugasRad.getText().equals("")&&NmPetugasRad.getText().equals("")&&KdCaraBayarRad.getText().equals("")&&NmCaraBayarRad.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -4360,8 +4360,8 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(5,"%"+KdCaraBayarRad.getText()+NmCaraBayarRad.getText()+"%");
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
-                }   
-                    
+                }
+
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmdokter=0;jmpetugas=0;jmperujuk=0;
@@ -4398,13 +4398,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil9(){     
+
+    public void tampil9(){
         Valid.tabelKosong(tabModeLaborat);
         try{
             if(KdDokterPerujukLab.getText().equals("")&&NmDokterPerujukLab.getText().equals("")&&KdPetugasLab.getText().equals("")&&NmPetugasLab.getText().equals("")&&KdCaraBayarLab.getText().equals("")&&NmCaraBayarLab.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -4499,9 +4499,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join jns_perawatan_lab on periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(periksa_lab.tgl_periksa,' ',periksa_lab.jam) between ? and ? and concat(periksa_lab.dokter_perujuk,perujuk.nm_dokter) like ? and concat(periksa_lab.nip,petugas.nama) like ? and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and (periksa_lab.kd_jenis_prw like ? or jns_perawatan_lab.nm_perawatan like ?) "+
                            " group by periksa_lab.kd_jenis_prw order by periksa_lab.kd_jenis_prw");
-                }    
+                }
             }
-                
+
             try {
                 if(KdDokterPerujukLab.getText().equals("")&&NmDokterPerujukLab.getText().equals("")&&KdPetugasLab.getText().equals("")&&NmPetugasLab.getText().equals("")&&KdCaraBayarLab.getText().equals("")&&NmCaraBayarLab.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -4515,7 +4515,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmdokter=0;jmpetugas=0;jmperujuk=0;
@@ -4552,13 +4552,13 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil10(){     
+
+    public void tampil10(){
         Valid.tabelKosong(tabModeDetailLaborat);
         try {
             if(KdDokterPerujukDetailLab.getText().equals("")&&NmDokterPerujukDetailLab.getText().equals("")&&KdPetugasDetailLab.getText().equals("")&&NmPetugasDetailLab.getText().equals("")&&KdCaraBayarDetailLab.getText().equals("")&&NmCaraBayarDetailLab.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
@@ -4675,9 +4675,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                             "and jns_perawatan_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw "+
                             "where reg_periksa.status_bayar='Belum Bayar' and concat(detail_periksa_lab.tgl_periksa,' ',detail_periksa_lab.jam) between ? and ? and concat(periksa_lab.dokter_perujuk,perujuk.nm_dokter) like ? and concat(periksa_lab.nip,petugas.nama) like ? and concat(reg_periksa.kd_pj,penjab.png_jawab) like ? and (detail_periksa_lab.id_template like ? or template_laboratorium.Pemeriksaan like ? ) "+
                             " group by detail_periksa_lab.id_template order by detail_periksa_lab.id_template");
-                }    
+                }
             }
-                
+
             try {
                 if(KdDokterPerujukDetailLab.getText().equals("")&&NmDokterPerujukDetailLab.getText().equals("")&&KdPetugasDetailLab.getText().equals("")&&NmPetugasDetailLab.getText().equals("")&&KdCaraBayarDetailLab.getText().equals("")&&NmCaraBayarDetailLab.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                     ps.setString(1,Valid.SetTglJam(Tgl1.getSelectedItem()+""));
@@ -4691,7 +4691,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 material=0;bhp=0;jmdokter=0;jmpetugas=0;jmperujuk=0;
@@ -4728,152 +4728,152 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        }            
+        }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void isForm2(){
         if(ChkInput1.isSelected()==true){
             ChkInput1.setVisible(false);
             PanelInput1.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput1.setVisible(true);      
+            FormInput1.setVisible(true);
             ChkInput1.setVisible(true);
-        }else if(ChkInput1.isSelected()==false){           
-            ChkInput1.setVisible(false);            
+        }else if(ChkInput1.isSelected()==false){
+            ChkInput1.setVisible(false);
             PanelInput1.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput1.setVisible(false);      
+            FormInput1.setVisible(false);
             ChkInput1.setVisible(true);
         }
     }
-    
+
     private void isForm3(){
         if(ChkInput2.isSelected()==true){
             ChkInput2.setVisible(false);
             PanelInput2.setPreferredSize(new Dimension(WIDTH,95));
-            FormInput2.setVisible(true);      
+            FormInput2.setVisible(true);
             ChkInput2.setVisible(true);
-        }else if(ChkInput2.isSelected()==false){           
-            ChkInput2.setVisible(false);            
+        }else if(ChkInput2.isSelected()==false){
+            ChkInput2.setVisible(false);
             PanelInput2.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput2.setVisible(false);      
+            FormInput2.setVisible(false);
             ChkInput2.setVisible(true);
         }
     }
-    
+
     private void isForm4(){
         if(ChkInput3.isSelected()==true){
             ChkInput3.setVisible(false);
             PanelInput3.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput3.setVisible(true);      
+            FormInput3.setVisible(true);
             ChkInput3.setVisible(true);
-        }else if(ChkInput3.isSelected()==false){           
-            ChkInput3.setVisible(false);            
+        }else if(ChkInput3.isSelected()==false){
+            ChkInput3.setVisible(false);
             PanelInput3.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput3.setVisible(false);      
+            FormInput3.setVisible(false);
             ChkInput3.setVisible(true);
         }
     }
-    
+
     private void isForm5(){
         if(ChkInput4.isSelected()==true){
             ChkInput4.setVisible(false);
             PanelInput4.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput4.setVisible(true);      
+            FormInput4.setVisible(true);
             ChkInput4.setVisible(true);
-        }else if(ChkInput4.isSelected()==false){           
-            ChkInput4.setVisible(false);            
+        }else if(ChkInput4.isSelected()==false){
+            ChkInput4.setVisible(false);
             PanelInput4.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput4.setVisible(false);      
+            FormInput4.setVisible(false);
             ChkInput4.setVisible(true);
         }
     }
-    
+
     private void isForm6(){
         if(ChkInput5.isSelected()==true){
             ChkInput5.setVisible(false);
             PanelInput5.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput5.setVisible(true);      
+            FormInput5.setVisible(true);
             ChkInput5.setVisible(true);
-        }else if(ChkInput5.isSelected()==false){           
-            ChkInput5.setVisible(false);            
+        }else if(ChkInput5.isSelected()==false){
+            ChkInput5.setVisible(false);
             PanelInput5.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput5.setVisible(false);      
+            FormInput5.setVisible(false);
             ChkInput5.setVisible(true);
         }
     }
-    
+
     private void isForm7(){
         if(ChkInput7.isSelected()==true){
             ChkInput7.setVisible(false);
             PanelInput7.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput7.setVisible(true);      
+            FormInput7.setVisible(true);
             ChkInput7.setVisible(true);
-        }else if(ChkInput7.isSelected()==false){           
-            ChkInput7.setVisible(false);            
+        }else if(ChkInput7.isSelected()==false){
+            ChkInput7.setVisible(false);
             PanelInput7.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput7.setVisible(false);      
+            FormInput7.setVisible(false);
             ChkInput7.setVisible(true);
         }
     }
-    
+
     private void isForm8(){
         if(ChkInput8.isSelected()==true){
             ChkInput8.setVisible(false);
             PanelInput8.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput8.setVisible(true);      
+            FormInput8.setVisible(true);
             ChkInput8.setVisible(true);
-        }else if(ChkInput8.isSelected()==false){           
-            ChkInput8.setVisible(false);            
+        }else if(ChkInput8.isSelected()==false){
+            ChkInput8.setVisible(false);
             PanelInput8.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput8.setVisible(false);      
+            FormInput8.setVisible(false);
             ChkInput8.setVisible(true);
         }
     }
-    
+
     private void isForm9(){
         if(ChkInput9.isSelected()==true){
             ChkInput9.setVisible(false);
             PanelInput9.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput9.setVisible(true);      
+            FormInput9.setVisible(true);
             ChkInput9.setVisible(true);
-        }else if(ChkInput9.isSelected()==false){           
-            ChkInput9.setVisible(false);            
+        }else if(ChkInput9.isSelected()==false){
+            ChkInput9.setVisible(false);
             PanelInput9.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput9.setVisible(false);      
+            FormInput9.setVisible(false);
             ChkInput9.setVisible(true);
         }
     }
-    
+
     private void isForm10(){
         if(ChkInput10.isSelected()==true){
             ChkInput10.setVisible(false);
             PanelInput10.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput10.setVisible(true);      
+            FormInput10.setVisible(true);
             ChkInput10.setVisible(true);
-        }else if(ChkInput10.isSelected()==false){           
-            ChkInput10.setVisible(false);            
+        }else if(ChkInput10.isSelected()==false){
+            ChkInput10.setVisible(false);
             PanelInput10.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput10.setVisible(false);      
+            FormInput10.setVisible(false);
             ChkInput10.setVisible(true);
         }
     }
-    
+
     private void CetakRalanDokter() {
         if(tabModeRalanDokter.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -4885,7 +4885,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());                  
+            param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdDokterRalanDokter.getText().equals("")&&NmDokterRalanDokter.getText().equals("")&&KdPoliRalanDokter.getText().equals("")&&NmPoliRalanDokter.getText().equals("")&&KdCaraBayarRalanDokter.getText().equals("")&&NmCaraBayarRalanDokter.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanTindakanRalanDokter.jasper","report","::[ Ringkasan Tindakan Ralan Yang Ditangani Dokter ]::",
@@ -4986,7 +4986,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+""));
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+""));
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
+            param.put("cari","%"+TCari.getText().trim()+"%");
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdPetugasRalanParamedis.getText().equals("")&&NmPetugasRalanParamedis.getText().equals("")&&KdPoliRalanParamedis.getText().equals("")&&NmPoliRalanParamedis.getText().equals("")&&KdCaraBayarRalanParamedis.getText().equals("")&&NmCaraBayarRalanParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanTindakanRalanParamedis.jasper","report","::[ Ringkasan Tindakan Ralan Yang Ditangani Paramedis ]::",
@@ -5087,7 +5087,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+""));
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+""));
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
+            param.put("cari","%"+TCari.getText().trim()+"%");
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdDokterRalanDokterParamedis.getText().equals("")&&NmDokterRalanDokterParamedis.getText().equals("")&&KdPetugasRalanDokterParamedis.getText().equals("")&&NmPetugasRalanDokterParamedis.getText().equals("")&&KdPoliRalanDokterParamedis.getText().equals("")&&NmPoliRalanDokterParamedis.getText().equals("")&&KdCaraBayarRalanDokterParamedis.getText().equals("")&&NmCaraBayarRalanDokterParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanTindakanRalanDokterParamedis.jasper","report","::[ Detail Tindakan Ralan Yang Ditangani Dokter & Petugas ]::",
@@ -5175,9 +5175,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join petugas on rawat_jl_drpr.nip=petugas.nip "+
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(rawat_jl_drpr.tgl_perawatan,' ',rawat_jl_drpr.jam_rawat) between '"+Valid.SetTglJam(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTglJam(Tgl2.getSelectedItem()+"")+"' and concat(rawat_jl_drpr.kd_dokter,dokter.nm_dokter) like '%"+KdDokterRalanDokterParamedis.getText()+NmDokterRalanDokterParamedis.getText()+"%' and concat(reg_periksa.kd_poli,poliklinik.nm_poli) like '%"+KdPoliRalanDokterParamedis.getText()+NmPoliRalanDokterParamedis.getText()+"%' and concat(rawat_jl_drpr.nip,petugas.nama) like '%"+KdPetugasRalanDokterParamedis.getText()+NmPetugasRalanDokterParamedis.getText()+"%' and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayarRalanDokterParamedis.getText()+NmCaraBayarRalanDokterParamedis.getText()+"%' and (rawat_jl_drpr.no_rawat like '%"+TCari.getText().trim()+"%' or poliklinik.nm_poli like '%"+TCari.getText().trim()+"%') "+
                            " group by rawat_jl_drpr.kd_jenis_prw order by rawat_jl_drpr.kd_jenis_prw asc",param);
-                }   
+                }
             }
-        }   
+        }
     }
 
     private void CetakOperasi() {
@@ -5194,7 +5194,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+"")+" 00:00:00");
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+"")+" 23:59:59");
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
+            param.put("cari","%"+TCari.getText().trim()+"%");
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdOperatorOperasi.getText().equals("")&&NmOperatorOperasi.getText().equals("")&&KdAsistenOperasi.getText().equals("")&&NmAsistenOperasi.getText().equals("")&&KdCaraBayarOperasi.getText().equals("")&&NmCaraBayarOperasi.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanTindakanOperasi.jasper","report","::[ Ringkasan Tindakan Operasi ]::",
@@ -5245,7 +5245,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join dokter as operator1 on operator1.kd_dokter=operasi.operator1 "+
                            "inner join petugas as asisten_operator1 on asisten_operator1.nip=operasi.asisten_operator1 "+
                            "where operasi.tgl_operasi between '"+Valid.SetTglJam(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTglJam(Tgl2.getSelectedItem()+"")+"' and concat(operasi.operator1,operator1.nm_dokter) like '%"+KdOperatorOperasi.getText()+NmOperatorOperasi.getText()+"%' and concat(operasi.asisten_operator1,asisten_operator1.nama) like '%"+KdAsistenOperasi.getText()+NmAsistenOperasi.getText()+"%' and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayarOperasi.getText()+NmCaraBayarOperasi.getText()+"%' and (operasi.kode_paket like '%"+TCari.getText().trim()+"%' or paket_operasi.nm_perawatan like '%"+TCari.getText().trim()+"%') "+
-                           "group by operasi.kode_paket order by operasi.kode_paket desc",param);    
+                           "group by operasi.kode_paket order by operasi.kode_paket desc",param);
                 }else if(cmbStatus.getSelectedItem().equals("Piutang Belum Lunas")){
                     Valid.MyReportqry("rptRingkasanTindakanOperasi.jasper","report","::[ Ringkasan Tindakan Operasi ]::",
                            "select operasi.kode_paket,paket_operasi.nm_perawatan,"+
@@ -5348,7 +5348,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join petugas as asisten_operator1 on asisten_operator1.nip=operasi.asisten_operator1 "+
                            "where reg_periksa.status_bayar='Belum Bayar' and operasi.tgl_operasi between '"+Valid.SetTglJam(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTglJam(Tgl2.getSelectedItem()+"")+"' and concat(operasi.operator1,operator1.nm_dokter) like '%"+KdOperatorOperasi.getText()+NmOperatorOperasi.getText()+"%' and concat(operasi.asisten_operator1,asisten_operator1.nama) like '%"+KdAsistenOperasi.getText()+NmAsistenOperasi.getText()+"%' and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayarOperasi.getText()+NmCaraBayarOperasi.getText()+"%' and (operasi.kode_paket like '%"+TCari.getText().trim()+"%' or paket_operasi.nm_perawatan like '%"+TCari.getText().trim()+"%')  "+
                            "group by operasi.kode_paket order by operasi.kode_paket desc",param);
-                }   
+                }
             }
         }
     }
@@ -5367,8 +5367,8 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+""));
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+""));
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("cari","%"+TCari.getText().trim()+"%");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdDokterRanapDokter.getText().equals("")&&NmDokterRanapDokter.getText().equals("")&&KdCaraBayarRanapDokter.getText().equals("")&&NmCaraBayarRanapDokter.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanTindakanRanapDokter.jasper","report","::[ Ringkasan Tindakan Ranap Yang Ditangani Dokter ]::",
                        "select rawat_inap_dr.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,"+
@@ -5445,7 +5445,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            " group by rawat_inap_dr.kd_jenis_prw order by rawat_inap_dr.kd_jenis_prw asc",param);
                 }
             }
-        }  
+        }
     }
 
     private void CetakRanapParamedis() {
@@ -5462,7 +5462,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+""));
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+""));
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
+            param.put("cari","%"+TCari.getText().trim()+"%");
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdPetugasRanapParamedis.getText().equals("")&&NmPetugasRanapParamedis.getText().equals("")&&KdCaraBayarRanapParamedis.getText().equals("")&&NmCaraBayarRanapParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanTindakanRanapParamedis.jasper","report","::[ Ringkasan Tindakan Ranap Yang Ditangani Paramedis ]::",
@@ -5538,9 +5538,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(rawat_inap_pr.tgl_perawatan,' ',rawat_inap_pr.jam_rawat) between '"+Valid.SetTglJam(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTglJam(Tgl2.getSelectedItem()+"")+"' and concat(rawat_inap_pr.nip,petugas.nama) like '%"+KdPetugasRanapParamedis.getText()+NmPetugasRanapParamedis.getText()+"%' and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayarRanapParamedis.getText()+NmCaraBayarRanapParamedis.getText()+"%' and (rawat_inap_pr.kd_jenis_prw like '%"+TCari.getText().trim()+"%' or jns_perawatan_inap.nm_perawatan like '%"+TCari.getText().trim()+"%' ) "+
                            " group by rawat_inap_pr.kd_jenis_prw order by rawat_inap_pr.kd_jenis_prw asc",param);
-                }     
+                }
             }
-        }   
+        }
     }
 
     private void CetakRanapDokterParamedis() {
@@ -5557,7 +5557,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+""));
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+""));
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
+            param.put("cari","%"+TCari.getText().trim()+"%");
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdDokterRanapDokterParamedis.getText().equals("")&&NmDokterRanapDokterParamedis.getText().equals("")&&KdPetugasRanapDokterParamedis.getText().equals("")&&NmPetugasRanapDokterParamedis.getText().equals("")&&KdCaraBayarRanapDokterParamedis.getText().equals("")&&NmCaraBayarRanapDokterParamedis.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanTindakanRanapDokterParamedis.jasper","report","::[ Ringkasan Tindakan Ranap Yang Ditangani Dokter & Paramedis ]::",
@@ -5645,9 +5645,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join petugas on rawat_inap_drpr.nip=petugas.nip  "+
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(rawat_inap_drpr.tgl_perawatan,' ',rawat_inap_drpr.jam_rawat) between '"+Valid.SetTglJam(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTglJam(Tgl2.getSelectedItem()+"")+"' and concat(rawat_inap_drpr.kd_dokter,dokter.nm_dokter) like '%"+KdDokterRanapDokterParamedis.getText()+NmDokterRanapDokterParamedis.getText()+"%' and concat(rawat_inap_drpr.nip,petugas.nama) like '%"+KdPetugasRanapDokterParamedis.getText()+NmPetugasRanapDokterParamedis.getText()+"%' and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayarRanapDokterParamedis.getText()+NmCaraBayarRanapDokterParamedis.getText()+"%' and (rawat_inap_drpr.kd_jenis_prw like '%"+TCari.getText().trim()+"%' or jns_perawatan_inap.nm_perawatan like '%"+TCari.getText().trim()+"%' )  "+
                            " group by rawat_inap_drpr.kd_jenis_prw order by rawat_inap_drpr.kd_jenis_prw asc",param);
-                }    
+                }
             }
-        }  
+        }
     }
 
     private void CetakRadiologi() {
@@ -5664,7 +5664,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+""));
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+""));
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
+            param.put("cari","%"+TCari.getText().trim()+"%");
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdDokterPerujukRad.getText().equals("")&&NmDokterPerujukRad.getText().equals("")&&KdPetugasRad.getText().equals("")&&NmPetugasRad.getText().equals("")&&KdCaraBayarRad.getText().equals("")&&NmCaraBayarRad.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanRadiologi.jasper","report","::[ Ringkasan Pemeriksaan Radiologi ]::",
@@ -5760,8 +5760,8 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            " group by periksa_radiologi.kd_jenis_prw order by periksa_radiologi.kd_jenis_prw",param);
                 }
 
-            } 
-        }   
+            }
+        }
     }
 
     private void CetakLaborat() {
@@ -5778,8 +5778,8 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+""));
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+""));
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("cari","%"+TCari.getText().trim()+"%");
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdDokterPerujukLab.getText().equals("")&&NmDokterPerujukLab.getText().equals("")&&KdPetugasLab.getText().equals("")&&NmPetugasLab.getText().equals("")&&KdCaraBayarLab.getText().equals("")&&NmCaraBayarLab.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanLaborat.jasper","report","::[ Ringkasan Pemeriksaan Laborat ]::",
                        "select periksa_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan, "+
@@ -5872,9 +5872,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                            "inner join jns_perawatan_lab on periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
                            "where reg_periksa.status_bayar='Belum Bayar' and concat(periksa_lab.tgl_periksa,' ',periksa_lab.jam) between '"+Valid.SetTglJam(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTglJam(Tgl2.getSelectedItem()+"")+"' and concat(periksa_lab.dokter_perujuk,perujuk.nm_dokter) like '%"+KdDokterPerujukLab.getText()+NmDokterPerujukLab.getText()+"%' and concat(periksa_lab.nip,petugas.nama) like '%"+KdPetugasLab.getText()+NmPetugasLab.getText()+"%' and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayarLab.getText()+NmCaraBayarLab.getText()+"%' and (periksa_lab.kd_jenis_prw like '%"+TCari.getText().trim()+"%' or jns_perawatan_lab.nm_perawatan like '%"+TCari.getText().trim()+"%') "+
                            " group by periksa_lab.kd_jenis_prw order by periksa_lab.kd_jenis_prw",param);
-                }    
+                }
             }
-        }   
+        }
     }
 
     private void CetakDetailLaborat() {
@@ -5891,7 +5891,7 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("tanggal1",Valid.SetTglJam(Tgl1.getSelectedItem()+""));
             param.put("tanggal2",Valid.SetTglJam(Tgl2.getSelectedItem()+""));
-            param.put("cari","%"+TCari.getText().trim()+"%");                    
+            param.put("cari","%"+TCari.getText().trim()+"%");
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(KdDokterPerujukDetailLab.getText().equals("")&&NmDokterPerujukDetailLab.getText().equals("")&&KdPetugasDetailLab.getText().equals("")&&NmPetugasDetailLab.getText().equals("")&&KdCaraBayarDetailLab.getText().equals("")&&NmCaraBayarDetailLab.getText().equals("")&&TCari.getText().equals("")&&cmbStatus.getSelectedItem().equals("Semua")){
                 Valid.MyReportqry("rptRingkasanDetailLaborat.jasper","report","::[ Ringkasan Detail Pemeriksaan Laborat ]::",
@@ -6007,9 +6007,9 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
                             "and jns_perawatan_lab.kd_jenis_prw=detail_periksa_lab.kd_jenis_prw "+
                             "where reg_periksa.status_bayar='Belum Bayar' and concat(detail_periksa_lab.tgl_periksa,' ',detail_periksa_lab.jam) between '"+Valid.SetTglJam(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTglJam(Tgl2.getSelectedItem()+"")+"' and concat(periksa_lab.dokter_perujuk,perujuk.nm_dokter) like '%"+KdDokterPerujukDetailLab.getText()+NmDokterPerujukDetailLab.getText()+"%' and concat(periksa_lab.nip,petugas.nama) like '%"+KdPetugasDetailLab.getText()+NmPetugasDetailLab.getText()+"%' and concat(reg_periksa.kd_pj,penjab.png_jawab) like '%"+KdCaraBayarDetailLab.getText()+NmCaraBayarDetailLab.getText()+"%' and (detail_periksa_lab.id_template like '%"+TCari.getText().trim()+"%' or template_laboratorium.Pemeriksaan like '%"+TCari.getText().trim()+"%' ) "+
                             " group by detail_periksa_lab.id_template order by detail_periksa_lab.id_template",param);
-                }    
+                }
             }
-        }   
+        }
     }
- 
+
 }

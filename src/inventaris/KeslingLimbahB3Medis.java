@@ -121,7 +121,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -132,7 +132,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
                 if(petugas.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KdPetugas.requestFocus();
             }
             @Override
@@ -144,7 +144,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -464,7 +464,6 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(0, 70, 80, 23);
 
-        Jumlah.setHighlighter(null);
         Jumlah.setName("Jumlah"); // NOI18N
         Jumlah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -479,7 +478,6 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(516, 10, 70, 23);
 
-        Tujuan.setHighlighter(null);
         Tujuan.setName("Tujuan"); // NOI18N
         Tujuan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -513,7 +511,6 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         jLabel5.setBounds(0, 10, 80, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         KdPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -536,7 +533,6 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         btnPetugas.setBounds(475, 10, 28, 23);
 
         NmPetugas.setEditable(false);
-        NmPetugas.setHighlighter(null);
         NmPetugas.setName("NmPetugas"); // NOI18N
         NmPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -551,7 +547,6 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         FormInput.add(jLabel15);
         jLabel15.setBounds(161, 70, 70, 23);
 
-        Sisa.setHighlighter(null);
         Sisa.setName("Sisa"); // NOI18N
         Sisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -566,7 +561,6 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 40, 80, 23);
 
-        NoDokumen.setHighlighter(null);
         NoDokumen.setName("NoDokumen"); // NOI18N
         NoDokumen.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -581,7 +575,6 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(331, 70, 80, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -623,11 +616,11 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
 
     private void JumlahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JumlahKeyPressed
         Valid.pindah(evt,Tujuan,Sisa);
-}//GEN-LAST:event_JumlahKeyPressed
+    }//GEN-LAST:event_JumlahKeyPressed
 
     private void TujuanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TujuanKeyPressed
         Valid.pindah(evt,NoDokumen,Jumlah);
-}//GEN-LAST:event_TujuanKeyPressed
+    }//GEN-LAST:event_TujuanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(Jumlah.getText().trim().equals("")){
@@ -649,7 +642,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
                     emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -657,19 +650,19 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Keterangan,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
-}//GEN-LAST:event_BtnBatalActionPerformed
+        isForm();
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()> -1){
@@ -677,7 +670,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
             tampil();
             emptTeks();
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -685,7 +678,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(Jumlah.getText().trim().equals("")){
@@ -709,7 +702,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -717,17 +710,17 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -735,14 +728,14 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptLimbahB3Medis.jasper","report","::[ Data Limbah Padat B3 Medis Keluar TPS ]::",
                    "select kesling_limbah_b3medis.nip,petugas.nama,kesling_limbah_b3medis.tanggal,"+
                    "kesling_limbah_b3medis.jmllimbah,kesling_limbah_b3medis.tujuan_penyerahan,kesling_limbah_b3medis.bukti_dokumen, "+
@@ -752,7 +745,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
                    "order by kesling_limbah_b3medis.tanggal",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -760,7 +753,7 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -770,11 +763,11 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -782,12 +775,12 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -796,11 +789,11 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari,BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
         Valid.pindah(evt,btnPetugas,NoDokumen);
-}//GEN-LAST:event_TanggalKeyPressed
+    }//GEN-LAST:event_TanggalKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -809,28 +802,28 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
-private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
+    private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             NmPetugas.setText(petugas.tampil3(KdPetugas.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
-}//GEN-LAST:event_KdPetugasKeyPressed
+    }//GEN-LAST:event_KdPetugasKeyPressed
 
-private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
+    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setVisible(true);
-}//GEN-LAST:event_btnPetugasActionPerformed
+    }//GEN-LAST:event_btnPetugasActionPerformed
 
-private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmPetugasKeyPressed
+    private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmPetugasKeyPressed
         //Valid.pindah(evt,TKd,TSpek);
-}//GEN-LAST:event_NmPetugasKeyPressed
+    }//GEN-LAST:event_NmPetugasKeyPressed
 
     private void SisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SisaKeyPressed
         Valid.pindah(evt,Jumlah,Keterangan);
@@ -998,16 +991,16 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,126));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getlimbah_b3_medis());
         BtnHapus.setEnabled(akses.getlimbah_b3_medis());
@@ -1017,6 +1010,6 @@ private void NmPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             btnPetugas.setEnabled(false);
             KdPetugas.setText(akses.getkode());
             NmPetugas.setText(petugas.tampil3(KdPetugas.getText()));
-        }  
+        }
     }
 }

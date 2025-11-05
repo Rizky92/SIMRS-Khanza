@@ -683,9 +683,6 @@
                 <Component class="widget.TextBox" name="Nip">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Nip" noResource="true"/>
                   </Properties>
                   <Events>
@@ -740,9 +737,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Tindakan">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Tindakan" noResource="true"/>
                   </Properties>
                   <Events>

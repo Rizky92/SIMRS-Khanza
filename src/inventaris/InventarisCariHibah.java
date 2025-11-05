@@ -80,7 +80,7 @@ public class InventarisCariHibah extends javax.swing.JDialog {
         kdsup.setDocument(new batasInput((byte)5).getKata(kdsup));
         kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
         kdbar.setDocument(new batasInput((byte)15).getKata(kdbar));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -102,7 +102,7 @@ public class InventarisCariHibah extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         asalhibah.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -111,10 +111,10 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("InventarisCariHibah")){
-                    if(asalhibah.getTable().getSelectedRow()!= -1){                   
-                        kdsup.setText(asalhibah.getTable().getValueAt(asalhibah.getTable().getSelectedRow(),0).toString());                    
+                    if(asalhibah.getTable().getSelectedRow()!= -1){
+                        kdsup.setText(asalhibah.getTable().getValueAt(asalhibah.getTable().getSelectedRow(),0).toString());
                         nmsup.setText(asalhibah.getTable().getValueAt(asalhibah.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     kdsup.requestFocus();
                 }
             }
@@ -127,7 +127,7 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         asalhibah.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -136,13 +136,13 @@ public class InventarisCariHibah extends javax.swing.JDialog {
                 if(akses.getform().equals("InventarisCariHibah")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         asalhibah.dispose();
-                    }                
+                    }
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });         
-        
+        });
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -151,10 +151,10 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("InventarisCariHibah")){
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }            
+                    }
                     kdptg.requestFocus();
                 }
             }
@@ -167,7 +167,7 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -176,10 +176,10 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("InventarisCariHibah")){
-                    if(barang.getTable().getSelectedRow()!= -1){                   
-                        kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());                    
+                    if(barang.getTable().getSelectedRow()!= -1){
+                        kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
                         nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
-                    }   
+                    }
                     kdbar.requestFocus();
                 }
             }
@@ -192,7 +192,7 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -201,13 +201,13 @@ public class InventarisCariHibah extends javax.swing.JDialog {
                 if(akses.getform().equals("InventarisCariHibah")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         barang.dispose();
-                    }                
+                    }
                 }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         barang.jenis.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -216,10 +216,10 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("InventarisCariHibah")){
-                    if(barang.jenis.getTable().getSelectedRow()!= -1){                   
-                        kdjenis.setText(barang.jenis.getTable().getValueAt(barang.jenis.getTable().getSelectedRow(),0).toString());                    
+                    if(barang.jenis.getTable().getSelectedRow()!= -1){
+                        kdjenis.setText(barang.jenis.getTable().getValueAt(barang.jenis.getTable().getSelectedRow(),0).toString());
                         nmjenis.setText(barang.jenis.getTable().getValueAt(barang.jenis.getTable().getSelectedRow(),1).toString());
-                    }   
+                    }
                     kdjenis.requestFocus();
                 }
             }
@@ -232,7 +232,7 @@ public class InventarisCariHibah extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -635,18 +635,18 @@ public class InventarisCariHibah extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
-}//GEN-LAST:event_BtnKeluarActionPerformed
+            dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,kdbar);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void btnSuplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuplierActionPerformed
@@ -746,7 +746,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
@@ -754,21 +754,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 tabMode.getValueAt(i,3).toString()+"','"+
                                 tabMode.getValueAt(i,4).toString()+"','"+
                                 tabMode.getValueAt(i,5).toString()+"','"+
-                                tabMode.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian"); 
+                                tabMode.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
             }
             i++;
-            Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian"); 
+            Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
             i++;
-            Sequel.menyimpan("temporary","'"+i+"','Jumlah Total :','','','','','','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian"); 
-            
-            Map<String, Object> param = new HashMap<>();    
+            Sequel.menyimpan("temporary","'"+i+"','Jumlah Total :','','','','','','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
+
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptHibahAset.jasper","report","::[ Transaksi Hibah Barang Aset/Inventaris ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -782,7 +782,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnPrintKeyPressed
 
-private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
+    private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
     if(tbDokter.getSelectedRow()>-1){
         if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
             Valid.textKosong(TCari,"No.Faktur");
@@ -797,10 +797,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                       sukses=true;
 
                       Sequel.deleteTampJurnal();
-                      Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "JENIS ASET/INVENTARIS", 0, rs.getDouble("totalhibah"));
-                      Sequel.insertTampJurnal(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0);
-                      sukses=jur.simpanJurnal(rs.getString("no_hibah"),"U","PEMBATALAN HIBAH ASET/INVENTARIS "+", OLEH "+akses.getkode());
-                      
+                      if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "JENIS ASET/INVENTARIS", 0, rs.getDouble("totalhibah"));
+                      if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0);
+                      if (sukses) sukses = jur.simpanJurnal(rs.getString("no_hibah"),"U","PEMBATALAN HIBAH ASET/INVENTARIS "+", OLEH "+akses.getkode());
+
                       if(sukses==true){
                           Sequel.queryu2("delete from inventaris_hibah where no_hibah=?",1,new String[]{rs.getString("no_hibah")});
                           Sequel.Commit();
@@ -811,7 +811,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                       }
 
                       Sequel.AutoComitTrue();
-                  }   
+                  }
                } catch (Exception e) {
                    System.out.println("Notif : "+e);
                } finally{
@@ -824,12 +824,12 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                }
            } catch (Exception ex) {
                System.out.println(ex);
-           }      
-        }     
+           }
+        }
     }else{
         JOptionPane.showMessageDialog(null,"Silahkan pilih faktur yang mau dihapus..!");
-    }   
-}//GEN-LAST:event_ppHapusActionPerformed
+    }
+    }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -903,7 +903,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private void tampil() {
        Valid.tabelKosong(tabMode);
-        try{            
+        try{
             ps=koneksi.prepareStatement("select inventaris_hibah.tgl_hibah,inventaris_hibah.no_hibah, "+
                     "inventaris_hibah.kode_pemberi,pemberihibah.nama_pemberi, "+
                     "inventaris_hibah.nip,petugas.nama,inventaris_hibah.totalhibah,"+
@@ -940,7 +940,7 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3)+", "+rs.getString(4),
                           rs.getString(5)+", "+rs.getString(6),"","",""
-                    });      
+                    });
                     ps2=koneksi.prepareStatement("select inventaris_detail_hibah.kode_barang,inventaris_barang.nama_barang, "+
                         "inventaris_barang.id_jenis,inventaris_jenis.nama_jenis,inventaris_detail_hibah.jumlah,inventaris_detail_hibah.h_hibah, "+
                         "inventaris_detail_hibah.subtotalhibah "+
@@ -976,8 +976,8 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }   
-                }                
+                    }
+                }
                 LTotal.setText(Valid.SetAngka(totalhibah));
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -988,10 +988,10 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
 
     public void emptTeks() {
@@ -1004,16 +1004,16 @@ private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         nmsup.setText("");
         kdptg.setText("");
         nmptg.setText("");
-        kdbar.requestFocus();        
+        kdbar.requestFocus();
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.gethibah_aset_inventaris());
         if(akses.getkode().equals("Admin Utama")){
             ppHapus.setEnabled(true);
         }else{
             ppHapus.setEnabled(false);
-        } 
+        }
     }
-    
+
 }

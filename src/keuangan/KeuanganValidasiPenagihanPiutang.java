@@ -27,7 +27,6 @@ import javax.swing.table.TableColumn;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
-import keuangan.KeuanganPiutangBelumLunas;
 import simrskhanza.DlgCariCaraBayar;
 
 /**
@@ -85,7 +84,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -107,8 +106,8 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
                     }
                 }
             });
-        }  
-        
+        }
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -120,7 +119,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),3).toString());
                     tampil();
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -131,8 +130,8 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -145,7 +144,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
         HTMLEditorKit kit = new HTMLEditorKit();
@@ -163,7 +162,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
                 ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
-        
+
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
 
@@ -475,15 +474,15 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptRValidasiPiutang.jasper","report","::[ Data Tagihan Piutang ]::",
                 "select penagihan_piutang.no_tagihan,penagihan_piutang.tanggal,penagihan_piutang.tanggaltempo,bagianpenagihan.nama,"+
                  "penjab.nama_perusahaan,akun_penagihan_piutang.nama_bank,sum(detail_penagihan_piutang.sisapiutang) as total "+
@@ -497,7 +496,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
                  "group by penagihan_piutang.no_tagihan order by penagihan_piutang.tanggal",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -505,18 +504,18 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
         }else{
             Valid.pindah(evt, BtnBayar, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         penjab.dispose();
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TKd);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
@@ -524,7 +523,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
         nmpenjab.setText("");
         tampil();
 
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -532,9 +531,9 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
-private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -542,19 +541,19 @@ private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCa
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
         }else{
             Valid.pindah(evt, TKd, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void kdpenjabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpenjabKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -612,7 +611,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     }//GEN-LAST:event_ChkAccorActionPerformed
 
     private void tbBangsalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbBangsalMouseClicked
-        if(tbBangsal.getSelectedRow()!= -1){  
+        if(tbBangsal.getSelectedRow()!= -1){
             panggilPhoto();
             LCount1.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString());
         }
@@ -676,7 +675,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                      "inner join penjab on penagihan_piutang.kd_pj=penjab.kd_pj "+
                      "inner join akun_penagihan_piutang on akun_penagihan_piutang.kd_rek=penagihan_piutang.kd_rek "+
                      "inner join detail_penagihan_piutang on detail_penagihan_piutang.no_tagihan=penagihan_piutang.no_tagihan "+
-                     "where penagihan_piutang.status='Proses Penagihan' and penjab.nama_perusahaan like ? and "+
+                     "where penagihan_piutang.status<>'Sudah Dibayar' and penjab.nama_perusahaan like ? and "+
                      "(penagihan_piutang.no_tagihan like ? or bagianpenagihan.nama like ? or penjab.nama_perusahaan like ? or akun_penagihan_piutang.nama_bank like ?)"+
                      "group by penagihan_piutang.no_tagihan order by penagihan_piutang.tanggal");
             try {
@@ -703,7 +702,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.close();
                 }
             }
-            
+
             LCount.setText(Valid.SetAngka(sisapiutang));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
@@ -714,20 +713,20 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(internalFrame1.getWidth()-300,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
-    
+
     private void panggilPhoto() {
         if(FormPhoto.isVisible()==true){
             try {
-                ps=koneksi.prepareStatement("select photo from bukti_penagihan_piutang where no_tagihan=?");
+                ps=koneksi.prepareStatement("select bukti_penagihan_piutang.photo from bukti_penagihan_piutang where bukti_penagihan_piutang.no_tagihan=?");
                 try {
                     ps.setString(1,tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
                     rs=ps.executeQuery();
@@ -736,7 +735,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                         }else{
                             LoadHTML.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/penagihanpiutang/"+rs.getString("photo")+"' alt='photo' width='"+(internalFrame1.getWidth()-330)+"' height='"+(internalFrame1.getHeight()-315)+"'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                     }
@@ -752,8 +751,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
-            } 
+            }
         }
     }
-    
+
 }

@@ -787,9 +787,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="stok_minimal">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="stok_minimal" noResource="true"/>
                   </Properties>
                   <Events>

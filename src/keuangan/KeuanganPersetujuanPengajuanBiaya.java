@@ -50,7 +50,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         initComponents();
         this.setLocation(8,1);
         setSize(885,674);
-        
+
         DlgPersetujuan.setSize(532,106);
 
         tabMode=new DefaultTableModel(null,new Object[]{
@@ -111,7 +111,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -133,8 +133,8 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                     }
                 }
             });
-        }  
-        
+        }
+
         pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -146,7 +146,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                     kdpegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     nmpegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
                     tampil();
-                }      
+                }
                 kdpegawai.requestFocus();
             }
             @Override
@@ -157,8 +157,8 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
             public void windowActivated(WindowEvent e) {pegawai.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -171,7 +171,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         Harga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -188,7 +188,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                 isHitung();
             }
         });
-        
+
         Jumlah.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -272,7 +272,6 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         jLabel3.setBounds(0, 10, 55, 23);
 
         NoPengajuan.setEditable(false);
-        NoPengajuan.setHighlighter(null);
         NoPengajuan.setName("NoPengajuan"); // NOI18N
         panelBiasa2.add(NoPengajuan);
         NoPengajuan.setBounds(59, 10, 130, 23);
@@ -282,7 +281,6 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         panelBiasa2.add(jLabel12);
         jLabel12.setBounds(206, 10, 52, 23);
 
-        Jumlah.setHighlighter(null);
         Jumlah.setName("Jumlah"); // NOI18N
         Jumlah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -292,7 +290,6 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         panelBiasa2.add(Jumlah);
         Jumlah.setBounds(262, 10, 55, 23);
 
-        Harga.setHighlighter(null);
         Harga.setName("Harga"); // NOI18N
         Harga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -313,7 +310,6 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         jLabel14.setBounds(0, 40, 55, 23);
 
         Total.setEditable(false);
-        Total.setHighlighter(null);
         Total.setName("Total"); // NOI18N
         panelBiasa2.add(Total);
         Total.setBounds(59, 40, 160, 23);
@@ -583,14 +579,14 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPersetujuanPengajuanBiaya.jasper","report","::[ Data Pengajuan Biaya ]::",
                    "select pengajuan_biaya.no_pengajuan,pengajuan_biaya.tanggal,pengajuan_biaya.nik,pegawai.nama as namapengaju,"+
                    "pegawai.bidang,pegawai.departemen,pengajuan_biaya.urgensi,pengajuan_biaya.uraian_latar_belakang,pengajuan_biaya.tujuan_pengajuan,"+
@@ -605,7 +601,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                    "pengajuan_biaya.keterangan like '%"+TCari.getText().trim()+"%')")+" order by pengajuan_biaya.tanggal",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -613,19 +609,19 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         }else{
             Valid.pindah(evt, BtnSetujui, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         DlgPersetujuan.dispose();
         pegawai.dispose();
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TKd);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
@@ -633,7 +629,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         nmpegawai.setText("");
         tampil();
 
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -641,9 +637,9 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
-private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -651,19 +647,19 @@ private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCa
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
         }else{
             Valid.pindah(evt, TKd, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void kdpegawaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpegawaiKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -748,7 +744,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             hitung();
                     }
                     DlgPersetujuan.dispose();
-                }   
+                }
             }else{
                 JOptionPane.showMessageDialog(null,"Silahkan pilih No.Pengajuan yang diajukan..!!");
             }
@@ -866,7 +862,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ps.setString(9,"%"+TCari.getText().trim()+"%");
                     ps.setString(10,"%"+TCari.getText().trim()+"%");
                     ps.setString(11,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -891,7 +887,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void hitung(){
         belumdisetujui=0;
         for(i=0;i<tabMode.getRowCount();i++){
@@ -899,16 +895,16 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }
         LCount.setText(""+Valid.SetAngka(belumdisetujui));
     }
-    
+
     public void isCek(){
         if(akses.getjml2()>=1){
             kdpegawai.setEditable(false);
             BtnPegawai.setEnabled(false);
             kdpegawai.setText(akses.getkode());
             nmpegawai.setText(pegawai.tampil3(kdpegawai.getText()));
-        }  
+        }
     }
-    
+
     private void getData() {
         if(tbBangsal.getSelectedRow()!= -1){
             NoPengajuan.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
@@ -916,7 +912,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             Harga.setText(Valid.SetAngka(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),12).toString())+"");
         }
     }
-    
+
     private void isHitung(){
         if((!Harga.getText().equals(""))&&(!Jumlah.getText().equals(""))){
             Total.setText(Valid.SetAngka(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())));

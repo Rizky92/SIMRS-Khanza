@@ -38,7 +38,7 @@ import kepegawaian.DlgCariDokter;
 
 
 /**
- * 
+ *
  * @author salimmulyana
  */
 public final class SuratSakitPihak2 extends javax.swing.JDialog {
@@ -55,13 +55,13 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
     private LocalDate birthday;
     private Period p;
     private DlgCariDokter dokter = new DlgCariDokter(null, false);
-    
+
     public SuratSakitPihak2(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "Nomor Surat","No.Rawat","No.R.M.","Nama Pasien","Dari Tanggal","Sampai",
             "Lama Sakit","Nama Pihak ke 2","Lahir","Umur","J.K.","Alamat",
@@ -110,17 +110,17 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         NoSurat.setDocument(new batasInput((byte)17).getKata(NoSurat));
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));  
-        LamaSakit.setDocument(new batasInput((byte)20).getKata(LamaSakit));         
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        LamaSakit.setDocument(new batasInput((byte)20).getKata(LamaSakit));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         NamaPihak2.setDocument(new batasInput((byte)50).getKata(NamaPihak2));
-        AlamatPj.setDocument(new batasInput((int)200).getKata(AlamatPj));  
-        Instansi.setDocument(new batasInput((byte)50).getKata(Instansi));  
-        TUmurTh.setDocument(new batasInput((byte)4).getKata(TUmurTh));    
-        TUmurBl.setDocument(new batasInput((byte)4).getKata(TUmurBl));    
-        TUmurHr.setDocument(new batasInput((byte)4).getKata(TUmurHr));  
+        AlamatPj.setDocument(new batasInput((int)200).getKata(AlamatPj));
+        Instansi.setDocument(new batasInput((byte)50).getKata(Instansi));
+        TUmurTh.setDocument(new batasInput((byte)4).getKata(TUmurTh));
+        TUmurBl.setDocument(new batasInput((byte)4).getKata(TUmurBl));
+        TUmurHr.setDocument(new batasInput((byte)4).getKata(TUmurHr));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -146,11 +146,11 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-    
-    
-    
-    
-    
+
+
+
+
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -491,7 +491,6 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         FormInput.setPreferredSize(new java.awt.Dimension(100, 165));
         FormInput.setLayout(null);
 
-        NoSurat.setHighlighter(null);
         NoSurat.setName("NoSurat"); // NOI18N
         NoSurat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -506,7 +505,6 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 100, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -517,7 +515,6 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         TNoRw.setBounds(104, 10, 136, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -546,7 +543,6 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         TanggalAkhir.setBounds(457, 40, 90, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -557,7 +553,6 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         TNoRM.setBounds(242, 10, 111, 23);
 
         LamaSakit.setText("1 (Satu)");
-        LamaSakit.setHighlighter(null);
         LamaSakit.setName("LamaSakit"); // NOI18N
         LamaSakit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -799,23 +794,23 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+
     private void NoSuratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoSuratKeyPressed
        Valid.pindah(evt,TCari,LamaSakit);
-}//GEN-LAST:event_NoSuratKeyPressed
+    }//GEN-LAST:event_NoSuratKeyPressed
 
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
             isPsien();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,LamaSakit);
         }
-}//GEN-LAST:event_TNoRwKeyPressed
+    }//GEN-LAST:event_TNoRwKeyPressed
 
     private void TPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasienKeyPressed
         Valid.pindah(evt,TCari,NamaPihak2);
-}//GEN-LAST:event_TPasienKeyPressed
+    }//GEN-LAST:event_TPasienKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(NoSurat.getText().trim().equals("")){
@@ -848,7 +843,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
                 emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -856,20 +851,20 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Instansi,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
-        
-}//GEN-LAST:event_BtnBatalActionPerformed
+        isForm();
+
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,NoSurat,"suratsakitpihak2","no_surat")==true){
@@ -879,7 +874,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
                 LCount.setText(""+tabMode.getRowCount());
             }
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -887,7 +882,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(NoSurat.getText().trim().equals("")){
@@ -905,7 +900,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         } else if ((TanggalAwal.getDate().getTime() / 1000) > (TanggalAkhir.getDate().getTime() / 1000)) {
             JOptionPane.showMessageDialog(null, "Tanggal awal tidak boleh melebihi tanggal akhir surat..!!");
             TanggalAwal.requestFocus();
-        }else{  
+        }else{
             if(tbObat.getSelectedRow()!= -1){
                 if(Sequel.mengedittf("suratsakitpihak2","no_surat=?","no_surat=?,no_rawat=?,tanggalawal=?,tanggalakhir=?,lamasakit=?,nama2=?,tgl_lahir=?,umur=?,jk=?,alamat=?,hubungan=?,pekerjaan=?,instansi=?",14,new String[]{
                     NoSurat.getText(),TNoRw.getText(),Valid.SetTgl(TanggalAwal.getSelectedItem()+""),Valid.SetTgl(TanggalAkhir.getSelectedItem()+""),LamaSakit.getText(),
@@ -931,7 +926,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -939,17 +934,17 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -957,26 +952,26 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             tgl=" suratsakitpihak2.tanggalawal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
             if(TCari.getText().trim().equals("")){
                 Valid.MyReportqry("rptDataSuratSakitPihak2.jasper","report","::[ Data Surat Keterangan Sakit Pihak Ke 2 ]::",
                      "select suratsakitpihak2.no_surat,suratsakitpihak2.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                     "suratsakitpihak2.tanggalawal,suratsakitpihak2.tanggalakhir,suratsakitpihak2.lamasakit,suratsakitpihak2.nama2,suratsakitpihak2.tgl_lahir, "+                  
+                     "suratsakitpihak2.tanggalawal,suratsakitpihak2.tanggalakhir,suratsakitpihak2.lamasakit,suratsakitpihak2.nama2,suratsakitpihak2.tgl_lahir, "+
                      "suratsakitpihak2.umur,suratsakitpihak2.jk,suratsakitpihak2.alamat,suratsakitpihak2.hubungan,suratsakitpihak2.pekerjaan,suratsakitpihak2.instansi from suratsakitpihak2 inner join reg_periksa on suratsakitpihak2.no_rawat=reg_periksa.no_rawat "+
                      "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                      "where "+tgl+"order by suratsakitpihak2.no_surat",param);
             }else{
                 Valid.MyReportqry("rptDataSuratSakitPihak2.jasper","report","::[ Data Surat Keterangan Sakit Pihak Ke 2 ]::",
                      "select suratsakitpihak2.no_surat,suratsakitpihak2.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                     "suratsakitpihak2.tanggalawal,suratsakitpihak2.tanggalakhir,suratsakitpihak2.lamasakit,suratsakitpihak2.nama2,suratsakitpihak2.tgl_lahir, "+                  
+                     "suratsakitpihak2.tanggalawal,suratsakitpihak2.tanggalakhir,suratsakitpihak2.lamasakit,suratsakitpihak2.nama2,suratsakitpihak2.tgl_lahir, "+
                      "suratsakitpihak2.umur,suratsakitpihak2.jk,suratsakitpihak2.alamat,suratsakitpihak2.hubungan,suratsakitpihak2.pekerjaan,suratsakitpihak2.instansi from suratsakitpihak2 inner join reg_periksa on suratsakitpihak2.no_rawat=reg_periksa.no_rawat "+
                      "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                      "where "+tgl+" and (no_surat like '%"+TCari.getText().trim()+"%' or suratsakitpihak2.no_rawat like '%"+TCari.getText().trim()+"%' or "+
@@ -985,10 +980,10 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
                      "suratsakitpihak2.nama2 like '%"+TCari.getText().trim()+"%' or suratsakitpihak2.hubungan like '%"+TCari.getText().trim()+"%') "+
                      "order by suratsakitpihak2.no_surat",param);
             }
-            
+
         }
-        this.setCursor(Cursor.getDefaultCursor());        
-}//GEN-LAST:event_BtnPrintActionPerformed
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -996,7 +991,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1006,11 +1001,11 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1018,12 +1013,12 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1032,16 +1027,16 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
-   
-                                  
+    }//GEN-LAST:event_BtnAllKeyPressed
+
+
     private void TanggalAkhirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalAkhirKeyPressed
         Valid.pindah2(evt,TanggalAwal,LamaSakit);
-}//GEN-LAST:event_TanggalAkhirKeyPressed
+    }//GEN-LAST:event_TanggalAkhirKeyPressed
 
     private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
-       
-}//GEN-LAST:event_TNoRMKeyPressed
+
+    }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1050,7 +1045,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void LamaSakitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LamaSakitKeyPressed
         Valid.pindah(evt,TanggalAkhir,NamaPihak2);
@@ -1072,7 +1067,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatKeyReleased
 
     private void TglLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglLahirKeyPressed
-        Valid.pindah2(evt,NamaPihak2,TUmurTh);    
+        Valid.pindah2(evt,NamaPihak2,TUmurTh);
     }//GEN-LAST:event_TglLahirKeyPressed
 
     private void MnCetakSuratSakit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCetakSuratSakit2ActionPerformed
@@ -1118,7 +1113,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalAwalKeyPressed
 
     private void TglLahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TglLahirItemStateChanged
-        lahir = TglLahir.getDate();    
+        lahir = TglLahir.getDate();
         birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
         p = Period.between(birthday,today);
         TUmurTh.setText(String.valueOf(p.getYears()));
@@ -1281,14 +1276,14 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
             if(TCari.getText().trim().equals("")){
                 ps=koneksi.prepareStatement(
                      "select suratsakitpihak2.no_surat,suratsakitpihak2.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                     "suratsakitpihak2.tanggalawal,suratsakitpihak2.tanggalakhir,suratsakitpihak2.lamasakit,suratsakitpihak2.nama2,suratsakitpihak2.tgl_lahir, "+                  
+                     "suratsakitpihak2.tanggalawal,suratsakitpihak2.tanggalakhir,suratsakitpihak2.lamasakit,suratsakitpihak2.nama2,suratsakitpihak2.tgl_lahir, "+
                      "suratsakitpihak2.umur,suratsakitpihak2.jk,suratsakitpihak2.alamat,suratsakitpihak2.hubungan,suratsakitpihak2.pekerjaan,suratsakitpihak2.instansi from suratsakitpihak2 inner join reg_periksa on suratsakitpihak2.no_rawat=reg_periksa.no_rawat "+
                      "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                      "where "+tgl+"order by suratsakitpihak2.no_surat");
             }else{
                 ps=koneksi.prepareStatement(
                      "select suratsakitpihak2.no_surat,suratsakitpihak2.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                     "suratsakitpihak2.tanggalawal,suratsakitpihak2.tanggalakhir,suratsakitpihak2.lamasakit,suratsakitpihak2.nama2,suratsakitpihak2.tgl_lahir, "+                  
+                     "suratsakitpihak2.tanggalawal,suratsakitpihak2.tanggalakhir,suratsakitpihak2.lamasakit,suratsakitpihak2.nama2,suratsakitpihak2.tgl_lahir, "+
                      "suratsakitpihak2.umur,suratsakitpihak2.jk,suratsakitpihak2.alamat,suratsakitpihak2.hubungan,suratsakitpihak2.pekerjaan,suratsakitpihak2.instansi from suratsakitpihak2 inner join reg_periksa on suratsakitpihak2.no_rawat=reg_periksa.no_rawat "+
                      "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                      "where "+tgl+" and (no_surat like '%"+TCari.getText().trim()+"%' or suratsakitpihak2.no_rawat like '%"+TCari.getText().trim()+"%' or "+
@@ -1297,7 +1292,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
                      "suratsakitpihak2.nama2 like '%"+TCari.getText().trim()+"%' or suratsakitpihak2.hubungan like '%"+TCari.getText().trim()+"%') "+
                      "order by suratsakitpihak2.no_surat");
             }
-                
+
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -1307,7 +1302,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
                         rs.getString(7),rs.getString(8),rs.getString(9),
                         rs.getString(10),rs.getString(11),rs.getString(12),
                         rs.getString(13),rs.getString(14),rs.getString(15)
-                        
+
                     });
                 }
             } catch (Exception e) {
@@ -1353,18 +1348,18 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         NoSurat.requestFocus();
     }
 
- 
+
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             LamaSakit.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            NamaPihak2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()); 
-            cmbJk.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()); 
-            AlamatPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()); 
-            cmbHubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString()); 
-            cmbPekerjaan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()); 
+            NamaPihak2.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+            cmbJk.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            AlamatPj.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
+            cmbHubungan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+            cmbPekerjaan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
             Instansi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
             Valid.SetTgl(TanggalAwal,tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             Valid.SetTgl(TanggalAkhir,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
@@ -1380,7 +1375,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
     private void isPsien() {
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+TNoRM.getText()+"' ",TPasien);
     }
-    
+
     public void setNoRm(String norwt,String alamat, Date tgl1, Date tgl2) {
         TNoRw.setText(norwt);
         AlamatPj.setText(alamat);
@@ -1388,7 +1383,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl2);
         isRawat();
-        isPsien(); 
+        isPsien();
         ChkInput.setSelected(true);
         isForm();
     }
@@ -1396,16 +1391,16 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,186));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    }   
-    
+    }
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsurat_sakit_pihak_2());
         BtnHapus.setEnabled(akses.getsurat_sakit_pihak_2());
@@ -1419,7 +1414,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
             }
         }
     }
-    
+
     public void hitungHari() {
         long hari = 1;
         if ((TanggalAwal.getDate().getTime() / 1000) >= (TanggalAkhir.getDate().getTime() / 1000)) {
@@ -1429,7 +1424,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
         }
         LamaSakit.setText(hari + " (" + Valid.capitalizeSmc(Valid.terbilangSmc(hari)) + ")");
     }
-    
+
     public String getBulanRomawi(int bulan) {
         switch (bulan) {
             case 1: return "I";

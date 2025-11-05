@@ -56,7 +56,7 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
             jandivalidasi=0,febdivalidasi=0,mardivalidasi=0,aprdivalidasi=0,meidivalidasi=0,jundivalidasi=0,juldivalidasi=0,agudivalidasi=0,sepdivalidasi=0,oktdivalidasi=0,novdivalidasi=0,desdivalidasi=0,
             jmljandivalidasi=0,jmlfebdivalidasi=0,jmlmardivalidasi=0,jmlaprdivalidasi=0,jmlmeidivalidasi=0,jmljundivalidasi=0,jmljuldivalidasi=0,jmlagudivalidasi=0,jmlsepdivalidasi=0,jmloktdivalidasi=0,jmlnovdivalidasi=0,jmldesdivalidasi=0,
             ttljmljandivalidasi=0,ttljmlfebdivalidasi=0,ttljmlmardivalidasi=0,ttljmlaprdivalidasi=0,ttljmlmeidivalidasi=0,ttljmljundivalidasi=0,ttljmljuldivalidasi=0,ttljmlagudivalidasi=0,ttljmlsepdivalidasi=0,ttljmloktdivalidasi=0,ttljmlnovdivalidasi=0,ttljmldesdivalidasi=0;
-            
+
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -113,10 +113,10 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         Valid.LoadTahun(ThnCari);
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -271,15 +271,15 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();         
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
+            param.put("emailrs",akses.getemailrs());
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(int r=0;r<tabMode.getRowCount();r++){ 
+            for(int r=0;r<tabMode.getRowCount();r++){
                 if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                     Sequel.menyimpan("temporary","'"+i+"','"+
                                     tabMode.getValueAt(r,0).toString()+"','"+
@@ -298,13 +298,13 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
                                     tabMode.getValueAt(r,13).toString()+"','"+
                                     tabMode.getValueAt(r,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Pengajuan Biaya");
                     i++;
-                }                    
+                }
             }
-               
+
             Valid.MyReportqry("rptRekapPengajuanBiaya.jasper","report","::[ Laporan Rekap Pengajuan Biaya/Anggaran Per Departemen ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -312,31 +312,31 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
         }else{
             //Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnKeluar,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
        tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             Valid.pindah(evt, TCari, BtnPrint);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -357,7 +357,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
         }else{
-            
+
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -393,9 +393,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(){        
-        try{   
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
+    public void tampil(){
+        try{
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
                 "select departemen.dep_id,departemen.nama from departemen where departemen.nama like ? order by departemen.nama");
@@ -439,7 +439,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     jmlokt=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-10%");
                     jmlnov=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-11%");
                     jmldes=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-12%");
-                    
+
                     ttljan=ttljan+jan;
                     ttlfeb=ttlfeb+feb;
                     ttlmar=ttlmar+mar;
@@ -452,7 +452,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttlokt=ttlokt+okt;
                     ttlnov=ttlnov+nov;
                     ttldes=ttldes+des;
-                    
+
                     ttljmljan=ttljmljan+jmljan;
                     ttljmlfeb=ttljmlfeb+jmlfeb;
                     ttljmlmar=ttljmlmar+jmlmar;
@@ -465,12 +465,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttljmlokt=ttljmlokt+jmlokt;
                     ttljmlnov=ttljmlnov+jmlnov;
                     ttljmldes=ttljmldes+jmldes;
-                    
+
                     tabMode.addRow(new Object[]{
                         "","  Pengajuan",jmljan+"("+Valid.SetAngka(jan)+")",jmlfeb+"("+Valid.SetAngka(feb)+")",jmlmar+"("+Valid.SetAngka(mar)+")",jmlapr+"("+Valid.SetAngka(apr)+")",jmlmei+"("+Valid.SetAngka(mei)+")",jmljun+"("+Valid.SetAngka(jun)+")",jmljul+"("+Valid.SetAngka(jul)+")",jmlagu+"("+Valid.SetAngka(agu)+")",jmlsep+"("+Valid.SetAngka(sep)+")",jmlokt+"("+Valid.SetAngka(okt)+")",jmlnov+"("+Valid.SetAngka(nov)+")",jmldes+"("+Valid.SetAngka(des)+")",
                         (jmljan+jmlfeb+jmlmar+jmlapr+jmlmei+jmljun+jmljul+jmlagu+jmlsep+jmlokt+jmlnov+jmldes)+"("+Valid.SetAngka((jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des))+")"
                     });
-                    
+
                     janproses=Sequel.cariInteger("select sum(pengajuan_biaya.total) as total from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Proses Pengajuan' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-01%");
                     febproses=Sequel.cariInteger("select sum(pengajuan_biaya.total) as total from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Proses Pengajuan' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-02%");
                     marproses=Sequel.cariInteger("select sum(pengajuan_biaya.total) as total from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Proses Pengajuan' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-03%");
@@ -495,7 +495,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     jmloktproses=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Proses Pengajuan' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-10%");
                     jmlnovproses=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Proses Pengajuan' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-11%");
                     jmldesproses=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Proses Pengajuan' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-12%");
-                    
+
                     ttljanproses=ttljanproses+janproses;
                     ttlfebproses=ttlfebproses+febproses;
                     ttlmarproses=ttlmarproses+marproses;
@@ -508,7 +508,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttloktproses=ttloktproses+oktproses;
                     ttlnovproses=ttlnovproses+novproses;
                     ttldesproses=ttldesproses+desproses;
-                    
+
                     ttljmljanproses=ttljmljanproses+jmljanproses;
                     ttljmlfebproses=ttljmlfebproses+jmlfebproses;
                     ttljmlmarproses=ttljmlmarproses+jmlmarproses;
@@ -521,12 +521,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttljmloktproses=ttljmloktproses+jmloktproses;
                     ttljmlnovproses=ttljmlnovproses+jmlnovproses;
                     ttljmldesproses=ttljmldesproses+jmldesproses;
-                    
+
                     tabMode.addRow(new Object[]{
                         "","  Proses",jmljanproses+"("+Valid.SetAngka(janproses)+")",jmlfebproses+"("+Valid.SetAngka(febproses)+")",jmlmarproses+"("+Valid.SetAngka(marproses)+")",jmlaprproses+"("+Valid.SetAngka(aprproses)+")",jmlmeiproses+"("+Valid.SetAngka(meiproses)+")",jmljunproses+"("+Valid.SetAngka(junproses)+")",jmljulproses+"("+Valid.SetAngka(julproses)+")",jmlaguproses+"("+Valid.SetAngka(aguproses)+")",jmlsepproses+"("+Valid.SetAngka(sepproses)+")",jmloktproses+"("+Valid.SetAngka(oktproses)+")",jmlnovproses+"("+Valid.SetAngka(novproses)+")",jmldesproses+"("+Valid.SetAngka(desproses)+")",
                         (jmljanproses+jmlfebproses+jmlmarproses+jmlaprproses+jmlmeiproses+jmljunproses+jmljulproses+jmlaguproses+jmlsepproses+jmloktproses+jmlnovproses+jmldesproses)+"("+Valid.SetAngka((janproses+febproses+marproses+aprproses+meiproses+junproses+julproses+aguproses+sepproses+oktproses+novproses+desproses))+")"
                     });
-                    
+
                     jandisetujui=Sequel.cariInteger("select sum(pengajuan_biaya_disetujui.total) as total from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-01%");
                     febdisetujui=Sequel.cariInteger("select sum(pengajuan_biaya_disetujui.total) as total from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-02%");
                     mardisetujui=Sequel.cariInteger("select sum(pengajuan_biaya_disetujui.total) as total from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-03%");
@@ -551,7 +551,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     jmloktdisetujui=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-10%");
                     jmlnovdisetujui=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-11%");
                     jmldesdisetujui=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-12%");
-                    
+
                     ttljandisetujui=ttljandisetujui+jandisetujui;
                     ttlfebdisetujui=ttlfebdisetujui+febdisetujui;
                     ttlmardisetujui=ttlmardisetujui+mardisetujui;
@@ -564,7 +564,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttloktdisetujui=ttloktdisetujui+oktdisetujui;
                     ttlnovdisetujui=ttlnovdisetujui+novdisetujui;
                     ttldesdisetujui=ttldesdisetujui+desdisetujui;
-                    
+
                     ttljmljandisetujui=ttljmljandisetujui+jmljandisetujui;
                     ttljmlfebdisetujui=ttljmlfebdisetujui+jmlfebdisetujui;
                     ttljmlmardisetujui=ttljmlmardisetujui+jmlmardisetujui;
@@ -577,12 +577,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttljmloktdisetujui=ttljmloktdisetujui+jmloktdisetujui;
                     ttljmlnovdisetujui=ttljmlnovdisetujui+jmlnovdisetujui;
                     ttljmldesdisetujui=ttljmldesdisetujui+jmldesdisetujui;
-                    
+
                     tabMode.addRow(new Object[]{
                         "","  Disetujui",jmljandisetujui+"("+Valid.SetAngka(jandisetujui)+")",jmlfebdisetujui+"("+Valid.SetAngka(febdisetujui)+")",jmlmardisetujui+"("+Valid.SetAngka(mardisetujui)+")",jmlaprdisetujui+"("+Valid.SetAngka(aprdisetujui)+")",jmlmeidisetujui+"("+Valid.SetAngka(meidisetujui)+")",jmljundisetujui+"("+Valid.SetAngka(jundisetujui)+")",jmljuldisetujui+"("+Valid.SetAngka(juldisetujui)+")",jmlagudisetujui+"("+Valid.SetAngka(agudisetujui)+")",jmlsepdisetujui+"("+Valid.SetAngka(sepdisetujui)+")",jmloktdisetujui+"("+Valid.SetAngka(oktdisetujui)+")",jmlnovdisetujui+"("+Valid.SetAngka(novdisetujui)+")",jmldesdisetujui+"("+Valid.SetAngka(desdisetujui)+")",
                         (jmljandisetujui+jmlfebdisetujui+jmlmardisetujui+jmlaprdisetujui+jmlmeidisetujui+jmljundisetujui+jmljuldisetujui+jmlagudisetujui+jmlsepdisetujui+jmloktdisetujui+jmlnovdisetujui+jmldesdisetujui)+"("+Valid.SetAngka((jandisetujui+febdisetujui+mardisetujui+aprdisetujui+meidisetujui+jundisetujui+juldisetujui+agudisetujui+sepdisetujui+oktdisetujui+novdisetujui+desdisetujui))+")"
                     });
-                    
+
                     jandivalidasi=Sequel.cariInteger("select sum(pengajuan_biaya_disetujui.total) as total from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where pengajuan_biaya.status='Divalidasi' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-01%");
                     febdivalidasi=Sequel.cariInteger("select sum(pengajuan_biaya_disetujui.total) as total from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where pengajuan_biaya.status='Divalidasi' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-02%");
                     mardivalidasi=Sequel.cariInteger("select sum(pengajuan_biaya_disetujui.total) as total from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where pengajuan_biaya.status='Divalidasi' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-03%");
@@ -607,7 +607,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     jmloktdivalidasi=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where pengajuan_biaya.status='Divalidasi' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-10%");
                     jmlnovdivalidasi=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where pengajuan_biaya.status='Divalidasi' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-11%");
                     jmldesdivalidasi=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pengajuan_biaya_disetujui inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id and pengajuan_biaya_disetujui.no_pengajuan=pengajuan_biaya.no_pengajuan where pengajuan_biaya.status='Divalidasi' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-12%");
-                    
+
                     ttljandivalidasi=ttljandivalidasi+jandivalidasi;
                     ttlfebdivalidasi=ttlfebdivalidasi+febdivalidasi;
                     ttlmardivalidasi=ttlmardivalidasi+mardivalidasi;
@@ -620,7 +620,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttloktdivalidasi=ttloktdivalidasi+oktdivalidasi;
                     ttlnovdivalidasi=ttlnovdivalidasi+novdivalidasi;
                     ttldesdivalidasi=ttldesdivalidasi+desdivalidasi;
-                    
+
                     ttljmljandivalidasi=ttljmljandivalidasi+jmljandivalidasi;
                     ttljmlfebdivalidasi=ttljmlfebdivalidasi+jmlfebdivalidasi;
                     ttljmlmardivalidasi=ttljmlmardivalidasi+jmlmardivalidasi;
@@ -633,12 +633,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttljmloktdivalidasi=ttljmloktdivalidasi+jmloktdivalidasi;
                     ttljmlnovdivalidasi=ttljmlnovdivalidasi+jmlnovdivalidasi;
                     ttljmldesdivalidasi=ttljmldesdivalidasi+jmldesdivalidasi;
-                    
+
                     tabMode.addRow(new Object[]{
                         "","  Divalidasi",jmljandivalidasi+"("+Valid.SetAngka(jandivalidasi)+")",jmlfebdivalidasi+"("+Valid.SetAngka(febdivalidasi)+")",jmlmardivalidasi+"("+Valid.SetAngka(mardivalidasi)+")",jmlaprdivalidasi+"("+Valid.SetAngka(aprdivalidasi)+")",jmlmeidivalidasi+"("+Valid.SetAngka(meidivalidasi)+")",jmljundivalidasi+"("+Valid.SetAngka(jundivalidasi)+")",jmljuldivalidasi+"("+Valid.SetAngka(juldivalidasi)+")",jmlagudivalidasi+"("+Valid.SetAngka(agudivalidasi)+")",jmlsepdivalidasi+"("+Valid.SetAngka(sepdivalidasi)+")",jmloktdivalidasi+"("+Valid.SetAngka(oktdivalidasi)+")",jmlnovdivalidasi+"("+Valid.SetAngka(novdivalidasi)+")",jmldesdivalidasi+"("+Valid.SetAngka(desdivalidasi)+")",
                         (jmljandivalidasi+jmlfebdivalidasi+jmlmardivalidasi+jmlaprdivalidasi+jmlmeidivalidasi+jmljundivalidasi+jmljuldivalidasi+jmlagudivalidasi+jmlsepdivalidasi+jmloktdivalidasi+jmlnovdivalidasi+jmldesdivalidasi)+"("+Valid.SetAngka((jandivalidasi+febdivalidasi+mardivalidasi+aprdivalidasi+meidivalidasi+jundivalidasi+juldivalidasi+agudivalidasi+sepdivalidasi+oktdivalidasi+novdivalidasi+desdivalidasi))+")"
                     });
-                    
+
                     janditolak=Sequel.cariInteger("select sum(pengajuan_biaya.total) as total from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Ditolak' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-01%");
                     febditolak=Sequel.cariInteger("select sum(pengajuan_biaya.total) as total from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Ditolak' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-02%");
                     marditolak=Sequel.cariInteger("select sum(pengajuan_biaya.total) as total from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Ditolak' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-03%");
@@ -663,7 +663,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     jmloktditolak=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Ditolak' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-10%");
                     jmlnovditolak=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Ditolak' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-11%");
                     jmldesditolak=Sequel.cariInteger("select count(departemen.dep_id) as jumlah from pengajuan_biaya inner join pegawai inner join departemen on pengajuan_biaya.nik=pegawai.nik and pegawai.departemen=departemen.dep_id  where pengajuan_biaya.status='Ditolak' and departemen.dep_id=? and tanggal like ?",rs.getString("dep_id"),"%"+ThnCari.getSelectedItem()+"-12%");
-                    
+
                     ttljanditolak=ttljanditolak+janditolak;
                     ttlfebditolak=ttlfebditolak+febditolak;
                     ttlmarditolak=ttlmarditolak+marditolak;
@@ -676,7 +676,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttloktditolak=ttloktditolak+oktditolak;
                     ttlnovditolak=ttlnovditolak+novditolak;
                     ttldesditolak=ttldesditolak+desditolak;
-                    
+
                     ttljmljanditolak=ttljmljanditolak+jmljanditolak;
                     ttljmlfebditolak=ttljmlfebditolak+jmlfebditolak;
                     ttljmlmarditolak=ttljmlmarditolak+jmlmarditolak;
@@ -689,12 +689,12 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     ttljmloktditolak=ttljmloktditolak+jmloktditolak;
                     ttljmlnovditolak=ttljmlnovditolak+jmlnovditolak;
                     ttljmldesditolak=ttljmldesditolak+jmldesditolak;
-                    
+
                     tabMode.addRow(new Object[]{
                         "","  Ditolak",jmljanditolak+"("+Valid.SetAngka(janditolak)+")",jmlfebditolak+"("+Valid.SetAngka(febditolak)+")",jmlmarditolak+"("+Valid.SetAngka(marditolak)+")",jmlaprditolak+"("+Valid.SetAngka(aprditolak)+")",jmlmeiditolak+"("+Valid.SetAngka(meiditolak)+")",jmljunditolak+"("+Valid.SetAngka(junditolak)+")",jmljulditolak+"("+Valid.SetAngka(julditolak)+")",jmlaguditolak+"("+Valid.SetAngka(aguditolak)+")",jmlsepditolak+"("+Valid.SetAngka(sepditolak)+")",jmloktditolak+"("+Valid.SetAngka(oktditolak)+")",jmlnovditolak+"("+Valid.SetAngka(novditolak)+")",jmldesditolak+"("+Valid.SetAngka(desditolak)+")",
                         (jmljanditolak+jmlfebditolak+jmlmarditolak+jmlaprditolak+jmlmeiditolak+jmljunditolak+jmljulditolak+jmlaguditolak+jmlsepditolak+jmloktditolak+jmlnovditolak+jmldesditolak)+"("+Valid.SetAngka((janditolak+febditolak+marditolak+aprditolak+meiditolak+junditolak+julditolak+aguditolak+sepditolak+oktditolak+novditolak+desditolak))+")"
                     });
-                    
+
                     i++;
                 }
                 if(i>1){
@@ -738,7 +738,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             this.setCursor(Cursor.getDefaultCursor());
         }catch(Exception e){
             System.out.println("Notif : "+e);
-        }    
+        }
     }
 
 }

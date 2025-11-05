@@ -90,7 +90,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         kdPPK2.setDocument(new batasInput((byte)15).getKata(kdPPK2));
     }
     Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-    private javax.swing.JFileChooser jfc = new JFileChooser();    
+    private javax.swing.JFileChooser jfc = new JFileChooser();
     private javax.swing.JFileChooser jfc2 = new JFileChooser();
     private FileFilter jpgFilter = new FileNameExtensionFilter("Gambar JPEG", "jpg");
     private FileFilter gifFilter = new FileNameExtensionFilter("Gambar GIF", "gif");
@@ -286,7 +286,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         panelGlass1.add(label35);
         label35.setBounds(0, 10, 70, 23);
 
-        Nm.setHighlighter(null);
         Nm.setName("Nm"); // NOI18N
         Nm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -530,11 +529,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
     private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
         Valid.pindah(evt,BtnSimpan,Almt);
-}//GEN-LAST:event_NmKeyPressed
+    }//GEN-LAST:event_NmKeyPressed
 
     private void AlmtKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlmtKeyPressed
         Valid.pindah(evt,Nm,Kota);
-}//GEN-LAST:event_AlmtKeyPressed
+    }//GEN-LAST:event_AlmtKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -543,7 +542,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbAdminMouseClicked
+    }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -554,7 +553,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbAdminKeyPressed
+    }//GEN-LAST:event_tbAdminKeyPressed
 
     private void KotaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KotaKeyPressed
         Valid.pindah(evt,Almt,Propinsi);
@@ -700,7 +699,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         }else if(ELogo.getText().trim().equals("")){
             YesNo.setSelectedItem("No");
             ELogo.setText("./setting/logo.jpg");
-        }else{  
+        }else{
             Sequel.queryu("delete from setting ");
             Sequel.menyimpan("setting","'"+Nm.getText()+"','"+Almt.getText()+"','"+Kota.getText()+
                              "','"+Propinsi.getText()+"','"+Kontak.getText()+"','"+Email.getText()+
@@ -831,7 +830,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                     ((Painter) PhotoGambar).setImageIcon(new javax.swing.ImageIcon(
                         blob.getBytes(1, (int) (blob.length()))));
                     blob.free();
-                    
+
                     ((Painter) PhotoLogo).setImage(gambar(tabMode.getValueAt(row,0).toString()));
                     Blob blob2 = hasil.getBlob(2);
                     ((Painter) PhotoLogo).setImageIcon(new javax.swing.ImageIcon(
@@ -850,8 +849,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         Almt.setText("");
         Kota.setText("");
         Propinsi.setText("");
-        kdPPK.setText("");        
-        kdPPK1.setText("");       
+        kdPPK.setText("");
+        kdPPK1.setText("");
         kdPPK2.setText("");
         ((Painter) PhotoGambar).setImage("");
         EGb.setText("");
@@ -860,8 +859,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         YesNo.setSelectedItem("No");
         Nm.requestFocus();
     }
-    
-    
+
+
     private String gambar(String id) {
         return folder + File.separator + id.trim() + ".jpg";
     }
@@ -895,12 +894,12 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 double x = this.getWidth() / 2 - w / 2;
                 g.drawImage(image, (int) x, 0, (int) (w), this.getHeight(), this);
             } catch (Exception e) {
-            }            
+            }
         }
     }
-    
+
     private void cetak(String str) {
         System.out.println(str);
     }
-    
+
 }

@@ -324,7 +324,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
 
     private void NamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NamaKeyPressed
         Valid.pindah(evt,TCari,BtnSimpan,TCari);
-}//GEN-LAST:event_NamaKeyPressed
+    }//GEN-LAST:event_NamaKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(Nama.getText().trim().equals("")){
@@ -334,7 +334,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
             tampil2();
             emptTeks();
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -342,17 +342,17 @@ public class DlgPropinsi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,BtnAll,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,Nama,"propinsi","nm_prop")==true){
@@ -362,7 +362,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
                 emptTeks();
             }
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -370,17 +370,17 @@ public class DlgPropinsi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnKeluar);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnSimpan,Nama);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -392,11 +392,11 @@ public class DlgPropinsi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbpropinsi.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -404,12 +404,12 @@ public class DlgPropinsi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -417,7 +417,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari,BtnSimpan);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbpropinsiMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbpropinsiMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -429,7 +429,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbpropinsiMouseClicked
+    }//GEN-LAST:event_tbpropinsiMouseClicked
 
     private void tbpropinsiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbpropinsiKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -445,7 +445,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbpropinsiKeyPressed
+    }//GEN-LAST:event_tbpropinsiKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         onCari();
@@ -489,7 +489,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             file=new File("./cache/masterpropinsi.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -510,14 +510,14 @@ public class DlgPropinsi extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }  
-            
+            }
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"masterpropinsi\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
@@ -525,7 +525,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/masterpropinsi.iyem");
@@ -574,7 +574,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public String tampil3(String nama) {
         try {
             if(Valid.daysOld("./cache/masterpropinsi.iyem")>7){
@@ -585,7 +585,7 @@ public class DlgPropinsi extends javax.swing.JDialog {
                 tampil();
             }
         }
-        
+
         String iyem="";
         try {
             myObj = new FileReader("./cache/masterpropinsi.iyem");
@@ -619,11 +619,11 @@ public class DlgPropinsi extends javax.swing.JDialog {
             Nama.setText(tbpropinsi.getValueAt(tbpropinsi.getSelectedRow(),0).toString());
         }
     }
-    
+
     public JTable getTable() {
         return tbpropinsi;
     }
-    
+
     public void onCari(){
         TCari.setText("");
         TCari.requestFocus();

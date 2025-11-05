@@ -239,9 +239,6 @@
                 <Component class="widget.TextBox" name="LebihBayarPiutang">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="LebihBayarPiutang" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -254,9 +251,6 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="PersentaseBayarPaket" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -279,9 +273,6 @@
                 <Component class="widget.TextBox" name="NilaiKapitasiPaket">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NilaiKapitasiPaket" noResource="true"/>
                   </Properties>
                   <Events>
@@ -319,9 +310,6 @@
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="PiutangBelumDibayar" noResource="true"/>
                   </Properties>
                   <Constraints>

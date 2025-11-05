@@ -84,9 +84,9 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
                 column.setPreferredWidth(90);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());         
-        
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -109,7 +109,7 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         asalstok.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -117,10 +117,10 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(asalstok.getTable().getSelectedRow()!= -1){                   
-                    kdasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),0).toString());                    
+                if(asalstok.getTable().getSelectedRow()!= -1){
+                    kdasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),0).toString());
                     nmasal.setText(asalstok.getTable().getValueAt(asalstok.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdasal.requestFocus();
             }
             @Override
@@ -132,7 +132,7 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         asalstok.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -140,12 +140,12 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     asalstok.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
-        
+        });
+
         jenis.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -167,7 +167,7 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         golongan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -191,7 +191,7 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kategori.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -215,13 +215,13 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
     }
     private double total=0;
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -607,7 +607,7 @@ public class DlgProyeksiJual extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -616,14 +616,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();  
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(Jenisjual.getSelectedItem().toString().equals("Semua")&nmasal.getText().equals("")&&nmjns.getText().equals("")&&nmkategori.getText().equals("")&&nmgolongan.getText().equals("")&&TCari.getText().equals("")){
                 Valid.MyReportqry("rptProyeksi.jasper","report","::[ Proyeksi Keuntungan Penjualan ]::",
                         "select penjualan.tgl_jual,penjualan.nota_jual,detailjual.kode_brng,databarang.nama_brng,kodesatuan.satuan,detailjual.h_jual,detailjual.jumlah, "+
@@ -655,7 +655,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and kodesatuan.satuan like '%"+TCari.getText().trim()+"%' "+
                         " order by penjualan.tgl_jual,penjualan.nota_jual",param);
             }
-                
+
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -824,8 +824,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void prosesCari() {
-       Valid.tabelKosong(tabMode);      
-       try{   
+       Valid.tabelKosong(tabMode);
+       try{
             if(Jenisjual.getSelectedItem().toString().equals("Semua")&nmasal.getText().equals("")&&nmjns.getText().equals("")&&nmkategori.getText().equals("")&&nmgolongan.getText().equals("")&&TCari.getText().equals("")){
                 ps=koneksi.prepareStatement(
                         "select penjualan.tgl_jual,penjualan.nota_jual,detailjual.kode_brng,databarang.nama_brng,kodesatuan.satuan,detailjual.h_jual,detailjual.jumlah, "+
@@ -857,8 +857,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and penjualan.jns_jual like '%"+Jenisjual.getSelectedItem().toString().replaceAll("Semua","")+"%' and concat(penjualan.kd_bangsal,bangsal.nm_bangsal) like '%"+kdasal.getText()+nmasal.getText()+"%' and concat(databarang.kdjns,jenis.nama) like '%"+kdjenis.getText()+nmjns.getText()+"%' and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText()+"%' and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText()+"%' and kodesatuan.satuan like '%"+TCari.getText().trim()+"%' "+
                         " order by penjualan.tgl_jual,penjualan.nota_jual");
             }
-            
-                
+
+
             try {
                 rs=ps.executeQuery();
                 total=0;
@@ -870,7 +870,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         Valid.SetAngka(rs.getDouble(9)),Valid.SetAngka(rs.getDouble(10)),Valid.SetAngka(rs.getDouble(11)),
                         Valid.SetAngka(rs.getDouble(12)),Valid.SetAngka(rs.getDouble(13)),Valid.SetAngka(rs.getDouble(14)),
                         Valid.SetAngka(rs.getDouble(15))
-                    });  
+                    });
                 }
             } catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -882,31 +882,31 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                    ps.close();
                }
             }
-              
-            LTotal.setText(Valid.SetAngka(total));            
+
+            LTotal.setText(Valid.SetAngka(total));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
-    
+
     public void isCek(){
          BtnPrint.setEnabled(akses.getkeuntungan_penjualan());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,96));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-     
- 
+
+
 }

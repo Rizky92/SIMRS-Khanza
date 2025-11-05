@@ -50,7 +50,7 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode nameNode;
     private JsonNode response;
-   
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -59,10 +59,10 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "No.SEP","No.Rawat","No.RM","Nama Pasien","Tanggal SEP","Tanggal Rujukan", 
-                "No.Rujukan","Kode PPK Rujukan","Nama PPK Rujukan","Kode PPK Pelayanan", 
-                "Nama PPK Pelayanan","Jenis Pelayanan","Catatan", "Kode Diagnosa", 
-                "Nama Diagnosa", "Kode Poli", "Nama Poli", "Kelas Rawat", "Laka Lantas", 
+                "No.SEP","No.Rawat","No.RM","Nama Pasien","Tanggal SEP","Tanggal Rujukan",
+                "No.Rujukan","Kode PPK Rujukan","Nama PPK Rujukan","Kode PPK Pelayanan",
+                "Nama PPK Pelayanan","Jenis Pelayanan","Catatan", "Kode Diagnosa",
+                "Nama Diagnosa", "Kode Poli", "Nama Poli", "Kelas Rawat", "Laka Lantas",
                 "Lokasi Laka Lantas", "User Input","Tgl.Lahir","Peserta",
                 "J.Kel","No.Kartu","Tanggal Pulang","Asal Rujukan","Eksekutif",
                 "COB","Penjamin","No.Telp","INACBG","Status","No.FPK","Pengajuan",
@@ -141,11 +141,11 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         KdPpkRujukan.setDocument(new batasInput((byte)5).getKata(KdPpkRujukan));
-        KdPenyakit.setDocument(new batasInput((byte)25).getKata(KdPenyakit));        
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
-        
+        KdPenyakit.setDocument(new batasInput((byte)25).getKata(KdPenyakit));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -167,8 +167,8 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         faskes.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -176,10 +176,10 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(faskes.getTable().getSelectedRow()!= -1){                   
+                if(faskes.getTable().getSelectedRow()!= -1){
                     KdPpkRujukan.setText(faskes.getTable().getValueAt(faskes.getTable().getSelectedRow(),1).toString());
                     NmPpkRujukan.setText(faskes.getTable().getValueAt(faskes.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 KdPpkRujukan.requestFocus();
             }
             @Override
@@ -191,7 +191,7 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         faskes.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -203,8 +203,8 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
-        
+        });
+
         penyakit.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -212,10 +212,10 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     KdPenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
                     NmPenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 KdPenyakit.requestFocus();
             }
             @Override
@@ -227,7 +227,7 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penyakit.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -239,8 +239,8 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
-        
+        });
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -248,10 +248,10 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                   
+                if(poli.getTable().getSelectedRow()!= -1){
                     KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                     NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 KdPoli.requestFocus();
             }
             @Override
@@ -263,7 +263,7 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         poli.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -275,15 +275,15 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml")); 
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             link=prop.getProperty("URLAPIBPJS");
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-                
+
     }
 
     /** This method is called from within the constructor to
@@ -644,29 +644,29 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
-}//GEN-LAST:event_BtnKeluarActionPerformed
+            dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,TglSEP1);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void btnPPKRujukanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPPKRujukanActionPerformed
         faskes.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        faskes.setLocationRelativeTo(internalFrame1);        
+        faskes.setLocationRelativeTo(internalFrame1);
         faskes.setVisible(true);
     }//GEN-LAST:event_btnPPKRujukanActionPerformed
 
     private void btnPenyakitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenyakitActionPerformed
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        penyakit.setLocationRelativeTo(internalFrame1);        
+        penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);
     }//GEN-LAST:event_btnPenyakitActionPerformed
 
@@ -733,7 +733,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(tabMode.getRowCount()!=0){
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int i=0;i<row;i++){  
+            for(int i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
@@ -743,19 +743,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 tabMode.getValueAt(i,29).toString()+"','"+
                                 tabMode.getValueAt(i,37).toString()+"','"+
                                 tabMode.getValueAt(i,38).toString()+"','"+
-                                tabMode.getValueAt(i,39).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian"); 
+                                tabMode.getValueAt(i,39).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
             }
-            
-            Map<String, Object> param = new HashMap<>();    
+
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptBridgingMonitoringSEP.jasper","report","::[ Monitoring Klaim SEP ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
-            
+
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -770,7 +770,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void btnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliActionPerformed
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        poli.setLocationRelativeTo(internalFrame1);        
+        poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
     }//GEN-LAST:event_btnPoliActionPerformed
 
@@ -840,7 +840,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {        
+    public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -862,7 +862,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }else{
                             Monitor(rs.getString("tanggal"),"1",Status.getSelectedItem().toString().substring(0,1));
                             Monitor(rs.getString("tanggal"),"2",Status.getSelectedItem().toString().substring(0,1));
-                        }                            
+                        }
                     }else{
                         if(Status.getSelectedItem().toString().equals("Semua")){
                             Monitor(rs.getString("tanggal"),JenisPelayanan.getSelectedItem().toString().substring(0,1),"1");
@@ -873,7 +873,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             Monitor(rs.getString("tanggal"),JenisPelayanan.getSelectedItem().toString().substring(0,1),"3");
                         }else{
                             Monitor(rs.getString("tanggal"),JenisPelayanan.getSelectedItem().toString().substring(0,1),Status.getSelectedItem().toString().substring(0,1));
-                        } 
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -885,8 +885,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }   
-            
+            }
+
             ps=koneksi.prepareStatement(
                    "select DISTINCT bridging_sep_internal.tglsep as tanggal from bridging_sep_internal where "+
                    "bridging_sep_internal.tglsep between ? and ? order by bridging_sep_internal.tglsep");
@@ -906,7 +906,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }else{
                             MonitorInternal(rs.getString("tanggal"),"1",Status.getSelectedItem().toString().substring(0,1));
                             MonitorInternal(rs.getString("tanggal"),"2",Status.getSelectedItem().toString().substring(0,1));
-                        }                            
+                        }
                     }else{
                         if(Status.getSelectedItem().toString().equals("Semua")){
                             MonitorInternal(rs.getString("tanggal"),JenisPelayanan.getSelectedItem().toString().substring(0,1),"1");
@@ -917,7 +917,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             MonitorInternal(rs.getString("tanggal"),JenisPelayanan.getSelectedItem().toString().substring(0,1),"3");
                         }else{
                             MonitorInternal(rs.getString("tanggal"),JenisPelayanan.getSelectedItem().toString().substring(0,1),Status.getSelectedItem().toString().substring(0,1));
-                        } 
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -929,7 +929,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            } 
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -937,16 +937,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
 
     public void emptTeks() {
-        TCari.requestFocus();        
+        TCari.requestFocus();
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getbpjs_monitoring_klaim());
     }
-    
+
     private void Monitor(String tanggal,String jenispelayanan,String status){
         try {
-            URL = link+"/Monitoring/Klaim/Tanggal/"+tanggal+"/JnsPelayanan/"+jenispelayanan+"/Status/"+status;	
+            URL = link+"/Monitoring/Klaim/Tanggal/"+tanggal+"/JnsPelayanan/"+jenispelayanan+"/Status/"+status;
             System.out.println(URL);
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -964,37 +964,72 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                 //response = root.path("response");
                 if(response.path("klaim").isArray()){
-                    for(JsonNode list:response.path("klaim")){
-                        pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep = ?");
-                        try {
-                            pssep.setString(1,list.path("noSEP").asText());
-                            rssep=pssep.executeQuery();
-                            while(rssep.next()){
-                                tabMode.addRow(new Object[]{
-                                    rssep.getString("no_sep"),rssep.getString("no_rawat"),rssep.getString("nomr"),rssep.getString("nama_pasien"),rssep.getString("tglsep"),rssep.getString("tglrujukan"),rssep.getString("no_rujukan"),
-                                    rssep.getString("kdppkrujukan"),rssep.getString("nmppkrujukan"),rssep.getString("kdppkpelayanan"),rssep.getString("nmppkpelayanan"),rssep.getString("jnspelayanan"),rssep.getString("catatan"),
-                                    rssep.getString("diagawal"),rssep.getString("nmdiagnosaawal"),rssep.getString("kdpolitujuan"),rssep.getString("nmpolitujuan"),rssep.getString("klsrawat"),rssep.getString("lakalantas").replaceAll("0","0. Bukan KLL").replaceAll("1","1. KLL Bukan KK").replaceAll("2","2. KLL dan KK").replaceAll("3","3. KK"),
-                                    rssep.getString("nmkec")+", "+rssep.getString("nmkab")+" "+rssep.getString("nmprop"),rssep.getString("user"),rssep.getString("tanggal_lahir"),rssep.getString("peserta"),rssep.getString("jkel"),
-                                    rssep.getString("no_kartu"),rssep.getString("tglpulang"),rssep.getString("asal_rujukan"),rssep.getString("eksekutif"),rssep.getString("cob"),rssep.getString("pembiayaan").replaceAll("1","1. Pribadi").replaceAll("2","2. Pemberi Kerja").replaceAll("2","3. Asuransi Lain"),rssep.getString("notelep"),
-                                    list.path("Inacbg").path("kode").asText()+" "+list.path("Inacbg").path("nama").asText(),list.path("status").asText(),list.path("noFPK").asText(),Valid.SetAngka(list.path("biaya").path("byPengajuan").asDouble()),
-                                    Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifGruper").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifRS").asDouble()),
-                                    Valid.SetAngka(list.path("biaya").path("byTopup").asDouble()),Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()-list.path("biaya").path("byTopup").asDouble()-list.path("biaya").path("byTarifRS").asDouble())
-                                });
+                    if(TCari.getText().trim().equals("")){
+                        for(JsonNode list:response.path("klaim")){
+                            pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep = ?");
+                            try {
+                                pssep.setString(1,list.path("noSEP").asText());
+                                rssep=pssep.executeQuery();
+                                while(rssep.next()){
+                                    tabMode.addRow(new Object[]{
+                                        rssep.getString("no_sep"),rssep.getString("no_rawat"),rssep.getString("nomr"),rssep.getString("nama_pasien"),rssep.getString("tglsep"),rssep.getString("tglrujukan"),rssep.getString("no_rujukan"),
+                                        rssep.getString("kdppkrujukan"),rssep.getString("nmppkrujukan"),rssep.getString("kdppkpelayanan"),rssep.getString("nmppkpelayanan"),rssep.getString("jnspelayanan"),rssep.getString("catatan"),
+                                        rssep.getString("diagawal"),rssep.getString("nmdiagnosaawal"),rssep.getString("kdpolitujuan"),rssep.getString("nmpolitujuan"),rssep.getString("klsrawat"),rssep.getString("lakalantas").replaceAll("0","0. Bukan KLL").replaceAll("1","1. KLL Bukan KK").replaceAll("2","2. KLL dan KK").replaceAll("3","3. KK"),
+                                        rssep.getString("nmkec")+", "+rssep.getString("nmkab")+" "+rssep.getString("nmprop"),rssep.getString("user"),rssep.getString("tanggal_lahir"),rssep.getString("peserta"),rssep.getString("jkel"),
+                                        rssep.getString("no_kartu"),rssep.getString("tglpulang"),rssep.getString("asal_rujukan"),rssep.getString("eksekutif"),rssep.getString("cob"),rssep.getString("pembiayaan").replaceAll("1","1. Pribadi").replaceAll("2","2. Pemberi Kerja").replaceAll("2","3. Asuransi Lain"),rssep.getString("notelep"),
+                                        list.path("Inacbg").path("kode").asText()+" "+list.path("Inacbg").path("nama").asText(),list.path("status").asText(),list.path("noFPK").asText(),Valid.SetAngka(list.path("biaya").path("byPengajuan").asDouble()),
+                                        Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifGruper").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifRS").asDouble()),
+                                        Valid.SetAngka(list.path("biaya").path("byTopup").asDouble()),Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()-list.path("biaya").path("byTopup").asDouble()-list.path("biaya").path("byTarifRS").asDouble())
+                                    });
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif Detail : "+e);
+                            } finally{
+                                if(rssep!=null){
+                                    rssep.close();
+                                }
+                                if(pssep!=null){
+                                    pssep.close();
+                                }
                             }
-                        } catch (Exception e) {
-                            System.out.println("Notif Detail : "+e);
-                        } finally{
-                            if(rssep!=null){
-                                rssep.close();
-                            }
-                            if(pssep!=null){
-                                pssep.close();
+                        }        
+                    }else{
+                        for(JsonNode list:response.path("klaim")){
+                            pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep=?");
+                            try {
+                                pssep.setString(1,list.path("noSEP").asText());
+                                rssep=pssep.executeQuery();
+                                while(rssep.next()){
+                                    if(rssep.getString("no_sep").contains(TCari.getText().trim())||rssep.getString("no_rawat").contains(TCari.getText().trim())||
+                                            rssep.getString("nomr").contains(TCari.getText().trim())||rssep.getString("nama_pasien").contains(TCari.getText().trim())||
+                                                list.path("Inacbg").path("kode").asText().contains(TCari.getText().trim())||list.path("Inacbg").path("nama").asText().contains(TCari.getText().trim())){
+                                        tabMode.addRow(new Object[]{
+                                            rssep.getString("no_sep"),rssep.getString("no_rawat"),rssep.getString("nomr"),rssep.getString("nama_pasien"),rssep.getString("tglsep"),rssep.getString("tglrujukan"),rssep.getString("no_rujukan"),
+                                            rssep.getString("kdppkrujukan"),rssep.getString("nmppkrujukan"),rssep.getString("kdppkpelayanan"),rssep.getString("nmppkpelayanan"),rssep.getString("jnspelayanan"),rssep.getString("catatan"),
+                                            rssep.getString("diagawal"),rssep.getString("nmdiagnosaawal"),rssep.getString("kdpolitujuan"),rssep.getString("nmpolitujuan"),rssep.getString("klsrawat"),rssep.getString("lakalantas").replaceAll("0","0. Bukan KLL").replaceAll("1","1. KLL Bukan KK").replaceAll("2","2. KLL dan KK").replaceAll("3","3. KK"),
+                                            rssep.getString("nmkec")+", "+rssep.getString("nmkab")+" "+rssep.getString("nmprop"),rssep.getString("user"),rssep.getString("tanggal_lahir"),rssep.getString("peserta"),rssep.getString("jkel"),
+                                            rssep.getString("no_kartu"),rssep.getString("tglpulang"),rssep.getString("asal_rujukan"),rssep.getString("eksekutif"),rssep.getString("cob"),rssep.getString("pembiayaan").replaceAll("1","1. Pribadi").replaceAll("2","2. Pemberi Kerja").replaceAll("2","3. Asuransi Lain"),rssep.getString("notelep"),
+                                            list.path("Inacbg").path("kode").asText()+" "+list.path("Inacbg").path("nama").asText(),list.path("status").asText(),list.path("noFPK").asText(),Valid.SetAngka(list.path("biaya").path("byPengajuan").asDouble()),
+                                            Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifGruper").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifRS").asDouble()),
+                                            Valid.SetAngka(list.path("biaya").path("byTopup").asDouble()),Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()-list.path("biaya").path("byTopup").asDouble()-list.path("biaya").path("byTarifRS").asDouble())
+                                        });
+                                    }   
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif Detail : "+e);
+                            } finally{
+                                if(rssep!=null){
+                                    rssep.close();
+                                }
+                                if(pssep!=null){
+                                    pssep.close();
+                                }
                             }
                         }
                     }
                 }
             }else {
-                System.out.println(nameNode.path("message").asText());               
+                System.out.println(nameNode.path("message").asText());
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
@@ -1004,10 +1039,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
         }
     }
-    
+
     private void MonitorInternal(String tanggal,String jenispelayanan,String status){
         try {
-            URL = link+"/Monitoring/Klaim/Tanggal/"+tanggal+"/JnsPelayanan/"+jenispelayanan+"/Status/"+status;	
+            URL = link+"/Monitoring/Klaim/Tanggal/"+tanggal+"/JnsPelayanan/"+jenispelayanan+"/Status/"+status;
             System.out.println(URL);
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -1025,37 +1060,72 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
                 //response = root.path("response");
                 if(response.path("klaim").isArray()){
-                    for(JsonNode list:response.path("klaim")){
-                        pssep=koneksi.prepareStatement("select * from bridging_sep_internal where bridging_sep_internal.no_sep=?");
-                        try {
-                            pssep.setString(1,list.path("noSEP").asText());
-                            rssep=pssep.executeQuery();
-                            while(rssep.next()){
-                                tabMode.addRow(new Object[]{
-                                    rssep.getString("no_sep"),rssep.getString("no_rawat"),rssep.getString("nomr"),rssep.getString("nama_pasien"),rssep.getString("tglsep"),rssep.getString("tglrujukan"),rssep.getString("no_rujukan"),
-                                    rssep.getString("kdppkrujukan"),rssep.getString("nmppkrujukan"),rssep.getString("kdppkpelayanan"),rssep.getString("nmppkpelayanan"),rssep.getString("jnspelayanan"),rssep.getString("catatan"),
-                                    rssep.getString("diagawal"),rssep.getString("nmdiagnosaawal"),rssep.getString("kdpolitujuan"),rssep.getString("nmpolitujuan"),rssep.getString("klsrawat"),rssep.getString("lakalantas").replaceAll("0","0. Bukan KLL").replaceAll("1","1. KLL Bukan KK").replaceAll("2","2. KLL dan KK").replaceAll("3","3. KK"),
-                                    rssep.getString("nmkec")+", "+rssep.getString("nmkab")+" "+rssep.getString("nmprop"),rssep.getString("user"),rssep.getString("tanggal_lahir"),rssep.getString("peserta"),rssep.getString("jkel"),
-                                    rssep.getString("no_kartu"),rssep.getString("tglpulang"),rssep.getString("asal_rujukan"),rssep.getString("eksekutif"),rssep.getString("cob"),rssep.getString("pembiayaan").replaceAll("1","1. Pribadi").replaceAll("2","2. Pemberi Kerja").replaceAll("2","3. Asuransi Lain"),rssep.getString("notelep"),
-                                    list.path("Inacbg").path("kode").asText()+" "+list.path("Inacbg").path("nama").asText(),list.path("status").asText(),list.path("noFPK").asText(),Valid.SetAngka(list.path("biaya").path("byPengajuan").asDouble()),
-                                    Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifGruper").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifRS").asDouble()),
-                                    Valid.SetAngka(list.path("biaya").path("byTopup").asDouble()),Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()-list.path("biaya").path("byTopup").asDouble()-list.path("biaya").path("byTarifRS").asDouble())
-                                });
+                    if(TCari.getText().trim().equals("")){
+                        for(JsonNode list:response.path("klaim")){
+                            pssep=koneksi.prepareStatement("select * from bridging_sep_internal where bridging_sep_internal.no_sep=?");
+                            try {
+                                pssep.setString(1,list.path("noSEP").asText());
+                                rssep=pssep.executeQuery();
+                                while(rssep.next()){
+                                    tabMode.addRow(new Object[]{
+                                        rssep.getString("no_sep"),rssep.getString("no_rawat"),rssep.getString("nomr"),rssep.getString("nama_pasien"),rssep.getString("tglsep"),rssep.getString("tglrujukan"),rssep.getString("no_rujukan"),
+                                        rssep.getString("kdppkrujukan"),rssep.getString("nmppkrujukan"),rssep.getString("kdppkpelayanan"),rssep.getString("nmppkpelayanan"),rssep.getString("jnspelayanan"),rssep.getString("catatan"),
+                                        rssep.getString("diagawal"),rssep.getString("nmdiagnosaawal"),rssep.getString("kdpolitujuan"),rssep.getString("nmpolitujuan"),rssep.getString("klsrawat"),rssep.getString("lakalantas").replaceAll("0","0. Bukan KLL").replaceAll("1","1. KLL Bukan KK").replaceAll("2","2. KLL dan KK").replaceAll("3","3. KK"),
+                                        rssep.getString("nmkec")+", "+rssep.getString("nmkab")+" "+rssep.getString("nmprop"),rssep.getString("user"),rssep.getString("tanggal_lahir"),rssep.getString("peserta"),rssep.getString("jkel"),
+                                        rssep.getString("no_kartu"),rssep.getString("tglpulang"),rssep.getString("asal_rujukan"),rssep.getString("eksekutif"),rssep.getString("cob"),rssep.getString("pembiayaan").replaceAll("1","1. Pribadi").replaceAll("2","2. Pemberi Kerja").replaceAll("2","3. Asuransi Lain"),rssep.getString("notelep"),
+                                        list.path("Inacbg").path("kode").asText()+" "+list.path("Inacbg").path("nama").asText(),list.path("status").asText(),list.path("noFPK").asText(),Valid.SetAngka(list.path("biaya").path("byPengajuan").asDouble()),
+                                        Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifGruper").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifRS").asDouble()),
+                                        Valid.SetAngka(list.path("biaya").path("byTopup").asDouble()),Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()-list.path("biaya").path("byTopup").asDouble()-list.path("biaya").path("byTarifRS").asDouble())
+                                    });
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif Detail : "+e);
+                            } finally{
+                                if(rssep!=null){
+                                    rssep.close();
+                                }
+                                if(pssep!=null){
+                                    pssep.close();
+                                }
                             }
-                        } catch (Exception e) {
-                            System.out.println("Notif Detail : "+e);
-                        } finally{
-                            if(rssep!=null){
-                                rssep.close();
-                            }
-                            if(pssep!=null){
-                                pssep.close();
+                        }
+                    }else{
+                        for(JsonNode list:response.path("klaim")){
+                            pssep=koneksi.prepareStatement("select * from bridging_sep_internal where bridging_sep_internal.no_sep=?");
+                            try {
+                                pssep.setString(1,list.path("noSEP").asText());
+                                rssep=pssep.executeQuery();
+                                while(rssep.next()){
+                                    if(rssep.getString("no_sep").contains(TCari.getText().trim())||rssep.getString("no_rawat").contains(TCari.getText().trim())||
+                                            rssep.getString("nomr").contains(TCari.getText().trim())||rssep.getString("nama_pasien").contains(TCari.getText().trim())||
+                                                list.path("Inacbg").path("kode").asText().contains(TCari.getText().trim())||list.path("Inacbg").path("nama").asText().contains(TCari.getText().trim())){
+                                        tabMode.addRow(new Object[]{
+                                            rssep.getString("no_sep"),rssep.getString("no_rawat"),rssep.getString("nomr"),rssep.getString("nama_pasien"),rssep.getString("tglsep"),rssep.getString("tglrujukan"),rssep.getString("no_rujukan"),
+                                            rssep.getString("kdppkrujukan"),rssep.getString("nmppkrujukan"),rssep.getString("kdppkpelayanan"),rssep.getString("nmppkpelayanan"),rssep.getString("jnspelayanan"),rssep.getString("catatan"),
+                                            rssep.getString("diagawal"),rssep.getString("nmdiagnosaawal"),rssep.getString("kdpolitujuan"),rssep.getString("nmpolitujuan"),rssep.getString("klsrawat"),rssep.getString("lakalantas").replaceAll("0","0. Bukan KLL").replaceAll("1","1. KLL Bukan KK").replaceAll("2","2. KLL dan KK").replaceAll("3","3. KK"),
+                                            rssep.getString("nmkec")+", "+rssep.getString("nmkab")+" "+rssep.getString("nmprop"),rssep.getString("user"),rssep.getString("tanggal_lahir"),rssep.getString("peserta"),rssep.getString("jkel"),
+                                            rssep.getString("no_kartu"),rssep.getString("tglpulang"),rssep.getString("asal_rujukan"),rssep.getString("eksekutif"),rssep.getString("cob"),rssep.getString("pembiayaan").replaceAll("1","1. Pribadi").replaceAll("2","2. Pemberi Kerja").replaceAll("2","3. Asuransi Lain"),rssep.getString("notelep"),
+                                            list.path("Inacbg").path("kode").asText()+" "+list.path("Inacbg").path("nama").asText(),list.path("status").asText(),list.path("noFPK").asText(),Valid.SetAngka(list.path("biaya").path("byPengajuan").asDouble()),
+                                            Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifGruper").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifRS").asDouble()),
+                                            Valid.SetAngka(list.path("biaya").path("byTopup").asDouble()),Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()-list.path("biaya").path("byTopup").asDouble()-list.path("biaya").path("byTarifRS").asDouble())
+                                        });
+                                    }
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif Detail : "+e);
+                            } finally{
+                                if(rssep!=null){
+                                    rssep.close();
+                                }
+                                if(pssep!=null){
+                                    pssep.close();
+                                }
                             }
                         }
                     }
                 }
             }else {
-                System.out.println(nameNode.path("message").asText());               
+                System.out.println(nameNode.path("message").asText());
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
@@ -1065,5 +1135,5 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
         }
     }
-    
+
 }

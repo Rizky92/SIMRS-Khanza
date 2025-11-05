@@ -524,7 +524,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
             Valid.MyReportqry("rptPiutangPeminjamanUangBelumLunas.jasper","report","::[ Rekap Piutang Peminjaman Uang Belum lunas ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -532,23 +532,23 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
         }else{
             Valid.pindah(evt, BtnBayar, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TKd);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
 
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -556,7 +556,7 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbBangsalKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -564,9 +564,9 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
                 getdata();
             }
         }
-}//GEN-LAST:event_tbBangsalKeyPressed
+    }//GEN-LAST:event_tbBangsalKeyPressed
 
-private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -574,21 +574,21 @@ private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCa
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
         }else{
             Valid.pindah(evt, TKd, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
-private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
+    private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailPiutangActionPerformed
      if(tabMode.getRowCount()==0){
         JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
         TCari.requestFocus();
@@ -606,7 +606,7 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
              JOptionPane.showMessageDialog(null,"Silahkan pilih data terlebih dahulu...!!");
          }
     }
-}//GEN-LAST:event_MnDetailPiutangActionPerformed
+    }//GEN-LAST:event_MnDetailPiutangActionPerformed
 
     private void BtnBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBayarActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -654,9 +654,9 @@ private void MnDetailPiutangActionPerformed(java.awt.event.ActionEvent evt) {//G
                             }
                             Sequel.mengedit("piutang_lainlain","nota_piutang='"+tbBangsal.getValueAt(i,1).toString()+"'","sisapiutang=sisapiutang-"+tbBangsal.getValueAt(i,10).toString());
                             Sequel.deleteTampJurnal();
-                            Sequel.insertTampJurnal(tbBangsal.getValueAt(i, 11).toString(), tbBangsal.getValueAt(i, 12).toString(), "0", tbBangsal.getValueAt(i, 10).toString());
-                            Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tbBangsal.getValueAt(i, 10).toString(), "0");
-                            sukses=jur.simpanJurnal(tbBangsal.getValueAt(i,1).toString(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                            if (sukses) sukses = Sequel.insertTampJurnal(tbBangsal.getValueAt(i, 11).toString(), tbBangsal.getValueAt(i, 12).toString(), "0", tbBangsal.getValueAt(i, 10).toString());
+                            if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tbBangsal.getValueAt(i, 10).toString(), "0");
+                            if (sukses) sukses = jur.simpanJurnal(tbBangsal.getValueAt(i,1).toString(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
                         }else{
                             sukses=false;
                         }

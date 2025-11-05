@@ -357,9 +357,6 @@
             </Component>
             <Component class="widget.TextBox" name="KodeDenda">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KodeDenda" noResource="true"/>
               </Properties>
               <Events>
@@ -397,9 +394,6 @@
             </Component>
             <Component class="widget.TextBox" name="BesarDenda">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="BesarDenda" noResource="true"/>
               </Properties>
               <Events>

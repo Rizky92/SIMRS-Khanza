@@ -39,9 +39,6 @@
     </Container>
     <Component class="widget.TextBox" name="JK">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="JK" noResource="true"/>
       </Properties>
     </Component>
@@ -530,9 +527,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="TNoRw">
                       <Properties>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="TNoRw" noResource="true"/>
                       </Properties>
                       <Events>
@@ -547,9 +541,6 @@
                     <Component class="widget.TextBox" name="TPasien">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="TPasien" noResource="true"/>
                       </Properties>
                       <Events>
@@ -587,9 +578,6 @@
                     <Component class="widget.TextBox" name="TNoRM">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="TNoRM" noResource="true"/>
                       </Properties>
                       <Events>
@@ -841,9 +829,6 @@
                     <Component class="widget.TextBox" name="NIP">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="NIP" noResource="true"/>
                       </Properties>
                       <Constraints>
@@ -895,9 +880,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="TglLahir">
                       <Properties>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="TglLahir" noResource="true"/>
                       </Properties>
                       <Constraints>
@@ -1015,10 +997,10 @@
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
-                            <StringItem index="0" value="Proses Penyakit"/>
-                            <StringItem index="1" value="Benturan"/>
-                            <StringItem index="2" value="Lain-lain"/>
-                            <StringItem index="3" value="-"/>
+                            <StringItem index="0" value="-"/>
+                            <StringItem index="1" value="Proses Penyakit"/>
+                            <StringItem index="2" value="Benturan"/>
+                            <StringItem index="3" value="Lain-lain"/>
                           </StringArray>
                         </Property>
                         <Property name="name" type="java.lang.String" value="Provokes" noResource="true"/>
@@ -1062,13 +1044,13 @@
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="7">
-                            <StringItem index="0" value="Seperti Tertusuk"/>
-                            <StringItem index="1" value="Berdenyut"/>
-                            <StringItem index="2" value="Teriris"/>
-                            <StringItem index="3" value="Tertindih"/>
-                            <StringItem index="4" value="Tertiban"/>
-                            <StringItem index="5" value="Lain-lain"/>
-                            <StringItem index="6" value="-"/>
+                            <StringItem index="0" value="-"/>
+                            <StringItem index="1" value="Seperti Tertusuk"/>
+                            <StringItem index="2" value="Berdenyut"/>
+                            <StringItem index="3" value="Teriris"/>
+                            <StringItem index="4" value="Tertindih"/>
+                            <StringItem index="5" value="Tertiban"/>
+                            <StringItem index="6" value="Lain-lain"/>
                           </StringArray>
                         </Property>
                         <Property name="name" type="java.lang.String" value="Quality" noResource="true"/>
@@ -1268,10 +1250,10 @@
                       <Properties>
                         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                           <StringArray count="4">
-                            <StringItem index="0" value="Istirahat"/>
-                            <StringItem index="1" value="Medengar Musik"/>
-                            <StringItem index="2" value="Minum Obat"/>
-                            <StringItem index="3" value="-"/>
+                            <StringItem index="0" value="-"/>
+                            <StringItem index="1" value="Istirahat"/>
+                            <StringItem index="2" value="Medengar Musik"/>
+                            <StringItem index="3" value="Minum Obat"/>
                           </StringArray>
                         </Property>
                         <Property name="name" type="java.lang.String" value="NyeriHilang" noResource="true"/>

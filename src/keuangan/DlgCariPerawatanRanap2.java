@@ -11,6 +11,10 @@
 
 package keuangan;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -49,7 +53,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                               pstindakan,pstindakan2,pstindakan3,pshapustindakan,pshapustindakan2,pshapustindakan3,psrekening;
     private ResultSet rs,rstindakan,rstarif,rsrekening;
     private String pilihtable="",kd_pj="",kd_bangsal="",ruang_ranap="Yes", cara_bayar_ranap="Yes",kelas="",kelas_ranap="Yes";
-    private boolean[] pagi,siang,sore,malam; 
+    private boolean[] pagi,siang,sore,malam;
     private boolean pg=false,sg=false,sr=false,mlm=false;
     private boolean sukses=false;
     private String[] kode,nama,kategori,kelastarif;
@@ -63,9 +67,11 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private String Suspen_Piutang_Tindakan_Ranap="",Tindakan_Ranap="",Beban_Jasa_Medik_Dokter_Tindakan_Ranap="",Utang_Jasa_Medik_Dokter_Tindakan_Ranap="",
             Beban_Jasa_Medik_Paramedis_Tindakan_Ranap="",Utang_Jasa_Medik_Paramedis_Tindakan_Ranap="",Beban_KSO_Tindakan_Ranap="",Utang_KSO_Tindakan_Ranap="",
             Beban_Jasa_Sarana_Tindakan_Ranap="",Utang_Jasa_Sarana_Tindakan_Ranap="",Beban_Jasa_Menejemen_Tindakan_Ranap="",Utang_Jasa_Menejemen_Tindakan_Ranap="",
-            HPP_BHP_Tindakan_Ranap="",Persediaan_BHP_Tindakan_Ranap="";    
+            HPP_BHP_Tindakan_Ranap="",Persediaan_BHP_Tindakan_Ranap="", where;
+    private final ObjectMapper mapper = new ObjectMapper();
+    private ObjectNode tindakanTerinput;
     public DlgKtgPerawatan ktg=new DlgKtgPerawatan(null,false);
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -78,26 +84,26 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         Object[] row={"Pagi","Siang","Sore","Malam","Kode","Nama Perawatan","Kategori Perawatan",
                       "Tarif/Biaya","Bagian RS","BHP","JM Dokter","JM Perawat","KSO","Menejemen","Kelas"};
         tabMode=new DefaultTableModel(null,row){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
+            @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if ((colIndex==0)||(colIndex==1)||(colIndex==2)||(colIndex==3)) {
                     a=true;
                 }
                 return a;
-             }
-             Class[] types = new Class[] {
-                java.lang.Boolean.class,java.lang.Boolean.class,java.lang.Boolean.class,java.lang.Boolean.class, 
+            }
+            Class[] types = new Class[] {
+                java.lang.Boolean.class,java.lang.Boolean.class,java.lang.Boolean.class,java.lang.Boolean.class,
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,java.lang.Double.class,
                 java.lang.Double.class, java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,
                 java.lang.Double.class,java.lang.Double.class, java.lang.Object.class
-             };
-             /*Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-             };*/
-             @Override
-             public Class getColumnClass(int columnIndex) {
+            };
+            /*Class[] types = new Class[] {
+            java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+            };*/
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
@@ -129,7 +135,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -151,8 +157,8 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -163,7 +169,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -175,7 +181,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -183,7 +189,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     switch (pilihtable) {
                         case "rawat_inap_pr":
                             kddokter.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
@@ -192,11 +198,11 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                             break;
                         case "rawat_inap_drpr":
                             KdPtg2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-                            NmPtg2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());                        
+                            NmPtg2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                             KdPtg2.requestFocus();
                             break;
                     }
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -207,7 +213,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ktg.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -215,10 +221,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ktg.getTable().getSelectedRow()!= -1){                   
+                if(ktg.getTable().getSelectedRow()!= -1){
                     KdKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
                     NmKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),2).toString());
-                }     
+                }
                 KdKtg.requestFocus();
             }
             @Override
@@ -230,7 +236,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ktg.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -243,7 +249,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         TCari.requestFocus();
         try {
             psrekening=koneksi.prepareStatement("select * from set_akun_ranap");
@@ -274,11 +280,11 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                 if(psrekening!=null){
                     psrekening.close();
                 }
-            }            
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         try {
             pstarif=koneksi.prepareStatement("select * from set_tarif");
             try {
@@ -306,7 +312,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             System.out.println(e);
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -419,7 +425,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         });
         Popup.add(ppPetugasDokter);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
 
         TPasien.setFocusTraversalPolicyProvider(true);
@@ -429,11 +434,11 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -471,14 +476,9 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(55, 23));
         panelisi3.add(jLabel4);
 
-        KdKtg.setHighlighter(null);
+        KdKtg.setEditable(false);
         KdKtg.setName("KdKtg"); // NOI18N
         KdKtg.setPreferredSize(new java.awt.Dimension(50, 23));
-        KdKtg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                KdKtgActionPerformed(evt);
-            }
-        });
         KdKtg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 KdKtgKeyPressed(evt);
@@ -487,7 +487,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         panelisi3.add(KdKtg);
 
         NmKtg.setEditable(false);
-        NmKtg.setHighlighter(null);
         NmKtg.setName("NmKtg"); // NOI18N
         NmKtg.setPreferredSize(new java.awt.Dimension(140, 23));
         NmKtg.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -617,15 +616,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         FormInput.setLayout(null);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-07-2020" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-08-2025" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
-        DTPTgl.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DTPTglKeyPressed(evt);
-            }
-        });
         FormInput.add(DTPTgl);
         DTPTgl.setBounds(685, 10, 120, 23);
 
@@ -634,7 +628,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(0, 10, 60, 23);
 
-        kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
         kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -645,7 +638,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         kddokter.setBounds(63, 10, 100, 23);
 
         nmdokter.setEditable(false);
-        nmdokter.setHighlighter(null);
         nmdokter.setName("nmdokter"); // NOI18N
         FormInput.add(nmdokter);
         nmdokter.setBounds(165, 10, 367, 23);
@@ -672,7 +664,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         FormInput.add(LblPetugas);
         LblPetugas.setBounds(0, 40, 60, 23);
 
-        KdPtg2.setHighlighter(null);
         KdPtg2.setName("KdPtg2"); // NOI18N
         KdPtg2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -683,7 +674,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         KdPtg2.setBounds(63, 40, 100, 23);
 
         NmPtg2.setEditable(false);
-        NmPtg2.setHighlighter(null);
         NmPtg2.setName("NmPtg2"); // NOI18N
         FormInput.add(NmPtg2);
         NmPtg2.setBounds(165, 40, 367, 23);
@@ -718,11 +708,11 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -730,12 +720,12 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-        TCari.setText("");
+        emptTeks();
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -743,7 +733,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tbKamar.getRowCount()!=0){
@@ -751,29 +741,29 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-            
+
             if(evt.getClickCount()==2){
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tbKamar.getRowCount()!=0){
             if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                try {                    
+                try {
                     if(tbKamar.getSelectedRow()>-1){
                         i=tbKamar.getSelectedColumn();
                         if(i==0){
-                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),0);             
+                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),0);
                         }else if(i==1){
-                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),1);             
+                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),1);
                         }else if(i==2){
-                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),2);             
+                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),2);
                         }else if(i==3){
-                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),3);             
-                        }                           
-                    }                                          
+                            tbKamar.setValueAt(true,tbKamar.getSelectedRow(),3);
+                        }
+                    }
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
@@ -789,7 +779,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -804,10 +794,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         perawatan.setLocationRelativeTo(internalFrame1);
         perawatan.setAlwaysOnTop(false);
         perawatan.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());           
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
-private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||kddokter.getText().trim().equals("")){
             Valid.textKosong(TCari,"Pasien & Dokter");
         }else{
@@ -818,986 +808,19 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     simpan2();
                 }
             }
-            /*
-            try {          
-                if(pilihtable.equals("rawat_inap_dr")||pilihtable.equals("rawat_inap_pr")||pilihtable.equals("rawat_inap_drpr")){
-                    Sequel.AutoComitFalse();
-                    sukses=true;   
-                    ttljmdokter=0;ttljmperawat=0;ttlkso=0;ttlpendapatan=0;ttljasasarana=0;ttlbhp=0;ttlmenejemen=0;
-                    hapusttljasasarana=0;hapusttlbhp=0;hapusttlmenejemen=0;hapusttljmdokter=0;hapusttljmperawat=0;
-                    hapusttlkso=0;hapusttlpendapatan=0;
-                    for(i=0;i<tbKamar.getRowCount();i++){                                                              
-                        pg=false;
-                        sg=false;
-                        sr=false;
-                        mlm=false;
-                        switch (pilihtable) {
-                            case "rawat_inap_dr":
-                                pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                    "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                                try {
-                                    pstindakan.setString(1,TNoRw.getText());
-                                    pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan.setString(4,"00:00:01");
-                                    pstindakan.setString(5,"10:00:00");
-                                    rstindakan=pstindakan.executeQuery();
-                                    if(rstindakan.next()){
-                                        pg=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,0).toString().equals("true")&&(pg==false)){
-                                        psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
-                                        try {                                                
-                                            psinputrawatdr.setString(1,TNoRw.getText());
-                                            psinputrawatdr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdr.setString(3,kddokter.getText());
-                                            psinputrawatdr.setString(4,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatdr.setString(5,"07:00:00");
-                                            psinputrawatdr.setString(6,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatdr.setString(7,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatdr.setString(8,tbKamar.getValueAt(i,10).toString());
-                                            psinputrawatdr.setString(9,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatdr.setString(10,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatdr.setString(11,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatdr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( psinputrawatdr != null){
-                                                psinputrawatdr.close();
-                                           }
-                                        }
-                                        if(sukses==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,0).toString().equals("false")&&(pg==true)){
-                                        pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                            "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan.setString(1,TNoRw.getText());
-                                            pshapustindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan.setString(4,"07:00:00");
-                                            pshapustindakan.executeUpdate(); 
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan != null){
-                                                pshapustindakan.close();
-                                           }
-                                        }   
-                                        if(sukses==true){
-                                            hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-
-                                    pstindakan.setString(1,TNoRw.getText());
-                                    pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan.setString(4,"10:00:01");
-                                    pstindakan.setString(5,"15:00:00");
-                                    rstindakan=pstindakan.executeQuery();
-                                    if(rstindakan.next()){
-                                        sg=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,1).toString().equals("true")&&(sg==false)){
-                                        psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
-                                        try {
-                                            psinputrawatdr.setString(1,TNoRw.getText());
-                                            psinputrawatdr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdr.setString(3,kddokter.getText());
-                                            psinputrawatdr.setString(4,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatdr.setString(5,"12:00:00");
-                                            psinputrawatdr.setString(6,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatdr.setString(7,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatdr.setString(8,tbKamar.getValueAt(i,10).toString());
-                                            psinputrawatdr.setString(9,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatdr.setString(10,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatdr.setString(11,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatdr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                            if(psinputrawatdr != null){
-                                                psinputrawatdr.close();
-                                            }
-                                        }            
-                                        if(sukses==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,1).toString().equals("false")&&(sg==true)){
-                                        pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                                "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan.setString(1,TNoRw.getText());
-                                            pshapustindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan.setString(4,"12:00:00");
-                                            pshapustindakan.executeUpdate(); 
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan != null){
-                                                pshapustindakan.close();
-                                           }
-                                        } 
-                                        if(sukses==true){
-                                            hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-
-                                    pstindakan.setString(1,TNoRw.getText());
-                                    pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan.setString(4,"15:00:01");
-                                    pstindakan.setString(5,"19:00:00");
-                                    rstindakan=pstindakan.executeQuery();
-                                    if(rstindakan.next()){
-                                        sr=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,2).toString().equals("true")&&(sr==false)){
-                                        psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
-                                        try {
-                                            psinputrawatdr.setString(1,TNoRw.getText());
-                                            psinputrawatdr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdr.setString(3,kddokter.getText());
-                                            psinputrawatdr.setString(4,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatdr.setString(5,"16:00:00");
-                                            psinputrawatdr.setString(6,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatdr.setString(7,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatdr.setString(8,tbKamar.getValueAt(i,10).toString());
-                                            psinputrawatdr.setString(9,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatdr.setString(10,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatdr.setString(11,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatdr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                            if(psinputrawatdr != null){
-                                                psinputrawatdr.close();
-                                            }
-                                        }
-                                        if(sukses==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,2).toString().equals("false")&&(sr==true)){
-                                        pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                                "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan.setString(1,TNoRw.getText());
-                                            pshapustindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan.setString(4,"16:00:00");
-                                            pshapustindakan.executeUpdate();  
-                                        }  catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan != null){
-                                                pshapustindakan.close();
-                                           }
-                                        } 
-                                        if(sukses==true){
-                                            hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-
-                                    pstindakan.setString(1,TNoRw.getText());
-                                    pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan.setString(4,"19:00:01");
-                                    pstindakan.setString(5,"23:59:59");
-                                    rstindakan=pstindakan.executeQuery();
-                                    if(rstindakan.next()){
-                                        mlm=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,3).toString().equals("true")&&(mlm==false)){
-                                        psinputrawatdr=koneksi.prepareStatement("insert into rawat_inap_dr values(?,?,?,?,?,?,?,?,?,?,?)");
-                                        try {
-                                            psinputrawatdr.setString(1,TNoRw.getText());
-                                            psinputrawatdr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdr.setString(3,kddokter.getText());
-                                            psinputrawatdr.setString(4,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatdr.setString(5,"20:00:00");
-                                            psinputrawatdr.setString(6,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatdr.setString(7,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatdr.setString(8,tbKamar.getValueAt(i,10).toString());
-                                            psinputrawatdr.setString(9,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatdr.setString(10,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatdr.setString(11,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatdr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notfikasi : "+e);
-                                        } finally{
-                                            if(psinputrawatdr != null){
-                                                psinputrawatdr.close();
-                                            }
-                                        }
-                                        if(sukses==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,3).toString().equals("false")&&(mlm==true)){
-                                        pshapustindakan=koneksi.prepareStatement("delete from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                                "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan.setString(1,TNoRw.getText());
-                                            pshapustindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan.setString(4,"20:00:00");
-                                            pshapustindakan.executeUpdate(); 
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan != null){
-                                                pshapustindakan.close();
-                                           }
-                                        }   
-                                        if(sukses==true){
-                                            hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                    sukses=false;
-                                    System.out.println("Notifikasi : "+e);
-                                } finally{
-                                    if(rstindakan != null){
-                                        rstindakan.close();
-                                    }
-                                    if(pstindakan != null){
-                                        pstindakan.close();
-                                    }
-                                }
-                                break;
-                            case "rawat_inap_pr":    
-                                pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                    "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                                try {
-                                    pstindakan2.setString(1,TNoRw.getText());
-                                    pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan2.setString(4,"00:00:01");
-                                    pstindakan2.setString(5,"10:00:00");
-                                    rstindakan=pstindakan2.executeQuery();
-                                    if(rstindakan.next()){
-                                        pg=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,0).toString().equals("true")&&(pg==false)){
-                                        psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
-                                        try {
-                                            psinputrawatpr.setString(1,TNoRw.getText());
-                                            psinputrawatpr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatpr.setString(3,kddokter.getText());
-                                            psinputrawatpr.setString(4,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatpr.setString(5,"07:00:00");
-                                            psinputrawatpr.setString(6,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatpr.setString(7,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatpr.setString(8,tbKamar.getValueAt(i,11).toString());
-                                            psinputrawatpr.setString(9,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatpr.setString(10,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatpr.setString(11,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatpr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                           if(psinputrawatpr != null){
-                                               psinputrawatpr.close();
-                                           } 
-                                        }       
-                                        if(sukses==true){
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,0).toString().equals("false")&&(pg==true)){
-                                        pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                                "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan2.setString(1,TNoRw.getText());
-                                            pshapustindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan2.setString(4,"07:00:00");
-                                            pshapustindakan2.executeUpdate();  
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan2 != null){
-                                                pshapustindakan2.close();
-                                           }
-                                        } 
-                                        if(sukses==true){
-                                            hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-
-                                    pstindakan2.setString(1,TNoRw.getText());
-                                    pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan2.setString(4,"10:00:01");
-                                    pstindakan2.setString(5,"15:00:00");
-                                    rstindakan=pstindakan2.executeQuery();
-                                    if(rstindakan.next()){
-                                        sg=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,1).toString().equals("true")&&(sg==false)){
-                                        psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
-                                        try {
-                                            psinputrawatpr.setString(1,TNoRw.getText());
-                                            psinputrawatpr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatpr.setString(3,kddokter.getText());
-                                            psinputrawatpr.setString(4,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatpr.setString(5,"12:00:00");
-                                            psinputrawatpr.setString(6,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatpr.setString(7,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatpr.setString(8,tbKamar.getValueAt(i,11).toString());
-                                            psinputrawatpr.setString(9,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatpr.setString(10,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatpr.setString(11,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatpr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                           if(psinputrawatpr != null){
-                                               psinputrawatpr.close();
-                                           } 
-                                        }
-                                        if(sukses==true){
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,1).toString().equals("false")&&(sg==true)){
-                                        pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                                "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan2.setString(1,TNoRw.getText());
-                                            pshapustindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan2.setString(4,"12:00:00");
-                                            pshapustindakan2.executeUpdate();   
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                            if( pshapustindakan2 != null){
-                                                pshapustindakan2.close();
-                                            }
-                                        } 
-                                        if(sukses==true){
-                                            hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-
-                                    pstindakan2.setString(1,TNoRw.getText());
-                                    pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan2.setString(4,"15:00:01");
-                                    pstindakan2.setString(5,"19:00:00");
-                                    rstindakan=pstindakan2.executeQuery();
-                                    if(rstindakan.next()){
-                                        sr=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,2).toString().equals("true")&&(sr==false)){
-                                        psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
-                                        try {
-                                            psinputrawatpr.setString(1,TNoRw.getText());
-                                            psinputrawatpr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatpr.setString(3,kddokter.getText());
-                                            psinputrawatpr.setString(4,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatpr.setString(5,"16:00:00");
-                                            psinputrawatpr.setString(6,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatpr.setString(7,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatpr.setString(8,tbKamar.getValueAt(i,11).toString());
-                                            psinputrawatpr.setString(9,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatpr.setString(10,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatpr.setString(11,tbKamar.getValueAt(i,7).toString()); 
-                                            psinputrawatpr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                           if(psinputrawatpr != null){
-                                               psinputrawatpr.close();
-                                           } 
-                                        }
-                                        if(sukses==true){
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,2).toString().equals("false")&&(sr==true)){
-                                        pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                                "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan2.setString(1,TNoRw.getText());
-                                            pshapustindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan2.setString(4,"16:00:00");
-                                            pshapustindakan2.executeUpdate();   
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                            if( pshapustindakan2 != null){
-                                                pshapustindakan2.close();
-                                            }
-                                        }
-                                        if(sukses==true){
-                                            hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }       
-
-                                    pstindakan2.setString(1,TNoRw.getText());
-                                    pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan2.setString(4,"19:00:01");
-                                    pstindakan2.setString(5,"23:59:59");
-                                    rstindakan=pstindakan2.executeQuery();
-                                    if(rstindakan.next()){
-                                        mlm=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,3).toString().equals("true")&&(mlm==false)){
-                                        psinputrawatpr=koneksi.prepareStatement("insert into rawat_inap_pr values(?,?,?,?,?,?,?,?,?,?,?)");
-                                        try {
-                                            psinputrawatpr.setString(1,TNoRw.getText());
-                                            psinputrawatpr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatpr.setString(3,kddokter.getText());
-                                            psinputrawatpr.setString(4,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatpr.setString(5,"20:00:00");
-                                            psinputrawatpr.setString(6,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatpr.setString(7,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatpr.setString(8,tbKamar.getValueAt(i,11).toString());
-                                            psinputrawatpr.setString(9,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatpr.setString(10,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatpr.setString(11,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatpr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                           if(psinputrawatpr != null){
-                                               psinputrawatpr.close();
-                                           } 
-                                        }
-                                        if(sukses==true){
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,3).toString().equals("false")&&(mlm==true)){
-                                        pshapustindakan2=koneksi.prepareStatement("delete from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                                "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan2.setString(1,TNoRw.getText());
-                                            pshapustindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan2.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan2.setString(4,"20:00:00");
-                                            pshapustindakan2.executeUpdate();  
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                            if( pshapustindakan2 != null){
-                                                pshapustindakan2.close();
-                                            }
-                                        }  
-                                        if(sukses==true){
-                                            hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                    sukses=false;
-                                    System.out.println("Notifikasi : "+e);
-                                } finally{
-                                    if(rstindakan != null){
-                                        rstindakan.close();
-                                    }
-                                    if(pstindakan2 != null){
-                                        pstindakan2.close();
-                                    }
-                                }
-
-                                break;
-                            case "rawat_inap_drpr": 
-                                pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                        "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                                try {
-                                    pstindakan3.setString(1,TNoRw.getText());
-                                    pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan3.setString(4,"00:00:01");
-                                    pstindakan3.setString(5,"10:00:00");
-                                    rstindakan=pstindakan3.executeQuery();
-                                    if(rstindakan.next()){
-                                        pg=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,0).toString().equals("true")&&(pg==false)){
-                                        psinputrawatdrpr=koneksi.prepareStatement("insert into rawat_inap_drpr values(?,?,?,?,?,?,?,?,?,?,?,?,?)");             
-                                        try {                                                
-                                            psinputrawatdrpr.setString(1,TNoRw.getText());
-                                            psinputrawatdrpr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdrpr.setString(3,kddokter.getText());
-                                            psinputrawatdrpr.setString(4,KdPtg2.getText());
-                                            psinputrawatdrpr.setString(5,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatdrpr.setString(6,"07:00:00");
-                                            psinputrawatdrpr.setString(7,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatdrpr.setString(8,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatdrpr.setString(9,tbKamar.getValueAt(i,10).toString());
-                                            psinputrawatdrpr.setString(10,tbKamar.getValueAt(i,11).toString());
-                                            psinputrawatdrpr.setString(11,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatdrpr.setString(12,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatdrpr.setString(13,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatdrpr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                           if(psinputrawatdrpr != null){
-                                               psinputrawatdrpr.close();
-                                           } 
-                                        }  
-                                        if(sukses==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,0).toString().equals("false")&&(pg==true)){
-                                        pshapustindakan3=koneksi.prepareStatement("delete from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan3.setString(1,TNoRw.getText());
-                                            pshapustindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan3.setString(4,"07:00:00");
-                                            pshapustindakan3.executeUpdate(); 
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan3 != null){
-                                                pshapustindakan3.close();
-                                           }
-                                        }  
-                                        if(sukses==true){
-                                            hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-
-                                    pstindakan3.setString(1,TNoRw.getText());
-                                    pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan3.setString(4,"10:00:01");
-                                    pstindakan3.setString(5,"15:00:00");
-                                    rstindakan=pstindakan3.executeQuery();
-                                    if(rstindakan.next()){
-                                        sg=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,1).toString().equals("true")&&(sg==false)){
-                                        psinputrawatdrpr=koneksi.prepareStatement("insert into rawat_inap_drpr values(?,?,?,?,?,?,?,?,?,?,?,?,?)");         
-                                        try {
-                                            psinputrawatdrpr.setString(1,TNoRw.getText());
-                                            psinputrawatdrpr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdrpr.setString(3,kddokter.getText());
-                                            psinputrawatdrpr.setString(4,KdPtg2.getText());
-                                            psinputrawatdrpr.setString(5,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatdrpr.setString(6,"12:00:00");
-                                            psinputrawatdrpr.setString(7,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatdrpr.setString(8,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatdrpr.setString(9,tbKamar.getValueAt(i,10).toString());
-                                            psinputrawatdrpr.setString(10,tbKamar.getValueAt(i,11).toString());
-                                            psinputrawatdrpr.setString(11,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatdrpr.setString(12,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatdrpr.setString(13,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatdrpr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                           if(psinputrawatdrpr != null){
-                                               psinputrawatdrpr.close();
-                                           } 
-                                        }                    
-                                        if(sukses==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,1).toString().equals("false")&&(sg==true)){
-                                        pshapustindakan3=koneksi.prepareStatement("delete from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan3.setString(1,TNoRw.getText());
-                                            pshapustindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan3.setString(4,"12:00:00");
-                                            pshapustindakan3.executeUpdate(); 
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan3 != null){
-                                                pshapustindakan3.close();
-                                           }
-                                        } 
-                                        if(sukses==true){
-                                            hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-
-                                    pstindakan3.setString(1,TNoRw.getText());
-                                    pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan3.setString(4,"15:00:01");
-                                    pstindakan3.setString(5,"19:00:00");
-                                    rstindakan=pstindakan3.executeQuery();
-                                    if(rstindakan.next()){
-                                        sr=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,2).toString().equals("true")&&(sr==false)){
-                                        psinputrawatdrpr=koneksi.prepareStatement("insert into rawat_inap_drpr values(?,?,?,?,?,?,?,?,?,?,?,?,?)");             
-                                        try {
-                                            psinputrawatdrpr.setString(1,TNoRw.getText());
-                                            psinputrawatdrpr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdrpr.setString(3,kddokter.getText());
-                                            psinputrawatdrpr.setString(4,KdPtg2.getText());
-                                            psinputrawatdrpr.setString(5,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatdrpr.setString(6,"16:00:00");
-                                            psinputrawatdrpr.setString(7,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatdrpr.setString(8,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatdrpr.setString(9,tbKamar.getValueAt(i,10).toString());
-                                            psinputrawatdrpr.setString(10,tbKamar.getValueAt(i,11).toString());
-                                            psinputrawatdrpr.setString(11,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatdrpr.setString(12,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatdrpr.setString(13,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatdrpr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                           if(psinputrawatdrpr != null){
-                                               psinputrawatdrpr.close();
-                                           } 
-                                        }
-                                        if(sukses==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,2).toString().equals("false")&&(sr==true)){
-                                        pshapustindakan3=koneksi.prepareStatement("delete from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan3.setString(1,TNoRw.getText());
-                                            pshapustindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan3.setString(4,"16:00:00");
-                                            pshapustindakan3.executeUpdate();     
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan3 != null){
-                                                pshapustindakan3.close();
-                                           }
-                                        } 
-                                        if(sukses==true){
-                                            hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-
-                                    pstindakan3.setString(1,TNoRw.getText());
-                                    pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                    pstindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
-                                    pstindakan3.setString(4,"19:00:01");
-                                    pstindakan3.setString(5,"23:59:59");
-                                    rstindakan=pstindakan3.executeQuery();
-                                    if(rstindakan.next()){
-                                        mlm=true;
-                                    }
-                                    if(tbKamar.getValueAt(i,3).toString().equals("true")&&(mlm==false)){
-                                        psinputrawatdrpr=koneksi.prepareStatement("insert into rawat_inap_drpr values(?,?,?,?,?,?,?,?,?,?,?,?,?)");             
-                                        try {
-                                            psinputrawatdrpr.setString(1,TNoRw.getText());
-                                            psinputrawatdrpr.setString(2,tbKamar.getValueAt(i,4).toString());
-                                            psinputrawatdrpr.setString(3,kddokter.getText());
-                                            psinputrawatdrpr.setString(4,KdPtg2.getText());
-                                            psinputrawatdrpr.setString(5,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            psinputrawatdrpr.setString(6,"20:00:00");
-                                            psinputrawatdrpr.setString(7,tbKamar.getValueAt(i,8).toString());
-                                            psinputrawatdrpr.setString(8,tbKamar.getValueAt(i,9).toString());
-                                            psinputrawatdrpr.setString(9,tbKamar.getValueAt(i,10).toString());
-                                            psinputrawatdrpr.setString(10,tbKamar.getValueAt(i,11).toString());
-                                            psinputrawatdrpr.setString(11,tbKamar.getValueAt(i,12).toString());
-                                            psinputrawatdrpr.setString(12,tbKamar.getValueAt(i,13).toString());
-                                            psinputrawatdrpr.setString(13,tbKamar.getValueAt(i,7).toString());
-                                            psinputrawatdrpr.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        } finally{
-                                           if(psinputrawatdrpr != null){
-                                               psinputrawatdrpr.close();
-                                           } 
-                                        }
-                                        if(sukses==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }else if(tbKamar.getValueAt(i,3).toString().equals("false")&&(mlm==true)){
-                                        pshapustindakan3=koneksi.prepareStatement("delete from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat=?");
-                                        try {
-                                            pshapustindakan3.setString(1,TNoRw.getText());
-                                            pshapustindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                            pshapustindakan3.setString(3,tbKamar.getValueAt(i,4).toString());
-                                            pshapustindakan3.setString(4,"20:00:00");
-                                            pshapustindakan3.executeUpdate();
-                                        } catch (Exception e) {
-                                            sukses=false;
-                                            System.out.println("Notifikasi : "+e);
-                                        }finally{
-                                           if( pshapustindakan3 != null){
-                                                pshapustindakan3.close();
-                                           }
-                                        } 
-                                        if(sukses==true){
-                                            hapusttljmdokter=hapusttljmdokter+Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                                            hapusttljmperawat=hapusttljmperawat+Double.parseDouble(tbKamar.getValueAt(i,11).toString());
-                                            hapusttlkso=hapusttlkso+Double.parseDouble(tbKamar.getValueAt(i,12).toString());
-                                            hapusttlpendapatan=hapusttlpendapatan+Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                                            hapusttlmenejemen=hapusttlmenejemen+Double.parseDouble(tbKamar.getValueAt(i,13).toString());
-                                            hapusttljasasarana=hapusttljasasarana+Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                                            hapusttlbhp=hapusttlbhp+Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                                        }
-                                    }
-                                } catch (Exception e) {
-                                    sukses=false;
-                                    System.out.println("Notifikasi : "+e);
-                                } finally{
-                                    if(rstindakan != null){
-                                        rstindakan.close();
-                                    }
-                                    if(pstindakan3 != null){
-                                        pstindakan3.close();
-                                    }
-                                }
-
-                                break;
-                        }                             
-                    } 
-                     
-                    if(sukses==true){
-                        Sequel.deleteTampJurnal();
-                        if(hapusttlpendapatan>0){
-                            Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, hapusttlpendapatan);
-                            Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Ranap", hapusttlpendapatan, 0);
-                        }
-                        if(hapusttljmdokter>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, hapusttljmdokter);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", hapusttljmdokter, 0);
-                        }
-                        if(hapusttljmperawat>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, hapusttljmperawat);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", hapusttljmperawat, 0);
-                        }
-                        if(hapusttlkso>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, hapusttlkso);
-                            Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", hapusttlkso, 0);
-                        }
-                        if(hapusttlmenejemen>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, hapusttlmenejemen);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", hapusttlmenejemen, 0);
-                        }
-                        if(hapusttljasasarana>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, hapusttljasasarana);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", hapusttljasasarana, 0);
-                        }
-                        if(hapusttlbhp>0){
-                            Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, hapusttlbhp);
-                            Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", hapusttlbhp, 0);
-                        }
-                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN OLEH "+akses.getkode());  
-                    }
-                                                                      
-                    if(sukses==true){
-                        Sequel.deleteTampJurnal();
-                        if(ttlpendapatan>0){
-                            Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", ttlpendapatan, 0);
-                            Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Ranap", 0, ttlpendapatan);
-                        }
-                        if(ttljmdokter>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
-                        }
-                        if(ttljmperawat>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
-                        }
-                        if(ttlkso>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, ttlkso);
-                        }
-                        if(ttljasasarana>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
-                        }
-                        if(ttlbhp>0){
-                            Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", ttlbhp, 0);
-                            Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, ttlbhp);
-                        }
-                        if(ttlmenejemen>0){
-                            Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
-                            Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
-                        }
-                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());   
-                    }
-                                                                     
-                    if(sukses==true){
-                        Sequel.Commit();
-                        JOptionPane.showMessageDialog(null,"Proses simpan selesai...!"); 
-                        tampil2();
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
-                    }
-
-                    Sequel.AutoComitTrue();
-                }  
-            } catch (Exception ex) {
-                System.out.println(ex);
-                JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
-            }
-            */
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
-private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbKamar.getRowCount();i++){ 
-                tbKamar.setValueAt(false,i,0);
-            }
-}//GEN-LAST:event_ppBersihkanActionPerformed
+    private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
+        for(i=0;i<tbKamar.getRowCount();i++){
+            tbKamar.setValueAt(false,i,0);
+            tbKamar.setValueAt(false,i,1);
+            tbKamar.setValueAt(false,i,2);
+            tbKamar.setValueAt(false,i,3);
+        }
+    }//GEN-LAST:event_ppBersihkanActionPerformed
 
-private void DTPTglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTglKeyPressed
-      // Valid.pindah(evt,TTensi,cmbJam);
-}//GEN-LAST:event_DTPTglKeyPressed
-
-private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
+    private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             switch (pilihtable) {
                 case "rawat_inap_dr":
@@ -1814,12 +837,12 @@ private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             btnDokterActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
             TCari.requestFocus();
-        }else{            
+        }else{
             Valid.pindah(evt,BtnKeluar,TCari);
         }
-}//GEN-LAST:event_kddokterKeyPressed
+    }//GEN-LAST:event_kddokterKeyPressed
 
-private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterActionPerformed
+    private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterActionPerformed
         switch (pilihtable) {
             case "rawat_inap_dr":
                 dokter.isCek();
@@ -1841,36 +864,35 @@ private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 dokter.setLocationRelativeTo(internalFrame1);
                 dokter.setAlwaysOnTop(false);
                 dokter.setVisible(true);
-                break;      
-        }       
-}//GEN-LAST:event_btnDokterActionPerformed
+                break;
+        }
+    }//GEN-LAST:event_btnDokterActionPerformed
 
-private void ppDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDokterActionPerformed
-    pilihtable="rawat_inap_dr";
-    jLabel5.setText("Dokter :");
-    kddokter.setText("");
-    nmdokter.setText("");
-    LblPetugas.setVisible(false);
-    KdPtg2.setVisible(false);
-    NmPtg2.setVisible(false);
-    btnPetugas.setVisible(false);
-    FormInput.setPreferredSize(new Dimension(WIDTH, 44));
-    tampil();
-        
-}//GEN-LAST:event_ppDokterActionPerformed
+    private void ppDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDokterActionPerformed
+        pilihtable="rawat_inap_dr";
+        jLabel5.setText("Dokter :");
+        kddokter.setText("");
+        nmdokter.setText("");
+        LblPetugas.setVisible(false);
+        KdPtg2.setVisible(false);
+        NmPtg2.setVisible(false);
+        btnPetugas.setVisible(false);
+        FormInput.setPreferredSize(new Dimension(WIDTH, 44));
+        tampil();
+    }//GEN-LAST:event_ppDokterActionPerformed
 
-private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPetugasActionPerformed
-    pilihtable="rawat_inap_pr";
-    jLabel5.setText("Petugas :");
-    kddokter.setText("");
-    nmdokter.setText(""); 
-    LblPetugas.setVisible(false);
-    KdPtg2.setVisible(false);
-    NmPtg2.setVisible(false);
-    btnPetugas.setVisible(false);  
-    FormInput.setPreferredSize(new Dimension(WIDTH, 44));
-    tampil();
-}//GEN-LAST:event_ppPetugasActionPerformed
+    private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPetugasActionPerformed
+        pilihtable="rawat_inap_pr";
+        jLabel5.setText("Petugas :");
+        kddokter.setText("");
+        nmdokter.setText("");
+        LblPetugas.setVisible(false);
+        KdPtg2.setVisible(false);
+        NmPtg2.setVisible(false);
+        btnPetugas.setVisible(false);
+        FormInput.setPreferredSize(new Dimension(WIDTH, 44));
+        tampil();
+    }//GEN-LAST:event_ppPetugasActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         TCari.requestFocus();
@@ -1883,7 +905,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             btnPetugasActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
             TCari.requestFocus();
-        }else{            
+        }else{
             Valid.pindah(evt,BtnKeluar,TCari);
         }
     }//GEN-LAST:event_KdPtg2KeyPressed
@@ -1898,7 +920,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
     private void ppPetugasDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPetugasDokterActionPerformed
         pilihtable="rawat_inap_drpr";
-        jLabel5.setText(" Dokter :");
+        jLabel5.setText("Dokter :");
         kddokter.setText("");
         nmdokter.setText("");
         LblPetugas.setVisible(true);
@@ -1909,13 +931,9 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         tampil();
     }//GEN-LAST:event_ppPetugasDokterActionPerformed
 
-    private void KdKtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KdKtgActionPerformed
-
-    }//GEN-LAST:event_KdKtgActionPerformed
-
     private void KdKtgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKtgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            isktg();
+            Sequel.cariIsi("select kategori_perawatan.nm_kategori from kategori_perawatan where kategori_perawatan.kd_kategori=? ",NmKtg,KdKtg.getText());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnKategoriActionPerformed(null);
         }else{
@@ -1939,7 +957,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }//GEN-LAST:event_btnKategoriKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1996,1021 +1014,307 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() { 
-        try{  
-            jml=0;
-            for(i=0;i<tbKamar.getRowCount();i++){
-                if(tbKamar.getValueAt(i,0).toString().equals("true")||tbKamar.getValueAt(i,1).toString().equals("true")||
-                        tbKamar.getValueAt(i,2).toString().equals("true")||tbKamar.getValueAt(i,3).toString().equals("true")){
-                    jml++;
+    public void tampil() {
+        try {
+            ArrayNode tindakan = mapper.createArrayNode();
+            where = "";
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if ((Boolean) tbKamar.getValueAt(i, 0)
+                    || (Boolean) tbKamar.getValueAt(i, 1)
+                    || (Boolean) tbKamar.getValueAt(i, 2)
+                    || (Boolean) tbKamar.getValueAt(i, 3)
+                ) {
+                    ObjectNode row = mapper.createObjectNode();
+                    row.put("pg", (Boolean) tbKamar.getValueAt(i, 0));
+                    row.put("sg", (Boolean) tbKamar.getValueAt(i, 1));
+                    row.put("sr", (Boolean) tbKamar.getValueAt(i, 2));
+                    row.put("mlm", (Boolean) tbKamar.getValueAt(i, 3));
+                    row.put("kd_jenis_prw", tbKamar.getValueAt(i, 4).toString());
+                    row.put("nm_perawatan", tbKamar.getValueAt(i, 5).toString());
+                    row.put("nm_kategori", tbKamar.getValueAt(i, 6).toString());
+                    row.put("total_bayar", (Double) tbKamar.getValueAt(i, 7));
+                    row.put("bagian_rs", (Double) tbKamar.getValueAt(i, 8));
+                    row.put("bhp", (Double) tbKamar.getValueAt(i, 9));
+                    row.put("tarif_tindakandr", (Double) tbKamar.getValueAt(i, 10));
+                    row.put("tarif_tindakanpr", (Double) tbKamar.getValueAt(i, 11));
+                    row.put("kso", (Double) tbKamar.getValueAt(i, 12));
+                    row.put("menejemen", (Double) tbKamar.getValueAt(i, 13));
+                    row.put("kelas", tbKamar.getValueAt(i, 14).toString());
+                    tindakan.add(row);
+                    where = where.concat("'" + tbKamar.getValueAt(i, 4).toString() + "', ");
                 }
             }
-            
-            pagi=null;
-            pagi=new boolean[jml]; 
-            siang=null;
-            siang=new boolean[jml];
-            sore=null;
-            sore=new boolean[jml];
-            malam=null;
-            malam=new boolean[jml];
-            kode=null;
-            kode=new String[jml];
-            nama=null;
-            nama=new String[jml];
-            kelastarif=null;
-            kelastarif=new String[jml];
-            kategori=null;
-            kategori=new String[jml];
-            totaltnd=null;
-            totaltnd=new double[jml];  
-            bagianrs=null;
-            bagianrs=new double[jml];
-            bhp=null;
-            bhp=new double[jml];
-            jmdokter=null;
-            jmdokter=new double[jml];
-            jmperawat=null;
-            jmperawat=new double[jml];
-            kso=null;
-            kso=new double[jml];
-            menejemen=null;
-            menejemen=new double[jml];
-            
-            index=0;        
-            for(i=0;i<tbKamar.getRowCount();i++){
-                    if(tbKamar.getValueAt(i,0).toString().equals("true")||tbKamar.getValueAt(i,1).toString().equals("true")||tbKamar.getValueAt(i,2).toString().equals("true")||tbKamar.getValueAt(i,3).toString().equals("true")){
-                        pagi[index]=Boolean.parseBoolean(tbKamar.getValueAt(i,0).toString());
-                        siang[index]=Boolean.parseBoolean(tbKamar.getValueAt(i,1).toString());
-                        sore[index]=Boolean.parseBoolean(tbKamar.getValueAt(i,2).toString());
-                        malam[index]=Boolean.parseBoolean(tbKamar.getValueAt(i,3).toString());
-                        kode[index]=tbKamar.getValueAt(i,4).toString();
-                        nama[index]=tbKamar.getValueAt(i,5).toString();
-                        kategori[index]=tbKamar.getValueAt(i,6).toString();                        
-                        totaltnd[index]=Double.parseDouble(tbKamar.getValueAt(i,7).toString());
-                        bagianrs[index]=Double.parseDouble(tbKamar.getValueAt(i,8).toString());
-                        bhp[index]=Double.parseDouble(tbKamar.getValueAt(i,9).toString());
-                        jmdokter[index]=Double.parseDouble(tbKamar.getValueAt(i,10).toString());
-                        jmperawat[index]=Double.parseDouble(tbKamar.getValueAt(i,11).toString()); 
-                        kso[index]=Double.parseDouble(tbKamar.getValueAt(i,12).toString()); 
-                        menejemen[index]=Double.parseDouble(tbKamar.getValueAt(i,13).toString()); 
-                        kelastarif[index]=tbKamar.getValueAt(i,14).toString();  
-                        index++;
-                    }
-            }                  
-            
+            if (!where.isBlank()) {
+                where = where.substring(0, where.length() - 2);
+            }
             Valid.tabelKosong(tabMode);
-
-            for(i=0;i<jml;i++){
-                tabMode.addRow(new Object[] {pagi[i],siang[i],sore[i],malam[i],kode[i],nama[i],kategori[i],totaltnd[i],bagianrs[i],bhp[i],jmdokter[i],jmperawat[i],kso[i],menejemen[i],kelastarif[i]});
+            for (JsonNode row : tindakan) {
+                tabMode.addRow(new Object[] {
+                    row.path("pg").asBoolean(), row.path("sg").asBoolean(), row.path("sr").asBoolean(), row.path("mlm").asBoolean(),
+                    row.path("kd_jenis_prw").asText(), row.path("nm_perawatan").asText(), row.path("nm_kategori").asText(),
+                    row.path("total_bayar").asDouble(), row.path("bagian_rs").asDouble(), row.path("bhp").asDouble(),
+                    row.path("tarif_tindakandr").asDouble(), row.path("tarif_tindakanpr").asDouble(), row.path("kso").asDouble(),
+                    row.path("menejemen").asDouble(), row.path("kelas").asText()
+                });
             }
-            
-            try {
-                if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("No")){
-                    pscari=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_pj=? or jns_perawatan_inap.kd_pj='-') and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari.setString(2,kd_pj.trim());
-                    pscari.setString(3,kd_bangsal.trim());
-                    pscari.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari.setString(5,"%"+TCari.getText().trim()+"%");
-                    pscari.setString(6,"%"+TCari.getText().trim()+"%");
-                    rs=pscari.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("No")){
-                    pscari2=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_pj=? or jns_perawatan_inap.kd_pj='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari2.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari2.setString(2,kd_pj.trim());
-                    pscari2.setString(3,"%"+TCari.getText().trim()+"%");
-                    pscari2.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari2.setString(5,"%"+TCari.getText().trim()+"%");
-                    rs=pscari2.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("No")){
-                    pscari3=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari3.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari3.setString(2,kd_bangsal.trim());
-                    pscari3.setString(3,"%"+TCari.getText().trim()+"%");
-                    pscari3.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari3.setString(5,"%"+TCari.getText().trim()+"%");
-                    rs=pscari3.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("No")){
-                    pscari4=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari4.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari4.setString(2,"%"+TCari.getText().trim()+"%");
-                    pscari4.setString(3,"%"+TCari.getText().trim()+"%");
-                    pscari4.setString(4,"%"+TCari.getText().trim()+"%");
-                    rs=pscari4.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("Yes")){
-                    pscari5=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_pj=? or jns_perawatan_inap.kd_pj='-') and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari5.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari5.setString(2,kd_pj.trim());
-                    pscari5.setString(3,kd_bangsal.trim());
-                    pscari5.setString(4,kelas.trim());
-                    pscari5.setString(5,"%"+TCari.getText().trim()+"%");
-                    pscari5.setString(6,"%"+TCari.getText().trim()+"%");
-                    pscari5.setString(7,"%"+TCari.getText().trim()+"%");
-                    rs=pscari5.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("Yes")){
-                    pscari6=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_pj=? or jns_perawatan_inap.kd_pj='-') and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari6.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari6.setString(2,kd_pj.trim());
-                    pscari6.setString(3,kelas.trim());
-                    pscari6.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari6.setString(5,"%"+TCari.getText().trim()+"%");
-                    pscari6.setString(6,"%"+TCari.getText().trim()+"%");
-                    rs=pscari6.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("Yes")){
-                    pscari7=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari7.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari7.setString(2,kd_bangsal.trim());
-                    pscari7.setString(3,kelas.trim());
-                    pscari7.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari7.setString(5,"%"+TCari.getText().trim()+"%");
-                    pscari7.setString(6,"%"+TCari.getText().trim()+"%");
-                    rs=pscari7.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("Yes")){
-                    pscari8=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari8.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari8.setString(2,kelas.trim());
-                    pscari8.setString(3,"%"+TCari.getText().trim()+"%");
-                    pscari8.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari8.setString(5,"%"+TCari.getText().trim()+"%");
-                    rs=pscari8.executeQuery();
+            // cekTindakanTerinput();
+            boolean isRuangRanap = ruang_ranap.equals("Yes"),
+                    isCaraBayarRanap = cara_bayar_ranap.equals("Yes"),
+                    isKelasRanap = kelas_ranap.equals("Yes");
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select jns_perawatan_inap.*, kategori_perawatan.nm_kategori from jns_perawatan_inap " +
+                "join kategori_perawatan on jns_perawatan_inap.kd_kategori = kategori_perawatan.kd_kategori " +
+                "where " + (where.isBlank() ? "" : "jns_perawatan_inap.kd_jenis_prw not in (" + where + ") and ") +
+                "(jns_perawatan_inap.status = '1' and jns_perawatan_inap.kd_kategori like ? " +
+                (isCaraBayarRanap ? "and (jns_perawatan_inap.kd_pj = ? or jns_perawatan_inap.kd_pj = '-' ) " : "") +
+                (isRuangRanap ? "and (jns_perawatan_inap.kd_bangsal = ? or jns_perawatan_inap.kd_bangsal = '-') " : "") +
+                (isKelasRanap ? "and (jns_perawatan_inap.kelas = ? or jns_perawatan_inap.kelas = '-') " : "") +
+                (TCari.getText().isBlank() ? "" : "and (jns_perawatan_inap.kd_jenis_prw like ? or " +
+                "jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ") +
+                ") order by " + (where.isBlank() ? "" : "(field(jns_perawatan_inap.kd_jenis_prw, " + where +
+                ") = 1), ") + "jns_perawatan_inap.nm_perawatan, jns_perawatan_inap.kd_jenis_prw"
+            )) {
+                int p = 0;
+                ps.setString(++p, KdKtg.getText() + "%");
+                if (isCaraBayarRanap) ps.setString(++p, kd_pj.trim());
+                if (isRuangRanap) ps.setString(++p, kd_bangsal.trim());
+                if (isKelasRanap) ps.setString(++p, kelas.trim());
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
                 }
-
-                while(rs.next()){
-                    pg=false;
-                    sg=false;
-                    sr=false;
-                    mlm=false;
-                    switch (pilihtable) {
-                        case "rawat_inap_dr":                            
-                            pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                        "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                            try {
-                                pstindakan.setString(1,TNoRw.getText());
-                                pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan.setString(3,rs.getString(1));
-                                pstindakan.setString(4,"00:00:01");
-                                pstindakan.setString(5,"10:00:00");
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    pg=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        do {
+                            JsonNode cc = tindakanTerinput.path(pilihtable).path(rs.getString("kd_jenis_prw"));
+                            switch (pilihtable) {
+                                case "rawat_inap_dr":
+                                    if (rs.getDouble("total_byrdr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrdr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
+                                case "rawat_inap_pr":
+                                    if (rs.getDouble("total_byrpr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrpr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
+                                case "rawat_inap_drpr":
+                                    if (rs.getDouble("total_byrdrpr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrdrpr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
                             }
-
-                            pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                        "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                            try {
-                                pstindakan.setString(1,TNoRw.getText());
-                                pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan.setString(3,rs.getString(1));
-                                pstindakan.setString(4,"10:00:01");
-                                pstindakan.setString(5,"15:00:00");
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    sg=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
-                            }
-
-                            pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                        "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                            try {
-                                pstindakan.setString(1,TNoRw.getText());
-                                pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan.setString(3,rs.getString(1));
-                                pstindakan.setString(4,"15:00:01");
-                                pstindakan.setString(5,"19:00:00");
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    sr=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
-                            }
-
-                            pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                        "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                            try {
-                                pstindakan.setString(1,TNoRw.getText());
-                                pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan.setString(3,rs.getString(1));
-                                pstindakan.setString(4,"19:00:01");
-                                pstindakan.setString(5,"23:59:59");
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    mlm=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
-                            }
-                                
-                            break;
-                        case "rawat_inap_pr":
-                            pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                            "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan2.setString(1,TNoRw.getText());
-                                pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan2.setString(3,rs.getString(1));
-                                pstindakan2.setString(4,"00:00:01");
-                                pstindakan2.setString(5,"10:00:00");
-                                rstindakan=pstindakan2.executeQuery();
-                                if(rstindakan.next()){
-                                    pg=true;
-                                }
-                            }catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan2!=null){
-                                    pstindakan2.close();
-                                }
-                            }
-                            
-                            pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                            "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan2.setString(1,TNoRw.getText());
-                                pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan2.setString(3,rs.getString(1));
-                                pstindakan2.setString(4,"10:00:01");
-                                pstindakan2.setString(5,"15:00:00");
-                                rstindakan=pstindakan2.executeQuery();
-                                if(rstindakan.next()){
-                                    sg=true;
-                                }
-                            }catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan2!=null){
-                                    pstindakan2.close();
-                                }
-                            }
-                            
-                            pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                            "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan2.setString(1,TNoRw.getText());
-                                pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan2.setString(3,rs.getString(1));
-                                pstindakan2.setString(4,"15:00:01");
-                                pstindakan2.setString(5,"19:00:00");
-                                rstindakan=pstindakan2.executeQuery();
-                                if(rstindakan.next()){
-                                    sr=true;
-                                }
-                            }catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan2!=null){
-                                    pstindakan2.close();
-                                }
-                            }
-                            
-                            pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                            "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan2.setString(1,TNoRw.getText());
-                                pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan2.setString(3,rs.getString(1));
-                                pstindakan2.setString(4,"19:00:01");
-                                pstindakan2.setString(5,"23:59:59");
-                                rstindakan=pstindakan2.executeQuery();
-                                if(rstindakan.next()){
-                                    mlm=true;
-                                }
-                            }catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan2!=null){
-                                    pstindakan2.close();
-                                }
-                            }
-                                
-                            break;
-                        case "rawat_inap_drpr":
-                            pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan3.setString(1,TNoRw.getText());
-                                pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan3.setString(3,rs.getString(1));
-                                pstindakan3.setString(4,"00:00:01");
-                                pstindakan3.setString(5,"10:00:00");
-                                rstindakan=pstindakan3.executeQuery();
-                                if(rstindakan.next()){
-                                    pg=true;
-                                }
-                            }catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan3!=null){
-                                    pstindakan3.close();
-                                }
-                            }
-                            
-                            pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan3.setString(1,TNoRw.getText());
-                                pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan3.setString(3,rs.getString(1));
-                                pstindakan3.setString(4,"10:00:01");
-                                pstindakan3.setString(5,"15:00:00");
-                                rstindakan=pstindakan3.executeQuery();
-                                if(rstindakan.next()){
-                                    sg=true;
-                                }
-                            }catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan3!=null){
-                                    pstindakan3.close();
-                                }
-                            }
-                            
-                            pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan3.setString(1,TNoRw.getText());
-                                pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan3.setString(3,rs.getString(1));
-                                pstindakan3.setString(4,"15:00:01");
-                                pstindakan3.setString(5,"19:00:00");
-                                rstindakan=pstindakan3.executeQuery();
-                                if(rstindakan.next()){
-                                    sr=true;
-                                }
-                            }catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan3!=null){
-                                    pstindakan3.close();
-                                }
-                            }
-                            
-                            pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan3.setString(1,TNoRw.getText());
-                                pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan3.setString(3,rs.getString(1));
-                                pstindakan3.setString(4,"19:00:01");
-                                pstindakan3.setString(5,"23:59:59");
-                                rstindakan=pstindakan3.executeQuery();
-                                if(rstindakan.next()){
-                                    mlm=true;
-                                }
-                            }catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan3!=null){
-                                    pstindakan3.close();
-                                }
-                            }
-                            break;
+                        } while (rs.next());
                     }
-                    index=0;
-                    for(i=0;i<jml;i++){
-                        if(kode[i].equals(rs.getString(1))){
-                            index++;
-                        }
-                    }
-                    if(index==0){
-                        switch (pilihtable) {
-                            case "rawat_inap_dr":
-                                    if(rs.getDouble("total_byrdr")>0){
-                                        tabMode.addRow(new Object[] {
-                                            pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
-                                            rs.getDouble("total_byrdr"),rs.getDouble("material"),
-                                            rs.getDouble("bhp"),rs.getDouble("tarif_tindakandr"),
-                                            rs.getDouble("tarif_tindakanpr"),rs.getDouble("kso"),
-                                            rs.getDouble("menejemen"),rs.getString("kelas")
-                                        });
-                                    }            
-                                break;
-                            case "rawat_inap_pr":
-                                    if(rs.getDouble("total_byrpr")>0){
-                                        tabMode.addRow(new Object[] {
-                                            pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
-                                            rs.getDouble("total_byrpr"),rs.getDouble("material"),
-                                            rs.getDouble("bhp"),rs.getDouble("tarif_tindakandr"),
-                                            rs.getDouble("tarif_tindakanpr"),rs.getDouble("kso"),
-                                            rs.getDouble("menejemen"),rs.getString("kelas")
-                                        });
-                                    }            
-                                break;
-                            case "rawat_inap_drpr":
-                                    if(rs.getDouble("total_byrdrpr")>0){
-                                        tabMode.addRow(new Object[] {
-                                            pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
-                                            rs.getDouble("total_byrdrpr"),rs.getDouble("material"),
-                                            rs.getDouble("bhp"),rs.getDouble("tarif_tindakandr"),
-                                            rs.getDouble("tarif_tindakanpr"),rs.getDouble("kso"),
-                                            rs.getDouble("menejemen"),rs.getString("kelas")
-                                        });
-                                    }                                                    
-                                break;
-                        }
-                    }
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if( rs != null){
-                    rs.close();
-                }
-                if(pscari != null){
-                    pscari.close();
-                }
-                if(pscari2 != null){
-                    pscari2.close();
-                }
-                if(pscari3 != null){
-                    pscari3.close();
-                }
-                if(pscari4 != null){
-                    pscari4.close();
-                }
-            }                
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
-        }
-        LCount.setText(""+tbKamar.getRowCount());
-    }
-    
-    public void tampil2() { 
-        try{ 
-            Valid.tabelKosong(tabMode);
-            try {
-                if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("No")){
-                    pscari=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where jns_perawatan_inap.status='1' and kategori_perawatan.nm_kategori like ? and (jns_perawatan_inap.kd_pj=? or jns_perawatan_inap.kd_pj='-') and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-
-                    pscari.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari.setString(2,kd_pj.trim());
-                    pscari.setString(3,kd_bangsal.trim());
-                    pscari.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari.setString(5,"%"+TCari.getText().trim()+"%");
-                    pscari.setString(6,"%"+TCari.getText().trim()+"%");
-                    rs=pscari.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("No")){
-                    pscari2=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where jns_perawatan_inap.status='1' and kategori_perawatan.nm_kategori like ? and (jns_perawatan_inap.kd_pj=? or jns_perawatan_inap.kd_pj='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-
-                    pscari2.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari2.setString(2,kd_pj.trim());
-                    pscari2.setString(3,"%"+TCari.getText().trim()+"%");
-                    pscari2.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari2.setString(5,"%"+TCari.getText().trim()+"%");
-                    rs=pscari2.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("No")){
-                    pscari3=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where jns_perawatan_inap.status='1' and kategori_perawatan.nm_kategori like ? and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-
-                    pscari3.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari3.setString(2,kd_bangsal.trim());
-                    pscari3.setString(3,"%"+TCari.getText().trim()+"%");
-                    pscari3.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari3.setString(5,"%"+TCari.getText().trim()+"%");
-                    rs=pscari3.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("No")){
-                    pscari4=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where jns_perawatan_inap.status='1' and kategori_perawatan.nm_kategori like ? "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari4.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari4.setString(2,"%"+TCari.getText().trim()+"%");
-                    pscari4.setString(3,"%"+TCari.getText().trim()+"%");
-                    pscari4.setString(4,"%"+TCari.getText().trim()+"%");
-                    rs=pscari4.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("Yes")){
-                    pscari5=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where jns_perawatan_inap.status='1' and kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_pj=? or jns_perawatan_inap.kd_pj='-') and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari5.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari5.setString(2,kd_pj.trim());
-                    pscari5.setString(3,kd_bangsal.trim());
-                    pscari5.setString(4,kelas.trim());
-                    pscari5.setString(5,"%"+TCari.getText().trim()+"%");
-                    pscari5.setString(6,"%"+TCari.getText().trim()+"%");
-                    pscari5.setString(7,"%"+TCari.getText().trim()+"%");
-                    rs=pscari5.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("Yes")){
-                    pscari6=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where jns_perawatan_inap.status='1' and kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_pj=? or jns_perawatan_inap.kd_pj='-') and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari6.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari6.setString(2,kd_pj.trim());
-                    pscari6.setString(3,kelas.trim());
-                    pscari6.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari6.setString(5,"%"+TCari.getText().trim()+"%");
-                    pscari6.setString(6,"%"+TCari.getText().trim()+"%");
-                    rs=pscari6.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("Yes")){
-                    pscari7=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where jns_perawatan_inap.status='1' and kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-                    pscari7.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari7.setString(2,kd_bangsal.trim());
-                    pscari7.setString(3,kelas.trim());
-                    pscari7.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari7.setString(5,"%"+TCari.getText().trim()+"%");
-                    pscari7.setString(6,"%"+TCari.getText().trim()+"%");
-                    rs=pscari7.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("Yes")){
-                    pscari8=koneksi.prepareStatement("select jns_perawatan_inap.kd_jenis_prw,jns_perawatan_inap.nm_perawatan,kategori_perawatan.nm_kategori,"+
-                        "jns_perawatan_inap.total_byrdr,jns_perawatan_inap.total_byrpr,jns_perawatan_inap.total_byrdrpr,jns_perawatan_inap.bhp,jns_perawatan_inap.material,jns_perawatan_inap.kso,jns_perawatan_inap.menejemen," +
-                        "jns_perawatan_inap.tarif_tindakandr,jns_perawatan_inap.tarif_tindakanpr,jns_perawatan_inap.kelas from jns_perawatan_inap inner join kategori_perawatan "+
-                        "on jns_perawatan_inap.kd_kategori=kategori_perawatan.kd_kategori  "+
-                        "where jns_perawatan_inap.status='1' and kategori_perawatan.nm_kategori like ? and jns_perawatan_inap.status='1' and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') "+
-                        "and (jns_perawatan_inap.kd_jenis_prw like ? or jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) order by jns_perawatan_inap.nm_perawatan");
-            
-                    pscari8.setString(1,"%"+NmKtg.getText().trim()+"%");
-                    pscari8.setString(2,kelas.trim());
-                    pscari8.setString(3,"%"+TCari.getText().trim()+"%");
-                    pscari8.setString(4,"%"+TCari.getText().trim()+"%");
-                    pscari8.setString(5,"%"+TCari.getText().trim()+"%");
-                    rs=pscari8.executeQuery();
-                }
-                
-                while(rs.next()){
-                    pg=false;
-                    sg=false;
-                    sr=false;
-                    mlm=false;
-                    switch (pilihtable) {
-                        case "rawat_inap_dr":
-                            pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                            "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                            
-                            try{
-                                pstindakan.setString(1,TNoRw.getText());
-                                pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan.setString(3,rs.getString(1));
-                                pstindakan.setString(4,"00:00:01");
-                                pstindakan.setString(5,"10:00:00");
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    pg=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
-                            }
-                            
-                            pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                            "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan.setString(1,TNoRw.getText());
-                                pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan.setString(3,rs.getString(1));
-                                pstindakan.setString(4,"10:00:01");
-                                pstindakan.setString(5,"15:00:00");
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    sg=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
-                            }
-                            
-                            pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                            "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                            
-                            try{
-                                pstindakan.setString(1,TNoRw.getText());
-                                pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan.setString(3,rs.getString(1));
-                                pstindakan.setString(4,"15:00:01");
-                                pstindakan.setString(5,"19:00:00");
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    sr=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
-                            }
-                            
-                            pstindakan=koneksi.prepareStatement("select rawat_inap_dr.kd_jenis_prw from rawat_inap_dr where rawat_inap_dr.no_rawat=? "+
-                                            "and rawat_inap_dr.tgl_perawatan=? and rawat_inap_dr.kd_jenis_prw=? and rawat_inap_dr.jam_rawat between ? and ?");
-                            
-                            try{
-                                pstindakan.setString(1,TNoRw.getText());
-                                pstindakan.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan.setString(3,rs.getString(1));
-                                pstindakan.setString(4,"19:00:01");
-                                pstindakan.setString(5,"23:59:59");
-                                rstindakan=pstindakan.executeQuery();
-                                if(rstindakan.next()){
-                                    mlm=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan!=null){
-                                    pstindakan.close();
-                                }
-                            }
-                              
-                            break;
-                        case "rawat_inap_pr":
-                            pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                            "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan2.setString(1,TNoRw.getText());
-                                pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan2.setString(3,rs.getString(1));
-                                pstindakan2.setString(4,"00:00:01");
-                                pstindakan2.setString(5,"10:00:00");
-                                rstindakan=pstindakan2.executeQuery();
-                                if(rstindakan.next()){
-                                    pg=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan2!=null){
-                                    pstindakan2.close();
-                                }
-                            }
-                            
-                            pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                            "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan2.setString(1,TNoRw.getText());
-                                pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan2.setString(3,rs.getString(1));
-                                pstindakan2.setString(4,"10:00:01");
-                                pstindakan2.setString(5,"15:00:00");
-                                rstindakan=pstindakan2.executeQuery();
-                                if(rstindakan.next()){
-                                    sg=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan2!=null){
-                                    pstindakan2.close();
-                                }
-                            }
-                            
-                            pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                            "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan2.setString(1,TNoRw.getText());
-                                pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan2.setString(3,rs.getString(1));
-                                pstindakan2.setString(4,"15:00:01");
-                                pstindakan2.setString(5,"19:00:00");
-                                rstindakan=pstindakan2.executeQuery();
-                                if(rstindakan.next()){
-                                    sr=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan2!=null){
-                                    pstindakan2.close();
-                                }
-                            }
-                            
-                            pstindakan2=koneksi.prepareStatement("select rawat_inap_pr.kd_jenis_prw from rawat_inap_pr where rawat_inap_pr.no_rawat=? "+
-                                            "and rawat_inap_pr.tgl_perawatan=? and rawat_inap_pr.kd_jenis_prw=? and rawat_inap_pr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan2.setString(1,TNoRw.getText());
-                                pstindakan2.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan2.setString(3,rs.getString(1));
-                                pstindakan2.setString(4,"19:00:01");
-                                pstindakan2.setString(5,"23:59:59");
-                                rstindakan=pstindakan2.executeQuery();
-                                if(rstindakan.next()){
-                                    mlm=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan2!=null){
-                                    pstindakan2.close();
-                                }
-                            }
-                                
-                            break;
-                        case "rawat_inap_drpr":
-                            pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan3.setString(1,TNoRw.getText());
-                                pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan3.setString(3,rs.getString(1));
-                                pstindakan3.setString(4,"00:00:01");
-                                pstindakan3.setString(5,"10:00:00");
-                                rstindakan=pstindakan3.executeQuery();
-                                if(rstindakan.next()){
-                                    pg=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan3!=null){
-                                    pstindakan3.close();
-                                }
-                            }
-                            
-                            pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan3.setString(1,TNoRw.getText());
-                                pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan3.setString(3,rs.getString(1));
-                                pstindakan3.setString(4,"10:00:01");
-                                pstindakan3.setString(5,"15:00:00");
-                                rstindakan=pstindakan3.executeQuery();
-                                if(rstindakan.next()){
-                                    sg=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan3!=null){
-                                    pstindakan3.close();
-                                }
-                            }
-                            
-                            pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan3.setString(1,TNoRw.getText());
-                                pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan3.setString(3,rs.getString(1));
-                                pstindakan3.setString(4,"15:00:01");
-                                pstindakan3.setString(5,"19:00:00");
-                                rstindakan=pstindakan3.executeQuery();
-                                if(rstindakan.next()){
-                                    sr=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan3!=null){
-                                    pstindakan3.close();
-                                }
-                            }
-                            
-                            pstindakan3=koneksi.prepareStatement("select rawat_inap_drpr.kd_jenis_prw from rawat_inap_drpr where rawat_inap_drpr.no_rawat=? "+
-                                                "and rawat_inap_drpr.tgl_perawatan=? and rawat_inap_drpr.kd_jenis_prw=? and rawat_inap_drpr.jam_rawat between ? and ?");
-                            try{
-                                pstindakan3.setString(1,TNoRw.getText());
-                                pstindakan3.setString(2,Valid.SetTgl(DTPTgl.getSelectedItem()+""));
-                                pstindakan3.setString(3,rs.getString(1));
-                                pstindakan3.setString(4,"19:00:01");
-                                pstindakan3.setString(5,"23:59:59");
-                                rstindakan=pstindakan3.executeQuery();
-                                if(rstindakan.next()){
-                                    mlm=true;
-                                }
-                            } catch (Exception e) {
-                                System.out.println("Notif : "+e);
-                            } finally{
-                                if(rstindakan!=null){
-                                    rstindakan.close();
-                                }
-                                if(pstindakan3!=null){
-                                    pstindakan3.close();
-                                }
-                            }   
-                            break;
-                    }
-                    switch (pilihtable) {
-                            case "rawat_inap_dr":
-                                    if(rs.getDouble("total_byrdr")>0){
-                                        tabMode.addRow(new Object[] {
-                                            pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
-                                            rs.getDouble("total_byrdr"),rs.getDouble("material"),
-                                            rs.getDouble("bhp"),rs.getDouble("tarif_tindakandr"),
-                                            rs.getDouble("tarif_tindakanpr"),rs.getDouble("kso"),
-                                            rs.getDouble("menejemen"),rs.getString("kelas")
-                                        });
-                                    }  
-                                break;
-                            case "rawat_inap_pr":
-                                    if(rs.getDouble("total_byrpr")>0){
-                                        tabMode.addRow(new Object[] {
-                                            pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
-                                            rs.getDouble("total_byrpr"),rs.getDouble("material"),
-                                            rs.getDouble("bhp"),rs.getDouble("tarif_tindakandr"),
-                                            rs.getDouble("tarif_tindakanpr"),rs.getDouble("kso"),
-                                            rs.getDouble("menejemen"),rs.getString("kelas")
-                                        });
-                                    }            
-                                break;
-                            case "rawat_inap_drpr":
-                                    if(rs.getDouble("total_byrdrpr")>0){
-                                        tabMode.addRow(new Object[] {
-                                            pg,sg,sr,mlm,rs.getString(1),rs.getString(2),rs.getString(3),
-                                            rs.getDouble("total_byrdrpr"),rs.getDouble("material"),
-                                            rs.getDouble("bhp"),rs.getDouble("tarif_tindakandr"),
-                                            rs.getDouble("tarif_tindakanpr"),rs.getDouble("kso"),
-                                            rs.getDouble("menejemen"),rs.getString("kelas")
-                                        });
-                                    }                                                   
-                                break;
-                   }
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rs != null){
-                    rs.close();
-                }
-                if(pscari != null){
-                    pscari.close();
-                }
-                if(pscari2 != null){
-                    pscari2.close();
-                }
-                if(pscari3 != null){
-                    pscari3.close();
-                }
-                if(pscari4 != null){
-                    pscari4.close();
                 }
             }
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tbKamar.getRowCount());
+        LCount.setText("" + tbKamar.getRowCount());
     }
 
+    public void tampil2() {
+        try {
+            Valid.tabelKosong(tabMode);
+            cekTindakanTerinput();
+            boolean isRuangRanap = ruang_ranap.equals("Yes"),
+                    isCaraBayarRanap = cara_bayar_ranap.equals("Yes"),
+                    isKelasRanap = kelas_ranap.equals("Yes");
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select jns_perawatan_inap.*, kategori_perawatan.nm_kategori from jns_perawatan_inap join " +
+                "kategori_perawatan on jns_perawatan_inap.kd_kategori = kategori_perawatan.kd_kategori " +
+                "where jns_perawatan_inap.status = '1' and jns_perawatan_inap.kd_kategori like ? " +
+                (isCaraBayarRanap ? "and (jns_perawatan_inap.kd_pj = ? or jns_perawatan_inap.kd_pj = '-' ) " : "") +
+                (isRuangRanap ? "and (jns_perawatan_inap.kd_bangsal = ? or jns_perawatan_inap.kd_bangsal = '-') " : "") +
+                (isKelasRanap ? "and (jns_perawatan_inap.kelas = ? or jns_perawatan_inap.kelas = '-') " : "") +
+                (TCari.getText().isBlank() ? "" : "and (jns_perawatan_inap.kd_jenis_prw like ? or " +
+                "jns_perawatan_inap.nm_perawatan like ? or kategori_perawatan.nm_kategori like ?) ") +
+                "order by " + (where.isBlank() ? "" : "(field(jns_perawatan_inap.kd_jenis_prw, " + where + ") = 0), ") +
+                "jns_perawatan_inap.nm_perawatan, jns_perawatan_inap.kd_jenis_prw"
+            )) {
+                int p = 0;
+                ps.setString(++p, KdKtg.getText() + "%");
+                if (isCaraBayarRanap) ps.setString(++p, kd_pj.trim());
+                if (isRuangRanap) ps.setString(++p, kd_bangsal.trim());
+                if (isKelasRanap) ps.setString(++p, kelas.trim());
+                if (!TCari.getText().isBlank()) {
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                    ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        do {
+                            JsonNode cc = tindakanTerinput.path(pilihtable).path(rs.getString("kd_jenis_prw"));
+                            switch (pilihtable) {
+                                case "rawat_inap_dr":
+                                    if (rs.getDouble("total_byrdr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrdr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
+                                case "rawat_inap_pr":
+                                    if (rs.getDouble("total_byrpr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrpr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
+                                case "rawat_inap_drpr":
+                                    if (rs.getDouble("total_byrdrpr") > 0) {
+                                        tabMode.addRow(new Object[] {
+                                            cc.path("pg").asBoolean(), cc.path("sg").asBoolean(), cc.path("sr").asBoolean(),
+                                            cc.path("mlm").asBoolean(), rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"),
+                                            rs.getString("nm_kategori"), rs.getDouble("total_byrdrpr"), rs.getDouble("material"),
+                                            rs.getDouble("bhp"), rs.getDouble("tarif_tindakandr"), rs.getDouble("tarif_tindakanpr"),
+                                            rs.getDouble("kso"), rs.getDouble("menejemen"), rs.getString("kelas")
+                                        });
+                                    }
+                                    break;
+                            }
+                        } while (rs.next());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        LCount.setText("" + tbKamar.getRowCount());
+    }
+
+    private void cekTindakanTerinput() {
+        tindakanTerinput = mapper.createObjectNode();
+        where = "";
+        try {
+            switch (pilihtable) {
+                case "rawat_inap_dr":
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select rawat_inap_dr.kd_jenis_prw, " +
+                        "(rawat_inap_dr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
+                        "(rawat_inap_dr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
+                        "(rawat_inap_dr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
+                        "(rawat_inap_dr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
+                        "from rawat_inap_dr where rawat_inap_dr.no_rawat = ? and rawat_inap_dr.tgl_perawatan = ? " +
+                        "group by rawat_inap_dr.kd_jenis_prw"
+                    )) {
+                        ps.setString(1, TNoRw.getText());
+                        ps.setString(2, Valid.getTglSmc(DTPTgl));
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                ObjectNode dr = mapper.createObjectNode();
+                                do {
+                                    ObjectNode cc = mapper.createObjectNode();
+                                    cc.put("pg", rs.getBoolean("pg"));
+                                    cc.put("sg", rs.getBoolean("sg"));
+                                    cc.put("sr", rs.getBoolean("sr"));
+                                    cc.put("mlm", rs.getBoolean("mlm"));
+                                    dr.set(rs.getString("kd_jenis_prw"), cc);
+                                    where = where.concat("'").concat(rs.getString("kd_jenis_prw")).concat("', ");
+                                } while (rs.next());
+                                tindakanTerinput.set("rawat_inap_dr", dr);
+                            }
+                        }
+                    }
+                    break;
+                case "rawat_inap_pr":
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select rawat_inap_pr.kd_jenis_prw, " +
+                        "(rawat_inap_pr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
+                        "(rawat_inap_pr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
+                        "(rawat_inap_pr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
+                        "(rawat_inap_pr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
+                        "from rawat_inap_pr where rawat_inap_pr.no_rawat = ? and rawat_inap_pr.tgl_perawatan = ? " +
+                        "group by rawat_inap_pr.kd_jenis_prw"
+                    )) {
+                        ps.setString(1, TNoRw.getText());
+                        ps.setString(2, Valid.getTglSmc(DTPTgl));
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                ObjectNode pr = mapper.createObjectNode();
+                                do {
+                                    ObjectNode cc = mapper.createObjectNode();
+                                    cc.put("pg", rs.getBoolean("pg"));
+                                    cc.put("sg", rs.getBoolean("sg"));
+                                    cc.put("sr", rs.getBoolean("sr"));
+                                    cc.put("mlm", rs.getBoolean("mlm"));
+                                    pr.set(rs.getString("kd_jenis_prw"), cc);
+                                } while (rs.next());
+                                tindakanTerinput.set("rawat_inap_pr", pr);
+                            }
+                        }
+                    }
+                    break;
+                case "rawat_inap_drpr":
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select rawat_inap_drpr.kd_jenis_prw, " +
+                        "(rawat_inap_drpr.jam_rawat between '00:00:01' and '10:00:00') as pg, " +
+                        "(rawat_inap_drpr.jam_rawat between '10:00:01' and '15:00:00') as sg, " +
+                        "(rawat_inap_drpr.jam_rawat between '15:00:01' and '19:00:00') as sr, " +
+                        "(rawat_inap_drpr.jam_rawat between '19:00:01' and '23:59:59') as mlm " +
+                        "from rawat_inap_drpr where rawat_inap_drpr.no_rawat = ? and rawat_inap_drpr.tgl_perawatan = ? " +
+                        "group by rawat_inap_drpr.kd_jenis_prw"
+                    )) {
+                        ps.setString(1, TNoRw.getText());
+                        ps.setString(2, Valid.getTglSmc(DTPTgl));
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                ObjectNode drpr = mapper.createObjectNode();
+                                do {
+                                    ObjectNode cc = mapper.createObjectNode();
+                                    cc.put("pg", rs.getBoolean("pg"));
+                                    cc.put("sg", rs.getBoolean("sg"));
+                                    cc.put("sr", rs.getBoolean("sr"));
+                                    cc.put("mlm", rs.getBoolean("mlm"));
+                                    drpr.set(rs.getString("kd_jenis_prw"), cc);
+                                } while (rs.next());
+                                tindakanTerinput.set("rawat_inap_drpr", drpr);
+                            }
+                        }
+                    }
+                    break;
+            }
+            where = where.substring(0, where.length() - 2);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
 
     private void emptTeks() {
         TCari.setText("");
-         for(i=0;i<tbKamar.getRowCount();i++){ 
-                tbKamar.setValueAt(false,i,0);
-                tbKamar.setValueAt(false,i,1);
-                tbKamar.setValueAt(false,i,2);
-                tbKamar.setValueAt(false,i,3);
+         for(i=0;i<tbKamar.getRowCount();i++){
+            tbKamar.setValueAt(false,i,0);
+            tbKamar.setValueAt(false,i,1);
+            tbKamar.setValueAt(false,i,2);
+            tbKamar.setValueAt(false,i,3);
          }
         TCari.requestFocus();
     }
@@ -3019,7 +1323,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         if(tbKamar.getSelectedRow()!= -1){
             if(TNoRw.getText().trim().equals("")||kddokter.getText().trim().equals("")){
                 Valid.textKosong(TCari,"Dokter/Paramedis");
-                for(i=0;i<tbKamar.getRowCount();i++){ 
+                for(i=0;i<tbKamar.getRowCount();i++){
                     tbKamar.setValueAt(false,i,0);
                     tbKamar.setValueAt(false,i,1);
                     tbKamar.setValueAt(false,i,2);
@@ -3028,16 +1332,16 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             }
         }
     }
-    
+
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void isCek(){
         BtnTambah.setEnabled(akses.gettarif_ranap());
         TCari.requestFocus();
     }
-    
+
     public void setNoRm(String norwt,String pilihtable,Date tanggal,String jam,String menit,String detik,boolean status,String pasien) {
         TNoRw.setText(norwt);
         kddokter.setText("");
@@ -3051,10 +1355,10 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         this.kelas=Sequel.cariIsi(
                 "select kamar.kelas from kamar inner join kamar_inap "+
                 "on kamar.kd_kamar=kamar_inap.kd_kamar where kamar_inap.no_rawat=? "+
-                "and kamar_inap.stts_pulang='-' order by STR_TO_DATE(concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1",TNoRw.getText());        
+                "and kamar_inap.stts_pulang='-' order by STR_TO_DATE(concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk),'%Y-%m-%d %H:%i:%s') desc limit 1",TNoRw.getText());
         switch (pilihtable) {
             case "rawat_inap_dr":
-                jLabel5.setText("Dokter :");                
+                jLabel5.setText("Dokter :");
                 LblPetugas.setVisible(false);
                 KdPtg2.setVisible(false);
                 NmPtg2.setVisible(false);
@@ -3062,7 +1366,7 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 FormInput.setPreferredSize(new Dimension(WIDTH, 44));
                 break;
             case "rawat_inap_pr":
-                jLabel5.setText("Perawat :");                
+                jLabel5.setText("Perawat :");
                 LblPetugas.setVisible(false);
                 KdPtg2.setVisible(false);
                 NmPtg2.setVisible(false);
@@ -3070,26 +1374,26 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 FormInput.setPreferredSize(new Dimension(WIDTH, 44));
                 break;
             case "rawat_inap_drpr":
-                jLabel5.setText(" Dokter :");                
+                jLabel5.setText(" Dokter :");
                 LblPetugas.setVisible(true);
                 KdPtg2.setVisible(true);
                 NmPtg2.setVisible(true);
-                btnPetugas.setVisible(true); 
+                btnPetugas.setVisible(true);
                 FormInput.setPreferredSize(new Dimension(WIDTH, 74));
                 break;
         }
         DTPTgl.setDate(tanggal);
         TCari.requestFocus();
-        
-        for(i=0;i<tbKamar.getRowCount();i++){ 
-                    tbKamar.setValueAt(false,i,0);
-                    tbKamar.setValueAt(false,i,1);
-                    tbKamar.setValueAt(false,i,2);
-                    tbKamar.setValueAt(false,i,3);
+
+        for(i=0;i<tbKamar.getRowCount();i++){
+            tbKamar.setValueAt(false,i,0);
+            tbKamar.setValueAt(false,i,1);
+            tbKamar.setValueAt(false,i,2);
+            tbKamar.setValueAt(false,i,3);
         }
     }
-    
-    public void setPetugas(String kode, String nama,String suhu,String tensi, String Hasil, 
+
+    public void setPetugas(String kode, String nama,String suhu,String tensi, String Hasil,
             String perkembangan, String kode2, String nama2,String berat,
             String tinggi,String nadi,String respirasi,String gcs,String alergi){
         kddokter.setText(kode);
@@ -3097,16 +1401,12 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         KdPtg2.setText(kode2);
         NmPtg2.setText(nama2);
     }
-    
+
     public void setPetugas2(String kodeDokter, String namaDokter, String kodePetugas, String namaPetugas) {
         kddokter.setText(kodeDokter);
         nmdokter.setText(namaDokter);
         KdPtg2.setText(kodePetugas);
         NmPtg2.setText(namaPetugas);
-    }
-    
-    private void isktg(){
-        Sequel.cariIsi("select kategori_perawatan.nm_kategori from kategori_perawatan where kategori_perawatan.kd_kategori=? ",NmKtg,KdKtg.getText());
     }
 
     private void simpan2() {
@@ -3118,14 +1418,14 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 hapusttljmdokter = 0; hapusttljmperawat = 0; hapusttlkso = 0; hapusttlpendapatan = 0; hapusttljasasarana = 0; hapusttlbhp = 0; hapusttlmenejemen = 0;
                 for (i = 0; i < tbKamar.getRowCount(); i++) {
                     pg = false; sg = false; sr = false; mlm = false;
+                    if (tindakanTerinput.path(pilihtable).has(tbKamar.getValueAt(i, 4).toString())) {
+                        pg = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("pg").asBoolean();
+                        sg = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("sg").asBoolean();
+                        sr = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("sr").asBoolean();
+                        mlm = tindakanTerinput.path(pilihtable).path(tbKamar.getValueAt(i, 4).toString()).path("mlm").asBoolean();
+                    }
                     switch (pilihtable) {
                         case "rawat_inap_dr":
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                pg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
@@ -3156,12 +1456,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
@@ -3192,12 +1486,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sr = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
@@ -3228,12 +1516,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_dr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                mlm = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_dr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
@@ -3265,12 +1547,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                             break;
                         case "rawat_inap_pr":
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                pg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
@@ -3301,12 +1577,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
@@ -3337,12 +1607,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sr = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
@@ -3373,12 +1637,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_pr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                mlm = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_pr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
@@ -3410,12 +1668,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                             break;
                         case "rawat_inap_drpr":
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '00:00:01' and '10:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                pg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 0).toString()) && !pg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "07:00:00",
@@ -3448,12 +1700,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '10:00:01' and '15:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sg = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 1).toString()) && !sg) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "12:00:00",
@@ -3486,12 +1732,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '15:00:01' and '19:00:00'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                sr = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 2).toString()) && !sr) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "16:00:00",
@@ -3524,12 +1764,6 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 }
                             }
 
-                            if (Sequel.cariExistsSmc(
-                                "select * from rawat_inap_drpr where no_rawat = ? and kd_jenis_prw = ? and tgl_perawatan = ? and jam_rawat between '19:00:01' and '23:59:59'",
-                                TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), Valid.getTglSmc(DTPTgl)
-                            )) {
-                                mlm = true;
-                            }
                             if (Boolean.parseBoolean(tbKamar.getValueAt(i, 3).toString()) && !mlm) {
                                 if (Sequel.menyimpantfSmc("rawat_inap_drpr", null,
                                     TNoRw.getText(), tbKamar.getValueAt(i, 4).toString(), kddokter.getText(), KdPtg2.getText(), Valid.getTglSmc(DTPTgl), "20:00:00",
@@ -3567,32 +1801,32 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 if (sukses) {
                     Sequel.deleteTampJurnal();
                     if (hapusttlpendapatan > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, hapusttlpendapatan);
-                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Ranap", hapusttlpendapatan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, hapusttlpendapatan);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Ranap", hapusttlpendapatan, 0);
                     }
                     if (hapusttljmdokter > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, hapusttljmdokter);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", hapusttljmdokter, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, hapusttljmdokter);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", hapusttljmdokter, 0);
                     }
                     if (hapusttljmperawat > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, hapusttljmperawat);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", hapusttljmperawat, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, hapusttljmperawat);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", hapusttljmperawat, 0);
                     }
                     if (hapusttlkso > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, hapusttlkso);
-                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", hapusttlkso, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, hapusttlkso);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", hapusttlkso, 0);
                     }
                     if (hapusttlmenejemen > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, hapusttlmenejemen);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", hapusttlmenejemen, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", 0, hapusttlmenejemen);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", hapusttlmenejemen, 0);
                     }
                     if (hapusttljasasarana > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, hapusttljasasarana);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", hapusttljasasarana, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", 0, hapusttljasasarana);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", hapusttljasasarana, 0);
                     }
                     if (hapusttlbhp > 0) {
-                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, hapusttlbhp);
-                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", hapusttlbhp, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, hapusttlbhp);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", hapusttlbhp, 0);
                     }
                     sukses = jur.simpanJurnal(TNoRw.getText(), "U", "PEMBATALAN TINDAKAN RAWAT INAP PASIEN OLEH " + akses.getkode());
                 }
@@ -3600,32 +1834,32 @@ private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 if (sukses) {
                     Sequel.deleteTampJurnal();
                     if (ttlpendapatan > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", ttlpendapatan, 0);
-                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Ranap", 0, ttlpendapatan);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", ttlpendapatan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Ranap", 0, ttlpendapatan);
                     }
                     if (ttljmdokter > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
                     }
                     if (ttljmperawat > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
                     }
                     if (ttlkso > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, ttlkso);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", ttlkso, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, ttlkso);
                     }
                     if (ttljasasarana > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
                     }
                     if (ttlbhp > 0) {
-                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", ttlbhp, 0);
-                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, ttlbhp);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", ttlbhp, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", 0, ttlbhp);
                     }
                     if (ttlmenejemen > 0) {
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
                     }
                     sukses = jur.simpanJurnal(TNoRw.getText(), "U", "TINDAKAN RAWAT INAP PASIEN " + TPasien.getText() + " DIPOSTING OLEH " + akses.getkode());
                 }

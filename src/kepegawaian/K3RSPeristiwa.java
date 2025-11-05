@@ -181,7 +181,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         NoLaporan.setDocument(new batasInput((byte)20).getKata(NoLaporan));
         Kronologi.setDocument(new batasInput((int)300).getKata(Kronologi));
@@ -193,7 +193,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         Catatan.setDocument(new batasInput((int)200).getKata(Catatan));
         Wewenang.setDocument(new batasInput((int)100).getKata(Wewenang));
         LT.setDocument(new batasInput((byte)10).getOnlyAngka(LT));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -215,8 +215,8 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         jenispekerjaan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -227,7 +227,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(jenispekerjaan.getTable().getSelectedRow()!= -1){
                     KdJenisPekerjaan.setText(jenispekerjaan.getTable().getValueAt(jenispekerjaan.getTable().getSelectedRow(),0).toString());
                     NmJenisPekerjaan.setText(jenispekerjaan.getTable().getValueAt(jenispekerjaan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 BtnJenisPekerjaan.requestFocus();
             }
             @Override
@@ -239,7 +239,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenispekerjaan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -247,12 +247,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jenispekerjaan.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         lokasikejadian.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -263,7 +263,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(lokasikejadian.getTable().getSelectedRow()!= -1){
                     KdLokasiKejadian.setText(lokasikejadian.getTable().getValueAt(lokasikejadian.getTable().getSelectedRow(),0).toString());
                     NmLokasiKejadian.setText(lokasikejadian.getTable().getValueAt(lokasikejadian.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnLokasiKejadian.requestFocus();
             }
             @Override
@@ -275,7 +275,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         lokasikejadian.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -283,12 +283,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     lokasikejadian.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         penyebab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -299,7 +299,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(penyebab.getTable().getSelectedRow()!= -1){
                     KdPenyebab.setText(penyebab.getTable().getValueAt(penyebab.getTable().getSelectedRow(),0).toString());
                     NmPenyebab.setText(penyebab.getTable().getValueAt(penyebab.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 BtnPenyebab.requestFocus();
             }
             @Override
@@ -311,7 +311,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penyebab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -319,12 +319,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penyebab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         jeniscidera.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -335,7 +335,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(jeniscidera.getTable().getSelectedRow()!= -1){
                     KdJenisCidera.setText(jeniscidera.getTable().getValueAt(jeniscidera.getTable().getSelectedRow(),0).toString());
                     NmJenisCidera.setText(jeniscidera.getTable().getValueAt(jeniscidera.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnJenisCidera.requestFocus();
             }
             @Override
@@ -347,7 +347,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jeniscidera.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -355,12 +355,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jeniscidera.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         jenisluka.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -371,7 +371,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(jenisluka.getTable().getSelectedRow()!= -1){
                     KdJenisLuka.setText(jenisluka.getTable().getValueAt(jenisluka.getTable().getSelectedRow(),0).toString());
                     NmJenisLuka.setText(jenisluka.getTable().getValueAt(jenisluka.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnJenisLuka.requestFocus();
             }
             @Override
@@ -383,7 +383,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenisluka.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -391,12 +391,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jenisluka.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         bagiantubuh.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -407,7 +407,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(bagiantubuh.getTable().getSelectedRow()!= -1){
                     KdBagianTubuh.setText(bagiantubuh.getTable().getValueAt(bagiantubuh.getTable().getSelectedRow(),0).toString());
                     NmBagianTubuh.setText(bagiantubuh.getTable().getValueAt(bagiantubuh.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnBagianTubuh.requestFocus();
             }
             @Override
@@ -419,7 +419,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bagiantubuh.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -427,12 +427,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     bagiantubuh.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         dampakcidera.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -443,7 +443,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(dampakcidera.getTable().getSelectedRow()!= -1){
                     KdDampak.setText(dampakcidera.getTable().getValueAt(dampakcidera.getTable().getSelectedRow(),0).toString());
                     NmDampak.setText(dampakcidera.getTable().getValueAt(dampakcidera.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 BtnDampak.requestFocus();
             }
             @Override
@@ -455,7 +455,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         dampakcidera.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -463,12 +463,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     dampakcidera.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -476,7 +476,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     if(i==1){
                         NIKKorban.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                         NmKorban.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
@@ -496,8 +496,8 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                     } else if(i==3){
                         NIKK3.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                         NmPetugasK3.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
-                    }  
-                }   
+                    }
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -508,7 +508,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -516,14 +516,14 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pegawai.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -1267,7 +1267,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         FormInput.add(jLabel3);
         jLabel3.setBounds(425, 50, 125, 23);
 
-        KondisiTidakAman.setHighlighter(null);
         KondisiTidakAman.setName("KondisiTidakAman"); // NOI18N
         KondisiTidakAman.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1336,7 +1335,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel14.setBounds(0, 90, 97, 23);
 
         KdJenisPekerjaan.setEditable(false);
-        KdJenisPekerjaan.setHighlighter(null);
         KdJenisPekerjaan.setName("KdJenisPekerjaan"); // NOI18N
         FormInput.add(KdJenisPekerjaan);
         KdJenisPekerjaan.setBounds(101, 90, 55, 23);
@@ -1417,7 +1415,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel17.setBounds(0, 150, 97, 23);
 
         KdLokasiKejadian.setEditable(false);
-        KdLokasiKejadian.setHighlighter(null);
         KdLokasiKejadian.setName("KdLokasiKejadian"); // NOI18N
         FormInput.add(KdLokasiKejadian);
         KdLokasiKejadian.setBounds(101, 150, 55, 23);
@@ -1473,7 +1470,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel18.setBounds(10, 300, 100, 23);
 
         KdPenyebab.setEditable(false);
-        KdPenyebab.setHighlighter(null);
         KdPenyebab.setName("KdPenyebab"); // NOI18N
         FormInput.add(KdPenyebab);
         KdPenyebab.setBounds(101, 270, 55, 23);
@@ -1506,7 +1502,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel19.setBounds(0, 320, 97, 23);
 
         NIKKorban.setEditable(false);
-        NIKKorban.setHighlighter(null);
         NIKKorban.setName("NIKKorban"); // NOI18N
         FormInput.add(NIKKorban);
         NIKKorban.setBounds(101, 320, 100, 23);
@@ -1539,7 +1534,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel20.setBounds(0, 350, 97, 23);
 
         Bidang.setEditable(false);
-        Bidang.setHighlighter(null);
         Bidang.setName("Bidang"); // NOI18N
         FormInput.add(Bidang);
         Bidang.setBounds(101, 350, 100, 23);
@@ -1550,7 +1544,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel21.setBounds(202, 350, 80, 23);
 
         Departemen.setEditable(false);
-        Departemen.setHighlighter(null);
         Departemen.setName("Departemen"); // NOI18N
         FormInput.add(Departemen);
         Departemen.setBounds(286, 350, 100, 23);
@@ -1561,13 +1554,11 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel22.setBounds(0, 380, 97, 23);
 
         JK.setEditable(false);
-        JK.setHighlighter(null);
         JK.setName("JK"); // NOI18N
         FormInput.add(JK);
         JK.setBounds(101, 380, 40, 23);
 
         Usia.setEditable(false);
-        Usia.setHighlighter(null);
         Usia.setName("Usia"); // NOI18N
         FormInput.add(Usia);
         Usia.setBounds(179, 380, 40, 23);
@@ -1583,7 +1574,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel24.setBounds(220, 380, 62, 23);
 
         Jabatan.setEditable(false);
-        Jabatan.setHighlighter(null);
         Jabatan.setName("Jabatan"); // NOI18N
         FormInput.add(Jabatan);
         Jabatan.setBounds(286, 380, 100, 23);
@@ -1609,7 +1599,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         FormInput.add(jLabel26);
         jLabel26.setBounds(202, 410, 80, 23);
 
-        LT.setHighlighter(null);
         LT.setName("LT"); // NOI18N
         LT.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1625,7 +1614,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel27.setBounds(0, 440, 97, 23);
 
         KdJenisCidera.setEditable(false);
-        KdJenisCidera.setHighlighter(null);
         KdJenisCidera.setName("KdJenisCidera"); // NOI18N
         FormInput.add(KdJenisCidera);
         KdJenisCidera.setBounds(101, 440, 55, 23);
@@ -1658,7 +1646,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel28.setBounds(0, 470, 97, 23);
 
         KdJenisLuka.setEditable(false);
-        KdJenisLuka.setHighlighter(null);
         KdJenisLuka.setName("KdJenisLuka"); // NOI18N
         FormInput.add(KdJenisLuka);
         KdJenisLuka.setBounds(101, 470, 55, 23);
@@ -1691,7 +1678,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel29.setBounds(0, 500, 97, 23);
 
         KdBagianTubuh.setEditable(false);
-        KdBagianTubuh.setHighlighter(null);
         KdBagianTubuh.setName("KdBagianTubuh"); // NOI18N
         FormInput.add(KdBagianTubuh);
         KdBagianTubuh.setBounds(101, 500, 55, 23);
@@ -1746,7 +1732,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         FormInput.add(jLabel10);
         jLabel10.setBounds(424, 30, 120, 23);
 
-        NoLaporan.setHighlighter(null);
         NoLaporan.setName("NoLaporan"); // NOI18N
         NoLaporan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1761,7 +1746,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(425, 80, 125, 23);
 
-        TindakanTidakAman.setHighlighter(null);
         TindakanTidakAman.setName("TindakanTidakAman"); // NOI18N
         TindakanTidakAman.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1776,7 +1760,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         FormInput.add(jLabel12);
         jLabel12.setBounds(425, 120, 125, 23);
 
-        Pribadi.setHighlighter(null);
         Pribadi.setName("Pribadi"); // NOI18N
         Pribadi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1797,7 +1780,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         FormInput.add(jLabel32);
         jLabel32.setBounds(425, 150, 125, 23);
 
-        Pekerjaan.setHighlighter(null);
         Pekerjaan.setName("Pekerjaan"); // NOI18N
         Pekerjaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1813,7 +1795,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel33.setBounds(400, 180, 100, 23);
 
         KdDampak.setEditable(false);
-        KdDampak.setHighlighter(null);
         KdDampak.setName("KdDampak"); // NOI18N
         FormInput.add(KdDampak);
         KdDampak.setBounds(504, 180, 55, 23);
@@ -1862,7 +1843,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel35.setBounds(400, 210, 100, 23);
 
         NIKPelapor.setEditable(false);
-        NIKPelapor.setHighlighter(null);
         NIKPelapor.setName("NIKPelapor"); // NOI18N
         FormInput.add(NIKPelapor);
         NIKPelapor.setBounds(504, 210, 100, 23);
@@ -1895,7 +1875,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel36.setBounds(400, 240, 100, 23);
 
         BidangPelapor.setEditable(false);
-        BidangPelapor.setHighlighter(null);
         BidangPelapor.setName("BidangPelapor"); // NOI18N
         FormInput.add(BidangPelapor);
         BidangPelapor.setBounds(504, 240, 100, 23);
@@ -1906,7 +1885,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel37.setBounds(600, 240, 85, 23);
 
         DepartemenPelapor.setEditable(false);
-        DepartemenPelapor.setHighlighter(null);
         DepartemenPelapor.setName("DepartemenPelapor"); // NOI18N
         FormInput.add(DepartemenPelapor);
         DepartemenPelapor.setBounds(689, 240, 100, 23);
@@ -1978,7 +1956,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         FormInput.add(jLabel42);
         jLabel42.setBounds(595, 410, 70, 23);
 
-        Wewenang.setHighlighter(null);
         Wewenang.setName("Wewenang"); // NOI18N
         Wewenang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2016,7 +1993,6 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         jLabel44.setBounds(400, 500, 100, 23);
 
         NIKK3.setEditable(false);
-        NIKK3.setHighlighter(null);
         NIKK3.setName("NIKK3"); // NOI18N
         FormInput.add(NIKK3);
         NIKK3.setBounds(504, 500, 100, 23);
@@ -2134,16 +2110,16 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             Valid.textKosong(btnTIMK3,"Petugas K3");
         }else{
             if(Sequel.menyimpantf("k3rs_peristiwa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Laporan",28,new String[]{
-                    NoLaporan.getText(),Valid.SetTgl(TglInsiden.getSelectedItem()+""),JamInsiden.getSelectedItem()+":"+MenitInsiden.getSelectedItem()+":"+DetikInsiden.getSelectedItem(), 
-                    KdJenisPekerjaan.getText(),Valid.SetTgl(TglPelaporan.getSelectedItem()+""),JamPelaporan.getSelectedItem()+":"+MenitPelaporan.getSelectedItem()+":"+DetikPelaporan.getSelectedItem(), 
-                    KdLokasiKejadian.getText(),Kronologi.getText(),KdPenyebab.getText(),NIKKorban.getText(),Kategori.getSelectedItem().toString(),KdJenisCidera.getText(),KdJenisLuka.getText(), 
-                    KdBagianTubuh.getText(),LT.getText(),KondisiTidakAman.getText(),TindakanTidakAman.getText(),Pribadi.getText(),Pekerjaan.getText(),BarangBukti.getSelectedItem().toString(), 
+                    NoLaporan.getText(),Valid.SetTgl(TglInsiden.getSelectedItem()+""),JamInsiden.getSelectedItem()+":"+MenitInsiden.getSelectedItem()+":"+DetikInsiden.getSelectedItem(),
+                    KdJenisPekerjaan.getText(),Valid.SetTgl(TglPelaporan.getSelectedItem()+""),JamPelaporan.getSelectedItem()+":"+MenitPelaporan.getSelectedItem()+":"+DetikPelaporan.getSelectedItem(),
+                    KdLokasiKejadian.getText(),Kronologi.getText(),KdPenyebab.getText(),NIKKorban.getText(),Kategori.getSelectedItem().toString(),KdJenisCidera.getText(),KdJenisLuka.getText(),
+                    KdBagianTubuh.getText(),LT.getText(),KondisiTidakAman.getText(),TindakanTidakAman.getText(),Pribadi.getText(),Pekerjaan.getText(),BarangBukti.getSelectedItem().toString(),
                     KdDampak.getText(),NIKPelapor.getText(),JenisTindakan.getSelectedItem().toString(),Rencana.getText(),Valid.SetTgl(Target.getSelectedItem()+""),Wewenang.getText(),NIKK3.getText(),Catatan.getText()
                 })==true){
                     emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2151,19 +2127,19 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,btnTIMK3,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         TabRawat.setSelectedIndex(0);
-        emptTeks();        
-}//GEN-LAST:event_BtnBatalActionPerformed
+        emptTeks();
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             TabRawat.setSelectedIndex(0);
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbJnsPerawatan.getSelectedRow() > -1){
@@ -2171,7 +2147,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             emptTeks();
             tampil();
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2179,7 +2155,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(NoLaporan.getText().trim().equals("")){
@@ -2225,10 +2201,10 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow() > -1){
                 if(Sequel.mengedittf("k3rs_peristiwa","no_k3rs=?","no_k3rs=?,tgl_insiden=?,waktu_insiden=?,kode_pekerjaan=?,tgl_pelaporan=?,waktu_pelaporan=?,kode_lokasi=?,kronologi_kejadian=?,kode_penyebab=?,nik=?,kategori_cidera=?,kode_cidera=?,kode_luka=?,kode_bagian=?,lt=?,penyebab_langsung_kondisi=?,penyebab_langsung_tindakan=?,penyebab_tidak_langsung_pribadi=?,penyebab_tidak_langsung_pekerjaan=?,barang_bukti=?,kode_dampak=?,nik_pelapor=?,perbaikan_jenis_tindakan=?,perbaikan_rencana_tindakan=?,perbaikan_target=?,perbaikan_wewenang=?,nik_timk3=?,catatan=?",29,new String[]{
-                        NoLaporan.getText(),Valid.SetTgl(TglInsiden.getSelectedItem()+""),JamInsiden.getSelectedItem()+":"+MenitInsiden.getSelectedItem()+":"+DetikInsiden.getSelectedItem(), 
-                        KdJenisPekerjaan.getText(),Valid.SetTgl(TglPelaporan.getSelectedItem()+""),JamPelaporan.getSelectedItem()+":"+MenitPelaporan.getSelectedItem()+":"+DetikPelaporan.getSelectedItem(), 
-                        KdLokasiKejadian.getText(),Kronologi.getText(),KdPenyebab.getText(),NIKKorban.getText(),Kategori.getSelectedItem().toString(),KdJenisCidera.getText(),KdJenisLuka.getText(), 
-                        KdBagianTubuh.getText(),LT.getText(),KondisiTidakAman.getText(),TindakanTidakAman.getText(),Pribadi.getText(),Pekerjaan.getText(),BarangBukti.getSelectedItem().toString(), 
+                        NoLaporan.getText(),Valid.SetTgl(TglInsiden.getSelectedItem()+""),JamInsiden.getSelectedItem()+":"+MenitInsiden.getSelectedItem()+":"+DetikInsiden.getSelectedItem(),
+                        KdJenisPekerjaan.getText(),Valid.SetTgl(TglPelaporan.getSelectedItem()+""),JamPelaporan.getSelectedItem()+":"+MenitPelaporan.getSelectedItem()+":"+DetikPelaporan.getSelectedItem(),
+                        KdLokasiKejadian.getText(),Kronologi.getText(),KdPenyebab.getText(),NIKKorban.getText(),Kategori.getSelectedItem().toString(),KdJenisCidera.getText(),KdJenisLuka.getText(),
+                        KdBagianTubuh.getText(),LT.getText(),KondisiTidakAman.getText(),TindakanTidakAman.getText(),Pribadi.getText(),Pekerjaan.getText(),BarangBukti.getSelectedItem().toString(),
                         KdDampak.getText(),NIKPelapor.getText(),JenisTindakan.getSelectedItem().toString(),Rencana.getText(),Valid.SetTgl(Target.getSelectedItem()+""),Wewenang.getText(),NIKK3.getText(),
                         Catatan.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
                     })==true){
@@ -2238,8 +2214,8 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 }
             }
         }
-        
-}//GEN-LAST:event_BtnEditActionPerformed
+
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2247,40 +2223,40 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());  
-            param.put("periode",DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("periode",DTPCari1.getSelectedItem()+" s.d. "+DTPCari2.getSelectedItem());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-            param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+"")); 
-            param.put("parameter","%"+TCari.getText().trim()+"%"); 
+            param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+            param.put("parameter","%"+TCari.getText().trim()+"%");
             Valid.MyReport("rptPeristiwaK3RS.jasper","report","::[ Data Pasien Teridentifikasi TB ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2288,7 +2264,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -2298,11 +2274,11 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2310,12 +2286,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2324,7 +2300,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -2336,7 +2312,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -2348,7 +2324,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanKeyPressed
+    }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==1){
@@ -2357,22 +2333,22 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
     }//GEN-LAST:event_TabRawatMouseClicked
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        if(this.getHeight()<700){   
+        if(this.getHeight()<700){
             Scroll1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
             FormInput.setPreferredSize(new Dimension(FormInput.WIDTH,540));
             if(this.getWidth()<835){
-                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);                                
+                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
                 FormInput.setPreferredSize(new Dimension(810,540));
             }else{
-                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);                
+                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             }
         }else{
-            Scroll1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);            
+            Scroll1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
             if(this.getWidth()<835){
-                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);                                
+                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
                 FormInput.setPreferredSize(new Dimension(810,FormInput.HEIGHT));
             }else{
-                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);                
+                Scroll1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             }
         }
     }//GEN-LAST:event_formWindowActivated
@@ -2586,512 +2562,512 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
 
     private void ppGrafikBatangPeristiwaK3PerTahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerTahunActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select year(k3rs_peristiwa.tgl_pelaporan),count(year(k3rs_peristiwa.tgl_pelaporan)) as jumlah "+
                 "from k3rs_peristiwa where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by year(k3rs_peristiwa.tgl_pelaporan)").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Tahun Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Tahun","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Tahun Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Tahun","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Tahun",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerTahunActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerTahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerTahunActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select year(k3rs_peristiwa.tgl_pelaporan),count(year(k3rs_peristiwa.tgl_pelaporan)) as jumlah "+
                 "from k3rs_peristiwa where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by year(k3rs_peristiwa.tgl_pelaporan)").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Tahun Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Tahun Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Tahun",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerTahunActionPerformed
 
     private void ppGrafikBatangPeristiwaK3PerBulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerBulanActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m'),count(DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m')) as jumlah "+
                 "from k3rs_peristiwa where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m')").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Bulan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Bulan","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Bulan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Bulan","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Bulan",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true); 
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerBulanActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerBulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerBulanActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m'),count(DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m')) as jumlah "+
                 "from k3rs_peristiwa where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m')").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Bulan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Bulan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Bulan",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerBulanActionPerformed
 
     private void ppGrafikBatangPeristiwaK3PerTanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerTanggalActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m-%d'),count(DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m-%d')) as jumlah "+
                 "from k3rs_peristiwa where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m-%d')").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per DTPCari Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"DTPCari","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per DTPCari Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"DTPCari","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per DTPCari",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerTanggalActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerTanggalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerTanggalActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m-%d'),count(DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m-%d')) as jumlah "+
                 "from k3rs_peristiwa where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by DATE_FORMAT(k3rs_peristiwa.tgl_pelaporan, '%y-%m-%d')").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per DTPCari Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per DTPCari Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per DTPCari",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerTanggalActionPerformed
 
     private void ppGrafikBatangPeristiwaK3PerJenisCideraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerJenisCideraActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_jenis_cidera.jenis_cidera,count(k3rs_peristiwa.kode_cidera) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_jenis_cidera on k3rs_jenis_cidera.kode_cidera=k3rs_peristiwa.kode_cidera where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_cidera").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Jenis Cidera Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Jenis Cidera","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Jenis Cidera Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Jenis Cidera","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Jenis Cidera",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerJenisCideraActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerJenisCideraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerJenisCideraActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_jenis_cidera.jenis_cidera,count(k3rs_peristiwa.kode_cidera) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_jenis_cidera on k3rs_jenis_cidera.kode_cidera=k3rs_peristiwa.kode_cidera where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_cidera").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Jenis Cidera Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Jenis Cidera Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Jenis Cidera",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerJenisCideraActionPerformed
 
     private void ppGrafikBatangPeristiwaK3PerPenyebabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerPenyebabActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_penyebab.penyebab_kecelakaan,count(k3rs_peristiwa.kode_penyebab) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_penyebab on k3rs_penyebab.kode_penyebab=k3rs_peristiwa.kode_penyebab where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_penyebab").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Penyebab Kecelakaan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Penyebab Kecelakaan","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Penyebab Kecelakaan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Penyebab Kecelakaan","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Penyebab Kecelakaan",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerPenyebabActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerPenyebabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerPenyebabActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_penyebab.penyebab_kecelakaan,count(k3rs_peristiwa.kode_penyebab) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_penyebab on k3rs_penyebab.kode_penyebab=k3rs_peristiwa.kode_penyebab where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_penyebab").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Penyebab Kecelakaan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Penyebab Kecelakaan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Penyebab Kecelakaan",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerPenyebabActionPerformed
 
     private void ppGrafikBatangPeristiwaK3PerJenisLukaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerJenisLukaActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_jenis_luka.jenis_luka,count(k3rs_peristiwa.kode_luka) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_jenis_luka on k3rs_jenis_luka.kode_luka=k3rs_peristiwa.kode_luka where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_luka").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Jenis Luka Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Jenis Luka","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Jenis Luka Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Jenis Luka","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Jenis Luka",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerJenisLukaActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerJenisLukaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerJenisLukaActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_jenis_luka.jenis_luka,count(k3rs_peristiwa.kode_luka) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_jenis_luka on k3rs_jenis_luka.kode_luka=k3rs_peristiwa.kode_luka where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_luka").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Jenis Luka Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Jenis Luka Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Jenis Luka",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerJenisLukaActionPerformed
 
     private void ppGrafikBatangPeristiwaK3PerLokasiKejadianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerLokasiKejadianActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_lokasi_kejadian.lokasi_kejadian,count(k3rs_peristiwa.kode_lokasi) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_lokasi_kejadian on k3rs_lokasi_kejadian.kode_lokasi=k3rs_peristiwa.kode_lokasi where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_lokasi").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Lokasi Kejadian Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Lokasi Kejadian","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Lokasi Kejadian Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Lokasi Kejadian","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Lokasi Kejadian",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerLokasiKejadianActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerLokasiKejadianActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerLokasiKejadianActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_lokasi_kejadian.lokasi_kejadian,count(k3rs_peristiwa.kode_lokasi) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_lokasi_kejadian on k3rs_lokasi_kejadian.kode_lokasi=k3rs_peristiwa.kode_lokasi where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_lokasi").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Lokasi Kejadian Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Lokasi Kejadian Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Lokasi Kejadian",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true); 
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerLokasiKejadianActionPerformed
 
     private void ppGrafikBatangPeristiwaK3PerDampakCideraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerDampakCideraActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_dampak_cidera.dampak_cidera,count(k3rs_peristiwa.kode_dampak) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_dampak_cidera on k3rs_dampak_cidera.kode_dampak=k3rs_peristiwa.kode_dampak where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_dampak").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Dampak Cidera Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Dampak Cidera","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Dampak Cidera Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Dampak Cidera","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Dampak Cidera",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerDampakCideraActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerDampakCideraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerDampakCideraActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_dampak_cidera.dampak_cidera,count(k3rs_peristiwa.kode_dampak) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_dampak_cidera on k3rs_dampak_cidera.kode_dampak=k3rs_peristiwa.kode_dampak where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_dampak").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Dampak Cidera Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Dampak Cidera Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Dampak Cidera",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerDampakCideraActionPerformed
 
     private void ppGrafikBatangPeristiwaK3PerJenisPekerjaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerJenisPekerjaanActionPerformed
         DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_jenis_pekerjaan.jenis_pekerjaan,count(k3rs_peristiwa.kode_pekerjaan) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_jenis_pekerjaan on k3rs_jenis_pekerjaan.kode_pekerjaan=k3rs_peristiwa.kode_pekerjaan where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_pekerjaan").executeQuery();
             while(rs.next()) {
                 dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Jenis pekerjaan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Jenis pekerjaan","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Jenis pekerjaan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Jenis pekerjaan","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Jenis pekerjaan",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerJenisPekerjaanActionPerformed
 
     private void ppGrafikPiePeristiwaK3PerJenisPekerjaanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerJenisPekerjaanActionPerformed
         DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+        try {
             rs = koneksi.prepareStatement("select k3rs_jenis_pekerjaan.jenis_pekerjaan,count(k3rs_peristiwa.kode_pekerjaan) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_jenis_pekerjaan on k3rs_jenis_pekerjaan.kode_pekerjaan=k3rs_peristiwa.kode_pekerjaan where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_pekerjaan").executeQuery();
             while(rs.next()) {
                 dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
             }
-            
-            if(rs!=null){
-                rs.close();
-            }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Jenis pekerjaan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
-        ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Jenis pekerjaan",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
-        cf.setLocationRelativeTo(internalFrame1);
-        cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
-        cf.setAlwaysOnTop(true);
-        cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
-    }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerJenisPekerjaanActionPerformed
 
-    private void ppGrafikBatangPeristiwaK3PerBagianTubuhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerBagianTubuhActionPerformed
-        DefaultCategoryDataset dcd = new DefaultCategoryDataset();
-        try {                
-            rs = koneksi.prepareStatement("select k3rs_bagian_tubuh.bagian_tubuh,count(k3rs_peristiwa.kode_bagian) as jumlah "+
-                "from k3rs_peristiwa inner join k3rs_bagian_tubuh on k3rs_bagian_tubuh.kode_bagian=k3rs_peristiwa.kode_bagian where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_bagian").executeQuery();
-            while(rs.next()) {
-                dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
-            }
-            
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
         }
-        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Bagian Tubuh Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Bagian Tubuh","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true); 
-        ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Bagian Tubuh",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Jenis pekerjaan Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
+        ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Jenis pekerjaan",freeChart);
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
-    }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerBagianTubuhActionPerformed
+        cf.setVisible(true);
+    }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerJenisPekerjaanActionPerformed
 
-    private void ppGrafikPiePeristiwaK3PerBagianTubuhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerBagianTubuhActionPerformed
-        DefaultPieDataset dpd = new DefaultPieDataset();
-        try {                
+    private void ppGrafikBatangPeristiwaK3PerBagianTubuhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikBatangPeristiwaK3PerBagianTubuhActionPerformed
+        DefaultCategoryDataset dcd = new DefaultCategoryDataset();
+        try {
             rs = koneksi.prepareStatement("select k3rs_bagian_tubuh.bagian_tubuh,count(k3rs_peristiwa.kode_bagian) as jumlah "+
                 "from k3rs_peristiwa inner join k3rs_bagian_tubuh on k3rs_bagian_tubuh.kode_bagian=k3rs_peristiwa.kode_bagian where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_bagian").executeQuery();
             while(rs.next()) {
-                dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
+                dcd.setValue(rs.getDouble(2),rs.getString(1)+"("+rs.getString(2)+")",rs.getString(1));
             }
-            
+
             if(rs!=null){
                 rs.close();
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-        } 
-        
-        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Bagian Tubuh Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url 
+        }
+        JFreeChart freeChart = ChartFactory.createBarChart("Grafik Peristiwa K3 Per Bagian Tubuh Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),"Bagian Tubuh","Jumlah", dcd, PlotOrientation.VERTICAL,true, true,true);
         ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Bagian Tubuh",freeChart);
-        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);   
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         cf.setLocationRelativeTo(internalFrame1);
         cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
         cf.setAlwaysOnTop(true);
         cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        cf.setVisible(true);  
+        cf.setVisible(true);
+    }//GEN-LAST:event_ppGrafikBatangPeristiwaK3PerBagianTubuhActionPerformed
+
+    private void ppGrafikPiePeristiwaK3PerBagianTubuhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikPiePeristiwaK3PerBagianTubuhActionPerformed
+        DefaultPieDataset dpd = new DefaultPieDataset();
+        try {
+            rs = koneksi.prepareStatement("select k3rs_bagian_tubuh.bagian_tubuh,count(k3rs_peristiwa.kode_bagian) as jumlah "+
+                "from k3rs_peristiwa inner join k3rs_bagian_tubuh on k3rs_bagian_tubuh.kode_bagian=k3rs_peristiwa.kode_bagian where tgl_pelaporan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' group by k3rs_peristiwa.kode_bagian").executeQuery();
+            while(rs.next()) {
+                dpd.setValue(rs.getString(1)+"("+rs.getString(2)+")",rs.getDouble(2));
+            }
+
+            if(rs!=null){
+                rs.close();
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+
+        JFreeChart freeChart = ChartFactory.createPieChart("Grafik Peristiwa K3 Per Bagian Tubuh Periode "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+""),dpd,true,true, false); //String title,PieDatasheet datasheet,boolean legends,boolean tooltips,boolean url
+        ChartFrame cf = new ChartFrame("Grafik Peristiwa K3 Per Bagian Tubuh",freeChart);
+        cf.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        cf.setLocationRelativeTo(internalFrame1);
+        cf.setModalExclusionType(ModalExclusionType.APPLICATION_EXCLUDE);
+        cf.setAlwaysOnTop(true);
+        cf.setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
+        cf.setVisible(true);
     }//GEN-LAST:event_ppGrafikPiePeristiwaK3PerBagianTubuhActionPerformed
 
     /**
@@ -3266,7 +3242,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{    
+        try{
             ps=koneksi.prepareStatement(
                 "select k3rs_peristiwa.no_k3rs,k3rs_peristiwa.tgl_insiden,k3rs_peristiwa.waktu_insiden,k3rs_peristiwa.kode_pekerjaan,k3rs_jenis_pekerjaan.jenis_pekerjaan,"+
                 "k3rs_peristiwa.tgl_pelaporan,k3rs_peristiwa.waktu_pelaporan,k3rs_peristiwa.kode_lokasi,k3rs_lokasi_kejadian.lokasi_kejadian,k3rs_peristiwa.kronologi_kejadian,"+
@@ -3335,7 +3311,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 ps.setString(38,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 ps.setString(39,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
-                while(rs.next()){   
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_k3rs"),rs.getString("tgl_insiden")+" "+rs.getString("waktu_insiden"),rs.getString("kode_pekerjaan"),rs.getString("jenis_pekerjaan"),
                         rs.getString("tgl_pelaporan")+" "+rs.getString("waktu_pelaporan"),rs.getString("kode_lokasi"),rs.getString("lokasi_kejadian"),rs.getString("kronologi_kejadian"),
@@ -3346,7 +3322,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                         rs.getString("perbaikan_rencana_tindakan"),rs.getString("perbaikan_target"),rs.getString("perbaikan_wewenang"),rs.getString("catatan"),rs.getString("nik_timk3"),
                         rs.getString("timk3")
                     });
-                }  
+                }
             } catch(Exception e){
                 System.out.println(e);
             } finally{
@@ -3406,10 +3382,10 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         Catatan.setText("");
         NoLaporan.requestFocus();
     }
-    
+
     public void autoNomor(){
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_k3rs,4),signed)),0) from k3rs_peristiwa where tgl_pelaporan='"+Valid.SetTgl(TglPelaporan.getSelectedItem()+"")+"' ",
-                "K3/"+TglPelaporan.getSelectedItem().toString().substring(6,10)+"/"+TglPelaporan.getSelectedItem().toString().substring(3,5)+"/"+TglPelaporan.getSelectedItem().toString().substring(0,2)+"/",4,NoLaporan); 
+                "K3/"+TglPelaporan.getSelectedItem().toString().substring(6,10)+"/"+TglPelaporan.getSelectedItem().toString().substring(3,5)+"/"+TglPelaporan.getSelectedItem().toString().substring(0,2)+"/",4,NoLaporan);
     }
 
     private void getData() {
@@ -3479,7 +3455,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                         ps.close();
                     }
                 }
-                
+
                 ps=koneksi.prepareStatement(
                     "select departemen,bidang from pegawai where nik=?");
                 try {
@@ -3504,7 +3480,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             }
         }
     }
-    
+
     public void isCek(){
         TabRawat.setSelectedIndex(1);
         tampil();
@@ -3513,14 +3489,14 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             btnTIMK3.setEnabled(false);
             NIKK3.setText(akses.getkode());
             NmPetugasK3.setText(pegawai.tampil3(NIKK3.getText()));
-        }   
+        }
         BtnSimpan.setEnabled(akses.getperistiwa_k3rs());
         BtnHapus.setEnabled(akses.getperistiwa_k3rs());
         BtnEdit.setEnabled(akses.getperistiwa_k3rs());
         BtnPrint.setEnabled(akses.getperistiwa_k3rs());
     }
-    
-    
 
-    
+
+
+
 }

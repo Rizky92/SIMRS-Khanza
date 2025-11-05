@@ -25,15 +25,15 @@ public class RMRiwayatKamarPasien extends javax.swing.JDialog {
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
     private int i=0,w=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public RMRiwayatKamarPasien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -226,42 +226,42 @@ public class RMRiwayatKamarPasien extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("RiwayatKamarPasien.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("RiwayatKamarPasien.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                             "<tr class='isi2'>"+
                                 "<td valign='top' align='center'>"+
                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+       
+                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -283,17 +283,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,Tgl1);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
     prosesCari();
-}//GEN-LAST:event_btnCariActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
+    private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, Tgl2, BtnPrint);
         }
-}//GEN-LAST:event_btnCariKeyPressed
+    }//GEN-LAST:event_btnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         prosesCari();
@@ -362,7 +362,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAF8' align='center' width='5%'>Tgl.Reg</td>"+
                     "<td valign='middle' bgcolor='#FFFAF8' align='center' width='8%'>No.Rawat</td>"+
@@ -370,7 +370,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAF8' align='center' width='14%'>Nama Pasien</td>"+
                     "<td valign='middle' bgcolor='#FFFAF8' align='center' width='69%'>Riwayat Kamar</td>"+
                 "</tr>"
-            );     
+            );
             ps=koneksi.prepareStatement(
                 "select reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur "+
                 "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where reg_periksa.status_lanjut='Ranap' and "+
@@ -403,8 +403,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     try{
                         ps2.setString(1,rs.getString("no_rawat"));
                         rs2=ps2.executeQuery();
-                        if(rs2.next()){                                    
-                            htmlContent.append(  
+                        if(rs2.next()){
+                            htmlContent.append(
                               "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                 "<tr align='center'>"+
                                   "<td valign='top' width='4%' bgcolor='#FFFAF8'>No.</td>"+
@@ -427,12 +427,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                         "<td valign='top'>"+rs2.getString("kd_kamar")+", "+rs2.getString("nm_bangsal")+"</td>"+
                                         "<td valign='top'>"+rs2.getString("stts_pulang")+"</td>"+
                                         "<td valign='top' align='right'>"+Valid.SetAngka(rs2.getDouble("ttl_biaya"))+"</td>"+
-                                     "</tr>"); 
+                                     "</tr>");
                                 w++;
                             }
                             htmlContent.append(
                               "</table>");
-                        }                                
+                        }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
                     } finally{
@@ -459,7 +459,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ps.close();
                 }
             }
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -468,11 +468,11 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("laporan.DlgRL4A.prosesCari() 5 : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getriwayat_kamar_pasien());
     }
@@ -480,5 +480,5 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
     public void tampil() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-    
+
 }
