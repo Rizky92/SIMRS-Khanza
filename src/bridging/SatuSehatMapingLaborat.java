@@ -37,7 +37,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private DlgCariTemplateLaborat pemeriksaan=new DlgCariTemplateLaborat(null,false);
     private final SatuSehatReferensiLabLOINC refPeriksa = new SatuSehatReferensiLabLOINC(null, false);
@@ -86,15 +86,15 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        IDTemplate.setDocument(new batasInput((byte)15).getKata(IDTemplate)); 
-        PeriksaCode.setDocument(new batasInput((byte)15).getKata(PeriksaCode)); 
-        PeriksaSystem.setDocument(new batasInput((byte)100).getKata(PeriksaSystem)); 
-        PeriksaDisplay.setDocument(new batasInput((byte)80).getKata(PeriksaDisplay)); 
-        SampelCode.setDocument(new batasInput((byte)15).getKata(SampelCode)); 
-        SampelSystem.setDocument(new batasInput((byte)100).getKata(SampelSystem)); 
-        SampelDisplay.setDocument(new batasInput((byte)80).getKata(SampelDisplay)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
-        
+        IDTemplate.setDocument(new batasInput((byte)15).getKata(IDTemplate));
+        PeriksaCode.setDocument(new batasInput((byte)15).getKata(PeriksaCode));
+        PeriksaSystem.setDocument(new batasInput((byte)100).getKata(PeriksaSystem));
+        PeriksaDisplay.setDocument(new batasInput((byte)80).getKata(PeriksaDisplay));
+        SampelCode.setDocument(new batasInput((byte)15).getKata(SampelCode));
+        SampelSystem.setDocument(new batasInput((byte)100).getKata(SampelSystem));
+        SampelDisplay.setDocument(new batasInput((byte)80).getKata(SampelDisplay));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -116,29 +116,29 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         pemeriksaan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pemeriksaan.getTable().getSelectedRow()!= -1){                    
+                if(pemeriksaan.getTable().getSelectedRow()!= -1){
                     IDTemplate.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),2).toString());
                     NamaPemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),3).toString());
                     NamaTindakan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),1).toString());
                 }
                 BtnCariTemplateLab.requestFocus();
             }
-        }); 
-        
+        });
+
         pemeriksaan.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pemeriksaan.dispose();
-                }  
+                }
             }
         });
-        
+
         refPeriksa.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -159,7 +159,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         refSampel.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -180,7 +180,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -485,7 +485,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         jLabel4.setBounds(245, 40, 45, 23);
 
         IDTemplate.setEditable(false);
-        IDTemplate.setHighlighter(null);
         IDTemplate.setName("IDTemplate"); // NOI18N
         FormInput.add(IDTemplate);
         IDTemplate.setBounds(99, 10, 110, 23);
@@ -507,7 +506,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(BtnCariTemplateLab);
         BtnCariTemplateLab.setBounds(213, 10, 28, 23);
 
-        PeriksaCode.setHighlighter(null);
         PeriksaCode.setName("PeriksaCode"); // NOI18N
         PeriksaCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -527,7 +525,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(jLabel10);
         jLabel10.setBounds(0, 70, 95, 23);
 
-        PeriksaDisplay.setHighlighter(null);
         PeriksaDisplay.setName("PeriksaDisplay"); // NOI18N
         PeriksaDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -537,7 +534,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(PeriksaDisplay);
         PeriksaDisplay.setBounds(99, 70, 625, 23);
 
-        PeriksaSystem.setHighlighter(null);
         PeriksaSystem.setName("PeriksaSystem"); // NOI18N
         PeriksaSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -557,7 +553,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(jLabel12);
         jLabel12.setBounds(0, 130, 95, 23);
 
-        SampelCode.setHighlighter(null);
         SampelCode.setName("SampelCode"); // NOI18N
         SampelCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -567,7 +562,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(SampelCode);
         SampelCode.setBounds(99, 100, 160, 23);
 
-        SampelDisplay.setHighlighter(null);
         SampelDisplay.setName("SampelDisplay"); // NOI18N
         SampelDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -582,7 +576,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(295, 100, 81, 23);
 
-        SampelSystem.setHighlighter(null);
         SampelSystem.setName("SampelSystem"); // NOI18N
         SampelSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -597,7 +590,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(0, 10, 95, 23);
 
-        NamaTindakan.setHighlighter(null);
         NamaTindakan.setName("NamaTindakan"); // NOI18N
         NamaTindakan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -607,7 +599,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         FormInput.add(NamaTindakan);
         NamaTindakan.setBounds(485, 10, 237, 23);
 
-        NamaPemeriksaan.setHighlighter(null);
         NamaPemeriksaan.setName("NamaPemeriksaan"); // NOI18N
         NamaPemeriksaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -666,11 +657,11 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         pemeriksaan.emptTeks();
         pemeriksaan.tampil2();
         pemeriksaan.setVisible(true);
-}//GEN-LAST:event_BtnCariTemplateLabActionPerformed
+    }//GEN-LAST:event_BtnCariTemplateLabActionPerformed
 
     private void BtnCariTemplateLabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariTemplateLabKeyPressed
         Valid.pindah(evt, PeriksaSystem, PeriksaDisplay);
-}//GEN-LAST:event_BtnCariTemplateLabKeyPressed
+    }//GEN-LAST:event_BtnCariTemplateLabKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(PeriksaCode.getText().trim().equals("")){
@@ -696,25 +687,25 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                 });
                 emptTeks();
                 LCount.setText(""+tabMode.getRowCount());
-            }                
+            }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{Valid.pindah(evt,SampelDisplay, BtnBatal);}
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,IDTemplate,"satu_sehat_mapping_lab","id_template")==true){
@@ -722,7 +713,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             emptTeks();
             LCount.setText(""+tabMode.getRowCount());
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -730,7 +721,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(PeriksaCode.getText().trim().equals("")){
@@ -762,9 +753,9 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                     tabMode.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.getSelectedRow(),7);
                     emptTeks();
                 }
-            }                
+            }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -772,37 +763,37 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingPemeriksaanLaboratSatuSehat.jasper","report","::[ Mapping Pemeriksaan Laboratorium Satu Sehat Kemenkes ]::",param);            
+                Valid.MyReport("rptMapingPemeriksaanLaboratSatuSehat.jasper","report","::[ Mapping Pemeriksaan Laboratorium Satu Sehat Kemenkes ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -810,7 +801,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -820,11 +811,11 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -832,12 +823,12 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -846,7 +837,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -855,7 +846,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyReleased
         if(tabMode.getRowCount()!=0){
@@ -1056,17 +1047,17 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
            SampelDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getsatu_sehat_mapping_lab());
         BtnHapus.setEnabled(akses.getsatu_sehat_mapping_lab());
         BtnEdit.setEnabled(akses.getsatu_sehat_mapping_lab());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }  
-    
+    }
+
     private void isForm() {
         if (ChkInput.isSelected() == true) {
             ChkInput.setVisible(false);

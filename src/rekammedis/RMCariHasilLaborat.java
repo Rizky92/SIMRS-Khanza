@@ -46,7 +46,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         this.setLocation(10,2);
         setSize(656,250);
 
-        Object[] row={"P","Tanggal","Jam","Hasil Pemeriksaan", "Nama Tindakan"};
+        Object[] row={"P","Tanggal","Jam","Hasil Pemeriksaan","Nilai Normal", "Nama Tindakan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -56,7 +56,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
+                java.lang.Boolean.class, java.lang.Object.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -67,7 +67,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (z= 0; z < 5; z++) {
+        for (z= 0; z < 6; z++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(z);
             if(z==0){
                 column.setPreferredWidth(20);
@@ -78,6 +78,8 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
             }else if(z==3){
                 column.setPreferredWidth(500);
             }else if(z==4){
+                column.setPreferredWidth(100);
+            }else if(z==5){
                 column.setPreferredWidth(200);
             }
         }
@@ -106,7 +108,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
             });
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -313,12 +315,12 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         sql="";
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -326,13 +328,13 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         sql="";
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -340,7 +342,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -348,7 +350,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -359,7 +361,7 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -428,19 +430,21 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                    "select detail_periksa_lab.tgl_periksa,detail_periksa_lab.jam,template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai, jns_perawatan_lab.nm_perawatan "+
+                    "select detail_periksa_lab.tgl_periksa,detail_periksa_lab.jam,template_laboratorium.Pemeriksaan,detail_periksa_lab.nilai,detail_periksa_lab.nilai_rujukan, jns_perawatan_lab.nm_perawatan "+
                     "from detail_periksa_lab inner join template_laboratorium on detail_periksa_lab.id_template=template_laboratorium.id_template join "+
                     "jns_perawatan_lab on detail_periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw where " +
-                    "detail_periksa_lab.no_rawat=? and (detail_periksa_lab.tgl_periksa like ? or template_laboratorium.Pemeriksaan like ?) "+sql+
-                    "order by detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template");
+                    "detail_periksa_lab.no_rawat=? "+(TCari.getText().trim().equals("")?"":"and (detail_periksa_lab.tgl_periksa like ? or template_laboratorium.Pemeriksaan like ?)")+
+                    sql+"order by detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.kd_jenis_prw, detail_periksa_lab.id_template");
             try{
                 ps.setString(1,norawat);
-                ps.setString(2,"%"+TCari.getText().trim()+"%");
-                ps.setString(3,"%"+TCari.getText().trim()+"%");
+                if(!TCari.getText().trim().equals("")){
+                    ps.setString(2,"%"+TCari.getText().trim()+"%");
+                    ps.setString(3,"%"+TCari.getText().trim()+"%");
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[] {
-                        false,rs.getString(1),rs.getString(2),rs.getString(3)+" : "+rs.getString(4), rs.getString(5)
+                        false,rs.getString(1),rs.getString(2),rs.getString(3)+" : "+rs.getString(4),rs.getString(5), rs.getString(6)
                     });
                 }
             }catch(Exception ex){
@@ -459,10 +463,10 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-    
+
     public void setNoRawat(String norawat){
         this.norawat=norawat;
     }
@@ -470,5 +474,5 @@ public final class RMCariHasilLaborat extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
 }

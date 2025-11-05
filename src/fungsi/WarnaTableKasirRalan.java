@@ -10,7 +10,6 @@ import java.awt.Component;
 import javax.swing.JTable;
 import javax.swing.UIManager;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -36,48 +35,39 @@ public class WarnaTableKasirRalan extends DefaultTableCellRenderer {
     private static Color FOREGROUND_BAYAR = new Color(255, 255, 255);
 
     @Override
-    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
+    public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column){
         Component component = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-        Color backgroundColor = BACKGROUND_DEFAULT;
-        Color foregroundColor = FOREGROUND_DEFAULT;
-        switch (table.getValueAt(row, 10).toString()) {
-            case "TTV":
-                backgroundColor = row % 2 == 1 ? ColorFunctions.darken(BACKGROUND_TTV, 0.05f) : BACKGROUND_TTV;
-                foregroundColor = FOREGROUND_TTV;
-                break;
-            case "Sudah":
-                backgroundColor = row % 2 == 1 ? ColorFunctions.darken(BACKGROUND_SUDAH, 0.05f) : BACKGROUND_SUDAH;
-                foregroundColor = FOREGROUND_SUDAH;
-                break;
-            case "Batal":
-                backgroundColor = row % 2 == 1 ? ColorFunctions.darken(BACKGROUND_BATAL, 0.05f): BACKGROUND_BATAL;
-                foregroundColor = FOREGROUND_BATAL;
-                break;
-            case "Dirujuk":
-            case "Meninggal":
-            case "Pulang Paksa":
-                backgroundColor = row % 2 == 1 ? ColorFunctions.darken(BACKGROUND_KELUAR, 0.05f) : BACKGROUND_KELUAR;
-                foregroundColor = FOREGROUND_KELUAR;
-                break;
-            case "Dirawat":
-                backgroundColor = row % 2 == 1 ? ColorFunctions.darken(BACKGROUND_DIRAWAT, 0.05f) : BACKGROUND_DIRAWAT;
-                foregroundColor = FOREGROUND_DIRAWAT;
-                break;
-            default:
-                backgroundColor = row % 2 == 1 ? ColorFunctions.darken(BACKGROUND_DEFAULT, 0.05f) : BACKGROUND_DEFAULT;
-                foregroundColor = FOREGROUND_DEFAULT;
-                break;
+        if (row % 2 == 1){
+            component.setBackground(new Color(255,244,244));
+            component.setForeground(new Color(50,50,50));
+        }else{
+            component.setBackground(new Color(255,255,255));
+            component.setForeground(new Color(50,50,50));
         }
-        if (table.getValueAt(row, 15).toString().equals("Sudah Bayar")) {
-            backgroundColor = row % 2 == 0 ? ColorFunctions.lighten(BACKGROUND_BAYAR, 0.05f) : BACKGROUND_BAYAR;
-            foregroundColor = FOREGROUND_BAYAR;
+        if(table.getValueAt(row,10).toString().equals("Sudah")){
+            component.setBackground(new Color(200,0,0));
+            component.setForeground(new Color(255,230,230));
+        }else if(table.getValueAt(row,10).toString().equals("Batal")){
+            component.setBackground(new Color(255,243,109));
+            component.setForeground(new Color(120,110,50));
+        }else if(table.getValueAt(row,10).toString().equals("Dirujuk")||table.getValueAt(row,10).toString().equals("Meninggal")||table.getValueAt(row,10).toString().equals("Pulang Paksa")){
+            component.setBackground(new Color(152,152,156));
+            component.setForeground(new Color(245,245,255));
+        }else if(table.getValueAt(row,10).toString().equals("Dirawat")){
+            component.setBackground(new Color(119,221,119));
+            component.setForeground(new Color(245,255,245));
+        }else if(table.getValueAt(row,10).toString().equals("TTV")){
+            if (row % 2 == 1) {
+                component.setBackground(new Color(17, 217, 242));
+            } else {
+                component.setBackground(new Color(30, 230, 255));
+            }
+            component.setForeground(new Color(45, 40, 55));
         }
-        if (isSelected) {
-            backgroundColor = BACKGROUND_SELECTION;
-            foregroundColor = FOREGROUND_SELECTION;
+        if(table.getValueAt(row,15).toString().equals("Sudah Bayar")){
+            component.setBackground(new Color(50,50,50));
+            component.setForeground(new Color(255,255,255));
         }
-        component.setBackground(backgroundColor);
-        component.setForeground(foregroundColor);
         return component;
     }
 

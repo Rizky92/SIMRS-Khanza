@@ -597,9 +597,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="NoFaktur">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NoFaktur" noResource="true"/>
                   </Properties>
                   <Events>
@@ -925,9 +922,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="NoBatch">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NoBatch" noResource="true"/>
                   </Properties>
                   <Events>
@@ -1008,9 +1002,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="JmlBeli">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="JmlBeli" noResource="true"/>
                   </Properties>
                   <Events>
@@ -1038,9 +1029,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Sisa">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Sisa" noResource="true"/>
                   </Properties>
                   <Events>

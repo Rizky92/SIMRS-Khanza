@@ -92,13 +92,13 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel7.setBounds(0, 8, 104, 17);
 
         jLabel17.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel17.setText("2025-08-01");
+        jLabel17.setText("2025-10-15");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass1.add(jLabel17);
         jLabel17.setBounds(107, 8, 90, 17);
 
         jLabel18.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel18.setText("Patch 1");
+        jLabel18.setText("Patch 3");
         jLabel18.setName("jLabel18"); // NOI18N
         panelGlass1.add(jLabel18);
         jLabel18.setBounds(107, 28, 90, 17);
@@ -159,7 +159,7 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel23.setBounds(10, 100, 440, 17);
 
         jLabel25.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel25.setText("RS Puri Husada Sleman Yogyakarta, RS Pelita Insani Martapura,");
+        jLabel25.setText("RS Permata Hati Bungo, RS Pelita Insani Martapura,");
         jLabel25.setName("jLabel25"); // NOI18N
         panelGlass4.add(jLabel25);
         jLabel25.setBounds(126, 120, 320, 17);
@@ -258,11 +258,11 @@ public class DlgAbout extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         dispose();
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     /**
     * @param args the command line arguments

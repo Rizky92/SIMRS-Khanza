@@ -355,9 +355,6 @@
             <Component class="widget.TextBox" name="KodeDepartemen">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KodeDepartemen" noResource="true"/>
               </Properties>
               <Constraints>
@@ -369,9 +366,6 @@
             <Component class="widget.TextBox" name="NamaDepartemen">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="NamaDepartemen" noResource="true"/>
               </Properties>
               <Constraints>

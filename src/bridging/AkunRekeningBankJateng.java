@@ -87,7 +87,7 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
         kdrek.setDocument(new batasInput((byte)15).getKata(kdrek));
         TKd.setDocument(new batasInput((byte)30).getKata(TKd));
         TPass.setDocument(new batasInput((byte)30).getKata(TPass));
-        
+
         rekening.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -96,17 +96,17 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("AkunRekeningBankJateng")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                                 rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
-                                                                      
+
                         kdrek.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -118,7 +118,7 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -132,10 +132,10 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });       
-        
+        });
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -207,13 +207,11 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
         jLabel3.setBounds(1, 10, 95, 23);
 
         kdrek.setEditable(false);
-        kdrek.setHighlighter(null);
         kdrek.setName("kdrek"); // NOI18N
         panelGlass7.add(kdrek);
         kdrek.setBounds(99, 10, 113, 23);
 
         nmrek.setEditable(false);
-        nmrek.setHighlighter(null);
         nmrek.setName("nmrek"); // NOI18N
         nmrek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -245,7 +243,6 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(1, 42, 95, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -478,7 +475,7 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu akun pengaturan ...!!!!");
             TKd.requestFocus();
         }
-        
+
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
@@ -555,10 +552,10 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
         try {
             ps=koneksi.prepareStatement(
                    "select set_akun_bankjateng.kd_rek,rekening.nm_rek,aes_decrypt(usere,'nur'),aes_decrypt(passworde,'windi') "+
-                   "from set_akun_bankjateng inner join rekening on set_akun_bankjateng.kd_rek=rekening.kd_rek"); 
+                   "from set_akun_bankjateng inner join rekening on set_akun_bankjateng.kd_rek=rekening.kd_rek");
             try{
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4)
                     });
@@ -575,7 +572,7 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
 
     public void emptTeks() {
@@ -595,10 +592,10 @@ public class AkunRekeningBankJateng extends javax.swing.JDialog {
             TPass.setText(tabMode.getValueAt(row,3).toString());
         }
     }
-    
-    
-    
-    
+
+
+
+
 
 
 }

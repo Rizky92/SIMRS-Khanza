@@ -146,7 +146,7 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 	<detail>
 		<band height="350">
 			<textField isStretchWithOverflow="true">
-				<reportElement mode="Transparent" x="75" y="90" width="250" height="13" uuid="ee6ceaea-8255-496c-bc02-8e99e407cf76">
+				<reportElement mode="Transparent" x="75" y="90" width="289" height="13" uuid="ee6ceaea-8255-496c-bc02-8e99e407cf76">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -166,7 +166,7 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 				<text><![CDATA[Kepada Yth]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement mode="Transparent" x="75" y="104" width="250" height="13" uuid="b014f387-198e-4ba3-b60a-8b5c8d700746">
+				<reportElement mode="Transparent" x="75" y="104" width="289" height="13" uuid="b014f387-198e-4ba3-b60a-8b5c8d700746">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -176,7 +176,7 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 				<textFieldExpression><![CDATA[$F{nm_poli_bpjs}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="134" width="250" height="13" uuid="c548a410-1444-4fea-a1e9-1baa2c894b3d">
+				<reportElement mode="Transparent" x="75" y="134" width="289" height="13" uuid="c548a410-1444-4fea-a1e9-1baa2c894b3d">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -216,7 +216,7 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement mode="Transparent" x="75" y="148" width="250" height="13" uuid="0c5cb0b1-2a5e-4de8-9454-5d65d99094a4">
+				<reportElement positionType="Float" mode="Transparent" x="75" y="148" width="289" height="13" uuid="0c5cb0b1-2a5e-4de8-9454-5d65d99094a4">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>
@@ -246,7 +246,7 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 				<text><![CDATA[Tgl. Lahir]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="d MMMM yyyy">
-				<reportElement mode="Transparent" x="75" y="162" width="250" height="13" uuid="78c0073c-bcc9-43cf-889b-6f0428d2fe4a">
+				<reportElement mode="Transparent" x="75" y="162" width="289" height="13" uuid="78c0073c-bcc9-43cf-889b-6f0428d2fe4a">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement>

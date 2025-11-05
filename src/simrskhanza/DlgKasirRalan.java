@@ -114,8 +114,10 @@ import rekammedis.RMHasilEndoskopiHidung;
 import rekammedis.RMHasilEndoskopiTelinga;
 import rekammedis.RMHasilPemeriksaanEKG;
 import rekammedis.RMHasilPemeriksaanEcho;
+import rekammedis.RMHasilPemeriksaanEchoPediatrik;
 import rekammedis.RMHasilPemeriksaanOCT;
 import rekammedis.RMHasilPemeriksaanSlitLamp;
+import rekammedis.RMHasilPemeriksaanTreadmill;
 import rekammedis.RMHasilPemeriksaanUSG;
 import rekammedis.RMHasilPemeriksaanUSGGynecologi;
 import rekammedis.RMHasilPemeriksaanUSGNeonatus;
@@ -151,6 +153,7 @@ import rekammedis.RMPenilaianAwalMedisRalanBedah;
 import rekammedis.RMPenilaianAwalMedisRalanBedahMulut;
 import rekammedis.RMPenilaianAwalMedisRalanDewasa;
 import rekammedis.RMPenilaianAwalMedisRalanGeriatri;
+import rekammedis.RMPenilaianAwalMedisRalanJantung;
 import rekammedis.RMPenilaianAwalMedisRalanKandungan;
 import rekammedis.RMPenilaianAwalMedisRalanKulitDanKelamin;
 import rekammedis.RMPenilaianAwalMedisRalanMata;
@@ -161,6 +164,7 @@ import rekammedis.RMPenilaianAwalMedisRalanPenyakitDalam;
 import rekammedis.RMPenilaianAwalMedisRalanPsikiatrik;
 import rekammedis.RMPenilaianAwalMedisRalanRehabMedik;
 import rekammedis.RMPenilaianAwalMedisRalanTHT;
+import rekammedis.RMPenilaianAwalMedisRalanUrologi;
 import rekammedis.RMPenilaianBayiBaruLahir;
 import rekammedis.RMPenilaianDerajatDehidrasi;
 import rekammedis.RMPenilaianFisioterapi;
@@ -198,6 +202,8 @@ import rekammedis.RMSkriningFrailtySyndrome;
 import rekammedis.RMSkriningHipertensi;
 import rekammedis.RMSkriningIndraPendengaran;
 import rekammedis.RMSkriningInstrumenACRS;
+import rekammedis.RMSkriningInstrumenAMT;
+import rekammedis.RMSkriningInstrumenESAT;
 import rekammedis.RMSkriningInstrumenMentalEmosional;
 import rekammedis.RMSkriningInstrumenSDQ;
 import rekammedis.RMSkriningKankerKolorektal;
@@ -213,6 +219,7 @@ import rekammedis.RMSkriningNutrisiDewasa;
 import rekammedis.RMSkriningNutrisiLansia;
 import rekammedis.RMSkriningObesitas;
 import rekammedis.RMSkriningPUMA;
+import rekammedis.RMSkriningPneumoniaSeverityIndex;
 import rekammedis.RMSkriningRisikoKankerParu;
 import rekammedis.RMSkriningRisikoKankerPayudara;
 import rekammedis.RMSkriningRisikoKankerServiks;
@@ -5358,7 +5365,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         jPopupMenu1.add(MnHapusData);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -5375,7 +5381,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setLayout(null);
 
-        TotalObat.setHighlighter(null);
         TotalObat.setName("TotalObat"); // NOI18N
         TotalObat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -5496,7 +5501,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         internalFrame3.add(jLabel13);
         jLabel13.setBounds(0, 32, 77, 23);
 
-        kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
         kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -5525,7 +5529,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         WindowGantiDokter.getContentPane().add(internalFrame3, java.awt.BorderLayout.CENTER);
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -5535,10 +5538,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
 
         TKdPny.setName("TKdPny"); // NOI18N
 
-        Tanggal.setHighlighter(null);
         Tanggal.setName("Tanggal"); // NOI18N
 
-        Jam.setHighlighter(null);
         Jam.setName("Jam"); // NOI18N
 
         WindowGantiPoli.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -5581,7 +5582,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         internalFrame5.add(jLabel18);
         jLabel18.setBounds(0, 32, 77, 23);
 
-        kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
         kdpoli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -5650,7 +5650,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         internalFrame6.add(jLabel19);
         jLabel19.setBounds(0, 32, 77, 23);
 
-        kdpenjab.setHighlighter(null);
         kdpenjab.setName("kdpenjab"); // NOI18N
         kdpenjab.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -6456,7 +6455,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa2.add(jLabel33);
         jLabel33.setBounds(0, 10, 66, 23);
 
-        lmsakit.setHighlighter(null);
         lmsakit.setName("lmsakit"); // NOI18N
         panelBiasa2.add(lmsakit);
         lmsakit.setBounds(410, 10, 110, 23);
@@ -6510,7 +6508,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelBiasa4.add(BtnKeluar4);
         BtnKeluar4.setBounds(430, 80, 100, 30);
 
-        NomorSurat.setHighlighter(null);
         NomorSurat.setName("NomorSurat"); // NOI18N
         panelBiasa4.add(NomorSurat);
         NomorSurat.setBounds(150, 10, 370, 23);
@@ -6829,7 +6826,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel4);
 
         TNoRwCari.setEditable(false);
-        TNoRwCari.setHighlighter(null);
         TNoRwCari.setName("TNoRwCari"); // NOI18N
         TNoRwCari.setPreferredSize(new java.awt.Dimension(140, 23));
         TNoRwCari.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -6845,7 +6841,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel5);
 
         TNoReg.setEditable(false);
-        TNoReg.setHighlighter(null);
         TNoReg.setName("TNoReg"); // NOI18N
         TNoReg.setPreferredSize(new java.awt.Dimension(50, 23));
         TNoReg.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -6861,7 +6856,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel7);
 
         TNoRMCari.setEditable(false);
-        TNoRMCari.setHighlighter(null);
         TNoRMCari.setName("TNoRMCari"); // NOI18N
         TNoRMCari.setPreferredSize(new java.awt.Dimension(90, 23));
         panelGlass9.add(TNoRMCari);
@@ -6872,7 +6866,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         panelGlass9.add(jLabel8);
 
         TPasienCari.setEditable(false);
-        TPasienCari.setHighlighter(null);
         TPasienCari.setName("TPasienCari"); // NOI18N
         TPasienCari.setPreferredSize(new java.awt.Dimension(250, 23));
         panelGlass9.add(TPasienCari);
@@ -7202,8 +7195,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
                 }else {
-                    dlgrwjl2.isCek();
                     dlgrwjl2.emptTeks();
+                    dlgrwjl2.isCek();
                     dlgrwjl2.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     dlgrwjl2.setLocationRelativeTo(internalFrame1);
                     dlgrwjl2.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString());
@@ -8110,78 +8103,78 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }else{
                 if (JOptionPane.showConfirmDialog(null, "Yakin ingin menghapus semua?\nAksi ini tidak bisa dikembalikan..!!", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
                     Sequel.AutoComitFalse();
-                    Sequel.menghapusIgnoreSmc("operasi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("laporan_operasi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("saran_kesan_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("beri_obat_operasi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("billing", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pengurangan_biaya", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("nota_inap", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("nota_jalan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("deposit", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_beri_diet", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("diagnosa_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("dpjp_ranap", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("hemodialisa", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("kamar_inap", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pengurangan_biaya", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("piutang_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("prosedur_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("ranap_gabung", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rvp_klaim_bpjs", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rujuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rujuk_masuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("tambahan_biaya", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_inap_dr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_inap_pr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("rawat_jl_pr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pemeriksaan_ralan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pemeriksaan_ranap", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_periksa_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("periksa_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("beri_bhp_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("periksa_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("aturan_pakai", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_pemberian_obat", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("tagihan_obat_langsung", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("resep_obat", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("resep_pulang", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("returpasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("stok_obat_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_nota_jalan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_piutang_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("mutasi_berkas", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("gambar_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("hasil_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_obat_racikan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("obat_racikan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("booking_operasi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("catatan_perawatan", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("permintaan_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("permintaan_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("pcare_pendaftaran", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("detail_penagihan_piutang", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("permintaan_stok_obat_pasien", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_detail_periksa_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_detail_periksa_lab_perujuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_dokter_anak", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_dokter_anestesi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_dokter_pjanak", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_dokter_umum", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_operator1", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_operator2", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_operasi_operator3", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_periksa_lab", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_periksa_lab_perujuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_periksa_radiologi", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_periksa_radiologi_perujuk", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_rawat_inap_dr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
-                    Sequel.menghapusIgnoreSmc("bayar_rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("operasi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("laporan_operasi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("saran_kesan_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("beri_obat_operasi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("billing", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pengurangan_biaya", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("nota_inap", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("nota_jalan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("deposit", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_beri_diet", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("diagnosa_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("dpjp_ranap", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("hemodialisa", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("kamar_inap", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pengurangan_biaya", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("piutang_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("prosedur_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("ranap_gabung", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rvp_klaim_bpjs", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rujuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rujuk_masuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("tambahan_biaya", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("rawat_jl_pr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pemeriksaan_ralan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pemeriksaan_ranap", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_periksa_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("periksa_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("beri_bhp_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("periksa_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("aturan_pakai", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_pemberian_obat", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("tagihan_obat_langsung", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("resep_obat", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("resep_pulang", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("returpasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("stok_obat_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_nota_jalan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_piutang_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("mutasi_berkas", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("gambar_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("hasil_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_obat_racikan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("obat_racikan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("booking_operasi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("catatan_perawatan", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("permintaan_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("permintaan_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("pcare_pendaftaran", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("detail_penagihan_piutang", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("permintaan_stok_obat_pasien", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_detail_periksa_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_detail_periksa_lab_perujuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_dokter_anak", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_dokter_anestesi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_dokter_pjanak", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_dokter_umum", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_operator1", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_operator2", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_operasi_operator3", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_periksa_lab", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_periksa_lab_perujuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_periksa_radiologi", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_periksa_radiologi_perujuk", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_rawat_inap_dr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bayar_rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
                     if (Sequel.menghapustfSmc("reg_periksa", "no_rawat = ?", TNoRw.getText())) {
                         if(tbKasirRalan.getSelectedRow()>-1){
                             tabModekasir.removeRow(tbKasirRalan.getSelectedRow());
@@ -15615,6 +15608,165 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
+    private void MnSkriningInstrumenAMTActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningInstrumenAMT form=new RMSkriningInstrumenAMT(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnSkriningPneumoniaSeverityIndexActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningPneumoniaSeverityIndex form=new RMSkriningPneumoniaSeverityIndex(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMPenilaianAwalMedisRalanJantung form=new RMPenilaianAwalMedisRalanJantung(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMPenilaianAwalMedisRalanUrologi form=new RMPenilaianAwalMedisRalanUrologi(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnHasilPemeriksaanTreadmillActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMHasilPemeriksaanTreadmill form=new RMHasilPemeriksaanTreadmill(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnHasilPemeriksaanECHOPediatrikActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMHasilPemeriksaanEchoPediatrik form=new RMHasilPemeriksaanEchoPediatrik(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnSkriningInstrumenESATActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningInstrumenESAT form=new RMSkriningInstrumenESAT(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -16065,7 +16217,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                                   MnLayananKedokteranFisikRehabilitasi,MnSkriningKesehatanGigiMulutBalita,MnSkriningAnemia,MnSkriningHipertensi,MnSkriningKesehatanPenglihatan,MnCatatanObservasiHemodialisa,MnSkriningKesehatanGigiMulutDewasa,
                                   MnSkriningRisikoKankerServiks,MnCatatanCairanHemodialisa,MnSkriningKesehatanGigiMulutLansia,MnSkriningIndraPendengaran,MnCatatanPengkajianPaskaOperasi,MnSkriningFrailtySyndrome,MnCatatanObservasiBayi,
                                   MnCheckListKesiapanAnestesi,MnHasilPemeriksaanSlitLamp,MnHasilPemeriksaanOCT,MnCetakSuratKeteranganLayakTerbang,MnPersetujuanPemeriksaanHIV,MnSkriningInstrumenACRS,MnPernyataanMemilihDPJP,
-                                  MnSkriningInstrumenMentalEmosional,MnCheckListKriteriaMasukNICU,MnCheckListKriteriaMasukPICU;
+                                  MnSkriningInstrumenMentalEmosional,MnCheckListKriteriaMasukNICU,MnCheckListKriteriaMasukPICU,MnSkriningInstrumenAMT,MnSkriningPneumoniaSeverityIndex,MnPenilaianAwalMedisRalanJantung,MnPenilaianAwalMedisRalanUrologi,
+                                  MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnRMSkrining,MnEdukasi,MnRehabMedik,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen;
 
     private synchronized void tampilkasir() {
@@ -16483,7 +16636,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnHasilPemeriksaanUSGNeonatus.setEnabled(akses.gethasil_usg_neonatus());
         MnHasilPemeriksaanUSGGynecologi.setEnabled(akses.gethasil_usg_gynecologi());
         MnHasilPemeriksaanEKG.setEnabled(akses.gethasil_pemeriksaan_ekg());
+        MnHasilPemeriksaanTreadmill.setEnabled(akses.gethasil_pemeriksaan_treadmill());
         MnHasilPemeriksaanECHO.setEnabled(akses.gethasil_pemeriksaan_echo());
+        MnHasilPemeriksaanECHOPediatrik.setEnabled(akses.gethasil_pemeriksaan_echo_pediatrik());
         MnHasilEndoskopiFaringLaring.setEnabled(akses.gethasil_endoskopi_faring_laring());
         MnHasilEndoskopiHidung.setEnabled(akses.gethasil_endoskopi_hidung());
         MnHasilEndoskopiTelinga.setEnabled(akses.gethasil_endoskopi_telinga());
@@ -16513,6 +16668,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnSkriningInstrumenSRQ.setEnabled(akses.getskrining_instrumen_srq());
         MnSkriningInstrumenACRS.setEnabled(akses.getskrining_instrumen_acrs());
         MnSkriningInstrumenMentalEmosional.setEnabled(akses.getskrining_instrumen_mental_emosional());
+        MnSkriningInstrumenAMT.setEnabled(akses.getskrining_instrumen_amt());
+        MnSkriningInstrumenESAT.setEnabled(akses.getskrining_instrumen_esat());
+        MnSkriningPneumoniaSeverityIndex.setEnabled(akses.getskrining_pneumonia_severity_index());
         MnSkriningKankerKolorektal.setEnabled(akses.getskrining_kanker_kolorektal());
         MnSkriningDiabetesMelitus.setEnabled(akses.getskrining_diabetes_melitus());
         MnLaporanTindakan.setEnabled(akses.getlaporan_tindakan());
@@ -16533,6 +16691,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPernyataanMemilihDPJP.setEnabled(akses.getsurat_pernyataan_memilih_dpjp());
         MnCheckListKriteriaMasukNICU.setEnabled(akses.getkriteria_masuk_nicu());
         MnCheckListKriteriaMasukPICU.setEnabled(akses.getkriteria_masuk_picu());
+        MnPenilaianAwalMedisRalanJantung.setEnabled(akses.getpenilaian_awal_medis_ralan_jantung());
+        MnPenilaianAwalMedisRalanUrologi.setEnabled(akses.getpenilaian_awal_medis_ralan_urologi());
 
         if(akses.getkode().equals("Admin Utama")){
             MnHapusData.setEnabled(true);
@@ -16789,34 +16949,34 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
                     if(ttlpendapatan>0){
-                        Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", ttlpendapatan, 0);
-                        Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Pendapatan Tindakan Rawat Jalan", 0, ttlpendapatan);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", ttlpendapatan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Pendapatan Tindakan Rawat Jalan", 0, ttlpendapatan);
                     }
                     if(ttljmdokter>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Jasa Medik Dokter Tindakan Ralan", ttljmdokter, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", 0, ttljmdokter);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Jasa Medik Dokter Tindakan Ralan", ttljmdokter, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", 0, ttljmdokter);
                     }
                     if(ttljmperawat>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Jasa Medik Paramedis Tindakan Ralan", ttljmperawat, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Jasa Medik Paramedis Tindakan Ralan", 0, ttljmperawat);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Jasa Medik Paramedis Tindakan Ralan", ttljmperawat, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Jasa Medik Paramedis Tindakan Ralan", 0, ttljmperawat);
                     }
                     if(ttlkso>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban KSO Tindakan Ralan", ttlkso, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang KSO Tindakan Ralan", 0, ttlkso);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban KSO Tindakan Ralan", ttlkso, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang KSO Tindakan Ralan", 0, ttlkso);
                     }
                     if(ttljasasarana>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Jasa Sarana Tindakan Ralan", ttljasasarana, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "Utang Jasa Sarana Tindakan Ralan", 0, ttljasasarana);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Jasa Sarana Tindakan Ralan", ttljasasarana, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "Utang Jasa Sarana Tindakan Ralan", 0, ttljasasarana);
                     }
                     if(ttlbhp>0){
-                        Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "HPP BHP Tindakan Ralan", ttlbhp, 0);
-                        Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Persediaan BHP Tindakan Ralan", 0, ttlbhp);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "HPP BHP Tindakan Ralan", ttlbhp, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Persediaan BHP Tindakan Ralan", 0, ttlbhp);
                     }
                     if(ttlmenejemen>0){
-                        Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Jasa Menejemen Tindakan Ralan", ttlmenejemen, 0);
-                        Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Jasa Menejemen Tindakan Ralan", 0, ttlmenejemen);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Jasa Menejemen Tindakan Ralan", ttlmenejemen, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Jasa Menejemen Tindakan Ralan", 0, ttlmenejemen);
                     }
-                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
+                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
                 }
 
                 if(sukses==true){
@@ -17015,34 +17175,34 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             if(sukses==true){
                 Sequel.deleteTampJurnal();
                 if(ttlpendapatan>0){
-                    Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", ttlpendapatan, 0);
-                    Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Pendapatan Tindakan Rawat Jalan", 0, ttlpendapatan);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", ttlpendapatan, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Pendapatan Tindakan Rawat Jalan", 0, ttlpendapatan);
                 }
                 if(ttljmdokter>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Jasa Medik Dokter Tindakan Ralan", ttljmdokter, 0);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", 0, ttljmdokter);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Jasa Medik Dokter Tindakan Ralan", ttljmdokter, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", 0, ttljmdokter);
                 }
                 if(ttljmperawat>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Jasa Medik Paramedis Tindakan Ralan", ttljmperawat, 0);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Jasa Medik Paramedis Tindakan Ralan", 0, ttljmperawat);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Jasa Medik Paramedis Tindakan Ralan", ttljmperawat, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Jasa Medik Paramedis Tindakan Ralan", 0, ttljmperawat);
                 }
                 if(ttlkso>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban KSO Tindakan Ralan", ttlkso, 0);
-                    Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang KSO Tindakan Ralan", 0, ttlkso);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban KSO Tindakan Ralan", ttlkso, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang KSO Tindakan Ralan", 0, ttlkso);
                 }
                 if(ttljasasarana>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Jasa Sarana Tindakan Ralan", ttljasasarana, 0);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "Utang Jasa Sarana Tindakan Ralan", 0, ttljasasarana);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Jasa Sarana Tindakan Ralan", ttljasasarana, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "Utang Jasa Sarana Tindakan Ralan", 0, ttljasasarana);
                 }
                 if(ttlbhp>0){
-                    Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "HPP BHP Tindakan Ralan", ttlbhp, 0);
-                    Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Persediaan BHP Tindakan Ralan", 0, ttlbhp);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "HPP BHP Tindakan Ralan", ttlbhp, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Persediaan BHP Tindakan Ralan", 0, ttlbhp);
                 }
                 if(ttlmenejemen>0){
-                    Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Jasa Menejemen Tindakan Ralan", ttlmenejemen, 0);
-                    Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Jasa Menejemen Tindakan Ralan", 0, ttlmenejemen);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Jasa Menejemen Tindakan Ralan", ttlmenejemen, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Jasa Menejemen Tindakan Ralan", 0, ttlmenejemen);
                 }
-                sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
+                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
             }
 
             if(sukses==true){
@@ -17189,6 +17349,18 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnHasilPemeriksaanEKG.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilPemeriksaanEKG.addActionListener(this::MnHasilPemeriksaanEKGActionPerformed);
 
+        MnHasilPemeriksaanTreadmill = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanTreadmill.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasilPemeriksaanTreadmill.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnHasilPemeriksaanTreadmill.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasilPemeriksaanTreadmill.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnHasilPemeriksaanTreadmill.setText("Hasil Pemeriksaan Treadmill");
+        MnHasilPemeriksaanTreadmill.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasilPemeriksaanTreadmill.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasilPemeriksaanTreadmill.setName("MnHasilPemeriksaanTreadmill");
+        MnHasilPemeriksaanTreadmill.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnHasilPemeriksaanTreadmill.addActionListener(this::MnHasilPemeriksaanTreadmillActionPerformed);
+
         MnHasilPemeriksaanECHO = new javax.swing.JMenuItem();
         MnHasilPemeriksaanECHO.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilPemeriksaanECHO.setFont(new java.awt.Font("Tahoma", 0, 11));
@@ -17200,6 +17372,18 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnHasilPemeriksaanECHO.setName("MnHasilPemeriksaanECHO");
         MnHasilPemeriksaanECHO.setPreferredSize(new java.awt.Dimension(200, 26));
         MnHasilPemeriksaanECHO.addActionListener(this::MnHasilPemeriksaanECHOActionPerformed);
+
+        MnHasilPemeriksaanECHOPediatrik = new javax.swing.JMenuItem();
+        MnHasilPemeriksaanECHOPediatrik.setBackground(new java.awt.Color(255, 255, 254));
+        MnHasilPemeriksaanECHOPediatrik.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnHasilPemeriksaanECHOPediatrik.setForeground(new java.awt.Color(50, 50, 50));
+        MnHasilPemeriksaanECHOPediatrik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnHasilPemeriksaanECHOPediatrik.setText("Hasil Pemeriksaan ECHO Pediatrik");
+        MnHasilPemeriksaanECHOPediatrik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnHasilPemeriksaanECHOPediatrik.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnHasilPemeriksaanECHOPediatrik.setName("MnHasilPemeriksaanECHOPediatrik");
+        MnHasilPemeriksaanECHOPediatrik.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnHasilPemeriksaanECHOPediatrik.addActionListener(this::MnHasilPemeriksaanECHOPediatrikActionPerformed);
 
         MnPenatalaksanaanTerapiOkupasi = new javax.swing.JMenuItem();
         MnPenatalaksanaanTerapiOkupasi.setBackground(new java.awt.Color(255, 255, 254));
@@ -17597,6 +17781,42 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnSkriningInstrumenMentalEmosional.setPreferredSize(new java.awt.Dimension(200, 26));
         MnSkriningInstrumenMentalEmosional.addActionListener(this::MnSkriningInstrumenMentalEmosionalActionPerformed);
 
+        MnSkriningInstrumenAMT = new javax.swing.JMenuItem();
+        MnSkriningInstrumenAMT.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningInstrumenAMT.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningInstrumenAMT.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningInstrumenAMT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnSkriningInstrumenAMT.setText("AMT");
+        MnSkriningInstrumenAMT.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningInstrumenAMT.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningInstrumenAMT.setName("MnSkriningInstrumenAMT");
+        MnSkriningInstrumenAMT.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnSkriningInstrumenAMT.addActionListener(this::MnSkriningInstrumenAMTActionPerformed);
+
+        MnSkriningInstrumenESAT = new javax.swing.JMenuItem();
+        MnSkriningInstrumenESAT.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningInstrumenESAT.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningInstrumenESAT.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningInstrumenESAT.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnSkriningInstrumenESAT.setText("ESAT");
+        MnSkriningInstrumenESAT.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningInstrumenESAT.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningInstrumenESAT.setName("MnSkriningInstrumenESAT");
+        MnSkriningInstrumenESAT.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnSkriningInstrumenESAT.addActionListener(this::MnSkriningInstrumenESATActionPerformed);
+
+        MnSkriningPneumoniaSeverityIndex = new javax.swing.JMenuItem();
+        MnSkriningPneumoniaSeverityIndex.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningPneumoniaSeverityIndex.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningPneumoniaSeverityIndex.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningPneumoniaSeverityIndex.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnSkriningPneumoniaSeverityIndex.setText("Skrining Pneumonia Severity Index");
+        MnSkriningPneumoniaSeverityIndex.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningPneumoniaSeverityIndex.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningPneumoniaSeverityIndex.setName("MnSkriningPneumoniaSeverityIndex");
+        MnSkriningPneumoniaSeverityIndex.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnSkriningPneumoniaSeverityIndex.addActionListener(this::MnSkriningPneumoniaSeverityIndexActionPerformed);
+
         MnSkriningKankerKolorektal = new javax.swing.JMenuItem();
         MnSkriningKankerKolorektal.setBackground(new java.awt.Color(255, 255, 254));
         MnSkriningKankerKolorektal.setFont(new java.awt.Font("Tahoma", 0, 11));
@@ -17885,6 +18105,30 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnCheckListKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(260, 26));
         MnCheckListKriteriaMasukPICU.addActionListener(this::MnCheckListKriteriaMasukPICUActionPerformed);
 
+        MnPenilaianAwalMedisRalanJantung = new javax.swing.JMenuItem();
+        MnPenilaianAwalMedisRalanJantung.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianAwalMedisRalanJantung.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPenilaianAwalMedisRalanJantung.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianAwalMedisRalanJantung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPenilaianAwalMedisRalanJantung.setText("Pengkajian Awal Medis Jantung");
+        MnPenilaianAwalMedisRalanJantung.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianAwalMedisRalanJantung.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianAwalMedisRalanJantung.setName("MnPenilaianAwalMedisRalanJantung");
+        MnPenilaianAwalMedisRalanJantung.setPreferredSize(new java.awt.Dimension(260, 26));
+        MnPenilaianAwalMedisRalanJantung.addActionListener(this::MnPenilaianAwalMedisRalanJantungActionPerformed);
+
+        MnPenilaianAwalMedisRalanUrologi = new javax.swing.JMenuItem();
+        MnPenilaianAwalMedisRalanUrologi.setBackground(new java.awt.Color(255, 255, 254));
+        MnPenilaianAwalMedisRalanUrologi.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPenilaianAwalMedisRalanUrologi.setForeground(new java.awt.Color(50, 50, 50));
+        MnPenilaianAwalMedisRalanUrologi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPenilaianAwalMedisRalanUrologi.setText("Pengkajian Awal Medis Urologi");
+        MnPenilaianAwalMedisRalanUrologi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPenilaianAwalMedisRalanUrologi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPenilaianAwalMedisRalanUrologi.setName("MnPenilaianAwalMedisRalanUrologi");
+        MnPenilaianAwalMedisRalanUrologi.setPreferredSize(new java.awt.Dimension(260, 26));
+        MnPenilaianAwalMedisRalanUrologi.addActionListener(this::MnPenilaianAwalMedisRalanUrologiActionPerformed);
+
         MnHasilUSG = new javax.swing.JMenu();
         MnHasilUSG.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilUSG.setForeground(new java.awt.Color(50, 50, 50));
@@ -18019,6 +18263,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnAwalMedis.add(MnPenilaianAwalMedisRalanGeriatri);
         MnAwalMedis.add(MnPenilaianAwalMedisRalanKulitKelamin);
         MnAwalMedis.add(MnPenilaianAwalMedisRalanParu);
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanJantung);
+        MnAwalMedis.add(MnPenilaianAwalMedisRalanUrologi);
         MnAwalMedis.add(MnPenilaianAwalMedisRalanHemodialisa);
         MnAwalMedis.add(MnPenilaianAwalMedisRalanFisikRehabilitasi);
 
@@ -18032,8 +18278,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnHasilUSG.add(MnHasilPemeriksaanUSGNeonatus);
         MnRMRawatJalan.add(MnHasilPemeriksaanEKG);
         MnRMRawatJalan.add(MnHasilPemeriksaanECHO);
+        MnRMRawatJalan.add(MnHasilPemeriksaanECHOPediatrik);
         MnRMRawatJalan.add(MnHasilPemeriksaanSlitLamp);
         MnRMRawatJalan.add(MnHasilPemeriksaanOCT);
+        MnRMRawatJalan.add(MnHasilPemeriksaanTreadmill);
         MnHasilEndoskopi.add(MnHasilEndoskopiFaringLaring);
         MnHasilEndoskopi.add(MnHasilEndoskopiHidung);
         MnHasilEndoskopi.add(MnHasilEndoskopiTelinga);
@@ -18096,6 +18344,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnRMSkrining.add(MnRMSkriningKesehatanGigiMulut);
         MnRMSkrining.add(MnSkriningTBC);
         MnRMSkrining.add(MnSkriningPUMA);
+        MnRMSkrining.add(MnSkriningPneumoniaSeverityIndex);
         MnRMSkrining.add(MnSkriningAdiksiNikotin);
         MnRMSkrining.add(MnSkriningThalassemia);
         MnRMSkrining.add(MnSkriningInstrumen);
@@ -18103,6 +18352,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnSkriningInstrumen.add(MnSkriningInstrumenSRQ);
         MnSkriningInstrumen.add(MnSkriningInstrumenACRS);
         MnSkriningInstrumen.add(MnSkriningInstrumenMentalEmosional);
+        MnSkriningInstrumen.add(MnSkriningInstrumenAMT);
+        MnSkriningInstrumen.add(MnSkriningInstrumenESAT);
         MnRMSkrining.add(MnSkriningKankerKolorektal);
         MnRMSkrining.add(MnSkriningDiabetesMelitus);
         MnRMSkrining.add(MnSkriningAnemia);

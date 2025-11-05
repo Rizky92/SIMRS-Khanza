@@ -113,9 +113,6 @@
             <Component class="widget.TextBox" name="kdrek">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="kdrek" noResource="true"/>
               </Properties>
               <Constraints>
@@ -127,9 +124,6 @@
             <Component class="widget.TextBox" name="nmrek">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="nmrek" noResource="true"/>
               </Properties>
               <Constraints>
@@ -170,9 +164,6 @@
             </Component>
             <Component class="widget.TextBox" name="Username">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Username" noResource="true"/>
               </Properties>
               <Events>
@@ -221,9 +212,6 @@
             </Component>
             <Component class="widget.TextBox" name="ClientID">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="ClientID" noResource="true"/>
               </Properties>
               <Events>
@@ -272,9 +260,6 @@
             </Component>
             <Component class="widget.TextBox" name="KodeFaskes">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KodeFaskes" noResource="true"/>
               </Properties>
               <Events>
@@ -300,9 +285,6 @@
             <Component class="widget.TextBox" name="KdRekBiaya">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdRekBiaya" noResource="true"/>
               </Properties>
               <Constraints>
@@ -314,9 +296,6 @@
             <Component class="widget.TextBox" name="NmRekBiaya">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="NmRekBiaya" noResource="true"/>
               </Properties>
               <Constraints>
@@ -381,9 +360,6 @@
             </Component>
             <Component class="widget.TextBox" name="NoRekening">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="NoRekening" noResource="true"/>
               </Properties>
               <Events>

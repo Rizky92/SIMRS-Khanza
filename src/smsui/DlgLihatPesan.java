@@ -168,7 +168,7 @@ public final class DlgLihatPesan extends javax.swing.JDialog {
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed
         dispose();
-}//GEN-LAST:event_button1ActionPerformed
+    }//GEN-LAST:event_button1ActionPerformed
 
     /**
     * @param args the command line arguments

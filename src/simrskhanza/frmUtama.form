@@ -17,11 +17,11 @@
             <Property name="name" type="java.lang.String" value="internalFrame2" noResource="true" />
             <Property name="warnaAtas" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="98" green="47" red="e1" type="rgb" />
+              <Color blue="8e" green="1f" red="e6" type="rgb" />
             </Property>
             <Property name="warnaBawah" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="84" green="15" red="e6" type="rgb" />
             </Property>
           </Properties>
           <Constraints>
@@ -57,7 +57,7 @@
                 <Property name="requestFocusEnabled" type="boolean" value="false" />
                 <Property name="warnaAtas" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="d7" green="c8" red="fa" type="rgb" />
+                  <Color blue="d7" green="d7" red="fa" type="rgb" />
                 </Property>
               </Properties>
               <Constraints>
@@ -90,7 +90,7 @@
                     <Property name="round" type="boolean" value="false" />
                     <Property name="warna" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="c8" green="ff" red="ff" type="rgb" />
+                      <Color blue="d2" green="ff" red="ff" type="rgb" />
                     </Property>
                   </Properties>
                   <Constraints>
@@ -569,7 +569,7 @@
         <Property name="model" type="javax.swing.ComboBoxModel"
           editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
           <StringArray count="1">
-            <StringItem index="0" value="26/08/2025" />
+            <StringItem index="0" value="04/11/2025"/>
           </StringArray>
         </Property>
         <Property name="displayFormat" type="java.lang.String" value="dd/MM/yyyy" />
@@ -11287,7 +11287,7 @@
         <Property name="verifyInputWhenFocusTarget" type="boolean" value="false" />
         <Property name="warnaBawah" type="java.awt.Color"
           editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="b9" green="af" red="fa" type="rgb" />
+          <Color blue="cd" green="cd" red="ff" type="rgb" />
         </Property>
       </Properties>
       <Constraints>
@@ -11341,11 +11341,11 @@
           <Properties>
             <Property name="background" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="8e" green="29" red="eb" type="rgb" />
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="8e" green="29" red="eb" type="rgb" />
             </Property>
             <Property name="orientation" type="int" value="1" />
             <Property name="border" type="javax.swing.border.Border"
@@ -11436,11 +11436,11 @@
           <Properties>
             <Property name="background" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="8e" green="29" red="eb" type="rgb" />
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="8e" green="29" red="eb" type="rgb" />
             </Property>
             <Property name="orientation" type="int" value="1" />
             <Property name="border" type="javax.swing.border.Border"
@@ -11562,11 +11562,11 @@
           <Properties>
             <Property name="background" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="8e" green="29" red="eb" type="rgb" />
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="8e" green="29" red="eb" type="rgb" />
             </Property>
             <Property name="orientation" type="int" value="1" />
             <Property name="border" type="javax.swing.border.Border"
@@ -11657,11 +11657,11 @@
           <Properties>
             <Property name="background" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="8e" green="29" red="eb" type="rgb" />
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="8e" green="3d" red="e1" type="rgb" />
+              <Color blue="8e" green="29" red="eb" type="rgb" />
             </Property>
             <Property name="orientation" type="int" value="1" />
             <Property name="border" type="javax.swing.border.Border"
@@ -11761,7 +11761,7 @@
         </Property>
         <Property name="warnaAtas" type="java.awt.Color"
           editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="c3" green="b9" red="ff" type="rgb" />
+          <Color blue="d7" green="d7" red="ff" type="rgb" />
         </Property>
       </Properties>
       <Constraints>

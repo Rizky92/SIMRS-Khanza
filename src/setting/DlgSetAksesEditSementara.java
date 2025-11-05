@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -81,7 +81,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         tbUser.getColumnModel().getColumn(2).setPreferredWidth(100);
         tbUser.getColumnModel().getColumn(3).setPreferredWidth(150);
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         cariUser.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
@@ -90,7 +90,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
                 }
             }
         });
-        
+
         cariUser.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -212,7 +212,6 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         jLabel4.setBounds(0, 42, 110, 23);
 
         TUser.setEditable(false);
-        TUser.setHighlighter(null);
         TUser.setName("TUser"); // NOI18N
         panelGlass5.add(TUser);
         TUser.setBounds(52, 12, 112, 23);
@@ -427,7 +426,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
@@ -435,7 +434,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -532,7 +531,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Silahkan pilih data yang mau diubah terlebih dahulu...!!!");
             return;
         }
-        
+
         if (TUser.getText().isBlank()) {
             Valid.textKosong(TUser, "ID User");
         } else if (TNmUser.getText().isBlank()) {
@@ -669,7 +668,7 @@ public class DlgSetAksesEditSementara extends javax.swing.JDialog {
                 CmbDetik1.setSelectedItem(tbUser.getValueAt(tbUser.getSelectedRow(), 3).toString().substring(17, 19));
             }
         } catch (Exception e) {
-            
+
         }
     }
 }

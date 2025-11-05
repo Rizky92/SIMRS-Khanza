@@ -1,4 +1,3 @@
-
 package widget;
 
 import javax.swing.event.DocumentEvent;

@@ -24,7 +24,7 @@ public final class InformasiTarifRadiologi extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -57,7 +57,7 @@ public final class InformasiTarifRadiologi extends javax.swing.JDialog {
             }
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -80,9 +80,9 @@ public final class InformasiTarifRadiologi extends javax.swing.JDialog {
                 }
             });
         }
-    
+
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -221,11 +221,11 @@ public final class InformasiTarifRadiologi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -233,7 +233,7 @@ public final class InformasiTarifRadiologi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -300,13 +300,13 @@ public final class InformasiTarifRadiologi extends javax.swing.JDialog {
                         " (jns_perawatan_radiologi.kd_jenis_prw like ? or  jns_perawatan_radiologi.nm_perawatan like ? or "+
                         " penjab.png_jawab like ? or jns_perawatan_radiologi.total_byr like ?)  "+
                         "order by jns_perawatan_radiologi.kd_jenis_prw");
-            try {                            
+            try {
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
                 ps.setString(4,"%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),
                                    rs.getString(2),
                                    Valid.SetAngka(rs.getDouble(3)),
@@ -329,5 +329,5 @@ public final class InformasiTarifRadiologi extends javax.swing.JDialog {
     }
 
 
-    
+
 }

@@ -46,7 +46,6 @@ public final class DlgCariPoli extends javax.swing.JDialog {
     private ResultSet rs;
     private File file;
     private FileWriter fileWriter;
-    private String iyem;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
@@ -269,11 +268,11 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -281,12 +280,12 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -294,7 +293,7 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -302,7 +301,7 @@ public final class DlgCariPoli extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -317,8 +316,8 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         poli.setLocationRelativeTo(internalFrame1);
         poli.setAlwaysOnTop(false);
         poli.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -388,12 +387,12 @@ public final class DlgCariPoli extends javax.swing.JDialog {
                         ObjectNode poli = mapper.createObjectNode();
                         poli.put("KodeUnit", rs.getString(1));
                         poli.put("NamaUnit", rs.getString(2));
-                        poli.put("RegistrasiBaru", Valid.SetAngka(rs.getDouble(3)));
-                        poli.put("RegistrasiLama", Valid.SetAngka(rs.getDouble(4)));
+                        poli.put("RegistrasiBaru", rs.getString(3));
+                        poli.put("RegistrasiLama", rs.getString(4));
                         array.add(poli);
                         tabMode.addRow(new Object[] {
                             rs.getString(1), rs.getString(2),
-                            Valid.SetAngka(rs.getDouble(3)), Valid.SetAngka(rs.getDouble(4))
+                            rs.getString(3), rs.getString(4)
                         });
                     } while (rs.next());
                     root.set("poli", array);
@@ -408,18 +407,18 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getadmin());
     }
-    
+
     private void tampil2() {
         Valid.tabelKosongSmc(tabMode);
         try (FileReader fr = new FileReader("./cache/poli.iyem")) {
@@ -451,5 +450,5 @@ public final class DlgCariPoli extends javax.swing.JDialog {
             tampil();
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
+    }
 }

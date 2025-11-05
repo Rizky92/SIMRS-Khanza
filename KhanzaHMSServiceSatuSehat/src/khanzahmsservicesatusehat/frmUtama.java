@@ -346,7 +346,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -434,7 +434,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -536,7 +536,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception eg){
-                                System.out.println("Notifikasi Bridging : "+eg);
+                                TeksArea.append("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ed) {
                             System.out.println("Notifikasi : "+ed);
@@ -631,7 +631,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception eg){
-                                System.out.println("Notifikasi Bridging : "+eg);
+                                TeksArea.append("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ed) {
                             System.out.println("Notifikasi : "+ed);
@@ -731,7 +731,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ef){
-                                System.out.println("Notifikasi Bridging : "+ef);
+                                TeksArea.append("Notifikasi Bridging : "+ef);
                             }
                         } catch (Exception eg) {
                             System.out.println("Notifikasi : "+eg);
@@ -826,7 +826,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ef){
-                                System.out.println("Notifikasi Bridging : "+ef);
+                                TeksArea.append("Notifikasi Bridging : "+ef);
                             }
                         } catch (Exception eg) {
                             System.out.println("Notifikasi : "+eg);
@@ -926,7 +926,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception es) {
                             System.out.println("Notifikasi : "+es);
@@ -1021,7 +1021,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception es) {
                             System.out.println("Notifikasi : "+es);
@@ -1121,7 +1121,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ef){
-                                System.out.println("Notifikasi Bridging : "+ef);
+                                TeksArea.append("Notifikasi Bridging : "+ef);
                             }
                         } catch (Exception ex) {
                             System.out.println("Notifikasi : "+ex);
@@ -1216,7 +1216,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ef){
-                                System.out.println("Notifikasi Bridging : "+ef);
+                                TeksArea.append("Notifikasi Bridging : "+ef);
                             }
                         } catch (Exception ex) {
                             System.out.println("Notifikasi : "+ex);
@@ -1315,7 +1315,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception es){
-                                System.out.println("Notifikasi Bridging : "+es);
+                                TeksArea.append("Notifikasi Bridging : "+es);
                             }
                         } catch (Exception ea) {
                             System.out.println("Notifikasi : "+ea);
@@ -1409,7 +1409,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception es){
-                                System.out.println("Notifikasi Bridging : "+es);
+                                TeksArea.append("Notifikasi Bridging : "+es);
                             }
                         } catch (Exception ea) {
                             System.out.println("Notifikasi : "+ea);
@@ -1506,7 +1506,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception eg){
-                                System.out.println("Notifikasi Bridging : "+eg);
+                                TeksArea.append("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -1598,7 +1598,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception eg){
-                                System.out.println("Notifikasi Bridging : "+eg);
+                                TeksArea.append("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -1746,7 +1746,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception eg){
-                                System.out.println("Notifikasi Bridging : "+eg);
+                                TeksArea.append("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -1889,7 +1889,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception eg){
-                                System.out.println("Notifikasi Bridging : "+eg);
+                                TeksArea.append("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -1989,7 +1989,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception eg){
-                                System.out.println("Notifikasi Bridging : "+eg);
+                                TeksArea.append("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -2084,7 +2084,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception eg){
-                                System.out.println("Notifikasi Bridging : "+eg);
+                                TeksArea.append("Notifikasi Bridging : "+eg);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -2184,7 +2184,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2279,7 +2279,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2379,7 +2379,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2491,7 +2491,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2595,7 +2595,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2740,7 +2740,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2879,7 +2879,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -2971,7 +2971,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3057,7 +3057,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3154,7 +3154,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3245,7 +3245,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3372,7 +3372,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3493,7 +3493,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3587,7 +3587,7 @@ public class frmUtama extends javax.swing.JFrame {
                             json=api.getRest().exchange(link+"/Medication/"+rs.getString("id_medication"), HttpMethod.PUT, requestEntity, String.class).getBody();
                             TeksArea.append("Result JSON : "+json);
                         }catch(Exception e){
-                            System.out.println("Notifikasi Bridging : "+e);
+                            TeksArea.append("Notifikasi Bridging : "+e);
                         }
                     }
                 }
@@ -3622,9 +3622,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join resep_dokter on resep_dokter.no_resep=resep_obat.no_resep "+
                    "inner join satu_sehat_mapping_obat on satu_sehat_mapping_obat.kode_brng=resep_dokter.kode_brng "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationrequest on satu_sehat_medicationrequest.no_resep=resep_dokter.no_resep and satu_sehat_medicationrequest.kode_brng=resep_dokter.kode_brng "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -3755,7 +3754,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3787,9 +3786,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join resep_dokter on resep_dokter.no_resep=resep_obat.no_resep "+
                    "inner join satu_sehat_mapping_obat on satu_sehat_mapping_obat.kode_brng=resep_dokter.kode_brng "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationrequest on satu_sehat_medicationrequest.no_resep=resep_dokter.no_resep and satu_sehat_medicationrequest.kode_brng=resep_dokter.kode_brng "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -3920,7 +3918,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -3953,10 +3951,9 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.no_resep=resep_dokter_racikan.no_resep and resep_dokter_racikan_detail.no_racik=resep_dokter_racikan.no_racik "+
                    "inner join satu_sehat_mapping_obat on satu_sehat_mapping_obat.kode_brng=resep_dokter_racikan_detail.kode_brng "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationrequest_racikan on satu_sehat_medicationrequest_racikan.no_resep=resep_dokter_racikan_detail.no_resep and "+
                    "satu_sehat_medicationrequest_racikan.kode_brng=resep_dokter_racikan_detail.kode_brng and satu_sehat_medicationrequest_racikan.no_racik=resep_dokter_racikan_detail.no_racik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -4087,7 +4084,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4120,10 +4117,9 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.no_resep=resep_dokter_racikan.no_resep and resep_dokter_racikan_detail.no_racik=resep_dokter_racikan.no_racik "+
                    "inner join satu_sehat_mapping_obat on satu_sehat_mapping_obat.kode_brng=resep_dokter_racikan_detail.kode_brng "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationrequest_racikan on satu_sehat_medicationrequest_racikan.no_resep=resep_dokter_racikan_detail.no_resep and "+
                    "satu_sehat_medicationrequest_racikan.kode_brng=resep_dokter_racikan_detail.kode_brng and satu_sehat_medicationrequest_racikan.no_racik=resep_dokter_racikan_detail.no_racik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -4254,7 +4250,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4299,14 +4295,13 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join bangsal on bangsal.kd_bangsal=detail_pemberian_obat.kd_bangsal "+
                    "inner join satu_sehat_mapping_lokasi_depo_farmasi on satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal=bangsal.kd_bangsal "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationdispense on satu_sehat_medicationdispense.no_rawat=detail_pemberian_obat.no_rawat and "+
                    "satu_sehat_medicationdispense.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and "+
                    "satu_sehat_medicationdispense.jam=detail_pemberian_obat.jam and "+
                    "satu_sehat_medicationdispense.kode_brng=detail_pemberian_obat.kode_brng and "+
                    "satu_sehat_medicationdispense.no_batch=detail_pemberian_obat.no_batch and "+
                    "satu_sehat_medicationdispense.no_faktur=detail_pemberian_obat.no_faktur "+
-                   "where reg_periksa.tgl_registrasi between ? and ?");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ?");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -4443,7 +4438,7 @@ public class frmUtama extends javax.swing.JFrame {
                                    });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4482,14 +4477,13 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join bangsal on bangsal.kd_bangsal=detail_pemberian_obat.kd_bangsal "+
                    "inner join satu_sehat_mapping_lokasi_depo_farmasi on satu_sehat_mapping_lokasi_depo_farmasi.kd_bangsal=bangsal.kd_bangsal "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationdispense on satu_sehat_medicationdispense.no_rawat=detail_pemberian_obat.no_rawat and "+
                    "satu_sehat_medicationdispense.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and "+
                    "satu_sehat_medicationdispense.jam=detail_pemberian_obat.jam and "+
                    "satu_sehat_medicationdispense.kode_brng=detail_pemberian_obat.kode_brng and "+
                    "satu_sehat_medicationdispense.no_batch=detail_pemberian_obat.no_batch and "+
                    "satu_sehat_medicationdispense.no_faktur=detail_pemberian_obat.no_faktur "+
-                   "where reg_periksa.tgl_registrasi between ? and ?");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ?");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -4626,7 +4620,7 @@ public class frmUtama extends javax.swing.JFrame {
                                    });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -4662,8 +4656,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join satu_sehat_mapping_radiologi on satu_sehat_mapping_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
                    "left join satu_sehat_servicerequest_radiologi on satu_sehat_servicerequest_radiologi.noorder=permintaan_pemeriksaan_radiologi.noorder "+
                    "and satu_sehat_servicerequest_radiologi.kd_jenis_prw=permintaan_pemeriksaan_radiologi.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -4743,7 +4736,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -4777,8 +4770,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join satu_sehat_mapping_radiologi on satu_sehat_mapping_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
                    "left join satu_sehat_servicerequest_radiologi on satu_sehat_servicerequest_radiologi.noorder=permintaan_pemeriksaan_radiologi.noorder "+
                    "and satu_sehat_servicerequest_radiologi.kd_jenis_prw=permintaan_pemeriksaan_radiologi.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -4858,7 +4850,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -4894,8 +4886,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_servicerequest_radiologi.kd_jenis_prw=permintaan_pemeriksaan_radiologi.kd_jenis_prw "+
                    "left join satu_sehat_specimen_radiologi on satu_sehat_servicerequest_radiologi.noorder=satu_sehat_specimen_radiologi.noorder "+
                    "and satu_sehat_servicerequest_radiologi.kd_jenis_prw=satu_sehat_specimen_radiologi.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -4950,7 +4941,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -4984,8 +4975,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_servicerequest_radiologi.kd_jenis_prw=permintaan_pemeriksaan_radiologi.kd_jenis_prw "+
                    "left join satu_sehat_specimen_radiologi on satu_sehat_servicerequest_radiologi.noorder=satu_sehat_specimen_radiologi.noorder "+
                    "and satu_sehat_servicerequest_radiologi.kd_jenis_prw=satu_sehat_specimen_radiologi.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -5040,7 +5030,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5084,7 +5074,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_specimen_radiologi.kd_jenis_prw=satu_sehat_observation_radiologi.kd_jenis_prw "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on periksa_radiologi.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -5158,7 +5148,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5200,7 +5190,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_specimen_radiologi.kd_jenis_prw=satu_sehat_observation_radiologi.kd_jenis_prw "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on periksa_radiologi.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -5274,7 +5264,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5321,9 +5311,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_specimen_radiologi.kd_jenis_prw=satu_sehat_observation_radiologi.kd_jenis_prw "+
                    "left join satu_sehat_diagnosticreport_radiologi on satu_sehat_servicerequest_radiologi.noorder=satu_sehat_diagnosticreport_radiologi.noorder "+
                    "and satu_sehat_servicerequest_radiologi.kd_jenis_prw=satu_sehat_diagnosticreport_radiologi.kd_jenis_prw "+
-                   ""+
                    "inner join pegawai on periksa_radiologi.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -5408,7 +5397,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5453,9 +5442,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_specimen_radiologi.kd_jenis_prw=satu_sehat_observation_radiologi.kd_jenis_prw "+
                    "left join satu_sehat_diagnosticreport_radiologi on satu_sehat_servicerequest_radiologi.noorder=satu_sehat_diagnosticreport_radiologi.noorder "+
                    "and satu_sehat_servicerequest_radiologi.kd_jenis_prw=satu_sehat_diagnosticreport_radiologi.kd_jenis_prw "+
-                   ""+
                    "inner join pegawai on periksa_radiologi.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -5540,7 +5528,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5577,8 +5565,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_servicerequest_lab on satu_sehat_servicerequest_lab.noorder=permintaan_detail_permintaan_lab.noorder "+
                    "and satu_sehat_servicerequest_lab.id_template=permintaan_detail_permintaan_lab.id_template "+
                    "and satu_sehat_servicerequest_lab.kd_jenis_prw=permintaan_detail_permintaan_lab.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -5658,7 +5645,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5693,8 +5680,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_servicerequest_lab on satu_sehat_servicerequest_lab.noorder=permintaan_detail_permintaan_lab.noorder "+
                    "and satu_sehat_servicerequest_lab.id_template=permintaan_detail_permintaan_lab.id_template "+
                    "and satu_sehat_servicerequest_lab.kd_jenis_prw=permintaan_detail_permintaan_lab.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -5774,7 +5760,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5811,8 +5797,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_servicerequest_lab_mb on satu_sehat_servicerequest_lab_mb.noorder=permintaan_detail_permintaan_labmb.noorder "+
                    "and satu_sehat_servicerequest_lab_mb.id_template=permintaan_detail_permintaan_labmb.id_template "+
                    "and satu_sehat_servicerequest_lab_mb.kd_jenis_prw=permintaan_detail_permintaan_labmb.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -5892,7 +5877,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -5927,8 +5912,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_servicerequest_lab_mb on satu_sehat_servicerequest_lab_mb.noorder=permintaan_detail_permintaan_labmb.noorder "+
                    "and satu_sehat_servicerequest_lab_mb.id_template=permintaan_detail_permintaan_labmb.id_template "+
                    "and satu_sehat_servicerequest_lab_mb.kd_jenis_prw=permintaan_detail_permintaan_labmb.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6008,7 +5992,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6047,8 +6031,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_specimen_lab on satu_sehat_servicerequest_lab.noorder=satu_sehat_specimen_lab.noorder "+
                    "and satu_sehat_servicerequest_lab.id_template=satu_sehat_specimen_lab.id_template "+
                    "and satu_sehat_servicerequest_lab.kd_jenis_prw=satu_sehat_specimen_lab.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6103,7 +6086,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6140,8 +6123,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_specimen_lab on satu_sehat_servicerequest_lab.noorder=satu_sehat_specimen_lab.noorder "+
                    "and satu_sehat_servicerequest_lab.id_template=satu_sehat_specimen_lab.id_template "+
                    "and satu_sehat_servicerequest_lab.kd_jenis_prw=satu_sehat_specimen_lab.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6196,7 +6178,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6235,8 +6217,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_specimen_lab_mb on satu_sehat_servicerequest_lab_mb.noorder=satu_sehat_specimen_lab_mb.noorder "+
                    "and satu_sehat_servicerequest_lab_mb.id_template=satu_sehat_specimen_lab_mb.id_template "+
                    "and satu_sehat_servicerequest_lab_mb.kd_jenis_prw=satu_sehat_specimen_lab_mb.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6291,7 +6272,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6328,8 +6309,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_specimen_lab_mb on satu_sehat_servicerequest_lab_mb.noorder=satu_sehat_specimen_lab_mb.noorder "+
                    "and satu_sehat_servicerequest_lab_mb.id_template=satu_sehat_specimen_lab_mb.id_template "+
                    "and satu_sehat_servicerequest_lab_mb.kd_jenis_prw=satu_sehat_specimen_lab_mb.kd_jenis_prw "+
-                   ""+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6384,7 +6364,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6431,7 +6411,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_specimen_lab.kd_jenis_prw=satu_sehat_observation_lab.kd_jenis_prw "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on periksa_lab.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6505,7 +6485,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6550,7 +6530,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_specimen_lab.kd_jenis_prw=satu_sehat_observation_lab.kd_jenis_prw "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on periksa_lab.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6624,7 +6604,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6671,7 +6651,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_specimen_lab_mb.kd_jenis_prw=satu_sehat_observation_lab_mb.kd_jenis_prw "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on periksa_lab.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6745,7 +6725,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6790,7 +6770,7 @@ public class frmUtama extends javax.swing.JFrame {
                    "and satu_sehat_specimen_lab_mb.kd_jenis_prw=satu_sehat_observation_lab_mb.kd_jenis_prw "+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on periksa_lab.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -6864,7 +6844,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -6915,9 +6895,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_diagnosticreport_lab on satu_sehat_servicerequest_lab.noorder=satu_sehat_diagnosticreport_lab.noorder "+
                    "and satu_sehat_servicerequest_lab.id_template=satu_sehat_diagnosticreport_lab.id_template "+
                    "and satu_sehat_servicerequest_lab.kd_jenis_prw=satu_sehat_diagnosticreport_lab.kd_jenis_prw "+
-                   ""+
                    "inner join pegawai on periksa_lab.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -7002,7 +6981,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7051,9 +7030,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_diagnosticreport_lab on satu_sehat_servicerequest_lab.noorder=satu_sehat_diagnosticreport_lab.noorder "+
                    "and satu_sehat_servicerequest_lab.id_template=satu_sehat_diagnosticreport_lab.id_template "+
                    "and satu_sehat_servicerequest_lab.kd_jenis_prw=satu_sehat_diagnosticreport_lab.kd_jenis_prw "+
-                   ""+
                    "inner join pegawai on periksa_lab.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -7138,7 +7116,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7189,9 +7167,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_diagnosticreport_lab_mb on satu_sehat_servicerequest_lab_mb.noorder=satu_sehat_diagnosticreport_lab_mb.noorder "+
                    "and satu_sehat_servicerequest_lab_mb.id_template=satu_sehat_diagnosticreport_lab_mb.id_template "+
                    "and satu_sehat_servicerequest_lab_mb.kd_jenis_prw=satu_sehat_diagnosticreport_lab_mb.kd_jenis_prw "+
-                   ""+
                    "inner join pegawai on periksa_lab.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -7276,7 +7253,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7325,9 +7302,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "left join satu_sehat_diagnosticreport_lab_mb on satu_sehat_servicerequest_lab_mb.noorder=satu_sehat_diagnosticreport_lab_mb.noorder "+
                    "and satu_sehat_servicerequest_lab_mb.id_template=satu_sehat_diagnosticreport_lab_mb.id_template "+
                    "and satu_sehat_servicerequest_lab_mb.kd_jenis_prw=satu_sehat_diagnosticreport_lab_mb.kd_jenis_prw "+
-                   ""+
                    "inner join pegawai on periksa_lab.kd_dokter=pegawai.nik "+
-                   "where reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -7412,7 +7388,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception ea){
-                                System.out.println("Notifikasi Bridging : "+ea);
+                                TeksArea.append("Notifikasi Bridging : "+ea);
                             }
                         } catch (Exception ef) {
                             System.out.println("Notifikasi : "+ef);
@@ -7442,7 +7418,6 @@ public class frmUtama extends javax.swing.JFrame {
                    "pegawai.nama,pegawai.no_ktp as ktppraktisi,pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,"+
                    "ifnull(satu_sehat_careplan.id_careplan,'') as satu_sehat_careplan "+
                    "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                   ""+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pemeriksaan_ralan on pemeriksaan_ralan.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on pemeriksaan_ralan.nip=pegawai.nik "+
@@ -7510,7 +7485,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -7534,7 +7509,6 @@ public class frmUtama extends javax.swing.JFrame {
                    "pegawai.nama,pegawai.no_ktp as ktppraktisi,pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat,"+
                    "ifnull(satu_sehat_careplan.id_careplan,'') as satu_sehat_careplan "+
                    "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                   ""+
                    "inner join satu_sehat_encounter on satu_sehat_encounter.no_rawat=reg_periksa.no_rawat "+
                    "inner join pemeriksaan_ranap on pemeriksaan_ranap.no_rawat=reg_periksa.no_rawat "+
                    "inner join pegawai on pemeriksaan_ranap.nip=pegawai.nik "+
@@ -7602,7 +7576,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -7639,9 +7613,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join resep_dokter on resep_dokter.no_resep=resep_obat.no_resep "+
                    "inner join satu_sehat_mapping_obat on satu_sehat_mapping_obat.kode_brng=resep_dokter.kode_brng "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationstatement on satu_sehat_medicationstatement.no_resep=resep_dokter.no_resep and satu_sehat_medicationstatement.kode_brng=resep_dokter.kode_brng "+
-                   "where resep_obat.tgl_penyerahan<>'0000-00-00' and reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and resep_obat.tgl_penyerahan<>'0000-00-00' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -7752,7 +7725,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -7783,9 +7756,8 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join resep_dokter on resep_dokter.no_resep=resep_obat.no_resep "+
                    "inner join satu_sehat_mapping_obat on satu_sehat_mapping_obat.kode_brng=resep_dokter.kode_brng "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationstatement on satu_sehat_medicationstatement.no_resep=resep_dokter.no_resep and satu_sehat_medicationstatement.kode_brng=resep_dokter.kode_brng "+
-                   "where resep_obat.tgl_penyerahan<>'0000-00-00' and reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and resep_obat.tgl_penyerahan<>'0000-00-00' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -7896,7 +7868,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -7928,10 +7900,9 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.no_resep=resep_dokter_racikan.no_resep and resep_dokter_racikan_detail.no_racik=resep_dokter_racikan.no_racik "+
                    "inner join satu_sehat_mapping_obat on satu_sehat_mapping_obat.kode_brng=resep_dokter_racikan_detail.kode_brng "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationstatement_racikan on satu_sehat_medicationstatement_racikan.no_resep=resep_dokter_racikan_detail.no_resep and "+
                    "satu_sehat_medicationstatement_racikan.kode_brng=resep_dokter_racikan_detail.kode_brng and satu_sehat_medicationstatement_racikan.no_racik=resep_dokter_racikan_detail.no_racik "+
-                   "where resep_obat.tgl_penyerahan<>'0000-00-00' and reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ralan' and resep_obat.tgl_penyerahan<>'0000-00-00' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -8042,7 +8013,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
@@ -8074,10 +8045,9 @@ public class frmUtama extends javax.swing.JFrame {
                    "inner join resep_dokter_racikan_detail on resep_dokter_racikan_detail.no_resep=resep_dokter_racikan.no_resep and resep_dokter_racikan_detail.no_racik=resep_dokter_racikan.no_racik "+
                    "inner join satu_sehat_mapping_obat on satu_sehat_mapping_obat.kode_brng=resep_dokter_racikan_detail.kode_brng "+
                    "inner join satu_sehat_medication on satu_sehat_medication.kode_brng=satu_sehat_mapping_obat.kode_brng "+
-                   ""+
                    "left join satu_sehat_medicationstatement_racikan on satu_sehat_medicationstatement_racikan.no_resep=resep_dokter_racikan_detail.no_resep and "+
                    "satu_sehat_medicationstatement_racikan.kode_brng=resep_dokter_racikan_detail.kode_brng and satu_sehat_medicationstatement_racikan.no_racik=resep_dokter_racikan_detail.no_racik "+
-                   "where resep_obat.tgl_penyerahan<>'0000-00-00' and reg_periksa.tgl_registrasi between ? and ? ");
+                   "where reg_periksa.status_lanjut='Ranap' and resep_obat.tgl_penyerahan<>'0000-00-00' and reg_periksa.tgl_registrasi between ? and ? ");
             try {
                 ps.setString(1,Tanggal1.getText());
                 ps.setString(2,Tanggal2.getText());
@@ -8188,7 +8158,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     });
                                 }
                             }catch(Exception e){
-                                System.out.println("Notifikasi Bridging : "+e);
+                                TeksArea.append("Notifikasi Bridging : "+e);
                             }
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
