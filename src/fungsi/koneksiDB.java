@@ -995,24 +995,22 @@ public class koneksiDB {
         return var;
     }
     
-    public static String URUTNOREG(){
+    public static String URUTNOREG() {
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("URUTNOREG", "");
-        }catch(Exception e){
-            var=""; 
+            return prop.getProperty("URUTNOREG", "");
+        } catch (Exception e) {
+            return "";
         }
-        return var;
     }
     
-    public static String JADWALDOKTERDIREGISTRASI(){
+    public static String JADWALDOKTERDIREGISTRASI() {
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("JADWALDOKTERDIREGISTRASI", "no");
-        }catch(Exception e){
-            var=""; 
+            return prop.getProperty("JADWALDOKTERDIREGISTRASI", "no");
+        } catch (Exception e) {
+            return "";
         }
-        return var;
     }
     
     public static String IPPRINTERTRACER(){
@@ -1533,14 +1531,13 @@ public class koneksiDB {
         return var;
     }
     
-    public static String JADIKANBOOKINGSURATKONTROL(){
+    public static String JADIKANBOOKINGSURATKONTROL() {
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("JADIKANBOOKINGSURATKONTROL");
-        }catch(Exception e){
-            var=""; 
+            return prop.getProperty("JADIKANBOOKINGSURATKONTROL", "no").toLowerCase().trim();
+        } catch (Exception e) {
+            return "";
         }
-        return var;
     }
     
     public static String JADIKANBOOKINGSURATKONTROLAPIBPJS(){

@@ -89,7 +89,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
             });
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -240,11 +240,11 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -252,12 +252,12 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -265,7 +265,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -273,7 +273,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -284,7 +284,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -359,7 +359,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                     "select rawat_inap_dr.tgl_perawatan, rawat_inap_dr.jam_rawat, jns_perawatan_inap.nm_perawatan "+
@@ -389,7 +389,7 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
         try{
             ps=koneksi.prepareStatement(
                     "select DATE_FORMAT(operasi.tgl_operasi,'%Y-%m-%d') as tgl_operasi,DATE_FORMAT(operasi.tgl_operasi,'%H:%i:%s') as jamoperasi, "+
@@ -422,10 +422,10 @@ public final class RMCariTindakan extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-    
+
     public void setNoRawat(String norawat){
         this.norawat=norawat;
     }
@@ -433,5 +433,5 @@ public final class RMCariTindakan extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
 }

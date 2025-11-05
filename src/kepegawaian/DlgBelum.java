@@ -45,9 +45,9 @@ public final class DlgBelum extends javax.swing.JDialog {
     public DlgBelum(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"NIK","Nama","JK","Jabatan","Jenjang Jabatan","Departemen","Bidang"};
-        
+
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -93,11 +93,11 @@ public final class DlgBelum extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         Valid.loadCombo(Departemen,"nama","departemen");
         Departemen.addItem("Semua");
         Departemen.setSelectedItem("Semua");
-        
+
         try{
             ps=koneksi.prepareStatement(
                    "select pegawai.nik, pegawai.nama, pegawai.jk, pegawai.jbtn, pegawai.jnj_jabatan,"+
@@ -107,12 +107,12 @@ public final class DlgBelum extends javax.swing.JDialog {
                    "or pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and pegawai.jk like ? and "+say+
                    "or pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and pegawai.jbtn like ? and "+say+
                    "or pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and pegawai.jnj_jabatan like ? and "+say+
-                   "or pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and pegawai.bidang like ? and "+say+" order by pegawai.nik ");            
+                   "or pegawai.stts_aktif<>'KELUAR' and departemen.nama like ? and pegawai.bidang like ? and "+say+" order by pegawai.nik ");
         }catch(SQLException ex){
             System.out.println(ex);
         }
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -271,13 +271,13 @@ public final class DlgBelum extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -287,11 +287,11 @@ public final class DlgBelum extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -299,12 +299,12 @@ public final class DlgBelum extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -313,7 +313,7 @@ public final class DlgBelum extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     /**
     * @param args the command line arguments
@@ -349,9 +349,9 @@ public final class DlgBelum extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {        
+    public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{         
+        try{
             ps.setString(1,"%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             ps.setString(3,"%"+Departemen.getSelectedItem().toString().replaceAll("Semua","")+"%");

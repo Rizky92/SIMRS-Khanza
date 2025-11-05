@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -49,7 +49,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     private String no_peserta="", requestJson,URL="",jkel="",duplikat="",user="",kelas="";
     private double totaltagihan=0;
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
@@ -57,14 +57,14 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocation(8,1);
-        
+
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "No.SJP","No.Rawat","Tanggal SJP","Tanggal Rujukan","No.Rujukan", 
+                "No.SJP","No.Rawat","Tanggal SJP","Tanggal Rujukan","No.Rujukan",
                 "kdppkrujukan","Nama PPK Rujukan","kdppkpelayanan","Nama PPK Pelayanan",
-                "Jenis Pelayanan","Catatan","ICD X","Diagnosa Awal","ICD X 2","Diagnosa Tambahan", 
-                "Kode Poli/Kamar","Nama Poli/Kamar","Kelas Rawat","Kelas Desc","Kode BU","Nama BU", 
-                "Laka Lantas","Lokasi Laka","User","No.R.M","Nama Pasien","Tgl.Lahir","Jns.Kelamin", 
+                "Jenis Pelayanan","Catatan","ICD X","Diagnosa Awal","ICD X 2","Diagnosa Tambahan",
+                "Kode Poli/Kamar","Nama Poli/Kamar","Kelas Rawat","Kelas Desc","Kode BU","Nama BU",
+                "Laka Lantas","Lokasi Laka","User","No.R.M","Nama Pasien","Tgl.Lahir","Jns.Kelamin",
                 "No.Kartu","Tanggal Pulang","Plan","Plan Desc","ID Akomodasi","Tipe SJP","Tipe COB"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -155,7 +155,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
             }
         }
         tbSJP.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeTagihanKamar=new DefaultTableModel(null,new Object[]{
                 "P","Kode Jenis","Jenis Pelayanan Ruang Rawat","Tarif","Hari","Total"
             }){
@@ -178,7 +178,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         tbTagihanKamar.getColumnModel().getColumn(3).setPreferredWidth(70);
         tbTagihanKamar.getColumnModel().getColumn(4).setPreferredWidth(30);
         tbTagihanKamar.getColumnModel().getColumn(5).setPreferredWidth(80);
-        
+
         tabModeTagihanRalan=new DefaultTableModel(null,new Object[]{
                 "P","Kode Jenis","Jenis Pelayanan Ruang Rawat","Tarif","Hari","Total"
             }){
@@ -196,9 +196,9 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         tbTagihanRawatJalan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbTagihanRawatJalan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         tbTagihanRawatJalan.getColumnModel().getColumn(0).setPreferredWidth(20);
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -221,7 +221,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         ChkAccor.setSelected(false);
         isMenu();
     }
@@ -500,7 +500,6 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         jLabel34.setPreferredSize(new java.awt.Dimension(55, 23));
         FormMenu.add(jLabel34);
 
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.setPreferredSize(new java.awt.Dimension(100, 23));
         TNoRM.addActionListener(new java.awt.event.ActionListener() {
@@ -511,7 +510,6 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         FormMenu.add(TNoRM);
 
         TPasien.setBackground(new java.awt.Color(245, 250, 240));
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.setPreferredSize(new java.awt.Dimension(250, 23));
         FormMenu.add(TPasien);
@@ -623,13 +621,13 @@ public final class InhealthTagihan extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnCari,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -639,11 +637,11 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -651,12 +649,12 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -665,7 +663,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -729,7 +727,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
                     getData();
                 } catch (java.lang.NullPointerException e) {
                 }
-            }          
+            }
         }
     }//GEN-LAST:event_tbSJPKeyReleased
 
@@ -795,7 +793,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
     private widget.Table tbTagihanRawatJalan;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {        
+    public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -856,34 +854,34 @@ public final class InhealthTagihan extends javax.swing.JDialog {
             } finally{
                 if(rs!=null){
                     rs.close();
-                }   
+                }
                 if(ps!=null){
                     ps.close();
-                }   
-            }                
+                }
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        LCount.setText(""+tabMode.getRowCount()); 
+        LCount.setText(""+tabMode.getRowCount());
     }
 
-    
+
     public void isCek(){
-        BtnPrint.setEnabled(akses.getinhealth_kirim_tagihan());       
+        BtnPrint.setEnabled(akses.getinhealth_kirim_tagihan());
     }
-    
+
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(550,HEIGHT));
-            FormMenu.setVisible(true);  
-            TabTarif.setVisible(true);  
+            FormMenu.setVisible(true);
+            TabTarif.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){   
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormMenu.setVisible(false);  
-            TabTarif.setVisible(false);    
+            FormMenu.setVisible(false);
+            TabTarif.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -897,7 +895,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
             LTagihan.setText(Valid.SetAngka(totaltagihan));
         }
     }
-    
+
     private void tagihanKamar(String norawat){
         Valid.tabelKosong(tabModeTagihanKamar);
         try {
@@ -932,7 +930,7 @@ public final class InhealthTagihan extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     private void tagihanRalan(String norawat){
         Valid.tabelKosong(tabModeTagihanKamar);
         try {

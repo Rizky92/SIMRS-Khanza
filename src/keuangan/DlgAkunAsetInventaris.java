@@ -60,7 +60,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class                
+                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -86,12 +86,12 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
                 column.setPreferredWidth(220);
             }
         }
-        
+
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         kdrek.setDocument(new batasInput((byte)15).getKata(kdrek));
         kdjenis.setDocument(new batasInput((int)10).getKata(kdjenis));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -113,12 +113,12 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
-        emptTeks();        
-        
+        }
+
+        emptTeks();
+
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -368,7 +368,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         jLabel10.setBounds(0, 42, 125, 23);
 
         nmrek.setEditable(false);
-        nmrek.setHighlighter(null);
         nmrek.setName("nmrek"); // NOI18N
         nmrek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -379,7 +378,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         nmrek.setBounds(232, 42, 342, 23);
 
         kdrek.setEditable(false);
-        kdrek.setHighlighter(null);
         kdrek.setName("kdrek"); // NOI18N
         kdrek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -408,7 +406,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
 
         kdjenis.setEditable(false);
         kdjenis.setToolTipText("Tekan ENTER untuk lanjut ke field berikutnya, tekan PAGE UP untuk ke field sebelumnya, Tekan UP untuk menampilkan data Jenis Pembayaran");
-        kdjenis.setHighlighter(null);
         kdjenis.setName("kdjenis"); // NOI18N
         kdjenis.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -444,7 +441,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
 
     private void nmrekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmrekKeyPressed
         //Valid.pindah(evt,TJns,BtnSimpan);
-}//GEN-LAST:event_nmrekKeyPressed
+    }//GEN-LAST:event_nmrekKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(kdjenis.getText().trim().equals("")||nmjenis.getText().trim().equals("")){
@@ -458,7 +455,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
             tampil();
             emptTeks();
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -466,27 +463,27 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,kdrek,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(int i=0;i<tbJadwal.getRowCount();i++){ 
+        for(int i=0;i<tbJadwal.getRowCount();i++){
             if(tbJadwal.getValueAt(i,0).toString().equals("true")){
                 Sequel.meghapus("akun_aset_inventaris","id_jenis",tbJadwal.getValueAt(i,1).toString());
             }
-        } 
+        }
         tampil();
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -494,7 +491,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(kdjenis.getText().trim().equals("")||nmjenis.getText().trim().equals("")){
@@ -511,9 +508,9 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data pada tabel terlebih dahulu");
                 tbJadwal.requestFocus();
-            }            
+            }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -521,17 +518,17 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnSemua);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnSemua,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -541,11 +538,11 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -553,12 +550,12 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnSemua);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSemuaActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnSemuaActionPerformed
+    }//GEN-LAST:event_BtnSemuaActionPerformed
 
     private void BtnSemuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSemuaKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -567,7 +564,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         }else{
            // Valid.pindah(evt, BtnCari,kddokter);
         }
-}//GEN-LAST:event_BtnSemuaKeyPressed
+    }//GEN-LAST:event_BtnSemuaKeyPressed
 
     private void tbJadwalMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJadwalMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -576,7 +573,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJadwalMouseClicked
+    }//GEN-LAST:event_tbJadwalMouseClicked
 
     private void tbJadwalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJadwalKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -587,13 +584,13 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbJadwalKeyPressed
+    }//GEN-LAST:event_tbJadwalKeyPressed
 
-private void kdrekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdrekKeyPressed
+    private void kdrekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdrekKeyPressed
         Valid.pindah(evt,kdrek,BtnSimpan);
-}//GEN-LAST:event_kdrekKeyPressed
+    }//GEN-LAST:event_kdrekKeyPressed
 
-private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPoliActionPerformed
+    private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPoliActionPerformed
         akses.setform("DlgAkunAsetInventaris");
         DlgRekeningTahun rekening=new DlgRekeningTahun(null,false);
         rekening.addWindowListener(new WindowListener() {
@@ -604,11 +601,11 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgAkunAsetInventaris")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                        nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                        nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         kdrek.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -620,7 +617,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -634,14 +631,14 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         rekening.emptTeks();
         rekening.tampil();
         rekening.isCek();
         rekening.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         rekening.setLocationRelativeTo(internalFrame1);
         rekening.setVisible(true);
-}//GEN-LAST:event_BtnPoliActionPerformed
+    }//GEN-LAST:event_BtnPoliActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -663,7 +660,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 if(jenis.getTable().getSelectedRow()!= -1){
                     kdjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
                     nmjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
-                } 
+                }
                 kdjenis.requestFocus();
             }
             @Override
@@ -675,7 +672,7 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenis.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -795,17 +792,17 @@ private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             nmrek.setText(tabMode.getValueAt(row,4).toString());
         }
     }
-    
+
     public JTable getTable(){
         return tbJadwal;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getakun_aset_inventaris());
         BtnHapus.setEnabled(akses.getakun_aset_inventaris());
         BtnEdit.setEnabled(akses.getakun_aset_inventaris());
         BtnSemua.setEnabled(akses.getakun_aset_inventaris());
     }
-    
-    
+
+
 }

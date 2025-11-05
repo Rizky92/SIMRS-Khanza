@@ -636,7 +636,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         jLabel4.setBounds(345, 40, 64, 23);
 
         NamaBarang.setEditable(false);
-        NamaBarang.setHighlighter(null);
         NamaBarang.setName("NamaBarang"); // NOI18N
         FormInput.add(NamaBarang);
         NamaBarang.setBounds(212, 10, 210, 23);
@@ -663,7 +662,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel5);
         jLabel5.setBounds(0, 100, 105, 23);
 
-        FormCode.setHighlighter(null);
         FormCode.setName("FormCode"); // NOI18N
         FormCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -678,7 +676,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(0, 160, 105, 23);
 
-        NumeratorCode.setHighlighter(null);
         NumeratorCode.setName("NumeratorCode"); // NOI18N
         NumeratorCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -688,7 +685,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(NumeratorCode);
         NumeratorCode.setBounds(109, 160, 70, 23);
 
-        KodeBarang.setHighlighter(null);
         KodeBarang.setName("KodeBarang"); // NOI18N
         KodeBarang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -708,7 +704,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel10);
         jLabel10.setBounds(0, 70, 105, 23);
 
-        KFADisplay.setHighlighter(null);
         KFADisplay.setName("KFADisplay"); // NOI18N
         KFADisplay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -724,7 +719,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel11);
         jLabel11.setBounds(196, 100, 69, 23);
 
-        FormSystem.setHighlighter(null);
         FormSystem.setName("FormSystem"); // NOI18N
         FormSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -734,7 +728,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(FormSystem);
         FormSystem.setBounds(269, 100, 455, 23);
 
-        FormDisplay.setHighlighter(null);
         FormDisplay.setName("FormDisplay"); // NOI18N
         FormDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -760,7 +753,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel14);
         jLabel14.setBounds(188, 160, 96, 23);
 
-        NumeratorSystem.setHighlighter(null);
         NumeratorSystem.setName("NumeratorSystem"); // NOI18N
         NumeratorSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -770,7 +762,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(NumeratorSystem);
         NumeratorSystem.setBounds(288, 160, 404, 23);
 
-        DenominatorCode.setHighlighter(null);
         DenominatorCode.setName("DenominatorCode"); // NOI18N
         DenominatorCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -780,7 +771,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(DenominatorCode);
         DenominatorCode.setBounds(109, 190, 70, 23);
 
-        KFASystem.setHighlighter(null);
         KFASystem.setName("KFASystem"); // NOI18N
         KFASystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -796,7 +786,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel15);
         jLabel15.setBounds(188, 190, 106, 23);
 
-        DenominatorSystem.setHighlighter(null);
         DenominatorSystem.setName("DenominatorSystem"); // NOI18N
         DenominatorSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -811,7 +800,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel16);
         jLabel16.setBounds(0, 220, 105, 23);
 
-        RouteCode.setHighlighter(null);
         RouteCode.setName("RouteCode"); // NOI18N
         RouteCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -827,7 +815,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel17);
         jLabel17.setBounds(188, 220, 74, 23);
 
-        RouteSystem.setHighlighter(null);
         RouteSystem.setName("RouteSystem"); // NOI18N
         RouteSystem.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -843,7 +830,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel18);
         jLabel18.setBounds(462, 220, 73, 23);
 
-        RouteDisplay.setHighlighter(null);
         RouteDisplay.setName("RouteDisplay"); // NOI18N
         RouteDisplay.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -858,7 +844,6 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         FormInput.add(jLabel19);
         jLabel19.setBounds(0, 40, 105, 23);
 
-        KFACode.setHighlighter(null);
         KFACode.setName("KFACode"); // NOI18N
         KFACode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -886,13 +871,11 @@ public final class SatuSehatMapingObatAlkes2 extends javax.swing.JDialog {
         btnCariKFA.setBounds(315, 40, 28, 23);
 
         Satuan.setEditable(false);
-        Satuan.setHighlighter(null);
         Satuan.setName("Satuan"); // NOI18N
         FormInput.add(Satuan);
         Satuan.setBounds(426, 10, 90, 23);
 
         Kategori.setEditable(false);
-        Kategori.setHighlighter(null);
         Kategori.setName("Kategori"); // NOI18N
         FormInput.add(Kategori);
         Kategori.setBounds(520, 10, 172, 23);

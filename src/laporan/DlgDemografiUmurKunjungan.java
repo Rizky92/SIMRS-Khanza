@@ -50,15 +50,15 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
                 ttlth1519l=0,ttlth1519p=0,ttlth2044l=0,ttlth2044p=0,ttlth4554l=0,ttlth4554p=0,ttlth5559l=0,ttlth5559p=0,
                 ttlth6069l=0,ttlth6069p=0,ttlthl70l=0,ttlthl70p=0,ttlhr830l=0,ttlhr830p=0,ttltotall=0,ttltotalp=0,ttltotallp=0,
                 ttlregistrasibaru=0,ttlregistrasilama=0,ttlpolilama=0,ttlpolibaru=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public DlgDemografiUmurKunjungan(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -71,7 +71,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -82,7 +82,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
                 if(poli.getTable().getSelectedRow()!= -1){
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     nmpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kdpoli.requestFocus();
             }
             @Override
@@ -93,8 +93,8 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {poli.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -105,7 +105,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -116,8 +116,8 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -130,7 +130,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         penjab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -141,7 +141,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -152,8 +152,8 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -166,7 +166,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         kabupaten.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -176,7 +176,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(kabupaten.getTable().getSelectedRow()!= -1){
                     nmkabupaten.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),0).toString());
-                }      
+                }
                 nmkabupaten.requestFocus();
             }
             @Override
@@ -187,8 +187,8 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {kabupaten.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         kabupaten.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -201,7 +201,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         kecamatan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -211,7 +211,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(kecamatan.getTable().getSelectedRow()!= -1){
                     nmkecamatan.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),0).toString());
-                }      
+                }
                 nmkecamatan.requestFocus();
             }
             @Override
@@ -222,8 +222,8 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {kecamatan.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         kecamatan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -236,7 +236,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         kelurahan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -246,7 +246,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(kelurahan.getTable().getSelectedRow()!= -1){
                     nmkelurahan.setText(kelurahan.getTable().getValueAt(kelurahan.getTable().getSelectedRow(),0).toString());
-                }      
+                }
                 nmkelurahan.requestFocus();
             }
             @Override
@@ -257,8 +257,8 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {kelurahan.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         kelurahan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -271,7 +271,7 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -706,24 +706,24 @@ public class DlgDemografiUmurKunjungan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            File g = new File("file2.css");            
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("rl4b.html");            
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+
+            File f = new File("rl4b.html");
+            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                         "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                             "<tr class='isi2'>"+
@@ -731,17 +731,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                     akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                     akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                    "<font size='2' face='Tahoma'>DATA DEMOGRAFI UMUR KUNJUNGAN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+        
+                                    "<font size='2' face='Tahoma'>DATA DEMOGRAFI UMUR KUNJUNGAN<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
                                 "</td>"+
                            "</tr>"+
                         "</table>")
             );
-            bw.close();                         
+            bw.close();
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -763,17 +763,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,Tgl1);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
     prosesCari();
-}//GEN-LAST:event_btnCariActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
+    private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, Tgl2, BtnPrint);
         }
-}//GEN-LAST:event_btnCariKeyPressed
+    }//GEN-LAST:event_btnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         prosesCari();
@@ -984,9 +984,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             }
 
             querytambahan=querydokter+querypoli+querycarabayar;
-                    
+
             if(!nmkelurahan.getText().equals("")){
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='3'>No.</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%' rowspan='3'>Desa/Alamat</td>"+
@@ -994,7 +994,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Total</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%' colspan='2'>Jenis Kunjungan</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' colspan='3'>Jumlah Kunjungan/Kasus</td>"+
-                    "</tr>"+  
+                    "</tr>"+
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>0-7Hr</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>8-30hr</td>"+
@@ -1495,9 +1495,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     if(ps!=null){
                         ps.close();
                     }
-                } 
+                }
             }else if(!nmkecamatan.getText().equals("")){
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='3'>No.</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%' rowspan='3'>Kelurahan</td>"+
@@ -1505,7 +1505,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Total</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%' colspan='2'>Jenis Kunjungan</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' colspan='3'>Jumlah Kunjungan/Kasus</td>"+
-                    "</tr>"+  
+                    "</tr>"+
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>0-7Hr</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>8-30hr</td>"+
@@ -1977,9 +1977,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     if(ps!=null){
                         ps.close();
                     }
-                } 
+                }
             }else if(!nmkabupaten.getText().equals("")){
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='3'>No.</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%' rowspan='3'>Kecamatan</td>"+
@@ -1987,7 +1987,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Total</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%' colspan='2'>Jenis Kunjungan</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' colspan='3'>Jumlah Kunjungan/Kasus</td>"+
-                    "</tr>"+  
+                    "</tr>"+
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>0-7Hr</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>8-30hr</td>"+
@@ -2429,9 +2429,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     if(ps!=null){
                         ps.close();
                     }
-                } 
+                }
             }else if(nmkabupaten.getText().equals("")){
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='3'>No.</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='15%' rowspan='3'>Kabupaten</td>"+
@@ -2439,7 +2439,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='5%' rowspan='3'>Total</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='10%' colspan='2'>Jenis Kunjungan</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' width='13%' colspan='3'>Jumlah Kunjungan/Kasus</td>"+
-                    "</tr>"+  
+                    "</tr>"+
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>0-7Hr</td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='2'>8-30hr</td>"+
@@ -2851,9 +2851,9 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     if(ps!=null){
                         ps.close();
                     }
-                } 
+                }
             }
-            
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -2862,25 +2862,25 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("laporan.DlgRL4A.prosesCari() 5 : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
-        
+
     }
-    
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getdemografi_umur_kunjungan());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,126));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }

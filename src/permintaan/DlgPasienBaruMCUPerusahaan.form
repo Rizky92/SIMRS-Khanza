@@ -79,9 +79,6 @@
     </Component>
     <Component class="widget.TextBox" name="NoRm">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="NoRm" noResource="true"/>
       </Properties>
       <Events>
@@ -94,9 +91,6 @@
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="f0" green="fa" red="f5" type="rgb"/>
         </Property>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="TNo" noResource="true"/>
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
@@ -106,9 +100,6 @@
         <Property name="editable" type="boolean" value="false"/>
         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="f0" green="fa" red="f5" type="rgb"/>
-        </Property>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
         </Property>
         <Property name="name" type="java.lang.String" value="TNoBooking" noResource="true"/>
         <Property name="opaque" type="boolean" value="true"/>

@@ -109,9 +109,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="NoRekonsiliasi">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NoRekonsiliasi" noResource="true"/>
                   </Properties>
                   <Events>
@@ -250,9 +247,6 @@
                 <Component class="widget.TextBox" name="NamaPetugas">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NamaPetugas" noResource="true"/>
                   </Properties>
                   <Constraints>

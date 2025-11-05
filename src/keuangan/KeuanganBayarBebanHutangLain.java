@@ -259,7 +259,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         NoBukti = new widget.TextBox();
         label37 = new widget.Label();
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -317,19 +316,16 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         BtnSimpanMandiri.setBounds(10, 100, 100, 30);
 
         NoRekening.setToolTipText("No.Rekening");
-        NoRekening.setHighlighter(null);
         NoRekening.setName("NoRekening"); // NOI18N
         panelBiasa2.add(NoRekening);
         NoRekening.setBounds(84, 10, 130, 23);
 
         RekeningAtasNama.setToolTipText("Rekening Atas Nama");
-        RekeningAtasNama.setHighlighter(null);
         RekeningAtasNama.setName("RekeningAtasNama"); // NOI18N
         panelBiasa2.add(RekeningAtasNama);
         RekeningAtasNama.setBounds(217, 10, 200, 23);
 
         KotaAtasNamaRekening.setToolTipText("Kota Atas Nama Rekening");
-        KotaAtasNamaRekening.setHighlighter(null);
         KotaAtasNamaRekening.setName("KotaAtasNamaRekening"); // NOI18N
         panelBiasa2.add(KotaAtasNamaRekening);
         KotaAtasNamaRekening.setBounds(420, 10, 120, 23);
@@ -352,19 +348,16 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         jLabel102.setBounds(0, 40, 80, 23);
 
         BiayaTransaksi.setEditable(false);
-        BiayaTransaksi.setHighlighter(null);
         BiayaTransaksi.setName("BiayaTransaksi"); // NOI18N
         panelBiasa2.add(BiayaTransaksi);
         BiayaTransaksi.setBounds(399, 40, 110, 23);
 
         KodeMetode.setEditable(false);
-        KodeMetode.setHighlighter(null);
         KodeMetode.setName("KodeMetode"); // NOI18N
         panelBiasa2.add(KodeMetode);
         KodeMetode.setBounds(84, 40, 64, 23);
 
         MetodePembayaran.setEditable(false);
-        MetodePembayaran.setHighlighter(null);
         MetodePembayaran.setName("MetodePembayaran"); // NOI18N
         panelBiasa2.add(MetodePembayaran);
         MetodePembayaran.setBounds(151, 40, 245, 23);
@@ -375,19 +368,16 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         jLabel103.setBounds(0, 70, 80, 23);
 
         KodeBank.setEditable(false);
-        KodeBank.setHighlighter(null);
         KodeBank.setName("KodeBank"); // NOI18N
         panelBiasa2.add(KodeBank);
         KodeBank.setBounds(84, 70, 64, 23);
 
         BankTujuan.setEditable(false);
-        BankTujuan.setHighlighter(null);
         BankTujuan.setName("BankTujuan"); // NOI18N
         panelBiasa2.add(BankTujuan);
         BankTujuan.setBounds(151, 70, 245, 23);
 
         KodeTransaksi.setEditable(false);
-        KodeTransaksi.setHighlighter(null);
         KodeTransaksi.setName("KodeTransaksi"); // NOI18N
         panelBiasa2.add(KodeTransaksi);
         KodeTransaksi.setBounds(399, 70, 141, 23);
@@ -651,7 +641,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label32);
         label32.setBounds(0, 40, 75, 23);
 
-        NoHutang.setHighlighter(null);
         NoHutang.setName("NoHutang"); // NOI18N
         NoHutang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -667,7 +656,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label36);
         label36.setBounds(0, 100, 75, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -683,7 +671,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label35);
         label35.setBounds(301, 40, 79, 23);
 
-        Cicilan.setHighlighter(null);
         Cicilan.setName("Cicilan"); // NOI18N
         Cicilan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -732,7 +719,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label38);
         label38.setBounds(510, 40, 77, 23);
 
-        Sisa.setHighlighter(null);
         Sisa.setName("Sisa"); // NOI18N
         Sisa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -794,7 +780,6 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(BtnAll1);
         BtnAll1.setBounds(682, 70, 28, 23);
 
-        NoBukti.setHighlighter(null);
         NoBukti.setName("NoBukti"); // NOI18N
         NoBukti.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -821,7 +806,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
 
     private void NoHutangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoHutangKeyPressed
         Valid.pindah(evt,TCari,NoHutang);
-}//GEN-LAST:event_NoHutangKeyPressed
+    }//GEN-LAST:event_NoHutangKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(NoHutang.getText().trim().equals("")){
@@ -895,9 +880,9 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                                     }
                                     Sequel.mengedit("beban_hutang_lain","no_hutang='"+NoHutang.getText()+"'","sisahutang=sisahutang-"+Cicilan.getText());
                                     Sequel.deleteTampJurnal();
-                                    Sequel.insertTampJurnal(kontraakun, namakontraakun, Cicilan.getText(), "0");
-                                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText());
-                                    sukses=jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                                    if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, Cicilan.getText(), "0");
+                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText());
+                                    if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
                             }else{
                                 sukses=false;
                             }
@@ -925,7 +910,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"No.Hutang untuk Pemberi Hutang "+KdPemberiHutang.getText()+" "+NmPemberiHutang.getText()+" tidak ditemukan......!!!");
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -933,7 +918,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Keterangan,BtnKeluar);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbKamar.getSelectedRow()>-1){
@@ -964,9 +949,9 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                 }
                 Sequel.mengedit("beban_hutang_lain","no_hutang='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","status='Belum Lunas', sisahutang=sisahutang+"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
                 Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString());
-                Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString(), "0");
-                sukses=jur.simpanJurnal(NoBukti.getText(),"U","PEMBATALAN BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString());
+                if (sukses) sukses = Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString(), "0");
+                if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(),"U","PEMBATALAN BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
             }else{
                 sukses=false;
             }
@@ -987,7 +972,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang mau dihapus..!");
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -995,17 +980,17 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnKeluar, BtnAll);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1033,7 +1018,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                 "order by bayar_beban_hutang_lain.tgl_bayar,bayar_beban_hutang_lain.kode_pemberi_hutang,bayar_beban_hutang_lain.no_hutang ",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1041,7 +1026,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1051,11 +1036,11 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1063,7 +1048,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1072,7 +1057,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1083,11 +1068,11 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
-private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
+    private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
    Valid.pindah(evt,AkunBayar,BtnSimpan);
-}//GEN-LAST:event_KeteranganKeyPressed
+    }//GEN-LAST:event_KeteranganKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed
         // TODO add your handling code here:
@@ -1135,7 +1120,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         // TODO add your handling code here:
     }//GEN-LAST:event_SisaKeyPressed
 
-private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPeminjamActionPerformed
+    private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPeminjamActionPerformed
         kontraakun="";
         namakontraakun="";
         DlgCariPemberiHutang pemberihutang=new DlgCariPemberiHutang(null,false);
@@ -1182,7 +1167,7 @@ private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         pemberihutang.setLocationRelativeTo(internalFrame1);
         pemberihutang.setAlwaysOnTop(false);
         pemberihutang.setVisible(true);
-}//GEN-LAST:event_BtnPeminjamActionPerformed
+    }//GEN-LAST:event_BtnPeminjamActionPerformed
 
     private void AkunBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AkunBayarKeyPressed
         Valid.pindah(evt,NoBukti,Keterangan);
@@ -1289,9 +1274,9 @@ private void BtnPeminjamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
                     }
                     Sequel.mengedit("beban_hutang_lain","no_hutang='"+NoHutang.getText()+"'","sisahutang=sisahutang-"+Cicilan.getText());
                     Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(kontraakun, namakontraakun, Cicilan.getText(), "0");
-                    Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText());
-                    sukses=jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                    if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, Cicilan.getText(), "0");
+                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText());
+                    if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
                     if(sukses==true){
                         if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
                             NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),Cicilan.getText(),NoHutang.getText(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Beban Hutang Lain","Baru"

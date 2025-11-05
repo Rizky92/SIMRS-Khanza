@@ -452,9 +452,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="AlamatPemberiHutang">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="AlamatPemberiHutang" noResource="true"/>
                   </Properties>
                   <Events>
@@ -482,9 +479,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="NmPemberi">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NmPemberi" noResource="true"/>
                   </Properties>
                   <Events>
@@ -512,9 +506,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="KdPemberi">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KdPemberi" noResource="true"/>
                   </Properties>
                   <Events>
@@ -528,9 +519,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="NoTelp">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NoTelp" noResource="true"/>
                   </Properties>
                   <Events>
@@ -570,9 +558,6 @@
                 <Component class="widget.TextBox" name="KodeRekening">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KodeRekening" noResource="true"/>
                   </Properties>
                   <Events>
@@ -587,9 +572,6 @@
                 <Component class="widget.TextBox" name="NamaRekening">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NamaRekening" noResource="true"/>
                   </Properties>
                   <Events>
