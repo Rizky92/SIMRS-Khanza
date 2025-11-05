@@ -375,9 +375,6 @@
                 <Component class="widget.TextBox" name="Kapasitas">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Kapasitas" noResource="true"/>
                   </Properties>
                   <Events>
@@ -403,9 +400,6 @@
                 <Component class="widget.TextBox" name="KdKelas">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KdKelas" noResource="true"/>
                   </Properties>
                   <Events>
@@ -421,9 +415,6 @@
                 <Component class="widget.TextBox" name="NmKelas">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NmKelas" noResource="true"/>
                   </Properties>
                   <Events>
@@ -468,9 +459,6 @@
                 <Component class="widget.TextBox" name="KdKamar">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KdKamar" noResource="true"/>
                   </Properties>
                   <Events>
@@ -560,9 +548,6 @@
                 <Component class="widget.TextBox" name="Tersedia">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Tersedia" noResource="true"/>
                   </Properties>
                   <Events>
@@ -599,9 +584,6 @@
                 <Component class="widget.TextBox" name="TersediaPW">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TersediaPW" noResource="true"/>
                   </Properties>
                   <Events>
@@ -616,9 +598,6 @@
                 <Component class="widget.TextBox" name="TersediaPria">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TersediaPria" noResource="true"/>
                   </Properties>
                   <Events>
@@ -644,9 +623,6 @@
                 <Component class="widget.TextBox" name="TersediaWanita">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="0"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TersediaWanita" noResource="true"/>
                   </Properties>
                   <Events>

@@ -53,11 +53,11 @@ public class InformasiAnalisaKamin extends javax.swing.JDialog {
                 column.setPreferredWidth(150);
             }
         }
-        
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());   
-        
+
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         kdbangsal.setDocument(new batasInput((byte)5).getKata(kdbangsal));
-        
+
         bangsal.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -65,10 +65,10 @@ public class InformasiAnalisaKamin extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                   
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     kdbangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     nmbangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdbangsal.requestFocus();
                 prosesCari();
             }
@@ -81,7 +81,7 @@ public class InformasiAnalisaKamin extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bangsal.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -94,7 +94,7 @@ public class InformasiAnalisaKamin extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-     
+
     }
 
     /** This method is called from within the constructor to
@@ -260,7 +260,7 @@ public class InformasiAnalisaKamin extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -302,30 +302,30 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-private void btnBangsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalActionPerformed
+    private void btnBangsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalActionPerformed
         bangsal.isCek();
-        bangsal.emptTeks();        
+        bangsal.emptTeks();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         bangsal.setLocationRelativeTo(internalFrame1);
         bangsal.setAlwaysOnTop(false);
         bangsal.setVisible(true);
-}//GEN-LAST:event_btnBangsalActionPerformed
+    }//GEN-LAST:event_btnBangsalActionPerformed
 
-private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalKeyPressed
+    private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalKeyPressed
    //Valid.pindah(evt,DTPCari2,TCari);
-}//GEN-LAST:event_btnBangsalKeyPressed
+    }//GEN-LAST:event_btnBangsalKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         prosesCari();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             //Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         prosesCari();
@@ -366,8 +366,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     // End of variables declaration//GEN-END:variables
 
     private void prosesCari() {
-       Valid.tabelKosong(tabMode);      
-       try{   
+       Valid.tabelKosong(tabMode);
+       try{
            ps=koneksi.prepareStatement("select bangsal.kd_bangsal,bangsal.nm_bangsal from bangsal where bangsal.status='1' and bangsal.kd_bangsal in (select kamar.kd_bangsal from kamar group by kamar.kd_bangsal) and bangsal.kd_bangsal like ? order by bangsal.nm_bangsal");
            try {
                 ps.setString(1,"%"+kdbangsal.getText()+"%");
@@ -375,7 +375,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 i=1;
                 tabMode.addRow(new Object[]{"Kondisi kamar saat ini : ","Isi : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.status='ISI'"),"Kosong : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.status='KOSONG'")});
                 tabMode.addRow(new Object[]{"","",""});
-                while(rs.next()){               
+                while(rs.next()){
                    tabMode.addRow(new Object[]{i+". Kamar : "+rs.getString("nm_bangsal"),"",""});
                    tabMode.addRow(new Object[]{"","Isi : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='ISI' ",rs.getString("kd_bangsal"))});
 
@@ -396,7 +396,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                            ps2.close();
                        }
                    }
-                   
+
                    tabMode.addRow(new Object[]{"","Kosong : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='KOSONG' ",rs.getString("kd_bangsal")),""});
 
                    ps3=koneksi.prepareStatement("select kamar.kd_kamar,kamar.trf_kamar from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='KOSONG'");
@@ -405,7 +405,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         rs2=ps3.executeQuery();
                         while(rs2.next()){
                             tabMode.addRow(new Object[]{"",rs2.getString("kd_kamar"),Valid.SetAngka(rs2.getDouble("trf_kamar"))});
-                        } 
+                        }
                    } catch (Exception e) {
                        System.out.println("Notifikasi : "+e);
                    } finally{
@@ -416,9 +416,9 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                            ps3.close();
                        }
                    }
-                                         
+
                    i++;
-                }    
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -428,10 +428,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                if(ps!=null){
                    ps.close();
                }
-           }          
+           }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
 }

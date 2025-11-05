@@ -2,6 +2,8 @@ package kepegawaian;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -15,7 +17,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -28,94 +29,92 @@ import javax.swing.table.TableColumn;
  */
 public final class DlgCariPetugas extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
-    private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
-    private sekuel Sequel=new sekuel();
-    private PreparedStatement ps;
-    private ResultSet rs;
-    private File file;
-    private FileWriter fileWriter;
-    private ObjectMapper mapper = new ObjectMapper();
-    private JsonNode root;
-    private JsonNode response;
-    private FileReader myObj;
-    /** Creates new form DlgPenyakit
+    private final Connection koneksi = koneksiDB.condb();
+    private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
+    private final ObjectMapper mapper = new ObjectMapper();
+
+    /**
+     * Creates new form DlgPenyakit
+     *
      * @param parent
-     * @param modal */
+     * @param modal
+     */
     public DlgCariPetugas(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setLocation(10,2);
-        setSize(656,250);
+        this.setLocation(10, 2);
+        setSize(656, 250);
 
-        Object[] row={"NIP","Nama Petugas","J.K.","Tmp.Lahir","Tgl.Lahir","G.D.","Agama","Stts.Nikah","Alamat","Jabatan","No.Telp"};
-        tabMode=new DefaultTableModel(null,row){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        Object[] row = {"NIP", "Nama Petugas", "J.K.", "Tmp.Lahir", "Tgl.Lahir", "G.D.", "Agama", "Stts.Nikah", "Alamat", "Jabatan", "No.Telp"};
+        tabMode = new DefaultTableModel(null, row) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
         };
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
-        tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
+        tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         for (int i = 0; i < 11; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
-            if(i==0){
+            if (i == 0) {
                 column.setPreferredWidth(100);
-            }else if(i==1){
+            } else if (i == 1) {
                 column.setPreferredWidth(200);
-            }else if(i==2){
+            } else if (i == 2) {
                 column.setPreferredWidth(30);
-            }else if(i==3){
+            } else if (i == 3) {
                 column.setPreferredWidth(120);
-            }else if(i==4){
+            } else if (i == 4) {
                 column.setPreferredWidth(70);
-            }else if(i==5){
+            } else if (i == 5) {
                 column.setPreferredWidth(30);
-            }else if(i==6){
+            } else if (i == 6) {
                 column.setPreferredWidth(70);
-            }else if(i==7){
+            } else if (i == 7) {
                 column.setPreferredWidth(90);
-            }else if(i==8){
+            } else if (i == 8) {
                 column.setPreferredWidth(200);
-            }else if(i==9){
+            } else if (i == 9) {
                 column.setPreferredWidth(150);
-            }else if(i==10){
+            } else if (i == 10) {
                 column.setPreferredWidth(90);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        if(koneksiDB.CARICEPAT().equals("aktif")){
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+        if (koneksiDB.CARICEPAT().equals("aktif")) {
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
+                    if (TCari.getText().length() > 2) {
                         tampil2();
                     }
                 }
+
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
+                    if (TCari.getText().length() > 2) {
                         tampil2();
                     }
                 }
+
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
+                    if (TCari.getText().length() > 2) {
                         tampil2();
                     }
                 }
             });
-        } 
-        
-        
-    }
-    
+        }
 
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -265,60 +264,60 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
 
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnCariActionPerformed(null);
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             BtnCari.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
             BtnKeluar.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
-        }else{
+        } else {
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-        TCari.setText("");
+        emptTeks();
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnAllActionPerformed(null);
-        }else{
+        } else {
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
-            if(evt.getClickCount()==2){
+        if (tabMode.getRowCount() != 0) {
+            if (evt.getClickCount() == 2) {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if(tabMode.getRowCount()!=0){
-            if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (tabMode.getRowCount() != 0) {
+            if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
                 dispose();
-            }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
+            } else if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
                 TCari.setText("");
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -326,15 +325,14 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgPetugas petugas=new DlgPetugas(null,false);
+        DlgPetugas petugas = new DlgPetugas(null, false);
         petugas.emptTeks();
         petugas.isCek();
-        petugas.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
+        petugas.setSize(internalFrame1.getWidth(), internalFrame1.getHeight());
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setAlwaysOnTop(false);
         petugas.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -342,19 +340,16 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            if(Valid.daysOld("./cache/petugas.iyem")<30){
-                tampil2();
-            }else{
-                tampil();
-            }
-        } catch (Exception e) {
+        if (Valid.umurcacheSmc("./cache/petugas.iyem", 30)) {
+            tampil();
+        } else {
+            tampil2();
         }
     }//GEN-LAST:event_formWindowOpened
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             DlgCariPetugas dialog = new DlgCariPetugas(new javax.swing.JFrame(), true);
@@ -383,125 +378,118 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {  
+    private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{
-            file=new File("./cache/petugas.iyem");
+        try {
+            File file = new File("./cache/petugas.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select petugas.nip,petugas.nama,petugas.jk,petugas.tmp_lahir,petugas.tgl_lahir, "+
-                    "petugas.gol_darah,petugas.agama,petugas.stts_nikah,petugas.alamat,jabatan.nm_jbtn,petugas.no_telp "+
-                    "from petugas inner join jabatan on jabatan.kd_jbtn=petugas.kd_jbtn "+
-                    "where petugas.status='1' order by petugas.nip");
-            try {
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{
-                        rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),rs.getString(10),rs.getString(11)
-                    });
-                    iyembuilder.append("{\"NIP\":\"").append(rs.getString(1)).append("\",\"NamaPetugas\":\"").append(rs.getString(2).replaceAll("\"","")).append("\",\"JK\":\"").append(rs.getString(3)).append("\",\"TmpLahir\":\"").append(rs.getString(4).replaceAll("\"","")).append("\",\"TglLahir\":\"").append(rs.getString(5)).append("\",\"GD\":\"").append(rs.getString(6)).append("\",\"Agama\":\"").append(rs.getString(7)).append("\",\"SttsNikah\":\"").append(rs.getString(8)).append("\",\"Alamat\":\"").append(rs.getString(9).replaceAll("\"","")).append("\",\"Jabatan\":\"").append(rs.getString(10)).append("\",\"NoTelp\":\"").append(rs.getString(11)).append("\"},");
-                }
-            } catch (Exception e) {
-                System.out.println(e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select petugas.nip, petugas.nama, petugas.jk, petugas.tmp_lahir, petugas.tgl_lahir, " +
+                "petugas.gol_darah, petugas.agama, petugas.stts_nikah, petugas.alamat, jabatan.nm_jbtn, " +
+                "petugas.no_telp from petugas join jabatan on jabatan.kd_jbtn = petugas.kd_jbtn where " +
+                "petugas.status = '1' order by petugas.nip"
+            )) {
+                if (rs.next()) {
+                    ObjectNode root = mapper.createObjectNode();
+                    ArrayNode array = mapper.createArrayNode();
+                    do {
+                        ObjectNode petugas = mapper.createObjectNode();
+                        petugas.put("NIP", rs.getString(1));
+                        petugas.put("NamaPetugas", rs.getString(2));
+                        petugas.put("JK", rs.getString(3));
+                        petugas.put("TmpLahir", rs.getString(4));
+                        petugas.put("TglLahir", rs.getString(5));
+                        petugas.put("GD", rs.getString(6));
+                        petugas.put("Agama", rs.getString(7));
+                        petugas.put("SttsNikah", rs.getString(8));
+                        petugas.put("Alamat", rs.getString(9));
+                        petugas.put("Jabatan", rs.getString(10));
+                        petugas.put("NoTelp", rs.getString(11));
+                        tabMode.addRow(new Object[] {
+                            rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4),
+                            rs.getString(5), rs.getString(6), rs.getString(7), rs.getString(8),
+                            rs.getString(9), rs.getString(10), rs.getString(11)
+                        });
+                        array.add(petugas);
+                    } while (rs.next());
+                    root.set("petugas", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
             }
-            
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"petugas\":["+iyembuilder+"]}");
-                fileWriter.flush();
-            }
-            
-            fileWriter.close();
-            iyembuilder=null;
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText("" + tabMode.getRowCount());
     }
 
     public void emptTeks() {
+        TCari.setText("");
         TCari.requestFocus();
     }
 
-    public JTable getTable(){
+    public JTable getTable() {
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek() {
         BtnTambah.setEnabled(akses.getpetugas());
     }
-    
+
     private void tampil2() {
-        try {
-            myObj = new FileReader("./cache/petugas.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("petugas");
-            if(response.isArray()){
-                if(TCari.getText().trim().equals("")){
-                    for(JsonNode list:response){
-                        tabMode.addRow(new Object[]{
-                            list.path("NIP").asText(),list.path("NamaPetugas").asText(),list.path("JK").asText(),list.path("TmpLahir").asText(),list.path("TglLahir").asText(),list.path("GD").asText(),list.path("Agama").asText(),list.path("SttsNikah").asText(),list.path("Alamat").asText(),list.path("Jabatan").asText(),list.path("NoTelp").asText()
+        Valid.tabelKosong(tabMode);
+        try (FileReader fr = new FileReader("./cache/petugas.iyem")) {
+            JsonNode response = mapper.readTree(fr).path("petugas");
+            if (response.isArray()) {
+                if (TCari.getText().isBlank()) {
+                    for (JsonNode list : response) {
+                        tabMode.addRow(new Object[] {
+                            list.path("NIP").asText(), list.path("NamaPetugas").asText(), list.path("JK").asText(),
+                            list.path("TmpLahir").asText(), list.path("TglLahir").asText(), list.path("GD").asText(),
+                            list.path("Agama").asText(), list.path("SttsNikah").asText(), list.path("Alamat").asText(),
+                            list.path("Jabatan").asText(), list.path("NoTelp").asText()
                         });
                     }
-                }else{
-                    for(JsonNode list:response){
-                        if(list.path("NIP").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaPetugas").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Jabatan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                            tabMode.addRow(new Object[]{
-                                list.path("NIP").asText(),list.path("NamaPetugas").asText(),list.path("JK").asText(),list.path("TmpLahir").asText(),list.path("TglLahir").asText(),list.path("GD").asText(),list.path("Agama").asText(),list.path("SttsNikah").asText(),list.path("Alamat").asText(),list.path("Jabatan").asText(),list.path("NoTelp").asText()
+                } else {
+                    for (JsonNode list : response) {
+                        if (list.path("NIP").asText().toLowerCase().contains(TCari.getText().trim().toLowerCase()) ||
+                             list.path("NamaPetugas").asText().toLowerCase().contains(TCari.getText().trim().toLowerCase()) ||
+                             list.path("Jabatan").asText().toLowerCase().contains(TCari.getText().trim().toLowerCase())) {
+                            tabMode.addRow(new Object[] {
+                                list.path("NIP").asText(), list.path("NamaPetugas").asText(), list.path("JK").asText(),
+                                list.path("TmpLahir").asText(), list.path("TglLahir").asText(), list.path("GD").asText(),
+                                list.path("Agama").asText(), list.path("SttsNikah").asText(), list.path("Alamat").asText(),
+                                list.path("Jabatan").asText(), list.path("NoTelp").asText()
                             });
                         }
                     }
                 }
             }
-            myObj.close();
-        } catch (Exception ex) {
-            if(ex.toString().contains("java.io.FileNotFoundException")){
-                tampil();
-            }else{
-                System.out.println("Notifikasi : "+ex);
-            }
-        }
-    } 
-    
-    public String tampil3(String kode) {
-        try {
-            if(Valid.daysOld("./cache/petugas.iyem")>7){
-                tampil();
-            }
         } catch (Exception e) {
-            if(e.toString().contains("No such file or directory")){
-                tampil();
-            }
+            System.out.println("Notif : " + e);
+            tampil();
         }
-        
-        String iyem="";
-        try {
-            myObj = new FileReader("./cache/petugas.iyem");
-            root = mapper.readTree(myObj);
-            response = root.path("petugas");
-            if(response.isArray()){
-                for(JsonNode list:response){
-                    if(list.path("NIP").asText().equalsIgnoreCase(kode)){
-                        iyem=list.path("NamaPetugas").asText();
+        LCount.setText("" + tabMode.getRowCount());
+    }
+
+    public String tampil3(String kode) {
+        if (Valid.umurcacheSmc("./cache/petugas.iyem", 7)) {
+            tampil();
+        }
+
+        try (FileReader fr = new FileReader("./cache/petugas.iyem")) {
+            JsonNode response = mapper.readTree(fr).path("petugas");
+            if (response.isArray()) {
+                for (JsonNode list : response) {
+                    if (list.path("NIP").asText().equalsIgnoreCase(kode)) {
+                        return list.path("NamaPetugas").asText();
                     }
                 }
             }
-            myObj.close();
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        if(iyem.equals("")){
-            iyem=Sequel.cariIsi("select petugas.nama from petugas where petugas.nip=?",kode);
-        }
-        return iyem;
+
+        return Sequel.cariIsiSmc("select petugas.nama from petugas where petugas.nip = ?", kode);
     }
 }

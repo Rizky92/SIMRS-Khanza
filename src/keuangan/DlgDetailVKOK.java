@@ -34,7 +34,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
     private PreparedStatement ps,pstindakan;
     private String sql;
     private int i=0;
-    private double total=0,biayaoperator1=0,biayaoperator2=0, 
+    private double total=0,biayaoperator1=0,biayaoperator2=0,
             biayaoperator3=0,biayaasisten_operator1=0,biayaasisten_operator2=0,
             biayaasisten_operator3=0,biayainstrumen=0,biayadokter_anak=0,
             biayaperawaat_resusitas=0,biayadokter_anestesi=0,biayaasisten_anestesi=0,
@@ -52,8 +52,8 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(885,674);
-        
-        
+
+
         tabModeOperasi=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Tanggal","Jam","Cara Bayar","Ruangan",
             "Operator 1","JM Operator 1","Operator 2","JM Operator 2",
@@ -66,7 +66,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
             "Perawat Luar","JM P.L.","Onloop 1","JM Onloop 1","Onloop 2","JM Onloop 2",
             "Onloop 3","JM Onloop 3", "Onloop 4","JM Onloop 4", "Onloop 5","JM Onloop 5",
             "Dokter P.J. Anak","JM dr P.J. Anak","Dokter Umum", "JM dr Umum",
-            "Sewa Alat", "Sewa OK/VK", "Akomodasi", "N.M.S.",  "Sarpras","Total" 
+            "Sewa Alat", "Sewa OK/VK", "Akomodasi", "N.M.S.",  "Sarpras","Total"
         }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
@@ -226,7 +226,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
             }
         }
         tbOperasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeOperasi2=new DefaultTableModel(null,new Object[]{
             "No.","No.Rawat","No.R.M.","Nama Pasien","Tanggal","Jam","Cara Bayar","Ruangan",
             "Operator 1","JM Operator 1","Operator 2","JM Operator 2",
@@ -239,7 +239,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
             "Perawat Luar","JM P.L.","Onloop 1","JM Onloop 1","Onloop 2","JM Onloop 2",
             "Onloop 3","JM Onloop 3", "Onloop 4","JM Onloop 4", "Onloop 5","JM Onloop 5",
             "Dokter P.J. Anak","JM dr P.J. Anak","Dokter Umum", "JM dr Umum",
-            "Sewa Alat", "Sewa OK/VK", "Akomodasi", "N.M.S.",  "Sarpras","Total" 
+            "Sewa Alat", "Sewa OK/VK", "Akomodasi", "N.M.S.",  "Sarpras","Total"
         }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
@@ -399,11 +399,11 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
             }
         }
         tbOperasi1.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-            
+
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -633,18 +633,18 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,Tgl1,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         switch (TabRawat.getSelectedIndex()) {
-            case 0:                
+            case 0:
                 if(tabModeOperasi.getRowCount()==0){
                     JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                     TCari.requestFocus();
@@ -658,9 +658,9 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("tanggal1",Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                     param.put("tanggal2",Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                    param.put("cari","%"+TCari.getText().trim()+"%");                    
+                    param.put("cari","%"+TCari.getText().trim()+"%");
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptDetailTindakanOperasi.jasper",param,"::[ Detail Tindakan Operasi ]::");                    
+                    Valid.MyReport("rptDetailTindakanOperasi.jasper",param,"::[ Detail Tindakan Operasi ]::");
                 }   break;
             case 1:
                 if(tabModeOperasi2.getRowCount()==0){
@@ -676,9 +676,9 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                     param.put("emailrs",akses.getemailrs());
                     param.put("tanggal1",Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                     param.put("tanggal2",Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                    param.put("cari","%"+TCari.getText().trim()+"%");                    
+                    param.put("cari","%"+TCari.getText().trim()+"%");
                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptDetailTindakanOperasi.jasper",param,"::[ Detail Tindakan Operasi ]::");                    
+                    Valid.MyReport("rptDetailTindakanOperasi.jasper",param,"::[ Detail Tindakan Operasi ]::");
                 }  break;
             default:
                     break;
@@ -691,7 +691,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
     }//GEN-LAST:event_Tgl1KeyPressed
 
     private void Tgl2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl2KeyPressed
-        
+
     }//GEN-LAST:event_Tgl2KeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
@@ -796,8 +796,8 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
     private widget.Table tbOperasi;
     private widget.Table tbOperasi1;
     // End of variables declaration//GEN-END:variables
-    
-    public void tampil(){     
+
+    public void tampil(){
         Valid.tabelKosong(tabModeOperasi);
         try{
             pstindakan=koneksi.prepareStatement(
@@ -863,10 +863,10 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                      try {
                          ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                          ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                         ps.setString(3,rstindakan.getString("kode_paket"));                         
+                         ps.setString(3,rstindakan.getString("kode_paket"));
                          rs=ps.executeQuery();
                          i=1;
-                         total=0;biayaoperator1=0;biayaoperator2=0; 
+                         total=0;biayaoperator1=0;biayaoperator2=0;
                          biayaoperator3=0;biayaasisten_operator1=0;biayaasisten_operator2=0;
                          biayaasisten_operator3=0;biayainstrumen=0;biayadokter_anak=0;
                          biayaperawaat_resusitas=0;biayadokter_anestesi=0;biayaasisten_anestesi=0;
@@ -875,7 +875,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                          bagian_rs=0;biaya_omloop=0;biaya_omloop2=0;biaya_omloop3=0;
                          biaya_omloop4=0;biaya_omloop5=0;biayasarpras=0;biaya_dokter_pjanak=0;
                          biaya_dokter_umum=0;
-                         while(rs.next()){  
+                         while(rs.next()){
                              biayaoperator1=biayaoperator1+rs.getDouble("biayaoperator1");
                              biayaoperator2=biayaoperator2+rs.getDouble("biayaoperator2");
                              biayaoperator3=biayaoperator3+rs.getDouble("biayaoperator3");
@@ -988,13 +988,13 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                 if(pstindakan!=null){
                     pstindakan.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    public void tampil2(){     
+
+    public void tampil2(){
         Valid.tabelKosong(tabModeOperasi2);
         try{
             pstindakan=koneksi.prepareStatement(
@@ -1060,10 +1060,10 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                      try {
                          ps.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+"")+" 00:00:00");
                          ps.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+"")+" 23:59:59");
-                         ps.setString(3,rstindakan.getString("kode_paket"));                         
+                         ps.setString(3,rstindakan.getString("kode_paket"));
                          rs=ps.executeQuery();
                          i=1;
-                         total=0;biayaoperator1=0;biayaoperator2=0; 
+                         total=0;biayaoperator1=0;biayaoperator2=0;
                          biayaoperator3=0;biayaasisten_operator1=0;biayaasisten_operator2=0;
                          biayaasisten_operator3=0;biayainstrumen=0;biayadokter_anak=0;
                          biayaperawaat_resusitas=0;biayadokter_anestesi=0;biayaasisten_anestesi=0;
@@ -1072,7 +1072,7 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                          bagian_rs=0;biaya_omloop=0;biaya_omloop2=0;biaya_omloop3=0;
                          biaya_omloop4=0;biaya_omloop5=0;biayasarpras=0;biaya_dokter_pjanak=0;
                          biaya_dokter_umum=0;
-                         while(rs.next()){  
+                         while(rs.next()){
                              biayaoperator1=biayaoperator1+rs.getDouble("biayaoperator1");
                              biayaoperator2=biayaoperator2+rs.getDouble("biayaoperator2");
                              biayaoperator3=biayaoperator3+rs.getDouble("biayaoperator3");
@@ -1185,11 +1185,11 @@ public final class DlgDetailVKOK extends javax.swing.JDialog {
                 if(pstindakan!=null){
                     pstindakan.close();
                 }
-            }           
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
- 
+
+
 }

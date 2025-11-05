@@ -97,7 +97,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         KdJenis.setDocument(new batasInput((byte)5).getKata(KdJenis));
         Tarif.setDocument(new batasInput((byte)10).getOnlyAngka(Tarif));
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -120,10 +120,10 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         WindowInputParkir.setSize(445,200);
         WindowInputParkir.setLocationRelativeTo(null);
-        
+
         jenis.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -131,12 +131,12 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jenis.getTable().getSelectedRow()!= -1){                   
-                    KdJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());                    
-                    NmJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());                    
-                    Tarif.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),2).toString());                    
-                    SIstem.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),3).toString());                    
-                }  
+                if(jenis.getTable().getSelectedRow()!= -1){
+                    KdJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
+                    NmJenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
+                    Tarif.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),2).toString());
+                    SIstem.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),3).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -147,7 +147,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenis.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -159,8 +159,8 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -168,10 +168,10 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
-                    KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());                    
-                    NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());                   
-                }  
+                if(petugas.getTable().getSelectedRow()!= -1){
+                    KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
+                    NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -182,7 +182,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         petugas.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -195,9 +195,9 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         try {
-            //  
+            //
         } catch (Exception e) {
             System.out.println(e);
         }
@@ -267,7 +267,6 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         internalFrame2.setLayout(null);
 
         NomorKendaraan.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
-        NomorKendaraan.setHighlighter(null);
         NomorKendaraan.setName("NomorKendaraan"); // NOI18N
         NomorKendaraan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -314,7 +313,6 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         jLabel4.setBounds(20, 20, 195, 30);
 
         NomorKartu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        NomorKartu.setHighlighter(null);
         NomorKartu.setName("NomorKartu"); // NOI18N
         NomorKartu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -660,12 +658,12 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void NomorKendaraanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomorKendaraanKeyPressed
-        
-}//GEN-LAST:event_NomorKendaraanKeyPressed
+
+    }//GEN-LAST:event_NomorKendaraanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        
-}//GEN-LAST:event_BtnHapusActionPerformed
+
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -673,19 +671,19 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         }else{
             //Valid.pindah(evt, btnPindah,BtnPrint);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         WindowInputParkir.dispose();
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInputParkir.dispose();
             dispose();
         }else{Valid.pindah(evt,BtnPrint,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -694,7 +692,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
-            
+
         }else if(tabMode.getRowCount()!=0){
 
                 /*String sql="select kamar_inap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab),"+
@@ -710,20 +708,20 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                    "and kamar.kd_bangsal=bangsal.kd_bangsal and pasien.kd_kel=kelurahan.kd_kel "+
                    "and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab " +
                    "where  "+key+" order by bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.jam_masuk";
-                
-                Map<String, Object> param = new HashMap<>();    
+
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",var.getnamars());
                 param.put("alamatrs",var.getalamatrs());
                 param.put("kotars",var.getkabupatenrs());
                 param.put("propinsirs",var.getpropinsirs());
                 param.put("kontakrs",var.getkontakrs());
-                param.put("emailrs",var.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",var.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReport("rptKamarInap.jasper","report","::[ Data Kamar Inap Pasien ]::",sql,param);*/
 
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -731,7 +729,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -741,11 +739,11 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -753,13 +751,13 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         KdPetugas.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -767,11 +765,11 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         }else{
             //Valid.pindah(evt, BtnCari, BtnIn);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void DTPTglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTglKeyPressed
 
-}//GEN-LAST:event_DTPTglKeyPressed
+    }//GEN-LAST:event_DTPTglKeyPressed
 
     private void BtnCloseInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseInActionPerformed
 //        TOut.setText("");
@@ -786,7 +784,7 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseInKeyPressed
 
     private void DTPTglItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPTglItemStateChanged
-        
+
     }//GEN-LAST:event_DTPTglItemStateChanged
 
     private void tbKamInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamInMouseClicked
@@ -795,11 +793,11 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
-            
+
             if(evt.getClickCount()==2){
             }
         }
-}//GEN-LAST:event_tbKamInMouseClicked
+    }//GEN-LAST:event_tbKamInMouseClicked
 
     private void tbKamInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -809,26 +807,26 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
                 } catch (java.lang.NullPointerException e) {
                 }
             }
-            
+
             if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 i=tbKamIn.getSelectedColumn();
             }
         }
-}//GEN-LAST:event_tbKamInKeyPressed
+    }//GEN-LAST:event_tbKamInKeyPressed
 
-private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
+    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
     petugas.isCek();
-    petugas.emptTeks(); 
+    petugas.emptTeks();
     petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     petugas.setLocationRelativeTo(internalFrame1);
     petugas.setVisible(true);
-}//GEN-LAST:event_btnPetugasActionPerformed
+    }//GEN-LAST:event_btnPetugasActionPerformed
 
-private void btnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPetugasKeyPressed
+    private void btnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPetugasKeyPressed
 //   Valid.pindah(evt,DTPCari2,TCari);
-}//GEN-LAST:event_btnPetugasKeyPressed
+    }//GEN-LAST:event_btnPetugasKeyPressed
 
-private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
+    private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             NmPetugas.setText(petugas.tampil3(KdPetugas.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -836,14 +834,14 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }else{
             Valid.pindah(evt,KdJenis,TCari);
         }
-}//GEN-LAST:event_KdPetugasKeyPressed
+    }//GEN-LAST:event_KdPetugasKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Barcode.requestFocus();
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();        
+        tampil();
     }//GEN-LAST:event_formWindowOpened
 
     private void WindowInputParkirWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowInputParkirWindowActivated
@@ -866,11 +864,11 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                 }else{
                     WindowInputParkir.setVisible(true);
                     NomorKendaraan.requestFocus();
-                }            
+                }
             }
         }else{
             Valid.pindah(evt,KdJenis,TCari);
-        }            
+        }
     }//GEN-LAST:event_BarcodeKeyPressed
 
     private void KdJenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdJenisKeyPressed
@@ -887,7 +885,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
 
     private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJenisActionPerformed
         jenis.isCek();
-        jenis.emptTeks();        
+        jenis.emptTeks();
         jenis.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         jenis.setLocationRelativeTo(internalFrame1);
         jenis.setVisible(true);
@@ -983,7 +981,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
-        
+
         Valid.tabelKosong(tabMode);
         try{
             /*if(stts_pulang='Pindah Kamar',(IFNULL(to_days(concat(tgl_keluar,' ',jam_keluar))-to_days(concat(tgl_masuk,' ',jam_masuk)),to_days(NOW())-to_days(concat(tgl_masuk,' ',jam_masuk)))),"+
@@ -1039,8 +1037,8 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
                                     rs.getString(16),
                                     rs.getString(17)});
                 }
-                
-                
+
+
             }
             //rs.close();*/
         }catch(Exception e){
@@ -1049,7 +1047,7 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {       
+    public void emptTeks() {
         NomorKendaraan.setText("");
         NomorKendaraan.requestFocus();
     }
@@ -1060,11 +1058,11 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
         }
     }
 
-    
-   
 
-    
-    
+
+
+
+
     public void isCek(){
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
@@ -1080,10 +1078,10 @@ private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event
             KdPetugas.setText("");
             NmPetugas.setText("");
             btnPetugas.setEnabled(true);
-        } 
-        
+        }
+
    }
-    
+
     private void updateHari(){
         tampil();
     }

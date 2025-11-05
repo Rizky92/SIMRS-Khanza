@@ -1,1 +1,10 @@
-**/*.jasper
+*.jasper
+*.pdf
+*.html
+*.html_files
+*.csv
+*.xls
+*.xlsx
+*.doc
+*.docx
+*.wps

@@ -53,7 +53,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private String TANGGALMUNDUR="yes";
     /** Creates new form DlgRujuk
@@ -135,7 +135,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         PemeriksaanFisik.setDocument(new batasInput((int)600).getKata(PemeriksaanFisik));
         PemeriksaanPenunjang.setDocument(new batasInput((int)600).getKata(PemeriksaanPenunjang));
         HasilSkrining.setDocument(new batasInput((int)50).getKata(HasilSkrining));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -158,7 +158,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -166,10 +166,10 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdPetugas.requestFocus();
             }
             @Override
@@ -180,10 +180,10 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         ChkInput.setSelected(false);
         isForm();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -201,13 +201,13 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
-        
+
         jam();
     }
 
@@ -336,7 +336,6 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         Jk.setFocusTraversalPolicyProvider(true);
         Jk.setName("Jk"); // NOI18N
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -622,7 +621,6 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 75, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -633,7 +631,6 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         TNoRw.setBounds(79, 10, 141, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -657,7 +654,6 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         Tanggal.setBounds(79, 40, 90, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -718,7 +714,6 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         jLabel18.setBounds(400, 40, 70, 23);
 
         KdPetugas.setEditable(false);
-        KdPetugas.setHighlighter(null);
         KdPetugas.setName("KdPetugas"); // NOI18N
         KdPetugas.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -755,7 +750,6 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
 
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
@@ -1094,14 +1088,14 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
-}//GEN-LAST:event_TNoRwKeyPressed
+    }//GEN-LAST:event_TNoRwKeyPressed
 
     private void TPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasienKeyPressed
         Valid.pindah(evt,TCari,BtnSimpan);
-}//GEN-LAST:event_TPasienKeyPressed
+    }//GEN-LAST:event_TPasienKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -1118,9 +1112,9 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                 if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem())==true){
                     simpan();
                 }
-            } 
+            }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1128,19 +1122,19 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         }else{
             Valid.pindah(evt,Keterangan,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
-}//GEN-LAST:event_BtnBatalActionPerformed
+        isForm();
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -1157,8 +1151,8 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }  
-}//GEN-LAST:event_BtnHapusActionPerformed
+        }
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1166,14 +1160,14 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"pasien");
         }else if(KdPetugas.getText().trim().equals("")||NmPetugas.getText().trim().equals("")){
             Valid.textKosong(KdPetugas,"Petugas");
-        }else{ 
+        }else{
             if(tbObat.getSelectedRow()>-1){
                 if(akses.getkode().equals("Admin Utama")){
                     ganti();
@@ -1193,9 +1187,9 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            } 
+            }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1203,18 +1197,18 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         petugas.dispose();
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1225,7 +1219,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             try{
                 StringBuilder htmlContent;
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
@@ -1284,7 +1278,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -1299,8 +1293,8 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                 );
                 bg.close();
 
-                File f = new File("DataSkriningKesehatanGigiMulutRemaja.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("DataSkriningKesehatanGigiMulutRemaja.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='1700px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -1309,12 +1303,12 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA SEKRINING KESEHATAN GIGI MULUT USIA REMAJA & SEKOLAH<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA SEKRINING KESEHATAN GIGI MULUT USIA REMAJA & SEKOLAH<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -1322,7 +1316,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1330,7 +1324,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1340,11 +1334,11 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1352,12 +1346,12 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1366,15 +1360,15 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
         Valid.pindah(evt,TCari,Jam);
-}//GEN-LAST:event_TanggalKeyPressed
+    }//GEN-LAST:event_TanggalKeyPressed
 
     private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
         // Valid.pindah(evt, TNm, BtnSimpan);
-}//GEN-LAST:event_TNoRMKeyPressed
+    }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1383,7 +1377,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1394,7 +1388,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                 }
             }
         }
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
     private void JamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamKeyPressed
         Valid.pindah(evt,Tanggal,Menit);
@@ -1440,10 +1434,10 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem()); 
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirSkriningKesehatanGigiMulutRemaja.jasper","report","::[ Formulir Skrining Kesehatan Gigi & Mulut Anak Usia Sekolah & Remaja ]::",
                     "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,pasien.jk,skrining_kesehatan_gigi_mulut_remaja.nip,petugas.nama,skrining_kesehatan_gigi_mulut_remaja.tanggal,"+
                     "skrining_kesehatan_gigi_mulut_remaja.pernah_pemeriksaan_gigimulut,skrining_kesehatan_gigi_mulut_remaja.jumlah_gigi_tumbuh,skrining_kesehatan_gigi_mulut_remaja.kondisi_kebersihan_gigimulut,"+
@@ -1621,7 +1615,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
     private widget.ScrollPane scrollPane13;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1648,7 +1642,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                     "pasien.nm_pasien like ? or skrining_kesehatan_gigi_mulut_remaja.nip like ? or petugas.nama like ?) "+
                     "order by skrining_kesehatan_gigi_mulut_remaja.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -1662,7 +1656,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1687,7 +1681,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         PernahPemeriksaanGigi.setSelectedIndex(0);
         JumlahGigiTumbuh.setSelectedIndex(0);
@@ -1704,7 +1698,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
         Keterangan.setText("");
         Tanggal.setDate(new Date());
         PernahPemeriksaanGigi.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -1729,10 +1723,10 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             PemeriksaanPenunjang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
             HasilSkrining.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
             Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
-            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());  
+            Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -1765,35 +1759,35 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getskrining_kesehatan_gigi_mulut_remaja());
         BtnHapus.setEnabled(akses.getskrining_kesehatan_gigi_mulut_remaja());
         BtnEdit.setEnabled(akses.getskrining_kesehatan_gigi_mulut_remaja());
-        BtnPrint.setEnabled(akses.getskrining_kesehatan_gigi_mulut_remaja()); 
+        BtnPrint.setEnabled(akses.getskrining_kesehatan_gigi_mulut_remaja());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -1803,7 +1797,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }    
+        }
 
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
@@ -1826,7 +1820,7 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -1875,9 +1869,9 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
                 "punya_gigi_berlubang=?,pernah_gusi_berdarah=?,punya_karang_gigi=?,gigi_depan_tidak_teratur=?,menyikat_gigi_sebelum_tidur=?,punya_sariawan=?,pemeriksaan_fisik=?,"+
                 "pemeriksaan_penunjang=?,hasil_skrining=?,keterangan=?,nip=?",17,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                PernahPemeriksaanGigi.getSelectedItem().toString(),JumlahGigiTumbuh.getSelectedItem().toString(),KebersihanGigiMulut.getSelectedItem().toString(), 
-                GigiBerlubang.getSelectedItem().toString(),GusiBerdarah.getSelectedItem().toString(),KarangGigi.getSelectedItem().toString(),GigiTidakteratur.getSelectedItem().toString(), 
-                KebiasaanMenyikatGigi.getSelectedItem().toString(),PunyaSariawan.getSelectedItem().toString(),PemeriksaanFisik.getText(),PemeriksaanPenunjang.getText(), 
+                PernahPemeriksaanGigi.getSelectedItem().toString(),JumlahGigiTumbuh.getSelectedItem().toString(),KebersihanGigiMulut.getSelectedItem().toString(),
+                GigiBerlubang.getSelectedItem().toString(),GusiBerdarah.getSelectedItem().toString(),KarangGigi.getSelectedItem().toString(),GigiTidakteratur.getSelectedItem().toString(),
+                KebiasaanMenyikatGigi.getSelectedItem().toString(),PunyaSariawan.getSelectedItem().toString(),PemeriksaanFisik.getText(),PemeriksaanPenunjang.getText(),
                 HasilSkrining.getText(),Keterangan.getText(),KdPetugas.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
             })==true){
                tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
@@ -1920,19 +1914,19 @@ public final class RMSkriningKesehatanGigiMulutRemaja extends javax.swing.JDialo
     private void simpan() {
         if(Sequel.menyimpantf("skrining_kesehatan_gigi_mulut_remaja","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",16,new String[]{
             TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-            PernahPemeriksaanGigi.getSelectedItem().toString(),JumlahGigiTumbuh.getSelectedItem().toString(),KebersihanGigiMulut.getSelectedItem().toString(), 
-            GigiBerlubang.getSelectedItem().toString(),GusiBerdarah.getSelectedItem().toString(),KarangGigi.getSelectedItem().toString(),GigiTidakteratur.getSelectedItem().toString(), 
-            KebiasaanMenyikatGigi.getSelectedItem().toString(),PunyaSariawan.getSelectedItem().toString(),PemeriksaanFisik.getText(),PemeriksaanPenunjang.getText(), 
+            PernahPemeriksaanGigi.getSelectedItem().toString(),JumlahGigiTumbuh.getSelectedItem().toString(),KebersihanGigiMulut.getSelectedItem().toString(),
+            GigiBerlubang.getSelectedItem().toString(),GusiBerdarah.getSelectedItem().toString(),KarangGigi.getSelectedItem().toString(),GigiTidakteratur.getSelectedItem().toString(),
+            KebiasaanMenyikatGigi.getSelectedItem().toString(),PunyaSariawan.getSelectedItem().toString(),PemeriksaanFisik.getText(),PemeriksaanPenunjang.getText(),
             HasilSkrining.getText(),Keterangan.getText(),KdPetugas.getText()
         })==true){
             tabMode.addRow(new Object[]{
                 TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),KdPetugas.getText(),NmPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
                 PernahPemeriksaanGigi.getSelectedItem().toString(),JumlahGigiTumbuh.getSelectedItem().toString(),KebersihanGigiMulut.getSelectedItem().toString(),GigiBerlubang.getSelectedItem().toString(),GusiBerdarah.getSelectedItem().toString(),
-                KarangGigi.getSelectedItem().toString(),GigiTidakteratur.getSelectedItem().toString(),KebiasaanMenyikatGigi.getSelectedItem().toString(),PunyaSariawan.getSelectedItem().toString(),PemeriksaanFisik.getText(),PemeriksaanPenunjang.getText(), 
+                KarangGigi.getSelectedItem().toString(),GigiTidakteratur.getSelectedItem().toString(),KebiasaanMenyikatGigi.getSelectedItem().toString(),PunyaSariawan.getSelectedItem().toString(),PemeriksaanFisik.getText(),PemeriksaanPenunjang.getText(),
                 HasilSkrining.getText(),Keterangan.getText()
             });
             LCount.setText(""+tabMode.getRowCount());
             emptTeks();
-        } 
+        }
     }
 }

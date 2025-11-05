@@ -335,9 +335,6 @@
             <Component class="widget.TextBox" name="nmpj">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="nmpj" noResource="true"/>
               </Properties>
               <Events>
@@ -370,9 +367,6 @@
             </Component>
             <Component class="widget.TextBox" name="kdpj">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="kdpj" noResource="true"/>
               </Properties>
               <Events>
@@ -386,9 +380,6 @@
             </Component>
             <Component class="widget.TextBox" name="harga">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="harga" noResource="true"/>
               </Properties>
               <Events>

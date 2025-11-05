@@ -10,8 +10,11 @@
  */
 
 package inventaris;
+import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -24,11 +27,14 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -117,12 +123,12 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 column.setPreferredWidth(60);
             }
         }
-        
+
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -145,7 +151,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
         HTMLEditorKit kit = new HTMLEditorKit();
@@ -164,9 +170,10 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"+
                 ".head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
         );
-        
+
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
+        mapper.configure(JsonGenerator.Feature.WRITE_BIGDECIMAL_AS_PLAIN, true);
     }
 
     /** This method is called from within the constructor to
@@ -404,11 +411,11 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbJnsPerawatan.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -416,7 +423,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnKeluar);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -424,9 +431,9 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 isPhoto();
                 panggilPhoto();
             } catch (java.lang.NullPointerException e) {
-            }            
+            }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void tbJnsPerawatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbJnsPerawatanKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -435,7 +442,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanKeyPressed
+    }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
@@ -449,7 +456,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnRuang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuang1ActionPerformed
-        InventarisRuang ruang=new InventarisRuang(null,false); 
+        InventarisRuang ruang=new InventarisRuang(null,false);
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -457,10 +464,10 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){ 
+                if(ruang.getTable().getSelectedRow()!= -1){
                     NmRuangan.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
-                    TCari.requestFocus();                   
-                }                   
+                    TCari.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -472,7 +479,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
 
         });
-        
+
         ruang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -480,7 +487,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ruang.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -571,117 +578,112 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
+        Valid.tabelKosong(tabMode);
         try {
-            file=new File("./cache/inventariskoleksi.iyem");
+            File file = new File("./cache/inventariskoleksi.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select inventaris.no_inventaris,inventaris_barang.kode_barang, inventaris_barang.nama_barang, "+
-                        "inventaris_produsen.nama_produsen, inventaris_merk.nama_merk, inventaris_barang.thn_produksi, inventaris_barang.isbn,"+
-                        "inventaris_kategori.nama_kategori, inventaris_jenis.nama_jenis,inventaris.asal_barang,inventaris.tgl_pengadaan,"+
-                        "inventaris.harga,inventaris.status_barang,inventaris_ruang.nama_ruang,inventaris.no_rak,inventaris.no_box "+
-                        "from inventaris inner join inventaris_barang on inventaris_barang.kode_barang=inventaris.kode_barang "+
-                        "inner join inventaris_produsen on inventaris_barang.kode_produsen=inventaris_produsen.kode_produsen "+
-                        "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
-                        "inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis "+
-                        "inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori "+
-                        "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
-                        "order by inventaris_barang.kode_barang,inventaris.no_inventaris");
-             Valid.tabelKosong(tabMode);
-             try{            
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{
-                        rs.getString("no_inventaris"),rs.getString("kode_barang"),rs.getString("nama_barang"),rs.getString("nama_produsen"),
-                        rs.getString("nama_merk"),rs.getString("thn_produksi").substring(0,4),rs.getString("isbn"),rs.getString("nama_kategori"),
-                        rs.getString("nama_jenis"),rs.getString("asal_barang"),rs.getString("tgl_pengadaan"),Valid.SetAngka(rs.getDouble("harga")),
-                        rs.getString("status_barang"),rs.getString("nama_ruang"),rs.getString("no_rak"),rs.getString("no_box")
-                    });
-                    iyembuilder.append("{\"NoInventaris\":\"").append(rs.getString("no_inventaris")).append("\",\"KodeBarang\":\"").append(rs.getString("kode_barang")).
-                                append("\",\"NamaBarang\":\"").append(rs.getString("nama_barang")).append("\",\"Produsen\":\"").append(rs.getString("nama_produsen")).
-                                append("\",\"Merk\":\"").append(rs.getString("nama_merk")).append("\",\"ThnProduksi\":\"").append(rs.getString("thn_produksi").substring(0,4)).
-                                append("\",\"BarcodeSN\":\"").append(rs.getString("isbn")).append("\",\"Kategori\":\"").append(rs.getString("nama_kategori")).
-                                append("\",\"Jenis\":\"").append(rs.getString("nama_jenis")).append("\",\"AsalBarang\":\"").append(rs.getString("asal_barang")).
-                                append("\",\"TglPengadaan\":\"").append(rs.getString("tgl_pengadaan")).append("\",\"Harga\":\"").append(Valid.SetAngka(rs.getDouble("harga"))).
-                                append("\",\"SttsBarang\":\"").append(rs.getString("status_barang")).append("\",\"Ruang\":\"").append(rs.getString("nama_ruang")).
-                                append("\",\"NoRak\":\"").append(rs.getString("no_rak")).append("\",\"NoBox\":\"").append(rs.getString("no_box")).append("\"},");
+            try (
+                FileWriter fw = new FileWriter(file);
+                ResultSet rs = koneksi.createStatement().executeQuery(
+                    "select i.no_inventaris, b.kode_barang, b.nama_barang, p.nama_produsen, m.nama_merk, b.thn_produksi, b.isbn, k.nama_kategori, " +
+                    "j.nama_jenis, i.asal_barang, i.tgl_pengadaan, i.harga, i.status_barang, r.nama_ruang, i.no_rak, i.no_box from inventaris i " +
+                    "join inventaris_barang b on i.kode_barang = b.kode_barang join inventaris_produsen p on b.kode_produsen = p.kode_produsen join " +
+                    "inventaris_ruang r on i.id_ruang = r.id_ruang join inventaris_jenis j on b.id_jenis = j.id_jenis join inventaris_kategori k on " +
+                    "b.id_kategori = k.id_kategori join inventaris_merk m on b.id_merk = m.id_merk order by b.kode_barang, i.no_inventaris"
+                );
+            ) {
+                ObjectNode root = mapper.createObjectNode();
+                ArrayNode array = mapper.createArrayNode();
+                if (rs.next()) {
+                    Map<String, Object> map;
+                    do {
+                        map = new HashMap<>();
+                        map.put("NoInventaris", rs.getString("no_inventaris"));
+                        map.put("KodeBarang", rs.getString("kode_barang"));
+                        map.put("NamaBarang", rs.getString("nama_barang"));
+                        map.put("Produsen", rs.getString("nama_produsen"));
+                        map.put("Merk", rs.getString("nama_merk"));
+                        map.put("ThnProduksi", rs.getString("thn_produksi").substring(0, 4));
+                        map.put("BarcodeSN", rs.getString("isbn"));
+                        map.put("Kategori", rs.getString("nama_kategori"));
+                        map.put("Jenis", rs.getString("nama_jenis"));
+                        map.put("AsalBarang", rs.getString("asal_barang"));
+                        map.put("TglPengadaan", rs.getString("tgl_pengadaan"));
+                        map.put("Harga", Valid.SetAngka(rs.getDouble("harga")));
+                        map.put("SttsBarang", rs.getString("status_barang"));
+                        map.put("Ruang", rs.getString("nama_ruang"));
+                        map.put("NoRak", rs.getString("no_rak"));
+                        map.put("NoBox", rs.getString("no_box"));
+                        array.add(mapper.valueToTree(map));
+                        tabMode.addRow(new Object[] {
+                            rs.getString("no_inventaris"), rs.getString("kode_barang"), rs.getString("nama_barang"), rs.getString("nama_produsen"),
+                            rs.getString("nama_merk"), rs.getString("thn_produksi").substring(0, 4), rs.getString("isbn"), rs.getString("nama_kategori"),
+                            rs.getString("nama_jenis"), rs.getString("asal_barang"), rs.getString("tgl_pengadaan"), Valid.SetAngka(rs.getDouble("harga")),
+                            rs.getString("status_barang"), rs.getString("nama_ruang"), rs.getString("no_rak"), rs.getString("no_box")
+                        });
+                    } while (rs.next());
                 }
-            }catch(Exception e){
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
+                root.set("inventariskoleksi", array);
+                fw.write(root.toString());
             }
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"inventariskoleksi\":["+iyembuilder+"]}");
-                fileWriter.flush();
-            }
-            
-            fileWriter.close();
-            iyembuilder=null;
-            LCount.setText(tabMode.getRowCount()+"");
         } catch (Exception e) {
-            System.out.println("Notif : "+e);
-        }        
+            System.out.println("Notif : " + e);
+        }
+        LCount.setText(tabMode.getRowCount() + "");
     }
-    
+
     private void tampil2() {
-        try {
-            myObj = new FileReader("./cache/inventariskoleksi.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("inventariskoleksi");
-            if(response.isArray()){
-                if(NmRuangan.getText().trim().equals("")){
-                    if(TCari.getText().trim().equals("")){
-                        for(JsonNode list:response){
-                            tabMode.addRow(new Object[]{
-                                list.path("NoInventaris").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Produsen").asText(),list.path("Merk").asText(),list.path("ThnProduksi").asText(),list.path("BarcodeSN").asText(),list.path("Kategori").asText(),list.path("Jenis").asText(),list.path("AsalBarang").asText(),list.path("TglPengadaan").asText(),list.path("Harga").asText(),list.path("SttsBarang").asText(),list.path("Ruang").asText(),list.path("NoRak").asText(),list.path("NoBox").asText()
+        Valid.tabelKosong(tabMode);
+        try (FileReader fr = new FileReader("./cache/inventariskoleksi.iyem")) {
+            JsonNode response = mapper.readTree(fr).path("inventariskoleksi");
+            if (response.isArray()) {
+                if (NmRuangan.getText().isBlank()) {
+                    if (TCari.getText().isBlank()) {
+                        for (JsonNode list : response) {
+                            tabMode.addRow(new Object[] {
+                                list.path("NoInventaris").asText(), list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
+                                list.path("Produsen").asText(), list.path("Merk").asText(), list.path("ThnProduksi").asText(),
+                                list.path("BarcodeSN").asText(), list.path("Kategori").asText(), list.path("Jenis").asText(),
+                                list.path("AsalBarang").asText(), list.path("TglPengadaan").asText(), list.path("Harga").asText(),
+                                list.path("SttsBarang").asText(), list.path("Ruang").asText(), list.path("NoRak").asText(), list.path("NoBox").asText()
                             });
                         }
-                    }else{
-                        for(JsonNode list:response){
-                            if(list.path("NoInventaris").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Produsen").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Merk").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("BarcodeSN").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Kategori").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                                tabMode.addRow(new Object[]{
-                                    list.path("NoInventaris").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Produsen").asText(),list.path("Merk").asText(),list.path("ThnProduksi").asText(),list.path("BarcodeSN").asText(),list.path("Kategori").asText(),list.path("Jenis").asText(),list.path("AsalBarang").asText(),list.path("TglPengadaan").asText(),list.path("Harga").asText(),list.path("SttsBarang").asText(),list.path("Ruang").asText(),list.path("NoRak").asText(),list.path("NoBox").asText()
+                    } else {
+                        for (JsonNode list : response) {
+                            if (list.toString().toLowerCase().contains(TCari.getText().toLowerCase().trim())) {
+                                tabMode.addRow(new Object[] {
+                                    list.path("NoInventaris").asText(), list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
+                                    list.path("Produsen").asText(), list.path("Merk").asText(), list.path("ThnProduksi").asText(),
+                                    list.path("BarcodeSN").asText(), list.path("Kategori").asText(), list.path("Jenis").asText(),
+                                    list.path("AsalBarang").asText(), list.path("TglPengadaan").asText(), list.path("Harga").asText(),
+                                    list.path("SttsBarang").asText(), list.path("Ruang").asText(), list.path("NoRak").asText(), list.path("NoBox").asText()
                                 });
                             }
                         }
                     }
-                }else{
-                    if(TCari.getText().trim().equals("")){
-                        for(JsonNode list:response){
-                            if(list.path("Ruang").asText().equals(NmRuangan.getText())){
-                                tabMode.addRow(new Object[]{
-                                    list.path("NoInventaris").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Produsen").asText(),list.path("Merk").asText(),list.path("ThnProduksi").asText(),list.path("BarcodeSN").asText(),list.path("Kategori").asText(),list.path("Jenis").asText(),list.path("AsalBarang").asText(),list.path("TglPengadaan").asText(),list.path("Harga").asText(),list.path("SttsBarang").asText(),list.path("Ruang").asText(),list.path("NoRak").asText(),list.path("NoBox").asText()
+                } else {
+                    if (TCari.getText().isBlank()) {
+                        for (JsonNode list : response) {
+                            if (list.path("Ruang").asText().toLowerCase().trim().contains(NmRuangan.getText().trim().toLowerCase())) {
+                                tabMode.addRow(new Object[] {
+                                    list.path("NoInventaris").asText(), list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
+                                    list.path("Produsen").asText(), list.path("Merk").asText(), list.path("ThnProduksi").asText(),
+                                    list.path("BarcodeSN").asText(), list.path("Kategori").asText(), list.path("Jenis").asText(),
+                                    list.path("AsalBarang").asText(), list.path("TglPengadaan").asText(), list.path("Harga").asText(),
+                                    list.path("SttsBarang").asText(), list.path("Ruang").asText(), list.path("NoRak").asText(), list.path("NoBox").asText()
                                 });
                             }
                         }
-                    }else{
-                        for(JsonNode list:response){
-                            if(list.path("NoInventaris").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Produsen").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Merk").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("BarcodeSN").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Kategori").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                                if(list.path("Ruang").asText().equals(NmRuangan.getText())){
-                                    tabMode.addRow(new Object[]{
-                                        list.path("NoInventaris").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Produsen").asText(),list.path("Merk").asText(),list.path("ThnProduksi").asText(),list.path("BarcodeSN").asText(),list.path("Kategori").asText(),list.path("Jenis").asText(),list.path("AsalBarang").asText(),list.path("TglPengadaan").asText(),list.path("Harga").asText(),list.path("SttsBarang").asText(),list.path("Ruang").asText(),list.path("NoRak").asText(),list.path("NoBox").asText()
+                    } else {
+                        for (JsonNode list : response) {
+                            if (list.path("Ruang").asText().toLowerCase().trim().contains(NmRuangan.getText().trim().toLowerCase())) {
+                                if (list.toString().toLowerCase().contains(TCari.getText().toLowerCase().trim())) {
+                                    tabMode.addRow(new Object[] {
+                                        list.path("NoInventaris").asText(), list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
+                                        list.path("Produsen").asText(), list.path("Merk").asText(), list.path("ThnProduksi").asText(),
+                                        list.path("BarcodeSN").asText(), list.path("Kategori").asText(), list.path("Jenis").asText(),
+                                        list.path("AsalBarang").asText(), list.path("TglPengadaan").asText(), list.path("Harga").asText(),
+                                        list.path("SttsBarang").asText(), list.path("Ruang").asText(), list.path("NoRak").asText(), list.path("NoBox").asText()
                                     });
                                 }
                             }
@@ -689,28 +691,26 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                     }
                 }
             }
-            myObj.close();
-        } catch (Exception ex) {
-            if(ex.toString().contains("java.io.FileNotFoundException")){
-                tampil();
-            }else{
-                System.out.println("Notifikasi : "+ex);
-            }
+        } catch (FileNotFoundException e) {
+            System.out.println("Notif : " + e);
+            tampil();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText("" + tabMode.getRowCount());
     }
 
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     public void isCek(){
         try {
             namaruang=koneksiDB.KAMARAKTIFRANAP();
         } catch (Exception ex) {
             namaruang="";
         }
-        
+
         if(!namaruang.equals("")){
             if(akses.getkode().equals("Admin Utama")){
                 NmRuangan.setText("");
@@ -720,7 +720,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 NmRuangan.setText(namaruang);
                 btnRuang1.setEnabled(false);
                 NmRuangan.setEditable(false);
-            }                
+            }
         }else{
             btnRuang1.setEnabled(true);
             NmRuangan.setEditable(true);
@@ -728,21 +728,21 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
         BtnTambah.setEnabled(akses.getinventaris_inventaris());
         TCari.requestFocus();
     }
-    
+
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(internalFrame1.getWidth()-300,HEIGHT));
-            FormPhoto.setVisible(true);  
+            FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormPhoto.setVisible(false);  
+            FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
-    
+
     private void panggilPhoto() {
         if(FormPhoto.isVisible()==true){
             try {
@@ -755,7 +755,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                             LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                         }else{
                             LoadHTML.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/inventaris/"+rs.getString("photo")+"' alt='photo' width='"+(internalFrame1.getWidth()-330)+"' height='"+(internalFrame1.getHeight()-260)+"'/></center></body></html>");
-                        }  
+                        }
                     }else{
                         LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                     }
@@ -771,7 +771,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
-            } 
+            }
         }
     }
 }

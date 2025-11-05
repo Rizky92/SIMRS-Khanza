@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import javax.swing.SwingWorker;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
@@ -22,19 +23,20 @@ public class LaporanTahunanIRJ extends javax.swing.JDialog {
     private final Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
+    private boolean ceksukses=false;
     private StringBuilder htmlContent;
     private int i=0,jan=0,feb=0,mar=0,apr=0,mei=0,jun=0,jul=0,agu=0,sep=0,okt=0,nov=0,des=0,
                 ttljan=0,ttlfeb=0,ttlmar=0,ttlapr=0,ttlmei=0,ttljun=0,ttljul=0,ttlagu=0,ttlsep=0,ttlokt=0,ttlnov=0,ttldes=0,
                 ttljanbaru=0,ttlfebbaru=0,ttlmarbaru=0,ttlaprbaru=0,ttlmeibaru=0,ttljunbaru=0,ttljulbaru=0,ttlagubaru=0,ttlsepbaru=0,ttloktbaru=0,ttlnovbaru=0,ttldesbaru=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
     public LaporanTahunanIRJ(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
-        
+
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -66,7 +68,7 @@ public class LaporanTahunanIRJ extends javax.swing.JDialog {
         LoadHTML4.setDocument(doc);
         LoadHTML5.setDocument(doc);
         LoadHTML6.setDocument(doc);
-        
+
         Valid.LoadTahun(ThnCari);
     }
 
@@ -283,25 +285,25 @@ public class LaporanTahunanIRJ extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            
-            File g = new File("file2.css");            
+
+            File g = new File("file2.css");
             BufferedWriter bg = new BufferedWriter(new FileWriter(g));
             bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                     ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                     ".isi5 td{font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
             );
             bg.close();
-            
-            File f = new File("LaporanTahunanIRJ.html");            
+
+            File f = new File("LaporanTahunanIRJ.html");
             BufferedWriter bw = new BufferedWriter(new FileWriter(f));
             if(TabRawat.getSelectedIndex()==0){
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
@@ -311,7 +313,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -325,7 +327,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -339,7 +341,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -353,7 +355,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -367,7 +369,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -381,7 +383,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
@@ -395,18 +397,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+      
+                                        "<font size='2' face='Tahoma'>LAPORAN TAHUNAN INSTALASI RAWAT JALAN PERIODE "+ThnCari.getSelectedItem()+"<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
                 bw.close();
-            }                          
+            }
             Desktop.getDesktop().browse(f.toURI());
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }     
-        
+        }
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -428,33 +430,131 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{Valid.pindah(evt,BtnPrint,ThnCari);}
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
+    private void btnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCariActionPerformed
         TabRawatMouseClicked(null);
-}//GEN-LAST:event_btnCariActionPerformed
+    }//GEN-LAST:event_btnCariActionPerformed
 
-private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
+    private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             btnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, ThnCari, BtnPrint);
         }
-}//GEN-LAST:event_btnCariKeyPressed
+    }//GEN-LAST:event_btnCariKeyPressed
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==0){
-            prosesCari();
+            if(ceksukses==false){
+                ceksukses=true;
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        prosesCari();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
         }else if(TabRawat.getSelectedIndex()==1){
-            prosesCari2();
+            if(ceksukses==false){
+                ceksukses=true;
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        prosesCari2();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
         }else if(TabRawat.getSelectedIndex()==2){
-            prosesCari3();
+            if(ceksukses==false){
+                ceksukses=true;
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        prosesCari3();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
         }else if(TabRawat.getSelectedIndex()==3){
-            prosesCari4();
+            if(ceksukses==false){
+                ceksukses=true;
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        prosesCari4();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
         }else if(TabRawat.getSelectedIndex()==4){
-            prosesCari5();
+            if(ceksukses==false){
+                ceksukses=true;
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        prosesCari5();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
         }else if(TabRawat.getSelectedIndex()==5){
-            prosesCari6();
+            if(ceksukses==false){
+                ceksukses=true;
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        prosesCari6();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
         }else if(TabRawat.getSelectedIndex()==6){
-            prosesCari7();
+            if(ceksukses==false){
+                ceksukses=true;
+                new SwingWorker<Void, Void>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        prosesCari7();
+                        return null;
+                    }
+
+                    @Override
+                    protected void done() {
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 
@@ -462,12 +562,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
@@ -487,8 +587,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
-            
+            );
+
             LoadHTML.setText(
                     "<html>"+
                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -497,7 +597,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_formWindowOpened
 
@@ -548,12 +648,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
@@ -573,7 +673,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                     "where reg_periksa.kd_poli<>'IGDK' and year(reg_periksa.tgl_registrasi)=? group by reg_periksa.kd_poli order by reg_periksa.kd_poli");
@@ -606,7 +706,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
-                    
+
                     ttljan=ttljan+jan;
                     ttlfeb=ttlfeb+feb;
                     ttlmar=ttlmar+mar;
@@ -619,7 +719,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttlokt=ttlokt+okt;
                     ttlnov=ttlnov+nov;
                     ttldes=ttldes+des;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'>"+i+"</td>"+
@@ -645,7 +745,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     );
                     i++;
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -688,20 +788,20 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari2() {
        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
@@ -721,7 +821,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                     "where reg_periksa.kd_poli<>'IGDK' and year(reg_periksa.tgl_registrasi)=? group by reg_periksa.kd_poli order by reg_periksa.kd_poli");
@@ -754,7 +854,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
-                    
+
                     ttljan=ttljan+jan;
                     ttlfeb=ttlfeb+feb;
                     ttlmar=ttlmar+mar;
@@ -767,7 +867,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttlokt=ttlokt+okt;
                     ttlnov=ttlnov+nov;
                     ttldes=ttldes+des;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+i+"</td>"+
@@ -791,7 +891,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     ps2=koneksi.prepareStatement("select reg_periksa.kd_dokter,dokter.nm_dokter from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter "+
                         "where reg_periksa.kd_poli=? and year(reg_periksa.tgl_registrasi)=? group by reg_periksa.kd_dokter order by reg_periksa.kd_dokter");
                     try {
@@ -883,7 +983,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "</tr>"
                     );
                 }
-                    
+
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -902,12 +1002,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
-        this.setCursor(Cursor.getDefaultCursor());   
+        }
+        this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    
-    
+
+
+
     public void isCek(){
         BtnPrint.setEnabled(akses.getlaporan_tahunan_irj());
     }
@@ -916,12 +1016,12 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
@@ -941,7 +1041,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                     "where reg_periksa.kd_poli<>'IGDK' and year(reg_periksa.tgl_registrasi)=? group by reg_periksa.kd_poli order by reg_periksa.kd_poli");
@@ -975,7 +1075,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
-                    
+
                     ttljan=ttljan+jan;
                     ttlfeb=ttlfeb+feb;
                     ttlmar=ttlmar+mar;
@@ -988,7 +1088,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttlokt=ttlokt+okt;
                     ttlnov=ttlnov+nov;
                     ttldes=ttldes+des;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+i+"</td>"+
@@ -1012,7 +1112,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     jan=0;
                     jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Lama'");
                     feb=0;
@@ -1060,7 +1160,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     jan=0;
                     jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
                     feb=0;
@@ -1085,7 +1185,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and reg_periksa.stts_daftar='Baru'");
-                    
+
                     ttljanbaru=ttljanbaru+jan;
                     ttlfebbaru=ttlfebbaru+feb;
                     ttlmarbaru=ttlmarbaru+mar;
@@ -1098,7 +1198,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttloktbaru=ttloktbaru+okt;
                     ttlnovbaru=ttlnovbaru+nov;
                     ttldesbaru=ttldesbaru+des;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'></td>"+
@@ -1122,7 +1222,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     i++;
                 }
                 if(i>1){
@@ -1189,7 +1289,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "</tr>"
                     );
                 }
-                    
+
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -1208,20 +1308,20 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
-        this.setCursor(Cursor.getDefaultCursor());   
+        }
+        this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari4() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Jenis Cakupan Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
@@ -1241,7 +1341,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_poli,poliklinik.nm_poli from reg_periksa inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli "+
                     "where reg_periksa.kd_poli<>'IGDK' and year(reg_periksa.tgl_registrasi)=? group by reg_periksa.kd_poli order by reg_periksa.kd_poli");
@@ -1275,7 +1375,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"'");
-                    
+
                     ttljan=ttljan+jan;
                     ttlfeb=ttlfeb+feb;
                     ttlmar=ttlmar+mar;
@@ -1288,7 +1388,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttlokt=ttlokt+okt;
                     ttlnov=ttlnov+nov;
                     ttldes=ttldes+des;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+i+"</td>"+
@@ -1312,7 +1412,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     jan=0;
                     jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where DATE_FORMAT(tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='L'");
                     feb=0;
@@ -1360,7 +1460,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     jan=0;
                     jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where DATE_FORMAT(tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='P'");
                     feb=0;
@@ -1385,8 +1485,8 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where DATE_FORMAT(tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='P'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis where DATE_FORMAT(tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_poli='"+rs.getString("kd_poli")+"' and pasien.jk='P'");
-                    
-                    
+
+
                     ttljanbaru=ttljanbaru+jan;
                     ttlfebbaru=ttlfebbaru+feb;
                     ttlmarbaru=ttlmarbaru+mar;
@@ -1399,7 +1499,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttloktbaru=ttloktbaru+okt;
                     ttlnovbaru=ttlnovbaru+nov;
                     ttldesbaru=ttldesbaru+des;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'></td>"+
@@ -1423,7 +1523,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                             "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                         "</tr>"
                     );
-                    
+
                     i++;
                 }
                 if(i>1){
@@ -1490,7 +1590,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         "</tr>"
                     );
                 }
-                    
+
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -1509,20 +1609,20 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
-        this.setCursor(Cursor.getDefaultCursor());   
+        }
+        this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari5() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Uraian</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
@@ -1542,7 +1642,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select reg_periksa.kd_pj,penjab.png_jawab from reg_periksa inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                     "where reg_periksa.kd_poli<>'IGDK' and year(reg_periksa.tgl_registrasi)=? group by reg_periksa.kd_pj order by reg_periksa.kd_pj");
@@ -1575,7 +1675,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
-                    
+
                     ttljan=ttljan+jan;
                     ttlfeb=ttlfeb+feb;
                     ttlmar=ttlmar+mar;
@@ -1588,7 +1688,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttlokt=ttlokt+okt;
                     ttlnov=ttlnov+nov;
                     ttldes=ttldes+des;
-                    
+
                     htmlContent.append(
                         "<tr class='isi'>"+
                             "<td valign='middle' align='center'>"+i+"</td>"+
@@ -1614,7 +1714,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     );
                     i++;
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -1657,20 +1757,20 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari6() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Uraian</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
@@ -1690,7 +1790,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
+            );
             i=1;
             ps=koneksi.prepareStatement("select penjab.kd_pj,penjab.png_jawab from penjab order by penjab.kd_pj");
             try {
@@ -1721,7 +1821,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     nov=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-11' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
                     des=0;
                     des=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-12' and reg_periksa.kd_pj='"+rs.getString("kd_pj")+"'");
-                    
+
                     ttljan=ttljan+jan;
                     ttlfeb=ttlfeb+feb;
                     ttlmar=ttlmar+mar;
@@ -1734,7 +1834,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     ttlokt=ttlokt+okt;
                     ttlnov=ttlnov+nov;
                     ttldes=ttldes+des;
-                    
+
                     if((jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)>0){
                         htmlContent.append(
                             "<tr class='isi'>"+
@@ -1759,7 +1859,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                                 "<td valign='middle' bgcolor='#FFFFF8' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                             "</tr>"
                         );
-                    
+
                         ps2=koneksi.prepareStatement("select poliklinik.kd_poli,poliklinik.nm_poli from poliklinik where poliklinik.kd_poli<>'IGDK' order by poliklinik.kd_poli");
                         try {
                             rs2=ps2.executeQuery();
@@ -1828,7 +1928,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                         i++;
                     }
                 }
-                
+
                 if(i>1){
                     htmlContent.append(
                         "<tr class='isi'>"+
@@ -1871,20 +1971,20 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void prosesCari7() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             htmlContent = new StringBuilder();
-            htmlContent.append(                             
+            htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='2%' rowspan='2'>No</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='20%' rowspan='2'>Status Pelayanan</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center' width='78%' colspan='17'>Jumlah Pasien</td>"+
-                "</tr>"+                            
+                "</tr>"+
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jan "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Feb "+ThnCari.getSelectedItem()+"</td>"+
@@ -1904,10 +2004,10 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>TW IV "+ThnCari.getSelectedItem()+"</td>"+
                     "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total</td>"+
                 "</tr>"
-            );            
-            
+            );
+
             ttljan=0;ttlfeb=0;ttlmar=0;ttlapr=0;ttlmei=0;ttljun=0;ttljul=0;ttlagu=0;ttlsep=0;ttlokt=0;ttlnov=0;ttldes=0;
-            
+
             jan=0;
             jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.stts='Batal'");
             feb=0;
@@ -1945,7 +2045,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ttlokt=ttlokt+okt;
             ttlnov=ttlnov+nov;
             ttldes=ttldes+des;
-                    
+
             htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' align='center'>1</td>"+
@@ -1969,7 +2069,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                 "</tr>"
             );
-            
+
             jan=0;
             jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.stts='Dirujuk'");
             feb=0;
@@ -2007,7 +2107,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ttlokt=ttlokt+okt;
             ttlnov=ttlnov+nov;
             ttldes=ttldes+des;
-                    
+
             htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' align='center'>2</td>"+
@@ -2031,7 +2131,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                 "</tr>"
             );
-                    
+
             jan=0;
             jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.stts='Meninggal'");
             feb=0;
@@ -2069,7 +2169,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ttlokt=ttlokt+okt;
             ttlnov=ttlnov+nov;
             ttldes=ttldes+des;
-                    
+
             htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' align='center'>3</td>"+
@@ -2093,7 +2193,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                 "</tr>"
             );
-            
+
             jan=0;
             jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.stts='Pulang Paksa'");
             feb=0;
@@ -2131,7 +2231,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ttlokt=ttlokt+okt;
             ttlnov=ttlnov+nov;
             ttldes=ttldes+des;
-                    
+
             htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' align='center'>4</td>"+
@@ -2155,7 +2255,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                 "</tr>"
             );
-            
+
             jan=0;
             jan=Sequel.cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.kd_poli<>'IGDK' and DATE_FORMAT(reg_periksa.tgl_registrasi, '%Y-%m')='"+ThnCari.getSelectedItem()+"-01' and reg_periksa.stts in ('Belum','Sudah','Berkas Diterima','Dirawat') ");
             feb=0;
@@ -2193,7 +2293,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
             ttlokt=ttlokt+okt;
             ttlnov=ttlnov+nov;
             ttldes=ttldes+des;
-                    
+
             htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' align='center'>5</td>"+
@@ -2217,7 +2317,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "<td valign='middle' align='center'>"+(jan+feb+mar+apr+mei+jun+jul+agu+sep+okt+nov+des)+"</td>"+
                 "</tr>"
             );
-            
+
             htmlContent.append(
                 "<tr class='isi'>"+
                     "<td valign='middle' bgcolor='#FFFFF8' align='right' colspan='2'>JUMLAH : </td>"+
@@ -2248,7 +2348,7 @@ private void btnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_b
                     "</html>");
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }
 }

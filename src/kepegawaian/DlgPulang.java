@@ -48,7 +48,7 @@ public final class DlgPulang extends javax.swing.JDialog {
     public DlgPulang(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         Object[] row={"NIK","Nama","Shift","Jam Datang","Jam Pulang","Status","Keterlambatan","Durasi","Catatan"};
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -81,7 +81,7 @@ public final class DlgPulang extends javax.swing.JDialog {
             }
         }
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         //catatan.setDocument(new batasInput((int)100).getKata(catatan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -105,7 +105,7 @@ public final class DlgPulang extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         try{
             ps=koneksi.prepareStatement(
                 "select  pegawai.id, "+
@@ -126,15 +126,15 @@ public final class DlgPulang extends javax.swing.JDialog {
                 "  pegawai.stts_aktif<>'KELUAR' and rekap_presensi.keterlambatan like ? and "+say+" or "+
                 "  pegawai.stts_aktif<>'KELUAR' and rekap_presensi.jam_datang like ? and "+say+" or "+
                 "  pegawai.stts_aktif<>'KELUAR' and rekap_presensi.keterangan like ? and "+say+" or "+
-                " pegawai.stts_aktif<>'KELUAR' and rekap_presensi.jam_pulang like ? and "+say+" order by rekap_presensi.jam_datang ");            
-        }catch(Exception ex){            
+                " pegawai.stts_aktif<>'KELUAR' and rekap_presensi.jam_pulang like ? and "+say+" order by rekap_presensi.jam_datang ");
+        }catch(Exception ex){
             System.out.println(ex);
         }
-        
+
         DlgInput.setSize(744,127);
         DlgInput.setVisible(false);
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -417,13 +417,13 @@ public final class DlgPulang extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -433,11 +433,11 @@ public final class DlgPulang extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -445,12 +445,12 @@ public final class DlgPulang extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -459,7 +459,7 @@ public final class DlgPulang extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseActionPerformed
         emptTeks();
@@ -583,9 +583,9 @@ public final class DlgPulang extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {        
+    public void tampil() {
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             ps.setString(1,"%"+TCari.getText().trim()+"%");
             ps.setString(2,"%"+TCari.getText().trim()+"%");
             ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -598,7 +598,7 @@ public final class DlgPulang extends javax.swing.JDialog {
             rs.last();
             primary=new String[rs.getRow()];
             rs.beforeFirst();
-            int i=0;            
+            int i=0;
             while(rs.next()){
                 String[] data={rs.getString(2),
                                rs.getString(3),
@@ -618,17 +618,17 @@ public final class DlgPulang extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void getData() {
         int row=tbBangsal.getSelectedRow();
         if(row!= -1){
             id_pegawai.setText(primary[row]);
             jam_datang.setText(tbBangsal.getValueAt(row,3).toString());
             catatan.setText(tbBangsal.getValueAt(row,8).toString());
-            
+
         }
     }
-    
+
     public void emptTeks() {
         catatan.setText("");
         id_pegawai.setText("");

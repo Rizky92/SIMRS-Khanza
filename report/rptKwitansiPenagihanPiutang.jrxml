@@ -382,7 +382,7 @@
 					<font fontName="Tahoma" size="9" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[DIREKTUR]]></text>
+				<text><![CDATA[PLT DIREKTUR]]></text>
 			</staticText>
 			<staticText>
 				<reportElement positionType="Float" x="16" y="513" width="179" height="12" uuid="de12c71c-2227-4b69-9f56-4ea8ff2ca4ca"/>
@@ -390,7 +390,7 @@
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[dr. TEGUH NURWANTO, MARS]]></text>
+				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
 			</staticText>
 			<line>
 				<reportElement positionType="Float" x="17" y="525" width="177" height="1" uuid="57c72281-3353-4cd9-90be-1627b83589a3"/>

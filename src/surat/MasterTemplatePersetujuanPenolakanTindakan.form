@@ -603,9 +603,6 @@
                         </Container>
                         <Component class="widget.TextBox" name="Biaya">
                           <Properties>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="Biaya" noResource="true"/>
                           </Properties>
                           <Events>

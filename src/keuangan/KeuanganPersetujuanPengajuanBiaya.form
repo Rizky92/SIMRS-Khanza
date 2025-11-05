@@ -76,9 +76,6 @@
                 <Component class="widget.TextBox" name="NoPengajuan">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NoPengajuan" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -100,9 +97,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Jumlah">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Jumlah" noResource="true"/>
                   </Properties>
                   <Events>
@@ -116,9 +110,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Harga">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Harga" noResource="true"/>
                   </Properties>
                   <Events>
@@ -155,9 +146,6 @@
                 <Component class="widget.TextBox" name="Total">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Total" noResource="true"/>
                   </Properties>
                   <Constraints>

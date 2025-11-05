@@ -45,7 +45,7 @@ public class DlgSetRM extends javax.swing.JDialog {
     public DlgSetRM(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{"No.Rekam Medis Terakhir Digunakan"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -62,7 +62,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }
 
         tbNoRM.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new Object[]{"Model Pengurutan No.R.M","Gunakan Tahun","Gunakan Bulan","Tahun & Bulan"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -85,7 +85,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }
 
         tbNoUrut.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode3=new DefaultTableModel(null,new Object[]{"Kelurahan","Kecamatan","Kabupaten","Propinsi"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -127,7 +127,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }
 
         tbKelengkapan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode5=new DefaultTableModel(null,new Object[]{"Wajib closing kasir terlebih dahulu untuk perawatan sebelumnya"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -144,7 +144,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }
 
         tbValidasiRegistrasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode6=new DefaultTableModel(null,new Object[]{"Tampilkan catatan pasien saat Registrasi Poli/Unit/IGD"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -161,7 +161,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }
 
         tbValidasiCatatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode7=new DefaultTableModel(null,new Object[]{"Tampilkan pilihan data pasien untuk RS TNI dan POLRI"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -178,7 +178,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }
 
         tbTniPolri.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         norm.setDocument(new batasInput((byte)10).getKata(norm));
         PanjangKTP.setDocument(new batasInput((byte)3).getOnlyAngka(PanjangKTP));
         PanjangTmpLahir.setDocument(new batasInput((byte)3).getOnlyAngka(PanjangTmpLahir));
@@ -449,7 +449,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 12, 150, 23);
 
-        norm.setHighlighter(null);
         norm.setName("norm"); // NOI18N
         norm.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -733,7 +732,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         jLabel15.setBounds(0, 40, 120, 23);
 
         PanjangKTP.setText("0");
-        PanjangKTP.setHighlighter(null);
         PanjangKTP.setName("PanjangKTP"); // NOI18N
         PanjangKTP.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -760,7 +758,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoKTP.setBounds(123, 10, 70, 23);
 
         PanjangTmpLahir.setText("0");
-        PanjangTmpLahir.setHighlighter(null);
         PanjangTmpLahir.setName("PanjangTmpLahir"); // NOI18N
         PanjangTmpLahir.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -792,7 +789,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoTmpLahir.setBounds(123, 70, 70, 23);
 
         PanjangNamaIbu.setText("0");
-        PanjangNamaIbu.setHighlighter(null);
         PanjangNamaIbu.setName("PanjangNamaIbu"); // NOI18N
         PanjangNamaIbu.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -845,7 +841,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         jLabel36.setBounds(0, 190, 120, 23);
 
         PanjangAlamat.setText("0");
-        PanjangAlamat.setHighlighter(null);
         PanjangAlamat.setName("PanjangAlamat"); // NOI18N
         PanjangAlamat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -877,7 +872,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoPekerjaan.setBounds(123, 250, 70, 23);
 
         PanjangPekerjaan.setText("0");
-        PanjangPekerjaan.setHighlighter(null);
         PanjangPekerjaan.setName("PanjangPekerjaan"); // NOI18N
         PanjangPekerjaan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -904,7 +898,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoTelp.setBounds(343, 10, 70, 23);
 
         PanjangTelp.setText("0");
-        PanjangTelp.setHighlighter(null);
         PanjangTelp.setName("PanjangTelp"); // NOI18N
         PanjangTelp.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -936,7 +929,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoUmur.setBounds(343, 70, 70, 23);
 
         PanjangUmur.setText("0");
-        PanjangUmur.setHighlighter(null);
         PanjangUmur.setName("PanjangUmur"); // NOI18N
         PanjangUmur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -968,7 +960,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoNamaKeluarga.setBounds(343, 130, 70, 23);
 
         PanjangNamaKeluarga.setText("0");
-        PanjangNamaKeluarga.setHighlighter(null);
         PanjangNamaKeluarga.setName("PanjangNamaKeluarga"); // NOI18N
         PanjangNamaKeluarga.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1000,7 +991,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoNoPeserta.setBounds(343, 190, 70, 23);
 
         PanjangNoPeserta.setText("0");
-        PanjangNoPeserta.setHighlighter(null);
         PanjangNoPeserta.setName("PanjangNoPeserta"); // NOI18N
         PanjangNoPeserta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1032,7 +1022,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoKelurahan.setBounds(343, 250, 70, 23);
 
         PanjangKelurahan.setText("0");
-        PanjangKelurahan.setHighlighter(null);
         PanjangKelurahan.setName("PanjangKelurahan"); // NOI18N
         PanjangKelurahan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1109,7 +1098,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoKecamatan.setBounds(548, 10, 70, 23);
 
         PanjangKecamatan.setText("0");
-        PanjangKecamatan.setHighlighter(null);
         PanjangKecamatan.setName("PanjangKecamatan"); // NOI18N
         PanjangKecamatan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1131,7 +1119,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoKabupaten.setBounds(548, 70, 70, 23);
 
         PanjangKabupaten.setText("0");
-        PanjangKabupaten.setHighlighter(null);
         PanjangKabupaten.setName("PanjangKabupaten"); // NOI18N
         PanjangKabupaten.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1153,7 +1140,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoPekerjaanPJ.setBounds(548, 130, 70, 23);
 
         PanjangPekerjaanPJ.setText("0");
-        PanjangPekerjaanPJ.setHighlighter(null);
         PanjangPekerjaanPJ.setName("PanjangPekerjaanPJ"); // NOI18N
         PanjangPekerjaanPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1175,7 +1161,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoAlamatPJ.setBounds(548, 190, 70, 23);
 
         PanjangAlamatPJ.setText("0");
-        PanjangAlamatPJ.setHighlighter(null);
         PanjangAlamatPJ.setName("PanjangAlamatPJ"); // NOI18N
         PanjangAlamatPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1197,7 +1182,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoKelurahanPJ.setBounds(548, 250, 70, 23);
 
         PanjangKelurahanPJ.setText("0");
-        PanjangKelurahanPJ.setHighlighter(null);
         PanjangKelurahanPJ.setName("PanjangKelurahanPJ"); // NOI18N
         PanjangKelurahanPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1224,7 +1208,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoKecamatanPJ.setBounds(758, 10, 70, 23);
 
         PanjangKecamatanPJ.setText("0");
-        PanjangKecamatanPJ.setHighlighter(null);
         PanjangKecamatanPJ.setName("PanjangKecamatanPJ"); // NOI18N
         PanjangKecamatanPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1261,7 +1244,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         jLabel31.setBounds(620, 100, 135, 23);
 
         PanjangKabupatenPJ.setText("0");
-        PanjangKabupatenPJ.setHighlighter(null);
         PanjangKabupatenPJ.setName("PanjangKabupatenPJ"); // NOI18N
         PanjangKabupatenPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1288,7 +1270,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoPropinsi.setBounds(758, 130, 70, 23);
 
         PanjangPropinsi.setText("0");
-        PanjangPropinsi.setHighlighter(null);
         PanjangPropinsi.setName("PanjangPropinsi"); // NOI18N
         PanjangPropinsi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1315,7 +1296,6 @@ public class DlgSetRM extends javax.swing.JDialog {
         YesNoPropinsiPJ.setBounds(758, 190, 70, 23);
 
         PanjangPropinsiPJ.setText("0");
-        PanjangPropinsiPJ.setHighlighter(null);
         PanjangPropinsiPJ.setName("PanjangPropinsiPJ"); // NOI18N
         PanjangPropinsiPJ.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1619,7 +1599,7 @@ public class DlgSetRM extends javax.swing.JDialog {
             default:
                 break;
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1639,9 +1619,9 @@ public class DlgSetRM extends javax.swing.JDialog {
                 Valid.pindah(evt,ValidasiCatatan,BtnHapus);
             }else if(TabRawat.getSelectedIndex()==6){
                 Valid.pindah(evt,TampilkanTNI,BtnHapus);
-            }             
+            }
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         switch (TabRawat.getSelectedIndex()) {
@@ -1677,8 +1657,8 @@ public class DlgSetRM extends javax.swing.JDialog {
             default:
                 break;
         }
-        
-}//GEN-LAST:event_BtnHapusActionPerformed
+
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1686,7 +1666,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnSimpan, BtnKeluar);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         if(tabMode.getRowCount()==0){
@@ -1695,13 +1675,13 @@ public class DlgSetRM extends javax.swing.JDialog {
         }else if(! (tabMode.getRowCount()==0)) {
             dispose();
         }
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnHapus,BtnSimpan);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbNoRMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbNoRMMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1710,7 +1690,7 @@ public class DlgSetRM extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbNoRMMouseClicked
+    }//GEN-LAST:event_tbNoRMMouseClicked
 
     private void tbNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbNoRMKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1721,12 +1701,12 @@ public class DlgSetRM extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbNoRMKeyPressed
+    }//GEN-LAST:event_tbNoRMKeyPressed
 
-private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_normKeyPressed
+    private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_normKeyPressed
      Valid.pindah(evt, BtnKeluar,BtnSimpan);
 
-}//GEN-LAST:event_normKeyPressed
+    }//GEN-LAST:event_normKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(TabRawat.getSelectedIndex()==0){
@@ -2241,7 +2221,7 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
 
     private void tampilnorm() {
         Valid.tabelKosong(tabMode);
-        try{   
+        try{
             ps=koneksi.prepareStatement("select * from set_no_rkm_medis ");
             try {
                 rs=ps.executeQuery();
@@ -2274,7 +2254,7 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
         norm.setText("");
         norm.requestFocus();
     }
-    
+
     public void emptTeks2() {
         PanjangKTP.setText("0");
         YesNoKTP.setSelectedIndex(0);
@@ -2316,7 +2296,7 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
         YesNoPropinsiPJ.setSelectedIndex(0);
         YesNoKTP.requestFocus();
     }
-    
+
     private void tampilurut() {
         Valid.tabelKosong(tabMode2);
         try{
@@ -2340,7 +2320,7 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void getDataurut() {
         int row=tbNoUrut.getSelectedRow();
         if(row!= -1){
@@ -2350,7 +2330,7 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
             cmbPosisi.setSelectedItem(tbNoUrut.getValueAt(row,3).toString());
         }
     }
-    
+
     private void tampilalamat() {
         Valid.tabelKosong(tabMode3);
         try{
@@ -2379,21 +2359,21 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,340));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void getDataAlamat() {
         int row=tbAlamat.getSelectedRow();
         if(row!= -1){
@@ -2403,10 +2383,10 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
             Propinsi.setSelectedItem(tbAlamat.getValueAt(row,3).toString());
         }
     }
-    
+
     public void tampilkelengkapan() {
         Valid.tabelKosong(tabMode4);
-        try{    
+        try{
             ps4=koneksi.prepareStatement("select * from set_kelengkapan_data_pasien ");
             try {
                 rs=ps4.executeQuery();
@@ -2459,59 +2439,59 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
                 if(ps!=null){
                     ps.close();
                 }
-            }                
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void getDataKelengkapan() {
         int row=tbKelengkapan.getSelectedRow();
         if(row!= -1){
-            YesNoKTP.setSelectedItem(tbKelengkapan.getValueAt(0,1).toString());            
-            PanjangKTP.setText(tbKelengkapan.getValueAt(1,1).toString()); 
-            YesNoTmpLahir.setSelectedItem(tbKelengkapan.getValueAt(2,1).toString());            
-            PanjangTmpLahir.setText(tbKelengkapan.getValueAt(3,1).toString()); 
-            YesNoNamaIbu.setSelectedItem(tbKelengkapan.getValueAt(4,1).toString());            
-            PanjangNamaIbu.setText(tbKelengkapan.getValueAt(5,1).toString()); 
-            YesNoAlamat.setSelectedItem(tbKelengkapan.getValueAt(6,1).toString());            
-            PanjangAlamat.setText(tbKelengkapan.getValueAt(7,1).toString()); 
-            YesNoPekerjaan.setSelectedItem(tbKelengkapan.getValueAt(8,1).toString());            
-            PanjangPekerjaan.setText(tbKelengkapan.getValueAt(9,1).toString()); 
-            YesNoTelp.setSelectedItem(tbKelengkapan.getValueAt(10,1).toString());            
-            PanjangTelp.setText(tbKelengkapan.getValueAt(11,1).toString()); 
-            YesNoUmur.setSelectedItem(tbKelengkapan.getValueAt(12,1).toString());            
-            PanjangUmur.setText(tbKelengkapan.getValueAt(13,1).toString()); 
-            YesNoNamaKeluarga.setSelectedItem(tbKelengkapan.getValueAt(14,1).toString());            
-            PanjangNamaKeluarga.setText(tbKelengkapan.getValueAt(15,1).toString()); 
-            YesNoNoPeserta.setSelectedItem(tbKelengkapan.getValueAt(16,1).toString());            
-            PanjangNoPeserta.setText(tbKelengkapan.getValueAt(17,1).toString()); 
-            YesNoKelurahan.setSelectedItem(tbKelengkapan.getValueAt(18,1).toString());            
-            PanjangKelurahan.setText(tbKelengkapan.getValueAt(19,1).toString()); 
-            YesNoKecamatan.setSelectedItem(tbKelengkapan.getValueAt(20,1).toString());            
-            PanjangKecamatan.setText(tbKelengkapan.getValueAt(21,1).toString()); 
-            YesNoKabupaten.setSelectedItem(tbKelengkapan.getValueAt(22,1).toString());            
-            PanjangKabupaten.setText(tbKelengkapan.getValueAt(23,1).toString()); 
-            YesNoPekerjaanPJ.setSelectedItem(tbKelengkapan.getValueAt(24,1).toString());            
-            PanjangPekerjaanPJ.setText(tbKelengkapan.getValueAt(25,1).toString()); 
-            YesNoAlamatPJ.setSelectedItem(tbKelengkapan.getValueAt(26,1).toString());            
-            PanjangAlamatPJ.setText(tbKelengkapan.getValueAt(27,1).toString()); 
-            YesNoKelurahanPJ.setSelectedItem(tbKelengkapan.getValueAt(28,1).toString());            
-            PanjangKelurahanPJ.setText(tbKelengkapan.getValueAt(29,1).toString()); 
-            YesNoKecamatanPJ.setSelectedItem(tbKelengkapan.getValueAt(30,1).toString());            
-            PanjangKecamatanPJ.setText(tbKelengkapan.getValueAt(31,1).toString()); 
-            YesNoKabupatenPJ.setSelectedItem(tbKelengkapan.getValueAt(32,1).toString());            
-            PanjangKabupatenPJ.setText(tbKelengkapan.getValueAt(33,1).toString()); 
-            YesNoPropinsi.setSelectedItem(tbKelengkapan.getValueAt(34,1).toString());            
-            PanjangPropinsi.setText(tbKelengkapan.getValueAt(35,1).toString()); 
-            YesNoPropinsiPJ.setSelectedItem(tbKelengkapan.getValueAt(36,1).toString());            
-            PanjangPropinsiPJ.setText(tbKelengkapan.getValueAt(37,1).toString()); 
+            YesNoKTP.setSelectedItem(tbKelengkapan.getValueAt(0,1).toString());
+            PanjangKTP.setText(tbKelengkapan.getValueAt(1,1).toString());
+            YesNoTmpLahir.setSelectedItem(tbKelengkapan.getValueAt(2,1).toString());
+            PanjangTmpLahir.setText(tbKelengkapan.getValueAt(3,1).toString());
+            YesNoNamaIbu.setSelectedItem(tbKelengkapan.getValueAt(4,1).toString());
+            PanjangNamaIbu.setText(tbKelengkapan.getValueAt(5,1).toString());
+            YesNoAlamat.setSelectedItem(tbKelengkapan.getValueAt(6,1).toString());
+            PanjangAlamat.setText(tbKelengkapan.getValueAt(7,1).toString());
+            YesNoPekerjaan.setSelectedItem(tbKelengkapan.getValueAt(8,1).toString());
+            PanjangPekerjaan.setText(tbKelengkapan.getValueAt(9,1).toString());
+            YesNoTelp.setSelectedItem(tbKelengkapan.getValueAt(10,1).toString());
+            PanjangTelp.setText(tbKelengkapan.getValueAt(11,1).toString());
+            YesNoUmur.setSelectedItem(tbKelengkapan.getValueAt(12,1).toString());
+            PanjangUmur.setText(tbKelengkapan.getValueAt(13,1).toString());
+            YesNoNamaKeluarga.setSelectedItem(tbKelengkapan.getValueAt(14,1).toString());
+            PanjangNamaKeluarga.setText(tbKelengkapan.getValueAt(15,1).toString());
+            YesNoNoPeserta.setSelectedItem(tbKelengkapan.getValueAt(16,1).toString());
+            PanjangNoPeserta.setText(tbKelengkapan.getValueAt(17,1).toString());
+            YesNoKelurahan.setSelectedItem(tbKelengkapan.getValueAt(18,1).toString());
+            PanjangKelurahan.setText(tbKelengkapan.getValueAt(19,1).toString());
+            YesNoKecamatan.setSelectedItem(tbKelengkapan.getValueAt(20,1).toString());
+            PanjangKecamatan.setText(tbKelengkapan.getValueAt(21,1).toString());
+            YesNoKabupaten.setSelectedItem(tbKelengkapan.getValueAt(22,1).toString());
+            PanjangKabupaten.setText(tbKelengkapan.getValueAt(23,1).toString());
+            YesNoPekerjaanPJ.setSelectedItem(tbKelengkapan.getValueAt(24,1).toString());
+            PanjangPekerjaanPJ.setText(tbKelengkapan.getValueAt(25,1).toString());
+            YesNoAlamatPJ.setSelectedItem(tbKelengkapan.getValueAt(26,1).toString());
+            PanjangAlamatPJ.setText(tbKelengkapan.getValueAt(27,1).toString());
+            YesNoKelurahanPJ.setSelectedItem(tbKelengkapan.getValueAt(28,1).toString());
+            PanjangKelurahanPJ.setText(tbKelengkapan.getValueAt(29,1).toString());
+            YesNoKecamatanPJ.setSelectedItem(tbKelengkapan.getValueAt(30,1).toString());
+            PanjangKecamatanPJ.setText(tbKelengkapan.getValueAt(31,1).toString());
+            YesNoKabupatenPJ.setSelectedItem(tbKelengkapan.getValueAt(32,1).toString());
+            PanjangKabupatenPJ.setText(tbKelengkapan.getValueAt(33,1).toString());
+            YesNoPropinsi.setSelectedItem(tbKelengkapan.getValueAt(34,1).toString());
+            PanjangPropinsi.setText(tbKelengkapan.getValueAt(35,1).toString());
+            YesNoPropinsiPJ.setSelectedItem(tbKelengkapan.getValueAt(36,1).toString());
+            PanjangPropinsiPJ.setText(tbKelengkapan.getValueAt(37,1).toString());
         }
     }
-    
+
     private void tampilvalidasiregistrasi() {
         Valid.tabelKosong(tabMode5);
-        try{   
+        try{
             ps5=koneksi.prepareStatement("select * from set_validasi_registrasi ");
             try {
                 rs=ps5.executeQuery();
@@ -2542,7 +2522,7 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
 
     private void tampilvalidasicatatan() {
         Valid.tabelKosong(tabMode6);
-        try{   
+        try{
             ps5=koneksi.prepareStatement("select * from set_validasi_catatan ");
             try {
                 rs=ps5.executeQuery();
@@ -2563,17 +2543,17 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void getDataValidasiCatatan() {
         int row=tbValidasiCatatan.getSelectedRow();
         if(row!= -1){
             ValidasiCatatan.setSelectedItem(tbValidasiCatatan.getValueAt(row,0).toString());
         }
     }
-    
+
     private void tampiltni() {
         Valid.tabelKosong(tabMode7);
-        try{   
+        try{
             ps6=koneksi.prepareStatement("select * from set_tni_polri ");
             try {
                 rs=ps6.executeQuery();
@@ -2594,12 +2574,12 @@ private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_norm
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void getDataTampilkanTNI() {
         int row=tbTniPolri.getSelectedRow();
         if(row!= -1){
             TampilkanTNI.setSelectedItem(tbTniPolri.getValueAt(row,0).toString());
         }
     }
-    
+
 }

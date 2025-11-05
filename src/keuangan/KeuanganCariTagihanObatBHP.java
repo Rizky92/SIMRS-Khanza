@@ -68,7 +68,7 @@ public class KeuanganCariTagihanObatBHP extends javax.swing.JDialog {
 
         NoTagihan.setDocument(new batasInput((byte)20).getKata(NoTagihan));
         KdPeg.setDocument(new batasInput((byte)20).getKata(KdPeg));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -90,8 +90,8 @@ public class KeuanganCariTagihanObatBHP extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -99,10 +99,10 @@ public class KeuanganCariTagihanObatBHP extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     KdPeg.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     NmPeg.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                }            
+                }
                 KdPeg.requestFocus();
             }
             @Override
@@ -114,10 +114,10 @@ public class KeuanganCariTagihanObatBHP extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ChkInput.setSelected(false);
         isForm();
-        
+
         ChkAccor.setSelected(false);
         isMenu();
     }
@@ -540,18 +540,18 @@ public class KeuanganCariTagihanObatBHP extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         pegawai.dispose();
-        dispose();  
-}//GEN-LAST:event_BtnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }else{Valid.pindah(evt,BtnPrint,BtnCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void btnPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPegawaiActionPerformed
@@ -623,26 +623,26 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            
+
             int row=tabMode.getRowCount();
-            for(i=0;i<row;i++){  
+            for(i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
                                 tabMode.getValueAt(i,2).toString()+"','"+
                                 tabMode.getValueAt(i,3).toString()+"','"+
-                                tabMode.getValueAt(i,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien"); 
+                                tabMode.getValueAt(i,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien");
             }
             i++;
-            Sequel.menyimpan("temporary","'"+i+"','TOTAL TAGIHAN :','','','','"+Valid.SetAngka(totaltagihan)+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien"); 
-            Map<String, Object> param = new HashMap<>();    
+            Sequel.menyimpan("temporary","'"+i+"','TOTAL TAGIHAN :','','','','"+Valid.SetAngka(totaltagihan)+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penagihan Piutang Pasien");
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptTagihanObatBHP.jasper","report","::[ Data Titip Faktur/Tagihan Obat & BHP ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -670,25 +670,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void MnHapusTagihanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnHapusTagihanActionPerformed
         int selected = tbDokter.getSelectedRow();
-        
+
         if (selected <= -1) {
             JOptionPane.showMessageDialog(null, "Silahkan pilih tagihan yang mau dihapus!");
             return;
         }
-        
+
         if (tbDokter.getValueAt(selected, 0).toString().trim().isBlank()) {
             Valid.textKosong(TCari,"pilihan data");
             return;
         }
-        
+
         if (tbDokter.getValueAt(selected, 4).toString().trim().equals("Dibayar")) {
 //            if (! akses.getadmin()) {
-//                
+//
 //            }
             JOptionPane.showMessageDialog(null, "Tagihan yang sudah dibayar tidak boleh dihapus!");
             return;
         }
-        
+
         try {
             ps=koneksi.prepareStatement("select detail_titip_faktur.no_faktur from detail_titip_faktur where detail_titip_faktur.no_tagihan=?");
             try {
@@ -721,7 +721,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }else{
                 Sequel.queryu("update titip_faktur set status='Ditagihkan' where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
                 tampil();
-            }  
+            }
         }
     }//GEN-LAST:event_MnDitagihkanActionPerformed
 
@@ -743,8 +743,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     tbDokter.setValueAt("Dibayar",tbDokter.getSelectedRow(),4);
                     JOptionPane.showMessageDialog(null,"Tagihan sudah dibayar..!!!");
                 }
-            }  
-        } 
+            }
+        }
     }//GEN-LAST:event_MnDibayarActionPerformed
 
     private void MnDitagihkan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDitagihkan1ActionPerformed
@@ -754,7 +754,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }else{
                 Sequel.queryu("update titip_faktur set status='Dibayar' where no_tagihan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
                 tampil();
-            }  
+            }
         }
     }//GEN-LAST:event_MnDitagihkan1ActionPerformed
 
@@ -819,21 +819,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
              if(!NoTagihan.getText().trim().equals("")){
                  notagihan=" and titip_faktur.no_tagihan like '%"+NoTagihan.getText()+"%' ";
              }
-             
+
              tanggal=" titip_faktur.tanggal between '"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tanggal2.getSelectedItem()+"")+"' ";
-             
+
              if(!Status.getSelectedItem().toString().equals("Semua")){
                  status=" and titip_faktur.status like '%"+Status.getSelectedItem().toString()+"%' ";
              }
-             
+
              if(!NmPeg.getText().trim().equals("")){
                  petugas=" and concat(titip_faktur.nip,petugas.nama) like '%"+KdPeg.getText()+NmPeg.getText()+"%' ";
              }
-             
+
              if(!TCari.getText().trim().equals("")){
                  cari=" and (titip_faktur.no_tagihan like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%' or titip_faktur.keterangan like '%"+TCari.getText()+"%' or detail_titip_faktur.no_faktur like '%"+TCari.getText()+"%' or datasuplier.nama_suplier like '%"+TCari.getText()+"%' ) ";
              }
-             
+
              ps=koneksi.prepareStatement(
                      "select titip_faktur.no_tagihan,titip_faktur.tanggal,titip_faktur.nip,petugas.nama as petugas,"+
                      "titip_faktur.keterangan,titip_faktur.status from titip_faktur "+
@@ -900,8 +900,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
              }
          }catch(Exception e){
             System.out.println("Notifikasi : "+e);
-         }  
-              
+         }
+
     }
 
     public void emptTeks() {
@@ -909,45 +909,45 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         NoTagihan.setText("");
         KdPeg.setText("");
         NmPeg.setText("");
-        TCari.requestFocus();        
+        TCari.requestFocus();
     }
-    
+
     public void isCek(){
         TCari.requestFocus();
         MnHapusTagihan.setEnabled(akses.gettagihan_hutang_obat());
         MnDitagihkan.setEnabled(akses.gettagihan_hutang_obat());
         MnDibayar.setEnabled(akses.getbayar_pemesanan_obat());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,65));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(135,HEIGHT));
-            FormMenu.setVisible(true); 
+            FormMenu.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){  
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormMenu.setVisible(false);    
+            FormMenu.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
-    
+
     private void batalBayarTagihan(String notagihan) {
-        
+
     }
 }

@@ -612,9 +612,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="TNm">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TNm" noResource="true"/>
                   </Properties>
                   <Events>
@@ -823,9 +820,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="TAlmt">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TAlmt" noResource="true"/>
                   </Properties>
                   <Events>
@@ -839,9 +833,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="TTlp">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TTlp" noResource="true"/>
                   </Properties>
                   <Events>
@@ -855,9 +846,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="TNip">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="TNip" noResource="true"/>
                   </Properties>
                   <Events>
@@ -871,9 +859,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="KdJbtn">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="KdJbtn" noResource="true"/>
                   </Properties>
                   <Events>
@@ -934,9 +919,6 @@
                 </Component>
                 <Component class="widget.TextBox" name="Email">
                   <Properties>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="Email" noResource="true"/>
                   </Properties>
                   <Events>

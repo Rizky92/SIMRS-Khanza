@@ -34,14 +34,14 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
         initComponents();
 
         Object[] row = {"Nama Template", "Tgl.Resep", "Jam Resep", "", "", "", "Dokter Peresep", "Kode Dokter"};
-        
+
         tabMode = new DefaultTableModel(null, row) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
         };
-        
+
         tbPemisahan.setModel(tabMode);
 
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
@@ -79,7 +79,7 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
                 break;
             }
         }
-        
+
         tbPemisahan.setDefaultRenderer(Object.class, new WarnaTable());
     }
 
@@ -243,7 +243,7 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -251,7 +251,7 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, TCari, BtnKeluar);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void tbPemisahanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPemisahanMouseClicked
         if (tabMode.getRowCount() != 0) {
@@ -259,7 +259,7 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbPemisahanMouseClicked
+    }//GEN-LAST:event_tbPemisahanMouseClicked
 
     private void tbPemisahanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPemisahanKeyPressed
         if (tabMode.getRowCount() != 0) {
@@ -267,11 +267,11 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbPemisahanKeyPressed
+    }//GEN-LAST:event_tbPemisahanKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -279,11 +279,11 @@ public class DlgCariTemplateResep extends javax.swing.JDialog {
         } else {
             Valid.pindah(evt, TCari, BtnTambah);
         }
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
     /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -378,10 +378,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 + "order by resep_obat.tgl_perawatan, resep_obat.jam desc"
             );
             ps.setString(1, "%" + TCari.getText() + "%");
-            
+
             try {
                 rs = ps.executeQuery();
-                
+
                 while (rs.next()) {
                     tabMode.addRow(new String[]{
                         rs.getString("nama_template"),
@@ -393,7 +393,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         rs.getString("nm_dokter"),
                         rs.getString("kd_dokter")
                     });
-                    
+
                     tabMode.addRow(new String[]{
                         "",
                         "Jumlah",
@@ -404,7 +404,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "",
                         ""
                     });
-                    
+
                     ps2 = koneksi.prepareStatement(
                         "select databarang.kode_brng, databarang.nama_brng, resep_dokter.jml, databarang.kode_sat, resep_dokter.aturan_pakai "
                         + "from resep_dokter "
@@ -412,12 +412,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         + "where resep_dokter.no_resep = ? "
                         + "order by databarang.kode_brng"
                     );
-                    
+
                     ps2.setString(1, rs.getString("no_resep"));
-                    
+
                     try {
                         rs2 = ps2.executeQuery();
-                        
+
                         while (rs2.next()) {
                             tabMode.addRow(new String[]{
                                 "",
@@ -436,24 +436,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if (rs2 != null) {
                             rs2.close();
                         }
-                        
+
                         if (ps2 != null) {
                             ps2.close();
                         }
                     }
-                    
+
                     ps2 = koneksi.prepareStatement(
                         "select resep_dokter_racikan.no_racik, resep_dokter_racikan.nama_racik, resep_dokter_racikan.kd_racik, metode_racik.nm_racik as metode, resep_dokter_racikan.jml_dr, resep_dokter_racikan.aturan_pakai, resep_dokter_racikan.keterangan "
                         + "from resep_dokter_racikan "
                         + "join metode_racik on resep_dokter_racikan.kd_racik = metode_racik.kd_racik "
                         + "where resep_dokter_racikan.no_resep = ?"
                     );
-                    
+
                     ps2.setString(1, rs.getString("no_resep"));
-                    
+
                     try {
                         rs2 = ps2.executeQuery();
-                        
+
                         while (rs2.next()) {
                             tabMode.addRow(new String[]{
                                 "",
@@ -465,7 +465,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 "",
                                 ""
                             });
-                            
+
                             ps3 = koneksi.prepareStatement(
                                 "select databarang.kode_brng, databarang.nama_brng, resep_dokter_racikan_detail.jml, databarang.kode_sat "
                                 + "from resep_dokter_racikan_detail "
@@ -473,10 +473,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 + "where resep_dokter_racikan_detail.no_resep = ? and resep_dokter_racikan_detail.no_racik = ? "
                                 + "order by databarang.kode_brng"
                             );
-                            
+
                             ps3.setString(1, rs.getString("no_resep"));
                             ps3.setString(2, rs2.getString("no_racik"));
-                            
+
                             try {
                                 rs3 = ps3.executeQuery();
                                 while (rs3.next()) {
@@ -498,7 +498,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if (rs3 != null) {
                                     rs3.close();
                                 }
-                                
+
                                 if (ps3 != null) {
                                     ps3.close();
                                 }

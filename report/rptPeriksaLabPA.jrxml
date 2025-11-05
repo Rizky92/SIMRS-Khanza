@@ -29,6 +29,7 @@
 	<parameter name="finger2" class="java.lang.String"/>
 	<parameter name="userid" class="java.lang.String"/>
 	<parameter name="ipaddress" class="java.lang.String"/>
+	<parameter name="lahir" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select no, temp1, temp2, temp3, temp4, temp5, temp6, temp7, temp8, temp9, temp10, temp11, temp12, temp13, temp14, temp15, temp16 from temporary_lab where temp36 = $P{userid} and temp37 = $P{ipaddress} order by no asc]]>
 	</queryString>
@@ -182,7 +183,7 @@
 					<font fontName="Tahoma" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[JK/Umur]]></text>
+				<text><![CDATA[JK/Tgl. Lahir]]></text>
 			</staticText>
 			<textField isBlankWhenNull="true">
 				<reportElement positionType="Float" x="77" y="183" width="35" height="15" uuid="b30b4dd8-56e4-4d8f-a385-0a466c1c11b3"/>
@@ -246,7 +247,7 @@
 					<font fontName="Tahoma" size="10"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$P{umur}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{lahir}]]></textFieldExpression>
 			</textField>
 			<staticText>
 				<reportElement positionType="Float" mode="Transparent" x="360" y="168" width="10" height="15" forecolor="#000000" backcolor="#F0F0DC" uuid="16e69608-4583-40f1-9160-2fcf92e39869"/>
