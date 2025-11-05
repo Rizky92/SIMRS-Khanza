@@ -11,7 +11,13 @@
  */
 package simrskhanza;
 
+import com.formdev.flatlaf.FlatLightLaf;
+import com.formdev.flatlaf.fonts.inter.FlatInterFont;
 import fungsi.sekuel;
+import java.awt.RenderingHints;
+import java.io.File;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
 import usu.widget.util.WidgetUtilities;
 
 /**
@@ -24,11 +30,19 @@ public class SIMRSKhanza {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        WidgetUtilities.invokeLater(() -> {
+        try {
+            FlatInterFont.install();
+            FlatLightLaf.setPreferredFontFamily(FlatInterFont.FAMILY);
+            FlatLightLaf.registerCustomDefaultsSource(new File("themes"));
+            FlatLightLaf.setup();
+            System.setProperty("flatlaf.animation", "true");
+        } catch (Exception ex) {
+            System.err.println("Failed to initialize LaF");
+        }
+        SwingUtilities.invokeLater(() -> {
             frmUtama utama = frmUtama.getInstance();
             utama.isWall();
             utama.setVisible(true);
-
             sekuel.nyalakanBatasEdit();
         });
     }

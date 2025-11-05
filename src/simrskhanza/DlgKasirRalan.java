@@ -15654,7 +15654,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -15676,7 +15676,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();

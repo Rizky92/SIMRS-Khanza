@@ -15,18 +15,4 @@ import javax.swing.border.EmptyBorder;
  */
 public class RadioButton extends JRadioButton{
 
-    private static final long serialVersionUID = 1L;
-
-    public RadioButton(){
-        super();
-        setFont(new java.awt.Font("Tahoma", 0, 11));
-        //setForeground(new Color(90,90,90));
-        //setBackground(new Color(245,170,245));
-        setBackground(new Color(255,255,255));
-        setForeground(new Color(50,50,50));
-        setFocusPainted(false);
-        setBorder(new EmptyBorder(1,1,1,1));
-        setOpaque(false);
-        setSize(WIDTH,23);
-    }
 }

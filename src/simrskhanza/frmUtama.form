@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<Form version="1.2" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+<Form version="1.5" maxVersion="1.7" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
     <Container class="javax.swing.JDialog" name="DlgLogin">
       <Properties>
@@ -14,10 +14,6 @@
       <SubComponents>
         <Container class="widget.InternalFrame" name="internalFrame2">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border"
-              editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null" />
-            </Property>
             <Property name="name" type="java.lang.String" value="internalFrame2" noResource="true" />
             <Property name="warnaAtas" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -258,22 +254,6 @@
                     </Constraint>
                   </Constraints>
                 </Component>
-                <Component class="javax.swing.JLabel" name="jLabel6">
-                  <Properties>
-                    <Property name="icon" type="javax.swing.Icon" noResource="true"
-                      editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/picture/LaST (Cobalt) Lock n Gear.png" />
-                    </Property>
-                    <Property name="name" type="java.lang.String" value="jLabel6" noResource="true" />
-                  </Properties>
-                  <Constraints>
-                    <Constraint
-                      layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout"
-                      value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                      <AbsoluteConstraints x="105" y="5" width="135" height="145" />
-                    </Constraint>
-                  </Constraints>
-                </Component>
               </SubComponents>
             </Container>
           </SubComponents>
@@ -510,7 +490,6 @@
                     <Property name="horizontalAlignment" type="int" value="0" />
                     <Property name="horizontalTextPosition" type="int" value="0" />
                     <Property name="name" type="java.lang.String" value="ChkInput" noResource="true" />
-                    <Property name="opaque" type="boolean" value="false" />
                     <Property name="preferredSize" type="java.awt.Dimension"
                       editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[25, 23]" />
@@ -561,10 +540,6 @@
               <SubComponents>
                 <Container class="widget.panelGlass" name="Panelmenu">
                   <Properties>
-                    <Property name="border" type="javax.swing.border.Border"
-                      editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="null" />
-                    </Property>
                     <Property name="minimumSize" type="java.awt.Dimension"
                       editor="org.netbeans.beaninfo.editors.DimensionEditor">
                       <Dimension value="[1975, 2826]" />
@@ -9563,14 +9538,17 @@
         </Property>
         <Property name="foreground" type="java.awt.Color"
           editor="org.netbeans.beaninfo.editors.ColorEditor">
-          <Color blue="fd" green="ff" red="ff" type="rgb" />
+          <Color blue="32" green="32" red="32" type="rgb" />
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="" />
-        <Property name="name" type="java.lang.String" value="MenuBar" noResource="true" />
-        <Property name="preferredSize" type="java.awt.Dimension"
-          editor="org.netbeans.beaninfo.editors.DimensionEditor">
-          <Dimension value="[227, 25]" />
+        <Property name="alignmentY" type="float" value="0.5" />
+        <Property name="font" type="java.awt.Font"
+          editor="org.netbeans.modules.form.editors2.FontEditor">
+          <FontInfo relative="true">
+            <Font component="MenuBar" property="font" relativeSize="true" size="0" />
+          </FontInfo>
         </Property>
+        <Property name="name" type="java.lang.String" value="MenuBar" noResource="true" />
       </Properties>
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jMenu1">
@@ -9581,44 +9559,47 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border"
               editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null" />
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="2" left="8" right="8" top="2" />
+              </Border>
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fd" green="ff" red="ff" type="rgb" />
             </Property>
-            <Property name="icon" type="javax.swing.Icon" noResource="true"
-              editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/picture/85.png" />
-            </Property>
             <Property name="mnemonic" type="int" value="65" />
             <Property name="text" type="java.lang.String" value="Program" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+A" />
+            <Property name="borderPainted" type="boolean" value="false" />
             <Property name="font" type="java.awt.Font"
-              editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0" />
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="jMenu1" property="font" relativeSize="true" size="0" />
+              </FontInfo>
             </Property>
             <Property name="horizontalAlignment" type="int" value="2" />
-            <Property name="name" type="java.lang.String" value="jMenu1" noResource="true" />
-            <Property name="preferredSize" type="java.awt.Dimension"
-              editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 26]" />
+            <Property name="margin" type="java.awt.Insets"
+              editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="null" />
             </Property>
+            <Property name="name" type="java.lang.String" value="jMenu1" noResource="true" />
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MnLogin">
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  editor="org.netbeans.modules.form.editors2.FontEditor">
+                  <FontInfo relative="true">
+                    <Font component="MnLogin" property="font" relativeSize="true" size="0" />
+                  </FontInfo>
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9640,15 +9621,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9698,15 +9675,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9755,15 +9728,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" noResource="true"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9791,45 +9760,42 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border"
               editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null" />
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="2" left="8" right="8" top="2" />
+              </Border>
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fd" green="ff" red="ff" type="rgb" />
             </Property>
-            <Property name="icon" type="javax.swing.Icon"
-              editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/picture/PatientMale.png" />
-            </Property>
             <Property name="mnemonic" type="int" value="80" />
-            <Property name="text" type="java.lang.String" value="Presensi Pegawai" />
+            <Property name="text" type="java.lang.String" value="Presensi" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+P" />
+            <Property name="borderPainted" type="boolean" value="false" />
             <Property name="font" type="java.awt.Font"
-              editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0" />
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="jMenu5" property="font" relativeSize="true" size="0" />
+              </FontInfo>
             </Property>
             <Property name="horizontalAlignment" type="int" value="2" />
             <Property name="iconTextGap" type="int" value="3" />
-            <Property name="name" type="java.lang.String" value="jMenu5" noResource="true" />
-            <Property name="preferredSize" type="java.awt.Dimension"
-              editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[126, 26]" />
+            <Property name="margin" type="java.awt.Insets"
+              editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="null" />
             </Property>
+            <Property name="name" type="java.lang.String" value="jMenu5" noResource="true" />
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MnBelumDatang1">
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9852,15 +9818,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9883,15 +9845,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9914,15 +9872,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9945,15 +9899,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -9975,15 +9925,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10014,44 +9960,40 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border"
               editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null" />
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="2" left="8" right="8" top="2" />
+              </Border>
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fd" green="ff" red="ff" type="rgb" />
             </Property>
-            <Property name="icon" type="javax.swing.Icon"
-              editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/picture/Bar Chart.png" />
-            </Property>
             <Property name="mnemonic" type="int" value="73" />
             <Property name="text" type="java.lang.String" value="Informasi" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+I" />
             <Property name="font" type="java.awt.Font"
-              editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0" />
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="jMenu6" property="font" relativeSize="true" size="0" />
+              </FontInfo>
             </Property>
             <Property name="horizontalAlignment" type="int" value="2" />
-            <Property name="name" type="java.lang.String" value="jMenu6" noResource="true" />
-            <Property name="preferredSize" type="java.awt.Dimension"
-              editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[88, 26]" />
+            <Property name="margin" type="java.awt.Insets"
+              editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="null" />
             </Property>
+            <Property name="name" type="java.lang.String" value="jMenu6" noResource="true" />
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MnRekapBulanan1">
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10074,15 +10016,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10105,15 +10043,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10136,15 +10070,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10192,21 +10122,17 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/picture/Preview.png" />
                 </Property>
                 <Property name="text" type="java.lang.String" value="Tarif" />
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="2" />
                 <Property name="horizontalTextPosition" type="int" value="4" />
                 <Property name="name" type="java.lang.String" value="MnTarif" noResource="true" />
@@ -10220,15 +10146,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10252,15 +10174,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10284,15 +10202,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10316,15 +10230,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10348,15 +10258,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10380,15 +10286,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10414,21 +10316,17 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/picture/Preview.png" />
                 </Property>
                 <Property name="text" type="java.lang.String" value="Dashboard" />
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="2" />
                 <Property name="horizontalTextPosition" type="int" value="4" />
                 <Property name="name" type="java.lang.String" value="MnTarif1" noResource="true" />
@@ -10442,15 +10340,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10473,15 +10367,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10504,15 +10394,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10535,15 +10421,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10566,15 +10448,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10598,15 +10476,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10629,15 +10503,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10688,15 +10558,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10720,15 +10586,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10750,15 +10612,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10788,44 +10646,41 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border"
               editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null" />
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="2" left="8" right="8" top="2" />
+              </Border>
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fd" green="ff" red="ff" type="rgb" />
             </Property>
-            <Property name="icon" type="javax.swing.Icon"
-              editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/picture/My-Tickets24.png" />
-            </Property>
             <Property name="mnemonic" type="int" value="78" />
             <Property name="text" type="java.lang.String" value="Anjungan &amp; Antrian" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+N" />
+            <Property name="borderPainted" type="boolean" value="false" />
             <Property name="font" type="java.awt.Font"
-              editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0" />
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="jMenu7" property="font" relativeSize="true" size="0" />
+              </FontInfo>
             </Property>
             <Property name="horizontalAlignment" type="int" value="2" />
-            <Property name="name" type="java.lang.String" value="jMenu7" noResource="true" />
-            <Property name="preferredSize" type="java.awt.Dimension"
-              editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[137, 26]" />
+            <Property name="margin" type="java.awt.Insets"
+              editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="null" />
             </Property>
+            <Property name="name" type="java.lang.String" value="jMenu7" noResource="true" />
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="MnAnjungan">
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10872,15 +10727,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10903,15 +10754,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10934,15 +10781,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10965,15 +10808,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -10996,15 +10835,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11026,21 +10861,17 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/picture/Create-Ticket24.png" />
                 </Property>
                 <Property name="text" type="java.lang.String" value="Antrian Apotek" />
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="2" />
                 <Property name="horizontalTextPosition" type="int" value="4" />
                 <Property name="name" type="java.lang.String" value="MnAntrianFarmasi"
@@ -11055,15 +10886,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11086,15 +10913,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11117,15 +10940,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11148,15 +10967,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11182,21 +10997,17 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/picture/Create-Ticket24.png" />
                 </Property>
                 <Property name="text" type="java.lang.String" value="Antrian Laborat" />
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="2" />
                 <Property name="horizontalTextPosition" type="int" value="4" />
                 <Property name="name" type="java.lang.String" value="MnAntrianLaborat"
@@ -11211,15 +11022,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11242,15 +11049,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11274,15 +11077,11 @@
                   <Properties>
                     <Property name="background" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="fe" green="ff" red="ff" type="rgb" />
-                    </Property>
-                    <Property name="font" type="java.awt.Font"
-                      editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Tahoma" size="11" style="0" />
+                      <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                     </Property>
                     <Property name="foreground" type="java.awt.Color"
                       editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="28" green="5a" red="32" type="rgb" />
+                      <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                     </Property>
                     <Property name="icon" type="javax.swing.Icon"
                       editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11309,15 +11108,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11365,15 +11160,11 @@
               <Properties>
                 <Property name="background" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="fe" green="ff" red="ff" type="rgb" />
-                </Property>
-                <Property name="font" type="java.awt.Font"
-                  editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Tahoma" size="11" style="0" />
+                  <Color blue="f0" green="f0" id="Menu" palette="2" red="f0" type="palette" />
                 </Property>
                 <Property name="foreground" type="java.awt.Color"
                   editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="28" green="5a" red="32" type="rgb" />
+                  <Color blue="0" green="0" id="Menu Text" palette="2" red="0" type="palette" />
                 </Property>
                 <Property name="icon" type="javax.swing.Icon"
                   editor="org.netbeans.modules.form.editors2.IconEditor">
@@ -11402,29 +11193,30 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border"
               editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="null" />
+              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
+                <EmptyBorder bottom="2" left="8" right="8" top="2" />
+              </Border>
             </Property>
             <Property name="foreground" type="java.awt.Color"
               editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="fd" green="ff" red="ff" type="rgb" />
             </Property>
-            <Property name="icon" type="javax.swing.Icon" noResource="true"
-              editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/picture/63.png" />
-            </Property>
             <Property name="mnemonic" type="int" value="71" />
-            <Property name="text" type="java.lang.String" value="Tentang Program" />
+            <Property name="text" type="java.lang.String" value="Tentang" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+G" />
+            <Property name="borderPainted" type="boolean" value="false" />
             <Property name="font" type="java.awt.Font"
-              editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="0" />
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="jMenu4" property="font" relativeSize="true" size="0" />
+              </FontInfo>
             </Property>
             <Property name="horizontalAlignment" type="int" value="2" />
-            <Property name="name" type="java.lang.String" value="jMenu4" noResource="true" />
-            <Property name="preferredSize" type="java.awt.Dimension"
-              editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[121, 26]" />
+            <Property name="margin" type="java.awt.Insets"
+              editor="org.netbeans.beaninfo.editors.InsetsEditor">
+              <Insets value="null" />
             </Property>
+            <Property name="name" type="java.lang.String" value="jMenu4" noResource="true" />
           </Properties>
           <Events>
             <EventHandler event="menuSelected" listener="javax.swing.event.MenuListener"
@@ -11507,8 +11299,8 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignFlowLayout">
         <Property name="alignment" type="int" value="0" />
-        <Property name="horizontalGap" type="int" value="0" />
-        <Property name="verticalGap" type="int" value="2" />
+        <Property name="horizontalGap" type="int" value="2" />
+        <Property name="verticalGap" type="int" value="0" />
       </Layout>
       <SubComponents>
         <Component class="widget.ButtonBig" name="BtnMenu">
@@ -11521,8 +11313,14 @@
             <Property name="text" type="java.lang.String" value="Menu" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+M" />
             <Property name="enabled" type="boolean" value="false" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="BtnMenu" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11530,7 +11328,7 @@
             <Property name="name" type="java.lang.String" value="BtnMenu" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[78, 38]" />
+              <Dimension value="[78, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11576,8 +11374,14 @@
             <Property name="text" type="java.lang.String" value="Registrasi" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+R" />
             <Property name="enabled" type="boolean" value="false" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="BtnToolReg" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11585,7 +11389,7 @@
             <Property name="name" type="java.lang.String" value="BtnToolReg" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[100, 38]" />
+              <Dimension value="[100, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11604,8 +11408,14 @@
             <Property name="text" type="java.lang.String" value="IGD/UGD" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+D" />
             <Property name="enabled" type="boolean" value="false" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="btnToolIGD" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11613,7 +11423,7 @@
             <Property name="name" type="java.lang.String" value="btnToolIGD" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[94, 38]" />
+              <Dimension value="[94, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11658,8 +11468,14 @@
             <Property name="mnemonic" type="int" value="79" />
             <Property name="text" type="java.lang.String" value="Laborat" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+O" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="btnToolLab" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11667,7 +11483,7 @@
             <Property name="name" type="java.lang.String" value="btnToolLab" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[88, 38]" />
+              <Dimension value="[88, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11685,8 +11501,14 @@
             <Property name="mnemonic" type="int" value="65" />
             <Property name="text" type="java.lang.String" value="Radiologi" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+A" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="btnToolRad" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11694,7 +11516,7 @@
             <Property name="name" type="java.lang.String" value="btnToolRad" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[97, 38]" />
+              <Dimension value="[94, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11712,8 +11534,14 @@
             <Property name="mnemonic" type="int" value="106" />
             <Property name="text" type="java.lang.String" value="Farmasi" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+J" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="BtnToolJualObat" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11721,7 +11549,7 @@
             <Property name="name" type="java.lang.String" value="BtnToolJualObat" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[90, 38]" />
+              <Dimension value="[90, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11767,8 +11595,14 @@
             <Property name="text" type="java.lang.String" value="Rawat Inap" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+K" />
             <Property name="enabled" type="boolean" value="false" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="BtnToolKamnap" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11776,7 +11610,7 @@
             <Property name="name" type="java.lang.String" value="BtnToolKamnap" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[107, 38]" />
+              <Dimension value="[106, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11795,8 +11629,14 @@
             <Property name="text" type="java.lang.String" value="Rawat Jalan" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+S" />
             <Property name="enabled" type="boolean" value="false" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="BtnToolKasir" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11804,7 +11644,7 @@
             <Property name="name" type="java.lang.String" value="BtnToolKasir" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[110, 38]" />
+              <Dimension value="[108, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11849,8 +11689,14 @@
             <Property name="mnemonic" type="int" value="76" />
             <Property name="text" type="java.lang.String" value="Log In" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+L" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="BtnLog" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11858,7 +11704,7 @@
             <Property name="name" type="java.lang.String" value="BtnLog" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[78, 38]" />
+              <Dimension value="[80, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11876,8 +11722,14 @@
             <Property name="mnemonic" type="int" value="85" />
             <Property name="text" type="java.lang.String" value="Keluar" />
             <Property name="toolTipText" type="java.lang.String" value="Alt+U" />
+            <Property name="font" type="java.awt.Font"
+              editor="org.netbeans.modules.form.editors2.FontEditor">
+              <FontInfo relative="true">
+                <Font component="BtnClose" property="font" relativeSize="true" size="0" />
+              </FontInfo>
+            </Property>
             <Property name="horizontalTextPosition" type="int" value="4" />
-            <Property name="iconTextGap" type="int" value="2" />
+            <Property name="iconTextGap" type="int" value="4" />
             <Property name="margin" type="java.awt.Insets"
               editor="org.netbeans.beaninfo.editors.InsetsEditor">
               <Insets value="[0, 0, 0, 0]" />
@@ -11885,7 +11737,7 @@
             <Property name="name" type="java.lang.String" value="BtnClose" noResource="true" />
             <Property name="preferredSize" type="java.awt.Dimension"
               editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[80, 38]" />
+              <Dimension value="[80, 42]" />
             </Property>
             <Property name="verticalTextPosition" type="int" value="0" />
           </Properties>
@@ -11901,10 +11753,6 @@
         <Property name="background" type="java.awt.Color"
           editor="org.netbeans.beaninfo.editors.ColorEditor">
           <Color blue="c3" green="d7" red="eb" type="rgb" />
-        </Property>
-        <Property name="border" type="javax.swing.border.Border"
-          editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="null" />
         </Property>
         <Property name="name" type="java.lang.String" value="internalFrame4" noResource="true" />
         <Property name="preferredSize" type="java.awt.Dimension"
