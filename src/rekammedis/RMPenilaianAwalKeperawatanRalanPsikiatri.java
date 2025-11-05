@@ -53,9 +53,9 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
     private ResultSet rs,rs2;
     private int i=0,jml=0,index=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
-    private boolean[] pilih; 
+    private boolean[] pilih;
     private String[] kode,masalah;
-    private String masalahkeperawatan="",finger=""; 
+    private String masalahkeperawatan="",finger="";
     private File file;
     private FileWriter fileWriter;
     private ObjectMapper mapper = new ObjectMapper();
@@ -63,14 +63,14 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
     private JsonNode response;
     private FileReader myObj;
     private String TANGGALMUNDUR="yes";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMPenilaianAwalKeperawatanRalanPsikiatri(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","J.K.","Agama","Bahasa","Cacat Fisik","Tgl.Lahir","Tgl.Asuhan","Informasi","Keluhan Utama","Sakit Sejak","Riwayat Penyakit Dahulu","Berobat",
             "Hasil Pengobatan","Putus Obat","Keterangan Putus Obat","Masalah Ekonomi","Keterangan Masalah Ekonomi","Masalah Fisik","Keterangan Masalah Fisik",
@@ -99,271 +99,271 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         for (i = 0; i < 131; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(105);  
+                column.setPreferredWidth(105);
             }else if(i==1){
-                column.setPreferredWidth(65);   
+                column.setPreferredWidth(65);
             }else if(i==2){
-                column.setPreferredWidth(160);  
+                column.setPreferredWidth(160);
             }else if(i==3){
-                column.setPreferredWidth(50);   
+                column.setPreferredWidth(50);
             }else if(i==4){
-                column.setPreferredWidth(60);   
+                column.setPreferredWidth(60);
             }else if(i==5){
-                column.setPreferredWidth(120);   
+                column.setPreferredWidth(120);
             }else if(i==6){
-                column.setPreferredWidth(120);   
+                column.setPreferredWidth(120);
             }else if(i==7){
-                column.setPreferredWidth(65); 
+                column.setPreferredWidth(65);
             }else if(i==8){
-                column.setPreferredWidth(115); 
+                column.setPreferredWidth(115);
             }else if(i==9){
-                column.setPreferredWidth(80); 
+                column.setPreferredWidth(80);
             }else if(i==10){
-                column.setPreferredWidth(200); 
+                column.setPreferredWidth(200);
             }else if(i==11){
-                column.setPreferredWidth(80); 
+                column.setPreferredWidth(80);
             }else if(i==12){
-                column.setPreferredWidth(170); 
+                column.setPreferredWidth(170);
             }else if(i==13){
-                column.setPreferredWidth(78); 
+                column.setPreferredWidth(78);
             }else if(i==14){
-                column.setPreferredWidth(95); 
+                column.setPreferredWidth(95);
             }else if(i==15){
-                column.setPreferredWidth(65); 
+                column.setPreferredWidth(65);
             }else if(i==16){
-                column.setPreferredWidth(123); 
+                column.setPreferredWidth(123);
             }else if(i==17){
-                column.setPreferredWidth(91); 
+                column.setPreferredWidth(91);
             }else if(i==18){
-                column.setPreferredWidth(150); 
+                column.setPreferredWidth(150);
             }else if(i==19){
-                column.setPreferredWidth(75); 
+                column.setPreferredWidth(75);
             }else if(i==20){
-                column.setPreferredWidth(134); 
+                column.setPreferredWidth(134);
             }else if(i==21){
-                column.setPreferredWidth(106); 
+                column.setPreferredWidth(106);
             }else if(i==22){
-                column.setPreferredWidth(165); 
+                column.setPreferredWidth(165);
             }else if(i==23){
-                column.setPreferredWidth(90); 
+                column.setPreferredWidth(90);
             }else if(i==24){
-                column.setPreferredWidth(150); 
+                column.setPreferredWidth(150);
             }else if(i==25){
-                column.setPreferredWidth(80); 
+                column.setPreferredWidth(80);
             }else if(i==26){
-                column.setPreferredWidth(78); 
+                column.setPreferredWidth(78);
             }else if(i==27){
-                column.setPreferredWidth(138); 
+                column.setPreferredWidth(138);
             }else if(i==28){
-                column.setPreferredWidth(104); 
+                column.setPreferredWidth(104);
             }else if(i==29){
-                column.setPreferredWidth(162); 
+                column.setPreferredWidth(162);
             }else if(i==30){
-                column.setPreferredWidth(82); 
+                column.setPreferredWidth(82);
             }else if(i==31){
-                column.setPreferredWidth(140); 
+                column.setPreferredWidth(140);
             }else if(i==32){
-                column.setPreferredWidth(113); 
+                column.setPreferredWidth(113);
             }else if(i==33){
-                column.setPreferredWidth(170); 
+                column.setPreferredWidth(170);
             }else if(i==34){
-                column.setPreferredWidth(110); 
+                column.setPreferredWidth(110);
             }else if(i==35){
-                column.setPreferredWidth(168); 
+                column.setPreferredWidth(168);
             }else if(i==36){
-                column.setPreferredWidth(136); 
+                column.setPreferredWidth(136);
             }else if(i==37){
-                column.setPreferredWidth(195); 
+                column.setPreferredWidth(195);
             }else if(i==38){
-                column.setPreferredWidth(101); 
+                column.setPreferredWidth(101);
             }else if(i==39){
-                column.setPreferredWidth(160); 
+                column.setPreferredWidth(160);
             }else if(i==40){
-                column.setPreferredWidth(40); 
+                column.setPreferredWidth(40);
             }else if(i==41){
-                column.setPreferredWidth(160); 
+                column.setPreferredWidth(160);
             }else if(i==42){
-                column.setPreferredWidth(68); 
+                column.setPreferredWidth(68);
             }else if(i==43){
-                column.setPreferredWidth(120); 
+                column.setPreferredWidth(120);
             }else if(i==44){
-                column.setPreferredWidth(170); 
+                column.setPreferredWidth(170);
             }else if(i==45){
-                column.setPreferredWidth(73); 
+                column.setPreferredWidth(73);
             }else if(i==46){
-                column.setPreferredWidth(195); 
+                column.setPreferredWidth(195);
             }else if(i==47){
-                column.setPreferredWidth(172); 
+                column.setPreferredWidth(172);
             }else if(i==48){
-                column.setPreferredWidth(64); 
+                column.setPreferredWidth(64);
             }else if(i==49){
-                column.setPreferredWidth(124); 
+                column.setPreferredWidth(124);
             }else if(i==50){
-                column.setPreferredWidth(49); 
+                column.setPreferredWidth(49);
             }else if(i==51){
-                column.setPreferredWidth(108); 
+                column.setPreferredWidth(108);
             }else if(i==52){
-                column.setPreferredWidth(64); 
+                column.setPreferredWidth(64);
             }else if(i==53){
-                column.setPreferredWidth(123); 
+                column.setPreferredWidth(123);
             }else if(i==54){
-                column.setPreferredWidth(50); 
+                column.setPreferredWidth(50);
             }else if(i==55){
-                column.setPreferredWidth(36); 
+                column.setPreferredWidth(36);
             }else if(i==56){
-                column.setPreferredWidth(36); 
+                column.setPreferredWidth(36);
             }else if(i==57){
-                column.setPreferredWidth(36); 
+                column.setPreferredWidth(36);
             }else if(i==58){
-                column.setPreferredWidth(36); 
+                column.setPreferredWidth(36);
             }else if(i==59){
-                column.setPreferredWidth(73); 
+                column.setPreferredWidth(73);
             }else if(i==60){
-                column.setPreferredWidth(131); 
+                column.setPreferredWidth(131);
             }else if(i==61){
-                column.setPreferredWidth(61); 
+                column.setPreferredWidth(61);
             }else if(i==62){
-                column.setPreferredWidth(39); 
+                column.setPreferredWidth(39);
             }else if(i==63){
-                column.setPreferredWidth(82); 
+                column.setPreferredWidth(82);
             }else if(i==64){
-                column.setPreferredWidth(82); 
+                column.setPreferredWidth(82);
             }else if(i==65){
-                column.setPreferredWidth(111); 
+                column.setPreferredWidth(111);
             }else if(i==66){
-                column.setPreferredWidth(87); 
+                column.setPreferredWidth(87);
             }else if(i==67){
-                column.setPreferredWidth(107); 
+                column.setPreferredWidth(107);
             }else if(i==68){
-                column.setPreferredWidth(110); 
+                column.setPreferredWidth(110);
             }else if(i==69){
-                column.setPreferredWidth(56); 
+                column.setPreferredWidth(56);
             }else if(i==70){
-                column.setPreferredWidth(70); 
+                column.setPreferredWidth(70);
             }else if(i==71){
-                column.setPreferredWidth(86); 
+                column.setPreferredWidth(86);
             }else if(i==72){
-                column.setPreferredWidth(86); 
+                column.setPreferredWidth(86);
             }else if(i==73){
-                column.setPreferredWidth(125); 
+                column.setPreferredWidth(125);
             }else if(i==74){
-                column.setPreferredWidth(35); 
+                column.setPreferredWidth(35);
             }else if(i==75){
-                column.setPreferredWidth(35); 
+                column.setPreferredWidth(35);
             }else if(i==76){
-                column.setPreferredWidth(45); 
+                column.setPreferredWidth(45);
             }else if(i==77){
-                column.setPreferredWidth(105); 
+                column.setPreferredWidth(105);
             }else if(i==78){
-                column.setPreferredWidth(127); 
+                column.setPreferredWidth(127);
             }else if(i==79){
-                column.setPreferredWidth(76); 
+                column.setPreferredWidth(76);
             }else if(i==80){
-                column.setPreferredWidth(40); 
+                column.setPreferredWidth(40);
             }else if(i==81){
-                column.setPreferredWidth(76); 
+                column.setPreferredWidth(76);
             }else if(i==82){
-                column.setPreferredWidth(40); 
+                column.setPreferredWidth(40);
             }else if(i==83){
-                column.setPreferredWidth(57); 
+                column.setPreferredWidth(57);
             }else if(i==84){
-                column.setPreferredWidth(85); 
+                column.setPreferredWidth(85);
             }else if(i==85){
-                column.setPreferredWidth(85); 
+                column.setPreferredWidth(85);
             }else if(i==86){
-                column.setPreferredWidth(85); 
+                column.setPreferredWidth(85);
             }else if(i==87){
-                column.setPreferredWidth(205); 
+                column.setPreferredWidth(205);
             }else if(i==88){
-                column.setPreferredWidth(71); 
+                column.setPreferredWidth(71);
             }else if(i==89){
-                column.setPreferredWidth(67); 
+                column.setPreferredWidth(67);
             }else if(i==90){
-                column.setPreferredWidth(88); 
+                column.setPreferredWidth(88);
             }else if(i==91){
-                column.setPreferredWidth(88); 
+                column.setPreferredWidth(88);
             }else if(i==92){
-                column.setPreferredWidth(88); 
+                column.setPreferredWidth(88);
             }else if(i==93){
-                column.setPreferredWidth(88); 
+                column.setPreferredWidth(88);
             }else if(i==94){
-                column.setPreferredWidth(88); 
+                column.setPreferredWidth(88);
             }else if(i==95){
-                column.setPreferredWidth(53); 
+                column.setPreferredWidth(53);
             }else if(i==96){
-                column.setPreferredWidth(112); 
+                column.setPreferredWidth(112);
             }else if(i==97){
-                column.setPreferredWidth(81); 
+                column.setPreferredWidth(81);
             }else if(i==98){
-                column.setPreferredWidth(141); 
+                column.setPreferredWidth(141);
             }else if(i==99){
-                column.setPreferredWidth(75); 
+                column.setPreferredWidth(75);
             }else if(i==100){
-                column.setPreferredWidth(135); 
+                column.setPreferredWidth(135);
             }else if(i==101){
-                column.setPreferredWidth(115); 
+                column.setPreferredWidth(115);
             }else if(i==102){
-                column.setPreferredWidth(108); 
+                column.setPreferredWidth(108);
             }else if(i==103){
-                column.setPreferredWidth(181); 
+                column.setPreferredWidth(181);
             }else if(i==104){
-                column.setPreferredWidth(67); 
+                column.setPreferredWidth(67);
             }else if(i==105){
-                column.setPreferredWidth(90); 
+                column.setPreferredWidth(90);
             }else if(i==106){
-                column.setPreferredWidth(106); 
+                column.setPreferredWidth(106);
             }else if(i==107){
-                column.setPreferredWidth(135); 
+                column.setPreferredWidth(135);
             }else if(i==108){
-                column.setPreferredWidth(54); 
+                column.setPreferredWidth(54);
             }else if(i==109){
-                column.setPreferredWidth(60); 
+                column.setPreferredWidth(60);
             }else if(i==110){
-                column.setPreferredWidth(181); 
+                column.setPreferredWidth(181);
             }else if(i==111){
-                column.setPreferredWidth(102); 
+                column.setPreferredWidth(102);
             }else if(i==112){
-                column.setPreferredWidth(175); 
+                column.setPreferredWidth(175);
             }else if(i==113){
-                column.setPreferredWidth(70); 
+                column.setPreferredWidth(70);
             }else if(i==114){
-                column.setPreferredWidth(108); 
+                column.setPreferredWidth(108);
             }else if(i==115){
-                column.setPreferredWidth(86); 
+                column.setPreferredWidth(86);
             }else if(i==116){
-                column.setPreferredWidth(58); 
+                column.setPreferredWidth(58);
             }else if(i==117){
-                column.setPreferredWidth(108); 
+                column.setPreferredWidth(108);
             }else if(i==118){
-                column.setPreferredWidth(178); 
+                column.setPreferredWidth(178);
             }else if(i==119){
-                column.setPreferredWidth(178); 
+                column.setPreferredWidth(178);
             }else if(i==120){
-                column.setPreferredWidth(76); 
+                column.setPreferredWidth(76);
             }else if(i==121){
-                column.setPreferredWidth(135); 
+                column.setPreferredWidth(135);
             }else if(i==122){
-                column.setPreferredWidth(175); 
+                column.setPreferredWidth(175);
             }else if(i==123){
-                column.setPreferredWidth(67); 
+                column.setPreferredWidth(67);
             }else if(i==124){
-                column.setPreferredWidth(107); 
+                column.setPreferredWidth(107);
             }else if(i==125){
-                column.setPreferredWidth(81); 
+                column.setPreferredWidth(81);
             }else if(i==126){
-                column.setPreferredWidth(177); 
+                column.setPreferredWidth(177);
             }else if(i==127){
-                column.setPreferredWidth(159); 
+                column.setPreferredWidth(159);
             }else if(i==128){
-                column.setPreferredWidth(157); 
+                column.setPreferredWidth(157);
             }else if(i==129){
-                column.setPreferredWidth(90); 
+                column.setPreferredWidth(90);
             }else if(i==130){
-                column.setPreferredWidth(150); 
+                column.setPreferredWidth(150);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeMasalah=new DefaultTableModel(null,new Object[]{
                 "P","KODE","MASALAH KEPERAWATAN"
             }){
@@ -387,7 +387,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbMasalahKeperawatan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbMasalahKeperawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         for (i = 0; i < 3; i++) {
             TableColumn column = tbMasalahKeperawatan.getColumnModel().getColumn(i);
             if(i==0){
@@ -400,7 +400,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             }
         }
         tbMasalahKeperawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRencana=new DefaultTableModel(null,new Object[]{
                 "P","KODE","RENCANA KEPERAWATAN"
             }){
@@ -423,7 +423,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
 
         tbRencanaKeperawatan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbRencanaKeperawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         for (i = 0; i < 3; i++) {
             TableColumn column = tbRencanaKeperawatan.getColumnModel().getColumn(i);
             if(i==0){
@@ -436,7 +436,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             }
         }
         tbRencanaKeperawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailMasalah=new DefaultTableModel(null,new Object[]{
                 "Kode","Masalah Keperawatan"
             }){
@@ -457,7 +457,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             }
         }
         tbMasalahDetail.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailRencana=new DefaultTableModel(null,new Object[]{
                 "Kode","Rencana Keperawatan"
             }){
@@ -480,9 +480,9 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         tbRencanaDetail.setDefaultRenderer(Object.class, new WarnaTable());
 
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
-        KeluhanUtama.setDocument(new batasInput((int)500).getKata(KeluhanUtama));
+        // KeluhanUtama.setDocument(new batasInput((int)500).getKata(KeluhanUtama));
         BMI.setDocument(new batasInput((byte)8).getKata(BMI));
-        RKDKeluhan.setDocument(new batasInput((int)500).getKata(RKDKeluhan));
+        // RKDKeluhan.setDocument(new batasInput((int)500).getKata(RKDKeluhan));
         KetPutusObat.setDocument(new batasInput((int)50).getKata(KetPutusObat));
         KetMasalahEkonomi.setDocument(new batasInput((int)50).getKata(KetMasalahEkonomi));
         KetMasalahFisik.setDocument(new batasInput((int)50).getKata(KetMasalahFisik));
@@ -502,7 +502,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         KetPenggunaanObatLainnya.setDocument(new batasInput((int)20).getKata(KetPenggunaanObatLainnya));
         KetAlergiObat.setDocument(new batasInput((int)25).getKata(KetAlergiObat));
         KetMerokok.setDocument(new batasInput((int)25).getKata(KetMerokok));
-        KetMinumKopi.setDocument(new batasInput((int)25).getKata(KetMinumKopi));       
+        KetMinumKopi.setDocument(new batasInput((int)25).getKata(KetMinumKopi));
         TD.setDocument(new batasInput((byte)8).getKata(TD));
         Nadi.setDocument(new batasInput((byte)5).getKata(Nadi));
         GCS.setDocument(new batasInput((byte)5).getKata(GCS));
@@ -530,10 +530,10 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         KetKKPembelajaranLainnya.setDocument(new batasInput((int)50).getKata(KetKKPembelajaranLainnya));
         KetKKPenerjamahLainnya.setDocument(new batasInput((int)50).getKata(KetKKPenerjamahLainnya));
         KetKKKebutuhanEdukasi.setDocument(new batasInput((int)50).getKata(KetKKKebutuhanEdukasi));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
-        
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -555,7 +555,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     }
                 }
             });
-            
+
             TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -577,7 +577,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -585,10 +585,10 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){ 
+                if(petugas.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-                    NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());   
-                }              
+                    NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -599,7 +599,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         BB.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -614,7 +614,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 isBMI();
             }
         });
-        
+
         TB.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -629,7 +629,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 isBMI();
             }
         });
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -647,13 +647,13 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
-        
+
         ChkAccor.setSelected(false);
         isMenu();
     }
@@ -1006,16 +1006,12 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         LoadHTML.setBorder(null);
         LoadHTML.setName("LoadHTML"); // NOI18N
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
-        Agama.setHighlighter(null);
         Agama.setName("Agama"); // NOI18N
 
-        Bahasa.setHighlighter(null);
         Bahasa.setName("Bahasa"); // NOI18N
 
-        CacatFisik.setHighlighter(null);
         CacatFisik.setName("CacatFisik"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1187,7 +1183,6 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FormInput.setPreferredSize(new java.awt.Dimension(870, 1793));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1198,13 +1193,11 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         TNoRw.setBounds(74, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(309, 10, 260, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(207, 10, 100, 23);
@@ -1256,7 +1249,6 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         jLabel8.setBounds(580, 10, 60, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(644, 10, 80, 23);
@@ -1267,7 +1259,6 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         jLabel9.setBounds(0, 140, 166, 23);
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
         Jk.setBounds(774, 10, 80, 23);
@@ -2994,7 +2985,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FormInput.add(jLabel80);
         jLabel80.setBounds(510, 710, 60, 23);
 
-        Provokes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Proses Penyakit", "Benturan", "Lain-lain" }));
+        Provokes.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Proses Penyakit", "Benturan", "Lain-lain" }));
         Provokes.setName("Provokes"); // NOI18N
         Provokes.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3019,7 +3010,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FormInput.add(jLabel81);
         jLabel81.setBounds(370, 740, 55, 23);
 
-        Quality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Seperti Tertusuk", "Berdenyut", "Teriris", "Tertindih", "Tertiban", "Lain-lain" }));
+        Quality.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Seperti Tertusuk", "Berdenyut", "Teriris", "Tertindih", "Tertiban", "Lain-lain" }));
         Quality.setName("Quality"); // NOI18N
         Quality.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3121,7 +3112,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FormInput.add(jLabel89);
         jLabel89.setBounds(0, 860, 130, 23);
 
-        NyeriHilang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Istirahat", "Medengar Musik", "Minum Obat" }));
+        NyeriHilang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "-", "Istirahat", "Medengar Musik", "Minum Obat" }));
         NyeriHilang.setName("NyeriHilang"); // NOI18N
         NyeriHilang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -3601,14 +3592,12 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FormMenu.add(jLabel34);
 
         TNoRM1.setEditable(false);
-        TNoRM1.setHighlighter(null);
         TNoRM1.setName("TNoRM1"); // NOI18N
         TNoRM1.setPreferredSize(new java.awt.Dimension(100, 23));
         FormMenu.add(TNoRM1);
 
         TPasien1.setEditable(false);
         TPasien1.setBackground(new java.awt.Color(245, 250, 240));
-        TPasien1.setHighlighter(null);
         TPasien1.setName("TPasien1"); // NOI18N
         TPasien1.setPreferredSize(new java.awt.Dimension(250, 23));
         FormMenu.add(TPasien1);
@@ -3681,10 +3670,10 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,BtnDokter);
         }
-}//GEN-LAST:event_TNoRwKeyPressed
+    }//GEN-LAST:event_TNoRwKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRM.getText().trim().equals("")){
@@ -3707,8 +3696,8 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 }
             }
         }
-    
-}//GEN-LAST:event_BtnSimpanActionPerformed
+
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -3716,17 +3705,17 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         }else{
             Valid.pindah(evt,KetKKKebutuhanEdukasi,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -3743,9 +3732,9 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }            
-            
-}//GEN-LAST:event_BtnHapusActionPerformed
+        }
+
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -3753,7 +3742,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRM.getText().trim().equals("")){
@@ -3784,9 +3773,9 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            }   
+            }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -3794,17 +3783,17 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -3833,7 +3822,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                             "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
                             "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
                             "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+       
+                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
                             "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
                             "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
                             "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -3862,7 +3851,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                             "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
                             "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
                             "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
-                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+       
+                            "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
                             "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
                             "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
                             "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -3888,10 +3877,10 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                         ps.setString(5,"%"+TCari.getText()+"%");
                         ps.setString(6,"%"+TCari.getText()+"%");
                         ps.setString(7,"%"+TCari.getText()+"%");
-                    }   
+                    }
                     rs=ps.executeQuery();
                     StringBuilder htmlContent = new StringBuilder();
-                    htmlContent.append(                             
+                    htmlContent.append(
                         "<tr class='isi'>").append(
                             "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
                             "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
@@ -4171,7 +4160,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     );
                     htmlContent=null;
 
-                    File g = new File("file2.css");            
+                    File g = new File("file2.css");
                     BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                     bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -4186,8 +4175,8 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     );
                     bg.close();
 
-                    File f = new File("DataPenilaianAwalKeperawatanRalan.html");            
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                    File f = new File("DataPenilaianAwalKeperawatanRalan.html");
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                     bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                                 "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                                 "<table width='14000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -4196,12 +4185,12 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                                             "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                             akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                             akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                            "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN<br><br></font>"+        
+                                            "<font size='2' face='Tahoma'>DATA PENGKAJIAN AWAL KEPERAWATAN RAWAT JALAN<br><br></font>"+
                                         "</td>"+
                                    "</tr>"+
                                 "</table>")
                     );
-                    bw.close();                         
+                    bw.close();
                     Desktop.getDesktop().browse(f.toURI());
                 } catch (Exception e) {
                     System.out.println("Notif : "+e);
@@ -4218,7 +4207,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -4226,7 +4215,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -4236,11 +4225,11 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -4248,12 +4237,12 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -4262,7 +4251,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -4276,7 +4265,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 TabRawat.setSelectedIndex(0);
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -4295,10 +4284,10 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 }
             }
         }
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
     private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
-        
+
     }//GEN-LAST:event_KdPetugasKeyPressed
 
     private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterActionPerformed
@@ -4435,17 +4424,17 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
 
     private void BtnPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint1ActionPerformed
        if(tbObat.getSelectedRow()>-1){
-            Map<String, Object> param = new HashMap<>();    
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());          
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            param.put("nyeri",Sequel.cariGambar("select nyeri from gambar")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("nyeri",Sequel.cariGambar("select nyeri from gambar"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),63).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),64).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),63).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString())); 
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),64).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),63).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString()));
             try {
                 masalahkeperawatan="";
                 ps2=koneksi.prepareStatement(
@@ -4471,7 +4460,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-            param.put("masalah",masalahkeperawatan);  
+            param.put("masalah",masalahkeperawatan);
             try {
                 masalahkeperawatan="";
                 ps2=koneksi.prepareStatement(
@@ -4497,7 +4486,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-            param.put("rencana",masalahkeperawatan); 
+            param.put("rencana",masalahkeperawatan);
             Valid.MyReportqry("rptCetakPenilaianAwalKeperawatanRalanPsikiatri.jasper","report","::[ Laporan Pengkajian Awal Keperawatan Ralan Psikiatri ]::",
                 "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,pasien.agama,bahasa_pasien.nama_bahasa,cacat_fisik.nama_cacat,penilaian_awal_keperawatan_ralan_psikiatri.tanggal,"+
                 "penilaian_awal_keperawatan_ralan_psikiatri.informasi,penilaian_awal_keperawatan_ralan_psikiatri.keluhan_utama,penilaian_awal_keperawatan_ralan_psikiatri.rkd_sakit_sejak,penilaian_awal_keperawatan_ralan_psikiatri.rkd_keluhan,penilaian_awal_keperawatan_ralan_psikiatri.rkd_berobat,penilaian_awal_keperawatan_ralan_psikiatri.rkd_hasil_pengobatan,"+
@@ -4517,7 +4506,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
                 "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
                 "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
-                "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+       
+                "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
                 "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
                 "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
                 "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -4528,7 +4517,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 "where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu..!!!!");
-        }  
+        }
     }//GEN-LAST:event_BtnPrint1ActionPerformed
 
     private void DetailRencanaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DetailRencanaKeyPressed
@@ -4612,11 +4601,11 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
     }//GEN-LAST:event_KetRBDPercobaanKeyPressed
 
     private void RBDKeinginanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RBDKeinginanKeyPressed
-        Valid.pindah(evt,KetRBDPercobaan,KetRBDKeinginan);        
+        Valid.pindah(evt,KetRBDPercobaan,KetRBDKeinginan);
     }//GEN-LAST:event_RBDKeinginanKeyPressed
 
     private void KetRBDKeinginanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KetRBDKeinginanKeyPressed
-        Valid.pindah(evt,RBDKeinginan,RPOPenggunaan);  
+        Valid.pindah(evt,RBDKeinginan,RPOPenggunaan);
     }//GEN-LAST:event_KetRBDKeinginanKeyPressed
 
     private void KeluhanUtamaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeluhanUtamaKeyPressed
@@ -5443,7 +5432,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                         "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
                         "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
                         "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
-                        "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+       
+                        "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
                         "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
                         "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
                         "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -5472,7 +5461,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                         "penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_sosialisasi,penilaian_awal_keperawatan_ralan_psikiatri.adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.ket_adl_kegiatan,penilaian_awal_keperawatan_ralan_psikiatri.sk_penampilan,penilaian_awal_keperawatan_ralan_psikiatri.sk_alam_perasaan,penilaian_awal_keperawatan_ralan_psikiatri.sk_pembicaraan,"+
                         "penilaian_awal_keperawatan_ralan_psikiatri.sk_afek,penilaian_awal_keperawatan_ralan_psikiatri.sk_aktifitas_motorik,penilaian_awal_keperawatan_ralan_psikiatri.sk_gangguan_ringan,penilaian_awal_keperawatan_ralan_psikiatri.sk_proses_pikir,penilaian_awal_keperawatan_ralan_psikiatri.sk_orientasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_tingkat_kesadaran_orientasi,"+
                         "penilaian_awal_keperawatan_ralan_psikiatri.sk_memori,penilaian_awal_keperawatan_ralan_psikiatri.sk_interaksi,penilaian_awal_keperawatan_ralan_psikiatri.sk_konsentrasi,penilaian_awal_keperawatan_ralan_psikiatri.sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_persepsi,penilaian_awal_keperawatan_ralan_psikiatri.sk_isi_pikir,"+
-                        "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+       
+                        "penilaian_awal_keperawatan_ralan_psikiatri.sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_waham,penilaian_awal_keperawatan_ralan_psikiatri.sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.ket_sk_daya_tilik_diri,penilaian_awal_keperawatan_ralan_psikiatri.kk_pembelajaran,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran,"+
                         "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_pembelajaran_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_penerjamah,penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_penerjamah_lainnya,penilaian_awal_keperawatan_ralan_psikiatri.kk_bahasa_isyarat,penilaian_awal_keperawatan_ralan_psikiatri.kk_kebutuhan_edukasi,"+
                         "penilaian_awal_keperawatan_ralan_psikiatri.ket_kk_kebutuhan_edukasi,penilaian_awal_keperawatan_ralan_psikiatri.rencana,penilaian_awal_keperawatan_ralan_psikiatri.nip,petugas.nama "+
                         "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
@@ -5485,7 +5474,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                         "penilaian_awal_keperawatan_ralan_psikiatri.nip like ? or petugas.nama like ?) "+
                         "order by penilaian_awal_keperawatan_ralan_psikiatri.tanggal");
             }
-                
+
             try {
                 if(TCari.getText().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -5498,7 +5487,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     ps.setString(5,"%"+TCari.getText()+"%");
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -5538,7 +5527,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -5562,7 +5551,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         FPMasalahPsikososial.setSelectedIndex(0);
         KetMasalahPsikososial.setText("");
         RHKeluarga.setSelectedIndex(0);
-        KetRHKeluarga.setText(""); 
+        KetRHKeluarga.setText("");
         ResikoBunuhDiri.setSelectedIndex(0);
         RBDIde.setSelectedIndex(0);
         KetRBDIde.setText("");
@@ -5591,10 +5580,10 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         RPOMerokok.setSelectedIndex(0);
         KetMerokok.setText("");
         RPOMinumKopi.setSelectedIndex(0);
-        KetMinumKopi.setText("");         
+        KetMinumKopi.setText("");
         TD.setText("");
         Nadi.setText("");
-        GCS.setText("");        
+        GCS.setText("");
         RR.setText("");
         Suhu.setText("");
         PFKeluhanFisik.setSelectedIndex(0);
@@ -5673,18 +5662,18 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         Valid.tabelKosong(tabModeRencana);
         TabRawat.setSelectedIndex(0);
         Informasi.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
-            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()); 
+            TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
-            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString()); 
+            TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+            Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             Agama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
             Bahasa.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
             CacatFisik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
-            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()); 
+            TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
             Informasi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
             KeluhanUtama.setText(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
             RKDSakitSejak.setText(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString());
@@ -5858,21 +5847,21 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt, Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_psikiatri());
         BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_psikiatri());
         BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_psikiatri());
         BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_psikiatri());
-        BtnTambahMasalah.setEnabled(akses.getmaster_masalah_keperawatan());  
-        BtnTambahRencana.setEnabled(akses.getmaster_rencana_keperawatan());  
+        BtnTambahMasalah.setEnabled(akses.getmaster_masalah_keperawatan());
+        BtnTambahRencana.setEnabled(akses.getmaster_rencana_keperawatan());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnDokter.setEnabled(false);
@@ -5882,8 +5871,8 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        } 
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 TglAsuhan.setEditable(false);
@@ -5895,7 +5884,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
-    
+
     private void tampilMasalah() {
         try{
             Valid.tabelKosong(tabModeMasalah);
@@ -5925,14 +5914,14 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 fileWriter.write("{\"masalahkeperawatanpsikiatri\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilMasalah2() {
         try{
             jml=0;
@@ -5942,11 +5931,11 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 }
             }
 
-            pilih=new boolean[jml]; 
+            pilih=new boolean[jml];
             kode=new String[jml];
             masalah=new String[jml];
 
-            index=0;        
+            index=0;
             for(i=0;i<tbMasalahKeperawatan.getRowCount();i++){
                 if(tbMasalahKeperawatan.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -5954,7 +5943,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     masalah[index]=tbMasalahKeperawatan.getValueAt(i,2).toString();
                     index++;
                 }
-            } 
+            }
 
             Valid.tabelKosong(tabModeMasalah);
 
@@ -5963,11 +5952,11 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     pilih[i],kode[i],masalah[i]
                 });
             }
-            
+
             pilih=null;
             kode=null;
             masalah=null;
-            
+
             myObj = new FileReader("./cache/masalahkeperawatanpsikiatri.iyem");
             root = mapper.readTree(myObj);
             response = root.path("masalahkeperawatanpsikiatri");
@@ -5976,7 +5965,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     if(list.path("KodeMasalah").asText().toLowerCase().contains(TCariMasalah.getText().toLowerCase())||list.path("NamaMasalah").asText().toLowerCase().contains(TCariMasalah.getText().toLowerCase())){
                         tabModeMasalah.addRow(new Object[]{
                             false,list.path("KodeMasalah").asText(),list.path("NamaMasalah").asText()
-                        });                    
+                        });
                     }
                 }
             }
@@ -5985,7 +5974,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilRencana() {
         try{
             file=new File("./cache/rencanakeperawatanpsikiatri.iyem");
@@ -6008,20 +5997,20 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     ps.close();
                 }
             }
-            
+
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"rencanakeperawatanpsikiatri\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilRencana2() {
         try{
             jml=0;
@@ -6031,11 +6020,11 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                 }
             }
 
-            pilih=new boolean[jml]; 
+            pilih=new boolean[jml];
             kode=new String[jml];
             masalah=new String[jml];
 
-            index=0;        
+            index=0;
             for(i=0;i<tbRencanaKeperawatan.getRowCount();i++){
                 if(tbRencanaKeperawatan.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -6043,7 +6032,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     masalah[index]=tbRencanaKeperawatan.getValueAt(i,2).toString();
                     index++;
                 }
-            } 
+            }
 
             Valid.tabelKosong(tabModeRencana);
 
@@ -6052,7 +6041,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                     pilih[i],kode[i],masalah[i]
                 });
             }
-            
+
             pilih=null;
             kode=null;
             masalah=null;
@@ -6068,7 +6057,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
                                     list.path("NamaRencana").asText().toLowerCase().contains(TCariRencana.getText().toLowerCase())){
                                 tabModeRencana.addRow(new Object[]{
                                     false,list.path("KodeRencana").asText(),list.path("NamaRencana").asText()
-                                });                    
+                                });
                             }
                         }
                     }
@@ -6079,19 +6068,19 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(470,HEIGHT));
-            FormMenu.setVisible(true);  
-            FormMasalahRencana.setVisible(true);  
+            FormMenu.setVisible(true);
+            FormMasalahRencana.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){   
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormMenu.setVisible(false);  
-            FormMasalahRencana.setVisible(false);   
+            FormMenu.setVisible(false);
+            FormMasalahRencana.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -6099,7 +6088,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
     private void getMasalah() {
         if(tbObat.getSelectedRow()!= -1){
             TNoRM1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
-            TPasien1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString()); 
+            TPasien1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
             DetailRencana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),128).toString());
             try {
                 Valid.tabelKosong(tabModeDetailMasalah);
@@ -6126,7 +6115,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-            
+
             try {
                 Valid.tabelKosong(tabModeDetailRencana);
                 ps=koneksi.prepareStatement(
@@ -6154,7 +6143,7 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
             }
         }
     }
-    
+
     private void isBMI(){
         if((!TB.getText().equals(""))&&(!BB.getText().equals(""))){
             try {

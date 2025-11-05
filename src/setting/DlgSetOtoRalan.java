@@ -59,7 +59,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
 
         this.setLocation(8,1);
         setSize(885,674);
- 
+
         tabMode=new DefaultTableModel(null,new String[]{
             "Kode Dokter","Nama Dokter","Kode Tindakan","Nama Tindakan","Kode Bayar","Nama Bayar"
             }){
@@ -88,7 +88,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             }
         }
         Table1.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new String[]{
             "Kode Tindakan","Nama Tindakan","Kode Bayar","Nama Bayar"
             }){
@@ -113,7 +113,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             }
         }
         Table2.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode3=new DefaultTableModel(null,new String[]{
             "Kode Dokter","Nama Dokter","Kode Tindakan","Nama Tindakan","Kode Bayar","Nama Bayar"
             }){
@@ -142,7 +142,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             }
         }
         Table3.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
 
         kdtindakan.setDocument(new batasInput((byte)15).getKata(kdtindakan));
         kddokter.setDocument(new batasInput((byte)20).getKata(kddokter));
@@ -170,8 +170,8 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                         nmpj3.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
                         kdpj3.requestFocus();
                     }
-                        
-                }                      
+
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -182,7 +182,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -190,12 +190,12 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penjab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         datatindakan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -203,21 +203,21 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(datatindakan.getTable().getSelectedRow()!= -1){    
+                if(datatindakan.getTable().getSelectedRow()!= -1){
                     if(TabRawat.getSelectedIndex()==0){
-                        kdtindakan.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),1).toString());   
-                        nmtindakan.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),2).toString()); 
+                        kdtindakan.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),1).toString());
+                        nmtindakan.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),2).toString());
                         kdtindakan.requestFocus();
                     }else if(TabRawat.getSelectedIndex()==1){
-                        kdtindakan2.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),1).toString());   
-                        nmtindakan2.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),2).toString()); 
+                        kdtindakan2.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),1).toString());
+                        nmtindakan2.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),2).toString());
                         kdtindakan2.requestFocus();
                     }else if(TabRawat.getSelectedIndex()==2){
-                        kdtindakan3.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),1).toString());   
-                        nmtindakan3.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),2).toString()); 
+                        kdtindakan3.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),1).toString());
+                        nmtindakan3.setText(datatindakan.getTable().getValueAt(datatindakan.getTable().getSelectedRow(),2).toString());
                         kdtindakan3.requestFocus();
-                    }                        
-                }                        
+                    }
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -228,11 +228,11 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         datatindakan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
-            
+
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
@@ -243,7 +243,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -260,8 +260,8 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                         kddokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                         nmdokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         kddokter3.requestFocus();
-                    }                        
-                }                       
+                    }
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -272,7 +272,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -578,7 +578,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         jLabel4.setBounds(0, 42, 120, 23);
 
         nmdokter.setEditable(false);
-        nmdokter.setHighlighter(null);
         nmdokter.setName("nmdokter"); // NOI18N
         nmdokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -632,7 +631,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         panelGlass2.add(BtnSeek1);
         BtnSeek1.setBounds(480, 42, 28, 23);
 
-        kddokter.setHighlighter(null);
         kddokter.setName("kddokter"); // NOI18N
         kddokter.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -642,7 +640,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         panelGlass2.add(kddokter);
         kddokter.setBounds(123, 12, 100, 23);
 
-        kdtindakan.setHighlighter(null);
         kdtindakan.setName("kdtindakan"); // NOI18N
         kdtindakan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -657,7 +654,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         panelGlass2.add(jLabel5);
         jLabel5.setBounds(0, 72, 120, 23);
 
-        kdpj.setHighlighter(null);
         kdpj.setName("kdpj"); // NOI18N
         kdpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -668,7 +664,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         kdpj.setBounds(123, 72, 100, 23);
 
         nmpj.setEditable(false);
-        nmpj.setHighlighter(null);
         nmpj.setName("nmpj"); // NOI18N
         nmpj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -755,7 +750,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         panelGlass3.add(BtnSeek3);
         BtnSeek3.setBounds(480, 12, 28, 23);
 
-        kdtindakan2.setHighlighter(null);
         kdtindakan2.setName("kdtindakan2"); // NOI18N
         kdtindakan2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -770,7 +764,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         panelGlass3.add(jLabel9);
         jLabel9.setBounds(0, 42, 120, 23);
 
-        kdpj2.setHighlighter(null);
         kdpj2.setName("kdpj2"); // NOI18N
         kdpj2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -781,7 +774,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         kdpj2.setBounds(123, 42, 100, 23);
 
         nmpj2.setEditable(false);
-        nmpj2.setHighlighter(null);
         nmpj2.setName("nmpj2"); // NOI18N
         nmpj2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -827,7 +819,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         jLabel11.setBounds(0, 42, 120, 23);
 
         nmdokter3.setEditable(false);
-        nmdokter3.setHighlighter(null);
         nmdokter3.setName("nmdokter3"); // NOI18N
         nmdokter3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -881,7 +872,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         panelGlass4.add(BtnSeek4);
         BtnSeek4.setBounds(480, 42, 28, 23);
 
-        kddokter3.setHighlighter(null);
         kddokter3.setName("kddokter3"); // NOI18N
         kddokter3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -891,7 +881,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         panelGlass4.add(kddokter3);
         kddokter3.setBounds(123, 12, 100, 23);
 
-        kdtindakan3.setHighlighter(null);
         kdtindakan3.setName("kdtindakan3"); // NOI18N
         kdtindakan3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -906,7 +895,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         panelGlass4.add(jLabel12);
         jLabel12.setBounds(0, 72, 120, 23);
 
-        kdpj3.setHighlighter(null);
         kdpj3.setName("kdpj3"); // NOI18N
         kdpj3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -917,7 +905,6 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         kdpj3.setBounds(123, 72, 100, 23);
 
         nmpj3.setEditable(false);
-        nmpj3.setHighlighter(null);
         nmpj3.setName("nmpj3"); // NOI18N
         nmpj3.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -972,11 +959,11 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
 
     private void nmdokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmdokterKeyPressed
         //Valid.pindah(evt,TCari,cmbBangsal);
-}//GEN-LAST:event_nmdokterKeyPressed
+    }//GEN-LAST:event_nmdokterKeyPressed
 
     private void nmtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nmtindakanKeyPressed
         //Valid.pindah(evt,TKd,BtnSimpan);
-}//GEN-LAST:event_nmtindakanKeyPressed
+    }//GEN-LAST:event_nmtindakanKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TabRawat.getSelectedIndex()==0){
@@ -992,7 +979,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                         "Tindakan")==true){
                     tampil();
                     emptTeks();
-                }                
+                }
             }
         }else if(TabRawat.getSelectedIndex()==1){
             if(kdtindakan2.getText().trim().equals("")||nmtindakan2.getText().trim().equals("")){
@@ -1004,7 +991,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                         "set_otomatis_tindakan_ralan_petugas","'"+kdtindakan2.getText()+"','"+kdpj2.getText()+"'","Tindakan")==true){
                     tampil2();
                     emptTeks2();
-                }                
+                }
             }
         }else if(TabRawat.getSelectedIndex()==2){
             if(kddokter3.getText().trim().equals("")||nmdokter3.getText().trim().equals("")){
@@ -1019,10 +1006,10 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                         "Tindakan")==true){
                     tampil3();
                     emptTeks3();
-                }                
+                }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1034,9 +1021,9 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 Valid.pindah(evt,kdtindakan2,BtnBatal);
             }else if(TabRawat.getSelectedIndex()==2){
                 Valid.pindah(evt,kdtindakan3,BtnBatal);
-            }                
+            }
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         if(TabRawat.getSelectedIndex()==0){
@@ -1046,13 +1033,13 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else if(TabRawat.getSelectedIndex()==2){
             emptTeks3();
         }
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabRawat.getSelectedIndex()==0){
@@ -1089,8 +1076,8 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 emptTeks3();
             }
         }
-            
-}//GEN-LAST:event_BtnHapusActionPerformed
+
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1098,7 +1085,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnPrint);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1106,15 +1093,15 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){    
-            Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     Valid.MyReportqry("rptOtoRalan.jasper","report","::[ Data Tindakan Otomatis Dokter Ralan ]::","select set_otomatis_tindakan_ralan.kd_dokter,dokter.nm_dokter, set_otomatis_tindakan_ralan.kd_jenis_prw,jns_perawatan.nm_perawatan "+
                    "from set_otomatis_tindakan_ralan inner join dokter inner join jns_perawatan on  "+
                    "set_otomatis_tindakan_ralan.kd_dokter=dokter.kd_dokter and "+
@@ -1126,7 +1113,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                    " order by dokter.nm_dokter",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1134,22 +1121,22 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnAll);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,BtnSimpan);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         TabRawatMouseClicked(null);
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1157,7 +1144,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1167,11 +1154,11 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         TabRawatMouseClicked(null);
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -1179,7 +1166,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnSeekActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeekActionPerformed
         dokter.isCek();
@@ -1187,22 +1174,22 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setVisible(true);
-}//GEN-LAST:event_BtnSeekActionPerformed
+    }//GEN-LAST:event_BtnSeekActionPerformed
 
     private void BtnSeekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeekKeyPressed
         Valid.pindah(evt,kddokter,kdtindakan);
-}//GEN-LAST:event_BtnSeekKeyPressed
+    }//GEN-LAST:event_BtnSeekKeyPressed
 
     private void BtnSeek1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek1ActionPerformed
         datatindakan.isCek();
         datatindakan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         datatindakan.setLocationRelativeTo(internalFrame1);
         datatindakan.setVisible(true);
-}//GEN-LAST:event_BtnSeek1ActionPerformed
+    }//GEN-LAST:event_BtnSeek1ActionPerformed
 
     private void BtnSeek1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek1KeyPressed
         Valid.pindah(evt,kdtindakan,BtnSimpan);
-}//GEN-LAST:event_BtnSeek1KeyPressed
+    }//GEN-LAST:event_BtnSeek1KeyPressed
 
     private void Table1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Table1MouseClicked
         if(tabMode.getRowCount()!=0){
@@ -1211,7 +1198,7 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_Table1MouseClicked
+    }//GEN-LAST:event_Table1MouseClicked
 
     private void Table1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Table1KeyPressed
         if(tabMode.getRowCount()!=0){
@@ -1222,23 +1209,23 @@ public final class DlgSetOtoRalan extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_Table1KeyPressed
+    }//GEN-LAST:event_Table1KeyPressed
 
-private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
+    private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
              nmdokter.setText(dokter.tampil3(kddokter.getText()));
         }else{
              Valid.pindah(evt,TCari,kdtindakan);
         }
-}//GEN-LAST:event_kddokterKeyPressed
+    }//GEN-LAST:event_kddokterKeyPressed
 
-private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdtindakanKeyPressed
+    private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdtindakanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
              Sequel.cariIsi("select nm_perawatan from jns_perawatan where kd_jenis_prw=? ",nmtindakan,kdtindakan.getText());
         }else{
              Valid.pindah(evt,kddokter,kdpj);
         }
-}//GEN-LAST:event_kdtindakanKeyPressed
+    }//GEN-LAST:event_kdtindakanKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -1525,7 +1512,7 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                "set_otomatis_tindakan_ralan.kd_pj like ? or "+
                "penjab.png_jawab like ? "+
                " order by dokter.nm_dokter");
-            try{            
+            try{
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -1551,11 +1538,11 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             }
         } catch (Exception e) {
             System.out.println("setting.DlgSetOtoRalan.tampil() : "+e);
-        } 
-            
+        }
+
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabMode2);
         try {
@@ -1570,7 +1557,7 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                "set_otomatis_tindakan_ralan_petugas.kd_pj like ? or "+
                "penjab.png_jawab like ? "+
                " order by set_otomatis_tindakan_ralan_petugas.kd_jenis_prw ");
-            try{            
+            try{
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -1594,11 +1581,11 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             }
         } catch (Exception e) {
             System.out.println("setting.DlgSetOtoRalan.tampil2() : "+e);
-        } 
-            
+        }
+
         LCount.setText(""+tabMode2.getRowCount());
     }
-    
+
     private void tampil3() {
         Valid.tabelKosong(tabMode3);
         try {
@@ -1618,7 +1605,7 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
                "set_otomatis_tindakan_ralan_dokterpetugas.kd_pj like ? or "+
                "penjab.png_jawab like ? "+
                " order by dokter.nm_dokter");
-            try{            
+            try{
                 ps.setString(1,"%"+TCari.getText().trim()+"%");
                 ps.setString(2,"%"+TCari.getText().trim()+"%");
                 ps.setString(3,"%"+TCari.getText().trim()+"%");
@@ -1644,8 +1631,8 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             }
         } catch (Exception e) {
             System.out.println("setting.DlgSetOtoRalan.tampil3() : "+e);
-        } 
-            
+        }
+
         LCount.setText(""+tabMode3.getRowCount());
     }
 
@@ -1654,13 +1641,13 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         nmtindakan.setText("");
         kdtindakan.requestFocus();
     }
-    
+
     public void emptTeks2() {
         kdtindakan2.setText("");
         nmtindakan2.setText("");
         kdtindakan2.requestFocus();
     }
-    
+
     public void emptTeks3() {
         kdtindakan3.setText("");
         nmtindakan3.setText("");
@@ -1678,7 +1665,7 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             nmpj.setText(Table1.getValueAt(row,5).toString());
         }
     }
-    
+
     private void getData2() {
         int row=Table2.getSelectedRow();
         if(row!= -1){
@@ -1688,7 +1675,7 @@ private void kdtindakanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
             nmpj2.setText(Table2.getValueAt(row,3).toString());
         }
     }
-    
+
     private void getData3() {
         int row=Table3.getSelectedRow();
         if(row!= -1){

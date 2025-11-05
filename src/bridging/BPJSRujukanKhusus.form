@@ -431,9 +431,6 @@
                   <SubComponents>
                     <Component class="widget.TextBox" name="NoPeserta">
                       <Properties>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="NoPeserta" noResource="true"/>
                       </Properties>
                       <Constraints>
@@ -445,9 +442,6 @@
                     <Component class="widget.TextBox" name="NoRM">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="NoRM" noResource="true"/>
                       </Properties>
                       <Constraints>
@@ -481,9 +475,6 @@
                     <Component class="widget.TextBox" name="NmPasien">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="NmPasien" noResource="true"/>
                       </Properties>
                       <Constraints>
@@ -494,9 +485,6 @@
                     </Component>
                     <Component class="widget.TextBox" name="NoRujukan">
                       <Properties>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="NoRujukan" noResource="true"/>
                       </Properties>
                       <Events>

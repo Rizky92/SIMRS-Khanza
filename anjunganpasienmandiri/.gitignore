@@ -1,0 +1,25 @@
+# Root level ignore
+/*.css
+/*.html
+/*.html_files
+
+# Root level folder ignore
+/.vscode
+/build/
+/dist/
+/lib/
+/setting/*.ini
+/setting/*.xml
+
+*.DS_Store
+*.*~*
+*.csv
+*.exe
+*.jar
+*.log
+*.pdf
+*.sql
+*.wps
+*.xls
+*.xlsx
+*.conf

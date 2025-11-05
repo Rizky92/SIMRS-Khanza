@@ -13,6 +13,8 @@ package simrskhanza;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -44,7 +46,6 @@ public final class DlgCariPoli extends javax.swing.JDialog {
     private ResultSet rs;
     private File file;
     private FileWriter fileWriter;
-    private String iyem;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
@@ -267,11 +268,11 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -279,12 +280,12 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -292,7 +293,7 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -300,7 +301,7 @@ public final class DlgCariPoli extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -315,8 +316,8 @@ public final class DlgCariPoli extends javax.swing.JDialog {
         poli.setLocationRelativeTo(internalFrame1);
         poli.setAlwaysOnTop(false);
         poli.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -335,13 +336,10 @@ public final class DlgCariPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            if(Valid.daysOld("./cache/poli.iyem")<30){
-                tampil2();
-            }else{
-                tampil();
-            }
-        } catch (Exception e) {
+        if (Valid.umurcacheSmc("./cache/poli.iyem", 30)) {
+            tampil();
+        } else {
+            tampil2();
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -377,88 +375,80 @@ public final class DlgCariPoli extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        Valid.tabelKosong(tabMode);
+        Valid.tabelKosongSmc(tabMode);
         try {
-            file=new File("./cache/poli.iyem");
+            File file = new File("./cache/poli.iyem");
             file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select * from poliklinik where poliklinik.status='1'");
-            try{           
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),Valid.SetAngka(rs.getDouble(3)),Valid.SetAngka(rs.getDouble(4))});
-                    iyembuilder.append("{\"KodeUnit\":\"").append(rs.getString(1)).append("\",\"NamaUnit\":\"").append(rs.getString(2)).append("\",\"RegistrasiBaru\":\"").append(rs.getString(3)).append("\",\"RegistrasiLama\":\"").append(rs.getString(4)).append("\"},");
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from poliklinik where poliklinik.status = '1' order by poliklinik.nm_poli")) {
+                if (rs.next()) {
+                    ObjectNode root = mapper.createObjectNode();
+                    ArrayNode array = mapper.createArrayNode();
+                    do {
+                        ObjectNode poli = mapper.createObjectNode();
+                        poli.put("KodeUnit", rs.getString(1));
+                        poli.put("NamaUnit", rs.getString(2));
+                        poli.put("RegistrasiBaru", rs.getString(3));
+                        poli.put("RegistrasiLama", rs.getString(4));
+                        array.add(poli);
+                        tabMode.addRow(new Object[] {
+                            rs.getString(1), rs.getString(2),
+                            rs.getString(3), rs.getString(4)
+                        });
+                    } while (rs.next());
+                    root.set("poli", array);
+                    fw.write(mapper.writeValueAsString(root));
+                    fw.flush();
                 }
-            }catch(Exception e){
-                System.out.println("Notifikasi : "+e);
-            }finally{
-                if(rs != null){
-                    rs.close();
-                }
-                
-                if(ps != null){
-                    ps.close();
-                }
+                tabMode.fireTableDataChanged();
             }
-
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"poli\":["+iyembuilder+"]}");
-                fileWriter.flush();
-            }
-            
-            fileWriter.close();
-            iyembuilder=null;
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notif : " + e);
         }
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
-  
+
     public JTable getTable(){
         return tbKamar;
     }
-    
-    public void isCek(){        
+
+    public void isCek(){
         BtnTambah.setEnabled(akses.getadmin());
     }
-    
+
     private void tampil2() {
-        try {
-            myObj = new FileReader("./cache/poli.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("poli");
-            if(response.isArray()){
-                if(TCari.getText().trim().equals("")){
-                    for(JsonNode list:response){
-                        tabMode.addRow(new Object[]{
-                            list.path("KodeUnit").asText(),list.path("NamaUnit").asText(),list.path("RegistrasiBaru").asText(),list.path("RegistrasiLama").asText()
+        Valid.tabelKosongSmc(tabMode);
+        try (FileReader fr = new FileReader("./cache/poli.iyem")) {
+            JsonNode response = mapper.readTree(fr).path("poli");
+            if (response.isArray()) {
+                if (TCari.getText().isBlank()) {
+                    for (JsonNode list : response) {
+                        tabMode.addRow(new Object[] {
+                            list.path("KodeUnit").asText(), list.path("NamaUnit").asText(),
+                            list.path("RegistrasiBaru").asText(), list.path("RegistrasiLama").asText()
                         });
                     }
-                }else{
-                    for(JsonNode list:response){
-                        if(list.path("KodeUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                            tabMode.addRow(new Object[]{
-                                list.path("KodeUnit").asText(),list.path("NamaUnit").asText(),list.path("RegistrasiBaru").asText(),list.path("RegistrasiLama").asText()
+                } else {
+                    for (JsonNode list : response) {
+                        if (list.path("KodeUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                            || list.path("NamaUnit").asText().toLowerCase().contains(TCari.getText().toLowerCase())
+                        ) {
+                            tabMode.addRow(new Object[] {
+                                list.path("KodeUnit").asText(), list.path("NamaUnit").asText(),
+                                list.path("RegistrasiBaru").asText(), list.path("RegistrasiLama").asText()
                             });
                         }
                     }
                 }
             }
-            myObj.close();
-        } catch (Exception ex) {
-            if(ex.toString().contains("java.io.FileNotFoundException")){
-                tampil();
-            }else{
-                System.out.println("Notifikasi : "+ex);
-            }
+            tabMode.fireTableDataChanged();
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            tampil();
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
+    }
 }

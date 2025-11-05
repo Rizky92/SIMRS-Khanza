@@ -27,7 +27,7 @@ public class InventoryPenggunaanBHPOK extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private double total=0;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -70,7 +70,7 @@ public class InventoryPenggunaanBHPOK extends javax.swing.JDialog {
             }
         }
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -92,11 +92,11 @@ public class InventoryPenggunaanBHPOK extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -291,7 +291,7 @@ public class InventoryPenggunaanBHPOK extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void Tgl1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl1KeyPressed
@@ -343,14 +343,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>(); 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs()); 
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPenggunaanBHPOK.jasper","report","::[ Penggunaan BHP OK/VK ]::",
                 "select beri_obat_operasi.tanggal,beri_obat_operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,beri_obat_operasi.kd_obat,obatbhp_ok.nm_obat,kodesatuan.satuan,"+
                 "beri_obat_operasi.hargasatuan,beri_obat_operasi.jumlah,(beri_obat_operasi.hargasatuan*beri_obat_operasi.jumlah) as total from beri_obat_operasi inner join obatbhp_ok "+
@@ -465,12 +465,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-        
+
     }
 
-    public void isCek(){   
+    public void isCek(){
         BtnPrint.setEnabled(akses.getpenggunaan_bhp_ok());
     }
-    
- 
+
+
 }

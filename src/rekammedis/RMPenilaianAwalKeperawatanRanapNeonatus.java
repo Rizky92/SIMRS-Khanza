@@ -1,11 +1,11 @@
 /*
-  Dilarang keras memperjualbelikan/mengambil keuntungan dari Software 
+  Dilarang keras memperjualbelikan/mengambil keuntungan dari Software
   ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -57,9 +57,9 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
     private ResultSet rs;
     private int i=0,jml=0,index=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
-    private boolean[] pilih; 
+    private boolean[] pilih;
     private String[] kode,masalah;
-    private String masalahkeperawatan="",finger=""; 
+    private String masalahkeperawatan="",finger="";
     private File file;
     private FileWriter fileWriter;
     private ObjectMapper mapper = new ObjectMapper();
@@ -67,14 +67,14 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
     private JsonNode response;
     private FileReader myObj;
     private String TANGGALMUNDUR="yes";
-    
+
     /** Creates new form DlgRujuk
      * @param parent
      * @param modal */
     public RMPenilaianAwalKeperawatanRanapNeonatus(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
             "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","NIP Pengkaji 1","Nama Pengkaji 1","NIP Pengkaji 2","Nama Pengkaji 2","Kode DPJP","Nama DPJP",
             "Tgl.Asuhan","Asal Pasien","Cara Masuk","Diperoleh Dari","Hubungan Dengan Pasien","Keluhan Utama","Prenatal G","Prenatal P","Prenatal A","Prenatal UK",
@@ -603,11 +603,11 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         DiperolehDari.setDocument(new batasInput((int)30).getKata(DiperolehDari));
         HubunganDenganPasien.setDocument(new batasInput((int)30).getKata(HubunganDenganPasien));
-        KeluhanUtama.setDocument(new batasInput((int)300).getKata(KeluhanUtama));
+        // KeluhanUtama.setDocument(new batasInput((int)300).getKata(KeluhanUtama));
         PrenatalG.setDocument(new batasInput((int)10).getKata(PrenatalG));
         PrenatalP.setDocument(new batasInput((int)10).getKata(PrenatalP));
         PrenatalA.setDocument(new batasInput((int)10).getKata(PrenatalA));
@@ -703,9 +703,9 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         KeteranganSkriningGizi.setDocument(new batasInput((int)50).getKata(KeteranganSkriningGizi));
         LamaRatarata.setDocument(new batasInput((int)3).getKata(LamaRatarata));
         KondisiPulang.setDocument(new batasInput((int)100).getKata(KondisiPulang));
-        PerawatanLanjutan.setDocument(new batasInput((int)300).getKata(PerawatanLanjutan));
-        Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
-        
+        // PerawatanLanjutan.setDocument(new batasInput((int)300).getKata(PerawatanLanjutan));
+        // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -727,7 +727,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     }
                 }
             });
-            
+
             TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -749,7 +749,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -757,16 +757,16 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){ 
+                if(petugas.getTable().getSelectedRow()!= -1){
                     if(i==1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-                        NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());  
+                        NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     }else{
                         KdPetugas2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-                        NmPetugas2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());  
+                        NmPetugas2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     }
-                         
-                }              
+
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -777,7 +777,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         tabModeMasalah=new DefaultTableModel(null,new Object[]{
                 "P","KODE","MASALAH KEPERAWATAN"
             }){
@@ -801,7 +801,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbMasalahKeperawatan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbMasalahKeperawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         for (i = 0; i < 3; i++) {
             TableColumn column = tbMasalahKeperawatan.getColumnModel().getColumn(i);
             if(i==0){
@@ -814,7 +814,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             }
         }
         tbMasalahKeperawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRencana=new DefaultTableModel(null,new Object[]{
                 "P","KODE","RENCANA KEPERAWATAN"
             }){
@@ -838,7 +838,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
         tbRencanaKeperawatan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbRencanaKeperawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         for (i = 0; i < 3; i++) {
             TableColumn column = tbRencanaKeperawatan.getColumnModel().getColumn(i);
             if(i==0){
@@ -851,7 +851,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             }
         }
         tbRencanaKeperawatan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailMasalah=new DefaultTableModel(null,new Object[]{
                 "Kode","Masalah Keperawatan"
             }){
@@ -873,7 +873,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             }
         }
         tbMasalahDetail.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeDetailRencana=new DefaultTableModel(null,new Object[]{
                 "Kode","Rencana Keperawatan"
             }){
@@ -895,13 +895,13 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             }
         }
         tbRencanaDetail.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
             TANGGALMUNDUR="yes";
         }
-        
+
         ChkAccor.setSelected(false);
         isMenu();
     }
@@ -1509,7 +1509,6 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         scrollPane6 = new widget.ScrollPane();
         DetailRencana = new widget.TextArea();
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -1677,7 +1676,6 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         FormInput.setPreferredSize(new java.awt.Dimension(870, 2933));
         FormInput.setLayout(null);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1688,13 +1686,11 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         TNoRw.setBounds(79, 10, 131, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(314, 10, 410, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         FormInput.add(TNoRM);
         TNoRM.setBounds(212, 10, 100, 23);
@@ -1741,13 +1737,11 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         BtnPetugas.setBounds(393, 40, 28, 23);
 
         TglLahir.setEditable(false);
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(429, 330, 90, 23);
 
         Jk.setEditable(false);
-        Jk.setHighlighter(null);
         Jk.setName("Jk"); // NOI18N
         FormInput.add(Jk);
         Jk.setBounds(774, 10, 80, 23);
@@ -6068,14 +6062,12 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         FormMenu.add(jLabel34);
 
         TNoRM1.setEditable(false);
-        TNoRM1.setHighlighter(null);
         TNoRM1.setName("TNoRM1"); // NOI18N
         TNoRM1.setPreferredSize(new java.awt.Dimension(100, 23));
         FormMenu.add(TNoRM1);
 
         TPasien1.setEditable(false);
         TPasien1.setBackground(new java.awt.Color(245, 250, 240));
-        TPasien1.setHighlighter(null);
         TPasien1.setName("TPasien1"); // NOI18N
         TPasien1.setPreferredSize(new java.awt.Dimension(250, 23));
         FormMenu.add(TPasien1);
@@ -6172,7 +6164,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -6180,11 +6172,11 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }else{
             Valid.pindah(evt,Rencana,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -6192,7 +6184,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }else{
             Valid.pindah(evt, BtnSimpan, BtnHapus);
         }
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -6209,9 +6201,9 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }            
-            
-}//GEN-LAST:event_BtnHapusActionPerformed
+        }
+
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -6219,7 +6211,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRM.getText().trim().equals("")){
@@ -6256,9 +6248,9 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 }
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-            }  
+            }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -6266,17 +6258,17 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -6285,25 +6277,25 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             try{
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                         ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+                    
+                        ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}"+
                         ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
                         ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
                 );
                 bg.close();
 
-                File f;            
-                BufferedWriter bw; 
+                File f;
+                BufferedWriter bw;
                 StringBuilder htmlContent;
-                
+
                 String pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>").append(
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
@@ -6573,7 +6565,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,23).toString()).append("</td>").append(
@@ -6593,7 +6585,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,37).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,38).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,39).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,40).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,40).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,41).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,42).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,43).toString()).append("</td>").append(
@@ -6693,7 +6685,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,137).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,138).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,139).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,140).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,140).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,141).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,142).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,143).toString()).append("</td>").append(
@@ -6773,7 +6765,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,217).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,218).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,219).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,220).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,220).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,221).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,222).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,223).toString()).append("</td>").append(
@@ -6793,29 +6785,29 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,237).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,238).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,239).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,240).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,240).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,241).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,242).toString()).append("</td>").append(
                                     "</tr>");
                             }
-                            f = new File("RMPenilaianAwalKeperawatanRanapNeonatus.html");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("RMPenilaianAwalKeperawatanRanapNeonatus.html");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write("<html>"+
                                         "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                         "<body>"+
                                             "<table width='22000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                 htmlContent.toString()+
                                             "</table>"+
-                                        "</body>"+                   
+                                        "</body>"+
                                      "</html>"
                             );
 
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "<tr class='isi'>").append(
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>").append(
                                     "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>").append(
@@ -7085,7 +7077,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,17).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,18).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,19).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,20).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,21).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,22).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,23).toString()).append("</td>").append(
@@ -7105,7 +7097,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,37).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,38).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,39).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,40).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,40).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,41).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,42).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,43).toString()).append("</td>").append(
@@ -7205,7 +7197,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,137).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,138).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,139).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,140).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,140).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,141).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,142).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,143).toString()).append("</td>").append(
@@ -7285,7 +7277,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,217).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,218).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,219).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,220).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,220).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,221).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,222).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,223).toString()).append("</td>").append(
@@ -7305,41 +7297,41 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                         "<td valign='top'>").append(tbObat.getValueAt(i,237).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,238).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,239).toString()).append("</td>").append(
-                                        "<td valign='top'>").append(tbObat.getValueAt(i,240).toString()).append("</td>").append( 
+                                        "<td valign='top'>").append(tbObat.getValueAt(i,240).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,241).toString()).append("</td>").append(
                                         "<td valign='top'>").append(tbObat.getValueAt(i,242).toString()).append("</td>").append(
                                     "</tr>");
                             }
-                            f = new File("RMPenilaianAwalKeperawatanRanapNeonatus.wps");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("RMPenilaianAwalKeperawatanRanapNeonatus.wps");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write("<html>"+
                                         "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
                                         "<body>"+
                                             "<table width='18500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                                 htmlContent.toString()+
                                             "</table>"+
-                                        "</body>"+                   
+                                        "</body>"+
                                      "</html>"
                             );
 
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
                             htmlContent = new StringBuilder();
-                            htmlContent.append(                             
+                            htmlContent.append(
                                 "\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"Tgl.Lahir\";\"J.K.\";\"NIP Pengkaji 1\";\"Nama Pengkaji 1\";\"NIP Pengkaji 2\";\"Nama Pengkaji 2\";\"Kode DPJP\";\"Nama DPJP\";\"Tgl.Asuhan\";\"Asal Pasien\";\"Cara Masuk\";\"Diperoleh Dari\";\"Hubungan Dengan Pasien\";\"Keluhan Utama\";\"Prenatal G\";\"Prenatal P\";\"Prenatal A\";\"Prenatal UK\";\"Riwayat Penyakit Ibu\";\"Keterangan Riwayat Penyakit Ibu\";\"Riwayat Pengobatan Ibu Selama Hamil\";\"Pernah Dirawat\";\"Keterangan Pernah Dirawat\";\"Status Gizi Ibu\";\"Intranatal G\";\"Intranatal P\";\"Intranatal A\";\"Kondisi Lahir\";\"Cara Persalinan\";\"Keterangan Cara Persalinan\";\"APGAR Score\";\"Letak\";\"Tali Pusat\";\"Ketuban\";\"BB(gr)\";\"PB(cm)\";\"LK(cm)\";\"LD(cm)\";\"LP(cm)\";\"Risiko Infeksi Mayor\";\"Keterangan Risiko Infeksi Mayor\";\"Risiko Infeksi Minor\";\"Keterangan Risiko Infeksi Minor\";\"Nutrisi\";\"Keterangan Nutrisi\";\"Frekuensi(cc)\";\"Frekuenasi(x)\";\"Eliminasi BAK\";\"Keterangan Eliminasi BAK\";\"Eliminasi BAB\";\"Keterangan Eliminasi BAB\";\"Alergi Obat\";\"Keterangan Alergi Obat\";\"Reaksi Alergi Obat\";\"Alergi Makanan\";\"Keterangan Alergi Makanan\";\"Reaksi Alergi Makanan\";\"Alergi Lainnya\";\"Keterangan Alergi Lainnya\";\"Reaksi Alergi Lainnya\";\"Riwayat Penyakit Keluarga\";\"Keterangan Riwayat Penyakit Keluarga\";\"Riwayat Imunisasi\";\"Keterangan Riwayat Imunisasi\";\"Riwayat Tranfusi Darah\";\"Keterangan Riwayat Tranfusi Darah\";\"Reaksi Tranfusi Darah\";\"Keterangan Reaksi Tranfusi Darah\";\"Obat-obatan Diminum\";\"Keterangan Obat-obatan Diminum\";\"Obat Tidur/Narkoba\";\"Keterangan Obat Tidur/Narkoba\";\"Merokok\";\"Batang/Hari\";\"Alkohol\";\"Gelas/Hari\";\"Kesadaran\";\"Keadaan Umum\";\"GCS(E+V+M)\";\"TD(mmHg)\";\"Suhu(°C)\";\"HR(x/menit)\";\"RR(x/menit)\";\"SPO2(%)\";\"Down Score\";\"BB(Kg)\";\"TB(cm)\";\"LK(cm)\";\"LD(cm)\";\"LP(cm)\";\"GD Bayi\";\"GD Ibu\";\"GD Ayah\";\"Gerak Bayi\";\"Kepala\";\"Keterangan Kepala\";\"Ubun-ubun\";\"Keterangan Ubun-ubun\";\"Wajah\";\"Keterangan Wajah\";\"Kejang\";\"Keterangan Kejang\";\"Refleks\";\"Keterangan Refleks\";\"Tangis Bayi\";\"Keterangan Tangis Bayi\";\"Denyut Nadi\";\"Sirkulasi\";\"Keterangan Sirkulasi\";\"Pulsasi\";\"Keterangan Pulsasi\";\"Pola Napas\";\"Jenis Pernapasan\";\"Keterangan Jenis Pernapasan\";\"Retraksi\";\"Air Entry\";\"Merintih\";\"Suara Napas\";\"Mulut\";\"Keterangan Mulut\";\"Lidah\";\"Keterangan Lidah\";\"Tenggorakan\";\"Keterangan Tenggorokan\";\"Abdomen\";\"Keterangan Abdomen\";\"BAB\";\"Keterangan BAB\";\"Warna BAB\";\"Keterangan Warna BAB\";\"BAK\";\"Keterangan BAK\";\"Warna BAK\";\"Keterangan Warna BAK\";\"Posisi Mata\";\"Kelopak Mata\";\"Keterangan Kelopak Mata\";\"Besar Pupil\";\"Konjugtiva\";\"Keterangan Konjugtiva\";\"Sklera\";\"Keterangan Sklera\";\"Pendengaran\";\"Keterangan Pendengaran\";\"Penciuman\";\"Keterangan Penciuman\";\"Warna Kulit\";\"Keterangan Warna Kulit\";\"Vernic Kaseosa\";\"Keterangan Vernic Kaseosa\";\"Turgor\";\"Lanugo\";\"Kulit\";\"Kriteria Risiko Dekubitas\";\"Reproduksi\";\"Keterangan Reproduksi\";\"Rekoil Telinga\";\"Keterangan Rekoil Telinga\";\"Lengan\";\"Keterangan Lengan\";\"Tungkai\";\"Keterangan Tungkai\";\"Telapak Kaki\";\"Kondisi Psikologis\";\"Gangguan Jiwa Di Masa Lalu\";\"Menerima Kondisi Bayi\";\"Status Menikah\";\"Masalah Pernikahan\";\"Keterangan Masalah Pernikahan\";\"Pekerjaan\";\"Agama\";\"Nilai Kepercayaan\";\"Keterangan Nilai Kepercayaan\";\"Suku\";\"Pendidikan\";\"Pembayaran\";\"Tinggal Bersama\";\"Keterangan Tinggal Bersama\";\"Hubungan Keluarga\";\"Respon Emosi\";\"Bahasa Sehari-hari\";\"Baca & Tulis\";\"Butuh Penerjemah\";\"Keterangan Butuh Penerjemah\";\"Terdapat Hambatan Belajar\";\"Hambatan Belajar\";\"Keterangan Hambatan Belajar\";\"Hambatan Cara Bicara\";\"Hambatan Bahasa Isyarat\";\"Cara Belajar Disukai\";\"Kesediaan Menerima Informasi\";\"Keterangan Kesediaan Menerima Informasi\";\"Pemahaman Nutrisi\";\"Pemahaman Penyakit\";\"Pemahaman Pengobatan\";\"Pemahaman Perawatan\";\"Masalah Gizi 1\";\"N.Gizi 1\";\"Masalah Gizi 2\";\"N.Gizi 2\";\"Masalah Gizi 3\";\"N.Gizi 3\";\"Total N.Gizi\";\"Keterangan Skrining Gizi\";\"Humpty Dumpty Skala 1\";\"Nilai H.D.1\";\"Humpty Dumpty Skala 2\";\"Nilai H.D.2\";\"Humpty Dumpty Skala 3\";\"Nilai H.D.3\";\"Humpty Dumpty Skala 4\";\"Nilai H.D.4\";\"Humpty Dumpty Skala 5\";\"Nilai H.D.5\";\"Humpty Dumpty Skala 6\";\"Nilai H.D.6\";\"Humpty Dumpty Skala 7\";\"Nilai H.D.7\";\"Total Nilai H.D.\";\"Keterangan Hasil Pengkajian H.D.\";\"Skala NIPS 1\";\"Nilai NIPS 1\";\"Skala NIPS 2\";\"Nilai NIPS 2\";\"Skala NIPS 3\";\"Nilai NIPS 3\";\"Skala NIPS 4\";\"Nilai NIPS 4\";\"Skala NIPS 5\";\"Nilai NIPS 5\";\"Total NIPS\";\"Keterangan Pengkajian NIPS\";\"Informasi Perencanaan Pulang\";\"Rawat Rata-rata\";\"Perencanaan Pulang\";\"Kondisi Klinis Pulang\";\"Perawatan Lanjutan Dirumah\";\"Cara Transportasi Pulang\";\"Transportasi Digunakan\";\"Rencana Keperawatan Lainnya\"\n"
-                            ); 
+                            );
                             for (i = 0; i < tabMode.getRowCount(); i++) {
                                 htmlContent.append("\"").append(tbObat.getValueAt(i,0).toString()).append("\";\"").append(tbObat.getValueAt(i,1).toString()).append("\";\"").append(tbObat.getValueAt(i,2).toString()).append("\";\"").append(tbObat.getValueAt(i,3).toString()).append("\";\"").append(tbObat.getValueAt(i,4).toString()).append("\";\"").append(tbObat.getValueAt(i,5).toString()).append("\";\"").append(tbObat.getValueAt(i,6).toString()).append("\";\"").append(tbObat.getValueAt(i,7).toString()).append("\";\"").append(tbObat.getValueAt(i,8).toString()).append("\";\"").append(tbObat.getValueAt(i,9).toString()).append("\";\"").append(tbObat.getValueAt(i,10).toString()).append("\";\"").append(tbObat.getValueAt(i,11).toString()).append("\";\"").append(tbObat.getValueAt(i,12).toString()).append("\";\"").append(tbObat.getValueAt(i,13).toString()).append("\";\"").append(tbObat.getValueAt(i,14).toString()).append("\";\"").append(tbObat.getValueAt(i,15).toString()).append("\";\"").append(tbObat.getValueAt(i,16).toString()).append("\";\"").append(tbObat.getValueAt(i,17).toString()).append("\";\"").append(tbObat.getValueAt(i,18).toString()).append("\";\"").append(tbObat.getValueAt(i,19).toString()).append("\";\"").append(tbObat.getValueAt(i,20).toString()).append("\";\"").append(tbObat.getValueAt(i,21).toString()).append("\";\"").append(tbObat.getValueAt(i,22).toString()).append("\";\"").append(tbObat.getValueAt(i,23).toString()).append("\";\"").append(tbObat.getValueAt(i,24).toString()).append("\";\"").append(tbObat.getValueAt(i,25).toString()).append("\";\"").append(tbObat.getValueAt(i,26).toString()).append("\";\"").append(tbObat.getValueAt(i,27).toString()).append("\";\"").append(tbObat.getValueAt(i,28).toString()).append("\";\"").append(tbObat.getValueAt(i,29).toString()).append("\";\"").append(tbObat.getValueAt(i,30).toString()).append("\";\"").append(tbObat.getValueAt(i,31).toString()).append("\";\"").append(tbObat.getValueAt(i,32).toString()).append("\";\"").append(tbObat.getValueAt(i,33).toString()).append("\";\"").append(tbObat.getValueAt(i,34).toString()).append("\";\"").append(tbObat.getValueAt(i,35).toString()).append("\";\"").append(tbObat.getValueAt(i,36).toString()).append("\";\"").append(tbObat.getValueAt(i,37).toString()).append("\";\"").append(tbObat.getValueAt(i,38).toString()).append("\";\"").append(tbObat.getValueAt(i,39).toString()).append("\";\"").append(tbObat.getValueAt(i,40).toString()).append("\";\"").append(tbObat.getValueAt(i,41).toString()).append("\";\"").append(tbObat.getValueAt(i,42).toString()).append("\";\"").append(tbObat.getValueAt(i,43).toString()).append("\";\"").append(tbObat.getValueAt(i,44).toString()).append("\";\"").append(tbObat.getValueAt(i,45).toString()).append("\";\"").append(tbObat.getValueAt(i,46).toString()).append("\";\"").append(tbObat.getValueAt(i,47).toString()).append("\";\"").append(tbObat.getValueAt(i,48).toString()).append("\";\"").append(tbObat.getValueAt(i,49).toString()).append("\";\"").append(tbObat.getValueAt(i,50).toString()).append("\";\"").append(tbObat.getValueAt(i,51).toString()).append("\";\"").append(tbObat.getValueAt(i,52).toString()).append("\";\"").append(tbObat.getValueAt(i,53).toString()).append("\";\"").append(tbObat.getValueAt(i,54).toString()).append("\";\"").append(tbObat.getValueAt(i,55).toString()).append("\";\"").append(tbObat.getValueAt(i,56).toString()).append("\";\"").append(tbObat.getValueAt(i,57).toString()).append("\";\"").append(tbObat.getValueAt(i,58).toString()).append("\";\"").append(tbObat.getValueAt(i,59).toString()).append("\";\"").append(tbObat.getValueAt(i,60).toString()).append("\";\"").append(tbObat.getValueAt(i,61).toString()).append("\";\"").append(tbObat.getValueAt(i,62).toString()).append("\";\"").append(tbObat.getValueAt(i,63).toString()).append("\";\"").append(tbObat.getValueAt(i,64).toString()).append("\";\"").append(tbObat.getValueAt(i,65).toString()).append("\";\"").append(tbObat.getValueAt(i,66).toString()).append("\";\"").append(tbObat.getValueAt(i,67).toString()).append("\";\"").append(tbObat.getValueAt(i,68).toString()).append("\";\"").append(tbObat.getValueAt(i,69).toString()).append("\";\"").append(tbObat.getValueAt(i,70).toString()).append("\";\"").append(tbObat.getValueAt(i,71).toString()).append("\";\"").append(tbObat.getValueAt(i,72).toString()).append("\";\"").append(tbObat.getValueAt(i,73).toString()).append("\";\"").append(tbObat.getValueAt(i,74).toString()).append("\";\"").append(tbObat.getValueAt(i,75).toString()).append("\";\"").append(tbObat.getValueAt(i,76).toString()).append("\";\"").append(tbObat.getValueAt(i,77).toString()).append("\";\"").append(tbObat.getValueAt(i,78).toString()).append("\";\"").append(tbObat.getValueAt(i,79).toString()).append("\";\"").append(tbObat.getValueAt(i,80).toString()).append("\";\"").append(tbObat.getValueAt(i,81).toString()).append("\";\"").append(tbObat.getValueAt(i,82).toString()).append("\";\"").append(tbObat.getValueAt(i,83).toString()).append("\";\"").append(tbObat.getValueAt(i,84).toString()).append("\";\"").append(tbObat.getValueAt(i,85).toString()).append("\";\"").append(tbObat.getValueAt(i,86).toString()).append("\";\"").append(tbObat.getValueAt(i,87).toString()).append("\";\"").append(tbObat.getValueAt(i,88).toString()).append("\";\"").append(tbObat.getValueAt(i,89).toString()).append("\";\"").append(tbObat.getValueAt(i,90).toString()).append("\";\"").append(tbObat.getValueAt(i,91).toString()).append("\";\"").append(tbObat.getValueAt(i,92).toString()).append("\";\"").append(tbObat.getValueAt(i,93).toString()).append("\";\"").append(tbObat.getValueAt(i,94).toString()).append("\";\"").append(tbObat.getValueAt(i,95).toString()).append("\";\"").append(tbObat.getValueAt(i,96).toString()).append("\";\"").append(tbObat.getValueAt(i,97).toString()).append("\";\"").append(tbObat.getValueAt(i,98).toString()).append("\";\"").append(tbObat.getValueAt(i,99).toString()).append("\";\"").append(tbObat.getValueAt(i,100).toString()).append("\";\"").append(tbObat.getValueAt(i,101).toString()).append("\";\"").append(tbObat.getValueAt(i,102).toString()).append("\";\"").append(tbObat.getValueAt(i,103).toString()).append("\";\"").append(tbObat.getValueAt(i,104).toString()).append("\";\"").append(tbObat.getValueAt(i,105).toString()).append("\";\"").append(tbObat.getValueAt(i,106).toString()).append("\";\"").append(tbObat.getValueAt(i,107).toString()).append("\";\"").append(tbObat.getValueAt(i,108).toString()).append("\";\"").append(tbObat.getValueAt(i,109).toString()).append("\";\"").append(tbObat.getValueAt(i,110).toString()).append("\";\"").append(tbObat.getValueAt(i,111).toString()).append("\";\"").append(tbObat.getValueAt(i,112).toString()).append("\";\"").append(tbObat.getValueAt(i,113).toString()).append("\";\"").append(tbObat.getValueAt(i,114).toString()).append("\";\"").append(tbObat.getValueAt(i,115).toString()).append("\";\"").append(tbObat.getValueAt(i,116).toString()).append("\";\"").append(tbObat.getValueAt(i,117).toString()).append("\";\"").append(tbObat.getValueAt(i,118).toString()).append("\";\"").append(tbObat.getValueAt(i,119).toString()).append("\";\"").append(tbObat.getValueAt(i,120).toString()).append("\";\"").append(tbObat.getValueAt(i,121).toString()).append("\";\"").append(tbObat.getValueAt(i,122).toString()).append("\";\"").append(tbObat.getValueAt(i,123).toString()).append("\";\"").append(tbObat.getValueAt(i,124).toString()).append("\";\"").append(tbObat.getValueAt(i,125).toString()).append("\";\"").append(tbObat.getValueAt(i,126).toString()).append("\";\"").append(tbObat.getValueAt(i,127).toString()).append("\";\"").append(tbObat.getValueAt(i,128).toString()).append("\";\"").append(tbObat.getValueAt(i,129).toString()).append("\";\"").append(tbObat.getValueAt(i,130).toString()).append("\";\"").append(tbObat.getValueAt(i,131).toString()).append("\";\"").append(tbObat.getValueAt(i,132).toString()).append("\";\"").append(tbObat.getValueAt(i,133).toString()).append("\";\"").append(tbObat.getValueAt(i,134).toString()).append("\";\"").append(tbObat.getValueAt(i,135).toString()).append("\";\"").append(tbObat.getValueAt(i,136).toString()).append("\";\"").append(tbObat.getValueAt(i,137).toString()).append("\";\"").append(tbObat.getValueAt(i,138).toString()).append("\";\"").append(tbObat.getValueAt(i,139).toString()).append("\";\"").append(tbObat.getValueAt(i,140).toString()).append("\";\"").append(tbObat.getValueAt(i,141).toString()).append("\";\"").append(tbObat.getValueAt(i,142).toString()).append("\";\"").append(tbObat.getValueAt(i,143).toString()).append("\";\"").append(tbObat.getValueAt(i,144).toString()).append("\";\"").append(tbObat.getValueAt(i,145).toString()).append("\";\"").append(tbObat.getValueAt(i,146).toString()).append("\";\"").append(tbObat.getValueAt(i,147).toString()).append("\";\"").append(tbObat.getValueAt(i,148).toString()).append("\";\"").append(tbObat.getValueAt(i,149).toString()).append("\";\"").append(tbObat.getValueAt(i,150).toString()).append("\";\"").append(tbObat.getValueAt(i,151).toString()).append("\";\"").append(tbObat.getValueAt(i,152).toString()).append("\";\"").append(tbObat.getValueAt(i,153).toString()).append("\";\"").append(tbObat.getValueAt(i,154).toString()).append("\";\"").append(tbObat.getValueAt(i,155).toString()).append("\";\"").append(tbObat.getValueAt(i,156).toString()).append("\";\"").append(tbObat.getValueAt(i,157).toString()).append("\";\"").append(tbObat.getValueAt(i,158).toString()).append("\";\"").append(tbObat.getValueAt(i,159).toString()).append("\";\"").append(tbObat.getValueAt(i,160).toString()).append("\";\"").append(tbObat.getValueAt(i,161).toString()).append("\";\"").append(tbObat.getValueAt(i,162).toString()).append("\";\"").append(tbObat.getValueAt(i,163).toString()).append("\";\"").append(tbObat.getValueAt(i,164).toString()).append("\";\"").append(tbObat.getValueAt(i,165).toString()).append("\";\"").append(tbObat.getValueAt(i,166).toString()).append("\";\"").append(tbObat.getValueAt(i,167).toString()).append("\";\"").append(tbObat.getValueAt(i,168).toString()).append("\";\"").append(tbObat.getValueAt(i,169).toString()).append("\";\"").append(tbObat.getValueAt(i,170).toString()).append("\";\"").append(tbObat.getValueAt(i,171).toString()).append("\";\"").append(tbObat.getValueAt(i,172).toString()).append("\";\"").append(tbObat.getValueAt(i,173).toString()).append("\";\"").append(tbObat.getValueAt(i,174).toString()).append("\";\"").append(tbObat.getValueAt(i,175).toString()).append("\";\"").append(tbObat.getValueAt(i,176).toString()).append("\";\"").append(tbObat.getValueAt(i,177).toString()).append("\";\"").append(tbObat.getValueAt(i,178).toString()).append("\";\"").append(tbObat.getValueAt(i,179).toString()).append("\";\"").append(tbObat.getValueAt(i,180).toString()).append("\";\"").append(tbObat.getValueAt(i,181).toString()).append("\";\"").append(tbObat.getValueAt(i,182).toString()).append("\";\"").append(tbObat.getValueAt(i,183).toString()).append("\";\"").append(tbObat.getValueAt(i,184).toString()).append("\";\"").append(tbObat.getValueAt(i,185).toString()).append("\";\"").append(tbObat.getValueAt(i,186).toString()).append("\";\"").append(tbObat.getValueAt(i,187).toString()).append("\";\"").append(tbObat.getValueAt(i,188).toString()).append("\";\"").append(tbObat.getValueAt(i,189).toString()).append("\";\"").append(tbObat.getValueAt(i,190).toString()).append("\";\"").append(tbObat.getValueAt(i,191).toString()).append("\";\"").append(tbObat.getValueAt(i,192).toString()).append("\";\"").append(tbObat.getValueAt(i,193).toString()).append("\";\"").append(tbObat.getValueAt(i,194).toString()).append("\";\"").append(tbObat.getValueAt(i,195).toString()).append("\";\"").append(tbObat.getValueAt(i,196).toString()).append("\";\"").append(tbObat.getValueAt(i,197).toString()).append("\";\"").append(tbObat.getValueAt(i,198).toString()).append("\";\"").append(tbObat.getValueAt(i,199).toString()).append("\";\"").append(tbObat.getValueAt(i,200).toString()).append("\";\"").append(tbObat.getValueAt(i,201).toString()).append("\";\"").append(tbObat.getValueAt(i,202).toString()).append("\";\"").append(tbObat.getValueAt(i,203).toString()).append("\";\"").append(tbObat.getValueAt(i,204).toString()).append("\";\"").append(tbObat.getValueAt(i,205).toString()).append("\";\"").append(tbObat.getValueAt(i,206).toString()).append("\";\"").append(tbObat.getValueAt(i,207).toString()).append("\";\"").append(tbObat.getValueAt(i,208).toString()).append("\";\"").append(tbObat.getValueAt(i,209).toString()).append("\";\"").append(tbObat.getValueAt(i,210).toString()).append("\";\"").append(tbObat.getValueAt(i,211).toString()).append("\";\"").append(tbObat.getValueAt(i,212).toString()).append("\";\"").append(tbObat.getValueAt(i,213).toString()).append("\";\"").append(tbObat.getValueAt(i,214).toString()).append("\";\"").append(tbObat.getValueAt(i,215).toString()).append("\";\"").append(tbObat.getValueAt(i,216).toString()).append("\";\"").append(tbObat.getValueAt(i,217).toString()).append("\";\"").append(tbObat.getValueAt(i,218).toString()).append("\";\"").append(tbObat.getValueAt(i,219).toString()).append("\";\"").append(tbObat.getValueAt(i,220).toString()).append("\";\"").append(tbObat.getValueAt(i,221).toString()).append("\";\"").append(tbObat.getValueAt(i,222).toString()).append("\";\"").append(tbObat.getValueAt(i,223).toString()).append("\";\"").append(tbObat.getValueAt(i,224).toString()).append("\";\"").append(tbObat.getValueAt(i,225).toString()).append("\";\"").append(tbObat.getValueAt(i,226).toString()).append("\";\"").append(tbObat.getValueAt(i,227).toString()).append("\";\"").append(tbObat.getValueAt(i,228).toString()).append("\";\"").append(tbObat.getValueAt(i,229).toString()).append("\";\"").append(tbObat.getValueAt(i,230).toString()).append("\";\"").append(tbObat.getValueAt(i,231).toString()).append("\";\"").append(tbObat.getValueAt(i,232).toString()).append("\";\"").append(tbObat.getValueAt(i,233).toString()).append("\";\"").append(tbObat.getValueAt(i,234).toString()).append("\";\"").append(tbObat.getValueAt(i,235).toString()).append("\";\"").append(tbObat.getValueAt(i,236).toString()).append("\";\"").append(tbObat.getValueAt(i,237).toString()).append("\";\"").append(tbObat.getValueAt(i,238).toString()).append("\";\"").append(tbObat.getValueAt(i,239).toString()).append("\";\"").append(tbObat.getValueAt(i,240).toString()).append("\";\"").append(tbObat.getValueAt(i,241).toString()).append("\";\"").append(tbObat.getValueAt(i,242).toString()).append("\"\n");
                             }
-                            f = new File("RMPenilaianAwalKeperawatanRanapNeonatus.csv");            
-                            bw = new BufferedWriter(new FileWriter(f));            
+                            f = new File("RMPenilaianAwalKeperawatanRanapNeonatus.csv");
+                            bw = new BufferedWriter(new FileWriter(f));
                             bw.write(htmlContent.toString());
 
-                            bw.close();                         
+                            bw.close();
                             Desktop.getDesktop().browse(f.toURI());
-                        break; 
+                        break;
                 }
                 htmlContent=null;
             }catch(Exception e){
@@ -7347,7 +7339,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -7355,7 +7347,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -7365,11 +7357,11 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -7377,12 +7369,12 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -7391,7 +7383,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -7405,7 +7397,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 TabRawat.setSelectedIndex(0);
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -7424,7 +7416,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 }
             }
         }
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
@@ -7448,18 +7440,18 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
 
     private void BtnPrint1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrint1ActionPerformed
         if(tbObat.getSelectedRow()>-1){
-            Map<String, Object> param = new HashMap<>();    
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());          
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            param.put("nyeri",Sequel.cariGambar("select gambar.nyeri from gambar")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("nyeri",Sequel.cariGambar("select gambar.nyeri from gambar"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString())); 
-            
+            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),6).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),5).toString():finger)+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()));
+
             try {
                 masalahkeperawatan="";
                 ps=koneksi.prepareStatement(
@@ -7485,7 +7477,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-            param.put("masalah",masalahkeperawatan);  
+            param.put("masalah",masalahkeperawatan);
             try {
                 masalahkeperawatan="";
                 ps=koneksi.prepareStatement(
@@ -7511,7 +7503,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             }
-            param.put("rencana",masalahkeperawatan); 
+            param.put("rencana",masalahkeperawatan);
             Valid.MyReportqry("rptCetakPenilaianAwalKeperawatanRanapNeonantus.jasper","report","::[ Laporan Pengkajian Awal Keperawatan Rawat Inap Neonatus ]::",
                 "select penilaian_awal_keperawatan_ranap_neonatus.no_rawat,penilaian_awal_keperawatan_ranap_neonatus.tanggal,penilaian_awal_keperawatan_ranap_neonatus.asal_pasien,penilaian_awal_keperawatan_ranap_neonatus.cara_masuk,"+
                 "penilaian_awal_keperawatan_ranap_neonatus.diperoleh_dari,penilaian_awal_keperawatan_ranap_neonatus.hubungan_dengan_pasien,penilaian_awal_keperawatan_ranap_neonatus.keluhan_utama,penilaian_awal_keperawatan_ranap_neonatus.prenatal_g,"+
@@ -7579,7 +7571,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 "inner join dokter on penilaian_awal_keperawatan_ranap_neonatus.kd_dokter=dokter.kd_dokter where reg_periksa.no_rawat='"+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"'",param);
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu..!!!!");
-        }  
+        }
     }//GEN-LAST:event_BtnPrint1ActionPerformed
 
     private void TglAsuhanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglAsuhanKeyPressed
@@ -7645,10 +7637,10 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){ 
+                if(dokter.getTable().getSelectedRow()!= -1){
                     KdDPJP.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                    NmDPJP.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());  
-                }              
+                    NmDPJP.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -9442,7 +9434,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or penilaian_awal_keperawatan_ranap_neonatus.nip1 like ? or "+
                 "pengkaji1.nama like ? or penilaian_awal_keperawatan_ranap_neonatus.kd_dokter like ? or dokter.nm_dokter like ?)")+
                 " order by penilaian_awal_keperawatan_ranap_neonatus.tanggal");
-            
+
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
@@ -9454,7 +9446,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     ps.setString(7,"%"+TCari.getText()+"%");
                     ps.setString(8,"%"+TCari.getText()+"%");
                     ps.setString(9,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -9511,7 +9503,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     ps.close();
                 }
             }
-            
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -9757,7 +9749,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
         Valid.tabelKosong(tabModeRencana);
         TabRawat.setSelectedIndex(0);
         AsalPasien.requestFocus();
-    } 
+    }
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -10050,22 +10042,22 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
     }
-    
-    
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpenilaian_awal_keperawatan_ranap_neonatus());
         BtnHapus.setEnabled(akses.getpenilaian_awal_keperawatan_ranap_neonatus());
         BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_ranap_neonatus());
-        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_ranap_neonatus()); 
-        BtnTambahMasalah.setEnabled(akses.getmaster_masalah_keperawatan_neonatus()); 
-        BtnTambahRencana.setEnabled(akses.getmaster_rencana_keperawatan_neonatus()); 
+        BtnEdit.setEnabled(akses.getpenilaian_awal_keperawatan_ranap_neonatus());
+        BtnTambahMasalah.setEnabled(akses.getmaster_masalah_keperawatan_neonatus());
+        BtnTambahRencana.setEnabled(akses.getmaster_rencana_keperawatan_neonatus());
         if(akses.getjml2()>=1){
             KdPetugas.setEditable(false);
             BtnPetugas.setEnabled(false);
@@ -10075,8 +10067,8 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 KdPetugas.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        }   
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 TglAsuhan.setEditable(false);
@@ -10088,19 +10080,19 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
     public void setTampil(){
        TabRawat.setSelectedIndex(1);
     }
-    
+
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(470,HEIGHT));
-            FormMenu.setVisible(true);  
+            FormMenu.setVisible(true);
             FormMasalahRencana.setVisible(true);
             ChkAccor.setVisible(true);
-        }else if(ChkAccor.isSelected()==false){    
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
-            FormMenu.setVisible(false);  
-            FormMasalahRencana.setVisible(false);  
+            FormMenu.setVisible(false);
+            FormMasalahRencana.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
@@ -10163,8 +10155,8 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             }
         }
     }
-   
-    
+
+
 
     private void hapus() {
         if(Sequel.queryu2tf("delete from penilaian_awal_keperawatan_ranap_neonatus where no_rawat=?",1,new String[]{
@@ -10481,7 +10473,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 TabRawat.setSelectedIndex(1);
         }
     }
-    
+
     private void tampilMasalah() {
         try{
             Valid.tabelKosong(tabModeMasalah);
@@ -10511,14 +10503,14 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 fileWriter.write("{\"masalahkeperawatan\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilMasalah2() {
         try{
             jml=0;
@@ -10528,11 +10520,11 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 }
             }
 
-            pilih=new boolean[jml]; 
+            pilih=new boolean[jml];
             kode=new String[jml];
             masalah=new String[jml];
 
-            index=0;        
+            index=0;
             for(i=0;i<tbMasalahKeperawatan.getRowCount();i++){
                 if(tbMasalahKeperawatan.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -10540,7 +10532,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     masalah[index]=tbMasalahKeperawatan.getValueAt(i,2).toString();
                     index++;
                 }
-            } 
+            }
 
             Valid.tabelKosong(tabModeMasalah);
 
@@ -10549,11 +10541,11 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     pilih[i],kode[i],masalah[i]
                 });
             }
-            
+
             pilih=null;
             kode=null;
             masalah=null;
-            
+
             myObj = new FileReader("./cache/masalahkeperawatanneonatus.iyem");
             root = mapper.readTree(myObj);
             response = root.path("masalahkeperawatan");
@@ -10562,7 +10554,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     if(list.path("KodeMasalah").asText().toLowerCase().contains(TCariMasalah.getText().toLowerCase())||list.path("NamaMasalah").asText().toLowerCase().contains(TCariMasalah.getText().toLowerCase())){
                         tabModeMasalah.addRow(new Object[]{
                             false,list.path("KodeMasalah").asText(),list.path("NamaMasalah").asText()
-                        });                    
+                        });
                     }
                 }
             }
@@ -10571,7 +10563,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilRencana() {
         try{
             file=new File("./cache/rencanakeperawatanneonatus.iyem");
@@ -10599,14 +10591,14 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 fileWriter.write("{\"rencanakeperawatan\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilRencana2() {
         try{
             jml=0;
@@ -10616,11 +10608,11 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                 }
             }
 
-            pilih=new boolean[jml]; 
+            pilih=new boolean[jml];
             kode=new String[jml];
             masalah=new String[jml];
 
-            index=0;        
+            index=0;
             for(i=0;i<tbRencanaKeperawatan.getRowCount();i++){
                 if(tbRencanaKeperawatan.getValueAt(i,0).toString().equals("true")){
                     pilih[index]=true;
@@ -10628,7 +10620,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     masalah[index]=tbRencanaKeperawatan.getValueAt(i,2).toString();
                     index++;
                 }
-            } 
+            }
 
             Valid.tabelKosong(tabModeRencana);
 
@@ -10637,7 +10629,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                     pilih[i],kode[i],masalah[i]
                 });
             }
-            
+
             pilih=null;
             kode=null;
             masalah=null;
@@ -10653,7 +10645,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
                                     list.path("NamaRencana").asText().toLowerCase().contains(TCariRencana.getText().toLowerCase())){
                                 tabModeRencana.addRow(new Object[]{
                                     false,list.path("KodeRencana").asText(),list.path("NamaRencana").asText()
-                                });                    
+                                });
                             }
                         }
                     }
@@ -10664,7 +10656,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void isTotalResikoJatuh(){
         try {
             NilaiResikoTotal.setText((Integer.parseInt(NilaiResiko1.getText())+Integer.parseInt(NilaiResiko2.getText())+Integer.parseInt(NilaiResiko3.getText())+Integer.parseInt(NilaiResiko4.getText())+Integer.parseInt(NilaiResiko5.getText())+Integer.parseInt(NilaiResiko6.getText())+Integer.parseInt(NilaiResiko7.getText()))+"");
@@ -10678,7 +10670,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             KeteranganTingkatRisiko.setText("Risiko Rendah 7 - 11");
         }
     }
-    
+
     private void isGizi(){
         try {
             TotalNilaiGizi.setText((Integer.parseInt(NilaiGizi1.getText())+Integer.parseInt(NilaiGizi2.getText())+Integer.parseInt(NilaiGizi3.getText()))+"");
@@ -10692,7 +10684,7 @@ public final class RMPenilaianAwalKeperawatanRanapNeonatus extends javax.swing.J
             KeteranganSkriningGizi.setText("Diet Yang Diberikan : ASI / PASI Per Oral/NGT");
         }
     }
-    
+
     private void isNyeri(){
         try {
             TotalNIPS.setText((Integer.parseInt(NilaiNIPS1.getText())+Integer.parseInt(NilaiNIPS2.getText())+Integer.parseInt(NilaiNIPS3.getText())+Integer.parseInt(NilaiNIPS4.getText())+Integer.parseInt(NilaiNIPS5.getText()))+"");

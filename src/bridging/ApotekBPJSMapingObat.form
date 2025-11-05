@@ -356,9 +356,6 @@
             <Component class="widget.TextBox" name="kdobat">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="kdobat" noResource="true"/>
               </Properties>
               <Constraints>
@@ -370,9 +367,6 @@
             <Component class="widget.TextBox" name="TObat">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="TObat" noResource="true"/>
               </Properties>
               <Constraints>
@@ -414,9 +408,6 @@
             <Component class="widget.TextBox" name="KdObatBPJS">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdObatBPJS" noResource="true"/>
               </Properties>
               <Constraints>

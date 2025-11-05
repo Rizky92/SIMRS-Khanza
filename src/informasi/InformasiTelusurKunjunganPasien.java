@@ -89,7 +89,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabModeRegistrasi=new DefaultTableModel(null,new Object[]{
                 "No.","No.Rawat","Tanggal","Jam","Kd.Dokter","Dokter Dituju/DPJP","Umur","Poliklinik/Kamar","Jenis Bayar","Diagnosa Utama"
             }){
@@ -113,7 +113,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
             }else if(i==4){
                 column.setPreferredWidth(70);
             }else if(i==5){
-                column.setPreferredWidth(190);   
+                column.setPreferredWidth(190);
             }else if(i==6){
                 column.setPreferredWidth(40);
             }else if(i==7){
@@ -126,8 +126,8 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
         }
         tbRegistrasi.setDefaultRenderer(Object.class, new WarnaTable());
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
-        TCari1.setDocument(new batasInput((byte)100).getKata(TCari1)); 
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+        TCari1.setDocument(new batasInput((byte)100).getKata(TCari1));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -170,9 +170,9 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                 }
             });
         }
-        
+
     }
-    
+
     private int pilihan=0;
 
     /** This method is called from within the constructor to
@@ -410,11 +410,11 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -422,12 +422,12 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -436,7 +436,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -526,7 +526,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
         if(!TCari.getText().equals("")){
             Valid.tabelKosong(tabMode);
             Valid.tabelKosong(tabModeRegistrasi);
-            try{     
+            try{
                 ps=koneksi.prepareStatement(
                     "select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp,pasien.umur, pasien.jk,pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, "+
                     "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,pasien.no_tlp "+
@@ -534,7 +534,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                     "and pasien.kd_prop=propinsi.kd_prop and pasien.kd_kec=kecamatan.kd_kec and pasien.kd_kab=kabupaten.kd_kab "+
                     "where concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) like ? or "+
                     "pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or pasien.no_ktp like ? or pasien.tmp_lahir like ? or pasien.tgl_lahir like ? "+
-                    "order by pasien.no_rkm_medis desc LIMIT 500 ");           
+                    "order by pasien.no_rkm_medis desc LIMIT 500 ");
                 try {
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
@@ -567,13 +567,13 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
             }
             LCount.setText(""+tabMode.getRowCount());
         }
-    } 
-    
+    }
+
     private void tampil2(){
         if(tbKamar.getSelectedRow()!= -1){
             Valid.tabelKosong(tabModeRegistrasi);
             i=0;
-            try{ 
+            try{
                 ps=koneksi.prepareStatement(
                     "select reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,reg_periksa.status_lanjut,"+
                     "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.umurdaftar,reg_periksa.sttsumur,"+
@@ -605,7 +605,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                         i++;
                         kdpenyakit=Sequel.cariIsi("select kd_penyakit from diagnosa_pasien where no_rawat=? and status='Ralan' and prioritas='1'",rs.getString("no_rawat"));
                         namapenyakit=Sequel.cariIsi("select nm_penyakit from penyakit where kd_penyakit=?",kdpenyakit);
-                        
+
                         tabModeRegistrasi.addRow(new Object[]{
                             i+"",rs.getString("no_rawat"),rs.getString("tgl_registrasi"),rs.getString("jam_reg"),
                             rs.getString("kd_dokter"),rs.getString("nm_dokter"),rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),
@@ -619,7 +619,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                         try {
                             ps2.setString(1,rs.getString("no_rawat"));
                             rs2=ps2.executeQuery();
-                            while(rs2.next()){                            
+                            while(rs2.next()){
                                 i++;
                                 tabModeRegistrasi.addRow(new Object[]{
                                     i+"",rs.getString("no_rawat"),rs.getString("tgl_registrasi"),"",
@@ -637,7 +637,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                                 ps2.close();
                             }
                         }
-                        
+
                         kddpjp="";
                         dpjp="";
                         if(rs.getString("status_lanjut").equals("Ranap")){
@@ -650,9 +650,9 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                             }
                             kdpenyakit=Sequel.cariIsi("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.no_rawat=? and diagnosa_pasien.status='Ranap' and diagnosa_pasien.prioritas='1'",rs.getString("no_rawat"));
                             namapenyakit=Sequel.cariIsi("select penyakit.nm_penyakit from penyakit where penyakit.kd_penyakit=?",kdpenyakit);
-                                
-                        }    
-                        
+
+                        }
+
                         ps2=koneksi.prepareStatement(
                                 "select kamar_inap.tgl_masuk,kamar_inap.jam_masuk,kamar_inap.kd_kamar,bangsal.nm_bangsal "+
                                 "from kamar_inap inner join kamar inner join bangsal on kamar_inap.kd_kamar=kamar.kd_kamar "+
@@ -660,8 +660,8 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                         try {
                             ps2.setString(1,rs.getString("no_rawat"));
                             rs2=ps2.executeQuery();
-                            while(rs2.next()){                            
-                                i++;       
+                            while(rs2.next()){
+                                i++;
                                 tabModeRegistrasi.addRow(new Object[]{
                                     i+"",rs.getString("no_rawat"),rs2.getString("tgl_masuk"),rs2.getString("jam_masuk"),
                                     kddpjp,dpjp,rs.getString("umurdaftar")+" "+rs.getString("sttsumur"),
@@ -677,7 +677,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                             if(ps2!=null){
                                 ps2.close();
                             }
-                        } 
+                        }
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -688,7 +688,7 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
                     if(ps!=null){
                         ps.close();
                     }
-                }                
+                }
             }catch(SQLException e){
                 System.out.println("Notifikasi : "+e);
             }
@@ -698,5 +698,5 @@ public final class InformasiTelusurKunjunganPasien extends javax.swing.JDialog {
         }
     }
 
- 
+
 }

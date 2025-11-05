@@ -53,7 +53,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;    
+    private int i=0;
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private String finger="";
     private StringBuilder htmlContent;
@@ -66,7 +66,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         initComponents();
         this.setLocation(8,1);
         setSize(628,674);
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Rawat","No.R.M.","Nama Pasien","Tgl.Lahir","JK","NIP","Petugas","Tanggal",
                 "SDQ1","N.SDQ1","SDQ2","N.SDQ2","SDQ3","N.SDQ3","SDQ4","N.SDQ4","SDQ5","N.SDQ5",
@@ -239,7 +239,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         NIP.setDocument(new batasInput((byte)20).getKata(NIP));
         Keterangan.setDocument(new batasInput((int)200).getKata(Keterangan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -262,7 +262,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -270,10 +270,10 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     NIP.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 NIP.requestFocus();
             }
             @Override
@@ -284,12 +284,12 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         ChkInput.setSelected(false);
         isForm();
         jam();
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -307,7 +307,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         );
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -555,7 +555,6 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         Jk.setFocusTraversalPolicyProvider(true);
         Jk.setName("Jk"); // NOI18N
 
-        TanggalRegistrasi.setHighlighter(null);
         TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -728,7 +727,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-11-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2024" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -742,7 +741,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-11-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2024" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -842,7 +841,6 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 80, 23);
 
-        TNoRw.setHighlighter(null);
         TNoRw.setName("TNoRw"); // NOI18N
         TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -853,7 +851,6 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         TNoRw.setBounds(84, 10, 136, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         TPasien.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -864,7 +861,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         TPasien.setBounds(336, 10, 285, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "09-11-2024" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-11-2024" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -877,7 +874,6 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         Tanggal.setBounds(84, 40, 90, 23);
 
         TNoRM.setEditable(false);
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -938,7 +934,6 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         jLabel18.setBounds(400, 40, 70, 23);
 
         NIP.setEditable(false);
-        NIP.setHighlighter(null);
         NIP.setName("NIP"); // NOI18N
         FormInput.add(NIP);
         NIP.setBounds(474, 40, 94, 23);
@@ -970,7 +965,6 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         FormInput.add(jLabel8);
         jLabel8.setBounds(625, 10, 60, 23);
 
-        TglLahir.setHighlighter(null);
         TglLahir.setName("TglLahir"); // NOI18N
         FormInput.add(TglLahir);
         TglLahir.setBounds(689, 10, 100, 23);
@@ -1798,7 +1792,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         KesimpulanKesulitan.setFocusTraversalPolicyProvider(true);
         KesimpulanKesulitan.setName("KesimpulanKesulitan"); // NOI18N
         FormInput.add(KesimpulanKesulitan);
-        KesimpulanKesulitan.setBounds(210, 1040, 240, 23);
+        KesimpulanKesulitan.setBounds(218, 1040, 240, 23);
 
         jLabel273.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel273.setText("rumah sampai selesai.");
@@ -1899,7 +1893,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         KesimpulanSkorE.setFocusTraversalPolicyProvider(true);
         KesimpulanSkorE.setName("KesimpulanSkorE"); // NOI18N
         FormInput.add(KesimpulanSkorE);
-        KesimpulanSkorE.setBounds(210, 890, 240, 23);
+        KesimpulanSkorE.setBounds(218, 890, 240, 23);
 
         jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel59.setText("II. INTEPRETASI DAN KESIMPULAN HASIL PEMERIKSAAN (SDQ) :");
@@ -1917,7 +1911,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         KesimpulanSkorC.setFocusTraversalPolicyProvider(true);
         KesimpulanSkorC.setName("KesimpulanSkorC"); // NOI18N
         FormInput.add(KesimpulanSkorC);
-        KesimpulanSkorC.setBounds(210, 920, 240, 23);
+        KesimpulanSkorC.setBounds(218, 920, 240, 23);
 
         jLabel293.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel293.setText("C. Pengkajian Hiperaktivitas (H)");
@@ -1929,7 +1923,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         KesimpulanSkorH.setFocusTraversalPolicyProvider(true);
         KesimpulanSkorH.setName("KesimpulanSkorH"); // NOI18N
         FormInput.add(KesimpulanSkorH);
-        KesimpulanSkorH.setBounds(210, 950, 240, 23);
+        KesimpulanSkorH.setBounds(218, 950, 240, 23);
 
         jLabel295.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel295.setText("D. Masalah Teman Sebaya (P)");
@@ -1941,7 +1935,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         KesimpulanSkorP.setFocusTraversalPolicyProvider(true);
         KesimpulanSkorP.setName("KesimpulanSkorP"); // NOI18N
         FormInput.add(KesimpulanSkorP);
-        KesimpulanSkorP.setBounds(210, 980, 240, 23);
+        KesimpulanSkorP.setBounds(218, 980, 240, 23);
 
         jLabel297.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel297.setText("E. Pengkajian Skor Kekuatan (Pr)");
@@ -1953,7 +1947,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         KesimpulanSkorPr.setFocusTraversalPolicyProvider(true);
         KesimpulanSkorPr.setName("KesimpulanSkorPr"); // NOI18N
         FormInput.add(KesimpulanSkorPr);
-        KesimpulanSkorPr.setBounds(210, 1010, 240, 23);
+        KesimpulanSkorPr.setBounds(218, 1010, 240, 23);
 
         jLabel299.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel299.setText("Banyak yang Saya takuti, Saya mudah menjadi takut.");
@@ -2141,14 +2135,14 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             isRawat();
-        }else{            
+        }else{
             Valid.pindah(evt,TCari,Tanggal);
         }
-}//GEN-LAST:event_TNoRwKeyPressed
+    }//GEN-LAST:event_TNoRwKeyPressed
 
     private void TPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TPasienKeyPressed
         Valid.pindah(evt,TCari,BtnSimpan);
-}//GEN-LAST:event_TPasienKeyPressed
+    }//GEN-LAST:event_TPasienKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -2167,7 +2161,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2175,19 +2169,19 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,SDQ10,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
         ChkInput.setSelected(true);
-        isForm(); 
-}//GEN-LAST:event_BtnBatalActionPerformed
+        isForm();
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tbObat.getSelectedRow()>-1){
@@ -2204,8 +2198,8 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             }
         }else{
             JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
-        }   
-}//GEN-LAST:event_BtnHapusActionPerformed
+        }
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2213,7 +2207,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(TNoRw.getText().trim().equals("")||TPasien.getText().trim().equals("")){
@@ -2242,7 +2236,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2250,18 +2244,18 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         petugas.dispose();
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnKeluarActionPerformed(null);
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2271,7 +2265,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             try{
                 htmlContent = new StringBuilder();
-                htmlContent.append(                             
+                htmlContent.append(
                     "<tr class='isi'>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.Rawat</b></td>"+
                         "<td valign='middle' bgcolor='#FFFAF8' align='center'><b>No.R.M.</b></td>"+
@@ -2370,7 +2364,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                             "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
-                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+ 
+                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
                             "<td valign='top'>"+tbObat.getValueAt(i,23).toString()+"</td>"+
@@ -2432,7 +2426,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                     "</html>"
                 );
 
-                File g = new File("file2.css");            
+                File g = new File("file2.css");
                 BufferedWriter bg = new BufferedWriter(new FileWriter(g));
                 bg.write(
                     ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
@@ -2447,8 +2441,8 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                 );
                 bg.close();
 
-                File f = new File("PenilaianSkriningInstrumenSDQ.html");            
-                BufferedWriter bw = new BufferedWriter(new FileWriter(f));            
+                File f = new File("PenilaianSkriningInstrumenSDQ.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
                 bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
                             "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
                             "<table width='4500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -2457,12 +2451,12 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                                         "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
                                         akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
                                         akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                        "<font size='2' face='Tahoma'>DATA SKRINING INSTRUMEN SDQ<br><br></font>"+        
+                                        "<font size='2' face='Tahoma'>DATA SKRINING INSTRUMEN SDQ<br><br></font>"+
                                     "</td>"+
                                "</tr>"+
                             "</table>")
                 );
-                bw.close();                         
+                bw.close();
                 Desktop.getDesktop().browse(f.toURI());
 
             }catch(Exception e){
@@ -2470,7 +2464,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             }
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2478,7 +2472,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -2488,11 +2482,11 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2500,12 +2494,12 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2514,15 +2508,15 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TPasien);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
         Valid.pindah(evt,TCari,Jam);
-}//GEN-LAST:event_TanggalKeyPressed
+    }//GEN-LAST:event_TanggalKeyPressed
 
     private void TNoRMKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRMKeyPressed
         // Valid.pindah(evt, TNm, BtnSimpan);
-}//GEN-LAST:event_TNoRMKeyPressed
+    }//GEN-LAST:event_TNoRMKeyPressed
 
     private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -2531,7 +2525,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbObatMouseClicked
+    }//GEN-LAST:event_tbObatMouseClicked
 
     private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -2542,7 +2536,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbObatKeyPressed
+    }//GEN-LAST:event_tbObatKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
         isForm();
@@ -2580,8 +2574,8 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),28).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),27).toString():finger)+"\n"+Tanggal.getSelectedItem());
             Valid.MyReportqry("rptFormulirSkriningInstrumenSDQ.jasper","report","::[ Formulir Skrining Instrumen SDQ ]::",
@@ -3385,7 +3379,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
     private widget.ScrollPane scrollInput;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
-    
+
     public void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -3435,7 +3429,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                     "skrining_instrumen_sdq.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or skrining_instrumen_sdq.nip like ? or petugas.nama like ?) "+
                     "order by skrining_instrumen_sdq.tanggal ");
             }
-                
+
             try {
                 if(TCari.getText().toString().trim().equals("")){
                     ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
@@ -3449,7 +3443,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText()+"%");
                     ps.setString(7,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -3481,7 +3475,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void emptTeks() {
         Tanggal.setDate(new Date());
         SDQ1.setSelectedIndex(0);
@@ -3549,8 +3543,8 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         KesimpulanKesulitan.setText("Normal");
         Keterangan.setText("");
         SDQ1.requestFocus();
-    } 
-    
+    }
+
 
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
@@ -3629,7 +3623,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             Valid.SetTgl(Tanggal,tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
         }
     }
-    
+
     private void isRawat() {
         try {
             ps=koneksi.prepareStatement(
@@ -3662,35 +3656,35 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
- 
+
     public void setNoRm(String norwt,Date tgl2) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
-        DTPCari2.setDate(tgl2);    
-        isRawat(); 
+        DTPCari2.setDate(tgl2);
+        isRawat();
         ChkInput.setSelected(true);
         isForm();
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getskrining_instrumen_sdq());
         BtnHapus.setEnabled(akses.getskrining_instrumen_sdq());
         BtnEdit.setEnabled(akses.getskrining_instrumen_sdq());
-        BtnPrint.setEnabled(akses.getskrining_instrumen_sdq()); 
+        BtnPrint.setEnabled(akses.getskrining_instrumen_sdq());
         if(akses.getjml2()>=1){
             NIP.setEditable(false);
             btnPetugas.setEnabled(false);
@@ -3700,8 +3694,8 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                 NIP.setText("");
                 JOptionPane.showMessageDialog(null,"User login bukan petugas...!!");
             }
-        } 
-        
+        }
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 Tanggal.setEditable(false);
@@ -3723,7 +3717,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                 String nol_jam = "";
                 String nol_menit = "";
                 String nol_detik = "";
-                
+
                 Date now = Calendar.getInstance().getTime();
 
                 // Mengambil nilaj JAM, MENIT, dan DETIK Sekarang
@@ -3776,8 +3770,8 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
                 "nilai_total_sdq=?,gejala_emosional=?,nilai_gejala_emosional=?,masalah_perilaku=?,nilai_masalah_perilaku=?,hiperaktivitas=?,nilai_hiperaktivitas=?,teman_sebaya=?,nilai_teman_sebaya=?,"+
                 "kekuatan=?,nilai_kekuatan=?,kesulitan=?,nilai_kesulitan=?,keterangan=?",68,new String[]{
                 TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),NIP.getText(),
-                SDQ1.getSelectedItem().toString(),NilaiSDQ1.getText(),SDQ2.getSelectedItem().toString(),NilaiSDQ2.getText(),SDQ3.getSelectedItem().toString(),NilaiSDQ3.getText(),SDQ4.getSelectedItem().toString(),NilaiSDQ4.getText(), 
-                SDQ5.getSelectedItem().toString(),NilaiSDQ5.getText(),SDQ6.getSelectedItem().toString(),NilaiSDQ6.getText(),SDQ7.getSelectedItem().toString(),NilaiSDQ7.getText(),SDQ8.getSelectedItem().toString(),NilaiSDQ8.getText(), 
+                SDQ1.getSelectedItem().toString(),NilaiSDQ1.getText(),SDQ2.getSelectedItem().toString(),NilaiSDQ2.getText(),SDQ3.getSelectedItem().toString(),NilaiSDQ3.getText(),SDQ4.getSelectedItem().toString(),NilaiSDQ4.getText(),
+                SDQ5.getSelectedItem().toString(),NilaiSDQ5.getText(),SDQ6.getSelectedItem().toString(),NilaiSDQ6.getText(),SDQ7.getSelectedItem().toString(),NilaiSDQ7.getText(),SDQ8.getSelectedItem().toString(),NilaiSDQ8.getText(),
                 SDQ9.getSelectedItem().toString(),NilaiSDQ9.getText(),SDQ10.getSelectedItem().toString(),NilaiSDQ10.getText(),SDQ11.getSelectedItem().toString(),NilaiSDQ11.getText(),SDQ12.getSelectedItem().toString(),NilaiSDQ12.getText(),
                 SDQ13.getSelectedItem().toString(),NilaiSDQ13.getText(),SDQ14.getSelectedItem().toString(),NilaiSDQ14.getText(),SDQ15.getSelectedItem().toString(),NilaiSDQ15.getText(),SDQ16.getSelectedItem().toString(),NilaiSDQ16.getText(),
                 SDQ17.getSelectedItem().toString(),NilaiSDQ17.getText(),SDQ18.getSelectedItem().toString(),NilaiSDQ18.getText(),SDQ19.getSelectedItem().toString(),NilaiSDQ19.getText(),SDQ20.getSelectedItem().toString(),NilaiSDQ20.getText(),
@@ -3873,7 +3867,7 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
         }
     }
-    
+
     private void isTotal() {
         TotalNilai.setText(""+(
             Integer.parseInt(NilaiSDQ1.getText())+Integer.parseInt(NilaiSDQ2.getText())+Integer.parseInt(NilaiSDQ3.getText())+Integer.parseInt(NilaiSDQ4.getText())+Integer.parseInt(NilaiSDQ5.getText())+
@@ -3883,13 +3877,13 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             Integer.parseInt(NilaiSDQ21.getText())+Integer.parseInt(NilaiSDQ22.getText())+Integer.parseInt(NilaiSDQ23.getText())+Integer.parseInt(NilaiSDQ24.getText())+Integer.parseInt(NilaiSDQ25.getText())
         ));
     }
-    
+
     private void SkorE() {
         try {
             NilaiKesimpulanSkorE.setText(""+(
                 Integer.parseInt(NilaiSDQ3.getText())+Integer.parseInt(NilaiSDQ8.getText())+Integer.parseInt(NilaiSDQ13.getText())+Integer.parseInt(NilaiSDQ16.getText())+Integer.parseInt(NilaiSDQ24.getText())
             ));
-            
+
             if(Integer.parseInt(NilaiKesimpulanSkorE.getText())>7){
                 KesimpulanSkorE.setText("Abnormal");
             }else if(Integer.parseInt(TotalNilai.getText())>6){
@@ -3902,13 +3896,13 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }
         SkorKesulitan();
     }
-    
+
     private void SkorC() {
          try {
             NilaiKesimpulanSkorC.setText(""+(
                 Integer.parseInt(NilaiSDQ5.getText())+Integer.parseInt(NilaiSDQ7.getText())+Integer.parseInt(NilaiSDQ12.getText())+Integer.parseInt(NilaiSDQ18.getText())+Integer.parseInt(NilaiSDQ22.getText())
             ));
-            
+
             if(Integer.parseInt(NilaiKesimpulanSkorC.getText())>6){
                 KesimpulanSkorC.setText("Abnormal");
             }else if(Integer.parseInt(TotalNilai.getText())>4){
@@ -3921,13 +3915,13 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }
         SkorKesulitan();
     }
-    
+
     private void SkorH() {
          try {
             NilaiKesimpulanSkorH.setText(""+(
                 Integer.parseInt(NilaiSDQ2.getText())+Integer.parseInt(NilaiSDQ10.getText())+Integer.parseInt(NilaiSDQ15.getText())+Integer.parseInt(NilaiSDQ21.getText())+Integer.parseInt(NilaiSDQ25.getText())
             ));
-            
+
             if(Integer.parseInt(NilaiKesimpulanSkorH.getText())>7){
                 KesimpulanSkorH.setText("Abnormal");
             }else if(Integer.parseInt(TotalNilai.getText())>6){
@@ -3940,13 +3934,13 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }
         SkorKesulitan();
     }
-    
+
     private void SkorP() {
         try {
             NilaiKesimpulanSkorP.setText(""+(
                     Integer.parseInt(NilaiSDQ6.getText())+Integer.parseInt(NilaiSDQ11.getText())+Integer.parseInt(NilaiSDQ14.getText())+Integer.parseInt(NilaiSDQ19.getText())+Integer.parseInt(NilaiSDQ23.getText())
             ));
-            
+
             if(Integer.parseInt(NilaiKesimpulanSkorP.getText())>6){
                 KesimpulanSkorP.setText("Abnormal");
             }else if(Integer.parseInt(TotalNilai.getText())>4){
@@ -3959,13 +3953,13 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         }
         SkorKesulitan();
     }
-    
+
     private void SkorPr() {
         try {
             NilaiKesimpulanSkorPr.setText(""+(
                 Integer.parseInt(NilaiSDQ1.getText())+Integer.parseInt(NilaiSDQ4.getText())+Integer.parseInt(NilaiSDQ9.getText())+Integer.parseInt(NilaiSDQ17.getText())+Integer.parseInt(NilaiSDQ20.getText())
             ));
-            
+
             if(Integer.parseInt(NilaiKesimpulanSkorPr.getText())<4){
                 KesimpulanSkorPr.setText("Abnormal");
             }else if(Integer.parseInt(TotalNilai.getText())<5){
@@ -3977,13 +3971,13 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             KesimpulanSkorPr.setText("Normal");
         }
     }
-    
+
     private void SkorKesulitan() {
         try {
             NilaiKesimpulanKesulitan.setText(""+(
                 Integer.parseInt(NilaiKesimpulanSkorE.getText())+Integer.parseInt(NilaiKesimpulanSkorC.getText())+Integer.parseInt(NilaiKesimpulanSkorH.getText())+Integer.parseInt(NilaiKesimpulanSkorP.getText())
             ));
-            
+
             if(Integer.parseInt(NilaiKesimpulanKesulitan.getText())>20){
                 KesimpulanKesulitan.setText("Abnormal");
             }else if(Integer.parseInt(TotalNilai.getText())>16){
@@ -3998,9 +3992,9 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
 
     private void simpan() {
         if(Sequel.menyimpantf("skrining_instrumen_sdq","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",67,new String[]{
-            TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),NIP.getText(), 
-            SDQ1.getSelectedItem().toString(),NilaiSDQ1.getText(),SDQ2.getSelectedItem().toString(),NilaiSDQ2.getText(),SDQ3.getSelectedItem().toString(),NilaiSDQ3.getText(),SDQ4.getSelectedItem().toString(),NilaiSDQ4.getText(), 
-            SDQ5.getSelectedItem().toString(),NilaiSDQ5.getText(),SDQ6.getSelectedItem().toString(),NilaiSDQ6.getText(),SDQ7.getSelectedItem().toString(),NilaiSDQ7.getText(),SDQ8.getSelectedItem().toString(),NilaiSDQ8.getText(), 
+            TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),NIP.getText(),
+            SDQ1.getSelectedItem().toString(),NilaiSDQ1.getText(),SDQ2.getSelectedItem().toString(),NilaiSDQ2.getText(),SDQ3.getSelectedItem().toString(),NilaiSDQ3.getText(),SDQ4.getSelectedItem().toString(),NilaiSDQ4.getText(),
+            SDQ5.getSelectedItem().toString(),NilaiSDQ5.getText(),SDQ6.getSelectedItem().toString(),NilaiSDQ6.getText(),SDQ7.getSelectedItem().toString(),NilaiSDQ7.getText(),SDQ8.getSelectedItem().toString(),NilaiSDQ8.getText(),
             SDQ9.getSelectedItem().toString(),NilaiSDQ9.getText(),SDQ10.getSelectedItem().toString(),NilaiSDQ10.getText(),SDQ11.getSelectedItem().toString(),NilaiSDQ11.getText(),SDQ12.getSelectedItem().toString(),NilaiSDQ12.getText(),
             SDQ13.getSelectedItem().toString(),NilaiSDQ13.getText(),SDQ14.getSelectedItem().toString(),NilaiSDQ14.getText(),SDQ15.getSelectedItem().toString(),NilaiSDQ15.getText(),SDQ16.getSelectedItem().toString(),NilaiSDQ16.getText(),
             SDQ17.getSelectedItem().toString(),NilaiSDQ17.getText(),SDQ18.getSelectedItem().toString(),NilaiSDQ18.getText(),SDQ19.getSelectedItem().toString(),NilaiSDQ19.getText(),SDQ20.getSelectedItem().toString(),NilaiSDQ20.getText(),
@@ -4010,8 +4004,8 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
         })==true){
             tabMode.addRow(new Object[]{
                 TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),NIP.getText(),NamaPetugas.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Jam.getSelectedItem()+":"+Menit.getSelectedItem()+":"+Detik.getSelectedItem(),
-                SDQ1.getSelectedItem().toString(),NilaiSDQ1.getText(),SDQ2.getSelectedItem().toString(),NilaiSDQ2.getText(),SDQ3.getSelectedItem().toString(),NilaiSDQ3.getText(),SDQ4.getSelectedItem().toString(),NilaiSDQ4.getText(), 
-                SDQ5.getSelectedItem().toString(),NilaiSDQ5.getText(),SDQ6.getSelectedItem().toString(),NilaiSDQ6.getText(),SDQ7.getSelectedItem().toString(),NilaiSDQ7.getText(),SDQ8.getSelectedItem().toString(),NilaiSDQ8.getText(), 
+                SDQ1.getSelectedItem().toString(),NilaiSDQ1.getText(),SDQ2.getSelectedItem().toString(),NilaiSDQ2.getText(),SDQ3.getSelectedItem().toString(),NilaiSDQ3.getText(),SDQ4.getSelectedItem().toString(),NilaiSDQ4.getText(),
+                SDQ5.getSelectedItem().toString(),NilaiSDQ5.getText(),SDQ6.getSelectedItem().toString(),NilaiSDQ6.getText(),SDQ7.getSelectedItem().toString(),NilaiSDQ7.getText(),SDQ8.getSelectedItem().toString(),NilaiSDQ8.getText(),
                 SDQ9.getSelectedItem().toString(),NilaiSDQ9.getText(),SDQ10.getSelectedItem().toString(),NilaiSDQ10.getText(),SDQ11.getSelectedItem().toString(),NilaiSDQ11.getText(),SDQ12.getSelectedItem().toString(),NilaiSDQ12.getText(),
                 SDQ13.getSelectedItem().toString(),NilaiSDQ13.getText(),SDQ14.getSelectedItem().toString(),NilaiSDQ14.getText(),SDQ15.getSelectedItem().toString(),NilaiSDQ15.getText(),SDQ16.getSelectedItem().toString(),NilaiSDQ16.getText(),
                 SDQ17.getSelectedItem().toString(),NilaiSDQ17.getText(),SDQ18.getSelectedItem().toString(),NilaiSDQ18.getText(),SDQ19.getSelectedItem().toString(),NilaiSDQ19.getText(),SDQ20.getSelectedItem().toString(),NilaiSDQ20.getText(),
@@ -4021,6 +4015,6 @@ public final class RMSkriningInstrumenSDQ extends javax.swing.JDialog {
             });
             emptTeks();
             LCount.setText(""+tabMode.getRowCount());
-        } 
+        }
     }
 }

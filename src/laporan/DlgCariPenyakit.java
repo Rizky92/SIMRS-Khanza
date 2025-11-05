@@ -39,12 +39,12 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private String[] hlm;   
+    private String[] hlm;
     private String awal="0";
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
     public  DlgPenyakit penyakit=new DlgPenyakit(null,false);
-    private double jumlah=0,x=0,i=0; 
+    private double jumlah=0,x=0,i=0;
     private int z=0,j=0,mulai=0;
     /** Creates new form DlgPenyakit
      * @param parent
@@ -102,8 +102,8 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try{
             ps=koneksi.prepareStatement("select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
                 "kategori_penyakit.nm_kategori,kategori_penyakit.ciri_umum "+
@@ -129,7 +129,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
             System.out.println(ex);
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -304,11 +304,11 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -316,12 +316,12 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -329,7 +329,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -337,7 +337,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -348,7 +348,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
@@ -356,7 +356,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        
+
         //nm_dokter.setModal(true);
         penyakit.emptTeks();
         penyakit.isCek();
@@ -364,7 +364,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setAlwaysOnTop(false);
         penyakit.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());           
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -431,7 +431,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                                rs.getString(5),
                                rs.getString(6)});
             }
-            
+
             cmbHlm.removeAllItems();
             ps2.setString(1,"%"+TCari.getText().trim()+"%");
             ps2.setString(2,"%"+TCari.getText().trim()+"%");
@@ -442,12 +442,12 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
             rs2=ps2.executeQuery();
             jumlah=0;
             if(rs2.next()){
-               jumlah=rs2.getDouble("jumlah");   
+               jumlah=rs2.getDouble("jumlah");
             }
             x=jumlah/499;
             i=Math.ceil(x);
             z=(int) i;
-            
+
             hlm=new String[z+1];
             for(j=1;j<=i;j++){
                  mulai=((j-1)*499+j)-1;
@@ -460,14 +460,14 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void emptTeks() {   
+    public void emptTeks() {
         TCari.requestFocus();
     }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void isCek(){
         BtnTambah.setEnabled(akses.getpenyakit());
     }

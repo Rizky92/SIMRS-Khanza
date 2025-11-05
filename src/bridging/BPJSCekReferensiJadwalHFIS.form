@@ -91,9 +91,6 @@
             <Component class="widget.TextBox" name="KodePoliUpdate">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KodePoliUpdate" noResource="true"/>
               </Properties>
               <Constraints>
@@ -146,9 +143,6 @@
             <Component class="widget.TextBox" name="KodeDokterUpdate">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KodeDokterUpdate" noResource="true"/>
               </Properties>
               <Constraints>
@@ -485,9 +479,6 @@
             <Component class="widget.TextBox" name="KodeSubspesialis">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KodeSubspesialis" noResource="true"/>
               </Properties>
               <Constraints>
@@ -632,9 +623,6 @@
             <Component class="widget.TextBox" name="KdPoli">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdPoli" noResource="true"/>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[70, 23]"/>

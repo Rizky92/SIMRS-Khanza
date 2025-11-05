@@ -72,7 +72,7 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         setSize(628,674);
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Nota","Tgl.Piutang","NIP","Nama Petugas","Kode","Nama Pemberi Hutang","Keterangan","Tgl.Tempo","Nilai Hutang","Sisa Piutang","Status"}){
+            "No.Nota","Tgl.Hutang","NIP","Nama Petugas","Kode","Nama Pemberi Hutang","Keterangan","Tgl.Tempo","Nilai Hutang","Sisa Hutang","Status"}){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
                  java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
@@ -244,7 +244,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         NilaiHutang = new widget.TextBox();
         label37 = new widget.Label();
 
-        Kd2.setHighlighter(null);
         Kd2.setName("Kd2"); // NOI18N
         Kd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -541,7 +540,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label32);
         label32.setBounds(0, 40, 75, 23);
 
-        NoHutang.setHighlighter(null);
         NoHutang.setName("NoHutang"); // NOI18N
         NoHutang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -557,7 +555,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(label36);
         label36.setBounds(0, 70, 75, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -592,6 +589,11 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
 
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
+        Tanggal.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                TanggalItemStateChanged(evt);
+            }
+        });
         Tanggal.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TanggalKeyPressed(evt);
@@ -658,7 +660,6 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         FormInput.add(Tempo);
         Tempo.setBounds(224, 40, 90, 23);
 
-        NilaiHutang.setHighlighter(null);
         NilaiHutang.setName("NilaiHutang"); // NOI18N
         NilaiHutang.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -704,9 +705,9 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                     Keterangan.getText(),Valid.SetTgl(Tempo.getSelectedItem()+""),NilaiHutang.getText(),NilaiHutang.getText()
                 })==true){
                     Sequel.deleteTampJurnal();
-                    Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", NilaiHutang.getText());
-                    Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", NilaiHutang.getText(), "0");
-                    sukses=jur.simpanJurnal(NoHutang.getText(),"U","BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
+                    if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", NilaiHutang.getText());
+                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", NilaiHutang.getText(), "0");
+                    if (sukses) sukses = jur.simpanJurnal(NoHutang.getText(),"U","BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
             }else{
                 sukses=false;
             }
@@ -762,16 +763,10 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                     sukses=false;
                 }
                 Sequel.deleteTampJurnal();
-                Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());
-                Sequel.insertTampJurnal(kontraakun, namakontraakun, tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString(), "0");
-                if(Sequel.menyimpantf2("tampjurnal","'"+koderekening+"','BEBAN HUTANG LAIN','0','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString()+"'","Rekening")==false){
-                    sukses=false;
-                }
-                if(Sequel.menyimpantf2("tampjurnal","'"+kontraakun+"','"+namakontraakun+"','"+tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString()+"','0'","Rekening")==false){
-                    sukses=false;
-                }
+                if (sukses) sukses = Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());
+                if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString(), "0");
                 if(sukses==true){
-                    sukses=jur.simpanJurnal(NoHutang.getText(),"U","PEMBATALAN BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
+                    if (sukses) sukses = jur.simpanJurnal(NoHutang.getText(),"U","PEMBATALAN BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
                 }
             }else{
                 sukses=false;
@@ -870,7 +865,7 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
-private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
+    private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
    Valid.pindah(evt,KdPemberiHutang,NilaiHutang);
     }//GEN-LAST:event_KeteranganKeyPressed
 
@@ -895,7 +890,7 @@ private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:even
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
-private void BtnPemberiHutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPemberiHutangActionPerformed
+    private void BtnPemberiHutangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPemberiHutangActionPerformed
         kontraakun="";
         namakontraakun="";
         DlgCariPemberiHutang peminjam=new DlgCariPemberiHutang(null,false);
@@ -1003,6 +998,10 @@ private void BtnPemberiHutangActionPerformed(java.awt.event.ActionEvent evt) {//
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_ppBayarBebanBtnPrintActionPerformed
+
+    private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
+        autoNomor();
+    }//GEN-LAST:event_TanggalItemStateChanged
 
     /**
     * @param args the command line arguments
@@ -1180,7 +1179,6 @@ private void BtnPemberiHutangActionPerformed(java.awt.event.ActionEvent evt) {//
     }
 
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(beban_hutang_lain.no_hutang,4),signed)),0) from beban_hutang_lain where beban_hutang_lain.tgl_hutang like '%"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"%' ",
-                "BHL"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),4,NoHutang);
+        Valid.autonomorSmc(NoHutang, "BHL", "", "beban_hutang_lain", "no_hutang", 4, "0", Tanggal);
     }
 }

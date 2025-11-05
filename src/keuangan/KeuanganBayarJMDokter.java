@@ -87,7 +87,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
             totalradrawatinap=0,
             totaloperasirawatjalan=0,
             totaloperasirawatinap=0;
-    private boolean sukses=true;  
+    private boolean sukses=true;
     private KeuanganCariBayarJMDokter form=new KeuanganCariBayarJMDokter(null,false);
 
     /** Creates new form DlgLhtBiaya
@@ -106,19 +106,19 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return colIndex == 0;
             }
-            
+
             Class[] types = new Class[] {
                 java.lang.Boolean.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
                 java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,java.lang.Object.class
             };
-            
+
             @Override
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         };
-        
+
         tbBangsal.setModel(tabMode);
         //tbBangsal.setDefaultRenderer(Object.class, new WarnaTable(jPanel2.getBackground(),tbBangsal.getBackground()));
         tbBangsal.setPreferredScrollableViewportSize(new Dimension(500,500));
@@ -156,8 +156,8 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         NoTagihan.setDocument(new batasInput((byte)17).getKata(NoTagihan));
-        Keterangan.setDocument(new batasInput((int)150).getKata(Keterangan));        
-        
+        Keterangan.setDocument(new batasInput((int)150).getKata(Keterangan));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -179,12 +179,12 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         NoTagihan.setDocument(new batasInput((int)17).getKata(NoTagihan));
         Keterangan.setDocument(new batasInput((int)70).getKata(Keterangan));
-                
+
         form.dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -196,9 +196,9 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
                     if(form.dokter.getTable().getSelectedRow()!= -1){
                         kddokter.setText(form.dokter.getTable().getValueAt(form.dokter.getTable().getSelectedRow(),0).toString());
                         nmdokter.setText(form.dokter.getTable().getValueAt(form.dokter.getTable().getSelectedRow(),1).toString());
-                    }   
+                    }
                     kddokter.requestFocus();
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -210,7 +210,7 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
         });
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -381,7 +381,6 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         BtnSimpanMandiri.setBounds(10, 130, 100, 30);
 
         NoRekening.setEditable(false);
-        NoRekening.setHighlighter(null);
         NoRekening.setName("NoRekening"); // NOI18N
         NoRekening.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -392,7 +391,6 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         NoRekening.setBounds(84, 10, 130, 23);
 
         RekeningAtasNama.setEditable(false);
-        RekeningAtasNama.setHighlighter(null);
         RekeningAtasNama.setName("RekeningAtasNama"); // NOI18N
         RekeningAtasNama.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -403,7 +401,6 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         RekeningAtasNama.setBounds(84, 40, 456, 23);
 
         KotaAtasNamaRekening.setEditable(false);
-        KotaAtasNamaRekening.setHighlighter(null);
         KotaAtasNamaRekening.setName("KotaAtasNamaRekening"); // NOI18N
         KotaAtasNamaRekening.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -431,19 +428,16 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         jLabel102.setBounds(0, 70, 80, 23);
 
         BiayaTransaksi.setEditable(false);
-        BiayaTransaksi.setHighlighter(null);
         BiayaTransaksi.setName("BiayaTransaksi"); // NOI18N
         panelBiasa2.add(BiayaTransaksi);
         BiayaTransaksi.setBounds(399, 70, 110, 23);
 
         KodeMetode.setEditable(false);
-        KodeMetode.setHighlighter(null);
         KodeMetode.setName("KodeMetode"); // NOI18N
         panelBiasa2.add(KodeMetode);
         KodeMetode.setBounds(84, 70, 64, 23);
 
         MetodePembayaran.setEditable(false);
-        MetodePembayaran.setHighlighter(null);
         MetodePembayaran.setName("MetodePembayaran"); // NOI18N
         panelBiasa2.add(MetodePembayaran);
         MetodePembayaran.setBounds(151, 70, 245, 23);
@@ -454,19 +448,16 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         jLabel103.setBounds(0, 100, 80, 23);
 
         KodeBank.setEditable(false);
-        KodeBank.setHighlighter(null);
         KodeBank.setName("KodeBank"); // NOI18N
         panelBiasa2.add(KodeBank);
         KodeBank.setBounds(84, 100, 64, 23);
 
         BankTujuan.setEditable(false);
-        BankTujuan.setHighlighter(null);
         BankTujuan.setName("BankTujuan"); // NOI18N
         panelBiasa2.add(BankTujuan);
         BankTujuan.setBounds(151, 100, 245, 23);
 
         KodeTransaksi.setEditable(false);
-        KodeTransaksi.setHighlighter(null);
         KodeTransaksi.setName("KodeTransaksi"); // NOI18N
         panelBiasa2.add(KodeTransaksi);
         KodeTransaksi.setBounds(399, 100, 141, 23);
@@ -816,7 +807,6 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         panelisi4.add(label36);
         label36.setBounds(0, 40, 74, 23);
 
-        NoTagihan.setHighlighter(null);
         NoTagihan.setName("NoTagihan"); // NOI18N
         NoTagihan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -881,7 +871,6 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         panelisi4.add(BtnPetugas);
         BtnPetugas.setBounds(722, 10, 28, 23);
 
-        Keterangan.setHighlighter(null);
         Keterangan.setName("Keterangan"); // NOI18N
         Keterangan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -933,20 +922,20 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnAll,TKd);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         KdCaraBayar.setText("");
         NmCaraBayar.setText("");
         prosesCari();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -954,9 +943,9 @@ public final class KeuanganBayarJMDokter extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari1, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
-private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -964,19 +953,19 @@ private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCa
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         prosesCari();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             prosesCari();
         }else{
             Valid.pindah(evt, TKd, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
@@ -1012,19 +1001,19 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     if(form.response.isArray()){
                        for(JsonNode list:form.response){
                            if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
-                                form.koderekening=list.path("KodeRek").asText();  
+                                form.koderekening=list.path("KodeRek").asText();
                            }
                        }
                     }
                     form.myObj.close();
                 } catch (Exception e) {
                     form.koderekening="";
-                } 
+                }
                 if(form.koderekening.equals("")){
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan akun bayar, silahkan hubungi administrator..!!");
                 }else{
                     if(form.koderekening.equals(form.Host_to_Host_Bank_Mandiri)){
-                        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,6),signed)),0) from pembayaran_pihak_ke3_bankmandiri where left(pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,10)='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",form.kodemcm+"14"+Tanggal.getSelectedItem().toString().substring(0,10).replaceAll("-",""),6,NoTagihan); 
+                        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(pembayaran_pihak_ke3_bankmandiri.nomor_pembayaran,6),signed)),0) from pembayaran_pihak_ke3_bankmandiri where left(pembayaran_pihak_ke3_bankmandiri.tgl_pembayaran,10)='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",form.kodemcm+"14"+Tanggal.getSelectedItem().toString().substring(0,10).replaceAll("-",""),6,NoTagihan);
                         form.myObj = new FileReader("./cache/pegawai.iyem");
                         form.root = form.mapper.readTree(form.myObj);
                         Valid.tabelKosong(tabMode);
@@ -1056,42 +1045,42 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                     if(tabMode.getValueAt(i,0).toString().equals("true")){
                                         if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan Dr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_jl_dr","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan DrPr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_jl_drpr","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Inap Dr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_inap_dr","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Inap DrPr")){
                                             if(Sequel.menyimpantf2("bayar_rawat_inap_drpr","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
-                                            } 
+                                            }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan PJ")){
                                             if(Sequel.menyimpantf2("bayar_periksa_lab","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan PJ Detail")){
                                             if(Sequel.menyimpantf2("bayar_detail_periksa_lab","?,?,?,?,?,?,?",7,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
                                                 tbBangsal.getValueAt(i,10).toString()
                                               })==false){
@@ -1099,14 +1088,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan Perujuk")){
                                             if(Sequel.menyimpantf2("bayar_periksa_lab_perujuk","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan Perujuk Detail")){
                                             if(Sequel.menyimpantf2("bayar_detail_periksa_lab_perujuk","?,?,?,?,?,?,?",7,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
                                                 tbBangsal.getValueAt(i,10).toString()
                                               })==false){
@@ -1114,14 +1103,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap PJ")){
                                             if(Sequel.menyimpantf2("bayar_periksa_lab","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap PJ Detail")){
                                             if(Sequel.menyimpantf2("bayar_detail_periksa_lab","?,?,?,?,?,?,?",7,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
                                                 tbBangsal.getValueAt(i,10).toString()
                                               })==false){
@@ -1129,14 +1118,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap Perujuk")){
                                             if(Sequel.menyimpantf2("bayar_periksa_lab_perujuk","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap Perujuk Detail")){
                                             if(Sequel.menyimpantf2("bayar_detail_periksa_lab_perujuk","?,?,?,?,?,?,?",7,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
                                                 tbBangsal.getValueAt(i,10).toString()
                                               })==false){
@@ -1144,126 +1133,126 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ralan PJ")){
                                             if(Sequel.menyimpantf2("bayar_periksa_radiologi","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ralan Perujuk")){
                                             if(Sequel.menyimpantf2("bayar_periksa_radiologi_perujuk","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ranap PJ")){
                                             if(Sequel.menyimpantf2("bayar_periksa_radiologi","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ranap Perujuk")){
                                             if(Sequel.menyimpantf2("bayar_periksa_radiologi_perujuk","?,?,?,?,?,?",6,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op1")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator1","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op2")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator2","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op3")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator3","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Anak")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_anak","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Anastesi")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_anestesi","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr PJ Anak")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_pjanak","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Umum")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_umum","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op1")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator1","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op2")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator2","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op3")){
                                             if(Sequel.menyimpantf2("bayar_operasi_operator3","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Anak")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_anak","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Anastesi")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_anestesi","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr PJ Anak")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_pjanak","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
                                             }
                                         }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Umum")){
                                             if(Sequel.menyimpantf2("bayar_operasi_dokter_umum","?,?,?,?,?",5,new String[]{
-                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                                NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                                 tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                               })==false){
                                                 sukses=false;
@@ -1279,38 +1268,38 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             if(sukses==true){
                                 Sequel.deleteTampJurnal();
                                 if(totalrawatjalan>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", totalrawatjalan, 0);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", totalrawatjalan, 0);
                                 }
                                 if(totalrawatinap>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", totalrawatinap, 0);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", totalrawatinap, 0);
                                 }
                                 if(totallabrawatjalan>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", totallabrawatjalan, 0);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", totallabrawatjalan, 0);
                                 }
                                 if(totallabrawatinap>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", totallabrawatinap, 0);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", totallabrawatinap, 0);
                                 }
                                 if(totalradrawatjalan>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", totalradrawatjalan, 0);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", totalradrawatjalan, 0);
                                 }
                                 if(totalradrawatinap>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", totalradrawatinap, 0);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", totalradrawatinap, 0);
                                 }
                                 if(totaloperasirawatjalan>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", totaloperasirawatjalan, 0);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", totaloperasirawatjalan, 0);
                                 }
                                 if(totaloperasirawatinap>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", totaloperasirawatinap, 0);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", totaloperasirawatinap, 0);
                                 }
                                 if(bayar>0){
-                                    Sequel.insertOrUpdateTampJurnal(form.koderekening, AkunBayar.getSelectedItem().toString(), 0, bayar);
+                                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.koderekening, AkunBayar.getSelectedItem().toString(), 0, bayar);
                                 }
                                 sukses=form.jur.simpanJurnal(NoTagihan.getText(),"U","PEMBAYARAN JASA MEDIS DOKTER "+kddokter.getText()+" "+nmdokter.getText()+", OLEH "+akses.getkode());
                             }
 
                             if(sukses==true){
                                 autoNomor();
-                                for(i=0;i<tbBangsal.getRowCount();i++){  
+                                for(i=0;i<tbBangsal.getRowCount();i++){
                                     if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                                         tabMode.removeRow(i);
                                         i--;
@@ -1330,7 +1319,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 }
             } catch (Exception ex) {
                System.out.println(ex);
-            } 
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1392,7 +1381,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(carabayar.getTable().getSelectedRow()!= -1){
                     KdCaraBayar.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString());
                     NmCaraBayar.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),2).toString());
-                }     
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1402,8 +1391,8 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowActivated(WindowEvent e) {carabayar.onCari();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         carabayar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1415,7 +1404,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         carabayar.isCek();
         carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         carabayar.setLocationRelativeTo(internalFrame1);
@@ -1488,7 +1477,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 //"P","Tanggal","Jam","No.Rawat","No.RM","Nama Pasien","Kode","Tindakan Medis","Status","Jasa Medis","Id Detail"
                 row=1;
-                for(i=0;i<tabMode.getRowCount();i++){  
+                for(i=0;i<tabMode.getRowCount();i++){
                     if(tabMode.getValueAt(i,0).toString().equals("true")){
                         Sequel.menyimpan("temporary","'"+row+"','"+
                             tabMode.getValueAt(i,1).toString().replaceAll("'","`")+" "+tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
@@ -1501,23 +1490,23 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                             "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter"
                         );
                         row++;
-                    } 
+                    }
                 }
                 row++;
                 Sequel.menyimpan("temporary","'"+row+"','>> Jumlah :','','','','','','"+LCount1.getText()+
                     "','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter"
-                ); 
+                );
 
-                Map<String, Object> param = new HashMap<>();   
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("dokter",nmdokter.getText());   
-                param.put("bulan",Tanggal.getSelectedItem().toString().substring(3,10));   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("dokter",nmdokter.getText());
+                param.put("bulan",Tanggal.getSelectedItem().toString().substring(3,10));
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 Valid.MyReportqry("rptSlipBayarJMDokter.jasper","report","[ Slip J.M. Dokter  ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -1581,42 +1570,42 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         if(tabMode.getValueAt(i,0).toString().equals("true")){
                             if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan Dr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_jl_dr","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Jalan DrPr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_jl_drpr","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Inap Dr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_inap_dr","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Rawat Inap DrPr")){
                                 if(Sequel.menyimpantf2("bayar_rawat_inap_drpr","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
-                                } 
+                                }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan PJ")){
                                 if(Sequel.menyimpantf2("bayar_periksa_lab","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan PJ Detail")){
                                 if(Sequel.menyimpantf2("bayar_detail_periksa_lab","?,?,?,?,?,?,?",7,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
                                     tbBangsal.getValueAt(i,10).toString()
                                   })==false){
@@ -1624,14 +1613,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan Perujuk")){
                                 if(Sequel.menyimpantf2("bayar_periksa_lab_perujuk","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ralan Perujuk Detail")){
                                 if(Sequel.menyimpantf2("bayar_detail_periksa_lab_perujuk","?,?,?,?,?,?,?",7,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
                                     tbBangsal.getValueAt(i,10).toString()
                                   })==false){
@@ -1639,14 +1628,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap PJ")){
                                 if(Sequel.menyimpantf2("bayar_periksa_lab","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap PJ Detail")){
                                 if(Sequel.menyimpantf2("bayar_detail_periksa_lab","?,?,?,?,?,?,?",7,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
                                     tbBangsal.getValueAt(i,10).toString()
                                   })==false){
@@ -1654,14 +1643,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap Perujuk")){
                                 if(Sequel.menyimpantf2("bayar_periksa_lab_perujuk","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Laborat Ranap Perujuk Detail")){
                                 if(Sequel.menyimpantf2("bayar_detail_periksa_lab_perujuk","?,?,?,?,?,?,?",7,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,11).toString(),
                                     tbBangsal.getValueAt(i,10).toString()
                                   })==false){
@@ -1669,126 +1658,126 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ralan PJ")){
                                 if(Sequel.menyimpantf2("bayar_periksa_radiologi","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ralan Perujuk")){
                                 if(Sequel.menyimpantf2("bayar_periksa_radiologi_perujuk","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ranap PJ")){
                                 if(Sequel.menyimpantf2("bayar_periksa_radiologi","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Radiologi Ranap Perujuk")){
                                 if(Sequel.menyimpantf2("bayar_periksa_radiologi_perujuk","?,?,?,?,?,?",6,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString(),tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op1")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator1","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op2")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator2","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan Op3")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator3","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Anak")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_anak","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Anastesi")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_anestesi","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr PJ Anak")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_pjanak","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ralan dr Umum")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_umum","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op1")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator1","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op2")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator2","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap Op3")){
                                 if(Sequel.menyimpantf2("bayar_operasi_operator3","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Anak")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_anak","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Anastesi")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_anestesi","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr PJ Anak")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_pjanak","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
                                 }
                             }else if(tbBangsal.getValueAt(i,9).toString().equals("Operasi Ranap dr Umum")){
                                 if(Sequel.menyimpantf2("bayar_operasi_dokter_umum","?,?,?,?,?",5,new String[]{
-                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(), 
+                                    NoTagihan.getText(),tbBangsal.getValueAt(i,3).toString(),tbBangsal.getValueAt(i,7).toString(),
                                     tbBangsal.getValueAt(i,1).toString()+" "+tbBangsal.getValueAt(i,2).toString(),tbBangsal.getValueAt(i,10).toString()
                                   })==false){
                                     sukses=false;
@@ -1804,34 +1793,34 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
                     if(Valid.SetInteger(BiayaTransaksi.getText())>0){
-                        Sequel.insertTampJurnal(form.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
+                        if (sukses) sukses = Sequel.insertTampJurnal(form.Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", BiayaTransaksi.getText(), "0");
                     }
                     if(totalrawatjalan>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", totalrawatjalan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", totalrawatjalan, 0);
                     }
                     if(totalrawatinap>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", totalrawatinap, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", totalrawatinap, 0);
                     }
                     if(totallabrawatjalan>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", totallabrawatjalan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", totallabrawatjalan, 0);
                     }
                     if(totallabrawatinap>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", totallabrawatinap, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", totallabrawatinap, 0);
                     }
                     if(totalradrawatjalan>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", totalradrawatjalan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Jasa Medik Dokter Radiologi Ralan", totalradrawatjalan, 0);
                     }
                     if(totalradrawatinap>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", totalradrawatinap, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Radiologi_Ranap, "Utang Jasa Medik Dokter Radiologi Ranap", totalradrawatinap, 0);
                     }
                     if(totaloperasirawatjalan>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", totaloperasirawatjalan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ralan, "Utang Jasa Medik Dokter Operasi Ralan", totaloperasirawatjalan, 0);
                     }
                     if(totaloperasirawatinap>0){
-                        Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", totaloperasirawatinap, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", totaloperasirawatinap, 0);
                     }
                     if(bayar>0){
-                        Sequel.insertOrUpdateTampJurnal(form.koderekening, AkunBayar.getSelectedItem().toString(), 0, Valid.SetAngka(BiayaTransaksi.getText()) + bayar);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(form.koderekening, AkunBayar.getSelectedItem().toString(), 0, Valid.SetAngka(BiayaTransaksi.getText()) + bayar);
                     }
                     sukses=form.jur.simpanJurnal(NoTagihan.getText(),"U","PEMBAYARAN JASA MEDIS DOKTER "+kddokter.getText()+" "+nmdokter.getText()+", OLEH "+akses.getkode());
                     if(sukses==true){
@@ -1845,7 +1834,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
 
                 if(sukses==true){
                     autoNomor();
-                    for(i=0;i<tbBangsal.getRowCount();i++){  
+                    for(i=0;i<tbBangsal.getRowCount();i++){
                         if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                             tabMode.removeRow(i);
                             i--;
@@ -1891,14 +1880,14 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kodetransaksibank.getTable().getSelectedRow()!= -1){                   
-                    KodeMetode.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),0).toString());   
-                    MetodePembayaran.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),1).toString());   
-                    BiayaTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),2).toString());   
-                    KodeBank.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),3).toString());   
-                    BankTujuan.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),4).toString());   
-                    KodeTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),5).toString());                  
-                }                
+                if(kodetransaksibank.getTable().getSelectedRow()!= -1){
+                    KodeMetode.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),0).toString());
+                    MetodePembayaran.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),1).toString());
+                    BiayaTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),2).toString());
+                    KodeBank.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),3).toString());
+                    BankTujuan.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),4).toString());
+                    KodeTransaksi.setText(kodetransaksibank.getTable().getValueAt(kodetransaksibank.getTable().getSelectedRow(),5).toString());
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1909,7 +1898,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kodetransaksibank.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2034,49 +2023,49 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             prosesCariSmc();
         }
     }
-    
+
     private void getData(){
         row=tbBangsal.getRowCount();
         bayar=0;totalrawatjalan=0;totalrawatinap=0;totallabrawatjalan=0;totallabrawatinap=0;totalradrawatjalan=0;totalradrawatinap=0;totaloperasirawatjalan=0;totaloperasirawatinap=0;
-        for(i=0;i<row;i++){  
+        for(i=0;i<row;i++){
             if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                 if(tbBangsal.getValueAt(i,9).toString().contains("Rawat Jalan")){
-                    totalrawatjalan=totalrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());   
+                    totalrawatjalan=totalrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
                 }else if(tbBangsal.getValueAt(i,9).toString().contains("Rawat Inap")){
-                    totalrawatinap=totalrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());   
+                    totalrawatinap=totalrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
                 }else if(tbBangsal.getValueAt(i,9).toString().contains("Laborat Ralan")){
-                    totallabrawatjalan=totallabrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());   
+                    totallabrawatjalan=totallabrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
                 }else if(tbBangsal.getValueAt(i,9).toString().contains("Laborat Ranap")){
-                    totallabrawatinap=totallabrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());   
+                    totallabrawatinap=totallabrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
                 }else if(tbBangsal.getValueAt(i,9).toString().contains("Radiologi Ralan")){
-                    totalradrawatjalan=totalradrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());   
+                    totalradrawatjalan=totalradrawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
                 }else if(tbBangsal.getValueAt(i,9).toString().contains("Radiologi Ranap")){
-                    totalradrawatinap=totalradrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());   
+                    totalradrawatinap=totalradrawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
                 }else if(tbBangsal.getValueAt(i,9).toString().contains("Operasi Ralan")){
-                    totaloperasirawatjalan=totaloperasirawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());   
+                    totaloperasirawatjalan=totaloperasirawatjalan+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
                 }else if(tbBangsal.getValueAt(i,9).toString().contains("Operasi Ranap")){
-                    totaloperasirawatinap=totaloperasirawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());   
+                    totaloperasirawatinap=totaloperasirawatinap+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
                 }
-                
-                bayar=bayar+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());     
+
+                bayar=bayar+Double.parseDouble(tbBangsal.getValueAt(i,10).toString());
             }
         }
         LCount1.setText(Valid.SetAngka(bayar));
     }
-    
-    
+
+
     private void autoNomor() {
         Valid.autonomorSmc(NoTagihan, "JMD", "", "bayar_jm_dokter", "no_bayar", 3, "0", Tanggal);
     }
-    
+
     public void isCek(){
         autoNomor();
         TCari.requestFocus();
         BtnSimpan.setEnabled(akses.getbayar_jm_dokter());
     }
-    
-    private void tampilAkunBayar() {         
-         try{      
+
+    private void tampilAkunBayar() {
+         try{
              form.file=new File("./cache/akunbayarhutang.iyem");
              form.file.createNewFile();
              form.fileWriter = new FileWriter(form.file);
@@ -2085,7 +2074,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
              try{
                  rs=ps.executeQuery();
                  AkunBayar.removeAllItems();
-                 while(rs.next()){    
+                 while(rs.next()){
                      AkunBayar.addItem(rs.getString(1).replaceAll("\"",""));
                      form.iyem=form.iyem+"{\"NamaAkun\":\""+rs.getString(1).replaceAll("\"","")+"\",\"KodeRek\":\""+rs.getString(2)+"\"},";
                  }
@@ -2094,10 +2083,10 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
              } finally{
                  if(rs != null){
                      rs.close();
-                 } 
+                 }
                  if(ps != null){
                      ps.close();
-                 } 
+                 }
              }
 
              form.fileWriter.write("{\"akunbayarhutang\":["+form.iyem.substring(0,form.iyem.length()-1)+"]}");
@@ -2108,7 +2097,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void tampilAkunBayar2() {
         try {
             form.myObj = new FileReader("./cache/akunbayarhutang.iyem");
@@ -2128,7 +2117,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             }
         }
     }
-    
+
     private void prosesCariSmc() {
         total = 0;
         String sql = "";
@@ -2140,7 +2129,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
             case 4: sql = "and reg_periksa.status_bayar = 'Sudah Bayar' and (exists(select * from piutang_pasien where piutang_pasien.no_rawat = reg_periksa.no_rawat and piutang_pasien.status = 'Lunas') or not exists(select * from piutang_pasien where piutang_pasien.no_rawat = reg_periksa.no_rawat)) "; break;
             case 5: sql = "and reg_periksa.status_bayar = 'Belum Bayar' "; break;
         }
-        
+
         // TINDAKAN RALAN DOKTER
         if (chkRalan.isSelected()) {
             try {
@@ -2185,7 +2174,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select rawat_jl_drpr.tgl_perawatan, rawat_jl_drpr.jam_rawat, rawat_jl_drpr.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
                     "pasien.nm_pasien, reg_periksa.kd_pj, rawat_jl_drpr.kd_jenis_prw, jns_perawatan.nm_perawatan, 'Rawat Jalan DrPr' as status, " +
@@ -2231,7 +2220,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 System.out.println("Notif : " + e);
             }
         }
-        
+
         // TINDAKAN RANAP DOKTER
         if (chkRanap.isSelected()) {
             try {
@@ -2276,7 +2265,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select rawat_inap_drpr.tgl_perawatan, rawat_inap_drpr.jam_rawat, rawat_inap_drpr.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
                     "pasien.nm_pasien, reg_periksa.kd_pj, rawat_inap_drpr.kd_jenis_prw, jns_perawatan_inap.nm_perawatan, 'Rawat Inap DrPr' as status, " +
@@ -2322,7 +2311,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 System.out.println("Notif : " + e);
             }
         }
-        
+
         // TINDAKAN OPERASI DOKTER
         if (chkOperasi.isSelected()) {
             try {
@@ -2366,7 +2355,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // OPERATOR 2
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
@@ -2407,7 +2396,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // OPERATOR 3
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
@@ -2448,7 +2437,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // DOKTER ANAK
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
@@ -2489,7 +2478,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // DOKTER ANESTESI
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
@@ -2530,7 +2519,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // DOKTER UMUM
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
@@ -2571,7 +2560,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // DOKTER PJ ANAK
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select date(operasi.tgl_operasi) as tgl_operasi, time(operasi.tgl_operasi) as jam_operasi, operasi.no_rawat, bridging_sep.no_sep, " +
@@ -2616,7 +2605,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 System.out.println("Notif : " + e);
             }
         }
-        
+
         // TINDAKAN LABORAT
         if (chkLaborat.isSelected()) {
             try {
@@ -2662,7 +2651,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // DETAIL TINDAKAN LABORAT PJ
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
@@ -2709,7 +2698,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // TINDAKAN LABORAT PERUJUK
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
@@ -2752,7 +2741,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // DETAIL TINDAKAN LABORAT PERUJUK
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select detail_periksa_lab.tgl_periksa, detail_periksa_lab.jam, detail_periksa_lab.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +
@@ -2804,7 +2793,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 System.out.println("Notif : " + e);
             }
         }
-        
+
         // TINDAKAN RADIOLOGI
         if (chkRadiologi.isSelected()) {
             try {
@@ -2851,7 +2840,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                         }
                     }
                 }
-                
+
                 // TINDAKAN RADIOLOGI PERUJUK
                 try (PreparedStatement ps = koneksi.prepareStatement(
                     "select periksa_radiologi.tgl_periksa, periksa_radiologi.jam, periksa_radiologi.no_rawat, bridging_sep.no_sep, reg_periksa.no_rkm_medis, " +

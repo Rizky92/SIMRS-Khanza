@@ -49,7 +49,7 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
         Object[] row={"No.","Tgl.Masuk","Tgl.Pulang","Nama Pasien","Ruang","Jenis Bayar",
                       "Jml.Lsg","Jml.ByPhone","Tarif Lsg","Tarif ByPhone","Biaya Visit",
                       "Biaya ByPhone","Total Bruto","Uang Js Dokter","Uang RS"};
-        
+
         tabMode=new DefaultTableModel(null,row){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
@@ -90,10 +90,10 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
                 column.setPreferredWidth(88);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());   
-        
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+
         kddokter.setDocument(new batasInput((byte)10).getKata(kddokter));
-                
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -105,7 +105,7 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     prosesCari();
-                }   
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -117,8 +117,8 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
-        try {            
+
+        try {
             pskamar=koneksi.prepareStatement(
                     "select kamar_inap.no_rawat,pasien.nm_pasien,penjab.png_jawab,kamar_inap.kd_kamar,bangsal.kd_bangsal,bangsal.nm_bangsal,kamar_inap.tgl_masuk,kamar_inap.tgl_keluar "+
                     "from kamar_inap inner join kamar inner join bangsal inner join reg_periksa inner join pasien inner join penjab on kamar_inap.no_rawat=reg_periksa.no_rawat and "+
@@ -150,7 +150,7 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
         } catch (SQLException e) {
             System.out.println(e);
         }
-     
+
     }
 
     /** This method is called from within the constructor to
@@ -350,7 +350,7 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-}//GEN-LAST:event_TKdKeyPressed
+    }//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -359,57 +359,57 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            
+
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(i=0;i<tabMode.getRowCount();i++){  
+            for(i=0;i<tabMode.getRowCount();i++){
                 try {
                     sjmlvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
                 } catch (Exception e) {
                     sjmlvisit="";
                 }
-                
+
                 try {
                     sjmlbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
                 } catch (Exception e) {
                     sjmlbyphone="";
                 }
-                
+
                 try {
                     starifvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
                 } catch (Exception e) {
                     starifvisit="";
                 }
-                
+
                 try {
                     starifbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()));
                 } catch (Exception e) {
                     starifbyphone="";
                 }
-                
+
                 try {
                     svisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()));
                 } catch (Exception e) {
                     svisit="";
                 }
-                
+
                 try {
                     sbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()));
                 } catch (Exception e) {
                     sbyphone="";
                 }
-                
+
                 try {
                     sbruto=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()));
                 } catch (Exception e) {
                     sbruto="";
                 }
-                
+
                 try {
                     sjasa=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()));
                 } catch (Exception e) {
                     sjasa="";
                 }
-                
+
                 try {
                     suangrs=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()));
                 } catch (Exception e) {
@@ -430,19 +430,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 sbyphone+"','"+
                                 sbruto+"','"+
                                 sjasa+"','"+
-                                suangrs+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter"); 
+                                suangrs+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
             }
-            
-            Map<String, Object> param = new HashMap<>();   
+
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs()); 
+                param.put("emailrs",akses.getemailrs());
                 param.put("dokter",nmdokter.getText());
-                param.put("periode",Tgl1.getSelectedItem()+" s/d "+Tgl2.getSelectedItem());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("periode",Tgl1.getSelectedItem()+" s/d "+Tgl2.getSelectedItem());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptFeeVisitDokter.jasper","report","[ Rekap Jasa Visit Dokter ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -470,7 +470,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmdokter.setText(dokter.tampil3(kddokter.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            nmdokter.setText(dokter.tampil3(kddokter.getText())); 
+            nmdokter.setText(dokter.tampil3(kddokter.getText()));
             Tgl2.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             nmdokter.setText(dokter.tampil3(kddokter.getText()));
@@ -480,33 +480,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_kddokterKeyPressed
 
-private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
+    private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
         dokter.isCek();
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
         dokter.setAlwaysOnTop(false);
         dokter.setVisible(true);
-}//GEN-LAST:event_BtnSeek2ActionPerformed
+    }//GEN-LAST:event_BtnSeek2ActionPerformed
 
-private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
+    private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
    //Valid.pindah(evt,DTPCari2,TCari);
-}//GEN-LAST:event_BtnSeek2KeyPressed
+    }//GEN-LAST:event_BtnSeek2KeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         if(kddokter.getText().equals("")){
             JOptionPane.showMessageDialog(rootPane,"Silahkan pilih dokter terlebih dahulu..!!");
         }else{
             prosesCari();
         }
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
-private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
         }else{
             Valid.pindah(evt, kddokter, BtnPrint);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void Tgl1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl1KeyPressed
         Valid.pindah(evt, BtnKeluar,Tgl2);
@@ -557,15 +557,15 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
     // End of variables declaration//GEN-END:variables
 
     private void prosesCari(){
-        Valid.tabelKosong(tabMode);      
-        try{  
+        Valid.tabelKosong(tabMode);
+        try{
             pskamar.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
             pskamar.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
             rskamar=pskamar.executeQuery();
             i=1;ttljmlvisit=0;ttljmlbyphone=0;ttlvisit=0;ttlbyphone=0;ttlbruto=0;ttljasa=0;ttluangrs=0;
             while(rskamar.next()){
                 jmlvisit=0;jmlbyphone=0;visit=0;byphone=0;bruto=0;jasa=0;uangrs=0;
-                
+
                 psvisit.setString(1,kddokter.getText());
                 psvisit.setString(2,rskamar.getString("no_rawat"));
                 rsvisit=psvisit.executeQuery();
@@ -577,7 +577,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     jasa=rsvisit.getDouble("bayardokter");
                     uangrs=rsvisit.getDouble("material")+rsvisit.getDouble("bhp");
                 }
-                
+
                 psbyphone.setString(1,kddokter.getText());
                 psbyphone.setString(2,rskamar.getString("no_rawat"));
                 rsbyphone=psbyphone.executeQuery();
@@ -589,7 +589,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                     jasa=jasa+rsbyphone.getDouble("bayardokter");
                     uangrs=uangrs+rsbyphone.getDouble("material")+rsbyphone.getDouble("bhp");
                 }
-                
+
                 if(bruto>0){
                     tabMode.addRow(new Object[]{
                         i,rskamar.getString("tgl_masuk"),rskamar.getString("tgl_keluar"),
@@ -607,7 +607,7 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
                 ttljasa=ttljasa+jasa;
                 ttluangrs=ttluangrs+uangrs;
             }
-            
+
             if(ttlbruto>0){
                 tabMode.addRow(new Object[]{
                     "","","","Jumlah :","","",ttljmlvisit,ttljmlbyphone,
@@ -617,11 +617,11 @@ private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_B
         }catch(Exception e){
             System.out.println("Catatan  "+e);
         }
-        
+
     }
-    
+
     public void isCek(){
         //BtnPrint.setEnabled(var.getfee_visit_dokter());
     }
-    
+
 }

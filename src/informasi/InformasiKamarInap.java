@@ -26,7 +26,7 @@ public class InformasiKamarInap extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private validasi Valid=new validasi();
     private DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
-    
+
     private String kmr="",key="";
     private PreparedStatement ps;
     private ResultSet rs;
@@ -97,7 +97,7 @@ public class InformasiKamarInap extends javax.swing.JDialog {
         }
         tbKamIn.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         bangsal.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -105,9 +105,9 @@ public class InformasiKamarInap extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                   
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     BangsalCari.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 BangsalCari.requestFocus();
             }
             @Override
@@ -119,7 +119,7 @@ public class InformasiKamarInap extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -536,11 +536,11 @@ public class InformasiKamarInap extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -548,113 +548,113 @@ public class InformasiKamarInap extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void DTPCari1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPCari1ItemStateChanged
          R2.setSelected(true);
-         tampil();          
-       
-}//GEN-LAST:event_DTPCari1ItemStateChanged
+         tampil();
+
+    }//GEN-LAST:event_DTPCari1ItemStateChanged
 
     private void DTPCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari2KeyPressed
         Valid.pindah(evt,DTPCari1,BangsalCari);
-}//GEN-LAST:event_DTPCari2KeyPressed
+    }//GEN-LAST:event_DTPCari2KeyPressed
 
-private void btnBangsalCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalCariActionPerformed
+    private void btnBangsalCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalCariActionPerformed
        bangsal.isCek();
-        bangsal.emptTeks();        
+        bangsal.emptTeks();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         bangsal.setLocationRelativeTo(internalFrame1);
         bangsal.setAlwaysOnTop(false);
         bangsal.setVisible(true);
-}//GEN-LAST:event_btnBangsalCariActionPerformed
+    }//GEN-LAST:event_btnBangsalCariActionPerformed
 
-private void btnBangsalCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalCariKeyPressed
+    private void btnBangsalCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalCariKeyPressed
    Valid.pindah(evt,DTPCari2,TCari);
-}//GEN-LAST:event_btnBangsalCariKeyPressed
+    }//GEN-LAST:event_btnBangsalCariKeyPressed
 
-private void BangsalCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BangsalCariKeyPressed
+    private void BangsalCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BangsalCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             tampil();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnBangsalCariActionPerformed(null);
         }else{Valid.pindah(evt, DTPCari2, TCari);}
-}//GEN-LAST:event_BangsalCariKeyPressed
+    }//GEN-LAST:event_BangsalCariKeyPressed
 
-private void DTPCari3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPCari3ItemStateChanged
+    private void DTPCari3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPCari3ItemStateChanged
    R3.setSelected(true);
-   tampil(); 
-}//GEN-LAST:event_DTPCari3ItemStateChanged
+   tampil();
+    }//GEN-LAST:event_DTPCari3ItemStateChanged
 
-private void DTPCari3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari3KeyPressed
+    private void DTPCari3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari3KeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_DTPCari3KeyPressed
+    }//GEN-LAST:event_DTPCari3KeyPressed
 
-private void cmbJam1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbJam1ItemStateChanged
+    private void cmbJam1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbJam1ItemStateChanged
    R3.setSelected(true);
    tampil();
-}//GEN-LAST:event_cmbJam1ItemStateChanged
+    }//GEN-LAST:event_cmbJam1ItemStateChanged
 
-private void cmbJam1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam1KeyPressed
-  
-}//GEN-LAST:event_cmbJam1KeyPressed
+    private void cmbJam1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam1KeyPressed
 
-private void cmbMnt1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMnt1KeyPressed
- 
-}//GEN-LAST:event_cmbMnt1KeyPressed
+    }//GEN-LAST:event_cmbJam1KeyPressed
 
-private void cmbDtk1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtk1KeyPressed
-  
-}//GEN-LAST:event_cmbDtk1KeyPressed
+    private void cmbMnt1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMnt1KeyPressed
 
-private void cmbDtk2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtk2KeyPressed
-   
-}//GEN-LAST:event_cmbDtk2KeyPressed
+    }//GEN-LAST:event_cmbMnt1KeyPressed
 
-private void cmbMnt2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMnt2KeyPressed
+    private void cmbDtk1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtk1KeyPressed
+
+    }//GEN-LAST:event_cmbDtk1KeyPressed
+
+    private void cmbDtk2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbDtk2KeyPressed
+
+    }//GEN-LAST:event_cmbDtk2KeyPressed
+
+    private void cmbMnt2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMnt2KeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_cmbMnt2KeyPressed
+    }//GEN-LAST:event_cmbMnt2KeyPressed
 
-private void cmbJam2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbJam2ItemStateChanged
+    private void cmbJam2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbJam2ItemStateChanged
    R3.setSelected(true);
    tampil();
-}//GEN-LAST:event_cmbJam2ItemStateChanged
+    }//GEN-LAST:event_cmbJam2ItemStateChanged
 
-private void cmbJam2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam2KeyPressed
+    private void cmbJam2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam2KeyPressed
 // TODO add your handling code here:
-}//GEN-LAST:event_cmbJam2KeyPressed
+    }//GEN-LAST:event_cmbJam2KeyPressed
 
-private void cmbMnt1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMnt1ItemStateChanged
+    private void cmbMnt1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMnt1ItemStateChanged
    R3.setSelected(true);
    tampil();
-}//GEN-LAST:event_cmbMnt1ItemStateChanged
+    }//GEN-LAST:event_cmbMnt1ItemStateChanged
 
-private void cmbDtk1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDtk1ItemStateChanged
+    private void cmbDtk1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDtk1ItemStateChanged
    R3.setSelected(true);
    tampil();
-}//GEN-LAST:event_cmbDtk1ItemStateChanged
+    }//GEN-LAST:event_cmbDtk1ItemStateChanged
 
-private void cmbMnt2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMnt2ItemStateChanged
+    private void cmbMnt2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMnt2ItemStateChanged
    R3.setSelected(true);
    tampil();
-}//GEN-LAST:event_cmbMnt2ItemStateChanged
+    }//GEN-LAST:event_cmbMnt2ItemStateChanged
 
-private void cmbDtk2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDtk2ItemStateChanged
+    private void cmbDtk2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDtk2ItemStateChanged
    R3.setSelected(true);
    tampil();
-}//GEN-LAST:event_cmbDtk2ItemStateChanged
+    }//GEN-LAST:event_cmbDtk2ItemStateChanged
 
-private void R1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R1ItemStateChanged
+    private void R1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R1ItemStateChanged
    tampil();
-}//GEN-LAST:event_R1ItemStateChanged
+    }//GEN-LAST:event_R1ItemStateChanged
 
-private void R2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R2ItemStateChanged
+    private void R2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R2ItemStateChanged
    tampil();
-}//GEN-LAST:event_R2ItemStateChanged
+    }//GEN-LAST:event_R2ItemStateChanged
 
-private void R3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R3ItemStateChanged
+    private void R3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R3ItemStateChanged
    tampil();
-}//GEN-LAST:event_R3ItemStateChanged
+    }//GEN-LAST:event_R3ItemStateChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -755,7 +755,7 @@ private void R3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event
                   cmbJam2.getSelectedItem()+":"+cmbMnt2.getSelectedItem()+":"+cmbDtk2.getSelectedItem()+"' and bangsal.nm_bangsal='"+BangsalCari.getText()+"' ";
             }
         }
-        
+
         key=kmr+" ";
         if(!TCari.getText().equals("")){
             key= kmr+"and kamar_inap.no_rawat like '%"+TCari.getText().trim()+"%' or "+
@@ -773,7 +773,7 @@ private void R3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event
                    kmr+"and kamar_inap.tgl_keluar like '%"+TCari.getText().trim()+"%' or "+
                    kmr+"and kamar_inap.ttl_biaya like '%"+TCari.getText().trim()+"%' ";
         }
-        
+
         Valid.tabelKosong(tabMode);
         try{
             rs=koneksi.prepareStatement(

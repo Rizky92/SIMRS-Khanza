@@ -69,13 +69,13 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                 return false;
              }
              Class[] types = new Class[] {
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
+                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
              };
              @Override
@@ -104,9 +104,9 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -128,8 +128,8 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
             psset_tarif=koneksi.prepareStatement("select * from set_tarif");
             try {
@@ -140,7 +140,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                 }else{
                     cara_bayar_operasi="Yes";
                     kelas_operasi="Yes";
-                }  
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             }finally{
@@ -153,7 +153,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        } 
+        }
     }
 
 
@@ -319,11 +319,11 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil2();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -331,13 +331,13 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
         tampil2();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -345,7 +345,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -353,7 +353,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                 dispose();
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -364,21 +364,21 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                 TCari.requestFocus();
             }
         }
-}//GEN-LAST:event_tbKamarKeyPressed
+    }//GEN-LAST:event_tbKamarKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgJnsPerawatanOperasi bangsal=new DlgJnsPerawatanOperasi(null,false);
         bangsal.emptTeks();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         bangsal.setLocationRelativeTo(internalFrame1);
         bangsal.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());   
-        
+        this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -420,7 +420,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {  
+    private void tampil() {
         try{
             file=new File("./cache/paketoperasi.iyem");
             file.createNewFile();
@@ -437,7 +437,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             try {
                 rs=pstindakan.executeQuery();
                 while(rs.next()){
-                    iyembuilder.append("{\"KodePaket\":\"").append(rs.getString("kode_paket")).append("\",\"NamaOperasi\":\"").append(rs.getString("nm_perawatan").replaceAll("\"","")).append("\",\"Kategori\":\"").append(rs.getString("kategori")).append("\",\"Operator1\":\"").append(rs.getString("operator1")).append("\",\"Operator2\":\"").append(rs.getString("operator2")).append("\",\"Operator3\":\"").append(rs.getString("operator3")).append("\",\"AsistenOp1\":\"").append(rs.getString("asisten_operator1")).append("\",\"AsistenOp2\":\"").append(rs.getString("asisten_operator2")).append("\",\"AsistenOp3\":\"").append(rs.getString("asisten_operator3")).append("\",\"Instrumen\":\"").append(rs.getString("instrumen")).append("\",\"drAnak\":\"").append(rs.getString("dokter_anak")).append("\",\"PerawatResus\":\"").append(rs.getString("perawaat_resusitas")).append("\",\"drAnastesi\":\"").append(rs.getString("dokter_anestesi")).append("\",\"AsistenAnast1\":\"").append(rs.getString("asisten_anestesi")).append("\",\"AsistenAnast2\":\"").append(rs.getString("asisten_anestesi2")).append("\",\"Bidan1\":\"").append(rs.getString("bidan")).append("\",\"Bidan2\":\"").append(rs.getString("bidan2")).append("\",\"Bidan3\":\"").append(rs.getString("bidan3")).append("\",\"PerawatLuar\":\"").append(rs.getString("perawat_luar")).append("\",\"Alat\":\"").append(rs.getString("alat")).append("\",\"SewaOK/VK\":\"").append(rs.getString("sewa_ok")).append("\",\"Akomodasi\":\"").append(rs.getString("akomodasi")).append("\",\"NMS\":\"").append(rs.getString("bagian_rs")).append("\",\"Onloop1\":\"").append(rs.getString("omloop")).append("\",\"Onloop2\":\"").append(rs.getString("omloop2")).append("\",\"Onloop3\":\"").append(rs.getString("omloop3")).append("\",\"Onloop4\":\"").append(rs.getString("omloop4")).append("\",\"Onloop5\":\"").append(rs.getString("omloop5")).append("\",\"Sarpras\":\"").append(rs.getString("sarpras")).append("\",\"drPjAnak\":\"").append(rs.getString("dokter_pjanak")).append("\",\"drUmum\":\"").append(rs.getString("dokter_umum")).append("\",\"Total\":\"").append(rs.getDouble("operator1")).append(rs.getDouble("operator2")).append(rs.getDouble("operator3")).append(rs.getDouble("asisten_operator1")).append(rs.getDouble("asisten_operator2")).append(rs.getDouble("asisten_operator3")).append(rs.getDouble("instrumen")).append(rs.getDouble("dokter_anak")).append(rs.getDouble("perawaat_resusitas")).append(rs.getDouble("alat")).append(rs.getDouble("dokter_anestesi")).append(rs.getDouble("asisten_anestesi")).append(rs.getDouble("asisten_anestesi2")).append(rs.getDouble("bidan")).append(rs.getDouble("bidan2")).append(rs.getDouble("bidan3")).append(rs.getDouble("perawat_luar")).append(rs.getDouble("sewa_ok")).append(rs.getDouble("akomodasi")).append(rs.getDouble("bagian_rs")).append(rs.getDouble("omloop")).append(rs.getDouble("omloop2")).append(rs.getDouble("omloop3")).append(rs.getDouble("omloop4")).append(rs.getDouble("omloop5")).append(rs.getDouble("sarpras")).append(rs.getDouble("dokter_pjanak")).append(rs.getDouble("dokter_umum")).append("\",\"KodePJ\":\"").append(rs.getString("kd_pj")).append("\",\"Kelas\":\"").append(rs.getString("kelas")).append("\"},");
+                    iyembuilder.append("{\"KodePaket\":\"").append(rs.getString("kode_paket")).append("\",\"NamaOperasi\":\"").append(rs.getString("nm_perawatan").replaceAll("\"","")).append("\",\"Kategori\":\"").append(rs.getString("kategori")).append("\",\"Operator1\":\"").append(rs.getString("operator1")).append("\",\"Operator2\":\"").append(rs.getString("operator2")).append("\",\"Operator3\":\"").append(rs.getString("operator3")).append("\",\"AsistenOp1\":\"").append(rs.getString("asisten_operator1")).append("\",\"AsistenOp2\":\"").append(rs.getString("asisten_operator2")).append("\",\"AsistenOp3\":\"").append(rs.getString("asisten_operator3")).append("\",\"Instrumen\":\"").append(rs.getString("instrumen")).append("\",\"drAnak\":\"").append(rs.getString("dokter_anak")).append("\",\"PerawatResus\":\"").append(rs.getString("perawaat_resusitas")).append("\",\"drAnastesi\":\"").append(rs.getString("dokter_anestesi")).append("\",\"AsistenAnast1\":\"").append(rs.getString("asisten_anestesi")).append("\",\"AsistenAnast2\":\"").append(rs.getString("asisten_anestesi2")).append("\",\"Bidan1\":\"").append(rs.getString("bidan")).append("\",\"Bidan2\":\"").append(rs.getString("bidan2")).append("\",\"Bidan3\":\"").append(rs.getString("bidan3")).append("\",\"PerawatLuar\":\"").append(rs.getString("perawat_luar")).append("\",\"Alat\":\"").append(rs.getString("alat")).append("\",\"SewaOK/VK\":\"").append(rs.getString("sewa_ok")).append("\",\"Akomodasi\":\"").append(rs.getString("akomodasi")).append("\",\"NMS\":\"").append(rs.getString("bagian_rs")).append("\",\"Onloop1\":\"").append(rs.getString("omloop")).append("\",\"Onloop2\":\"").append(rs.getString("omloop2")).append("\",\"Onloop3\":\"").append(rs.getString("omloop3")).append("\",\"Onloop4\":\"").append(rs.getString("omloop4")).append("\",\"Onloop5\":\"").append(rs.getString("omloop5")).append("\",\"Sarpras\":\"").append(rs.getString("sarpras")).append("\",\"drPjAnak\":\"").append(rs.getString("dokter_pjanak")).append("\",\"drUmum\":\"").append(rs.getString("dokter_umum")).append("\",\"Total\":\"").append((rs.getDouble("operator1")+rs.getDouble("operator2")+rs.getDouble("operator3")+rs.getDouble("asisten_operator1")+rs.getDouble("asisten_operator2")+rs.getDouble("asisten_operator3")+rs.getDouble("instrumen")+rs.getDouble("dokter_anak")+rs.getDouble("perawaat_resusitas")+rs.getDouble("alat")+rs.getDouble("dokter_anestesi")+rs.getDouble("asisten_anestesi")+rs.getDouble("asisten_anestesi2")+rs.getDouble("bidan")+rs.getDouble("bidan2")+rs.getDouble("bidan3")+rs.getDouble("perawat_luar")+rs.getDouble("sewa_ok")+rs.getDouble("akomodasi")+rs.getDouble("bagian_rs")+rs.getDouble("omloop")+rs.getDouble("omloop2")+rs.getDouble("omloop3")+rs.getDouble("omloop4")+rs.getDouble("omloop5")+rs.getDouble("sarpras")+rs.getDouble("dokter_pjanak")+rs.getDouble("dokter_umum"))).append("\",\"KodePJ\":\"").append(rs.getString("kd_pj")).append("\",\"Kelas\":\"").append(rs.getString("kelas")).append("\"},");
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -448,21 +448,21 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                 if(pstindakan!=null){
                     pstindakan.close();
                 }
-            }   
+            }
             if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"paketoperasi\":["+iyembuilder+"]}");
                 fileWriter.flush();
             }
-            
+
             fileWriter.close();
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    private void tampil2() {  
+
+    private void tampil2() {
         try{
             myObj = new FileReader("./cache/paketoperasi.iyem");
             root = mapper.readTree(myObj);
@@ -546,8 +546,8 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
                         }
                     }
                 }
-            }   
-            myObj.close();   
+            }
+            myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -561,7 +561,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void setBayar(String penjab,String kelasoperasi){
         this.kd_pj=penjab;
         this.kelas=kelasoperasi;
@@ -572,7 +572,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
         } catch (Exception e) {
         }
     }
-    public void isCek(){        
+    public void isCek(){
        BtnTambah.setEnabled(akses.gettarif_operasi());
     }
 }
