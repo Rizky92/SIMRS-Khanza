@@ -1712,7 +1712,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
     }
 
     private void isCekPasien() {
