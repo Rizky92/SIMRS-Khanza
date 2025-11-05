@@ -195,7 +195,7 @@
                 covid19_status_cd,if(covid19_status_cd='ODP',1,if(covid19_status_cd='PDP',2,3)) as ytcovid19_status_cd,
                 nomor_kartu_t, episodes1, episodes2,episodes3, episodes4, episodes5, episodes6,
                 covid19_cc_ind,if(covid19_cc_ind='Ya',1,0) as ytcovid19_cc_ind
-                from perawatan_corona where no_rawat='".$no_rawat."'");
+                from perawatan_corona where no_rawat='".$norawat."'");
         if($bariscorona = mysqli_fetch_array($hasilcorona)) {
             $episodes1 = $bariscorona["episodes1"];
             $episodes2 = $bariscorona["episodes2"];
@@ -432,6 +432,7 @@
                                 "diagnosa": "'.$diagnosa.'"
                             }
                        }';
+            echo $request;
             $msg= Request($request);
         }
     }
