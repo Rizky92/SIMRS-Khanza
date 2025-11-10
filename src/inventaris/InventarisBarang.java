@@ -1256,7 +1256,8 @@ public final class InventarisBarang extends javax.swing.JDialog {
         TCari.setText("");
         kode_barang.requestFocus();
         //Valid.autoNomer(" jns_perawatan ","JP",6,TKd);
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(kode_barang,4),signed)),0) from inventaris_barang  ","BI",8,kode_barang);
+        kode_barang.setText(Sequel.cariIsiSmc("select concat('BI', lpad(ifnull(max(convert(right(inventaris_barang.kode_barang, 8), signed)), 0), 4, '0')) from inventaris_barang"));
+        // Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(kode_barang,4),signed)),0) from inventaris_barang  ","BI",8,kode_barang);
         kode_barang.requestFocus();
     }
 
