@@ -1333,6 +1333,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     NamaSampel.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),1).toString());
                     BakuMutu.setText(sampel.getTable().getValueAt(sampel.getTable().getSelectedRow(),2).toString());
                     tampil2();
+                    autoNomor();
                 }  
                 BtnSampel.requestFocus();
             }
@@ -1507,7 +1508,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             StringBuilder iyembuilder = new StringBuilder();
             ps=koneksi.prepareStatement(
                 "select laborat_kesling_parameter_pengujian.kode_parameter,laborat_kesling_parameter_pengujian.nama_parameter,laborat_kesling_parameter_pengujian.metode_pengujian,laborat_kesling_parameter_pengujian.satuan,laborat_kesling_parameter_pengujian.kategori,laborat_kesling_nilai_normal_baku_mutu.kode_sampel "+
-                "from laborat_kesling_parameter_pengujian inner join laborat_kesling_nilai_normal_baku_mutu on laborat_kesling_nilai_normal_baku_mutu.kode_parameter=laborat_kesling_parameter_pengujian.kode_parameter order by laborat_kesling_nilai_normal_baku_mutu.kode_sampel"
+                "from laborat_kesling_parameter_pengujian inner join laborat_kesling_nilai_normal_baku_mutu on laborat_kesling_nilai_normal_baku_mutu.kode_parameter=laborat_kesling_parameter_pengujian.kode_parameter order by laborat_kesling_nilai_normal_baku_mutu.kode_sampel,laborat_kesling_parameter_pengujian.kode_parameter"
             );
             try{           
                 rs=ps.executeQuery();
@@ -1643,7 +1644,6 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
     
     public void emptTeks() {
-        TNoPermintaan.requestFocus();
         KodePelanggan.setText("");
         NamaPelanggan.setText("");
         AlamatPelanggan.setText("");
@@ -1661,6 +1661,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         KodeSampel.setText("");
         NamaSampel.setText("");
         BakuMutu.setText("");
+        TNoPermintaan.setText("");
         autoNomor();
         LokasiSampling.requestFocus();
     }
@@ -1758,7 +1759,9 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }
   
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(laborat_kesling_permintaan_pengujian_sampel.no_permintaan,4),signed)),0) from laborat_kesling_permintaan_pengujian_sampel where date_format(laborat_kesling_permintaan_pengujian_sampel.waktu_diterima,'%Y-%m-%d')='"+Valid.SetTgl(WaktuDiterima.getSelectedItem()+"")+"' ","PSL"+Valid.SetTgl(WaktuDiterima.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaan);           
+        if(!KodeSampel.getText().trim().equals("")){
+            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(laborat_kesling_permintaan_pengujian_sampel.no_permintaan,5),signed)),0) from laborat_kesling_permintaan_pengujian_sampel where date_format(laborat_kesling_permintaan_pengujian_sampel.waktu_diterima,'%Y')='"+WaktuDiterima.getSelectedItem().toString().substring(6,10)+"' and laborat_kesling_permintaan_pengujian_sampel.kode_sampel='"+KodeSampel.getText()+"'",KodeSampel.getText()+"/"+WaktuDiterima.getSelectedItem().toString().substring(6,10)+"/PPS"+"/",5,TNoPermintaan);   
+        }        
     }
 
 }
