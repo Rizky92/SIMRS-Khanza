@@ -23394,7 +23394,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         LabKeslingCariPenugasanPengujianSampel form=new LabKeslingCariPenugasanPengujianSampel(this,false);
         form.isCek();
-        form.emptTeks();
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
@@ -24445,7 +24444,7 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
-            if(akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan()==true){
+            if((akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan()==true)||(akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan()==true)){
                 Panelmenu.add(btnLabKeslingPenugasanPengujianSampel);
                 jmlmenu++;
             }
@@ -30264,7 +30263,7 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
-        if(akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan()==true){
+        if((akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan()==true)||(akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan()==true)){
             Panelmenu.add(btnLabKeslingPenugasanPengujianSampel);
             jmlmenu++;
         }
@@ -36119,7 +36118,7 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
-        if(akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan()==true){
+        if((akses.getpenugasan_pengujian_sampel_lab_kesehatan_lingkungan()==true)||(akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan()==true)){
             if(btnLabKeslingPenugasanPengujianSampel.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLabKeslingPenugasanPengujianSampel);
                 jmlmenu++;
@@ -49505,7 +49504,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingPengujianSampelDapatDilayani.addActionListener(this::btnLabKeslingPengujianSampelDapatDilayaniActionPerformed);
 
         btnLabKeslingPenugasanPengujianSampel = new widget.ButtonBig();
-        btnLabKeslingPenugasanPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6783481_attachment_data_document_file_page_icon.png")));
+        btnLabKeslingPenugasanPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/7038097_marketing_file_business_clipboard_data_icon.png")));
         btnLabKeslingPenugasanPengujianSampel.setText("Penugasan Pengujian Sampel Lab Kesling");
         btnLabKeslingPenugasanPengujianSampel.setIconTextGap(0);
         btnLabKeslingPenugasanPengujianSampel.setName("btnLabKeslingPenugasanPengujianSampel");

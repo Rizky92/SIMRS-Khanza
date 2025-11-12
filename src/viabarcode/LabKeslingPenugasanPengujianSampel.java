@@ -26,12 +26,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.File;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Date;
 import javax.swing.JOptionPane;
@@ -739,7 +735,7 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
-    LabKeslingCariPermintaanPengujianSampel form=new LabKeslingCariPermintaanPengujianSampel(null,false);
+    LabKeslingCariPenugasanPengujianSampel form=new LabKeslingCariPenugasanPengujianSampel(null,false);
     form.isCek();
     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     form.setLocationRelativeTo(this);
