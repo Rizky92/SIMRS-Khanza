@@ -349,8 +349,6 @@ ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `tmp_lahir` varchar(30) NULL DEFAUL
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_ibu` varchar(60) NOT NULL AFTER `tgl_lahir`;
 
-ALTER TABLE `pasien_bayi` ADD COLUMN IF NOT EXISTS `perkawinan_anak_ke` varchar(2) NOT NULL DEFAULT '' AFTER `mikonium`;
-
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `alamat` varchar(150) NOT NULL AFTER `tgl_lahir`;

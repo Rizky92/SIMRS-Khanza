@@ -4,8 +4,6 @@
 	<property name="ireport.zoom" value="1.24184264611831"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="192"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="SIK LOCALHOST UPD"/>
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<parameter name="namars" class="java.lang.String"/>
 	<parameter name="alamatrs" class="java.lang.String"/>
 	<parameter name="kotars" class="java.lang.String"/>
@@ -15,258 +13,96 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<parameter name="nomor" class="java.lang.String"/>
 	<parameter name="logo2" class="java.io.InputStream"/>
-	<parameter name="norm" class="java.lang.String"/>
 	<queryString>
-		<![CDATA[select pasien_bayi.*, pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pasien.umur, pasien.tgl_daftar, pasien.pekerjaanpj,
-pasien.nm_ibu, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, pegawai.nama, pasien.no_ktp
-from pasien join pasien_bayi on pasien.no_rkm_medis = pasien_bayi.no_rkm_medis join pegawai on pasien_bayi.penolong = pegawai.nik
-join kelurahan on pasien.kd_kel = kelurahan.kd_kel join kecamatan on pasien.kd_kec = kecamatan.kd_kec join kabupaten on pasien.kd_kab = kabupaten.kd_kab
-where pasien.no_rkm_medis = $P{norm}]]>
+		<![CDATA[select pasien.no_rkm_medis,pasien.nm_pasien, pasien.jk,
+pasien.no_ktp, pasien.pekerjaanpj, pasien.no_tlp,
+pasien.tgl_lahir,pasien_bayi.jam_lahir, pasien.umur,
+pasien.tgl_daftar,pasien.nm_ibu,pasien_bayi.umur_ibu,
+pasien_bayi.nama_ayah,pasien_bayi.umur_ayah,pasien.alamat,
+pasien_bayi.berat_badan,pasien_bayi.panjang_badan, pasien_bayi.lingkar_kepala,
+pasien_bayi.proses_lahir,pasien_bayi.anakke, pasien_bayi.keterangan,
+pasien_bayi.diagnosa,pasien_bayi.penyulit_kehamilan,pasien_bayi.ketuban,
+pasien_bayi.lingkar_perut,pasien_bayi.lingkar_dada,pegawai.nama,
+pasien_bayi.no_skl from pasien inner join pegawai inner join pasien_bayi
+on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai.nik]]>
 	</queryString>
 	<field name="no_rkm_medis" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="no_rkm_medis"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="umur_ibu" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="umur_ibu"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="nama_ayah" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="nama_ayah"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="umur_ayah" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="umur_ayah"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="berat_badan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="berat_badan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="panjang_badan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="panjang_badan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="lingkar_kepala" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="lingkar_kepala"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="proses_lahir" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="proses_lahir"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="anakke" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="anakke"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="jam_lahir" class="java.sql.Time">
-		<property name="com.jaspersoft.studio.field.label" value="jam_lahir"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="keterangan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="keterangan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="diagnosa" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="diagnosa"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="penyulit_kehamilan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="penyulit_kehamilan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="ketuban" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="ketuban"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="lingkar_perut" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="lingkar_perut"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="lingkar_dada" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="lingkar_dada"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="penolong" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="penolong"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="no_skl" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="no_skl"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="g" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="g"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="p" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="p"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="a" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="a"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="f1" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="f1"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="u1" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="u1"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="t1" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="t1"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="r1" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="r1"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="w1" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="w1"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="n1" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="n1"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="f5" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="f5"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="u5" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="u5"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="t5" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="t5"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="r5" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="r5"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="w5" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="w5"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="n5" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="n5"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="f10" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="f10"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="u10" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="u10"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="t10" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="t10"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="r10" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="r10"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="w10" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="w10"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="n10" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="n10"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="resusitas" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="resusitas"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="obat_diberikan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="obat_diberikan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="mikasi" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="mikasi"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="mikonium" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="mikonium"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="perkawinan_anak_ke" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="perkawinan_anak_ke"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien_bayi"/>
-	</field>
-	<field name="COLUMN_45" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="no_rkm_medis"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
 	</field>
 	<field name="nm_pasien" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="nm_pasien"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="jk" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="jk"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="tgl_lahir" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="tgl_lahir"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+	<field name="tgl_lahir" class="java.util.Date">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="jam_lahir" class="java.sql.Time">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="umur" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="umur"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="tgl_daftar" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="tgl_daftar"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+	<field name="tgl_daftar" class="java.util.Date">
 		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="pekerjaanpj" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="pekerjaanpj"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
 	</field>
 	<field name="nm_ibu" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="nm_ibu"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="umur_ibu" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="nama_ayah" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="umur_ayah" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="alamat" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="alamat"/>
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="berat_badan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="panjang_badan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lingkar_kepala" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="proses_lahir" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="anakke" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="keterangan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="diagnosa" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="penyulit_kehamilan" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="ketuban" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lingkar_perut" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="lingkar_dada" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nama" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="nama"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pegawai"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="no_ktp" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="no_ktp"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="pasien"/>
+	<field name="no_skl" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="no_ktp" class="java.lang.String"/>
+	<field name="pekerjaanpj" class="java.lang.String"/>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -305,7 +141,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[($F{jk}.toLowerCase().equals("p") ?    "Perempuan":"Laki-Laki")]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="5" y="355" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="2d8a5e71-6d8d-43fc-b313-da34df5358d0"/>
+				<reportElement mode="Transparent" x="5" y="334" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="2d8a5e71-6d8d-43fc-b313-da34df5358d0"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -313,7 +149,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Pada Tanggal]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="EEEE, dd MMMMM yyyy">
-				<reportElement x="131" y="355" width="253" height="17" uuid="eae8f1cc-7597-4619-bc47-7f1cc4064314"/>
+				<reportElement x="131" y="334" width="253" height="17" uuid="eae8f1cc-7597-4619-bc47-7f1cc4064314"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -321,7 +157,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{tgl_lahir}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="HH:mm:ss">
-				<reportElement x="131" y="376" width="78" height="17" uuid="f550475c-c177-42f5-b892-5c2f90b44b0e"/>
+				<reportElement x="131" y="355" width="78" height="17" uuid="f550475c-c177-42f5-b892-5c2f90b44b0e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -329,7 +165,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{jam_lahir}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="5" y="271" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="ea28fac9-958c-417c-8aaf-50e94456a4c1"/>
+				<reportElement mode="Transparent" x="5" y="250" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="ea28fac9-958c-417c-8aaf-50e94456a4c1"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -337,7 +173,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Dari Ibu]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="271" width="253" height="17" uuid="6b27e4f9-9c3f-4268-809e-7a428d89d0c9"/>
+				<reportElement x="131" y="250" width="253" height="17" uuid="6b27e4f9-9c3f-4268-809e-7a428d89d0c9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -345,7 +181,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{nm_ibu}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="5" y="397" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="87a3ce56-1eef-4cf7-b054-812b9ff92ddd"/>
+				<reportElement mode="Transparent" x="5" y="376" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="87a3ce56-1eef-4cf7-b054-812b9ff92ddd"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -353,7 +189,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Alamat ]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="400" width="420" height="35" uuid="ea5b5691-25cf-417f-bff6-b3221f8fc01f"/>
+				<reportElement x="131" y="379" width="420" height="35" uuid="ea5b5691-25cf-417f-bff6-b3221f8fc01f"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial" size="10" isBold="true" isUnderline="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -361,7 +197,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{alamat}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="291" y="459" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="aca20ed9-3801-4e2a-91b5-3149fb03e6a2"/>
+				<reportElement mode="Transparent" x="291" y="435" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="aca20ed9-3801-4e2a-91b5-3149fb03e6a2"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -369,7 +205,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Berat Badan]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="395" y="459" width="67" height="16" uuid="d0153a86-dc18-434b-9784-b5c2053bd04e"/>
+				<reportElement x="395" y="435" width="67" height="16" uuid="d0153a86-dc18-434b-9784-b5c2053bd04e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -377,7 +213,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{berat_badan}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="291" y="482" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="7cac2dd7-ef74-4160-adf3-02bfe6fee9dc"/>
+				<reportElement mode="Transparent" x="291" y="458" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="7cac2dd7-ef74-4160-adf3-02bfe6fee9dc"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -385,7 +221,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Pnj. Badan]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="395" y="482" width="67" height="16" uuid="eb63c014-b06a-4b87-9067-1b2e772fe65a"/>
+				<reportElement x="395" y="458" width="67" height="16" uuid="eb63c014-b06a-4b87-9067-1b2e772fe65a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -401,7 +237,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="118" y="355" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="ab197b45-c870-43b6-b391-6bf78dc5da4a"/>
+				<reportElement mode="Transparent" x="118" y="334" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="ab197b45-c870-43b6-b391-6bf78dc5da4a"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -409,7 +245,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="118" y="271" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="f15882bc-0db8-4fb6-b4c1-059a61a4d239"/>
+				<reportElement mode="Transparent" x="118" y="250" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="f15882bc-0db8-4fb6-b4c1-059a61a4d239"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -417,7 +253,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="118" y="397" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="278b63a5-1663-4ec2-9f3e-0f9168a2a8a9"/>
+				<reportElement mode="Transparent" x="118" y="376" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="278b63a5-1663-4ec2-9f3e-0f9168a2a8a9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -425,7 +261,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="385" y="459" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="7e535bb5-dd4e-4b1c-9bc2-fed2dd72646c"/>
+				<reportElement mode="Transparent" x="385" y="435" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="7e535bb5-dd4e-4b1c-9bc2-fed2dd72646c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -433,7 +269,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="385" y="482" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="11095e46-534a-4116-96bc-bf9efcd334e3"/>
+				<reportElement mode="Transparent" x="385" y="458" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="11095e46-534a-4116-96bc-bf9efcd334e3"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -441,7 +277,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="5" y="313" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="d9c2fea4-1710-48ab-bc60-06a80164aff1"/>
+				<reportElement mode="Transparent" x="5" y="292" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="d9c2fea4-1710-48ab-bc60-06a80164aff1"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -449,7 +285,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Nama Ayah]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="313" width="253" height="17" uuid="b380301f-78ca-43f7-9f6c-3078bbf414fb"/>
+				<reportElement x="131" y="292" width="253" height="17" uuid="b380301f-78ca-43f7-9f6c-3078bbf414fb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -457,7 +293,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{nama_ayah}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="118" y="313" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="39fdacca-07af-4863-932f-de6e4a4f4d02"/>
+				<reportElement mode="Transparent" x="118" y="292" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="39fdacca-07af-4863-932f-de6e4a4f4d02"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -465,7 +301,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="118" y="376" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="6dbe8f47-87bd-4bc2-b5ec-7f80c4d7ff13"/>
+				<reportElement mode="Transparent" x="118" y="355" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="6dbe8f47-87bd-4bc2-b5ec-7f80c4d7ff13"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -473,7 +309,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="5" y="376" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="fc97c801-4c11-4c76-914f-4de81a514e5f"/>
+				<reportElement mode="Transparent" x="5" y="355" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="fc97c801-4c11-4c76-914f-4de81a514e5f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -481,7 +317,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Pukul]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="462" y="459" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="10edb6cc-1d9f-481f-a02b-6e6632c8bd5d"/>
+				<reportElement mode="Transparent" x="462" y="435" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="10edb6cc-1d9f-481f-a02b-6e6632c8bd5d"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -489,7 +325,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[: Gram]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="462" y="482" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="e8fc8671-c89d-42d1-96d3-63c6a9e69b98"/>
+				<reportElement mode="Transparent" x="462" y="458" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="e8fc8671-c89d-42d1-96d3-63c6a9e69b98"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -497,7 +333,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[: Cm]]></text>
 			</staticText>
 			<textField>
-				<reportElement mode="Transparent" x="17" y="594" width="204" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="7a472b50-2d0f-464e-a4c2-c7349ba1ba58"/>
+				<reportElement mode="Transparent" x="17" y="570" width="204" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="7a472b50-2d0f-464e-a4c2-c7349ba1ba58"/>
 				<textElement verticalAlignment="Middle" markup="none">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -505,7 +341,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$P{kotars}+", "+DATEFORMAT($F{tgl_lahir},  "EEEEE dd MMMMM yyyy")]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="17" y="716" width="174" height="28" uuid="7e40d6fc-153a-42f0-b8eb-b567844d45b0">
+				<reportElement x="17" y="692" width="174" height="28" uuid="7e40d6fc-153a-42f0-b8eb-b567844d45b0">
 					<property name="com.jaspersoft.studio.unit.height" value="cm"/>
 				</reportElement>
 				<box>
@@ -537,7 +373,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Menerangkan bahwa telah kami lakukan pertolongan Kelahiran & didaftarkan dengan Identitas,]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="291" y="526" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="c064c105-b596-43ae-b2d9-416c15f9a10c"/>
+				<reportElement mode="Transparent" x="291" y="502" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="c064c105-b596-43ae-b2d9-416c15f9a10c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -545,7 +381,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Lingkar Dada]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="462" y="503" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="a449bb89-82c7-4911-89a5-a8c3ee4bb81b"/>
+				<reportElement mode="Transparent" x="462" y="479" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="a449bb89-82c7-4911-89a5-a8c3ee4bb81b"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -553,7 +389,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[: Cm]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="395" y="503" width="67" height="16" uuid="f7a87e7f-9917-4886-b405-14ca05abafdd"/>
+				<reportElement x="395" y="479" width="67" height="16" uuid="f7a87e7f-9917-4886-b405-14ca05abafdd"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -561,7 +397,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{lingkar_kepala}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="385" y="503" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="e7d6df1d-61e2-4af9-b876-4e4c12fa736c"/>
+				<reportElement mode="Transparent" x="385" y="479" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="e7d6df1d-61e2-4af9-b876-4e4c12fa736c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -569,7 +405,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="462" y="526" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="f9178e40-b197-41df-ab5c-607a99f07d5f"/>
+				<reportElement mode="Transparent" x="462" y="502" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="f9178e40-b197-41df-ab5c-607a99f07d5f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -577,7 +413,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[: Cm]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="291" y="503" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="cf88c95d-cfbd-441e-9a80-9c1fcec43b20"/>
+				<reportElement mode="Transparent" x="291" y="479" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="cf88c95d-cfbd-441e-9a80-9c1fcec43b20"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -585,7 +421,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Lingkar Kepala]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="385" y="526" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="40833c6a-4b13-450b-80aa-cbc7536d25ba"/>
+				<reportElement mode="Transparent" x="385" y="502" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="40833c6a-4b13-450b-80aa-cbc7536d25ba"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -593,7 +429,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="120" y="529" width="147" height="55" uuid="1fb94809-8fab-4a53-9925-1803abccae45"/>
+				<reportElement x="120" y="505" width="147" height="55" uuid="1fb94809-8fab-4a53-9925-1803abccae45"/>
 				<textElement verticalAlignment="Top">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -601,7 +437,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="395" y="526" width="67" height="16" uuid="a2450a31-d916-46cf-9979-f5f569afd684"/>
+				<reportElement x="395" y="502" width="67" height="16" uuid="a2450a31-d916-46cf-9979-f5f569afd684"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -609,7 +445,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{lingkar_dada}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="395" y="548" width="67" height="16" uuid="ed08304d-3cc3-4dcb-92a8-63aa2fe417c1"/>
+				<reportElement x="395" y="524" width="67" height="16" uuid="ed08304d-3cc3-4dcb-92a8-63aa2fe417c1"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -617,7 +453,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{lingkar_perut}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="385" y="548" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="f7cee0d0-81f6-471c-a882-7e34fadc0a03"/>
+				<reportElement mode="Transparent" x="385" y="524" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="f7cee0d0-81f6-471c-a882-7e34fadc0a03"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -625,7 +461,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="291" y="548" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="99c865a9-424f-4be0-aa06-50ed7dd0ab19"/>
+				<reportElement mode="Transparent" x="291" y="524" width="94" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="99c865a9-424f-4be0-aa06-50ed7dd0ab19"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -633,7 +469,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Lingkar Perut]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="6" y="460" width="105" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="777c31f0-9c31-485c-bba4-095debdff3c5"/>
+				<reportElement mode="Transparent" x="6" y="436" width="105" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="777c31f0-9c31-485c-bba4-095debdff3c5"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -641,7 +477,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Proses Kelahiran]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="120" y="460" width="147" height="16" uuid="c760d09e-82e5-48d4-9504-220e9a5a03a7"/>
+				<reportElement x="120" y="436" width="147" height="16" uuid="c760d09e-82e5-48d4-9504-220e9a5a03a7"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -649,7 +485,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{proses_lahir}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="110" y="460" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="1e5b9469-365d-40f1-9c11-30d70b8eb4ae"/>
+				<reportElement mode="Transparent" x="110" y="436" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="1e5b9469-365d-40f1-9c11-30d70b8eb4ae"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -662,7 +498,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Kelahiran Ke -]]></text>
+				<text><![CDATA[Anak Ke -]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="118" y="229" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="37cbbd41-5404-4601-b2ec-463240011cde"/>
@@ -681,7 +517,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{anakke}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="6" y="483" width="105" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="33a84495-6372-4cb4-915b-240c2baa331e"/>
+				<reportElement mode="Transparent" x="6" y="459" width="105" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="33a84495-6372-4cb4-915b-240c2baa331e"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -689,7 +525,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Kode Diagnosis (I C D)]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="120" y="483" width="147" height="16" uuid="b108271c-ebea-46e0-8639-f68e8b0e453b"/>
+				<reportElement x="120" y="459" width="147" height="16" uuid="b108271c-ebea-46e0-8639-f68e8b0e453b"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -697,7 +533,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{diagnosa}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="110" y="483" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="ec6234a1-5548-4cbe-b074-fdc1325d4074"/>
+				<reportElement mode="Transparent" x="110" y="459" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="ec6234a1-5548-4cbe-b074-fdc1325d4074"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -705,7 +541,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="110" y="506" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="affd15fb-5ff6-4ee8-920c-d5ec0dfc5e6f"/>
+				<reportElement mode="Transparent" x="110" y="482" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="affd15fb-5ff6-4ee8-920c-d5ec0dfc5e6f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -713,7 +549,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="120" y="506" width="147" height="16" uuid="9f0ec8b1-eb32-410c-8c32-1cd0c689d90c"/>
+				<reportElement x="120" y="482" width="147" height="16" uuid="9f0ec8b1-eb32-410c-8c32-1cd0c689d90c"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -721,7 +557,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{penyulit_kehamilan}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="6" y="506" width="105" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="3b2fa107-71cb-4afe-ba69-e6071a2d6b05"/>
+				<reportElement mode="Transparent" x="6" y="482" width="105" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="3b2fa107-71cb-4afe-ba69-e6071a2d6b05"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -729,7 +565,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Penyulit]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="210" y="376" width="174" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="56f43328-5873-4702-a8d0-db88be5d32b0"/>
+				<reportElement mode="Transparent" x="210" y="355" width="174" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="56f43328-5873-4702-a8d0-db88be5d32b0"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -737,7 +573,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[WITA]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="6" y="529" width="105" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="ca0fb948-15bb-4857-a508-9a106e0c50fb"/>
+				<reportElement mode="Transparent" x="6" y="505" width="105" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="ca0fb948-15bb-4857-a508-9a106e0c50fb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -745,7 +581,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Keterangan Lain]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="110" y="529" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="4b61c5f9-dab3-4e82-8ebf-ea9b5798a310"/>
+				<reportElement mode="Transparent" x="110" y="505" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="4b61c5f9-dab3-4e82-8ebf-ea9b5798a310"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -753,7 +589,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="118" y="334" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="85b70588-b857-4db6-84a0-ffedda44031b"/>
+				<reportElement mode="Transparent" x="118" y="313" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="85b70588-b857-4db6-84a0-ffedda44031b"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -761,7 +597,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="5" y="334" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="6c33dccf-c58e-4336-89ae-7ab21564ed64"/>
+				<reportElement mode="Transparent" x="5" y="313" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="6c33dccf-c58e-4336-89ae-7ab21564ed64"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -769,7 +605,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Pekerjaan]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="334" width="253" height="17" uuid="9bfd27b4-2486-4dc7-bfad-28bd2847a7e6"/>
+				<reportElement x="131" y="313" width="253" height="17" uuid="9bfd27b4-2486-4dc7-bfad-28bd2847a7e6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -777,7 +613,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{pekerjaanpj}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="291" y="435" width="102" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="991a178b-0a51-48f1-acd4-36844b1964ba"/>
+				<reportElement mode="Transparent" x="291" y="411" width="102" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="991a178b-0a51-48f1-acd4-36844b1964ba"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true" isUnderline="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -785,7 +621,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Keterangan Fisik]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="6" y="436" width="113" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="410959ea-9dd6-4b0d-b37d-e6a7a23340fb"/>
+				<reportElement mode="Transparent" x="6" y="412" width="113" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="410959ea-9dd6-4b0d-b37d-e6a7a23340fb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true" isUnderline="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -825,7 +661,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="292" width="253" height="17" uuid="71d21e84-cde6-4417-8eaf-69880dc9b849"/>
+				<reportElement x="131" y="271" width="253" height="17" uuid="71d21e84-cde6-4417-8eaf-69880dc9b849"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -833,7 +669,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{no_ktp}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="5" y="292" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="072dc3e2-c5ad-4df7-83a9-e437410c0971"/>
+				<reportElement mode="Transparent" x="5" y="271" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="072dc3e2-c5ad-4df7-83a9-e437410c0971"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -841,7 +677,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[No.KTP]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="118" y="292" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="1f39a9c4-2172-4581-a7cf-c24def66e794"/>
+				<reportElement mode="Transparent" x="118" y="271" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="1f39a9c4-2172-4581-a7cf-c24def66e794"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="11" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -868,7 +704,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[SURAT KETERANGAN KELAHIRAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="462" y="548" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="ef691729-1d3f-4574-9e7a-395609f4dd2f"/>
+				<reportElement mode="Transparent" x="462" y="524" width="83" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="ef691729-1d3f-4574-9e7a-395609f4dd2f"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -876,7 +712,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[: Cm]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="17" y="614" width="174" height="20" uuid="dd5626f1-fcd1-4a09-ba78-652f75684fd1"/>
+				<reportElement x="17" y="590" width="174" height="20" uuid="dd5626f1-fcd1-4a09-ba78-652f75684fd1"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -889,7 +725,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[Pihak RS]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="191" y="614" width="170" height="20" uuid="ef3d23e2-5814-4077-88a4-a8be5017f1a7"/>
+				<reportElement x="191" y="590" width="170" height="20" uuid="ef3d23e2-5814-4077-88a4-a8be5017f1a7"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -902,7 +738,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[IBU]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="614" width="180" height="20" uuid="38e25e6b-db2f-483c-8a67-a6d563d92426"/>
+				<reportElement x="361" y="590" width="180" height="20" uuid="38e25e6b-db2f-483c-8a67-a6d563d92426"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -915,7 +751,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[AYAH]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="191" y="716" width="170" height="28" uuid="5de6fa95-7993-4eff-aefa-2bd386ec37c0"/>
+				<reportElement x="191" y="692" width="170" height="28" uuid="5de6fa95-7993-4eff-aefa-2bd386ec37c0"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -929,7 +765,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{nm_ibu}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="361" y="716" width="180" height="28" uuid="581744fb-5575-4f6e-9672-75656dd161d4"/>
+				<reportElement x="361" y="692" width="180" height="28" uuid="581744fb-5575-4f6e-9672-75656dd161d4"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -943,7 +779,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<textFieldExpression><![CDATA[$F{nama_ayah}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="17" y="634" width="174" height="82" uuid="a8bcb976-8d5b-4caf-a6f5-3be8cd16140a"/>
+				<reportElement x="17" y="610" width="174" height="82" uuid="a8bcb976-8d5b-4caf-a6f5-3be8cd16140a"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -956,7 +792,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="191" y="634" width="170" height="82" uuid="ea7fad50-0c8b-4c5a-9564-50c4ad972233"/>
+				<reportElement x="191" y="610" width="170" height="82" uuid="ea7fad50-0c8b-4c5a-9564-50c4ad972233"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -969,7 +805,7 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="361" y="634" width="180" height="82" uuid="4b34a37e-e2ac-42df-be03-1ad177d9daa5"/>
+				<reportElement x="361" y="610" width="180" height="82" uuid="4b34a37e-e2ac-42df-be03-1ad177d9daa5"/>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -981,30 +817,6 @@ where pasien.no_rkm_medis = $P{norm}]]>
 				</textElement>
 				<text><![CDATA[]]></text>
 			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="5" y="250" width="114" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="e1c0a55c-281d-4d1c-84a4-cb9be3d15cc3"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="10" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[Anak Ke -]]></text>
-			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="118" y="250" width="10" height="17" forecolor="#000000" backcolor="#F0F0DC" uuid="2ba391b9-7fc3-4d66-a70e-dae66955d119"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="11" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[:]]></text>
-			</staticText>
-			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="250" width="253" height="17" uuid="6fd5a37d-81a8-403c-85ee-df6bff4d3e72"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Arial" size="10" isBold="true"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$F{perkawinan_anak_ke}]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 </jasperReport>
