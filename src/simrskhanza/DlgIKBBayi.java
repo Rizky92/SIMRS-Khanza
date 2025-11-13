@@ -918,7 +918,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         BtnKeluar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar2.setMnemonic('K');
         BtnKeluar2.setText("Keluar");
         BtnKeluar2.setToolTipText("Alt+K");
         BtnKeluar2.setName("BtnKeluar2"); // NOI18N
@@ -948,7 +947,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKIbu.setBounds(93, 10, 148, 23);
 
         BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari1.setMnemonic('2');
         BtnCari1.setToolTipText("Alt+2");
         BtnCari1.setName("BtnCari1"); // NOI18N
         BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -976,7 +974,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKAyah.setBounds(93, 100, 148, 23);
 
         BtnCari2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari2.setMnemonic('2');
         BtnCari2.setToolTipText("Alt+2");
         BtnCari2.setName("BtnCari2"); // NOI18N
         BtnCari2.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1056,7 +1053,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         CaraLahir.setBounds(93, 280, 180, 23);
 
         BtnSimpan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan1.setMnemonic('S');
         BtnSimpan1.setText("Simpan");
         BtnSimpan1.setToolTipText("Alt+S");
         BtnSimpan1.setName("BtnSimpan1"); // NOI18N
@@ -1155,7 +1151,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKPelapor.setBounds(403, 10, 148, 23);
 
         BtnCari3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari3.setMnemonic('2');
         BtnCari3.setToolTipText("Alt+2");
         BtnCari3.setName("BtnCari3"); // NOI18N
         BtnCari3.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1254,7 +1249,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKSaksi1.setBounds(403, 160, 148, 23);
 
         BtnCari4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari4.setMnemonic('2');
         BtnCari4.setToolTipText("Alt+2");
         BtnCari4.setName("BtnCari4"); // NOI18N
         BtnCari4.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1369,7 +1363,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKSaksi2.setBounds(760, 10, 148, 23);
 
         BtnCari5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari5.setMnemonic('2');
         BtnCari5.setToolTipText("Alt+2");
         BtnCari5.setName("BtnCari5"); // NOI18N
         BtnCari5.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1539,7 +1532,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi2.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('1');
         BtnCari.setToolTipText("Alt+1");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1571,7 +1563,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -1589,7 +1580,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -1607,7 +1597,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -1625,7 +1614,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -1643,7 +1631,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+PT");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -1661,7 +1648,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnPrint);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('M');
         BtnAll.setText("Semua");
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
@@ -1690,7 +1676,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(LCount);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -1784,11 +1769,11 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         FormInput.add(Anakke);
         Anakke.setBounds(130, 452, 50, 23);
 
-        label25.setText("Kelahiran Ke :");
+        label25.setText("Anak Ke :");
         label25.setName("label25"); // NOI18N
         label25.setPreferredSize(new java.awt.Dimension(65, 23));
         FormInput.add(label25);
-        label25.setBounds(0, 450, 126, 23);
+        label25.setBounds(0, 452, 126, 23);
 
         LingkarKepala.setName("LingkarKepala"); // NOI18N
         LingkarKepala.setPreferredSize(new java.awt.Dimension(207, 23));
@@ -2161,7 +2146,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NmPenolong.setBounds(232, 272, 201, 23);
 
         BtnPenjab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnPenjab.setMnemonic('1');
         BtnPenjab.setToolTipText("ALt+1");
         BtnPenjab.setName("BtnPenjab"); // NOI18N
         BtnPenjab.addActionListener(new java.awt.event.ActionListener() {
@@ -2178,7 +2162,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         BtnPenjab.setBounds(437, 272, 28, 23);
 
         BtnKelurahan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/011.png"))); // NOI18N
-        BtnKelurahan1.setMnemonic('2');
         BtnKelurahan1.setToolTipText("ALt+2");
         BtnKelurahan1.setName("BtnKelurahan1"); // NOI18N
         BtnKelurahan1.addActionListener(new java.awt.event.ActionListener() {
