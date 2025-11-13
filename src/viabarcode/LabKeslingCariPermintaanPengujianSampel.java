@@ -673,11 +673,6 @@ public class LabKeslingCariPermintaanPengujianSampel extends javax.swing.JDialog
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Permintaan Pengujian Sampel Laboratorium Kesehatan Lingkungan ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -1681,10 +1676,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnPrintKeyPressed
 
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
-    }//GEN-LAST:event_formWindowOpened
-
     private void KodeSampelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeSampelKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nm_jenis from ipsrsjenisbarang where kd_jenis=?", NamaSampel,KodeSampel.getText());
@@ -1742,7 +1733,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void ppDapatDilayaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDapatDilayaniActionPerformed
         if(tbPermintaan.getSelectedRow()!= -1){
-            if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().trim().equals("Permintaan Baru")){
+            if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
                 NoPermintaanVerifikasi2.setText(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString());
                 AsalPermintaan2.setText(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),2).toString()+" "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),3).toString());
                 WindowInput2.setVisible(true);
@@ -1780,8 +1771,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "and laborat_kesling_nilai_normal_baku_mutu.kode_sampel=? order by laborat_kesling_detail_permintaan_pengujian_sampel.kode_parameter"
                     );
                     try {
-                        ps.setString(1,tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString().trim());
-                        ps.setString(2,tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),19).toString().trim());
+                        ps.setString(1,tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString());
+                        ps.setString(2,tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),19).toString());
                         rs=ps.executeQuery();
                         while(rs.next()){
                             tabModeDetailPermintaan.addRow(new Object[]{
@@ -1872,7 +1863,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void ppTidakDapatDilayaniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTidakDapatDilayaniActionPerformed
         if(tbPermintaan.getSelectedRow()!= -1){
-            if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().trim().equals("Permintaan Baru")){
+            if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
                 NoPermintaanVerifikasi.setText(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString());
                 AsalPermintaan.setText(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),2).toString()+" "+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),3).toString());
                 WindowInput.setVisible(true);
@@ -1888,8 +1879,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(TabData.getSelectedIndex()==0){
             if(tbPermintaan.getSelectedRow()!= -1){
-                if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().trim().equals("Permintaan Baru")){
-                    if(Sequel.queryutf("delete from laborat_kesling_permintaan_pengujian_sampel where no_permintaan='"+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString().trim()+"'")==true){
+                if(tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
+                    if(Sequel.queryutf("delete from laborat_kesling_permintaan_pengujian_sampel where no_permintaan='"+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString()+"'")==true){
                         tabModePermintaan.removeRow(tbPermintaan.getSelectedRow());
                         LTotal.setText(tabModePermintaan.getRowCount()+"");
                     }
@@ -1901,8 +1892,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
         }else if(TabData.getSelectedIndex()==1){
             if(tbRekapPermintaan.getSelectedRow()!= -1){
-                if(tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),22).toString().trim().equals("Permintaan Baru")){
-                    if(Sequel.queryutf("delete from laborat_kesling_detail_permintaan_pengujian_sampel where no_permintaan='"+tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),1).toString().trim()+"' and kode_parameter='"+tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),23).toString().trim()+"'")==true){
+                if(tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),22).toString().equals("Permintaan Baru")){
+                    if(Sequel.queryutf("delete from laborat_kesling_detail_permintaan_pengujian_sampel where no_permintaan='"+tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),1).toString()+"' and kode_parameter='"+tbRekapPermintaan.getValueAt(tbRekapPermintaan.getSelectedRow(),23).toString()+"'")==true){
                         tabModeRekapPermintaan.removeRow(tbRekapPermintaan.getSelectedRow());
                         LTotal.setText(tabModeRekapPermintaan.getRowCount()+"");
                     }
@@ -1991,7 +1982,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(Sequel.menyimpantf("laborat_kesling_permintaan_pengujian_sampel_dilayani","?,?,'Belum Ada Penugasan'","No.Permintaan",2,new String[]{
                 NoPermintaanVerifikasi2.getText(),Keterangan2.getText()
             })==true){
-                Sequel.queryu("update laborat_kesling_permintaan_pengujian_sampel set status='Dapat Dilayani' where no_permintaan='"+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString().trim()+"'");
+                Sequel.queryu("update laborat_kesling_permintaan_pengujian_sampel set status='Dapat Dilayani' where no_permintaan='"+tbPermintaan.getValueAt(tbPermintaan.getSelectedRow(),1).toString()+"'");
                 tbPermintaan.setValueAt("Dapat Dilayani",tbPermintaan.getSelectedRow(),22);
                 Keterangan2.setText("");
                 WindowInput2.dispose();
