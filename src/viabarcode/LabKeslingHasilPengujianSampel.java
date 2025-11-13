@@ -63,7 +63,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,row){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if (colIndex==0) {
+                if ((colIndex==0)||(colIndex==7)) {
                     a=true;
                 }
                 return a;
@@ -610,7 +610,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
 
 private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
-    LabKeslingCariPenugasanPengujianSampel form=new LabKeslingCariPenugasanPengujianSampel(null,false);
+    LabKeslingCariHasilPengujianSampel form=new LabKeslingCariHasilPengujianSampel(null,false);
     form.isCek();
     form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     form.setLocationRelativeTo(this);
@@ -754,6 +754,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 }
                 
                 if(berhasil==true){
+                    Sequel.queryu("update laborat_kesling_penugasan_pengujian_sampel set status='Sudah Keluar Hasil' where no_penugasan='"+TNoPenugasan.getText()+"'");
                     Sequel.Commit();
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                     for(i=0;i<tbPengujian.getRowCount();i++){

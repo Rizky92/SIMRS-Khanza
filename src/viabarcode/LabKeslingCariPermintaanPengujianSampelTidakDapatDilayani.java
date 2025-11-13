@@ -1052,7 +1052,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         rs.getString("waktu_diterima"),rs.getString("no_permintaan"),rs.getString("kode_pelanggan"),rs.getString("nama_pelanggan"),rs.getString("kode_sampel"),rs.getString("nama_sampel"),rs.getString("keterangan")
                     }); 
                 }        
-                LTotal.setText(rs.getRow()+"");
+                LTotal.setText(tabModeTidakDapatDilayani.getRowCount()+"");
             } catch (Exception e) {
                 System.out.println("Note : "+e);
             } finally{
@@ -1066,12 +1066,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }        
-    }
-    
-    public void emptTeks() {
-        KodePelanggan.setText("");
-        NamaPelanggan.setText("");
-        KodePelanggan.requestFocus();        
     }
     
     public void isCek(){
