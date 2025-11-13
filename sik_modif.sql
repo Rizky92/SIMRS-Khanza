@@ -124,9 +124,9 @@ ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `no_telp` varchar(20) NULL DEF
 
 ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
 
-ALTER TABLE `detail_nota_jalan` ADD COLUMN IF NOT EXISTS `keterangan` varchar(40) NULL DEFAULT NULL AFTER `besar_bayar`;
-
 ALTER TABLE `detail_nota_inap` ADD COLUMN IF NOT EXISTS `keterangan` varchar(40) NULL DEFAULT NULL AFTER `besar_bayar`;
+
+ALTER TABLE `detail_nota_jalan` ADD COLUMN IF NOT EXISTS `keterangan` varchar(40) NULL DEFAULT NULL AFTER `besar_bayar`;
 
 CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
   `tgl_perawatan` date NOT NULL,
