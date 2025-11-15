@@ -2478,7 +2478,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         if (reply == JOptionPane.YES_OPTION) {
             ChkJln.setSelected(false);
             try {
-                koneksi.setAutoCommit(false);
+                Sequel.AutoComitFalse();
                 sukses=true;
                 //autoNomor();
                 if(jml>0){
@@ -2744,7 +2744,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 } else {
                     Sequel.RollBack();
                 }
-                koneksi.setAutoCommit(true);
+                Sequel.AutoComitTrue();
 
                 if (sukses) {
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");

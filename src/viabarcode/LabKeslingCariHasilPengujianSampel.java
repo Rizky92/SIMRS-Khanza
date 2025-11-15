@@ -413,17 +413,17 @@ public class LabKeslingCariHasilPengujianSampel extends javax.swing.JDialog {
 
         label14.setText("Status :");
         label14.setName("label14"); // NOI18N
-        label14.setPreferredSize(new java.awt.Dimension(55, 23));
+        label14.setPreferredSize(new java.awt.Dimension(57, 23));
         panelisi4.add(label14);
 
         Status.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Sudah Diverifikasi", "Belum Diverifikasi" }));
         Status.setName("Status"); // NOI18N
-        Status.setPreferredSize(new java.awt.Dimension(145, 23));
+        Status.setPreferredSize(new java.awt.Dimension(140, 23));
         panelisi4.add(Status);
 
         label15.setText("No.Permintaan :");
         label15.setName("label15"); // NOI18N
-        label15.setPreferredSize(new java.awt.Dimension(97, 23));
+        label15.setPreferredSize(new java.awt.Dimension(100, 23));
         panelisi4.add(label15);
 
         NoPermintaan.setName("NoPermintaan"); // NOI18N
@@ -860,58 +860,28 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void BtnVerifikasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnVerifikasiActionPerformed
         if(tbHasilPengujian.getSelectedRow()!= -1){
-            if(ChkAccor.isSelected()==true){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
-                try {
-                    file=new File("./cache/penugasanpengujiansampellabkesling.iyem");
-                    file.createNewFile();
-                    fileWriter = new FileWriter(file);
-                    StringBuilder iyembuilder = new StringBuilder();
-                    
-                    for(i=0;i<tbDetailPermintaan.getRowCount();i++){
-                        iyembuilder.append("{\"Kode\":\"").append(tbDetailPermintaan.getValueAt(i,0).toString()).append("\",\"NamaParameter\":\"").append(tbDetailPermintaan.getValueAt(i,1).toString()).append("\",\"MetodePengujian\":\"").append(tbDetailPermintaan.getValueAt(i,2).toString()).append("\",\"Satuan\":\"").append(tbDetailPermintaan.getValueAt(i,3).toString()).append("\",\"Kategori\":\"").append(tbDetailPermintaan.getValueAt(i,4).toString()).append("\"},");
-                    }
-
-                    if (iyembuilder.length() > 0) {
-                        iyembuilder.setLength(iyembuilder.length() - 1);
-                        fileWriter.write("{\"penugasanpengujiansampellabkesling\":["+iyembuilder+"]}");
-                        fileWriter.flush();
-                    }
-
-                    fileWriter.close();
-                    iyembuilder=null;
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
-                }
-                LabKeslingPenugasanPengujianSampel form=new LabKeslingPenugasanPengujianSampel(null,false);
-                form.addWindowListener(new WindowListener() {
-                    @Override
-                    public void windowOpened(WindowEvent e) {}
-                    @Override
-                    public void windowClosing(WindowEvent e) {}
-                    @Override
-                    public void windowClosed(WindowEvent e) {
-                        if(form.berhasil==true){
-                            tbHasilPengujian.setValueAt("Sudah Ada Penugasan",tbHasilPengujian.getSelectedRow(),6);
+            if(tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),5).toString().equals("Sudah Diverifikasi")){
+                JOptionPane.showMessageDialog(null,"Sudah dilakukan verifikasi...!!!");
+            }else{
+                if(ChkAccor.isSelected()==true){
+                    NoPermintaan.setText(tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),1).toString());
+                    for(i=0;i<tbHasilPengujian.getRowCount();i++){
+                        if(!tbHasilPengujian.getValueAt(i,1).toString().equals(NoPermintaan.getText())){
+                            tabModeHasilPengujian.removeRow(i);
+                            i--;
                         }
                     }
-                    @Override
-                    public void windowIconified(WindowEvent e) {}
-                    @Override
-                    public void windowDeiconified(WindowEvent e) {}
-                    @Override
-                    public void windowActivated(WindowEvent e) {}
-                    @Override
-                    public void windowDeactivated(WindowEvent e) {}
-                });
-                form.isCek();
-                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                form.setLocationRelativeTo(this);
-                form.setData(tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),1).toString(),tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),2).toString(),tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),3).toString(),tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),4).toString(),tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),5).toString());
-                form.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
-            }else if(ChkAccor.isSelected()==false){
-                JOptionPane.showMessageDialog(null,"Silahkan tampilkan detail permintaan...!!!");
+                    if(tabModeHasilPengujian.getRowCount()!=tabModeDetailPermintaan.getRowCount()){
+                        int reply = JOptionPane.showConfirmDialog(rootPane,"Jumlah data permintaan dengan jumlah data pengujian tidak sama.\nApakah mau dilanjutkan...???","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                        if (reply == JOptionPane.YES_OPTION) {
+                            verifikasi();
+                        }
+                    }else{
+                        verifikasi();
+                    }
+                }else if(ChkAccor.isSelected()==false){
+                    JOptionPane.showMessageDialog(null,"Silahkan tampilkan detail permintaan...!!!");
+                }
             }
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data hasil pengujian...!!!");
@@ -1220,6 +1190,64 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         TCari.requestFocus();
         BtnPrint.setEnabled(akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan());
         BtnHapus.setEnabled(akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan());
-        BtnVerifikasi.setEnabled(akses.gethasil_pengujian_sampel_lab_kesehatan_lingkungan());
+        BtnVerifikasi.setEnabled(akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan());
+    }
+    
+    private void verifikasi(){
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
+        try {
+            file=new File("./cache/verifikasipengujiansampellabkesling.iyem");
+            file.createNewFile();
+            fileWriter = new FileWriter(file);
+            StringBuilder iyembuilder = new StringBuilder();
+
+            for(i=0;i<tbDetailPermintaan.getRowCount();i++){
+                for(int a=0;a<tbHasilPengujian.getRowCount();a++){
+                    if(tbDetailPermintaan.getValueAt(i,0).toString().equals(tbHasilPengujian.getValueAt(a,2).toString())){
+                        iyembuilder.append("{\"Kode\":\"").append(tbDetailPermintaan.getValueAt(i,0).toString()).append("\",\"NamaParameter\":\"").append(tbDetailPermintaan.getValueAt(i,1).toString()).append("\",\"MetodePengujian\":\"").append(tbDetailPermintaan.getValueAt(i,2).toString()).append("\",\"Satuan\":\"").append(tbDetailPermintaan.getValueAt(i,3).toString()).append("\",\"Kategori\":\"").append(tbDetailPermintaan.getValueAt(i,4).toString()).append("\",\"Normal\":\"").append(tbDetailPermintaan.getValueAt(i,5).toString()).append("\",\"HasilPengujian\":\"").append(tbHasilPengujian.getValueAt(a,4).toString()).append("\",\"NoPenugasan\":\"").append(tbHasilPengujian.getValueAt(a,8).toString()).append("\"},");
+                    }
+                }       
+            }
+
+            if (iyembuilder.length() > 0) {
+                iyembuilder.setLength(iyembuilder.length() - 1);
+                fileWriter.write("{\"verifikasipengujiansampellabkesling\":["+iyembuilder+"]}");
+                fileWriter.flush();
+            }
+
+            fileWriter.close();
+            iyembuilder=null;
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+        LabKeslingVerifikasiPengujianSampel form=new LabKeslingVerifikasiPengujianSampel(null,false);
+        form.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(form.berhasil==true){
+                    for(i=0;i<tbHasilPengujian.getRowCount();i++){
+                        tbHasilPengujian.setValueAt("Sudah Diverifikasi",i,5);
+                    }
+                }
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        form.isCek();
+        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        form.setLocationRelativeTo(this);
+        form.setData(tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),1).toString(),tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),9).toString(),tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),10).toString(),tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),11).toString(),tbHasilPengujian.getValueAt(tbHasilPengujian.getSelectedRow(),12).toString());
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }
 }

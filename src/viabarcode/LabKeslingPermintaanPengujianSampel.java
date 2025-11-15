@@ -876,16 +876,6 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
 
         tbPermintaan.setComponentPopupMenu(Popup);
         tbPermintaan.setName("tbPermintaan"); // NOI18N
-        tbPermintaan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbPermintaanMouseClicked(evt);
-            }
-        });
-        tbPermintaan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                tbPermintaanKeyPressed(evt);
-            }
-        });
         Scroll2.setViewportView(tbPermintaan);
 
         jPanel3.add(Scroll2, java.awt.BorderLayout.CENTER);
@@ -982,39 +972,6 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
     }//GEN-LAST:event_BtnAllPeriksaKeyPressed
 
-    private void tbPermintaanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPermintaanMouseClicked
-        if(tabMode.getRowCount()!=0){
-            try {
-               // getData2();
-            } catch (java.lang.NullPointerException e) {
-            }
-        }
-    }//GEN-LAST:event_tbPermintaanMouseClicked
-
-    private void tbPermintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPermintaanKeyPressed
-        if(tbPermintaan.getRowCount()!=0){
-            if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-                try {
-                    int row=tbPermintaan.getSelectedColumn();
-                    if((row!=0)||(row!=20)){
-                        if(tbPermintaan.getSelectedRow()>-1){
-                            tbPermintaan.setValueAt(true,tbPermintaan.getSelectedRow(),0);
-                        }
-                        TCariPeriksa.setText("");
-                        TCariPeriksa.requestFocus();
-                    }
-                    //getData2();
-                } catch (java.lang.NullPointerException e) {
-                }
-            }else if((evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
-                try {
-                   // getData2();
-                } catch (java.lang.NullPointerException e) {
-                }
-            }
-        }
-    }//GEN-LAST:event_tbPermintaanKeyPressed
-
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
@@ -1063,7 +1020,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             if (reply == JOptionPane.YES_OPTION) {
                 ChkJln.setSelected(false);
                 try {                    
-                    koneksi.setAutoCommit(false);
+                    Sequel.AutoComitFalse();
                     if(Sequel.menyimpantf2("laborat_kesling_permintaan_pengujian_sampel","?,?,?,?,?,?,?,?,?,?,?,?,?,?,'Permintaan Baru'","No.Permintaan",14,new String[]{
                             TNoPermintaan.getText(),KodePelanggan.getText(),KdPetugas.getText(),Valid.SetTgl(WaktuSampling.getSelectedItem()+"")+" "+WaktuSampling.getSelectedItem().toString().substring(11,19),
                             Valid.SetTgl(WaktuDiterima.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),LokasiSampling.getText(),DeskripsiSampling.getText(),
@@ -1130,7 +1087,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             } 
                         } 
                     }   
-                    koneksi.setAutoCommit(true);                    
+                    Sequel.AutoComitTrue();                   
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                 } catch (Exception e) {
                     System.out.println(e);

@@ -1090,7 +1090,7 @@ public class PanelDiagnosa extends widget.panelisi {
 
     public void simpan(){
         try {
-            koneksi.setAutoCommit(false);
+            Sequel.AutoComitFalse();
             index=1;
             for(i=0;i<tbDiagnosa.getRowCount();i++){
                 if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
@@ -1163,8 +1163,8 @@ public class PanelDiagnosa extends widget.panelisi {
                     index++;
                 }
             }
-            koneksi.setAutoCommit(true);
-            for(i=0;i<tbDiagnosa.getRowCount();i++){
+            Sequel.AutoComitTrue();
+            for(i=0;i<tbDiagnosa.getRowCount();i++){ 
                tbDiagnosa.setValueAt(false,i,0);
                tbDiagnosa.setValueAt("",i,11);
             }
@@ -1173,7 +1173,7 @@ public class PanelDiagnosa extends widget.panelisi {
         }
 
         try {
-            koneksi.setAutoCommit(false);
+            Sequel.AutoComitFalse();
             index=1;
             for(i=0;i<tbProsedur.getRowCount();i++){
                 if(tbProsedur.getValueAt(i,0).toString().equals("true")){
@@ -1226,8 +1226,8 @@ public class PanelDiagnosa extends widget.panelisi {
                     index++;
                 }
             }
-            koneksi.setAutoCommit(true);
-            for(i=0;i<tbProsedur.getRowCount();i++){
+            Sequel.AutoComitTrue();
+            for(i=0;i<tbProsedur.getRowCount();i++){ 
                tbProsedur.setValueAt(false,i,0);
                tbProsedur.setValueAt("",i,7);
                tbProsedur.setValueAt("",i,8);

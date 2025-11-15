@@ -1346,7 +1346,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         if (reply == JOptionPane.YES_OPTION) {
             ChkJln.setSelected(false);
             try {
-                koneksi.setAutoCommit(false);
+                Sequel.AutoComitFalse();
                 //autoNomor();
                 if(Sequel.menyimpantf2("permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
                         TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
@@ -1419,7 +1419,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                     }
                 }
 
-                koneksi.setAutoCommit(true);
+                Sequel.AutoComitTrue();
                 JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
             } catch (Exception e) {
                 System.out.println(e);
