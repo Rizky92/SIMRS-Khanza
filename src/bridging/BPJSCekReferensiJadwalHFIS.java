@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -106,7 +106,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -114,7 +114,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){   
+                if(poli.getTable().getSelectedRow()!= -1){
                     if(i==1){
                         KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                         NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
@@ -125,8 +125,8 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
                         KodeSubspesialis.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),3).toString());
                         NmSubspesialis.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),4).toString());
                         KodePoliUpdate.requestFocus();
-                    }   
-                }                  
+                    }
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -137,7 +137,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         poli.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -149,8 +149,8 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         dokter.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -158,11 +158,11 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){   
+                if(dokter.getTable().getSelectedRow()!= -1){
                     KodeDokterUpdate.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     NmDokterUpdate.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
                     KodeDokterUpdate.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -173,7 +173,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -185,19 +185,19 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         WindowUpdate.setSize(725,170);
-        
+
         try {
             link=koneksiDB.URLAPIMOBILEJKN();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
-              
+
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -288,7 +288,6 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
         jLabel21.setBounds(0, 30, 75, 23);
 
         KodePoliUpdate.setEditable(false);
-        KodePoliUpdate.setHighlighter(null);
         KodePoliUpdate.setName("KodePoliUpdate"); // NOI18N
         internalFrame6.add(KodePoliUpdate);
         KodePoliUpdate.setBounds(79, 30, 65, 23);
@@ -321,7 +320,6 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
         jLabel22.setBounds(352, 30, 60, 23);
 
         KodeDokterUpdate.setEditable(false);
-        KodeDokterUpdate.setHighlighter(null);
         KodeDokterUpdate.setName("KodeDokterUpdate"); // NOI18N
         internalFrame6.add(KodeDokterUpdate);
         KodeDokterUpdate.setBounds(416, 30, 72, 23);
@@ -415,7 +413,6 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
         cmbMnt2.setBounds(643, 60, 62, 23);
 
         KodeSubspesialis.setEditable(false);
-        KodeSubspesialis.setHighlighter(null);
         KodeSubspesialis.setName("KodeSubspesialis"); // NOI18N
         internalFrame6.add(KodeSubspesialis);
         KodeSubspesialis.setBounds(79, 60, 65, 23);
@@ -461,7 +458,6 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
         panelGlass6.add(jLabel19);
 
         KdPoli.setEditable(false);
-        KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         KdPoli.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass6.add(KdPoli);
@@ -588,7 +584,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
                                 tabMode.getValueAt(r,1).toString()+"','"+
@@ -601,21 +597,21 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
                                 tabMode.getValueAt(r,8).toString()+"','"+
                                 tabMode.getValueAt(r,9).toString()+"','"+
                                 tabMode.getValueAt(r,10).toString()+"','"+
-                                tabMode.getValueAt(r,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Jadwal"); 
+                                tabMode.getValueAt(r,11).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Jadwal");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("polirs",akses.getpropinsirs());
             //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariBPJSReferensiJadwalHFIS.jasper","report","[ Pencarian Referensi Jadwal HFIS ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPoliActionPerformed
@@ -633,7 +629,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             tampil();
             this.setCursor(Cursor.getDefaultCursor());
-        }   
+        }
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -689,7 +685,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
                                 "]" +
                              "}";
                 requestEntity = new HttpEntity(requestJson,headers);
-                URL = link+"/jadwaldokter/updatejadwaldokter";	
+                URL = link+"/jadwaldokter/updatejadwaldokter";
                 System.out.println(URL);
                 //System.out.println(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
                 root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody());
@@ -697,8 +693,8 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
                 if(nameNode.path("code").asText().equals("200")){
                     tampil();
                 }else {
-                    JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-                }   
+                    JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+                }
             } catch (Exception ex) {
                 System.out.println("Notifikasi : "+ex);
                 if(ex.toString().contains("UnknownHostException")){
@@ -816,7 +812,7 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
 	    headers.add("x-signature",api.getHmac(utc));
 	    headers.add("user_key",koneksiDB.USERKEYAPIMOBILEJKN());
             requestEntity = new HttpEntity(headers);
-            URL = link+"/jadwaldokter/kodepoli/"+KdPoli.getText()+"/tanggal/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");	
+            URL = link+"/jadwaldokter/kodepoli/"+KdPoli.getText()+"/tanggal/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");
             System.out.println(URL);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metadata");
@@ -839,15 +835,15 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-    }    
+    }
 
     public JTable getTable(){
         return tbKamar;

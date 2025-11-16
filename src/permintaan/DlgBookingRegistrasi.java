@@ -48,7 +48,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     private ResultSet rs;
     private int i=0,kuota=0;
     private DlgPasien pasien=new DlgPasien(null,false);
-    private String status="",no_rawat="",umur="",sttsumur="",nohp="";
+    private String status="",norawat="",umur="",sttsumur="",nohp="";
     private StringBuilder htmlContent;
     private final String URUTNOREG = koneksiDB.URUTNOREG();
     private final boolean BOOKINGLANGSUNGREGISTRASI = koneksiDB.BOOKINGLANGSUNGREGISTRASI(),
@@ -63,34 +63,35 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "P","Tgl.Booking","Jam Booking","No.RM","Nama Pasien","Tgl.Periksa","Kode Dokter",
-                "Nama Dokter","Kode Poli","Nama Poli","No.Reg","Nama PJ","Alamat PJ",
-                "kelurahanpj","kecamatanpj","kabupatenpj","propinsipj","Hubungan","Bayar",
-                "Tahun","Bulan","Hari","Asal Booking","Status","Kd PJ","Cara Bayar","No.Telp/HP", "no_rawat"
-            }){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){
+            "P","Tgl.Booking","Jam Booking","No.RM","Nama Pasien","Tgl.Periksa","Kode Dokter",
+            "Nama Dokter","Kode Poli","Nama Poli","No.Reg","Nama PJ","Alamat PJ",
+            "kelurahanpj","kecamatanpj","kabupatenpj","propinsipj","Hubungan","Bayar",
+            "Tahun","Bulan","Hari","Asal Booking","Status","Kd PJ","Cara Bayar","No.Telp/HP", "No.Rawat"
+        }){
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if (colIndex==0) {
                     a=true;
                 }
                 return a;
-             }
-             Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                 java.lang.Object.class, java.lang.String.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
+            }
+            Class[] types = new Class[] {
+                java.lang.Boolean.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class, java.lang.String.class,
+                java.lang.String.class, java.lang.String.class
+            };
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbObat.setModel(tabMode);
 
@@ -165,14 +166,19 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else if(i==27){
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
+                if (BOOKINGLANGSUNGREGISTRASI) {
+                    column.setPreferredWidth(110);
+                    column.setMinWidth(0);
+                    column.setMaxWidth(Integer.MAX_VALUE);
+                } else {
+                    column.setMinWidth(0);
+                    column.setMaxWidth(0);
+                }
             }else{
                 column.setWidth(180);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-
 
         TNoRM.setDocument(new batasInput((byte)17).getKata(TNoRM));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
@@ -792,7 +798,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         FormInput.add(jLabel4);
         jLabel4.setBounds(0, 10, 55, 23);
 
-        TNoRM.setHighlighter(null);
         TNoRM.setName("TNoRM"); // NOI18N
         TNoRM.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -808,19 +813,16 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         jLabel9.setBounds(0, 40, 55, 23);
 
         NmDokter.setEditable(false);
-        NmDokter.setHighlighter(null);
         NmDokter.setName("NmDokter"); // NOI18N
         FormInput.add(NmDokter);
         NmDokter.setBounds(151, 40, 311, 23);
 
         TPasien.setEditable(false);
-        TPasien.setHighlighter(null);
         TPasien.setName("TPasien"); // NOI18N
         FormInput.add(TPasien);
         TPasien.setBounds(151, 10, 311, 23);
 
         KdDokter.setEditable(false);
-        KdDokter.setHighlighter(null);
         KdDokter.setName("KdDokter"); // NOI18N
         FormInput.add(KdDokter);
         KdDokter.setBounds(59, 40, 90, 23);
@@ -848,13 +850,11 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         jLabel11.setBounds(0, 70, 121, 23);
 
         KdPoli.setEditable(false);
-        KdPoli.setHighlighter(null);
         KdPoli.setName("KdPoli"); // NOI18N
         FormInput.add(KdPoli);
         KdPoli.setBounds(125, 70, 70, 23);
 
         NmPoli.setEditable(false);
-        NmPoli.setHighlighter(null);
         NmPoli.setName("NmPoli"); // NOI18N
         FormInput.add(NmPoli);
         NmPoli.setBounds(198, 70, 263, 23);
@@ -899,7 +899,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         FormInput.add(TanggalPeriksa);
         TanggalPeriksa.setBounds(590, 10, 120, 23);
 
-        NoReg.setHighlighter(null);
         NoReg.setName("NoReg"); // NOI18N
         NoReg.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -937,7 +936,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         jLabel19.setBounds(0, 100, 121, 23);
 
         kdpnj.setEditable(false);
-        kdpnj.setHighlighter(null);
         kdpnj.setName("kdpnj"); // NOI18N
         kdpnj.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -975,7 +973,6 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         jLabel20.setBounds(506, 100, 80, 23);
 
         Kuota.setEditable(false);
-        Kuota.setHighlighter(null);
         Kuota.setName("Kuota"); // NOI18N
         Kuota.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -1199,7 +1196,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 dokter.setLocationRelativeTo(internalFrame1);
                 dokter.setVisible(true);
         }
-        
+
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
@@ -1225,7 +1222,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                 if(tbObat.getValueAt(i,0).toString().equals("true")&&tbObat.getValueAt(i,23).toString().equals("Belum")){
                     Sequel.mengedit("pasien","no_rkm_medis=?","umur=CONCAT(CONCAT(CONCAT(TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()), ' Th '),CONCAT(TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12), ' Bl ')),CONCAT(TIMESTAMPDIFF(DAY, DATE_ADD(DATE_ADD(tgl_lahir,INTERVAL TIMESTAMPDIFF(YEAR, tgl_lahir, CURDATE()) YEAR), INTERVAL TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) - ((TIMESTAMPDIFF(MONTH, tgl_lahir, CURDATE()) div 12) * 12) MONTH), CURDATE()), ' Hr'))",1,new String[]{tbObat.getValueAt(i,3).toString()});
                     status=Sequel.cariIsi("select if((select count(no_rkm_medis) from reg_periksa where no_rkm_medis='"+tbObat.getValueAt(i,3).toString()+"' and kd_poli='"+tbObat.getValueAt(i,8).toString()+"')>0,'Lama','Baru' )");
-                    no_rawat=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_rawat,6),signed)),0) from reg_periksa where tgl_registrasi='"+tbObat.getValueAt(i,5).toString()+"' ",tbObat.getValueAt(i,5).toString().replace("-","/")+"/",6);
+                    norawat=Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(no_rawat,6),signed)),0) from reg_periksa where tgl_registrasi='"+tbObat.getValueAt(i,5).toString()+"' ",tbObat.getValueAt(i,5).toString().replace("-","/")+"/",6);
                     umur="0";
                     sttsumur="Th";
                     if(Double.parseDouble(tbObat.getValueAt(i,19).toString())>0){
@@ -1242,7 +1239,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                     }
 
                     if(Sequel.menyimpantf2("reg_periksa","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",19,new String[]{
-                        tbObat.getValueAt(i,10).toString(),no_rawat,tbObat.getValueAt(i,5).toString(),jam(),
+                        tbObat.getValueAt(i,10).toString(),norawat,tbObat.getValueAt(i,5).toString(),jam(),
                         tbObat.getValueAt(i,6).toString(),tbObat.getValueAt(i,3).toString(),tbObat.getValueAt(i,8).toString(),
                         tbObat.getValueAt(i,11).toString(),tbObat.getValueAt(i,12).toString()+", "+tbObat.getValueAt(i,13).toString()+
                         ", "+tbObat.getValueAt(i,14).toString()+", "+tbObat.getValueAt(i,15).toString()+
@@ -1478,31 +1475,41 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for (i = tbObat.getRowCount() - 1; i > -1; --i) { // loop mundur
-            if(tbObat.getValueAt(i,0).toString().equals("true")){
-                if (BOOKINGLANGSUNGREGISTRASI) {
-                    if (tbObat.getValueAt(i, 23).toString().equals("Belum")) {
-                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?",
-                            tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString()
-                        )) {
-                            Sequel.menghapusIgnoreSmc("reg_periksa",
-                                "no_rawat = ? and status_lanjut = 'Ralan' and stts = 'Belum' and " +
-                                "not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
-                                tbObat.getValueAt(i, 27).toString()
-                            );
-                            tabMode.removeRow(i);
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Data table masih kosong..!!");
+        } else {
+            for (int i = tbObat.getRowCount() - 1; i >= 0; --i) {
+                if(tbObat.getValueAt(i,0).toString().equals("true")){
+                    if (BOOKINGLANGSUNGREGISTRASI) {
+                        if (tbObat.getValueAt(i, 23).toString().equals("Belum")) {
+                            if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ? and no_rawat = ?",
+                                tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString(), tbObat.getValueAt(i, 27).toString()
+                            )) {
+                                Sequel.menghapustfSmc("reg_periksa",
+                                    "no_rawat = ? and no_rkm_medis = ? and tgl_registrasi = ? and status_lanjut = 'Ralan' and stts = 'Belum' and " +
+                                    "status_bayar = 'Belum Bayar' and not exists(select * from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = reg_periksa.no_rawat)",
+                                    tbObat.getValueAt(i, 27).toString(), tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString()
+                                );
+                                tabMode.removeRow(i);
+                            }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Maaf, booking sudah diberikan pelayanan..!!");
+                            tbObat.setValueAt(false, i, 0);
+                            break;
                         }
                     } else {
-                        JOptionPane.showMessageDialog(null, "Maaf, booking sudah diberikan pelayanan..!!");
-                        tbObat.setValueAt(false, i, 0);
-                        break;
-                    }
-                } else {
-                    if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?", tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString())) {
-                        tabMode.removeRow(i);
+                        if (Sequel.menghapustfSmc("booking_registrasi", "no_rkm_medis = ? and tanggal_periksa = ?", tbObat.getValueAt(i, 3).toString(), tbObat.getValueAt(i, 5).toString())) {
+                            tabMode.removeRow(i);
+                        }
                     }
                 }
             }
+            emptTeks();
+            KdDokter.setText("");
+            NmDokter.setText("");
+            KdPoli.setText("");
+            NmPoli.setText("");
+            NoReg.setText("");
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -1743,6 +1750,7 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
         TanggalBooking.setDate(new Date());
         BtnPasien.requestFocus();
         isNomer();
+        tbObat.clearSelection();
     }
 
     private void isNomer(){
@@ -1781,6 +1789,9 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
                     Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText()
                 ));
                 break;
+        }
+        if (BOOKINGLANGSUNGREGISTRASI) {
+            norawat = Sequel.autonomorSmc("", "/", "reg_periksa", "no_rawat", 6, "0", Valid.getTglSmc(TanggalPeriksa));
         }
     }
 
@@ -1933,25 +1944,27 @@ public class DlgBookingRegistrasi extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
-            isNomer();
-            if (Sequel.menyimpantfSmc("booking_registrasi", null, Valid.getTglSmc(TanggalBooking), jam(),
-                TNoRM.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), NoReg.getText(),
-                kdpnj.getText(), "0", null, "Belum", ""
-            )) {
-                no_rawat = Sequel.autonomorSmc("", "/", "reg_periksa", "no_rawat", 6, "0", Valid.getTglSmc(TanggalPeriksa));
-                if (Sequel.menyimpantfSmc("reg_periksa", null, NoReg.getText(), no_rawat, Valid.getTglSmc(TanggalPeriksa), jamRegist,
+
+            boolean sukses = false;
+            int i = 0, max = 5;
+            do {
+                isNomer();
+                sukses = Sequel.menyimpantfSmc("reg_periksa", null, NoReg.getText(), norawat, Valid.getTglSmc(TanggalPeriksa), jamRegist,
                     KdDokter.getText(), TNoRM.getText(), KdPoli.getText(), namaPJ, alamatPJ, hubunganPJ, biayaReg, "Belum", statusDaftar,
                     "Ralan", kdpnj.getText(), umurDaftar, statusUmur, "Belum bayar", statusPoli
-                )) {
-                    Sequel.mengupdateSmc("pasien", "umur = ?", "no_rkm_medis = ?", umurPasienRM, TNoRM.getText());
-                    Sequel.mengupdateSmc("booking_registrasi", "no_rawat = ?", "tanggal_periksa = ? and no_rkm_medis = ?", no_rawat, Valid.getTglSmc(TanggalPeriksa), TNoRM.getText());
-                    emptTeks();
-                    tampil();
-                } else {
-                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan registrasi..!!");
-                }
+                );
+            } while (!sukses && i++ < max);
+
+            if (sukses) {
+                Sequel.menyimpanSmc("booking_registrasi", null, Valid.getTglSmc(TanggalBooking), jam(),
+                    TNoRM.getText(), Valid.getTglSmc(TanggalPeriksa), KdDokter.getText(), KdPoli.getText(), NoReg.getText(),
+                    kdpnj.getText(), "0", null, "Belum", norawat
+                );
+                Sequel.mengupdateSmc("pasien", "umur = ?", "no_rkm_medis = ?", umurPasienRM, TNoRM.getText());
+                emptTeks();
+                tampil();
             } else {
-                JOptionPane.showMessageDialog(null, "Hanya boleh ada 1 booking per tanggal periksa..!!");
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan booking registrasi..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
             }
         }
     }

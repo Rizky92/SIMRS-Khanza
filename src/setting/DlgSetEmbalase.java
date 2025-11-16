@@ -77,7 +77,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
     }
 
     /** This method is called from within the constructor to
@@ -147,7 +147,6 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(0, 12, 120, 23);
 
-        Embalase.setHighlighter(null);
         Embalase.setName("Embalase"); // NOI18N
         Embalase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -157,7 +156,6 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         panelGlass7.add(Embalase);
         Embalase.setBounds(123, 12, 120, 23);
 
-        Tuslah.setHighlighter(null);
         Tuslah.setName("Tuslah"); // NOI18N
         Tuslah.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -289,7 +287,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Embalase & Tuslah ...!!!!");
             Embalase.requestFocus();
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -297,17 +295,17 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Tuslah,BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(tabMode.getRowCount()==0){
@@ -320,7 +318,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
             tampil();
             emptTeks();
         }
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -328,7 +326,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnKeluar);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         if(tabMode.getRowCount()==0){
@@ -337,13 +335,13 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
         }else if(! (tabMode.getRowCount()==0)) {
             dispose();
         }
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnBatal,BtnKeluar);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbAdminMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -352,7 +350,7 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbAdminMouseClicked
+    }//GEN-LAST:event_tbAdminMouseClicked
 
     private void tbAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAdminKeyPressed
         if(tabMode.getRowCount()!=0){
@@ -363,12 +361,12 @@ public class DlgSetEmbalase extends javax.swing.JDialog {
                 }
             }
         }
-}//GEN-LAST:event_tbAdminKeyPressed
+    }//GEN-LAST:event_tbAdminKeyPressed
 
-private void EmbalaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmbalaseKeyPressed
+    private void EmbalaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_EmbalaseKeyPressed
      Valid.pindah(evt, BtnKeluar,Tuslah);
 
-}//GEN-LAST:event_EmbalaseKeyPressed
+    }//GEN-LAST:event_EmbalaseKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -434,7 +432,7 @@ private void EmbalaseKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{            
+        try{
             rs=ps.executeQuery();
             while(rs.next()){
                 tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2)});

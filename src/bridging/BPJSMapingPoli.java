@@ -44,11 +44,11 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
-    private ResultSet rs;    
+    private ResultSet rs;
     private int i=0;
     private DlgCariPoli poli=new DlgCariPoli(null,false);
     private BPJSCekReferensiPoli polibpjs=new BPJSCekReferensiPoli(null,false);
-    
+
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -83,10 +83,10 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        kdpoli.setDocument(new batasInput((byte)5).getKata(kdpoli)); 
-        KdPoliBPJS.setDocument(new batasInput((byte)15).getKata(KdPoliBPJS)); 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));                  
-        
+        kdpoli.setDocument(new batasInput((byte)5).getKata(kdpoli));
+        KdPoliBPJS.setDocument(new batasInput((byte)15).getKata(KdPoliBPJS));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -108,8 +108,8 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         poli.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -117,7 +117,7 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(poli.getTable().getSelectedRow()!= -1){                    
+                if(poli.getTable().getSelectedRow()!= -1){
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                 }
@@ -131,8 +131,8 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         polibpjs.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -140,11 +140,11 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(polibpjs.getTable().getSelectedRow()!= -1){                   
+                if(polibpjs.getTable().getSelectedRow()!= -1){
                     KdPoliBPJS.setText(polibpjs.getTable().getValueAt(polibpjs.getTable().getSelectedRow(),1).toString());
                     NmPoliBPJS.setText(polibpjs.getTable().getValueAt(polibpjs.getTable().getSelectedRow(),2).toString());
                     KdPoliBPJS.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -155,7 +155,7 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         polibpjs.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -167,8 +167,8 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
-    
+        });
+
     }
 
     /** This method is called from within the constructor to
@@ -438,13 +438,11 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         jLabel4.setBounds(0, 10, 56, 23);
 
         kdpoli.setEditable(false);
-        kdpoli.setHighlighter(null);
         kdpoli.setName("kdpoli"); // NOI18N
         FormInput.add(kdpoli);
         kdpoli.setBounds(59, 10, 70, 23);
 
         TPoli.setEditable(false);
-        TPoli.setHighlighter(null);
         TPoli.setName("TPoli"); // NOI18N
         FormInput.add(TPoli);
         TPoli.setBounds(131, 10, 190, 23);
@@ -472,7 +470,6 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         jLabel19.setBounds(353, 10, 70, 23);
 
         KdPoliBPJS.setEditable(false);
-        KdPoliBPJS.setHighlighter(null);
         KdPoliBPJS.setName("KdPoliBPJS"); // NOI18N
         FormInput.add(KdPoliBPJS);
         KdPoliBPJS.setBounds(426, 10, 70, 23);
@@ -502,15 +499,15 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnPoliRSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliRSActionPerformed
-        poli.isCek();        
+        poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
-}//GEN-LAST:event_btnPoliRSActionPerformed
+    }//GEN-LAST:event_btnPoliRSActionPerformed
 
     private void btnPoliRSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliRSKeyPressed
-        
-}//GEN-LAST:event_btnPoliRSKeyPressed
+
+    }//GEN-LAST:event_btnPoliRSKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if(kdpoli.getText().trim().equals("")||TPoli.getText().trim().equals("")){
@@ -523,31 +520,31 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
             })==true){
                 tampil();
                 emptTeks();
-            }                
+            }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnSimpanActionPerformed(null);
         }else{Valid.pindah(evt,btnPoliBPJS, BtnBatal);}
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             emptTeks();
         }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         Valid.hapusTable(tabMode,kdpoli,"maping_poli_bpjs","kd_poli_rs");
         tampil();
         emptTeks();
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -555,7 +552,7 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(kdpoli.getText().trim().equals("")||TPoli.getText().trim().equals("")){
@@ -570,9 +567,9 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
                     emptTeks();
                     tampil();
                 }
-            }                
+            }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -580,37 +577,37 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){            
-                Map<String, Object> param = new HashMap<>();    
+        }else if(tabMode.getRowCount()!=0){
+                Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                 param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingPoliBPJS.jasper","report","::[ Mapping Unit RS & BPJS ]::",param);            
+                Valid.MyReport("rptMapingPoliBPJS.jasper","report","::[ Mapping Unit RS & BPJS ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -618,7 +615,7 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -628,11 +625,11 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         tampil();
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -640,12 +637,12 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
         tampil();
-}//GEN-LAST:event_BtnAllActionPerformed
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -654,7 +651,7 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
         if(tabMode.getRowCount()!=0){
@@ -663,13 +660,13 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
-private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliBPJSActionPerformed
+    private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliBPJSActionPerformed
     polibpjs.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     polibpjs.setLocationRelativeTo(internalFrame1);
     polibpjs.setVisible(true);
-}//GEN-LAST:event_btnPoliBPJSActionPerformed
+    }//GEN-LAST:event_btnPoliBPJSActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
@@ -784,25 +781,25 @@ private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }
 
-    
-   
-    
-    
+
+
+
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getmapping_poli_bpjs());
         BtnHapus.setEnabled(akses.getmapping_poli_bpjs());
         BtnEdit.setEnabled(akses.getmapping_poli_bpjs());
         BtnPrint.setEnabled(akses.getmapping_poli_bpjs());
     }
-    
+
     public JTable getTable(){
         return tbJnsPerawatan;
-    }    
+    }
 
-   
-    
-    
-    
 
-    
+
+
+
+
+
 }

@@ -97,7 +97,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
         InstitutionCode.setDocument(new batasInput((byte)15).getKata(InstitutionCode));
         BrivaNo.setDocument(new batasInput((byte)15).getKata(BrivaNo));
         UrlApi.setDocument(new batasInput((int)100).getKata(UrlApi));
-        
+
         rekening.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -106,17 +106,17 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("BRIApiIntegrasi")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                                 rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
-                                                                      
+
                         kdrek.requestFocus();
-                    }                 
+                    }
                 }
             }
             @Override
@@ -128,7 +128,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -142,10 +142,10 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });       
-        
+        });
+
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -223,13 +223,11 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
         jLabel3.setBounds(1, 10, 100, 23);
 
         kdrek.setEditable(false);
-        kdrek.setHighlighter(null);
         kdrek.setName("kdrek"); // NOI18N
         panelGlass7.add(kdrek);
         kdrek.setBounds(104, 10, 108, 23);
 
         nmrek.setEditable(false);
-        nmrek.setHighlighter(null);
         nmrek.setName("nmrek"); // NOI18N
         nmrek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -261,7 +259,6 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(1, 42, 100, 23);
 
-        ConsumerKey.setHighlighter(null);
         ConsumerKey.setName("ConsumerKey"); // NOI18N
         ConsumerKey.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -290,7 +287,6 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
         panelGlass7.add(jLabel6);
         jLabel6.setBounds(1, 72, 100, 23);
 
-        InstitutionCode.setHighlighter(null);
         InstitutionCode.setName("InstitutionCode"); // NOI18N
         InstitutionCode.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -319,7 +315,6 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
         panelGlass7.add(jLabel8);
         jLabel8.setBounds(1, 102, 100, 23);
 
-        UrlApi.setHighlighter(null);
         UrlApi.setName("UrlApi"); // NOI18N
         UrlApi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -551,7 +546,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu akun pengaturan ...!!!!");
             ConsumerKey.requestFocus();
         }
-        
+
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void tbSpesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbSpesialisKeyPressed
@@ -646,10 +641,10 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
         try {
             ps=koneksi.prepareStatement(
                    "select set_akun_bankbri.kd_rek,rekening.nm_rek,aes_decrypt(consumer_key,'nur'),aes_decrypt(consumer_secret,'windi'),aes_decrypt(institution_code,'nur'),aes_decrypt(briva_no,'windi'),aes_decrypt(urlapi,'dewi') "+
-                   "from set_akun_bankbri inner join rekening on set_akun_bankbri.kd_rek=rekening.kd_rek"); 
+                   "from set_akun_bankbri inner join rekening on set_akun_bankbri.kd_rek=rekening.kd_rek");
             try{
                 rs=ps.executeQuery();
-                while(rs.next()){                
+                while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)
                     });
@@ -666,7 +661,7 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
 
     public void emptTeks() {
@@ -692,10 +687,10 @@ public class BRIApiIntegrasi extends javax.swing.JDialog {
             UrlApi.setText(tabMode.getValueAt(row,6).toString());
         }
     }
-    
-    
-    
-    
+
+
+
+
 
 
 }

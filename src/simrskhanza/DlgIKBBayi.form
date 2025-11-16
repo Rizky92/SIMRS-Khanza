@@ -2521,7 +2521,7 @@
                     </Component>
                     <Component class="widget.Label" name="label25">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Kelahiran Ke :"/>
+                        <Property name="text" type="java.lang.String" value="Anak Ke :"/>
                         <Property name="name" type="java.lang.String" value="label25" noResource="true"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                           <Dimension value="[65, 23]"/>
@@ -2529,7 +2529,7 @@
                       </Properties>
                       <Constraints>
                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                          <AbsoluteConstraints x="0" y="450" width="126" height="23"/>
+                          <AbsoluteConstraints x="0" y="452" width="126" height="23"/>
                         </Constraint>
                       </Constraints>
                     </Component>
@@ -3341,9 +3341,6 @@
                     <Component class="widget.TextBox" name="KdPenolong">
                       <Properties>
                         <Property name="editable" type="boolean" value="false"/>
-                        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                          <ComponentRef name="null"/>
-                        </Property>
                         <Property name="name" type="java.lang.String" value="KdPenolong" noResource="true"/>
                       </Properties>
                       <Constraints>

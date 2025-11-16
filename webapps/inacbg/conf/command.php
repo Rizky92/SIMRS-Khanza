@@ -68,6 +68,7 @@
             case 'KlaimBaruManual2' : include_once('pages/klaimbarumanual2.php'); break;
             case 'DetailKirim'      : include_once('pages/detailkirim.php'); break;
             case 'DetailKirimSmc'   : include_once('pages/detailkirimsmc.php'); break;
+            case 'DetailKirimSmc2'  : include_once('pages/detailkirimsmc2.php'); break;
                  default            : include_once('pages/kontak.php');
         }
     }

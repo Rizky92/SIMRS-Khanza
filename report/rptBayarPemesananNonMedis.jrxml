@@ -16,9 +16,9 @@
 ipsrspemesanan.tgl_tempo, bayar_pemesanan_non_medis.no_faktur,
 ipsrssuplier.nama_suplier,bayar_pemesanan_non_medis.nama_bayar,bayar_pemesanan_non_medis.no_bukti,
 bayar_pemesanan_non_medis.besar_bayar,bayar_pemesanan_non_medis.keterangan,
-bayar_pemesanan_non_medis.nip,petugas.nama from bayar_pemesanan_non_medis inner join petugas 
-inner join ipsrspemesanan inner join ipsrssuplier on bayar_pemesanan_non_medis.nip=petugas.nip 
-and bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur 
+bayar_pemesanan_non_medis.nip,petugas.nama from bayar_pemesanan_non_medis inner join petugas
+inner join ipsrspemesanan inner join ipsrssuplier on bayar_pemesanan_non_medis.nip=petugas.nip
+and bayar_pemesanan_non_medis.no_faktur=ipsrspemesanan.no_faktur
 and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 	</queryString>
 	<field name="tgl_bayar" class="java.sql.Date">
@@ -419,7 +419,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
+				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="94" width="121" height="11" uuid="e821ce07-6d3e-40cd-99ec-4afcf9a23cc3">
@@ -429,7 +429,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[MANAGER KEUANGAN]]></text>
+				<text><![CDATA[KABAG KEUANGAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="711" y="29" width="50" height="11" uuid="69360437-8cb7-4f4e-b3aa-237579bfb78c">
@@ -449,7 +449,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[dr. TEGUH NURWANTO, MARS]]></text>
+				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="676" y="94" width="121" height="11" uuid="bdffba95-93fd-4328-8fcc-effb50e99a9c">
@@ -459,7 +459,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[DIREKTUR]]></text>
+				<text><![CDATA[PLT DIREKTUR]]></text>
 			</staticText>
 		</band>
 	</summary>

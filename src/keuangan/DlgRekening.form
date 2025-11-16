@@ -4,9 +4,6 @@
   <NonVisualComponents>
     <Component class="widget.TextBox" name="Kd2">
       <Properties>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="Kd2" noResource="true"/>
       </Properties>
       <Events>
@@ -105,9 +102,6 @@
             </Component>
             <Component class="widget.TextBox" name="KdSub">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdSub" noResource="true"/>
               </Properties>
               <Events>
@@ -121,9 +115,6 @@
             </Component>
             <Component class="widget.TextBox" name="NmSub">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="NmSub" noResource="true"/>
               </Properties>
               <Events>
@@ -407,9 +398,6 @@
             </Component>
             <Component class="widget.TextBox" name="KdSubInduk">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="KdSubInduk" noResource="true"/>
               </Properties>
               <Events>
@@ -424,9 +412,6 @@
             <Component class="widget.TextBox" name="NmSubInduk">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="NmSubInduk" noResource="true"/>
               </Properties>
               <Constraints>
@@ -602,9 +587,6 @@
             </Component>
             <Component class="widget.TextBox" name="Kd">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Kd" noResource="true"/>
               </Properties>
               <Events>
@@ -632,9 +614,6 @@
             </Component>
             <Component class="widget.TextBox" name="Nm">
               <Properties>
-                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="null"/>
-                </Property>
                 <Property name="name" type="java.lang.String" value="Nm" noResource="true"/>
               </Properties>
               <Events>
