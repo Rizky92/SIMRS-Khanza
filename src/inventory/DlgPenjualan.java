@@ -2124,7 +2124,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tbObatPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbObatPropertyChange
         if(this.isVisible()==true){
-              getData();
+            int currentRow = tbObat.convertRowIndexToModel(tbObat.getEditingRow());
+            int currentColumn = tbObat.convertColumnIndexToModel(tbObat.getEditingColumn());
+            if (tbObat.getSelectedRow() != currentRow) {
+                tbObat.changeSelection(currentRow, currentColumn, false, false);
+            }
+            getData();
         }
     }//GEN-LAST:event_tbObatPropertyChange
 
