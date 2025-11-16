@@ -2394,7 +2394,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tbDetailObatRacikanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbDetailObatRacikanPropertyChange
         if(this.isVisible()==true){
-              getData();
+            int currentRow = tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getEditingRow());
+            int currentColumn = tbDetailObatRacikan.convertColumnIndexToModel(tbDetailObatRacikan.getEditingColumn());
+            if (tbDetailObatRacikan.getSelectedRow() != currentRow) {
+                tbDetailObatRacikan.changeSelection(currentRow, currentColumn, false, false);
+            }
+            getData();
         }
     }//GEN-LAST:event_tbDetailObatRacikanPropertyChange
 
