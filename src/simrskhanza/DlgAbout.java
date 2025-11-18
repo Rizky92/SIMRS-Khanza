@@ -12,6 +12,8 @@
 
 package simrskhanza;
 
+import java.util.Properties;
+
 /**
  *
  * @author perpustakaan
@@ -24,6 +26,10 @@ public class DlgAbout extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10,10);
         setSize(465,515);
+        
+        Properties prop = System.getProperties();
+        jLabel29.setText(prop.getProperty("java.runtime.name"));
+        jLabel30.setText(prop.getProperty("java.runtime.version"));
     }
 
     /** This method is called from within the constructor to
@@ -41,6 +47,9 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel7 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
         jLabel18 = new javax.swing.JLabel();
+        jLabel29 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel30 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         panelGlass4 = new usu.widget.glass.PanelGlass();
         jLabel19 = new javax.swing.JLabel();
@@ -105,6 +114,26 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel18.setName("jLabel18"); // NOI18N
         panelGlass1.add(jLabel18);
         jLabel18.setBounds(107, 28, 90, 17);
+
+        jLabel29.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jLabel29.setForeground(new java.awt.Color(50, 50, 50));
+        jLabel29.setName("jLabel29"); // NOI18N
+        panelGlass1.add(jLabel29);
+        jLabel29.setBounds(107, 48, 330, 17);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(50, 50, 50));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel8.setText("Versi Java :");
+        jLabel8.setName("jLabel8"); // NOI18N
+        panelGlass1.add(jLabel8);
+        jLabel8.setBounds(0, 48, 104, 17);
+
+        jLabel30.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        jLabel30.setForeground(new java.awt.Color(50, 50, 50));
+        jLabel30.setName("jLabel30"); // NOI18N
+        panelGlass1.add(jLabel30);
+        jLabel30.setBounds(107, 68, 330, 17);
 
         internalFrame1.add(panelGlass1);
         panelGlass1.setBounds(7, 38, 454, 90);
@@ -316,6 +345,8 @@ public class DlgAbout extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
+    private javax.swing.JLabel jLabel29;
+    private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel33;
@@ -324,6 +355,7 @@ public class DlgAbout extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private usu.widget.glass.PanelGlass panelGlass1;
     private usu.widget.glass.PanelGlass panelGlass4;
     private usu.widget.glass.PanelGlass panelGlass5;
