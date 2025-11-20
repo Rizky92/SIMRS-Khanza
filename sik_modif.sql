@@ -59,8 +59,7 @@ CREATE TABLE IF NOT EXISTS `antriloketsmc`  (
 CREATE TABLE IF NOT EXISTS `antripintu_smc`  (
   `kd_pintu` varchar(20) NOT NULL DEFAULT '',
   `no_rawat` varchar(17) NOT NULL,
-  `status` enum('0','1') NOT NULL,
-  PRIMARY KEY (`kd_pintu`) USING BTREE
+  `status` enum('0','1') NOT NULL
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `asuhan_gizi` ADD COLUMN IF NOT EXISTS `alergi_ayam` enum('Ya','Tidak') NULL DEFAULT NULL AFTER `nip`;
@@ -1417,7 +1416,7 @@ CREATE TABLE IF NOT EXISTS `set_pintu_smc`  (
   INDEX `set_pintu_smc_ibfk_1`(`kd_pintu`) USING BTREE,
   CONSTRAINT `set_pintu_smc_ibfk_1` FOREIGN KEY (`kd_pintu`) REFERENCES `pintu_smc` (`kd_pintu`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `set_pintu_smc_ibfk_2` FOREIGN KEY (`kd_dokter`) REFERENCES `dokter` (`kd_dokter`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `set_pintu_smc_ibfk_3` FOREIGN KEY (`kd_poli`) REFERENCES `poliklinik` (`kd_poli`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `set_pintu_smc_ibfk_3` FOREIGN KEY (`kd_poli`) REFERENCES `poliklinik` (`kd_poli`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
