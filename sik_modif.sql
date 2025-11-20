@@ -64,7 +64,7 @@ CREATE TABLE IF NOT EXISTS `antripintu_smc`  (
 
 ALTER TABLE `asuhan_gizi` ADD COLUMN IF NOT EXISTS `alergi_ayam` enum('Ya','Tidak') NULL DEFAULT NULL AFTER `nip`;
 
-ALTER TABLE `billing` DROP INDEX `noindex`;
+ALTER TABLE `billing` DROP INDEX IF EXISTS `noindex`;
 
 ALTER TABLE `booking_operasi` ADD COLUMN IF NOT EXISTS `catatan` varchar(500) NULL DEFAULT NULL AFTER `kd_ruang_ok`;
 
