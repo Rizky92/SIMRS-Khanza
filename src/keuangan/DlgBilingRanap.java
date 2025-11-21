@@ -53,6 +53,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -3629,6 +3630,8 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             String tglkeluar, jamkeluar;
             Sequel.AutoComitFalse();
             for (r = 0; r < z; r++) {
+                // "Kode Kamar", "Nama Kamar", "Tgl.Masuk", "Jam Masuk", "Tgl.Keluar", "Jam Keluar", "Lama Inap", "Status Kamar", "tgl_masuk", "jam_masuk"
+                // 0             1             2            3            4             5             6            7               8            9
                 if (((Double) tabModeKamIn.getValueAt(r, 6)) > -1) {
                     tglkeluar = tabModeKamIn.getValueAt(r, 4).toString();
                     jamkeluar = tabModeKamIn.getValueAt(r, 5).toString();
@@ -3638,9 +3641,23 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     if (jamkeluar.isBlank()) {
                         jamkeluar = "00:00:00";
                     }
-                    if (tabModeKamIn.getValueAt(r, 7).toString().equals("Pindah Kamar")) {
-                        int kamarTujuan = posisiWaktuPindahKamarTujuan(tglkeluar, jamkeluar);
-                        if (kamarTujuan >= 0) {
+                    if (validasiWaktuMasukKeluarKamar(tabModeKamIn.getValueAt(r, 2).toString(), tabModeKamIn.getValueAt(r, 3).toString(), tglkeluar, jamkeluar)) {
+                        if (tabModeKamIn.getValueAt(r, 7).toString().equals("Pindah Kamar")) {
+                            int kamarTujuan = posisiWaktuPindahKamarTujuan(tglkeluar, jamkeluar);
+                            if (kamarTujuan >= 0) {
+                                if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, " +
+                                    "lama = ?, ttl_biaya = ? * trf_kamar", "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?",
+                                    tabModeKamIn.getValueAt(r, 2).toString(), tabModeKamIn.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
+                                    tabModeKamIn.getValueAt(r, 6).toString(), tabModeKamIn.getValueAt(r, 6).toString(), norawatubahlama.getText(),
+                                    tabModeKamIn.getValueAt(r, 0).toString(), tabModeKamIn.getValueAt(r, 8).toString(), tabModeKamIn.getValueAt(r, 9).toString())
+                                ) {
+                                    sukses = false;
+                                }
+                            } else {
+                                sukses = false;
+                                JOptionPane.showMessageDialog(null, "Tidak dapat menemukan kamar tujuan pindah dari kamar " + tabModeKamIn.getValueAt(r, 0).toString() + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                            }
+                        } else {
                             if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, " +
                                 "lama = ?, ttl_biaya = ? * trf_kamar", "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?",
                                 tabModeKamIn.getValueAt(r, 2).toString(), tabModeKamIn.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
@@ -3649,20 +3666,14 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                             ) {
                                 sukses = false;
                             }
-                        } else {
-                            sukses = false;
-                            JOptionPane.showMessageDialog(null, "Tidak dapat menemukan kamar tujuan pindah dari kamar " + tabModeKamIn.getValueAt(r, 0).toString() + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
                     } else {
-                        if (!Sequel.mengupdatetfSmc("kamar_inap", "tgl_masuk = ?, jam_masuk = ?, tgl_keluar = ?, jam_keluar = ?, " +
-                            "lama = ?, ttl_biaya = ? * trf_kamar", "no_rawat = ? and kd_kamar = ? and tgl_masuk = ? and jam_masuk = ?",
-                            tabModeKamIn.getValueAt(r, 2).toString(), tabModeKamIn.getValueAt(r, 3).toString(), tglkeluar, jamkeluar,
-                            tabModeKamIn.getValueAt(r, 6).toString(), tabModeKamIn.getValueAt(r, 6).toString(), norawatubahlama.getText(),
-                            tabModeKamIn.getValueAt(r, 0).toString(), tabModeKamIn.getValueAt(r, 8).toString(), tabModeKamIn.getValueAt(r, 9).toString())
-                        ) {
-                            sukses = false;
-                        }
+                        sukses = false;
+                        JOptionPane.showMessageDialog(null, "Waktu keluar kamar tidak boleh lebih dulu dari waktu masuk..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
+                } else {
+                    sukses = false;
+                    JOptionPane.showMessageDialog(null, "Lama inap tidak boleh minus..!!");
                 }
             }
             if (sukses) {
@@ -7607,5 +7618,17 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         }
 
         return -1;
+    }
+    
+    private boolean validasiWaktuMasukKeluarKamar(String tglMasuk, String jamMasuk, String tglKeluar, String jamKeluar) {
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            Date masuk = sdf.parse(tglMasuk + " " + jamMasuk);
+            Date keluar = sdf.parse(tglKeluar + " " + jamKeluar);
+            return ((masuk.getTime() / 1000) - (keluar.getTime() / 1000)) < 0;
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+        return false;
     }
 }
