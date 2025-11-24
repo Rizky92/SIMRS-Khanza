@@ -12,6 +12,7 @@
 package simrskhanza;
 
 import fungsi.sekuel;
+import java.util.TimeZone;
 import usu.widget.util.WidgetUtilities;
 
 /**
@@ -24,12 +25,20 @@ public class SIMRSKhanza {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        System.setProperty("user.timezone", "Asia/Makassar");
+        TimeZone.setDefault(TimeZone.getTimeZone("Asia/Makassar"));
         WidgetUtilities.invokeLater(() -> {
             frmUtama utama = frmUtama.getInstance();
             utama.isWall();
             utama.setVisible(true);
 
             sekuel.nyalakanBatasEdit();
+            TimeZone tz = TimeZone.getDefault();
+            int offsetMillis = tz.getRawOffset();
+            int hour = offsetMillis / (1000 * 60 * 60);
+            int minute = Math.abs((offsetMillis / (1000 * 60)) % 60);
+            
+            System.out.println("Timezone : " + TimeZone.getDefault().getID() + " (UTC " + String.format("%+03d:%02d", hour, minute) + ")");
         });
     }
 }
