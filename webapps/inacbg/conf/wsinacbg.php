@@ -1394,6 +1394,9 @@
                 $msg['metadata']['message']
             );
 
+            if ($msg['metadata']['error_no'] == 'E2004' && str_contains($error_klaim_baru, 'E2043')) {
+                echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">Tidak dapat mengambil status data klaim, kemungkinan no. SEP dihapus dari eklaim! Lakukan pembuatan klaim baru dari menggunakan no. SEP di eklaim!</span><br /><br />';
+            }
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error_klaim_baru.'</span><br /><br />';
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
@@ -1416,7 +1419,7 @@
         UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
 
         if ($msg['response']['data']['klaim_status_cd'] == 'final') {
-            ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nomor_sep);
+            ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nomor_sep, $norawat);
             if ($success === true) {
                 ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditIdrgSmc($nomor_sep);
             }
@@ -1471,7 +1474,7 @@
         ];
     }
 
-    function ReeditKlaimSmc($nomor_sep, $grouper = null, $coder_nik = null)
+    function ReeditKlaimSmc($nomor_sep, $norawat)
     {
         $request = [
             'metadata' => [
@@ -1494,9 +1497,20 @@
 
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
 
+            @bukaquery2("delete from inacbg_klaim_baru2 where no_rawat = '$norawat'");
+            @bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
+            @bukaquery2("delete from idrg_grouping_smc where no_sep = '$nomor_sep'");
+            @bukaquery2("delete from idrg_klaim_final_smc where no_sep = '$nomor_sep'");
+            @bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
+            @bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
+            @bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+            @bukaquery2("delete from inacbg_grouping_stage2_smc where no_sep = '$nomor_sep'");
+            @bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
+            @bukaquery2("delete from inacbg_cetak_klaim where no_sep = '$nomor_sep'");
+
             return [
                 'success' => false,
-                'data' => null,
+                'data' => 'grouper',
                 'error' => $error,
             ];
         }
@@ -1534,17 +1548,13 @@
             echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
         }
 
-        try {
-            bukaquery2("delete from idrg_grouping_smc where no_sep = '$nomor_sep'");
-            bukaquery2("delete from idrg_klaim_final_smc where no_sep = '$nomor_sep'");
-            bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
-            bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
-            bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
-            bukaquery2("delete from inacbg_grouping_stage2_smc where no_sep = '$nomor_sep'");
-            bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
-        } catch (\Exception $e) {
-
-        }
+        @bukaquery2("delete from idrg_grouping_smc where no_sep = '$nomor_sep'");
+        @bukaquery2("delete from idrg_klaim_final_smc where no_sep = '$nomor_sep'");
+        @bukaquery2("delete from inacbg_diagnosa_pasien_smc where no_sep = '$nomor_sep'");
+        @bukaquery2("delete from inacbg_prosedur_pasien_smc where no_sep = '$nomor_sep'");
+        @bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+        @bukaquery2("delete from inacbg_grouping_stage2_smc where no_sep = '$nomor_sep'");
+        @bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
 
         return [
             'success' => true,
@@ -1583,13 +1593,9 @@
             ];
         }
 
-        try {
-            bukaquery2("delete from inacbg_grouping_stage2_smc where no_sep = '$nomor_sep'");
-            bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
-            bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
-        } catch (\Exception $e) {
-
-        }
+        @bukaquery2("delete from inacbg_grouping_stage2_smc where no_sep = '$nomor_sep'");
+        @bukaquery2("delete from inacbg_grouping_stage12 where no_sep = '$nomor_sep'");
+        @bukaquery2("delete from inacbg_klaim_final_smc where no_sep = '$nomor_sep'");
 
         return [
             'success' => true,
