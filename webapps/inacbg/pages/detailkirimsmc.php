@@ -1752,11 +1752,18 @@
                         <?php elseif ($grouper === 'final'): ?>
                             <?php
                                 if ($action === 'reedit') {
-                                    ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nosep);
+                                    $norawat_edit = getOne("select bridging_sep.no_rawat from bridging_sep where bridging_sep.no_sep = '$nosep'");
+                                    ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nosep, $norawat_edit);
                                     if ($success === true) {
                                         echo <<<HTML
                                             <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=final">
                                             HTML;
+                                    } else {
+                                        if ($response === 'grouper') {
+                                            echo <<<HTML
+                                                <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg">
+                                                HTML;
+                                        }
                                     }
                                 }
                             ?>
