@@ -1820,12 +1820,7 @@ public final class RMDataCatatanObservasiHemodialisa extends javax.swing.JDialog
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
             if (ChkKejadian.isSelected()) {
-                Calendar c = Calendar.getInstance();
-
-                Tanggal.setDate(c.getTime());
-                Jam.setSelectedIndex(c.get(Calendar.HOUR_OF_DAY));
-                Menit.setSelectedIndex(c.get(Calendar.MINUTE));
-                Detik.setSelectedIndex(c.get(Calendar.SECOND));
+                Valid.setTglJamRealSmc(Tanggal, Jam, Menit, Detik);
             }
         };
 

@@ -492,7 +492,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         try {
             TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
         } catch (Exception e) {
@@ -3532,7 +3532,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         BtnTambah.setEnabled(akses.getobat());
         TCari.requestFocus();
         BtnGudang.setEnabled(akses.getakses_depo_obat());
-        
+
         if(TANGGALMUNDUR.equals("no")){
             if(!akses.getkode().equals("Admin Utama")){
                 DTPTgl.setEditable(false);
@@ -3580,14 +3580,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
-            Date now = Calendar.getInstance().getTime();
             if (ChkJln.isSelected()) {
-                String jam = new java.text.SimpleDateFormat("HH:mm:ss").format(now);
-
-                DTPTgl.setDate(now);
-                cmbJam.setSelectedItem(jam.substring(0, 2));
-                cmbMnt.setSelectedItem(jam.substring(3, 5));
-                cmbDtk.setSelectedItem(jam.substring(6, 8));
+                Valid.setTglJamRealSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk);
             }
         };
         // Timer

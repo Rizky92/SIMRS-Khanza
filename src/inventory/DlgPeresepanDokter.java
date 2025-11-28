@@ -2241,14 +2241,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
     private void jam(){
         ActionListener taskPerformer = (ActionEvent e) -> {
-            Date now = Calendar.getInstance().getTime();
             if (ChkJln.isSelected()) {
-                String jam = new java.text.SimpleDateFormat("HH:mm:ss").format(now);
-
-                DTPBeri.setDate(now);
-                cmbJam.setSelectedItem(jam.substring(0, 2));
-                cmbMnt.setSelectedItem(jam.substring(3, 5));
-                cmbDtk.setSelectedItem(jam.substring(6, 8));
+                Valid.setTglJamRealSmc(DTPBeri, cmbJam, cmbMnt, cmbDtk);
             }
         };
 
