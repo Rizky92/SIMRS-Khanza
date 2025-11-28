@@ -611,7 +611,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[PLT DIREKTUR]]></text>
+				<text><![CDATA[DIREKTUR]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="139" y="236" width="138" height="10" uuid="26ecba7b-7d7c-4cd4-a981-af89692fd368"/>
@@ -633,7 +633,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
+				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
 			</staticText>
 		</band>
 	</summary>
