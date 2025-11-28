@@ -257,7 +257,7 @@ public final class akses {
             penilaian_awal_medis_ralan_jantung=false,penilaian_awal_medis_ralan_urologi=false,hasil_pemeriksaan_treadmill=false,hasil_pemeriksaan_echo_pediatrik=false,
             template_pelaksanaan_informasi_edukasi=false,skrining_instrumen_esat=false,penilaian_awal_medis_ranap_jantung=false,e_eksekutif=false,penugasan_pengujian_sampel_lab_kesehatan_lingkungan=false,
             hasil_pengujian_sampel_lab_kesehatan_lingkungan=false,verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false,validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,
-            rekap_pelayanan_lab_kesehatan_lingkungan=false;
+            rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1459,6 +1459,7 @@ public final class akses {
                         akses.verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=rs2.getBoolean("verifikasi_pengujian_sampel_lab_kesehatan_lingkungan");
                         akses.validasi_pengujian_sampel_lab_kesehatan_lingkungan=rs2.getBoolean("validasi_pengujian_sampel_lab_kesehatan_lingkungan");
                         akses.rekap_pelayanan_lab_kesehatan_lingkungan=rs2.getBoolean("rekap_pelayanan_lab_kesehatan_lingkungan");
+                        akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=rs2.getBoolean("pembayaran_pengujian_sampel_lab_kesehatan_lingkungan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2671,6 +2672,7 @@ public final class akses {
         akses.verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=isadmin;
         akses.validasi_pengujian_sampel_lab_kesehatan_lingkungan=isadmin;
         akses.rekap_pelayanan_lab_kesehatan_lingkungan=isadmin;
+        akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3888,6 +3890,7 @@ public final class akses {
     public static boolean getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan(){return akses.verifikasi_pengujian_sampel_lab_kesehatan_lingkungan;}
     public static boolean getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan(){return akses.validasi_pengujian_sampel_lab_kesehatan_lingkungan;}
     public static boolean getrekap_pelayanan_lab_kesehatan_lingkungan(){return akses.rekap_pelayanan_lab_kesehatan_lingkungan;}
+    public static boolean getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan(){return akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
