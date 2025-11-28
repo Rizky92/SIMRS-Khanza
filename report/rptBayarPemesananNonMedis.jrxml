@@ -432,7 +432,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<text><![CDATA[MANAGER KEUANGAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="711" y="29" width="50" height="11" uuid="69360437-8cb7-4f4e-b3aa-237579bfb78c">
+				<reportElement x="652" y="29" width="144" height="11" uuid="d8846cdc-44b3-4686-aafd-6e796d5f9d73">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -442,25 +442,25 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<text><![CDATA[Mengetahui]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="676" y="80" width="121" height="11" uuid="99239f98-fea0-41ae-9d8d-a8fba7fdce0e">
+				<reportElement x="652" y="80" width="145" height="11" uuid="b26791a4-4890-459b-9d2a-10917de31789">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
+				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
 			</staticText>
-			<staticText>
-				<reportElement x="676" y="94" width="121" height="11" uuid="bdffba95-93fd-4328-8fcc-effb50e99a9c">
+			<textField>
+				<reportElement x="652" y="94" width="145" height="11" uuid="26d0b2fa-6dee-4675-897e-42912fed494f">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[PLT DIREKTUR]]></text>
-			</staticText>
+				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

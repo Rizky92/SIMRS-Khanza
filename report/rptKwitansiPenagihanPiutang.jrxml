@@ -84,7 +84,7 @@
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="542" splitType="Stretch">
+		<band height="556" splitType="Stretch">
 			<property name="com.jaspersoft.studio.unit.height" value="px"/>
 			<staticText>
 				<reportElement x="2" y="60" width="553" height="14" uuid="f63aae1f-c584-42f3-88fc-5eb8002d06cb"/>
@@ -299,13 +299,13 @@
 				<textFieldExpression><![CDATA["No.Rek. "+$P{norek}]]></textFieldExpression>
 			</textField>
 			<line>
-				<reportElement positionType="Float" x="370" y="525" width="177" height="1" uuid="09109f4d-d6fe-492b-b73a-38bc260c1230"/>
+				<reportElement positionType="Float" x="370" y="535" width="177" height="1" uuid="09109f4d-d6fe-492b-b73a-38bc260c1230"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineStyle="Solid"/>
 				</graphicElement>
 			</line>
 			<staticText>
-				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="370" y="528" width="178" height="12" forecolor="#000000" backcolor="#F0F0DC" uuid="4a87531a-036e-4935-bf45-d0d0e3d01260">
+				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="370" y="538" width="178" height="12" forecolor="#000000" backcolor="#F0F0DC" uuid="4a87531a-036e-4935-bf45-d0d0e3d01260">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
@@ -315,7 +315,7 @@
 				<text><![CDATA[Manager Keuangan]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
-				<reportElement positionType="Float" x="370" y="513" width="179" height="12" uuid="6888fcc1-59d0-4e11-9351-3432cbef0a4a"/>
+				<reportElement positionType="Float" x="370" y="523" width="179" height="12" uuid="6888fcc1-59d0-4e11-9351-3432cbef0a4a"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
@@ -323,7 +323,7 @@
 				<textFieldExpression><![CDATA[$P{menyetujui}]]></textFieldExpression>
 			</textField>
 			<componentElement>
-				<reportElement x="370" y="464" width="177" height="46" isRemoveLineWhenBlank="true" uuid="63d2c425-32ff-44c1-84cb-b5970e152bca">
+				<reportElement x="370" y="464" width="176" height="59" isRemoveLineWhenBlank="true" uuid="63d2c425-32ff-44c1-84cb-b5970e152bca">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 				</reportElement>
 				<jr:QRCode xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" errorCorrectionLevel="H">
@@ -382,18 +382,18 @@
 					<font fontName="Tahoma" size="9" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[PLT DIREKTUR]]></text>
+				<text><![CDATA[DIREKTUR]]></text>
 			</staticText>
 			<staticText>
-				<reportElement positionType="Float" x="16" y="513" width="179" height="12" uuid="de12c71c-2227-4b69-9f56-4ea8ff2ca4ca"/>
+				<reportElement positionType="Float" x="16" y="523" width="179" height="12" uuid="de12c71c-2227-4b69-9f56-4ea8ff2ca4ca"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="9"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
+				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
 			</staticText>
 			<line>
-				<reportElement positionType="Float" x="17" y="525" width="177" height="1" uuid="57c72281-3353-4cd9-90be-1627b83589a3"/>
+				<reportElement positionType="Float" x="17" y="535" width="177" height="1" uuid="57c72281-3353-4cd9-90be-1627b83589a3"/>
 				<graphicElement>
 					<pen lineWidth="0.5" lineStyle="Solid"/>
 				</graphicElement>
