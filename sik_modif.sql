@@ -59,8 +59,8 @@ CREATE TABLE IF NOT EXISTS `antriloketsmc`  (
 CREATE TABLE IF NOT EXISTS `antripintu_smc`  (
   `kd_pintu` varchar(20) NOT NULL DEFAULT '',
   `no_rawat` varchar(17) NOT NULL,
-  `status` enum('0','1','2') NOT NULL,
-  PRIMARY KEY (`kd_pintu`, `status`) USING BTREE
+  `status` enum('0','1','2') NOT NULL
+
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `asuhan_gizi` ADD COLUMN IF NOT EXISTS `alergi_ayam` enum('Ya','Tidak') NULL DEFAULT NULL AFTER `nip`;
