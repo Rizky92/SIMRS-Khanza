@@ -391,16 +391,6 @@
 	<summary>
 		<band height="105">
 			<staticText>
-				<reportElement x="842" y="94" width="121" height="11" uuid="5272a929-7365-4c2c-8471-a7bdf44fbfe7">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<text><![CDATA[PLT DIREKTUR]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="4" y="80" width="121" height="11" uuid="b5b70a0f-8ee8-495e-a884-68f51e85ca21">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -409,16 +399,6 @@
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
 				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="842" y="80" width="121" height="11" uuid="41bb8b55-a910-4bab-a917-19ce5e096487">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<text><![CDATA[Ns. YULIANA PABIBAK, S.Kep]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="39" y="29" width="50" height="11" uuid="f87d03f7-db24-4599-9610-f943f7a06eeb">
@@ -441,7 +421,7 @@
 				<text><![CDATA[KABAG KEUANGAN]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="877" y="29" width="50" height="11" uuid="6d76058d-68d4-42da-b172-fb6308f350bc">
+				<reportElement x="798" y="29" width="144" height="11" uuid="4ecaff3b-76ab-477d-9a34-fe7d1db5864a">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
 				</reportElement>
@@ -450,6 +430,26 @@
 				</textElement>
 				<text><![CDATA[Mengetahui]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="798" y="80" width="145" height="11" uuid="30a2e1d0-3833-4fe0-b3df-737f40da1e95">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="798" y="94" width="145" height="11" uuid="0dfcd862-d34b-407f-8e39-3a61487baabf">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>
