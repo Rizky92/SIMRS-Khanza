@@ -11171,12 +11171,12 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 if (ANTRIANPOLIPERPINTU) {
                     String kdPintu = Sequel.cariIsiSmc("select set_pintu_smc.kd_pintu from set_pintu_smc where set_pintu_smc.kd_dokter = ? and set_pintu_smc.kd_poli = ?", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                     if (!kdPintu.isBlank()) {
-                        Sequel.executeRawSmc("insert into antripintu_smc values(?, ?, '1') on duplicate key update no_rawat = values(no_rawat), status = value(status)", kdPintu, tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
+                        Sequel.menyimpantfSmc("antripintu_smc", "", kdPintu, tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
                     }
                 }
                 Sequel.menghapustfSmc("antripoli", "kd_dokter = ? and kd_poli = ?", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                 Sequel.menyimpantfSmc("antripoli", null, tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString(), "1", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
-                Sequel.executeRawSmc("insert into mutasi_berkas values(?, 'Sudah Diterima', now(), now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000' on duplicate key update status = value(status), diterima = value(diterima)", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
+                Sequel.executeRawSmc("insert into mutasi_berkas values(?, 'Sudah Diterima', now(), now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') on duplicate key update status = value(status), diterima = value(diterima)", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
             }
         }
     }//GEN-LAST:event_ppMasukPoliBtnPrintActionPerformed
