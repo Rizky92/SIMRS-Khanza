@@ -14,6 +14,7 @@ package viabarcode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.WarnaTable2;
 import fungsi.batasInput;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -24,9 +25,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
+import java.io.File;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,9 +38,6 @@ import javax.swing.JTable;
 import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import kepegawaian.DlgCariPetugas;
-import java.util.HashMap;
-import java.util.Map;
 import keuangan.Jurnal;
 
 /**
@@ -47,26 +45,25 @@ import keuangan.Jurnal;
  * @author dosen
  */
 public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDialog {
-    private final DefaultTableModel tabMode;
+    private final DefaultTableModel tabMode,tabModeAkunBayar;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private Jurnal jur=new Jurnal();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;
+    private int i=0,jml=0,countbayar=0;
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
-    private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     public boolean berhasil=false;
-    private double jasa_sarana=0,paket_bhp=0,jasa_pj_lab=0,jasa_pj_pengujian=0,jasa_verifikator=0,jasa_petugas=0,kso=0,jasa_menejemen=0,total=0;
-    private String Suspen_Piutang_Pelayanan_Lab_Kesling,Pendapatan_Pelayanan_Lab_Kesling,Beban_Jasa_Sarana_Pelayanan_Lab_Kesling,Utang_Jasa_sarana_Pelayanan_Lab_Kesling, 
-                   HPP_BHP_Pelayanan_Lab_Kesling,Persediaan_BHP_Pelayanan_Lab_Kesling,Beban_Jasa_PJLab_Pelayanan_Lab_Kesling,Utang_Jasa_PJLab_Pelayanan_Lab_Kesling,
-                   Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling,Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling,Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling, 
-                   Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling,Beban_Jasa_Analis_Pelayanan_Lab_Kesling,Utang_Jasa_Analis_Pelayanan_Lab_Kesling,Beban_KSO_Pelayanan_Lab_Kesling, 
-                   Utang_KSO_Pelayanan_Lab_Kesling,Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling,Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling;
+    private double total=0,bayar=0,besarppn=0,tagihanppn=0,kekurangan=0;
+    private String Suspen_Piutang_Pelayanan_Lab_Kesling,pilih="";
+    private File file;
+    private FileWriter fileWriter;
+    private WarnaTable2 warna=new WarnaTable2();
+    private String[] Nama_Akun_Bayar,Kode_Rek_Bayar,Bayar,PPN_Persen,PPN_Besar;
 
     /** Creates new form DlgPerawatan
      * @param parent
@@ -76,23 +73,11 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         initComponents();
         
         tabMode=new DefaultTableModel(null,new Object[]{
-              "Kode","Nama Parameter","Satuan","Hasil Pemeriksaan","Keterangan","Nilai Normal","Metode Pengujian","Kategori","No.Penugasan","NIP Analis","Nama Analis","NIP PJ","Nama PJ Pengujian",
-              "Jasa Sarana","Paket BHP","Jasa PJ Lab","Jasa PJ Pengujian","Jasa Verifikator","Jasa Petugas","KSO","Jasa Menejemen","Total"
+              "No.","Nama Parameter","Jumlah","Biaya (Rp)","Total Biaya (Rp)"
             }){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if ((colIndex==3)||(colIndex==4)) {
-                    a=true;
-                }
-                return a;
-             }
+             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class,java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Double.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -104,74 +89,74 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         tbValidasi.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbValidasi.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for(i = 0; i < 22; i++) {
+        for(i = 0; i < 5; i++) {
             TableColumn column = tbValidasi.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(55);
+                column.setPreferredWidth(28);
             }else if(i==1){
-                column.setPreferredWidth(160);
+                column.setPreferredWidth(370);
             }else if(i==2){
-                column.setPreferredWidth(60);
+                column.setPreferredWidth(45);
             }else if(i==3){
-                column.setPreferredWidth(97);
+                column.setPreferredWidth(105);
             }else if(i==4){
-                column.setPreferredWidth(140);
-            }else if(i==5){
-                column.setPreferredWidth(70);
-            }else if(i==6){
-                column.setPreferredWidth(130);
-            }else if(i==7){
-                column.setPreferredWidth(80);
-            }else if(i==8){
                 column.setPreferredWidth(120);
-            }else if(i==9){
-                column.setPreferredWidth(90);
-            }else if(i==10){
-                column.setPreferredWidth(150);
-            }else if(i==11){
-                column.setPreferredWidth(90);
-            }else if(i==12){
-                column.setPreferredWidth(150);
-            }else {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
             }
         }
         tbValidasi.setDefaultRenderer(Object.class, new WarnaTable());
+        
+        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)"}){             
+            @Override public boolean isCellEditable(int rowIndex, int colIndex){
+                boolean a = false;
+                if ((colIndex==2)) {
+                    a=true;
+                }
+                return a;
+            }
+             Class[] types = new Class[] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class
+             };
+             @Override
+             public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+             }
+        };
+        tbAkunBayar.setModel(tabModeAkunBayar);
+
+        tbAkunBayar.setPreferredScrollableViewportSize(new Dimension(800,800));
+        tbAkunBayar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (i = 0; i < 5; i++) {
+            TableColumn column = tbAkunBayar.getColumnModel().getColumn(i);
+            if(i==0){
+                column.setPreferredWidth(295);
+            }else if(i==1){
+                //column.setPreferredWidth(70);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }else if(i==2){
+                column.setPreferredWidth(112);
+            }else if(i==3){
+                column.setPreferredWidth(60);
+            }else if(i==4){
+                column.setPreferredWidth(90);
+            }
+        }
+        warna.kolom=2;
+        tbAkunBayar.setDefaultRenderer(Object.class,warna);
 
         NoBayar.setDocument(new batasInput((byte)20).getKata(NoBayar));
         DibayarOleh.setDocument(new batasInput((int)60).getKata(DibayarOleh)); 
         
         try {
             ps=koneksi.prepareStatement(
-                "select set_akun2.Suspen_Piutang_Pelayanan_Lab_Kesling,set_akun2.Pendapatan_Pelayanan_Lab_Kesling,set_akun2.Beban_Jasa_Sarana_Pelayanan_Lab_Kesling,"+
-                "set_akun2.Utang_Jasa_sarana_Pelayanan_Lab_Kesling,set_akun2.HPP_BHP_Pelayanan_Lab_Kesling,set_akun2.Persediaan_BHP_Pelayanan_Lab_Kesling,"+
-                "set_akun2.Beban_Jasa_PJLab_Pelayanan_Lab_Kesling,set_akun2.Utang_Jasa_PJLab_Pelayanan_Lab_Kesling,set_akun2.Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling,"+
-                "set_akun2.Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling,set_akun2.Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling,set_akun2.Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling,"+
-                "set_akun2.Beban_Jasa_Analis_Pelayanan_Lab_Kesling,set_akun2.Utang_Jasa_Analis_Pelayanan_Lab_Kesling,set_akun2.Beban_KSO_Pelayanan_Lab_Kesling,"+
-                "set_akun2.Utang_KSO_Pelayanan_Lab_Kesling,set_akun2.Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling,set_akun2.Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling from set_akun2"
+                "select set_akun2.Suspen_Piutang_Pelayanan_Lab_Kesling from set_akun2"
             );
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
                     Suspen_Piutang_Pelayanan_Lab_Kesling=rs.getString("Suspen_Piutang_Pelayanan_Lab_Kesling");
-                    Pendapatan_Pelayanan_Lab_Kesling=rs.getString("Pendapatan_Pelayanan_Lab_Kesling");
-                    Beban_Jasa_Sarana_Pelayanan_Lab_Kesling=rs.getString("Beban_Jasa_Sarana_Pelayanan_Lab_Kesling");
-                    Utang_Jasa_sarana_Pelayanan_Lab_Kesling=rs.getString("Utang_Jasa_sarana_Pelayanan_Lab_Kesling");
-                    HPP_BHP_Pelayanan_Lab_Kesling=rs.getString("HPP_BHP_Pelayanan_Lab_Kesling");
-                    Persediaan_BHP_Pelayanan_Lab_Kesling=rs.getString("Persediaan_BHP_Pelayanan_Lab_Kesling");
-                    Beban_Jasa_PJLab_Pelayanan_Lab_Kesling=rs.getString("Beban_Jasa_PJLab_Pelayanan_Lab_Kesling");
-                    Utang_Jasa_PJLab_Pelayanan_Lab_Kesling=rs.getString("Utang_Jasa_PJLab_Pelayanan_Lab_Kesling");
-                    Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling=rs.getString("Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling");
-                    Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling=rs.getString("Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling");
-                    Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling=rs.getString("Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling");
-                    Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling=rs.getString("Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling");
-                    Beban_Jasa_Analis_Pelayanan_Lab_Kesling=rs.getString("Beban_Jasa_Analis_Pelayanan_Lab_Kesling");
-                    Utang_Jasa_Analis_Pelayanan_Lab_Kesling=rs.getString("Utang_Jasa_Analis_Pelayanan_Lab_Kesling");
-                    Beban_KSO_Pelayanan_Lab_Kesling=rs.getString("Beban_KSO_Pelayanan_Lab_Kesling");
-                    Utang_KSO_Pelayanan_Lab_Kesling=rs.getString("Utang_KSO_Pelayanan_Lab_Kesling");
-                    Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling=rs.getString("Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling");
-                    Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling=rs.getString("Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling");
                 }
             } catch (Exception e) {
                 System.out.println("Notif Rekening : "+e);
@@ -200,8 +185,8 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Rentang = new widget.TextBox();
-        NoVerifikasi = new widget.TextBox();
+        PenerimaanSampel = new widget.TextBox();
+        TitikSampel = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
@@ -242,20 +227,22 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         TCari = new widget.TextBox();
         BtnCariBayar = new widget.Button();
         BtnAll = new widget.Button();
+        jLabel12 = new widget.Label();
+        TagihanPPn = new widget.TextBox();
 
-        Rentang.setHighlighter(null);
-        Rentang.setName("Rentang"); // NOI18N
-        Rentang.addKeyListener(new java.awt.event.KeyAdapter() {
+        PenerimaanSampel.setHighlighter(null);
+        PenerimaanSampel.setName("PenerimaanSampel"); // NOI18N
+        PenerimaanSampel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                RentangKeyPressed(evt);
+                PenerimaanSampelKeyPressed(evt);
             }
         });
 
-        NoVerifikasi.setHighlighter(null);
-        NoVerifikasi.setName("NoVerifikasi"); // NOI18N
-        NoVerifikasi.addKeyListener(new java.awt.event.KeyAdapter() {
+        TitikSampel.setHighlighter(null);
+        TitikSampel.setName("TitikSampel"); // NOI18N
+        TitikSampel.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                NoVerifikasiKeyPressed(evt);
+                TitikSampelKeyPressed(evt);
             }
         });
 
@@ -488,7 +475,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
             }
         });
 
-        Scroll2.setBorder(null);
+        Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
 
@@ -503,7 +490,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
 
         panelBayar.setBorder(null);
         panelBayar.setName("panelBayar"); // NOI18N
-        panelBayar.setPreferredSize(new java.awt.Dimension(100, 303));
+        panelBayar.setPreferredSize(new java.awt.Dimension(100, 353));
         panelBayar.setLayout(null);
 
         TtlSemua.setEditable(false);
@@ -517,7 +504,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
             }
         });
         panelBayar.add(TtlSemua);
-        TtlSemua.setBounds(105, 10, 230, 23);
+        TtlSemua.setBounds(105, 10, 225, 23);
 
         TKembali.setEditable(false);
         TKembali.setText("0");
@@ -525,7 +512,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         TKembali.setHighlighter(null);
         TKembali.setName("TKembali"); // NOI18N
         panelBayar.add(TKembali);
-        TKembali.setBounds(105, 270, 230, 23);
+        TKembali.setBounds(105, 320, 225, 23);
 
         jLabel8.setText("Bayar : Rp.");
         jLabel8.setName("jLabel8"); // NOI18N
@@ -568,13 +555,13 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         scrollPane3.setViewportView(tbAkunBayar);
 
         panelBayar.add(scrollPane3);
-        scrollPane3.setBounds(105, 65, 573, 200);
+        scrollPane3.setBounds(105, 65, 573, 250);
 
         jLabel10.setText("Kembali : Rp.");
         jLabel10.setName("jLabel10"); // NOI18N
         jLabel10.setPreferredSize(new java.awt.Dimension(95, 23));
         panelBayar.add(jLabel10);
-        jLabel10.setBounds(19, 270, 85, 23);
+        jLabel10.setBounds(19, 320, 85, 23);
 
         TCari.setName("TCari"); // NOI18N
         TCari.setPreferredSize(new java.awt.Dimension(340, 23));
@@ -621,6 +608,20 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         });
         panelBayar.add(BtnAll);
         BtnAll.setBounds(653, 40, 25, 23);
+
+        jLabel12.setText("Tagihan + PPN : Rp.");
+        jLabel12.setName("jLabel12"); // NOI18N
+        jLabel12.setPreferredSize(new java.awt.Dimension(95, 23));
+        panelBayar.add(jLabel12);
+        jLabel12.setBounds(342, 10, 110, 23);
+
+        TagihanPPn.setEditable(false);
+        TagihanPPn.setText("0");
+        TagihanPPn.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        TagihanPPn.setHighlighter(null);
+        TagihanPPn.setName("TagihanPPn"); // NOI18N
+        panelBayar.add(TagihanPPn);
+        TagihanPPn.setBounds(453, 10, 225, 23);
 
         scrollPane8.setViewportView(panelBayar);
 
@@ -822,9 +823,9 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        /*this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(KdPJ.getText().equals("")||NmPJ.getText().equals("")){
-            Valid.textKosong(btnPJ,"Penanggung Jawab Verifikasi");
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(DibayarOleh.getText().equals("")){
+            Valid.textKosong(DibayarOleh,"Pihak Pelanggan Yang Membayar");
         }else if(KodePelanggan.getText().equals("")||NamaPelanggan.getText().equals("")){
             Valid.textKosong(NoBayar,"Pelanggan");
         }else if(NoPermintaan.getText().equals("")){
@@ -834,46 +835,98 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }else if(KodeSampel.getText().equals("")||NamaSampel.getText().equals("")){
             Valid.textKosong(NoBayar,"Sampel");
         }else if(tabMode.getRowCount()==0){
-            Valid.textKosong(NoBayar,"Data Verifikasi");
+            Valid.textKosong(NoBayar,"Data Pembayaran");
         }else{
-            Sequel.queryu("delete from temporary");
+            Sequel.queryu("delete from temporary_bayar_labkesling");
+            jml=0;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","No.Nota",": "+NoBayar.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
+            }); 
+            jml++;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","No.Permintaan",": "+NoPermintaan.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
+            }); 
+            jml++;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","Nama Pelanggan",": "+NamaPelanggan.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
+            }); 
+            jml++;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","Penerimaan Sample",": "+Valid.SetTgl5(PenerimaanSampel.getText()),"","","","","","","","","","","","","","Header",akses.getkode()
+            }); 
+            jml++;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","Tanggal Uji",": "+Sequel.cariIsi("select concat(date_format(labkesling_verifikasi_pengujian_sampel.mulai_pengujian,'%d/%m/%Y %H:%i:%s'),' s.d. ',date_format(labkesling_verifikasi_pengujian_sampel.selesai_pengujian,'%d/%m/%Y %H:%i:%s')) from labkesling_verifikasi_pengujian_sampel where labkesling_verifikasi_pengujian_sampel.no_permintaan=?",NoPermintaan.getText()),"","","","","","","","","","","","","","Header",akses.getkode()
+            }); 
+            jml++;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","Jenis Sampel",": "+NamaSampel.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
+            }); 
+            jml++;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","Titik Sampling",": "+TitikSampel.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
+            }); 
+            jml++;
             for(i=0;i<tbValidasi.getRowCount();i++){ 
-                Sequel.menyimpan("temporary","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
-                    "0",tbValidasi.getValueAt(i,1).toString(),tbValidasi.getValueAt(i,2).toString(),tbValidasi.getValueAt(i,3).toString(),tbValidasi.getValueAt(i,5).toString(),tbValidasi.getValueAt(i,6).toString(),tbValidasi.getValueAt(i,7).toString(),"","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",""
-                });               
+                Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                    jml+"",tbValidasi.getValueAt(i,0).toString(),tbValidasi.getValueAt(i,1).toString(),tbValidasi.getValueAt(i,2).toString(),tbValidasi.getValueAt(i,3).toString(),tbValidasi.getValueAt(i,4).toString(),"","","","","","","","","","","Tagihan",akses.getkode()
+                });    
+                jml++;
             }
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","Total Biaya Pemeriksaan","","","",TtlSemua.getText(),"","","","","","","","","","","Total Tagihan",akses.getkode()
+            });    
+            jml++;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","PPN","","","",Valid.SetAngka(besarppn),"","","","","","","","","","","Total Tagihan",akses.getkode()
+            });    
+            jml++;
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","Total Pembayaran","","","",TagihanPPn.getText(),"","","","","","","","","","","Total Tagihan",akses.getkode()
+            });    
+            jml++;
+            for(i=0;i<tbAkunBayar.getRowCount();i++){
+                if(Valid.SetAngka(tbAkunBayar.getValueAt(i,2).toString())>0){
+                    Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                        jml+"","- "+tbAkunBayar.getValueAt(i,0).toString(),"","","",Valid.SetAngka((Valid.SetAngka(tbAkunBayar.getValueAt(i,2).toString())+Valid.SetAngka(tbAkunBayar.getValueAt(i,4).toString()))),"","","","","","","","","","","Total Tagihan",akses.getkode()
+                    });
+                    jml++;
+                } 
+            }
+            Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
+                jml+"","Dibayar Lunas Oleh ",DibayarOleh.getText(),"","","","","","","","","","","","","","Dibayar",akses.getkode()
+            });    
+            jml++;  
             
-            Map<String, Object> param = new HashMap<>();
-            param.put("nomorpermintaan",NoPermintaan.getText());
-            param.put("novalidasi",NoBayar.getText());
-            param.put("namapelanggan",NamaPelanggan.getText());
-            param.put("alamatpelanggan",Sequel.cariIsi("select labkesling_pelanggan.alamat from labkesling_pelanggan where labkesling_pelanggan.kode_pelanggan=?",KodePelanggan.getText()));
-            param.put("jenisampel",NamaSampel.getText());
-            param.put("bakumutu",Sequel.cariIsi("select labkesling_master_sampel.baku_mutu from labkesling_master_sampel where labkesling_master_sampel.kode_sampel=?",KodeSampel.getText()));
-            param.put("titiksampling",Sequel.cariIsi("select labkesling_permintaan_pengujian_sampel.lokasi_sampling from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",NoPermintaan.getText()));
-            param.put("disamplingoleh",Sequel.cariIsi("select labkesling_permintaan_pengujian_sampel.sampling_dilakukan_oleh from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",NoPermintaan.getText()));
-            param.put("waktusampling",Sequel.cariIsi("select date_format(labkesling_permintaan_pengujian_sampel.waktu_sampling,'%d/%m/%Y %H:%i:%s') from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",NoPermintaan.getText()));
-            param.put("waktuterimasampel",Sequel.cariIsi("select date_format(labkesling_permintaan_pengujian_sampel.waktu_diterima,'%d/%m/%Y %H:%i:%s') from labkesling_permintaan_pengujian_sampel where labkesling_permintaan_pengujian_sampel.no_permintaan=?",NoPermintaan.getText()));
-            param.put("rentangwaktu",Rentang.getText());
-            param.put("tanggalvalidasi",TanggalValidasi.getSelectedItem().toString());
-            param.put("pjlaborat",NmPJ.getText());
-            param.put("kodepjlaborat",KdPJ.getText());
-            param.put("namapjpengujian",NamaVerifikator.getText());
-            param.put("kodepjpengujian",KodeVerifikator.getText());
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdPJ.getText());
-            param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmPJ.getText()+"\nID "+(finger.equals("")?KdPJ.getText():finger)+"\n"+TanggalValidasi.getSelectedItem()); 
-            finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KodeVerifikator.getText());
-            param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NamaVerifikator.getText()+"\nID "+(finger.equals("")?KodeVerifikator.getText():finger)+"\n"+TanggalValidasi.getSelectedItem()); 
-            Valid.MyReport("rptValidasiPengujianSampelLaboratKesling.jasper","report","::[ Laporan Hasil Uji Laboratorium ]::",param);            
+            i = 0;
+            try{
+                pilih = (String)JOptionPane.showInputDialog(null,"Silahkan pilih nota yang mau dicetak!","Nota",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Nota", "Kwitansi", "Nota & Kwitansi"},"Nota");
+                switch (pilih) {
+                    case "Nota":
+                          i=1;
+                          break;
+                    case "Kwitansi":
+                          i=2;
+                          break;
+                    case "Nota & Kwitansi":
+                          i=3;
+                          break;
+               }
+            }catch(Exception e){
+                i=0;
+            }
+            if(i>0){ 
+                if(i==1){
+                    Valid.panggilUrl("billing/NotaLabkesLing.php?petugas="+akses.getkode().replaceAll(" ","_")+"&tanggal="+TanggalValidasi.getSelectedItem().toString().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+                }else if(i==2){
+                    
+                }else if(i==3){
+                    Valid.panggilUrl("billing/NotaLabkesLing.php?petugas="+akses.getkode().replaceAll(" ","_")+"&tanggal="+TanggalValidasi.getSelectedItem().toString().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
+                                                 
+                }
+            }
         }
-        this.setCursor(Cursor.getDefaultCursor());*/
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -893,6 +946,14 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampil();
+        try {
+            if(Valid.daysOld("./cache/akunbayar.iyem")>30){
+                tampilAkunBayar();
+            }else{
+                tampilAkunBayar2();
+            }
+        } catch (Exception e) {
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void NoBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoBayarKeyPressed
@@ -903,13 +964,13 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         Valid.pindah(evt,NoBayar,BtnSimpan);
     }//GEN-LAST:event_DibayarOlehKeyPressed
 
-    private void RentangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RentangKeyPressed
+    private void PenerimaanSampelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenerimaanSampelKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_RentangKeyPressed
+    }//GEN-LAST:event_PenerimaanSampelKeyPressed
 
-    private void NoVerifikasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoVerifikasiKeyPressed
+    private void TitikSampelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TitikSampelKeyPressed
         // TODO add your handling code here:
-    }//GEN-LAST:event_NoVerifikasiKeyPressed
+    }//GEN-LAST:event_TitikSampelKeyPressed
 
     private void TabDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabDataMouseClicked
         
@@ -920,11 +981,28 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_TtlSemuaKeyPressed
 
     private void tbAkunBayarPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbAkunBayarPropertyChange
-        
+        if(this.isVisible()==true){
+              isKembali();
+        }
     }//GEN-LAST:event_tbAkunBayarPropertyChange
 
     private void tbAkunBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbAkunBayarKeyPressed
-       
+        if(tabModeAkunBayar.getRowCount()!=0){
+            if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+                if(tbAkunBayar.getRowCount()!=0){
+                    if((tbAkunBayar.getSelectedColumn()==2)||(tbAkunBayar.getSelectedColumn()==3)||(tbAkunBayar.getSelectedColumn()==4)){
+                        if(!tabModeAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString().equals("")){
+                            tbAkunBayar.setValueAt(
+                                    Valid.roundUp((Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),3).toString())/100)*
+                                    Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString()),100),tbAkunBayar.getSelectedRow(),4);
+                        }else{
+                            tbAkunBayar.setValueAt("",tbAkunBayar.getSelectedRow(),4);                        
+                        }                            
+                    }
+                }
+                isKembali();
+            }
+        }
     }//GEN-LAST:event_tbAkunBayarKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -934,7 +1012,8 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariBayarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariBayarActionPerformed
-        
+        tampilAkunBayar2();
+        isKembali();
     }//GEN-LAST:event_BtnCariBayarActionPerformed
 
     private void BtnCariBayarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariBayarKeyPressed
@@ -942,7 +1021,8 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_BtnCariBayarKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-        
+        tampilAkunBayar();
+        isKembali();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -987,17 +1067,19 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.TextBox NamaSampel;
     private widget.TextBox NoBayar;
     private widget.TextBox NoPermintaan;
-    private widget.TextBox NoVerifikasi;
     private widget.PanelBiasa PanelInput;
-    private widget.TextBox Rentang;
+    private widget.TextBox PenerimaanSampel;
     private widget.ScrollPane Scroll2;
     private widget.TextBox TCari;
     public widget.TextBox TKembali;
     private javax.swing.JTabbedPane TabData;
+    private widget.TextBox TagihanPPn;
     private widget.Tanggal TanggalValidasi;
+    private widget.TextBox TitikSampel;
     private widget.TextBox TtlSemua;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
+    private widget.Label jLabel12;
     private widget.Label jLabel15;
     private widget.Label jLabel18;
     private widget.Label jLabel4;
@@ -1018,22 +1100,20 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private void tampil() {   
         try {
             Valid.tabelKosong(tabMode);
-            myObj = new FileReader("./cache/validasipengujiansampellabkesling.iyem");
+            myObj = new FileReader("./cache/bayartagihansampellabkesling.iyem");
             root = mapper.readTree(myObj);
-            response = root.path("validasipengujiansampellabkesling");
+            response = root.path("bayartagihansampellabkesling");
             if(response.isArray()){
+                total=0;
+                i=1;
                 for(JsonNode list:response){
                     tabMode.addRow(new Object[]{
-                        list.path("Kode").asText(),list.path("NamaParameter").asText(),list.path("Satuan").asText(),
-                        list.path("HasilPemeriksaan").asText(),list.path("Keterangan").asText(),list.path("NilaiNormal").asText(),
-                        list.path("MetodePengujian").asText(),list.path("Kategori").asText(),list.path("NoPenugasan").asText(),
-                        list.path("NIPAnalis").asText(),list.path("NamaAnalis").asText(),list.path("NIPPJPengujian").asText(),
-                        list.path("NamaPJPengujian").asText(),list.path("JasaSarana").asText(),list.path("PaketBHP").asText(),
-                        list.path("JasaPJLab").asText(),list.path("JasaPJPengujian").asText(),list.path("JasaVerifikator").asText(),
-                        list.path("JasaPetugas").asText(),list.path("KSO").asText(),list.path("JasaMenejemen").asText(),
-                        list.path("Total").asText()
+                        i,list.path("NamaParameter").asText(),"1",list.path("Total").asDouble(),list.path("Total").asDouble()
                     });
+                    total=total+list.path("Total").asDouble();
+                    i++;
                 }
+                TtlSemua.setText(Valid.SetAngka3(total));
             }
             myObj.close();
         } catch (Exception ex) {
@@ -1045,16 +1125,14 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
     }
     
-    public void setData(String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel,String kodeverifikator,String namaverifikator,String rentang,String noverifikasi) {
+    public void setData(String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel,String titiksampel,String tanggalpenerimaan) {
         NoPermintaan.setText(nopermintaan);
         KodePelanggan.setText(kodepelanggan);
         NamaPelanggan.setText(namapelanggan);
         KodeSampel.setText(kodesampel);
         NamaSampel.setText(namasampel);
-        //KodeVerifikator.setText(kodeverifikator);
-        //NamaVerifikator.setText(namaverifikator);
-        Rentang.setText(rentang);
-        NoVerifikasi.setText(noverifikasi);
+        TitikSampel.setText(titiksampel);
+        PenerimaanSampel.setText(tanggalpenerimaan);
         autoNomor();
     }
     
@@ -1122,5 +1200,132 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         if(!KodeSampel.getText().trim().equals("")){
             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(labkesling_pembayaran_pengujian_sampel.no_pembayaran,5),signed)),0) from labkesling_pembayaran_pengujian_sampel where date_format(labkesling_pembayaran_pengujian_sampel.tanggal,'%Y-%m-%d')='"+Valid.SetTgl(TanggalValidasi.getSelectedItem()+"")+"'","LKL"+TanggalValidasi.getSelectedItem().toString().substring(6,10)+TanggalValidasi.getSelectedItem().toString().substring(3,5)+TanggalValidasi.getSelectedItem().toString().substring(0,2),5,NoBayar);   
         }        
+    }
+    
+    private void tampilAkunBayar() {         
+        try{      
+             Valid.tabelKosong(tabModeAkunBayar);
+             file=new File("./cache/akunbayar.iyem");
+             file.createNewFile();
+             fileWriter = new FileWriter(file);
+             StringBuilder iyembuilder = new StringBuilder();
+             ps=koneksi.prepareStatement("select * from akun_bayar order by akun_bayar.nama_bayar");
+             try{
+                 rs=ps.executeQuery();
+                 while(rs.next()){      
+                     tabModeAkunBayar.addRow(new Object[]{rs.getString(1),rs.getString(2),"",rs.getDouble(3),""});
+                     iyembuilder.append("{\"NamaAkun\":\"").append(rs.getString(1).replaceAll("\"","")).append("\",\"KodeRek\":\"").append(rs.getString(2)).append("\",\"PPN\":\"").append(rs.getDouble(3)).append("\"},");
+                 }
+             }catch (Exception e) {
+                 System.out.println("Notifikasi : "+e);
+             } finally{
+                 if(rs != null){
+                     rs.close();
+                 } 
+                 if(ps != null){
+                     ps.close();
+                 } 
+             }
+             
+             if (iyembuilder.length() > 0) {
+                iyembuilder.setLength(iyembuilder.length() - 1);
+                fileWriter.write("{\"akunbayar\":["+iyembuilder+"]}");
+                fileWriter.flush();
+             }
+            
+             fileWriter.close();
+             iyembuilder=null;
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
+    }
+    
+    private void tampilAkunBayar2() {         
+         try{           
+             jml=0;
+             for(i=0;1<tbAkunBayar.getRowCount();i++){
+                if(!tbAkunBayar.getValueAt(i,2).toString().equals("")){
+                    jml++;
+                }
+             }
+             
+             Nama_Akun_Bayar=new String[jml];
+             Kode_Rek_Bayar=new String[jml];
+             Bayar=new String[jml];
+             PPN_Persen=new String[jml];
+             PPN_Besar=new String[jml];
+             
+             jml=0;
+             for(i=0;i<tbAkunBayar.getRowCount();i++){
+                if(!tbAkunBayar.getValueAt(i,2).toString().equals("")){
+                    Nama_Akun_Bayar[jml]=tbAkunBayar.getValueAt(i,0).toString();
+                    Kode_Rek_Bayar[jml]=tbAkunBayar.getValueAt(i,1).toString();
+                    Bayar[jml]=tbAkunBayar.getValueAt(i,2).toString();
+                    PPN_Persen[jml]=tbAkunBayar.getValueAt(i,3).toString();
+                    PPN_Besar[jml]=tbAkunBayar.getValueAt(i,4).toString();
+                    jml++;
+                }
+             }
+             
+             Valid.tabelKosong(tabModeAkunBayar);
+             
+             for(i=0;i<jml;i++){
+                tabModeAkunBayar.addRow(new Object[] {
+                    Nama_Akun_Bayar[i],Kode_Rek_Bayar[i],Bayar[i],PPN_Persen[i],PPN_Besar[i]
+                });
+             }
+             
+             Nama_Akun_Bayar=null;
+             Kode_Rek_Bayar=null;
+             Bayar=null;
+             PPN_Persen=null;
+             PPN_Besar=null;
+             
+             myObj = new FileReader("./cache/akunbayar.iyem");
+             root = mapper.readTree(myObj);
+             response = root.path("akunbayar");
+             if(response.isArray()){
+                for(JsonNode list:response){
+                    if(list.path("NamaAkun").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                        tabModeAkunBayar.addRow(new Object[]{
+                            list.path("NamaAkun").asText(),list.path("KodeRek").asText(),"",list.path("PPN").asText(),""
+                        });
+                    }
+                }
+             }
+             myObj.close();
+         }catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex);
+         }
+    }
+    
+    private void isKembali(){
+        bayar=0;besarppn=0;tagihanppn=0;countbayar=0;kekurangan=0;
+        
+        for(i=0;i<tabModeAkunBayar.getRowCount();i++){ 
+            if(!tabModeAkunBayar.getValueAt(i,2).toString().equals("")){
+                countbayar++;
+                try {
+                    bayar=bayar+Double.parseDouble(tabModeAkunBayar.getValueAt(i,2).toString()); 
+                } catch (Exception e) {
+                    bayar=bayar+0;
+                }               
+            }  
+            
+            if(!tabModeAkunBayar.getValueAt(i,4).toString().equals("")){
+                try {
+                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tabModeAkunBayar.getValueAt(i,4).toString()),100); 
+                } catch (Exception e) {
+                    besarppn=besarppn+0;
+                }               
+            }   
+        }
+        
+        tagihanppn=besarppn+total;
+        TagihanPPn.setText(Valid.SetAngka3(tagihanppn));
+        
+        kekurangan=(bayar+besarppn)-tagihanppn;
+        
+        TKembali.setText(Valid.SetAngka3(kekurangan));  
     }
 }
