@@ -99,6 +99,9 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        Popup = new javax.swing.JPopupMenu();
+        ppClear = new javax.swing.JMenuItem();
+        ppSemua = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbUser = new widget.Table();
@@ -114,6 +117,42 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         LCount = new widget.Label();
         BtnSimpan = new widget.Button();
         BtnKeluar = new widget.Button();
+
+        Popup.setName("Popup"); // NOI18N
+
+        ppClear.setBackground(new java.awt.Color(255, 255, 254));
+        ppClear.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppClear.setForeground(new java.awt.Color(50, 50, 50));
+        ppClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppClear.setText("Bersihkan Pilihan");
+        ppClear.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppClear.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppClear.setIconTextGap(8);
+        ppClear.setName("ppClear"); // NOI18N
+        ppClear.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppClear.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppClearActionPerformed(evt);
+            }
+        });
+        Popup.add(ppClear);
+
+        ppSemua.setBackground(new java.awt.Color(255, 255, 254));
+        ppSemua.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        ppSemua.setForeground(new java.awt.Color(50, 50, 50));
+        ppSemua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        ppSemua.setText("Pilih Semua");
+        ppSemua.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        ppSemua.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ppSemua.setIconTextGap(8);
+        ppSemua.setName("ppSemua"); // NOI18N
+        ppSemua.setPreferredSize(new java.awt.Dimension(200, 25));
+        ppSemua.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ppSemuaActionPerformed(evt);
+            }
+        });
+        Popup.add(ppSemua);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -132,6 +171,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         Scroll.setOpaque(true);
 
         tbUser.setToolTipText("Untuk memegang hak akses agar tidak hilang karena pencarian data, silahkan klik di bagian P. \nUntuk memberikan hak akses klik pada akses. Gunakan klik kanan untuk menampilkan popup menu.");
+        tbUser.setComponentPopupMenu(Popup);
         tbUser.setName("tbUser"); // NOI18N
         Scroll.setViewportView(tbUser);
 
@@ -148,6 +188,11 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
 
         TNmUser.setEditable(false);
         TNmUser.setName("TNmUser"); // NOI18N
+        TNmUser.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNmUserKeyPressed(evt);
+            }
+        });
         panelGlass5.add(TNmUser);
         TNmUser.setBounds(47, 10, 150, 23);
 
@@ -259,18 +304,14 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TNmUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmUserKeyPressed
-        // TODO add your handling code here:
+        Valid.pindahSmc(evt, BtnKeluar, TCari);
     }//GEN-LAST:event_TNmUserKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnCariActionPerformed(null);
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnCari.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            BtnKeluar.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            tbUser.requestFocus();
+        } else {
+            Valid.pindahSmc(evt, TNmUser, BtnCari);
         }
     }//GEN-LAST:event_TCariKeyPressed
 
@@ -282,7 +323,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
         } else {
-            Valid.pindah(evt, TCari, BtnAll);
+            Valid.pindahSmc(evt, TCari, BtnAll);
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -294,7 +335,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnAllActionPerformed(null);
         } else {
-            Valid.pindah(evt, BtnCari, BtnSimpan);
+            Valid.pindahSmc(evt, BtnCari, BtnSimpan);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -322,13 +363,25 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
         } else {
-            Valid.pindah(evt, BtnSimpan, TCari);
+            Valid.pindah(evt, BtnSimpan, TNmUser);
         }
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         aksesdiubah.clear();
     }//GEN-LAST:event_formWindowClosed
+
+    private void ppClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppClearActionPerformed
+        for (int i = 0; i < tbUser.getRowCount(); i++) {
+            tbUser.setValueAt(false, i, 0);
+        }
+    }//GEN-LAST:event_ppClearActionPerformed
+
+    private void ppSemuaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSemuaActionPerformed
+        for (int i = 0; i < tbUser.getRowCount(); i++) {
+            tbUser.setValueAt(true, i, 0);
+        }
+    }//GEN-LAST:event_ppSemuaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -352,6 +405,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
     private widget.Label LCount;
+    private javax.swing.JPopupMenu Popup;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.TextBox TNmUser;
@@ -361,6 +415,8 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     private widget.Label jLabel9;
     private widget.panelisi panelGlass5;
     private widget.panelisi panelGlass8;
+    private javax.swing.JMenuItem ppClear;
+    private javax.swing.JMenuItem ppSemua;
     private widget.Table tbUser;
     // End of variables declaration//GEN-END:variables
 
