@@ -507,6 +507,10 @@ public final class sekuel {
         return false;
     }
 
+    public boolean menghapustfSmc(String table) {
+        return menghapustfSmc(table, null);
+    }
+
     public boolean executeRawSmc(String sql, String... values) {
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
             for (int i = 0; i < values.length; i++) {
