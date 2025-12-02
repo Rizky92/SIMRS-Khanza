@@ -304,14 +304,14 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void TNmUserKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmUserKeyPressed
-        Valid.pindahSmc(evt, BtnKeluar, TCari);
+        Valid.pindah(evt, BtnKeluar, TCari);
     }//GEN-LAST:event_TNmUserKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnCariActionPerformed(null);
         } else {
-            Valid.pindahSmc(evt, TNmUser, BtnCari);
+            Valid.pindah(evt, TNmUser, BtnCari);
         }
     }//GEN-LAST:event_TCariKeyPressed
 
@@ -323,7 +323,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
         } else {
-            Valid.pindahSmc(evt, TCari, BtnAll);
+            Valid.pindah(evt, TCari, BtnAll);
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -335,7 +335,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnAllActionPerformed(null);
         } else {
-            Valid.pindahSmc(evt, BtnCari, BtnSimpan);
+            Valid.pindah(evt, BtnCari, BtnSimpan);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
