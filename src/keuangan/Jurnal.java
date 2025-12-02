@@ -30,29 +30,31 @@ public class Jurnal {
                 pscek.setString(1, akses.getkode());
                 pscek.setString(2, akses.getalamatip());
                 try (ResultSet rscek = pscek.executeQuery()) {
-                    if (rscek.getInt("jml") > 0) {
-                        if (rscek.getInt("selisih") == 0) {
-                            String nojur = "";
-                            int i = 0;
-                            do {
-                                nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
-                                sukses = Sequel.menyimpantfSmc("jurnal", "", nojur, nobukti, rscek.getString("tanggal"), rscek.getString("jam"), jenis, keterangan);
-                            } while (!sukses && i++ < 3);
+                    if (rscek.next()) {
+                        if (rscek.getInt("jml") > 0) {
+                            if (rscek.getInt("selisih") == 0) {
+                                String nojur = "";
+                                int i = 0;
+                                do {
+                                    nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
+                                    sukses = Sequel.menyimpantfSmc("jurnal", "", nojur, nobukti, rscek.getString("tanggal"), rscek.getString("jam"), jenis, keterangan);
+                                } while (!sukses && i++ < 3);
 
-                            if (sukses && !nojur.isBlank()) {
-                                sukses = Sequel.executeRawSmc("insert into detailjurnal select ? as no_jurnal, tampjurnal_smc.kd_rek, tampjurnal_smc.debet, " +
-                                    "tampjurnal_smc.kredit from tampjurnal_smc where user_id = ? and ip = ?", nojur, akses.getkode(), akses.getalamatip()
-                                );
-                                Sequel.deleteTampJurnal();
+                                if (sukses && !nojur.isBlank()) {
+                                    sukses = Sequel.executeRawSmc("insert into detailjurnal select ? as no_jurnal, tampjurnal_smc.kd_rek, tampjurnal_smc.debet, " +
+                                        "tampjurnal_smc.kredit from tampjurnal_smc where user_id = ? and ip = ?", nojur, akses.getkode(), akses.getalamatip()
+                                    );
+                                    Sequel.deleteTampJurnal();
+                                }
+                            } else {
+                                System.out.println("Notif : Debet dan Kredit tidak sama!");
+                                System.out.println("Total Debet  : " + rscek.getBigDecimal("total_debet").toPlainString());
+                                System.out.println("Total Kredit : " + rscek.getBigDecimal("total_kredit").toPlainString());
+                                sukses = false;
                             }
                         } else {
-                            System.out.println("Notif : Debet dan Kredit tidak sama!");
-                            System.out.println("Total Debet  : " + rscek.getBigDecimal("total_debet").toPlainString());
-                            System.out.println("Total Kredit : " + rscek.getBigDecimal("total_kredit").toPlainString());
-                            sukses = false;
+                            System.out.println("Notif : Tidak ada transaksi yang bisa dijurnal!");
                         }
-                    } else {
-                        System.out.println("Notif : Tidak ada transaksi yang bisa dijurnal!");
                     }
                 }
             }

@@ -5332,10 +5332,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 simpan();
             }else{
-                /*if(TanggalRegistrasi.getText().equals("")){
-                    TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
-                }
-                if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){*/
                 if (Sequel.cekTanggalRegistrasiSmc(TNoRw.getText(), Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk))) {
                     simpan();
                 }
@@ -5519,7 +5515,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.Commit();
                         for(i=0;i<tbRawatDr.getRowCount();i++){
-                            if(tbRawatDr.getValueAt(i,0).toString().equals("true") && TNoRw.getText().equals(tbRawatDr.getValueAt(i, 1).toString())){
+                            if(tbRawatDr.getValueAt(i,0).toString().equals("true")){
                                 tabModeDr.removeRow(i);
                                 i--;
                             }
@@ -5622,7 +5618,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.Commit();
                         for(i=0;i<tbRawatPr.getRowCount();i++){
-                            if (tbRawatPr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatPr.getValueAt(i, 1).toString())) {
+                            if (tbRawatPr.getValueAt(i, 0).toString().equals("true")) {
                                 tabModePr.removeRow(i);
                                 i--;
                             }
@@ -5731,7 +5727,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.Commit();
                         for(i=0;i<tbRawatDrPr.getRowCount();i++){
-                            if (tbRawatDrPr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatDrPr.getValueAt(i, 1).toString())) {
+                            if (tbRawatDrPr.getValueAt(i, 0).toString().equals("true")) {
                                 tabModeDrPr.removeRow(i);
                                 i--;
                             }
