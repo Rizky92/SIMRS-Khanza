@@ -336,7 +336,7 @@
 		</band>
 	</pageFooter>
 	<summary>
-		<band height="105">
+		<band height="110">
 			<staticText>
 				<reportElement x="4" y="94" width="121" height="11" uuid="81607f18-2666-47b6-afe5-e8ee64fb9999">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -345,7 +345,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[MANAGER KEUANGAN]]></text>
+				<text><![CDATA[KABAG KEUANGAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="80" width="121" height="11" uuid="39b6cabd-4481-4ed7-8842-81349471b915">
@@ -366,6 +366,36 @@
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
 				<text><![CDATA[Menyetujui]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="677" y="80" width="121" height="11" uuid="014f4b89-fb93-4133-96fb-e66a2d316602">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="712" y="29" width="50" height="11" uuid="c97bdf95-9bfa-4f8f-9694-8fded4eb409c">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Mengetahui]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="677" y="94" width="121" height="11" uuid="15b86521-191c-41e0-90e6-cbfd0de0fc26">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[DIREKTUR]]></text>
 			</staticText>
 		</band>
 	</summary>
