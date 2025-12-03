@@ -678,7 +678,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             BtnNota.setVisible(true);
                         }else{
                             BtnNota.setVisible(false);
-                        }            
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -692,7 +692,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     BtnNota.setVisible(true);
                 }else{
                     BtnNota.setVisible(false);
-                } 
+                }
                 System.out.println("Notif Set Nota : "+e);
             } finally{
                 if(rsrekening!=null){
@@ -2657,7 +2657,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     i=0;
                 }
 
-                    if(i>0){                       
+                    if(i>0){
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         kd_pj=Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
                         switch (i) {
@@ -2693,12 +2693,12 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         }
                         this.setCursor(Cursor.getDefaultCursor());
                     }
-                    
+
                     this.setCursor(Cursor.getDefaultCursor());
                 }catch(Exception ex){
                     System.out.println(ex);
-                }      
-          }        
+                }
+          }
 }//GEN-LAST:event_BtnNotaActionPerformed
 
     private void BtnNotaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnNotaKeyPressed
@@ -5249,8 +5249,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         MnPoli.setEnabled(akses.getregistrasi());
         MnDokter.setEnabled(akses.getregistrasi());
         MnPenjab.setEnabled(akses.getregistrasi());
-    } 
-    
+    }
+
     public void isKembali(){
         bayar=0;total=0;besarppn=0;tagihanppn=0;y=0;piutang=0;kekurangan=0;countbayar=0;
         row2=tabModeAkunBayar.getRowCount();
@@ -5670,7 +5670,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             Host_to_Host_Bank_Mandiri="";
         }
     }
-    
+
     private void tampilAkunBayar() {
         try {
             Valid.tabelKosong(tabModeAkunBayar);
@@ -5696,7 +5696,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void tampilAkunBayar2() {
         try {
             jml = 0;
@@ -5742,7 +5742,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void tampilAkunBayar3() {
         try {
             File file = new File("./cache/akunbayar.iyem");
@@ -6292,10 +6292,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         if(piutang>0){
                             if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PIUTANG PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
                             if(bayar>0){
-                                if(Sequel.menyimpantf2(
-                                    "tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"',concat('"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+
-                                    "',' ',CURTIME()),'Uang Muka','"+total+"','"+bayar+"','Belum','"+akses.getkode()+"'","No.Rawat"
-                                )==false){
+                                if(Sequel.menyimpantf2("tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19)+"','Uang Muka','"+total+"','"+bayar+"','Belum','"+akses.getkode()+"'","No.Rawat")==false){
                                     sukses=false;
                                 }
                             }
@@ -6306,11 +6303,10 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }else if(piutang<=0){
-                            if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBAYARAN PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
-                            if(Sequel.menyimpantf2(
-                                "tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"',concat('"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+
-                                "',' ',CURTIME()),'Pelunasan','"+total+"','"+total+"','Sudah','"+akses.getkode()+"'","No.Rawat"
-                            )==false){
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBAYARAN PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                            }
+                            if(Sequel.menyimpantf2("tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19)+"','Pelunasan','"+total+"','"+total+"','Sudah','"+akses.getkode()+"'","No.Rawat")==false){
                                 sukses=false;
                             }
                         }
