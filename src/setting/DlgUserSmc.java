@@ -43,7 +43,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
-    private final DlgUpdateUser personal = new DlgUpdateUser(null, false);
+    private final DlgUpdateUserSmc personal = new DlgUpdateUserSmc(null, false);
     private final DlgCariDokter dlgdokter = new DlgCariDokter(null, false);
     private final DlgCariPetugas dlgpetugas = new DlgCariPetugas(null, false);
     private String copyhakakses = "", userdicopy = "";
@@ -717,7 +717,7 @@ public class DlgUserSmc extends javax.swing.JDialog {
     private void MnSetUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnSetUserActionPerformed
         if (tbUser.getSelectedRow() != -1) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            personal.isUser(TKd.getText(), TNmUser.getText(), TPass.getText());
+            personal.isUser(TKd.getText());
             personal.setSize(460, this.getHeight() - 50);
             personal.setLocationRelativeTo(internalFrame1);
             personal.setAlwaysOnTop(false);

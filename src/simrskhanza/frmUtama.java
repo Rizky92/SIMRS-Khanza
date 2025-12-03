@@ -1073,6 +1073,7 @@ import setting.DlgSetNota;
 import setting.DlgSetOtoLokasi;
 import setting.DlgSetOtoRalan;
 import setting.DlgSetPenjabLab;
+import setting.DlgSetPintuPoli;
 import setting.DlgSetRM;
 import setting.DlgSetTampilJenisObatResep;
 import setting.DlgSetTarif;
@@ -1162,8 +1163,10 @@ import viabarcode.LabKeslingMasterSampelBakuMutu;
 import viabarcode.LabKeslingNilaiNormalBakuMutu;
 import viabarcode.LabKeslingParameterPengujian;
 import viabarcode.LabKeslingPelanggan;
+import viabarcode.LabKeslingPembayaranPengujianSampel;
 import viabarcode.LabKeslingPermintaanPengujianSampel;
 import viabarcode.LabKeslingRekapPelayanan;
+import viabarcode.LabKeslingRekapPembayaran;
 import ziscsr.ZISAtapRumahPenerimaDankes;
 import ziscsr.ZISDapurRumahPenerimaDankes;
 import ziscsr.ZISDindingRumahPenerimaDankes;
@@ -23452,6 +23455,30 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getDefaultCursor());
     }
     
+    private void btnLabKeslingPembyaranPengujianSampelActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        LabKeslingPembayaranPengujianSampel form=new LabKeslingPembayaranPengujianSampel(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnLabKeslingRekapPembayaranActionPerformed(java.awt.event.ActionEvent evt) {                                           
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        LabKeslingRekapPembayaran form=new LabKeslingRekapPembayaran(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
     /**
     * @param args the command line arguments
     */
@@ -24168,7 +24195,7 @@ public class frmUtama extends javax.swing.JFrame {
             btnLabKeslingNilaiNormalBakuMutu,btnSkriningPneumoniaSeverityIndex,btnPenilaianAwalMedisRalanJantung,btnPenilaianAwalMedisRalanUrologi,btnHasilPemeriksaanTreadmill,
             btnHasilPemeriksaanECHOPediatrik,btnMasterTemplateInformasiEdukasi,btnSkriningInstrumenESAT,btnLabKeslingPermintaanPengujianSampel,btnPenilaianAwalMedisRanapJantung,
             btnEEksekutif,btnLabKeslingPengujianSampelTidakDapatDilayani,btnLabKeslingPengujianSampelDapatDilayani,btnLabKeslingPenugasanPengujianSampel,btnLabKeslingHasilPengujianSampel,
-            btnLabKeslingVerifikasiPengujianSampel,btnLabKeslingValidasiPengujianSampel,btnLabKeslingRekapPelayanan;
+            btnLabKeslingVerifikasiPengujianSampel,btnLabKeslingValidasiPengujianSampel,btnLabKeslingRekapPelayanan,btnLabKeslingPembyaranPengujianSampel,btnLabKeslingRekapPembayaran;
     
     public void isWall(){
         try{
@@ -24518,6 +24545,14 @@ public class frmUtama extends javax.swing.JFrame {
             
             if(akses.getrekap_pelayanan_lab_kesehatan_lingkungan()==true){
                 Panelmenu.add(btnLabKeslingRekapPelayanan);
+                jmlmenu++;
+            }
+            
+            if(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan()==true){
+                Panelmenu.add(btnLabKeslingPembyaranPengujianSampel);
+                jmlmenu++;
+                
+                Panelmenu.add(btnLabKeslingRekapPembayaran);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==2){ 
@@ -30357,6 +30392,14 @@ public class frmUtama extends javax.swing.JFrame {
         
         if(akses.getrekap_pelayanan_lab_kesehatan_lingkungan()==true){
             Panelmenu.add(btnLabKeslingRekapPelayanan);
+            jmlmenu++;
+        }
+        
+        if(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan()==true){
+            Panelmenu.add(btnLabKeslingPembyaranPengujianSampel);
+            jmlmenu++;
+            
+            Panelmenu.add(btnLabKeslingRekapPembayaran);
             jmlmenu++;
         }
 
@@ -36241,6 +36284,17 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getrekap_pelayanan_lab_kesehatan_lingkungan()==true){
             if(btnLabKeslingRekapPelayanan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLabKeslingRekapPelayanan);
+                jmlmenu++;
+            }
+        }
+        
+        if(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan()==true){
+            if(btnLabKeslingPembyaranPengujianSampel.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnLabKeslingPembyaranPengujianSampel);
+                jmlmenu++;
+            }
+            if(btnLabKeslingRekapPembayaran.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnLabKeslingRekapPembayaran);
                 jmlmenu++;
             }
         }
@@ -43883,6 +43937,11 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
+        if(akses.getset_pintu_poli()==true){
+            Panelmenu.add(btnSetPintuPoliSmc);
+            jmlmenu++;
+        }
+
         if(akses.gettracer_login()==true){
             if(btnTracker.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnTracker);
@@ -49663,6 +49722,22 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingRekapPelayanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingRekapPelayanan.addActionListener(this::btnLabKeslingRekapPelayananActionPerformed);
         
+        btnLabKeslingPembyaranPengujianSampel = new widget.ButtonBig();
+        btnLabKeslingPembyaranPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money-bag_2953536-2.png"))); 
+        btnLabKeslingPembyaranPengujianSampel.setText("Pembayaran Pengujian Sampel Lab Kesling");
+        btnLabKeslingPembyaranPengujianSampel.setIconTextGap(0);
+        btnLabKeslingPembyaranPengujianSampel.setName("btnLabKeslingPembyaranPengujianSampel");
+        btnLabKeslingPembyaranPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnLabKeslingPembyaranPengujianSampel.addActionListener(this::btnLabKeslingPembyaranPengujianSampelActionPerformed);
+        
+        btnLabKeslingRekapPembayaran = new widget.ButtonBig();
+        btnLabKeslingRekapPembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money_536054-2.png"))); 
+        btnLabKeslingRekapPembayaran.setText("Rekap Pembayaran Lab Kesling");
+        btnLabKeslingRekapPembayaran.setIconTextGap(0);
+        btnLabKeslingRekapPembayaran.setName("btnLabKeslingRekapPembayaran");
+        btnLabKeslingRekapPembayaran.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnLabKeslingRekapPembayaran.addActionListener(this::btnLabKeslingRekapPembayaranActionPerformed);
+        
         btnPenilaianAwalMedisRanapJantung = new widget.ButtonBig();
         btnPenilaianAwalMedisRanapJantung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6217204_anatomy_heart_human_medical_organ_icon.png")));
         btnPenilaianAwalMedisRanapJantung.setText("Awal Medis Ranap Jantung");
@@ -49680,7 +49755,7 @@ public class frmUtama extends javax.swing.JFrame {
         btnEEksekutif.addActionListener(this::btnEEksekutifActionPerformed);
     }
 
-    private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep;
+    private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -49722,6 +49797,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnSetTampilJenisObatResep.setName("btnSetTampilJenisObatResep");
         btnSetTampilJenisObatResep.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSetTampilJenisObatResep.addActionListener(this::btnSetTampilJenisObatResepActionPerformed);
+
+        btnSetPintuPoliSmc = new widget.ButtonBig();
+        btnSetPintuPoliSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png")));
+        btnSetPintuPoliSmc.setText("Set Pintu Poli");
+        btnSetPintuPoliSmc.setIconTextGap(0);
+        btnSetPintuPoliSmc.setName("btnSetPintuPoliSmc");
+        btnSetPintuPoliSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSetPintuPoliSmc.addActionListener(this::btnSetPintuPoliSmcActionPerformed);
     }
 
     private void isComboSMC() {
@@ -49738,6 +49821,11 @@ public class frmUtama extends javax.swing.JFrame {
         } else if (cmbMenu.getSelectedIndex() == 19) {
             if (akses.getuser()) {
                 Panelmenu.add(btnUserSmc);
+                jmlmenu++;
+            }
+
+            if (akses.getset_pintu_poli()) {
+                Panelmenu.add(btnSetPintuPoliSmc);
                 jmlmenu++;
             }
 
@@ -49778,6 +49866,11 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnUserSmc);
             jmlmenu++;
         }
+
+        if (akses.getset_pintu_poli()) {
+            Panelmenu.add(btnSetPintuPoliSmc);
+            jmlmenu++;
+        }
     }
 
     private void isCariIsiSMC() {
@@ -49812,6 +49905,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getuser()) {
             if (btnUserSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnUserSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getset_pintu_poli()) {
+            if (btnSetPintuPoliSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSetPintuPoliSmc);
                 jmlmenu++;
             }
         }
@@ -49892,6 +49992,18 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setAlwaysOnTop(false);
         aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSetPintuPoliSmcActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgSetPintuPoli aplikasi = new DlgSetPintuPoli(this, false);
+        aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
 }

@@ -389,7 +389,7 @@ and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori]]
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[ Ns. YULIANA PABIBAK, S.Kep]]></text>
+				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="605" y="94" width="170" height="11" uuid="1a4a2290-ee9e-41ba-a2a5-0a68d62cbfb0">
@@ -399,7 +399,7 @@ and pengeluaran_harian.kode_kategori=kategori_pengeluaran_harian.kode_kategori]]
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["PLT DIREKTUR " + $P{namars}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>

@@ -259,6 +259,7 @@ import surat.SuratTidakHamil;
  */
 public final class DlgKasirRalan extends javax.swing.JDialog {
     private final DefaultTableModel tabModekasir,tabModekasir2;
+    private final boolean ANTRIANPOLIPERPINTU = koneksiDB.ANTRIANPOLIPERPINTU();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -11167,9 +11168,15 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             tbKasirRalan.requestFocus();
         }else{
             if(tbKasirRalan.getSelectedRow()!= -1){
-                Sequel.queryu("delete from antripoli where kd_dokter='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString()+"' and kd_poli='"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString()+"'");
-                Sequel.queryu("insert into antripoli values('"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),0).toString()+"','"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString()+"','1','"+tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),11).toString()+"')");
-                Sequel.executeRawSmc("insert into mutasi_berkas values(?, 'Sudah Diterima', now(), now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000' on duplicate key update status = value(status), diterima = value(diterima)", TNoRw.getText());
+                if (ANTRIANPOLIPERPINTU) {
+                    String kdPintu = Sequel.cariIsiSmc("select set_pintu_smc.kd_pintu from set_pintu_smc where set_pintu_smc.kd_dokter = ? and set_pintu_smc.kd_poli = ?", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
+                    if (!kdPintu.isBlank()) {
+                        Sequel.menyimpantfSmc("antripintu_smc", "", kdPintu, tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
+                    }
+                }
+                Sequel.menghapustfSmc("antripoli", "kd_dokter = ? and kd_poli = ?", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
+                Sequel.menyimpantfSmc("antripoli", null, tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString(), "1", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
+                Sequel.executeRawSmc("insert into mutasi_berkas values(?, 'Sudah Diterima', now(), now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') on duplicate key update status = value(status), diterima = value(diterima)", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
             }
         }
     }//GEN-LAST:event_ppMasukPoliBtnPrintActionPerformed
