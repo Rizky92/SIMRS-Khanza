@@ -23,7 +23,7 @@ public class HalamanUtama extends javax.swing.JFrame {
     public HalamanUtama() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/logo.png")).getImage());
-        
+
         TOMBOLDIMATIKAN.forEach(tombol -> {
             switch (tombol) {
                 case "antrian":
