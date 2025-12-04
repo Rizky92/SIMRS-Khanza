@@ -11171,7 +11171,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 if (ANTRIANPOLIPERPINTU) {
                     String kdPintu = Sequel.cariIsiSmc("select set_pintu_smc.kd_pintu from set_pintu_smc where set_pintu_smc.kd_dokter = ? and set_pintu_smc.kd_poli = ?", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
                     if (!kdPintu.isBlank()) {
-                        Sequel.menyimpantfSmc("antripintu_smc", "", kdPintu, tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString());
+                        Sequel.menyimpantfSmc("antripintu_smc", "", kdPintu, tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 11).toString(), "1");
                     }
                 }
                 Sequel.menghapustfSmc("antripoli", "kd_dokter = ? and kd_poli = ?", tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 0).toString(), tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(), 18).toString());
