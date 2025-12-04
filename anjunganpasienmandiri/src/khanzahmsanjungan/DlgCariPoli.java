@@ -9,22 +9,16 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
 public final class DlgCariPoli extends widget.Dialog {
-
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
+    private String hari = "";
 
     public DlgCariPoli(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"Kode Unit", "Nama Unit", "registrasi", "registrasilama"};
-        tabMode = new DefaultTableModel(null, row) {
-            Class[] type = new Class[] {
-                java.lang.String.class, java.lang.String.class,
-                java.lang.Double.class, java.lang.Double.class
-            };
-
+        tabMode = new DefaultTableModel(null, new Object[] {"Kode Unit", "Nama Unit", "registrasi", "registrasilama"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -32,22 +26,20 @@ public final class DlgCariPoli extends widget.Dialog {
 
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                return type[columnIndex];
+                if (columnIndex == 2 || columnIndex == 3) {
+                    return Double.class;
+                }
+
+                return String.class;
             }
         };
         tbPoli.setModel(tabMode);
-
-        for (int i = 0; i < 4; i++) {
-            TableColumn column = tbPoli.getColumnModel().getColumn(i);
-            if (i == 0) {
-                column.setPreferredWidth(100);
-            } else if (i == 1) {
-                column.setPreferredWidth(500);
-            } else {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            }
-        }
+        tbPoli.getColumnModel().getColumn(0).setPreferredWidth(100);
+        tbPoli.getColumnModel().getColumn(1).setPreferredWidth(500);
+        tbPoli.getColumnModel().getColumn(2).setMinWidth(500);
+        tbPoli.getColumnModel().getColumn(2).setMaxWidth(500);
+        tbPoli.getColumnModel().getColumn(3).setMinWidth(500);
+        tbPoli.getColumnModel().getColumn(3).setMaxWidth(500);
     }
 
     /**
@@ -61,6 +53,12 @@ public final class DlgCariPoli extends widget.Dialog {
         tbPoli = new widget.Table();
         panelBawah = new widget.Panel();
         btnKeluar = new widget.Button();
+
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         tbPoli.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbPoli.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -79,7 +77,6 @@ public final class DlgCariPoli extends widget.Dialog {
         btnKeluar.setForeground(new java.awt.Color(255, 23, 26));
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
         btnKeluar.setText("KELUAR");
-        btnKeluar.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
         btnKeluar.setName("btnKeluar"); // NOI18N
         btnKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -101,14 +98,7 @@ public final class DlgCariPoli extends widget.Dialog {
         dispose();
     }//GEN-LAST:event_tbPoliMouseReleased
 
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private widget.ScrollPane Scroll;
-    private widget.Button btnKeluar;
-    private widget.Panel panelBawah;
-    private widget.Table tbPoli;
-    // End of variables declaration//GEN-END:variables
-
-    public void tampil(String hari) {
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Valid.tabelKosong(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select p.kd_poli, p.nm_poli, p.registrasi, p.registrasilama from poliklinik as p where p.status = '1' and " +
@@ -126,26 +116,17 @@ public final class DlgCariPoli extends widget.Dialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-    }
+    }//GEN-LAST:event_formWindowActivated
 
-    public void tampilPoliMapping(String kodePoliBPJS) {
-        Valid.tabelKosong(tabMode);
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select m.kd_poli, m.nm_poli, m.registrasi, m.registrasilama from poliklinik as p where " +
-            "exists(select * from maping_poli_bpjs as m where m.kd_poli_rs = p.kd_poli and m.kd_poli_bpjs = ?)"
-        )) {
-            ps.setString(1, kodePoliBPJS);
-            try (ResultSet rs = ps.executeQuery()) {
-                while (rs.next()) {
-                    tabMode.addRow(new Object[] {
-                        rs.getString("kd_poli"), rs.getString("nm_poli"),
-                        rs.getDouble("registrasi"), rs.getDouble("registrasilama")
-                    });
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.ScrollPane Scroll;
+    private widget.Button btnKeluar;
+    private widget.Panel panelBawah;
+    private widget.Table tbPoli;
+    // End of variables declaration//GEN-END:variables
+
+    public void setHari(String hari) {
+        this.hari = hari;
     }
 
     public boolean hasSelection() {

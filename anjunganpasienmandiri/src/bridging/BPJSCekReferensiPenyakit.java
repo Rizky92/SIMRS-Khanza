@@ -121,11 +121,11 @@ public final class BPJSCekReferensiPenyakit extends widget.Dialog {
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
         panelBawah = new widget.Panel();
+        btnKeluar = new widget.Button();
         jLabel16 = new widget.Label();
         diagnosa = new widget.TextField();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
-        BtnKeluar = new widget.Button();
 
         setIconImage(null);
 
@@ -142,16 +142,28 @@ public final class BPJSCekReferensiPenyakit extends widget.Dialog {
         getContentPane().add(Scroll, java.awt.BorderLayout.CENTER);
 
         panelBawah.setName("panelBawah"); // NOI18N
-        panelBawah.setPreferredSize(new java.awt.Dimension(44, 54));
-        panelBawah.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelBawah.setPreferredSize(new java.awt.Dimension(168, 68));
+        panelBawah.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel16.setText("Kode/Nama Diagnosa :");
+        btnKeluar.setBackground(new java.awt.Color(255, 255, 255));
+        btnKeluar.setForeground(new java.awt.Color(255, 23, 26));
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        btnKeluar.setText("KELUAR");
+        btnKeluar.setName("btnKeluar"); // NOI18N
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
+        panelBawah.add(btnKeluar);
+
+        jLabel16.setText("Key word :");
         jLabel16.setName("jLabel16"); // NOI18N
-        jLabel16.setPreferredSize(new java.awt.Dimension(130, 30));
+        jLabel16.setPreferredSize(new java.awt.Dimension(110, 36));
         panelBawah.add(jLabel16);
 
         diagnosa.setName("diagnosa"); // NOI18N
-        diagnosa.setPreferredSize(new java.awt.Dimension(400, 30));
+        diagnosa.setPreferredSize(new java.awt.Dimension(400, 36));
         diagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 diagnosaKeyPressed(evt);
@@ -163,7 +175,7 @@ public final class BPJSCekReferensiPenyakit extends widget.Dialog {
         BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
-        BtnCari.setPreferredSize(new java.awt.Dimension(30, 30));
+        BtnCari.setPreferredSize(new java.awt.Dimension(36, 36));
         BtnCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariActionPerformed(evt);
@@ -180,40 +192,10 @@ public final class BPJSCekReferensiPenyakit extends widget.Dialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(40, 23));
         panelBawah.add(jLabel17);
 
-        BtnKeluar.setBackground(new java.awt.Color(255, 255, 255));
-        BtnKeluar.setForeground(new java.awt.Color(255, 23, 26));
-        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
-        BtnKeluar.setText("KELUAR");
-        BtnKeluar.setToolTipText("Alt+K");
-        BtnKeluar.setName("BtnKeluar"); // NOI18N
-        BtnKeluar.setPreferredSize(new java.awt.Dimension(110, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKeluarActionPerformed(evt);
-            }
-        });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnKeluarKeyPressed(evt);
-            }
-        });
-        panelBawah.add(BtnKeluar);
-
         getContentPane().add(panelBawah, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();
-    }//GEN-LAST:event_BtnKeluarActionPerformed
-
-    private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            dispose();
-        }
-    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void diagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_diagnosaKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -221,7 +203,7 @@ public final class BPJSCekReferensiPenyakit extends widget.Dialog {
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             tampil(diagnosa.getText());
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            BtnKeluar.requestFocus();
+            btnKeluar.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
             BtnCariActionPerformed(null);
         }
@@ -247,10 +229,14 @@ public final class BPJSCekReferensiPenyakit extends widget.Dialog {
         dispose();
     }//GEN-LAST:event_tbKamarMouseReleased
 
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;
-    private widget.Button BtnKeluar;
     private widget.ScrollPane Scroll;
+    private widget.Button btnKeluar;
     private widget.TextField diagnosa;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
@@ -296,7 +282,7 @@ public final class BPJSCekReferensiPenyakit extends widget.Dialog {
     }
     
     public boolean hasSelection() {
-        return tbKamar.getSelectedRow() > -1;
+        return tbKamar.getSelectedRow() >= 0;
     }
     
     public Object getSelectedRow(int column) {

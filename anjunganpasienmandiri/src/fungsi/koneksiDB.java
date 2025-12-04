@@ -192,7 +192,15 @@ public class koneksiDB {
     public static String KODEPOLIEKSEKUTIF() {
         return rawAPM("KODEPOLIEKSEKUTIF");
     }
-    
+
+    public static boolean JADWALPRAKTEKDIANJUNGAN() {
+        if (JADWALDOKTERDIREGISTRASI()) {
+            return true;
+        }
+        
+        return rawAPM("JADWALPRAKTEKDIANJUNGAN", "no").equalsIgnoreCase("yes");
+    }
+
     public static boolean JADIKANBOOKINGSURATKONTROL() {
         return raw("JADIKANBOOKINGSURATKONTROL", "no").equalsIgnoreCase("yes");
     }

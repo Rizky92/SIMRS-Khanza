@@ -59,8 +59,7 @@ public final class BPJSCekRiwayatPelayanan extends widget.Dialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"No.", "Diagnosa", "Jenis Pelayanan", "Kelas Rawat", "Nama Peserta", "No.Kartu", "No.SEP", "No.Rujukan", "Poli", "PPK Pelayanan", "Pulang SEP", "Tgl.SEP"};
-        tabMode = new DefaultTableModel(null, row) {
+        tabMode = new DefaultTableModel(null, new Object[] {"No.", "Diagnosa", "Jenis Pelayanan", "Kelas Rawat", "Nama Peserta", "No. Kartu", "No. SEP", "No.Rujukan", "Poli", "PPK Pelayanan", "Pulang SEP", "Tgl. SEP"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -364,7 +363,5 @@ public final class BPJSCekRiwayatPelayanan extends widget.Dialog {
     public void setKartu(String Kartu) {
         this.NoKartu.setText(Kartu);
         BtnCariActionPerformed(null);
-
     }
-
 }

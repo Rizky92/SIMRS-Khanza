@@ -54,8 +54,7 @@ public final class BPJSCekRiwayatRujukanTerakhir extends widget.Dialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"ICD 10", "Nama Diagnosa", "No.Rujukan", "Kode Tujuan", "Nama Tujuan", "Tgl.Rujukan", "Kode PPK", "Nama PPK", "Status"};
-        tabMode = new DefaultTableModel(null, row) {
+        tabMode = new DefaultTableModel(null, new Object[] {"Kode Diagnosa", "Nama Diagnosa", "No. Rujukan", "Kode Tujuan", "Nama Tujuan", "Tgl. Rujukan", "Kode PPK", "Nama PPK", "Status"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -273,7 +272,7 @@ public final class BPJSCekRiwayatRujukanTerakhir extends widget.Dialog {
     }
     
     public boolean hasSelection() {
-        return tbKamar.getSelectedRow() > -1;
+        return tbKamar.getSelectedRow() >= 0;
     }
     
     public Object getSelectedRow(int column) {

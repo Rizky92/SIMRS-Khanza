@@ -3,37 +3,41 @@ package khanzahmsanjungan;
 import fungsi.koneksiDB;
 import fungsi.validasi;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 
 public final class DlgCariPoliBPJS extends widget.Dialog {
-
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
+    private static final boolean JADWALPRAKTEKDIANJUNGAN = koneksiDB.JADWALPRAKTEKDIANJUNGAN();
+    private String hari = "";
+    private String kodeDokter = "";
 
     public DlgCariPoliBPJS(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"Kode Unit", "Nama Unit"};
-        tabMode = new DefaultTableModel(null, row) {
+        tabMode = new DefaultTableModel(null, new Object[] {"Kode Poli BPJS", "Nama Poli BPJS", "Kode Poli", "Jam Praktek"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
         };
         tbPoli.setModel(tabMode);
-
-        for (int i = 0; i < 2; i++) {
-            TableColumn column = tbPoli.getColumnModel().getColumn(i);
-            if (i == 1) {
-                column.setPreferredWidth(500);
-            } else {
-                column.setMinWidth(0);
-                column.setMaxWidth(0);
-            }
+        tbPoli.getColumnModel().getColumn(0).setMinWidth(0);
+        tbPoli.getColumnModel().getColumn(0).setMaxWidth(0);
+        tbPoli.getColumnModel().getColumn(1).setPreferredWidth(500);
+        tbPoli.getColumnModel().getColumn(2).setMinWidth(0);
+        tbPoli.getColumnModel().getColumn(2).setMaxWidth(0);
+        if (JADWALPRAKTEKDIANJUNGAN) {
+            tbPoli.getColumnModel().getColumn(3).setPreferredWidth(250);
+        } else {
+            tbPoli.getColumnModel().getColumn(3).setMinWidth(0);
+            tbPoli.getColumnModel().getColumn(3).setMaxWidth(0);
         }
     }
 
@@ -89,12 +93,36 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Valid.tabelKosong(tabMode);
-        try (ResultSet rs = koneksi.createStatement().executeQuery("select * from maping_poli_bpjs")) {
-            while (rs.next()) {
-                tabMode.addRow(new String[] {rs.getString("kd_poli_bpjs"), rs.getString("nm_poli_bpjs")});
+        if (JADWALPRAKTEKDIANJUNGAN) {
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select jadwal.kd_poli, concat(left(jadwal.jam_mulai, 5), '-', left(jadwal.jam_selesai, 5)) as jampraktek, " +
+                "maping_poli_bpjs.kd_poli_bpjs, maping_poli_bpjs.nm_poli_bpjs from jadwal join maping_poli_bpjs on " +
+                "jadwal.kd_poli = maping_poli_bpjs.kd_poli_rs where jadwal.hari_kerja = ? " + (kodeDokter.isBlank() ? "" :
+                "and jadwal.kd_dokter = ? ") + "order by jadwal.jam_mulai"
+            )) {
+                int p = 0;
+                ps.setString(++p, hari);
+                if (!kodeDokter.isBlank()) {
+                    ps.setString(++p, kodeDokter);
+                }
+                try (ResultSet rs = ps.executeQuery()) {
+                    while (rs.next()) {
+                        tabMode.addRow(new Object[] {
+                            rs.getString("kd_poli_bpjs"), rs.getString("nm_poli_bpjs"), rs.getString("kd_poli"), rs.getString("jampraktek")
+                        });
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+        } else {
+            try (ResultSet rs = koneksi.createStatement().executeQuery("select * from maping_poli_bpjs")) {
+                while (rs.next()) {
+                    tabMode.addRow(new String[] {rs.getString("kd_poli_bpjs"), rs.getString("nm_poli_bpjs"), rs.getString("kd_poli_rs"), ""});
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
         }
     }//GEN-LAST:event_formWindowActivated
 
@@ -119,5 +147,44 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
 
     public Object getSelectedRow(int column) {
         return tbPoli.getValueAt(tbPoli.getSelectedRow(), column);
+    }
+
+    public void setHari(String tgl) {
+        try {
+            Calendar.getInstance().setTime(new SimpleDateFormat("yyyy-MM-dd").parse(tgl));
+            switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+                case 1:
+                    hari = "AKHAD";
+                    break;
+                case 2:
+                    hari = "SENIN";
+                    break;
+                case 3:
+                    hari = "SELASA";
+                    break;
+                case 4:
+                    hari = "RABU";
+                    break;
+                case 5:
+                    hari = "KAMIS";
+                    break;
+                case 6:
+                    hari = "JUMAT";
+                    break;
+                case 7:
+                    hari = "SABTU";
+                    break;
+                default:
+                    hari = "";
+                    break;
+            }
+        } catch (Exception e) {
+            hari = "";
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    public void setDokter(String kodeDokter) {
+        this.kodeDokter = kodeDokter;
     }
 }

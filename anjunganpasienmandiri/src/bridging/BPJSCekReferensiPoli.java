@@ -121,11 +121,11 @@ public final class BPJSCekReferensiPoli extends widget.Dialog {
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
         panelGlass6 = new widget.Panel();
+        btnKeluar = new widget.Button();
         jLabel16 = new widget.Label();
         Poli = new widget.TextField();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
-        BtnKeluar = new widget.Button();
 
         setIconImage(null);
         setIconImages(null);
@@ -145,16 +145,28 @@ public final class BPJSCekReferensiPoli extends widget.Dialog {
         getContentPane().add(Scroll, java.awt.BorderLayout.CENTER);
 
         panelGlass6.setName("panelGlass6"); // NOI18N
-        panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
-        panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelGlass6.setPreferredSize(new java.awt.Dimension(44, 68));
+        panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel16.setText("Kode/Nama Poli :");
+        btnKeluar.setBackground(new java.awt.Color(255, 255, 255));
+        btnKeluar.setForeground(new java.awt.Color(255, 23, 26));
+        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        btnKeluar.setText("KELUAR");
+        btnKeluar.setName("btnKeluar"); // NOI18N
+        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnKeluarActionPerformed(evt);
+            }
+        });
+        panelGlass6.add(btnKeluar);
+
+        jLabel16.setText("Key word :");
         jLabel16.setName("jLabel16"); // NOI18N
-        jLabel16.setPreferredSize(new java.awt.Dimension(98, 30));
+        jLabel16.setPreferredSize(new java.awt.Dimension(110, 36));
         panelGlass6.add(jLabel16);
 
         Poli.setName("Poli"); // NOI18N
-        Poli.setPreferredSize(new java.awt.Dimension(400, 30));
+        Poli.setPreferredSize(new java.awt.Dimension(400, 36));
         Poli.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 PoliKeyPressed(evt);
@@ -163,10 +175,9 @@ public final class BPJSCekReferensiPoli extends widget.Dialog {
         panelGlass6.add(Poli);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
-        BtnCari.setPreferredSize(new java.awt.Dimension(30, 30));
+        BtnCari.setPreferredSize(new java.awt.Dimension(36, 36));
         BtnCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariActionPerformed(evt);
@@ -183,38 +194,10 @@ public final class BPJSCekReferensiPoli extends widget.Dialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(40, 23));
         panelGlass6.add(jLabel17);
 
-        BtnKeluar.setBackground(new java.awt.Color(255, 255, 255));
-        BtnKeluar.setForeground(new java.awt.Color(255, 23, 26));
-        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setText("KELUAR");
-        BtnKeluar.setName("BtnKeluar"); // NOI18N
-        BtnKeluar.setPreferredSize(new java.awt.Dimension(110, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKeluarActionPerformed(evt);
-            }
-        });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnKeluarKeyPressed(evt);
-            }
-        });
-        panelGlass6.add(BtnKeluar);
-
         getContentPane().add(panelGlass6, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();
-    }//GEN-LAST:event_BtnKeluarActionPerformed
-
-    private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            dispose();
-        }
-    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void PoliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PoliKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
@@ -222,7 +205,7 @@ public final class BPJSCekReferensiPoli extends widget.Dialog {
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             tampil(Poli.getText());
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            BtnKeluar.requestFocus();
+            btnKeluar.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
             BtnCariActionPerformed(null);
         }
@@ -244,11 +227,15 @@ public final class BPJSCekReferensiPoli extends widget.Dialog {
         dispose();
     }//GEN-LAST:event_tbKamarMouseReleased
 
+    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnKeluarActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;
-    private widget.Button BtnKeluar;
     private widget.TextField Poli;
     private widget.ScrollPane Scroll;
+    private widget.Button btnKeluar;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
     private widget.Panel panelGlass6;
