@@ -193,14 +193,6 @@ public class koneksiDB {
         return rawAPM("KODEPOLIEKSEKUTIF");
     }
 
-    public static boolean JADWALPRAKTEKDIANJUNGAN() {
-        if (JADWALDOKTERDIREGISTRASI()) {
-            return true;
-        }
-        
-        return rawAPM("JADWALPRAKTEKDIANJUNGAN", "no").equalsIgnoreCase("yes");
-    }
-
     public static boolean JADIKANBOOKINGSURATKONTROL() {
         return raw("JADIKANBOOKINGSURATKONTROL", "no").equalsIgnoreCase("yes");
     }
@@ -211,6 +203,10 @@ public class koneksiDB {
 
     public static boolean PREVIEWHASILPRINT() {
         return rawAPM("PREVIEWHASILPRINT", "no").equalsIgnoreCase("yes");
+    }
+
+    public static boolean REGISTRASISATUJAMSEBELUMJAMPRAKTEK() {
+        return rawAPM("REGISTRASISATUJAMSEBELUMJAMPRAKTEK", "no").equalsIgnoreCase("yes");
     }
 
     public static String HOST() {
