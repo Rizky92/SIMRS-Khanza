@@ -5,6 +5,9 @@
     <Component class="widget.TextBox" name="TKd">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
+        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="null"/>
+        </Property>
         <Property name="name" type="java.lang.String" value="TKd" noResource="true"/>
       </Properties>
       <Events>
@@ -267,6 +270,9 @@
                 <Property name="editable" type="boolean" value="false"/>
                 <Property name="name" type="java.lang.String" value="TNmUser" noResource="true"/>
               </Properties>
+              <Events>
+                <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="TNmUserKeyPressed"/>
+              </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="47" y="10" width="150" height="23"/>

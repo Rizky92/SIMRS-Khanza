@@ -12,9 +12,9 @@
     <import file="nbproject/build-impl.xml"/>
     <!--
 
-    There exist several targets which are by default empty and which can be 
-    used for execution of your tasks. These targets are usually executed 
-    before and after some main targets. They are: 
+    There exist several targets which are by default empty and which can be
+    used for execution of your tasks. These targets are usually executed
+    before and after some main targets. They are:
 
       -pre-init:                 called before initialization of project properties
       -post-init:                called after initialization of project properties
@@ -40,19 +40,19 @@
             </obfuscate>
         </target>
 
-    For list of available properties check the imported 
-    nbproject/build-impl.xml file. 
+    For list of available properties check the imported
+    nbproject/build-impl.xml file.
 
 
     Another way to customize the build is by overriding existing main targets.
-    The targets of interest are: 
+    The targets of interest are:
 
       -init-macrodef-javac:     defines macro for javac compilation
       -init-macrodef-junit:     defines macro for junit execution
       -init-macrodef-debug:     defines macro for class debugging
       -init-macrodef-java:      defines macro for class execution
       -do-jar:                  JAR building
-      run:                      execution of project 
+      run:                      execution of project
       -javadoc-build:           Javadoc generation
       test-report:              JUnit report generation
 
@@ -64,20 +64,20 @@
             </exec>
         </target>
 
-    Notice that the overridden target depends on the jar target and not only on 
-    the compile target as the regular run target does. Again, for a list of available 
+    Notice that the overridden target depends on the jar target and not only on
+    the compile target as the regular run target does. Again, for a list of available
     properties which you can use, check the target you are overriding in the
-    nbproject/build-impl.xml file. 
+    nbproject/build-impl.xml file.
 
     -->
     <target name="-post-compile">
-        <mkdir dir="${build.dir}/report" />        
-        <mkdir dir="${build.dir}/setting" />       
-        <mkdir dir="${build.dir}/suara" />        
-        <mkdir dir="${build.dir}/gambar" />      
+        <mkdir dir="${build.dir}/report" />
+        <mkdir dir="${build.dir}/setting" />
+        <mkdir dir="${build.dir}/suara" />
+        <mkdir dir="${build.dir}/gambar" />
         <copy todir="${build.dir}/report">
             <fileset dir="report/" includes="**/*.jrxml, **/*.jasper" />
-        </copy>                
+        </copy>
         <copy todir="${build.dir}/setting">
             <fileset dir="setting/" includes="**/*.xml, **/*.png, **/*.jpg" />
         </copy>
@@ -89,22 +89,49 @@
         </copy>
     </target>
 
-    <target name="-post-jar">
-        <mkdir dir="${dist.dir}/report" />        
-        <mkdir dir="${dist.dir}/setting" />       
-        <mkdir dir="${dist.dir}/suara" />         
-        <mkdir dir="${dist.dir}/gambar" />       
+    <target name="-post-jar" if="dist.jar.resolved">
+        <condition property="should.compress">
+            <and>
+                <isset property="dist.jar"/>
+                <available file="${dist.jar}"/>
+            </and>
+        </condition>
+
+        <antcall target="compress-jar"/>
+
+        <mkdir dir="${dist.dir}/report" />
+        <mkdir dir="${dist.dir}/setting" />
+        <mkdir dir="${dist.dir}/suara" />
+        <mkdir dir="${dist.dir}/gambar" />
         <copy todir="${dist.dir}/report">
             <fileset dir="report/" includes="**/*.jrxml, **/*.jasper" />
-        </copy>               
+        </copy>
         <copy todir="${dist.dir}/setting">
             <fileset dir="setting/" includes="**/*.xml, **/*.png, **/*.jpg" />
-        </copy> 
+        </copy>
         <copy todir="${dist.dir}/suara">
             <fileset dir="suara/" includes="**/*.mp3" />
-        </copy> 
+        </copy>
         <copy todir="${build.dir}/gambar">
             <fileset dir="gambar/" includes="**/*.png, **/*.jpg" />
         </copy>
+    </target>
+
+    <target name="compress-jar" if="should.compress">
+        <echo message="Compressing distribution JAR..."/>
+
+        <tempfile property="temp.dir" destdir="${java.io.tmpdir}" prefix="repack"/>
+        <mkdir dir="${temp.dir}"/>
+
+        <unzip src="${dist.jar}" dest="${temp.dir}"/>
+
+        <delete file="${dist.jar}"/>
+        <jar destfile="${dist.jar}" basedir="${temp.dir}" compress="true">
+            <manifest>
+                <attribute name="Manifest-Version" value="1.0"/>
+            </manifest>
+        </jar>
+
+        <delete dir="${temp.dir}"/>
     </target>
 </project>

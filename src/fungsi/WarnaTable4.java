@@ -32,5 +32,4 @@ public class WarnaTable4 extends JTextArea implements TableCellRenderer {
         this.setFont(new java.awt.Font("Tahoma", 0, 11));
         return this;
     }
-
 }

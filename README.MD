@@ -16,7 +16,7 @@ Untuk menjalankan projek, ada beberapa hal yang perlu diketahui.
 
 ### Requirements
 - [XAMPP](https://drive.google.com/file/d/1jQd3j16X_fFfS9Sq-7okpdBBD5ng78K_/view?usp=drive_link)  
-- [Apache NetBeans](https://netbeans.apache.org/front/main/download/index.html)  
+- [Apache NetBeans <= 27](https://netbeans.apache.org/front/main/download/nb27/)  
 - [Liberica JDK 17](https://github.com/bell-sw/Liberica/releases?q=17.0&expanded=true)  
 - [Jaspersoft Studio 6.8.0](https://drive.google.com/file/d/1l2jNOd7gqmpQK_7NZBNxmUBLI7IwwKQ3/view?usp=drive_link)  
 - Library yang digunakan bisa di [download disini](https://drive.google.com/drive/folders/1bLKuw8l9k5ElC5dxxlrXijACPLtNmCTg?usp=sharing)  
@@ -24,13 +24,13 @@ Untuk menjalankan projek, ada beberapa hal yang perlu diketahui.
 Sebelum memulai setup, pastikan aplikasi-aplikasi ini sudah terinstall dengan baik.  
 
 ### Setup
-1. Clone repository  
+1. Clone repository.  
 ```bash
 git clone https://github.com/Rizky92/simrs-khanza.git --branch=custom "simrs-khanza-smc"
 ```
 
 > [!NOTE]
-> Gunakan flag `--depth=1` setelah `--branch=custom` apabila proses cloning lambat / kendala internet  
+> Gunakan flag `--depth=1` setelah `--branch=custom` apabila proses cloning lambat / kendala internet.  
 > ```bash
 > git clone https://github.com/Rizky92/simrs-khanza.git --branch=custom --depth=1 "simrs-khanza-smc"
 > ```
@@ -39,6 +39,7 @@ git clone https://github.com/Rizky92/simrs-khanza.git --branch=custom "simrs-kha
 
 > [!WARNING]
 > Jangan **TUMPANG TINDIH** folder library ini dengan kumpulan library original SIMRS Khanza!  
+> 
 > Pastikan gunakan folder yang berbeda.  
 
 3. Setelah clone selesai dan library sudah diextract, masuk ke folder projek, kemudian buka file `nbproject/project.properties` menggunakan text editor kemudian cari `path.file-reference`. Ganti nilai ini dengan path ke folder tempat library di extract.  
@@ -48,7 +49,7 @@ git clone https://github.com/Rizky92/simrs-khanza.git --branch=custom "simrs-kha
 ![Java Platform menggunakan Liberica JDK 17](docs/Screenshot_25.png)  
 
 > [!NOTE]
-> Apabila opsi "Liberica JDK 17" tidak ada, silahkan tambahkan dulu sebagai `Java Platform`. Cara menambahkan `Java Platform` bisa dilihat [disini](docs/menambah-jdk.md)  
+> Apabila opsi "Liberica JDK 17" tidak ada, silahkan tambahkan dulu sebagai `Java Platform`. Cara menambahkan `Java Platform` bisa dilihat [disini](docs/menambah-jdk.md).  
 
 5. Import `sik.sql` ke database bernama `sik`. Pastikan database dalam keadaan ***KOSONG***. Apabila database belum ada, silahkan buat terlebih dahulu.  
 ```bash

@@ -13344,8 +13344,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                         do{
                             htmlContent.append(
                                  "<tr>").append(
-                                    "<td valign='top' align='center' rowspan='2'>").append(w).append("</td>").append(
-                                    "<td valign='top' rowspan='2'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
+                                    "<td valign='top' align='center'>").append(w).append("</td>").append(
+                                    "<td valign='top'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("td")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("hr")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("suhu")).append("</td>").append(
@@ -13353,7 +13353,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     "<td valign='top' align='center'>").append(rs2.getString("his")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("ppv")).append("</td>").append(
                                     "<td valign='top' align='center'>").append(rs2.getString("keterangan")).append("</td>").append(
-                                    "<td valign='top' rowspan='2'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
+                                    "<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
                                  "</tr>"
                             );
                             w++;
@@ -13381,49 +13381,44 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                             "catatan_observasi_induksi_persalinan.nip,petugas.nama from catatan_observasi_induksi_persalinan inner join petugas on catatan_observasi_induksi_persalinan.nip=petugas.nip "+
                             "where catatan_observasi_induksi_persalinan.no_rawat='"+norawat+"' order by catatan_observasi_induksi_persalinan.tgl_perawatan,catatan_observasi_induksi_persalinan.jam_rawat").executeQuery();
                     if(rs2.next()){
-                        htmlContent.append(
-                          "<tr class='isi'>").append(
-                            "<td valign='top' width='2%'></td>").append(
-                            "<td valign='top' width='18%'>Catatan Observasi Induksi Persalinan</td>").append(
-                            "<td valign='top' width='1%' align='center'>:</td>").append(
-                            "<td valign='top' width='79%'>").append(
-                              "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").append(
-                                 "<tr align='center'>").append(
-                                    "<td valign='middle' width='4%' bgcolor='#FFFAF8' rowspan='2'>No.</td>").append(
-                                    "<td valign='middle' width='15%' bgcolor='#FFFAF8' rowspan='2'>Tanggal</td>").append(
-                                    "<td valign='top' width='63%' bgcolor='#FFFAF8' colspan='6'>Monitoring</td>").append(
-                                    "<td valign='middle' width='18%' bgcolor='#FFFAF8' rowspan='2'>Petugas</td>").append(
-                                 "</tr>").append(
-                                 "<tr align='center'>").append(
-                                    "<td valign='middle' width='14%' bgcolor='#FFFAF8'>Obat</td>").append(
-                                    "<td valign='middle' width='13%' bgcolor='#FFFAF8'>Cairan</td>").append(
-                                    "<td valign='middle' width='5%' bgcolor='#FFFAF8'>Dosis</td>").append(
-                                    "<td valign='middle' width='12%' bgcolor='#FFFAF8'>HIS</td>").append(
-                                    "<td valign='middle' width='5%' bgcolor='#FFFAF8'>DJJ</td>").append(
-                                    "<td valign='middle' width='14%' bgcolor='#FFFAF8'>Keterangan</td>").append(
-                                 "</tr>"
-                        );
+                        htmlContent.append("<tr class='isi'>").
+                                        append("<td valign='top' width='2%'></td>").
+                                        append("<td valign='top' width='18%'>Catatan Observasi Induksi Persalinan</td>").
+                                        append("<td valign='top' width='1%' align='center'>:</td>").
+                                        append("<td valign='top' width='79%'>").
+                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                            append("<tr align='center'>").
+                                                append("<td valign='middle' width='4%' bgcolor='#FFFAF8' rowspan='2'>No.</td>").
+                                                append("<td valign='middle' width='15%' bgcolor='#FFFAF8' rowspan='2'>Tanggal</td>").
+                                                append("<td valign='top' width='63%' bgcolor='#FFFAF8' colspan='6'>Monitoring</td>").
+                                                append("<td valign='middle' width='18%' bgcolor='#FFFAF8' rowspan='2'>Petugas</td>").
+                                            append("</tr>").
+                                            append("<tr align='center'>").
+                                                append("<td valign='middle' width='14%' bgcolor='#FFFAF8'>Obat</td>").
+                                                append("<td valign='middle' width='13%' bgcolor='#FFFAF8'>Cairan</td>").
+                                                append("<td valign='middle' width='5%' bgcolor='#FFFAF8'>Dosis</td>").
+                                                append("<td valign='middle' width='12%' bgcolor='#FFFAF8'>HIS</td>").
+                                                append("<td valign='middle' width='5%' bgcolor='#FFFAF8'>DJJ</td>").
+                                                append("<td valign='middle' width='14%' bgcolor='#FFFAF8'>Keterangan</td>").
+                                            append("</tr>");
                         w=1;
                         do{
-                            htmlContent.append(
-                                 "<tr>").append(
-                                    "<td valign='top' align='center' rowspan='2'>").append(w).append("</td>").append(
-                                    "<td valign='top' rowspan='2'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").append(
-                                    "<td valign='top' align='center'>").append(rs2.getString("obat")).append("</td>").append(
-                                    "<td valign='top' align='center'>").append(rs2.getString("cairan")).append("</td>").append(
-                                    "<td valign='top' align='center'>").append(rs2.getString("dosis")).append("</td>").append(
-                                    "<td valign='top' align='center'>").append(rs2.getString("his")).append("</td>").append(
-                                    "<td valign='top' align='center'>").append(rs2.getString("djj")).append("</td>").append(
-                                    "<td valign='top' align='center'>").append(rs2.getString("keterangan")).append("</td>").append(
-                                    "<td valign='top' rowspan='2'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").append(
-                                 "</tr>"
-                            );
+                            htmlContent.append("<tr>").
+                                            append("<td valign='top' align='center'>").append(w).append("</td>").
+                                            append("<td valign='top'>").append(rs2.getString("tgl_perawatan")).append(" ").append(rs2.getString("jam_rawat")).append("</td>").
+                                            append("<td valign='top' align='center'>").append(rs2.getString("obat")).append("</td>").
+                                            append("<td valign='top' align='center'>").append(rs2.getString("cairan")).append("</td>").
+                                            append("<td valign='top' align='center'>").append(rs2.getString("dosis")).append("</td>").
+                                            append("<td valign='top' align='center'>").append(rs2.getString("his")).append("</td>").
+                                            append("<td valign='top' align='center'>").append(rs2.getString("djj")).append("</td>").
+                                            append("<td valign='top' align='center'>").append(rs2.getString("keterangan")).append("</td>").
+                                            append("<td valign='top'>").append(rs2.getString("nip")).append(" ").append(rs2.getString("nama")).append("</td>").
+                                        append("</tr>");
                             w++;
                         }while(rs2.next());
-                        htmlContent.append(
-                              "</table>").append(
-                            "</td>").append(
-                          "</tr>");
+                        htmlContent.append("</table>").
+                                    append("</td>").
+                                    append("</tr>");
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi Observasi Induksi Persalinan : "+e);
@@ -32896,7 +32891,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("PHOTO ECHO").
                                                     append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
                                                         append("<tr>").
-                                                            append("<td valign='top' border='0' width='100%' align='center'><a href='http://").append(koneksiDB.HOSTHYBRIDWEB()).append(":").append(koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/hasilpemeriksaanechopediatrik/").append(file).append("'><img alt='Gambar EKG' src='http://").append(koneksiDB.HOSTHYBRIDWEB()).append(":").append(koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/hasilpemeriksaanechopediatrik/").append(file).append("' width='450' height='450'/></a></td>").
+                                                            append("<td valign='top' border='0' width='100%' align='center'><a href='http://").append(koneksiDB.HOSTHYBRIDWEB()).append(":").append(koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/hasilpemeriksaanecho/").append(file).append("'><img alt='Gambar EKG' src='http://").append(koneksiDB.HOSTHYBRIDWEB()).append(":").append(koneksiDB.PORTWEB()).append("/").append(koneksiDB.HYBRIDWEB()).append("/hasilpemeriksaanecho/").append(file).append("' width='450' height='450'/></a></td>").
                                                         append("</tr>").
                                                     append("</table>").
                                                 append("</td>").
@@ -37890,7 +37885,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             System.out.println("Notif Skrining PSI : "+e);
         }
     }
-    
+
     private void menampilkanSkriningInstrumenESAT(String norawat) {
         try {
             if(chkSkriningInstrumenESAT.isSelected()==true){
@@ -37992,7 +37987,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>"); 
+                                        append("</tr>");
                         }while(rs2.next());
                         htmlContent.append("</table>").
                                     append("</td>").
@@ -38010,7 +38005,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             System.out.println("Notif Skrining ESAT : "+e);
         }
     }
-    
+
     private void menampilkanAsuhanMedisRawatInapJantung(String norawat) {
         try {
             if(chkAsuhanMedisRanapJantung.isSelected()==true){

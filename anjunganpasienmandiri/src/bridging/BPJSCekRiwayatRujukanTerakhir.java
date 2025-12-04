@@ -271,11 +271,11 @@ public final class BPJSCekRiwayatRujukanTerakhir extends widget.Dialog {
 
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     public boolean hasSelection() {
         return tbKamar.getSelectedRow() > -1;
     }
-    
+
     public Object getSelectedRow(int column) {
         return tbKamar.getValueAt(tbKamar.getSelectedRow(), column);
     }

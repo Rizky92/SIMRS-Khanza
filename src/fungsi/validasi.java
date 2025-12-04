@@ -441,7 +441,7 @@ public final class validasi {
         if (value == null || value.isBlank() || value.trim().equals("0")) {
             return 0;
         }
-        
+
         try {
             DecimalFormat df = new DecimalFormat("#,##0.00");
             return df.parse(value).doubleValue();
@@ -450,7 +450,7 @@ public final class validasi {
         try {
             return Double.parseDouble(value);
         } catch (Exception e) {}
-        
+
         return 0;
     }
 
@@ -1735,6 +1735,16 @@ public final class validasi {
         s = "";
         try {
             s=original.substring(8,10)+"-"+original.substring(5,7)+"-"+original.substring(0,4);
+        }catch (Exception e) {
+        }
+        return s;
+    }
+
+    public String SetTgl5(String original){
+        original=original.replaceAll("'","");
+        s = "";
+        try {
+            s=original.substring(8,10)+"-"+original.substring(5,7)+"-"+original.substring(0,4)+" "+original.substring(11,19);
         }catch (Exception e) {
         }
         return s;

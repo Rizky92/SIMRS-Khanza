@@ -3019,7 +3019,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         System.out.println("Notif : "+e);
                     }
                 }
-                Valid.MyReport("rptLaporanOperasi.jasper","report","::[ Laporan Operasi ]::",param);
+                Valid.MyReport("rptLaporanOperasiSMC.jasper","report","::[ Laporan Operasi ]::",param);
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan pilih data, klik pada No.Rawat ..!!");
             }

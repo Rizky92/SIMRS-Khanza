@@ -12,7 +12,7 @@ public class DlgCekDataBPJS extends widget.Dialog {
     public static final int SEP_KONTROL = 2;
     public static final int SEP_KONTROL_BEDA_POLI = 3;
     public static final int SEP_MOBILEJKN = 4;
-    
+
     private static final String TITLE_SEP_KUNJUNGAN_PERTAMA = "::[ Pendaftaran SEP Kunjungan Pertama ]::";
     private static final String TITLE_SEP_KONTROL = "::[ Pendaftaran SEP Kontrol ]::";
     private static final String TITLE_SEP_KONTROL_BEDA_POLI = "::[ Pendaftaran SEP Kontrol Beda Poli ]::";
@@ -20,10 +20,10 @@ public class DlgCekDataBPJS extends widget.Dialog {
     private static final String INPUT_RM = "No. RM / NIK / Peserta BPJS :";
     private static final String INPUT_KONTROL = "No. Surat Kontrol :";
     private static final String INPUT_MOBILEJKN = "No. RM / NIK / Peserta BPJS / Surat Kontrol :";
-    
+
     private final sekuel Sequel = new sekuel();
     private final DlgRegistrasiBPJS regist;
-    
+
     private int flag = -1;
 
     public DlgCekDataBPJS(java.awt.Frame parent, boolean modal) {
@@ -262,11 +262,11 @@ public class DlgCekDataBPJS extends widget.Dialog {
             JOptionPane.showMessageDialog(null, "Flag tidak valid..!!");
             return;
         }
-        
+
         this.flag = flag;
         panelNumpad1.setSkdpMode(flag == SEP_KONTROL || flag == SEP_MOBILEJKN);
         TitledBorder border = (TitledBorder) panelTengah.getBorder();
-        
+
         switch (flag) {
             case SEP_KUNJUNGAN_PERTAMA:
                 border.setTitle(TITLE_SEP_KUNJUNGAN_PERTAMA);
@@ -291,7 +291,7 @@ public class DlgCekDataBPJS extends widget.Dialog {
         }
         repaint();
     }
-    
+
     private void cek() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (NoRMPasien.getText().isBlank()) {

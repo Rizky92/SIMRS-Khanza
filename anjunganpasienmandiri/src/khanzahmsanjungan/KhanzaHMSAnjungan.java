@@ -32,12 +32,12 @@ public class KhanzaHMSAnjungan {
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, ClassLoader.getSystemClassLoader().getResourceAsStream("font/Inter-Regular.ttf")));
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, ClassLoader.getSystemClassLoader().getResourceAsStream("font/Inter-Medium.ttf")));
             ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, ClassLoader.getSystemClassLoader().getResourceAsStream("font/Inter-Bold.ttf")));
-            
+
             Color foreground = new Color(0, 131, 62);
             Color panelBackground = new Color(240, 249, 255);
             Color disableEditBackground = new Color(255, 255, 153);
             Font main = new Font("Inter Medium", Font.PLAIN, 18);
-            
+
             UIManager.setLookAndFeel(new FlatLightLaf());
             System.setProperty("flatlaf.animation", "true");
             UIManager.put("TitlePane.background", panelBackground);

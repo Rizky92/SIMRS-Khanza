@@ -363,26 +363,6 @@
 				<textFieldExpression><![CDATA[$V{total}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="665" y="40" width="50" height="11" uuid="baa49c90-453d-46a9-82f1-d9390668bb01">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<text><![CDATA[Mengetahui]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="605" y="80" width="170" height="11" uuid="20274e87-9455-437b-9bd0-0df133405e5c">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<text><![CDATA[ Ns. YULIANA PABIBAK, S.Kep]]></text>
-			</staticText>
-			<staticText>
 				<reportElement x="30" y="94" width="111" height="11" uuid="3af9285d-6603-4aa0-9c45-e5e2320003d3">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
 					<property name="com.jaspersoft.studio.unit.y" value="px"/>
@@ -402,16 +382,6 @@
 				</textElement>
 				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="605" y="94" width="170" height="11" uuid="916dd5ef-30bb-4707-b3e1-b66d8837f571">
-					<property name="com.jaspersoft.studio.unit.x" value="px"/>
-					<property name="com.jaspersoft.studio.unit.y" value="px"/>
-				</reportElement>
-				<textElement textAlignment="Center">
-					<font fontName="Tahoma" size="8"/>
-				</textElement>
-				<textFieldExpression><![CDATA["PLT DIREKTUR " + $P{namars}]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="60" y="40" width="50" height="11" uuid="5a5196ad-38a4-4b03-bada-6df38d065594">
 					<property name="com.jaspersoft.studio.unit.x" value="px"/>
@@ -422,6 +392,36 @@
 				</textElement>
 				<text><![CDATA[Menyetujui]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="627" y="29" width="144" height="11" uuid="6743d2f3-dc53-401b-a698-0de2b4d42135">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[Mengetahui]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="627" y="80" width="145" height="11" uuid="df579d43-12a4-4362-864f-53ed65d5b3b7">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="627" y="94" width="145" height="11" uuid="848d9414-2e0a-4558-895b-ec0780b9e614">
+					<property name="com.jaspersoft.studio.unit.x" value="px"/>
+					<property name="com.jaspersoft.studio.unit.y" value="px"/>
+				</reportElement>
+				<textElement textAlignment="Center">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

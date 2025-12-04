@@ -17,16 +17,16 @@ public class DlgCekDataPasien extends widget.Dialog {
 
     public static final int REGIST_MANDIRI = 1;
     public static final int CEKIN_BOOKING = 2;
-    
+
     private static final String TITLE_REGIST_MANDIRI = "::[ Registrasi Mandiri Poliklinik Eksekutif ]::";
     private static final String TITLE_CEKIN_BOOKING = "::[ Cek In Booking Registrasi ]::";
-    
+
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final String KODEPOLIEKSEKUTIF = koneksiDB.KODEPOLIEKSEKUTIF();
     private final DlgRegistrasiMandiri mandiri;
-    
+
     private int flag = -1;
 
     public DlgCekDataPasien(java.awt.Frame parent, boolean modal) {
@@ -269,10 +269,10 @@ public class DlgCekDataPasien extends widget.Dialog {
             JOptionPane.showMessageDialog(null, "Flag tidak valid..!!");
             return;
         }
-        
+
         this.flag = flag;
         TitledBorder border = (TitledBorder) panelTengah.getBorder();
-        
+
         switch (flag) {
             case REGIST_MANDIRI:
                 border.setTitle(TITLE_REGIST_MANDIRI);
@@ -284,10 +284,10 @@ public class DlgCekDataPasien extends widget.Dialog {
                 border.setTitle(TITLE_REGIST_MANDIRI);
                 break;
         }
-        
+
         repaint();
     }
-    
+
     private void cek() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (NoRMPasien.getText().isBlank()) {
@@ -315,7 +315,7 @@ public class DlgCekDataPasien extends widget.Dialog {
         formWindowActivated(null);
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void cekBooking(String noRM) {
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select b.no_rawat, b.status, r.stts, exists(select * from pemeriksaan_ralan as p where p.no_rawat = b.no_rawat) as ada_pemeriksaan from " +

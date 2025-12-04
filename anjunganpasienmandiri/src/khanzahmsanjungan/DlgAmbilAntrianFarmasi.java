@@ -51,10 +51,10 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        
+
         InputMap input = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
         ActionMap action = rootPane.getActionMap();
-        
+
         input.put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0), "ESCAPE");
         action.put("ESCAPE", new AbstractAction() {
             @Override
@@ -62,7 +62,7 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
                 dispose();
             }
         });
-        
+
         repaint();
     }
 

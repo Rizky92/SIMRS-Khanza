@@ -463,7 +463,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
                 try {
-                    koneksi.setAutoCommit(false);
+                    Sequel.AutoComitFalse();
                     jml=tbObat.getRowCount();
                     for(i=0;i<jml;i++){
                         harga=0;
@@ -796,7 +796,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                             }
                         }
                     }
-                    koneksi.setAutoCommit(true);
+                    Sequel.AutoComitTrue();
                     tampil();
                 }catch(Exception e){
                     System.out.println(e);

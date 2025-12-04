@@ -6,6 +6,7 @@ package fungsi;
 
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Font;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableCellRenderer;
 
@@ -42,7 +43,11 @@ public class WarnaTableValidasiResep extends DefaultTableCellRenderer {
             }
         } catch (Exception e) {
         }
-
+        if (isSelected) {
+            component.setFont(component.getFont().deriveFont(Font.BOLD));
+        } else {
+            component.setFont(component.getFont().deriveFont(Font.PLAIN));
+        }
         return component;
     }
 

@@ -1943,6 +1943,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                             }
                         }
                     }else{
+                        tbBangsal.setValueAt(false,i,0);
                         sukses=false;
                     }
                     if (sukses) {

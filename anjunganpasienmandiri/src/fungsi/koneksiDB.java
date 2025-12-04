@@ -153,7 +153,7 @@ public class koneksiDB {
     public static int PRINTJUMLAHBARCODE() {
         return Integer.parseInt(rawAPM("PRINTJUMLAHBARCODE", "3"));
     }
-    
+
     public static int PRINTJUMLAHANTRIANFARMASI() {
         return Integer.parseInt(rawAPM("PRINTJUMLAHANTRIANFARMASI", "2"));
     }
@@ -192,7 +192,7 @@ public class koneksiDB {
     public static String KODEPOLIEKSEKUTIF() {
         return rawAPM("KODEPOLIEKSEKUTIF");
     }
-    
+
     public static boolean JADIKANBOOKINGSURATKONTROL() {
         return raw("JADIKANBOOKINGSURATKONTROL", "no").equalsIgnoreCase("yes");
     }
@@ -200,7 +200,7 @@ public class koneksiDB {
     public static boolean BOOKINGLANGSUNGREGISTRASI() {
         return raw("BOOKINGLANGSUNGREGISTRASI", "no").equalsIgnoreCase("yes");
     }
-    
+
     public static boolean PREVIEWHASILPRINT() {
         return rawAPM("PREVIEWHASILPRINT", "no").equalsIgnoreCase("yes");
     }

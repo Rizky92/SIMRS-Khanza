@@ -78,7 +78,7 @@ public class ApiBPJS {
         millis = System.currentTimeMillis();
         return millis / 1000;
     }
-    
+
     public String getUTCDateTimeAsString() {
         millis = System.currentTimeMillis();
         return String.valueOf(millis / 1000);
