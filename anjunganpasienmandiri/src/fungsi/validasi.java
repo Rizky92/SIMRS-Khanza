@@ -92,7 +92,6 @@ public final class validasi {
         return new SimpleDateFormat("yyyy-MM-dd").format(tgl.getDate());
     }
 
-
     public void printReportSmc(String reportName, String reportDirName, String judul, Map reportParams, String printerName, int jumlah, String sql, String... values) {
         try {
             try (PreparedStatement ps = connect.prepareStatement(sql)) {

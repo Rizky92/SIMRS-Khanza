@@ -280,11 +280,11 @@ public final class BPJSCekReferensiPenyakit extends widget.Dialog {
             }
         }
     }
-    
+
     public boolean hasSelection() {
         return tbKamar.getSelectedRow() >= 0;
     }
-    
+
     public Object getSelectedRow(int column) {
         return tbKamar.getValueAt(tbKamar.getSelectedRow(), column);
     }
