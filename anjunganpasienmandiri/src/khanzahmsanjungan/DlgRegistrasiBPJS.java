@@ -1926,12 +1926,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 if (metadata.path("code").asText().equals("200")) {
                     response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
                     if (response.path("kode").asText().equals("1")) {
-                        if (response.path("status").asText().contains(tglSEP.getText())) {
-                            statusFinger = true;
-                        } else {
-                            statusFinger = false;
-                            JOptionPane.showMessageDialog(null, response.path("status").asText());
-                        }
+                        statusFinger = true;
+                    } else {
+                        statusFinger = false;
+                        JOptionPane.showMessageDialog(null, response.path("status").asText());
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, response.path("status").asText());
