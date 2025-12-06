@@ -32,7 +32,7 @@ import org.springframework.http.MediaType;
  *
  * @author dosen
  */
-public final class BPJSCekRiwayatPelayanan extends widget.Dialog {
+public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
 
     private final DefaultTableModel tabMode;
     private validasi Valid = new validasi();
@@ -55,12 +55,11 @@ public final class BPJSCekRiwayatPelayanan extends widget.Dialog {
      * @param parent
      * @param modal
      */
-    public BPJSCekRiwayatPelayanan(java.awt.Frame parent, boolean modal) {
+    public BPJSRiwayatPelayananPasien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        Object[] row = {"No.", "Diagnosa", "Jenis Pelayanan", "Kelas Rawat", "Nama Peserta", "No.Kartu", "No.SEP", "No.Rujukan", "Poli", "PPK Pelayanan", "Pulang SEP", "Tgl.SEP"};
-        tabMode = new DefaultTableModel(null, row) {
+        tabMode = new DefaultTableModel(null, new Object[] {"No.", "Diagnosa", "Jenis Pelayanan", "Kelas Rawat", "Nama Peserta", "No. Kartu", "No. SEP", "No.Rujukan", "Poli", "PPK Pelayanan", "Pulang SEP", "Tgl. SEP"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -364,7 +363,5 @@ public final class BPJSCekRiwayatPelayanan extends widget.Dialog {
     public void setKartu(String Kartu) {
         this.NoKartu.setText(Kartu);
         BtnCariActionPerformed(null);
-
     }
-
 }

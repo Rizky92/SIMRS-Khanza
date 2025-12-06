@@ -205,6 +205,10 @@ public class koneksiDB {
         return rawAPM("PREVIEWHASILPRINT", "no").equalsIgnoreCase("yes");
     }
 
+    public static boolean REGISTRASISATUJAMSEBELUMJAMPRAKTEK() {
+        return rawAPM("REGISTRASISATUJAMSEBELUMJAMPRAKTEK", "no").equalsIgnoreCase("yes");
+    }
+
     public static String HOST() {
         return rawe("HOST");
     }

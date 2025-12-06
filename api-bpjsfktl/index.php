@@ -176,25 +176,26 @@
                                                 );
                                                 http_response_code(201);
                                             }else{
-                                                $data = fetch_array(bukaquery2("SELECT poliklinik.nm_poli,COUNT(reg_periksa.kd_poli) as total_antrean,dokter.nm_dokter,
-                                                    IFNULL(SUM(CASE WHEN reg_periksa.stts ='Belum' THEN 1 ELSE 0 END),0) as sisa_antrean,
-                                                    ('Datanglah Minimal 30 Menit, jika no antrian anda terlewat, silakan konfirmasi ke bagian Pendaftaran atau Perawat Poli, Terima Kasih ..') as keterangan
-                                                    FROM reg_periksa INNER JOIN poliklinik ON poliklinik.kd_poli=reg_periksa.kd_poli INNER JOIN dokter ON reg_periksa.kd_dokter=dokter.kd_dokter
-                                                    WHERE reg_periksa.tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' AND reg_periksa.kd_poli='$kdpoli' and reg_periksa.kd_dokter='$kddokter'"));
+                                                $data = fetch_array(bukaquery2("select p.nm_poli, d.nm_dokter, (select count(*) from reg_periksa r where r.tgl_registrasi = '$decode[tanggalperiksa]'
+                                                    and r.kd_poli = j.kd_poli and r.kd_dokter = j.kd_dokter) as total_antrean, (select count(*) from reg_periksa r where r.tgl_registrasi = '$decode[tanggalperiksa]'
+                                                    and r.kd_poli = j.kd_poli and r.kd_dokter = j.kd_dokter and r.stts = 'Belum') as sisa_antrean, (select concat(r.kd_poli, '-', r.no_reg) from reg_periksa r where
+                                                    r.tgl_registrasi = '$decode[tanggalperiksa]' and r.kd_poli = j.kd_poli and r.kd_dokter = j.kd_dokter and r.stts = 'Belum' order by convert(right(r.no_reg, 3),
+                                                    signed) limit 1) as antreandipanggil from jadwal j join poliklinik p on j.kd_poli = p.kd_poli join dokter d on j.kd_dokter = d.kd_dokter where
+                                                    j.hari_kerja = '$hari' and j.jam_mulai = '$jammulai:00' and j.kd_poli = '$kdpoli' and j.kd_dokter = '$kddokter'"));
 
-                                                if ($data['sisa_antrean'] >=0) {
+                                                if ($data['sisa_antrean'] >= 0) {
                                                     $response = array(
                                                         'response' => array(
-                                                            'namapoli' => $data['nm_poli'],
-                                                            'namadokter' => $data['nm_dokter'],
-                                                            'totalantrean' => intval($data['total_antrean']),
-                                                            'sisaantrean' => intval(validangka($data['sisa_antrean'])>=0?($data['sisa_antrean']):0),
-                                                            'antreanpanggil' =>$kdpoli."-".getOne2("select reg_periksa.no_reg from reg_periksa where reg_periksa.stts='Belum' and reg_periksa.kd_dokter='$kddokter' and reg_periksa.kd_poli='$kdpoli' and reg_periksa.tgl_registrasi='".validTeks4($decode['tanggalperiksa'],20)."' order by CONVERT(RIGHT(reg_periksa.no_reg,3),signed) limit 1 "),
-                                                            'sisakuotajkn' => intval($kuota-$data['total_antrean']),
-                                                            'kuotajkn' => intval($kuota),
-                                                            'sisakuotanonjkn' => intval($kuota-$data['total_antrean']),
-                                                            'kuotanonjkn' => intval($kuota),
-                                                            'keterangan' => $data['keterangan']
+                                                            'namapoli'        => $data['nm_poli'],
+                                                            'namadokter'      => $data['nm_dokter'],
+                                                            'totalantrean'    => intval($data['total_antrean']),
+                                                            'sisaantrean'     => max([0, intval(validangka($data['sisa_antrean']))]),
+                                                            'antreanpanggil'  => $data['antreandipanggil'],
+                                                            'sisakuotajkn'    => intval($kuota - $data['total_antrean']),
+                                                            'kuotajkn'        => intval($kuota),
+                                                            'sisakuotanonjkn' => intval($kuota - $data['total_antrean']),
+                                                            'kuotanonjkn'     => intval($kuota),
+                                                            'keterangan'      => 'Datanglah Minimal 30 Menit, jika no antrian anda terlewat, silakan konfirmasi ke bagian Pendaftaran atau Perawat Poli, Terima Kasih ..'
                                                         ),
                                                         'metadata' => array(
                                                             'message' => 'Ok',
@@ -1079,27 +1080,31 @@
                                                 $jammulai   = substr($booking['jampraktek'],0,5);
                                                 $jamselesai = substr($booking['jampraktek'],6,5);
                                                 $hari       = strtoupper(hariindo($booking['tanggalperiksa']));
-                                                $kodedokter = getOne2("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs='$booking[kodedokter]'");
-                                                $kodepoli   = getOne2("SELECT maping_poli_bpjs.kd_poli_rs FROM maping_poli_bpjs inner join jadwal on maping_poli_bpjs.kd_poli_rs=jadwal.kd_poli WHERE maping_poli_bpjs.kd_poli_bpjs='$booking[kodepoli]' and jadwal.kd_dokter='$kodedokter' and jadwal.hari_kerja='$hari' and jadwal.jam_mulai='$jammulai:00' and jadwal.jam_selesai='$jamselesai:00' ");
+                                                // $kodedokter = getOne2("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs='$booking[kodedokter]'");
+                                                // $kodepoli   = getOne2("SELECT maping_poli_bpjs.kd_poli_rs FROM maping_poli_bpjs inner join jadwal on maping_poli_bpjs.kd_poli_rs=jadwal.kd_poli WHERE maping_poli_bpjs.kd_poli_bpjs='$booking[kodepoli]' and jadwal.kd_dokter='$kodedokter' and jadwal.hari_kerja='$hari' and jadwal.jam_mulai='$jammulai:00' and jadwal.jam_selesai='$jamselesai:00' ");
                                                 $noreg      = getOne2("select no_reg from reg_periksa where no_rawat='$booking[no_rawat]'");
-                                                $data = fetch_array(bukaquery("SELECT reg_periksa.kd_poli,poliklinik.nm_poli,dokter.nm_dokter,
-                                                    reg_periksa.no_reg,COUNT(reg_periksa.no_rawat) as total_antrean,
-                                                    IFNULL(SUM(CASE WHEN reg_periksa.stts ='Belum' THEN 1 ELSE 0 END),0) as sisa_antrean
-                                                    FROM reg_periksa INNER JOIN poliklinik ON poliklinik.kd_poli=reg_periksa.kd_poli
-                                                    INNER JOIN dokter ON dokter.kd_dokter=reg_periksa.kd_dokter
-                                                    WHERE reg_periksa.kd_dokter='$kodedokter' and reg_periksa.kd_poli='$kodepoli'and reg_periksa.tgl_registrasi='$booking[tanggalperiksa]'
-                                                    and CONVERT(RIGHT(reg_periksa.no_reg,3),signed)<CONVERT(RIGHT($noreg,3),signed)"));
+                                                $data = fetch_array(bukaquery("select j.kd_poli, j.kd_dokter, p.nm_poli, d.nm_dokter, (select count(*) from reg_periksa r
+                                                    where r.tgl_registrasi = '$booking[tanggalperiksa]' and r.kd_dokter = j.kd_dokter and r.kd_poli = j.kd_poli) as total_antrean,
+                                                    (select count(*) from reg_periksa r where r.tgl_registrasi = '$booking[tanggalperiksa]' and r.kd_dokter = j.kd_dokter and
+                                                    r.kd_poli = j.kd_poli and r.stts = 'Belum' and convert(right(r.no_reg, 3), signed) <= convert(right('$noreg', 3), signed)) as
+                                                    sisa_antrean, (select concat(r.kd_poli, '-', r.no_reg) from reg_periksa r where r.tgl_registrasi = '$booking[tanggalperiksa]'
+                                                    and r.kd_dokter = j.kd_dokter and r.kd_poli = j.kd_poli and r.stts = 'Belum' and convert(right(r.no_reg, 3), signed) <= convert(
+                                                    right('$noreg', 3), signed) order by r.no_reg limit 1) as antrean_dipanggil from jadwal j join poliklinik p on j.kd_poli = p.kd_poli
+                                                    join dokter d on j.kd_dokter = d.kd_dokter join maping_dokter_dpjpvclaim md on j.kd_dokter = md.kd_dokter join maping_poli_bpjs mp on
+                                                    j.kd_poli = mp.kd_poli_rs where j.hari_kerja = '$hari' and j.jam_mulai = '$jammulai:00' and j.jam_selesai = '$jamselesai:00' and
+                                                    md.kd_dokter_bpjs = '$booking[kodedokter]' and mp.kd_poli_bpjs = '$booking[kodepoli]'"
+                                                ));
 
                                                 if ($data['nm_poli'] != '') {
                                                     $response = array(
                                                         'response' => array(
-                                                            'nomorantrean' => $data['kd_poli']."-".$noreg,
-                                                            'namapoli' => $data['nm_poli'],
-                                                            'namadokter' => $data['nm_dokter'],
-                                                            'sisaantrean' => intval(validangka($data['sisa_antrean'])>=0?($data['sisa_antrean']):0),
-                                                            'antreanpanggil' => $data['kd_poli']."-".getOne2("select reg_periksa.no_reg from reg_periksa where reg_periksa.stts='Belum' and reg_periksa.kd_dokter='$kodedokter' and reg_periksa.kd_poli='$kodepoli' and reg_periksa.tgl_registrasi='$booking[tanggalperiksa]' and CONVERT(RIGHT(reg_periksa.no_reg,3),signed)<=CONVERT(RIGHT($noreg,3),signed) order by CONVERT(RIGHT(reg_periksa.no_reg,3),signed) limit 1 "),
-                                                            'waktutunggu' => (($data['sisa_antrean']*$waktutunggu)*1000),
-                                                            'keterangan' => "Datanglah Minimal 30 Menit, jika no antrian anda terlewat, silakan konfirmasi ke bagian Pendaftaran atau Perawat Poli, Terima Kasih ..Datanglah Minimal 30 Menit, jika no antrian anda terlewat, silakan konfirmasi ke bagian Pendaftaran atau Perawat Poli, Terima Kasih .."
+                                                            'nomorantrean'   => $data['kd_poli']."-".$noreg,
+                                                            'namapoli'       => $data['nm_poli'],
+                                                            'namadokter'     => $data['nm_dokter'],
+                                                            'sisaantrean'    => intval(validangka($data['sisa_antrean']) >= 0 ? ($data['sisa_antrean']) : 0),
+                                                            'antreanpanggil' => $data['antrean_dipanggil'],
+                                                            'waktutunggu'    => (($data['sisa_antrean'] * $waktutunggu) * 1000),
+                                                            'keterangan'     => "Datanglah Minimal 30 Menit, jika no antrian anda terlewat, silakan konfirmasi ke bagian Pendaftaran atau Perawat Poli, Terima Kasih .."
                                                         ),
                                                         'metadata' => array(
                                                             'message' => 'Ok',

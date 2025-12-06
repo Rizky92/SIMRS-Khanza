@@ -407,7 +407,7 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
     private void buttonCariPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCariPoliActionPerformed
         poli.setSize(getContentPane().getSize());
         poli.setLocationRelativeTo(getContentPane());
-        poli.tampil(hari);
+        poli.setHari(hari);
         poli.setVisible(true);
     }//GEN-LAST:event_buttonCariPoliActionPerformed
 

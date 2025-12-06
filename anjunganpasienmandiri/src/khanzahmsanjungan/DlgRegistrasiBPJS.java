@@ -1,10 +1,10 @@
 package khanzahmsanjungan;
 
 import bridging.ApiBPJS;
-import bridging.BPJSCekReferensiDokterDPJP;
-import bridging.BPJSCekReferensiPenyakit;
-import bridging.BPJSCekRiwayatPelayanan;
-import bridging.BPJSCekRiwayatRujukanTerakhir;
+import bridging.BPJSReferensiDokter;
+import bridging.BPJSReferensiDiagnosa;
+import bridging.BPJSRiwayatPelayananPasien;
+import bridging.BPJSRiwayatRujukanPasien;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jna.Native;
@@ -30,7 +30,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
+import java.time.Instant;
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,17 +52,17 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final ApiBPJS api = new ApiBPJS();
-    private final BPJSCekReferensiDokterDPJP dokter;
-    private final BPJSCekReferensiPenyakit diagnosa;
+    private final BPJSReferensiDokter dokter;
+    private final BPJSReferensiDiagnosa diagnosa;
     private final DlgCariPoliBPJS poli;
-    private final BPJSCekRiwayatRujukanTerakhir riwayatRujukan;
-    private final BPJSCekRiwayatPelayanan riwayatPelayanan;
-    private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), JADWALDOKTERDIREGISTRASI = koneksiDB.JADWALDOKTERDIREGISTRASI();
+    private final BPJSRiwayatRujukanPasien riwayatRujukan;
+    private final BPJSRiwayatPelayananPasien riwayatPelayanan;
+    private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), JADWALPRAKTEKDIANJUNGAN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
     private String hari = "",
         tglkll = "0000-00-00",
         datajam = "",
         url = "",
-        json = "",
+        payload = "",
         utc = "",
         aksi = "",
         kodeBPJS = "",
@@ -115,15 +117,16 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             System.out.println("Notif : " + e);
         }
 
-        dokter = new BPJSCekReferensiDokterDPJP(parent, modal);
+        dokter = new BPJSReferensiDokter(parent, modal);
         dokter.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if (dokter.getTable().getSelectedRow() != -1) {
-                    kodeDokter = dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 1).toString();
-                    namaDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 2).toString());
-                    kodeDPJPLayanan.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 1).toString());
-                    namaDPJPLayanan.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(), 2).toString());
+                if (dokter.hasSelection()) {
+                    kodeDokter = dokter.getSelectedRow(1).toString();
+                    namaDokter.setText(dokter.getSelectedRow(2).toString());
+                    kodeDPJPLayanan.setText(dokter.getSelectedRow(1).toString());
+                    namaDPJPLayanan.setText(dokter.getSelectedRow(2).toString());
+                    kodeDokterReg = Sequel.cariIsiSmc("select maping_dokter_dpjpvclaim.kd_dokter from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter_bpjs = ?", kodeDokter);
                 }
                 namaDokter.requestFocus();
             }
@@ -136,42 +139,44 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 if (poli.hasSelection()) {
                     kodePoli = poli.getSelectedRow(0).toString();
                     namaPoli.setText(poli.getSelectedRow(1).toString());
-                    namaPoli.requestFocus();
+                    kodePoliReg = poli.getSelectedRow(2).toString();
+                    // jamPraktek = poli.getSelectedRow(3).toString();
                 }
+                namaPoli.requestFocus();
             }
         });
 
-        diagnosa = new BPJSCekReferensiPenyakit(parent, modal);
+        diagnosa = new BPJSReferensiDiagnosa(parent, modal);
         diagnosa.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if (diagnosa.getTable().getSelectedRow() != -1) {
-                    kodeDiagnosa.setText(diagnosa.getTable().getValueAt(diagnosa.getTable().getSelectedRow(), 1).toString());
-                    namaDiagnosa.setText(diagnosa.getTable().getValueAt(diagnosa.getTable().getSelectedRow(), 2).toString());
+                if (diagnosa.hasSelection()) {
+                    kodeDiagnosa.setText(diagnosa.getSelectedRow(1).toString());
+                    namaDiagnosa.setText(diagnosa.getSelectedRow(2).toString());
                 }
                 kodeDiagnosa.requestFocus();
             }
         });
 
-        riwayatRujukan = new BPJSCekRiwayatRujukanTerakhir(parent, modal);
+        riwayatRujukan = new BPJSRiwayatRujukanPasien(parent, modal);
         riwayatRujukan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if (riwayatRujukan.getTable().getSelectedRow() != -1) {
-                    noRujukan.setText(riwayatRujukan.getTable().getValueAt(riwayatRujukan.getTable().getSelectedRow(), 2).toString());
-                    kodePPKRujukan.setText(riwayatRujukan.getTable().getValueAt(riwayatRujukan.getTable().getSelectedRow(), 6).toString());
-                    namaPPKRujukan.setText(riwayatRujukan.getTable().getValueAt(riwayatRujukan.getTable().getSelectedRow(), 7).toString());
-                    kodeDiagnosa.setText(riwayatRujukan.getTable().getValueAt(riwayatRujukan.getTable().getSelectedRow(), 0).toString());
-                    namaDiagnosa.setText(riwayatRujukan.getTable().getValueAt(riwayatRujukan.getTable().getSelectedRow(), 1).toString());
-                    kodePoli = riwayatRujukan.getTable().getValueAt(riwayatRujukan.getTable().getSelectedRow(), 3).toString();
-                    namaPoli.setText(riwayatRujukan.getTable().getValueAt(riwayatRujukan.getTable().getSelectedRow(), 4).toString());
-                    tglRujukan.setText(riwayatRujukan.getTable().getValueAt(riwayatRujukan.getTable().getSelectedRow(), 5).toString());
+                if (riwayatRujukan.hasSelection()) {
+                    noRujukan.setText(riwayatRujukan.getSelectedRow(2).toString());
+                    kodePPKRujukan.setText(riwayatRujukan.getSelectedRow(6).toString());
+                    namaPPKRujukan.setText(riwayatRujukan.getSelectedRow(7).toString());
+                    kodeDiagnosa.setText(riwayatRujukan.getSelectedRow(0).toString());
+                    namaDiagnosa.setText(riwayatRujukan.getSelectedRow(1).toString());
+                    kodePoli = riwayatRujukan.getSelectedRow(3).toString();
+                    namaPoli.setText(riwayatRujukan.getSelectedRow(4).toString());
+                    tglRujukan.setText(riwayatRujukan.getSelectedRow(5).toString());
                 }
                 catatan.requestFocus();
             }
         });
 
-        riwayatPelayanan = new BPJSCekRiwayatPelayanan(parent, modal);
+        riwayatPelayanan = new BPJSRiwayatPelayananPasien(parent, modal);
         riwayatPelayanan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -1064,8 +1069,12 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         } else if (!statusFinger && Sequel.cariIntegerSmc("select timestampdiff(year, ?, CURRENT_DATE())", tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
             JOptionPane.showMessageDialog(null, "Silahkan lakukan validasi biometrik dahulu..!!");
         } else {
-            kodePoliReg = Sequel.cariIsiSmc("select kd_poli_rs from maping_poli_bpjs where kd_poli_bpjs = ?", kodePoli);
-            kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
+            if (kodePoliReg.isBlank()) {
+                kodePoliReg = Sequel.cariIsiSmc("select kd_poli_rs from maping_poli_bpjs where kd_poli_bpjs = ?", kodePoli);
+            }
+            if (kodeDokterReg.isBlank()) {
+                kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
+            }
             if (kodePoliReg.isBlank() || kodeDokterReg.isBlank()) {
                 JOptionPane.showMessageDialog(null, "Mapping Poliklinik atau Dokter tidak ditemukan..!!");
             } else {
@@ -1139,6 +1148,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }//GEN-LAST:event_lakaLantasItemStateChanged
 
     private void cariPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariPoliActionPerformed
+        if (JADWALPRAKTEKDIANJUNGAN) {
+            poli.setHari(tglSEP.getText());
+            poli.setDokter(Sequel.cariIsiSmc("select maping_dokter_dpjpvclaim.kd_dokter from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter_bpjs = ?", kodeDokter));
+        }
         poli.setSize(getContentPane().getSize());
         poli.setLocationRelativeTo(getContentPane());
         poli.setVisible(true);
@@ -1219,7 +1232,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                     headers.add("X-Timestamp", utc);
                                     headers.add("X-Signature", api.getHmac(utc));
                                     headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-                                    json = " {" +
+                                    payload = " {" +
                                         "\"request\": {" +
                                         "\"t_sep\": {" +
                                         "\"noKartu\": \"" + noPeserta.getText() + "\"," +
@@ -1231,7 +1244,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                         "}" +
                                         "}" +
                                         "}";
-                                    entity = new HttpEntity(json, headers);
+                                    entity = new HttpEntity(payload, headers);
                                     root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
                                     metadata = root.path("metaData");
                                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
@@ -1259,7 +1272,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                     headers.add("X-Timestamp", utc);
                                     headers.add("X-Signature", api.getHmac(utc));
                                     headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-                                    json = " {" +
+                                    payload = " {" +
                                         "\"request\": {" +
                                         "\"t_sep\": {" +
                                         "\"noKartu\": \"" + noPeserta.getText() + "\"," +
@@ -1271,7 +1284,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                         "}" +
                                         "}" +
                                         "}";
-                                    entity = new HttpEntity(json, headers);
+                                    entity = new HttpEntity(payload, headers);
                                     root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
                                     metadata = root.path("metaData");
                                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
@@ -1784,7 +1797,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             headers.add("X-Timestamp", utc);
             headers.add("X-Signature", api.getHmac(utc));
             headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            json = "{" +
+            payload = "{" +
                 "\"request\":{" +
                 "\"t_sep\":{" +
                 "\"noKartu\":\"" + noPeserta.getText() + "\"," +
@@ -1847,7 +1860,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 "}" +
                 "}";
 
-            entity = new HttpEntity(json, headers);
+            entity = new HttpEntity(payload, headers);
             root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
             metadata = root.path("metaData");
             System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
@@ -1883,16 +1896,21 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     (penunjang.getSelectedIndex() > 0 ? String.valueOf(penunjang.getSelectedIndex()) : ""), (asesmenPelayanan.getSelectedIndex() > 0 ? asesmenPelayanan.getSelectedItem().toString().substring(0, 1) : ""),
                     kodeDPJPLayanan.getText(), namaDPJPLayanan.getText()
                 );
+
                 Sequel.executeRawSmc("insert into mutasi_berkas values(?, 'Sudah Dikirim', now(), '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00', '0000-00-00 00:00:00') on duplicate key update dikirim = values(dikirim)", noRawat);
+
                 if (!simpanRujukan()) {
                     System.out.println("Terjadi kesalahan pada saat proses rujukan masuk pasien!");
                 }
+
                 if (!prb.isBlank()) {
                     Sequel.menyimpanSmc("bpjs_prb", null, noSEP, prb);
                 }
+
                 if (Sequel.cariExistsSmc("select * from booking_registrasi where no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ? and status != 'Terdaftar'", noRM.getText(), tglSEP.getText(), kodeDokterReg, kodePoliReg)) {
                     Sequel.mengupdateSmc("booking_registrasi", "status = 'Terdaftar', waktu_kunjungan = now()", "no_rkm_medis = ? and tanggal_periksa = ? and kd_dokter = ? and kd_poli = ?", noRM.getText(), tglSEP.getText(), kodeDokterReg, kodePoliReg);
                 }
+
                 cetakRegistrasi();
                 emptTeks();
                 dispose();
@@ -2321,18 +2339,22 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             psjkn.setString(1, noKartu);
             try (ResultSet rsjkn = psjkn.executeQuery()) {
                 if (rsjkn.next()) {
+                    jamPraktek = rsjkn.getString("jampraktek");
+                    if (!cekWaktuRegistrasi()) {
+                        emptTeks();
+                        JOptionPane.showMessageDialog(null, "Waktu cekin anda masih harus menunggu lagi.", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                        return;
+                    }
                     noBooking = rsjkn.getString("nobooking");
                     noRawat = rsjkn.getString("no_rawat");
                     noTelpBPJS = rsjkn.getString("nohp");
                     statusDaftar = rsjkn.getString("pasienbaru");
-                    jamPraktek = rsjkn.getString("jampraktek");
                     jenisKunjungan = rsjkn.getString("jeniskunjungan").substring(0, 1);
                     noReferensi = rsjkn.getString("nomorreferensi");
                     noReg = rsjkn.getString("angkaantrean");
                     estimasiDilayani = rsjkn.getString("estimasidilayani");
                     kuota = rsjkn.getInt("kuotajkn");
                     sisaKuota = rsjkn.getInt("sisakuotajkn");
-
                     noRM.setText(rsjkn.getString("norm"));
                     tglLahir.setText(rsjkn.getString("tgl_lahir"));
                     kodePoli = rsjkn.getString("kodepoli");
@@ -2605,7 +2627,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     headers.add("x-timestamp", utc);
                     headers.add("x-signature", api.getHmac(utc));
                     headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
-                    json = "{" +
+                    payload = "{" +
                         "\"kodebooking\": \"" + noBooking + "\"," +
                         "\"jenispasien\": \"JKN\"," +
                         "\"nomorkartu\": \"" + noPeserta.getText() + "\"," +
@@ -2630,13 +2652,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         "\"kuotanonjkn\": " + kuota + "," +
                         "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\"" +
                         "}";
-                    System.out.println(json);
+                    System.out.println(payload);
                     System.out.print("Addantrean mobileJKN onsite [" + noBooking + "] : ");
-                    entity = new HttpEntity(json, headers);
+                    entity = new HttpEntity(payload, headers);
                     root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
                     metadata = root.path("metadata");
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
-                    Sequel.logTaskid(noRawat, noBooking, "Onsite", "addantrean", json, metadata.path("code").asText(), metadata.path("message").asText(), root.toString(), datajam);
+                    Sequel.logTaskid(noRawat, noBooking, "Onsite", "addantrean", payload, metadata.path("code").asText(), metadata.path("message").asText(), root.toString(), datajam);
                     if (metadata.path("code").asText().equals("200") || metadata.path("code").asText().equals("208") || metadata.path("message").asText().equals("Ok")) {
                         Sequel.mengupdateSmc("referensi_mobilejkn_bpjs", "statuskirim = 'Sudah'", "nobooking = ?", noBooking);
                     } else {
@@ -2646,12 +2668,12 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 } catch (HttpClientErrorException e) {
                     sukses = false;
                     System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
-                    Sequel.logTaskid(noRawat, noBooking, "Onsite", "addantrean", json, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
+                    Sequel.logTaskid(noRawat, noBooking, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
                 } catch (HttpServerErrorException e) {
                     sukses = false;
                     System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
-                    Sequel.logTaskid(noRawat, noBooking, "Onsite", "addantrean", json, e.getStatusCode().toString(), e.getMessage(), "", datajam);
+                    Sequel.logTaskid(noRawat, noBooking, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), "", datajam);
                     JOptionPane.showMessageDialog(null, e.getMessage(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
                 } catch (Exception e) {
                     sukses = false;
@@ -2753,7 +2775,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             try {
                                 url = koneksiDB.URLAPIMOBILEJKN() + "/antrean/add";
                                 System.out.println("URL : " + url);
-                                json = "{" +
+                                payload = "{" +
                                     "\"kodebooking\": \"" + noRawat + "\"," +
                                     "\"jenispasien\": \"JKN\"," +
                                     "\"nomorkartu\": \"" + noPeserta.getText() + "\"," +
@@ -2778,7 +2800,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                     "\"kuotanonjkn\": " + kuota + "," +
                                     "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\"" +
                                     "}";
-                                System.out.println("JSON : " + json);
+                                System.out.println("JSON : " + payload);
                                 System.out.print("Addantrean onsite [" + noRawat + "] : ");
                                 utc = api.getUTCDateTimeAsString();
                                 headers = new HttpHeaders();
@@ -2787,10 +2809,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                 headers.add("x-timestamp", utc);
                                 headers.add("x-signature", api.getHmac(utc));
                                 headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
-                                entity = new HttpEntity(json, headers);
+                                entity = new HttpEntity(payload, headers);
                                 root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
                                 metadata = root.path("metadata");
-                                Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", json, metadata.path("code").asText(), metadata.path("message").asText(), root.toString(), datajam);
+                                Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", payload, metadata.path("code").asText(), metadata.path("message").asText(), root.toString(), datajam);
                                 System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                                 if (!metadata.path("code").asText().equals("200")) {
                                     sukses = false;
@@ -2798,11 +2820,11 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             } catch (HttpClientErrorException e) {
                                 sukses = false;
                                 System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
-                                Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", json, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
+                                Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
                             } catch (HttpServerErrorException e) {
                                 sukses = false;
                                 System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
-                                Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", json, e.getStatusCode().toString(), e.getMessage(), "", datajam);
+                                Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), "", datajam);
                             } catch (Exception e) {
                                 sukses = false;
                                 System.out.println("Notif : " + e);
@@ -2816,7 +2838,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             sukses = true;
                             url = koneksiDB.URLAPIMOBILEJKN() + "/antrean/add";
                             System.out.println("URL : " + url);
-                            json = "{" +
+                            payload = "{" +
                                 "\"kodebooking\": \"" + noRawat + "\"," +
                                 "\"jenispasien\": \"JKN\"," +
                                 "\"nomorkartu\": \"" + noPeserta.getText() + "\"," +
@@ -2841,7 +2863,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                 "\"kuotanonjkn\": " + kuota + "," +
                                 "\"keterangan\": \"Peserta harap 30 menit lebih awal guna pencatatan administrasi.\"" +
                                 "}";
-                            System.out.println("JSON : " + json);
+                            System.out.println("JSON : " + payload);
                             System.out.print("Addantrean onsite [" + noRawat + "] : ");
                             utc = api.getUTCDateTimeAsString();
                             headers = new HttpHeaders();
@@ -2850,10 +2872,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             headers.add("x-timestamp", utc);
                             headers.add("x-signature", api.getHmac(utc));
                             headers.add("user_key", koneksiDB.USERKEYAPIMOBILEJKN());
-                            entity = new HttpEntity(json, headers);
+                            entity = new HttpEntity(payload, headers);
                             root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
                             metadata = root.path("metadata");
-                            Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", json, metadata.path("code").asText(), metadata.path("message").asText(), root.toString(), datajam);
+                            Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", payload, metadata.path("code").asText(), metadata.path("message").asText(), root.toString(), datajam);
                             System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                             if (!metadata.path("code").asText().equals("200")) {
                                 sukses = false;
@@ -2862,12 +2884,12 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         } catch (HttpClientErrorException e) {
                             sukses = false;
                             System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
-                            Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", json, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
+                            Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
                             JOptionPane.showMessageDialog(null, e.getMessage(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
                         } catch (HttpServerErrorException e) {
                             sukses = false;
                             System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
-                            Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", json, e.getStatusCode().toString(), e.getMessage(), "", datajam);
+                            Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), "", datajam);
                             JOptionPane.showMessageDialog(null, e.getMessage(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
                         } catch (Exception e) {
                             sukses = false;
@@ -2946,7 +2968,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         tglkll = "0000-00-00";
         datajam = "";
         url = "";
-        json = "";
+        payload = "";
         utc = "";
         noSEP = "";
         noBooking = "";
@@ -2990,7 +3012,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             headers.add("X-Timestamp", utc);
             headers.add("X-Signature", api.getHmac(utc));
             headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            json = "{" +
+            payload = "{" +
                 "\"request\": {" +
                 "\"noSuratKontrol\":\"" + noSKDP.getText() + "\"," +
                 "\"noSEP\":\"" + Sequel.cariIsiSmc("select no_sep from bridging_surat_kontrol_bpjs where no_surat = ?", noSKDP.getText()) + "\"," +
@@ -3000,7 +3022,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 "\"user\":\"" + noPeserta.getText() + "\"" +
                 "}" +
                 "}";
-            entity = new HttpEntity(json, headers);
+            entity = new HttpEntity(payload, headers);
             root = mapper.readTree(api.getRest().exchange(url, HttpMethod.PUT, entity, String.class).getBody());
             metadata = root.path("metaData");
             System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
@@ -3099,7 +3121,25 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             panelUtama.setMinimumSize(new Dimension(preferredWidth, height));
             panelUtama.setPreferredSize(new Dimension(preferredWidth, height));
         }
+
         revalidate();
+
         panelTambahan.setVisible(toggleInfoTambahan.isSelected());
+    }
+
+    private boolean cekWaktuRegistrasi() {
+        if (!REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
+            return true;
+        }
+
+        Calendar cal = Calendar.getInstance();
+        Instant now = cal.toInstant();
+
+        cal.set(Calendar.HOUR_OF_DAY, Integer.parseInt(jamPraktek.substring(0, 2)));
+        cal.set(Calendar.MINUTE, Integer.parseInt(jamPraktek.substring(3, 5)));
+        cal.set(Calendar.SECOND, 0);
+        Instant jamMasuk = cal.toInstant();
+
+        return now.isAfter(jamMasuk.minus(1, ChronoUnit.HOURS));
     }
 }
