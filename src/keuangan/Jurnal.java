@@ -36,7 +36,7 @@ public class Jurnal {
                                 String nojur = "";
                                 int i = 0;
                                 do {
-                                    nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
+                                    nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"), max(1, i));
                                     sukses = Sequel.menyimpantfSmc("jurnal", "", nojur, nobukti, rscek.getString("tanggal"), rscek.getString("jam"), jenis, keterangan);
                                 } while (!sukses && i++ < 3);
 
@@ -71,7 +71,7 @@ public class Jurnal {
         try {
             try (ResultSet rscek = koneksi.createStatement().executeQuery(
                 "select count(*) as jml, current_date() as tanggal, current_time() as jam, round(sum(debet) - sum(kredit), 0) " +
-                "as selisih, round(sum(debet), 0) as total_debet, round(sum(kredit), 0) as total_kredit from tampjurnal_smc"
+                "as selisih, round(sum(debet), 0) as total_debet, round(sum(kredit), 0) as total_kredit from tampjurnal_rvpbpjs"
             )) {
                 if (rscek.next()) {
                     if (rscek.getInt("jml") > 0) {
@@ -79,7 +79,7 @@ public class Jurnal {
                             String nojur = "";
                             int i = 0;
                             do {
-                                nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"));
+                                nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"), max(1, i));
                                 sukses = Sequel.menyimpantfSmc("jurnal", "", nojur, nobukti, rscek.getString("tanggal"), rscek.getString("jam"), jenis, keterangan);
                             } while (!sukses && i++ < 3);
 
@@ -106,5 +106,12 @@ public class Jurnal {
         }
 
         return sukses;
+    }
+    
+    private int max(int a, int b) {
+        if (a > b) {
+            return a;
+        }
+        return b;
     }
 }
