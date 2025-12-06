@@ -931,14 +931,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),10).toString());
                             TTnd.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),4).toString());
                             TKdPrw.requestFocus();
-                            System.out.println("Tab Dr");
-                            System.out.println("material = " + BagianRS.getText());
-                            System.out.println("bhp = " + Bhp.getText());
-                            System.out.println("tarif_tindakandr = " + JmDokter.getText());
-                            System.out.println("tarif_tindakanpr = " + JmPerawat.getText());
-                            System.out.println("kso = " + KSO.getText());
-                            System.out.println("menejemen = " + Menejemen.getText());
-                            System.out.println("biaya_rawat = " + TTnd.getText());
                         }else if(TabRawat.getSelectedIndex()==1){
                             TKdPrwPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),1).toString());
                             TNmPrwPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),2).toString());
@@ -950,14 +942,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),10).toString());
                             TTnd.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),4).toString());
                             TKdPrwPetugas.requestFocus();
-                            System.out.println("Tab Pr");
-                            System.out.println("material = " + BagianRS.getText());
-                            System.out.println("bhp = " + Bhp.getText());
-                            System.out.println("tarif_tindakandr = " + JmDokter.getText());
-                            System.out.println("tarif_tindakanpr = " + JmPerawat.getText());
-                            System.out.println("kso = " + KSO.getText());
-                            System.out.println("menejemen = " + Menejemen.getText());
-                            System.out.println("biaya_rawat = " + TTnd.getText());
                         }else if(TabRawat.getSelectedIndex()==2){
                             TKdPrwDokterPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),1).toString());
                             TNmPrwDokterPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),2).toString());
@@ -969,14 +953,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),10).toString());
                             TTnd.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),4).toString());
                             TKdPrwDokterPetugas.requestFocus();
-                            System.out.println("Tab DrPr");
-                            System.out.println("material = " + BagianRS.getText());
-                            System.out.println("bhp = " + Bhp.getText());
-                            System.out.println("tarif_tindakandr = " + JmDokter.getText());
-                            System.out.println("tarif_tindakanpr = " + JmPerawat.getText());
-                            System.out.println("kso = " + KSO.getText());
-                            System.out.println("menejemen = " + Menejemen.getText());
-                            System.out.println("biaya_rawat = " + TTnd.getText());
                         }
                     }
                     BtnCariActionPerformed(null);
@@ -1012,14 +988,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),13).toString());
                             TTnd.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),7).toString());
                             TKdPrw.requestFocus();
-                            System.out.println("Tab Dr");
-                            System.out.println("material = " + BagianRS.getText());
-                            System.out.println("bhp = " + Bhp.getText());
-                            System.out.println("tarif_tindakandr = " + JmDokter.getText());
-                            System.out.println("tarif_tindakanpr = " + JmPerawat.getText());
-                            System.out.println("kso = " + KSO.getText());
-                            System.out.println("menejemen = " + Menejemen.getText());
-                            System.out.println("biaya_rawat = " + TTnd.getText());
                         }else if(TabRawat.getSelectedIndex()==1){
                             TKdPrwPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),4).toString());
                             TNmPrwPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),5).toString());
@@ -1031,14 +999,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),13).toString());
                             TTnd.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),7).toString());
                             TKdPrwPetugas.requestFocus();
-                            System.out.println("Tab Pr");
-                            System.out.println("material = " + BagianRS.getText());
-                            System.out.println("bhp = " + Bhp.getText());
-                            System.out.println("tarif_tindakandr = " + JmDokter.getText());
-                            System.out.println("tarif_tindakanpr = " + JmPerawat.getText());
-                            System.out.println("kso = " + KSO.getText());
-                            System.out.println("menejemen = " + Menejemen.getText());
-                            System.out.println("biaya_rawat = " + TTnd.getText());
                         }else if(TabRawat.getSelectedIndex()==2){
                             TKdPrwDokterPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),4).toString());
                             TNmPrwDokterPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),5).toString());
@@ -1050,14 +1010,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),13).toString());
                             TTnd.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),7).toString());
                             TKdPrwDokterPetugas.requestFocus();
-                            System.out.println("Tab DrPr");
-                            System.out.println("material = " + BagianRS.getText());
-                            System.out.println("bhp = " + Bhp.getText());
-                            System.out.println("tarif_tindakandr = " + JmDokter.getText());
-                            System.out.println("tarif_tindakanpr = " + JmPerawat.getText());
-                            System.out.println("kso = " + KSO.getText());
-                            System.out.println("menejemen = " + Menejemen.getText());
-                            System.out.println("biaya_rawat = " + TTnd.getText());
                         }
                     }
                     BtnCariActionPerformed(null);
