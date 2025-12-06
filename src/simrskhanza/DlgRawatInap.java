@@ -4723,10 +4723,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             if(akses.getkode().equals("Admin Utama")){
                 simpan();
             }else{
-                /*if(TanggalRegistrasi.getText().equals("")){
-                    TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
-                }
-                if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem())==true){*/
                 if (Sequel.cekTanggalRegistrasiSmc(TNoRw.getText(), Valid.getTglJamSmc(DTPTgl, cmbJam, cmbMnt, cmbDtk))) {
                     simpan();
                 }
@@ -4775,26 +4771,25 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     sukses=true;
                     ttljmdokter=0;ttljmperawat=0;ttlkso=0;ttlpendapatan=0;ttljasasarana=0;ttlbhp=0;ttlmenejemen=0;
                     for(i=0;i<tbRawatDr.getRowCount();i++){
-                        if(tbRawatDr.getValueAt(i,0).toString().equals("true")){
+                        if (tbRawatDr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatDr.getValueAt(i, 1).toString())) {
                             if(akses.getkode().equals("Admin Utama")){
                                 if(Sequel.cariRegistrasi(tbRawatDr.getValueAt(i,1).toString())>0){
                                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                                     tbRawatDr.setValueAt(false,i,0);
                                     TCari.requestFocus();
                                 }else{
-                                    if(Sequel.queryutf("delete from rawat_inap_dr where no_rawat='"+tbRawatDr.getValueAt(i,1).toString()+
-                                            "' and kd_jenis_prw='"+tbRawatDr.getValueAt(i,10)+
-                                            "' and kd_dokter='"+tbRawatDr.getValueAt(i,5).toString()+
-                                            "' and tgl_perawatan='"+tbRawatDr.getValueAt(i,7).toString()+
-                                            "' and jam_rawat='"+tbRawatDr.getValueAt(i,8).toString()+"'")==true){
-                                        ttljmdokter=ttljmdokter+Double.parseDouble(tbRawatDr.getValueAt(i,11).toString());
-                                        ttlkso=ttlkso+Double.parseDouble(tbRawatDr.getValueAt(i,12).toString());
-                                        ttlpendapatan=ttlpendapatan+Double.parseDouble(tbRawatDr.getValueAt(i,9).toString());
-                                        ttljasasarana=ttljasasarana+Double.parseDouble(tbRawatDr.getValueAt(i,13).toString());
-                                        ttlbhp=ttlbhp+Double.parseDouble(tbRawatDr.getValueAt(i,14).toString());
-                                        ttlmenejemen=ttlmenejemen+Double.parseDouble(tbRawatDr.getValueAt(i,15).toString());
-                                    }else{
-                                        sukses=false;
+                                    if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and kd_dokter = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                        tbRawatDr.getValueAt(i, 1).toString(), tbRawatDr.getValueAt(i, 10).toString(), tbRawatDr.getValueAt(i, 5).toString(),
+                                        tbRawatDr.getValueAt(i, 7).toString(), tbRawatDr.getValueAt(i, 8).toString()
+                                    )) {
+                                        ttljmdokter += Double.parseDouble(tbRawatDr.getValueAt(i, 11).toString());
+                                        ttlkso += Double.parseDouble(tbRawatDr.getValueAt(i, 12).toString());
+                                        ttlpendapatan += Double.parseDouble(tbRawatDr.getValueAt(i, 9).toString());
+                                        ttljasasarana += Double.parseDouble(tbRawatDr.getValueAt(i, 13).toString());
+                                        ttlbhp += Double.parseDouble(tbRawatDr.getValueAt(i, 14).toString());
+                                        ttlmenejemen += Double.parseDouble(tbRawatDr.getValueAt(i, 15).toString());
+                                    } else {
+                                        sukses = false;
                                     }
                                 }
                             }else{
@@ -4804,19 +4799,18 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                         tbRawatDr.setValueAt(false,i,0);
                                         TCari.requestFocus();
                                     }else{
-                                        if(Sequel.queryutf("delete from rawat_inap_dr where no_rawat='"+tbRawatDr.getValueAt(i,1).toString()+
-                                                "' and kd_jenis_prw='"+tbRawatDr.getValueAt(i,10)+
-                                                "' and kd_dokter='"+tbRawatDr.getValueAt(i,5).toString()+
-                                                "' and tgl_perawatan='"+tbRawatDr.getValueAt(i,7).toString()+
-                                                "' and jam_rawat='"+tbRawatDr.getValueAt(i,8).toString()+"'")==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbRawatDr.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbRawatDr.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbRawatDr.getValueAt(i,9).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbRawatDr.getValueAt(i,13).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbRawatDr.getValueAt(i,14).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbRawatDr.getValueAt(i,15).toString());
-                                        }else{
-                                            sukses=false;
+                                        if (Sequel.menghapustfSmc("rawat_inap_dr", "no_rawat = ? and kd_jenis_prw = ? and kd_dokter = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                            tbRawatDr.getValueAt(i, 1).toString(), tbRawatDr.getValueAt(i, 10).toString(), tbRawatDr.getValueAt(i, 5).toString(),
+                                            tbRawatDr.getValueAt(i, 7).toString(), tbRawatDr.getValueAt(i, 8).toString()
+                                        )) {
+                                            ttljmdokter += Double.parseDouble(tbRawatDr.getValueAt(i, 11).toString());
+                                            ttlkso += Double.parseDouble(tbRawatDr.getValueAt(i, 12).toString());
+                                            ttlpendapatan += Double.parseDouble(tbRawatDr.getValueAt(i, 9).toString());
+                                            ttljasasarana += Double.parseDouble(tbRawatDr.getValueAt(i, 13).toString());
+                                            ttlbhp += Double.parseDouble(tbRawatDr.getValueAt(i, 14).toString());
+                                            ttlmenejemen += Double.parseDouble(tbRawatDr.getValueAt(i, 15).toString());
+                                        } else {
+                                            sukses = false;
                                         }
                                     }
                                 }else{
@@ -4857,7 +4851,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.Commit();
                         for(i=0;i<tbRawatDr.getRowCount();i++){
-                            if(tbRawatDr.getValueAt(i,0).toString().equals("true")){
+                            if (tbRawatDr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatDr.getValueAt(i, 1).toString())) {
                                 tabModeDr.removeRow(i);
                                 i--;
                             }
@@ -4879,26 +4873,25 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     sukses=true;
                     ttljmdokter=0;ttljmperawat=0;ttlkso=0;ttlpendapatan=0;ttljasasarana=0;ttlbhp=0;ttlmenejemen=0;
                     for(i=0;i<tbRawatPr.getRowCount();i++){
-                        if(tbRawatPr.getValueAt(i,0).toString().equals("true")){
+                        if (tbRawatPr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatPr.getValueAt(i, 1).toString())) {
                             if(akses.getkode().equals("Admin Utama")){
                                 if(Sequel.cariRegistrasi(tbRawatPr.getValueAt(i,1).toString())>0){
                                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                                     tbRawatPr.setValueAt(false,i,0);
                                     TCari.requestFocus();
                                 }else{
-                                    if(Sequel.queryutf("delete from rawat_inap_pr where no_rawat='"+tbRawatPr.getValueAt(i,1).toString()+
-                                            "' and kd_jenis_prw='"+tbRawatPr.getValueAt(i,10)+
-                                            "' and nip='"+tbRawatPr.getValueAt(i,5).toString()+
-                                            "' and tgl_perawatan='"+tbRawatPr.getValueAt(i,7).toString()+
-                                            "' and jam_rawat='"+tbRawatPr.getValueAt(i,8).toString()+"' ")==true){
-                                        ttljmperawat=ttljmperawat+Double.parseDouble(tbRawatPr.getValueAt(i,11).toString());
-                                        ttlkso=ttlkso+Double.parseDouble(tbRawatPr.getValueAt(i,12).toString());
-                                        ttlpendapatan=ttlpendapatan+Double.parseDouble(tbRawatPr.getValueAt(i,9).toString());
-                                        ttljasasarana=ttljasasarana+Double.parseDouble(tbRawatPr.getValueAt(i,13).toString());
-                                        ttlbhp=ttlbhp+Double.parseDouble(tbRawatPr.getValueAt(i,14).toString());
-                                        ttlmenejemen=ttlmenejemen+Double.parseDouble(tbRawatPr.getValueAt(i,15).toString());
-                                    }else{
-                                        sukses=false;
+                                    if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and nip = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                        tbRawatPr.getValueAt(i, 1).toString(), tbRawatPr.getValueAt(i, 10).toString(), tbRawatPr.getValueAt(i, 5).toString(),
+                                        tbRawatPr.getValueAt(i, 7).toString(), tbRawatPr.getValueAt(i, 8).toString()
+                                    )) {
+                                        ttljmperawat += Double.parseDouble(tbRawatPr.getValueAt(i, 11).toString());
+                                        ttlkso += Double.parseDouble(tbRawatPr.getValueAt(i, 12).toString());
+                                        ttlpendapatan += Double.parseDouble(tbRawatPr.getValueAt(i, 9).toString());
+                                        ttljasasarana += Double.parseDouble(tbRawatPr.getValueAt(i, 13).toString());
+                                        ttlbhp += Double.parseDouble(tbRawatPr.getValueAt(i, 14).toString());
+                                        ttlmenejemen += Double.parseDouble(tbRawatPr.getValueAt(i, 15).toString());
+                                    } else {
+                                        sukses = false;
                                     }
                                 }
                             }else{
@@ -4908,19 +4901,18 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                         tbRawatPr.setValueAt(false,i,0);
                                         TCari.requestFocus();
                                     }else{
-                                        if(Sequel.queryutf("delete from rawat_inap_pr where no_rawat='"+tbRawatPr.getValueAt(i,1).toString()+
-                                                "' and kd_jenis_prw='"+tbRawatPr.getValueAt(i,10)+
-                                                "' and nip='"+tbRawatPr.getValueAt(i,5).toString()+
-                                                "' and tgl_perawatan='"+tbRawatPr.getValueAt(i,7).toString()+
-                                                "' and jam_rawat='"+tbRawatPr.getValueAt(i,8).toString()+"' ")==true){
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbRawatPr.getValueAt(i,11).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbRawatPr.getValueAt(i,12).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbRawatPr.getValueAt(i,9).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbRawatPr.getValueAt(i,13).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbRawatPr.getValueAt(i,14).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbRawatPr.getValueAt(i,15).toString());
-                                        }else{
-                                            sukses=false;
+                                        if (Sequel.menghapustfSmc("rawat_inap_pr", "no_rawat = ? and kd_jenis_prw = ? and nip = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                            tbRawatPr.getValueAt(i, 1).toString(), tbRawatPr.getValueAt(i, 10).toString(), tbRawatPr.getValueAt(i, 5).toString(),
+                                            tbRawatPr.getValueAt(i, 7).toString(), tbRawatPr.getValueAt(i, 8).toString()
+                                        )) {
+                                            ttljmperawat += Double.parseDouble(tbRawatPr.getValueAt(i, 11).toString());
+                                            ttlkso += Double.parseDouble(tbRawatPr.getValueAt(i, 12).toString());
+                                            ttlpendapatan += Double.parseDouble(tbRawatPr.getValueAt(i, 9).toString());
+                                            ttljasasarana += Double.parseDouble(tbRawatPr.getValueAt(i, 13).toString());
+                                            ttlbhp += Double.parseDouble(tbRawatPr.getValueAt(i, 14).toString());
+                                            ttlmenejemen += Double.parseDouble(tbRawatPr.getValueAt(i, 15).toString());
+                                        } else {
+                                            sukses = false;
                                         }
                                     }
                                 }else{
@@ -4961,7 +4953,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.Commit();
                         for(i=0;i<tbRawatPr.getRowCount();i++){
-                            if(tbRawatPr.getValueAt(i,0).toString().equals("true")){
+                            if (tbRawatPr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatPr.getValueAt(i, 1).toString())) {
                                 tabModePr.removeRow(i);
                                 i--;
                             }
@@ -4983,28 +4975,26 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     sukses=true;
                     ttljmdokter=0;ttljmperawat=0;ttlkso=0;ttlpendapatan=0;ttljasasarana=0;ttlbhp=0;ttlmenejemen=0;
                     for(i=0;i<tbRawatDrPr.getRowCount();i++){
-                        if(tbRawatDrPr.getValueAt(i,0).toString().equals("true")){
+                        if (tbRawatDrPr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatDrPr.getValueAt(i, 1).toString())) {
                             if(akses.getkode().equals("Admin Utama")){
                                 if(Sequel.cariRegistrasi(tbRawatDrPr.getValueAt(i,1).toString())>0){
                                     JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
                                     tbRawatDrPr.setValueAt(false,i,0);
                                     TCari.requestFocus();
                                 }else{
-                                    if(Sequel.queryutf("delete from rawat_inap_drpr where no_rawat='"+tbRawatDrPr.getValueAt(i,1).toString()+
-                                            "' and kd_jenis_prw='"+tbRawatDrPr.getValueAt(i,12)+
-                                            "' and kd_dokter='"+tbRawatDrPr.getValueAt(i,5).toString()+
-                                            "' and nip='"+tbRawatDrPr.getValueAt(i,7).toString()+
-                                            "' and tgl_perawatan='"+tbRawatDrPr.getValueAt(i,9).toString()+
-                                            "' and jam_rawat='"+tbRawatDrPr.getValueAt(i,10).toString()+"' ")==true){
-                                        ttljmdokter=ttljmdokter+Double.parseDouble(tbRawatDrPr.getValueAt(i,13).toString());
-                                        ttljmperawat=ttljmperawat+Double.parseDouble(tbRawatDrPr.getValueAt(i,14).toString());
-                                        ttlkso=ttlkso+Double.parseDouble(tbRawatDrPr.getValueAt(i,15).toString());
-                                        ttlpendapatan=ttlpendapatan+Double.parseDouble(tbRawatDrPr.getValueAt(i,11).toString());
-                                        ttljasasarana=ttljasasarana+Double.parseDouble(tbRawatDrPr.getValueAt(i,16).toString());
-                                        ttlbhp=ttlbhp+Double.parseDouble(tbRawatDrPr.getValueAt(i,17).toString());
-                                        ttlmenejemen=ttlmenejemen+Double.parseDouble(tbRawatDrPr.getValueAt(i,18).toString());
-                                    }else{
-                                        sukses=false;
+                                    if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and kd_dokter = ? and nip = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                        tbRawatDrPr.getValueAt(i, 1).toString(), tbRawatDrPr.getValueAt(i, 12).toString(), tbRawatDrPr.getValueAt(i, 5).toString(),
+                                        tbRawatDrPr.getValueAt(i, 7).toString(), tbRawatDrPr.getValueAt(i, 9).toString(), tbRawatDrPr.getValueAt(i, 10).toString()
+                                    )) {
+                                        ttljmdokter += Double.parseDouble(tbRawatDrPr.getValueAt(i, 13).toString());
+                                        ttljmperawat += Double.parseDouble(tbRawatDrPr.getValueAt(i, 14).toString());
+                                        ttlkso += Double.parseDouble(tbRawatDrPr.getValueAt(i, 15).toString());
+                                        ttlpendapatan += Double.parseDouble(tbRawatDrPr.getValueAt(i, 11).toString());
+                                        ttljasasarana += Double.parseDouble(tbRawatDrPr.getValueAt(i, 16).toString());
+                                        ttlbhp += Double.parseDouble(tbRawatDrPr.getValueAt(i, 17).toString());
+                                        ttlmenejemen += Double.parseDouble(tbRawatDrPr.getValueAt(i, 18).toString());
+                                    } else {
+                                        sukses = false;
                                     }
                                 }
                             }else{
@@ -5014,21 +5004,19 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                         tbRawatDrPr.setValueAt(false,i,0);
                                         TCari.requestFocus();
                                     }else{
-                                        if(Sequel.queryutf("delete from rawat_inap_drpr where no_rawat='"+tbRawatDrPr.getValueAt(i,1).toString()+
-                                                "' and kd_jenis_prw='"+tbRawatDrPr.getValueAt(i,12)+
-                                                "' and kd_dokter='"+tbRawatDrPr.getValueAt(i,5).toString()+
-                                                "' and nip='"+tbRawatDrPr.getValueAt(i,7).toString()+
-                                                "' and tgl_perawatan='"+tbRawatDrPr.getValueAt(i,9).toString()+
-                                                "' and jam_rawat='"+tbRawatDrPr.getValueAt(i,10).toString()+"' ")==true){
-                                            ttljmdokter=ttljmdokter+Double.parseDouble(tbRawatDrPr.getValueAt(i,13).toString());
-                                            ttljmperawat=ttljmperawat+Double.parseDouble(tbRawatDrPr.getValueAt(i,14).toString());
-                                            ttlkso=ttlkso+Double.parseDouble(tbRawatDrPr.getValueAt(i,15).toString());
-                                            ttlpendapatan=ttlpendapatan+Double.parseDouble(tbRawatDrPr.getValueAt(i,11).toString());
-                                            ttljasasarana=ttljasasarana+Double.parseDouble(tbRawatDrPr.getValueAt(i,16).toString());
-                                            ttlbhp=ttlbhp+Double.parseDouble(tbRawatDrPr.getValueAt(i,17).toString());
-                                            ttlmenejemen=ttlmenejemen+Double.parseDouble(tbRawatDrPr.getValueAt(i,18).toString());
-                                        }else{
-                                            sukses=false;
+                                        if (Sequel.menghapustfSmc("rawat_inap_drpr", "no_rawat = ? and kd_jenis_prw = ? and kd_dokter = ? and nip = ? and tgl_perawatan = ? and jam_rawat = ?",
+                                            tbRawatDrPr.getValueAt(i, 1).toString(), tbRawatDrPr.getValueAt(i, 12).toString(), tbRawatDrPr.getValueAt(i, 5).toString(),
+                                            tbRawatDrPr.getValueAt(i, 7).toString(), tbRawatDrPr.getValueAt(i, 9).toString(), tbRawatDrPr.getValueAt(i, 10).toString()
+                                        )) {
+                                            ttljmdokter += Double.parseDouble(tbRawatDrPr.getValueAt(i, 13).toString());
+                                            ttljmperawat += Double.parseDouble(tbRawatDrPr.getValueAt(i, 14).toString());
+                                            ttlkso += Double.parseDouble(tbRawatDrPr.getValueAt(i, 15).toString());
+                                            ttlpendapatan += Double.parseDouble(tbRawatDrPr.getValueAt(i, 11).toString());
+                                            ttljasasarana += Double.parseDouble(tbRawatDrPr.getValueAt(i, 16).toString());
+                                            ttlbhp += Double.parseDouble(tbRawatDrPr.getValueAt(i, 17).toString());
+                                            ttlmenejemen += Double.parseDouble(tbRawatDrPr.getValueAt(i, 18).toString());
+                                        } else {
+                                            sukses = false;
                                         }
                                     }
                                 }else{
@@ -5072,8 +5060,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
                     if(sukses==true){
                         Sequel.Commit();
-                        for(i=0;i<tbRawatDrPr.getRowCount();i++){
-                            if(tbRawatDrPr.getValueAt(i,0).toString().equals("true")){
+                        if (tbRawatDrPr.getValueAt(i, 0).toString().equals("true") && TNoRw.getText().equals(tbRawatDrPr.getValueAt(i, 1).toString())) {
+                            if (tbRawatDrPr.getValueAt(i, 0).toString().equals("true")) {
                                 tabModeDrPr.removeRow(i);
                                 i--;
                             }
@@ -8657,7 +8645,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    private void BtnChecklistKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+    private void BtnChecklistKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -8674,7 +8662,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    private void BtnChecklistKriteriaKeluarNICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+    private void BtnChecklistKriteriaKeluarNICUActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -8691,7 +8679,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    private void BtnAwalMedisPsikiatriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAwalMedisActionPerformed
+    private void BtnAwalMedisPsikiatriActionPerformed(java.awt.event.ActionEvent evt) {                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -8708,7 +8696,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    private void BtnChecklistKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+    private void BtnChecklistKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -8725,7 +8713,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    private void BtnChecklistKriteriaKeluarPICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnChecklistKriteriaMasukICUActionPerformed
+    private void BtnChecklistKriteriaKeluarPICUActionPerformed(java.awt.event.ActionEvent evt) {                                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -8778,7 +8766,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    private void BtnAwalMedisJantungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAwalMedisActionPerformed
+    private void BtnAwalMedisJantungActionPerformed(java.awt.event.ActionEvent evt) {                                             
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -11093,35 +11081,34 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }else{
                         Sequel.AutoComitFalse();
                         sukses=true;
-                        if(Sequel.menyimpantf("rawat_inap_dr","?,?,?,?,?,?,?,?,?,?,?","Data",11,new String[]{
-                            TNoRw.getText(),TKdPrw.getText(),KdDok.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),
-                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                            BagianRS.getText(),Bhp.getText(),JmDokter.getText(),KSO.getText(),Menejemen.getText(),TTnd.getText()
-                        })==true){
+                        if (Sequel.menyimpantfSmc("rawat_inap_dr", "", TNoRw.getText(), TKdPrw.getText(), KdDok.getText(),
+                            Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), BagianRS.getText(),
+                            Bhp.getText(), JmDokter.getText(), KSO.getText(), Menejemen.getText(), TTnd.getText()
+                        )) {
                             Sequel.deleteTampJurnal();
                             if(Valid.SetAngka(TTnd.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", TTnd.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", "0", TTnd.getText());
                             }
                             if(Valid.SetAngka(JmDokter.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", JmDokter.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", "0", JmDokter.getText());
                             }
                             if(Valid.SetAngka(KSO.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", KSO.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", "0", KSO.getText());
                             }
                             if(Valid.SetAngka(BagianRS.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", BagianRS.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", "0", BagianRS.getText());
                             }
                             if(Valid.SetAngka(Bhp.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Bhp.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", "0", Bhp.getText());
                             }
                             if(Valid.SetAngka(Menejemen.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Menejemen.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", "0", Menejemen.getText());
                             }
                             if(jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode())==false){
                                 sukses=false;
@@ -11134,7 +11121,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Sequel.Commit();
                             tabModeDr.addRow(new Object[]{
                                 false,TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TNmPrw.getText(),KdDok.getText(),TDokter.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),
-                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.parseDouble(TTnd.getText()),TKdPrw.getText(),JmDokter.getText(),KSO.getText(),
+                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.valueOf(TTnd.getText()),TKdPrw.getText(),JmDokter.getText(),KSO.getText(),
                                 BagianRS.getText(),Bhp.getText(),Menejemen.getText()
                             });
                             LCount.setText(""+tabModeDr.getRowCount());
@@ -11158,35 +11145,34 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }else{
                         Sequel.AutoComitFalse();
                         sukses=true;
-                        if(Sequel.menyimpantf("rawat_inap_pr","?,?,?,?,?,?,?,?,?,?,?","Data",11,new String[]{
-                            TNoRw.getText(),TKdPrwPetugas.getText(),kdptg.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),
-                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                            BagianRS.getText(),Bhp.getText(),JmPerawat.getText(),KSO.getText(),Menejemen.getText(),TTnd.getText()
-                        })==true){
+                        if (Sequel.menyimpantfSmc("rawat_inap_pr", "", TNoRw.getText(), TKdPrwPetugas.getText(), kdptg.getText(),
+                            Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), BagianRS.getText(), Bhp.getText(),
+                            JmPerawat.getText(), KSO.getText(), Menejemen.getText(), TTnd.getText()
+                        )) {
                             Sequel.deleteTampJurnal();
                             if(Valid.SetAngka(TTnd.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", TTnd.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", "0", TTnd.getText());
                             }
                             if(Valid.SetAngka(JmPerawat.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", JmPerawat.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", "0", JmPerawat.getText());
                             }
                             if(Valid.SetAngka(KSO.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", KSO.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", "0", KSO.getText());
                             }
                             if(Valid.SetAngka(BagianRS.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", BagianRS.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", "0", BagianRS.getText());
                             }
                             if(Valid.SetAngka(Bhp.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Bhp.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", "0", Bhp.getText());
                             }
                             if(Valid.SetAngka(Menejemen.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Menejemen.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", "0", Menejemen.getText());
                             }
                             if(jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode())==false){
                                 sukses=false;
@@ -11198,7 +11184,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Sequel.Commit();
                             tabModePr.addRow(new Object[]{
                                 false,TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TNmPrwPetugas.getText(),kdptg.getText(),TPerawat.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),
-                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.parseDouble(TTnd.getText()),TKdPrwPetugas.getText(),
+                                cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.valueOf(TTnd.getText()),TKdPrwPetugas.getText(),
                                 JmPerawat.getText(),KSO.getText(),BagianRS.getText(),Bhp.getText(),Menejemen.getText()
                             });
                             LCount.setText(""+tabModePr.getRowCount());
@@ -11224,39 +11210,38 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }else{
                         Sequel.AutoComitFalse();
                         sukses=true;
-                        if(Sequel.menyimpantf("rawat_inap_drpr","?,?,?,?,?,?,?,?,?,?,?,?,?","Data",13,new String[]{
-                            TNoRw.getText(),TKdPrwDokterPetugas.getText(),KdDok2.getText(),kdptg2.getText(),Valid.SetTgl(DTPTgl.getSelectedItem()+""),
-                            cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                            BagianRS.getText(),Bhp.getText(),JmDokter.getText(),JmPerawat.getText(),KSO.getText(),Menejemen.getText(),TTnd.getText()
-                        })==true){
+                        if (Sequel.menyimpantfSmc("rawat_inap_drpr", "", TNoRw.getText(), TKdPrwDokterPetugas.getText(), KdDok2.getText(),
+                            kdptg2.getText(), Valid.getTglSmc(DTPTgl), Valid.getJamSmc(cmbJam, cmbMnt, cmbDtk), BagianRS.getText(),
+                            Bhp.getText(), JmDokter.getText(), JmPerawat.getText(), KSO.getText(), Menejemen.getText(), TTnd.getText()
+                        )) {
                             Sequel.deleteTampJurnal();
                             if(Valid.SetAngka(TTnd.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", Valid.setAngkaSmc(TTnd.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", 0, Valid.setAngkaSmc(TTnd.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", TTnd.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", "0", TTnd.getText());
                             }
                             if(Valid.SetAngka(JmDokter.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", Valid.setAngkaSmc(JmDokter.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", 0, Valid.setAngkaSmc(JmDokter.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", JmDokter.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", "0", JmDokter.getText());
                             }
                             if(Valid.SetAngka(JmPerawat.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", Valid.setAngkaSmc(JmPerawat.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", 0, Valid.setAngkaSmc(JmPerawat.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", JmPerawat.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", "0", JmPerawat.getText());
                             }
                             if(Valid.SetAngka(KSO.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", Valid.setAngkaSmc(KSO.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", 0, Valid.setAngkaSmc(KSO.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", KSO.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", "0", KSO.getText());
                             }
                             if(Valid.SetAngka(BagianRS.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(BagianRS.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(BagianRS.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", BagianRS.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", "0", BagianRS.getText());
                             }
                             if(Valid.SetAngka(Bhp.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Valid.setAngkaSmc(Bhp.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, Valid.setAngkaSmc(Bhp.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", Bhp.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", "0", Bhp.getText());
                             }
                             if(Valid.SetAngka(Menejemen.getText())>0){
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Valid.setAngkaSmc(Menejemen.getText()), 0);
-                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", 0, Valid.setAngkaSmc(Menejemen.getText()));
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Menejemen Tindakan Ranap", Menejemen.getText(), "0");
+                                if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Menejemen Tindakan Ranap", "0", Menejemen.getText());
                             }
                             if(jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode())==false){
                                 sukses=false;
@@ -11269,7 +11254,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Sequel.Commit();
                             tabModeDrPr.addRow(new Object[]{
                                 false,TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TNmPrwDokterPetugas.getText(),KdDok2.getText(),TDokter2.getText(),kdptg2.getText(),TPerawat2.getText(),
-                                Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.parseDouble(TTnd.getText()),
+                                Valid.SetTgl(DTPTgl.getSelectedItem()+""),cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),Double.valueOf(TTnd.getText()),
                                 TKdPrwDokterPetugas.getText(),JmDokter.getText(),JmPerawat.getText(),KSO.getText(),BagianRS.getText(),Bhp.getText(),Menejemen.getText()
                             });
                             LCount.setText(""+tabModeDrPr.getRowCount());
