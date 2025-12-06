@@ -13,7 +13,7 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
-    private static final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN();
+    private static final boolean REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
     private String hari = "";
     private String kodeDokter = "";
 
@@ -33,7 +33,7 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
         tbPoli.getColumnModel().getColumn(1).setPreferredWidth(500);
         tbPoli.getColumnModel().getColumn(2).setMinWidth(0);
         tbPoli.getColumnModel().getColumn(2).setMaxWidth(0);
-        if (ADDANTRIANAPIMOBILEJKN) {
+        if (REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
             tbPoli.getColumnModel().getColumn(3).setPreferredWidth(250);
         } else {
             tbPoli.getColumnModel().getColumn(3).setMinWidth(0);
@@ -93,7 +93,7 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         Valid.tabelKosong(tabMode);
-        if (ADDANTRIANAPIMOBILEJKN) {
+        if (REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select jadwal.kd_poli, concat(left(jadwal.jam_mulai, 5), '-', left(jadwal.jam_selesai, 5)) as jampraktek, " +
                 "maping_poli_bpjs.kd_poli_bpjs, maping_poli_bpjs.nm_poli_bpjs from jadwal join maping_poli_bpjs on " +

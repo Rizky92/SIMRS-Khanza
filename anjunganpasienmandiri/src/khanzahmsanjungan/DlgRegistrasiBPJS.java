@@ -3121,7 +3121,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             panelUtama.setMinimumSize(new Dimension(preferredWidth, height));
             panelUtama.setPreferredSize(new Dimension(preferredWidth, height));
         }
+
         revalidate();
+
         panelTambahan.setVisible(toggleInfoTambahan.isSelected());
     }
 
@@ -3138,10 +3140,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         cal.set(Calendar.SECOND, 0);
         Instant jamMasuk = cal.toInstant();
 
-        if (now.isAfter(jamMasuk.minus(1, ChronoUnit.HOURS))) {
-            return true;
-        }
-
-        return true;
+        return now.isAfter(jamMasuk.minus(1, ChronoUnit.HOURS));
     }
 }
