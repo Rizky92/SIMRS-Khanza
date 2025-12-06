@@ -32,7 +32,7 @@ import org.springframework.http.MediaType;
  *
  * @author dosen
  */
-public final class BPJSCekRiwayatPelayanan extends widget.Dialog {
+public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
 
     private final DefaultTableModel tabMode;
     private validasi Valid = new validasi();
@@ -55,7 +55,7 @@ public final class BPJSCekRiwayatPelayanan extends widget.Dialog {
      * @param parent
      * @param modal
      */
-    public BPJSCekRiwayatPelayanan(java.awt.Frame parent, boolean modal) {
+    public BPJSRiwayatPelayananPasien(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 

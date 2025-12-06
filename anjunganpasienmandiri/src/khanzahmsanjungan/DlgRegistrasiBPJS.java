@@ -1,10 +1,10 @@
 package khanzahmsanjungan;
 
 import bridging.ApiBPJS;
-import bridging.BPJSCekReferensiDokterDPJP;
-import bridging.BPJSCekReferensiPenyakit;
-import bridging.BPJSCekRiwayatPelayanan;
-import bridging.BPJSCekRiwayatRujukanTerakhir;
+import bridging.BPJSReferensiDokter;
+import bridging.BPJSReferensiDiagnosa;
+import bridging.BPJSRiwayatPelayananPasien;
+import bridging.BPJSRiwayatRujukanPasien;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sun.jna.Native;
@@ -52,11 +52,11 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final ApiBPJS api = new ApiBPJS();
-    private final BPJSCekReferensiDokterDPJP dokter;
-    private final BPJSCekReferensiPenyakit diagnosa;
+    private final BPJSReferensiDokter dokter;
+    private final BPJSReferensiDiagnosa diagnosa;
     private final DlgCariPoliBPJS poli;
-    private final BPJSCekRiwayatRujukanTerakhir riwayatRujukan;
-    private final BPJSCekRiwayatPelayanan riwayatPelayanan;
+    private final BPJSRiwayatRujukanPasien riwayatRujukan;
+    private final BPJSRiwayatPelayananPasien riwayatPelayanan;
     private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), JADWALPRAKTEKDIANJUNGAN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
     private String hari = "",
         tglkll = "0000-00-00",
@@ -117,7 +117,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             System.out.println("Notif : " + e);
         }
 
-        dokter = new BPJSCekReferensiDokterDPJP(parent, modal);
+        dokter = new BPJSReferensiDokter(parent, modal);
         dokter.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -146,7 +146,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
 
-        diagnosa = new BPJSCekReferensiPenyakit(parent, modal);
+        diagnosa = new BPJSReferensiDiagnosa(parent, modal);
         diagnosa.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -158,7 +158,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
 
-        riwayatRujukan = new BPJSCekRiwayatRujukanTerakhir(parent, modal);
+        riwayatRujukan = new BPJSRiwayatRujukanPasien(parent, modal);
         riwayatRujukan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -176,7 +176,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
 
-        riwayatPelayanan = new BPJSCekRiwayatPelayanan(parent, modal);
+        riwayatPelayanan = new BPJSRiwayatPelayananPasien(parent, modal);
         riwayatPelayanan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {

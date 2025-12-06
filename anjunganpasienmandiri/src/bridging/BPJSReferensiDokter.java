@@ -31,14 +31,14 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
 
-public final class BPJSCekReferensiDokterDPJP extends widget.Dialog {
+public final class BPJSReferensiDokter extends widget.Dialog {
 
     private final DefaultTableModel tabMode;
     private validasi Valid = new validasi();
     private int i = 0;
     private String URL = "", link = "", utc = "";
     private ApiBPJS api = new ApiBPJS();
-    private final BPJSCekReferensiPoli spesialis;
+    private final BPJSReferensiPoli spesialis;
     private HttpHeaders headers;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
@@ -46,7 +46,7 @@ public final class BPJSCekReferensiDokterDPJP extends widget.Dialog {
     private JsonNode nameNode;
     private JsonNode response;
 
-    public BPJSCekReferensiDokterDPJP(java.awt.Frame parent, boolean modal) {
+    public BPJSReferensiDokter(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
@@ -96,7 +96,7 @@ public final class BPJSCekReferensiDokterDPJP extends widget.Dialog {
             });
         }
 
-        spesialis = new BPJSCekReferensiPoli(parent, modal);
+        spesialis = new BPJSReferensiPoli(parent, modal);
         spesialis.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {

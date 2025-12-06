@@ -55,7 +55,6 @@ public class ApiBPJS {
         } catch (GeneralSecurityException e) {
             // TODO Auto-generated catch block
             System.out.println("Error Signature : " + e);
-            e.printStackTrace();
         }
         return generateHmacSHA256Signature;
     }
@@ -96,13 +95,16 @@ public class ApiBPJS {
         sslContext = SSLContext.getInstance("SSL");
         TrustManager[] trustManagers = {
             new X509TrustManager() {
+                @Override
                 public X509Certificate[] getAcceptedIssuers() {
                     return null;
                 }
 
+                @Override
                 public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
                 }
 
+                @Override
                 public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
                 }
             }
