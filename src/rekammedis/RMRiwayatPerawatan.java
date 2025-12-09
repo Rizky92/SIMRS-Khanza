@@ -11,7 +11,6 @@
 
 package rekammedis;
 
-import bridging.ICareRiwayatPerawatan;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
@@ -34,23 +33,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
-import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.concurrent.Worker;
-import static javafx.concurrent.Worker.State.FAILED;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Scene;
-import javafx.scene.web.PopupFeatures;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebEvent;
-import javafx.scene.web.WebView;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
 import javax.swing.event.HyperlinkEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -77,9 +61,11 @@ import org.apache.hc.core5.http.HttpEntity;
 import org.apache.hc.client5.http.entity.mime.MultipartEntityBuilder;
 import org.apache.hc.core5.http.io.entity.EntityUtils;
 import java.nio.channels.Channels;
-import javax.swing.SwingWorker;
 import java.nio.channels.ReadableByteChannel;
 import java.nio.file.Files;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import javax.swing.SwingUtilities;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 
 
@@ -101,9 +87,11 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private StringBuilder htmlContent;
     private HttpClient http = new HttpClient();
     private GetMethod get;
-    private boolean esign=false,sertisign=false,ceksukses=false;
+    private boolean esign=false,sertisign=false;
     private ObjectMapper mapper= new ObjectMapper();
     private JsonNode root;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -3039,156 +3027,43 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     }//GEN-LAST:event_Tgl2KeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-        if(NoRM.getText().trim().equals("")||NmPasien.getText().equals("")){
-            JOptionPane.showMessageDialog(null,"Pasien masih kosong...!!!");
-        }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            switch (TabRawat.getSelectedIndex()) {
-                case 0:
-                    tampilKunjungan();
-                    break;
-                case 1:
-                    if(ceksukses==false){
-                        ceksukses=true;
-                        new SwingWorker<Void, Void>() {
-                            @Override
-                            protected Void doInBackground() throws Exception {
-                                tampilSoapi();
-                                return null;
-                            }
+        if (NoRM.getText().trim().isEmpty() || NmPasien.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, "Pasien masih kosong...!!!");
+            return;
+        }
 
-                            @Override
-                            protected void done() {
-                                ceksukses = false;
-                            }
-                        }.execute();
-                    }
-                    break;
-                case 2:
-                    esign=false;
-                    sertisign=false;
-                    if(ceksukses==false){
-                        ceksukses=true;
-                        new SwingWorker<Void, Void>() {
-                            @Override
-                            protected Void doInBackground() throws Exception {
-                                tampilPerawatan();
-                                return null;
-                            }
-
-                            @Override
-                            protected void done() {
-                                ceksukses = false;
-                            }
-                        }.execute();
-                    }
-                    break;
-                case 3:
-                    if(ceksukses==false){
-                        ceksukses=true;
-                        new SwingWorker<Void, Void>() {
-                            @Override
-                            protected Void doInBackground() throws Exception {
-                                tampilTindakanLab();
-                                return null;
-                            }
-
-                            @Override
-                            protected void done() {
-                                ceksukses = false;
-                            }
-                        }.execute();
-                    }
-                    break;
-                case 4:
-                    if(ceksukses==false){
-                        ceksukses=true;
-                        new SwingWorker<Void, Void>() {
-                            @Override
-                            protected Void doInBackground() throws Exception {
-                                tampilTindakanRadiologi();
-                                return null;
-                            }
-
-                            @Override
-                            protected void done() {
-                                ceksukses = false;
-                            }
-                        }.execute();
-                    }
-                    break;
-                case 5:
-                    if(ceksukses==false){
-                        ceksukses=true;
-                        new SwingWorker<Void, Void>() {
-                            @Override
-                            protected Void doInBackground() throws Exception {
-                                tampilBerkasDigitalPerawatan();
-                                return null;
-                            }
-
-                            @Override
-                            protected void done() {
-                                ceksukses = false;
-                            }
-                        }.execute();
-                    }
-                    break;
-                case 6:
-                    if(ceksukses==false){
-                        ceksukses=true;
-                        new SwingWorker<Void, Void>() {
-                            @Override
-                            protected Void doInBackground() throws Exception {
-                                tampilPembelian();
-                                return null;
-                            }
-
-                            @Override
-                            protected void done() {
-                                ceksukses = false;
-                            }
-                        }.execute();
-                    }
-                    break;
-                case 7:
-                    if(ceksukses==false){
-                        ceksukses=true;
-                        new SwingWorker<Void, Void>() {
-                            @Override
-                            protected Void doInBackground() throws Exception {
-                                tampilPiutang();
-                                return null;
-                            }
-
-                            @Override
-                            protected void done() {
-                                ceksukses = false;
-                            }
-                        }.execute();
-                    }
-                    break;
-                case 8:
-                    if(ceksukses==false){
-                        ceksukses=true;
-                        new SwingWorker<Void, Void>() {
-                            @Override
-                            protected Void doInBackground() throws Exception {
-                                tampilRetensi();
-                                return null;
-                            }
-
-                            @Override
-                            protected void done() {
-                                ceksukses = false;
-                            }
-                        }.execute();
-                    }
-                    break;
-                default:
-                    break;
-            }
-            this.setCursor(Cursor.getDefaultCursor());
+        switch (TabRawat.getSelectedIndex()) {
+            case 0:
+                runBackground(() -> tampilKunjungan());
+                break;
+            case 1:
+                runBackground(() -> tampilSoapi());
+                break;
+            case 2:
+                esign = false;
+                sertisign = false;
+                runBackground(() -> tampilPerawatan());
+                break;
+            case 3:
+                runBackground(() -> tampilTindakanLab());
+                break;
+            case 4:
+                runBackground(() -> tampilTindakanRadiologi());
+                break;
+            case 5:
+                runBackground(() -> tampilBerkasDigitalPerawatan());
+                break;
+            case 6:
+                runBackground(() -> tampilPembelian());
+                break;
+            case 7:
+                runBackground(() -> tampilPiutang());
+                break;
+            case 8:
+                runBackground(() -> tampilRetensi());
+                break;
+            default:
+                break;
         }
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -35002,9 +34877,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                         append("<td valign='top' width='18%'>Skrining Kesehatan Indra Pendengaran</td>").
                                         append("<td valign='top' width='1%' align='center'>:</td>").
                                         append("<td valign='top' width='79%'>").
-                                            append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                            append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -35127,11 +35001,10 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
-                                append("</td>").
-                            append("</tr>");
+                                        append("</tr>").
+                                    append("</table>").
+                                    append("</td>").
+                                append("</tr>");
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : "+e);
@@ -35300,9 +35173,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                         append("<td valign='top' width='18%'>Skrining Frailty Syndrome</td>").
                                         append("<td valign='top' width='1%' align='center'>:</td>").
                                         append("<td valign='top' width='79%'>").
-                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                        append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -35385,9 +35257,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                 append("</tr>");
                     }
@@ -35865,9 +35736,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                         append("<td valign='top' width='18%'>Skrining Instrumen ACRS</td>").
                                         append("<td valign='top' width='1%' align='center'>:</td>").
                                         append("<td valign='top' width='79%'>").
-                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                        append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -35964,9 +35834,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                 append("</tr>");
                     }
@@ -36373,9 +36242,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     append("<td valign='top' width='18%'>Pengkajian Awal Medis Rawat Inap Psikiatri</td>").
                                     append("<td valign='top' width='1%' align='center'>:</td>").
                                     append("<td valign='top' width='79%'>").
-                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                    append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -36514,9 +36382,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                     append("</tr>");
                     }
@@ -36924,9 +36791,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                         append("<td valign='top' width='18%'>Skrining Instrumen AMT</td>").
                                         append("<td valign='top' width='1%' align='center'>:</td>").
                                         append("<td valign='top' width='79%'>").
-                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                        append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -37023,9 +36889,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                 append("</tr>");
                     }
@@ -37060,9 +36925,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     append("<td valign='top' width='18%'>Pengkajian Awal Medis Rawat Jalan Jantung</td>").
                                     append("<td valign='top' width='1%' align='center'>:</td>").
                                     append("<td valign='top' width='79%'>").
-                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                    append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -37182,9 +37046,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                     append("</tr>");
                     }
@@ -37222,9 +37085,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     append("<td valign='top' width='18%'>Pengkajian Awal Medis Rawat Jalan Urologi</td>").
                                     append("<td valign='top' width='1%' align='center'>:</td>").
                                     append("<td valign='top' width='79%'>").
-                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                    append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -37359,9 +37221,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                     append("</tr>");
                     }
@@ -37681,9 +37542,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     append("<td valign='top' width='18%'>Skrining Pneumonia Severity Index</td>").
                                     append("<td valign='top' width='1%' align='center'>:</td>").
                                     append("<td valign='top' width='79%'>").
-                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                    append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -37880,9 +37740,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                     append("</tr>");
                     }
@@ -37913,9 +37772,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                         append("<td valign='top' width='18%'>Skrining Instrumen ESAT</td>").
                                         append("<td valign='top' width='1%' align='center'>:</td>").
                                         append("<td valign='top' width='79%'>").
-                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                        append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -38000,9 +37858,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                 append("</tr>");
                     }
@@ -38037,9 +37894,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                     append("<td valign='top' width='18%'>Pengkajian Awal Medis Rawat Inap Jantung</td>").
                                     append("<td valign='top' width='1%' align='center'>:</td>").
                                     append("<td valign='top' width='79%'>").
-                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                    append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                        append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -38159,9 +38015,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>");
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                     append("</tr>");
                     }
@@ -38177,7 +38032,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             System.out.println("Notif Asuhan Medis Rawat Inap Jantung : "+e);
         }
     }
-    
+
     private void menampilkanSkriningCRUB65(String norawat) {
         try {
             if(chkSkriningCRUB65.isSelected()==true){
@@ -38193,9 +38048,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                         append("<td valign='top' width='18%'>Skrining CRUB-65</td>").
                                         append("<td valign='top' width='1%' align='center'>:</td>").
                                         append("<td valign='top' width='79%'>").
-                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>");
-                        do{
-                            htmlContent.append("<tr>").
+                                        append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>").
+                                        append("<tr>").
                                             append("<td valign='top'>").
                                                 append("YANG MELAKUKAN PENGKAJIAN").
                                                 append("<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0px' class='tbl_form'>").
@@ -38262,9 +38116,8 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>"); 
-                        }while(rs2.next());
-                        htmlContent.append("</table>").
+                                        append("</tr>").
+                                    append("</table>").
                                     append("</td>").
                                 append("</tr>");
                     }
@@ -38280,4 +38133,23 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             System.out.println("Notif Skrining CRUB-65 : "+e);
         }
     }
+
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
+    }
+
 }
