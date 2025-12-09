@@ -154,8 +154,8 @@ public class ApiADAMLABS
                 Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("payload").path("registrasi").path("no_lab").asText());
                 JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS ADAMLABS...!!!");
             } else {
-                // StringBuilder concat = new StringBuilder();
                 ArrayList<String> messages = new ArrayList<>();
+
                 if (response.path("message").isArray()) {
                     for (JsonNode error : response.path("message")) {
                         messages.add(new StringBuilder("- ").append(error.path("msg").asText()).toString());
@@ -163,6 +163,7 @@ public class ApiADAMLABS
                 } else {
                     messages.add(response.path("message").asText());
                 }
+
                 if (messages.isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses order lab..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
                 } else {

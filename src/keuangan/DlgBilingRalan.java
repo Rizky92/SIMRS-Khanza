@@ -3508,7 +3508,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         }else if(cek>0){
             JOptionPane.showMessageDialog(null,"Maaf, data tagihan pasien dengan No.Rawat tersebut sudah pernah disimpan...!!!");
         }else if(cek==0){
-            if (sekarang != tagihanppn) {
+            if (Math.round(sekarang) != Math.round(tagihanppn)) {
                 JOptionPane.showMessageDialog(null, "Terjadi perubahan total tagihan\nSilahkan cek kembali data tagihan pasien...!!!", "Gagal", JOptionPane.WARNING_MESSAGE);
             } else {
                 if(piutang<=0){
