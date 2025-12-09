@@ -103,23 +103,22 @@ public class DlgAbout extends javax.swing.JDialog {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel17.setText("2025-10-15");
+        jLabel17.setText("2025-12-09");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass1.add(jLabel17);
-        jLabel17.setBounds(107, 8, 90, 17);
+        jLabel17.setBounds(107, 8, 58, 17);
 
         jLabel18.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel18.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel18.setText("Patch 3");
         jLabel18.setName("jLabel18"); // NOI18N
         panelGlass1.add(jLabel18);
-        jLabel18.setBounds(107, 28, 90, 17);
+        jLabel18.setBounds(168, 8, 90, 17);
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(50, 50, 50));
         jLabel29.setName("jLabel29"); // NOI18N
         panelGlass1.add(jLabel29);
-        jLabel29.setBounds(107, 48, 330, 17);
+        jLabel29.setBounds(107, 28, 330, 17);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(50, 50, 50));
@@ -127,13 +126,13 @@ public class DlgAbout extends javax.swing.JDialog {
         jLabel8.setText("Versi Java :");
         jLabel8.setName("jLabel8"); // NOI18N
         panelGlass1.add(jLabel8);
-        jLabel8.setBounds(0, 48, 104, 17);
+        jLabel8.setBounds(0, 28, 104, 17);
 
         jLabel30.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel30.setForeground(new java.awt.Color(50, 50, 50));
         jLabel30.setName("jLabel30"); // NOI18N
         panelGlass1.add(jLabel30);
-        jLabel30.setBounds(107, 68, 330, 17);
+        jLabel30.setBounds(107, 48, 330, 17);
 
         internalFrame1.add(panelGlass1);
         panelGlass1.setBounds(7, 38, 454, 90);
@@ -221,7 +220,6 @@ public class DlgAbout extends javax.swing.JDialog {
         panelGlass5.setBounds(0, 280, 330, 70);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Close");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setIconTextGap(3);
