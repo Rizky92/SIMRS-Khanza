@@ -915,10 +915,10 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         }
 
         if(tabModePO.getRowCount()==0){
-             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
-             TNoRw.requestFocus();
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TNoRw.requestFocus();
         }else if(TPasien.getText().trim().equals("")){
-             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
         }else if(!(TPasien.getText().trim().equals(""))){
             try{
                 if(tbPemberianObat.getSelectedRow()!= -1){
