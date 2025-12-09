@@ -1011,6 +1011,7 @@ import rekammedis.RMSignInSebelumAnastesi;
 import rekammedis.RMSignOutSebelumMenutupLuka;
 import rekammedis.RMSkriningAdiksiNikotin;
 import rekammedis.RMSkriningAnemia;
+import rekammedis.RMSkriningCURB65;
 import rekammedis.RMSkriningDiabetesMelitus;
 import rekammedis.RMSkriningFrailtySyndrome;
 import rekammedis.RMSkriningHipertensi;
@@ -23418,8 +23419,8 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void btnLabKeslingVerifikasiPengujianSampelActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    private void btnLabKeslingVerifikasiPengujianSampelActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         LabKeslingCariVerifikasiPengujianSampel form=new LabKeslingCariVerifikasiPengujianSampel(this,false);
@@ -23430,8 +23431,8 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void btnLabKeslingValidasiPengujianSampelActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    private void btnLabKeslingValidasiPengujianSampelActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         LabKeslingCariValidasiPengujianSampel form=new LabKeslingCariValidasiPengujianSampel(this,false);
@@ -23442,8 +23443,8 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void btnLabKeslingRekapPelayananActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    private void btnLabKeslingRekapPelayananActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         LabKeslingRekapPelayanan form=new LabKeslingRekapPelayanan(this,false);
@@ -23454,8 +23455,8 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void btnLabKeslingPembyaranPengujianSampelActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    private void btnLabKeslingPembyaranPengujianSampelActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         LabKeslingPembayaranPengujianSampel form=new LabKeslingPembayaranPengujianSampel(this,false);
@@ -23466,8 +23467,8 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
-    private void btnLabKeslingRekapPembayaranActionPerformed(java.awt.event.ActionEvent evt) {                                           
+
+    private void btnLabKeslingRekapPembayaranActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         LabKeslingRekapPembayaran form=new LabKeslingRekapPembayaran(this,false);
@@ -23478,7 +23479,20 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
+    private void btnSkriningCURB65ActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        RMSkriningCURB65 form=new RMSkriningCURB65(this,false);
+        form.isCek();
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
     /**
     * @param args the command line arguments
     */
@@ -24195,8 +24209,9 @@ public class frmUtama extends javax.swing.JFrame {
             btnLabKeslingNilaiNormalBakuMutu,btnSkriningPneumoniaSeverityIndex,btnPenilaianAwalMedisRalanJantung,btnPenilaianAwalMedisRalanUrologi,btnHasilPemeriksaanTreadmill,
             btnHasilPemeriksaanECHOPediatrik,btnMasterTemplateInformasiEdukasi,btnSkriningInstrumenESAT,btnLabKeslingPermintaanPengujianSampel,btnPenilaianAwalMedisRanapJantung,
             btnEEksekutif,btnLabKeslingPengujianSampelTidakDapatDilayani,btnLabKeslingPengujianSampelDapatDilayani,btnLabKeslingPenugasanPengujianSampel,btnLabKeslingHasilPengujianSampel,
-            btnLabKeslingVerifikasiPengujianSampel,btnLabKeslingValidasiPengujianSampel,btnLabKeslingRekapPelayanan,btnLabKeslingPembyaranPengujianSampel,btnLabKeslingRekapPembayaran;
-    
+            btnLabKeslingVerifikasiPengujianSampel,btnLabKeslingValidasiPengujianSampel,btnLabKeslingRekapPelayanan,btnLabKeslingPembyaranPengujianSampel,btnLabKeslingRekapPembayaran,
+            btnSkriningCURB65;
+
     public void isWall(){
         try{
             ps=koneksi.prepareStatement("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.aktifkan,setting.wallpaper,setting.kontak,setting.email,setting.logo,setting.kode_ppk from setting");
@@ -24532,30 +24547,30 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnLabKeslingHasilPengujianSampel);
                 jmlmenu++;
             }
-            
+
             if((akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan()==true)||(akses.getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan()==true)){
                 Panelmenu.add(btnLabKeslingVerifikasiPengujianSampel);
                 jmlmenu++;
             }
-            
+
             if(akses.getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan()==true){
                 Panelmenu.add(btnLabKeslingValidasiPengujianSampel);
                 jmlmenu++;
             }
-            
+
             if(akses.getrekap_pelayanan_lab_kesehatan_lingkungan()==true){
                 Panelmenu.add(btnLabKeslingRekapPelayanan);
                 jmlmenu++;
             }
-            
+
             if(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan()==true){
                 Panelmenu.add(btnLabKeslingPembyaranPengujianSampel);
                 jmlmenu++;
-                
+
                 Panelmenu.add(btnLabKeslingRekapPembayaran);
                 jmlmenu++;
             }
-        }else if(cmbMenu.getSelectedIndex()==2){ 
+        }else if(cmbMenu.getSelectedIndex()==2){
             jmlmenu=0;
             if(akses.getpetugas()==true){
                 Panelmenu.add(btnPegawai);
@@ -28891,6 +28906,11 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
+            if(akses.getskrining_curb65()==true){
+                Panelmenu.add(btnSkriningCURB65);
+                jmlmenu++;
+            }
+
             if(akses.getskrining_kanker_kolorektal()==true){
                 Panelmenu.add(btnSkriningKankerKolorektal);
                 jmlmenu++;
@@ -30379,26 +30399,26 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnLabKeslingHasilPengujianSampel);
             jmlmenu++;
         }
-        
+
         if((akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan()==true)||(akses.getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan()==true)){
             Panelmenu.add(btnLabKeslingVerifikasiPengujianSampel);
             jmlmenu++;
         }
-        
+
         if(akses.getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan()==true){
             Panelmenu.add(btnLabKeslingValidasiPengujianSampel);
             jmlmenu++;
         }
-        
+
         if(akses.getrekap_pelayanan_lab_kesehatan_lingkungan()==true){
             Panelmenu.add(btnLabKeslingRekapPelayanan);
             jmlmenu++;
         }
-        
+
         if(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan()==true){
             Panelmenu.add(btnLabKeslingPembyaranPengujianSampel);
             jmlmenu++;
-            
+
             Panelmenu.add(btnLabKeslingRekapPembayaran);
             jmlmenu++;
         }
@@ -34697,6 +34717,11 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
+        if(akses.getskrining_curb65()==true){
+            Panelmenu.add(btnSkriningCURB65);
+            jmlmenu++;
+        }
+
         if(akses.getskrining_kanker_kolorektal()==true){
             Panelmenu.add(btnSkriningKankerKolorektal);
             jmlmenu++;
@@ -36266,28 +36291,28 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
         }
-        
+
         if((akses.getverifikasi_pengujian_sampel_lab_kesehatan_lingkungan()==true)||(akses.getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan()==true)){
             if(btnLabKeslingVerifikasiPengujianSampel.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLabKeslingVerifikasiPengujianSampel);
                 jmlmenu++;
             }
         }
-        
+
         if((akses.getvalidasi_pengujian_sampel_lab_kesehatan_lingkungan()==true)){
             if(btnLabKeslingValidasiPengujianSampel.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLabKeslingValidasiPengujianSampel);
                 jmlmenu++;
             }
         }
-        
+
         if(akses.getrekap_pelayanan_lab_kesehatan_lingkungan()==true){
             if(btnLabKeslingRekapPelayanan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLabKeslingRekapPelayanan);
                 jmlmenu++;
             }
         }
-        
+
         if(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan()==true){
             if(btnLabKeslingPembyaranPengujianSampel.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnLabKeslingPembyaranPengujianSampel);
@@ -42149,6 +42174,13 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getskrining_pneumonia_severity_index()==true){
             if(btnSkriningPneumoniaSeverityIndex.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSkriningPneumoniaSeverityIndex);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getskrining_curb65()==true){
+            if(btnSkriningCURB65.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSkriningCURB65);
                 jmlmenu++;
             }
         }
@@ -49697,47 +49729,47 @@ public class frmUtama extends javax.swing.JFrame {
         btnLabKeslingHasilPengujianSampel.setName("btnLabKeslingHasilPengujianSampel");
         btnLabKeslingHasilPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingHasilPengujianSampel.addActionListener(this::btnLabKeslingHasilPengujianSampelActionPerformed);
-        
+
         btnLabKeslingVerifikasiPengujianSampel = new widget.ButtonBig();
-        btnLabKeslingVerifikasiPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4698583_document_file_paper_pen_text_icon.png"))); 
+        btnLabKeslingVerifikasiPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/4698583_document_file_paper_pen_text_icon.png")));
         btnLabKeslingVerifikasiPengujianSampel.setText("Data Verifikasi Pengujian Sampel Lab Kesling");
         btnLabKeslingVerifikasiPengujianSampel.setIconTextGap(0);
         btnLabKeslingVerifikasiPengujianSampel.setName("btnLabKeslingVerifikasiPengujianSampel");
         btnLabKeslingVerifikasiPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingVerifikasiPengujianSampel.addActionListener(this::btnLabKeslingVerifikasiPengujianSampelActionPerformed);
-        
+
         btnLabKeslingValidasiPengujianSampel = new widget.ButtonBig();
-        btnLabKeslingValidasiPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/paper_9683410.png"))); 
+        btnLabKeslingValidasiPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/paper_9683410.png")));
         btnLabKeslingValidasiPengujianSampel.setText("Data Validasi Pengujian Sampel Lab Kesling");
         btnLabKeslingValidasiPengujianSampel.setIconTextGap(0);
         btnLabKeslingValidasiPengujianSampel.setName("btnLabKeslingValidasiPengujianSampel");
         btnLabKeslingValidasiPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingValidasiPengujianSampel.addActionListener(this::btnLabKeslingValidasiPengujianSampelActionPerformed);
-        
+
         btnLabKeslingRekapPelayanan = new widget.ButtonBig();
-        btnLabKeslingRekapPelayanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/85334_file_open_icon.png"))); 
+        btnLabKeslingRekapPelayanan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/85334_file_open_icon.png")));
         btnLabKeslingRekapPelayanan.setText("Rekap Pelayanan Lab Kesling");
         btnLabKeslingRekapPelayanan.setIconTextGap(0);
         btnLabKeslingRekapPelayanan.setName("btnLabKeslingRekapPelayanan");
         btnLabKeslingRekapPelayanan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingRekapPelayanan.addActionListener(this::btnLabKeslingRekapPelayananActionPerformed);
-        
+
         btnLabKeslingPembyaranPengujianSampel = new widget.ButtonBig();
-        btnLabKeslingPembyaranPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money-bag_2953536-2.png"))); 
+        btnLabKeslingPembyaranPengujianSampel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money-bag_2953536-2.png")));
         btnLabKeslingPembyaranPengujianSampel.setText("Pembayaran Pengujian Sampel Lab Kesling");
         btnLabKeslingPembyaranPengujianSampel.setIconTextGap(0);
         btnLabKeslingPembyaranPengujianSampel.setName("btnLabKeslingPembyaranPengujianSampel");
         btnLabKeslingPembyaranPengujianSampel.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingPembyaranPengujianSampel.addActionListener(this::btnLabKeslingPembyaranPengujianSampelActionPerformed);
-        
+
         btnLabKeslingRekapPembayaran = new widget.ButtonBig();
-        btnLabKeslingRekapPembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money_536054-2.png"))); 
+        btnLabKeslingRekapPembayaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/money_536054-2.png")));
         btnLabKeslingRekapPembayaran.setText("Rekap Pembayaran Lab Kesling");
         btnLabKeslingRekapPembayaran.setIconTextGap(0);
         btnLabKeslingRekapPembayaran.setName("btnLabKeslingRekapPembayaran");
         btnLabKeslingRekapPembayaran.setPreferredSize(new java.awt.Dimension(200, 90));
         btnLabKeslingRekapPembayaran.addActionListener(this::btnLabKeslingRekapPembayaranActionPerformed);
-        
+
         btnPenilaianAwalMedisRanapJantung = new widget.ButtonBig();
         btnPenilaianAwalMedisRanapJantung.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/6217204_anatomy_heart_human_medical_organ_icon.png")));
         btnPenilaianAwalMedisRanapJantung.setText("Awal Medis Ranap Jantung");
@@ -49745,6 +49777,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnPenilaianAwalMedisRanapJantung.setName("btnPenilaianAwalMedisRanapJantung");
         btnPenilaianAwalMedisRanapJantung.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPenilaianAwalMedisRanapJantung.addActionListener(this::btnPenilaianAwalMedisRanapJantungActionPerformed);
+
+        btnSkriningCURB65 = new widget.ButtonBig();
+        btnSkriningCURB65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/lungs_2811493.png")));
+        btnSkriningCURB65.setText("Skrining CURB-65");
+        btnSkriningCURB65.setIconTextGap(0);
+        btnSkriningCURB65.setName("btnSkriningCURB65");
+        btnSkriningCURB65.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSkriningCURB65.addActionListener(this::btnSkriningCURB65ActionPerformed);
 
         btnEEksekutif = new widget.ButtonBig();
         btnEEksekutif.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/2169607_bar_chart_financial_graph_graphic_icon.png")));

@@ -197,6 +197,7 @@ import rekammedis.RMSignInSebelumAnastesi;
 import rekammedis.RMSignOutSebelumMenutupLuka;
 import rekammedis.RMSkriningAdiksiNikotin;
 import rekammedis.RMSkriningAnemia;
+import rekammedis.RMSkriningCURB65;
 import rekammedis.RMSkriningDiabetesMelitus;
 import rekammedis.RMSkriningFrailtySyndrome;
 import rekammedis.RMSkriningHipertensi;
@@ -15661,7 +15662,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+    private void MnPenilaianAwalMedisRalanJantungActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -15683,7 +15684,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+    private void MnPenilaianAwalMedisRalanUrologiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -15762,6 +15763,29 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             if(tbKasirRalan.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 RMSkriningInstrumenESAT form=new RMSkriningInstrumenESAT(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
+                form.tampil();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnSkriningCURB65ActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabModekasir.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            //TNoReg.requestFocus();
+        }else if(TNoRw.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbKasirRalan.requestFocus();
+        }else{
+            if(tbKasirRalan.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                RMSkriningCURB65 form=new RMSkriningCURB65(null,false);
                 form.isCek();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
@@ -16225,8 +16249,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                                   MnSkriningRisikoKankerServiks,MnCatatanCairanHemodialisa,MnSkriningKesehatanGigiMulutLansia,MnSkriningIndraPendengaran,MnCatatanPengkajianPaskaOperasi,MnSkriningFrailtySyndrome,MnCatatanObservasiBayi,
                                   MnCheckListKesiapanAnestesi,MnHasilPemeriksaanSlitLamp,MnHasilPemeriksaanOCT,MnCetakSuratKeteranganLayakTerbang,MnPersetujuanPemeriksaanHIV,MnSkriningInstrumenACRS,MnPernyataanMemilihDPJP,
                                   MnSkriningInstrumenMentalEmosional,MnCheckListKriteriaMasukNICU,MnCheckListKriteriaMasukPICU,MnSkriningInstrumenAMT,MnSkriningPneumoniaSeverityIndex,MnPenilaianAwalMedisRalanJantung,MnPenilaianAwalMedisRalanUrologi,
-                                  MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT;
-    private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnRMSkrining,MnEdukasi,MnRehabMedik,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen;
+                                  MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT,MnSkriningCURB65;
+    private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnRMSkrining,MnEdukasi,MnRehabMedik,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu;
 
     private synchronized void tampilkasir() {
         if (!ceksukses) {
@@ -18136,6 +18160,18 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPenilaianAwalMedisRalanUrologi.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPenilaianAwalMedisRalanUrologi.addActionListener(this::MnPenilaianAwalMedisRalanUrologiActionPerformed);
 
+        MnSkriningCURB65 = new javax.swing.JMenuItem();
+        MnSkriningCURB65.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningCURB65.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningCURB65.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningCURB65.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnSkriningCURB65.setText("Skrining CURB-65");
+        MnSkriningCURB65.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningCURB65.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningCURB65.setName("MnSkriningCURB65");
+        MnSkriningCURB65.setPreferredSize(new java.awt.Dimension(200, 26));
+        MnSkriningCURB65.addActionListener(this::MnSkriningCURB65ActionPerformed);
+
         MnHasilUSG = new javax.swing.JMenu();
         MnHasilUSG.setBackground(new java.awt.Color(255, 255, 254));
         MnHasilUSG.setForeground(new java.awt.Color(50, 50, 50));
@@ -18234,6 +18270,17 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnSkriningInstrumen.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSkriningInstrumen.setName("MnSkriningInstrumen");
         MnSkriningInstrumen.setPreferredSize(new java.awt.Dimension(200, 26));
+
+        MnSkriningParu = new javax.swing.JMenu();
+        MnSkriningParu.setBackground(new java.awt.Color(255, 255, 254));
+        MnSkriningParu.setForeground(new java.awt.Color(50, 50, 50));
+        MnSkriningParu.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnSkriningParu.setText("Skrining Paru");
+        MnSkriningParu.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnSkriningParu.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnSkriningParu.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnSkriningParu.setName("MnSkriningParu");
+        MnSkriningParu.setPreferredSize(new java.awt.Dimension(200, 26));
 
         MnRMOperasi.add(MnPenilaianPreInduksi);
         MnRMOperasi.add(MnChecklistPreOperasi);
@@ -18349,18 +18396,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnRMSkrining.add(MnSkriningObesitas);
         MnRMSkrining.add(MnRMSkriningRisikoKanker);
         MnRMSkrining.add(MnRMSkriningKesehatanGigiMulut);
-        MnRMSkrining.add(MnSkriningTBC);
-        MnRMSkrining.add(MnSkriningPUMA);
-        MnRMSkrining.add(MnSkriningPneumoniaSeverityIndex);
+        MnRMSkrining.add(MnSkriningParu);
         MnRMSkrining.add(MnSkriningAdiksiNikotin);
         MnRMSkrining.add(MnSkriningThalassemia);
         MnRMSkrining.add(MnSkriningInstrumen);
-        MnSkriningInstrumen.add(MnSkriningInstrumenSDQ);
-        MnSkriningInstrumen.add(MnSkriningInstrumenSRQ);
-        MnSkriningInstrumen.add(MnSkriningInstrumenACRS);
-        MnSkriningInstrumen.add(MnSkriningInstrumenMentalEmosional);
-        MnSkriningInstrumen.add(MnSkriningInstrumenAMT);
-        MnSkriningInstrumen.add(MnSkriningInstrumenESAT);
         MnRMSkrining.add(MnSkriningKankerKolorektal);
         MnRMSkrining.add(MnSkriningDiabetesMelitus);
         MnRMSkrining.add(MnSkriningAnemia);
@@ -18368,6 +18407,18 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnRMSkrining.add(MnSkriningKesehatanPenglihatan);
         MnRMSkrining.add(MnSkriningIndraPendengaran);
         MnRMSkrining.add(MnSkriningFrailtySyndrome);
+
+        MnSkriningParu.add(MnSkriningTBC);
+        MnSkriningParu.add(MnSkriningPUMA);
+        MnSkriningParu.add(MnSkriningPneumoniaSeverityIndex);
+        MnSkriningParu.add(MnSkriningCURB65);
+
+        MnSkriningInstrumen.add(MnSkriningInstrumenSDQ);
+        MnSkriningInstrumen.add(MnSkriningInstrumenSRQ);
+        MnSkriningInstrumen.add(MnSkriningInstrumenACRS);
+        MnSkriningInstrumen.add(MnSkriningInstrumenMentalEmosional);
+        MnSkriningInstrumen.add(MnSkriningInstrumenAMT);
+        MnSkriningInstrumen.add(MnSkriningInstrumenESAT);
 
         MnRMSkriningKesehatanGigiMulut.add(MnSkriningKesehatanGigiMulutRemaja);
         MnRMSkriningKesehatanGigiMulut.add(MnSkriningKesehatanGigiMulutBalita);
