@@ -19,17 +19,20 @@ import fungsi.koneksiDB;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import javax.swing.ImageIcon;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -37,6 +40,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.apache.commons.codec.binary.Base64;
 
 /**
  *
@@ -57,9 +61,14 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         this.setLocation(10,10);
         setSize(457,249);
 
-        Object[] row={"Faskes","Alamat","Kota","Propinsi","Aktifkan?","Wallpaper","KontaK","Email","Logo","Kode PPK BPJS","Kode PPK Inhealth","Kode PPK Kemenkes"};
-        tabMode=new DefaultTableModel(null,row){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        tabMode=new DefaultTableModel(null, new Object[] {
+            "Faskes", "Alamat", "Kota", "Propinsi", "Aktifkan?", "Wallpaper", "Kontak", "Email", "Logo",
+            "Kode PPK BPJS", "Kode PPK Inhealth", "Kode PPK Kemenkes", "Batas Edit 2x24 Jam", "Sistem Import Koding"
+        }){
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
         };
 
         tbAdmin.setModel(tabMode);
@@ -68,10 +77,10 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         tbAdmin.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbAdmin.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 12; i++) {
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbAdmin.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(250);
             }else{
                 column.setPreferredWidth(150);
             }
@@ -106,6 +115,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtnEdit = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbAdmin = new widget.Table();
@@ -113,7 +123,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         BtnSimpan = new widget.Button();
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
-        BtnEdit = new widget.Button();
         BtnKeluar = new widget.Button();
         panelGlass1 = new widget.panelGlass();
         label35 = new widget.Label();
@@ -146,6 +155,28 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         kdPPK1 = new widget.TextBox();
         label44 = new widget.Label();
         kdPPK2 = new widget.TextBox();
+        label13 = new widget.Label();
+        SistemImportKoding = new widget.ComboBox();
+        label14 = new widget.Label();
+        BatasEdit2x24jam = new widget.ComboBox();
+
+        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEdit.setMnemonic('G');
+        BtnEdit.setText("Ganti");
+        BtnEdit.setToolTipText("Alt+G");
+        BtnEdit.setIconTextGap(3);
+        BtnEdit.setName("BtnEdit"); // NOI18N
+        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEditKeyPressed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -237,25 +268,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         });
         panelisi1.add(BtnHapus);
 
-        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
-        BtnEdit.setText("Ganti");
-        BtnEdit.setToolTipText("Alt+G");
-        BtnEdit.setIconTextGap(3);
-        BtnEdit.setName("BtnEdit"); // NOI18N
-        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnEditActionPerformed(evt);
-            }
-        });
-        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnEditKeyPressed(evt);
-            }
-        });
-        panelisi1.add(BtnEdit);
-
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
@@ -277,7 +289,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         internalFrame1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
 
         panelGlass1.setName("panelGlass1"); // NOI18N
-        panelGlass1.setPreferredSize(new java.awt.Dimension(200, 282));
+        panelGlass1.setPreferredSize(new java.awt.Dimension(200, 312));
         panelGlass1.setLayout(null);
 
         label35.setText("Faskes :");
@@ -520,6 +532,38 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         panelGlass1.add(kdPPK2);
         kdPPK2.setBounds(610, 250, 110, 23);
 
+        label13.setText("Sistem import koding ke satu sehat :");
+        label13.setName("label13"); // NOI18N
+        label13.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass1.add(label13);
+        label13.setBounds(264, 280, 190, 23);
+
+        SistemImportKoding.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "INA-CBG", "IDRG" }));
+        SistemImportKoding.setName("SistemImportKoding"); // NOI18N
+        SistemImportKoding.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                SistemImportKodingKeyPressed(evt);
+            }
+        });
+        panelGlass1.add(SistemImportKoding);
+        SistemImportKoding.setBounds(459, 280, 100, 23);
+
+        label14.setText("Pemberlakuan batas edit 2x24 jam :");
+        label14.setName("label14"); // NOI18N
+        label14.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass1.add(label14);
+        label14.setBounds(0, 280, 194, 23);
+
+        BatasEdit2x24jam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Yes", "No" }));
+        BatasEdit2x24jam.setName("BatasEdit2x24jam"); // NOI18N
+        BatasEdit2x24jam.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BatasEdit2x24jamKeyPressed(evt);
+            }
+        });
+        panelGlass1.add(BatasEdit2x24jam);
+        BatasEdit2x24jam.setBounds(199, 280, 60, 23);
+
         internalFrame1.add(panelGlass1, java.awt.BorderLayout.PAGE_START);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
@@ -592,9 +636,27 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             YesNo.setSelectedItem("No");
             ELogo.setText("./setting/logo.jpg");
         }else if(tabMode.getRowCount()==0){
-            Sequel.menyimpan("setting","'"+Nm.getText()+"','"+Almt.getText()+"','"+Kota.getText()+
-                             "','"+Propinsi.getText()+"','"+Kontak.getText()+"','"+Email.getText()+
-                             "','"+YesNo.getSelectedItem()+"','"+kdPPK.getText()+"','"+kdPPK1.getText()+"','"+kdPPK2.getText()+"'","Setting",EGb,ELogo);
+            String gb = "", logo = "";
+            File fgb = new File(EGb.getText()), flogo = new File(ELogo.getText());
+            
+            try (FileInputStream fs1 = new FileInputStream(fgb);
+                FileInputStream fs2 = new FileInputStream(flogo)
+            ) {
+                byte[] b1 = new byte[(int) fgb.length()],
+                       b2 = new byte[(int) flogo.length()];
+                fs1.read(b1);
+                fs2.read(b2);
+                gb = Base64.encodeBase64String(b1);
+                logo = Base64.encodeBase64String(b2);
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+
+            Sequel.menghapusSmc("setting");
+            Sequel.executeRawSmc("insert into setting values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, from_base64(?), from_base64(?), ?, ?)", Nm.getText(), Almt.getText(),
+                Kota.getText(), Propinsi.getText(), Kontak.getText(), Email.getText(), YesNo.getSelectedItem().toString(), kdPPK.getText(), kdPPK1.getText(),
+                kdPPK2.getText(), gb, logo, BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString());
+
             tampil();
         }else if(tabMode.getRowCount()>0){
             JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu Set Aplikasi...!!!!");
@@ -682,7 +744,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             ELogo.setText(f);
             //lGambar.setIcon(new ImageIcon(f));
             ((Painter) PhotoLogo).setImage(f);
-
         }
     }//GEN-LAST:event_BtnCariLogoActionPerformed
 
@@ -728,6 +789,14 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         Valid.pindah(evt,kdPPK1,BtnCariLogo);
     }//GEN-LAST:event_kdPPK2KeyPressed
 
+    private void SistemImportKodingKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SistemImportKodingKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_SistemImportKodingKeyPressed
+
+    private void BatasEdit2x24jamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BatasEdit2x24jamKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BatasEdit2x24jamKeyPressed
+
     /**
     * @param args the command line arguments
     */
@@ -746,6 +815,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.TextBox Almt;
+    private widget.ComboBox BatasEdit2x24jam;
     private widget.Button BtnBatal;
     private widget.Button BtnCariGb;
     private widget.Button BtnCariLogo;
@@ -763,12 +833,15 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private java.awt.Canvas PhotoLogo;
     private widget.TextBox Propinsi;
     private widget.ScrollPane Scroll;
+    private widget.ComboBox SistemImportKoding;
     private widget.ComboBox YesNo;
     private widget.InternalFrame internalFrame1;
     private widget.TextBox kdPPK;
     private widget.TextBox kdPPK1;
     private widget.TextBox kdPPK2;
     private widget.Label label12;
+    private widget.Label label13;
+    private widget.Label label14;
     private widget.Label label34;
     private widget.Label label35;
     private widget.Label label36;
@@ -788,58 +861,44 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        String sql="select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo,kode_ppk,kode_ppkinhealth,kode_ppkkemenkes from setting";
-        prosesCari(sql);
-    }
-
-    private void prosesCari(String sql) {
         Valid.tabelKosong(tabMode);
-        try{
-            ResultSet rs=koneksi.prepareStatement(sql).executeQuery();
-            while(rs.next()){
-                Object[] data={rs.getString(1),rs.getString(2),rs.getString(3),
-                               rs.getString(4),rs.getString(5),rs.getBlob(6),
-                               rs.getString(7),rs.getString(8),rs.getBlob(9),
-                               rs.getString(10),rs.getString(11),rs.getString(12)
-                };
-                tabMode.addRow(data);
+        try (ResultSet rs = koneksi.createStatement().executeQuery(
+            "select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, to_base64(wallpaper) as wallpaper, " +
+            "kontak, email, to_base64(logo) as logo, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, pemberlakuan_2x24_jam, " +
+            "import_koding_satusehat from setting"
+        )) {
+            if (rs.next()) {
+                tabMode.addRow(new Object[] {
+                    rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
+                    rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
+                    rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14)
+                });
             }
-        }catch(SQLException e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 
     private void getData() {
-        int row=tbAdmin.getSelectedRow();
-        if(row!= -1){
-            Nm.setText(tabMode.getValueAt(row,0).toString());
-            Almt.setText(tabMode.getValueAt(row,1).toString());
-            Kota.setText(tabMode.getValueAt(row,2).toString());
-            Propinsi.setText(tabMode.getValueAt(row,3).toString());
-            YesNo.setSelectedItem(tabMode.getValueAt(row,4).toString());
-            Kontak.setText(tabMode.getValueAt(row,6).toString());
-            Email.setText(tabMode.getValueAt(row,7).toString());
-            kdPPK.setText(tabMode.getValueAt(row,9).toString());
-            kdPPK1.setText(tabMode.getValueAt(row,10).toString());
-            kdPPK2.setText(tabMode.getValueAt(row,11).toString());
+        int row = tbAdmin.getSelectedRow();
+        if (row != -1) {
+            Nm.setText(tbAdmin.getValueAt(row, 0).toString());
+            Almt.setText(tbAdmin.getValueAt(row, 1).toString());
+            Kota.setText(tbAdmin.getValueAt(row, 2).toString());
+            Propinsi.setText(tbAdmin.getValueAt(row, 3).toString());
+            YesNo.setSelectedItem(tbAdmin.getValueAt(row, 4).toString());
+            Kontak.setText(tbAdmin.getValueAt(row, 6).toString());
+            Email.setText(tbAdmin.getValueAt(row, 7).toString());
+            kdPPK.setText(tbAdmin.getValueAt(row, 9).toString());
+            kdPPK1.setText(tbAdmin.getValueAt(row, 10).toString());
+            kdPPK2.setText(tbAdmin.getValueAt(row, 11).toString());
+            BatasEdit2x24jam.setSelectedItem(tbAdmin.getValueAt(row, 12).toString());
+            SistemImportKoding.setSelectedItem(tbAdmin.getValueAt(row, 13).toString());
             try {
-                ResultSet hasil = koneksi.prepareStatement("select wallpaper,logo from setting").executeQuery();
-                for (int I = 0; hasil.next(); I++) {
-                    ((Painter) PhotoGambar).setImage(gambar(tabMode.getValueAt(row,0).toString()));
-                    Blob blob = hasil.getBlob(1);
-                    ((Painter) PhotoGambar).setImageIcon(new javax.swing.ImageIcon(
-                        blob.getBytes(1, (int) (blob.length()))));
-                    blob.free();
-
-                    ((Painter) PhotoLogo).setImage(gambar(tabMode.getValueAt(row,0).toString()));
-                    Blob blob2 = hasil.getBlob(2);
-                    ((Painter) PhotoLogo).setImageIcon(new javax.swing.ImageIcon(
-                        blob2.getBytes(1, (int) (blob2.length()))));
-                    blob2.free();
-                }
-                hasil.close();
-            } catch (Exception ex) {
-                cetak(ex.toString());
+                ((Painter) PhotoGambar).setBufferedImage(Base64.decodeBase64(tbAdmin.getValueAt(row, 5).toString()));
+                ((Painter) PhotoLogo).setBufferedImage(Base64.decodeBase64(tbAdmin.getValueAt(row, 8).toString()));
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
         }
     }
@@ -849,17 +908,20 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         Almt.setText("");
         Kota.setText("");
         Propinsi.setText("");
+        Kontak.setText("");
+        Email.setText("");
+        YesNo.setSelectedItem("No");
+        BatasEdit2x24jam.setSelectedIndex(0);
+        SistemImportKoding.setSelectedIndex(0);
         kdPPK.setText("");
         kdPPK1.setText("");
         kdPPK2.setText("");
-        ((Painter) PhotoGambar).setImage("");
         EGb.setText("");
-        ((Painter) PhotoLogo).setImage("");
         ELogo.setText("");
-        YesNo.setSelectedItem("No");
+        ((Painter) PhotoGambar).setImage("");
+        ((Painter) PhotoLogo).setImage("");
         Nm.requestFocus();
     }
-
 
     private String gambar(String id) {
         return folder + File.separator + id.trim() + ".jpg";
@@ -869,21 +931,22 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
     public class Painter extends Canvas {
 
-        Image image;
+        BufferedImage image;
 
         public void setImage(String file) {
-            URL url = null;
             try {
-                url = new File(file).toURI().toURL();
-            } catch (MalformedURLException ex) {
-                cetak(ex.toString());
+                image = ImageIO.read(new File(file));
+                repaint();
+            } catch (IOException e) {
+                System.out.println("Notif : " + e);
             }
-            image = getToolkit().getImage(url);
-            repaint();
         }
-        public void setImageIcon(ImageIcon file) {
-            image = file.getImage();
-            repaint();
+
+        public void setBufferedImage(byte[] bytes) throws Exception {
+            try (ByteArrayInputStream bits = new ByteArrayInputStream(bytes)) {
+                image = ImageIO.read(bits);
+                repaint();
+            }
         }
 
         @Override
@@ -894,12 +957,9 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
                 double x = this.getWidth() / 2 - w / 2;
                 g.drawImage(image, (int) x, 0, (int) (w), this.getHeight(), this);
             } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                super.paint(g);
             }
         }
     }
-
-    private void cetak(String str) {
-        System.out.println(str);
-    }
-
 }

@@ -39,6 +39,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.util.List;
+import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import kepegawaian.DlgCariPetugas;
 import org.springframework.http.HttpEntity;
