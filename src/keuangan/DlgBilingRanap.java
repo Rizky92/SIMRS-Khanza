@@ -78,6 +78,7 @@ import simrskhanza.DlgTagihanOperasi;
  */
 public class DlgBilingRanap extends javax.swing.JDialog {
     private final DefaultTableModel tabModeRwJlDr,tabModeTambahan,tabModePotongan,tabModeKamIn,tabModeAkunBayar,tabModeAkunPiutang,tabModeLab,tabModeRad,tabModeApotek;
+    private final boolean AKTIFKANKETERANGANPERAKUNBAYAR = koneksiDB.AKTIFKANKETERANGANPERAKUNPEMBAYARAN();
     public DlgPemberianObat beriobat=new DlgPemberianObat(null,false);
     public DlgRawatInap rawatinap=new DlgRawatInap(null,false);
     public DlgDeposit deposit=new DlgDeposit(null,false);
@@ -416,8 +417,12 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)", "Keterangan"}){
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex){
-                return colIndex == 2
-                    || colIndex == 5;
+                if (AKTIFKANKETERANGANPERAKUNBAYAR) {
+                    return colIndex == 2
+                        || colIndex == 5;
+                }
+                
+                return colIndex == 2;
             }
             Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
@@ -447,30 +452,35 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             }else if(i==4){
                 column.setPreferredWidth(90);
             }else if(i==5){
-                column.setPreferredWidth(120);
-                DefaultCellEditor editor = (DefaultCellEditor) column.getCellEditor();
-                if (editor == null) {
-                    editor = (DefaultCellEditor) tbAkunBayar.getDefaultEditor(String.class);
-                }
-                JTextField txt = (JTextField) editor.getComponent();
-                ((AbstractDocument) txt.getDocument()).setDocumentFilter(new DocumentFilter() {
-                    @Override
-                    public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                        if (text == null) return;
-                        if (fb.getDocument().getLength() + text.length() <= 30) {
-                            super.replace(fb, offset, length, text, attrs);
-                        }
+                if (AKTIFKANKETERANGANPERAKUNBAYAR) {
+                    column.setPreferredWidth(120);
+                    DefaultCellEditor editor = (DefaultCellEditor) column.getCellEditor();
+                    if (editor == null) {
+                        editor = (DefaultCellEditor) tbAkunBayar.getDefaultEditor(String.class);
                     }
+                    JTextField txt = (JTextField) editor.getComponent();
+                    ((AbstractDocument) txt.getDocument()).setDocumentFilter(new DocumentFilter() {
+                        @Override
+                        public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                            if (text == null) return;
+                            if (fb.getDocument().getLength() + text.length() <= 30) {
+                                super.replace(fb, offset, length, text, attrs);
+                            }
+                        }
 
-                    @Override
-                    public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
-                        if (string == null) return;
-                        if (fb.getDocument().getLength() + string.length() <= 30) {
-                            super.insertString(fb, offset, string, attr);
+                        @Override
+                        public void insertString(DocumentFilter.FilterBypass fb, int offset, String string, AttributeSet attr) throws BadLocationException {
+                            if (string == null) return;
+                            if (fb.getDocument().getLength() + string.length() <= 30) {
+                                super.insertString(fb, offset, string, attr);
+                            }
                         }
-                    }
-                });
-                column.setCellEditor(editor);
+                    });
+                    column.setCellEditor(editor);
+                } else {
+                    column.setMinWidth(0);
+                    column.setMaxWidth(0);
+                }
             }
         }
         warna.kolom=2;
@@ -6970,10 +6980,17 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     private void tampilAkunBayarTersimpan() {
         try{
             Valid.tabelKosong(tabModeAkunBayar);
-            psakunbayar=koneksi.prepareStatement(
-                    "select akun_bayar.nama_bayar,akun_bayar.kd_rek,detail_nota_inap.besar_bayar,"+
-                     "akun_bayar.ppn,detail_nota_inap.besarppn, detail_nota_inap.keterangan from akun_bayar inner join detail_nota_inap "+
-                     "on akun_bayar.nama_bayar=detail_nota_inap.nama_bayar where detail_nota_inap.no_rawat=? and akun_bayar.nama_bayar like ? order by nama_bayar");
+            if (AKTIFKANKETERANGANPERAKUNBAYAR) {
+                psakunbayar=koneksi.prepareStatement(
+                        "select akun_bayar.nama_bayar,akun_bayar.kd_rek,detail_nota_inap.besar_bayar,"+
+                         "akun_bayar.ppn,detail_nota_inap.besarppn, detail_nota_inap.keterangan from akun_bayar inner join detail_nota_inap "+
+                         "on akun_bayar.nama_bayar=detail_nota_inap.nama_bayar where detail_nota_inap.no_rawat=? and akun_bayar.nama_bayar like ? order by nama_bayar");
+            } else {
+                psakunbayar=koneksi.prepareStatement(
+                        "select akun_bayar.nama_bayar,akun_bayar.kd_rek,detail_nota_inap.besar_bayar,"+
+                         "akun_bayar.ppn,detail_nota_inap.besarppn, '' as keterangan from akun_bayar inner join detail_nota_inap "+
+                         "on akun_bayar.nama_bayar=detail_nota_inap.nama_bayar where detail_nota_inap.no_rawat=? and akun_bayar.nama_bayar like ? order by nama_bayar");
+            }
             try{
                 psakunbayar.setString(1,TNoRw.getText());
                 psakunbayar.setString(2,"%"+TCari.getText()+"%");
@@ -7300,7 +7317,20 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                         }
 
                         if(countbayar>1){
-                            if (Sequel.menyimpantfSmc("detail_nota_inap", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString())) {
+                            String[] values;
+                            String columns;
+                            if (AKTIFKANKETERANGANPERAKUNBAYAR) {
+                                values = new String[] {
+                                    TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString()
+                                };
+                                columns = "no_rawat, nama_bayar, besarppn, besar_bayar, keterangan";
+                            } else {
+                                values = new String[] {
+                                    TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar)
+                                };
+                                columns = "no_rawat, nama_bayar, besarppn, besar_bayar";
+                            }
+                            if (Sequel.menyimpantfSmc("detail_nota_inap", columns, values)) {
                                 if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
 
                                 if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
@@ -7345,7 +7375,20 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                             }
                         }else if(countbayar==1){
                             if(piutang<=0){
-                                if (Sequel.menyimpantfSmc("detail_nota_inap", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar - kekurangan), tbAkunBayar.getValueAt(r, 5).toString())) {
+                                String[] values;
+                                String columns;
+                                if (AKTIFKANKETERANGANPERAKUNBAYAR) {
+                                    values = new String[] {
+                                        TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar - kekurangan), tbAkunBayar.getValueAt(r, 5).toString()
+                                    };
+                                    columns = "no_rawat, nama_bayar, besarppn, besar_bayar, keterangan";
+                                } else {
+                                    values = new String[] {
+                                        TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar - kekurangan)
+                                    };
+                                    columns = "no_rawat, nama_bayar, besarppn, besar_bayar";
+                                }
+                                if (Sequel.menyimpantfSmc("detail_nota_inap", columns, values)) {
                                     if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar - kekurangan, 0);
 
                                     if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
@@ -7389,7 +7432,20 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     sukses=false;
                                 }
                             }else{
-                                if (Sequel.menyimpantfSmc("detail_nota_inap", null, TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString())) {
+                                String[] values;
+                                String columns;
+                                if (AKTIFKANKETERANGANPERAKUNBAYAR) {
+                                    values = new String[] {
+                                        TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString()
+                                    };
+                                    columns = "no_rawat, nama_bayar, besarppn, besar_bayar, keterangan";
+                                } else {
+                                    values = new String[] {
+                                        TNoRw.getText(),tbAkunBayar.getValueAt(r,0).toString(),Double.toString(besarppn),Double.toString(itembayar)
+                                    };
+                                    columns = "no_rawat, nama_bayar, besarppn, besar_bayar";
+                                }
+                                if (Sequel.menyimpantfSmc("detail_nota_inap", columns, values)) {
                                     if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
 
                                     if(Host_to_Host_Bank_Jateng.equals(tbAkunBayar.getValueAt(r,1).toString())){
