@@ -67,8 +67,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.swing.SwingUtilities;
 import org.apache.hc.core5.http.io.entity.StringEntity;
-import java.util.List;
-import java.util.ArrayList;
 
 
 
@@ -4553,7 +4551,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         }
     }
 
-    private synchronized void tampilKunjungan() {
+    private void tampilKunjungan() {
         Valid.tabelKosong(tabModeRegistrasi);
         try{
             if(R1.isSelected()==true){
@@ -6837,7 +6835,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         }
     }
 
-    private synchronized void tampilSoapi() {
+    private void tampilSoapi() {
         try {
             htmlContent = new StringBuilder();
             htmlContent.append("<tr class='isi'>").
@@ -7014,7 +7012,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         }
     }
 
-    private synchronized void tampilPembelian() {
+    private void tampilPembelian() {
         try{
             htmlContent = new StringBuilder();
             htmlContent.append(
@@ -7262,7 +7260,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         }
     }
 
-    private synchronized void tampilPiutang() {
+    private void tampilPiutang() {
         try{
             htmlContent = new StringBuilder();
             htmlContent.append(
@@ -7419,7 +7417,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         }
     }
 
-    private synchronized void tampilRetensi() {
+    private void tampilRetensi() {
         try{
             htmlContent = new StringBuilder();
             try{

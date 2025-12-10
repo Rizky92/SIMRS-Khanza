@@ -70,7 +70,6 @@ import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
@@ -224,6 +223,7 @@ import surat.SuratPulangAtasPermintaanSendiri;
 import surat.SuratSakit;
 import surat.SuratSakitPihak2;
 import surat.SuratTidakHamil;
+import java.util.List;
 
 /**
  *
@@ -12650,11 +12650,11 @@ public final class DlgIGD extends javax.swing.JDialog {
                                   MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT,MnSkriningCURB65;
     private javax.swing.JMenu MnRMSkrining,MnEdukasi,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu;
 
-    private synchronized void tampil() {
+    private void tampil() {
         if(ceksukses==false){
             ceksukses=true;
             Valid.tabelKosong(tabMode);
-            new SwingWorker<Void, Void>() {
+            new SwingWorker<Void, Object[]>() {
                 @Override
                 protected Void doInBackground() {
                     try{
@@ -12699,7 +12699,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                                     rs.getString("kd_pj"),rs.getString("status_bayar")
                                 };
                                 i++;
-                                SwingUtilities.invokeLater(() -> tabMode.addRow(row));
+                                publish(row);
                             }
                         } catch (Exception e) {
                             System.out.println("Notif : "+e);
@@ -12716,6 +12716,14 @@ public final class DlgIGD extends javax.swing.JDialog {
                     }
                     return null;
                 }
+
+                @Override
+                protected void process(List<Object[]> data) {
+                    for (Object[] row : data) {
+                        tabMode.addRow(row);
+                    }
+                }
+
                 @Override
                 protected void done() {
                     LCount.setText(""+i);

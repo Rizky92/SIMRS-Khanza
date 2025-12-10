@@ -38,7 +38,7 @@ import javax.swing.filechooser.FileFilter;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.SwingUtilities;
+import java.util.List;
 import javax.swing.SwingWorker;
 import kepegawaian.DlgCariPetugas;
 import org.springframework.http.HttpEntity;
@@ -2674,10 +2674,10 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private synchronized void tampil(){
+    private void tampil(){
         if (!ceksukses) {
             ceksukses = true;
-            new SwingWorker<Void, Void>() {
+            new SwingWorker<Void, Object[]>() {
                 @Override
                 protected Void doInBackground() throws Exception {
                     Valid.tabelKosong(tabMode);
@@ -2720,7 +2720,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                                     0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, ""
                                 };
                                 sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
-                                SwingUtilities.invokeLater(() -> tabMode.addRow(row));
+                                publish(row);
                             }
                         }
                     } catch (Exception e) {
@@ -2756,7 +2756,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                                         0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, "Internal"
                                     };
                                     sisapiutang += rs.getDouble("sisapiutang") - rs.getDouble("besar_cicilan");
-                                    SwingUtilities.invokeLater(() -> tabMode.addRow(row));
+                                    publish(row);
                                 }
                             }
                         } catch (Exception e) {
@@ -2766,6 +2766,14 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                     SwingUtilities.invokeLater(() -> totalnilai());
                     return null;
                 }
+
+                @Override
+                protected void process(List<Object[]> data) {
+                    for (Object[] row : data) {
+                        tabMode.addRow(row);
+                    }
+                }
+
                 @Override
                 protected void done() {
                     LCount.setText(Valid.SetAngka(sisapiutang));

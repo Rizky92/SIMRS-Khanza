@@ -22,7 +22,6 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import simrskhanza.DlgCariBangsal;
 
@@ -671,7 +670,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
-                    
+
                     return null;
                 }
 

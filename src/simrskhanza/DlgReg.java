@@ -87,7 +87,6 @@ import bridging.ICareRiwayatPerawatanFKTP;
 import bridging.INACBGPerawatanCorona;
 import bridging.PilihanBridgingAsuransi;
 import inventory.DlgCopyResep;
-import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import laporan.DlgDiagnosaPenyakit;
 import laporan.DlgFrekuensiPenyakitRalan;
@@ -275,6 +274,7 @@ import surat.SuratPulangAtasPermintaanSendiri;
 import surat.SuratSakit;
 import surat.SuratSakitPihak2;
 import surat.SuratTidakHamil;
+import java.util.List;
 /**
  *
  * @author dosen
@@ -16995,11 +16995,11 @@ public final class DlgReg extends javax.swing.JDialog {
             MnSkriningInstrumenESAT,MnSkriningCURB65;
     private javax.swing.JMenu MnHasilUSG,MnHasilEndoskopi,MnRMSkrining,MnEdukasi,MnRehabMedik,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu;
 
-    private synchronized void tampil() {
+    private void tampil() {
         if(ceksukses==false){
             ceksukses=true;
             Valid.tabelKosong(tabMode);
-            new SwingWorker<Void, Void>() {
+            new SwingWorker<Void, Object[]>() {
                 @Override
                 protected Void doInBackground() {
                     try {
@@ -17059,7 +17059,7 @@ public final class DlgReg extends javax.swing.JDialog {
                                     rs.getString("kd_poli"),rs.getString("kd_pj"),rs.getString("status_bayar"),rs.getString("no_antrian")
                                 };
                                 i++;
-                                SwingUtilities.invokeLater(() -> tabMode.addRow(row));
+                                publish(row);
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi : "+e);
@@ -17079,6 +17079,13 @@ public final class DlgReg extends javax.swing.JDialog {
                 }
 
                 @Override
+                protected void process(List<Object[]> data) {
+                    for (Object[] row : data) {
+                        tabMode.addRow(row);
+                    }
+                }
+
+                @Override
                 protected void done() {
                     LCount.setText(""+i);
                     ceksukses = false;
@@ -17087,11 +17094,11 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }
 
-    private synchronized void tampil2() {
+    private void tampil2() {
         if(ceksukses==false){
             ceksukses=true;
             Valid.tabelKosong(tabMode2);
-            new SwingWorker<Void, Void>() {
+            new SwingWorker<Void, Object[]>() {
                 @Override
                 protected Void doInBackground() {
                     try {
@@ -17137,7 +17144,7 @@ public final class DlgReg extends javax.swing.JDialog {
                                     rs.getString("stts"),rs.getString("kd_poli"),rs.getString("kd_pj")
                                 };
                                 i++;
-                                SwingUtilities.invokeLater(() -> tabMode2.addRow(row));
+                                publish(row);
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi : "+e);
@@ -17154,6 +17161,13 @@ public final class DlgReg extends javax.swing.JDialog {
                         System.out.println("Notifikasi : "+e);
                     }
                     return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> data) {
+                    for (Object[] row : data) {
+                        tabMode2.addRow(row);
+                    }
                 }
 
                 @Override
