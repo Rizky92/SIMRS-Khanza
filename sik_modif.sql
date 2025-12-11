@@ -1200,6 +1200,8 @@ ALTER TABLE `penjab` MODIFY COLUMN IF EXISTS `png_jawab` varchar(50) NOT NULL AF
 
 ALTER TABLE `penjab` MODIFY COLUMN IF EXISTS `nama_perusahaan` varchar(100) NOT NULL AFTER `png_jawab`;
 
+ALTER TABLE `penyakit` MODIFY COLUMN IF EXISTS `deskripsi_panjang` varchar(300) NULL DEFAULT NULL AFTER `kd_penyakit`;
+
 ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `email` varchar(50) NULL DEFAULT NULL AFTER `no_telp`;
 
 ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `no_npwp` varchar(30) NULL DEFAULT NULL AFTER `email`;
@@ -1421,6 +1423,8 @@ CREATE TABLE IF NOT EXISTS `set_pintu_smc`  (
 ALTER TABLE `set_validasi_registrasi` MODIFY COLUMN IF EXISTS `wajib_closing_kasir` enum('Yes','Peringatan di hari yang sama','No') NULL DEFAULT NULL FIRST;
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes','No') NULL DEFAULT NULL AFTER `logo`;
+
+ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `sistem_import_koding` enum('','IDRG','INA-CBG') NULL DEFAULT NULL AFTER `pemberlakuan_2x24_jam`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
 

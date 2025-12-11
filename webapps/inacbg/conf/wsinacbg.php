@@ -2288,6 +2288,46 @@
             ];
         }
 
+        $import_koding = trim(getOne('select setting.sistem_import_koding from setting'));
+        $norawat = trim(getOne("select bridging_sep.no_rawat from bridging_sep where bridging_sep.no_sep = '$nomor_sep'"));
+        $status_lanjut = trim(getOne("select reg_periksa.status_lanjut from reg_periksa where reg_periksa.no_rawat = '$norawat'"));
+
+        if ($import_koding === 'IDRG') {
+            bukaquery2("delete from diagnosa_pasien where diagnosa_pasien.no_rawat = '$norawat' and diagnosa_pasien.status = '$status_lanjut'");
+            bukaquery2("delete from prosedur_pasien where prosedur_pasien.no_rawat = '$norawat' and prosedur_pasien.status = '$status_lanjut'");
+
+            bukaquery2(<<<SQL
+                insert into diagnosa_pasien (no_rawat, kd_penyakit, status, prioritas, status_penyakit) select * from (select s.no_rawat,
+                i.kode_icd10 as kd_penyakit, r.status_lanjut as status, i.urut as prioritas, if(exists(select * from diagnosa_pasien d join
+                reg_periksa r2 on d.no_rawat = r2.no_rawat where r2.no_rkm_medis = r.no_rkm_medis), 'Lama', 'Baru') as status_penyakit from
+                idrg_diagnosa_pasien_smc i join bridging_sep s on i.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat where
+                i.no_sep = '$nomor_sep') t
+                SQL);
+
+            bukaquery2(<<<SQL
+                insert into prosedur_pasien (no_rawat, kode, status, prioritas, jumlah) select * from (select s.no_rawat, i.kode_icd9 as kode,
+                r.status_lanjut as status, i.urut as prioritas, i.multiplicity as jumlah from idrg_prosedur_pasien_smc i join bridging_sep s on
+                i.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat where i.no_sep = '$nomor_sep') t
+                SQL);
+        } else if ($import_koding === 'INA-CBG') {
+            bukaquery2("delete from diagnosa_pasien where diagnosa_pasien.no_rawat = '$norawat' and diagnosa_pasien.status = '$status_lanjut'");
+            bukaquery2("delete from prosedur_pasien where prosedur_pasien.no_rawat = '$norawat' and prosedur_pasien.status = '$status_lanjut'");
+
+            bukaquery2(<<<SQL
+                insert into diagnosa_pasien (no_rawat, kd_penyakit, status, prioritas, status_penyakit) select * from (select s.no_rawat,
+                i.kode_icd10 as kd_penyakit, r.status_lanjut as status, i.urut as prioritas, if(exists(select * from diagnosa_pasien d join
+                reg_periksa r2 on d.no_rawat = r2.no_rawat where r2.no_rkm_medis = r.no_rkm_medis), 'Lama', 'Baru') as status_penyakit from
+                inacbg_diagnosa_pasien_smc i join bridging_sep s on i.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat where
+                i.no_sep = '$nomor_sep') t
+                SQL);
+
+            bukaquery2(<<<SQL
+                insert into prosedur_pasien (no_rawat, kode, status, prioritas, jumlah) select * from (select s.no_rawat, i.kode_icd9 as kode,
+                r.status_lanjut as status, i.urut as prioritas, 1 as jumlah from inacbg_prosedur_pasien_smc i join bridging_sep s on i.no_sep
+                = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat where i.no_sep = '$nomor_sep') t
+                SQL);
+        }
+
         return CetakKlaimSmc($nomor_sep);
     }
 
