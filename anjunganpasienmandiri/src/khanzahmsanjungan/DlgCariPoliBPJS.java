@@ -151,8 +151,9 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
 
     public void setHari(String tgl) {
         try {
-            Calendar.getInstance().setTime(new SimpleDateFormat("yyyy-MM-dd").parse(tgl));
-            switch (Calendar.getInstance().get(Calendar.DAY_OF_WEEK)) {
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(new SimpleDateFormat("yyyy-MM-dd").parse(tgl));
+            switch (cal.get(Calendar.DAY_OF_WEEK)) {
                 case 1:
                     hari = "AKHAD";
                     break;

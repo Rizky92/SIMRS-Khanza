@@ -122,14 +122,14 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
         Scroll = new widget.ScrollPane();
         tbRiwayat = new widget.Table();
         panelBawah = new widget.Panel();
-        jLabel29 = new widget.Label();
+        BtnKeluar = new widget.Button();
         jLabel19 = new widget.Label();
         DTPCari1 = new widget.Tanggal();
         jLabel21 = new widget.Label();
         DTPCari2 = new widget.Tanggal();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
-        BtnKeluar = new widget.Button();
+        jLabel29 = new widget.Label();
 
         NoKartu.setName("NoKartu"); // NOI18N
         NoKartu.setPreferredSize(new java.awt.Dimension(130, 23));
@@ -151,39 +151,49 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
         getContentPane().add(Scroll, java.awt.BorderLayout.CENTER);
 
         panelBawah.setName("panelBawah"); // NOI18N
-        panelBawah.setPreferredSize(new java.awt.Dimension(44, 54));
-        panelBawah.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelBawah.setPreferredSize(new java.awt.Dimension(44, 68));
+        panelBawah.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel29.setText("Klik pada kolom nomor SEP apabila ingin mengambil No. SEP");
-        jLabel29.setName("jLabel29"); // NOI18N
-        jLabel29.setPreferredSize(new java.awt.Dimension(400, 30));
-        panelBawah.add(jLabel29);
+        BtnKeluar.setBackground(new java.awt.Color(255, 255, 255));
+        BtnKeluar.setForeground(new java.awt.Color(255, 23, 26));
+        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        BtnKeluar.setText("KELUAR");
+        BtnKeluar.setName("BtnKeluar"); // NOI18N
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluarActionPerformed(evt);
+            }
+        });
+        panelBawah.add(BtnKeluar);
 
         jLabel19.setText("Periode :");
         jLabel19.setName("jLabel19"); // NOI18N
-        jLabel19.setPreferredSize(new java.awt.Dimension(60, 30));
+        jLabel19.setPreferredSize(new java.awt.Dimension(95, 36));
         panelBawah.add(jLabel19);
 
+        DTPCari1.setEditable(false);
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
-        DTPCari1.setPreferredSize(new java.awt.Dimension(110, 30));
+        DTPCari1.setPreferredSize(new java.awt.Dimension(140, 36));
         panelBawah.add(DTPCari1);
 
         jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel21.setText("s.d.");
         jLabel21.setName("jLabel21"); // NOI18N
-        jLabel21.setPreferredSize(new java.awt.Dimension(30, 30));
+        jLabel21.setPreferredSize(new java.awt.Dimension(50, 36));
         panelBawah.add(jLabel21);
 
+        DTPCari2.setEditable(false);
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
-        DTPCari2.setPreferredSize(new java.awt.Dimension(110, 30));
+        DTPCari2.setPreferredSize(new java.awt.Dimension(140, 36));
         panelBawah.add(DTPCari2);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMaximumSize(new java.awt.Dimension(36, 36));
+        BtnCari.setMinimumSize(new java.awt.Dimension(36, 36));
         BtnCari.setName("BtnCari"); // NOI18N
-        BtnCari.setPreferredSize(new java.awt.Dimension(30, 30));
+        BtnCari.setPreferredSize(new java.awt.Dimension(36, 36));
         BtnCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnCariActionPerformed(evt);
@@ -201,40 +211,16 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(40, 30));
         panelBawah.add(jLabel17);
 
-        BtnKeluar.setBackground(new java.awt.Color(255, 255, 255));
-        BtnKeluar.setForeground(new java.awt.Color(255, 23, 26));
-        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setText("KELUAR");
-        BtnKeluar.setName("BtnKeluar"); // NOI18N
-        BtnKeluar.setPreferredSize(new java.awt.Dimension(110, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKeluarActionPerformed(evt);
-            }
-        });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnKeluarKeyPressed(evt);
-            }
-        });
-        panelBawah.add(BtnKeluar);
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel29.setText("Klik pada kolom No. SEP apabila ingin mengambil No. SEP");
+        jLabel29.setName("jLabel29"); // NOI18N
+        jLabel29.setPreferredSize(new java.awt.Dimension(520, 30));
+        panelBawah.add(jLabel29);
 
         getContentPane().add(panelBawah, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();
-    }//GEN-LAST:event_BtnKeluarActionPerformed
-
-    private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            dispose();
-        } else {
-            Valid.pindah(evt, DTPCari1, BtnKeluar);
-        }
-    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
@@ -262,6 +248,10 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
             dispose();
         }
     }//GEN-LAST:event_tbRiwayatMouseClicked
+
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;

@@ -865,7 +865,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         try (ResultSet rs = koneksi.createStatement().executeQuery(
             "select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, to_base64(wallpaper) as wallpaper, " +
             "kontak, email, to_base64(logo) as logo, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, pemberlakuan_2x24_jam, " +
-            "import_koding_satusehat from setting"
+            "sistem_import_koding from setting"
         )) {
             if (rs.next()) {
                 tabMode.addRow(new Object[] {

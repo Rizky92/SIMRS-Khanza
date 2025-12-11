@@ -57,7 +57,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private final DlgCariPoliBPJS poli;
     private final BPJSRiwayatRujukanPasien riwayatRujukan;
     private final BPJSRiwayatPelayananPasien riwayatPelayanan;
-    private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), JADWALPRAKTEKDIANJUNGAN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
+    private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
     private String hari = "",
         tglkll = "0000-00-00",
         datajam = "",
@@ -1148,7 +1148,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }//GEN-LAST:event_lakaLantasItemStateChanged
 
     private void cariPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariPoliActionPerformed
-        if (JADWALPRAKTEKDIANJUNGAN) {
+        if (REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
             poli.setHari(tglSEP.getText());
             poli.setDokter(Sequel.cariIsiSmc("select maping_dokter_dpjpvclaim.kd_dokter from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter_bpjs = ?", kodeDokter));
         }

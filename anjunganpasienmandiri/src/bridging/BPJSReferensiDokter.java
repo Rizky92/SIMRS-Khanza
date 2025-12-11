@@ -189,7 +189,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
 
         jLabel14.setText("Poli :");
         jLabel14.setName("jLabel14"); // NOI18N
-        jLabel14.setPreferredSize(new java.awt.Dimension(60, 36));
+        jLabel14.setPreferredSize(new java.awt.Dimension(61, 36));
         panelBawah.add(jLabel14);
 
         KdPoli.setEditable(false);
@@ -204,7 +204,6 @@ public final class BPJSReferensiDokter extends widget.Dialog {
 
         btnCariPoli.setBackground(new java.awt.Color(240, 249, 255));
         btnCariPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pilih.png"))); // NOI18N
-        btnCariPoli.setMnemonic('3');
         btnCariPoli.setToolTipText("ALt+3");
         btnCariPoli.setName("btnCariPoli"); // NOI18N
         btnCariPoli.setPreferredSize(new java.awt.Dimension(36, 36));
@@ -225,7 +224,6 @@ public final class BPJSReferensiDokter extends widget.Dialog {
         panelBawah.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setMaximumSize(new java.awt.Dimension(30, 30));
         BtnCari.setName("BtnCari"); // NOI18N

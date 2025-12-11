@@ -102,11 +102,11 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
         panelBawah = new widget.Panel();
+        BtnKeluar1 = new widget.Button();
         jLabel16 = new widget.Label();
         NoKartu = new widget.TextField();
         NamaPasien = new widget.TextField();
         jLabel17 = new widget.Label();
-        BtnKeluar = new widget.Button();
 
         setIconImage(null);
         setIconImages(null);
@@ -126,22 +126,34 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
         getContentPane().add(Scroll, java.awt.BorderLayout.CENTER);
 
         panelBawah.setName("panelBawah"); // NOI18N
-        panelBawah.setPreferredSize(new java.awt.Dimension(44, 54));
-        panelBawah.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+        panelBawah.setPreferredSize(new java.awt.Dimension(44, 68));
+        panelBawah.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        jLabel16.setText("No.Kartu :");
+        BtnKeluar1.setBackground(new java.awt.Color(255, 255, 255));
+        BtnKeluar1.setForeground(new java.awt.Color(255, 23, 26));
+        BtnKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        BtnKeluar1.setText("KELUAR");
+        BtnKeluar1.setName("BtnKeluar1"); // NOI18N
+        BtnKeluar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluar1ActionPerformed(evt);
+            }
+        });
+        panelBawah.add(BtnKeluar1);
+
+        jLabel16.setText("Pasien :");
         jLabel16.setName("jLabel16"); // NOI18N
-        jLabel16.setPreferredSize(new java.awt.Dimension(59, 30));
+        jLabel16.setPreferredSize(new java.awt.Dimension(90, 36));
         panelBawah.add(jLabel16);
 
         NoKartu.setEditable(false);
         NoKartu.setName("NoKartu"); // NOI18N
-        NoKartu.setPreferredSize(new java.awt.Dimension(130, 30));
+        NoKartu.setPreferredSize(new java.awt.Dimension(200, 36));
         panelBawah.add(NoKartu);
 
         NamaPasien.setEditable(false);
         NamaPasien.setName("NamaPasien"); // NOI18N
-        NamaPasien.setPreferredSize(new java.awt.Dimension(400, 30));
+        NamaPasien.setPreferredSize(new java.awt.Dimension(450, 36));
         panelBawah.add(NamaPasien);
 
         jLabel17.setFocusable(false);
@@ -149,38 +161,10 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 23));
         panelBawah.add(jLabel17);
 
-        BtnKeluar.setBackground(new java.awt.Color(255, 255, 255));
-        BtnKeluar.setForeground(new java.awt.Color(255, 23, 26));
-        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setText("KELUAR");
-        BtnKeluar.setName("BtnKeluar"); // NOI18N
-        BtnKeluar.setPreferredSize(new java.awt.Dimension(110, 30));
-        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKeluarActionPerformed(evt);
-            }
-        });
-        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnKeluarKeyPressed(evt);
-            }
-        });
-        panelBawah.add(BtnKeluar);
-
         getContentPane().add(panelBawah, java.awt.BorderLayout.PAGE_END);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();
-    }//GEN-LAST:event_BtnKeluarActionPerformed
-
-    private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            dispose();
-        }
-    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
         if (evt.getClickCount() == 1) {
@@ -192,8 +176,12 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
         }
     }//GEN-LAST:event_tbKamarMouseClicked
 
+    private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnKeluar1ActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private widget.Button BtnKeluar;
+    private widget.Button BtnKeluar1;
     private widget.TextField NamaPasien;
     private widget.TextField NoKartu;
     private widget.ScrollPane Scroll;
