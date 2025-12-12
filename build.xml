@@ -89,16 +89,7 @@
         </copy>
     </target>
 
-    <target name="-post-jar" if="dist.jar.resolved">
-        <condition property="should.compress">
-            <and>
-                <isset property="dist.jar"/>
-                <available file="${dist.jar}"/>
-            </and>
-        </condition>
-
-        <antcall target="compress-jar"/>
-
+    <target name="-post-jar">
         <mkdir dir="${dist.dir}/report" />
         <mkdir dir="${dist.dir}/setting" />
         <mkdir dir="${dist.dir}/suara" />
@@ -115,23 +106,5 @@
         <copy todir="${build.dir}/gambar">
             <fileset dir="gambar/" includes="**/*.png, **/*.jpg" />
         </copy>
-    </target>
-
-    <target name="compress-jar" if="should.compress">
-        <echo message="Compressing distribution JAR..."/>
-
-        <tempfile property="temp.dir" destdir="${java.io.tmpdir}" prefix="repack"/>
-        <mkdir dir="${temp.dir}"/>
-
-        <unzip src="${dist.jar}" dest="${temp.dir}"/>
-
-        <delete file="${dist.jar}"/>
-        <jar destfile="${dist.jar}" basedir="${temp.dir}" compress="true">
-            <manifest>
-                <attribute name="Manifest-Version" value="1.0"/>
-            </manifest>
-        </jar>
-
-        <delete dir="${temp.dir}"/>
     </target>
 </project>
