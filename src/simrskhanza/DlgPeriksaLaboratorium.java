@@ -39,8 +39,11 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -61,6 +64,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private Connection koneksiadamlabs;
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
     private Jurnal jur=new Jurnal();
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private DlgCariDokter dokter=new DlgCariDokter(null,false);
@@ -207,19 +212,19 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(Pemeriksaan.getText().length()>2){
-                        tampiltarif();
+                        runBackground(() -> tampiltarif());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(Pemeriksaan.getText().length()>2){
-                        tampiltarif();
+                        runBackground(() -> tampiltarif());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(Pemeriksaan.getText().length()>2){
-                        tampiltarif();
+                        runBackground(() -> tampiltarif());
                     }
                 }
             });
@@ -227,19 +232,19 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() -> tampil());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() -> tampil());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() -> tampil());
                     }
                 }
             });
@@ -1275,7 +1280,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
     private void PemeriksaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PemeriksaanKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            tampiltarif();
+            runBackground(() -> tampiltarif());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             if(akses.gettarif_lab()==true){
                 btnTarifActionPerformed(null);
@@ -1341,7 +1346,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-       tampiltarif();
+       runBackground(() -> tampiltarif());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
@@ -1367,7 +1372,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         if(tabMode2.getRowCount()!=0){
             try {
                 Valid.tabelKosong(tabMode);
-                tampil();
+                runBackground(() -> tampil());
             } catch (java.lang.NullPointerException e) {
             }
         }
@@ -1479,7 +1484,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCari2KeyPressed
 
     private void BtnCari2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari2ActionPerformed
-        tampil();
+        runBackground(() -> tampil());
     }//GEN-LAST:event_BtnCari2ActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
@@ -2586,7 +2591,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             tbTarif.setValueAt(false,i,0);
         }
         Valid.tabelKosong(tabMode);
-        tampiltarif();
+        runBackground(() -> tampiltarif());
     }
 
     private void jam(){
@@ -3348,4 +3353,21 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         ChkJln.setSelected(true);
     }
 
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
+    }
 }
