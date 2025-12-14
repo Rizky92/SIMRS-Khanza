@@ -343,15 +343,6 @@ public class koneksiDB {
             return false;
         }
     }
-    
-    public static boolean AKTIFKANKETERANGANPERAKUNPEMBAYARAN() {
-        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
-            prop.loadFromXML(fs);
-            return prop.getProperty("AKTIFKANKETERANGANPERAKUNPEMBAYARAN", "no").trim().equalsIgnoreCase("yes");
-        } catch (Exception e) {
-            return false;
-        }
-    }
 
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
