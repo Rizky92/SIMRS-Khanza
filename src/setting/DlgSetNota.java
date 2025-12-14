@@ -741,7 +741,7 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput.add(cmbYesRincianOperasi);
         cmbYesRincianOperasi.setBounds(168, 310, 70, 23);
 
-        jLabel26.setText("Tampilkan PPN Obat 10 % di Nota Ralan :");
+        jLabel26.setText("Tampilkan PPN Obat di Nota Ralan :");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
         jLabel26.setBounds(285, 130, 300, 23);
@@ -757,7 +757,7 @@ public class DlgSetNota extends javax.swing.JDialog {
         FormInput.add(cmbYesPPNRalan);
         cmbYesPPNRalan.setBounds(588, 130, 70, 23);
 
-        jLabel27.setText("Tampilkan PPN Obat 10 % di Nota Ranap :");
+        jLabel27.setText("Tampilkan PPN Obat di Nota Ranap :");
         jLabel27.setName("jLabel27"); // NOI18N
         FormInput.add(jLabel27);
         jLabel27.setBounds(285, 160, 300, 23);
@@ -2603,8 +2603,8 @@ public class DlgSetNota extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{" Centang Dokter di Nota Ranap",rs.getString(16)});
                     tabMode.addRow(new Object[]{" Tampilkan Administrasi di Billing Ranap",rs.getString(17)});
                     tabMode.addRow(new Object[]{" Tampilkan Rincian Operasi",rs.getString(18)});
-                    tabMode.addRow(new Object[]{" Tampilkan PPN Obat 11 % di Nota Ralan",rs.getString(19)});
-                    tabMode.addRow(new Object[]{" Tampilkan PPN Obat 11 % di Nota Ranap",rs.getString(20)});
+                    tabMode.addRow(new Object[]{" Tampilkan PPN Obat di Nota Ralan",rs.getString(19)});
+                    tabMode.addRow(new Object[]{" Tampilkan PPN Obat di Nota Ranap",rs.getString(20)});
                     tabMode.addRow(new Object[]{" Tampilkan Tombol Nota di Billing Rawat Jalan",rs.getString(21)});
                     tabMode.addRow(new Object[]{" Tampilkan Tombol Nota di Billing Rawat Inap",rs.getString(22)});
                     tabMode.addRow(new Object[]{" Verifikasi Penjualan Obat Bebas di Kasir",rs.getString(23)});

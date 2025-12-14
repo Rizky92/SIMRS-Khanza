@@ -24,8 +24,11 @@ import java.sql.ResultSet;
 import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -61,6 +64,8 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -133,19 +138,31 @@ public class DlgCariPenjualan extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        if(TabRawat.getSelectedIndex()==0){
+                            runBackground(() ->tampil());
+                        }else if(TabRawat.getSelectedIndex()==1){
+                            runBackground(() ->tampil2());
+                        }
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        if(TabRawat.getSelectedIndex()==0){
+                            runBackground(() ->tampil());
+                        }else if(TabRawat.getSelectedIndex()==1){
+                            runBackground(() ->tampil2());
+                        }
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        if(TabRawat.getSelectedIndex()==0){
+                            runBackground(() ->tampil());
+                        }else if(TabRawat.getSelectedIndex()==1){
+                            runBackground(() ->tampil2());
+                        }
                     }
                 }
             });
@@ -1342,7 +1359,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                         Sequel.AutoComitTrue();
                         if(sukses==true){
-                            tampil();
+                            runBackground(() ->tampil());
                         }
                     }
                 } catch (Exception e) {
@@ -1363,8 +1380,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
-        tampilAkunBayar();
+        runBackground(() ->tampilAkunBayar());
     }//GEN-LAST:event_formWindowOpened
 
     private void ppVerifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppVerifActionPerformed
@@ -1387,9 +1403,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==0){
-            tampil();
+            runBackground(() ->tampil());
         }else if(TabRawat.getSelectedIndex()==1){
-            tampil2();
+            runBackground(() ->tampil2());
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 
@@ -1636,7 +1652,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             if(notapenjualan.equals("Yes")){
                                 ppCetakNotaActionPerformed(evt);
                             }
-                            tampil();
+                            runBackground(() ->tampil());
                          }
                       }
                   }
@@ -2238,5 +2254,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
     }
 }
