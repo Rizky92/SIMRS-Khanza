@@ -2131,8 +2131,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tbObatPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbObatPropertyChange
         if(this.isVisible()==true){
-            int currentRow = tbObat.convertRowIndexToModel(tbObat.getEditingRow());
-            int currentColumn = tbObat.convertColumnIndexToModel(tbObat.getEditingColumn());
+            int currentRow = tbObat.getEditingRow();
+            int currentColumn = tbObat.getEditingColumn();
             if (tbObat.getSelectedRow() != currentRow) {
                 tbObat.changeSelection(currentRow, currentColumn, false, false);
             }
@@ -2401,8 +2401,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tbDetailObatRacikanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbDetailObatRacikanPropertyChange
         if(this.isVisible()==true){
-            int currentRow = tbDetailObatRacikan.convertRowIndexToModel(tbDetailObatRacikan.getEditingRow());
-            int currentColumn = tbDetailObatRacikan.convertColumnIndexToModel(tbDetailObatRacikan.getEditingColumn());
+            int currentRow = tbDetailObatRacikan.getEditingRow();
+            int currentColumn = tbDetailObatRacikan.getEditingColumn();
             if (tbDetailObatRacikan.getSelectedRow() != currentRow) {
                 tbDetailObatRacikan.changeSelection(currentRow, currentColumn, false, false);
             }
