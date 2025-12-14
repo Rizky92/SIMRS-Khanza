@@ -2804,6 +2804,9 @@ public final class sekuel {
     
     private void SimpanTrack(String sql){
         if(AKTIFKANTRACKSQL.equals("yes")){
+            if (sql.length() > (65535 - 16)) {
+                sql = sql.substring(0, 65535 - 16);
+            }
             try {
                 ps=connect.prepareStatement("insert into trackersql values(now(),?,?)");
                 try{       
