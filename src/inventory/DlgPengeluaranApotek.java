@@ -1170,8 +1170,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     }
 
-
-
     private void getData(){
         row=tbDokter.getSelectedRow();
         if(nmgudang.getText().trim().equals("")){
@@ -1440,7 +1438,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Notifikasi : "+e);
         }
     }
-   
+
    private void runBackground(Runnable task) {
         if (ceksukses) return;
         ceksukses = true;
