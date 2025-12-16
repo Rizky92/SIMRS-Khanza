@@ -43962,18 +43962,6 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
-        if(akses.getuser()==true){
-            if(btnUserSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
-                Panelmenu.add(btnUserSmc);
-                jmlmenu++;
-            }
-        }
-
-        if(akses.getset_pintu_poli()==true){
-            Panelmenu.add(btnSetPintuPoliSmc);
-            jmlmenu++;
-        }
-
         if(akses.gettracer_login()==true){
             if(btnTracker.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnTracker);
