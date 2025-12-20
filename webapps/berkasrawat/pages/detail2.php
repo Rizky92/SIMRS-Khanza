@@ -12,9 +12,13 @@
                 echo "";
                 $action       = isset($_GET['action'])?$_GET['action']:NULL;
                 $norawat      = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-                $norawat      = json_decode(encrypt_decrypt($norawat,"d"),true); 
+                $norawat      = json_decode(encrypt_decrypt($norawat,"d"),true);
+                $noexit = '0'; 
+                $kodeberkas = '';
                 if (isset($norawat["no_rawat"])) {
                     $no_rawat = validTeks4($norawat["no_rawat"],20);
+                    $noexit = validTeks4($norawat['noexit'], 1);
+                    $kodeberkas = validTeks4($norawat['kodeberkas'], 4);
                 }else{
                     exit(header("Location:../index.php"));
                 }
@@ -53,7 +57,7 @@
                     <td width="25%" valign="top">No.RM</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top"><?php echo $no_rkm_medis;?></td>
                 </tr>
-		<tr class="isi2">
+		        <tr class="isi2">
                     <td width="25%" valign="top">Nama Pasien</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top"><?php echo $nm_pasien.", ".$umurdaftar." ".$sttsumur;?></td>
                 </tr>                
@@ -61,14 +65,10 @@
                     <td width="25%" valign="top">Berkas Digital</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top">
                         <select name="kode" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" id="TxtIsi1">
-                            <?php
-                                $_sql = "SELECT master_berkas_digital.kode,master_berkas_digital.nama FROM master_berkas_digital ORDER BY master_berkas_digital.nama";
-                                $hasil=bukaquery($_sql);
-
-                                while($baris = mysqli_fetch_array($hasil)) {
-                                    echo "<option id='TxtIsi1' value='$baris[0]'>$baris[1]</option>";
-                                }
-                            ?>
+                            <?php $hasil = bukaquery('select master_berkas_digital.kode, master_berkas_digital.nama from master_berkas_digital order by master_berkas_digital.nama'); ?>
+                            <?php while ($baris = mysqli_fetch_array($hasil)): ?>
+                                <option value="<?= $baris[0] ?>" <?= $baris[0] === $kodeberkas ? 'selected' : '' ?>><?= $baris[1] ?></option>
+                            <?php endwhile;?>
                         </select>
                         <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                     </td>
@@ -96,7 +96,11 @@
                                             if(Tambah(" berkas_digital_perawatan "," '$no_rawat','$kode','$dokumen'", " Berkas Digital Perawatan " )){
                                                 move_uploaded_file($_FILES['dokumen']['tmp_name'],$dokumen);
                                             }
-                                            echo"<meta http-equiv='refresh' content='1;URL=?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks($no_rawat)."\"}","e")."'>";
+                                            echo"<meta http-equiv='refresh' content='1;URL=?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt(json_encode([
+                                                'no_rawat' => validTeks($no_rawat),
+                                                'noexit' => $noexit,
+                                                'kodeberkas' => validTeks($kodeberkas),
+                                            ]), "e")."'>";
                                             break;
                                     }
                                 }else if ((empty($no_rawat))||(empty($kode))||(empty($dokumen))){
@@ -160,16 +164,18 @@
                 Hapus(" berkas_digital_perawatan "," no_rawat ='".validTeks($norawat["no_rawat"])."' and kode ='".validTeks($norawat["kode"])."' and lokasi_file='".validTeks($norawat["lokasi_file"])."' ","?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks($no_rawat)."\"}","e"));
             }
 
-            echo <<<HTML
-                <table width="99.6%" border="0" align="center" cellpadding="0" cellspacing="0" class="tbl_form">
-                    <tr class="head">
-                        <td><div align="left">Data : $jumlah</div></td>
-                        <td>
-                            <a href="?act=List&action=Keluar" class="button">&nbsp;&nbsp;&nbsp;Keluar&nbsp;&nbsp;&nbsp;</a>
-                        </td>
-                    </tr>     
-                </table>
-            HTML;
+            if ($noexit !== '1') {
+                echo <<<HTML
+                    <table width="99.6%" border="0" align="center" cellpadding="0" cellspacing="0" class="tbl_form">
+                        <tr class="head">
+                            <td><div align="left">Data : $jumlah</div></td>
+                            <td>
+                                <a href="?act=List&action=Keluar" class="button">&nbsp;&nbsp;&nbsp;Keluar&nbsp;&nbsp;&nbsp;</a>
+                            </td>
+                        </tr>     
+                    </table>
+                HTML;
+            }
         ?>       
         </form>
     </div>
