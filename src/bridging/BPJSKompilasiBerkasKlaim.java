@@ -413,8 +413,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
-        ppBerkasDigital = new javax.swing.JMenuItem();
-        ppRiwayatPerawatan = new javax.swing.JMenuItem();
         ppUpdateTanggalPulangSEP = new javax.swing.JMenuItem();
         WindowUpdatePulang = new javax.swing.JDialog();
         internalFrame11 = new widget.InternalFrame();
@@ -539,38 +537,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jPopupMenu1.setForeground(new java.awt.Color(50, 50, 50));
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
-        ppBerkasDigital.setBackground(new java.awt.Color(255, 255, 254));
-        ppBerkasDigital.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppBerkasDigital.setForeground(new java.awt.Color(50, 50, 50));
-        ppBerkasDigital.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppBerkasDigital.setText("Berkas Perawatan Digital");
-        ppBerkasDigital.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppBerkasDigital.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppBerkasDigital.setName("ppBerkasDigital"); // NOI18N
-        ppBerkasDigital.setPreferredSize(new java.awt.Dimension(200, 26));
-        ppBerkasDigital.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppBerkasDigitalActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(ppBerkasDigital);
-
-        ppRiwayatPerawatan.setBackground(new java.awt.Color(255, 255, 254));
-        ppRiwayatPerawatan.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        ppRiwayatPerawatan.setForeground(new java.awt.Color(50, 50, 50));
-        ppRiwayatPerawatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppRiwayatPerawatan.setText("Riwayat Perawatan");
-        ppRiwayatPerawatan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppRiwayatPerawatan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppRiwayatPerawatan.setName("ppRiwayatPerawatan"); // NOI18N
-        ppRiwayatPerawatan.setPreferredSize(new java.awt.Dimension(200, 26));
-        ppRiwayatPerawatan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppRiwayatPerawatanActionPerformed(evt);
-            }
-        });
-        jPopupMenu1.add(ppRiwayatPerawatan);
-
         ppUpdateTanggalPulangSEP.setBackground(new java.awt.Color(255, 255, 254));
         ppUpdateTanggalPulangSEP.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         ppUpdateTanggalPulangSEP.setForeground(new java.awt.Color(50, 50, 50));
@@ -628,7 +594,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2025 18:43:46" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-12-2025 00:38:33" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -668,7 +634,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2025" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-12-2025" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -1049,7 +1015,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-12-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1063,7 +1029,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-12-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-12-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2351,52 +2317,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_StatusPulangItemStateChanged
 
-    private void ppBerkasDigitalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBerkasDigitalActionPerformed
-        if (tbKompilasi.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, table masih kosong...!!!!");
-            TCari.requestFocus();
-        } else {
-            if (tbKompilasi.getSelectedRow() > -1) {
-                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgBerkasRawat berkas = new DlgBerkasRawat(null, true);
-                berkas.setJudul("::[ Berkas Digital Perawatan ]::", "berkasrawat/pages");
-                try {
-                    if (akses.gethapus_berkas_digital_perawatan() == true) {
-                        berkas.loadURL("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/" + "berkasrawat/login2.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() + "&no_rawat=" + lblNoRawat.getText());
-                    } else {
-                        berkas.loadURL("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/" + "berkasrawat/login2nonhapus.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() + "&no_rawat=" + lblNoRawat.getText());
-                    }
-                } catch (Exception ex) {
-                    System.out.println("Notifikasi : " + ex);
-                }
-                berkas.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                berkas.setLocationRelativeTo(internalFrame1);
-                berkas.setVisible(true);
-                setCursor(Cursor.getDefaultCursor());
-            }
-        }
-    }//GEN-LAST:event_ppBerkasDigitalActionPerformed
-
-    private void ppRiwayatPerawatanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppRiwayatPerawatanActionPerformed
-        if (tbKompilasi.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, data pasien sudah habis...!!!!");
-            TCari.requestFocus();
-        } else if (tbKompilasi.getSelectedRow() == -1) {
-            JOptionPane.showMessageDialog(null, "Maaf, Silahkan anda pilih dulu data kamar inap pada table...!!!");
-            TCari.requestFocus();
-        } else {
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if (resume == null) {
-                resume = new RMRiwayatPerawatan(null, false);
-            }
-            resume.setNoRMKompilasi(tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 0).toString(), tbKompilasi.getValueAt(tbKompilasi.getSelectedRow(), 2).toString());
-            resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-            resume.setLocationRelativeTo(internalFrame1);
-            resume.setVisible(true);
-            setCursor(Cursor.getDefaultCursor());
-        }
-    }//GEN-LAST:event_ppRiwayatPerawatanActionPerformed
-
     private void btnRiwayatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRiwayatPasienActionPerformed
         if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data pasien terlebih dahulu..!!");
@@ -3087,8 +3007,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private laporan.PanelIdrgSmc panelIdrg;
     private laporan.PanelInacbgSmc panelInacbg;
     private widget.panelisi panelInvoices;
-    private javax.swing.JMenuItem ppBerkasDigital;
-    private javax.swing.JMenuItem ppRiwayatPerawatan;
     private javax.swing.JMenuItem ppUpdateTanggalPulangSEP;
     private widget.ScrollPane scrollPane1;
     private widget.ScrollPane scrollPane2;
@@ -3365,14 +3283,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     public void isCek() {
         lblCoderNIK.setText(Sequel.cariIsiSmc("select no_ik from inacbg_coder_nik where nik = ?", akses.getkode()));
-        kodePJ.setText("BPJ");
-        namaPJ.setText("BPJS KESEHATAN");
+        kodePJ.setText(KODEPJBPJS);
+        namaPJ.setText(NAMAPJBPJS);
+        btnRiwayatPasien.setEnabled(akses.getresume_pasien());
     }
 
     public void isCek(String nik) {
         lblCoderNIK.setText(nik);
-        kodePJ.setText("BPJ");
-        namaPJ.setText("BPJS KESEHATAN");
+        kodePJ.setText(KODEPJBPJS);
+        namaPJ.setText(NAMAPJBPJS);
+        btnRiwayatPasien.setEnabled(akses.getresume_pasien());
     }
 
     private void tampilINACBG() {
