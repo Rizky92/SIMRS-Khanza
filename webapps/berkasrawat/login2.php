@@ -8,7 +8,11 @@
         if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
             session_start();
             $_SESSION['ses_admin_berkas_rawat']="admin";
-            $url = "index.php?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks4($_GET['no_rawat'],20)."\"}","e");			
+            $url = "index.php?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt(json_encode([
+                'no_rawat'   => validTeks4($_GET['no_rawat'], 20),
+                'noexit'     => isset($_GET['noexit']) ? validTeks4($_GET['noexit'], 1) : '',
+                'kodeberkas' => isset($_GET['kodeberkas']) ? validTeks4($_GET['kodeberkas'], 4) : '',
+            ]), "e");			
         }else{
             session_start();
             session_destroy();
