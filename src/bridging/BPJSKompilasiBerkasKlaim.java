@@ -44,6 +44,7 @@ import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import javafx.application.Platform;
+import javafx.concurrent.Worker;
 import static javafx.concurrent.Worker.State.FAILED;
 import javafx.embed.swing.JFXPanel;
 import javafx.scene.Scene;
@@ -63,7 +64,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
-import laporan.DlgBerkasRawat;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperExportManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -195,12 +195,27 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
             engineBerkasDigital = viewBerkasDigital.getEngine();
             engineBerkasDigital.setJavaScriptEnabled(true);
-            engineBerkasDigital.setCreatePopupHandler(popup -> viewKlaim.getEngine());
+            engineBerkasDigital.setCreatePopupHandler(popup -> viewBerkasDigital.getEngine());
             engineBerkasDigital.getLoadWorker().exceptionProperty().addListener((observable, oldValue, newValue) -> {
                 if (engineBerkasDigital.getLoadWorker().getState() == FAILED) {
                     SwingUtilities.invokeLater(() -> {
                         JOptionPane.showMessageDialog(null, engineBerkasDigital.getLocation() + "\n" + (newValue != null ? newValue.getMessage() : "Unexpected error!"), "Error", JOptionPane.ERROR_MESSAGE);
                     });
+                }
+            });
+
+            engineBerkasDigital.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == Worker.State.SUCCEEDED) {
+                    try {
+                        if (engineBerkasDigital.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "").contains("berkasrawat/pages")) {
+                            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                            Valid.panggilUrl(engineBerkasDigital.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/pages/upload/", "berkasrawat/").replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/pages/upload/", "berkasrawat/"));
+                            engineBerkasDigital.executeScript("history.back()");
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
                 }
             });
 
