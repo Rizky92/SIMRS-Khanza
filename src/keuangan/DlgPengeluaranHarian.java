@@ -1439,7 +1439,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         }
     }
 
-    public void hitung(){
+    private void hitung(){
         total=0;
         for(i=0;i<tabMode.getRowCount();i++){
             if(!tbResep.getValueAt(i,0).toString().equals("")){

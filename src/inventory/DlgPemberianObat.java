@@ -1206,7 +1206,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             resep.emptTeks();
             resep.isCek();
             resep.setNoRm(TNoRw.getText(),Valid.SetTgl2(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()),Valid.SetTgl2(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()),tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(0,2),tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(3,5),tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString().substring(6,8),status);
-            resep.tampil();
+            resep.tampil2();
             resep.setVisible(true);
         }
     }//GEN-LAST:event_ppResepObatActionPerformed
@@ -1374,7 +1374,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private widget.Table tbPemberianObat;
     // End of variables declaration//GEN-END:variables
 
-    public void tampilPO() {
+    private void tampilPO() {
         pas="";
         if(!TCariPasien.getText().equals("")){
            pas=" and reg_periksa.no_rkm_medis='"+TCariPasien.getText()+"' ";
@@ -1439,7 +1439,11 @@ public class DlgPemberianObat extends javax.swing.JDialog {
         LCount1.setText(""+Valid.SetAngka(jumlahtotal));
     }
 
-    public void tampilPO2() {
+    public void tampilPO3() {
+        runBackground(() ->tampilPO());
+    }
+    
+    private void tampilPO2() {
         pas="";
         if(!TCariPasien.getText().equals("")){
            pas=" and reg_periksa.no_rkm_medis='"+TCariPasien.getText()+"' ";

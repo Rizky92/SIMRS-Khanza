@@ -939,7 +939,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
     private widget.Table tbResep;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select resep_pulang.no_rawat,resep_pulang.tanggal,resep_pulang.jam,concat(reg_periksa.no_rkm_medis,' ',pasien.nm_pasien),"+
@@ -986,6 +986,10 @@ public final class DlgResepPulang extends javax.swing.JDialog {
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
+    }
+    
+    public void tampil2() {
+        runBackground(() ->tampil());
     }
 
     private void getData() {

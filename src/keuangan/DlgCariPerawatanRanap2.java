@@ -31,8 +31,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -64,13 +67,14 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private double ttljmdokter=0,ttljmperawat=0,ttlkso=0,ttlpendapatan=0,ttljasasarana=0,ttlbhp=0,ttlmenejemen=0,
             hapusttljasasarana=0,hapusttlbhp=0,hapusttlmenejemen=0,hapusttljmdokter=0,hapusttljmperawat=0,hapusttlkso=0,hapusttlpendapatan=0;
     private Jurnal jur=new Jurnal();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
     private String Suspen_Piutang_Tindakan_Ranap="",Tindakan_Ranap="",Beban_Jasa_Medik_Dokter_Tindakan_Ranap="",Utang_Jasa_Medik_Dokter_Tindakan_Ranap="",
             Beban_Jasa_Medik_Paramedis_Tindakan_Ranap="",Utang_Jasa_Medik_Paramedis_Tindakan_Ranap="",Beban_KSO_Tindakan_Ranap="",Utang_KSO_Tindakan_Ranap="",
             Beban_Jasa_Sarana_Tindakan_Ranap="",Utang_Jasa_Sarana_Tindakan_Ranap="",Beban_Jasa_Menejemen_Tindakan_Ranap="",Utang_Jasa_Menejemen_Tindakan_Ranap="",
             HPP_BHP_Tindakan_Ranap="",Persediaan_BHP_Tindakan_Ranap="", where;
     private final ObjectMapper mapper = new ObjectMapper();
     private ObjectNode tindakanTerinput;
-    public DlgKtgPerawatan ktg=new DlgKtgPerawatan(null,false);
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -141,19 +145,19 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
             });
@@ -213,43 +217,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-
-        ktg.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(ktg.getTable().getSelectedRow()!= -1){
-                    KdKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
-                    NmKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),2).toString());
-                }
-                KdKtg.requestFocus();
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        ktg.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    ktg.dispose();
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-
+        
         TCari.requestFocus();
         try {
             psrekening=koneksi.prepareStatement("select * from set_akun_ranap");
@@ -711,7 +679,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -724,7 +692,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         emptTeks();
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -878,7 +846,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         NmPtg2.setVisible(false);
         btnPetugas.setVisible(false);
         FormInput.setPreferredSize(new Dimension(WIDTH, 44));
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_ppDokterActionPerformed
 
     private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPetugasActionPerformed
@@ -891,7 +859,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         NmPtg2.setVisible(false);
         btnPetugas.setVisible(false);
         FormInput.setPreferredSize(new Dimension(WIDTH, 44));
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_ppPetugasActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -928,7 +896,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         NmPtg2.setVisible(true);
         btnPetugas.setVisible(true);
         FormInput.setPreferredSize(new Dimension(WIDTH, 74));
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_ppPetugasDokterActionPerformed
 
     private void KdKtgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKtgKeyPressed
@@ -946,6 +914,42 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     }//GEN-LAST:event_NmKtgKeyPressed
 
     private void btnKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKategoriActionPerformed
+        DlgKtgPerawatan ktg=new DlgKtgPerawatan(null,false);
+        ktg.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(ktg.getTable().getSelectedRow()!= -1){                   
+                    KdKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
+                    NmKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),2).toString());
+                }     
+                KdKtg.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        ktg.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    ktg.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         ktg.emptTeks();
         ktg.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         ktg.setLocationRelativeTo(internalFrame1);
@@ -1882,5 +1886,41 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Maaf, gagal menyimpan data. Kemungkinan ada data yang sama dimasukkan sebelumnya...!");
             }
         }
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
     }
 }

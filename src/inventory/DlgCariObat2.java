@@ -1486,7 +1486,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                             resep.emptTeks();
                             resep.isCek();
                             resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),"ranap");
-                            resep.tampil();
+                            resep.tampil2();
                             //resep.setAlwaysOnTop(true);
                             resep.dokter.setAlwaysOnTop(true);
                             resep.setVisible(true);
@@ -1570,7 +1570,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             resep.emptTeks();
             resep.isCek();
             resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),"ralan");
-            resep.tampil();
+            resep.tampil2();
             resep.setVisible(true);
         }
     }//GEN-LAST:event_ChkNoResepItemStateChanged
@@ -2988,7 +2988,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }
     }
 
-    public void tampilobat2(String no_resep) {
+    private void tampilobat2(String no_resep) {
         this.noresep=no_resep;
         cekPengaturanResepRanap();
         try{
@@ -3747,6 +3747,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+    }
+    
+    public void tampilobat3(String no_resep) {
+        runBackground(() -> tampilobat2(no_resep));
     }
 
     private void getDatadetailobatracikan(int data) {

@@ -1767,7 +1767,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                 resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),"ralan");
                                 resep.setDokterRalan();
                             }
-                            resep.tampil();
+                            resep.tampil2();
                             resep.setVisible(true);
                         }
                         dispose();
@@ -1844,7 +1844,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),"ralan");
                 resep.setDokterRalan();
             }
-            resep.tampil();
+            resep.tampil2();
             resep.setVisible(true);
         }
     }//GEN-LAST:event_ChkNoResepItemStateChanged
@@ -2696,7 +2696,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         }
     }
 
-    public void tampilobat2(String no_resep) {
+    private void tampilobat2(String no_resep) {
         this.load = true;
         this.noresep=no_resep;
         adaObatKronis = false;
@@ -3301,6 +3301,14 @@ public final class DlgCariObat extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ditemukan obat kronis diresepkan oleh dokter, silahkan dilakukan review dahulu..!!");
         }
     }
+    
+    public void tampilobat3(String no_resep) {
+        runBackground(() -> tampilobat2(no_resep));
+    }
+    
+    public void tampilobat3(String no_resep) {
+        runBackground(() -> tampilobat2(no_resep));
+    }
 
     public void emptTeksobat() {
         Kd2.setText("");
@@ -3606,7 +3614,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         this.namadokter=namadokter;
     }
 
-    public void tampildetailracikanobat() {
+    private void tampildetailracikanobat() {
         if (!Valid.exists("./cache/beriobatralan.iyem")) {
             buatcacheberiobat();
         }

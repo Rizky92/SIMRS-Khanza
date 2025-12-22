@@ -36,8 +36,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -88,6 +91,8 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
     private File file;
     private FileWriter fileWriter;
     private FileReader myObj;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -170,19 +175,19 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil2();
+                        runBackground(() ->tampil2());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil2();
+                        runBackground(() ->tampil2());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil2();
+                        runBackground(() ->tampil2());
                     }
                 }
             });
@@ -771,7 +776,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil2();
+        runBackground(() ->tampil2());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -786,7 +791,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         TCari.setText("");
         KdKtg.setText("");
         NmKtg.setText("");
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -1133,29 +1138,29 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_btnDokterActionPerformed
 
     private void ppDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppDokterActionPerformed
-    pilihtable="rawat_inap_dr";
-    jLabel5.setText("Dokter :");
-    kddokter.setText("");
-    nmdokter.setText("");
-    LblPetugas.setVisible(false);
-    KdPtg2.setVisible(false);
-    NmPtg2.setVisible(false);
-    btnPetugas.setVisible(false);
-    FormInput.setPreferredSize(new Dimension(WIDTH, 44));
-    tampil();
+        pilihtable="rawat_inap_dr";
+        jLabel5.setText("Dokter :");
+        kddokter.setText("");
+        nmdokter.setText("");
+        LblPetugas.setVisible(false);
+        KdPtg2.setVisible(false);
+        NmPtg2.setVisible(false);
+        btnPetugas.setVisible(false);
+        FormInput.setPreferredSize(new Dimension(WIDTH, 44));
+        runBackground(() ->tampil());
     }//GEN-LAST:event_ppDokterActionPerformed
 
     private void ppPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppPetugasActionPerformed
-    pilihtable="rawat_inap_pr";
-    jLabel5.setText("Petugas :");
-    kddokter.setText("");
-    nmdokter.setText("");
-    LblPetugas.setVisible(false);
-    KdPtg2.setVisible(false);
-    NmPtg2.setVisible(false);
-    btnPetugas.setVisible(false);
-    FormInput.setPreferredSize(new Dimension(WIDTH, 44));
-    tampil();
+        pilihtable="rawat_inap_pr";
+        jLabel5.setText("Petugas :");
+        kddokter.setText("");
+        nmdokter.setText("");
+        LblPetugas.setVisible(false);
+        KdPtg2.setVisible(false);
+        NmPtg2.setVisible(false);
+        btnPetugas.setVisible(false);
+        FormInput.setPreferredSize(new Dimension(WIDTH, 44));
+        runBackground(() ->tampil());
     }//GEN-LAST:event_ppPetugasActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -1193,7 +1198,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         NmPtg2.setVisible(true);
         btnPetugas.setVisible(true);
         FormInput.setPreferredSize(new Dimension(WIDTH, 74));
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_ppPetugasDokterActionPerformed
 
     private void KdKtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_KdKtgActionPerformed
@@ -1319,7 +1324,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         try{
             Valid.tabelKosong(tabMode);
             file=new File("./cache/tarifranap.iyem");
@@ -1584,6 +1589,10 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tbKamar.getRowCount());
+    }
+    
+    public void tampil3() { 
+        runBackground(() ->tampil());
     }
 
     public void emptTeks() {
@@ -1927,5 +1936,23 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null, "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
             }
         }
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
     }
 }

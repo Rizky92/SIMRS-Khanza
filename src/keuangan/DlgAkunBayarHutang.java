@@ -687,7 +687,7 @@ public class DlgAkunBayarHutang extends javax.swing.JDialog {
             public void keyReleased(KeyEvent e) {}
         });  
         rekening.emptTeks();
-        rekening.tampil();
+        rekening.tampil2();
         rekening.isCek();
         rekening.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         rekening.setLocationRelativeTo(internalFrame1);

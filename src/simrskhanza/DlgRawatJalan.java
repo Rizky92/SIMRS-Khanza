@@ -7340,7 +7340,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             dlgrwinap.setLocationRelativeTo(internalFrame1);
             dlgrwinap.isCek();
             dlgrwinap.setNoRm2(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"ralan");
-            dlgrwinap.tampilPO();
+            dlgrwinap.tampilPO3();
             dlgrwinap.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }

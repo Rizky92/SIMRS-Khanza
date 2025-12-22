@@ -1273,7 +1273,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 aplikasi.tampikan=false;
                 aplikasi.isCek();
-                aplikasi.tampil(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
+                aplikasi.tampil2(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim());
                 aplikasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 aplikasi.setLocationRelativeTo(internalFrame1);
                 aplikasi.setVisible(true);

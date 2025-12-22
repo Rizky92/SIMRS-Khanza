@@ -1071,7 +1071,7 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
         this.nopermintaan="";
     }
 
-    public void tampil2(String nopermintaan) {
+    private void tampil2(String nopermintaan) {
         this.nopermintaan=nopermintaan;
         Valid.tabelKosong(tabMode);
         try{
@@ -1275,6 +1275,10 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+    }
+    
+    public void tampil3(String nopermintaan) {
+        runBackground(() -> tampil2(nopermintaan));
     }
 
     private void getData() {

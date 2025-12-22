@@ -6180,7 +6180,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 akses.setform("DlgRawatInap");
                 perawatan.emptTeks();
                 perawatan.isCek();
-                perawatan.tampil();
+                perawatan.tampil3();
                 perawatan.setSize(this.getWidth()-20,this.getHeight()-20);
                 perawatan.setLocationRelativeTo(internalFrame1);
                 perawatan.setVisible(true);
@@ -6235,7 +6235,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 akses.setform("DlgRawatInap");
                 perawatan.emptTeks();
                 perawatan.isCek();
-                perawatan.tampil();
+                perawatan.tampil3();
                 perawatan.setSize(this.getWidth()-20,this.getHeight()-20);
                 perawatan.setLocationRelativeTo(internalFrame1);
                 perawatan.setVisible(true);
@@ -6292,7 +6292,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 akses.setform("DlgRawatInap");
                 perawatan.emptTeks();
                 perawatan.isCek();
-                perawatan.tampil();
+                perawatan.tampil3();
                 perawatan.setSize(this.getWidth()-20,this.getHeight()-20);
                 perawatan.setLocationRelativeTo(internalFrame1);
                 perawatan.setVisible(true);
@@ -6574,7 +6574,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             dlgrwinap.setLocationRelativeTo(internalFrame1);
             dlgrwinap.isCek();
             dlgrwinap.setNoRm2(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"ranap");
-            dlgrwinap.tampilPO();
+            dlgrwinap.tampilPO3();
             dlgrwinap.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -6796,7 +6796,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 resep.setLocationRelativeTo(internalFrame1);
                 resep.setNoRm(TNoRw.getText(),DTPTgl.getDate());
                 resep.isCek();
-                resep.tampil();
+                resep.tampil2();
                 resep.setVisible(true);
             }
         }

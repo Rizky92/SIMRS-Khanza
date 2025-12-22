@@ -1268,7 +1268,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }
 
-    public void tampil(String nopermintaan) {
+    private void tampil(String nopermintaan) {
         Valid.tabelKosong(tabMode);
         try{
             kdke.setText(Sequel.cariIsi("select permintaan_medis.kd_bangsal from permintaan_medis where permintaan_medis.no_permintaan=?", nopermintaan));
@@ -1356,6 +1356,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+    }
+    
+    public void tampil2(String nopermintaan) {
+        runBackground(() ->tampil(nopermintaan));
     }
 
     public void isCek(){

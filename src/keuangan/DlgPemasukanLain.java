@@ -30,8 +30,11 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -52,6 +55,8 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
     private DlgCariPetugas petugas=new DlgCariPetugas(null,false);
     private double total=0;
     private boolean sukses=true;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgResepObat
      *@param parent
@@ -117,19 +122,19 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
             });
@@ -679,13 +684,13 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 Sequel.deleteTampJurnal();
                 try {
                     psakun=koneksi.prepareStatement(
-                        "select kategori_pemasukan_lain.kd_rek,'Akun',kategori_pemasukan_lain.kd_rek2,'Kontra Akun' from kategori_pemasukan_lain where kategori_pemasukan_lain.kode_kategori=?");
+                        "select kategori_pemasukan_lain.kd_rek,kategori_pemasukan_lain.kd_rek2 from kategori_pemasukan_lain where kategori_pemasukan_lain.kode_kategori=?");
                     try {
                         psakun.setString(1,KdKategori.getText());
                         rs=psakun.executeQuery();
                         if(rs.next()){
-                            if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), 0, Double.parseDouble(pemasukan.getText()));
-                            if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), Double.parseDouble(pemasukan.getText()), 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(1), "Akun", 0, Double.parseDouble(pemasukan.getText()));
+                            if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(2), "Kontra Akun", Double.parseDouble(pemasukan.getText()), 0);
                             if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
                         }
                     } catch (Exception e) {
@@ -700,8 +705,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                         }
                     }
                     if(sukses==true){
-                        sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+Nomor.getText()+"','-','"+Keterangan.getText().replaceAll("'","")+"','-',concat('"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+
-                            "',' ',CURTIME()),'Pelunasan','"+total+"','"+pemasukan.getText()+"','Sudah','"+akses.getkode()+"'","No.Transaksi");
+                        sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+Nomor.getText()+"','-','"+Keterangan.getText().replaceAll("'","")+"','-',concat('"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"',' ',CURTIME()),'Pelunasan','"+total+"','"+pemasukan.getText()+"','Sudah','"+akses.getkode()+"'","No.Transaksi");
                     }
                 } catch (Exception e) {
                     sukses=false;
@@ -721,8 +725,11 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
 
             Sequel.AutoComitTrue();
             if(sukses==true){
-                tampil();
+                tabMode.addRow(new Object[]{
+                    Nomor.getText(),Tanggal.getSelectedItem().toString(),KdKategori.getText()+" "+NmKategori.getText(),KdPtg.getText()+" "+NmPtg.getText(),Double.parseDouble(pemasukan.getText()),Keterangan.getText(),Keperluan.getText(),KdKategori.getText(),KdPtg.getText()
+                });
                 emptTeks();
+                hitung();
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -758,13 +765,13 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 Sequel.AutoComitFalse();
                 sukses = true;
                 if (Sequel.menghapustfSmc("pemasukan_lain", "no_masuk = ?", tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString())) {
-                    try (PreparedStatement ps = koneksi.prepareStatement("select p.kd_rek, 'Akun', p.kd_rek2, 'Kontra Akun' from kategori_pemasukan_lain p where p.kode_kategori = ?")) {
+                    try (PreparedStatement ps = koneksi.prepareStatement("select p.kd_rek, p.kd_rek2 from kategori_pemasukan_lain p where p.kode_kategori = ?")) {
                         ps.setString(1, tbResep.getValueAt(tbResep.getSelectedRow(), 7).toString());
                         try (ResultSet rs = ps.executeQuery()) {
                             if (rs.next()) {
                                 Sequel.deleteTampJurnal();
-                                if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(1), rs.getString(2), (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4), 0);
-                                if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(3), rs.getString(4), 0, (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4));
+                                if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(1), "Akun", (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4), 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(rs.getString(2), "Kontra Akun", 0, (Double) tbResep.getValueAt(tbResep.getSelectedRow(), 4));
                                 sukses = jur.simpanJurnal(tbResep.getValueAt(tbResep.getSelectedRow(), 0).toString(), "U", "PEMBATALAN PEMASUKAN LAIN-LAIN OLEH " + akses.getkode());
                             } else {
                                 sukses = false;
@@ -790,8 +797,9 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 Sequel.AutoComitTrue();
 
                 if (sukses) {
-                    tampil();
+                    tabMode.removeRow(tbResep.getSelectedRow());
                     emptTeks();
+                    hitung();
                 } else {
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
@@ -864,7 +872,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -877,12 +885,12 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            tampil();
+            runBackground(() ->tampil());
             TCari.setText("");
         }else{
             Valid.pindah(evt, BtnCari, NmPtg);
@@ -948,7 +956,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
     }//GEN-LAST:event_KeperluanKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_formWindowOpened
 
     private void KdKategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKategoriKeyPressed
@@ -1105,14 +1113,10 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
-                "select pemasukan_lain.no_masuk,pemasukan_lain.tanggal, pemasukan_lain.keterangan, pemasukan_lain.keperluan, pemasukan_lain.besar, pemasukan_lain.nip, "+
-                "petugas.nama,pemasukan_lain.kode_kategori,kategori_pemasukan_lain.nama_kategori "+
-                "from pemasukan_lain inner join petugas inner join kategori_pemasukan_lain on pemasukan_lain.nip=petugas.nip "+
-                "and pemasukan_lain.kode_kategori=kategori_pemasukan_lain.kode_kategori where "+
-                "pemasukan_lain.tanggal between ? and ? "+(TCari.getText().trim().equals("")?"":
-                "and (pemasukan_lain.keterangan like ? or pemasukan_lain.nip like ? or petugas.nama like ? or "+
-                "pemasukan_lain.kode_kategori like ? or kategori_pemasukan_lain.nama_kategori like ? or pemasukan_lain.no_masuk like ?) ")+
-                "order by pemasukan_lain.tanggal");
+                "select pemasukan_lain.no_masuk,pemasukan_lain.tanggal, pemasukan_lain.keterangan, pemasukan_lain.keperluan, pemasukan_lain.besar, pemasukan_lain.nip,petugas.nama,pemasukan_lain.kode_kategori,kategori_pemasukan_lain.nama_kategori "+
+                "from pemasukan_lain inner join petugas on pemasukan_lain.nip=petugas.nip inner join kategori_pemasukan_lain on pemasukan_lain.kode_kategori=kategori_pemasukan_lain.kode_kategori where pemasukan_lain.tanggal between ? and ? "+
+                (TCari.getText().trim().equals("")?"":"and (pemasukan_lain.keterangan like ? or pemasukan_lain.nip like ? or petugas.nama like ? or pemasukan_lain.kode_kategori like ? or kategori_pemasukan_lain.nama_kategori like ? or "+
+                "pemasukan_lain.no_masuk like ?) ")+"order by pemasukan_lain.tanggal");
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
@@ -1126,14 +1130,12 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 }
 
                 rs=ps.executeQuery();
-                total=0;
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString("no_masuk"),rs.getString("tanggal"),rs.getString("kode_kategori")+" "+rs.getString("nama_kategori"),
                         rs.getString("nip")+" "+rs.getString("nama"),rs.getDouble("besar"),rs.getString("keterangan"),rs.getString("keperluan"),
                         rs.getString("kode_kategori"),rs.getString("nip")
                     });
-                    total=total+rs.getDouble("besar");
                 }
             } catch (Exception e){
                 System.out.println(e);
@@ -1144,15 +1146,27 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }
-
-            if(total>0){
-                tabMode.addRow(new Object[]{"",">> Total Pemasukan :","","",total,"","",""});
-            }
-            LCount.setText((""+(tabMode.getRowCount()-1)).replaceAll("-1","0"));
+            }  
+            hitung(); 
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
+        }        
+    }
+    
+    private void hitung(){
+        total=0;
+        for(int i=0;i<tabMode.getRowCount();i++){
+            if(!tbResep.getValueAt(i,0).toString().equals("")){
+                total=total+Valid.SetAngka(tbResep.getValueAt(i,4).toString());
+            }else{
+                tabMode.removeRow(i);
+                i--;
+            }
         }
+        LCount.setText(""+tabMode.getRowCount());
+        if(total>0){
+            tabMode.addRow(new Object[]{"",">> Total Pemasukan :","","",total,"","",""}); 
+        }        
     }
 
     public void emptTeks() {
@@ -1209,5 +1223,23 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
 
     private void autoNomor() {
         Valid.autonomorSmc(Nomor, "PL", "", "pemasukan_lain", "no_masuk", 3, "0", Tanggal);
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
     }
 }

@@ -2696,91 +2696,86 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnViewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnViewActionPerformed
-        Object[] options = {
-            "Tagihan Masuk", "Piutang Pasien","Data Pembayaran HtH BPD Jateng",
-            "Data Pembayaran HtH BPD Papua","Data Pembayaran HtH BPD Jabar","Data Pembayaran HtH Mandiri"
-        };
-        String input;
-        int pilih = 0;
-        try{
-            input = (String) JOptionPane.showInputDialog(null,"Silahkan pilih yang mau ditampilkan!","Keuangan",JOptionPane.QUESTION_MESSAGE,null,options,"Tagihan Masuk");
-            switch (input) {
-                case "Tagihan Masuk":
-                    pilih=1;
-                    break;
-                case "Piutang Pasien":
-                    pilih=2;
-                    break;
-                case "Data Pembayaran HtH BPD Jateng":
-                    i=3;
-                    break;
-                case "Data Pembayaran HtH BPD Papua":
-                    pilih=4;
-                    break;
-                case "Data Pembayaran HtH BPD Jabar":
-                    pilih=5;
-                case "Data Pembayaran HtH Mandiri":
-                    pilih=6;
-                    break;
-            }
-        }catch(Exception e){
-            pilih=0;
-        }
-        if(pilih>0){
-            if(pilih==1){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgLhtBiaya billing=new DlgLhtBiaya(null,false);
-                billing.setSize(this.getWidth()-20,this.getHeight()-20);
-                billing.setLocationRelativeTo(this);
-                billing.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
-            }else if(pilih==2){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgLhtPiutang billing=new DlgLhtPiutang(null,false);
-                billing.tampil();
-                billing.isCek();
-                billing.setSize(this.getWidth()-20,this.getHeight()-20);
-                billing.setLocationRelativeTo(this);
-                billing.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
-            }else if(pilih==3){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgLhtBankJateng billing=new DlgLhtBankJateng(null,false);
-                billing.tampil();
-                billing.setSize(this.getWidth(),this.getHeight());
-                billing.setLocationRelativeTo(this);
-                billing.setAlwaysOnTop(false);
-                billing.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
-            } else if(pilih==4){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgLhtBankPapua billing=new DlgLhtBankPapua(null,false);
-                billing.tampil();
-                billing.setSize(this.getWidth(),this.getHeight());
-                billing.setLocationRelativeTo(this);
-                billing.setAlwaysOnTop(false);
-                billing.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
-            }else if(pilih==5){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgLhtBankJabar billing=new DlgLhtBankJabar(null,false);
-                billing.tampil();
-                billing.setSize(this.getWidth(),this.getHeight());
-                billing.setLocationRelativeTo(this);
-                billing.setAlwaysOnTop(false);
-                billing.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
-            }else if(pilih==6){
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                DlgLhtBankMandiri billing=new DlgLhtBankMandiri(null,false);
-                billing.tampil();
-                billing.setSize(this.getWidth(),this.getHeight());
-                billing.setLocationRelativeTo(this);
-                billing.setAlwaysOnTop(false);
-                billing.setVisible(true);
-                this.setCursor(Cursor.getDefaultCursor());
-            }
-        }
+           Object[] options = {"Tagihan Masuk", "Piutang Pasien","Data Pembayaran HtH BPD Jateng","Data Pembayaran HtH BPD Papua","Data Pembayaran HtH BPD Jabar","Data Pembayaran HtH Mandiri"};
+            
+            String input;
+            int pilih = 0;
+            try{
+                input = (String) JOptionPane.showInputDialog(null,"Silahkan pilih yang mau ditampilkan!","Keuangan",JOptionPane.QUESTION_MESSAGE,null,options,"Tagihan Masuk");
+                switch (input) {
+                    case "Tagihan Masuk":
+                        pilih=1;
+                        break;
+                    case "Piutang Pasien":
+                        pilih=2;
+                        break;
+                    case "Data Pembayaran HtH BPD Jateng":
+                        i=3;
+                        break;
+                    case "Data Pembayaran HtH BPD Papua":
+                        pilih=4;
+                        break;
+                    case "Data Pembayaran HtH BPD Jabar":
+                        pilih=5;
+                    case "Data Pembayaran HtH Mandiri":
+                        pilih=6;
+                        break;
+                }
+            }catch(Exception e){
+                pilih=0;
+            }        
+            
+            if(pilih>0){
+                if(pilih==1){
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgLhtBiaya billing=new DlgLhtBiaya(null,false);
+                    billing.setSize(this.getWidth()-20,this.getHeight()-20);
+                    billing.setLocationRelativeTo(this);
+                    billing.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
+                }else if(pilih==2){
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgLhtPiutang billing=new DlgLhtPiutang(null,false);
+                    billing.tampil2();    
+                    billing.isCek();
+                    billing.setSize(this.getWidth()-20,this.getHeight()-20);
+                    billing.setLocationRelativeTo(this);
+                    billing.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
+                }else if(pilih==3){
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgLhtBankJateng billing=new DlgLhtBankJateng(null,false);
+                    billing.setSize(this.getWidth(),this.getHeight());
+                    billing.setLocationRelativeTo(this);
+                    billing.setAlwaysOnTop(false);
+                    billing.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
+                } else if(pilih==4){
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgLhtBankPapua billing=new DlgLhtBankPapua(null,false);
+                    billing.setSize(this.getWidth(),this.getHeight());
+                    billing.setLocationRelativeTo(this);
+                    billing.setAlwaysOnTop(false);
+                    billing.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
+                }else if(pilih==5){
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgLhtBankJabar billing=new DlgLhtBankJabar(null,false);
+                    billing.setSize(this.getWidth(),this.getHeight());
+                    billing.setLocationRelativeTo(this);
+                    billing.setAlwaysOnTop(false);
+                    billing.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
+                }else if(pilih==6){
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                    DlgLhtBankMandiri billing=new DlgLhtBankMandiri(null,false);
+                    billing.setSize(this.getWidth(),this.getHeight());
+                    billing.setLocationRelativeTo(this);
+                    billing.setAlwaysOnTop(false);
+                    billing.setVisible(true);
+                    this.setCursor(Cursor.getDefaultCursor());
+                }   
+            }   
     }//GEN-LAST:event_BtnViewActionPerformed
 
     private void BtnViewKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnViewKeyPressed
@@ -2807,7 +2802,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     rawatinap.perawatan.setNoRm(TNoRw.getText(),"rawat_inap_dr",DTPTgl.getDate(),"00","00","00",true,TPasien.getText());
                                     rawatinap.perawatan.setPetugas("","","","");
                                     rawatinap.perawatan.isCek();
-                                    rawatinap.perawatan.tampil();
+                                    rawatinap.perawatan.tampil3();
                                     rawatinap.perawatan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                     rawatinap.perawatan.setLocationRelativeTo(internalFrame1);
                                     rawatinap.perawatan.setVisible(true);
@@ -2863,7 +2858,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                         rawatinap.perawatan.setNoRm(TNoRw.getText(),"rawat_inap_dr",DTPTgl.getDate(),"00","00","00",true,TPasien.getText());
                                         rawatinap.perawatan.setPetugas("","","","");
                                         rawatinap.perawatan.isCek();
-                                        rawatinap.perawatan.tampil();
+                                        rawatinap.perawatan.tampil3();
                                         rawatinap.perawatan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                         rawatinap.perawatan.setLocationRelativeTo(internalFrame1);
                                         rawatinap.perawatan.setVisible(true);
@@ -2979,7 +2974,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     rawatinap.perawatan.setNoRm(TNoRw.getText(),"rawat_inap_dr",DTPTgl.getDate(),"00","00","00",true,TPasien.getText());
                                     rawatinap.perawatan.setPetugas("","","","");
                                     rawatinap.perawatan.isCek();
-                                    rawatinap.perawatan.tampil();
+                                    rawatinap.perawatan.tampil3();
                                     rawatinap.perawatan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                     rawatinap.perawatan.setLocationRelativeTo(internalFrame1);
                                     rawatinap.perawatan.setVisible(true);
@@ -3034,7 +3029,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     rawatinap.perawatan.setNoRm(TNoRw.getText(),"rawat_inap_dr",DTPTgl.getDate(),"00","00","00",true,TPasien.getText());
                                     rawatinap.perawatan.setPetugas("","","","");
                                     rawatinap.perawatan.isCek();
-                                    rawatinap.perawatan.tampil();
+                                    rawatinap.perawatan.tampil3();
                                     rawatinap.perawatan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                     rawatinap.perawatan.setLocationRelativeTo(internalFrame1);
                                     rawatinap.perawatan.setVisible(true);

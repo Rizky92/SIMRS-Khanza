@@ -27,8 +27,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -47,6 +50,8 @@ public final class DlgKamar extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
     private String asalform="",ubah_status_kamar=Sequel.cariIsi("select set_jam_minimal.ubah_status_kamar from set_jam_minimal");
 
     /** Creates new form DlgKamar
@@ -113,19 +118,19 @@ public final class DlgKamar extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
             });
@@ -695,11 +700,15 @@ public final class DlgKamar extends javax.swing.JDialog {
         }else if(TTarif.getText().trim().equals("")){
             Valid.textKosong(TTarif,"Tarif");
         }else{
-            Sequel.menyimpan("kamar","?,?,?,?,?,?","Nomer Bad/Kamar",6,new String[]{
+            if(Sequel.menyimpantf("kamar","?,?,?,?,?,?","Nomer Bad/Kamar",6,new String[]{
                 TKd.getText(),kd_bangsal.getText(),TTarif.getText(),CmbStatus.getSelectedItem().toString(),Kelas.getSelectedItem().toString(),"1"
-            });
-            tampil();
-            emptTeks();
+            })==true){
+                tabMode.addRow(new Object[]{
+                    false,TKd.getText(),kd_bangsal.getText(),TBangsal.getText(),Kelas.getSelectedItem().toString(),Double.parseDouble(TTarif.getText()),CmbStatus.getSelectedItem().toString()
+                });
+                LCount.setText("" + tabMode.getRowCount());
+                emptTeks();
+            }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -725,10 +734,11 @@ public final class DlgKamar extends javax.swing.JDialog {
         for(i=0;i<tbKamar.getRowCount();i++){
             if(tbKamar.getValueAt(i,0).toString().equals("true")){
                 Sequel.mengedit("kamar","kd_kamar='"+tbKamar.getValueAt(i,1).toString()+"'","statusdata='0'");
+                tabMode.removeRow(i);
+                i--;
             }
         }
-        tampil();
-        emptTeks();
+        LCount.setText("" + tabMode.getRowCount());
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -748,12 +758,19 @@ public final class DlgKamar extends javax.swing.JDialog {
             Valid.textKosong(TTarif,"Tarif");
         }else{
             if(tbKamar.getSelectedRow()>-1){
-                Sequel.mengedit("kamar","kd_kamar=?","kd_bangsal=?,trf_kamar=?,status=?,kelas=?,kd_kamar=?",6,new String[]{
+                if(Sequel.mengedittf("kamar","kd_kamar=?","kd_bangsal=?,trf_kamar=?,status=?,kelas=?,kd_kamar=?",6,new String[]{
                     kd_bangsal.getText(),TTarif.getText(),CmbStatus.getSelectedItem().toString(),Kelas.getSelectedItem().toString(),
                     TKd.getText(),tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString()
-                });
-                tampil();
-                emptTeks();
+                })==true){
+                    tbKamar.setValueAt(false,tbKamar.getSelectedRow(),0);
+                    tbKamar.setValueAt(TKd.getText(),tbKamar.getSelectedRow(),1);
+                    tbKamar.setValueAt(kd_bangsal.getText(),tbKamar.getSelectedRow(),2);
+                    tbKamar.setValueAt(TBangsal.getText(),tbKamar.getSelectedRow(),3);
+                    tbKamar.setValueAt(Kelas.getSelectedItem().toString(),tbKamar.getSelectedRow(),4);
+                    tbKamar.setValueAt(Double.parseDouble(TTarif.getText()),tbKamar.getSelectedRow(),5);
+                    tbKamar.setValueAt(CmbStatus.getSelectedItem().toString(),tbKamar.getSelectedRow(),6);
+                    emptTeks();
+                }
             }
         }
     }//GEN-LAST:event_BtnEditActionPerformed
@@ -778,9 +795,6 @@ public final class DlgKamar extends javax.swing.JDialog {
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(! TCari.getText().trim().equals("")){
-            BtnCariActionPerformed(evt);
-        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
@@ -857,7 +871,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -873,7 +887,7 @@ public final class DlgKamar extends javax.swing.JDialog {
         BangsalCari.setText("");
         kdbangsalcari.setText("");
         TCari.setText("");
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -892,7 +906,7 @@ public final class DlgKamar extends javax.swing.JDialog {
         if(ChkCari.isSelected()==true){
             panelCari.setVisible(true);
             TCari.setText("");
-            tampil();
+            runBackground(() ->tampil());
             posisi();
         }else if(ChkCari.isSelected()==false){
             panelCari.setVisible(false);
@@ -957,7 +971,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     private void kdbangsalcariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdbangsalcariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BangsalCari.setText(bangsal.tampil3(kdbangsalcari.getText()));
-            tampil();
+            runBackground(() ->tampil());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnKamarCariActionPerformed(null);
         }else{
@@ -980,11 +994,11 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKamarCariKeyPressed
 
     private void CmbCrIsiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbCrIsiItemStateChanged
-    tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_CmbCrIsiItemStateChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_formWindowOpened
 
     private void KelasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelasKeyPressed
@@ -1070,7 +1084,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select kamar.kd_kamar,kamar.kd_bangsal,bangsal.nm_bangsal, "+
@@ -1115,6 +1129,10 @@ public final class DlgKamar extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
         LCount.setText(""+tabMode.getRowCount());
+    }
+    
+    public void tampil2() {
+        runBackground(() ->tampil());
     }
 
     private void posisi() {
@@ -1183,4 +1201,22 @@ public final class DlgKamar extends javax.swing.JDialog {
             MnRestore.setEnabled(false);
         }
      }
+     
+     private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
+    }
 }

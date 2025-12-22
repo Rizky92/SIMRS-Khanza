@@ -2262,7 +2262,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         new Timer(250, taskPerformer).start();
     }
 
-    public void tampildetailracikanresep() {
+    private void tampildetailracikanresep() {
         try {
             boolean[] pilih;
             double[] jumlah,harga,beli,stok,kapasitas,p1,p2;
@@ -3006,7 +3006,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         }
     }
 
-    public void tampilobat(String no_resep) {
+    private void tampilobat(String no_resep) {
         NoResep.setText(no_resep);
         ubah=true;
         try {
@@ -3822,7 +3822,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         }
     }
 
-    public void tampilobat2(String no_resep) {
+    public void tampilobat3(String no_resep) {
+        runBackground(() -> tampilobat(no_resep));
+    }
+    
+    private void tampilobat2(String no_resep) {
         try {
             Valid.tabelKosong(tabModeResep);
             Valid.tabelKosong(tabModeResepRacikan);
@@ -4204,6 +4208,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
+    }
+    
+    public void tampilobat4(String no_resep) {
+        runBackground(() -> tampilobat2(no_resep));
     }
 
     private void simpandata() {
