@@ -766,7 +766,7 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
             public void keyReleased(KeyEvent e) {}
         });
         rekening.emptTeks();
-        rekening.tampil();
+        rekening.tampil3();
         rekening.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         rekening.setLocationRelativeTo(internalFrame1);
         rekening.setVisible(true);
