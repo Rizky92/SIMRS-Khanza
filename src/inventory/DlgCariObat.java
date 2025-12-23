@@ -3305,10 +3305,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
     public void tampilobat3(String no_resep) {
         runBackground(() -> tampilobat2(no_resep));
     }
-    
-    public void tampilobat3(String no_resep) {
-        runBackground(() -> tampilobat2(no_resep));
-    }
 
     public void emptTeksobat() {
         Kd2.setText("");

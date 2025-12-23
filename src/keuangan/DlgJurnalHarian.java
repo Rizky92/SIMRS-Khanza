@@ -33,7 +33,6 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
     private final Connection koneksi=koneksiDB.condb();
-    private boolean ceksukses = false;
     private ResultSet rs;
     private PreparedStatement ps;
     private String tanggal1="",tanggal2="";
