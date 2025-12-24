@@ -759,23 +759,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(Sequel.queryutf("delete from labkesling_pembayaran_pengujian_sampel where no_pembayaran='"+tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),1).toString()+"'")==false){
                     berhasil=false;
                 }else{
-                    Sequel.queryu2("delete from tampjurnal");
-                    if(Sequel.menyimpantf("tampjurnal","'"+Suspen_Piutang_Pelayanan_Lab_Kesling+"','Suspen Piutang Pelayanan Lab Kesling','"+tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),8).toString()+"','0'","debet=debet+'"+tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),8).toString()+"'","kd_rek='"+Suspen_Piutang_Pelayanan_Lab_Kesling+"'")==false){
-                        berhasil=false;
-                    }
+                    Sequel.deleteTampJurnal();
+                    if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Pelayanan_Lab_Kesling, "Suspen Piutang Pelayanan Lab Kesling", tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(), 8).toString(), "0");
                     if(berhasil==true){
                         for(i=0;i<tbDetailPembayaran.getRowCount();i++){
-                            if(Sequel.menyimpantf("tampjurnal","'"+tbDetailPembayaran.getValueAt(i,2).toString()+"','"+tbDetailPembayaran.getValueAt(i,0).toString()+"','0','"+tbDetailPembayaran.getValueAt(i,1).toString()+"'","kredit=kredit+'"+tbDetailPembayaran.getValueAt(i,1).toString()+"'","kd_rek='"+tbDetailPembayaran.getValueAt(i,2).toString()+"'")==false){
-                                berhasil=false;
-                            }
+                            if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(tbDetailPembayaran.getValueAt(i, 2).toString(), tbDetailPembayaran.getValueAt(i, 0).toString(), "0", tbDetailPembayaran.getValueAt(i, 1).toString());
                         }
                     }
+                    if (berhasil) berhasil = jur.simpanJurnal(tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(), 1).toString(), "U", "PEMBATALAN PEMBAYARAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN " + tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(), 5).toString() + " DIPOSTING OLEH " + akses.getkode());
                     if(berhasil==true){
-                        berhasil=jur.simpanJurnal(tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),1).toString(),"U","PEMBATALAN PEMBAYARAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN "+tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),5).toString()+" DIPOSTING OLEH "+akses.getkode());
-                        if(berhasil==true){
-                            if(Sequel.meghapustf("tagihan_sadewa","no_nota",tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),1).toString())==false){
-                                berhasil=false;
-                            }
+                        if(Sequel.meghapustf("tagihan_sadewa","no_nota",tbPembayaran.getValueAt(tbPembayaran.getSelectedRow(),1).toString())==false){
+                            berhasil=false;
                         }
                     }
                 }

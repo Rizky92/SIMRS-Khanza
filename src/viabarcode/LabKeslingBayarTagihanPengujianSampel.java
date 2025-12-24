@@ -1251,7 +1251,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 if(Sequel.menyimpantf2("labkesling_pembayaran_pengujian_sampel","?,?,?,?","No.Bayar/Nota",4,new String[]{
                         NoPermintaan.getText(),NoBayar.getText(),Valid.SetTgl(TanggalValidasi.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),DibayarOleh.getText()
                     })==true){
-                    Sequel.queryu2("delete from tampjurnal");
+                    Sequel.deleteTampJurnal();
                     itembayar=0;besarppn=0;
                     for(i=0;i<tbAkunBayar.getRowCount();i++){
                         if(Valid.SetAngka(tbAkunBayar.getValueAt(i,2).toString())>0){
@@ -1272,25 +1272,20 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             if(Sequel.menyimpantf2("labkesling_detail_pembayaran_pengujian_sampel","?,?,?,?","Akun bayar",4,new String[]{
                                     NoBayar.getText(),tbAkunBayar.getValueAt(i,0).toString(),Double.toString(besarppn),Double.toString(itembayar)
                                 })==true){
-                                if(Sequel.menyimpantf("tampjurnal","'"+tbAkunBayar.getValueAt(i,1).toString()+"','"+tbAkunBayar.getValueAt(i,0).toString()+"','"+Double.toString(itembayar)+"','0'","debet=debet+'"+Double.toString(itembayar)+"'","kd_rek='"+tbAkunBayar.getValueAt(i,1).toString()+"'")==false){
-                                    berhasil=false;
-                                }
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(tbAkunBayar.getValueAt(i, 1).toString(), tbAkunBayar.getValueAt(i, 0).toString(), itembayar, 0);
                             }else{
                                 berhasil=false;
                             }
                         }
                     }
                     
-                    if(berhasil==true){
-                        if(total>0){
-                            if(Sequel.menyimpantf("tampjurnal","'"+Suspen_Piutang_Pelayanan_Lab_Kesling+"','Suspen Piutang Pelayanan Lab Kesling','0','"+total+"'","kredit=kredit+'"+total+"'","kd_rek='"+Suspen_Piutang_Pelayanan_Lab_Kesling+"'")==false){
-                                berhasil=false;
-                            }
-                        }
+                    if(total>0){
+                        if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Pelayanan_Lab_Kesling, "Suspen Piutang Pelayanan Lab Kesling", 0, total);
                     }
                     
+                    if (berhasil) berhasil = jur.simpanJurnal(NoBayar.getText(), "U", "PEMBAYARAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN " + NamaPelanggan.getText() + " DIPOSTING OLEH " + akses.getkode());
+
                     if(berhasil==true){
-                        berhasil=jur.simpanJurnal(NoBayar.getText(),"U","PEMBAYARAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN "+NamaPelanggan.getText()+" DIPOSTING OLEH "+akses.getkode());
                         if(Sequel.menyimpantf2("tagihan_sadewa","'"+NoBayar.getText()+"','"+KodePelanggan.getText()+"','"+NamaPelanggan.getText().replaceAll("'","")+"','"+Sequel.cariIsi("select labkesling_pelanggan.alamat from labkesling_pelanggan where labkesling_pelanggan.kode_pelanggan=?",KodePelanggan.getText()).replaceAll("'","")+"','"+Valid.SetTgl(TanggalValidasi.getSelectedItem()+"")+" "+CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem()+"','Pelunasan','"+total+"','"+total+"','Sudah','"+akses.getkode()+"'","No.Bayar")==false){
                             berhasil=false;
                         }

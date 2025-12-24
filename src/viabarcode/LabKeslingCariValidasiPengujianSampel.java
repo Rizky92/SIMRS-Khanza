@@ -1503,82 +1503,44 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
                         
                         if(Sequel.queryutf("delete from labkesling_validasi_pengujian_sampel where no_validasi='"+tbValidasi.getValueAt(tbValidasi.getSelectedRow(),1).toString()+"'")==true){
-                            Sequel.queryu("delete from tampjurnal");  
+                            Sequel.deleteTampJurnal();
                             if(jasa_sarana>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Utang_Jasa_sarana_Pelayanan_Lab_Kesling+"','Utang Jasa Sarana Pelayanan Lab Kesling','"+jasa_sarana+"','0'","debet=debet+'"+(jasa_sarana)+"'","kd_rek='"+Utang_Jasa_sarana_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }     
-                                if(Sequel.menyimpantf("tampjurnal","'"+Beban_Jasa_Sarana_Pelayanan_Lab_Kesling+"','Beban Jasa Sarana Pelayanan Lab Kesling','0','"+jasa_sarana+"'","kredit=kredit+'"+(jasa_sarana)+"'","kd_rek='"+Beban_Jasa_Sarana_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                              
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_sarana_Pelayanan_Lab_Kesling, "Utang Jasa Sarana Pelayanan Lab Kesling", jasa_sarana, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Pelayanan_Lab_Kesling, "Beban Jasa Sarana Pelayanan Lab Kesling", 0, jasa_sarana);
                             }
                             if(paket_bhp>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Persediaan_BHP_Pelayanan_Lab_Kesling+"','Persediaan BHP Pelayanan Lab Kesling','"+paket_bhp+"','0'","debet=debet+'"+(paket_bhp)+"'","kd_rek='"+Persediaan_BHP_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }     
-                                if(Sequel.menyimpantf("tampjurnal","'"+HPP_BHP_Pelayanan_Lab_Kesling+"','HPP BHP Pelayanan Lab Kesling','0','"+paket_bhp+"'","kredit=kredit+'"+(paket_bhp)+"'","kd_rek='"+HPP_BHP_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                              
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Pelayanan_Lab_Kesling, "Persediaan BHP Pelayanan Lab Kesling", paket_bhp, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Pelayanan_Lab_Kesling, "HPP BHP Pelayanan Lab Kesling", 0, paket_bhp);
                             }
                             if(jasa_pj_lab>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Utang_Jasa_PJLab_Pelayanan_Lab_Kesling+"','Utang Jasa PJ Lab Pelayanan Lab Kesling','"+jasa_pj_lab+"','0'","debet=debet+'"+(jasa_pj_lab)+"'","kd_rek='"+Utang_Jasa_PJLab_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }     
-                                if(Sequel.menyimpantf("tampjurnal","'"+Beban_Jasa_PJLab_Pelayanan_Lab_Kesling+"','Beban Jasa PJ Lab Pelayanan Lab Kesling','0','"+jasa_pj_lab+"'","kredit=kredit+'"+(jasa_pj_lab)+"'","kd_rek='"+Beban_Jasa_PJLab_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                             
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_PJLab_Pelayanan_Lab_Kesling, "Utang Jasa PJ Lab Pelayanan Lab Kesling", jasa_pj_lab, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_PJLab_Pelayanan_Lab_Kesling, "Beban Jasa PJ Lab Pelayanan Lab Kesling", 0, jasa_pj_lab);
                             }
                             if(jasa_pj_pengujian>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling+"','Utang Jasa PJ Pengujian Pelayanan Lab Kesling','"+jasa_pj_pengujian+"','0'","debet=debet+'"+(jasa_pj_pengujian)+"'","kd_rek='"+Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }      
-                                if(Sequel.menyimpantf("tampjurnal","'"+Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling+"','Beban Jasa PJ Pengujian Pelayanan Lab Kesling','0','"+jasa_pj_pengujian+"'","kredit=kredit+'"+(jasa_pj_pengujian)+"'","kd_rek='"+Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                              
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_PJPengujian_Pelayanan_Lab_Kesling, "Utang Jasa PJ Pengujian Pelayanan Lab Kesling", jasa_pj_pengujian, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_PJPengujian_Pelayanan_Lab_Kesling, "Beban Jasa PJ Pengujian Pelayanan Lab Kesling", 0, jasa_pj_pengujian);
                             }
                             if(jasa_verifikator>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling+"','Utang Jasa PJ Verifikasi Pelayanan Lab Kesling','"+jasa_verifikator+"','0'","debet=debet+'"+(jasa_verifikator)+"'","kd_rek='"+Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }      
-                                if(Sequel.menyimpantf("tampjurnal","'"+Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling+"','Beban Jasa PJ Verifikasi Pelayanan Lab Kesling','0','"+jasa_verifikator+"'","kredit=kredit+'"+(jasa_verifikator)+"'","kd_rek='"+Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                             
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling, "Utang Jasa PJ Verifikasi Pelayanan Lab Kesling", jasa_verifikator, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_PJVerifikasi_Pelayanan_Lab_Kesling, "Beban Jasa PJ Verifikasi Pelayanan Lab Kesling", 0, jasa_verifikator);
                             }
                             if(jasa_petugas>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Utang_Jasa_Analis_Pelayanan_Lab_Kesling+"','Utang Jasa Analis Pelayanan Lab Kesling','"+jasa_petugas+"','0'","debet=debet+'"+(jasa_petugas)+"'","kd_rek='"+Utang_Jasa_Analis_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }     
-                                if(Sequel.menyimpantf("tampjurnal","'"+Beban_Jasa_Analis_Pelayanan_Lab_Kesling+"','Beban Jasa Analis Pelayanan Lab Kesling','0','"+jasa_petugas+"'","kredit=kredit+'"+(jasa_petugas)+"'","kd_rek='"+Beban_Jasa_Analis_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                             
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Analis_Pelayanan_Lab_Kesling, "Utang Jasa Analis Pelayanan Lab Kesling", jasa_petugas, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Analis_Pelayanan_Lab_Kesling, "Beban Jasa Analis Pelayanan Lab Kesling", 0, jasa_petugas);
                             }
                             if(kso>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Utang_KSO_Pelayanan_Lab_Kesling+"','Utang KSO Pelayanan Lab Kesling','"+kso+"','0'","debet=debet+'"+(kso)+"'","kd_rek='"+Utang_KSO_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }     
-                                if(Sequel.menyimpantf("tampjurnal","'"+Beban_KSO_Pelayanan_Lab_Kesling+"','Beban KSO Pelayanan Lab Kesling','0','"+kso+"'","kredit=kredit+'"+(kso)+"'","kd_rek='"+Beban_KSO_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                             
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Pelayanan_Lab_Kesling, "Utang KSO Pelayanan Lab Kesling", kso, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Pelayanan_Lab_Kesling, "Beban KSO Pelayanan Lab Kesling", 0, kso);
                             }
                             if(jasa_menejemen>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling+"','Utang Jasa Menejemen Pelayanan Lab Kesling','"+jasa_menejemen+"','0'","debet=debet+'"+(jasa_menejemen)+"'","kd_rek='"+Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }     
-                                if(Sequel.menyimpantf("tampjurnal","'"+Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling+"','Beban Jasa Menejemen Pelayanan Lab Kesling','0','"+jasa_menejemen+"'","kredit=kredit+'"+(jasa_menejemen)+"'","kd_rek='"+Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                             
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Pelayanan_Lab_Kesling, "Utang Jasa Menejemen Pelayanan Lab Kesling", jasa_menejemen, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Pelayanan_Lab_Kesling, "Beban Jasa Menejemen Pelayanan Lab Kesling", 0, jasa_menejemen);
                             }
                             if(total>0){
-                                if(Sequel.menyimpantf("tampjurnal","'"+Pendapatan_Pelayanan_Lab_Kesling+"','Pendapatan Pelayanan Lab Kesling','"+total+"','0'","debet=debet+'"+(total)+"'","kd_rek='"+Pendapatan_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }    
-                                if(Sequel.menyimpantf("tampjurnal","'"+Suspen_Piutang_Pelayanan_Lab_Kesling+"','Suspen Piutang Pelayanan Lab Kesling','0','"+total+"'","kredit=kredit+'"+(total)+"'","kd_rek='"+Suspen_Piutang_Pelayanan_Lab_Kesling+"'")==false){
-                                    berhasil=false;
-                                }                                
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Pendapatan_Pelayanan_Lab_Kesling, "Pendapatan Pelayanan Lab Kesling", total, 0);
+                                if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Pelayanan_Lab_Kesling, "Suspen Piutang Pelayanan Lab Kesling", 0, total);
                             }
-                            if(berhasil==true){
-                                berhasil=jur.simpanJurnal(tbValidasi.getValueAt(tbValidasi.getSelectedRow(),1).toString(),"U","PEMBATALAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN "+NamaPelanggan.getText()+" DIPOSTING OLEH "+akses.getkode()); 
-                            } 
+                            if (berhasil) berhasil = jur.simpanJurnal(tbValidasi.getValueAt(tbValidasi.getSelectedRow(), 1).toString(), "U", "PEMBATALAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN " + NamaPelanggan.getText() + " DIPOSTING OLEH " + akses.getkode());
                         }else{
                             berhasil=false;
                         }
