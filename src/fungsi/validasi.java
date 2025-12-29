@@ -42,6 +42,7 @@ import javax.print.attribute.standard.Copies;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -103,6 +104,16 @@ public final class validasi {
     public validasi(){
         super();
     };
+
+    public String padleftSmc(String str, int length, char c) {
+        if (length <= str.length()) {
+            return str;
+        }
+        
+        str = String.valueOf(c).repeat(Math.max(0, length)).concat(str);
+        
+        return str.substring(str.length() - length, str.length());
+    }
 
     public String fingerSmc(String kodedokter, String tanggal) {
         String finger = sek.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", kodedokter);
@@ -174,6 +185,15 @@ public final class validasi {
 
     public void setTglJamSmc(Tanggal tgl) {
         tgl.setDate(Calendar.getInstance().getTime());
+    }
+    
+    public void setTglJamSmc(Date tgljam, Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik) {
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(tgljam);
+        tgl.setDate(tgljam);
+        jam.setSelectedIndex(cal.get(Calendar.HOUR_OF_DAY));
+        menit.setSelectedIndex(cal.get(Calendar.MINUTE));
+        detik.setSelectedIndex(cal.get(Calendar.SECOND));
     }
 
     public void reportTempSmc(String reportName, String reportDirName, String judul, Map reportParams) {
@@ -463,6 +483,14 @@ public final class validasi {
             System.out.println("Notif : " + e);
         }
         return true;
+    }
+    
+    public void pindahSmc(KeyEvent e, JComponent previous, JComponent next) {
+        if (e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+            next.requestFocus();
+        } else if (e.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            previous.requestFocus();
+        }
     }
 
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){
@@ -1252,7 +1280,6 @@ public final class validasi {
             jv.setVisible(true);
         } catch (Exception e) {
             System.out.println("Report can't view because: " + e);
-            e.printStackTrace();
 
             JOptionPane.showMessageDialog(null, "Tidak bisa menampilkan hasil cetak!");
         }
@@ -1318,7 +1345,14 @@ public final class validasi {
         }
     }
 
-
+    public void pindah(java.awt.event.KeyEvent evt,JCheckBox kiri,JTextField kanan){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            kanan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            kiri.requestFocus();
+        }
+    }
+    
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();

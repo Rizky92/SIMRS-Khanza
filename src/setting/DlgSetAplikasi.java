@@ -18,7 +18,6 @@ import fungsi.koneksiDB;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayInputStream;
@@ -60,8 +59,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         setSize(457, 249);
 
         tabMode = new DefaultTableModel(null, new Object[] {
-            "Faskes", "Alamat", "Kota", "Propinsi", "Aktifkan?", "Wallpaper", "Kontak", "Email", "Logo",
-            "Kode PPK BPJS", "Kode PPK Inhealth", "Kode PPK Kemenkes", "Batas Edit 2x24 Jam", "Sistem Import Koding"
+            "Faskes", "Alamat", "Kota", "Propinsi", "Aktifkan?", "Wallpaper", "Kontak", "Email", "Logo", "Kode PPK BPJS",
+            "Kode PPK Apotek Online", "Kode PPK Inhealth", "Kode PPK Kemenkes", "Batas Edit 2x24 Jam", "Sistem Import Koding"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -70,8 +69,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         };
 
         tbAdmin.setModel(tabMode);
-        //tampil();
-        //tbJabatan.setDefaultRenderer(Object.class, new WarnaTable(Scroll.getBackground(),Color.GREEN));
         tbAdmin.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbAdmin.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
@@ -95,8 +92,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         kdPPKBPJS.setDocument(new batasInput((byte) 15).getKata(kdPPKBPJS));
         kdPPKInhealth.setDocument(new batasInput((byte) 15).getKata(kdPPKInhealth));
         kdPPKKemenkes.setDocument(new batasInput((byte) 15).getKata(kdPPKKemenkes));
+        kdPPKApotekOnline.setDocument(new batasInput((byte) 15).getKata(kdPPKKemenkes));
     }
-    Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
     private javax.swing.JFileChooser jfc = new JFileChooser();
     private javax.swing.JFileChooser jfc2 = new JFileChooser();
     private FileFilter jpgFilter = new FileNameExtensionFilter("Gambar JPEG", "jpg");
@@ -154,6 +151,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         label14 = new widget.Label();
         BatasEdit2x24jam = new widget.ComboBox();
         label45 = new widget.Label();
+        label46 = new widget.Label();
+        kdPPKApotekOnline = new widget.TextBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -407,21 +406,21 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         label43.setName("label43"); // NOI18N
         label43.setPreferredSize(new java.awt.Dimension(35, 23));
         panelGlass1.add(label43);
-        label43.setBounds(208, 280, 60, 23);
+        label43.setBounds(208, 280, 50, 23);
 
         kdPPKInhealth.setName("kdPPKInhealth"); // NOI18N
         panelGlass1.add(kdPPKInhealth);
-        kdPPKInhealth.setBounds(272, 280, 110, 23);
+        kdPPKInhealth.setBounds(262, 280, 110, 23);
 
         label44.setText(" Kemenkes :");
         label44.setName("label44"); // NOI18N
         label44.setPreferredSize(new java.awt.Dimension(35, 23));
         panelGlass1.add(label44);
-        label44.setBounds(386, 280, 60, 23);
+        label44.setBounds(376, 280, 60, 23);
 
         kdPPKKemenkes.setName("kdPPKKemenkes"); // NOI18N
         panelGlass1.add(kdPPKKemenkes);
-        kdPPKKemenkes.setBounds(450, 280, 110, 23);
+        kdPPKKemenkes.setBounds(440, 280, 110, 23);
 
         label13.setText("Import koding hasil bridging klaim :");
         label13.setName("label13"); // NOI18N
@@ -451,6 +450,16 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         label45.setPreferredSize(new java.awt.Dimension(35, 23));
         panelGlass1.add(label45);
         label45.setBounds(0, 250, 160, 23);
+
+        label46.setText(" Apotek BPJS :");
+        label46.setName("label46"); // NOI18N
+        label46.setPreferredSize(new java.awt.Dimension(35, 23));
+        panelGlass1.add(label46);
+        label46.setBounds(554, 280, 70, 23);
+
+        kdPPKApotekOnline.setName("kdPPKApotekOnline"); // NOI18N
+        panelGlass1.add(kdPPKApotekOnline);
+        kdPPKApotekOnline.setBounds(628, 280, 110, 23);
 
         internalFrame1.add(panelGlass1, java.awt.BorderLayout.PAGE_START);
 
@@ -501,7 +510,6 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             YesNo.setSelectedItem("No");
             EGb.setText("./setting/wallpaper.jpg");
         } else if (ELogo.getText().trim().equals("")) {
-            YesNo.setSelectedItem("No");
             ELogo.setText("./setting/logo.jpg");
         } else if (tabMode.getRowCount() == 0) {
             String gb = "", logo = "";
@@ -520,9 +528,9 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             }
 
             Sequel.menghapusSmc("setting");
-            Sequel.executeRawSmc("insert into setting values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, from_base64(?), from_base64(?), ?, ?)", Nm.getText(), Almt.getText(),
+            Sequel.executeRawSmc("insert into setting values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, from_base64(?), from_base64(?), ?, ?, ?)", Nm.getText(), Almt.getText(),
                 Kota.getText(), Propinsi.getText(), Kontak.getText(), Email.getText(), YesNo.getSelectedItem().toString(), kdPPKBPJS.getText(), kdPPKInhealth.getText(),
-                kdPPKKemenkes.getText(), gb, logo, BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString());
+                kdPPKKemenkes.getText(), gb, logo, BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString(), kdPPKApotekOnline.getText());
 
             tampil();
         } else if (tabMode.getRowCount() > 0) {
@@ -542,9 +550,9 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         } else if (Nm.getText().trim().equals("")) {
             JOptionPane.showMessageDialog(null, "Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
         } else if (!Nm.getText().trim().equals("")) {
-            Sequel.queryu("delete from setting ");
-            tampil();
+            Sequel.menghapusSmc("setting");
             emptTeks();
+            tampil();
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -617,6 +625,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private widget.ComboBox SistemImportKoding;
     private widget.ComboBox YesNo;
     private widget.InternalFrame internalFrame1;
+    private widget.TextBox kdPPKApotekOnline;
     private widget.TextBox kdPPKBPJS;
     private widget.TextBox kdPPKInhealth;
     private widget.TextBox kdPPKKemenkes;
@@ -634,6 +643,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private widget.Label label43;
     private widget.Label label44;
     private widget.Label label45;
+    private widget.Label label46;
     private widget.panelGlass panelGlass1;
     private widget.panelisi panelisi1;
     private widget.ScrollPane scrollPane2;
@@ -645,14 +655,14 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try (ResultSet rs = koneksi.createStatement().executeQuery(
             "select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, to_base64(wallpaper) as wallpaper, " +
-            "kontak, email, to_base64(logo) as logo, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, pemberlakuan_2x24_jam, " +
-            "sistem_import_koding from setting"
+            "kontak, email, to_base64(logo) as logo, kode_ppk, kode_ppkapotek, kode_ppkinhealth, kode_ppkkemenkes, " +
+            "pemberlakuan_2x24_jam, sistem_import_koding from setting"
         )) {
             if (rs.next()) {
                 tabMode.addRow(new Object[] {
                     rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5),
                     rs.getString(6), rs.getString(7), rs.getString(8), rs.getString(9), rs.getString(10),
-                    rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14)
+                    rs.getString(11), rs.getString(12), rs.getString(13), rs.getString(14), rs.getString(15)
                 });
             }
         } catch (Exception e) {
@@ -671,10 +681,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             Kontak.setText(tbAdmin.getValueAt(row, 6).toString());
             Email.setText(tbAdmin.getValueAt(row, 7).toString());
             kdPPKBPJS.setText(tbAdmin.getValueAt(row, 9).toString());
-            kdPPKInhealth.setText(tbAdmin.getValueAt(row, 10).toString());
-            kdPPKKemenkes.setText(tbAdmin.getValueAt(row, 11).toString());
-            BatasEdit2x24jam.setSelectedItem(tbAdmin.getValueAt(row, 12).toString());
-            SistemImportKoding.setSelectedItem(tbAdmin.getValueAt(row, 13).toString());
+            kdPPKApotekOnline.setText(tbAdmin.getValueAt(row, 10).toString());
+            kdPPKInhealth.setText(tbAdmin.getValueAt(row, 11).toString());
+            kdPPKKemenkes.setText(tbAdmin.getValueAt(row, 12).toString());
+            BatasEdit2x24jam.setSelectedItem(tbAdmin.getValueAt(row, 13).toString());
+            SistemImportKoding.setSelectedItem(tbAdmin.getValueAt(row, 14).toString());
             try {
                 ((Painter) PhotoGambar).fromBase64(tbAdmin.getValueAt(row, 5).toString());
                 ((Painter) PhotoLogo).fromBase64(tbAdmin.getValueAt(row, 8).toString());
@@ -693,10 +704,11 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         Email.setText("");
         YesNo.setSelectedItem("No");
         BatasEdit2x24jam.setSelectedIndex(0);
-        SistemImportKoding.setSelectedIndex(0);
+        SistemImportKoding.setSelectedIndex(2);
         kdPPKBPJS.setText("");
         kdPPKInhealth.setText("");
         kdPPKKemenkes.setText("");
+        kdPPKApotekOnline.setText("");
         EGb.setText("");
         ELogo.setText("");
         ((Painter) PhotoGambar).setImage("");
