@@ -34,10 +34,13 @@ import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -64,6 +67,8 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -125,19 +130,19 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
             });
@@ -729,7 +734,12 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                 Sequel.AutoComitTrue();
 
                 if(sukses==true){
-                    BtnCariActionPerformed(evt);
+                    tabMode.addRow(new Object[]{
+                        Valid.SetTgl(Tanggal.getSelectedItem()+""),KdPerusahaan.getText(),NmPerusahaan.getText(),Double.parseDouble(Cicilan.getText()),Keterangan.getText(),NoPiutang.getText(),koderekening,AkunBayar.getSelectedItem().toString()
+                    });
+                    LCount.setText(""+tabMode.getRowCount());
+                    total=total+Double.parseDouble(Cicilan.getText());
+                    LTotal.setText(Valid.SetAngka(total));
                     emptTeks();
                 }
             }else{
@@ -774,7 +784,10 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
             Sequel.AutoComitTrue();
 
             if(sukses==true){
-                BtnCariActionPerformed(evt);
+                total=total-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
+                LTotal.setText(Valid.SetAngka(total));
+                tabMode.removeRow(tbKamar.getSelectedRow());
+                LCount.setText(""+tabMode.getRowCount());
                 emptTeks();
             }
         }else{
@@ -802,7 +815,6 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        BtnCariActionPerformed(evt);
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnKeluar.requestFocus();
@@ -847,7 +859,7 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -921,7 +933,7 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void SisaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_SisaKeyPressed
@@ -1021,9 +1033,9 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             if(Valid.daysOld("./cache/akunbayar.iyem")<8){
-                tampilAkunBayar2();
+                runBackground(() ->tampilAkunBayar2());
             }else{
-                tampilAkunBayar();
+                runBackground(() ->tampilAkunBayar());
             }
         } catch (Exception e) {
         }
@@ -1038,7 +1050,7 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
     }//GEN-LAST:event_KdPerusahaanKeyPressed
 
     private void BtnAll1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAll1ActionPerformed
-        tampilAkunBayar();
+        runBackground(() ->tampilAkunBayar());
     }//GEN-LAST:event_BtnAll1ActionPerformed
 
     /**
@@ -1106,7 +1118,7 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -1148,6 +1160,10 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
         LTotal.setText(Valid.SetAngka(total));
     }
 
+    public void tampil2() {
+        runBackground(() ->tampil());
+    }
+    
     public void emptTeks() {
         Kd2.setText("");
         Cicilan.setText("0");
@@ -1270,5 +1286,23 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                 System.out.println("Notifikasi : "+ex);
             }
         }
+    } 
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
     }
 }

@@ -2110,7 +2110,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19/10/2025" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "27/12/2025" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -10733,7 +10733,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         KeuanganBayarPemesananFarmasi bayarpesan=new KeuanganBayarPemesananFarmasi(this,false);
-        bayarpesan.tampil();
+        bayarpesan.tampil2();
         bayarpesan.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         bayarpesan.setLocationRelativeTo(PanelUtama);
         bayarpesan.setVisible(true);
@@ -12981,7 +12981,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         KeuanganBayarPemesananNonMedis bayarpesan=new KeuanganBayarPemesananNonMedis(this,false);
-        bayarpesan.tampil();
+        bayarpesan.tampil2();
         bayarpesan.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         bayarpesan.setLocationRelativeTo(PanelUtama);
         bayarpesan.setVisible(true);
@@ -16678,7 +16678,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         KeuanganBayarPesanToko bayarpesan=new KeuanganBayarPesanToko(this,false);
-        bayarpesan.tampil();
+        bayarpesan.tampil2();
         bayarpesan.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         bayarpesan.setLocationRelativeTo(PanelUtama);
         bayarpesan.setVisible(true);
@@ -17521,7 +17521,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         KeuanganKlaimRalan billing=new KeuanganKlaimRalan(this,false);
-        billing.tampil();
         billing.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         billing.setLocationRelativeTo(PanelUtama);
         billing.setVisible(true);
@@ -18211,7 +18210,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         KeuanganBayarPemesananAset bayarpesan=new KeuanganBayarPemesananAset(this,false);
-        bayarpesan.tampil();
         bayarpesan.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         bayarpesan.setLocationRelativeTo(PanelUtama);
         bayarpesan.setVisible(true);
@@ -22246,7 +22244,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         KeuanganBayarPemesananDapur bayarpesan=new KeuanganBayarPemesananDapur(this,false);
-        bayarpesan.tampil();
+        bayarpesan.tampil2();
         bayarpesan.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         bayarpesan.setLocationRelativeTo(PanelUtama);
         bayarpesan.setVisible(true);

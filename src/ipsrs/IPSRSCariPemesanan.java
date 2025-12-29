@@ -1103,7 +1103,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             KeuanganBayarPemesananNonMedis bayarpesan=new KeuanganBayarPemesananNonMedis(null,false);
             bayarpesan.setData(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            bayarpesan.tampil();
+            bayarpesan.tampil2();
             bayarpesan.isCek();
             bayarpesan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             bayarpesan.setLocationRelativeTo(internalFrame1);

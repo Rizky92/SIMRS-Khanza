@@ -502,7 +502,7 @@ public final class KeuanganValidasiTagihanAset extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             KeuanganHutangAsetIventarisBelumLunas form=new KeuanganHutangAsetIventarisBelumLunas(null,false);
             form.isCek();
-            form.tampilTagihan(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
+            form.tampilTagihan2(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setVisible(true);

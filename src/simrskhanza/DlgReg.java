@@ -11818,7 +11818,7 @@ public final class DlgReg extends javax.swing.JDialog {
                     daftar.setLocationRelativeTo(internalFrame1);
                     daftar.setVisible(true);
                     daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDokter.getText(),kdpnj.getText(),"ralan", kdpoli.getText());
-                    daftar.tampil();
+                    daftar.tampil2();
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }

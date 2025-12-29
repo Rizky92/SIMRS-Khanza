@@ -1061,7 +1061,7 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
             bayarpiutang.emptTeks();
             bayarpiutang.setData(tbKamar.getValueAt(tbKamar.getSelectedRow(),0).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString());
             bayarpiutang.isCek();
-            bayarpiutang.tampil();
+            bayarpiutang.tampil2();
             bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);
             bayarpiutang.setLocationRelativeTo(this);
             bayarpiutang.setAlwaysOnTop(false);

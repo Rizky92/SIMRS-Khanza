@@ -490,7 +490,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Table tbPemisahan;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             if(ChkTanggal.isSelected()==true){
@@ -622,6 +622,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
+    }
+    
+    public void tampil2() {
+        runBackground(() ->tampil());
     }
 
     public void isCek(){

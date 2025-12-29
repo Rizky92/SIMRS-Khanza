@@ -8590,7 +8590,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                     daftar.setLocationRelativeTo(internalFrame1);
                     daftar.setVisible(true);
                     daftar.setRM(TNoRw.getText(),TNoRM.getText(),KdDokter.getText(),kdpnj.getText(),"ralan", "IGDK");
-                    daftar.tampil();
+                    daftar.tampil2();
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }
