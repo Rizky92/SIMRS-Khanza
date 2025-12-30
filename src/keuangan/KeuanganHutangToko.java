@@ -1165,6 +1165,13 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
 
                     if(sukses==true){
                         Sequel.Commit();
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                        Sequel.RollBack();
+                    }
+                    Sequel.AutoComitTrue();
+                    
+                    if(sukses==true){
                         bayar=0;
                         LCount1.setText("0");
                         for(i=0;i<tbBangsal.getRowCount();i++){
@@ -1173,11 +1180,7 @@ public final class KeuanganHutangToko extends javax.swing.JDialog {
                                 i--;
                             }
                         }
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
                     }
-                    Sequel.AutoComitTrue();
                 }
             }
         }
