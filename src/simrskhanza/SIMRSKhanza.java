@@ -37,10 +37,8 @@ public class SIMRSKhanza {
         
         WidgetUtilities.invokeLater(() -> {
             if (isRunning) {
-                WidgetUtilities.invokeLater(() -> {
-                    JOptionPane.showMessageDialog(null, "Tidak boleh menjalankan SIMRS Khanza lebih dari sekali..!!", "Peringatan", JOptionPane.ERROR_MESSAGE);
-                    System.exit(1);
-                });
+                JOptionPane.showMessageDialog(null, "Hanya boleh ada satu SIMRS Khanza yang berjalan..!!", "Peringatan", JOptionPane.ERROR_MESSAGE);
+                System.exit(1);
             } else {
                 frmUtama utama = frmUtama.getInstance();
 
