@@ -122,7 +122,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
             } else if (i == 8) {
                 column.setPreferredWidth(80);
             } else if (i == 9) {
-                column.setPreferredWidth(75);
+                column.setPreferredWidth(90);
             } else if (i == 10) {
                 column.setPreferredWidth(200);
             }
@@ -239,7 +239,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
             } else if (i == 10) {
                 column.setPreferredWidth(100);
             } else if (i == 11) {
-                column.setPreferredWidth(75);
+                column.setPreferredWidth(90);
             } else if (i == 12) {
                 column.setPreferredWidth(200);
             }
@@ -382,7 +382,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         panelisi3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -400,7 +399,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnSimpan);
 
         BtnSimpanResepKosong.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpanResepKosong.setMnemonic('S');
         BtnSimpanResepKosong.setText("Simpan Resep Kosong");
         BtnSimpanResepKosong.setToolTipText("Alt+S");
         BtnSimpanResepKosong.setName("BtnSimpanResepKosong"); // NOI18N
@@ -418,7 +416,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnSimpanResepKosong);
 
         BtnInsertObat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnInsertObat.setMnemonic('S');
         BtnInsertObat.setText("Masukkan Obat Umum");
         BtnInsertObat.setToolTipText("Alt+S");
         BtnInsertObat.setName("BtnInsertObat"); // NOI18N
@@ -437,7 +434,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnInsertObat);
 
         BtnInsertObatRacikan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnInsertObatRacikan.setMnemonic('S');
         BtnInsertObatRacikan.setText("Masukkan Obat Racikan");
         BtnInsertObatRacikan.setToolTipText("Alt+S");
         BtnInsertObatRacikan.setName("BtnInsertObatRacikan"); // NOI18N
@@ -455,7 +451,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnInsertObatRacikan);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -490,7 +485,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnCari);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('5');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+5");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -1063,15 +1057,15 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
             if (tbObat.getEditingColumn() == 0) {
                 try {
                     tbObat.setValueAt(
-                        Double.parseDouble(tbObat.getValueAt(tbObat.getEditingRow(), 6).toString()) *
+                        Double.parseDouble(tbObat.getValueAt(tbObat.getEditingRow(), 7).toString()) *
                         Double.parseDouble(tbObat.getValueAt(tbObat.getEditingRow(), 0).toString()),
-                        tbObat.getEditingRow(), 7
+                        tbObat.getEditingRow(), 8
                     );
                     tbObat.setValueAt(
                         Double.parseDouble(tbObat.getValueAt(tbObat.getEditingRow(), 0).toString()) /
-                        Double.parseDouble(tbObat.getValueAt(tbObat.getEditingRow(), 5).toString()) /
-                        Double.parseDouble(tbObat.getValueAt(tbObat.getEditingRow(), 4).toString()),
-                        tbObat.getEditingRow(), 3
+                        Double.parseDouble(tbObat.getValueAt(tbObat.getEditingRow(), 6).toString()) /
+                        Double.parseDouble(tbObat.getValueAt(tbObat.getEditingRow(), 5).toString()),
+                        tbObat.getEditingRow(), 4
                     );
                     updateTotal();
                 } catch (Exception e) {
@@ -1089,15 +1083,15 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
             if (tbDetailRacikanObat.getEditingColumn() == 1) {
                 try {
                     tbDetailRacikanObat.setValueAt(
-                        Double.parseDouble(tbDetailRacikanObat.getValueAt(tbDetailRacikanObat.getEditingRow(), 7).toString()) *
+                        Double.parseDouble(tbDetailRacikanObat.getValueAt(tbDetailRacikanObat.getEditingRow(), 8).toString()) *
                         Double.parseDouble(tbDetailRacikanObat.getValueAt(tbDetailRacikanObat.getEditingRow(), 1).toString()),
-                        tbDetailRacikanObat.getEditingRow(), 8
+                        tbDetailRacikanObat.getEditingRow(), 9
                     );
                     tbDetailRacikanObat.setValueAt(
                         Double.parseDouble(tbDetailRacikanObat.getValueAt(tbDetailRacikanObat.getEditingRow(), 1).toString()) /
-                        Double.parseDouble(tbDetailRacikanObat.getValueAt(tbDetailRacikanObat.getEditingRow(), 6).toString()) /
-                        Double.parseDouble(tbDetailRacikanObat.getValueAt(tbDetailRacikanObat.getEditingRow(), 5).toString()),
-                        tbDetailRacikanObat.getEditingRow(), 4
+                        Double.parseDouble(tbDetailRacikanObat.getValueAt(tbDetailRacikanObat.getEditingRow(), 7).toString()) /
+                        Double.parseDouble(tbDetailRacikanObat.getValueAt(tbDetailRacikanObat.getEditingRow(), 6).toString()),
+                        tbDetailRacikanObat.getEditingRow(), 5
                     );
                     updateTotal();
                 } catch (Exception e) {
@@ -1648,11 +1642,11 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
     private void updateTotal() {
         double total = 0;
         for (int i = 0; i < tabModeObat.getRowCount(); i++) {
-            total += (Double) tabModeObat.getValueAt(i, 7);
+            total += (Double) tabModeObat.getValueAt(i, 8);
         }
         
         for (int i = 0; i < tabModeDetailRacikanObat.getRowCount(); i++) {
-            total += (Double) tabModeDetailRacikanObat.getValueAt(i, 8);
+            total += (Double) tabModeDetailRacikanObat.getValueAt(i, 9);
         }
         LTotal.setText(Valid.SetAngka(total));
     }
