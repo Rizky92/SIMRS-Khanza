@@ -67,7 +67,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
         Suspen_Piutang_Obat_Ralan = "", Obat_Ralan = "", HPP_Obat_Rawat_Jalan = "", Persediaan_Obat_Rawat_Jalan = "", Piutang_Obat = "", Kontra_Piutang_Obat = "";
     private HttpHeaders headers;
     private HttpEntity entity;
-    private JsonNode root, metadata;
+    private JsonNode root, metadata, response;
     private ObjectNode json;
     private Set<String> kodeobat = new HashSet<>();
     private boolean ispiutang = false, sukses = true;
@@ -710,7 +710,9 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
         } else if (tbKamar.getSelectedRow() < 0) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih dulu data resep yang mau dihapus..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
-            if (Boolean.parseBoolean(tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString()) && Sequel.cariExistsSmc("select * from bayar_piutang where bayar_piutang.no_rawat = ? and bayar_piutang.no_rkm_medis = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString())) {
+            if (cekStatusKlaim()) {
+                JOptionPane.showMessageDialog(null, "No. SEP Apotek sudah dilakukan verifikasi klaim..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            } else if (Boolean.parseBoolean(tbKamar.getValueAt(tbKamar.getSelectedRow(), 10).toString()) && Sequel.cariExistsSmc("select * from bayar_piutang where bayar_piutang.no_rawat = ? and bayar_piutang.no_rkm_medis = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString())) {
                 JOptionPane.showMessageDialog(null, "Piutang obat sudah terverifikasi..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else if (Sequel.cariRegistrasi(Sequel.cariIsiSmc("select bridging_sep.no_rawat from bridging_sep where bridging_sep.no_sep = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString())) > 0) {
                 JOptionPane.showMessageDialog(null, "Billing sudah terverifikasi..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
@@ -1003,6 +1005,57 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                 System.out.println("Notif : " + e);
             }
         }
+    }
+
+    private boolean cekStatusKlaim() {
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("x-cons-id", koneksiDB.CONSIDAPIAPOTEKBPJS());
+            utc = api.getUTCDateTime();
+            headers.add("x-timestamp", utc);
+            headers.add("x-signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
+            entity = new HttpEntity(headers);
+
+            String bln = tbKamar.getValueAt(tbKamar.getSelectedRow(), 9).toString().substring(5, 7),
+                   thn = tbKamar.getValueAt(tbKamar.getSelectedRow(), 9).toString().substring(0, 4);
+            if (bln.startsWith("0")) {
+                bln = bln.substring(1, 2);
+            }
+
+            URL = URLAPIAPOTEKBPJS + "/monitoring/klaim/" + bln + "/" + thn + "/" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString().substring(0, 1) + "/1";
+            System.out.println(URL);
+            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, entity, String.class).getBody());
+            metadata = root.path("metaData");
+            if (metadata.path("code").asText().equals("200")) {
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                if (response.path("listsep").isArray()) {
+                    String nosepapotek = "";
+                    for (JsonNode list : response.path("listsep")) {
+                        nosepapotek = list.path("nosepapotek").asText("");
+                        if (nosepapotek != null && !nosepapotek.isBlank() && nosepapotek.equals(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString())) {
+                            return true;
+                        }
+                    }
+                }
+            } else {
+                if (JOptionPane.showConfirmDialog(null, "Tidak dapat mengecek status verifikasi resep, tetap lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            if (e.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
+            }
+
+            if (JOptionPane.showConfirmDialog(null, "Tidak dapat mengecek status verifikasi resep, tetap lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void hapus() {

@@ -926,10 +926,14 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
             if (!nosjp.isBlank()) {
                 int reply = JOptionPane.showConfirmDialog(null, "Eeiiiiiits, udah bener belum data yang mau disimpan..?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    sukses = true;
-                    insertObat();
-                    if (sukses) {
-                        JOptionPane.showMessageDialog(null, "Simpan obat umum berhasil..!!");
+                    if (cekStatusKlaim()) {
+                        JOptionPane.showMessageDialog(null, "No. SEP Apotek sudah dilakukan verifikasi klaim..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        sukses = true;
+                        insertObat();
+                        if (sukses) {
+                            JOptionPane.showMessageDialog(null, "Simpan obat umum berhasil..!!");
+                        }
                     }
                 }
             } else {
@@ -944,10 +948,14 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
             if (!nosjp.isBlank()) {
                 int reply = JOptionPane.showConfirmDialog(null, "Eeiiiiiits, udah bener belum data yang mau disimpan..?", "Konfirmasi", JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {
-                    sukses = true;
-                    insertObatRacikan();
-                    if (sukses) {
-                        JOptionPane.showMessageDialog(null, "Simpan obat umum berhasil..!!");
+                    if (cekStatusKlaim()) {
+                        JOptionPane.showMessageDialog(null, "No. SEP Apotek sudah dilakukan verifikasi klaim..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                    } else {
+                        sukses = true;
+                        insertObatRacikan();
+                        if (sukses) {
+                            JOptionPane.showMessageDialog(null, "Simpan obat umum berhasil..!!");
+                        }
                     }
                 }
             } else {
@@ -1591,7 +1599,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         }
     }
 
-    private boolean cekStatusVerifikasiResep() {
+    private boolean cekStatusKlaim() {
         if (nosjp.isBlank()) return false;
 
         if (baruDibuat) return false;
@@ -1617,7 +1625,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                     String nosepapotek = "";
                     for (JsonNode list : response.path("listsep")) {
                         nosepapotek = list.path("nosepapotek").asText("");
-                        if (nosepapotek != null && !nosepapotek.isBlank() && nosjp.equals(nosepapotek)) {
+                        if (nosepapotek != null && !nosepapotek.isBlank() && nosepapotek.equals(nosjp)) {
                             return true;
                         }
                     }
@@ -1627,18 +1635,19 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                     return true;
                 }
             }
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            if (e.toString().contains("UnknownHostException")) {
                 JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
             }
+
             if (JOptionPane.showConfirmDialog(null, "Tidak dapat mengecek status verifikasi resep, tetap lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
                 return true;
             }
         }
         return false;
     }
-    
+
     private void updateTotal() {
         double total = 0;
         for (int i = 0; i < tabModeObat.getRowCount(); i++) {

@@ -35,6 +35,7 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import org.apache.commons.codec.binary.Base64;
+import simrskhanza.frmUtama;
 
 /**
  *
@@ -506,12 +507,26 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
         if (Nm.getText().trim().equals("")) {
             Valid.textKosong(Nm, "Nama Faskes");
-        } else if (EGb.getText().trim().equals("")) {
-            YesNo.setSelectedItem("No");
-            EGb.setText("./setting/wallpaper.jpg");
-        } else if (ELogo.getText().trim().equals("")) {
-            ELogo.setText("./setting/logo.jpg");
-        } else if (tabMode.getRowCount() == 0) {
+        } else if (Almt.getText().isBlank()) {
+            Valid.textKosong(Almt, "Alamat");
+        } else if (Kota.getText().isBlank()) {
+            Valid.textKosong(Kota, "Kota/Kabupaten");
+        } else if (Propinsi.getText().isBlank()) {
+            Valid.textKosong(Propinsi, "Propinsi");
+        } else if (Kontak.getText().isBlank()) {
+            Valid.textKosong(Kontak, "Kontak");
+        } else if (Email.getText().isBlank()) {
+            Valid.textKosong(Email, "Email");
+        } else {
+            if (EGb.getText().isBlank()) {
+                YesNo.setSelectedItem("No");
+                EGb.setText("./setting/wallpaper.jpg");
+            }
+
+            if (ELogo.getText().isBlank()) {
+                ELogo.setText("./setting/logo.jpg");
+            }
+
             String gb = "", logo = "";
             File fgb = new File(EGb.getText()),
                 flogo = new File(ELogo.getText());
@@ -528,14 +543,16 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             }
 
             Sequel.menghapusSmc("setting");
-            Sequel.executeRawSmc("insert into setting values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, from_base64(?), from_base64(?), ?, ?, ?)", Nm.getText(), Almt.getText(),
-                Kota.getText(), Propinsi.getText(), Kontak.getText(), Email.getText(), YesNo.getSelectedItem().toString(), kdPPKBPJS.getText(), kdPPKInhealth.getText(),
-                kdPPKKemenkes.getText(), gb, logo, BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString(), kdPPKApotekOnline.getText());
+            Sequel.executeRawSmc("insert into setting (nama_instansi, alamat_instansi, kabupaten, propinsi, kontak, email, aktifkan, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, " +
+                "pemberlakuan_2x24_jam, sistem_import_koding, kode_ppkapotek, wallpaper, logo) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, from_base64(?), from_base64(?))",
+                Nm.getText(), Almt.getText(), Kota.getText(), Propinsi.getText(), Kontak.getText(), Email.getText(), YesNo.getSelectedItem().toString(), kdPPKBPJS.getText(),
+                kdPPKInhealth.getText(), kdPPKKemenkes.getText(), BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString(),
+                kdPPKApotekOnline.getText(), gb, logo);
 
+            emptTeks();
             tampil();
-        } else if (tabMode.getRowCount() > 0) {
-            JOptionPane.showMessageDialog(null, "Maaf, Hanya diijinkan satu Set Aplikasi...!!!!");
-            Nm.requestFocus();
+            
+            frmUtama.getInstance().isWall();
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -738,15 +755,14 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
         @Override
         public void paint(Graphics g) {
-            try {
-                if (image == null) super.paint(g);
+            if (image == null) super.paint(g);
 
+            try {
                 double d = image.getHeight(this) / this.getHeight();
                 double w = image.getWidth(this) / d;
                 double x = this.getWidth() / 2 - w / 2;
                 g.drawImage(image, (int) x, 0, (int) (w), this.getHeight(), this);
             } catch (Exception e) {
-                System.out.println("Notif : " + e);
                 super.paint(g);
             }
         }

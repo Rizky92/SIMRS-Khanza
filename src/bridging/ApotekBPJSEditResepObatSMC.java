@@ -37,6 +37,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -84,7 +85,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
     private String utc = "", URL = "", nosjp = "";
     private HttpHeaders headers;
     private HttpEntity entity;
-    private JsonNode root, metadata;
+    private JsonNode root, metadata, response;
     private boolean sukses = true, ispiutang = false;
 
     /**
@@ -434,9 +435,9 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         jLabel14 = new widget.Label();
         NoResep = new widget.TextBox();
         jLabel16 = new widget.Label();
-        CmbIterasi = new widget.ComboBox();
+        Iterasi = new widget.ComboBox();
         jLabel17 = new widget.Label();
-        CmbJnsObat = new widget.ComboBox();
+        JenisObat = new widget.ComboBox();
         jLabel20 = new widget.Label();
         TglResep = new widget.Tanggal();
         jLabel8 = new widget.Label();
@@ -456,7 +457,6 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         DlgRestriksi.setMinimumSize(new java.awt.Dimension(400, 300));
         DlgRestriksi.setName("DlgRestriksi"); // NOI18N
         DlgRestriksi.setUndecorated(true);
-        DlgRestriksi.setPreferredSize(new java.awt.Dimension(400, 300));
         DlgRestriksi.setResizable(false);
         DlgRestriksi.setType(java.awt.Window.Type.POPUP);
 
@@ -516,6 +516,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('1');
         BtnCari.setToolTipText("Alt+1");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -532,6 +533,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setMnemonic('2');
         BtnAll.setToolTipText("Alt+2");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -548,6 +550,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnAll);
 
         BtnSeek5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/011.png"))); // NOI18N
+        BtnSeek5.setMnemonic('4');
         BtnSeek5.setToolTipText("Alt+4");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -564,6 +567,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnSeek5);
 
         BtnTambah1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        BtnTambah1.setMnemonic('3');
         BtnTambah1.setToolTipText("Alt+3");
         BtnTambah1.setName("BtnTambah1"); // NOI18N
         BtnTambah1.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -580,6 +584,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnTambah1);
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpan.setMnemonic('S');
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -596,6 +601,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(BtnSimpan);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapus.setMnemonic('H');
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -616,6 +622,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         panelisi3.add(label13);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('5');
         BtnKeluar.setToolTipText("Alt+5");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -812,30 +819,32 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         FormInput.add(jLabel16);
         jLabel16.setBounds(172, 100, 50, 23);
 
-        CmbIterasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tanpa Iterasi", "1. Iterasi 1", "2. Iterasi 2" }));
-        CmbIterasi.setName("CmbIterasi"); // NOI18N
-        CmbIterasi.addKeyListener(new java.awt.event.KeyAdapter() {
+        Iterasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tanpa Iterasi", "1. Iterasi 1", "2. Iterasi 2" }));
+        Iterasi.setEnabled(false);
+        Iterasi.setName("Iterasi"); // NOI18N
+        Iterasi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                CmbIterasiKeyPressed(evt);
+                IterasiKeyPressed(evt);
             }
         });
-        FormInput.add(CmbIterasi);
-        CmbIterasi.setBounds(225, 100, 140, 23);
+        FormInput.add(Iterasi);
+        Iterasi.setBounds(225, 100, 140, 23);
 
         jLabel17.setText("Jenis Obat :");
         jLabel17.setName("jLabel17"); // NOI18N
         FormInput.add(jLabel17);
         jLabel17.setBounds(369, 100, 66, 23);
 
-        CmbJnsObat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Obat PRB", "2. Obat Kronis Belum Stabil", "3. Obat Kemoterapi" }));
-        CmbJnsObat.setName("CmbJnsObat"); // NOI18N
-        CmbJnsObat.addKeyListener(new java.awt.event.KeyAdapter() {
+        JenisObat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Obat PRB", "2. Obat Kronis Belum Stabil", "3. Obat Kemoterapi" }));
+        JenisObat.setEnabled(false);
+        JenisObat.setName("JenisObat"); // NOI18N
+        JenisObat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                CmbJnsObatKeyPressed(evt);
+                JenisObatKeyPressed(evt);
             }
         });
-        FormInput.add(CmbJnsObat);
-        CmbJnsObat.setBounds(439, 100, 225, 23);
+        FormInput.add(JenisObat);
+        JenisObat.setBounds(439, 100, 225, 23);
 
         jLabel20.setText("Tgl. Resep :");
         jLabel20.setName("jLabel20"); // NOI18N
@@ -845,8 +854,9 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
 
         TglResep.setEditable(false);
         TglResep.setForeground(new java.awt.Color(50, 70, 50));
-        TglResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-12-2025 14:27:51" }));
+        TglResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-12-2025 03:06:07" }));
         TglResep.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        TglResep.setEnabled(false);
         TglResep.setName("TglResep"); // NOI18N
         TglResep.setOpaque(false);
         TglResep.setPreferredSize(new java.awt.Dimension(95, 23));
@@ -866,8 +876,9 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
 
         TglPelayanan.setEditable(false);
         TglPelayanan.setForeground(new java.awt.Color(50, 70, 50));
-        TglPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "16-12-2025 14:27:51" }));
+        TglPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-12-2025 03:06:08" }));
         TglPelayanan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        TglPelayanan.setEnabled(false);
         TglPelayanan.setName("TglPelayanan"); // NOI18N
         TglPelayanan.setOpaque(false);
         TglPelayanan.setPreferredSize(new java.awt.Dimension(95, 23));
@@ -1022,6 +1033,8 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
             Valid.textKosong(KdPoli, "Poliklinik");
         } else if (NoResep.getText().isBlank()) {
             Valid.textKosong(NoResep, "Nomor Resep");
+        } else if (cekStatusKlaim()) {
+            JOptionPane.showMessageDialog(null, "No. SEP Apotek sudah dilakukan verifikasi klaim..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } else {
             if (ispiutang) {
                 if (Sequel.cariExistsSmc("select * from bayar_piutang where bayar_piutang.no_rawat = ? and bayar_piutang.no_rkm_medis = ?", nosjp, TNoRM.getText())) {
@@ -1257,19 +1270,19 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_NmPoliKeyPressed
 
     private void NoResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoResepKeyPressed
-        Valid.pindahSmc(evt, NmPoli, CmbIterasi);
+        Valid.pindahSmc(evt, NmPoli, Iterasi);
     }//GEN-LAST:event_NoResepKeyPressed
 
-    private void CmbIterasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbIterasiKeyPressed
-        Valid.pindahSmc(evt, NoResep, CmbJnsObat);
-    }//GEN-LAST:event_CmbIterasiKeyPressed
+    private void IterasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IterasiKeyPressed
+        Valid.pindahSmc(evt, NoResep, JenisObat);
+    }//GEN-LAST:event_IterasiKeyPressed
 
-    private void CmbJnsObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbJnsObatKeyPressed
-        Valid.pindahSmc(evt, CmbIterasi, TglResep);
-    }//GEN-LAST:event_CmbJnsObatKeyPressed
+    private void JenisObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JenisObatKeyPressed
+        Valid.pindahSmc(evt, Iterasi, TglResep);
+    }//GEN-LAST:event_JenisObatKeyPressed
 
     private void TglResepKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglResepKeyPressed
-        Valid.pindahSmc(evt, CmbJnsObat, TglPelayanan);
+        Valid.pindahSmc(evt, JenisObat, TglPelayanan);
     }//GEN-LAST:event_TglResepKeyPressed
 
     private void TabRawatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TabRawatKeyPressed
@@ -1434,10 +1447,10 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
     private widget.Button BtnSeek5;
     private widget.Button BtnSimpan;
     private widget.Button BtnTambah1;
-    private widget.ComboBox CmbIterasi;
-    private widget.ComboBox CmbJnsObat;
     private javax.swing.JDialog DlgRestriksi;
     private widget.PanelBiasa FormInput;
+    private widget.ComboBox Iterasi;
+    private widget.ComboBox JenisObat;
     private widget.TextBox KdDPJP;
     private widget.TextBox KdPoli;
     private widget.Label LTotal;
@@ -1685,24 +1698,24 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
                         NoResep.setText(rs.getString("no_resep"));
                         switch (rs.getString("iterasi")) {
                             case "0":
-                                CmbIterasi.setSelectedIndex(0);
+                                Iterasi.setSelectedIndex(0);
                                 break;
                             case "1":
-                                CmbIterasi.setSelectedIndex(1);
+                                Iterasi.setSelectedIndex(1);
                                 break;
                             case "2":
-                                CmbIterasi.setSelectedIndex(2);
+                                Iterasi.setSelectedIndex(2);
                                 break;
                         }
                         switch (rs.getString("jenis_obat")) {
                             case "1":
-                                CmbJnsObat.setSelectedIndex(0);
+                                JenisObat.setSelectedIndex(0);
                                 break;
                             case "2":
-                                CmbJnsObat.setSelectedIndex(1);
+                                JenisObat.setSelectedIndex(1);
                                 break;
                             case "3":
-                                CmbJnsObat.setSelectedIndex(2);
+                                JenisObat.setSelectedIndex(2);
                                 break;
                         }
                         TglResep.setDate(rs.getTimestamp("tgl_resep"));
@@ -1770,6 +1783,52 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
 
     public Button getButton() {
         return BtnSimpan;
+    }
+
+    private boolean cekStatusKlaim() {
+        try {
+            headers = new HttpHeaders();
+            headers.setContentType(MediaType.APPLICATION_JSON);
+            headers.add("x-cons-id", koneksiDB.CONSIDAPIAPOTEKBPJS());
+            utc = api.getUTCDateTime();
+            headers.add("x-timestamp", utc);
+            headers.add("x-signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
+            entity = new HttpEntity(headers);
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(TglPelayanan.getDate());
+            URL = URLAPIAPOTEKBPJS + "/monitoring/klaim/" + cal.get(Calendar.MONTH) + "/" + cal.get(Calendar.YEAR) + "/" + JenisObat.getSelectedItem().toString().substring(0, 1) + "/1";
+            System.out.println(URL);
+            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, entity, String.class).getBody());
+            metadata = root.path("metaData");
+            if (metadata.path("code").asText().equals("200")) {
+                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                if (response.path("listsep").isArray()) {
+                    String nosepapotek = "";
+                    for (JsonNode list : response.path("listsep")) {
+                        nosepapotek = list.path("nosepapotek").asText("");
+                        if (nosepapotek != null && !nosepapotek.isBlank() && nosepapotek.equals(nosjp)) {
+                            return true;
+                        }
+                    }
+                }
+            } else {
+                if (JOptionPane.showConfirmDialog(null, "Tidak dapat mengecek status verifikasi resep, tetap lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+            if (e.toString().contains("UnknownHostException")) {
+                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
+            }
+
+            if (JOptionPane.showConfirmDialog(null, "Tidak dapat mengecek status verifikasi resep, tetap lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private void hapusObat() {
@@ -1995,8 +2054,8 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
         KdPoli.setText("");
         NmPoli.setText("");
         NoResep.setText("");
-        CmbIterasi.setSelectedIndex(0);
-        CmbJnsObat.setSelectedIndex(0);
+        Iterasi.setSelectedIndex(0);
+        JenisObat.setSelectedIndex(0);
         TglResep.setDate(new Date());
         TglPelayanan.setDate(new Date());
         LTotal.setText("0");
