@@ -1326,6 +1326,12 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     }
 
                     Sequel.Commit();
+                }else{
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                    Sequel.RollBack();
+                }
+                Sequel.AutoComitTrue();
+                if(sukses==true){
                     for(i=0;i<tbResep.getRowCount();i++){
                         tbResep.setValueAt("",i,1);
                         tbResep.setValueAt("",i,2);
@@ -1333,11 +1339,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     Valid.tabelKosong(tabModeResepRacikan);
                     Valid.tabelKosong(tabModeDetailResepRacikan);
                     dispose();
-                }else{
-                    Sequel.RollBack();
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
-                Sequel.AutoComitTrue();
                 ChkJln.setSelected(true);
             }
         }
@@ -2140,6 +2142,12 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         if(ChkRM.isSelected()==true){
             autonomor(1);
         }
+    }
+    
+    private void emptTeksobat2() {
+        if(ChkRM.isSelected()==true){
+            Valid.autoNomer7(NoResep.getText().substring(NoResep.getText().length()-4),DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),4,NoResep);  
+        } 
     }
 
     public void autonomor(int next) {
