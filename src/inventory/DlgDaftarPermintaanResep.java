@@ -597,7 +597,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-12-2025 11:58:37" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-12-2025 09:53:34" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -773,7 +773,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         WindowPengaturan.getContentPane().add(internalFrame12, java.awt.BorderLayout.CENTER);
 
         BtnObat23HariBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnObat23HariBPJS.setText("Pelayanan Apotek BPJS");
+        BtnObat23HariBPJS.setText("Obat 23 Hari BPJS");
         BtnObat23HariBPJS.setFocusPainted(false);
         BtnObat23HariBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnObat23HariBPJS.setGlassColor(new java.awt.Color(255, 255, 255));
@@ -824,7 +824,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-12-2025" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -838,7 +838,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01-09-2025" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-12-2025" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -4379,8 +4379,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
 
     public void isCek(){
-        BtnKirimWAPengerjaan.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
-        BtnKirimWASelesai.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
         BtnEdit.setEnabled(akses.getresep_dokter());
         BtnPrint.setEnabled(akses.getresep_dokter());
         BtnRekap.setEnabled(akses.getresep_obat());
@@ -4392,6 +4390,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         BtnResepLuar.setEnabled(akses.getresep_luar());
         BtnObat23HariBPJS.setEnabled(akses.getbpjs_obat_23hari_apotek());
         BtnTelaahResep.setEnabled(akses.gettelaah_resep());
+        BtnKirimWAPengerjaan.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
+        BtnKirimWASelesai.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
+        BtnKirimResepApotekBPJS.setEnabled(akses.getbpjs_kirim_obat_smc());
+        BtnDaftarPelayananApotekBPJS.setEnabled(akses.getbpjs_daftar_pelayanan_obat_apotek());
     }
 
     public void setCari(String cari){

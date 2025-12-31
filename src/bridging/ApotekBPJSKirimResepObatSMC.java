@@ -1630,10 +1630,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                         }
                     }
                 }
-            } else {
-                if (JOptionPane.showConfirmDialog(null, "Tidak dapat mengecek status verifikasi resep, tetap lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
-                    return true;
-                }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);

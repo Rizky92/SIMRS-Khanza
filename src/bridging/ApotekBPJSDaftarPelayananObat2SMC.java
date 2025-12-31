@@ -1028,6 +1028,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
             System.out.println(URL);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, entity, String.class).getBody());
             metadata = root.path("metaData");
+            System.out.println(metadata.toString());
             if (metadata.path("code").asText().equals("200")) {
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
                 if (response.path("listsep").isArray()) {
@@ -1039,15 +1040,11 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                         }
                     }
                 }
-            } else {
-                if (JOptionPane.showConfirmDialog(null, "Tidak dapat mengecek status verifikasi resep, tetap lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
-                    return true;
-                }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             if (e.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
+                JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus...!");
             }
 
             if (JOptionPane.showConfirmDialog(null, "Tidak dapat mengecek status verifikasi resep, tetap lanjutkan?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
