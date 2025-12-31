@@ -64,6 +64,8 @@ CREATE TABLE IF NOT EXISTS `antripintu_smc`  (
 
 ALTER TABLE `asuhan_gizi` ADD COLUMN IF NOT EXISTS `alergi_ayam` enum('Ya','Tidak') NULL DEFAULT NULL AFTER `nip`;
 
+ALTER TABLE `bayar_piutang` MODIFY COLUMN IF EXISTS `no_rawat` varchar(40) NOT NULL AFTER `catatan`;
+
 ALTER TABLE `billing` DROP INDEX IF EXISTS `noindex`;
 
 ALTER TABLE `booking_operasi` ADD COLUMN IF NOT EXISTS `catatan` varchar(500) NULL DEFAULT NULL AFTER `kd_ruang_ok`;
@@ -81,6 +83,56 @@ ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_booking`(`tang
 ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `tanggal_periksa`(`tanggal_periksa`) USING BTREE;
 
 ALTER TABLE `booking_registrasi` ADD INDEX IF NOT EXISTS `no_rawat`(`no_rawat`) USING BTREE;
+
+CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs`  (
+  `no_sjp` varchar(40) NOT NULL,
+  `no_sep` varchar(40) NOT NULL,
+  `no_resep` varchar(5) NOT NULL,
+  `tgl_resep` datetime NOT NULL,
+  `tgl_pelayanan` datetime NOT NULL,
+  `jenis_obat` enum('1','2','3') NOT NULL,
+  `iterasi` enum('0','1','2') NOT NULL,
+  `kd_poli` varchar(10) NULL DEFAULT NULL,
+  `nm_poli` varchar(100) NULL DEFAULT NULL,
+  `kodedpjp` varchar(10) NULL DEFAULT NULL,
+  `nmdpjp` varchar(100) NULL DEFAULT NULL,
+  `user` varchar(25) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sjp`) USING BTREE,
+  INDEX `no_sep`(`no_sep`) USING BTREE,
+  INDEX `no_resep`(`no_resep`) USING BTREE,
+  CONSTRAINT `bridging_apotek_bpjs_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs_obat`  (
+  `no_sjp` varchar(40) NOT NULL,
+  `kode_brng_apotek_bpjs` varchar(15) NOT NULL,
+  `nama_brng_apotek_bpjs` varchar(80) NULL DEFAULT NULL,
+  `jumlah` double NOT NULL,
+  `signa1` double NOT NULL,
+  `signa2` double NOT NULL,
+  `jml_hari` double NOT NULL,
+  `harga` double NOT NULL,
+  `subtotal` double NOT NULL,
+  `kandungan` varchar(10) NULL DEFAULT NULL,
+  `no_racik` varchar(2) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sjp`, `kode_brng_apotek_bpjs`) USING BTREE,
+  INDEX `no_racik`(`no_racik`) USING BTREE,
+  CONSTRAINT `bridging_apotek_bpjs_obat_ibfk_1` FOREIGN KEY (`no_sjp`) REFERENCES `bridging_apotek_bpjs` (`no_sjp`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs_racikan`  (
+  `no_sjp` varchar(40) NOT NULL,
+  `nama_racik` varchar(100) NOT NULL,
+  `kd_racik` varchar(3) NOT NULL,
+  `jml_dr` int(11) NOT NULL,
+  `aturan_pakai` varchar(150) NOT NULL,
+  `keterangan` varchar(50) NOT NULL,
+  `no_racik` varchar(2) NOT NULL,
+  PRIMARY KEY (`no_sjp`, `no_racik`) USING BTREE,
+  INDEX `kd_racik`(`kd_racik`) USING BTREE,
+  CONSTRAINT `bridging_apotek_bpjs_racikan_ibfk_1` FOREIGN KEY (`no_sjp`) REFERENCES `bridging_apotek_bpjs` (`no_sjp`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `bridging_apotek_bpjs_racikan_ibfk_2` FOREIGN KEY (`kd_racik`) REFERENCES `metode_racik` (`kd_racik`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
 
@@ -135,6 +187,14 @@ ALTER TABLE `datasuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL D
 ALTER TABLE `detail_nota_inap` ADD COLUMN IF NOT EXISTS `keterangan` varchar(40) NULL DEFAULT NULL AFTER `besar_bayar`;
 
 ALTER TABLE `detail_nota_jalan` ADD COLUMN IF NOT EXISTS `keterangan` varchar(40) NULL DEFAULT NULL AFTER `besar_bayar`;
+
+ALTER TABLE `detailpiutang` ADD COLUMN IF NOT EXISTS `no_racik` varchar(2) NULL DEFAULT NULL AFTER `aturan_pakai`;
+
+ALTER TABLE `detailpiutang` ADD PRIMARY KEY IF NOT EXISTS (`nota_piutang`, `kode_brng`) USING BTREE;
+
+ALTER TABLE `detailpiutang` DROP CONSTRAINT IF EXISTS `detailpiutang_ibfk_1`;
+
+ALTER TABLE `detailpiutang` MODIFY COLUMN IF EXISTS `nota_piutang` varchar(40) NOT NULL FIRST;
 
 CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
   `tgl_perawatan` date NOT NULL,
@@ -333,6 +393,10 @@ ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(
 ALTER TABLE `jurnal` DROP INDEX IF EXISTS `no_jurnal`;
 
 ALTER TABLE `maping_dokter_dpjpvclaim` ADD UNIQUE INDEX IF NOT EXISTS `maping_dokter_dpjpvclaim_unique`(`kd_dokter_bpjs`) USING BTREE;
+
+ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `harga` double NOT NULL DEFAULT 0 AFTER `nama_brng_apotek_bpjs`;
+
+ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `restriksi` varchar(255) NULL DEFAULT NULL AFTER `harga`;
 
 CREATE TABLE IF NOT EXISTS `mapping_pemeriksaan_labpk`  (
   `id_pemeriksaan` int(10) UNSIGNED NOT NULL,
@@ -1208,6 +1272,10 @@ ALTER TABLE `perusahaan_pasien` ADD COLUMN IF NOT EXISTS `no_npwp` varchar(30) N
 
 ALTER TABLE `perusahaan_pasien` MODIFY COLUMN IF EXISTS `nama_perusahaan` varchar(120) NULL DEFAULT NULL AFTER `kode_perusahaan`;
 
+ALTER TABLE `piutang` MODIFY COLUMN IF EXISTS `nota_piutang` varchar(40) NOT NULL FIRST;
+
+ALTER TABLE `detailpiutang` ADD CONSTRAINT `detailpiutang_ibfk_1` FOREIGN KEY IF NOT EXISTS (`nota_piutang`) REFERENCES `piutang` ON DELETE CASCADE ON UPDATE CASCADE;
+
 CREATE TABLE IF NOT EXISTS `pintu_smc`  (
   `kd_pintu` varchar(20) NOT NULL DEFAULT '',
   `nm_pintu` varchar(50) NULL DEFAULT NULL,
@@ -1426,6 +1494,8 @@ ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `sistem_import_koding` enum('','IDRG','INA-CBG') NULL DEFAULT NULL AFTER `pemberlakuan_2x24_jam`;
 
+ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `kode_ppkapotek` varchar(15) NULL DEFAULT NULL AFTER `sistem_import_koding`;
+
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `lamasakit` varchar(20) NULL DEFAULT NULL AFTER `kd_dokter`;
@@ -1439,6 +1509,12 @@ ALTER TABLE `surat_keterangan_sehat` MODIFY COLUMN IF EXISTS `butawarna` enum('Y
 ALTER TABLE `suratsakitpihak2` MODIFY COLUMN IF EXISTS `hubungan` enum('Suami','Istri','Anak','Ayah','Ibu','Saudara','Keponakan') NOT NULL AFTER `alamat`;
 
 ALTER TABLE `suratsakitpihak2` ADD PRIMARY KEY IF NOT EXISTS (`no_surat`) USING BTREE;
+
+ALTER TABLE `tamppiutang` DROP INDEX IF EXISTS `PRIMARY`;
+
+ALTER TABLE `tamppiutang` ADD PRIMARY KEY IF NOT EXISTS (`petugas`, `kode_brng`, `no_batch`, `no_faktur`);
+
+ALTER TABLE `tamppiutang` ADD COLUMN IF NOT EXISTS `no_racik` varchar(2) NULL DEFAULT NULL AFTER `aturan_pakai`;
 
 CREATE TABLE IF NOT EXISTS `tampjurnal_rvpbpjs`  (
   `kd_rek` char(15) NOT NULL,
@@ -1585,6 +1661,16 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kompilasi_berkas_klaim` enum('
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pindah_kamar_pilihan_2` enum('true','false') NULL DEFAULT NULL AFTER `ringkasan_hutang_vendor_dapur`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `set_pintu_poli` enum('true','false') NULL DEFAULT NULL AFTER `validasi_pengujian_sampel_lab_kesehatan_lingkungan`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_kirim_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `parameter_pengujian_lab_kesehatan_lingkungan`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_edit_kirim_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_kirim_obat_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_edit_kirim_obat_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_riwayat_obat_smc`;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_resep_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_riwayat_pelayanan_obat_smc`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 

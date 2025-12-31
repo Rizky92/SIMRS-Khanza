@@ -344,6 +344,10 @@ public class koneksiDB {
         }
     }
 
+    public static boolean BRIDGINGAPOTEKBPJSPROSESKEUANGANDANSTOKOBAT() {
+        return false;
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
@@ -687,11 +691,10 @@ public class koneksiDB {
     public static String URLAPIAPOTEKBPJS(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("URLAPIAPOTEKBPJS");
-        }catch(Exception e){
-            var=""; 
+            return prop.getProperty("URLAPIAPOTEKBPJS", "");
+        } catch (Exception e) {
+            return "";
         }
-        return var;
     }
     
     public static String SECRETKEYAPIAPOTEKBPJS(){
@@ -1065,11 +1068,10 @@ public class koneksiDB {
     public static String AKTIFKANBATCHOBAT(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
-            var=prop.getProperty("AKTIFKANBATCHOBAT");
-        }catch(Exception e){
-            var=""; 
+            return prop.getProperty("AKTIFKANBATCHOBAT", "");
+        } catch (Exception e) {
+            return "";
         }
-        return var;
     }
     
     public static String CETAKRINCIANOBAT(){

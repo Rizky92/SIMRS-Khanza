@@ -467,4 +467,12 @@ public final class DlgCariMetodeRacik extends javax.swing.JDialog {
     public void isCek(){
         BtnTambah.setEnabled(akses.getmetode_racik());
     }
+
+    public boolean hasSelection() {
+        return tbKamar.getSelectedRow() >= 0;
+    }
+    
+    public Object getSelectedValue(int column) {
+        return tbKamar.getValueAt(tbKamar.getSelectedRow(), column);
+    }
 }
