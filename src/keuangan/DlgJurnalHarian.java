@@ -96,19 +96,19 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        tampil();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        tampil();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                        tampil();
                     }
                 }
             });
@@ -550,7 +550,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil());
+        tampil();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -569,7 +569,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         tipe.setText("");
         balance.setText("");
         saldoawal.setText("");
-        runBackground(() ->tampil());
+        tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -724,15 +724,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         int p = 0;
                         ps.setString(++p, Valid.getTglSmc(TglJurnal1));
                         ps.setString(++p, Valid.getTglSmc(TglJurnal2));
+
                         if (!NoJur.getText().isBlank()) {
                             ps.setString(++p, NoJur.getText().trim() + "%");
                         }
+
                         if (!NoBukti.getText().isBlank()) {
                             ps.setString(++p, NoBukti.getText().trim() + "%");
                         }
+
                         if (!kdrek.getText().isBlank()) {
                             ps.setString(++p, kdrek.getText().trim() + "%");
                         }
+
                         if (!TCari.getText().isBlank()) {
                             ps.setString(++p, "%" + TCari.getText().trim() + "%");
                             ps.setString(++p, "%" + TCari.getText().trim() + "%");
@@ -740,30 +744,27 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             ps.setString(++p, "%" + TCari.getText().trim() + "%");
                             ps.setString(++p, "%" + TCari.getText().trim() + "%");
                         }
+
                         try (ResultSet rs = ps.executeQuery()) {
                             if (rs.next()) {
                                 String waktujurnal = "";
                                 do {
                                     ttldebet += rs.getDouble("debet");
                                     ttlkredit += rs.getDouble("kredit");
-                                    if (!waktujurnal.isBlank() && !(rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal")).equals(waktujurnal)) {
+
+                                    if (!(rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal")).equals(waktujurnal)) {
                                         publish(new Object[] {"", "", "", "", null, null});
                                     }
-                                    if (rs.getDouble("kredit") > 0) {
-                                        publish(new Object[] {
-                                            rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal"), rs.getString("kd_rek"), "     " + rs.getString("nm_rek"),
-                                            "No.Jur " + rs.getString("no_jurnal") + ", No.Buk " + rs.getString("no_bukti") + ", " + rs.getString("keterangan"),
-                                            rs.getDouble("debet"), rs.getDouble("kredit")
-                                        });
-                                    } else {
-                                        publish(new Object[] {
-                                            rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal"), rs.getString("kd_rek"), rs.getString("nm_rek"),
-                                            "No.Jur " + rs.getString("no_jurnal") + ", No.Buk " + rs.getString("no_bukti") + ", " + rs.getString("keterangan"),
-                                            rs.getDouble("debet"), rs.getDouble("kredit")
-                                        });
-                                    }
+
+                                    publish(new Object[] {
+                                        rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal"), rs.getString("kd_rek"), (rs.getDouble("kredit") > 0 ? "     " : "") + rs.getString("nm_rek"),
+                                        "No.Jur " + rs.getString("no_jurnal") + ", No.Buk " + rs.getString("no_bukti") + ", " + rs.getString("keterangan"),
+                                        rs.getDouble("debet"), rs.getDouble("kredit")
+                                    });
+
                                     waktujurnal = rs.getString("tgl_jurnal") + " " + rs.getString("jam_jurnal");
                                 } while (rs.next() && ceksukses);
+
                                 if (ttldebet > 0 || ttlkredit > 0) {
                                     publish(new Object[] {"", "", "", "", null, null});
                                     publish(new Object[] {"Jumlah Total :", "", "", "", ttldebet, ttlkredit});
