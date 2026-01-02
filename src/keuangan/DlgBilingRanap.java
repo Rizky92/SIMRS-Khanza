@@ -3105,8 +3105,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             rawatinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             rawatinap.setLocationRelativeTo(internalFrame1);
             rawatinap.isCek();
-            rawatinap.setNoRm(TNoRw.getText(),DTPTgl.getDate(),new Date());
-            rawatinap.tampilDr();
+            rawatinap.setNoRm(TNoRw.getText(),DTPTgl.getDate(),new Date());  
             rawatinap.setVisible(true);
         }
     }//GEN-LAST:event_MnRawatInapActionPerformed
@@ -4092,7 +4091,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 rawatinap.setLocationRelativeTo(internalFrame1);
                 rawatinap.isCek();
                 rawatinap.setNoRm(norawatbayi,DTPTgl.getDate(),new Date());
-                rawatinap.tampilDr();
                 rawatinap.setVisible(true);
             }
         }

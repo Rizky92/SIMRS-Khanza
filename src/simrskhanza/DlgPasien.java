@@ -5921,7 +5921,7 @@ public class DlgPasien extends javax.swing.JDialog {
             DlgIKBBayi resume=new DlgIKBBayi(null,false);
             resume.setNoRM(TNo.getText(),TNm.getText(),NmIbu.getText(),Alamat.getText()+", "+Kelurahan.getText()+", "+Kecamatan.getText()+", "+Kabupaten.getText(),CmbJk.getSelectedItem().toString(),
                     TUmurTh.getText()+" Th "+TUmurBl.getText()+" Bl "+TUmurHr.getText()+" Hr",DTPLahir.getDate(),DTPDaftar.getDate());
-            resume.tampil();
+            resume.tampil2();
             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             resume.setLocationRelativeTo(internalFrame1);
             resume.setVisible(true);

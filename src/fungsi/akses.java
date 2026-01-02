@@ -256,9 +256,9 @@ public final class akses {
             nilai_normal_baku_mutu_lab_kesehatan_lingkungan=false,skrining_pneumonia_severity_index=false,permintaan_pengujian_sampel_lab_kesehatan_lingkungan=false,
             penilaian_awal_medis_ralan_jantung=false,penilaian_awal_medis_ralan_urologi=false,hasil_pemeriksaan_treadmill=false,hasil_pemeriksaan_echo_pediatrik=false,
             template_pelaksanaan_informasi_edukasi=false,skrining_instrumen_esat=false,penilaian_awal_medis_ranap_jantung=false,e_eksekutif=false,penugasan_pengujian_sampel_lab_kesehatan_lingkungan=false,
-            hasil_pengujian_sampel_lab_kesehatan_lingkungan=false,verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false,validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,set_pintu_poli=false,
-            rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false;
-    private static boolean bpjs_kirim_obat_smc=false,bpjs_edit_kirim_obat_smc=false,bpjs_riwayat_obat_smc=false,bpjs_riwayat_pelayanan_obat_smc=false,bpjs_riwayat_pelayanan_resep_smc=false;
+            hasil_pengujian_sampel_lab_kesehatan_lingkungan=false,verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false,validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,
+            rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false,bpjs_potensi_prb=false;
+    private static boolean bpjs_kirim_obat_smc=false,bpjs_edit_kirim_obat_smc=false,bpjs_riwayat_obat_smc=false,bpjs_riwayat_pelayanan_obat_smc=false,bpjs_riwayat_pelayanan_resep_smc=false,set_pintu_poli=false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1468,6 +1468,7 @@ public final class akses {
                         akses.rekap_pelayanan_lab_kesehatan_lingkungan=rs2.getBoolean("rekap_pelayanan_lab_kesehatan_lingkungan");
                         akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=rs2.getBoolean("pembayaran_pengujian_sampel_lab_kesehatan_lingkungan");
                         akses.skrining_curb65=rs2.getBoolean("skrining_curb65");
+                        akses.bpjs_potensi_prb=rs2.getBoolean("bpjs_potensi_prb");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2687,6 +2688,7 @@ public final class akses {
         akses.rekap_pelayanan_lab_kesehatan_lingkungan=isadmin;
         akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=isadmin;
         akses.skrining_curb65=isadmin;
+        akses.bpjs_potensi_prb=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3912,6 +3914,7 @@ public final class akses {
     public static boolean getrekap_pelayanan_lab_kesehatan_lingkungan(){return akses.rekap_pelayanan_lab_kesehatan_lingkungan;}
     public static boolean getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan(){return akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan;}
     public static boolean getskrining_curb65(){return akses.skrining_curb65;}
+    public static boolean getbpjs_potensi_prb(){return akses.bpjs_potensi_prb;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {

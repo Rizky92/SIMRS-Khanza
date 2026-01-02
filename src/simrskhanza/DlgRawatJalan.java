@@ -247,7 +247,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     private double ttljmdokter=0,ttljmperawat=0,ttlkso=0,ttljasasarana=0,ttlbhp=0,ttlmenejemen=0,ttlpendapatan=0;
     private Jurnal jur=new Jurnal();
     private widget.TextBox TanggalRegistrasi;
-    
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
@@ -9560,7 +9559,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
-            form.tampil();
+            form.tampil2();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }

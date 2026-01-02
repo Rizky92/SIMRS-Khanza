@@ -14518,7 +14518,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),TNoRMCari.getText(),TPasienCari.getText());
-                form.tampil();
+                form.tampil2();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14562,7 +14562,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRwCari.getText(),TNoRMCari.getText(),TPasienCari.getText());
-                form.tampil();
+                form.tampil2();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }

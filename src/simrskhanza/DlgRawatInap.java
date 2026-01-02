@@ -44,6 +44,7 @@ import java.util.Map;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -166,7 +167,8 @@ import rekammedis.RMSkriningNutrisiDewasa;
 import rekammedis.RMSkriningNutrisiLansia;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
-import surat.SuratKontrol;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  *
@@ -178,6 +180,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
     private Connection koneksi=koneksiDB.condb();
     public  DlgCariPerawatanRanap perawatan=new DlgCariPerawatanRanap(null,false);
     public  DlgCariPerawatanRanap2 perawatan2=new DlgCariPerawatanRanap2(null,false);
@@ -730,54 +734,81 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        if(TabRawat.getSelectedIndex()==0){
-                            tampilDr();
-                        }else if(TabRawat.getSelectedIndex()==1){
-                            tampilPr();
-                        }else if(TabRawat.getSelectedIndex()==2){
-                            tampilDrPr();
-                        }else if(TabRawat.getSelectedIndex()==3){
-                            tampilPemeriksaan();
-                        }else if(TabRawat.getSelectedIndex()==4){
-                            tampilPemeriksaanObstetri();
-                        }else if(TabRawat.getSelectedIndex()==5){
-                            tampilPemeriksaanGinekologi();
+                        switch (TabRawat.getSelectedIndex()) {
+                            case 0:
+                                runBackground(() ->tampilDr());
+                                break;
+                            case 1:
+                                runBackground(() ->tampilPr());
+                                break;
+                            case 2:
+                                runBackground(() ->tampilDrPr());
+                                break;
+                            case 3:
+                                runBackground(() ->tampilPemeriksaan());
+                                break;
+                            case 4:
+                                runBackground(() ->tampilPemeriksaanObstetri());
+                                break;
+                            case 5:
+                                runBackground(() ->tampilPemeriksaanGinekologi());
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        if(TabRawat.getSelectedIndex()==0){
-                            tampilDr();
-                        }else if(TabRawat.getSelectedIndex()==1){
-                            tampilPr();
-                        }else if(TabRawat.getSelectedIndex()==2){
-                            tampilDrPr();
-                        }else if(TabRawat.getSelectedIndex()==3){
-                            tampilPemeriksaan();
-                        }else if(TabRawat.getSelectedIndex()==4){
-                            tampilPemeriksaanObstetri();
-                        }else if(TabRawat.getSelectedIndex()==5){
-                            tampilPemeriksaanGinekologi();
+                        switch (TabRawat.getSelectedIndex()) {
+                            case 0:
+                                runBackground(() ->tampilDr());
+                                break;
+                            case 1:
+                                runBackground(() ->tampilPr());
+                                break;
+                            case 2:
+                                runBackground(() ->tampilDrPr());
+                                break;
+                            case 3:
+                                runBackground(() ->tampilPemeriksaan());
+                                break;
+                            case 4:
+                                runBackground(() ->tampilPemeriksaanObstetri());
+                                break;
+                            case 5:
+                                runBackground(() ->tampilPemeriksaanGinekologi());
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        if(TabRawat.getSelectedIndex()==0){
-                            tampilDr();
-                        }else if(TabRawat.getSelectedIndex()==1){
-                            tampilPr();
-                        }else if(TabRawat.getSelectedIndex()==2){
-                            tampilDrPr();
-                        }else if(TabRawat.getSelectedIndex()==3){
-                            tampilPemeriksaan();
-                        }else if(TabRawat.getSelectedIndex()==4){
-                            tampilPemeriksaanObstetri();
-                        }else if(TabRawat.getSelectedIndex()==5){
-                            tampilPemeriksaanGinekologi();
+                        switch (TabRawat.getSelectedIndex()) {
+                            case 0:
+                                runBackground(() ->tampilDr());
+                                break;
+                            case 1:
+                                runBackground(() ->tampilPr());
+                                break;
+                            case 2:
+                                runBackground(() ->tampilDrPr());
+                                break;
+                            case 3:
+                                runBackground(() ->tampilPemeriksaan());
+                                break;
+                            case 4:
+                                runBackground(() ->tampilPemeriksaanObstetri());
+                                break;
+                            case 5:
+                                runBackground(() ->tampilPemeriksaanGinekologi());
+                                break;
+                            default:
+                                break;
                         }
                     }
                 }
@@ -5432,22 +5463,22 @@ public final class DlgRawatInap extends javax.swing.JDialog {
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         switch (TabRawat.getSelectedIndex()) {
             case 0:
-                tampilDr();
+                runBackground(() ->tampilDr());
                 break;
             case 1:
-                tampilPr();
+                runBackground(() ->tampilPr());
                 break;
             case 2:
-                tampilDrPr();
+                runBackground(() ->tampilDrPr());
                 break;
             case 3:
-                tampilPemeriksaan();
+                runBackground(() ->tampilPemeriksaan());
                 break;
             case 4:
-                tampilPemeriksaanObstetri();
+                runBackground(() ->tampilPemeriksaanObstetri());
                 break;
             case 5:
-                tampilPemeriksaanGinekologi();
+                runBackground(() ->tampilPemeriksaanGinekologi());
                 break;
             default:
                 break;
@@ -5466,22 +5497,22 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         isJns();
         switch (TabRawat.getSelectedIndex()) {
             case 0:
-                tampilDr();
+                runBackground(() ->tampilDr());
                 break;
             case 1:
-                tampilPr();
+                runBackground(() ->tampilPr());
                 break;
             case 2:
-                tampilDrPr();
+                runBackground(() ->tampilDrPr());
                 break;
             case 3:
-                tampilPemeriksaan();
+                runBackground(() ->tampilPemeriksaan());
                 break;
             case 4:
-                tampilPemeriksaanObstetri();
+                runBackground(() ->tampilPemeriksaanObstetri());
                 break;
             case 5:
-                tampilPemeriksaanGinekologi();
+                runBackground(() ->tampilPemeriksaanGinekologi());
                 break;
             default:
                 break;
@@ -8305,7 +8336,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
-            form.tampil();
+            form.tampil2();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -9117,7 +9148,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                           BtnPelaksanaanInformasiEdukasi,BtnCatatanObservasiHemodialisa,BtnCatatanCairanHemodialisa,BtnCatatanPengkajianPaskaOperasi,BtnCatatanObservasiBayi,BtnChecklistKesiapanAnestesi,BtnHasilPemeriksaanSlitLamp,BtnHasilPemeriksaanOCT,
                           BtnChecklistKriteriaMasukNICU,BtnChecklistKriteriaKeluarNICU,BtnAwalMedisPsikiatri,BtnChecklistKriteriaMasukPICU,BtnChecklistKriteriaKeluarPICU,BtnHasilPemeriksaanTreadmill,BtnHasilPemeriksaanECHOPediatrik,BtnAwalMedisJantung;
 
-    public void tampilDr() {
+    private void tampilDr() {
         Valid.tabelKosong(tabModeDr);
         try{
             if(TCari.getText().equals("")&&TCariPasien.getText().equals("")){
@@ -9290,7 +9321,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         }
     }
 
-    public void tampilDrPr() {
+    private void tampilDrPr() {
         Valid.tabelKosong(tabModeDrPr);
         try{
             if(TCari.getText().equals("")&&TCariPasien.getText().equals("")){
@@ -11794,5 +11825,23 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         tbPemeriksaanObstetri.clearSelection();
         tbPemeriksaanGinekologi.clearSelection();
         TNoRw.requestFocus();
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
     }
 }
