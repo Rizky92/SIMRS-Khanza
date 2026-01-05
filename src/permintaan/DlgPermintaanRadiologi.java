@@ -926,10 +926,9 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_DiagnosisKlinisKeyPressed
 
     private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
-        try {
+        if(this.isActive()==true){
             autoNomor();
-        } catch (Exception e) {
-        }
+        } 
     }//GEN-LAST:event_TanggalItemStateChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
