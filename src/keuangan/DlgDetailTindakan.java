@@ -2947,42 +2947,40 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         switch (TabRawat.getSelectedIndex()) {
             case 0:
-                CetakRalanDokter();
+                runBackground(() -> CetakRalanDokter());
                 break;
             case 1:
-                CetakRalanParamedis();
+                runBackground(() -> CetakRalanParamedis());
                 break;
             case 2:
-                CetakRalanDokterParamedis();
+                runBackground(() -> CetakRalanDokterParamedis());
                 break;
             case 3:
-                CetakOperasi();
+                runBackground(() -> CetakOperasi());
                 break;
             case 4:
-                CetakRanapDokter();
+                runBackground(() -> CetakRanapDokter());
                 break;
             case 5:
-                CetakRanapParamedis();
+                runBackground(() -> CetakRanapParamedis());
                 break;
             case 6:
-                CetakRanapDokterParamedis();
+                runBackground(() -> CetakRanapDokterParamedis());
                 break;
             case 7:
-                CetakRadiologi();
+                runBackground(() -> CetakRadiologi());
                 break;
             case 8:
-                CetakLab();
+                runBackground(() -> CetakLab());
                 break;
             case 9:
-                CetakDetailLab();
+                runBackground(() -> CetakDetailLab());
                 break;
             default:
-                    break;
+                break;
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void Tgl1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Tgl1KeyPressed
@@ -3153,7 +3151,7 @@ public final class DlgDetailTindakan extends javax.swing.JDialog {
             default:
                 break;
         }
-        // TabRawatMouseClicked(null);
+        BtnCariActionPerformed(null);
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed

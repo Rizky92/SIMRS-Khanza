@@ -670,12 +670,12 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-        runBackground(() ->tampil());
+        tampil();
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-            runBackground(() ->tampil());
+            tampil();
         }else{
             Valid.pindah(evt, TKd, BtnPrint);
         }
@@ -705,7 +705,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                    runBackground(() ->tampil());
+                    tampil();
                 }      
                 kdpenjab.requestFocus();
             }
@@ -748,7 +748,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
         KdPoli.setText("");
         NmPoli.setText("");
         StatusLunas.setSelectedIndex(0);
-        runBackground(() ->tampil());
+        tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
