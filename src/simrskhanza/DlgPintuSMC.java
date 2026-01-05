@@ -3,12 +3,11 @@
  * and open the template in the editor.
  */
 
-/*
+ /*
  * DlgPenyakit.java
  *
  * Created on May 23, 2010, 12:57:16 AM
  */
-
 package simrskhanza;
 
 import fungsi.WarnaTable;
@@ -23,7 +22,6 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JButton;
@@ -39,99 +37,89 @@ import restore.DlgRestorePoli;
  *
  * @author dosen
  */
-public final class DlgPintu extends javax.swing.JDialog {
+public final class DlgPintuSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
-    private sekuel Sequel=new sekuel();
-    private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
-    private int i=0;
-    private PreparedStatement stat;
-    private ResultSet rs;
-    /** Creates new form DlgPenyakit
+    private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
+    private final Connection koneksi = koneksiDB.condb();
+
+    /**
+     * Creates new form DlgPenyakit
+     *
      * @param parent
-     * @param modal */
-    public DlgPintu(java.awt.Frame parent, boolean modal) {
+     * @param modal
+     */
+    public DlgPintuSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setLocation(10,2);
-        setSize(628,674);
+        this.setLocation(10, 2);
+        setSize(628, 674);
 
-        Object[] row={"P","Kode Pintu","Nama Pintu"};
-        tabMode=new DefaultTableModel(null,row){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if (colIndex==0) {
-                    a=true;
-                }
-                return a;
-             }
-             Class[] types = new Class[] {
-                java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
-                return types [columnIndex];
-             }
+        tabMode = new DefaultTableModel(null, new Object[] {"Kode Pintu", "Nama Pintu"}) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                return String.class;
+            }
         };
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
-        tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
+        tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 2; i++) {
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
-            if(i==0){
+            if (i == 0) {
                 column.setPreferredWidth(20);
-            }else if(i==1){
+            } else if (i == 1) {
                 column.setPreferredWidth(90);
-            }else if(i==2){
+            } else if (i == 2) {
                 column.setPreferredWidth(300);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        Kd.setDocument(new batasInput((byte)5).getKata(Kd));
-        Nm.setDocument(new batasInput((byte)50).getKata(Nm));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
-        if(koneksiDB.CARICEPAT().equals("aktif")){
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+
+        Kd.setDocument(new batasInput((byte) 5).getKata(Kd));
+        Nm.setDocument(new batasInput((byte) 50).getKata(Nm));
+        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+        if (koneksiDB.CARICEPAT().equals("aktif")) {
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        tampil(" order by kd_pintu");
+                    if (TCari.getText().length() > 2) {
+                        tampil();
                     }
                 }
+
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        tampil(" order by kd_pintu");
+                    if (TCari.getText().length() > 2) {
+                        tampil();
                     }
                 }
+
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        tampil(" order by kd_pintu");
+                    if (TCari.getText().length() > 2) {
+                        tampil();
                     }
                 }
             });
-        }  
+        }
     }
 
-
-    /** This method is called from within the constructor to
-     * initialize the form.
-     * WARNING: Do NOT modify this code. The content of this method is
-     * always regenerated by the Form Editor.
+    /**
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         Popup = new javax.swing.JPopupMenu();
-        ppOrder = new javax.swing.JMenu();
-        ppOrderKode = new javax.swing.JMenuItem();
-        ppOrderNama = new javax.swing.JMenuItem();
-        ppOrderKtg = new javax.swing.JMenuItem();
         MnRestore = new javax.swing.JMenuItem();
         Kd2 = new widget.TextBox();
         internalFrame1 = new widget.InternalFrame();
@@ -159,63 +147,6 @@ public final class DlgPintu extends javax.swing.JDialog {
         BtnKeluar = new widget.Button();
 
         Popup.setName("Popup"); // NOI18N
-
-        ppOrder.setBackground(new java.awt.Color(245, 255, 250));
-        ppOrder.setForeground(new java.awt.Color(50, 50, 50));
-        ppOrder.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppOrder.setText("Urutkan Berdasar");
-        ppOrder.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ppOrder.setName("ppOrder"); // NOI18N
-
-        ppOrderKode.setBackground(new java.awt.Color(254, 254, 254));
-        ppOrderKode.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ppOrderKode.setForeground(new java.awt.Color(50, 50, 50));
-        ppOrderKode.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppOrderKode.setText("Kode Unit");
-        ppOrderKode.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppOrderKode.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppOrderKode.setName("ppOrderKode"); // NOI18N
-        ppOrderKode.setPreferredSize(new java.awt.Dimension(150, 25));
-        ppOrderKode.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppOrderKodeActionPerformed(evt);
-            }
-        });
-        ppOrder.add(ppOrderKode);
-
-        ppOrderNama.setBackground(new java.awt.Color(254, 254, 254));
-        ppOrderNama.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ppOrderNama.setForeground(new java.awt.Color(50, 50, 50));
-        ppOrderNama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppOrderNama.setText("Nama Unit");
-        ppOrderNama.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppOrderNama.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppOrderNama.setName("ppOrderNama"); // NOI18N
-        ppOrderNama.setPreferredSize(new java.awt.Dimension(150, 25));
-        ppOrderNama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppOrderNamaActionPerformed(evt);
-            }
-        });
-        ppOrder.add(ppOrderNama);
-
-        ppOrderKtg.setBackground(new java.awt.Color(254, 254, 254));
-        ppOrderKtg.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
-        ppOrderKtg.setForeground(new java.awt.Color(50, 50, 50));
-        ppOrderKtg.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        ppOrderKtg.setText("Registrasi");
-        ppOrderKtg.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        ppOrderKtg.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        ppOrderKtg.setName("ppOrderKtg"); // NOI18N
-        ppOrderKtg.setPreferredSize(new java.awt.Dimension(150, 25));
-        ppOrderKtg.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ppOrderKtgActionPerformed(evt);
-            }
-        });
-        ppOrder.add(ppOrderKtg);
-
-        Popup.add(ppOrder);
 
         MnRestore.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         MnRestore.setForeground(new java.awt.Color(50, 50, 50));
@@ -249,7 +180,7 @@ public final class DlgPintu extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pintu ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Pintu Ruangan Untuk Poli SMC ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -499,206 +430,206 @@ public final class DlgPintu extends javax.swing.JDialog {
         internalFrame1.add(jPanel1, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
-        internalFrame1.getAccessibleContext().setAccessibleName("::[ Data Pintu ]::");
         internalFrame1.getAccessibleContext().setAccessibleDescription("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKeyPressed
-        Valid.pindah(evt,TCari,Nm);
-}//GEN-LAST:event_KdKeyPressed
+        Valid.pindah(evt, TCari, Nm);
+    }//GEN-LAST:event_KdKeyPressed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        if(Kd.getText().trim().equals("")){
-            Valid.textKosong(Kd,"Kode Pintu");
-        }else if(Nm.getText().trim().equals("")){
-            Valid.textKosong(Nm,"Nama Pintu");
-        }else{
-            if(Sequel.menyimpantf("pintu_smc","'"+Kd.getText()+"','"+Nm.getText()+"','1'","Kode Pintu")==true){
-                tabMode.addRow(new Object[]{
-                    false,Kd.getText(),Nm.getText()
-                });
-                LCount.setText(""+tabMode.getRowCount());
+        if (Kd.getText().isBlank()) {
+            Valid.textKosong(Kd, "Kode Pintu");
+        } else if (Nm.getText().isBlank()) {
+            Valid.textKosong(Nm, "Nama Pintu");
+        } else {
+            if (Sequel.menyimpantfSmc("pintu_smc", "", Kd.getText(), Nm.getText(), "1")) {
+                tabMode.addRow(new Object[] {Kd.getText(), Nm.getText()});
+                LCount.setText("" + tabMode.getRowCount());
                 emptTeks();
             }
         }
-}//GEN-LAST:event_BtnSimpanActionPerformed
+    }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnSimpanActionPerformed(null);
-        }else{
-            Valid.pindah(evt,BtnAll,BtnBatal);
+        } else {
+            Valid.pindah(evt, BtnAll, BtnBatal);
         }
-}//GEN-LAST:event_BtnSimpanKeyPressed
+    }//GEN-LAST:event_BtnSimpanKeyPressed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         emptTeks();
-}//GEN-LAST:event_BtnBatalActionPerformed
+    }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             emptTeks();
-        }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
-}//GEN-LAST:event_BtnBatalKeyPressed
+        } else {
+            Valid.pindah(evt, BtnSimpan, BtnHapus);
+        }
+    }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        for(i=0;i<tbKamar.getRowCount();i++){ 
-            if(tbKamar.getValueAt(i,0).toString().equals("true")){
-                Sequel.mengedit("pintu_smc","kd_pintu='"+tbKamar.getValueAt(i,1).toString()+"'","status='0'");
-                tabMode.removeRow(i);
-                i--;
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else if (tbKamar.getSelectedRow() < 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih dulu data yang mau dihapus..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        } else {
+            if (Sequel.mengupdatetfSmc("pintu_smc", "status = '0'", "kd_pintu = ?", tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString())) {
+                tabMode.removeRow(tbKamar.getSelectedRow());
+                emptTeks();
+                LCount.setText("" + tabMode.getRowCount());
+            } else {
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menonaktifkan pintu..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
             }
-        } 
-        emptTeks();
-        LCount.setText(""+tabMode.getRowCount());
-}//GEN-LAST:event_BtnHapusActionPerformed
+        }
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnHapusActionPerformed(null);
-        }else{
+        } else {
             Valid.pindah(evt, BtnBatal, BtnEdit);
         }
-}//GEN-LAST:event_BtnHapusKeyPressed
+    }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        if(Kd.getText().trim().equals("")){
-            Valid.textKosong(Kd,"Kode Pintu");
-        }else if(Nm.getText().trim().equals("")){
-            Valid.textKosong(Nm,"Nama Pintu");
-        }else{
-            if (tbKamar.getSelectedRow() != -1) {
-                if (Valid.editTabletf(tabMode, "pintu_smc", "kd_pintu", Kd2,
-                        "kd_pintu='" + Kd.getText() + "', nm_pintu='" + Nm.getText() + "'")) {
-                    tbKamar.setValueAt(Kd.getText(), tbKamar.getSelectedRow(), 1);
-                    tbKamar.setValueAt(Nm.getText(), tbKamar.getSelectedRow(), 2);
+        if (Kd.getText().isBlank()) {
+            Valid.textKosong(Kd, "Kode Pintu");
+        } else if (Nm.getText().isBlank()) {
+            Valid.textKosong(Nm, "Nama Pintu");
+        } else {
+            if (tabMode.getRowCount() == 0) {
+                JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            } else if (tbKamar.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih dulu data yang mau diubah..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            } else {
+                if (Sequel.mengupdatetfSmc("pintu_smc", "kd_pintu = ?, nm_pintu = ?", "kd_pintu = ?",
+                    Kd.getText(), Nm.getText(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString()
+                )) {
+                    tbKamar.setValueAt(Kd.getText(), tbKamar.getSelectedRow(), 0);
+                    tbKamar.setValueAt(Nm.getText(), tbKamar.getSelectedRow(), 1);
                     emptTeks();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengupdate data pintu..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
-}//GEN-LAST:event_BtnEditActionPerformed
+    }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnEditActionPerformed(null);
-        }else{
+        } else {
             Valid.pindah(evt, BtnHapus, BtnPrint);
         }
-}//GEN-LAST:event_BtnEditKeyPressed
+    }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             dispose();
-        }else{Valid.pindah(evt,BtnEdit,TCari);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+        } else {
+            Valid.pindah(evt, BtnEdit, TCari);
+        }
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         BtnCariActionPerformed(evt);
-        if(tabMode.getRowCount()==0){
-            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
-        }else if(tabMode.getRowCount()!=0){     
-                    Map<String, Object> param = new HashMap<>();  
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));        
-            Valid.MyReportqry("rptPintu.jasper","report","::[ Data Pintu ]::","select kd_pintu, nm_pintu "+
-                " from pintu_smc where status='1' and kd_pintu like '%"+TCari.getText().trim()+"%' or "+
-                " status='1' and nm_pintu like '%"+TCari.getText().trim()+"%' order by kd_pintu",param);
+        } else if (tabMode.getRowCount() != 0) {
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars", akses.getnamars());
+            param.put("alamatrs", akses.getalamatrs());
+            param.put("kotars", akses.getkabupatenrs());
+            param.put("propinsirs", akses.getpropinsirs());
+            param.put("kontakrs", akses.getkontakrs());
+            param.put("emailrs", akses.getemailrs());
+            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+            Valid.MyReportqry("rptPintu.jasper", "report", "::[ Data Pintu ]::", "select kd_pintu, nm_pintu " +
+                " from pintu_smc where status='1' and kd_pintu like '%" + TCari.getText().trim() + "%' or " +
+                " status='1' and nm_pintu like '%" + TCari.getText().trim() + "%' order by kd_pintu", param);
         }
         this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnPrintActionPerformed
+    }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnPrintActionPerformed(null);
-        }else{
+        } else {
             Valid.pindah(evt, BtnEdit, BtnKeluar);
         }
-}//GEN-LAST:event_BtnPrintKeyPressed
+    }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnCariActionPerformed(null);
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             BtnCari.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
             BtnKeluar.requestFocus();
         }
-}//GEN-LAST:event_TCariKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil(" order by kd_pintu");
-}//GEN-LAST:event_BtnCariActionPerformed
+        tampil();
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
-        }else{
+        } else {
             Valid.pindah(evt, TCari, BtnAll);
         }
-}//GEN-LAST:event_BtnCariKeyPressed
+    }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        tampil(" order by kd_pintu");
-}//GEN-LAST:event_BtnAllActionPerformed
+        tampil();
+    }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnAllActionPerformed(null);
-        }else{
+        } else {
             Valid.pindah(evt, BtnCari, TCari);
         }
-}//GEN-LAST:event_BtnAllKeyPressed
+    }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if(tabMode.getRowCount()!=0){
+        if (tabMode.getRowCount() != 0) {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
         }
-}//GEN-LAST:event_tbKamarMouseClicked
+    }//GEN-LAST:event_tbKamarMouseClicked
 
-private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
-   Valid.pindah(evt,Kd,TCari);
-}//GEN-LAST:event_NmKeyPressed
-
-    private void ppOrderKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppOrderKodeActionPerformed
-        tampil(" order by kd_pintu");
-    }//GEN-LAST:event_ppOrderKodeActionPerformed
-
-    private void ppOrderNamaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppOrderNamaActionPerformed
-        tampil(" order by nm_pintu");
-    }//GEN-LAST:event_ppOrderNamaActionPerformed
-
-    private void ppOrderKtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppOrderKtgActionPerformed
-        //
-    }//GEN-LAST:event_ppOrderKtgActionPerformed
+    private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
+    Valid.pindah(evt, Kd, TCari);
+    }//GEN-LAST:event_NmKeyPressed
 
     private void Kd2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_Kd2KeyPressed
         // TODO add your handling code here:
     }//GEN-LAST:event_Kd2KeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil("");
+        tampil();
     }//GEN-LAST:event_formWindowOpened
 
     private void tbKamarKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyReleased
-        if(tabMode.getRowCount()!=0){
-            if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
+        if (tabMode.getRowCount() != 0) {
+            if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
                 try {
                     getData();
                 } catch (java.lang.NullPointerException e) {
@@ -708,18 +639,18 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     }//GEN-LAST:event_tbKamarKeyReleased
 
     private void MnRestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnRestoreActionPerformed
-        DlgRestorePoli restore=new DlgRestorePoli(null,true);
-        restore.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        DlgRestorePoli restore = new DlgRestorePoli(null, true);
+        restore.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         restore.setLocationRelativeTo(internalFrame1);
         restore.setVisible(true);
     }//GEN-LAST:event_MnRestoreActionPerformed
 
     /**
-    * @param args the command line arguments
-    */
+     * @param args the command line arguments
+     */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgPintu dialog = new DlgPintu(new javax.swing.JFrame(), true);
+            DlgPintuSMC dialog = new DlgPintuSMC(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -756,85 +687,64 @@ private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyP
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi3;
     private widget.panelisi panelisi4;
-    private javax.swing.JMenu ppOrder;
-    private javax.swing.JMenuItem ppOrderKode;
-    private javax.swing.JMenuItem ppOrderKtg;
-    private javax.swing.JMenuItem ppOrderNama;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(String order) {
-        String sql="";
-        if(TCari.getText().equals("")){
-            sql="select pintu_smc.kd_pintu,pintu_smc.nm_pintu "+
-                "from pintu_smc where pintu_smc.status='1' "+order;
-        }else if(!TCari.getText().equals("")){
-            sql="select pintu_smc.kd_pintu,pintu_smc.nm_pintu "+
-                "from pintu_smc where pintu_smc.status='1' and pintu_smc.kd_pintu like '%"+TCari.getText().trim()+"%' or "+
-                "pintu_smc.status='1' and pintu_smc.nm_pintu like '%"+TCari.getText().trim()+"%' "+order;
-        } 
-        prosesCari(sql);
-    }
-
-    private void prosesCari(String sql) {
+    private void tampil() {
         Valid.tabelKosong(tabMode);
-        try {
-            stat=koneksi.prepareStatement(sql);
-            try{
-                rs=stat.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{false,rs.getString(1),rs.getString(2)});
-                }
-            }catch(SQLException e){
-                System.out.println("Notifikasi : "+e);
-            }finally{
-                if( rs != null){
-                    rs.close();
-                }
-                
-                if( stat != null){
-                    stat.close();
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select pintu_smc.kd_pintu, pintu_smc.nm_pintu from pintu_smc where pintu_smc.status = '1' " + (TCari.getText().isBlank() ? "" :
+            "and (pintu_smc.kd_pintu like ? or pintu_smc.nm_pintu like ?) ") + "order by pintu_smc.nm_pintu"
+        )) {
+            int p = 0;
+            if (!TCari.getText().isBlank()) {
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabMode.addRow(new Object[] {rs.getString("kd_pintu"), rs.getString("nm_pintu")});
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+            System.out.println("Notif : " + e);
         }
-            
-        LCount.setText(""+tabMode.getRowCount());
+
+        LCount.setText("" + tabMode.getRowCount());
     }
 
     public void emptTeks() {
         Kd.setText("");
         Kd2.setText("");
         Nm.setText("");
-        Kd.requestFocus();        
-        Valid.autoNomer("pintu_smc","PT",4,Kd);
+        Kd.requestFocus();
+        Kd.setText(Sequel.cariIsiSmc("select concat('PT', lpad(ifnull(max(convert(right(pintu_smc.kd_pintu, 4), signed)), 0) + 1, 4, '0')) from pintu_smc"));
     }
 
     private void getData() {
-        if(tbKamar.getSelectedRow()!= -1){
-            Kd.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
-            Nm.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(),2).toString());
+        if (tbKamar.getSelectedRow() != -1) {
+            Kd.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
+            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
+            Nm.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
         }
     }
 
-    public JTextField getTextField(){
+    public JTextField getTextField() {
         return Kd;
     }
 
-    public JButton getButton(){
+    public JButton getButton() {
         return BtnKeluar;
     }
-    
-    public void isCek(){
+
+    public void isCek() {
         BtnSimpan.setEnabled(akses.getregistrasi());
         BtnHapus.setEnabled(akses.getregistrasi());
         BtnEdit.setEnabled(akses.getregistrasi());
         BtnPrint.setEnabled(akses.getregistrasi());
-        if(akses.getkode().equals("Admin Utama")){
+        if (akses.getkode().equals("Admin Utama")) {
             MnRestore.setEnabled(true);
-        }else{
+        } else {
             MnRestore.setEnabled(false);
         }
     }

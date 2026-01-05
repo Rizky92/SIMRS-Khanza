@@ -935,33 +935,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TglKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            int row2=tbDokter.getRowCount();
-            for(int r=0;r<row2;r++){
-                tbDokter.setValueAt("",r,0);
-            }
+        int row2=tbDokter.getRowCount();
+        for(int r=0;r<row2;r++){
+            tbDokter.setValueAt("",r,0);
+        }
 
-            LTotal.setText("0");
-            LPpn.setText("0");
-            LTotalTagihan.setText("0");
+        LTotal.setText("0");
+        LPpn.setText("0");
+        LTotalTagihan.setText("0");
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
-private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Tgl.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        BtnSimpan.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        BtnGudangActionPerformed(null);
-    }
-    }//GEN-LAST:event_kdgudangKeyPressed
+    private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            Tgl.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnSimpan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            BtnGudangActionPerformed(null);
+        }
+        }//GEN-LAST:event_kdgudangKeyPressed
 
-    private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
-    bangsal.isCek();
-    bangsal.emptTeks();
-    bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    bangsal.setLocationRelativeTo(internalFrame1);
-    bangsal.setAlwaysOnTop(false);
-    bangsal.setVisible(true);
+        private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
+        bangsal.isCek();
+        bangsal.emptTeks();
+        bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        bangsal.setLocationRelativeTo(internalFrame1);
+        bangsal.setAlwaysOnTop(false);
+        bangsal.setVisible(true);
     }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -2109,7 +2109,7 @@ private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil3(String nopermintaan) {
         runBackground(() -> tampil2(nopermintaan));
     }
@@ -3574,7 +3574,7 @@ private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         ceksukses = true;

@@ -71,7 +71,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     public LabKeslingBayarTagihanPengujianSampel(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         tabMode=new DefaultTableModel(null,new Object[]{
               "No.","Nama Parameter","Jumlah","Biaya (Rp)","Total Biaya (Rp)"
             }){
@@ -84,8 +84,8 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
                 return types [columnIndex];
              }
         };
-        tbValidasi.setModel(tabMode);        
-        
+        tbValidasi.setModel(tabMode);
+
         tbValidasi.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbValidasi.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
@@ -104,8 +104,8 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
             }
         }
         tbValidasi.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)"}){             
+
+        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)"}){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if ((colIndex==2)) {
@@ -114,7 +114,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
                 return a;
             }
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                 java.lang.Object.class, java.lang.Object.class
              };
              @Override
@@ -147,8 +147,8 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
         tbAkunBayar.setDefaultRenderer(Object.class,warna);
 
         NoBayar.setDocument(new batasInput((byte)20).getKata(NoBayar));
-        DibayarOleh.setDocument(new batasInput((int)60).getKata(DibayarOleh)); 
-        
+        DibayarOleh.setDocument(new batasInput((int)60).getKata(DibayarOleh));
+
         try {
             ps=koneksi.prepareStatement(
                 "select set_akun2.Suspen_Piutang_Pelayanan_Lab_Kesling from set_akun2"
@@ -167,11 +167,11 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         try {
             ps=koneksi.prepareStatement(
                 "select set_nota.cetaknotasimpanlabkesling,set_nota.tampilkan_tombol_nota_labkesling from set_nota"
@@ -187,7 +187,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
                             BtnNota.setVisible(true);
                         }else{
                             BtnNota.setVisible(false);
-                        }            
+                        }
                     }
                 }
             } catch (Exception e) {
@@ -196,7 +196,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
                     BtnNota.setVisible(true);
                 }else{
                     BtnNota.setVisible(false);
-                } 
+                }
                 System.out.println("Notif Rekening : "+e);
             } finally{
                 if(rs!=null){
@@ -205,11 +205,11 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
                 if(ps!=null){
                     ps.close();
                 }
-            }  
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         ChkJln.setSelected(true);
         jam();
     }
@@ -664,23 +664,23 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-}//GEN-LAST:event_BtnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             dispose();
         }else{Valid.pindah(evt,BtnCari,NoBayar);}
-}//GEN-LAST:event_BtnKeluarKeyPressed
+    }//GEN-LAST:event_BtnKeluarKeyPressed
 
-private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));  
-    LabKeslingRekapPembayaran form=new LabKeslingRekapPembayaran(null,false);
-    form.isCek();
-    form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    form.setLocationRelativeTo(this);
-    form.setVisible(true);
-    this.setCursor(Cursor.getDefaultCursor());
-}//GEN-LAST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        LabKeslingRekapPembayaran form=new LabKeslingRekapPembayaran(null,false);
+        form.isCek();
+        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void TanggalValidasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalValidasiKeyPressed
         Valid.pindah(evt, DibayarOleh, NoBayar);
@@ -717,10 +717,10 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     JOptionPane.showMessageDialog(null,"Maaf, kembali harus bernilai 0 untuk cara bayar lebih dari 1...!!!");
                 }else{
                     isSimpan();
-                }                        
+                }
             }else if(kekurangan==0){
                 isSimpan();
-            } 
+            }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -751,49 +751,49 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             jml=0;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","No.Nota",": "+NoBayar.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
-            }); 
+            });
             jml++;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","No.Permintaan",": "+NoPermintaan.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
-            }); 
+            });
             jml++;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","Nama Pelanggan",": "+NamaPelanggan.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
-            }); 
+            });
             jml++;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","Penerimaan Sample",": "+Valid.SetTgl5(PenerimaanSampel.getText()),"","","","","","","","","","","","","","Header",akses.getkode()
-            }); 
+            });
             jml++;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","Tanggal Uji",": "+Sequel.cariIsi("select concat(date_format(labkesling_verifikasi_pengujian_sampel.mulai_pengujian,'%d/%m/%Y %H:%i:%s'),' s.d. ',date_format(labkesling_verifikasi_pengujian_sampel.selesai_pengujian,'%d/%m/%Y %H:%i:%s')) from labkesling_verifikasi_pengujian_sampel where labkesling_verifikasi_pengujian_sampel.no_permintaan=?",NoPermintaan.getText()),"","","","","","","","","","","","","","Header",akses.getkode()
-            }); 
+            });
             jml++;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","Jenis Sampel",": "+NamaSampel.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
-            }); 
+            });
             jml++;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","Titik Sampling",": "+TitikSampel.getText(),"","","","","","","","","","","","","","Header",akses.getkode()
-            }); 
+            });
             jml++;
-            for(i=0;i<tbValidasi.getRowCount();i++){ 
+            for(i=0;i<tbValidasi.getRowCount();i++){
                 Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                     jml+"",tbValidasi.getValueAt(i,0).toString(),tbValidasi.getValueAt(i,1).toString(),tbValidasi.getValueAt(i,2).toString(),tbValidasi.getValueAt(i,3).toString(),tbValidasi.getValueAt(i,4).toString(),"","","","","","","","","","","Tagihan",akses.getkode()
-                });    
+                });
                 jml++;
             }
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","Total Biaya Pemeriksaan","","","",TtlSemua.getText(),"","","","","","","","","","","Total Tagihan",akses.getkode()
-            });    
+            });
             jml++;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","PPN","","","",Valid.SetAngka(besarppn),"","","","","","","","","","","Total Tagihan",akses.getkode()
-            });    
+            });
             jml++;
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","Total Pembayaran","","","",TagihanPPn.getText(),"","","","","","","","","","","Total Tagihan",akses.getkode()
-            });    
+            });
             jml++;
             for(i=0;i<tbAkunBayar.getRowCount();i++){
                 if(Valid.SetAngka(tbAkunBayar.getValueAt(i,2).toString())>0){
@@ -801,13 +801,13 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                         jml+"","- "+tbAkunBayar.getValueAt(i,0).toString(),"","","",Valid.SetAngka((Valid.SetAngka(tbAkunBayar.getValueAt(i,2).toString())+Valid.SetAngka(tbAkunBayar.getValueAt(i,4).toString()))),"","","","","","","","","","","Total Tagihan",akses.getkode()
                     });
                     jml++;
-                } 
+                }
             }
             Sequel.menyimpan("temporary_bayar_labkesling","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",18,new String[]{
                 jml+"","Dibayar Lunas Oleh ",DibayarOleh.getText(),"","","","","","","","","","","","","","Dibayar",akses.getkode()
-            });    
-            jml++;  
-            
+            });
+            jml++;
+
             i = 0;
             try{
                 pilih = (String)JOptionPane.showInputDialog(null,"Silahkan pilih nota yang mau dicetak!","Nota",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Nota", "Kwitansi", "Nota & Kwitansi"},"Nota");
@@ -825,7 +825,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }catch(Exception e){
                 i=0;
             }
-            if(i>0){ 
+            if(i>0){
                 switch (i) {
                     case 1:
                         Valid.panggilUrl("billing/NotaLabkesLing.php?petugas="+akses.getkode().replaceAll(" ","_")+"&tanggal="+TanggalValidasi.getSelectedItem().toString().replaceAll(" ","_")+"&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB());
@@ -881,7 +881,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_DibayarOlehKeyPressed
 
     private void TabDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabDataMouseClicked
-        
+
     }//GEN-LAST:event_TabDataMouseClicked
 
     private void TtlSemuaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TtlSemuaKeyPressed
@@ -904,8 +904,8 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                                     Valid.roundUp((Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),3).toString())/100)*
                                     Valid.SetAngka(tbAkunBayar.getValueAt(tbAkunBayar.getSelectedRow(),2).toString()),100),tbAkunBayar.getSelectedRow(),4);
                         }else{
-                            tbAkunBayar.setValueAt("",tbAkunBayar.getSelectedRow(),4);                        
-                        }                            
+                            tbAkunBayar.setValueAt("",tbAkunBayar.getSelectedRow(),4);
+                        }
                     }
                 }
                 isKembali();
@@ -1003,9 +1003,9 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     private widget.Table tbAkunBayar;
     private widget.Table tbValidasi;
     // End of variables declaration//GEN-END:variables
-    
-    
-    private void tampil() {   
+
+
+    private void tampil() {
         try {
             Valid.tabelKosong(tabMode);
             myObj = new FileReader("./cache/bayartagihansampellabkesling.iyem");
@@ -1032,7 +1032,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             }
         }
     }
-    
+
     public void setData(String nopermintaan,String kodepelanggan,String namapelanggan,String kodesampel,String namasampel,String titiksampel,String tanggalpenerimaan) {
         NoPermintaan.setText(nopermintaan);
         KodePelanggan.setText(kodepelanggan);
@@ -1043,7 +1043,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         PenerimaanSampel.setText(tanggalpenerimaan);
         autoNomor();
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_jam;
@@ -1099,19 +1099,19 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         new Timer(1000, taskPerformer).start();
     }
 
-    public void isCek(){        
+    public void isCek(){
         BtnSimpan.setEnabled(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan());
         BtnNota.setEnabled(akses.getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan());
     }
-  
+
     private void autoNomor() {
         if(!KodeSampel.getText().trim().equals("")){
-            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(labkesling_pembayaran_pengujian_sampel.no_pembayaran,5),signed)),0) from labkesling_pembayaran_pengujian_sampel where date_format(labkesling_pembayaran_pengujian_sampel.tanggal,'%Y-%m-%d')='"+Valid.SetTgl(TanggalValidasi.getSelectedItem()+"")+"'","LKL"+TanggalValidasi.getSelectedItem().toString().substring(6,10)+TanggalValidasi.getSelectedItem().toString().substring(3,5)+TanggalValidasi.getSelectedItem().toString().substring(0,2),5,NoBayar);   
-        }        
+            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(labkesling_pembayaran_pengujian_sampel.no_pembayaran,5),signed)),0) from labkesling_pembayaran_pengujian_sampel where date_format(labkesling_pembayaran_pengujian_sampel.tanggal,'%Y-%m-%d')='"+Valid.SetTgl(TanggalValidasi.getSelectedItem()+"")+"'","LKL"+TanggalValidasi.getSelectedItem().toString().substring(6,10)+TanggalValidasi.getSelectedItem().toString().substring(3,5)+TanggalValidasi.getSelectedItem().toString().substring(0,2),5,NoBayar);
+        }
     }
-    
-    private void tampilAkunBayar() {         
-        try{      
+
+    private void tampilAkunBayar() {
+        try{
              Valid.tabelKosong(tabModeAkunBayar);
              file=new File("./cache/akunbayar.iyem");
              file.createNewFile();
@@ -1120,7 +1120,7 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
              ps=koneksi.prepareStatement("select * from akun_bayar order by akun_bayar.nama_bayar");
              try{
                  rs=ps.executeQuery();
-                 while(rs.next()){      
+                 while(rs.next()){
                      tabModeAkunBayar.addRow(new Object[]{rs.getString(1),rs.getString(2),"",rs.getDouble(3),""});
                      iyembuilder.append("{\"NamaAkun\":\"").append(rs.getString(1).replaceAll("\"","")).append("\",\"KodeRek\":\"").append(rs.getString(2)).append("\",\"PPN\":\"").append(rs.getDouble(3)).append("\"},");
                  }
@@ -1129,40 +1129,40 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
              } finally{
                  if(rs != null){
                      rs.close();
-                 } 
+                 }
                  if(ps != null){
                      ps.close();
-                 } 
+                 }
              }
-             
+
              if (iyembuilder.length() > 0) {
                 iyembuilder.setLength(iyembuilder.length() - 1);
                 fileWriter.write("{\"akunbayar\":["+iyembuilder+"]}");
                 fileWriter.flush();
              }
-            
+
              fileWriter.close();
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
-    private void tampilAkunBayar2() {         
-         try{           
+
+    private void tampilAkunBayar2() {
+         try{
              jml=0;
              for(i=0;i<tbAkunBayar.getRowCount();i++){
                 if(!tbAkunBayar.getValueAt(i,2).toString().equals("")){
                     jml++;
                 }
              }
-             
+
              Nama_Akun_Bayar=new String[jml];
              Kode_Rek_Bayar=new String[jml];
              Bayar=new String[jml];
              PPN_Persen=new String[jml];
              PPN_Besar=new String[jml];
-             
+
              jml=0;
              for(i=0;i<tbAkunBayar.getRowCount();i++){
                 if(!tbAkunBayar.getValueAt(i,2).toString().equals("")){
@@ -1174,21 +1174,21 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     jml++;
                 }
              }
-             
+
              Valid.tabelKosong(tabModeAkunBayar);
-             
+
              for(i=0;i<jml;i++){
                 tabModeAkunBayar.addRow(new Object[] {
                     Nama_Akun_Bayar[i],Kode_Rek_Bayar[i],Bayar[i],PPN_Persen[i],PPN_Besar[i]
                 });
              }
-             
+
              Nama_Akun_Bayar=null;
              Kode_Rek_Bayar=null;
              Bayar=null;
              PPN_Persen=null;
              PPN_Besar=null;
-             
+
              myObj = new FileReader("./cache/akunbayar.iyem");
              root = mapper.readTree(myObj);
              response = root.path("akunbayar");
@@ -1206,44 +1206,44 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
             System.out.println("Notifikasi : "+ex);
          }
     }
-    
+
     private void isKembali(){
         bayar=0;besarppn=0;tagihanppn=0;countbayar=0;kekurangan=0;
-        
-        for(i=0;i<tabModeAkunBayar.getRowCount();i++){ 
+
+        for(i=0;i<tabModeAkunBayar.getRowCount();i++){
             if(!tabModeAkunBayar.getValueAt(i,2).toString().equals("")){
                 countbayar++;
                 try {
-                    bayar=bayar+Double.parseDouble(tabModeAkunBayar.getValueAt(i,2).toString()); 
+                    bayar=bayar+Double.parseDouble(tabModeAkunBayar.getValueAt(i,2).toString());
                 } catch (Exception e) {
                     bayar=bayar+0;
-                }               
-            }  
-            
+                }
+            }
+
             if(!tabModeAkunBayar.getValueAt(i,4).toString().equals("")){
                 try {
-                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tabModeAkunBayar.getValueAt(i,4).toString()),100); 
+                    besarppn=besarppn+Valid.roundUp(Double.parseDouble(tabModeAkunBayar.getValueAt(i,4).toString()),100);
                 } catch (Exception e) {
                     besarppn=besarppn+0;
-                }               
-            }   
+                }
+            }
         }
-        
+
         tagihanppn=besarppn+total;
         TagihanPPn.setText(Valid.SetAngka3(tagihanppn));
-        
+
         kekurangan=(bayar+besarppn)-tagihanppn;
-        
-        TKembali.setText(Valid.SetAngka3(kekurangan));  
+
+        TKembali.setText(Valid.SetAngka3(kekurangan));
     }
-    
+
     private void isSimpan(){
         int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             ChkJln.setSelected(false);
-            berhasil=true; 
-            try { 
+            berhasil=true;
+            try {
                 if(notakesling.equals("Yes")){
                     BtnNotaActionPerformed(null);
                 }
@@ -1256,19 +1256,19 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     for(i=0;i<tbAkunBayar.getRowCount();i++){
                         if(Valid.SetAngka(tbAkunBayar.getValueAt(i,2).toString())>0){
                             try {
-                                itembayar=Double.parseDouble(tbAkunBayar.getValueAt(i,2).toString()); 
+                                itembayar=Double.parseDouble(tbAkunBayar.getValueAt(i,2).toString());
                             } catch (Exception e) {
                                 itembayar=0;
-                            }    
+                            }
 
                             if(!tbAkunBayar.getValueAt(i,4).toString().equals("")){
                                 try {
-                                    besarppn=Valid.roundUp(Double.parseDouble(tbAkunBayar.getValueAt(i,4).toString()),100); 
+                                    besarppn=Valid.roundUp(Double.parseDouble(tbAkunBayar.getValueAt(i,4).toString()),100);
                                 } catch (Exception e) {
                                     besarppn=0;
-                                }               
-                            }  
-                            
+                                }
+                            }
+
                             if(Sequel.menyimpantf2("labkesling_detail_pembayaran_pengujian_sampel","?,?,?,?","Akun bayar",4,new String[]{
                                     NoBayar.getText(),tbAkunBayar.getValueAt(i,0).toString(),Double.toString(besarppn),Double.toString(itembayar)
                                 })==true){
@@ -1278,11 +1278,11 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                             }
                         }
                     }
-                    
+
                     if(total>0){
                         if (berhasil) berhasil = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Pelayanan_Lab_Kesling, "Suspen Piutang Pelayanan Lab Kesling", 0, total);
                     }
-                    
+
                     if (berhasil) berhasil = jur.simpanJurnal(NoBayar.getText(), "U", "PEMBAYARAN PELAYANAN LABORATORIUM KESEHATAN LINGKUNGAN " + NamaPelanggan.getText() + " DIPOSTING OLEH " + akses.getkode());
 
                     if(berhasil==true){
@@ -1292,12 +1292,12 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                     }
                 }else{
                     berhasil=false;
-                } 
-                
+                }
+
                 if(berhasil==true){
                     Sequel.queryu("update labkesling_validasi_pengujian_sampel set status='Sudah Bayar' where no_permintaan='"+NoPermintaan.getText()+"'");
                     Sequel.Commit();
-                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");     
+                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                 }else{
                     JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
@@ -1305,8 +1305,8 @@ private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
                 Sequel.AutoComitTrue();
             } catch (Exception e) {
                 System.out.println(e);
-            }  
-            ChkJln.setSelected(true);    
+            }
+            ChkJln.setSelected(true);
             this.setCursor(Cursor.getDefaultCursor());
             if(berhasil==true){
                 if(notakesling.equals("Yes")){

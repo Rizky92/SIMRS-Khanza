@@ -109,9 +109,9 @@ public final class validasi {
         if (length <= str.length()) {
             return str;
         }
-        
+
         str = String.valueOf(c).repeat(Math.max(0, length)).concat(str);
-        
+
         return str.substring(str.length() - length, str.length());
     }
 
@@ -186,7 +186,7 @@ public final class validasi {
     public void setTglJamSmc(Tanggal tgl) {
         tgl.setDate(Calendar.getInstance().getTime());
     }
-    
+
     public void setTglJamSmc(Date tgljam, Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik) {
         Calendar cal = Calendar.getInstance();
         cal.setTime(tgljam);
@@ -477,14 +477,17 @@ public final class validasi {
     public boolean umurcacheSmc(String path, int hari) {
         try {
             File file = new File(path);
+
             if (!file.isFile()) return true;
+
             return TimeUnit.DAYS.convert(System.currentTimeMillis() - file.lastModified(), TimeUnit.MILLISECONDS) > hari;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+
         return true;
     }
-    
+
     public void pindahSmc(KeyEvent e, JComponent previous, JComponent next) {
         if (e.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
             next.requestFocus();
@@ -692,7 +695,7 @@ public final class validasi {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void autoNomer7(String nomorterakhir,String strAwal,Integer pnj,javax.swing.JTextField teks){
         try {
             s=Integer.toString(Integer.parseInt(nomorterakhir)+1);
@@ -1348,7 +1351,7 @@ public final class validasi {
             kiri.requestFocus();
         }
     }
-    
+
     public void pindah(java.awt.event.KeyEvent evt,JTextField kiri,JTextField kanan){
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             kanan.requestFocus();

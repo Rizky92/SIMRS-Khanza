@@ -255,7 +255,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         jam();
     }
 
@@ -819,14 +819,14 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                         public void windowClosing(WindowEvent e) {}
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(aturanpakai.getTable().getSelectedRow()!= -1){  
+                            if(aturanpakai.getTable().getSelectedRow()!= -1){
                                 if(TabRawat.getSelectedIndex()==0){
                                     tbResep.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbResep.getSelectedRow(),6);
                                 }else if(TabRawat.getSelectedIndex()==1){
                                     tbObatResepRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatResepRacikan.getSelectedRow(),5);
                                     tbObatResepRacikan.requestFocus();
-                                }   
-                            }   
+                                }
+                            }
                             tbResep.requestFocus();
                         }
                         @Override
@@ -950,20 +950,20 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek5KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-    if(TabRawat.getSelectedIndex()==0){
-        for(i=0;i<tbResep.getRowCount();i++){
-            tbResep.setValueAt("",i,0);
-            tbResep.setValueAt("",i,6);
+        if(TabRawat.getSelectedIndex()==0){
+            for(i=0;i<tbResep.getRowCount();i++){
+                tbResep.setValueAt("",i,0);
+                tbResep.setValueAt("",i,6);
+            }
+        }else if(TabRawat.getSelectedIndex()==1){
+            for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
+                tbDetailResepObatRacikan.setValueAt(1,i,6);
+                tbDetailResepObatRacikan.setValueAt(1,i,8);
+                tbDetailResepObatRacikan.setValueAt("",i,9);
+                tbDetailResepObatRacikan.setValueAt(0,i,10);
+            }
         }
-    }else if(TabRawat.getSelectedIndex()==1){
-        for(i=0;i<tbDetailResepObatRacikan.getRowCount();i++){
-            tbDetailResepObatRacikan.setValueAt(1,i,6);
-            tbDetailResepObatRacikan.setValueAt(1,i,8);
-            tbDetailResepObatRacikan.setValueAt("",i,9);
-            tbDetailResepObatRacikan.setValueAt(0,i,10);
-        }
-    }  
-}//GEN-LAST:event_ppBersihkanActionPerformed
+    }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampilobat());
@@ -995,14 +995,14 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                         public void windowClosing(WindowEvent e) {}
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(aturanpakai.getTable().getSelectedRow()!= -1){  
+                            if(aturanpakai.getTable().getSelectedRow()!= -1){
                                 if(TabRawat.getSelectedIndex()==0){
                                     tbResep.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbResep.getSelectedRow(),6);
                                 }else if(TabRawat.getSelectedIndex()==1){
                                     tbObatResepRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatResepRacikan.getSelectedRow(),5);
                                     tbObatResepRacikan.requestFocus();
-                                }   
-                            }   
+                                }
+                            }
                             tbResep.requestFocus();
                         }
                         @Override
@@ -1030,11 +1030,11 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                             public void windowClosing(WindowEvent e) {}
                             @Override
                             public void windowClosed(WindowEvent e) {
-                                if(metoderacik.getTable().getSelectedRow()!= -1){  
+                                if(metoderacik.getTable().getSelectedRow()!= -1){
                                     tbObatResepRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),1).toString(),tbObatResepRacikan.getSelectedRow(),2);
                                     tbObatResepRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),2).toString(),tbObatResepRacikan.getSelectedRow(),3);
                                     tbObatResepRacikan.requestFocus();
-                                }  
+                                }
                             }
                             @Override
                             public void windowIconified(WindowEvent e) {}
@@ -1057,7 +1057,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                             }
                             @Override
                             public void keyReleased(KeyEvent e) {}
-                        }); 
+                        });
                         metoderacik.isCek();
                         metoderacik.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
                         metoderacik.setLocationRelativeTo(internalFrame1);
@@ -1195,10 +1195,10 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){        
+                if(dokter.getTable().getSelectedRow()!= -1){
                      KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                      NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 KdDokter.requestFocus();
             }
             @Override
@@ -1385,7 +1385,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
                     psresep.setString(3,"%"+TCari.getText().trim()+"%");
                     psresep.setString(4,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rsobat=psresep.executeQuery();
                 while(rsobat.next()){
                     tabModeResep.addRow(new Object[] {

@@ -1080,7 +1080,6 @@ import setting.DlgSetNota;
 import setting.DlgSetOtoLokasi;
 import setting.DlgSetOtoRalan;
 import setting.DlgSetPenjabLab;
-import setting.DlgSetPintuPoli;
 import setting.DlgSetRM;
 import setting.DlgSetTampilJenisObatResep;
 import setting.DlgSetTarif;
@@ -23479,7 +23478,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnBPJSPotensiPRBActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
@@ -27052,7 +27051,7 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnBPJSProgramPRB);
                 jmlmenu++;
             }
-            
+
             if(akses.getbpjs_potensi_prb()==true){
                 Panelmenu.add(btnBPJSPotensiPRB);
                 jmlmenu++;
@@ -32879,7 +32878,7 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnBPJSProgramPRB);
             jmlmenu++;
         }
-        
+
         if(akses.getbpjs_potensi_prb()==true){
             Panelmenu.add(btnBPJSPotensiPRB);
             jmlmenu++;
@@ -39767,14 +39766,14 @@ public class frmUtama extends javax.swing.JFrame {
             if(btnBPJSProgramPRB.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBPJSProgramPRB);
                 jmlmenu++;
-            }                
+            }
         }
-        
+
         if(akses.getbpjs_potensi_prb()==true){
             if(btnBPJSPotensiPRB.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBPJSPotensiPRB);
                 jmlmenu++;
-            } 
+            }
         }
 
         if(akses.getbpjs_mapping_dokterdpjp()==true){
@@ -49773,12 +49772,12 @@ public class frmUtama extends javax.swing.JFrame {
         btnEEksekutif.setName("btnEEksekutif");
         btnEEksekutif.setPreferredSize(new java.awt.Dimension(200, 90));
         btnEEksekutif.addActionListener(this::btnEEksekutifActionPerformed);
-        
+
         btnBPJSPotensiPRB = new widget.ButtonBig();
         btnBPJSPotensiPRB.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
         btnBPJSPotensiPRB.setText("Potensi PRB di VClaim");
         btnBPJSPotensiPRB.setIconTextGap(0);
-        btnBPJSPotensiPRB.setName("btnBPJSPotensiPRB"); 
+        btnBPJSPotensiPRB.setName("btnBPJSPotensiPRB");
         btnBPJSPotensiPRB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSPotensiPRB.addActionListener(this::btnBPJSPotensiPRBActionPerformed);
     }
@@ -50148,7 +50147,7 @@ public class frmUtama extends javax.swing.JFrame {
     private void btnSetPintuPoliSmcActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgSetPintuPoli aplikasi = new DlgSetPintuPoli(this, false);
+        DlgSetPintuSMC aplikasi = new DlgSetPintuSMC(this, false);
         aplikasi.emptTeks();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);

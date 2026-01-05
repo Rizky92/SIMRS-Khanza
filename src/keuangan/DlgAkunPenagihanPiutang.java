@@ -569,9 +569,9 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
                     i--;
                 }
             }
-        } 
+        }
         LCount.setText("" + tabMode.getRowCount());
-}//GEN-LAST:event_BtnHapusActionPerformed
+    }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -933,7 +933,7 @@ public class DlgAkunPenagihanPiutang extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         ceksukses = true;
