@@ -607,30 +607,41 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
 
     private void btnPintuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPintuActionPerformed
         resolveDlgCariPintu();
+        pintu.setVisible(true);
     }//GEN-LAST:event_btnPintuActionPerformed
 
     private void btnPintuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPintuKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            resolveDlgCariPintu();
+            btnPintuActionPerformed(null);
         } else {
             Valid.pindahSmc(evt, btnDokter, BtnKeluar);
         }
     }//GEN-LAST:event_btnPintuKeyPressed
 
     private void btnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterActionPerformed
-        // TODO add your handling code here:
+        resolveDlgCariDokter();
+        dokter.setVisible(true);
     }//GEN-LAST:event_btnDokterActionPerformed
 
     private void btnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDokterKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            btnDokterActionPerformed(null);
+        } else {
+            Valid.pindahSmc(evt, btnPintu, BtnPoli);
+        }
     }//GEN-LAST:event_btnDokterKeyPressed
 
     private void BtnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPoliActionPerformed
-        // TODO add your handling code here:
+        resolveDlgCariPoli();
+        poli.setVisible(true);
     }//GEN-LAST:event_BtnPoliActionPerformed
 
     private void BtnPoliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPoliKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnPoliActionPerformed(null);
+        } else {
+            Valid.pindahSmc(evt, BtnSimpan, btnDokter);
+        }
     }//GEN-LAST:event_BtnPoliKeyPressed
 
     /**
@@ -773,10 +784,10 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
                     }
                 }
             });
-
-            pintu.setSize(new Dimension(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20));
-            pintu.setLocationRelativeTo(internalFrame1);
         }
+        pintu.isCek();
+        pintu.setSize(new Dimension(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20));
+        pintu.setLocationRelativeTo(internalFrame1);
     }
 
     private void resolveDlgCariPoli() {
@@ -802,7 +813,12 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
                     }
                 }
             });
+
         }
+        poli.isCek();
+        poli.TCari.requestFocus();
+        poli.setSize(new Dimension(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20));
+        poli.setLocationRelativeTo(internalFrame1);
     }
 
     private void resolveDlgCariDokter() {
@@ -829,5 +845,9 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
                 }
             });
         }
+        dokter.isCek();
+        dokter.TCari.requestFocus();
+        dokter.setSize(new Dimension(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20));
+        dokter.setLocationRelativeTo(internalFrame1);
     }
 }
