@@ -5796,40 +5796,50 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         nol_detik = "0";
                     }
 
-                    detik = nol_detik + Integer.toString(nilai_detik);
-                    if(detik.equals("05")){
-                        resepbaru=0;
-                        if(formalarm.contains("ralan")){
-                            tampil();
-                            for(i=0;i<tbResepRalan.getRowCount();i++){
-                                if(tbResepRalan.getValueAt(i,7).toString().equals("Belum Terlayani")){
-                                    resepbaru++;
-                                }
+                detik = nol_detik + Integer.toString(nilai_detik);
+                if(detik.equals("05")){
+                    if(formalarm.contains("ralan")){
+                        tampil();
+                    }
+                }else if(detik.equals("15")){
+                    if(formalarm.contains("ranap")){
+                        tampil3();
+                    }
+                }else if(detik.equals("25")){
+                    if(formalarm.contains("ranap")){
+                        tampil5();
+                    }
+                }else if(detik.equals("35")){
+                    if(formalarm.contains("ranap")){
+                        tampil7();
+                    }
+                }else if(detik.equals("45")){
+                    resepbaru=0;
+                    if(formalarm.contains("ralan")){
+                        for(i=0;i<tbResepRalan.getRowCount();i++){
+                            if(tbResepRalan.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                                resepbaru++;
                             }
                         }
+                    }
 
-                        if(formalarm.contains("ranap")){
-                            tampil3();
-                            for(i=0;i<tbResepRanap.getRowCount();i++){
-                                if(tbResepRanap.getValueAt(i,7).toString().equals("Belum Terlayani")){
-                                    resepbaru++;
-                                }
-                            }
-
-                            tampil5();
-                            for(i=0;i<tbPermintaanStok.getRowCount();i++){
-                                if(tbPermintaanStok.getValueAt(i,7).toString().equals("Belum Terlayani")){
-                                    resepbaru++;
-                                }
-                            }
-
-                            tampil7();
-                            for(i=0;i<tbPermintaanResepPulang.getRowCount();i++){
-                                if(tbPermintaanResepPulang.getValueAt(i,7).toString().equals("Belum Terlayani")){
-                                    resepbaru++;
-                                }
+                    if(formalarm.contains("ranap")){
+                        for(i=0;i<tbResepRanap.getRowCount();i++){
+                            if(tbResepRanap.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                                resepbaru++;
                             }
                         }
+                        for(i=0;i<tbPermintaanStok.getRowCount();i++){
+                            if(tbPermintaanStok.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                                resepbaru++;
+                            }
+                        }
+                        for(i=0;i<tbPermintaanResepPulang.getRowCount();i++){
+                            if(tbPermintaanResepPulang.getValueAt(i,7).toString().equals("Belum Terlayani")){
+                                resepbaru++;
+                            }
+                        }
+                    }
 
                         if(resepbaru>0){
                             try {

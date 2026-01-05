@@ -1585,7 +1585,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         WindowInput.setUndecorated(true);
         WindowInput.setResizable(false);
 
-        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Total BHP & Obat]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Input Total BHP & Obat ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setLayout(null);
 
@@ -2112,7 +2112,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-09-2025 08:35:49" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2026 14:59:13" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -3177,9 +3177,9 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 }
             }
             if(i>0){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 Sequel.AutoComitFalse();
                 sukses=true;
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 Sequel.deleteTampJurnal();
 
                 if((-1*ttlPotongan)>0){
@@ -3395,7 +3395,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
             Sequel.menyimpan("tagihan_obat_langsung","'"+TNoRw.getText()+"','"+TotalObat.getText()+"'","No.Rawat");
-            WindowInput.setVisible(false);
+            WindowInput.dispose();
             isRawat();
         }
     }//GEN-LAST:event_BtnSimpan2ActionPerformed
@@ -3409,7 +3409,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
             Sequel.queryu("delete from tagihan_obat_langsung where no_rawat=? ",TNoRw.getText());
-            WindowInput.setVisible(false);
+            WindowInput.dispose();
             isRawat();
         }
     }//GEN-LAST:event_BtnBatal1ActionPerformed
@@ -7559,14 +7559,14 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 if(!norawatbayi.equals("")){
                     Sequel.mengedit("reg_periksa","no_rawat='"+norawatbayi+"'","status_bayar='Sudah Bayar'");
                 }
-                Sequel.meghapus("temporary_tambahan_potongan","no_rawat",TNoRw.getText());
                 Sequel.Commit();
             }else{
                 Sequel.RollBack();
             }
             Sequel.AutoComitTrue();
             if(sukses==true){
-                JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                Sequel.meghapus("temporary_tambahan_potongan","no_rawat",TNoRw.getText());
+                JOptionPane.showMessageDialog(null,"Proses simpan selesai...!"); 
                 if(notaranap.equals("Yes")){
                     BtnNotaActionPerformed(null);
                     this.dispose();

@@ -79,7 +79,13 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
 
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Rawat","No.SEP","No.Kartu","No.RM","Nama Pasien","Tgl.Lahir","J.K.","Diagnosa","Tgl.Surat",
-                "No.Surat","Tgl.Kontrol","Kode Dokter","Nama Dokter/Sepesialis","Kode Poli","Nama Poli/Unit","Asal Jns. Pelayanan"
+                "No.Surat","Tgl.Kontrol","Kode Dokter","Nama Dokter/Sepesialis","Kode Poli","Nama Poli/Unit","Asal Jns. Pelayanan",
+                "HBA1C","GDP","GD2JPP","eGFR","TD Sis","TD Dias","LDL","Rerata TD Sis","Rerata TD Dias","Jantung Koroner",
+                "Stroke","Vaskular Perifer","Aritmia","Atrial Fibrilasi","RR Istirahat","Sesak Napas 3 Bulan",
+                "Nyeri Dada 3 Bulan","Sesak Napas Aktivitas","Nyeri Dada Aktivitas","Terkontrol","Gejala 2x Minggu",
+                "Bangun Malam","Keterbatasan Fisik","Fungsi Paru","Skor MMRC","Eksaserbasi 1 Tahun","Mampu Aktivitas",
+                "Epileptik 6 Bulan","Efek Samping OAB","Hamil Menyusui","Remisi","Terapi Rumatan","Usia","Asam Urat",
+                "Remisi SLE","Hamil"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -89,7 +95,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 16; i++) {
+        for (i = 0; i < 52; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -123,6 +129,34 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                 column.setPreferredWidth(150);
             }else if(i==15){
                 column.setPreferredWidth(140);
+            }else if(i==16){
+                column.setPreferredWidth(50);
+            }else if(i==17){
+                column.setPreferredWidth(50);
+            }else if(i==18){
+                column.setPreferredWidth(50);
+            }else if(i==19){
+                column.setPreferredWidth(50);
+            }else if(i==20){
+                column.setPreferredWidth(50);
+            }else if(i==21){
+                column.setPreferredWidth(50);
+            }else if(i==22){
+                column.setPreferredWidth(50);
+            }else if(i==23){
+                column.setPreferredWidth(80);
+            }else if(i==24){
+                column.setPreferredWidth(80);
+            }else if(i==25){
+                column.setPreferredWidth(90);
+            }else if(i==26){
+                column.setPreferredWidth(90);
+            }else if(i==27){
+                column.setPreferredWidth(90);
+            }else if(i==28){
+                column.setPreferredWidth(90);
+            }else if(i==29){
+                column.setPreferredWidth(90);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -131,6 +165,22 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         NoRawat.setDocument(new batasInput((byte)15).getKata(NoRawat));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         KdDokter.setDocument(new batasInput((byte)20).getKata(KdDokter));
+        HBA1C.setDocument(new batasInput((byte)5).getOnlyAngka(HBA1C));
+        GDP.setDocument(new batasInput((byte)5).getOnlyAngka(GDP));
+        GD2JPP.setDocument(new batasInput((byte)5).getOnlyAngka(GD2JPP));
+        eGFR.setDocument(new batasInput((byte)5).getOnlyAngka(eGFR));
+        LDL.setDocument(new batasInput((byte)5).getOnlyAngka(LDL));
+        TDSistolik.setDocument(new batasInput((byte)5).getOnlyAngka(TDSistolik));
+        TDDiastolik.setDocument(new batasInput((byte)5).getOnlyAngka(TDDiastolik));
+        RerataTDSistolik.setDocument(new batasInput((byte)5).getOnlyAngka(RerataTDSistolik));
+        RerataTDDiastolik.setDocument(new batasInput((byte)5).getOnlyAngka(RerataTDDiastolik));
+        RRIstirahat.setDocument(new batasInput((byte)5).getOnlyAngka(RRIstirahat));
+        FungsiParu.setDocument(new batasInput((byte)5).getOnlyAngka(FungsiParu));
+        SkorMMRC.setDocument(new batasInput((byte)5).getOnlyAngka(SkorMMRC));
+        Remisi.setDocument(new batasInput((byte)5).getOnlyAngka(Remisi));
+        Usia.setDocument(new batasInput((byte)5).getOnlyAngka(Usia));
+        AsamUrat.setDocument(new batasInput((byte)5).getOnlyAngka(AsamUrat));
+        RemisiSLE.setDocument(new batasInput((byte)5).getOnlyAngka(RemisiSLE));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -225,6 +275,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         DTPTanggalKontrol2 = new widget.Tanggal();
         PanelInput = new javax.swing.JPanel();
         ChkInput = new widget.CekBox();
+        scrollInput = new widget.ScrollPane();
         FormInput = new widget.PanelBiasa();
         jLabel4 = new widget.Label();
         NoRawat = new widget.TextBox();
@@ -254,30 +305,89 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel17 = new widget.Label();
         Diagnosa = new widget.TextBox();
         jLabel18 = new widget.Label();
-        BlnCari = new widget.ComboBox();
+        StatusPRB = new widget.ComboBox();
         jLabel19 = new widget.Label();
-        KdDokter1 = new widget.TextBox();
+        HBA1C = new widget.TextBox();
         jLabel20 = new widget.Label();
         jLabel21 = new widget.Label();
-        KdDokter2 = new widget.TextBox();
+        GDP = new widget.TextBox();
         jLabel23 = new widget.Label();
         jLabel24 = new widget.Label();
-        KdDokter3 = new widget.TextBox();
+        GD2JPP = new widget.TextBox();
         jLabel26 = new widget.Label();
-        KdDokter4 = new widget.TextBox();
+        eGFR = new widget.TextBox();
         jLabel27 = new widget.Label();
-        KdDokter5 = new widget.TextBox();
+        TDSistolik = new widget.TextBox();
         jLabel28 = new widget.Label();
-        KdDokter6 = new widget.TextBox();
+        TDDiastolik = new widget.TextBox();
         jLabel29 = new widget.Label();
-        KdDokter7 = new widget.TextBox();
+        LDL = new widget.TextBox();
         jLabel30 = new widget.Label();
         jLabel31 = new widget.Label();
-        KdDokter8 = new widget.TextBox();
-        jLabel32 = new widget.Label();
-        KdDokter9 = new widget.TextBox();
+        RerataTDSistolik = new widget.TextBox();
+        RerataTDDiastolik = new widget.TextBox();
         jLabel33 = new widget.Label();
-        BlnCari1 = new widget.ComboBox();
+        JantungKoroner = new widget.ComboBox();
+        jLabel34 = new widget.Label();
+        Stroke = new widget.ComboBox();
+        jLabel35 = new widget.Label();
+        RRIstirahat = new widget.TextBox();
+        jLabel36 = new widget.Label();
+        jLabel37 = new widget.Label();
+        VaskularPerifer = new widget.ComboBox();
+        jLabel38 = new widget.Label();
+        Aritmia = new widget.ComboBox();
+        jLabel39 = new widget.Label();
+        AtrialFibrilasi = new widget.ComboBox();
+        SesakNapas3Bulan = new widget.ComboBox();
+        jLabel40 = new widget.Label();
+        jLabel41 = new widget.Label();
+        NyeriDada3Bulan = new widget.ComboBox();
+        jLabel42 = new widget.Label();
+        jLabel43 = new widget.Label();
+        jLabel45 = new widget.Label();
+        SesakNapasAktivitas = new widget.ComboBox();
+        jLabel44 = new widget.Label();
+        jLabel46 = new widget.Label();
+        NyeriDadaAktivitas = new widget.ComboBox();
+        jLabel47 = new widget.Label();
+        Terkontrol = new widget.ComboBox();
+        jLabel48 = new widget.Label();
+        Gejala2xMinggu = new widget.ComboBox();
+        jLabel50 = new widget.Label();
+        BangunMalam = new widget.ComboBox();
+        jLabel49 = new widget.Label();
+        jLabel51 = new widget.Label();
+        KeterbatasanFisik = new widget.ComboBox();
+        jLabel52 = new widget.Label();
+        SkorMMRC = new widget.TextBox();
+        jLabel53 = new widget.Label();
+        FungsiParu = new widget.TextBox();
+        jLabel54 = new widget.Label();
+        jLabel55 = new widget.Label();
+        Eksaserbasi1Tahun = new widget.ComboBox();
+        jLabel56 = new widget.Label();
+        MampuAktivitas = new widget.ComboBox();
+        jLabel57 = new widget.Label();
+        Epileptik6Bulan = new widget.ComboBox();
+        jLabel59 = new widget.Label();
+        EfekSampingOAB = new widget.ComboBox();
+        jLabel58 = new widget.Label();
+        jLabel60 = new widget.Label();
+        HamilMenyusui = new widget.ComboBox();
+        jLabel61 = new widget.Label();
+        TerapiRumatan = new widget.ComboBox();
+        jLabel62 = new widget.Label();
+        Remisi = new widget.TextBox();
+        Usia = new widget.TextBox();
+        jLabel32 = new widget.Label();
+        jLabel63 = new widget.Label();
+        AsamUrat = new widget.TextBox();
+        jLabel64 = new widget.Label();
+        RemisiSLE = new widget.TextBox();
+        jLabel65 = new widget.Label();
+        jLabel66 = new widget.Label();
+        Hamil = new widget.ComboBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -622,7 +732,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 556));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 475));
         PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
@@ -645,8 +755,12 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         });
         PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
 
+        scrollInput.setName("scrollInput"); // NOI18N
+        scrollInput.setPreferredSize(new java.awt.Dimension(102, 557));
+
+        FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
-        FormInput.setPreferredSize(new java.awt.Dimension(190, 107));
+        FormInput.setPreferredSize(new java.awt.Dimension(740, 452));
         FormInput.setLayout(null);
 
         jLabel4.setText("No.SEP :");
@@ -835,22 +949,22 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         FormInput.add(jLabel18);
         jLabel18.setBounds(0, 130, 90, 23);
 
-        BlnCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01. Diabetes Melitus", "02. Hipertensi", "03. Asma", "04. Penyakit Jantung", "05. PPOK", "06. Skizofrenia", "07. Stroke", "08. Epilepsi", "09. SLE" }));
-        BlnCari.setName("BlnCari"); // NOI18N
-        BlnCari.setPreferredSize(new java.awt.Dimension(62, 23));
-        FormInput.add(BlnCari);
-        BlnCari.setBounds(94, 130, 170, 23);
+        StatusPRB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01. Diabetes Melitus", "02. Hipertensi", "03. Asma", "04. Penyakit Jantung", "05. PPOK", "06. Skizofrenia", "07. Stroke", "08. Epilepsi", "09. SLE" }));
+        StatusPRB.setName("StatusPRB"); // NOI18N
+        StatusPRB.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(StatusPRB);
+        StatusPRB.setBounds(94, 130, 170, 23);
 
         jLabel19.setText("Asesmen PRB :");
         jLabel19.setName("jLabel19"); // NOI18N
         FormInput.add(jLabel19);
         jLabel19.setBounds(0, 160, 90, 23);
 
-        KdDokter1.setEditable(false);
-        KdDokter1.setHighlighter(null);
-        KdDokter1.setName("KdDokter1"); // NOI18N
-        FormInput.add(KdDokter1);
-        KdDokter1.setBounds(104, 180, 50, 23);
+        HBA1C.setEditable(false);
+        HBA1C.setHighlighter(null);
+        HBA1C.setName("HBA1C"); // NOI18N
+        FormInput.add(HBA1C);
+        HBA1C.setBounds(104, 180, 50, 23);
 
         jLabel20.setText(":");
         jLabel20.setName("jLabel20"); // NOI18N
@@ -863,49 +977,49 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         FormInput.add(jLabel21);
         jLabel21.setBounds(60, 180, 50, 23);
 
-        KdDokter2.setEditable(false);
-        KdDokter2.setHighlighter(null);
-        KdDokter2.setName("KdDokter2"); // NOI18N
-        FormInput.add(KdDokter2);
-        KdDokter2.setBounds(207, 180, 50, 23);
+        GDP.setEditable(false);
+        GDP.setHighlighter(null);
+        GDP.setName("GDP"); // NOI18N
+        FormInput.add(GDP);
+        GDP.setBounds(207, 180, 50, 23);
 
         jLabel23.setText("GDP :");
         jLabel23.setName("jLabel23"); // NOI18N
         FormInput.add(jLabel23);
         jLabel23.setBounds(163, 180, 40, 23);
 
-        jLabel24.setText("GD2JPP :");
+        jLabel24.setText("Rerata TD Diastolik :");
         jLabel24.setName("jLabel24"); // NOI18N
         FormInput.add(jLabel24);
-        jLabel24.setBounds(251, 180, 70, 23);
+        jLabel24.setBounds(207, 210, 118, 23);
 
-        KdDokter3.setEditable(false);
-        KdDokter3.setHighlighter(null);
-        KdDokter3.setName("KdDokter3"); // NOI18N
-        FormInput.add(KdDokter3);
-        KdDokter3.setBounds(325, 180, 50, 23);
+        GD2JPP.setEditable(false);
+        GD2JPP.setHighlighter(null);
+        GD2JPP.setName("GD2JPP"); // NOI18N
+        FormInput.add(GD2JPP);
+        GD2JPP.setBounds(325, 180, 50, 23);
 
         jLabel26.setText("eGFR :");
         jLabel26.setName("jLabel26"); // NOI18N
         FormInput.add(jLabel26);
         jLabel26.setBounds(378, 180, 50, 23);
 
-        KdDokter4.setEditable(false);
-        KdDokter4.setHighlighter(null);
-        KdDokter4.setName("KdDokter4"); // NOI18N
-        FormInput.add(KdDokter4);
-        KdDokter4.setBounds(432, 180, 50, 23);
+        eGFR.setEditable(false);
+        eGFR.setHighlighter(null);
+        eGFR.setName("eGFR"); // NOI18N
+        FormInput.add(eGFR);
+        eGFR.setBounds(432, 180, 50, 23);
 
         jLabel27.setText("TD :");
         jLabel27.setName("jLabel27"); // NOI18N
         FormInput.add(jLabel27);
         jLabel27.setBounds(577, 180, 40, 23);
 
-        KdDokter5.setEditable(false);
-        KdDokter5.setHighlighter(null);
-        KdDokter5.setName("KdDokter5"); // NOI18N
-        FormInput.add(KdDokter5);
-        KdDokter5.setBounds(621, 180, 50, 23);
+        TDSistolik.setEditable(false);
+        TDSistolik.setHighlighter(null);
+        TDSistolik.setName("TDSistolik"); // NOI18N
+        FormInput.add(TDSistolik);
+        TDSistolik.setBounds(621, 180, 50, 23);
 
         jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel28.setText("/");
@@ -913,64 +1027,393 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         FormInput.add(jLabel28);
         jLabel28.setBounds(664, 180, 20, 23);
 
-        KdDokter6.setEditable(false);
-        KdDokter6.setHighlighter(null);
-        KdDokter6.setName("KdDokter6"); // NOI18N
-        FormInput.add(KdDokter6);
-        KdDokter6.setBounds(677, 180, 50, 23);
+        TDDiastolik.setEditable(false);
+        TDDiastolik.setHighlighter(null);
+        TDDiastolik.setName("TDDiastolik"); // NOI18N
+        FormInput.add(TDDiastolik);
+        TDDiastolik.setBounds(677, 180, 50, 23);
 
         jLabel29.setText("LDL :");
         jLabel29.setName("jLabel29"); // NOI18N
         FormInput.add(jLabel29);
         jLabel29.setBounds(487, 180, 40, 23);
 
-        KdDokter7.setEditable(false);
-        KdDokter7.setHighlighter(null);
-        KdDokter7.setName("KdDokter7"); // NOI18N
-        FormInput.add(KdDokter7);
-        KdDokter7.setBounds(531, 180, 50, 23);
+        LDL.setEditable(false);
+        LDL.setHighlighter(null);
+        LDL.setName("LDL"); // NOI18N
+        FormInput.add(LDL);
+        LDL.setBounds(531, 180, 50, 23);
 
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel30.setText("Rata-rata TD");
+        jLabel30.setText("Rerata TD Sistolik");
         jLabel30.setName("jLabel30"); // NOI18N
         FormInput.add(jLabel30);
-        jLabel30.setBounds(60, 210, 70, 23);
+        jLabel30.setBounds(60, 210, 110, 23);
 
         jLabel31.setText(":");
         jLabel31.setName("jLabel31"); // NOI18N
         FormInput.add(jLabel31);
-        jLabel31.setBounds(0, 210, 130, 23);
+        jLabel31.setBounds(0, 210, 154, 23);
 
-        KdDokter8.setEditable(false);
-        KdDokter8.setHighlighter(null);
-        KdDokter8.setName("KdDokter8"); // NOI18N
-        FormInput.add(KdDokter8);
-        KdDokter8.setBounds(130, 210, 50, 23);
+        RerataTDSistolik.setEditable(false);
+        RerataTDSistolik.setHighlighter(null);
+        RerataTDSistolik.setName("RerataTDSistolik"); // NOI18N
+        FormInput.add(RerataTDSistolik);
+        RerataTDSistolik.setBounds(158, 210, 50, 23);
 
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel32.setText("/");
-        jLabel32.setName("jLabel32"); // NOI18N
-        FormInput.add(jLabel32);
-        jLabel32.setBounds(180, 210, 20, 23);
-
-        KdDokter9.setEditable(false);
-        KdDokter9.setHighlighter(null);
-        KdDokter9.setName("KdDokter9"); // NOI18N
-        FormInput.add(KdDokter9);
-        KdDokter9.setBounds(200, 210, 50, 23);
+        RerataTDDiastolik.setEditable(false);
+        RerataTDDiastolik.setHighlighter(null);
+        RerataTDDiastolik.setName("RerataTDDiastolik"); // NOI18N
+        FormInput.add(RerataTDDiastolik);
+        RerataTDDiastolik.setBounds(329, 210, 50, 23);
 
         jLabel33.setText("Jantung Koroner :");
         jLabel33.setName("jLabel33"); // NOI18N
         FormInput.add(jLabel33);
-        jLabel33.setBounds(260, 210, 90, 23);
+        jLabel33.setBounds(385, 210, 99, 23);
 
-        BlnCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
-        BlnCari1.setName("BlnCari1"); // NOI18N
-        BlnCari1.setPreferredSize(new java.awt.Dimension(62, 23));
-        FormInput.add(BlnCari1);
-        BlnCari1.setBounds(360, 210, 90, 23);
+        JantungKoroner.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        JantungKoroner.setName("JantungKoroner"); // NOI18N
+        JantungKoroner.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(JantungKoroner);
+        JantungKoroner.setBounds(488, 210, 90, 23);
 
-        PanelInput.add(FormInput, java.awt.BorderLayout.CENTER);
+        jLabel34.setText("Stroke :");
+        jLabel34.setName("jLabel34"); // NOI18N
+        FormInput.add(jLabel34);
+        jLabel34.setBounds(583, 210, 50, 23);
+
+        Stroke.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        Stroke.setName("Stroke"); // NOI18N
+        Stroke.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(Stroke);
+        Stroke.setBounds(637, 210, 90, 23);
+
+        jLabel35.setText("RR Istirahat :");
+        jLabel35.setName("jLabel35"); // NOI18N
+        FormInput.add(jLabel35);
+        jLabel35.setBounds(593, 240, 80, 23);
+
+        RRIstirahat.setEditable(false);
+        RRIstirahat.setHighlighter(null);
+        RRIstirahat.setName("RRIstirahat"); // NOI18N
+        FormInput.add(RRIstirahat);
+        RRIstirahat.setBounds(677, 240, 50, 23);
+
+        jLabel36.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel36.setText("Vaskular Perifer");
+        jLabel36.setName("jLabel36"); // NOI18N
+        FormInput.add(jLabel36);
+        jLabel36.setBounds(60, 240, 110, 23);
+
+        jLabel37.setText(":");
+        jLabel37.setName("jLabel37"); // NOI18N
+        FormInput.add(jLabel37);
+        jLabel37.setBounds(0, 240, 145, 23);
+
+        VaskularPerifer.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        VaskularPerifer.setName("VaskularPerifer"); // NOI18N
+        VaskularPerifer.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(VaskularPerifer);
+        VaskularPerifer.setBounds(149, 240, 90, 23);
+
+        jLabel38.setText("Aritmia :");
+        jLabel38.setName("jLabel38"); // NOI18N
+        FormInput.add(jLabel38);
+        jLabel38.setBounds(245, 240, 60, 23);
+
+        Aritmia.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        Aritmia.setName("Aritmia"); // NOI18N
+        Aritmia.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(Aritmia);
+        Aritmia.setBounds(309, 240, 90, 23);
+
+        jLabel39.setText("Atrial Fibrilasi :");
+        jLabel39.setName("jLabel39"); // NOI18N
+        FormInput.add(jLabel39);
+        jLabel39.setBounds(405, 240, 90, 23);
+
+        AtrialFibrilasi.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        AtrialFibrilasi.setName("AtrialFibrilasi"); // NOI18N
+        AtrialFibrilasi.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(AtrialFibrilasi);
+        AtrialFibrilasi.setBounds(499, 240, 90, 23);
+
+        SesakNapas3Bulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        SesakNapas3Bulan.setName("SesakNapas3Bulan"); // NOI18N
+        SesakNapas3Bulan.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(SesakNapas3Bulan);
+        SesakNapas3Bulan.setBounds(171, 270, 90, 23);
+
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel40.setText("Sesak Napas 3 Bulan");
+        jLabel40.setName("jLabel40"); // NOI18N
+        FormInput.add(jLabel40);
+        jLabel40.setBounds(60, 270, 130, 23);
+
+        jLabel41.setText("Nyeri Dada 3 Bulan :");
+        jLabel41.setName("jLabel41"); // NOI18N
+        FormInput.add(jLabel41);
+        jLabel41.setBounds(273, 270, 120, 23);
+
+        NyeriDada3Bulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        NyeriDada3Bulan.setName("NyeriDada3Bulan"); // NOI18N
+        NyeriDada3Bulan.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(NyeriDada3Bulan);
+        NyeriDada3Bulan.setBounds(397, 270, 90, 23);
+
+        jLabel42.setText("GD2JPP :");
+        jLabel42.setName("jLabel42"); // NOI18N
+        FormInput.add(jLabel42);
+        jLabel42.setBounds(251, 180, 70, 23);
+
+        jLabel43.setText(":");
+        jLabel43.setName("jLabel43"); // NOI18N
+        FormInput.add(jLabel43);
+        jLabel43.setBounds(0, 270, 167, 23);
+
+        jLabel45.setText("Sesak Napas Aktivitas :");
+        jLabel45.setName("jLabel45"); // NOI18N
+        FormInput.add(jLabel45);
+        jLabel45.setBounds(493, 270, 140, 23);
+
+        SesakNapasAktivitas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        SesakNapasAktivitas.setName("SesakNapasAktivitas"); // NOI18N
+        SesakNapasAktivitas.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(SesakNapasAktivitas);
+        SesakNapasAktivitas.setBounds(637, 270, 90, 23);
+
+        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel44.setText("Nyeri Dada Aktivitas");
+        jLabel44.setName("jLabel44"); // NOI18N
+        FormInput.add(jLabel44);
+        jLabel44.setBounds(60, 300, 130, 23);
+
+        jLabel46.setText(":");
+        jLabel46.setName("jLabel46"); // NOI18N
+        FormInput.add(jLabel46);
+        jLabel46.setBounds(0, 300, 165, 23);
+
+        NyeriDadaAktivitas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        NyeriDadaAktivitas.setName("NyeriDadaAktivitas"); // NOI18N
+        NyeriDadaAktivitas.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(NyeriDadaAktivitas);
+        NyeriDadaAktivitas.setBounds(169, 300, 90, 23);
+
+        jLabel47.setText("Terkontrol :");
+        jLabel47.setName("jLabel47"); // NOI18N
+        FormInput.add(jLabel47);
+        jLabel47.setBounds(266, 300, 79, 23);
+
+        Terkontrol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        Terkontrol.setName("Terkontrol"); // NOI18N
+        Terkontrol.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(Terkontrol);
+        Terkontrol.setBounds(349, 300, 90, 23);
+
+        jLabel48.setText("Gejala 2x/Lebih Dalam Seminggu :");
+        jLabel48.setName("jLabel48"); // NOI18N
+        FormInput.add(jLabel48);
+        jLabel48.setBounds(443, 300, 190, 23);
+
+        Gejala2xMinggu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        Gejala2xMinggu.setName("Gejala2xMinggu"); // NOI18N
+        Gejala2xMinggu.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(Gejala2xMinggu);
+        Gejala2xMinggu.setBounds(637, 300, 90, 23);
+
+        jLabel50.setText(":");
+        jLabel50.setName("jLabel50"); // NOI18N
+        FormInput.add(jLabel50);
+        jLabel50.setBounds(0, 330, 138, 23);
+
+        BangunMalam.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        BangunMalam.setName("BangunMalam"); // NOI18N
+        BangunMalam.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(BangunMalam);
+        BangunMalam.setBounds(142, 330, 90, 23);
+
+        jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel49.setText("Bangun Malam");
+        jLabel49.setName("jLabel49"); // NOI18N
+        FormInput.add(jLabel49);
+        jLabel49.setBounds(60, 330, 130, 23);
+
+        jLabel51.setText("Keterbatasan Fisik :");
+        jLabel51.setName("jLabel51"); // NOI18N
+        FormInput.add(jLabel51);
+        jLabel51.setBounds(244, 330, 110, 23);
+
+        KeterbatasanFisik.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        KeterbatasanFisik.setName("KeterbatasanFisik"); // NOI18N
+        KeterbatasanFisik.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(KeterbatasanFisik);
+        KeterbatasanFisik.setBounds(358, 330, 90, 23);
+
+        jLabel52.setText("Skor MMRC :");
+        jLabel52.setName("jLabel52"); // NOI18N
+        FormInput.add(jLabel52);
+        jLabel52.setBounds(593, 330, 80, 23);
+
+        SkorMMRC.setEditable(false);
+        SkorMMRC.setHighlighter(null);
+        SkorMMRC.setName("SkorMMRC"); // NOI18N
+        FormInput.add(SkorMMRC);
+        SkorMMRC.setBounds(677, 330, 50, 23);
+
+        jLabel53.setText("Fungsi Paru :");
+        jLabel53.setName("jLabel53"); // NOI18N
+        FormInput.add(jLabel53);
+        jLabel53.setBounds(456, 330, 80, 23);
+
+        FungsiParu.setEditable(false);
+        FungsiParu.setHighlighter(null);
+        FungsiParu.setName("FungsiParu"); // NOI18N
+        FormInput.add(FungsiParu);
+        FungsiParu.setBounds(540, 330, 50, 23);
+
+        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel54.setText("Eksaserbasi Selama 1 Tahun");
+        jLabel54.setName("jLabel54"); // NOI18N
+        FormInput.add(jLabel54);
+        jLabel54.setBounds(60, 360, 150, 23);
+
+        jLabel55.setText(":");
+        jLabel55.setName("jLabel55"); // NOI18N
+        FormInput.add(jLabel55);
+        jLabel55.setBounds(0, 360, 205, 23);
+
+        Eksaserbasi1Tahun.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        Eksaserbasi1Tahun.setName("Eksaserbasi1Tahun"); // NOI18N
+        Eksaserbasi1Tahun.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(Eksaserbasi1Tahun);
+        Eksaserbasi1Tahun.setBounds(209, 360, 90, 23);
+
+        jLabel56.setText("Mampu Beraktivitas :");
+        jLabel56.setName("jLabel56"); // NOI18N
+        FormInput.add(jLabel56);
+        jLabel56.setBounds(306, 360, 120, 23);
+
+        MampuAktivitas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        MampuAktivitas.setName("MampuAktivitas"); // NOI18N
+        MampuAktivitas.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(MampuAktivitas);
+        MampuAktivitas.setBounds(430, 360, 90, 23);
+
+        jLabel57.setText("Epileptik 6 Bulan :");
+        jLabel57.setName("jLabel57"); // NOI18N
+        FormInput.add(jLabel57);
+        jLabel57.setBounds(533, 360, 100, 23);
+
+        Epileptik6Bulan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        Epileptik6Bulan.setName("Epileptik6Bulan"); // NOI18N
+        Epileptik6Bulan.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(Epileptik6Bulan);
+        Epileptik6Bulan.setBounds(637, 360, 90, 23);
+
+        jLabel59.setText(":");
+        jLabel59.setName("jLabel59"); // NOI18N
+        FormInput.add(jLabel59);
+        jLabel59.setBounds(0, 390, 157, 23);
+
+        EfekSampingOAB.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        EfekSampingOAB.setName("EfekSampingOAB"); // NOI18N
+        EfekSampingOAB.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(EfekSampingOAB);
+        EfekSampingOAB.setBounds(161, 390, 90, 23);
+
+        jLabel58.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel58.setText("Efek Samping OAB");
+        jLabel58.setName("jLabel58"); // NOI18N
+        FormInput.add(jLabel58);
+        jLabel58.setBounds(60, 390, 150, 23);
+
+        jLabel60.setText("Menyusui :");
+        jLabel60.setName("jLabel60"); // NOI18N
+        FormInput.add(jLabel60);
+        jLabel60.setBounds(252, 390, 70, 23);
+
+        HamilMenyusui.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        HamilMenyusui.setName("HamilMenyusui"); // NOI18N
+        HamilMenyusui.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(HamilMenyusui);
+        HamilMenyusui.setBounds(326, 390, 90, 23);
+
+        jLabel61.setText("Terapi Rumatan :");
+        jLabel61.setName("jLabel61"); // NOI18N
+        FormInput.add(jLabel61);
+        jLabel61.setBounds(533, 390, 100, 23);
+
+        TerapiRumatan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        TerapiRumatan.setName("TerapiRumatan"); // NOI18N
+        TerapiRumatan.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(TerapiRumatan);
+        TerapiRumatan.setBounds(637, 390, 90, 23);
+
+        jLabel62.setText("Remisi :");
+        jLabel62.setName("jLabel62"); // NOI18N
+        FormInput.add(jLabel62);
+        jLabel62.setBounds(416, 390, 60, 23);
+
+        Remisi.setEditable(false);
+        Remisi.setHighlighter(null);
+        Remisi.setName("Remisi"); // NOI18N
+        FormInput.add(Remisi);
+        Remisi.setBounds(480, 390, 50, 23);
+
+        Usia.setEditable(false);
+        Usia.setHighlighter(null);
+        Usia.setName("Usia"); // NOI18N
+        FormInput.add(Usia);
+        Usia.setBounds(92, 420, 50, 23);
+
+        jLabel32.setText(":");
+        jLabel32.setName("jLabel32"); // NOI18N
+        FormInput.add(jLabel32);
+        jLabel32.setBounds(0, 420, 88, 23);
+
+        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel63.setText("Usia");
+        jLabel63.setName("jLabel63"); // NOI18N
+        FormInput.add(jLabel63);
+        jLabel63.setBounds(60, 420, 50, 23);
+
+        AsamUrat.setEditable(false);
+        AsamUrat.setHighlighter(null);
+        AsamUrat.setName("AsamUrat"); // NOI18N
+        FormInput.add(AsamUrat);
+        AsamUrat.setBounds(229, 420, 50, 23);
+
+        jLabel64.setText("Asam Urat :");
+        jLabel64.setName("jLabel64"); // NOI18N
+        FormInput.add(jLabel64);
+        jLabel64.setBounds(145, 420, 80, 23);
+
+        RemisiSLE.setEditable(false);
+        RemisiSLE.setHighlighter(null);
+        RemisiSLE.setName("RemisiSLE"); // NOI18N
+        FormInput.add(RemisiSLE);
+        RemisiSLE.setBounds(365, 420, 50, 23);
+
+        jLabel65.setText("RemisiSLE :");
+        jLabel65.setName("jLabel65"); // NOI18N
+        FormInput.add(jLabel65);
+        jLabel65.setBounds(291, 420, 70, 23);
+
+        jLabel66.setText("Hamil :");
+        jLabel66.setName("jLabel66"); // NOI18N
+        FormInput.add(jLabel66);
+        jLabel66.setBounds(413, 420, 60, 23);
+
+        Hamil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { " ", "0. Tidak", "1. Ya" }));
+        Hamil.setName("Hamil"); // NOI18N
+        Hamil.setPreferredSize(new java.awt.Dimension(62, 23));
+        FormInput.add(Hamil);
+        Hamil.setBounds(477, 420, 90, 23);
+
+        scrollInput.setViewportView(FormInput);
+
+        PanelInput.add(scrollInput, java.awt.BorderLayout.CENTER);
 
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
@@ -999,14 +1442,55 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                 headers.add("X-Timestamp",utc);
                 headers.add("X-Signature",api.getHmac(utc));
                 headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-                URL = link+"/RencanaKontrol/insert";
+                URL = link+"/RencanaKontrol/v2/Insert";
                 requestJson ="{" +
                                 "\"request\": {" +
                                     "\"noSEP\":\""+NoSEP.getText()+"\"," +
                                     "\"kodeDokter\":\""+KdDokter.getText()+"\"," +
                                     "\"poliKontrol\":\""+KdPoli.getText()+"\"," +
                                     "\"tglRencanaKontrol\":\""+Valid.SetTgl(TanggalKontrol.getSelectedItem()+"")+"\"," +
-                                    "\"user\":\""+user+"\"" +
+                                    "\"user\":\""+user+"\"," +
+                                    "\"formPRB\": {" +
+                                        "\"kdStatusPRB\": \""+StatusPRB.getSelectedItem().toString().substring(0,2)+"\"," +
+                                        "\"data\": {" +
+                                            "\"HBA1C\": "+(HBA1C.getText().trim().equals("")?"null":HBA1C.getText())+"," +
+                                            "\"GDP\": "+(GDP.getText().trim().equals("")?"null":GDP.getText())+"," +
+                                            "\"GD2JPP\": "+(GD2JPP.getText().trim().equals("")?"null":GD2JPP.getText())+"," +
+                                            "\"eGFR\": "+(eGFR.getText().trim().equals("")?"null":eGFR.getText())+"," +
+                                            "\"TD_Sistolik\": "+(TDSistolik.getText().trim().equals("")?"null":TDSistolik.getText())+"," +
+                                            "\"TD_Diastolik\": "+(TDDiastolik.getText().trim().equals("")?"null":TDDiastolik.getText())+"," +
+                                            "\"LDL\": "+(LDL.getText().trim().equals("")?"null":LDL.getText())+"," +
+                                            "\"Rata_TD_Sistolik\": "+(RerataTDSistolik.getText().trim().equals("")?"null":RerataTDSistolik.getText())+"," +
+                                            "\"Rata_TD_Diastolik\": "+(RerataTDDiastolik.getText().trim().equals("")?"null":RerataTDDiastolik.getText())+"," +
+                                            "\"JantungKoroner\": "+(JantungKoroner.getSelectedIndex()==0?"null":JantungKoroner.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"Stroke\": "+(Stroke.getSelectedIndex()==0?"null":Stroke.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"VaskularPerifer\": "+(VaskularPerifer.getSelectedIndex()==0?"null":VaskularPerifer.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"Aritmia\": "+(Aritmia.getSelectedIndex()==0?"null":Aritmia.getSelectedItem().toString().substring(0,1))+", " +
+                                            "\"AtrialFibrilasi\": "+(AtrialFibrilasi.getSelectedIndex()==0?"null":AtrialFibrilasi.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"NadiIstirahat\": "+(RRIstirahat.getText().trim().equals("")?"null":RRIstirahat.getText())+"," +
+                                            "\"SesakNapas3Bulan\": "+(SesakNapas3Bulan.getSelectedIndex()==0?"null":SesakNapas3Bulan.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"NyeriDada3Bulan\": "+(NyeriDada3Bulan.getSelectedIndex()==0?"null":NyeriDada3Bulan.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"SesakNapasAktivitas\": "+(SesakNapasAktivitas.getSelectedIndex()==0?"null":SesakNapasAktivitas.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"NyeriDadaAktivitas\": "+(NyeriDadaAktivitas.getSelectedIndex()==0?"null":NyeriDadaAktivitas.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"Terkontrol\": "+(Terkontrol.getSelectedIndex()==0?"null":Terkontrol.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"Gejala2xMinggu\": "+(Gejala2xMinggu.getSelectedIndex()==0?"null":Gejala2xMinggu.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"BangunMalam\": "+(BangunMalam.getSelectedIndex()==0?"null":BangunMalam.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"KeterbatasanFisik\": "+(KeterbatasanFisik.getSelectedIndex()==0?"null":KeterbatasanFisik.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"FungsiParu\": "+(FungsiParu.getText().trim().equals("")?"null":FungsiParu.getText())+"," +
+                                            "\"SkorMMRC\": "+(SkorMMRC.getText().trim().equals("")?"null":SkorMMRC.getText())+"," +
+                                            "\"Eksaserbasi1Tahun\": "+(Eksaserbasi1Tahun.getSelectedIndex()==0?"null":Eksaserbasi1Tahun.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"MampuAktivitas\": "+(MampuAktivitas.getSelectedIndex()==0?"null":MampuAktivitas.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"Epileptik6Bulan\": "+(Epileptik6Bulan.getSelectedIndex()==0?"null":Epileptik6Bulan.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"EfekSampingOAB\": "+(EfekSampingOAB.getSelectedIndex()==0?"null":EfekSampingOAB.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"HamilMenyusui\": "+(HamilMenyusui.getSelectedIndex()==0?"null":HamilMenyusui.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"Remisi\": "+(Remisi.getText().trim().equals("")?"null":Remisi.getText())+"," +
+                                            "\"TerapiRumatan\": "+(TerapiRumatan.getSelectedIndex()==0?"null":TerapiRumatan.getSelectedItem().toString().substring(0,1))+"," +
+                                            "\"Usia\": "+(Usia.getText().trim().equals("")?"null":Usia.getText())+"," +
+                                            "\"AsamUrat\": "+(AsamUrat.getText().trim().equals("")?"null":AsamUrat.getText())+"," +
+                                            "\"RemisiSLE\": "+(RemisiSLE.getText().trim().equals("")?"null":RemisiSLE.getText())+"," +
+                                            "\"Hamil\": "+(Hamil.getSelectedIndex()==0?"null":Hamil.getSelectedItem().toString().substring(0,1))+" " +
+                                        "}" +
+                                    "}"+
                                 "}" +
                              "}";
                 System.out.println("JSON : "+requestJson);
@@ -1017,8 +1501,14 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                 System.out.println("message : "+nameNode.path("message").asText());
                 if(nameNode.path("code").asText().equals("200")){
                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("noSuratKontrol");
-                    if(Sequel.menyimpantf("bridging_surat_kontrol_bpjs","?,?,?,?,?,?,?,?","No.Surat",8,new String[]{
-                            NoSEP.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),response.asText(),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText()
+                    if(Sequel.menyimpantf("bridging_surat_kontrol_bpjs","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat",44,new String[]{
+                            NoSEP.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),response.asText(),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),
+                            HBA1C.getText(),GDP.getText(),GD2JPP.getText(),eGFR.getText(),TDSistolik.getText(),TDDiastolik.getText(),LDL.getText(),RerataTDSistolik.getText(),RerataTDDiastolik.getText(),JantungKoroner.getSelectedItem().toString().trim(), 
+                            Stroke.getSelectedItem().toString().trim(),VaskularPerifer.getSelectedItem().toString().trim(),Aritmia.getSelectedItem().toString().trim(),AtrialFibrilasi.getSelectedItem().toString().trim(),RRIstirahat.getText(), 
+                            SesakNapas3Bulan.getSelectedItem().toString().trim(),NyeriDada3Bulan.getSelectedItem().toString().trim(),SesakNapasAktivitas.getSelectedItem().toString().trim(),NyeriDadaAktivitas.getSelectedItem().toString().trim(), 
+                            Terkontrol.getSelectedItem().toString().trim(),Gejala2xMinggu.getSelectedItem().toString().trim(),BangunMalam.getSelectedItem().toString().trim(),KeterbatasanFisik.getSelectedItem().toString().trim(),FungsiParu.getText(), 
+                            SkorMMRC.getText(),Eksaserbasi1Tahun.getSelectedItem().toString().trim(),MampuAktivitas.getSelectedItem().toString().trim(),Epileptik6Bulan.getSelectedItem().toString().trim(),EfekSampingOAB.getSelectedItem().toString().trim(), 
+                            HamilMenyusui.getSelectedItem().toString().trim(),Remisi.getText(),TerapiRumatan.getSelectedItem().toString().trim(),Usia.getText(),AsamUrat.getText(),RemisiSLE.getText(),Hamil.getSelectedItem().toString().trim()
                         })==true){
                         emptTeks();
                         runBackground(() ->tampil());
@@ -1277,7 +1767,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                     headers.add("X-Timestamp",utc);
                     headers.add("X-Signature",api.getHmac(utc));
                     headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-                    URL = link+"/RencanaKontrol/Update";
+                    URL = link+"/RencanaKontrol/v2/Update";
                     requestJson ="{" +
                                     "\"request\": {" +
                                         "\"noSuratKontrol\":\""+NoSurat.getText()+"\"," +
@@ -1285,7 +1775,48 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                                         "\"kodeDokter\":\""+KdDokter.getText()+"\"," +
                                         "\"poliKontrol\":\""+KdPoli.getText()+"\"," +
                                         "\"tglRencanaKontrol\":\""+Valid.SetTgl(TanggalKontrol.getSelectedItem()+"")+"\"," +
-                                        "\"user\":\""+user+"\"" +
+                                        "\"user\":\""+user+"\"," +
+                                        "\"formPRB\": {" +
+                                            "\"kdStatusPRB\": \""+StatusPRB.getSelectedItem().toString().substring(0,2)+"\"," +
+                                            "\"data\": {" +
+                                                "\"HBA1C\": "+(HBA1C.getText().trim().equals("")?"null":HBA1C.getText())+"," +
+                                                "\"GDP\": "+(GDP.getText().trim().equals("")?"null":GDP.getText())+"," +
+                                                "\"GD2JPP\": "+(GD2JPP.getText().trim().equals("")?"null":GD2JPP.getText())+"," +
+                                                "\"eGFR\": "+(eGFR.getText().trim().equals("")?"null":eGFR.getText())+"," +
+                                                "\"TD_Sistolik\": "+(TDSistolik.getText().trim().equals("")?"null":TDSistolik.getText())+"," +
+                                                "\"TD_Diastolik\": "+(TDDiastolik.getText().trim().equals("")?"null":TDDiastolik.getText())+"," +
+                                                "\"LDL\": "+(LDL.getText().trim().equals("")?"null":LDL.getText())+"," +
+                                                "\"Rata_TD_Sistolik\": "+(RerataTDSistolik.getText().trim().equals("")?"null":RerataTDSistolik.getText())+"," +
+                                                "\"Rata_TD_Diastolik\": "+(RerataTDDiastolik.getText().trim().equals("")?"null":RerataTDDiastolik.getText())+"," +
+                                                "\"JantungKoroner\": "+(JantungKoroner.getSelectedIndex()==0?"null":JantungKoroner.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"Stroke\": "+(Stroke.getSelectedIndex()==0?"null":Stroke.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"VaskularPerifer\": "+(VaskularPerifer.getSelectedIndex()==0?"null":VaskularPerifer.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"Aritmia\": "+(Aritmia.getSelectedIndex()==0?"null":Aritmia.getSelectedItem().toString().substring(0,1))+", " +
+                                                "\"AtrialFibrilasi\": "+(AtrialFibrilasi.getSelectedIndex()==0?"null":AtrialFibrilasi.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"NadiIstirahat\": "+(RRIstirahat.getText().trim().equals("")?"null":RRIstirahat.getText())+"," +
+                                                "\"SesakNapas3Bulan\": "+(SesakNapas3Bulan.getSelectedIndex()==0?"null":SesakNapas3Bulan.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"NyeriDada3Bulan\": "+(NyeriDada3Bulan.getSelectedIndex()==0?"null":NyeriDada3Bulan.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"SesakNapasAktivitas\": "+(SesakNapasAktivitas.getSelectedIndex()==0?"null":SesakNapasAktivitas.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"NyeriDadaAktivitas\": "+(NyeriDadaAktivitas.getSelectedIndex()==0?"null":NyeriDadaAktivitas.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"Terkontrol\": "+(Terkontrol.getSelectedIndex()==0?"null":Terkontrol.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"Gejala2xMinggu\": "+(Gejala2xMinggu.getSelectedIndex()==0?"null":Gejala2xMinggu.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"BangunMalam\": "+(BangunMalam.getSelectedIndex()==0?"null":BangunMalam.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"KeterbatasanFisik\": "+(KeterbatasanFisik.getSelectedIndex()==0?"null":KeterbatasanFisik.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"FungsiParu\": "+(FungsiParu.getText().trim().equals("")?"null":FungsiParu.getText())+"," +
+                                                "\"SkorMMRC\": "+(SkorMMRC.getText().trim().equals("")?"null":SkorMMRC.getText())+"," +
+                                                "\"Eksaserbasi1Tahun\": "+(Eksaserbasi1Tahun.getSelectedIndex()==0?"null":Eksaserbasi1Tahun.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"MampuAktivitas\": "+(MampuAktivitas.getSelectedIndex()==0?"null":MampuAktivitas.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"Epileptik6Bulan\": "+(Epileptik6Bulan.getSelectedIndex()==0?"null":Epileptik6Bulan.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"EfekSampingOAB\": "+(EfekSampingOAB.getSelectedIndex()==0?"null":EfekSampingOAB.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"HamilMenyusui\": "+(HamilMenyusui.getSelectedIndex()==0?"null":HamilMenyusui.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"Remisi\": "+(Remisi.getText().trim().equals("")?"null":Remisi.getText())+"," +
+                                                "\"TerapiRumatan\": "+(TerapiRumatan.getSelectedIndex()==0?"null":TerapiRumatan.getSelectedItem().toString().substring(0,1))+"," +
+                                                "\"Usia\": "+(Usia.getText().trim().equals("")?"null":Usia.getText())+"," +
+                                                "\"AsamUrat\": "+(AsamUrat.getText().trim().equals("")?"null":AsamUrat.getText())+"," +
+                                                "\"RemisiSLE\": "+(RemisiSLE.getText().trim().equals("")?"null":RemisiSLE.getText())+"," +
+                                                "\"Hamil\": "+(Hamil.getSelectedIndex()==0?"null":Hamil.getSelectedItem().toString().substring(0,1))+" " +
+                                            "}" +
+                                        "}"+
                                     "}" +
                                  "}";
                     System.out.println("JSON : "+requestJson);
@@ -1295,8 +1826,17 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                     System.out.println("code : "+nameNode.path("code").asText());
                     System.out.println("message : "+nameNode.path("message").asText());
                     if(nameNode.path("code").asText().equals("200")){
-                        if(Sequel.mengedittf("bridging_surat_kontrol_bpjs","no_surat=?","tgl_surat=?,tgl_rencana=?,kd_dokter_bpjs=?,nm_dokter_bpjs=?,kd_poli_bpjs=?,nm_poli_bpjs=?",7,new String[]{
-                                Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),NoSurat.getText()
+                        if(Sequel.mengedittf("bridging_surat_kontrol_bpjs","no_surat=?","tgl_surat=?,tgl_rencana=?,kd_dokter_bpjs=?,nm_dokter_bpjs=?,kd_poli_bpjs=?,nm_poli_bpjs=?,HBA1C=?,GDP=?,GD2JPP=?,eGFR=?,TD_Sistolik=?,TD_Diastolik=?,LDL=?,"+
+                                "Rata_TD_Sistolik=?,Rata_TD_Diastolik=?,JantungKoroner=?,Stroke=?,VaskularPerifer=?,Aritmia=?,AtrialFibrilasi=?,NadiIstirahat=?,SesakNapas3Bulan=?,NyeriDada3Bulan=?,SesakNapasAktivitas=?,NyeriDadaAktivitas=?,"+
+                                "Terkontrol=?,Gejala2xMinggu=?,BangunMalam=?,KeterbatasanFisik=?,FungsiParu=?,SkorMMRC=?,Eksaserbasi1Tahun=?,MampuAktivitas=?,Epileptik6Bulan=?,EfekSampingOAB=?,HamilMenyusui=?,Remisi=?,TerapiRumatan=?,Usia=?,"+
+                                "AsamUrat=?,RemisiSLE=?,Hamil=?",43,new String[]{
+                                Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),HBA1C.getText(),GDP.getText(),GD2JPP.getText(),
+                                eGFR.getText(),TDSistolik.getText(),TDDiastolik.getText(),LDL.getText(),RerataTDSistolik.getText(),RerataTDDiastolik.getText(),JantungKoroner.getSelectedItem().toString().trim(),Stroke.getSelectedItem().toString().trim(),
+                                VaskularPerifer.getSelectedItem().toString().trim(),Aritmia.getSelectedItem().toString().trim(),AtrialFibrilasi.getSelectedItem().toString().trim(),RRIstirahat.getText(),SesakNapas3Bulan.getSelectedItem().toString().trim(),
+                                NyeriDada3Bulan.getSelectedItem().toString().trim(),SesakNapasAktivitas.getSelectedItem().toString().trim(),NyeriDadaAktivitas.getSelectedItem().toString().trim(),Terkontrol.getSelectedItem().toString().trim(),
+                                Gejala2xMinggu.getSelectedItem().toString().trim(),BangunMalam.getSelectedItem().toString().trim(),KeterbatasanFisik.getSelectedItem().toString().trim(),FungsiParu.getText(),SkorMMRC.getText(),
+                                Eksaserbasi1Tahun.getSelectedItem().toString().trim(),MampuAktivitas.getSelectedItem().toString().trim(),Epileptik6Bulan.getSelectedItem().toString().trim(),EfekSampingOAB.getSelectedItem().toString().trim(), 
+                                HamilMenyusui.getSelectedItem().toString().trim(),Remisi.getText(),TerapiRumatan.getSelectedItem().toString().trim(),Usia.getText(),AsamUrat.getText(),RemisiSLE.getText(),Hamil.getSelectedItem().toString().trim(),NoSurat.getText()
                             })==true){
                             emptTeks();
                             runBackground(() ->tampil());
@@ -1452,8 +1992,10 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private widget.ComboBox BlnCari;
-    private widget.ComboBox BlnCari1;
+    private widget.ComboBox Aritmia;
+    private widget.TextBox AsamUrat;
+    private widget.ComboBox AtrialFibrilasi;
+    private widget.ComboBox BangunMalam;
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
@@ -1470,21 +2012,26 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
     private widget.Tanggal DTPTanggalSurat1;
     private widget.Tanggal DTPTanggalSurat2;
     private widget.TextBox Diagnosa;
+    private widget.ComboBox EfekSampingOAB;
+    private widget.ComboBox Eksaserbasi1Tahun;
+    private widget.ComboBox Epileptik6Bulan;
     private widget.PanelBiasa FormInput;
+    private widget.TextBox FungsiParu;
+    private widget.TextBox GD2JPP;
+    private widget.TextBox GDP;
+    private widget.ComboBox Gejala2xMinggu;
+    private widget.TextBox HBA1C;
+    private widget.ComboBox Hamil;
+    private widget.ComboBox HamilMenyusui;
     private widget.TextBox JK;
+    private widget.ComboBox JantungKoroner;
     private widget.TextBox KdDokter;
-    private widget.TextBox KdDokter1;
-    private widget.TextBox KdDokter2;
-    private widget.TextBox KdDokter3;
-    private widget.TextBox KdDokter4;
-    private widget.TextBox KdDokter5;
-    private widget.TextBox KdDokter6;
-    private widget.TextBox KdDokter7;
-    private widget.TextBox KdDokter8;
-    private widget.TextBox KdDokter9;
     private widget.TextBox KdPoli;
+    private widget.ComboBox KeterbatasanFisik;
     private widget.Label LCount;
     private widget.Label LCount1;
+    private widget.TextBox LDL;
+    private widget.ComboBox MampuAktivitas;
     private javax.swing.JMenuItem MnSurat;
     private widget.TextBox NmDokter;
     private widget.TextBox NmPasien;
@@ -1494,15 +2041,34 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
     private widget.TextBox NoRawat;
     private widget.TextBox NoSEP;
     private widget.TextBox NoSurat;
+    private widget.ComboBox NyeriDada3Bulan;
+    private widget.ComboBox NyeriDadaAktivitas;
     private javax.swing.JPanel PanelInput;
     private widget.RadioButton R1;
     private widget.RadioButton R2;
+    private widget.TextBox RRIstirahat;
+    private widget.TextBox Remisi;
+    private widget.TextBox RemisiSLE;
+    private widget.TextBox RerataTDDiastolik;
+    private widget.TextBox RerataTDSistolik;
     private widget.ScrollPane Scroll;
+    private widget.ComboBox SesakNapas3Bulan;
+    private widget.ComboBox SesakNapasAktivitas;
+    private widget.TextBox SkorMMRC;
+    private widget.ComboBox StatusPRB;
+    private widget.ComboBox Stroke;
     private widget.TextBox TCari;
+    private widget.TextBox TDDiastolik;
+    private widget.TextBox TDSistolik;
     private widget.Tanggal TanggalKontrol;
     private widget.Tanggal TanggalSurat;
+    private widget.ComboBox TerapiRumatan;
+    private widget.ComboBox Terkontrol;
     private widget.TextBox TglLahir;
+    private widget.TextBox Usia;
+    private widget.ComboBox VaskularPerifer;
     private javax.swing.ButtonGroup buttonGroup1;
+    private widget.TextBox eGFR;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel10;
     private widget.Label jLabel11;
@@ -1528,9 +2094,42 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
     private widget.Label jLabel31;
     private widget.Label jLabel32;
     private widget.Label jLabel33;
+    private widget.Label jLabel34;
+    private widget.Label jLabel35;
+    private widget.Label jLabel36;
+    private widget.Label jLabel37;
+    private widget.Label jLabel38;
+    private widget.Label jLabel39;
     private widget.Label jLabel4;
+    private widget.Label jLabel40;
+    private widget.Label jLabel41;
+    private widget.Label jLabel42;
+    private widget.Label jLabel43;
+    private widget.Label jLabel44;
+    private widget.Label jLabel45;
+    private widget.Label jLabel46;
+    private widget.Label jLabel47;
+    private widget.Label jLabel48;
+    private widget.Label jLabel49;
     private widget.Label jLabel5;
+    private widget.Label jLabel50;
+    private widget.Label jLabel51;
+    private widget.Label jLabel52;
+    private widget.Label jLabel53;
+    private widget.Label jLabel54;
+    private widget.Label jLabel55;
+    private widget.Label jLabel56;
+    private widget.Label jLabel57;
+    private widget.Label jLabel58;
+    private widget.Label jLabel59;
     private widget.Label jLabel6;
+    private widget.Label jLabel60;
+    private widget.Label jLabel61;
+    private widget.Label jLabel62;
+    private widget.Label jLabel63;
+    private widget.Label jLabel64;
+    private widget.Label jLabel65;
+    private widget.Label jLabel66;
     private widget.Label jLabel7;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
@@ -1538,6 +2137,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
     private widget.panelisi panelCari;
     private widget.panelisi panelGlass10;
     private widget.panelisi panelGlass8;
+    private widget.ScrollPane scrollInput;
     private widget.Table tbObat;
     // End of variables declaration//GEN-END:variables
 
@@ -1549,7 +2149,18 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                     "select bridging_sep.no_rawat,bridging_sep.no_sep,bridging_sep.no_kartu,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tanggal_lahir,"+
                     "bridging_sep.jkel,bridging_sep.diagawal,bridging_sep.nmdiagnosaawal,bridging_surat_kontrol_bpjs.tgl_surat,bridging_surat_kontrol_bpjs.no_surat,"+
                     "bridging_surat_kontrol_bpjs.tgl_rencana,bridging_surat_kontrol_bpjs.kd_dokter_bpjs,bridging_surat_kontrol_bpjs.nm_dokter_bpjs,if(bridging_sep.jnspelayanan = '1', '1. Rawat Inap', '2. Rawat Jalan') as jenispelayanan,"+
-                    "bridging_surat_kontrol_bpjs.kd_poli_bpjs,bridging_surat_kontrol_bpjs.nm_poli_bpjs from bridging_sep inner join bridging_surat_kontrol_bpjs "+
+                    "bridging_surat_kontrol_bpjs.kd_poli_bpjs,bridging_surat_kontrol_bpjs.nm_poli_bpjs,bridging_surat_kontrol_bpjs.HBA1C,bridging_surat_kontrol_bpjs.GDP,"+
+                    "bridging_surat_kontrol_bpjs.GD2JPP,bridging_surat_kontrol_bpjs.eGFR,bridging_surat_kontrol_bpjs.TD_Sistolik,bridging_surat_kontrol_bpjs.TD_Diastolik,"+
+                    "bridging_surat_kontrol_bpjs.LDL,bridging_surat_kontrol_bpjs.Rata_TD_Sistolik,bridging_surat_kontrol_bpjs.Rata_TD_Diastolik,"+
+                    "bridging_surat_kontrol_bpjs.JantungKoroner,bridging_surat_kontrol_bpjs.Stroke,bridging_surat_kontrol_bpjs.VaskularPerifer,"+
+                    "bridging_surat_kontrol_bpjs.Aritmia,bridging_surat_kontrol_bpjs.AtrialFibrilasi,bridging_surat_kontrol_bpjs.NadiIstirahat,"+
+                    "bridging_surat_kontrol_bpjs.SesakNapas3Bulan,bridging_surat_kontrol_bpjs.NyeriDada3Bulan,bridging_surat_kontrol_bpjs.SesakNapasAktivitas,"+
+                    "bridging_surat_kontrol_bpjs.NyeriDadaAktivitas,bridging_surat_kontrol_bpjs.Terkontrol,bridging_surat_kontrol_bpjs.Gejala2xMinggu,"+
+                    "bridging_surat_kontrol_bpjs.BangunMalam,bridging_surat_kontrol_bpjs.KeterbatasanFisik,bridging_surat_kontrol_bpjs.FungsiParu,"+
+                    "bridging_surat_kontrol_bpjs.SkorMMRC,bridging_surat_kontrol_bpjs.Eksaserbasi1Tahun,bridging_surat_kontrol_bpjs.MampuAktivitas,"+
+                    "bridging_surat_kontrol_bpjs.Epileptik6Bulan,bridging_surat_kontrol_bpjs.EfekSampingOAB,bridging_surat_kontrol_bpjs.HamilMenyusui,"+
+                    "bridging_surat_kontrol_bpjs.Remisi,bridging_surat_kontrol_bpjs.TerapiRumatan,bridging_surat_kontrol_bpjs.Usia,bridging_surat_kontrol_bpjs.AsamUrat,"+
+                    "bridging_surat_kontrol_bpjs.RemisiSLE,bridging_surat_kontrol_bpjs.Hamil from bridging_sep inner join bridging_surat_kontrol_bpjs "+
                     "on bridging_surat_kontrol_bpjs.no_sep=bridging_sep.no_sep where bridging_surat_kontrol_bpjs.tgl_surat between ? and ? "+
                     (TCari.getText().trim().equals("")?"":"and (bridging_sep.no_rawat like ? or bridging_sep.no_sep like ? or bridging_sep.no_kartu like ? or "+
                     "bridging_sep.nomr like ? or bridging_sep.nama_pasien like ? or bridging_surat_kontrol_bpjs.no_surat like ? or "+
@@ -1574,7 +2185,14 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                         tabMode.addRow(new Object[]{
                             rs.getString("no_rawat"),rs.getString("no_sep"),rs.getString("no_kartu"),rs.getString("nomr"),rs.getString("nama_pasien"),
                             rs.getString("tanggal_lahir"),rs.getString("jkel"),rs.getString("diagawal")+" "+rs.getString("nmdiagnosaawal"),rs.getString("tgl_surat"),rs.getString("no_surat"),
-                            rs.getString("tgl_rencana"),rs.getString("kd_dokter_bpjs"),rs.getString("nm_dokter_bpjs"),rs.getString("kd_poli_bpjs"),rs.getString("nm_poli_bpjs"),rs.getString("jenispelayanan")
+                            rs.getString("tgl_rencana"),rs.getString("kd_dokter_bpjs"),rs.getString("nm_dokter_bpjs"),rs.getString("kd_poli_bpjs"),rs.getString("nm_poli_bpjs"),rs.getString("jenispelayanan"),
+                            rs.getString("HBA1C"),rs.getString("GDP"),rs.getString("GD2JPP"),rs.getString("eGFR"),rs.getString("TD_Sistolik"),rs.getString("TD_Diastolik"),rs.getString("LDL"),
+                            rs.getString("Rata_TD_Sistolik"),rs.getString("Rata_TD_Diastolik"),rs.getString("JantungKoroner"),rs.getString("Stroke"),rs.getString("VaskularPerifer"),
+                            rs.getString("Aritmia"),rs.getString("AtrialFibrilasi"),rs.getString("NadiIstirahat"),rs.getString("SesakNapas3Bulan"),rs.getString("NyeriDada3Bulan"),
+                            rs.getString("SesakNapasAktivitas"),rs.getString("NyeriDadaAktivitas"),rs.getString("Terkontrol"),rs.getString("Gejala2xMinggu"),rs.getString("BangunMalam"),
+                            rs.getString("KeterbatasanFisik"),rs.getString("FungsiParu"),rs.getString("SkorMMRC"),rs.getString("Eksaserbasi1Tahun"),rs.getString("MampuAktivitas"),
+                            rs.getString("Epileptik6Bulan"),rs.getString("EfekSampingOAB"),rs.getString("HamilMenyusui"),rs.getString("Remisi"),rs.getString("TerapiRumatan"),
+                            rs.getString("Usia"),rs.getString("AsamUrat"),rs.getString("RemisiSLE"),rs.getString("Hamil")
                         });
                     }
                 } catch (Exception e) {
@@ -1592,7 +2210,18 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                     "select bridging_sep.no_rawat,bridging_sep.no_sep,bridging_sep.no_kartu,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_sep.tanggal_lahir,"+
                     "bridging_sep.jkel,bridging_sep.diagawal,bridging_sep.nmdiagnosaawal,bridging_surat_kontrol_bpjs.tgl_surat,bridging_surat_kontrol_bpjs.no_surat,"+
                     "bridging_surat_kontrol_bpjs.tgl_rencana,bridging_surat_kontrol_bpjs.kd_dokter_bpjs,bridging_surat_kontrol_bpjs.nm_dokter_bpjs,if(bridging_sep.jnspelayanan = '1', '1. Rawat Inap', '2. Rawat Jalan') as jenispelayanan,"+
-                    "bridging_surat_kontrol_bpjs.kd_poli_bpjs,bridging_surat_kontrol_bpjs.nm_poli_bpjs from bridging_sep inner join bridging_surat_kontrol_bpjs "+
+                    "bridging_surat_kontrol_bpjs.kd_poli_bpjs,bridging_surat_kontrol_bpjs.nm_poli_bpjs,bridging_surat_kontrol_bpjs.HBA1C,bridging_surat_kontrol_bpjs.GDP,"+
+                    "bridging_surat_kontrol_bpjs.GD2JPP,bridging_surat_kontrol_bpjs.eGFR,bridging_surat_kontrol_bpjs.TD_Sistolik,bridging_surat_kontrol_bpjs.TD_Diastolik,"+
+                    "bridging_surat_kontrol_bpjs.LDL,bridging_surat_kontrol_bpjs.Rata_TD_Sistolik,bridging_surat_kontrol_bpjs.Rata_TD_Diastolik,"+
+                    "bridging_surat_kontrol_bpjs.JantungKoroner,bridging_surat_kontrol_bpjs.Stroke,bridging_surat_kontrol_bpjs.VaskularPerifer,"+
+                    "bridging_surat_kontrol_bpjs.Aritmia,bridging_surat_kontrol_bpjs.AtrialFibrilasi,bridging_surat_kontrol_bpjs.NadiIstirahat,"+
+                    "bridging_surat_kontrol_bpjs.SesakNapas3Bulan,bridging_surat_kontrol_bpjs.NyeriDada3Bulan,bridging_surat_kontrol_bpjs.SesakNapasAktivitas,"+
+                    "bridging_surat_kontrol_bpjs.NyeriDadaAktivitas,bridging_surat_kontrol_bpjs.Terkontrol,bridging_surat_kontrol_bpjs.Gejala2xMinggu,"+
+                    "bridging_surat_kontrol_bpjs.BangunMalam,bridging_surat_kontrol_bpjs.KeterbatasanFisik,bridging_surat_kontrol_bpjs.FungsiParu,"+
+                    "bridging_surat_kontrol_bpjs.SkorMMRC,bridging_surat_kontrol_bpjs.Eksaserbasi1Tahun,bridging_surat_kontrol_bpjs.MampuAktivitas,"+
+                    "bridging_surat_kontrol_bpjs.Epileptik6Bulan,bridging_surat_kontrol_bpjs.EfekSampingOAB,bridging_surat_kontrol_bpjs.HamilMenyusui,"+
+                    "bridging_surat_kontrol_bpjs.Remisi,bridging_surat_kontrol_bpjs.TerapiRumatan,bridging_surat_kontrol_bpjs.Usia,bridging_surat_kontrol_bpjs.AsamUrat,"+
+                    "bridging_surat_kontrol_bpjs.RemisiSLE,bridging_surat_kontrol_bpjs.Hamil from bridging_sep inner join bridging_surat_kontrol_bpjs "+
                     "on bridging_surat_kontrol_bpjs.no_sep=bridging_sep.no_sep where bridging_surat_kontrol_bpjs.tgl_rencana between ? and ? "+
                     (TCari.getText().trim().equals("")?"":"and (bridging_sep.no_rawat like ? or bridging_sep.no_sep like ? or bridging_sep.no_kartu like ? or "+
                     "bridging_sep.nomr like ? or bridging_sep.nama_pasien like ? or bridging_surat_kontrol_bpjs.no_surat like ? or "+
@@ -1617,7 +2246,14 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                         tabMode.addRow(new Object[]{
                             rs.getString("no_rawat"),rs.getString("no_sep"),rs.getString("no_kartu"),rs.getString("nomr"),rs.getString("nama_pasien"),
                             rs.getString("tanggal_lahir"),rs.getString("jkel"),rs.getString("diagawal")+" "+rs.getString("nmdiagnosaawal"),rs.getString("tgl_surat"),rs.getString("no_surat"),
-                            rs.getString("tgl_rencana"),rs.getString("kd_dokter_bpjs"),rs.getString("nm_dokter_bpjs"),rs.getString("kd_poli_bpjs"),rs.getString("nm_poli_bpjs"),rs.getString("jenispelayanan")
+                            rs.getString("tgl_rencana"),rs.getString("kd_dokter_bpjs"),rs.getString("nm_dokter_bpjs"),rs.getString("kd_poli_bpjs"),rs.getString("nm_poli_bpjs"),rs.getString("jenispelayanan"),
+                            rs.getString("HBA1C"),rs.getString("GDP"),rs.getString("GD2JPP"),rs.getString("eGFR"),rs.getString("TD_Sistolik"),rs.getString("TD_Diastolik"),rs.getString("LDL"),
+                            rs.getString("Rata_TD_Sistolik"),rs.getString("Rata_TD_Diastolik"),rs.getString("JantungKoroner"),rs.getString("Stroke"),rs.getString("VaskularPerifer"),
+                            rs.getString("Aritmia"),rs.getString("AtrialFibrilasi"),rs.getString("NadiIstirahat"),rs.getString("SesakNapas3Bulan"),rs.getString("NyeriDada3Bulan"),
+                            rs.getString("SesakNapasAktivitas"),rs.getString("NyeriDadaAktivitas"),rs.getString("Terkontrol"),rs.getString("Gejala2xMinggu"),rs.getString("BangunMalam"),
+                            rs.getString("KeterbatasanFisik"),rs.getString("FungsiParu"),rs.getString("SkorMMRC"),rs.getString("Eksaserbasi1Tahun"),rs.getString("MampuAktivitas"),
+                            rs.getString("Epileptik6Bulan"),rs.getString("EfekSampingOAB"),rs.getString("HamilMenyusui"),rs.getString("Remisi"),rs.getString("TerapiRumatan"),
+                            rs.getString("Usia"),rs.getString("AsamUrat"),rs.getString("RemisiSLE"),rs.getString("Hamil")
                         });
                     }
                 } catch (Exception e) {
@@ -1654,6 +2290,42 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         NmDokter.setText("");
         KdPoli.setText("");
         NmPoli.setText("");
+        HBA1C.setText("");
+        GDP.setText("");
+        GD2JPP.setText("");
+        eGFR.setText("");
+        TDSistolik.setText("");
+        TDDiastolik.setText("");
+        LDL.setText("");
+        RerataTDSistolik.setText("");
+        RerataTDDiastolik.setText("");
+        JantungKoroner.setSelectedIndex(0);
+        Stroke.setSelectedIndex(0);
+        VaskularPerifer.setSelectedIndex(0);
+        Aritmia.setSelectedIndex(0);
+        AtrialFibrilasi.setSelectedIndex(0);
+        RRIstirahat.setText("");
+        SesakNapas3Bulan.setSelectedIndex(0);
+        NyeriDada3Bulan.setSelectedIndex(0);
+        SesakNapasAktivitas.setSelectedIndex(0);
+        NyeriDadaAktivitas.setSelectedIndex(0);
+        Terkontrol.setSelectedIndex(0);
+        Gejala2xMinggu.setSelectedIndex(0);
+        BangunMalam.setSelectedIndex(0);
+        KeterbatasanFisik.setSelectedIndex(0);
+        FungsiParu.setText("");
+        SkorMMRC.setText("");
+        Eksaserbasi1Tahun.setSelectedIndex(0);
+        MampuAktivitas.setSelectedIndex(0);
+        Epileptik6Bulan.setSelectedIndex(0);
+        EfekSampingOAB.setSelectedIndex(0); 
+        HamilMenyusui.setSelectedIndex(0);
+        Remisi.setText("");
+        TerapiRumatan.setSelectedIndex(0);
+        Usia.setText("");
+        AsamUrat.setText("");
+        RemisiSLE.setText("");
+        Hamil.setSelectedIndex(0);
         TanggalSurat.requestFocus();
     }
 
@@ -1672,6 +2344,42 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
             NmDokter.setText(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
             KdPoli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
             NmPoli.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+            HBA1C.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+            GDP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+            GD2JPP.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
+            eGFR.setText(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
+            TDSistolik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
+            TDDiastolik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
+            LDL.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
+            RerataTDSistolik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
+            RerataTDDiastolik.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
+            JantungKoroner.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString().trim());
+            Stroke.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString().trim());
+            VaskularPerifer.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString().trim());
+            Aritmia.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString().trim());
+            AtrialFibrilasi.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString().trim());
+            RRIstirahat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
+            SesakNapas3Bulan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString().trim());
+            NyeriDada3Bulan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString().trim());
+            SesakNapasAktivitas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString().trim());
+            NyeriDadaAktivitas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString().trim());
+            Terkontrol.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString().trim());
+            Gejala2xMinggu.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),35).toString().trim());
+            BangunMalam.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString().trim());
+            KeterbatasanFisik.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),37).toString().trim());
+            FungsiParu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),38).toString());
+            SkorMMRC.setText(tbObat.getValueAt(tbObat.getSelectedRow(),39).toString());
+            Eksaserbasi1Tahun.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),40).toString().trim());
+            MampuAktivitas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),41).toString().trim());
+            Epileptik6Bulan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),42).toString().trim());
+            EfekSampingOAB.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),43).toString().trim());
+            HamilMenyusui.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),44).toString().trim());
+            Remisi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),45).toString());
+            TerapiRumatan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),46).toString().trim());
+            Usia.setText(tbObat.getValueAt(tbObat.getSelectedRow(),47).toString());
+            AsamUrat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),48).toString());
+            RemisiSLE.setText(tbObat.getValueAt(tbObat.getSelectedRow(),49).toString());
+            Hamil.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),50).toString().trim());
             Valid.SetTgl(TanggalSurat,tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             Valid.SetTgl(TanggalKontrol,tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
         }
@@ -1701,10 +2409,17 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
 
     private void isForm(){
         if(ChkInput.isSelected()==true){
-            ChkInput.setVisible(false);
-            PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-245));
-            FormInput.setVisible(true);
-            ChkInput.setVisible(true);
+            if(internalFrame1.getHeight()>647){
+                ChkInput.setVisible(false);
+                PanelInput.setPreferredSize(new Dimension(WIDTH,475));
+                FormInput.setVisible(true);
+                ChkInput.setVisible(true);
+            }else{
+                ChkInput.setVisible(false);
+                PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
+                FormInput.setVisible(true);      
+                ChkInput.setVisible(true);
+            }
         }else if(ChkInput.isSelected()==false){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));

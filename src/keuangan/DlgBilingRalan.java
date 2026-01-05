@@ -3033,9 +3033,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                 if(!tbBilling.getValueAt(0,1).toString().trim().contains("No.Nota")){
                     JOptionPane.showMessageDialog(null,"Pasien menggunakan billing parsial..!!");
                 }else{
+                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
                     Sequel.deleteTampJurnal();
                     if((-1*ttlPotongan)>0){
@@ -3245,7 +3245,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_btnCariDokterActionPerformed
 
     private void MnObatLangsungActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnObatLangsungActionPerformed
-        TotalObat.setText(Sequel.cariIsi("select besar_tagihan from tagihan_obat_langsung where no_rawat=?",TNoRw.getText()));
+        TotalObat.setText(Sequel.cariIsi("select tagihan_obat_langsung.besar_tagihan from tagihan_obat_langsung where tagihan_obat_langsung.no_rawat=?",TNoRw.getText()));
         WindowObatLangsung.setSize(590,80);
         WindowObatLangsung.setLocationRelativeTo(internalFrame1);
         TotalObat.requestFocus();
@@ -3274,7 +3274,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
             Sequel.menyimpan("tagihan_obat_langsung","'"+TNoRw.getText()+"','"+TotalObat.getText()+"'","No.Rawat");
-            WindowObatLangsung.setVisible(false);
+            WindowObatLangsung.dispose();
             isRawat();
             isKembali();
         }
@@ -3289,7 +3289,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             Valid.textKosong(TNoRw,"No.Rawat");
         }else{
             Sequel.queryu("delete from tagihan_obat_langsung where no_rawat=? ",TNoRw.getText());
-            WindowObatLangsung.setVisible(false);
+            WindowObatLangsung.dispose();
             isRawat();isKembali();
         }
     }//GEN-LAST:event_BtnBatal1ActionPerformed
@@ -6310,14 +6310,14 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
                 if(sukses==true){
                     Valid.editTable(tabModeRwJlDr,"reg_periksa","no_rawat",TNoRw,"status_bayar='Sudah Bayar'");
-                    Sequel.meghapus("temporary_tambahan_potongan","no_rawat",TNoRw.getText());
-                    Sequel.Commit();
+                    Sequel.Commit();    
                 }else{
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
                 if(sukses==true){
-                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
+                    Sequel.meghapus("temporary_tambahan_potongan","no_rawat",TNoRw.getText());
+                    JOptionPane.showMessageDialog(null,"Proses simpan selesai...!"); 
                     if(notaralan.equals("Yes")){
                         BtnNotaActionPerformed(null);
                         this.dispose();
