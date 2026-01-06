@@ -52,8 +52,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
     public DlgPintuSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setLocation(10, 2);
-        setSize(628, 674);
 
         tabMode = new DefaultTableModel(null, new Object[] {"Kode Pintu", "Nama Pintu"}) {
             @Override
@@ -74,10 +72,8 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         for (int i = 0; i < tabMode.getRowCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setPreferredWidth(20);
+                column.setPreferredWidth(100);
             } else if (i == 1) {
-                column.setPreferredWidth(90);
-            } else if (i == 2) {
                 column.setPreferredWidth(300);
             }
         }
@@ -86,6 +82,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         Kd.setDocument(new batasInput((byte) 5).getKata(Kd));
         Nm.setDocument(new batasInput((byte) 50).getKata(Nm));
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -190,6 +187,7 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
 
         tbKamar.setAutoCreateRowSorter(true);
         tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbKamar.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
         tbKamar.setComponentPopupMenu(Popup);
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -268,7 +266,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         panelisi3.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('1');
         BtnCari.setToolTipText("Alt+1");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -285,7 +282,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         panelisi3.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('2');
         BtnAll.setToolTipText("Alt+2");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -354,7 +350,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         panelisi1.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -372,7 +367,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         panelisi1.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -390,7 +384,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         panelisi1.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -408,7 +401,6 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
         panelisi1.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -723,9 +715,9 @@ public final class DlgPintuSMC extends javax.swing.JDialog {
 
     private void getData() {
         if (tbKamar.getSelectedRow() != -1) {
-            Kd.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
-            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
-            Nm.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString());
+            Kd.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
+            Kd2.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString());
+            Nm.setText(tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
         }
     }
 

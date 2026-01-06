@@ -3928,7 +3928,7 @@ public final class akses {
     public static boolean getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan(){return akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan;}
     public static boolean getskrining_curb65(){return akses.skrining_curb65;}
     public static boolean getbpjs_potensi_prb(){return akses.bpjs_potensi_prb;}
-    public static boolean getpintu_poli(){return akses.pintu_poli;}
+    public static boolean getpintu_poli_smc(){return akses.pintu_poli;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {

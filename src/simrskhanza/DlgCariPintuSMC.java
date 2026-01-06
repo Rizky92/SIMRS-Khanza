@@ -28,6 +28,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.stream.StreamSupport;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -37,7 +38,7 @@ import javax.swing.table.TableColumn;
  *
  * @author dosen
  */
-public final class DlgCariPintu extends javax.swing.JDialog {
+public final class DlgCariPintuSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
@@ -50,7 +51,7 @@ public final class DlgCariPintu extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public DlgCariPintu(java.awt.Frame parent, boolean modal) {
+    public DlgCariPintuSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
         this.setLocation(10, 2);
@@ -63,12 +64,13 @@ public final class DlgCariPintu extends javax.swing.JDialog {
                 return false;
             }
         };
+
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 2; i++) {
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(90);
@@ -76,8 +78,11 @@ public final class DlgCariPintu extends javax.swing.JDialog {
                 column.setPreferredWidth(300);
             }
         }
+
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
+
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -136,7 +141,7 @@ public final class DlgCariPintu extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pintu ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Cari Data Pintu Ruangan Untuk Poli SMC ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -249,7 +254,6 @@ public final class DlgCariPintu extends javax.swing.JDialog {
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
-        internalFrame1.getAccessibleContext().setAccessibleName("::[ Pintu ]::");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -332,7 +336,7 @@ public final class DlgCariPintu extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if (Valid.umurcacheSmc("./cache/pintu.iyem", 30)) {
+        if (Valid.umurcacheSmc("./cache/pinturuanganpolismc.iyem", 30)) {
             tampil();
         } else {
             tampil2();
@@ -344,7 +348,7 @@ public final class DlgCariPintu extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            DlgCariPintu dialog = new DlgCariPintu(new javax.swing.JFrame(), true);
+            DlgCariPintuSMC dialog = new DlgCariPintuSMC(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -373,30 +377,38 @@ public final class DlgCariPintu extends javax.swing.JDialog {
     private void tampil() {
         Valid.tabelKosongSmc(tabMode);
         try {
-            File file = new File("./cache/pintu_smc.iyem");
+            File file = new File("./cache/pinturuanganpolismc.iyem");
             file.createNewFile();
-            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select pintu_smc.kd_pintu, pintu_smc.nm_pintu from pintu_smc where pintu_smc.status = '1' order by pintu_smc.nm_pintu")) {
+
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                "select pintu_smc.kd_pintu, pintu_smc.nm_pintu from pintu_smc where pintu_smc.status = '1' order by pintu_smc.nm_pintu"
+            )) {
                 if (rs.next()) {
                     ObjectNode root = mapper.createObjectNode();
                     ArrayNode array = mapper.createArrayNode();
+
                     do {
                         ObjectNode pintu = mapper.createObjectNode();
                         pintu.put("KodePintu", rs.getString(1));
                         pintu.put("NamaPintu", rs.getString(2));
                         array.add(pintu);
+
                         tabMode.addRow(new Object[] {
                             rs.getString(1), rs.getString(2)
                         });
                     } while (rs.next());
-                    root.set("pintu_smc", array);
+
+                    root.set("pinturuanganpolismc", array);
                     fw.write(mapper.writeValueAsString(root));
                     fw.flush();
                 }
+
                 tabMode.fireTableDataChanged();
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
+
         LCount.setText("" + tabMode.getRowCount());
     }
 
@@ -409,35 +421,33 @@ public final class DlgCariPintu extends javax.swing.JDialog {
     }
 
     public void isCek() {
-        BtnTambah.setEnabled(akses.getadmin());
+        BtnTambah.setEnabled(akses.getpintu_poli_smc());
     }
 
     private void tampil2() {
         Valid.tabelKosongSmc(tabMode);
-        try (FileReader fr = new FileReader("./cache/pintu_smc.iyem")) {
-            JsonNode response = mapper.readTree(fr).path("pintu_smc");
+
+        try (FileReader fr = new FileReader("./cache/pinturuanganpolismc.iyem")) {
+            JsonNode response = mapper.readTree(fr).path("pinturuanganpolismc");
             if (response.isArray()) {
-                if (TCari.getText().isBlank()) {
-                    for (JsonNode list : response) {
-                        tabMode.addRow(new Object[] {
-                            list.path("KodePintu").asText(), list.path("NamaPintu").asText()
-                        });
-                    }
-                } else {
-                    for (JsonNode list : response) {
-                        if (list.path("KodePintu").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
-                             list.path("NamaPintu").asText().toLowerCase().contains(TCari.getText().toLowerCase())) {
-                            tabMode.addRow(new Object[] {
-                                list.path("KodeUnit").asText(), list.path("NamaUnit").asText(),});
-                        }
-                    }
-                }
+                StreamSupport.stream(response.spliterator(), false)
+                    .filter(node -> {
+                        if (TCari.getText().isBlank()) return true;
+
+                        return node.path("KodePintu").asText().toLowerCase().contains(TCari.getText().toLowerCase()) ||
+                            node.path("NamaPintu").asText().toLowerCase().contains(TCari.getText().toLowerCase());
+                    })
+                    .forEach(node -> tabMode.addRow(new Object[] {
+                        node.path("KodeUnit").asText(), node.path("NamaUnit").asText()
+                    }));
             }
+
             tabMode.fireTableDataChanged();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             tampil();
         }
+
         LCount.setText("" + tabMode.getRowCount());
     }
 }

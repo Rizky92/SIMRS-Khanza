@@ -8629,6 +8629,7 @@ public class frmUtama extends javax.swing.JFrame {
     DlgHome.setVisible(true);
     if(menuawal==0){
         isCombo();
+        isComboSMC();
         setLayout();
         menuawal=1;
     }else{
@@ -49891,7 +49892,7 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
-            if (akses.getpintu_poli()) {
+            if (akses.getpintu_poli_smc()) {
                 Panelmenu.add(btnPintuPoliSmc);
                 jmlmenu++;
             }
@@ -49999,7 +50000,7 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
-        if (akses.getpintu_poli()) {
+        if (akses.getpintu_poli_smc()) {
             Panelmenu.add(btnPintuPoliSmc);
             jmlmenu++;
         }
@@ -50083,7 +50084,7 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
-        if (akses.getpintu_poli()) {
+        if (akses.getpintu_poli_smc()) {
             if (btnPintuPoliSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnPintuPoliSmc);
                 jmlmenu++;
