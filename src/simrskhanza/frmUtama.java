@@ -49784,7 +49784,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
                              btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananObatApotek,
-                             btnBPJSRiwayatPelayananResepApotek;
+                             btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -49874,10 +49874,28 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatPelayananResepApotek.setName("btnBPJSRiwayatPelayananResepApotek");
         btnBPJSRiwayatPelayananResepApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatPelayananResepApotek.addActionListener(this::btnBPJSRiwayatPelayananResepApotekActionPerformed);
+
+        btnPintuPoliSmc = new widget.ButtonBig();
+        btnPintuPoliSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bedroom.png")));
+        btnPintuPoliSmc.setText("Pintu Ruangan Poli");
+        btnPintuPoliSmc.setIconTextGap(0);
+        btnPintuPoliSmc.setName("btnPintuPoliSmc");
+        btnPintuPoliSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPintuPoliSmc.addActionListener(this::btnPintuPoliSmcActionPerformed);
     }
 
     private void isComboSMC() {
-        if (cmbMenu.getSelectedIndex() == 11) {
+        if (cmbMenu.getSelectedIndex() == 0) {
+            if (akses.getset_pintu_poli()) {
+                Panelmenu.add(btnSetPintuPoliSmc);
+                jmlmenu++;
+            }
+
+            if (akses.getpintu_poli()) {
+                Panelmenu.add(btnPintuPoliSmc);
+                jmlmenu++;
+            }
+        } else if (cmbMenu.getSelectedIndex() == 11) {
             if (akses.getbpjs_kompilasi_berkas_klaim()) {
                 Panelmenu.add(btnBPJSKompilasiBerkasKlaim);
                 jmlmenu++;
@@ -49910,11 +49928,6 @@ public class frmUtama extends javax.swing.JFrame {
         } else if (cmbMenu.getSelectedIndex() == 19) {
             if (akses.getuser()) {
                 Panelmenu.add(btnUserSmc);
-                jmlmenu++;
-            }
-
-            if (akses.getset_pintu_poli()) {
-                Panelmenu.add(btnSetPintuPoliSmc);
                 jmlmenu++;
             }
 
@@ -49983,6 +49996,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getbpjs_riwayat_pelayanan_resep_smc()) {
             Panelmenu.add(btnBPJSRiwayatPelayananResepApotek);
+            jmlmenu++;
+        }
+
+        if (akses.getpintu_poli()) {
+            Panelmenu.add(btnPintuPoliSmc);
             jmlmenu++;
         }
     }
@@ -50061,6 +50079,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getbpjs_riwayat_pelayanan_resep_smc()) {
             if (btnBPJSRiwayatPelayananResepApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnBPJSRiwayatPelayananResepApotek);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getpintu_poli()) {
+            if (btnPintuPoliSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnPintuPoliSmc);
                 jmlmenu++;
             }
         }
@@ -50208,6 +50233,18 @@ public class frmUtama extends javax.swing.JFrame {
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPintuPoliSmcActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgPintuSMC aplikasi = new DlgPintuSMC(this, false);
+        aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
 }

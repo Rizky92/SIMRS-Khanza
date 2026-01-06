@@ -222,8 +222,8 @@ public final class akses {
             catatan_keperawatan_ralan=false,catatan_persalinan=false,skor_aldrette_pasca_anestesi=false,skor_steward_pasca_anestesi=false,skor_bromage_pasca_anestesi=false,
             penilaian_pre_induksi=false,hasil_usg_urologi=false,hasil_usg_gynecologi=false,hasil_pemeriksaan_ekg=false,hapus_edit_sep_bpjs=false,satu_sehat_kirim_diet=false,
             satu_sehat_mapping_obat=false,dapur_ringkasan_pembelian=false,satu_sehat_kirim_medication=false,satu_sehat_kirim_medicationrequest=false,
-            penatalaksanaan_terapi_okupasi=false,satu_sehat_kirim_medicationdispense=false,edit_hapus_spo_medis=false,edit_hapus_spo_nonmedis=false,hasil_usg_neonatus=false,hasil_endoskopi_faring_laring=false,
-            satu_sehat_mapping_radiologi=false,satu_sehat_kirim_servicerequest_radiologi=false,hasil_endoskopi_hidung=false,satu_sehat_kirim_specimen_radiologi=false,bpjs_kompilasi_berkas_klaim=false,
+            penatalaksanaan_terapi_okupasi=false,satu_sehat_kirim_medicationdispense=false,hasil_usg_neonatus=false,hasil_endoskopi_faring_laring=false,
+            satu_sehat_mapping_radiologi=false,satu_sehat_kirim_servicerequest_radiologi=false,hasil_endoskopi_hidung=false,satu_sehat_kirim_specimen_radiologi=false,
             master_masalah_keperawatan_neonatus=false,master_rencana_keperawatan_neonatus=false,penilaian_awal_keperawatan_ranap_neonatus=false,
             satu_sehat_kirim_observation_radiologi=false,satu_sehat_kirim_diagnosticreport_radiologi=false,hasil_endoskopi_telinga=false,satu_sehat_mapping_lab=false,
             satu_sehat_kirim_servicerequest_lab=false,satu_sehat_kirim_servicerequest_labmb=false,satu_sehat_kirim_specimen_lab=false,satu_sehat_kirim_specimen_labmb=false,
@@ -240,7 +240,7 @@ public final class akses {
             skrining_kanker_kolorektal=false,dapur_pemesanan=false,bayar_pesan_dapur=false,hutang_dapur=false,titip_faktur_dapur=false,validasi_tagihan_dapur=false,
             surat_pemesanan_dapur=false,pengajuan_barang_dapur=false,dapur_returbeli=false,hibah_dapur=false,ringkasan_penerimaan_dapur=false,ringkasan_pengajuan_dapur=false,
             ringkasan_pemesanan_dapur=false,ringkasan_returbeli_dapur=false,ringkasan_stokkeluar_dapur=false,dapur_stokkeluar_pertanggal=false,sirkulasi_dapur=false,
-            sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur=false,pindah_kamar_pilihan_2=false,penilaian_psikologi_klinis=false,
+            sirkulasi_dapur2=false,verifikasi_penerimaan_dapur=false,nilai_penerimaan_vendor_dapur_perbulan=false,ringkasan_hutang_vendor_dapur=false,penilaian_psikologi_klinis=false,
             penilaian_awal_medis_ranap_neonatus=false,penilaian_derajat_dehidrasi=false,ringkasan_jasa_tindakan_medis=false,pendapatan_per_akun=false,hasil_pemeriksaan_echo=false,
             penilaian_bayi_baru_lahir=false,rl1_3_ketersediaan_kamar=false,pendapatan_per_akun_closing=false,pengeluaran_pengeluaran=false,skrining_diabetes_melitus=false,
             laporan_tindakan=false,pelaksanaan_informasi_edukasi=false,layanan_kedokteran_fisik_rehabilitasi=false,skrining_kesehatan_gigi_mulut_balita=false,skrining_anemia=false,
@@ -258,7 +258,18 @@ public final class akses {
             template_pelaksanaan_informasi_edukasi=false,skrining_instrumen_esat=false,penilaian_awal_medis_ranap_jantung=false,e_eksekutif=false,penugasan_pengujian_sampel_lab_kesehatan_lingkungan=false,
             hasil_pengujian_sampel_lab_kesehatan_lingkungan=false,verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false,validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,
             rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false,bpjs_potensi_prb=false;
-    private static boolean bpjs_kirim_obat_smc=false,bpjs_edit_kirim_obat_smc=false,bpjs_riwayat_obat_smc=false,bpjs_riwayat_pelayanan_obat_smc=false,bpjs_riwayat_pelayanan_resep_smc=false,set_pintu_poli=false;
+
+    private static boolean edit_hapus_spo_medis = false,
+        edit_hapus_spo_nonmedis = false,
+        bpjs_kompilasi_berkas_klaim = false,
+        pindah_kamar_pilihan_2 = false,
+        bpjs_kirim_obat_smc = false,
+        bpjs_edit_kirim_obat_smc = false,
+        bpjs_riwayat_obat_smc = false,
+        bpjs_riwayat_pelayanan_obat_smc = false,
+        bpjs_riwayat_pelayanan_resep_smc = false,
+        set_pintu_poli = false,
+        pintu_poli = false;
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -1469,6 +1480,7 @@ public final class akses {
                         akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=rs2.getBoolean("pembayaran_pengujian_sampel_lab_kesehatan_lingkungan");
                         akses.skrining_curb65=rs2.getBoolean("skrining_curb65");
                         akses.bpjs_potensi_prb=rs2.getBoolean("bpjs_potensi_prb");
+                        akses.pintu_poli=rs2.getBoolean("pintu_poli");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2689,6 +2701,7 @@ public final class akses {
         akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=isadmin;
         akses.skrining_curb65=isadmin;
         akses.bpjs_potensi_prb=isadmin;
+        akses.pintu_poli=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3915,6 +3928,7 @@ public final class akses {
     public static boolean getpembayaran_pengujian_sampel_lab_kesehatan_lingkungan(){return akses.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan;}
     public static boolean getskrining_curb65(){return akses.skrining_curb65;}
     public static boolean getbpjs_potensi_prb(){return akses.bpjs_potensi_prb;}
+    public static boolean getpintu_poli(){return akses.pintu_poli;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
