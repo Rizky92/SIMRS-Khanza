@@ -158,5 +158,14 @@ public final class koneksiDB {
         return var;
     }
     
+    public static String SMCINTERNALAPPAPIURL() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            var=EnkripsiAES.decrypt(prop.getProperty("SMCINTERNALAPPAPIURL", EnkripsiAES.encrypt("http://smc-internal-app.test/api")));
+        } catch (Exception e) {
+            var="http://smc-internal-app.test/api";
+        }
+        return var;
+    }
     
 }

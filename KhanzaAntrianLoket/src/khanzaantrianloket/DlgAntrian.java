@@ -21,6 +21,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -39,6 +45,7 @@ import javax.swing.UIManager;
 public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
     private Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
+    private final String SMCINTERNALAPPAPIURL = koneksiDB.SMCINTERNALAPPAPIURL();
     private final boolean ANTRIANPREFIXHURUF = koneksiDB.ANTRIANPREFIXHURUF();
     private final String[] PREFIXHURUFAKTIF = koneksiDB.PREFIXHURUFAKTIF();
     private final String ANTRIAN = koneksiDB.ANTRIAN();
@@ -525,6 +532,10 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "",
             Antrian.getText().trim()
         );
+        String rawNomor = Antrian.getText().trim();
+        String formattedNomor = padleftSmc(rawNomor, 3, '0');
+        String nomorToSend = cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() + formattedNomor : formattedNomor;
+        panggilDiWeb(cmbloket.getSelectedItem().toString(), nomorToSend);
     }//GEN-LAST:event_BtnAntriActionPerformed
 
     private void BtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResetActionPerformed
@@ -533,6 +544,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
 
     private void BtnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStopActionPerformed
         Sequel.menghapusSmc("antriloketsmc");
+        stopPanggilDiWeb();
     }//GEN-LAST:event_BtnStopActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -839,5 +851,93 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             }
         };
         new Timer(1000, taskPerformer).start();
+    }
+
+    private String buildEndpoint(String desired, String other) {
+        String base = SMCINTERNALAPPAPIURL == null ? "" : SMCINTERNALAPPAPIURL.trim();
+
+        if (base.contains(desired)) {
+            return base;
+        }
+
+        if (base.contains(other)) {
+            return base.replace(other, desired);
+        }
+
+        return base.endsWith("/") ? base + desired : base + "/" + desired;
+    }
+
+    private boolean postJson(String endpoint, String jsonPayload) {
+        HttpURLConnection conn = null;
+
+        try {
+            System.out.println("Connecting to " + endpoint);
+            URL url = new URL(endpoint);
+            conn = (HttpURLConnection) url.openConnection();
+
+            conn.setRequestMethod("POST");
+            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
+            conn.setRequestProperty("Accept", "application/json");
+            conn.setDoOutput(true);
+
+            try (OutputStream os = conn.getOutputStream()) {
+                os.write(jsonPayload.getBytes(StandardCharsets.UTF_8));
+            }
+
+            int responseCode = conn.getResponseCode();
+
+            try (BufferedReader reader = new BufferedReader(
+                    new InputStreamReader(
+                            responseCode >= 200 && responseCode < 300
+                                    ? conn.getInputStream()
+                                    : conn.getErrorStream(),
+                            StandardCharsets.UTF_8
+                    ))) {
+
+                StringBuilder response = new StringBuilder();
+                String line;
+                while ((line = reader.readLine()) != null) {
+                    response.append(line);
+                }
+
+                System.out.println("Response: " + response);
+            }
+
+            return responseCode == HttpURLConnection.HTTP_OK;
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        } finally {
+            if (conn != null) {
+                conn.disconnect();
+            }
+        }
+    }
+
+    private boolean panggilDiWeb(String loket, String nomor) {
+        String endpoint = buildEndpoint(
+                "panggil-antrean-loket-smc",
+                "stop-antrean-loket-smc"
+        );
+
+        String payload = String.format(
+                "{\"action\":\"called\",\"loket\":\"%s\",\"nomor\":\"%s\"}",
+                loket,
+                nomor
+        );
+
+        return postJson(endpoint, payload);
+    }
+
+    private boolean stopPanggilDiWeb() {
+        String endpoint = buildEndpoint(
+                "stop-antrean-loket-smc",
+                "panggil-antrean-loket-smc"
+        );
+
+        String payload = "{\"action\":\"stopped\"}";
+
+        return postJson(endpoint, payload);
     }
 }
