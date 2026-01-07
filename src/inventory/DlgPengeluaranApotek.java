@@ -1440,7 +1440,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
    
    public void tampil2(String nopermintaan) {
-       runBackground(() ->tampil2(nopermintaan));
+       runBackground(() ->tampil(nopermintaan));
    }
 
    private void runBackground(Runnable task) {
