@@ -1672,6 +1672,8 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_obat_smc` en
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_resep_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_riwayat_pelayanan_obat_smc`;
 
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pintu_poli` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_potensi_prb`;
+
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `penyakit` enum('true','false') NULL DEFAULT NULL AFTER `password`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `obat_penyakit` enum('true','false') NULL DEFAULT NULL AFTER `penyakit`;
