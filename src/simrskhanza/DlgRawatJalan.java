@@ -12820,12 +12820,13 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     tbTindakan.setValueAt(false,i,0);
                 }
             }else{
-                sukses=false;
-                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 Sequel.RollBack();
             }
-
             Sequel.AutoComitTrue();
+            if (!sukses) {
+                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+            }
+
             ChkJln.setSelected(true);
         } catch (Exception e) {
             System.out.println("Notif : "+e);
@@ -12892,12 +12893,12 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     tbTindakan2.setValueAt(false,i,0);
                 }
             }else{
-                sukses=false;
-                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 Sequel.RollBack();
             }
-
             Sequel.AutoComitTrue();
+            if (!sukses) {
+                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+            }
             ChkJln.setSelected(true);
         } catch (Exception e) {
             System.out.println("Notif : "+e);
@@ -12970,12 +12971,12 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     tbTindakan3.setValueAt(false,i,0);
                 }
             }else{
-                sukses=false;
-                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 Sequel.RollBack();
             }
-
             Sequel.AutoComitTrue();
+            if (!sukses) {
+                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+            }
             ChkJln.setSelected(true);
         } catch (Exception e) {
             System.out.println("Notif : "+e);
