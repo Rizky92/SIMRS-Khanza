@@ -1223,7 +1223,6 @@ public class frmUtama extends javax.swing.JFrame {
         edAdmin.setDocument(new batasInput((byte)100).getKata(edAdmin));
         edPwd.setDocument(new batasInput((byte)100).getKata(edPwd));
         DlgLogin.setSize(299,180);
-        DlgLogin.setVisible(false);
         DlgLogin.setLocationRelativeTo(null);
         jMenu1.setOpaque(false);
         jMenu5.setOpaque(false);
@@ -8370,9 +8369,9 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jMenu4.setName("jMenu4"); // NOI18N
         jMenu4.setPreferredSize(new java.awt.Dimension(121, 26));
-        jMenu4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenu4ActionPerformed(evt);
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
             }
         });
         MenuBar.add(jMenu4);
@@ -8435,6 +8434,7 @@ public class frmUtama extends javax.swing.JFrame {
                 isTutup();
                 break;
             case "Log In":
+                isTutup();
                 DlgLogin.setVisible(true);
                 edAdmin.requestFocus();
                 break;
@@ -14672,14 +14672,13 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnInfoMobileJKNActionPerformed
 
-    private void jMenu4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenu4ActionPerformed
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
         isTutup();
-        DlgHome.dispose();
-        DlgAbout About=new DlgAbout(this,true);
+        DlgAbout About=new DlgAbout(this,false);
         About.setSize(PanelWall.getWidth(), PanelWall.getHeight());
-        About.setLocationRelativeTo(PanelWall);  
+        About.setLocationRelativeTo(PanelWall);
         About.setVisible(true);
-    }//GEN-LAST:event_jMenu4ActionPerformed
+    }//GEN-LAST:event_jMenu4MouseClicked
 
     private void MenuRevalidateCacheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuRevalidateCacheActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

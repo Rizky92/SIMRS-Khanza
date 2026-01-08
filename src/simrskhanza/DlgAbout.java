@@ -26,7 +26,7 @@ public class DlgAbout extends javax.swing.JDialog {
         initComponents();
         this.setLocation(10,10);
         setSize(465,515);
-        
+
         Properties prop = System.getProperties();
         jLabel29.setText(prop.getProperty("java.runtime.name"));
         jLabel30.setText(prop.getProperty("java.runtime.version"));

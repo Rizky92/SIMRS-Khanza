@@ -1707,14 +1707,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
                     if(sukses){
                         Sequel.Commit();
-                        for(i=0;i<tbObat.getRowCount();i++){
-                            tbObat.setValueAt("",i,1);
-                        }
-                        Valid.tabelKosong(tabModeObatRacikan);
-                        Valid.tabelKosong(tabModeDetailObatRacikan);
-                        LTotal.setText("0");
-                        LPpn.setText("0");
-                        LTotalTagihan.setText("0");
                     }else{
                         sukses=false;
                         Sequel.RollBack();
@@ -3301,7 +3293,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Ditemukan obat kronis diresepkan oleh dokter, silahkan dilakukan review dahulu..!!");
         }
     }
-    
+
     public void tampilobat3(String no_resep) {
         runBackground(() -> tampilobat2(no_resep));
     }

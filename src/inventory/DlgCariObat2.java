@@ -1460,11 +1460,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
                     if(sukses){
                         Sequel.Commit();
-                        for(i=0;i<tbObat.getRowCount();i++){
-                            tbObat.setValueAt("",i,1);
-                        }
-                        Valid.tabelKosong(tabModeObatRacikan);
-                        Valid.tabelKosong(tabModeDetailObatRacikan);
                     }else{
                         sukses=false;
                         Sequel.RollBack();
@@ -3748,7 +3743,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampilobat3(String no_resep) {
         runBackground(() -> tampilobat2(no_resep));
     }
