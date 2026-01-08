@@ -603,7 +603,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Kabag Keuangan]]></text>
+				<text><![CDATA[Manajer Keuangan]]></text>
 			</staticText>
 			<staticText>
 				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="416" y="200" width="139" height="10" forecolor="#000000" backcolor="#F0F0DC" uuid="2a3778c5-1532-48a1-86aa-4c0e5b1a4bcc"/>

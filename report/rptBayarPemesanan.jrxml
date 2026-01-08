@@ -435,7 +435,7 @@ and pemesanan.kode_suplier=datasuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
+				<text><![CDATA[ADE ARYANI, S.E.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="4" y="94" width="121" height="11" uuid="c190ed4f-30ef-4d64-b82a-292ddcfc64db">
@@ -445,7 +445,7 @@ and pemesanan.kode_suplier=datasuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[KABAG KEUANGAN]]></text>
+				<text><![CDATA[MANAJER KEUANGAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="652" y="29" width="144" height="11" uuid="afec9bc8-0011-46c4-9a5c-6f53f1ffe4d4">
