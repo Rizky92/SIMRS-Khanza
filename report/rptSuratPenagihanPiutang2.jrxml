@@ -605,7 +605,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Kabag Keuangan]]></text>
+				<text><![CDATA[Manajer Keuangan]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" isBlankWhenNull="true">
 				<reportElement positionType="Float" x="2" y="157" width="158" height="20" uuid="72627355-13f1-4c38-a8a7-b9621873c603"/>

@@ -370,7 +370,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[KABAG KEUANGAN]]></text>
+				<text><![CDATA[MANAJER KEUANGAN]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="30" y="80" width="110" height="11" uuid="acff0849-f1b2-489e-9d35-6ddb28901395">
@@ -380,7 +380,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[SAPTA PRIANGGATAMA]]></text>
+				<text><![CDATA[ADE ARYANI, S.E.]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="60" y="40" width="50" height="11" uuid="5a5196ad-38a4-4b03-bada-6df38d065594">
