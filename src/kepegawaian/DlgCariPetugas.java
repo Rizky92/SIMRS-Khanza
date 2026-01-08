@@ -18,7 +18,10 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -33,6 +36,8 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final ObjectMapper mapper = new ObjectMapper();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /**
      * Creates new form DlgPenyakit
@@ -324,7 +329,6 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgPetugas petugas = new DlgPetugas(null, false);
         petugas.emptTeks();
         petugas.isCek();
@@ -332,7 +336,6 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
         petugas.setLocationRelativeTo(internalFrame1);
         petugas.setAlwaysOnTop(false);
         petugas.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -453,8 +456,8 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
                 } else {
                     for (JsonNode list : response) {
                         if (list.path("NIP").asText().toLowerCase().contains(TCari.getText().trim().toLowerCase()) ||
-                             list.path("NamaPetugas").asText().toLowerCase().contains(TCari.getText().trim().toLowerCase()) ||
-                             list.path("Jabatan").asText().toLowerCase().contains(TCari.getText().trim().toLowerCase())) {
+                            list.path("NamaPetugas").asText().toLowerCase().contains(TCari.getText().trim().toLowerCase()) ||
+                            list.path("Jabatan").asText().toLowerCase().contains(TCari.getText().trim().toLowerCase())) {
                             tabMode.addRow(new Object[] {
                                 list.path("NIP").asText(), list.path("NamaPetugas").asText(), list.path("JK").asText(),
                                 list.path("TmpLahir").asText(), list.path("TglLahir").asText(), list.path("GD").asText(),
@@ -491,5 +494,25 @@ public final class DlgCariPetugas extends javax.swing.JDialog {
         }
 
         return Sequel.cariIsiSmc("select petugas.nama from petugas where petugas.nip = ?", kode);
+    }
+
+    private void runBackground(Runnable task) {
+        if (ceksukses) {
+            return;
+        }
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
     }
 }
