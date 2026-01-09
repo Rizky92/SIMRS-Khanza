@@ -865,6 +865,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         ChkInput.setSelected(true);
         isForm();
         nilaippn=0;
+        Keterangan.setText("");
         BesarPPN.setText("0");
         BesarDeposit.setText("0");
         DibayarPasien.setText("0");
@@ -919,7 +920,7 @@ public class DlgDeposit extends javax.swing.JDialog {
                     
                     if (sukses) {
                         runBackground(() ->tampil());
-                        BtnBatalActionPerformed(null);
+                        autoNomor();
                     } else {
                         JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     }
