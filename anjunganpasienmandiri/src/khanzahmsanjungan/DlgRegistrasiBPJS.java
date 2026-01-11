@@ -33,10 +33,13 @@ import java.text.SimpleDateFormat;
 import java.time.Instant;
 import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import org.springframework.http.HttpEntity;
@@ -58,6 +61,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private final BPJSRiwayatRujukanPasien riwayatRujukan;
     private final BPJSRiwayatPelayananPasien riwayatPelayanan;
     private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
+    private final Set<String> VALIDASIBIOMETRIKAKTIF = new HashSet<>(Arrays.asList(koneksiDB.VALIDASIBIOMETRIKAKTIF()));
     private String hari = "",
         tglkll = "0000-00-00",
         datajam = "",
@@ -103,6 +107,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     public DlgRegistrasiBPJS(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        btnFrista.setVisible(VALIDASIBIOMETRIKAKTIF.contains("frista"));
+        btnFingerprint.setVisible(VALIDASIBIOMETRIKAKTIF.contains("fingerprint"));
 
         kodeBPJS = Sequel.cariIsiSmc("select kd_pj from password_asuransi");
         try (ResultSet rs = koneksi.createStatement().executeQuery("select kode_ppk, nama_instansi, kabupaten from setting")) {
@@ -670,7 +677,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         btnFingerprint.setBackground(new java.awt.Color(255, 255, 255));
         btnFingerprint.setForeground(new java.awt.Color(0, 131, 62));
         btnFingerprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/fingerprint.png"))); // NOI18N
-        btnFingerprint.setText("Fingerprint");
+        btnFingerprint.setText("<html><body style=\"text-align: center\">\nFINGER<br>PRINT\n</body></html>"); // NOI18N
         btnFingerprint.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFingerprint.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFingerprint.addActionListener(new java.awt.event.ActionListener() {
@@ -679,12 +686,12 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
         panelUtama.add(btnFingerprint);
-        btnFingerprint.setBounds(645, 415, 140, 90);
+        btnFingerprint.setBounds(645, 415, 120, 110);
 
         btnFrista.setBackground(new java.awt.Color(255, 255, 255));
         btnFrista.setForeground(new java.awt.Color(0, 131, 62));
         btnFrista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/face-scan.png"))); // NOI18N
-        btnFrista.setText("FRISTA");
+        btnFrista.setText("<html><body style=\"text-align: center\">\nREKAM<br>WAJAH\n</body></html>"); // NOI18N
         btnFrista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFrista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFrista.addActionListener(new java.awt.event.ActionListener() {
@@ -693,7 +700,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
         panelUtama.add(btnFrista);
-        btnFrista.setBounds(495, 415, 140, 90);
+        btnFrista.setBounds(515, 415, 120, 110);
 
         panelNumpad.setFocusable(false);
         panelNumpad.setFontSize(36);

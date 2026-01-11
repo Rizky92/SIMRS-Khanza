@@ -209,6 +209,10 @@ public class koneksiDB {
         return rawAPM("REGISTRASISATUJAMSEBELUMJAMPRAKTEK", "no").equalsIgnoreCase("yes");
     }
 
+    public static String[] VALIDASIBIOMETRIKAKTIF() {
+        return rawAPM("VALIDASIBIOMETRIKAKTIF", "fingerprint,frista").toLowerCase().replaceAll("\\s+", "").split(",");
+    }
+
     public static String HOST() {
         return rawe("HOST");
     }
