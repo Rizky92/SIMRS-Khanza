@@ -831,7 +831,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/48x48/fingerprint.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Fingerprint"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body style=&quot;text-align: center&quot;&gt;&#xa;FINGER&lt;br&gt;PRINT&#xa;&lt;/body&gt;&lt;/html&gt;" noResource="true"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -840,7 +840,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="645" y="415" width="140" height="90"/>
+                  <AbsoluteConstraints x="645" y="415" width="120" height="110"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -855,7 +855,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/48x48/face-scan.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="FRISTA"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body style=&quot;text-align: center&quot;&gt;&#xa;REKAM&lt;br&gt;WAJAH&#xa;&lt;/body&gt;&lt;/html&gt;" noResource="true"/>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -864,7 +864,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="495" y="415" width="140" height="90"/>
+                  <AbsoluteConstraints x="515" y="415" width="120" height="110"/>
                 </Constraint>
               </Constraints>
             </Component>
