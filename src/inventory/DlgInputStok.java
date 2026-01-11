@@ -172,7 +172,8 @@ public class DlgInputStok extends javax.swing.JDialog {
                 if(bangsal.getTable().getSelectedRow()!= -1){
                     kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                    runBackground(() ->tampil2());
+                    TCari.setText("");
+                    runBackground(() ->tampil());
                 }
                 kdgudang.requestFocus();
             }
@@ -944,7 +945,7 @@ public class DlgInputStok extends javax.swing.JDialog {
     }//GEN-LAST:event_tbDokterKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-       this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgStokOpname opname=new DlgStokOpname(null,false);
         opname.isCek();
         opname.emptTeks();
@@ -1087,37 +1088,37 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TglKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            int row2=tbDokter.getRowCount();
-            for(int r=0;r<row2;r++){
-                tbDokter.setValueAt("",r,0);
-                tbDokter.setValueAt(0,r,6);
-                tbDokter.setValueAt(0,r,7);
-                tbDokter.setValueAt(0,r,8);
-                tbDokter.setValueAt(0,r,9);
-                tbDokter.setValueAt(0,r,10);
-            }
+        int row2=tbDokter.getRowCount();
+        for(int r=0;r<row2;r++){
+            tbDokter.setValueAt("",r,0);
+            tbDokter.setValueAt(0,r,6);
+            tbDokter.setValueAt(0,r,7);
+            tbDokter.setValueAt(0,r,8);
+            tbDokter.setValueAt(0,r,9);
+            tbDokter.setValueAt(0,r,10);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
-        Tgl.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
-        BtnSimpan.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        BtnGudangActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
+            Tgl.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
+            BtnSimpan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            BtnGudangActionPerformed(null);
+        }
     }//GEN-LAST:event_kdgudangKeyPressed
 
     private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
-    bangsal.isCek();
-    bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    bangsal.setLocationRelativeTo(internalFrame1);
-    bangsal.setAlwaysOnTop(false);
-    bangsal.setVisible(true);
+        bangsal.isCek();
+        bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        bangsal.setLocationRelativeTo(internalFrame1);
+        bangsal.setAlwaysOnTop(false);
+        bangsal.setVisible(true);
     }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void ppStokActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppStokActionPerformed
