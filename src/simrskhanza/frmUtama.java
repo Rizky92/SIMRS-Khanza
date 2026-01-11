@@ -9632,7 +9632,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgRujukMasuk rujukmasuk=new DlgRujukMasuk(null,false);
-        rujukmasuk.tampil();
         rujukmasuk.emptTeks();
         rujukmasuk.isCek();
         rujukmasuk.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());

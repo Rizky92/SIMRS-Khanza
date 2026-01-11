@@ -1342,6 +1342,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     Valid.tabelKosong(tabModeResepRacikan);
                     Valid.tabelKosong(tabModeDetailResepRacikan);
                     dispose();
+                }else{
+                    emptTeksobat();
                 }
                 ChkJln.setSelected(true);
             }

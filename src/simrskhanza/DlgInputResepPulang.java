@@ -511,6 +511,13 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
 
         if(sukses==true){
             Sequel.Commit();
+        }else{
+            sukses=false;
+            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+            Sequel.RollBack();
+        }
+        Sequel.AutoComitTrue();
+        if(sukses==true){
             try {
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
@@ -578,13 +585,6 @@ public final class DlgInputResepPulang extends javax.swing.JDialog {
                 }
             } catch (Exception e) {
             }
-        }else{
-            sukses=false;
-            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-            Sequel.RollBack();
-        }
-        Sequel.AutoComitTrue();
-        if(sukses==true){
             dispose();
             ppBersihkanActionPerformed(null);
         }

@@ -7385,23 +7385,11 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         pasien.dispose();
-        pasien.bahasa.dispose();
-        pasien.cacat.dispose();
-        pasien.golonganpolri.dispose();
-        pasien.golongantni.dispose();
-        pasien.jabatanpolri.dispose();
-        pasien.jabatantni.dispose();
         pasien.kab.dispose();
         pasien.kec.dispose();
         pasien.kel.dispose();
-        pasien.pangkatpolri.dispose();
-        pasien.pangkattni.dispose();
         pasien.penjab.dispose();
-        pasien.perusahaan.dispose();
         pasien.prop.dispose();
-        pasien.satuanpolri.dispose();
-        pasien.satuantni.dispose();
-        pasien.suku.dispose();
         dokter.dispose();
         poli.dispose();
         poli2.dispose();
@@ -8107,7 +8095,7 @@ public final class DlgReg extends javax.swing.JDialog {
         rujukmasuk.emptTeks();
         rujukmasuk.isCek();
         rujukmasuk.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());
-        rujukmasuk.tampil();
+        rujukmasuk.tampil3();
         rujukmasuk.setVisible(true);
         //this.dispose();
     }
@@ -8590,7 +8578,7 @@ public final class DlgReg extends javax.swing.JDialog {
 
     private void btnPenjab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenjab1ActionPerformed
         akses.setform("DlgReg");
-        rujukmasuk.tampil2();
+        rujukmasuk.tampil4();
         rujukmasuk.TCariPerujuk.requestFocus();
         rujukmasuk.WindowPerujuk.setSize(this.getWidth()-20,this.getHeight()-20);
         rujukmasuk.WindowPerujuk.setLocationRelativeTo(internalFrame1);
