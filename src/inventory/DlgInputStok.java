@@ -172,7 +172,7 @@ public class DlgInputStok extends javax.swing.JDialog {
                 if(bangsal.getTable().getSelectedRow()!= -1){
                     kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                    runBackground(() ->tampil2());
+                    runBackground(() ->tampil());
                 }
                 kdgudang.requestFocus();
             }
