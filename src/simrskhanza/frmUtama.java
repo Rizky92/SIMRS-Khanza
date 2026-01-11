@@ -8595,20 +8595,20 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
     }//GEN-LAST:event_edPwdKeyPressed
 
     private void BtnMenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnMenuActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    isTutup();
-    DlgHome.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
-    DlgHome.setLocationRelativeTo(PanelUtama);
-    DlgHome.setVisible(true);
-    if(menuawal==0){
-        isCombo();
-        isComboSMC();
-        setLayout();
-        menuawal=1;
-    }else{
-        isTampil();
-    }
-    this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        isTutup();
+        DlgHome.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        DlgHome.setLocationRelativeTo(PanelUtama);
+        DlgHome.setVisible(true);
+        if(menuawal==0){
+            isCombo();
+            isComboSMC();
+            setLayout();
+            menuawal=1;
+        }else{
+            isTampil();
+        }
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnMenuActionPerformed
 
     private void BtnToolKasirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnToolKasirActionPerformed
