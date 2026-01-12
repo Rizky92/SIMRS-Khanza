@@ -10473,7 +10473,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgRl37 aplikasi=new DlgRl37(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -10485,7 +10484,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgRl38 aplikasi=new DlgRl38(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -10636,7 +10634,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgRl34 aplikasi=new DlgRl34(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -10648,7 +10645,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgRl36 aplikasi=new DlgRl36(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);

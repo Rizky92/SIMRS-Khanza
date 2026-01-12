@@ -80,8 +80,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     private final DefaultTableModel tabModeRwJlDr,tabModeTambahan,tabModePotongan,tabModeKamIn,tabModeAkunBayar,tabModeAkunPiutang,tabModeLab,tabModeRad,tabModeApotek;
     public DlgPemberianObat beriobat=new DlgPemberianObat(null,false);
     public DlgRawatInap rawatinap=new DlgRawatInap(null,false);
-    public DlgDeposit deposit=new DlgDeposit(null,false);
-    public DlgCariCaraBayar carabayar=new DlgCariCaraBayar(null,false);
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
@@ -658,74 +656,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-
-        deposit.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgBilingRanap")){
-                    if(status.equals("belum")){
-                        uangdeposit=Sequel.cariIsiAngka("select ifnull(sum(deposit.besar_deposit),0) from deposit where deposit.no_rawat=?",TNoRw.getText());
-                    }else{
-                        uangdeposit=Sequel.cariIsiAngka("select ifnull(sum(nota_inap.Uang_Muka),0) from nota_inap where nota_inap.no_rawat=?",TNoRw.getText());
-                    }
-                    Deposit.setText(Valid.SetAngka(uangdeposit));
-                    isKembali();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        carabayar.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgBilingRanap")){
-                    if(carabayar.getTable().getSelectedRow()!= -1){
-                        kdpenjab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString());
-                        nmpenjab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),2).toString());
-                    }
-                    kdpenjab.requestFocus();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        carabayar.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(akses.getform().equals("DlgBilingRanap")){
-                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        carabayar.dispose();
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-
+        
         try {
             psrekening=koneksi.prepareStatement(
                     "select set_nota.cetaknotasimpanranap,set_nota.centangdokterranap,set_nota.rinciandokterranap,"+
@@ -1984,6 +1915,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         internalFrame7.add(jLabel17);
         jLabel17.setBounds(0, 32, 77, 23);
 
+        kdpenjab.setEditable(false);
         kdpenjab.setName("kdpenjab"); // NOI18N
         kdpenjab.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -2112,7 +2044,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2026 14:59:13" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-01-2026 15:21:08" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -3723,7 +3655,42 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_kdpenjabKeyPressed
 
     private void btnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenjabActionPerformed
-        akses.setform("DlgBilingRanap");
+        DlgCariCaraBayar carabayar=new DlgCariCaraBayar(null,false);
+        carabayar.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(carabayar.getTable().getSelectedRow()!= -1){
+                    kdpenjab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString());
+                    nmpenjab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),2).toString());
+                } 
+                kdpenjab.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        carabayar.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    carabayar.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        }); 
         carabayar.isCek();
         carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         carabayar.setLocationRelativeTo(internalFrame1);
@@ -3732,13 +3699,37 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPenjabActionPerformed
 
     private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
-        akses.setform("DlgBilingRanap");
-        deposit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        deposit.setLocationRelativeTo(internalFrame1);
-        deposit.isCek();
-        deposit.setNoRm(TNoRw.getText(),Valid.SetTgl2(tgl_registrasi),DTPTgl.getDate());
-        deposit.setAlwaysOnTop(false);
-        deposit.setVisible(true);
+            DlgDeposit deposit=new DlgDeposit(null,false);
+            deposit.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {}
+                @Override
+                public void windowClosing(WindowEvent e) {}
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(status.equals("belum")){
+                        uangdeposit=Sequel.cariIsiAngka("select ifnull(sum(deposit.besar_deposit),0) from deposit where deposit.no_rawat=?",TNoRw.getText());                  
+                    }else{
+                        uangdeposit=Sequel.cariIsiAngka("select ifnull(sum(nota_inap.Uang_Muka),0) from nota_inap where nota_inap.no_rawat=?",TNoRw.getText());
+                    }
+                    Deposit.setText(Valid.SetAngka(uangdeposit));
+                    isKembali();
+                }
+                @Override
+                public void windowIconified(WindowEvent e) {}
+                @Override
+                public void windowDeiconified(WindowEvent e) {}
+                @Override
+                public void windowActivated(WindowEvent e) {}
+                @Override
+                public void windowDeactivated(WindowEvent e) {}
+            });
+            deposit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            deposit.setLocationRelativeTo(internalFrame1);
+            deposit.isCek();
+            deposit.setNoRm(TNoRw.getText(),Valid.SetTgl2(tgl_registrasi),DTPTgl.getDate());
+            deposit.setAlwaysOnTop(false);
+            deposit.setVisible(true);
     }//GEN-LAST:event_BtnSeek2ActionPerformed
 
     private void MnDataObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDataObatActionPerformed

@@ -286,10 +286,6 @@ public final class DlgReg extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     public  DlgPasien pasien=new DlgPasien(null,false);
     public  DlgCariDokter dokter=new DlgCariDokter(null,false);
-    public  DlgCariDokter2 dokter2=new DlgCariDokter2(null,false);
-    private DlgCariPoli poli=new DlgCariPoli(null,false);
-    private DlgCariPoli2 poli2=new DlgCariPoli2(null,false);
-    public  DlgRujukMasuk rujukmasuk=new DlgRujukMasuk(null,false);
     private PreparedStatement ps,ps3,pscaripiutang;
     private ResultSet rs;
     private int pilihan=0,i=0,kuota=0,jmlparsial=0;
@@ -681,131 +677,7 @@ public final class DlgReg extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-
-        dokter2.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {;}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgReg")){
-                    if(dokter2.getTable().getSelectedRow()!= -1){
-                        if(pilihan==1){
-                            KdDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),0).toString());
-                            TDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
-                            if(aktifjadwal.equals("aktif")){
-                                kuota=Integer.parseInt(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),13).toString());
-                            }
-                            isNumber();
-                            KdDokter.requestFocus();
-                        }else if(pilihan==2){
-                            CrDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
-                            CrDokter.requestFocus();
-                            tampil();
-                        }else if(pilihan==3){
-                            CrDokter3.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
-                            CrDokter3.requestFocus();
-                        }
-                    }
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        poli.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgReg")){
-                    if(poli.getTable().getSelectedRow()!= -1){
-                        if(pilihan==1){
-                            kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
-                            TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                            switch (TStatus.getText()) {
-                                case "Baru":
-                                    TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
-                                    break;
-                                case "Lama":
-                                    TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),3).toString());
-                                    break;
-                                default :
-                                    TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
-                                    break;
-                            }
-                            isNumber();
-                            kdpoli.requestFocus();
-                        }else if(pilihan==2){
-                            CrPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                            CrPoli.requestFocus();
-                            tampil();
-                        }
-                    }
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        poli2.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgReg")){
-                    if(poli2.getTable().getSelectedRow()!= -1){
-                        if(pilihan==1){
-                            kdpoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),0).toString());
-                            TPoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),1).toString());
-                            switch (TStatus.getText()) {
-                                case "Baru":
-                                    TBiaya.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),2).toString());
-                                    break;
-                                case "Lama":
-                                    TBiaya.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),3).toString());
-                                    break;
-                                default :
-                                    TBiaya.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),2).toString());
-                                    break;
-                            }
-                            isNumber();
-                            kdpoli.requestFocus();
-                        }else if(pilihan==2){
-                            CrPoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),1).toString());
-                            CrPoli.requestFocus();
-                            tampil();
-                        }
-                    }
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
+                
         pasien.kab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -877,74 +749,9 @@ public final class DlgReg extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-
-        pasien.penjab.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgReg")){
-                    if(pasien.penjab.getTable().getSelectedRow()!= -1){
-                        kdpnj.setText(pasien.penjab.getTable().getValueAt(pasien.penjab.getTable().getSelectedRow(),1).toString());
-                        nmpnj.setText(pasien.penjab.getTable().getValueAt(pasien.penjab.getTable().getSelectedRow(),2).toString());
-                    }
-                    kdpnj.requestFocus();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        rujukmasuk.WindowPerujuk.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgReg")){
-                    if(rujukmasuk.tbPerujuk.getSelectedRow()!= -1){
-                        AsalRujukan.setText(rujukmasuk.tbPerujuk.getValueAt(rujukmasuk.tbPerujuk.getSelectedRow(),0).toString());
-                        alamatperujuk=rujukmasuk.tbPerujuk.getValueAt(rujukmasuk.tbPerujuk.getSelectedRow(),1).toString();
-                    }
-                    AsalRujukan.requestFocus();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        pasien.penjab.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(akses.getform().equals("DlgReg")){
-                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        pasien.penjab.dispose();
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-
-        DlgCatatan.setSize(595,34);
-
+        
+        DlgCatatan.setSize(595,34);        
+                
         try {
             aktifjadwal=koneksiDB.JADWALDOKTERDIREGISTRASI();
         } catch (Exception e) {
@@ -7388,12 +7195,8 @@ public final class DlgReg extends javax.swing.JDialog {
         pasien.kab.dispose();
         pasien.kec.dispose();
         pasien.kel.dispose();
-        pasien.penjab.dispose();
         pasien.prop.dispose();
         dokter.dispose();
-        poli.dispose();
-        poli2.dispose();
-        rujukmasuk.WindowPerujuk.dispose();
         DlgSakit2.dispose();
         DlgDemografi.dispose();
         DlgCatatan.dispose();
@@ -7573,19 +7376,44 @@ public final class DlgReg extends javax.swing.JDialog {
                 dokter.setLocationRelativeTo(internalFrame1);
                 dokter.setVisible(true);
             }else{
-                if (kdpoli.getText().isBlank()) {
-                    JOptionPane.showMessageDialog(rootPane, "Pilih poliklinik dahulu..!!");
-                } else {
-                    dokter2.setPoli(TPoli.getText());
-                    dokter2.isCek();
-                    dokter2.SetHari(DTPReg.getDate());
-                    dokter2.tampil();
-                    dokter2.TCari.requestFocus();
-                    dokter2.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                    dokter2.setLocationRelativeTo(internalFrame1);
-                    dokter2.setVisible(true);
-                }
-            }
+                DlgCariDokter2 dokter2=new DlgCariDokter2(null,false);
+                dokter2.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {;}
+                    @Override
+                    public void windowClosing(WindowEvent e) {}
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        if(akses.getform().equals("DlgReg")){
+                            if(dokter2.getTable().getSelectedRow()!= -1){                    
+                                KdDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),0).toString());
+                                TDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
+                                if(aktifjadwal.equals("aktif")){
+                                    kuota=Integer.parseInt(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),13).toString());
+                                }
+                                isNumber();
+                                KdDokter.requestFocus();
+                            }                
+                        }
+                    }
+                    @Override
+                    public void windowIconified(WindowEvent e) {}
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {}
+                    @Override
+                    public void windowActivated(WindowEvent e) {}
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {}
+                });
+                dokter2.setPoli(TPoli.getText());
+                dokter2.isCek();                 
+                dokter2.SetHari(DTPReg.getDate());
+                dokter2.tampil3();
+                dokter2.TCari.requestFocus();
+                dokter2.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                dokter2.setLocationRelativeTo(internalFrame1);
+                dokter2.setVisible(true);
+            }                
         }else{
             dokter.isCek();
             dokter.TCari.requestFocus();
@@ -7605,25 +7433,127 @@ public final class DlgReg extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_kdpoliKeyPressed
 
-    private void BtnUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUnitActionPerformed
-        akses.setform("DlgReg");
-        pilihan=1;
-
+private void BtnUnitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUnitActionPerformed
         if(aktifjadwal.equals("aktif")){
             if(akses.getkode().equals("Admin Utama")){
+                DlgCariPoli poli=new DlgCariPoli(null,false);
+                poli.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {}
+                    @Override
+                    public void windowClosing(WindowEvent e) {}
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        if(poli.getTable().getSelectedRow()!= -1){    
+                            kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
+                            TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
+                            switch (TStatus.getText()) {
+                                case "Baru":
+                                    TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
+                                    break;
+                                case "Lama":
+                                    TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),3).toString());
+                                    break;
+                                default :
+                                    TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
+                                    break;
+                            }
+                            isNumber();                            
+                            kdpoli.requestFocus();
+                        }  
+                    }
+                    @Override
+                    public void windowIconified(WindowEvent e) {}
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {}
+                    @Override
+                    public void windowActivated(WindowEvent e) {}
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {}
+                });  
                 poli.isCek();
                 poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 poli.setLocationRelativeTo(internalFrame1);
                 poli.setVisible(true);
             }else{
+                DlgCariPoli2 poli2=new DlgCariPoli2(null,false);
+                poli2.addWindowListener(new WindowListener() {
+                    @Override
+                    public void windowOpened(WindowEvent e) {}
+                    @Override
+                    public void windowClosing(WindowEvent e) {}
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        if(poli2.getTable().getSelectedRow()!= -1){    
+                            kdpoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),0).toString());
+                            TPoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),1).toString());
+                            switch (TStatus.getText()) {
+                                case "Baru":
+                                    TBiaya.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),2).toString());
+                                    break;
+                                case "Lama":
+                                    TBiaya.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),3).toString());
+                                    break;
+                                default :
+                                    TBiaya.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),2).toString());
+                                    break;
+                            }
+                            isNumber();                            
+                            kdpoli.requestFocus();
+                        }  
+                    }
+                    @Override
+                    public void windowIconified(WindowEvent e) {}
+                    @Override
+                    public void windowDeiconified(WindowEvent e) {}
+                    @Override
+                    public void windowActivated(WindowEvent e) {}
+                    @Override
+                    public void windowDeactivated(WindowEvent e) {}
+                });   
                 poli2.isCek();
                 poli2.SetHari(DTPReg.getDate());
-                poli2.tampil();
+                poli2.tampil3();
                 poli2.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 poli2.setLocationRelativeTo(internalFrame1);
                 poli2.setVisible(true);
             }
         }else{
+            DlgCariPoli poli=new DlgCariPoli(null,false);
+            poli.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {}
+                @Override
+                public void windowClosing(WindowEvent e) {}
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(poli.getTable().getSelectedRow()!= -1){    
+                        kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
+                        TPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
+                        switch (TStatus.getText()) {
+                            case "Baru":
+                                TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
+                                break;
+                            case "Lama":
+                                TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),3).toString());
+                                break;
+                            default :
+                                TBiaya.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
+                                break;
+                        }
+                        isNumber();                            
+                        kdpoli.requestFocus();
+                    } 
+                }
+                @Override
+                public void windowIconified(WindowEvent e) {}
+                @Override
+                public void windowDeiconified(WindowEvent e) {}
+                @Override
+                public void windowActivated(WindowEvent e) {}
+                @Override
+                public void windowDeactivated(WindowEvent e) {}
+            });  
             poli.isCek();
             poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             poli.setLocationRelativeTo(internalFrame1);
@@ -7642,8 +7572,29 @@ public final class DlgReg extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek3ActionPerformed
 
     private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek4ActionPerformed
-        akses.setform("DlgReg");
-        pilihan=2;
+        DlgCariPoli poli=new DlgCariPoli(null,false);
+        poli.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(poli.getTable().getSelectedRow()!= -1){       
+                    CrPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
+                    CrPoli.requestFocus();
+                    tampil();
+                } 
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });  
         poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
@@ -8090,6 +8041,7 @@ public final class DlgReg extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
         tbPetugas.requestFocus();
    }else{
+        DlgRujukMasuk rujukmasuk=new DlgRujukMasuk(null,false);
         rujukmasuk.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         rujukmasuk.setLocationRelativeTo(internalFrame1);
         rujukmasuk.emptTeks();
@@ -8114,13 +8066,48 @@ public final class DlgReg extends javax.swing.JDialog {
     }//GEN-LAST:event_kdpnjKeyPressed
 
     private void btnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenjabActionPerformed
-        akses.setform("DlgReg");
-        pasien.penjab.onCari();
-        pasien.penjab.isCek();
+        DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
+        penjab.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(penjab.getTable().getSelectedRow()!= -1){
+                    kdpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
+                    nmpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
+                }  
+                kdpnj.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        penjab.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    penjab.dispose();
         pasien.penjab.tampil2();
-        pasien.penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        pasien.penjab.setLocationRelativeTo(internalFrame1);
-        pasien.penjab.setVisible(true);
+                } 
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        penjab.isCek();
+        penjab.onCari();
+        penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        penjab.setLocationRelativeTo(internalFrame1);
+        penjab.setVisible(true);
     }//GEN-LAST:event_btnPenjabActionPerformed
 
     private void MnLaporanRekapKunjunganPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnLaporanRekapKunjunganPoliActionPerformed
@@ -8577,7 +8564,31 @@ public final class DlgReg extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar4ActionPerformed
 
     private void btnPenjab1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenjab1ActionPerformed
-        akses.setform("DlgReg");
+        DlgRujukMasuk rujukmasuk=new DlgRujukMasuk(null,false);
+        rujukmasuk.WindowPerujuk.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(akses.getform().equals("DlgReg")){
+                    if(rujukmasuk.tbPerujuk.getSelectedRow()!= -1){
+                        AsalRujukan.setText(rujukmasuk.tbPerujuk.getValueAt(rujukmasuk.tbPerujuk.getSelectedRow(),0).toString());
+                        alamatperujuk=rujukmasuk.tbPerujuk.getValueAt(rujukmasuk.tbPerujuk.getSelectedRow(),1).toString();
+                    }    
+                    AsalRujukan.requestFocus();
+                }
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         rujukmasuk.tampil4();
         rujukmasuk.TCariPerujuk.requestFocus();
         rujukmasuk.WindowPerujuk.setSize(this.getWidth()-20,this.getHeight()-20);
