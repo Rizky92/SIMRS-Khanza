@@ -849,7 +849,6 @@ public final class DlgStatusDataRM extends javax.swing.JDialog {
             penyakit.setLocationRelativeTo(internalFrame1);
             penyakit.isCek();
             penyakit.setNoRm(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),Tgl1.getDate(),Tgl2.getDate(),tbBangsal.getValueAt(tbBangsal.getSelectedRow(),6).toString());
-            penyakit.panelDiagnosa1.tampil();
             penyakit.setVisible(true);
         }
     }//GEN-LAST:event_MnInputDiagnosaActionPerformed

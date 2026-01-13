@@ -993,7 +993,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
 
-    public void tampil() {
+    private void tampil() {
         try {
             Valid.tabelKosong(tabMode);
             pstampilbarang=koneksi.prepareStatement(

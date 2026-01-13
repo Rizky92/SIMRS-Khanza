@@ -472,8 +472,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
-        
+
+
         billing.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -493,10 +493,10 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
-        DlgCatatan.setSize(595,34); 
-        
+        });
+
+        DlgCatatan.setSize(595,34);
+
         try {
             try {
                 namapoli=koneksiDB.POLIAKTIFKASIRRALAN();
@@ -6910,9 +6910,9 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             public void windowClosed(WindowEvent e) {
                 if(poli.getTable().getSelectedRow()!= -1){
                     CrPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                    CrPoli.requestFocus();   
+                    CrPoli.requestFocus();
                     TabRawatMouseClicked(null);
-                }       
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -7530,7 +7530,7 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     nmpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                     kdpoli.requestFocus();
-                } 
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -7579,7 +7579,6 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 resep.setLocationRelativeTo(internalFrame1);
                 resep.isCek();
                 resep.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),"Ralan");
-                resep.panelDiagnosa1.tampil();
                 resep.setVisible(true);
             }
         }
@@ -7714,7 +7713,7 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
                     kdpenjab.requestFocus();
-                } 
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -7725,7 +7724,7 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -7737,7 +7736,7 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         penjab.emptTeks();
         penjab.isCek();
         penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -9024,7 +9023,6 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),10).toString(),
                         DTPCari1.getDate(),DTPCari2.getDate(),"Ralan"
                     );
-                    resep.panelDiagnosa1.tampil();
                     resep.setVisible(true);
                 }
             }
@@ -9194,8 +9192,8 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             public void windowClosed(WindowEvent e) {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     caripenjab=penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString();
-                    tampilkasir();  
-                } 
+                    tampilkasir();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -9206,7 +9204,7 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -9218,7 +9216,7 @@ private void BtnSeek4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         penjab.emptTeks();
         penjab.isCek();
         penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);

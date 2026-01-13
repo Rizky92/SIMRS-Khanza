@@ -2516,7 +2516,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         panelGlass12.add(jLabel29);
         jLabel29.setBounds(234, 220, 70, 23);
 
-        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma" }));
+        cmbKesadaran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Compos Mentis", "Somnolence", "Sopor", "Coma" ,"Meninggal"}));
         cmbKesadaran.setName("cmbKesadaran"); // NOI18N
         cmbKesadaran.setPreferredSize(new java.awt.Dimension(62, 28));
         cmbKesadaran.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -10453,7 +10453,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
-    
+
     private void MnSOAPDokterActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -10467,11 +10467,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),23).toString());
                     param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),24).toString()+"\nID "+(finger.equals("")?
-                             tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),23).toString():finger)+"\n"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString()+" "+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString()); 
+                             tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),23).toString():finger)+"\n"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString()+" "+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString());
                     Valid.MyReportqry("rptFormulirSOAPDokter.jasper","report","::[ Formulir SOAP Dokter ]::",
                             "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,"+
                             "pemeriksaan_ralan.keluhan,pemeriksaan_ralan.pemeriksaan,pemeriksaan_ralan.rtl,pemeriksaan_ralan.penilaian,pemeriksaan_ralan.evaluasi,pemeriksaan_ralan.nip,pegawai.nama from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
@@ -10481,10 +10481,10 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                 }else{
                     JOptionPane.showMessageDialog(null,"Maaf, bukan dokter...!!!");
                 }
-            }                
+            }
         }
     }
-    
+
     private void MnSOAPPetugasActionPerformed(java.awt.event.ActionEvent evt) {
         if(TPasien.getText().trim().equals("")||TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
@@ -10498,16 +10498,16 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     param.put("kotars",akses.getkabupatenrs());
                     param.put("propinsirs",akses.getpropinsirs());
                     param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());   
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+                    param.put("emailrs",akses.getemailrs());
+                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                     String finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),23).toString());
                     param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),24).toString()+"\nID "+(finger.equals("")?
-                             tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),23).toString():finger)+"\n"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString()+" "+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString()); 
+                             tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),23).toString():finger)+"\n"+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString()+" "+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString());
                     String kodedokter=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),1).toString());
                     String namadokter=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kodedokter);
                     finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",kodedokter);
                     param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+namadokter+"\nID "+(finger.equals("")?kodedokter:finger)+"\n"+
-                            tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString()+" "+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString()); 
+                            tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),4).toString()+" "+tbPemeriksaan.getValueAt(tbPemeriksaan.getSelectedRow(),5).toString());
                     Valid.MyReportqry("rptFormulirSOAPPetugas.jasper","report","::[ Formulir SOAP Petugas ]::",
                             "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,pemeriksaan_ralan.tgl_perawatan,pemeriksaan_ralan.jam_rawat,"+
                             "pemeriksaan_ralan.keluhan,pemeriksaan_ralan.pemeriksaan,pemeriksaan_ralan.rtl,pemeriksaan_ralan.penilaian,pemeriksaan_ralan.nip,pegawai.nama,reg_periksa.kd_dokter,dokter.nm_dokter from reg_periksa inner join pasien on pasien.no_rkm_medis=reg_periksa.no_rkm_medis "+
@@ -10517,7 +10517,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                 }else{
                     JOptionPane.showMessageDialog(null,"Maaf, bukan petugas...!!!");
                 }
-            }                
+            }
         }
     }
 
@@ -13911,28 +13911,28 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnChecklistKriteriaMasukPICU.setRoundRect(false);
         BtnChecklistKriteriaMasukPICU.addActionListener(this::BtnChecklistKriteriaMasukPICUActionPerformed);
-        
+
         PopupSOAP = new javax.swing.JPopupMenu();
         PopupSOAP.setName("PopupSOAP");
         tbPemeriksaan.setComponentPopupMenu(PopupSOAP);
-        
+
         MnSOAPDokter = new javax.swing.JMenuItem();
         MnSOAPDokter.setBackground(new java.awt.Color(255, 255, 254));
         MnSOAPDokter.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSOAPDokter.setForeground(new java.awt.Color(50, 50, 50));
-        MnSOAPDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSOAPDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
         MnSOAPDokter.setText("Formulir SOAP Dokter");
         MnSOAPDokter.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSOAPDokter.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         MnSOAPDokter.setName("MnSOAPDokter");
         MnSOAPDokter.setPreferredSize(new java.awt.Dimension(210, 26));
         MnSOAPDokter.addActionListener(this::MnSOAPDokterActionPerformed);
-        
+
         MnSOAPPetugas = new javax.swing.JMenuItem();
         MnSOAPPetugas.setBackground(new java.awt.Color(255, 255, 254));
         MnSOAPPetugas.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSOAPPetugas.setForeground(new java.awt.Color(50, 50, 50));
-        MnSOAPPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSOAPPetugas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
         MnSOAPPetugas.setText("Formulir SOAP Petugas");
         MnSOAPPetugas.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSOAPPetugas.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -13942,7 +13942,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
         TanggalRegistrasi = new widget.TextBox();
         TanggalRegistrasi.setName("TanggalRegistrasi");
-        
+
         PopupSOAP.add(MnSOAPDokter);
         PopupSOAP.add(MnSOAPPetugas);
 
@@ -14335,7 +14335,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                 break;
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         ceksukses = true;

@@ -721,6 +721,7 @@ import laporan.DlgDataKlasifikasiPasienRanap;
 import laporan.DlgDataSasaranUsiaLansia;
 import laporan.DlgDataSasaranUsiaProduktif;
 import laporan.DlgDemografiUmurKunjungan;
+import laporan.DlgDiagnosaPenyakit;
 import laporan.DlgDkkPenyakitMenularRalan;
 import laporan.DlgDkkPenyakitMenularRanap;
 import laporan.DlgDkkPenyakitTidakMenularRalan;
@@ -10389,10 +10390,11 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        kasirralan.kamarinap.diagnosa.isCek();
-        kasirralan.kamarinap.diagnosa.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
-        kasirralan.kamarinap.diagnosa.setLocationRelativeTo(PanelUtama);
-        kasirralan.kamarinap.diagnosa.setVisible(true);
+        DlgDiagnosaPenyakit diagnosa=new DlgDiagnosaPenyakit(null,false);
+        diagnosa.isCek();
+        diagnosa.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        diagnosa.setLocationRelativeTo(PanelUtama);
+        diagnosa.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnDiagnosaActionPerformed
 
