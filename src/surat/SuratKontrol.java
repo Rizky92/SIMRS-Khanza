@@ -155,21 +155,7 @@ public class SuratKontrol extends javax.swing.JDialog {
 
         ChkInput.setSelected(false);
         isForm();
-        
-        try {
-            aktifjadwal=koneksiDB.JADWALDOKTERDIREGISTRASI();
-            URUTNOREG=koneksiDB.URUTNOREG();
-        } catch (Exception ex) {
-            aktifjadwal="";
-            URUTNOREG="";
-        }
-        
-        try {
-            JADIKANBOOKINGSURATKONTROL=koneksiDB.JADIKANBOOKINGSURATKONTROL();
-        } catch (Exception ex) {
-            JADIKANBOOKINGSURATKONTROL="no";
-        }
-        
+
         TanggalPeriksa.setDate(new Date());
     }
 
@@ -1153,7 +1139,7 @@ public class SuratKontrol extends javax.swing.JDialog {
                     if(dokter2.getTable().getSelectedRow()!= -1){                    
                         KdDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),0).toString());
                         NmDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
-                        if(aktifjadwal.equals("aktif")){
+                        if(JADWALDOKTERDIREGISTRASI.equals("aktif")){
                             kuota=Integer.parseInt(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),13).toString());
                         }
                         isNomer();                        
@@ -2062,24 +2048,6 @@ public class SuratKontrol extends javax.swing.JDialog {
         } else {
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat membuat surat kontrol..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         }
-    }
-    
-    private void runBackground(Runnable task) {
-        if (ceksukses) return;
-        ceksukses = true;
-
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
     }
     
     private void runBackground(Runnable task) {

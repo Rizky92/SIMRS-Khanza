@@ -15899,12 +15899,47 @@ public class DlgKamarInap extends javax.swing.JDialog {
     }//GEN-LAST:event_ppTampilkanSeleksiAsuransiActionPerformed
 
     private void ppTampilkanSeleksiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanSeleksiActionPerformed
-        akses.setform("DlgKamarInap_tampilkanSeleksiActionPerformed");
-        billing.carabayar.emptTeks();
-        billing.carabayar.isCek();
-        billing.carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        billing.carabayar.setLocationRelativeTo(internalFrame1);
-        billing.carabayar.setVisible(true);
+        DlgCariCaraBayar carabayar=new DlgCariCaraBayar(null,false);
+        carabayar.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(carabayar.getTable().getSelectedRow()!= -1){
+                    kdpenjab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString());
+                    nmpenjab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),2).toString());
+                } 
+                kdpenjab.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        carabayar.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    carabayar.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        }); 
+        carabayar.isCek();
+        carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        carabayar.setLocationRelativeTo(internalFrame1);
+        carabayar.setAlwaysOnTop(false);
+        carabayar.setVisible(true);
     }//GEN-LAST:event_ppTampilkanSeleksiActionPerformed
 
     private void ppTampilkanBelumDiagnosaBtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppTampilkanBelumDiagnosaBtnPrintActionPerformed
