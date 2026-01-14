@@ -47,7 +47,7 @@
                 echo "<input type=hidden name=no_rawat  value=$no_rawat>
                       <input type=hidden name=action value=$action>";
             ?>
-            <div style="width: 100%; height: 27%; overflow: auto;">
+            <div style="width: 100%; height: 27%; min-height: 170px; overflow: auto;">
             <table width="100%" align="center">
                 <tr class="isi2">
                     <td width="25%" valign="top">No.Rawat</td><td width="" valign="top">:</td>
@@ -80,7 +80,11 @@
                 </tr>        
             </table>
             </div>
-            <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;"></div><br>
+            <div align="center">
+                <input name="BtnSimpan" type="submit" style="padding: 0.5rem 1rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN">
+                <span>&nbsp;</span>
+                <input name="BtnKosong" type="reset" style="padding: 0.5rem 1rem; font-family: Tahoma; font-size: 0.75rem; cursor: pointer"  value="Reset">
+            </div><br>
             <?php
                 $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
                 if (isset($BtnSimpan)) {
