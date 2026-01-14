@@ -11,6 +11,7 @@
 
 package khanzaantrianloket;
 
+import bridging.ApiSMC;
 import fungsi.BackgroundMusic;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -45,7 +46,7 @@ import javax.swing.UIManager;
 public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
     private Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
-    private final String SMCINTERNALAPPAPIURL = koneksiDB.SMCINTERNALAPPAPIURL();
+    private final ApiSMC apiSmc = new ApiSMC();
     private final boolean ANTRIANPREFIXHURUF = koneksiDB.ANTRIANPREFIXHURUF();
     private final String[] PREFIXHURUFAKTIF = koneksiDB.PREFIXHURUFAKTIF();
     private final String ANTRIAN = koneksiDB.ANTRIAN();
@@ -853,91 +854,23 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         new Timer(1000, taskPerformer).start();
     }
 
-    private String buildEndpoint(String desired, String other) {
-        String base = SMCINTERNALAPPAPIURL == null ? "" : SMCINTERNALAPPAPIURL.trim();
-
-        if (base.contains(desired)) {
-            return base;
-        }
-
-        if (base.contains(other)) {
-            return base.replace(other, desired);
-        }
-
-        return base.endsWith("/") ? base + desired : base + "/" + desired;
-    }
-
-    private boolean postJson(String endpoint, String jsonPayload) {
-        HttpURLConnection conn = null;
-
-        try {
-            System.out.println("Connecting to " + endpoint);
-            URL url = new URL(endpoint);
-            conn = (HttpURLConnection) url.openConnection();
-
-            conn.setRequestMethod("POST");
-            conn.setRequestProperty("Content-Type", "application/json; charset=UTF-8");
-            conn.setRequestProperty("Accept", "application/json");
-            conn.setDoOutput(true);
-
-            try (OutputStream os = conn.getOutputStream()) {
-                os.write(jsonPayload.getBytes(StandardCharsets.UTF_8));
-            }
-
-            int responseCode = conn.getResponseCode();
-
-            try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(
-                            responseCode >= 200 && responseCode < 300
-                                    ? conn.getInputStream()
-                                    : conn.getErrorStream(),
-                            StandardCharsets.UTF_8
-                    ))) {
-
-                StringBuilder response = new StringBuilder();
-                String line;
-                while ((line = reader.readLine()) != null) {
-                    response.append(line);
-                }
-
-                System.out.println("Response: " + response);
-            }
-
-            return responseCode == HttpURLConnection.HTTP_OK;
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            return false;
-        } finally {
-            if (conn != null) {
-                conn.disconnect();
-            }
-        }
-    }
-
     private boolean panggilDiWeb(String loket, String nomor) {
-        String endpoint = buildEndpoint(
-                "panggil-antrean-loket-smc",
-                "stop-antrean-loket-smc"
-        );
-
-        String payload = String.format(
-                "{\"action\":\"called\",\"loket\":\"%s\",\"nomor\":\"%s\"}",
-                loket,
-                nomor
-        );
-
-        return postJson(endpoint, payload);
+        try {
+            apiSmc.panggilAntrean("called", nomor, loket);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Notifikasi Bridging : " + e);
+            return false;
+        }
     }
 
     private boolean stopPanggilDiWeb() {
-        String endpoint = buildEndpoint(
-                "stop-antrean-loket-smc",
-                "panggil-antrean-loket-smc"
-        );
-
-        String payload = "{\"action\":\"stopped\"}";
-
-        return postJson(endpoint, payload);
+        try {
+            apiSmc.stopAntrean("stopped");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Notifikasi Bridging : " + e);
+            return false;
+        }
     }
 }
