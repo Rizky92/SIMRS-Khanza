@@ -79,7 +79,6 @@ import simrskhanza.DlgTagihanOperasi;
  */
 public class DlgBilingRanap extends javax.swing.JDialog {
     private final DefaultTableModel tabModeRwJlDr,tabModeTambahan,tabModePotongan,tabModeKamIn,tabModeAkunBayar,tabModeAkunPiutang,tabModeLab,tabModeRad,tabModeApotek;
-    public DlgPemberianObat beriobat=new DlgPemberianObat(null,false);
     public DlgRawatInap rawatinap=new DlgRawatInap(null,false);
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
@@ -594,28 +593,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             }
         }
         tbApotek.setDefaultRenderer(Object.class, new WarnaTable());
-
-        beriobat.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgBilingRanap")){
-                    isRawat();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
+        
         rawatinap.perawatan.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -3797,7 +3775,23 @@ public class DlgBilingRanap extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek2ActionPerformed
 
     private void MnDataObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDataObatActionPerformed
-        akses.setform("DlgBilingRanap");
+        DlgPemberianObat beriobat=new DlgPemberianObat(null,false);
+        beriobat.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {isRawat();}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         beriobat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         beriobat.setLocationRelativeTo(internalFrame1);
         beriobat.isCek();
@@ -4193,7 +4187,23 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
             TCari.requestFocus();
         }else{
-            akses.setform("DlgBilingRanap");
+            DlgPemberianObat beriobat=new DlgPemberianObat(null,false);
+            beriobat.addWindowListener(new WindowListener() {
+                @Override
+                public void windowOpened(WindowEvent e) {}
+                @Override
+                public void windowClosing(WindowEvent e) {}
+                @Override
+                public void windowClosed(WindowEvent e) {isRawat();}
+                @Override
+                public void windowIconified(WindowEvent e) {}
+                @Override
+                public void windowDeiconified(WindowEvent e) {}
+                @Override
+                public void windowActivated(WindowEvent e) {}
+                @Override
+                public void windowDeactivated(WindowEvent e) {}
+            });
             beriobat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             beriobat.setLocationRelativeTo(internalFrame1);
             beriobat.isCek();

@@ -453,6 +453,7 @@ import ipsrs.DlgRHPembelianIPSRS;
 import ipsrs.DlgRHPengeluaranIPSRS;
 import ipsrs.DlgRekapPenerimaanNonMedis;
 import ipsrs.DlgRekapPermintaanNonMedis;
+import inventory.DlgPemberianObat;
 import ipsrs.DlgSirkulasiNonMedis;
 import ipsrs.DlgSirkulasiNonMedis2;
 import ipsrs.DlgStokKeluarIPSRSPerTanggal;
@@ -8857,11 +8858,12 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
     private void btnBeriObatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBeriObatActionPerformed
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        kasirralan.kamarinap.billing.beriobat.tampilPO3();
-        kasirralan.kamarinap.billing.beriobat.isCek();
-        kasirralan.kamarinap.billing.beriobat.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-        kasirralan.kamarinap.billing.beriobat.setLocationRelativeTo(PanelUtama);
-        kasirralan.kamarinap.billing.beriobat.setVisible(true);
+        DlgPemberianObat beriobat=new DlgPemberianObat(null,false);
+        beriobat.tampilPO3();
+        beriobat.isCek();
+        beriobat.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        beriobat.setLocationRelativeTo(PanelUtama);
+        beriobat.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnBeriObatActionPerformed
