@@ -1675,7 +1675,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
             }
 
-            if (j >= 2) {
+            if (j >= 1) {
                 bulkKompilasiBerkas(j);
             } else {
                 if (selectedRow < 0) {
@@ -1691,7 +1691,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKompilasiActionPerformed
 
     private void btnSEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSEPActionPerformed
-        if (selectedRow < 0) {
+        if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
             Map<String, Object> param = new HashMap<>();
@@ -1760,7 +1760,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSEPActionPerformed
 
     private void btnResumeRanapActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResumeRanapActionPerformed
-        if (selectedRow < 0) {
+        if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu...!!!");
         } else {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1818,7 +1818,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_btnResumeRanapActionPerformed
 
     private void btnAwalMedisIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAwalMedisIGDActionPerformed
-        if (selectedRow < 0) {
+        if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -1853,178 +1853,178 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAwalMedisIGDActionPerformed
 
     private void btnHasilLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHasilLabActionPerformed
-        if (selectedRow < 0) {
+        if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu");
-            return;
-        }
+        } else {
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            String kamar = "", namaKamar = "";
+            int i = 0;
+            Map<String, Object> param = new HashMap<>();
 
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        String kamar = "", namaKamar = "";
-        int i = 0;
-        Map<String, Object> param = new HashMap<>();
-        try {
-            try (PreparedStatement ps = koneksi.prepareStatement(
-                "select pasien.jk, pasien.umur, pasien.tgl_lahir, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, " +
-                "pasien.pekerjaan, pasien.no_ktp from reg_periksa join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join kelurahan on pasien.kd_kel = kelurahan.kd_kel " +
-                "join kecamatan on pasien.kd_kec = kecamatan.kd_kec join kabupaten on pasien.kd_kab = kabupaten.kd_kab join propinsi on pasien.kd_prop = propinsi.kd_prop where reg_periksa.no_rawat = ?"
-            )) {
-                ps.setString(1, lblNoRawat.getText());
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        param.put("noperiksa", lblNoRawat.getText());
-                        param.put("norm", lblNoRM.getText());
-                        param.put("namapasien", lblNamaPasien.getText());
-                        param.put("jkel", rs.getString("jk"));
-                        param.put("umur", rs.getString("umur"));
-                        param.put("lahir", new SimpleDateFormat("dd-MM-yyyy").format((Date) rs.getDate("tgl_lahir")));
-                        param.put("alamat", rs.getString("alamat"));
-                        param.put("diagnosa", tbKompilasi.getValueAt(selectedRow, 10).toString());
-                        param.put("pekerjaan", rs.getString("pekerjaan"));
-                        param.put("noktp", rs.getString("no_ktp"));
-                        param.put("namars", akses.getnamars());
-                        param.put("alamatrs", akses.getalamatrs());
-                        param.put("kotars", akses.getkabupatenrs());
-                        param.put("propinsirs", akses.getpropinsirs());
-                        param.put("kontakrs", akses.getkontakrs());
-                        param.put("emailrs", akses.getemailrs());
-                        param.put("userid", akses.getkode());
-                        param.put("ipaddress", akses.getalamatip());
+            try {
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select pasien.jk, pasien.umur, pasien.tgl_lahir, concat_ws(', ', pasien.alamat, kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab) as alamat, " +
+                    "pasien.pekerjaan, pasien.no_ktp from reg_periksa join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join kelurahan on pasien.kd_kel = kelurahan.kd_kel " +
+                    "join kecamatan on pasien.kd_kec = kecamatan.kd_kec join kabupaten on pasien.kd_kab = kabupaten.kd_kab join propinsi on pasien.kd_prop = propinsi.kd_prop where reg_periksa.no_rawat = ?"
+                )) {
+                    ps.setString(1, lblNoRawat.getText());
+                    try (ResultSet rs = ps.executeQuery()) {
+                        if (rs.next()) {
+                            param.put("noperiksa", lblNoRawat.getText());
+                            param.put("norm", lblNoRM.getText());
+                            param.put("namapasien", lblNamaPasien.getText());
+                            param.put("jkel", rs.getString("jk"));
+                            param.put("umur", rs.getString("umur"));
+                            param.put("lahir", new SimpleDateFormat("dd-MM-yyyy").format((Date) rs.getDate("tgl_lahir")));
+                            param.put("alamat", rs.getString("alamat"));
+                            param.put("diagnosa", tbKompilasi.getValueAt(selectedRow, 10).toString());
+                            param.put("pekerjaan", rs.getString("pekerjaan"));
+                            param.put("noktp", rs.getString("no_ktp"));
+                            param.put("namars", akses.getnamars());
+                            param.put("alamatrs", akses.getalamatrs());
+                            param.put("kotars", akses.getkabupatenrs());
+                            param.put("propinsirs", akses.getpropinsirs());
+                            param.put("kontakrs", akses.getkontakrs());
+                            param.put("emailrs", akses.getemailrs());
+                            param.put("userid", akses.getkode());
+                            param.put("ipaddress", akses.getalamatip());
+                        }
                     }
                 }
-            }
 
-            try (PreparedStatement ps = koneksi.prepareStatement(
-                "select periksa_lab.no_rawat, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.status, periksa_lab.kategori, periksa_lab.kd_dokter, " +
-                "dokter.nm_dokter, periksa_lab.dokter_perujuk, perujuk.nm_dokter nm_perujuk, periksa_lab.nip, petugas.nama from periksa_lab join dokter " +
-                "on periksa_lab.kd_dokter = dokter.kd_dokter join dokter perujuk on periksa_lab.dokter_perujuk = perujuk.kd_dokter join petugas on " +
-                "periksa_lab.nip = petugas.nip where periksa_lab.no_rawat = ? group by periksa_lab.no_rawat, periksa_lab.tgl_periksa, periksa_lab.jam, " +
-                "periksa_lab.status, periksa_lab.kategori"
-            )) {
-                ps.setString(1, lblNoRawat.getText());
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        Sequel.deleteTemporaryLab();
-                        i = 0;
-                        if (rs.getString("status").equalsIgnoreCase("ralan")) {
-                            kamar = "Poli";
-                            namaKamar = Sequel.cariIsiSmc("select poliklinik.nm_poli from poliklinik join reg_periksa on poliklinik.kd_poli = reg_periksa.kd_poli where reg_periksa.no_rawat = ?", lblNoRawat.getText());
-                        } else {
-                            kamar = "Kamar";
-                            namaKamar = tbKompilasi.getValueAt(selectedRow, 9).toString();
-                        }
-                        param.put("kamar", kamar);
-                        param.put("namakamar", namaKamar);
-                        param.put("pengirim", rs.getString("nm_perujuk"));
-                        param.put("tanggal", rs.getString("tgl_periksa"));
-                        param.put("jam", rs.getString("jam"));
-                        param.put("penjab", rs.getString("nm_dokter"));
-                        param.put("petugas", rs.getString("nama"));
-                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
-                        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + rs.getString("tgl_periksa"));
-                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("nip"));
-                        param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama") + "\nID " + (finger.isBlank() ? rs.getString("nip") : finger) + "\n" + rs.getString("tgl_periksa"));
-                        param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
-                        if (rs.getString("kategori").equals("PK")) {
-                            try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                "select periksa_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan from periksa_lab join jns_perawatan_lab " +
-                                "on periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw where periksa_lab.no_rawat = ? " +
-                                "and periksa_lab.tgl_periksa = ? and periksa_lab.jam = ? and periksa_lab.status = ? and periksa_lab.kategori = ?"
-                            )) {
-                                ps2.setString(1, lblNoRawat.getText());
-                                ps2.setString(2, rs.getString("tgl_periksa"));
-                                ps2.setString(3, rs.getString("jam"));
-                                ps2.setString(4, rs.getString("status"));
-                                ps2.setString(5, rs.getString("kategori"));
-                                try (ResultSet rs2 = ps2.executeQuery()) {
-                                    while (rs2.next()) {
-                                        Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
-                                        try (PreparedStatement ps3 = koneksi.prepareStatement(
-                                            "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai, template_laboratorium.satuan, " +
-                                            "detail_periksa_lab.nilai_rujukan, detail_periksa_lab.biaya_item, detail_periksa_lab.keterangan, " +
-                                            "detail_periksa_lab.kd_jenis_prw from detail_periksa_lab join template_laboratorium on " +
-                                            "detail_periksa_lab.id_template = template_laboratorium.id_template where detail_periksa_lab.no_rawat = ? " +
-                                            "and detail_periksa_lab.kd_jenis_prw = ? and detail_periksa_lab.tgl_periksa = ? and detail_periksa_lab.jam = ? " +
-                                            "order by template_laboratorium.urut"
-                                        )) {
-                                            ps3.setString(1, lblNoRawat.getText());
-                                            ps3.setString(2, rs2.getString("kd_jenis_prw"));
-                                            ps3.setString(3, rs.getString("tgl_periksa"));
-                                            ps3.setString(4, rs.getString("jam"));
-                                            try (ResultSet rs3 = ps3.executeQuery()) {
-                                                while (rs3.next()) {
-                                                    Sequel.temporaryLab(
-                                                        String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"),
-                                                        rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan")
-                                                    );
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select periksa_lab.no_rawat, periksa_lab.tgl_periksa, periksa_lab.jam, periksa_lab.status, periksa_lab.kategori, periksa_lab.kd_dokter, " +
+                    "dokter.nm_dokter, periksa_lab.dokter_perujuk, perujuk.nm_dokter nm_perujuk, periksa_lab.nip, petugas.nama from periksa_lab join dokter " +
+                    "on periksa_lab.kd_dokter = dokter.kd_dokter join dokter perujuk on periksa_lab.dokter_perujuk = perujuk.kd_dokter join petugas on " +
+                    "periksa_lab.nip = petugas.nip where periksa_lab.no_rawat = ? group by periksa_lab.no_rawat, periksa_lab.tgl_periksa, periksa_lab.jam, " +
+                    "periksa_lab.status, periksa_lab.kategori"
+                )) {
+                    ps.setString(1, lblNoRawat.getText());
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            Sequel.deleteTemporaryLab();
+                            i = 0;
+                            if (rs.getString("status").equalsIgnoreCase("ralan")) {
+                                kamar = "Poli";
+                                namaKamar = Sequel.cariIsiSmc("select poliklinik.nm_poli from poliklinik join reg_periksa on poliklinik.kd_poli = reg_periksa.kd_poli where reg_periksa.no_rawat = ?", lblNoRawat.getText());
+                            } else {
+                                kamar = "Kamar";
+                                namaKamar = tbKompilasi.getValueAt(selectedRow, 9).toString();
+                            }
+                            param.put("kamar", kamar);
+                            param.put("namakamar", namaKamar);
+                            param.put("pengirim", rs.getString("nm_perujuk"));
+                            param.put("tanggal", rs.getString("tgl_periksa"));
+                            param.put("jam", rs.getString("jam"));
+                            param.put("penjab", rs.getString("nm_dokter"));
+                            param.put("petugas", rs.getString("nama"));
+                            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                            finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                            param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + rs.getString("tgl_periksa"));
+                            finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("nip"));
+                            param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nama") + "\nID " + (finger.isBlank() ? rs.getString("nip") : finger) + "\n" + rs.getString("tgl_periksa"));
+                            param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
+                            if (rs.getString("kategori").equals("PK")) {
+                                try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                    "select periksa_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan from periksa_lab join jns_perawatan_lab " +
+                                    "on periksa_lab.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw where periksa_lab.no_rawat = ? " +
+                                    "and periksa_lab.tgl_periksa = ? and periksa_lab.jam = ? and periksa_lab.status = ? and periksa_lab.kategori = ?"
+                                )) {
+                                    ps2.setString(1, lblNoRawat.getText());
+                                    ps2.setString(2, rs.getString("tgl_periksa"));
+                                    ps2.setString(3, rs.getString("jam"));
+                                    ps2.setString(4, rs.getString("status"));
+                                    ps2.setString(5, rs.getString("kategori"));
+                                    try (ResultSet rs2 = ps2.executeQuery()) {
+                                        while (rs2.next()) {
+                                            Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"));
+                                            try (PreparedStatement ps3 = koneksi.prepareStatement(
+                                                "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai, template_laboratorium.satuan, " +
+                                                "detail_periksa_lab.nilai_rujukan, detail_periksa_lab.biaya_item, detail_periksa_lab.keterangan, " +
+                                                "detail_periksa_lab.kd_jenis_prw from detail_periksa_lab join template_laboratorium on " +
+                                                "detail_periksa_lab.id_template = template_laboratorium.id_template where detail_periksa_lab.no_rawat = ? " +
+                                                "and detail_periksa_lab.kd_jenis_prw = ? and detail_periksa_lab.tgl_periksa = ? and detail_periksa_lab.jam = ? " +
+                                                "order by template_laboratorium.urut"
+                                            )) {
+                                                ps3.setString(1, lblNoRawat.getText());
+                                                ps3.setString(2, rs2.getString("kd_jenis_prw"));
+                                                ps3.setString(3, rs.getString("tgl_periksa"));
+                                                ps3.setString(4, rs.getString("jam"));
+                                                try (ResultSet rs3 = ps3.executeQuery()) {
+                                                    while (rs3.next()) {
+                                                        Sequel.temporaryLab(
+                                                            String.valueOf(++i), "  " + rs3.getString("Pemeriksaan"), rs3.getString("nilai"),
+                                                            rs3.getString("satuan"), rs3.getString("nilai_rujukan"), rs3.getString("keterangan")
+                                                        );
+                                                    }
                                                 }
                                             }
                                         }
                                     }
                                 }
-                            }
-                            try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                "select noorder, tgl_permintaan, jam_permintaan " +
-                                "from permintaan_lab where no_rawat = ? and tgl_hasil = ? and jam_hasil = ?"
-                            )) {
-                                ps2.setString(1, lblNoRawat.getText());
-                                ps2.setString(2, rs.getString("tgl_periksa"));
-                                ps2.setString(3, rs.getString("jam"));
-                                try (ResultSet rs2 = ps2.executeQuery()) {
-                                    if (rs2.next()) {
-                                        param.put("nopermintaan", rs2.getString("noorder"));
-                                        param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
-                                        param.put("jampermintaan", rs2.getString("jam_permintaan"));
-                                        Valid.reportSmc("rptPeriksaLab4PermintaanKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
-                                    } else {
-                                        Valid.reportSmc("rptPeriksaLab4Kompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                    "select noorder, tgl_permintaan, jam_permintaan " +
+                                    "from permintaan_lab where no_rawat = ? and tgl_hasil = ? and jam_hasil = ?"
+                                )) {
+                                    ps2.setString(1, lblNoRawat.getText());
+                                    ps2.setString(2, rs.getString("tgl_periksa"));
+                                    ps2.setString(3, rs.getString("jam"));
+                                    try (ResultSet rs2 = ps2.executeQuery()) {
+                                        if (rs2.next()) {
+                                            param.put("nopermintaan", rs2.getString("noorder"));
+                                            param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
+                                            param.put("jampermintaan", rs2.getString("jam_permintaan"));
+                                            Valid.reportSmc("rptPeriksaLab4PermintaanKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                        } else {
+                                            Valid.reportSmc("rptPeriksaLab4Kompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                        }
                                     }
                                 }
-                            }
-                        } else if (rs.getString("kategori").equals("PA")) {
-                            try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                "select jns_perawatan_lab.nm_perawatan, detail_periksa_labpa.diagnosa_klinik, detail_periksa_labpa.makroskopik, detail_periksa_labpa.mikroskopik, detail_periksa_labpa.kesimpulan, detail_periksa_labpa.kesan " +
-                                "from detail_periksa_labpa join jns_perawatan_lab on detail_periksa_labpa.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw where no_rawat = ? and tgl_periksa = ? and jam = ?"
-                            )) {
-                                ps2.setString(1, lblNoRawat.getText());
-                                ps2.setString(2, rs.getString("tgl_periksa"));
-                                ps2.setString(3, rs.getString("jam"));
-                                try (ResultSet rs2 = ps2.executeQuery()) {
-                                    while (rs2.next()) {
-                                        Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"), rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5));
+                            } else if (rs.getString("kategori").equals("PA")) {
+                                try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                    "select jns_perawatan_lab.nm_perawatan, detail_periksa_labpa.diagnosa_klinik, detail_periksa_labpa.makroskopik, detail_periksa_labpa.mikroskopik, detail_periksa_labpa.kesimpulan, detail_periksa_labpa.kesan " +
+                                    "from detail_periksa_labpa join jns_perawatan_lab on detail_periksa_labpa.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw where no_rawat = ? and tgl_periksa = ? and jam = ?"
+                                )) {
+                                    ps2.setString(1, lblNoRawat.getText());
+                                    ps2.setString(2, rs.getString("tgl_periksa"));
+                                    ps2.setString(3, rs.getString("jam"));
+                                    try (ResultSet rs2 = ps2.executeQuery()) {
+                                        while (rs2.next()) {
+                                            Sequel.temporaryLab(String.valueOf(++i), rs2.getString("nm_perawatan"), rs2.getString(1), rs2.getString(2), rs2.getString(3), rs2.getString(4), rs2.getString(5));
+                                        }
                                     }
                                 }
-                            }
-                            try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                "select noorder, tgl_permintaan, jam_permintaan " +
-                                "from permintaan_labpa where no_rawat = ? and tgl_hasil = ? and jam_hasil = ?"
-                            )) {
-                                ps2.setString(1, lblNoRawat.getText());
-                                ps2.setString(2, rs.getString("tgl_periksa"));
-                                ps2.setString(3, rs.getString("jam"));
-                                try (ResultSet rs2 = ps2.executeQuery()) {
-                                    param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
-                                    if (rs2.next()) {
-                                        param.put("nopermintaan", rs2.getString("noorder"));
-                                        param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
-                                        param.put("jampermintaan", rs2.getString("jam_permintaan"));
-                                        Valid.reportSmc("rptPeriksaLabPermintaanPAKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
-                                    } else {
-                                        Valid.reportSmc("rptPeriksaLabPAKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                    "select noorder, tgl_permintaan, jam_permintaan " +
+                                    "from permintaan_labpa where no_rawat = ? and tgl_hasil = ? and jam_hasil = ?"
+                                )) {
+                                    ps2.setString(1, lblNoRawat.getText());
+                                    ps2.setString(2, rs.getString("tgl_periksa"));
+                                    ps2.setString(3, rs.getString("jam"));
+                                    try (ResultSet rs2 = ps2.executeQuery()) {
+                                        param.put("ttd", Sequel.cariGambarSmc("select dokter_ttdbasah.gambar_ttd from dokter_ttdbasah where dokter_ttdbasah.kd_dokter = ?", rs.getString("kd_dokter")));
+                                        if (rs2.next()) {
+                                            param.put("nopermintaan", rs2.getString("noorder"));
+                                            param.put("tanggalpermintaan", rs2.getString("tgl_permintaan"));
+                                            param.put("jampermintaan", rs2.getString("jam_permintaan"));
+                                            Valid.reportSmc("rptPeriksaLabPermintaanPAKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                        } else {
+                                            Valid.reportSmc("rptPeriksaLabPAKompilasi.jasper", "report", "::[ Pemeriksaan Laboratorium ]::", param);
+                                        }
                                     }
                                 }
+                            } else if (rs.getString("kategori").equals("MB")) {
+                                JOptionPane.showMessageDialog(null, "Maaf, bagian ini belum disupport..!!\nSilahkan hubungi administrator");
                             }
-                        } else if (rs.getString("kategori").equals("MB")) {
-                            JOptionPane.showMessageDialog(null, "Maaf, bagian ini belum disupport..!!\nSilahkan hubungi administrator");
                         }
                     }
                 }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mencari hasil pemeriksaan lab!");
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mencari hasil pemeriksaan lab!");
+            setCursor(Cursor.getDefaultCursor());
         }
-        setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnHasilLabActionPerformed
 
     private void btnHasilRadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHasilRadActionPerformed
