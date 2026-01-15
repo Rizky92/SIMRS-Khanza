@@ -99,19 +99,20 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private final JFXPanel jfxINACBG = new JFXPanel(),
         jfxBerkasDigital = new JFXPanel();
     private final DlgCariCaraBayar penjab = new DlgCariCaraBayar(null, false);
-    private RMRiwayatPerawatan resume = null;
-    private WebEngine engineKlaim, engineBerkasDigital;
     private final String KOMPILASIBERKASGUNAKANRIWAYATPASIEN = koneksiDB.KOMPILASIBERKASGUNAKANRIWAYATPASIEN(),
         KODEPJBPJS = Sequel.cariIsiSmc("select password_asuransi.kd_pj from password_asuransi"),
         NAMAPJBPJS = Sequel.cariIsiSmc("select penjab.png_jawab from penjab where penjab.kd_pj = ?", KODEPJBPJS),
         KODEPPKBPJS = Sequel.cariIsiSmc("select setting.kode_ppk from setting limit 1") + "%";
+
+    private RMRiwayatPerawatan resume = null;
+    private WebEngine engineKlaim, engineBerkasDigital;
     private String finger = "", tanggalExport = "",
         gunakanTanggalExport = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
         aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF(),
         kategoriUploadBerkas = "";
-    private boolean exportSukses = true, hapusOtomatisDiagnosaProsedur = false;
+    private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false;
     private int flagklaim = -1, flagInacbgTopup = -1, selectedRow = -1;
-    private long mamxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
+    private long maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
 
     public BPJSKompilasiBerkasKlaim(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -212,13 +213,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     if (newValue != null && newValue.toLowerCase().contains("action")) {
                         SwingUtilities.invokeLater(() -> {
                             setFlagKlaim();
-                            // "P", "No. Rawat", "No. SEP", "No. RM", "Nama Pasien", "Status Rawat",
-                            //  0    1            2          3         4              5
-                            // "Tgl. SEP", "Tgl. Pulang SEP", "Status Pulang", "Unit/Poli", "DPJP",
-                            //  6           7                  8                9            10
-                            // "Status Klaim", "statusklaim"
-                            //  11              12
-
                             switch (flagklaim) {
                                 case 1:
                                     tabMode.setValueAt("Selesai", selectedRow, 11);
@@ -2853,7 +2847,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
                 aplikasiPDF = aplikasipdf;
                 gunakanTanggalExport = tanggalexport;
-                mamxMemory = Integer.parseInt(maxmemory);
+                maxMemory = Integer.parseInt(maxmemory);
                 hapusOtomatisDiagnosaProsedur = hapusotomatis;
                 kategoriUploadBerkas = kategoriUpload;
                 if (selectedRow >= 0) {
@@ -3248,6 +3242,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         btnHasilKlaim.setEnabled(false);
         tabPaneKoding.setEnabledAt(1, false);
         tbKompilasi.clearSelection();
+        selectedRow = -1;
     }
 
     private void flipStatus(JButton button, boolean status) {
@@ -3529,7 +3524,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
 
                 if (root.hasNonNull("maxmemory")) {
-                    mamxMemory = root.path("maxmemory").asLong();
+                    maxMemory = root.path("maxmemory").asLong();
                 }
 
                 if (root.hasNonNull("hapusotomatis")) {
@@ -3544,14 +3539,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 System.out.println("Notif : " + e);
                 aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF();
                 gunakanTanggalExport = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT();
-                mamxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
+                maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
                 hapusOtomatisDiagnosaProsedur = false;
                 kategoriUploadBerkas = "";
             }
         } else {
             aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF();
             gunakanTanggalExport = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT();
-            mamxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
+            maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
             hapusOtomatisDiagnosaProsedur = false;
             kategoriUploadBerkas = "";
         }
@@ -3601,7 +3596,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             CmbPilihanTanggalExport.setSelectedIndex(0);
         }
 
-        TMaxMemory.setText(String.valueOf(mamxMemory));
+        TMaxMemory.setText(String.valueOf(maxMemory));
 
         CekAktifkanHapusOtomatis.setSelected(hapusOtomatisDiagnosaProsedur);
 
@@ -3673,7 +3668,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 simpanPDF(tbKompilasi.getValueAt(row, 2).toString(), "rptBridgingSEP2.jasper", urutan + "_SEP", param);
             }
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
             throw new KompilasiException("SEP", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
@@ -3710,7 +3704,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     throw new Exception("Sambungan ke server terputus..!!");
                 }
             } catch (Exception e) {
-                System.out.println("Notif : " + e);
                 throw new KompilasiException("Hasil Klaim", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
             }
         }
@@ -3769,7 +3762,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         try {
             simpanPDF(tbKompilasi.getValueAt(row, 2).toString(), "rptLaporanResumeRanapKompilasi.jasper", urutan + "_ResumePasien", param);
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
             throw new KompilasiException("Resume Ranap Pasien", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
@@ -3793,7 +3785,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             builder.toStream(os);
             builder.run();
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
             throw new KompilasiException("Billing", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
@@ -4144,7 +4135,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
             throw new KompilasiException("Triase IGD", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
@@ -4340,7 +4330,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 builder.run();
             }
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
             throw new KompilasiException("SOAP Ralan", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
@@ -4386,7 +4375,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 "join penilaian_medis_igd on reg_periksa.no_rawat = penilaian_medis_igd.no_rawat join dokter on penilaian_medis_igd.kd_dokter = dokter.kd_dokter where penilaian_medis_igd.no_rawat = ?", tbKompilasi.getValueAt(row, 1).toString()
             );
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
             throw new KompilasiException("Awal Medis IGD", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
@@ -4563,7 +4551,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
             throw new KompilasiException("Hasil Lab", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
@@ -4679,7 +4666,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
             }
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
             throw new KompilasiException("Hasil Radiologi", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
@@ -4812,7 +4798,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 }
 
                 merger.setDestinationFileName("./berkaspdf/" + tanggalExport + "/" + tbKompilasi.getValueAt(row, 2).toString() + ".pdf");
-                merger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly(mamxMemory * 1_000_000));
+                merger.mergeDocuments(MemoryUsageSetting.setupTempFileOnly(maxMemory * 1_000_000));
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
                 throw new KompilasiException("Kompilasi", "", tbKompilasi.getValueAt(row, 2).toString(), e);
@@ -5023,7 +5009,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         mergePDF(i);
                                         hapusTemporaryPDF(i);
                                     } catch (KompilasiException e) {
-                                        System.out.println("Notif : " + e);
+                                        System.out.println("Notif : " + e.getCause().toString());
                                         publish("Terjadi kesalahan pada saat mengkompilasi SEP " + tbKompilasi.getValueAt(i, 2).toString());
                                         synchronized (lock) {
                                             while (lanjut == null) {
