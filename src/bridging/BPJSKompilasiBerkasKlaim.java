@@ -57,6 +57,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebView;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JDialog;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
@@ -2775,7 +2776,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
     private void BtnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengaturanActionPerformed
         cekPengaturanKompilasi();
-        WindowPengaturan.setSize(610, 202);
+        WindowPengaturan.setSize(610, 232);
         WindowPengaturan.setLocationRelativeTo(internalFrame1);
         WindowPengaturan.setVisible(true);
     }//GEN-LAST:event_BtnPengaturanActionPerformed
@@ -3484,8 +3485,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                     .append("</td></tr>");
                             } else {
                                 if (rs.getString("no").isBlank() && rs.getDouble("biaya") == 0) {
-                                    sb.append("<tr><td width=\"20%\">")
-                                        .append(rs.getString("no").trim());
+                                    sb.append("<tr><td width=\"20%\">").append(rs.getString("no").trim());
                                     if (rs.getString("nm_perawatan").startsWith("Total")) {
                                         sb.append("</td><td colspan=\"5\" align=\"right\">");
                                     } else {
@@ -4916,17 +4916,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         // TODO: perlu strategi sebagai reminder / checkbox kalau ada SEP gagal kompilasi
         // jadi bisa ditinggal pergi, kompilasi sebulan semalam juga nggak ada masalah
         // ...mungkin bisa ditambahkan ke pengaturan kompilasi juga?
-        boolean stopApabilaGagal = false;
+        JCheckBox lanjutKompilasiApabilaGagal = new JCheckBox("Lewati berkas gagal diproses", false);
 
-        if (JOptionPane.showConfirmDialog(null, "Lakukan kompilasi untuk semua berkas yang dipilih?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
+        if (JOptionPane.showConfirmDialog(null, new Object[] {"Lakukan kompilasi untuk semua berkas yang dipilih?", lanjutKompilasiApabilaGagal}, "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
             return;
         }
+
+        lanjutKompilasiApabilaGagal.setText("Untuk selanjutnya, " + lanjutKompilasiApabilaGagal.getText().toLowerCase());
 
         JProgressBar bar = new JProgressBar(0, selectedRowCount);
         bar.setStringPainted(true);
 
         JButton cancel = new JButton("Batal");
-        JLabel judul = new JLabel("Mengkompilasi berkas SEP 123456789012V999999..."); // Biar nggak kepotong teksnya
+        JLabel judul = new JLabel("Mengkompilasi berkas SEP 123456789012V999999...");
 
         JOptionPane progressPane = new JOptionPane(new Object[] {judul, bar}, JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION, null, new Object[] {cancel});
 
@@ -5050,7 +5052,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
             @Override
             protected void process(List<String> chunks) {
-                int konfirm = JOptionPane.showConfirmDialog(null, chunks.get(chunks.size() - 1) + ", tetap lanjut?", "Lanjut?", JOptionPane.YES_NO_OPTION);
+                int konfirm = JOptionPane.YES_OPTION;
+                if (!lanjutKompilasiApabilaGagal.isSelected()) {
+                    konfirm = JOptionPane.showConfirmDialog(null, new Object[] {chunks.get(chunks.size() - 1) + ", tetap lanjut?", lanjutKompilasiApabilaGagal}, "Lanjut?", JOptionPane.YES_NO_OPTION);
+                }
                 synchronized (lock) {
                     lanjut = (konfirm == JOptionPane.YES_OPTION);
                     lock.notify();
