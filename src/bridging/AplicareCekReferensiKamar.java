@@ -28,7 +28,6 @@ import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
@@ -384,7 +383,7 @@ public final class AplicareCekReferensiKamar extends javax.swing.JDialog {
         if (ceksukses) return;
         ceksukses = true;
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
         executor.submit(() -> {
             try {
@@ -392,9 +391,17 @@ public final class AplicareCekReferensiKamar extends javax.swing.JDialog {
             } finally {
                 ceksukses = false;
                 SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
+                    if (isDisplayable()) {
+                        setCursor(Cursor.getDefaultCursor());
+                    }
                 });
             }
         });
+    }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

@@ -393,9 +393,7 @@ public final class ApotekBPJSMonitoringKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         runBackground(() -> tampil());
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -515,7 +513,7 @@ public final class ApotekBPJSMonitoringKlaim extends javax.swing.JDialog {
         if (ceksukses) return;
         ceksukses = true;
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
         executor.submit(() -> {
             try {
@@ -523,9 +521,17 @@ public final class ApotekBPJSMonitoringKlaim extends javax.swing.JDialog {
             } finally {
                 ceksukses = false;
                 SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
+                    if (isDisplayable()) {
+                        setCursor(Cursor.getDefaultCursor());
+                    }
                 });
             }
         });
+    }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

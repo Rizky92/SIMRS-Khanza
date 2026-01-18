@@ -1229,7 +1229,6 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
                 }else{
                     this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     akses.setstatus(true);
-                    akses.setstatus(true);
                     DlgKamarInap kamarinap=new DlgKamarInap(null,false);
                     kamarinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     kamarinap.setLocationRelativeTo(internalFrame1);

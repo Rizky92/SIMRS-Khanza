@@ -25,13 +25,17 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -55,7 +59,9 @@ public final class ApotekBPJSCekReferensiSettingPPK extends javax.swing.JDialog 
     private JsonNode root;
     private JsonNode nameNode;
     private JsonNode response;
-    private ApotekBPJSCekReferensiFaskes faskes=new ApotekBPJSCekReferensiFaskes(null, false);
+    private ApotekBPJSCekReferensiFaskes faskes;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgKamar
      * @param parent
@@ -93,59 +99,23 @@ public final class ApotekBPJSCekReferensiSettingPPK extends javax.swing.JDialog 
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(KodePPK.getText().length()>2){
-                        tampil(KodePPK.getText());
+                        runBackground(() ->tampil(KodePPK.getText()));
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(KodePPK.getText().length()>2){
-                        tampil(KodePPK.getText());
+                        runBackground(() ->tampil(KodePPK.getText()));
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(KodePPK.getText().length()>2){
-                        tampil(KodePPK.getText());
+                        runBackground(() ->tampil(KodePPK.getText()));
                     }
                 }
             });
         } 
-        
-        faskes.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(faskes.getTable().getSelectedRow()!= -1){                   
-                    KodePPK.setText(faskes.getTable().getValueAt(faskes.getTable().getSelectedRow(),1).toString());
-                    NamaPPK.setText(faskes.getTable().getValueAt(faskes.getTable().getSelectedRow(),2).toString());
-                    KodePPK.requestFocus();
-                }                  
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        faskes.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    faskes.dispose();
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        }); 
         
         try {
             link=koneksiDB.URLAPIAPOTEKBPJS();
@@ -346,9 +316,7 @@ public final class ApotekBPJSCekReferensiSettingPPK extends javax.swing.JDialog 
             JOptionPane.showMessageDialog(null,"Silahkan masukkan faskes terlebih dahulu..!!");
             BtnFaskes.requestFocus();
         }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            tampil(KodePPK.getText());
-            this.setCursor(Cursor.getDefaultCursor());
+            runBackground(() ->tampil(KodePPK.getText()));
         } 
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -361,8 +329,38 @@ public final class ApotekBPJSCekReferensiSettingPPK extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnFaskesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnFaskesActionPerformed
-        faskes.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        faskes.setLocationRelativeTo(internalFrame1);
+        if (faskes == null || !faskes.isDisplayable()) {
+            faskes=new ApotekBPJSCekReferensiFaskes(null, false);
+            faskes.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            faskes.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(faskes.getTable().getSelectedRow()!= -1){                   
+                        KodePPK.setText(faskes.getTable().getValueAt(faskes.getTable().getSelectedRow(),1).toString());
+                        NamaPPK.setText(faskes.getTable().getValueAt(faskes.getTable().getSelectedRow(),2).toString());
+                        KodePPK.requestFocus();
+                    }         
+                    faskes=null;
+                }
+            });
+
+            faskes.getTable().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                        faskes.dispose();
+                    }
+                }
+            }); 
+            faskes.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            faskes.setLocationRelativeTo(internalFrame1);
+        }
+            
+        if (faskes == null) return;
+        if (faskes.isVisible()) {
+            faskes.toFront();
+            return;
+        }    
         faskes.setVisible(true);
     }//GEN-LAST:event_BtnFaskesActionPerformed
 
@@ -397,7 +395,7 @@ public final class ApotekBPJSCekReferensiSettingPPK extends javax.swing.JDialog 
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String keyword) {
+    private void tampil(String keyword) {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -467,5 +465,31 @@ public final class ApotekBPJSCekReferensiSettingPPK extends javax.swing.JDialog 
 
     public JTable getTable(){
         return tbKamar;
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    if (isDisplayable()) {
+                        setCursor(Cursor.getDefaultCursor());
+                    }
+                });
+            }
+        });
+    }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

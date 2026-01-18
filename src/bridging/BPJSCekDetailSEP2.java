@@ -315,7 +315,7 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String sep) {
+    private void tampil(String sep) {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -445,7 +445,7 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
         if (ceksukses) return;
         ceksukses = true;
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
         executor.submit(() -> {
             try {
@@ -453,9 +453,17 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
             } finally {
                 ceksukses = false;
                 SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
+                    if (isDisplayable()) {
+                        setCursor(Cursor.getDefaultCursor());
+                    }
                 });
             }
         });
+    }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

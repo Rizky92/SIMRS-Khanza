@@ -1018,7 +1018,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         try {
             ArrayNode tindakan = mapper.createArrayNode();
             where = "";

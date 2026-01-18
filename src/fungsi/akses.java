@@ -257,7 +257,8 @@ public final class akses {
             penilaian_awal_medis_ralan_jantung=false,penilaian_awal_medis_ralan_urologi=false,hasil_pemeriksaan_treadmill=false,hasil_pemeriksaan_echo_pediatrik=false,
             template_pelaksanaan_informasi_edukasi=false,skrining_instrumen_esat=false,penilaian_awal_medis_ranap_jantung=false,e_eksekutif=false,penugasan_pengujian_sampel_lab_kesehatan_lingkungan=false,
             hasil_pengujian_sampel_lab_kesehatan_lingkungan=false,verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false,validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,
-            rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false,bpjs_potensi_prb=false;
+            rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false,bpjs_potensi_prb=false,
+            bpjs_riwayat_pelayanan_obat=false,skrining_gizi_kehamilan=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -1481,6 +1482,8 @@ public final class akses {
                         akses.skrining_curb65=rs2.getBoolean("skrining_curb65");
                         akses.bpjs_potensi_prb=rs2.getBoolean("bpjs_potensi_prb");
                         akses.pintu_poli=rs2.getBoolean("pintu_poli");
+                        akses.bpjs_riwayat_pelayanan_obat=rs2.getBoolean("bpjs_riwayat_pelayanan_obat");
+                        akses.skrining_gizi_kehamilan=rs2.getBoolean("skrining_gizi_kehamilan");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2702,6 +2705,8 @@ public final class akses {
         akses.skrining_curb65=isadmin;
         akses.bpjs_potensi_prb=isadmin;
         akses.pintu_poli=isadmin;
+        akses.bpjs_riwayat_pelayanan_obat=isadmin;
+        akses.skrining_gizi_kehamilan=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3929,6 +3934,8 @@ public final class akses {
     public static boolean getskrining_curb65(){return akses.skrining_curb65;}
     public static boolean getbpjs_potensi_prb(){return akses.bpjs_potensi_prb;}
     public static boolean getpintu_poli_smc(){return akses.pintu_poli;}
+    public static boolean getbpjs_riwayat_pelayanan_obat(){return akses.bpjs_riwayat_pelayanan_obat;}
+    public static boolean getskrining_gizi_kehamilan(){return akses.skrining_gizi_kehamilan;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {

@@ -1944,9 +1944,13 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private widget.Table tbObatRacikan;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    public void tampil() {  
+        runBackground(() ->loadData()); 
+    }
+    
+    private void loadData() {        
         buatcacheberiobat();
-        runBackground(() ->tampilcacheberiobat());
+        tampilcacheberiobat();           
     }
 
     private void buatcacheberiobat(){

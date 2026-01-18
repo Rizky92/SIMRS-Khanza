@@ -17,13 +17,17 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -215,7 +219,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             nilai_normal_baku_mutu_lab_kesehatan_lingkungan=false,skrining_pneumonia_severity_index=false,permintaan_pengujian_sampel_lab_kesehatan_lingkungan=false,penilaian_awal_medis_ralan_jantung=false,
             penilaian_awal_medis_ralan_urologi=false,hasil_pemeriksaan_treadmill=false,hasil_pemeriksaan_echo_pediatrik=false,template_pelaksanaan_informasi_edukasi=false,skrining_instrumen_esat=false,
             penilaian_awal_medis_ranap_jantung=false,penugasan_pengujian_sampel_lab_kesehatan_lingkungan=false,hasil_pengujian_sampel_lab_kesehatan_lingkungan=false,verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false,
-            validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false,bpjs_potensi_prb=false;
+            validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false,bpjs_potensi_prb=false,
+            bpjs_riwayat_pelayanan_obat=false,skrining_gizi_kehamilan=false;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgUser
      * @param parent
@@ -558,7 +565,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil(TKd.getText());
+        runBackground(() ->tampil(TKd.getText()));
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -571,7 +578,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        tampil(TKd.getText());
+        runBackground(() ->tampil(TKd.getText()));
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -855,6 +862,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         penilaian_awal_medis_ralan_urologi=false;hasil_pemeriksaan_treadmill=false;hasil_pemeriksaan_echo_pediatrik=false;template_pelaksanaan_informasi_edukasi=false;skrining_instrumen_esat=false;
         penilaian_awal_medis_ranap_jantung=false;penugasan_pengujian_sampel_lab_kesehatan_lingkungan=false;hasil_pengujian_sampel_lab_kesehatan_lingkungan=false;verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false;
         validasi_pengujian_sampel_lab_kesehatan_lingkungan=false;rekap_pelayanan_lab_kesehatan_lingkungan=false;pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false;skrining_curb65=false;bpjs_potensi_prb=false;
+        bpjs_riwayat_pelayanan_obat=false;skrining_gizi_kehamilan=false;
         try{
             jml=0;
             for(i=0;i<tbUser.getRowCount();i++){
@@ -1114,7 +1122,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                 "user.hasil_pemeriksaan_treadmill,user.hasil_pemeriksaan_echo_pediatrik,user.template_pelaksanaan_informasi_edukasi,user.skrining_instrumen_esat,"+
                 "user.penilaian_awal_medis_ranap_jantung,user.penugasan_pengujian_sampel_lab_kesehatan_lingkungan,user.hasil_pengujian_sampel_lab_kesehatan_lingkungan,"+
                 "user.verifikasi_pengujian_sampel_lab_kesehatan_lingkungan,user.validasi_pengujian_sampel_lab_kesehatan_lingkungan,user.rekap_pelayanan_lab_kesehatan_lingkungan,"+
-                "user.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan,user.skrining_curb65,user.bpjs_potensi_prb from user where user.id_user=AES_ENCRYPT(?,'nur')");
+                "user.pembayaran_pengujian_sampel_lab_kesehatan_lingkungan,user.skrining_curb65,user.bpjs_potensi_prb,user.bpjs_riwayat_pelayanan_obat,user.skrining_gizi_kehamilan from user where user.id_user=AES_ENCRYPT(?,'nur')");
             try {
                 ps.setString(1,user);
                 rs=ps.executeQuery();
@@ -1249,8 +1257,8 @@ public class DlgUpdateUser extends javax.swing.JDialog {
                     master_sampel_bakumutu=rs.getBoolean("master_sampel_bakumutu");skrining_instrumen_amt=rs.getBoolean("skrining_instrumen_amt");parameter_pengujian_lab_kesehatan_lingkungan=rs.getBoolean("parameter_pengujian_lab_kesehatan_lingkungan");nilai_normal_baku_mutu_lab_kesehatan_lingkungan=rs.getBoolean("nilai_normal_baku_mutu_lab_kesehatan_lingkungan");skrining_pneumonia_severity_index=rs.getBoolean("skrining_pneumonia_severity_index");permintaan_pengujian_sampel_lab_kesehatan_lingkungan=rs.getBoolean("permintaan_pengujian_sampel_lab_kesehatan_lingkungan");penilaian_awal_medis_ralan_jantung=rs.getBoolean("penilaian_awal_medis_ralan_jantung");
                     penilaian_awal_medis_ralan_urologi=rs.getBoolean("penilaian_awal_medis_ralan_urologi");hasil_pemeriksaan_treadmill=rs.getBoolean("hasil_pemeriksaan_treadmill");hasil_pemeriksaan_echo_pediatrik=rs.getBoolean("hasil_pemeriksaan_echo_pediatrik");template_pelaksanaan_informasi_edukasi=rs.getBoolean("template_pelaksanaan_informasi_edukasi");skrining_instrumen_esat=rs.getBoolean("skrining_instrumen_esat");penilaian_awal_medis_ranap_jantung=rs.getBoolean("penilaian_awal_medis_ranap_jantung");penugasan_pengujian_sampel_lab_kesehatan_lingkungan=rs.getBoolean("penugasan_pengujian_sampel_lab_kesehatan_lingkungan");
                     hasil_pengujian_sampel_lab_kesehatan_lingkungan=rs.getBoolean("hasil_pengujian_sampel_lab_kesehatan_lingkungan");verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=rs.getBoolean("verifikasi_pengujian_sampel_lab_kesehatan_lingkungan");validasi_pengujian_sampel_lab_kesehatan_lingkungan=rs.getBoolean("validasi_pengujian_sampel_lab_kesehatan_lingkungan");rekap_pelayanan_lab_kesehatan_lingkungan=rs.getBoolean("rekap_pelayanan_lab_kesehatan_lingkungan");pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=rs.getBoolean("pembayaran_pengujian_sampel_lab_kesehatan_lingkungan");skrining_curb65=rs.getBoolean("skrining_curb65");
-                    bpjs_potensi_prb=rs.getBoolean("bpjs_potensi_prb");
-                    setTampil();
+                    bpjs_potensi_prb=rs.getBoolean("bpjs_potensi_prb");bpjs_riwayat_pelayanan_obat=rs.getBoolean("bpjs_riwayat_pelayanan_obat");skrining_gizi_kehamilan=rs.getBoolean("skrining_gizi_kehamilan");
+                    setTampil();setTampil2();
                 }
                 LCount.setText(""+tabMode.getRowCount());
             } catch (Exception e) {
@@ -3349,7 +3357,9 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[K]Bayar Beban Hutang Lain".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[K]Bayar Beban Hutang Lain",bayar_beban_hutang_lain});
         }
-
+    }
+    
+    private void setTampil2(){
         if("[L]Cek NIK".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[L]Cek NIK",bpjs_cek_nik});
         }
@@ -4016,6 +4026,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
 
         if("[L]Potensi PRB di VClaim".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[L]Potensi PRB di VClaim",bpjs_potensi_prb});
+        }
+        
+        if("[L]Riwayat Pelayanan Obat Apotek BPJS".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[L]Riwayat Pelayanan Obat Apotek BPJS",bpjs_riwayat_pelayanan_obat});
         }
 
         if("[M]Pasien".toLowerCase().contains(TCari.getText().toLowerCase())){
@@ -4989,6 +5003,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[M]Skrining CURB-65".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[M]Skrining CURB-65",skrining_curb65});
         }
+        
+        if("[M]Skrining Gizi Kehamilan".toLowerCase().contains(TCari.getText().toLowerCase())){
+            tabMode.addRow(new Object[]{false,"[M]Skrining Gizi Kehamilan",skrining_gizi_kehamilan});
+        }
 
         if("[N]Pengambilan BHP Medis".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[N]Pengambilan BHP Medis",pengambilan_utd2});
@@ -5951,7 +5969,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         TKd.setText(User);
         TNmUser.setText(Nama);
         TPass.setText(Password);
-        tampil(User);
+        runBackground(() ->tampil(User));
         TCari.requestFocus();
     }
 
@@ -8708,7 +8726,11 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             if("[L]Potensi PRB di VClaim".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","bpjs_potensi_prb='"+tbUser.getValueAt(i,2).toString()+"'");
             }
-
+            
+            if("[L]Riwayat Pelayanan Obat Apotek BPJS".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","bpjs_riwayat_pelayanan_obat='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
+        
             if("[M]Pasien".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","pasien='"+tbUser.getValueAt(i,2).toString()+"'");
             }
@@ -9680,6 +9702,10 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             if("[M]Skrining CURB-65".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","skrining_curb65='"+tbUser.getValueAt(i,2).toString()+"'");
             }
+            
+            if("[M]Skrining Gizi Kehamilan".equals(tbUser.getValueAt(i,1).toString())){
+                Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","skrining_gizi_kehamilan='"+tbUser.getValueAt(i,2).toString()+"'");
+            }
 
             if("[N]Pengambilan BHP Medis".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","pengambilan_utd2='"+tbUser.getValueAt(i,2).toString()+"'");
@@ -10644,4 +10670,21 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         JOptionPane.showMessageDialog(null,"Proses update hak akses selesai..!!");
     }
 
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        ceksukses = true;
+
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        executor.submit(() -> {
+            try {
+                task.run();
+            } finally {
+                ceksukses = false;
+                SwingUtilities.invokeLater(() -> {
+                    this.setCursor(Cursor.getDefaultCursor());
+                });
+            }
+        });
+    }
 }
