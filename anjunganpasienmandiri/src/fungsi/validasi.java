@@ -273,6 +273,30 @@ public final class validasi {
         return (Integer) (pane.getValue() == null ? -1 : pane.getValue());
     }
 
+    public int popupInfoDialog(String pesan, int timeout) {
+        return popupDialog("Informasi", pesan, POPUPTYPE_KONFIRMASI, JOptionPane.INFORMATION_MESSAGE, timeout);
+    }
+
+    public int popupInfoDialog(String pesan) {
+        return popupInfoDialog(pesan, 0);
+    }
+
+    public int popupPeringatanDialog(String pesan, int timeout) {
+        return popupDialog("Peringatan", pesan, POPUPTYPE_KONFIRMASI, JOptionPane.WARNING_MESSAGE, timeout);
+    }
+
+    public int popupPeringatanDialog(String pesan) {
+        return popupPeringatanDialog(pesan, 0);
+    }
+
+    public int popupGagalDialog(String pesan, int timeout) {
+        return popupDialog("Gagal", pesan, POPUPTYPE_KONFIRMASI, JOptionPane.ERROR_MESSAGE, timeout);
+    }
+
+    public int popupGagalDialog(String pesan) {
+        return popupGagalDialog(pesan, 0);
+    }
+
     public void autoNomer(DefaultTableModel tabMode, String strAwal, Integer pnj, javax.swing.JTextField teks) {
         s = Integer.toString(tabMode.getRowCount() + 1);
         j = s.length();
