@@ -33,7 +33,6 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -91,8 +90,8 @@ import rekammedis.RMDataCatatanObservasiIGD;
 import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
-import rekammedis.RMDataSkriningGiziKehamilan;
 import rekammedis.RMDataResumePasien;
+import rekammedis.RMDataSkriningGiziKehamilan;
 import rekammedis.RMDataSkriningGiziLanjut;
 import rekammedis.RMEdukasiPasienKeluargaRawatJalan;
 import rekammedis.RMHasilEndoskopiFaringLaring;
@@ -1033,8 +1032,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         panelDiagnosa1.TabRawat.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -1121,13 +1120,6 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     TNoRM.setText(panelDiagnosa1.tbTindakanPasien.getValueAt(panelDiagnosa1.tbTindakanPasien.getSelectedRow(),3).toString());
                     TPasien.setText(panelDiagnosa1.tbTindakanPasien.getValueAt(panelDiagnosa1.tbTindakanPasien.getSelectedRow(),4).toString());
                 }
-            }
-        });
-
-        templatepemeriksaan.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                TampilkanData();
             }
         });
 
@@ -6040,7 +6032,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnPrintKeyPressed
 
-    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {
         try {
             i=JOptionPane.showConfirmDialog(null, "Mau skalian update status pasien sudah diperiksa ????","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if(i==JOptionPane.YES_OPTION){
@@ -6048,7 +6040,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     "poliklinik.registrasi, poliklinik.registrasilama) from poliklinik where poliklinik.kd_poli = reg_periksa.kd_poli)",
                     "no_rawat = ?", TNoRw.getText()
                 )) {
-                    if (TPegawai.getText().equals(dokter.tampil3(akses.getkode()))) {
+                    if (TPegawai.getText().equals(Sequel.CariDokter(akses.getkode()))) {
                         if (!Sequel.cariExistsSmc("select * from mutasi_berkas where mutasi_berkas.no_rawat = ? and mutasi_berkas.status = 'Sudah Kembali'", TNoRw.getText())) {
                             Sequel.executeRawSmc(
                                 "insert into mutasi_berkas values(?, 'Sudah Kembali', now(), ?, now(), '0000-00-00 00:00:00.000', '0000-00-00 00:00:00.000') " +
@@ -6273,7 +6265,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     KdDok.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     KdDok.requestFocus();
-                } 
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -6308,11 +6300,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     TPerawat.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     kdptg.requestFocus();
-                } 
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -6780,11 +6772,11 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     kdptg2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     TPerawat2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    kdptg2.requestFocus();   
-                } 
+                    kdptg2.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -6823,7 +6815,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     KdDok2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter2.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     KdDok2.requestFocus();
-                } 
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -7593,7 +7585,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                     KdDok3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     TDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     KdDok3.requestFocus();
-                } 
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -7701,7 +7693,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
     }//GEN-LAST:event_KdPegKeyPressed
 
     private void BtnSeekPegawaiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeekPegawaiActionPerformed
-        DlgCariPegawai pegawai=new DlgCariPegawai(null,false); 
+        DlgCariPegawai pegawai=new DlgCariPegawai(null,false);
         pegawai.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -7709,12 +7701,12 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     KdPeg.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     TPegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
                     Jabatan.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),3).toString());
-                    KdPeg.requestFocus();                    
-                }  
+                    KdPeg.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -10542,8 +10534,8 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             }
         }
     }
-    
-    private void BtnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSkriningGiziLanjutActionPerformed
+
+    private void BtnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {
         if(TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -11856,7 +11848,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         if(akses.getskrining_curb65()==true){
             tinggi=tinggi+24;
         }
-        BtnSkriningGiziKehamilan.setVisible(akses.getskrining_gizi_kehamilan());   
+        BtnSkriningGiziKehamilan.setVisible(akses.getskrining_gizi_kehamilan());
         if(akses.getskrining_gizi_kehamilan()==true){
             tinggi=tinggi+24;
         }
@@ -13082,6 +13074,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Template pemeriksaan hanya untuk dokter...!!");
         }else{
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            MasterCariTemplatePemeriksaan templatepemeriksaan=new MasterCariTemplatePemeriksaan(null,false);
             templatepemeriksaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             templatepemeriksaan.setLocationRelativeTo(internalFrame1);
             templatepemeriksaan.isCek();
@@ -13955,12 +13948,12 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
         BtnChecklistKriteriaMasukPICU.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnChecklistKriteriaMasukPICU.setRoundRect(false);
         BtnChecklistKriteriaMasukPICU.addActionListener(this::BtnChecklistKriteriaMasukPICUActionPerformed);
-        
+
         BtnSkriningGiziKehamilan = new widget.Button();
         BtnSkriningGiziKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnSkriningGiziKehamilan.setText("Skrining Gizi Kehamilan");
         BtnSkriningGiziKehamilan.setFocusPainted(false);
-        BtnSkriningGiziKehamilan.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnSkriningGiziKehamilan.setFont(new java.awt.Font("Tahoma", 0, 11));
         BtnSkriningGiziKehamilan.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnSkriningGiziKehamilan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningGiziKehamilan.setMargin(new java.awt.Insets(1, 1, 1, 1));

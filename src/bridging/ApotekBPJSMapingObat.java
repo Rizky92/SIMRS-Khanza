@@ -11,11 +11,11 @@
 package bridging;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.DlgBarang;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -28,12 +28,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -113,21 +109,21 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() ->tampil());
+                        tampil();
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() ->tampil());
+                        tampil();
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() ->tampil());
+                        tampil();
                     }
                 }
             });
@@ -643,7 +639,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
                     tbJnsPerawatan.setValueAt(TObat.getText(), tbJnsPerawatan.getSelectedRow(), 1);
                     tbJnsPerawatan.setValueAt(KdObatBPJS.getText(), tbJnsPerawatan.getSelectedRow(), 2);
                     tbJnsPerawatan.setValueAt(NmObatBPJS.getText(), tbJnsPerawatan.getSelectedRow(), 3);
-                    tbJnsPerawatan.setValueAt(Double.parseDouble(Harga.getText()), tbJnsPerawatan.getSelectedRow(), 4);
+                    tbJnsPerawatan.setValueAt(Double.valueOf(Harga.getText()), tbJnsPerawatan.getSelectedRow(), 4);
                     tbJnsPerawatan.setValueAt(Restriksi.getText(), tbJnsPerawatan.getSelectedRow(), 5);
                     emptTeks();
                 } else {
@@ -714,7 +710,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil());
+        tampil();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -727,13 +723,13 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampil());
+        tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            runBackground(() ->tampil());
             TCari.setText("");
+            tampil();
         } else {
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }

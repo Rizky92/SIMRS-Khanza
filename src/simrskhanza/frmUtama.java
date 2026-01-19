@@ -31,7 +31,6 @@ import bridging.ApotekBPJSKirimResepObatSMC;
 import bridging.ApotekBPJSKunjunganSEP;
 import bridging.ApotekBPJSMapingObat;
 import bridging.ApotekBPJSMonitoringKlaim;
-import bridging.ApotekBPJSRiwayatPelayananObat;
 import bridging.ApotekBPJSRiwayatPelayananObatSMC;
 import bridging.ApotekBPJSRiwayatPelayananResepSMC;
 import bridging.BPJSAntreanPerKodebooking;
@@ -393,6 +392,7 @@ import inventory.DlgObatPenyakit;
 import inventory.DlgObatPerTanggal;
 import inventory.DlgObatPeresep;
 import inventory.DlgPembelian;
+import inventory.DlgPemberianObat;
 import inventory.DlgPemesanan;
 import inventory.DlgPengambilanUTD;
 import inventory.DlgPengeluaranApotek;
@@ -454,7 +454,6 @@ import ipsrs.DlgRHPembelianIPSRS;
 import ipsrs.DlgRHPengeluaranIPSRS;
 import ipsrs.DlgRekapPenerimaanNonMedis;
 import ipsrs.DlgRekapPermintaanNonMedis;
-import inventory.DlgPemberianObat;
 import ipsrs.DlgSirkulasiNonMedis;
 import ipsrs.DlgSirkulasiNonMedis2;
 import ipsrs.DlgStokKeluarIPSRSPerTanggal;
@@ -591,6 +590,7 @@ import keuangan.DlgJnsPerawatanRanap;
 import keuangan.DlgJnsPerawatanUTD;
 import keuangan.DlgJurnal;
 import keuangan.DlgJurnalHarian;
+import keuangan.DlgKamar;
 import keuangan.DlgKategoriPemasukan;
 import keuangan.DlgKategoriPengeluaran;
 import keuangan.DlgKategoriPiutangJasaPerusahaan;
@@ -23474,18 +23474,19 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         form.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnBPJSRiwayatPelayananObatApotekActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        ApotekBPJSRiwayatPelayananObat form=new ApotekBPJSRiwayatPelayananObat(this,false);
+        // ApotekBPJSRiwayatPelayananObat form=new ApotekBPJSRiwayatPelayananObat(this,false);
+        ApotekBPJSRiwayatPelayananObatSMC form = new ApotekBPJSRiwayatPelayananObatSMC(this, false);
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -27204,7 +27205,7 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
                 Panelmenu.add(btnBPJSDaftarPelayananObatApotek);
                 jmlmenu++;
             }
-            
+
             if(akses.getbpjs_riwayat_pelayanan_obat()==true){
                 Panelmenu.add(btnBPJSRiwayatPelayananObatApotek);
                 jmlmenu++;
@@ -28001,7 +28002,7 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
                 Panelmenu.add(btnSkriningNutrisiAnak);
                 jmlmenu++;
             }
-            
+
             if(akses.getskrining_gizi_kehamilan()==true){
                 Panelmenu.add(btnSkriningGiziKehamilan);
                 jmlmenu++;
@@ -33041,7 +33042,7 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
             Panelmenu.add(btnBPJSDaftarPelayananObatApotek);
             jmlmenu++;
         }
-        
+
         if(akses.getbpjs_riwayat_pelayanan_obat()==true){
             Panelmenu.add(btnBPJSRiwayatPelayananObatApotek);
             jmlmenu++;
@@ -33832,7 +33833,7 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
             Panelmenu.add(btnSkriningNutrisiAnak);
             jmlmenu++;
         }
-        
+
         if(akses.getskrining_gizi_kehamilan()==true){
             Panelmenu.add(btnSkriningGiziKehamilan);
             jmlmenu++;
@@ -39997,14 +39998,14 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
             if(btnBPJSDaftarPelayananObatApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBPJSDaftarPelayananObatApotek);
                 jmlmenu++;
-            }                
+            }
         }
-        
+
         if(akses.getbpjs_riwayat_pelayanan_obat()==true){
             if(btnBPJSRiwayatPelayananObatApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBPJSRiwayatPelayananObatApotek);
                 jmlmenu++;
-            } 
+            }
         }
 
         if(akses.getriwayat_perawatan_icare_bpjs()==true){
@@ -41102,9 +41103,9 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
             if(btnSkriningNutrisiAnak.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSkriningNutrisiAnak);
                 jmlmenu++;
-            }                
+            }
         }
-        
+
         if(akses.getskrining_gizi_kehamilan()==true){
             if(btnSkriningGiziKehamilan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSkriningGiziKehamilan);
@@ -49822,17 +49823,17 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         btnBPJSPotensiPRB.setName("btnBPJSPotensiPRB");
         btnBPJSPotensiPRB.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSPotensiPRB.addActionListener(this::btnBPJSPotensiPRBActionPerformed);
-        
+
         btnBPJSRiwayatPelayananObatApotek = new widget.ButtonBig();
         btnBPJSRiwayatPelayananObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSRiwayatPelayananObatApotek.setText("Riwayat Pelayanan Obat Apotek BPJS");
         btnBPJSRiwayatPelayananObatApotek.setIconTextGap(0);
-        btnBPJSRiwayatPelayananObatApotek.setName("btnBPJSRiwayatPelayananObatApotek"); 
+        btnBPJSRiwayatPelayananObatApotek.setName("btnBPJSRiwayatPelayananObatApotek");
         btnBPJSRiwayatPelayananObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatPelayananObatApotek.addActionListener(this::btnBPJSRiwayatPelayananObatApotekActionPerformed);
-        
+
         btnSkriningGiziKehamilan = new widget.ButtonBig();
-        btnSkriningGiziKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/meal_4814223.png"))); 
+        btnSkriningGiziKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/meal_4814223.png")));
         btnSkriningGiziKehamilan.setText("Skrining Nutrisi Kehamilan");
         btnSkriningGiziKehamilan.setIconTextGap(0);
         btnSkriningGiziKehamilan.setName("btnSkriningGiziKehamilan");
@@ -49841,8 +49842,7 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
-                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananObatApotek,
-                             btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc;
+                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -49917,14 +49917,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         btnBPJSKirimEditObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSKirimEditObatApotek.addActionListener(this::btnBPJSKirimEditObatApotekActionPerformed);
 
-        btnBPJSRiwayatPelayananObatApotek = new widget.ButtonBig();
-        btnBPJSRiwayatPelayananObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
-        btnBPJSRiwayatPelayananObatApotek.setText("Riwayat Pelayanan Obat Apotek BPJS");
-        btnBPJSRiwayatPelayananObatApotek.setIconTextGap(0);
-        btnBPJSRiwayatPelayananObatApotek.setName("btnBPJSRiwayatPelayananObatApotek");
-        btnBPJSRiwayatPelayananObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
-        btnBPJSRiwayatPelayananObatApotek.addActionListener(this::btnBPJSRiwayatPelayananObatApotekActionPerformed);
-
         btnBPJSRiwayatPelayananResepApotek = new widget.ButtonBig();
         btnBPJSRiwayatPelayananResepApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSRiwayatPelayananResepApotek.setText("Riwayat Pelayanan Resep Apotek BPJS");
@@ -49971,11 +49963,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
 
             if (akses.getbpjs_edit_kirim_obat_smc()) {
                 Panelmenu.add(btnBPJSKirimEditObatApotek);
-                jmlmenu++;
-            }
-
-            if (akses.getbpjs_riwayat_pelayanan_obat_smc()) {
-                Panelmenu.add(btnBPJSRiwayatPelayananObatApotek);
                 jmlmenu++;
             }
 
@@ -50044,11 +50031,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
 
         if (akses.getbpjs_edit_kirim_obat_smc()) {
             Panelmenu.add(btnBPJSKirimEditObatApotek);
-            jmlmenu++;
-        }
-
-        if (akses.getbpjs_riwayat_pelayanan_obat_smc()) {
-            Panelmenu.add(btnBPJSRiwayatPelayananObatApotek);
             jmlmenu++;
         }
 
@@ -50123,13 +50105,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         if (akses.getbpjs_edit_kirim_obat_smc()) {
             if (btnBPJSRiwayatPelayananResepApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnBPJSKirimEditObatApotek);
-                jmlmenu++;
-            }
-        }
-
-        if (akses.getbpjs_riwayat_pelayanan_obat_smc()) {
-            if (btnBPJSRiwayatPelayananResepApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
-                Panelmenu.add(btnBPJSRiwayatPelayananObatApotek);
                 jmlmenu++;
             }
         }
@@ -50266,17 +50241,6 @@ private void edAdminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_e
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         ApotekBPJSEditResepObatSMC form = new ApotekBPJSEditResepObatSMC(this, false);
-        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
-        form.setLocationRelativeTo(PanelUtama);
-        form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());
-    }
-
-    private void btnBPJSRiwayatPelayananObatApotekActionPerformed(java.awt.event.ActionEvent evt) {
-        isTutup();
-        DlgHome.dispose();
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        ApotekBPJSRiwayatPelayananObatSMC form = new ApotekBPJSRiwayatPelayananObatSMC(this, false);
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);

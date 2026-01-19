@@ -41,6 +41,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -49,7 +51,9 @@ import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPegawai;
+import kepegawaian.DlgCariPetugas;
 import keuangan.DlgCariPerawatanRanap;
 import keuangan.DlgCariPerawatanRanap2;
 import keuangan.Jurnal;
@@ -95,6 +99,7 @@ import rekammedis.RMDataFollowUpDBD;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
 import rekammedis.RMDataResumePasienRanap;
+import rekammedis.RMDataSkriningGiziKehamilan;
 import rekammedis.RMDataSkriningGiziLanjut;
 import rekammedis.RMHasilEndoskopiFaringLaring;
 import rekammedis.RMHasilEndoskopiHidung;
@@ -167,11 +172,6 @@ import rekammedis.RMSkriningNutrisiDewasa;
 import rekammedis.RMSkriningNutrisiLansia;
 import rekammedis.RMTimeOutSebelumInsisi;
 import rekammedis.RMTransferPasienAntarRuang;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import kepegawaian.DlgCariDokter;
-import kepegawaian.DlgCariPetugas;
-import rekammedis.RMDataSkriningGiziKehamilan;
 import surat.SuratKontrol;
 
 /**
@@ -813,8 +813,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
         ChkInput1.setSelected(false);
@@ -5854,11 +5854,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     TPerawat.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     kdptg.requestFocus();
-                }  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -5903,11 +5903,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     kdptg2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     TPerawat2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     kdptg2.requestFocus();
-                }  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -6087,8 +6087,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(perawatan.getTable().getSelectedRow()!= -1){   
-                            TKdPrw.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),1).toString());   
+                        if(perawatan.getTable().getSelectedRow()!= -1){
+                            TKdPrw.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),1).toString());
                             TNmPrw.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),2).toString());
                             BagianRS.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),5).toString());
                             Bhp.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),6).toString());
@@ -6097,8 +6097,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             KSO.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),9).toString());
                             Menejemen.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),10).toString());
                             TTnd.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),4).toString());
-                            TKdPrw.requestFocus();  
-                        }  
+                            TKdPrw.requestFocus();
+                        }
                         BtnCariActionPerformed(null);
                     }
                     @Override
@@ -6144,8 +6144,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(perawatan2.getTable().getSelectedRow()!= -1){ 
-                            TKdPrw.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),4).toString());   
+                        if(perawatan2.getTable().getSelectedRow()!= -1){
+                            TKdPrw.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),4).toString());
                             TNmPrw.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),5).toString());
                             BagianRS.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),8).toString());
                             Bhp.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),9).toString());
@@ -6155,7 +6155,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),13).toString());
                             TTnd.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),7).toString());
                             TKdPrw.requestFocus();
-                        } 
+                        }
                         BtnCariActionPerformed(null);
                     }
                     @Override
@@ -6172,7 +6172,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 //     TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
                 perawatan2.setPetugas2(KdDok.getText(), TDokter.getText(), "-", "-");
                 perawatan2.isCek();
-                perawatan2.tampil3();
+                perawatan2.tampil2();
                 perawatan2.setSize(this.getWidth()-20,this.getHeight()-20);
                 perawatan2.setLocationRelativeTo(internalFrame1);
                 perawatan2.setVisible(true);
@@ -6202,8 +6202,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(perawatan.getTable().getSelectedRow()!= -1){   
-                            TKdPrwPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),1).toString());   
+                        if(perawatan.getTable().getSelectedRow()!= -1){
+                            TKdPrwPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),1).toString());
                             TNmPrwPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),2).toString());
                             BagianRS.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),5).toString());
                             Bhp.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),6).toString());
@@ -6212,8 +6212,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             KSO.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),9).toString());
                             Menejemen.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),10).toString());
                             TTnd.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),4).toString());
-                            TKdPrwPetugas.requestFocus(); 
-                        }  
+                            TKdPrwPetugas.requestFocus();
+                        }
                         BtnCariActionPerformed(null);
                     }
                     @Override
@@ -6259,8 +6259,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(perawatan2.getTable().getSelectedRow()!= -1){ 
-                            TKdPrwPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),4).toString());   
+                        if(perawatan2.getTable().getSelectedRow()!= -1){
+                            TKdPrwPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),4).toString());
                             TNmPrwPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),5).toString());
                             BagianRS.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),8).toString());
                             Bhp.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),9).toString());
@@ -6270,7 +6270,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),13).toString());
                             TTnd.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),7).toString());
                             TKdPrwPetugas.requestFocus();
-                        } 
+                        }
                         BtnCariActionPerformed(null);
                     }
                     @Override
@@ -6287,7 +6287,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 //     TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
                 perawatan2.setPetugas2(kdptg.getText(), TPerawat.getText(), "-", "-");
                 perawatan2.isCek();
-                perawatan2.tampil3();
+                perawatan2.tampil2();
                 perawatan2.setSize(this.getWidth()-20,this.getHeight()-20);
                 perawatan2.setLocationRelativeTo(internalFrame1);
                 perawatan2.setVisible(true);
@@ -6319,8 +6319,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(perawatan.getTable().getSelectedRow()!= -1){   
-                            TKdPrwDokterPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),1).toString());   
+                        if(perawatan.getTable().getSelectedRow()!= -1){
+                            TKdPrwDokterPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),1).toString());
                             TNmPrwDokterPetugas.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),2).toString());
                             BagianRS.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),5).toString());
                             Bhp.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),6).toString());
@@ -6329,8 +6329,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             KSO.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),9).toString());
                             Menejemen.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),10).toString());
                             TTnd.setText(perawatan.getTable().getValueAt(perawatan.getTable().getSelectedRow(),4).toString());
-                            TKdPrwDokterPetugas.requestFocus(); 
-                        }  
+                            TKdPrwDokterPetugas.requestFocus();
+                        }
                         BtnCariActionPerformed(null);
                     }
                     @Override
@@ -6378,8 +6378,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(perawatan2.getTable().getSelectedRow()!= -1){ 
-                            TKdPrwDokterPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),4).toString());   
+                        if(perawatan2.getTable().getSelectedRow()!= -1){
+                            TKdPrwDokterPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),4).toString());
                             TNmPrwDokterPetugas.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),5).toString());
                             BagianRS.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),8).toString());
                             Bhp.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),9).toString());
@@ -6389,7 +6389,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             Menejemen.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),13).toString());
                             TTnd.setText(perawatan2.getTable().getValueAt(perawatan2.getTable().getSelectedRow(),7).toString());
                             TKdPrwDokterPetugas.requestFocus();
-                        } 
+                        }
                         BtnCariActionPerformed(null);
                     }
                     @Override
@@ -6406,7 +6406,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                 //     TBerat.getText(),TTinggi.getText(),TNadi.getText(),TRespirasi.getText(),TGCS.getText(),TAlergi.getText());
                 perawatan2.setPetugas2(KdDok2.getText(), TDokter2.getText(), kdptg2.getText(), TPerawat2.getText());
                 perawatan2.isCek();
-                perawatan2.tampil3();
+                perawatan2.tampil2();
                 perawatan2.setSize(this.getWidth()-20,this.getHeight()-20);
                 perawatan2.setLocationRelativeTo(internalFrame1);
                 perawatan2.setVisible(true);
@@ -6902,11 +6902,11 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     KdPeg.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     TPegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
                     Jabatan.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),3).toString());
-                    KdPeg.requestFocus();                    
+                    KdPeg.requestFocus();
                 }
             }
             @Override
@@ -8886,8 +8886,8 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
-    
-    private void BtnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSkriningGiziLanjutActionPerformed
+
+    private void BtnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {
         if(TNoRw.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
             TCari.requestFocus();
@@ -9903,7 +9903,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         if(akses.getchecklist_kriteria_masuk_hcu()==true){
             tinggi=tinggi+24;
         }
-        BtnSkriningGiziKehamilan.setVisible(akses.getskrining_gizi_kehamilan());   
+        BtnSkriningGiziKehamilan.setVisible(akses.getskrining_gizi_kehamilan());
         if(akses.getskrining_gizi_kehamilan()==true){
             tinggi=tinggi+24;
         }
@@ -11066,12 +11066,12 @@ public final class DlgRawatInap extends javax.swing.JDialog {
         BtnChecklistKriteriaKeluarNICU.setPreferredSize(new java.awt.Dimension(190, 23));
         BtnChecklistKriteriaKeluarNICU.setRoundRect(false);
         BtnChecklistKriteriaKeluarNICU.addActionListener(this::BtnChecklistKriteriaKeluarNICUActionPerformed);
-        
+
         BtnSkriningGiziKehamilan = new widget.Button();
         BtnSkriningGiziKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
         BtnSkriningGiziKehamilan.setText("Skrining Gizi Kehamilan");
         BtnSkriningGiziKehamilan.setFocusPainted(false);
-        BtnSkriningGiziKehamilan.setFont(new java.awt.Font("Tahoma", 0, 11)); 
+        BtnSkriningGiziKehamilan.setFont(new java.awt.Font("Tahoma", 0, 11));
         BtnSkriningGiziKehamilan.setGlassColor(new java.awt.Color(255, 255, 255));
         BtnSkriningGiziKehamilan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         BtnSkriningGiziKehamilan.setMargin(new java.awt.Insets(1, 1, 1, 1));
