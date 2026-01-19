@@ -1,8 +1,8 @@
 package khanzahmsanjungan;
 
 import bridging.ApiBPJS;
-import bridging.BPJSReferensiDokter;
 import bridging.BPJSReferensiDiagnosa;
+import bridging.BPJSReferensiDokter;
 import bridging.BPJSRiwayatPelayananPasien;
 import bridging.BPJSRiwayatRujukanPasien;
 import com.fasterxml.jackson.databind.JsonNode;
@@ -40,6 +40,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.StringJoiner;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import org.springframework.http.HttpEntity;
@@ -272,6 +273,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         panelNumpad = new widget.Numpad();
         tglRujukan = new widget.TextField();
         tglSEP = new widget.TextField();
+        labelValidasi = new widget.Label();
         panelTambahan = new widget.Panel();
         jLabel13 = new widget.Label();
         jLabel42 = new widget.Label();
@@ -677,7 +679,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         btnFingerprint.setBackground(new java.awt.Color(255, 255, 255));
         btnFingerprint.setForeground(new java.awt.Color(0, 131, 62));
         btnFingerprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/fingerprint.png"))); // NOI18N
-        btnFingerprint.setText("<html><body style=\"text-align: center\">\nFINGER<br>PRINT\n</body></html>"); // NOI18N
+        btnFingerprint.setText("<html><body style=\"text-align: center\">\nREKAM<br>SIDIK JARI\n</body></html>"); // NOI18N
+        btnFingerprint.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         btnFingerprint.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFingerprint.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFingerprint.addActionListener(new java.awt.event.ActionListener() {
@@ -686,12 +689,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
         panelUtama.add(btnFingerprint);
-        btnFingerprint.setBounds(645, 415, 120, 110);
+        btnFingerprint.setBounds(645, 480, 160, 120);
 
         btnFrista.setBackground(new java.awt.Color(255, 255, 255));
         btnFrista.setForeground(new java.awt.Color(0, 131, 62));
         btnFrista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/face-scan.png"))); // NOI18N
         btnFrista.setText("<html><body style=\"text-align: center\">\nREKAM<br>WAJAH\n</body></html>"); // NOI18N
+        btnFrista.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         btnFrista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnFrista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnFrista.addActionListener(new java.awt.event.ActionListener() {
@@ -700,7 +704,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
         panelUtama.add(btnFrista);
-        btnFrista.setBounds(515, 415, 120, 110);
+        btnFrista.setBounds(475, 480, 160, 120);
 
         panelNumpad.setFocusable(false);
         panelNumpad.setFontSize(36);
@@ -715,6 +719,14 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         tglSEP.setEditable(false);
         panelUtama.add(tglSEP);
         tglSEP.setBounds(880, 280, 220, 40);
+
+        labelValidasi.setForeground(new java.awt.Color(255, 30, 0));
+        labelValidasi.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        labelValidasi.setText("<html><body>\nSilahkan lakukan proses REKAM WAJAH atau REKAM SIDIK JARI<br>terlebih dahulu\n</body></html>"); // NOI18N
+        labelValidasi.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        labelValidasi.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        panelUtama.add(labelValidasi);
+        labelValidasi.setBounds(235, 415, 520, 90);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -1083,14 +1095,14 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 kodeDokterReg = Sequel.cariIsiSmc("select kd_dokter from maping_dokter_dpjpvclaim where kd_dokter_bpjs = ?", kodeDokter);
             }
             if (kodePoliReg.isBlank() || kodeDokterReg.isBlank()) {
-                JOptionPane.showMessageDialog(null, "Mapping Poliklinik atau Dokter tidak ditemukan..!!");
+                Valid.popupDialog("Peringatan", "Mapping Poliklinik atau Dokter tidak ditemukan..!!", validasi.POPUPTYPE_KONFIRMASI, JOptionPane.WARNING_MESSAGE, 5);
             } else {
                 if (!registerPasien()) {
-                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat pendaftaran pasien!");
+                    Valid.popupDialog("Gagal", "Terjadi kesalahan pada saat pendaftaran pasien!", validasi.POPUPTYPE_KONFIRMASI, JOptionPane.ERROR_MESSAGE, 0);
                 } else {
                     if (namaPoli.getText().toLowerCase().contains("darurat")) {
                         if (Sequel.cariIntegerSmc("select count(*) from bridging_sep where no_kartu = ? and jnspelayanan = '2' and tglsep = ? and nmpolitujuan like '%darurat%'", noPeserta.getText(), tglSEP.getText()) >= 3) {
-                            JOptionPane.showMessageDialog(null, "Maaf, sebelumnya sudah dilakukan 3x pembuatan SEP di jenis pelayanan yang sama..!!");
+                            Valid.popupDialog("Peringatan", "Maaf, sebelumnya sudah dilakukan 3x pembuatan SEP di jenis pelayanan yang sama..!!", validasi.POPUPTYPE_KONFIRMASI, JOptionPane.WARNING_MESSAGE, 5);
                         } else {
                             if (kirimAntrianOnsite()) {
                                 insertSEP();
@@ -1098,7 +1110,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         }
                     } else {
                         if (Sequel.cariIntegerSmc("select count(*) from bridging_sep where no_kartu = ? and jnspelayanan = '2' and tglsep = ? and nmpolitujuan not like '%darurat%'", noPeserta.getText(), tglSEP.getText()) >= 1) {
-                            JOptionPane.showMessageDialog(null, "Maaf, sebelumnya sudah dilakukan pembuatan SEP di jenis pelayanan yang sama..!!");
+                            Valid.popupDialog("Peringatan", "Maaf, sebelumnya sudah dilakukan pembuatan SEP di jenis pelayanan yang sama..!!", validasi.POPUPTYPE_KONFIRMASI, JOptionPane.WARNING_MESSAGE, 5);
                         } else {
                             if (kirimAntrianOnsite()) {
                                 insertSEP();
@@ -1643,6 +1655,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private widget.Label label1;
     private widget.Label label2;
     private widget.Label label4;
+    private widget.Label labelValidasi;
     private widget.ComboBox lakaLantas;
     private widget.TextField namaDPJPLayanan;
     private widget.TextField namaDiagnosa;
@@ -1871,7 +1884,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
             metadata = root.path("metaData");
             System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
-            JOptionPane.showMessageDialog(null, metadata.path("message").asText());
+            Valid.popupDialog("Response SEP", metadata.path("message").asText(), validasi.POPUPTYPE_KONFIRMASI, JOptionPane.INFORMATION_MESSAGE, 3);
+            // JOptionPane.showMessageDialog(null, metadata.path("message").asText());
             if (metadata.path("code").asText().equals("200")) {
                 noSEP = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("sep").path("noSep").asText();
                 System.out.println("No. SEP: " + noSEP);
@@ -1932,6 +1946,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void cekStatusFinger() {
         statusFinger = false;
+        String keteranganValidasi = "";
         if (!noPeserta.getText().isBlank()) {
             try {
                 url = koneksiDB.URLAPIBPJS() + "/SEP/FingerPrint/Peserta/" + noPeserta.getText() + "/TglPelayanan/" + tglSEP.getText();
@@ -1952,12 +1967,31 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
                     if (response.path("kode").asText().equals("1")) {
                         statusFinger = true;
+                        keteranganValidasi = "";
                     } else {
                         statusFinger = false;
-                        JOptionPane.showMessageDialog(null, response.path("status").asText());
+                        StringJoiner sj = new StringJoiner(", ");
+
+                        if (btnFrista.isVisible()) {
+                            sj.add("REKAM WAJAH");
+                        }
+                        if (btnFingerprint.isVisible()) {
+                            sj.add("REKAM SIDIK JADI");
+                        }
+
+                        if (sj.length() == 0) {
+                            keteranganValidasi = "<html><body>Silahkan lakukan proses VALIDASI BIOMETRIK ke petugas admisi dahulu</body></html>";
+                        } else {
+                            keteranganValidasi = "<html><body>Silahkan lakukan proses " + sj.toString() + "<br>terlebih dahulu</body></html>";
+                        }
+
+                        System.out.println("Notif : " + response.path("status").asText());
+                        // JOptionPane.showMessageDialog(null, response.path("status").asText());
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, response.path("status").asText());
+                    keteranganValidasi = response.path("status").asText();
+                    System.out.println("Notif : " + response.path("status").asText());
+                    // JOptionPane.showMessageDialog(null, response.path("status").asText());
                 }
             } catch (Exception ex) {
                 System.out.println("Notif : " + ex);
@@ -1966,8 +2000,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 }
             }
         } else {
-            JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data peserta!");
+            JOptionPane.showMessageDialog(null, "Maaf, no. kartu masih kosong..!!");
         }
+        labelValidasi.setText(keteranganValidasi);
     }
 
     public void tampilKunjunganPertama(String noKartu) {
@@ -2582,6 +2617,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                     JOptionPane.showMessageDialog(null, "Maaf, antrian JKN tidak ditemukan!\nSilahkan hubungi administrasi.");
                                     break;
                             }
+                            cekStatusFinger();
                         } else {
                             emptTeks();
                             System.out.println("Notif : " + metadata.asText());
