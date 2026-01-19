@@ -11163,7 +11163,7 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
 
     public void setNoRm(String norwt,Date tgl1,Date tgl2) {
         this.norawatasal = norwt;
-        this.waktubuka = Sequel.cariIsiSmc("select now() from reg_periksa where no_rawat = ? and kd_dokter = ? and status_lanjut = 'Ralan'", norwt, akses.getkode());
+        this.waktubuka = Sequel.cariIsiSmc("select now()");
         TNoRw.setText(norwt);
         TCari.setText("");
         DTPCari1.setDate(tgl1);
