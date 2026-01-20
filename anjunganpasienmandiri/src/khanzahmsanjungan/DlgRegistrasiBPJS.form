@@ -914,7 +914,6 @@
                   <Color blue="0" green="1e" red="ff" type="rgb"/>
                 </Property>
                 <Property name="horizontalAlignment" type="int" value="2"/>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body&gt;&#xa;Silahkan lakukan proses REKAM WAJAH atau REKAM SIDIK JARI&lt;br&gt;terlebih dahulu&#xa;&lt;/body&gt;&lt;/html&gt;" noResource="true"/>
                 <Property name="verticalAlignment" type="int" value="1"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Inter" size="24" style="1"/>
