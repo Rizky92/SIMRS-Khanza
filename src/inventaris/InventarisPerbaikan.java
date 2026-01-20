@@ -1270,7 +1270,7 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
             BtnEdit.setEnabled(akses.getperbaikan_inventaris());
             BtnPrint.setEnabled(akses.getperbaikan_inventaris());
             NIP.setText(akses.getkode());
-            NamaPetugas.setText(petugas.tampil3(NIP.getText()));
+            NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
         }
         TCari.requestFocus();
     }

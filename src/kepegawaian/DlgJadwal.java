@@ -893,7 +893,7 @@ public class DlgJadwal extends javax.swing.JDialog {
 
     private void kddokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddokterKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmdokter.setText(dokter.tampil3(kddokter.getText()));
+            nmdokter.setText(Sequel.CariDokter(kddokter.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnDokterActionPerformed(null);
         }else{

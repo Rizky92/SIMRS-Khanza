@@ -36,6 +36,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -797,13 +798,13 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             switch (pilihtable) {
                 case "rawat_inap_dr":
-                    nmdokter.setText(dokter.tampil3(kddokter.getText()));
+                    nmdokter.setText(Sequel.CariDokter(kddokter.getText()));
                     break;
                 case "rawat_inap_pr":
-                    nmdokter.setText(petugas.tampil3(kddokter.getText()));
+                    nmdokter.setText(Sequel.CariPetugas(kddokter.getText()));
                     break;
                 case "rawat_inap_drpr":
-                    nmdokter.setText(dokter.tampil3(kddokter.getText()));
+                    nmdokter.setText(Sequel.CariDokter(kddokter.getText()));
                     break;
             }
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -873,7 +874,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
 
     private void KdPtg2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPtg2KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            NmPtg2.setText(petugas.tampil3(KdPtg2.getText()));
+            NmPtg2.setText(Sequel.CariPetugas(KdPtg2.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_DOWN){
@@ -1920,19 +1921,33 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

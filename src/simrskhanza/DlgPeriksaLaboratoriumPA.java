@@ -1132,7 +1132,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
 
     private void KdPtgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPtgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            NmPtg.setText(petugas.tampil3(KdPtg.getText()));
+            NmPtg.setText(Sequel.CariPetugas(KdPtg.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }else{
@@ -1262,7 +1262,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
 
     private void KodePerujukKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodePerujukKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            NmPerujuk.setText(dokter.tampil3(KodePerujuk.getText()));
+            NmPerujuk.setText(Sequel.CariDokter(KodePerujuk.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnDokterActionPerformed(null);
         }else{
@@ -1618,7 +1618,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
                 rssetpj=pssetpj.executeQuery();
                 while(rssetpj.next()){
                     KodePj.setText(rssetpj.getString(1));
-                    NmDokterPj.setText(dokter.tampil3(rssetpj.getString(1)));
+                    NmDokterPj.setText(Sequel.CariDokter(rssetpj.getString(1)));
                 }
             } catch (Exception e) {
                 System.out.println(e);
@@ -1644,7 +1644,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     public void isCek(){
         if(akses.getjml2()>=1){
             KdPtg.setText(akses.getkode());
-            NmPtg.setText(petugas.tampil3(KdPtg.getText()));
+            NmPtg.setText(Sequel.CariPetugas(KdPtg.getText()));
         }else{
             KdPtg.setText("");
             NmPtg.setText("");
@@ -1857,7 +1857,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
                 rssetpj=pssetpj.executeQuery();
                 while(rssetpj.next()){
                     KodePj.setText(rssetpj.getString(1));
-                    NmDokterPj.setText(dokter.tampil3(rssetpj.getString(1)));
+                    NmDokterPj.setText(Sequel.CariDokter(rssetpj.getString(1)));
                 }
             } catch (Exception e) {
                 System.out.println(e);

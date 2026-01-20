@@ -38,6 +38,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -121,15 +122,15 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                 } else {
                     c.setHorizontalAlignment(JLabel.LEFT);
                 }
-                
+
                 return c;
             }
         });
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-    }    
-    
-     
+    }
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -706,7 +707,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
                     tampil();
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -718,7 +719,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -786,7 +787,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                 if(poli.getTable().getSelectedRow()!= -1){
                     KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 BtnPoli.requestFocus();
             }
             @Override
@@ -798,7 +799,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         poli.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -891,7 +892,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                 @Override
                 protected Void doInBackground() {
                     String statuspiutang = "";
-                    
+
                     switch (StatusLunas.getSelectedIndex()) {
                         case 1: statuspiutang = "and piutang_pasien.status = 'Lunas' "; break;
                         case 2: statuspiutang = "and piutang_pasien.status = 'Belum Lunas' "; break;
@@ -945,16 +946,16 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                                 all += rs.getDouble("laborat") + rs.getDouble("radiologi") + rs.getDouble("obat") + rs.getDouble("ralan_dr") +
                                        rs.getDouble("ralan_pr") + rs.getDouble("ralan_drpr") + rs.getDouble("tambahan") + rs.getDouble("potongan") +
                                        rs.getDouble("registrasi") + rs.getDouble("operasi");
-                                
+
                                 ttlekses += rs.getDouble("uangmuka");
                                 ttldibayar += rs.getDouble("besar_cicilan");
                                 ttldiskon += rs.getDouble("diskon_piutang");
                                 ttltidakdibayar += rs.getDouble("tidak_terbayar");
                                 ttlsisa += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan") -
                                            rs.getDouble("diskon_piutang") - rs.getDouble("tidak_terbayar");
-                                
+
                                 ++count;
-                                
+
                                 publish(new Object[] {
                                     rs.getString("tgl_registrasi"), rs.getString("no_rawat"), rs.getString("no_nota"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
                                     rs.getString("png_jawab") + " (" + rs.getString("kd_pj") + ")", rs.getString("asal_rujuk"), Valid.SetAngka(rs.getDouble("registrasi")),
@@ -972,7 +973,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
-                    
+
                     return null;
                 }
 
@@ -1000,19 +1001,33 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
     }
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

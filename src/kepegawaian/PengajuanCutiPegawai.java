@@ -1205,7 +1205,7 @@ public final class PengajuanCutiPegawai extends javax.swing.JDialog {
 
     public void isCek(){
         KdPetugas.setText(akses.getkode());
-        NmPetugas.setText(petugas.tampil3(KdPetugas.getText()));
+        NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
     }
 
     private void autoNomor() {

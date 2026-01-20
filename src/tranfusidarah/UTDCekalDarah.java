@@ -834,7 +834,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
 
     private void KodePetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodePetugasKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            NamaPetugas.setText(dokter.tampil3(KodePetugas.getText()));
+            NamaPetugas.setText(Sequel.CariDokter(KodePetugas.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnDokterActionPerformed(null);
         }else{
@@ -1066,7 +1066,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
         BtnPrint.setEnabled(akses.getutd_cekal_darah());
         if(akses.getjml2()>=1){
             KodePetugas.setText(akses.getkode());
-            NamaPetugas.setText(dokter.tampil3(KodePetugas.getText()));
+            NamaPetugas.setText(Sequel.CariDokter(KodePetugas.getText()));
         }
     }
 
