@@ -5006,7 +5006,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         mergePDF(i);
                                         hapusTemporaryPDF(i);
                                     } catch (KompilasiException e) {
-                                        System.out.println("Notif : " + e.getCause().toString());
                                         publish("Terjadi kesalahan pada saat mengkompilasi SEP " + tbKompilasi.getValueAt(i, 2).toString());
                                         synchronized (lock) {
                                             while (lanjut == null) {
@@ -5026,6 +5025,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             }
                         }
                         noSEP = tbKompilasi.getValueAt(i, 2).toString();
+                        firePropertyChange("rowCompleted", i - 1, i);
                         firePropertyChange("kompilasiProgress", j, ++j);
                     }
                 }
@@ -5068,20 +5068,24 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             if ("kompilasiProgress".equals(evt.getPropertyName())) {
                 bar.setValue((Integer) evt.getNewValue());
             }
+
+            if ("rowCompleted".equals(evt.getPropertyName())) {
+                tbKompilasi.setValueAt(false, (Integer) evt.getNewValue(), 0);
+            }
         });
 
         popup.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
                 if (JOptionPane.showConfirmDialog(null, "Batalkan proses bulk kompilasi?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                    worker.cancel(true);
+                    worker.cancel(false);
                 }
             }
         });
 
         cancel.addActionListener(evt -> {
             if (JOptionPane.showConfirmDialog(null, "Batalkan proses bulk kompilasi?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
-                worker.cancel(true);
+                worker.cancel(false);
             }
         });
 
