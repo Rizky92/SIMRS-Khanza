@@ -4,9 +4,12 @@
  */
 package fungsi;
 
+import com.formdev.flatlaf.extras.components.FlatLabel;
+import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterJob;
@@ -34,11 +37,13 @@ import javax.print.attribute.standard.Copies;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 import jxl.Workbook;
 import jxl.write.Label;
@@ -58,6 +63,7 @@ import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
 import uz.ncipro.calendar.JDateTimePicker;
+import widget.Button;
 import widget.Tanggal;
 
 /**
@@ -65,6 +71,13 @@ import widget.Tanggal;
  * @author Owner
  */
 public final class validasi {
+
+    public static final int POPUPTYPE_YA_TIDAK = 1;
+    public static final int POPUPTYPE_KONFIRMASI = 2;
+
+    public static final int POPUP_YA = 1;
+    public static final int POPUP_TIDAK = 0;
+    public static final int POPUP_OKE = -1;
 
     private int a, j, i, result = 0;
 
@@ -208,6 +221,80 @@ public final class validasi {
             System.out.println("Notif : " + e);
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat melakukan proses cetak..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public int popupDialog(String judul, String pesan, int popupType, int messageType, int timeout) {
+        FlatLabel message = new FlatLabel();
+        message.setForeground(new Color(0, 131, 62));
+        message.setFont(new java.awt.Font("Inter Medium", Font.PLAIN, 18));
+        message.setText(pesan);
+
+        JOptionPane pane = new JOptionPane(message, messageType, JOptionPane.DEFAULT_OPTION);
+        pane.setInitialValue(POPUP_OKE);
+
+        Button ya = new Button();
+        ya.setFont(new java.awt.Font("Inter", Font.BOLD, 18));
+        ya.setForeground(new Color(255, 255, 255));
+        ya.setBackground(new Color(0, 131, 62));
+        ya.setText("Ya");
+        ya.addActionListener(e -> pane.setValue(POPUP_YA));
+
+        Button tidak = new Button();
+        ya.setFont(new java.awt.Font("Inter Medium", Font.PLAIN, 18));
+        ya.setForeground(new Color(70, 70, 70));
+        ya.setBackground(new Color(255, 255, 255));
+        tidak.setText("Tidak");
+        tidak.addActionListener(e -> pane.setValue(POPUP_TIDAK));
+
+        Button oke = new Button();
+        ya.setFont(new java.awt.Font("Inter Medium", Font.PLAIN, 18));
+        ya.setForeground(new Color(70, 70, 70));
+        ya.setBackground(new Color(255, 255, 255));
+        oke.setText("Oke");
+        oke.addActionListener(e -> pane.setValue(POPUP_OKE));
+
+        if (popupType == POPUPTYPE_YA_TIDAK) {
+            pane.setOptions(new Object[] {ya, tidak});
+        } else if (popupType == POPUPTYPE_KONFIRMASI) {
+            pane.setOptions(new Object[] {oke});
+        }
+
+        JDialog popup = pane.createDialog(judul);
+        popup.setModal(true);
+
+        if (timeout > 0) {
+            Timer timer = new Timer(timeout * 1000, e -> popup.dispose());
+            timer.setRepeats(false);
+            timer.start();
+        }
+
+        popup.setVisible(true);
+
+        return (Integer) (pane.getValue() == null ? -1 : pane.getValue());
+    }
+
+    public int popupInfoDialog(String pesan, int timeout) {
+        return popupDialog("Informasi", pesan, POPUPTYPE_KONFIRMASI, JOptionPane.INFORMATION_MESSAGE, timeout);
+    }
+
+    public int popupInfoDialog(String pesan) {
+        return popupInfoDialog(pesan, 0);
+    }
+
+    public int popupPeringatanDialog(String pesan, int timeout) {
+        return popupDialog("Peringatan", pesan, POPUPTYPE_KONFIRMASI, JOptionPane.WARNING_MESSAGE, timeout);
+    }
+
+    public int popupPeringatanDialog(String pesan) {
+        return popupPeringatanDialog(pesan, 0);
+    }
+
+    public int popupGagalDialog(String pesan, int timeout) {
+        return popupDialog("Gagal", pesan, POPUPTYPE_KONFIRMASI, JOptionPane.ERROR_MESSAGE, timeout);
+    }
+
+    public int popupGagalDialog(String pesan) {
+        return popupGagalDialog(pesan, 0);
     }
 
     public void autoNomer(DefaultTableModel tabMode, String strAwal, Integer pnj, javax.swing.JTextField teks) {

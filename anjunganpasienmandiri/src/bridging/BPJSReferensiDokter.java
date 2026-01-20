@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -298,8 +298,6 @@ public final class BPJSReferensiDokter extends widget.Dialog {
             URL = link + "/referensi/dokter/pelayanan/1/tglPelayanan/" + Valid.SetTgl(DTPCari1.getSelectedItem() + "") + "/Spesialis/" + KdPoli.getText();
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
-            System.out.println("code : " + nameNode.path("code").asText());
-            System.out.println("message : " + nameNode.path("message").asText());
             if (nameNode.path("code").asText().equals("200")) {
 //                tabMode.addRow(new Object[]{
 //                    "A", "Rawat Inap", ""
@@ -338,8 +336,6 @@ public final class BPJSReferensiDokter extends widget.Dialog {
             URL = link + "/referensi/dokter/pelayanan/2/tglPelayanan/" + Valid.SetTgl(DTPCari1.getSelectedItem() + "") + "/Spesialis/" + KdPoli.getText();
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
-            System.out.println("code : " + nameNode.path("code").asText());
-            System.out.println("message : " + nameNode.path("message").asText());
             if (nameNode.path("code").asText().equals("200")) {
                 tabMode.addRow(new Object[] {
                     "", "", ""

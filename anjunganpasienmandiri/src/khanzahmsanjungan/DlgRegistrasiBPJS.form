@@ -831,7 +831,10 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/48x48/fingerprint.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body style=&quot;text-align: center&quot;&gt;&#xa;FINGER&lt;br&gt;PRINT&#xa;&lt;/body&gt;&lt;/html&gt;" noResource="true"/>
+                <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body style=&quot;text-align: center&quot;&gt;&#xa;REKAM&lt;br&gt;SIDIK JARI&#xa;&lt;/body&gt;&lt;/html&gt;" noResource="true"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Inter" size="24" style="1"/>
+                </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -840,7 +843,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="645" y="415" width="120" height="110"/>
+                  <AbsoluteConstraints x="645" y="480" width="160" height="120"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -856,6 +859,9 @@
                   <Image iconType="3" name="/48x48/face-scan.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="&lt;html&gt;&lt;body style=&quot;text-align: center&quot;&gt;&#xa;REKAM&lt;br&gt;WAJAH&#xa;&lt;/body&gt;&lt;/html&gt;" noResource="true"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Inter" size="24" style="1"/>
+                </Property>
                 <Property name="horizontalTextPosition" type="int" value="0"/>
                 <Property name="verticalTextPosition" type="int" value="3"/>
               </Properties>
@@ -864,7 +870,7 @@
               </Events>
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                  <AbsoluteConstraints x="515" y="415" width="120" height="110"/>
+                  <AbsoluteConstraints x="475" y="480" width="160" height="120"/>
                 </Constraint>
               </Constraints>
             </Component>
@@ -899,6 +905,23 @@
               <Constraints>
                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                   <AbsoluteConstraints x="880" y="280" width="220" height="40"/>
+                </Constraint>
+              </Constraints>
+            </Component>
+            <Component class="widget.Label" name="labelValidasi">
+              <Properties>
+                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="0" green="1e" red="ff" type="rgb"/>
+                </Property>
+                <Property name="horizontalAlignment" type="int" value="2"/>
+                <Property name="verticalAlignment" type="int" value="1"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Inter" size="24" style="1"/>
+                </Property>
+              </Properties>
+              <Constraints>
+                <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
+                  <AbsoluteConstraints x="235" y="415" width="520" height="90"/>
                 </Constraint>
               </Constraints>
             </Component>

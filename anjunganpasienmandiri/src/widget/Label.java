@@ -14,6 +14,6 @@ public class Label extends FlatLabel {
         setVerticalAlignment(CENTER);
         setHorizontalTextPosition(CENTER);
         setVerticalTextPosition(CENTER);
-        setPreferredSize(new Dimension(WIDTH, 35));
+        setPreferredSize(new Dimension(getPreferredSize().width, 35));
     }
 }
