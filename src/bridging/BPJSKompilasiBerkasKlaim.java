@@ -109,7 +109,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private String finger = "", tanggalExport = "",
         gunakanTanggalExport = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
         aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF(),
-        kategoriUploadBerkas = "";
+        kategoriUploadBerkas = "", diagnosa = "", kamar = "", unit = "";
     private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false;
     private int flagklaim = -1, flagInacbgTopup = -1, selectedRow = -1;
     private long maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
@@ -209,40 +209,46 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             });
 
             engineKlaim.locationProperty().addListener((observable, oldValue, newValue) -> {
-                if (selectedRow >= 0) {
+                if (!btnSEP.getText().equals("Tidak ada")) {
                     if (newValue != null && newValue.toLowerCase().contains("action")) {
                         SwingUtilities.invokeLater(() -> {
                             setFlagKlaim();
                             switch (flagklaim) {
                                 case 1:
-                                    tabMode.setValueAt("Selesai", selectedRow, 11);
-                                    tabMode.setValueAt(1, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    btnHasilKlaim.setEnabled(true);
+                                    btnHasilKlaim.setText("Selesai");
+                                    btnHasilKlaim.setGlassColor(new Color(50, 50, 50));
+                                    btnHasilKlaim.setForeground(new Color(255, 255, 255));
                                     break;
                                 case 2:
-                                    tabMode.setValueAt("INACBG Final", selectedRow, 11);
-                                    tabMode.setValueAt(2, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    btnHasilKlaim.setEnabled(false);
+                                    btnHasilKlaim.setText("INACBG Final");
+                                    btnHasilKlaim.setGlassColor(new Color(180, 240, 140));
+                                    btnHasilKlaim.setForeground(new Color(65, 60, 40));
                                     break;
                                 case 3:
-                                    tabMode.setValueAt("INACBG Grouping", selectedRow, 11);
-                                    tabMode.setValueAt(3, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    btnHasilKlaim.setEnabled(false);
+                                    btnHasilKlaim.setText("INACBG Final");
+                                    btnHasilKlaim.setGlassColor(new Color(180, 240, 140));
+                                    btnHasilKlaim.setForeground(new Color(65, 60, 40));
                                     break;
                                 case 4:
-                                    tabMode.setValueAt("IDRG Final", selectedRow, 11);
-                                    tabMode.setValueAt(4, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    btnHasilKlaim.setEnabled(false);
+                                    btnHasilKlaim.setText("IDRG Final");
+                                    btnHasilKlaim.setGlassColor(new Color(30, 230, 255));
+                                    btnHasilKlaim.setForeground(new Color(45, 40, 55));
                                     break;
                                 case 5:
-                                    tabMode.setValueAt("IDRG Grouping", selectedRow, 11);
-                                    tabMode.setValueAt(5, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    btnHasilKlaim.setEnabled(false);
+                                    btnHasilKlaim.setText("IDRG Grouping");
+                                    btnHasilKlaim.setGlassColor(new Color(30, 230, 255));
+                                    btnHasilKlaim.setForeground(new Color(45, 40, 55));
                                     break;
                                 default:
-                                    tabMode.setValueAt("Belum", selectedRow, 11);
-                                    tabMode.setValueAt(6, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    btnHasilKlaim.setEnabled(false);
+                                    btnHasilKlaim.setText("Belum");
+                                    btnHasilKlaim.setGlassColor(new Color(240, 240, 240));
+                                    btnHasilKlaim.setForeground(new Color(50, 50, 50));
                                     break;
                             }
                         });
@@ -654,7 +660,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-01-2026 00:00:26" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2026 13:45:28" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -694,7 +700,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-01-2026" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2026" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -1075,7 +1081,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-01-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1089,7 +1095,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-01-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "20-01-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1192,41 +1198,41 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa1.setPreferredSize(new java.awt.Dimension(800, 780));
         panelBiasa1.setLayout(null);
 
-        jLabel14.setText("Data Pasien : ");
+        jLabel14.setText("Data Pasien :");
         jLabel14.setName("jLabel14"); // NOI18N
-        jLabel14.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel14.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel14);
-        jLabel14.setBounds(0, 10, 120, 16);
+        jLabel14.setBounds(0, 10, 105, 16);
 
         lblNamaPasien.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNamaPasien.setName("lblNamaPasien"); // NOI18N
         lblNamaPasien.setPreferredSize(new java.awt.Dimension(200, 16));
         panelBiasa1.add(lblNamaPasien);
-        lblNamaPasien.setBounds(160, 10, 200, 16);
+        lblNamaPasien.setBounds(156, 10, 200, 16);
 
-        jLabel15.setText("No. Rawat : ");
+        jLabel15.setText("No. Rawat :");
         jLabel15.setName("jLabel15"); // NOI18N
-        jLabel15.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel15.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel15);
-        jLabel15.setBounds(0, 30, 120, 16);
+        jLabel15.setBounds(0, 30, 105, 16);
 
         lblNoRawat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNoRawat.setName("lblNoRawat"); // NOI18N
         lblNoRawat.setPreferredSize(new java.awt.Dimension(240, 16));
         panelBiasa1.add(lblNoRawat);
-        lblNoRawat.setBounds(120, 30, 240, 16);
+        lblNoRawat.setBounds(116, 30, 240, 16);
 
         lblNoRM.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblNoRM.setName("lblNoRM"); // NOI18N
         lblNoRM.setPreferredSize(new java.awt.Dimension(36, 16));
         panelBiasa1.add(lblNoRM);
-        lblNoRM.setBounds(120, 10, 36, 16);
+        lblNoRM.setBounds(116, 10, 36, 16);
 
-        jLabel17.setText("No. SEP : ");
+        jLabel17.setText("No. SEP :");
         jLabel17.setName("jLabel17"); // NOI18N
-        jLabel17.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel17.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel17);
-        jLabel17.setBounds(0, 70, 120, 16);
+        jLabel17.setBounds(0, 70, 105, 16);
 
         btnSEP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSEP.setText("Tidak ada");
@@ -1241,13 +1247,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnSEP);
-        btnSEP.setBounds(120, 70, 160, 16);
+        btnSEP.setBounds(105, 70, 160, 16);
 
-        jLabel25.setText("Resume Ranap : ");
+        jLabel25.setText("Resume Ranap :");
         jLabel25.setName("jLabel25"); // NOI18N
-        jLabel25.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel25.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel25);
-        jLabel25.setBounds(0, 150, 120, 16);
+        jLabel25.setBounds(0, 150, 105, 16);
 
         btnResumeRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnResumeRanap.setMnemonic('1');
@@ -1264,13 +1270,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnResumeRanap);
-        btnResumeRanap.setBounds(120, 150, 100, 16);
+        btnResumeRanap.setBounds(105, 150, 100, 16);
 
-        jLabel27.setText("Awal Medis IGD : ");
+        jLabel27.setText("Awal Medis IGD :");
         jLabel27.setName("jLabel27"); // NOI18N
-        jLabel27.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel27.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel27);
-        jLabel27.setBounds(0, 130, 120, 16);
+        jLabel27.setBounds(0, 130, 105, 16);
 
         btnAwalMedisIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnAwalMedisIGD.setMnemonic('1');
@@ -1287,13 +1293,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnAwalMedisIGD);
-        btnAwalMedisIGD.setBounds(120, 130, 100, 16);
+        btnAwalMedisIGD.setBounds(105, 130, 100, 16);
 
-        jLabel28.setText("Hasil Lab : ");
+        jLabel28.setText("Hasil Lab :");
         jLabel28.setName("jLabel28"); // NOI18N
-        jLabel28.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel28.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel28);
-        jLabel28.setBounds(0, 170, 120, 16);
+        jLabel28.setBounds(0, 170, 105, 16);
 
         btnHasilLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnHasilLab.setMnemonic('1');
@@ -1310,13 +1316,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnHasilLab);
-        btnHasilLab.setBounds(120, 170, 100, 16);
+        btnHasilLab.setBounds(105, 170, 100, 16);
 
-        jLabel29.setText("Hasil Radiologi : ");
+        jLabel29.setText("Hasil Radiologi :");
         jLabel29.setName("jLabel29"); // NOI18N
-        jLabel29.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel29.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel29);
-        jLabel29.setBounds(0, 190, 120, 16);
+        jLabel29.setBounds(0, 190, 105, 16);
 
         btnHasilRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnHasilRad.setMnemonic('1');
@@ -1333,13 +1339,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnHasilRad);
-        btnHasilRad.setBounds(120, 190, 100, 16);
+        btnHasilRad.setBounds(105, 190, 100, 16);
 
-        jLabel30.setText("Surat Kontrol : ");
+        jLabel30.setText("Surat Kontrol :");
         jLabel30.setName("jLabel30"); // NOI18N
-        jLabel30.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel30.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel30);
-        jLabel30.setBounds(0, 250, 120, 16);
+        jLabel30.setBounds(0, 250, 105, 16);
 
         btnSurkon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSurkon.setMnemonic('1');
@@ -1356,13 +1362,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnSurkon);
-        btnSurkon.setBounds(120, 250, 100, 16);
+        btnSurkon.setBounds(105, 250, 100, 16);
 
-        jLabel31.setText("SPRI : ");
+        jLabel31.setText("SPRI :");
         jLabel31.setName("jLabel31"); // NOI18N
-        jLabel31.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel31.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel31);
-        jLabel31.setBounds(0, 230, 120, 16);
+        jLabel31.setBounds(0, 230, 105, 16);
 
         btnSPRI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnSPRI.setMnemonic('1');
@@ -1379,19 +1385,19 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnSPRI);
-        btnSPRI.setBounds(120, 230, 100, 16);
+        btnSPRI.setBounds(105, 230, 100, 16);
 
-        jLabel20.setText("Status Rawat : ");
+        jLabel20.setText("Status Rawat :");
         jLabel20.setName("jLabel20"); // NOI18N
-        jLabel20.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel20.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel20);
-        jLabel20.setBounds(0, 50, 120, 16);
+        jLabel20.setBounds(0, 50, 105, 16);
 
         lblStatusRawat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblStatusRawat.setName("lblStatusRawat"); // NOI18N
         lblStatusRawat.setPreferredSize(new java.awt.Dimension(240, 16));
         panelBiasa1.add(lblStatusRawat);
-        lblStatusRawat.setBounds(120, 50, 240, 16);
+        lblStatusRawat.setBounds(116, 50, 240, 16);
 
         BtnSimpanKoding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         BtnSimpanKoding.setMnemonic('S');
@@ -1435,11 +1441,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa1.add(BtnHapusKoding);
         BtnHapusKoding.setBounds(530, 740, 100, 30);
 
-        jLabel32.setText("Riwayat : ");
+        jLabel32.setText("Riwayat :");
         jLabel32.setName("jLabel32"); // NOI18N
-        jLabel32.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel32.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel32);
-        jLabel32.setBounds(0, 210, 120, 16);
+        jLabel32.setBounds(0, 210, 105, 16);
 
         btnRiwayatPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnRiwayatPasien.setMnemonic('1');
@@ -1455,36 +1461,36 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnRiwayatPasien);
-        btnRiwayatPasien.setBounds(120, 210, 100, 16);
+        btnRiwayatPasien.setBounds(105, 210, 100, 16);
 
-        jLabel33.setText("Hasil Klaim INACBG : ");
+        jLabel33.setText("Berkas Hasil Klaim :");
         jLabel33.setName("jLabel33"); // NOI18N
-        jLabel33.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel33.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel33);
-        jLabel33.setBounds(0, 90, 120, 16);
+        jLabel33.setBounds(0, 90, 105, 16);
 
         btnHasilKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnHasilKlaim.setMnemonic('1');
-        btnHasilKlaim.setText("Tidak ada");
+        btnHasilKlaim.setText("Tidak Ada");
         btnHasilKlaim.setToolTipText("ALt+1");
         btnHasilKlaim.setEnabled(false);
         btnHasilKlaim.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         btnHasilKlaim.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         btnHasilKlaim.setName("btnHasilKlaim"); // NOI18N
-        btnHasilKlaim.setPreferredSize(new java.awt.Dimension(100, 16));
+        btnHasilKlaim.setPreferredSize(new java.awt.Dimension(160, 16));
         btnHasilKlaim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHasilKlaimActionPerformed(evt);
             }
         });
         panelBiasa1.add(btnHasilKlaim);
-        btnHasilKlaim.setBounds(120, 90, 100, 16);
+        btnHasilKlaim.setBounds(105, 90, 160, 16);
 
-        jLabel34.setText("Triase IGD : ");
+        jLabel34.setText("Triase IGD :");
         jLabel34.setName("jLabel34"); // NOI18N
-        jLabel34.setPreferredSize(new java.awt.Dimension(120, 14));
+        jLabel34.setPreferredSize(new java.awt.Dimension(105, 14));
         panelBiasa1.add(jLabel34);
-        jLabel34.setBounds(0, 110, 120, 16);
+        jLabel34.setBounds(0, 110, 105, 16);
 
         btnTriaseIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
         btnTriaseIGD.setMnemonic('1');
@@ -1501,14 +1507,14 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(btnTriaseIGD);
-        btnTriaseIGD.setBounds(120, 110, 100, 16);
+        btnTriaseIGD.setBounds(105, 110, 100, 16);
 
         lblTglSEP.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         lblTglSEP.setToolTipText("");
         lblTglSEP.setName("lblTglSEP"); // NOI18N
         lblTglSEP.setPreferredSize(new java.awt.Dimension(300, 14));
         panelBiasa1.add(lblTglSEP);
-        lblTglSEP.setBounds(290, 70, 70, 16);
+        lblTglSEP.setBounds(275, 70, 70, 16);
 
         tabPaneKoding.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tabPaneKoding.setName("tabPaneKoding"); // NOI18N
@@ -1857,7 +1863,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            String kamar = "", namaKamar = "";
+            String namaKamar = "";
             int i = 0;
             Map<String, Object> param = new HashMap<>();
 
@@ -1877,7 +1883,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             param.put("umur", rs.getString("umur"));
                             param.put("lahir", new SimpleDateFormat("dd-MM-yyyy").format((Date) rs.getDate("tgl_lahir")));
                             param.put("alamat", rs.getString("alamat"));
-                            param.put("diagnosa", tbKompilasi.getValueAt(selectedRow, 10).toString());
+                            param.put("diagnosa", diagnosa);
                             param.put("pekerjaan", rs.getString("pekerjaan"));
                             param.put("noktp", rs.getString("no_ktp"));
                             param.put("namars", akses.getnamars());
@@ -1909,7 +1915,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                 namaKamar = Sequel.cariIsiSmc("select poliklinik.nm_poli from poliklinik join reg_periksa on poliklinik.kd_poli = reg_periksa.kd_poli where reg_periksa.no_rawat = ?", lblNoRawat.getText());
                             } else {
                                 kamar = "Kamar";
-                                namaKamar = tbKompilasi.getValueAt(selectedRow, 9).toString();
+                                namaKamar = unit;
                             }
                             param.put("kamar", kamar);
                             param.put("namakamar", namaKamar);
@@ -2028,7 +2034,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_btnHasilLabActionPerformed
 
     private void btnHasilRadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHasilRadActionPerformed
-        if (selectedRow < 0) {
+        if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -2137,10 +2143,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_btnHasilRadActionPerformed
 
     private void btnSurkonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSurkonActionPerformed
-        if (selectedRow < 0) {
+        if (btnSEP.getText().equals("Tidak ada")) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());
@@ -2160,15 +2166,15 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 "bridging_surat_kontrol_bpjs.no_surat, bridging_surat_kontrol_bpjs.tgl_rencana, bridging_surat_kontrol_bpjs.kd_dokter_bpjs, bridging_surat_kontrol_bpjs.nm_dokter_bpjs, bridging_surat_kontrol_bpjs.kd_poli_bpjs, bridging_surat_kontrol_bpjs.nm_poli_bpjs " +
                 "from bridging_sep join bridging_surat_kontrol_bpjs on bridging_surat_kontrol_bpjs.no_sep = bridging_sep.no_sep where bridging_surat_kontrol_bpjs.no_surat = ?", Sequel.cariIsiSmc("select noskdp from bridging_sep where no_sep = ?", btnSEP.getText())
             );
-            setCursor(Cursor.getDefaultCursor());
+            this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_btnSurkonActionPerformed
 
     private void btnSPRIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSPRIActionPerformed
-        if (selectedRow < 0) {
+        if (btnSEP.getText().equals("Tidak ada")) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data pasien terlebih dahulu!");
         } else {
-            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Map<String, Object> param = new HashMap<>();
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());
@@ -2187,7 +2193,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 "from reg_periksa join bridging_surat_pri_bpjs on bridging_surat_pri_bpjs.no_rawat = reg_periksa.no_rawat " +
                 "join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis where bridging_surat_pri_bpjs.no_surat = ?", noSPRI
             );
-            setCursor(Cursor.getDefaultCursor());
+            this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_btnSPRIActionPerformed
 
@@ -2373,23 +2379,23 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_StatusPulangItemStateChanged
 
     private void btnRiwayatPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRiwayatPasienActionPerformed
-        if (selectedRow < 0) {
+        if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data pasien terlebih dahulu..!!");
-            return;
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            if (resume == null) {
+                resume = new RMRiwayatPerawatan(null, false);
+            }
+            resume.setNoRMKompilasi(lblNoRawat.getText(), lblNoRM.getText());
+            resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            resume.setLocationRelativeTo(internalFrame1);
+            resume.setVisible(true);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if (resume == null) {
-            resume = new RMRiwayatPerawatan(null, false);
-        }
-        resume.setNoRMKompilasi(lblNoRawat.getText(), lblNoRM.getText());
-        resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        resume.setLocationRelativeTo(internalFrame1);
-        resume.setVisible(true);
-        setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnRiwayatPasienActionPerformed
 
     private void btnInvoiceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvoiceActionPerformed
-        if (selectedRow < 0) {
+        if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu");
         } else {
             Valid.panggilUrl("berkasrawat/loginlihatbilling.php?act=login&norawat=" + lblNoRawat.getText() + "&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB());
@@ -2397,7 +2403,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_btnInvoiceActionPerformed
 
     private void btnHasilKlaimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHasilKlaimActionPerformed
-        if (selectedRow < 0) {
+        if (btnSEP.getText().equals("Tidak ada")) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu!");
         } else {
             String file = "inacbg/" + Sequel.cariIsiSmc("select path from inacbg_cetak_klaim where no_sep = ?", btnSEP.getText());
@@ -2407,357 +2413,357 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_btnHasilKlaimActionPerformed
 
     private void btnTriaseIGDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnTriaseIGDActionPerformed
-        if (selectedRow < 0) {
+        if (lblNoRawat.getText().isBlank()) {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih pasien terlebih dahulu!");
-            return;
-        }
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        String detailTriase = "";
-        int i = 0;
-        Map<String, Object> param = new HashMap<>();
-        param.put("namars", akses.getnamars());
-        param.put("alamatrs", akses.getalamatrs());
-        param.put("kotars", akses.getkabupatenrs());
-        param.put("propinsirs", akses.getpropinsirs());
-        param.put("kontakrs", akses.getkontakrs());
-        param.put("emailrs", akses.getemailrs());
-        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-        Sequel.deleteTemporary();
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select t.no_rawat, " +
-            "(select count(*) from data_triase_igddetail_skala1 s1 where s1.no_rawat = t.no_rawat) as cs1, " +
-            "(select count(*) from data_triase_igddetail_skala2 s2 where s2.no_rawat = t.no_rawat) as cs2, " +
-            "(select count(*) from data_triase_igddetail_skala3 s3 where s3.no_rawat = t.no_rawat) as cs3, " +
-            "(select count(*) from data_triase_igddetail_skala4 s4 where s4.no_rawat = t.no_rawat) as cs4, " +
-            "(select count(*) from data_triase_igddetail_skala5 s5 where s5.no_rawat = t.no_rawat) as cs5 " +
-            "from data_triase_igd t where t.no_rawat = ?"
-        )) {
-            ps.setString(1, lblNoRawat.getText());
-            try (ResultSet rs = ps.executeQuery()) {
-                if (rs.next()) {
-                    if (rs.getInt("cs1") > 0) {
-                        try (PreparedStatement ps1 = koneksi.prepareStatement(
-                            "select data_triase_igdprimer.keluhan_utama, data_triase_igdprimer.kebutuhan_khusus, data_triase_igdprimer.catatan, data_triase_igdprimer.plan, data_triase_igdprimer.tanggaltriase, " +
-                            "data_triase_igdprimer.nik, data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, " +
-                            "data_triase_igd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
-                            "from data_triase_igdprimer join data_triase_igd on data_triase_igdprimer.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
-                            "join reg_periksa on data_triase_igdprimer.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdprimer.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
-                        )) {
-                            ps1.setString(1, lblNoRawat.getText());
-                            try (ResultSet rs1 = ps1.executeQuery()) {
-                                if (rs1.next()) {
-                                    param.put("norawat", rs1.getString("no_rawat"));
-                                    param.put("norm", rs1.getString("no_rkm_medis"));
-                                    param.put("namapasien", rs1.getString("nm_pasien"));
-                                    param.put("tanggallahir", rs1.getDate("tgl_lahir"));
-                                    param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
-                                    param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
-                                    param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
-                                    param.put("caradatang", rs1.getString("cara_masuk"));
-                                    param.put("macamkasus", rs1.getString("macam_kasus"));
-                                    param.put("keluhanutama", rs1.getString("keluhan_utama"));
-                                    param.put("kebutuhankhusus", rs1.getString("kebutuhan_khusus"));
-                                    param.put("plan", rs1.getString("plan"));
-                                    param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
-                                    param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
-                                    param.put("pegawai", rs1.getString("nama"));
-                                    param.put("catatan", rs1.getString("catatan"));
-                                    param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
-                                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
-                                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
-                                    try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                        "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
-                                        "join master_triase_skala1 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala1.kode_pemeriksaan " +
-                                        "join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1 = data_triase_igddetail_skala1.kode_skala1 " +
-                                        "where data_triase_igddetail_skala1.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
-                                        "order by master_triase_pemeriksaan.kode_pemeriksaan"
-                                    )) {
-                                        ps2.setString(1, lblNoRawat.getText());
-                                        try (ResultSet rs2 = ps2.executeQuery()) {
-                                            while (rs2.next()) {
-                                                detailTriase = "";
-                                                try (PreparedStatement ps3 = koneksi.prepareStatement(
-                                                    "select master_triase_skala1.pengkajian_skala1 from master_triase_skala1 " +
-                                                    "join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1 = data_triase_igddetail_skala1.kode_skala1 " +
-                                                    "where master_triase_skala1.kode_pemeriksaan = ? and data_triase_igddetail_skala1.no_rawat = ? " +
-                                                    "order by data_triase_igddetail_skala1.kode_skala1"
-                                                )) {
-                                                    ps3.setString(1, rs2.getString(1));
-                                                    ps3.setString(2, lblNoRawat.getText());
-                                                    try (ResultSet rs3 = ps3.executeQuery()) {
-                                                        while (rs3.next()) {
-                                                            detailTriase = rs3.getString(1) + ", " + detailTriase;
+        } else {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            String detailTriase = "";
+            int i = 0;
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars", akses.getnamars());
+            param.put("alamatrs", akses.getalamatrs());
+            param.put("kotars", akses.getkabupatenrs());
+            param.put("propinsirs", akses.getpropinsirs());
+            param.put("kontakrs", akses.getkontakrs());
+            param.put("emailrs", akses.getemailrs());
+            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+            Sequel.deleteTemporary();
+            try (PreparedStatement ps = koneksi.prepareStatement(
+                "select t.no_rawat, " +
+                "(select count(*) from data_triase_igddetail_skala1 s1 where s1.no_rawat = t.no_rawat) as cs1, " +
+                "(select count(*) from data_triase_igddetail_skala2 s2 where s2.no_rawat = t.no_rawat) as cs2, " +
+                "(select count(*) from data_triase_igddetail_skala3 s3 where s3.no_rawat = t.no_rawat) as cs3, " +
+                "(select count(*) from data_triase_igddetail_skala4 s4 where s4.no_rawat = t.no_rawat) as cs4, " +
+                "(select count(*) from data_triase_igddetail_skala5 s5 where s5.no_rawat = t.no_rawat) as cs5 " +
+                "from data_triase_igd t where t.no_rawat = ?"
+            )) {
+                ps.setString(1, lblNoRawat.getText());
+                try (ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        if (rs.getInt("cs1") > 0) {
+                            try (PreparedStatement ps1 = koneksi.prepareStatement(
+                                "select data_triase_igdprimer.keluhan_utama, data_triase_igdprimer.kebutuhan_khusus, data_triase_igdprimer.catatan, data_triase_igdprimer.plan, data_triase_igdprimer.tanggaltriase, " +
+                                "data_triase_igdprimer.nik, data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, " +
+                                "data_triase_igd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
+                                "from data_triase_igdprimer join data_triase_igd on data_triase_igdprimer.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
+                                "join reg_periksa on data_triase_igdprimer.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdprimer.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
+                            )) {
+                                ps1.setString(1, lblNoRawat.getText());
+                                try (ResultSet rs1 = ps1.executeQuery()) {
+                                    if (rs1.next()) {
+                                        param.put("norawat", rs1.getString("no_rawat"));
+                                        param.put("norm", rs1.getString("no_rkm_medis"));
+                                        param.put("namapasien", rs1.getString("nm_pasien"));
+                                        param.put("tanggallahir", rs1.getDate("tgl_lahir"));
+                                        param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
+                                        param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
+                                        param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
+                                        param.put("caradatang", rs1.getString("cara_masuk"));
+                                        param.put("macamkasus", rs1.getString("macam_kasus"));
+                                        param.put("keluhanutama", rs1.getString("keluhan_utama"));
+                                        param.put("kebutuhankhusus", rs1.getString("kebutuhan_khusus"));
+                                        param.put("plan", rs1.getString("plan"));
+                                        param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
+                                        param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
+                                        param.put("pegawai", rs1.getString("nama"));
+                                        param.put("catatan", rs1.getString("catatan"));
+                                        param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
+                                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
+                                        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
+                                        try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                            "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
+                                            "join master_triase_skala1 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala1.kode_pemeriksaan " +
+                                            "join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1 = data_triase_igddetail_skala1.kode_skala1 " +
+                                            "where data_triase_igddetail_skala1.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
+                                            "order by master_triase_pemeriksaan.kode_pemeriksaan"
+                                        )) {
+                                            ps2.setString(1, lblNoRawat.getText());
+                                            try (ResultSet rs2 = ps2.executeQuery()) {
+                                                while (rs2.next()) {
+                                                    detailTriase = "";
+                                                    try (PreparedStatement ps3 = koneksi.prepareStatement(
+                                                        "select master_triase_skala1.pengkajian_skala1 from master_triase_skala1 " +
+                                                        "join data_triase_igddetail_skala1 on master_triase_skala1.kode_skala1 = data_triase_igddetail_skala1.kode_skala1 " +
+                                                        "where master_triase_skala1.kode_pemeriksaan = ? and data_triase_igddetail_skala1.no_rawat = ? " +
+                                                        "order by data_triase_igddetail_skala1.kode_skala1"
+                                                    )) {
+                                                        ps3.setString(1, rs2.getString(1));
+                                                        ps3.setString(2, lblNoRawat.getText());
+                                                        try (ResultSet rs3 = ps3.executeQuery()) {
+                                                            while (rs3.next()) {
+                                                                detailTriase = rs3.getString(1) + ", " + detailTriase;
+                                                            }
                                                         }
                                                     }
+                                                    detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
+                                                    Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                                 }
-                                                detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
+                                        Valid.reportTempSmc("rptLembarTriaseSkala1.jasper", "report", "::[ Triase Skala 1 ]::", param);
                                     }
-                                    Valid.reportTempSmc("rptLembarTriaseSkala1.jasper", "report", "::[ Triase Skala 1 ]::", param);
                                 }
                             }
-                        }
-                    } else if (rs.getInt("cs2") > 0) {
-                        try (PreparedStatement ps1 = koneksi.prepareStatement(
-                            "select data_triase_igdprimer.keluhan_utama, data_triase_igdprimer.kebutuhan_khusus, data_triase_igdprimer.catatan, data_triase_igdprimer.plan, data_triase_igdprimer.tanggaltriase, " +
-                            "data_triase_igdprimer.nik, data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, " +
-                            "data_triase_igd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
-                            "from data_triase_igdprimer join data_triase_igd on data_triase_igdprimer.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
-                            "join reg_periksa on data_triase_igdprimer.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdprimer.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
-                        )) {
-                            ps1.setString(1, lblNoRawat.getText());
-                            try (ResultSet rs1 = ps1.executeQuery()) {
-                                if (rs1.next()) {
-                                    param.put("norawat", rs1.getString("no_rawat"));
-                                    param.put("norm", rs1.getString("no_rkm_medis"));
-                                    param.put("namapasien", rs1.getString("nm_pasien"));
-                                    param.put("tanggallahir", rs1.getDate("tgl_lahir"));
-                                    param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
-                                    param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
-                                    param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
-                                    param.put("caradatang", rs1.getString("cara_masuk"));
-                                    param.put("macamkasus", rs1.getString("macam_kasus"));
-                                    param.put("keluhanutama", rs1.getString("keluhan_utama"));
-                                    param.put("kebutuhankhusus", rs1.getString("kebutuhan_khusus"));
-                                    param.put("plan", rs1.getString("plan"));
-                                    param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
-                                    param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
-                                    param.put("pegawai", rs1.getString("nama"));
-                                    param.put("catatan", rs1.getString("catatan"));
-                                    param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
-                                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
-                                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
-                                    try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                        "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
-                                        "join master_triase_skala2 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala2.kode_pemeriksaan " +
-                                        "join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2 = data_triase_igddetail_skala2.kode_skala2 " +
-                                        "where data_triase_igddetail_skala2.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
-                                        "order by master_triase_pemeriksaan.kode_pemeriksaan"
-                                    )) {
-                                        ps2.setString(1, lblNoRawat.getText());
-                                        try (ResultSet rs2 = ps2.executeQuery()) {
-                                            while (rs2.next()) {
-                                                detailTriase = "";
-                                                try (PreparedStatement ps3 = koneksi.prepareStatement(
-                                                    "select master_triase_skala2.pengkajian_skala2 from master_triase_skala2 " +
-                                                    "join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2 = data_triase_igddetail_skala2.kode_skala2 " +
-                                                    "where master_triase_skala2.kode_pemeriksaan = ? and data_triase_igddetail_skala2.no_rawat = ? " +
-                                                    "order by data_triase_igddetail_skala2.kode_skala2"
-                                                )) {
-                                                    ps3.setString(1, rs2.getString(1));
-                                                    ps3.setString(2, lblNoRawat.getText());
-                                                    try (ResultSet rs3 = ps3.executeQuery()) {
-                                                        while (rs3.next()) {
-                                                            detailTriase = rs3.getString(1) + ", " + detailTriase;
+                        } else if (rs.getInt("cs2") > 0) {
+                            try (PreparedStatement ps1 = koneksi.prepareStatement(
+                                "select data_triase_igdprimer.keluhan_utama, data_triase_igdprimer.kebutuhan_khusus, data_triase_igdprimer.catatan, data_triase_igdprimer.plan, data_triase_igdprimer.tanggaltriase, " +
+                                "data_triase_igdprimer.nik, data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, " +
+                                "data_triase_igd.no_rawat, pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
+                                "from data_triase_igdprimer join data_triase_igd on data_triase_igdprimer.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
+                                "join reg_periksa on data_triase_igdprimer.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdprimer.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
+                            )) {
+                                ps1.setString(1, lblNoRawat.getText());
+                                try (ResultSet rs1 = ps1.executeQuery()) {
+                                    if (rs1.next()) {
+                                        param.put("norawat", rs1.getString("no_rawat"));
+                                        param.put("norm", rs1.getString("no_rkm_medis"));
+                                        param.put("namapasien", rs1.getString("nm_pasien"));
+                                        param.put("tanggallahir", rs1.getDate("tgl_lahir"));
+                                        param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
+                                        param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
+                                        param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
+                                        param.put("caradatang", rs1.getString("cara_masuk"));
+                                        param.put("macamkasus", rs1.getString("macam_kasus"));
+                                        param.put("keluhanutama", rs1.getString("keluhan_utama"));
+                                        param.put("kebutuhankhusus", rs1.getString("kebutuhan_khusus"));
+                                        param.put("plan", rs1.getString("plan"));
+                                        param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
+                                        param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
+                                        param.put("pegawai", rs1.getString("nama"));
+                                        param.put("catatan", rs1.getString("catatan"));
+                                        param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
+                                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
+                                        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
+                                        try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                            "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
+                                            "join master_triase_skala2 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala2.kode_pemeriksaan " +
+                                            "join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2 = data_triase_igddetail_skala2.kode_skala2 " +
+                                            "where data_triase_igddetail_skala2.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
+                                            "order by master_triase_pemeriksaan.kode_pemeriksaan"
+                                        )) {
+                                            ps2.setString(1, lblNoRawat.getText());
+                                            try (ResultSet rs2 = ps2.executeQuery()) {
+                                                while (rs2.next()) {
+                                                    detailTriase = "";
+                                                    try (PreparedStatement ps3 = koneksi.prepareStatement(
+                                                        "select master_triase_skala2.pengkajian_skala2 from master_triase_skala2 " +
+                                                        "join data_triase_igddetail_skala2 on master_triase_skala2.kode_skala2 = data_triase_igddetail_skala2.kode_skala2 " +
+                                                        "where master_triase_skala2.kode_pemeriksaan = ? and data_triase_igddetail_skala2.no_rawat = ? " +
+                                                        "order by data_triase_igddetail_skala2.kode_skala2"
+                                                    )) {
+                                                        ps3.setString(1, rs2.getString(1));
+                                                        ps3.setString(2, lblNoRawat.getText());
+                                                        try (ResultSet rs3 = ps3.executeQuery()) {
+                                                            while (rs3.next()) {
+                                                                detailTriase = rs3.getString(1) + ", " + detailTriase;
+                                                            }
                                                         }
                                                     }
+                                                    detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
+                                                    Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                                 }
-                                                detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
+                                        Valid.reportTempSmc("rptLembarTriaseSkala2.jasper", "report", "::[ Triase Skala 2 ]::", param);
                                     }
-                                    Valid.reportTempSmc("rptLembarTriaseSkala2.jasper", "report", "::[ Triase Skala 2 ]::", param);
                                 }
                             }
-                        }
-                    } else if (rs.getInt("cs3") > 0) {
-                        try (PreparedStatement ps1 = koneksi.prepareStatement(
-                            "select data_triase_igdsekunder.anamnesa_singkat, data_triase_igdsekunder.catatan, data_triase_igdsekunder.plan, data_triase_igdsekunder.tanggaltriase, data_triase_igdsekunder.nik, " +
-                            "data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, data_triase_igd.no_rawat, " +
-                            "pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
-                            "from data_triase_igdsekunder join data_triase_igd on data_triase_igdsekunder.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
-                            "join reg_periksa on data_triase_igd.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdsekunder.nik = pegawai.nik where data_triase_igdsekunder.no_rawat = ?"
-                        )) {
-                            ps1.setString(1, lblNoRawat.getText());
-                            try (ResultSet rs1 = ps1.executeQuery()) {
-                                if (rs1.next()) {
-                                    param.put("norawat", rs1.getString("no_rawat"));
-                                    param.put("norm", rs1.getString("no_rkm_medis"));
-                                    param.put("namapasien", rs1.getString("nm_pasien"));
-                                    param.put("tanggallahir", rs1.getDate("tgl_lahir"));
-                                    param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
-                                    param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
-                                    param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
-                                    param.put("caradatang", rs1.getString("cara_masuk"));
-                                    param.put("macamkasus", rs1.getString("macam_kasus"));
-                                    param.put("keluhanutama", rs1.getString("anamnesa_singkat"));
-                                    param.put("plan", rs1.getString("plan"));
-                                    param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
-                                    param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
-                                    param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
-                                    param.put("pegawai", rs1.getString("nama"));
-                                    param.put("catatan", rs1.getString("catatan"));
-                                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
-                                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
-                                    try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                        "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
-                                        "join master_triase_skala3 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala3.kode_pemeriksaan " +
-                                        "join data_triase_igddetail_skala3 on master_triase_skala3.kode_skala3 = data_triase_igddetail_skala3.kode_skala3 " +
-                                        "where data_triase_igddetail_skala3.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
-                                        "order by master_triase_pemeriksaan.kode_pemeriksaan"
-                                    )) {
-                                        ps2.setString(1, lblNoRawat.getText());
-                                        try (ResultSet rs2 = ps2.executeQuery()) {
-                                            while (rs2.next()) {
-                                                detailTriase = "";
-                                                try (PreparedStatement ps3 = koneksi.prepareStatement(
-                                                    "select master_triase_skala3.pengkajian_skala3 from master_triase_skala3 join data_triase_igddetail_skala3 " +
-                                                    "on master_triase_skala3.kode_skala3 = data_triase_igddetail_skala3.kode_skala3 where master_triase_skala3.kode_pemeriksaan = ? " +
-                                                    "and data_triase_igddetail_skala3.no_rawat = ? order by data_triase_igddetail_skala3.kode_skala3"
-                                                )) {
-                                                    ps3.setString(1, rs2.getString(1));
-                                                    ps3.setString(2, lblNoRawat.getText());
-                                                    try (ResultSet rs3 = ps3.executeQuery()) {
-                                                        while (rs3.next()) {
-                                                            detailTriase = rs3.getString(1) + ", " + detailTriase;
+                        } else if (rs.getInt("cs3") > 0) {
+                            try (PreparedStatement ps1 = koneksi.prepareStatement(
+                                "select data_triase_igdsekunder.anamnesa_singkat, data_triase_igdsekunder.catatan, data_triase_igdsekunder.plan, data_triase_igdsekunder.tanggaltriase, data_triase_igdsekunder.nik, " +
+                                "data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, data_triase_igd.no_rawat, " +
+                                "pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
+                                "from data_triase_igdsekunder join data_triase_igd on data_triase_igdsekunder.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
+                                "join reg_periksa on data_triase_igd.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdsekunder.nik = pegawai.nik where data_triase_igdsekunder.no_rawat = ?"
+                            )) {
+                                ps1.setString(1, lblNoRawat.getText());
+                                try (ResultSet rs1 = ps1.executeQuery()) {
+                                    if (rs1.next()) {
+                                        param.put("norawat", rs1.getString("no_rawat"));
+                                        param.put("norm", rs1.getString("no_rkm_medis"));
+                                        param.put("namapasien", rs1.getString("nm_pasien"));
+                                        param.put("tanggallahir", rs1.getDate("tgl_lahir"));
+                                        param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
+                                        param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
+                                        param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
+                                        param.put("caradatang", rs1.getString("cara_masuk"));
+                                        param.put("macamkasus", rs1.getString("macam_kasus"));
+                                        param.put("keluhanutama", rs1.getString("anamnesa_singkat"));
+                                        param.put("plan", rs1.getString("plan"));
+                                        param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
+                                        param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
+                                        param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
+                                        param.put("pegawai", rs1.getString("nama"));
+                                        param.put("catatan", rs1.getString("catatan"));
+                                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
+                                        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
+                                        try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                            "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
+                                            "join master_triase_skala3 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala3.kode_pemeriksaan " +
+                                            "join data_triase_igddetail_skala3 on master_triase_skala3.kode_skala3 = data_triase_igddetail_skala3.kode_skala3 " +
+                                            "where data_triase_igddetail_skala3.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
+                                            "order by master_triase_pemeriksaan.kode_pemeriksaan"
+                                        )) {
+                                            ps2.setString(1, lblNoRawat.getText());
+                                            try (ResultSet rs2 = ps2.executeQuery()) {
+                                                while (rs2.next()) {
+                                                    detailTriase = "";
+                                                    try (PreparedStatement ps3 = koneksi.prepareStatement(
+                                                        "select master_triase_skala3.pengkajian_skala3 from master_triase_skala3 join data_triase_igddetail_skala3 " +
+                                                        "on master_triase_skala3.kode_skala3 = data_triase_igddetail_skala3.kode_skala3 where master_triase_skala3.kode_pemeriksaan = ? " +
+                                                        "and data_triase_igddetail_skala3.no_rawat = ? order by data_triase_igddetail_skala3.kode_skala3"
+                                                    )) {
+                                                        ps3.setString(1, rs2.getString(1));
+                                                        ps3.setString(2, lblNoRawat.getText());
+                                                        try (ResultSet rs3 = ps3.executeQuery()) {
+                                                            while (rs3.next()) {
+                                                                detailTriase = rs3.getString(1) + ", " + detailTriase;
+                                                            }
                                                         }
                                                     }
+                                                    detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
+                                                    Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                                 }
-                                                detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
+                                        Valid.reportTempSmc("rptLembarTriaseSkala3.jasper", "report", "::[ Triase Skala 3 ]::", param);
                                     }
-                                    Valid.reportTempSmc("rptLembarTriaseSkala3.jasper", "report", "::[ Triase Skala 3 ]::", param);
                                 }
                             }
-                        }
-                    } else if (rs.getInt("cs4") > 0) {
-                        try (PreparedStatement ps1 = koneksi.prepareStatement(
-                            "select data_triase_igdsekunder.anamnesa_singkat, data_triase_igdsekunder.catatan, data_triase_igdsekunder.plan, data_triase_igdsekunder.tanggaltriase, data_triase_igdsekunder.nik, " +
-                            "data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, data_triase_igd.no_rawat, " +
-                            "pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
-                            "from data_triase_igdsekunder join data_triase_igd on data_triase_igdsekunder.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
-                            "join reg_periksa on data_triase_igdsekunder.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdsekunder.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
-                        )) {
-                            ps1.setString(1, lblNoRawat.getText());
-                            try (ResultSet rs1 = ps1.executeQuery()) {
-                                if (rs1.next()) {
-                                    param.put("norawat", rs1.getString("no_rawat"));
-                                    param.put("norm", rs1.getString("no_rkm_medis"));
-                                    param.put("namapasien", rs1.getString("nm_pasien"));
-                                    param.put("tanggallahir", rs1.getDate("tgl_lahir"));
-                                    param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
-                                    param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
-                                    param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
-                                    param.put("caradatang", rs1.getString("cara_masuk"));
-                                    param.put("macamkasus", rs1.getString("macam_kasus"));
-                                    param.put("keluhanutama", rs1.getString("anamnesa_singkat"));
-                                    param.put("plan", rs1.getString("plan"));
-                                    param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
-                                    param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
-                                    param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
-                                    param.put("pegawai", rs1.getString("nama"));
-                                    param.put("catatan", rs1.getString("catatan"));
-                                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
-                                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
-                                    try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                        "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
-                                        "join master_triase_skala4 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala4.kode_pemeriksaan " +
-                                        "join data_triase_igddetail_skala4 on master_triase_skala4.kode_skala4 = data_triase_igddetail_skala4.kode_skala4 " +
-                                        "where data_triase_igddetail_skala4.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
-                                        "order by master_triase_pemeriksaan.kode_pemeriksaan"
-                                    )) {
-                                        ps2.setString(1, lblNoRawat.getText());
-                                        try (ResultSet rs2 = ps2.executeQuery()) {
-                                            while (rs2.next()) {
-                                                detailTriase = "";
-                                                try (PreparedStatement ps3 = koneksi.prepareStatement(
-                                                    "select master_triase_skala4.pengkajian_skala4 from master_triase_skala4 join data_triase_igddetail_skala4 " +
-                                                    "on master_triase_skala4.kode_skala4 = data_triase_igddetail_skala4.kode_skala4 where master_triase_skala4.kode_pemeriksaan = ? " +
-                                                    "and data_triase_igddetail_skala4.no_rawat = ? order by data_triase_igddetail_skala4.kode_skala4"
-                                                )) {
-                                                    ps3.setString(1, rs2.getString(1));
-                                                    ps3.setString(2, lblNoRawat.getText());
-                                                    try (ResultSet rs3 = ps3.executeQuery()) {
-                                                        while (rs3.next()) {
-                                                            detailTriase = rs3.getString(1) + ", " + detailTriase;
+                        } else if (rs.getInt("cs4") > 0) {
+                            try (PreparedStatement ps1 = koneksi.prepareStatement(
+                                "select data_triase_igdsekunder.anamnesa_singkat, data_triase_igdsekunder.catatan, data_triase_igdsekunder.plan, data_triase_igdsekunder.tanggaltriase, data_triase_igdsekunder.nik, " +
+                                "data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, data_triase_igd.no_rawat, " +
+                                "pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
+                                "from data_triase_igdsekunder join data_triase_igd on data_triase_igdsekunder.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
+                                "join reg_periksa on data_triase_igdsekunder.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdsekunder.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
+                            )) {
+                                ps1.setString(1, lblNoRawat.getText());
+                                try (ResultSet rs1 = ps1.executeQuery()) {
+                                    if (rs1.next()) {
+                                        param.put("norawat", rs1.getString("no_rawat"));
+                                        param.put("norm", rs1.getString("no_rkm_medis"));
+                                        param.put("namapasien", rs1.getString("nm_pasien"));
+                                        param.put("tanggallahir", rs1.getDate("tgl_lahir"));
+                                        param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
+                                        param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
+                                        param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
+                                        param.put("caradatang", rs1.getString("cara_masuk"));
+                                        param.put("macamkasus", rs1.getString("macam_kasus"));
+                                        param.put("keluhanutama", rs1.getString("anamnesa_singkat"));
+                                        param.put("plan", rs1.getString("plan"));
+                                        param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
+                                        param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
+                                        param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
+                                        param.put("pegawai", rs1.getString("nama"));
+                                        param.put("catatan", rs1.getString("catatan"));
+                                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
+                                        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
+                                        try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                            "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
+                                            "join master_triase_skala4 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala4.kode_pemeriksaan " +
+                                            "join data_triase_igddetail_skala4 on master_triase_skala4.kode_skala4 = data_triase_igddetail_skala4.kode_skala4 " +
+                                            "where data_triase_igddetail_skala4.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
+                                            "order by master_triase_pemeriksaan.kode_pemeriksaan"
+                                        )) {
+                                            ps2.setString(1, lblNoRawat.getText());
+                                            try (ResultSet rs2 = ps2.executeQuery()) {
+                                                while (rs2.next()) {
+                                                    detailTriase = "";
+                                                    try (PreparedStatement ps3 = koneksi.prepareStatement(
+                                                        "select master_triase_skala4.pengkajian_skala4 from master_triase_skala4 join data_triase_igddetail_skala4 " +
+                                                        "on master_triase_skala4.kode_skala4 = data_triase_igddetail_skala4.kode_skala4 where master_triase_skala4.kode_pemeriksaan = ? " +
+                                                        "and data_triase_igddetail_skala4.no_rawat = ? order by data_triase_igddetail_skala4.kode_skala4"
+                                                    )) {
+                                                        ps3.setString(1, rs2.getString(1));
+                                                        ps3.setString(2, lblNoRawat.getText());
+                                                        try (ResultSet rs3 = ps3.executeQuery()) {
+                                                            while (rs3.next()) {
+                                                                detailTriase = rs3.getString(1) + ", " + detailTriase;
+                                                            }
                                                         }
                                                     }
+                                                    detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
+                                                    Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                                 }
-                                                detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
+                                        Valid.reportTempSmc("rptLembarTriaseSkala4.jasper", "report", "::[ Triase Skala 4 ]::", param);
                                     }
-                                    Valid.reportTempSmc("rptLembarTriaseSkala4.jasper", "report", "::[ Triase Skala 4 ]::", param);
                                 }
                             }
-                        }
-                    } else if (rs.getInt("cs5") > 0) {
-                        try (PreparedStatement ps1 = koneksi.prepareStatement(
-                            "select data_triase_igdsekunder.anamnesa_singkat, data_triase_igdsekunder.catatan, data_triase_igdsekunder.plan, data_triase_igdsekunder.tanggaltriase, data_triase_igdsekunder.nik, " +
-                            "data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, data_triase_igd.no_rawat, " +
-                            "pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
-                            "from data_triase_igdsekunder join data_triase_igd on data_triase_igdsekunder.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
-                            "join reg_periksa on data_triase_igdsekunder.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdsekunder.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
-                        )) {
-                            ps1.setString(1, lblNoRawat.getText());
-                            try (ResultSet rs1 = ps1.executeQuery()) {
-                                if (rs1.next()) {
-                                    param.put("norawat", rs1.getString("no_rawat"));
-                                    param.put("norm", rs1.getString("no_rkm_medis"));
-                                    param.put("namapasien", rs1.getString("nm_pasien"));
-                                    param.put("tanggallahir", rs1.getDate("tgl_lahir"));
-                                    param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
-                                    param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
-                                    param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
-                                    param.put("caradatang", rs1.getString("cara_masuk"));
-                                    param.put("macamkasus", rs1.getString("macam_kasus"));
-                                    param.put("keluhanutama", rs1.getString("anamnesa_singkat"));
-                                    param.put("plan", rs1.getString("plan"));
-                                    param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
-                                    param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
-                                    param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
-                                    param.put("pegawai", rs1.getString("nama"));
-                                    param.put("catatan", rs1.getString("catatan"));
-                                    finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
-                                    param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
-                                    try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                        "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
-                                        "join master_triase_skala5 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala5.kode_pemeriksaan " +
-                                        "join data_triase_igddetail_skala5 on master_triase_skala5.kode_skala5 = data_triase_igddetail_skala5.kode_skala5 " +
-                                        "where data_triase_igddetail_skala5.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
-                                        "order by master_triase_pemeriksaan.kode_pemeriksaan"
-                                    )) {
-                                        ps2.setString(1, lblNoRawat.getText());
-                                        try (ResultSet rs2 = ps2.executeQuery()) {
-                                            while (rs2.next()) {
-                                                detailTriase = "";
-                                                try (PreparedStatement ps3 = koneksi.prepareStatement(
-                                                    "select master_triase_skala5.pengkajian_skala5 from master_triase_skala5 join data_triase_igddetail_skala5 " +
-                                                    "on master_triase_skala5.kode_skala5 = data_triase_igddetail_skala5.kode_skala5 where master_triase_skala5.kode_pemeriksaan = ? " +
-                                                    "and data_triase_igddetail_skala5.no_rawat = ? order by data_triase_igddetail_skala5.kode_skala5"
-                                                )) {
-                                                    ps3.setString(1, rs2.getString(1));
-                                                    ps3.setString(2, lblNoRawat.getText());
-                                                    try (ResultSet rs3 = ps3.executeQuery()) {
-                                                        while (rs3.next()) {
-                                                            detailTriase = rs3.getString(1) + ", " + detailTriase;
+                        } else if (rs.getInt("cs5") > 0) {
+                            try (PreparedStatement ps1 = koneksi.prepareStatement(
+                                "select data_triase_igdsekunder.anamnesa_singkat, data_triase_igdsekunder.catatan, data_triase_igdsekunder.plan, data_triase_igdsekunder.tanggaltriase, data_triase_igdsekunder.nik, " +
+                                "data_triase_igd.tekanan_darah, data_triase_igd.nadi, data_triase_igd.pernapasan, data_triase_igd.suhu, data_triase_igd.saturasi_o2, data_triase_igd.nyeri, data_triase_igd.no_rawat, " +
+                                "pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, pasien.tgl_lahir, pegawai.nama, data_triase_igd.tgl_kunjungan, data_triase_igd.cara_masuk, master_triase_macam_kasus.macam_kasus " +
+                                "from data_triase_igdsekunder join data_triase_igd on data_triase_igdsekunder.no_rawat = data_triase_igd.no_rawat join master_triase_macam_kasus on data_triase_igd.kode_kasus = master_triase_macam_kasus.kode_kasus " +
+                                "join reg_periksa on data_triase_igdsekunder.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join pegawai on data_triase_igdsekunder.nik = pegawai.nik where data_triase_igd.no_rawat = ?"
+                            )) {
+                                ps1.setString(1, lblNoRawat.getText());
+                                try (ResultSet rs1 = ps1.executeQuery()) {
+                                    if (rs1.next()) {
+                                        param.put("norawat", rs1.getString("no_rawat"));
+                                        param.put("norm", rs1.getString("no_rkm_medis"));
+                                        param.put("namapasien", rs1.getString("nm_pasien"));
+                                        param.put("tanggallahir", rs1.getDate("tgl_lahir"));
+                                        param.put("jk", rs1.getString("jk").replaceAll("L", "Laki-Laki").replaceAll("P", "Perempuan"));
+                                        param.put("tanggalkunjungan", rs1.getDate("tgl_kunjungan"));
+                                        param.put("jamkunjungan", rs1.getString("tgl_kunjungan").substring(11, 19));
+                                        param.put("caradatang", rs1.getString("cara_masuk"));
+                                        param.put("macamkasus", rs1.getString("macam_kasus"));
+                                        param.put("keluhanutama", rs1.getString("anamnesa_singkat"));
+                                        param.put("plan", rs1.getString("plan"));
+                                        param.put("tanggaltriase", rs1.getDate("tanggaltriase"));
+                                        param.put("tandavital", "Suhu (C) : " + rs1.getString("suhu") + ", Nyeri : " + rs1.getString("nyeri") + ", Tensi : " + rs1.getString("tekanan_darah") + ", Nadi(/menit) : " + rs1.getString("nadi") + ", Saturasi O²(%) : " + rs1.getString("saturasi_o2") + ", Respirasi(/menit) : " + rs1.getString("pernapasan"));
+                                        param.put("jamtriase", rs1.getString("tanggaltriase").substring(11, 19));
+                                        param.put("pegawai", rs1.getString("nama"));
+                                        param.put("catatan", rs1.getString("catatan"));
+                                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs1.getString("nik"));
+                                        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs1.getString("nama") + "\nID " + (finger.isBlank() ? rs1.getString("nik") : finger) + "\n" + Valid.SetTgl3(rs1.getString("tanggaltriase")));
+                                        try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                            "select master_triase_pemeriksaan.kode_pemeriksaan, master_triase_pemeriksaan.nama_pemeriksaan from master_triase_pemeriksaan " +
+                                            "join master_triase_skala5 on master_triase_pemeriksaan.kode_pemeriksaan = master_triase_skala5.kode_pemeriksaan " +
+                                            "join data_triase_igddetail_skala5 on master_triase_skala5.kode_skala5 = data_triase_igddetail_skala5.kode_skala5 " +
+                                            "where data_triase_igddetail_skala5.no_rawat = ? group by master_triase_pemeriksaan.kode_pemeriksaan " +
+                                            "order by master_triase_pemeriksaan.kode_pemeriksaan"
+                                        )) {
+                                            ps2.setString(1, lblNoRawat.getText());
+                                            try (ResultSet rs2 = ps2.executeQuery()) {
+                                                while (rs2.next()) {
+                                                    detailTriase = "";
+                                                    try (PreparedStatement ps3 = koneksi.prepareStatement(
+                                                        "select master_triase_skala5.pengkajian_skala5 from master_triase_skala5 join data_triase_igddetail_skala5 " +
+                                                        "on master_triase_skala5.kode_skala5 = data_triase_igddetail_skala5.kode_skala5 where master_triase_skala5.kode_pemeriksaan = ? " +
+                                                        "and data_triase_igddetail_skala5.no_rawat = ? order by data_triase_igddetail_skala5.kode_skala5"
+                                                    )) {
+                                                        ps3.setString(1, rs2.getString(1));
+                                                        ps3.setString(2, lblNoRawat.getText());
+                                                        try (ResultSet rs3 = ps3.executeQuery()) {
+                                                            while (rs3.next()) {
+                                                                detailTriase = rs3.getString(1) + ", " + detailTriase;
+                                                            }
                                                         }
                                                     }
+                                                    detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
+                                                    Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                                 }
-                                                detailTriase = detailTriase.substring(0, detailTriase.length() - 2);
-                                                Sequel.temporary(String.valueOf(++i), rs2.getString("nama_pemeriksaan"), detailTriase);
                                             }
                                         }
+                                        Valid.reportTempSmc("rptLembarTriaseSkala5.jasper", "report", "::[ Triase Skala 5 ]::", param);
                                     }
-                                    Valid.reportTempSmc("rptLembarTriaseSkala5.jasper", "report", "::[ Triase Skala 5 ]::", param);
                                 }
                             }
+                        } else {
+                            JOptionPane.showMessageDialog(null, "Triase tidak memiliki skala yang benar!");
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Triase tidak memiliki skala yang benar!");
                     }
                 }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnTriaseIGDActionPerformed
 
     private void BtnPenjaminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPenjaminActionPerformed
@@ -3092,7 +3098,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void onListSelectionModelValueChanged(ListSelectionEvent evt) {
-        if (evt.getValueIsAdjusting()) {
+        if (evt != null && evt.getValueIsAdjusting()) {
             return;
         }
 
@@ -3110,7 +3116,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     private void tampil() {
-        emptTeks();
         Valid.tabelKosong(tabMode);
         String statusklaim = "";
         switch (CmbStatusKirim.getSelectedIndex()) {
@@ -3263,6 +3268,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             lblStatusRawat.setText(tbKompilasi.getValueAt(selectedRow, 5).toString());
             lblTglSEP.setText(tbKompilasi.getValueAt(selectedRow, 6).toString());
             btnSEP.setText(tbKompilasi.getValueAt(selectedRow, 2).toString());
+            unit = tbKompilasi.getValueAt(selectedRow, 9).toString();
+            diagnosa = tbKompilasi.getValueAt(selectedRow, 10).toString();
             String noSuratKontrol = Sequel.cariIsiSmc("select noskdp from bridging_sep where no_sep = ?", btnSEP.getText());
             if (noSuratKontrol.isBlank()) {
                 noSuratKontrol = Sequel.cariIsiSmc("select noskdp from bridging_sep where no_rawat = ? and noskdp != ''", lblNoRawat.getText());
@@ -3431,8 +3438,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
 
         String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/login.php?act=login&usere=" +
-            koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() + "&page=DetailKirimSmc&nosep=" + tbKompilasi.getValueAt(selectedRow, 2).toString() +
-            "&codernik=" + lblCoderNIK.getText() + "&corona=" + corona + aksi + grouper;
+            koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB() + "&page=DetailKirimSmc&nosep=" + btnSEP.getText() + "&codernik=" +
+            lblCoderNIK.getText() + "&corona=" + corona + aksi + grouper;
 
         Platform.runLater(() -> {
             try {
@@ -3603,7 +3610,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         // CmbPilihanKategoriBerkas.setSelectedItem(kategoriUploadBerkas);
     }
 
-    private void hapusTemporaryPDF(String containsName) throws Exception {
+    private void hapusTemporaryPDF(final String containsName) throws Exception {
         File folder = new File("./berkaspdf/" + tanggalExport);
         File[] files = folder.listFiles();
         if (files != null) {
@@ -3631,6 +3638,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
             }
+
             File dir = new File("./berkaspdf/" + tanggalExport);
 
             if (!dir.isDirectory() && !dir.mkdirs()) {
@@ -4840,7 +4848,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         // TODO: kasih treatment background worker
         try {
             if (gunakanTanggalExport.equals("sep")) {
-                tanggalExport = tbKompilasi.getValueAt(selectedRow, 6).toString();
+                tanggalExport = lblTglSEP.getText();
             } else {
                 tanggalExport = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
             }
@@ -4890,7 +4898,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             hapusTemporaryPDF();
             JOptionPane.showMessageDialog(null, "Kompilasi berkas PDF berhasil!");
         } catch (KompilasiException e) {
-            System.out.println("Notif : " + e);
+            System.out.println("Notif : " + e.getCause().getMessage());
             JOptionPane.showMessageDialog(null, e.getMessage() + "..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
