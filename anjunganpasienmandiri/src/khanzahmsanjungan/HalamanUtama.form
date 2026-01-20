@@ -212,7 +212,7 @@
               <Color blue="9f" green="9b" red="96" type="rgb"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="11"/>
-            <Property name="text" type="java.lang.String" value="Build 2025-08-29 Patch 1      "/>
+            <Property name="text" type="java.lang.String" value="Versi : 2026-01-20      "/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Inter Medium" size="12" style="0"/>
