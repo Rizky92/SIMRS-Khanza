@@ -13,10 +13,6 @@ class SimpanHasilLabController
 {
     public function __invoke(SimpanHasilLabRequest $request): JsonResponse
     {
-        try {
-            \Illuminate\Support\Facades\Log::info('request masuk', ['request' => $request]);
-        } catch (\Exception $e) {}
-
         $data = $request->validated();
 
         tracker_start('mysql');
