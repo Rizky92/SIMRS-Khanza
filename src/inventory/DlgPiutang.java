@@ -2036,7 +2036,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         Ongkir.setText("");
         UangMuka.setText("");
         Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi",kdgudang);
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
+        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         if(akses.getjml2()>=1){
             kdptg.setEditable(false);
             BtnPtg.setEnabled(false);
@@ -2210,7 +2210,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Notif Tamp Piutang 2 : "+e);
         }
     }
-    
+
     public void tampilResepApotekBPJSSmc(String nosjp, String noresep) {
         if (aktifkanbatch.equals("yes")) {
             JOptionPane.showMessageDialog(null, "Maaf, penggunaan batch obat untuk piutang obat BPJS saat ini belum support..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
@@ -2259,7 +2259,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
         Sequel.AutoComitFalse();
         Sequel.menghapusSmc("tamppiutang", "petugas = ?", akses.getkode());
-        
+
         if (aktifkanbatch.equals("yes")) {
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select m.kode_brng, o.nama_brng, o.kode_sat as satuan, o.jualbebas, o.h_beli, o.karyawan, o.beliluar, o.ralan, " +

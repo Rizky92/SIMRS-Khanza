@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -605,12 +606,12 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
 
     private void KdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdptgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            Nmptg.setText(petugas.tampil3(Kdptg.getText()));
+            Nmptg.setText(Sequel.CariPetugas(Kdptg.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            Nmptg.setText(petugas.tampil3(Kdptg.getText()));
+            Nmptg.setText(Sequel.CariPetugas(Kdptg.getText()));
             TglRetur1.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            Nmptg.setText(petugas.tampil3(Kdptg.getText()));
+            Nmptg.setText(Sequel.CariPetugas(Kdptg.getText()));
             NoNota.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
@@ -1051,22 +1052,36 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
             ppHapus.setEnabled(false);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

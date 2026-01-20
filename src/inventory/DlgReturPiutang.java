@@ -1181,12 +1181,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
+        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
+        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         Kdptg.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
+        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         BtnSimpan.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         BtnGudangActionPerformed(null);
@@ -1413,7 +1413,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(returpiutang.no_retur_piutang,3),signed)),0) from returpiutang where returpiutang.tgl_retur='"+Valid.SetTgl(TglRetur.getSelectedItem()+"")+"' ",
                 "RP"+TglRetur.getSelectedItem().toString().substring(6,10)+TglRetur.getSelectedItem().toString().substring(3,5)+TglRetur.getSelectedItem().toString().substring(0,2),3,NoRetur);
         Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi",kdgudang);
-        nmgudang.setText(bangsal.tampil3(kdgudang.getText()));
+        nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         if(akses.getjml2()>=1){
             Kdptg.setEditable(false);
             BtnPtg.setEnabled(false);

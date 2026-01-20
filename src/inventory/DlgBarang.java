@@ -33,6 +33,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -2146,10 +2147,10 @@ public class DlgBarang extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(industri.getTable().getSelectedRow()!= -1){                   
-                    KdIF.setText(industri.getTable().getValueAt(industri.getTable().getSelectedRow(),0).toString());                    
+                if(industri.getTable().getSelectedRow()!= -1){
+                    KdIF.setText(industri.getTable().getValueAt(industri.getTable().getSelectedRow(),0).toString());
                     NmIF.setText(industri.getTable().getValueAt(industri.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 BtnIF.requestFocus();
             }
             @Override
@@ -2161,7 +2162,7 @@ public class DlgBarang extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         industri.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2169,11 +2170,11 @@ public class DlgBarang extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     industri.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         industri.isCek();
         industri.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         industri.setLocationRelativeTo(internalFrame1);
@@ -2852,9 +2853,9 @@ public class DlgBarang extends javax.swing.JDialog {
         Valid.tabelKosong(tabMode);
         try {
             if(aktifkanbatch.equals("yes")){
-                qrystok="select sum(stok) from gudangbarang where kode_brng=? and kd_bangsal=? and no_batch<>'' and no_faktur<>''";
+                qrystok="select sum(gudangbarang.stok) from gudangbarang where gudangbarang.kode_brng=? and gudangbarang.kd_bangsal=? and gudangbarang.no_batch<>'' and gudangbarang.no_faktur<>''";
             }else{
-                qrystok="select sum(stok) from gudangbarang where kode_brng=? and kd_bangsal=? and no_batch='' and no_faktur=''";
+                qrystok="select sum(gudangbarang.stok) from gudangbarang where gudangbarang.kode_brng=? and gudangbarang.kd_bangsal=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''";
             }
             if(TCari.getText().trim().equals("")){
                 ps = koneksi.prepareStatement(
@@ -2995,7 +2996,7 @@ public class DlgBarang extends javax.swing.JDialog {
     public void tampil4(String NoRetur) {
         runBackground(() ->tampilretur(NoRetur));
     }
-    
+
     private void tampilretur(String NoRetur) {
         if(akses.getform().equals("DlgReturJual")){
             if(aktifkanbatch.equals("yes")){
@@ -3070,7 +3071,7 @@ public class DlgBarang extends javax.swing.JDialog {
                     }
                     LCount.setText("" + tabMode.getRowCount());
                     if(tabMode.getRowCount()==0){
-                       runBackground(() ->tampil());
+                       tampil();
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : " + e);
@@ -3144,14 +3145,14 @@ public class DlgBarang extends javax.swing.JDialog {
                     }
                     LCount.setText("" + tabMode.getRowCount());
                     if(tabMode.getRowCount()==0){
-                       runBackground(() ->tampil());
+                       tampil();
                     }
                 } catch (Exception e) {
                     System.out.println("Notifikasi : " + e);
                 }
             }
         }else{
-            runBackground(() ->tampil());
+            tampil();
         }
     }
 
@@ -3490,22 +3491,29 @@ public class DlgBarang extends javax.swing.JDialog {
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
-        ceksukses = true;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
 
+        ceksukses = true;
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    if (isDisplayable()) {
-                        setCursor(Cursor.getDefaultCursor());
-                    }
-                });
-            }
-        });
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            System.out.println("Notif : "+ex);
+            ceksukses = false;
+        }
     }
 
     @Override

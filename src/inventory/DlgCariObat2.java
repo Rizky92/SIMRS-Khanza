@@ -41,6 +41,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
@@ -1944,13 +1945,13 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private widget.Table tbObatRacikan;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {  
-        runBackground(() ->loadData()); 
+    public void tampil() {
+        runBackground(() ->loadData());
     }
-    
-    private void loadData() {        
+
+    private void loadData() {
         buatcacheberiobat();
-        tampilcacheberiobat();           
+        tampilcacheberiobat();
     }
 
     private void buatcacheberiobat(){
@@ -2615,13 +2616,13 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     public void isCek(){
         if(!DEPOAKTIFOBAT.equals("")){
             kdgudang.setText(DEPOAKTIFOBAT);
-            nmgudang.setText(caribangsal.tampil3(DEPOAKTIFOBAT));
+            nmgudang.setText(Sequel.CariBangsal(DEPOAKTIFOBAT));
         }else{
             kdgudang.setText(akses.getkdbangsal());
             if(akses.getkdbangsal().equals("")){
                 kdgudang.setText(bangsaldefault);
             }
-            nmgudang.setText(caribangsal.tampil3(kdgudang.getText()));
+            nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         }
 
         if(TANGGALMUNDUR.equals("no")){
@@ -4108,7 +4109,11 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 

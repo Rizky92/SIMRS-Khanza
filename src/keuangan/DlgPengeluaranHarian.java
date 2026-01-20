@@ -927,7 +927,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                     } else {
                         sukses = false;
                     }
-                    
+
                     if (sukses) {
                         if (!nopengajuanbiaya.isBlank()) {
                             Sequel.mengupdateSmc("pengajuan_biaya", "status = 'Divalidasi'", "no_pengajuan = ?", nopengajuanbiaya);
@@ -936,9 +936,9 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                     } else {
                         Sequel.RollBack();
                     }
-                    
+
                     Sequel.AutoComitTrue();
-                    
+
                     if (sukses) {
                         tabMode.addRow(new Object[] {
                             Nomor.getText(), Valid.getTglJamSmc(Tanggal), KdKategori.getText() + " " + NmKategori.getText(), NmPtg.getText(), Valid.SetAngka(Pengeluaran.getText()), Keterangan.getText(), KdKategori.getText(), KdPtg.getText()
@@ -1157,7 +1157,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
 
     private void KdPtgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPtgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            NmPtg.setText(petugas.tampil3(KdPtg.getText()));
+            NmPtg.setText(Sequel.CariPetugas(KdPtg.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }else{
@@ -1502,7 +1502,7 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
             BtnSimpan.setEnabled(akses.getpengeluaran());
             BtnHapus.setEnabled(akses.getpengeluaran());
             BtnPrint.setEnabled(akses.getpengeluaran());
-            NmPtg.setText(petugas.tampil3(KdPtg.getText()));
+            NmPtg.setText(Sequel.CariPetugas(KdPtg.getText()));
         }
     }
 

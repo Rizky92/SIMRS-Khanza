@@ -41,6 +41,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -899,7 +900,7 @@ public class DlgDeposit extends javax.swing.JDialog {
                 }else{
                     Sequel.AutoComitFalse();
                     sukses=true;
-                    
+
                     if (Sequel.menghapustfSmc("deposit", "no_deposit = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
                         Sequel.deleteTampJurnal();
                         if (sukses) sukses = Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()), 0);
@@ -909,15 +910,15 @@ public class DlgDeposit extends javax.swing.JDialog {
                     } else {
                         sukses = false;
                     }
-                    
+
                     if (sukses) {
                         Sequel.Commit();
                     } else {
                         Sequel.RollBack();
                     }
-                    
+
                     Sequel.AutoComitTrue();
-                    
+
                     if (sukses) {
                         runBackground(() ->tampil());
                         autoNomor();
@@ -1269,7 +1270,7 @@ public class DlgDeposit extends javax.swing.JDialog {
             });
         }
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1330,7 +1331,7 @@ public class DlgDeposit extends javax.swing.JDialog {
         if(akses.getjml2()>=1){
             BtnSeekPetugas.setEnabled(false);
             KodePetugas.setText(akses.getkode());
-            NamaPetugas.setText(petugas.tampil3(KodePetugas.getText()));
+            NamaPetugas.setText(Sequel.CariPetugas(KodePetugas.getText()));
         }
     }
 
@@ -1478,22 +1479,36 @@ public class DlgDeposit extends javax.swing.JDialog {
             Persenppn.setText("0");
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

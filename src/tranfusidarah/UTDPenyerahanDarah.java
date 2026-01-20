@@ -1416,7 +1416,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdptgcrossKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdptgcrossKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmptgcross.setText(petugas.tampil3(kdptgcross.getText()));
+            nmptgcross.setText(Sequel.CariPetugas(kdptgcross.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPtgCrossActionPerformed(null);
         }else{
@@ -1426,7 +1426,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdptgpjKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdptgpjKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmptgpj.setText(petugas.tampil3(kdptgpj.getText()));
+            nmptgpj.setText(Sequel.CariPetugas(kdptgpj.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPtgPJActionPerformed(null);
         }else{
@@ -2104,7 +2104,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             kdptgpj.setEditable(false);
             btnPtgPJ.setEnabled(false);
             kdptgpj.setText(akses.getkode());
-            nmptgpj.setText(petugas.tampil3(kdptgpj.getText()));
+            nmptgpj.setText(Sequel.CariPetugas(kdptgpj.getText()));
         }
     }
 

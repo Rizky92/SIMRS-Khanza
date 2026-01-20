@@ -1061,7 +1061,7 @@ public final class InventarisPemeliharaanGedung extends javax.swing.JDialog {
             BtnEdit.setEnabled(akses.getpemeliharaan_gedung());
             BtnPrint.setEnabled(akses.getpemeliharaan_gedung());
             NIP.setText(akses.getkode());
-            NamaPetugas.setText(petugas.tampil3(NIP.getText()));
+            NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
         }
         TCari.requestFocus();
     }

@@ -38,6 +38,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -1211,7 +1212,7 @@ public final class KeuanganBayarPemesananAset extends javax.swing.JDialog {
 
     private void nipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nama_petugas.setText(petugas.tampil3(nip.getText()));
+            nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             AkunBayar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1628,7 +1629,7 @@ public final class KeuanganBayarPemesananAset extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
         LTotal.setText(Valid.SetAngka(total));
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1682,7 +1683,7 @@ public final class KeuanganBayarPemesananAset extends javax.swing.JDialog {
             BtnPetugas.setEnabled(false);
             nip.setText(akses.getkode());
             BtnSimpan.setEnabled(akses.getbayar_pesan_non_medis());
-            nama_petugas.setText(petugas.tampil3(nip.getText()));
+            nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
         }else if(akses.getjml1()>=1){
             nip.setEditable(true);
             BtnPetugas.setEnabled(true);
@@ -1808,22 +1809,36 @@ public final class KeuanganBayarPemesananAset extends javax.swing.JDialog {
              norekening="";
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

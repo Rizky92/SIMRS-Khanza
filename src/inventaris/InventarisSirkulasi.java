@@ -1142,12 +1142,12 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
 
     private void nipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        nama_petugas.setText(petugas.tampil3(nip.getText()));
+        nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
     }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        nama_petugas.setText(petugas.tampil3(nip.getText()));
+        nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
         tlp.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        nama_petugas.setText(petugas.tampil3(nip.getText()));
+        nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
         BtnSimpan.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnPtgActionPerformed(null);
@@ -1349,7 +1349,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
             BtnIn.setEnabled(akses.getinventaris_sirkulasi());
             BtnOut.setEnabled(akses.getinventaris_sirkulasi());
             nip.setText(akses.getkode());
-            nama_petugas.setText(petugas.tampil3(nip.getText()));
+            nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
         }
     }
 

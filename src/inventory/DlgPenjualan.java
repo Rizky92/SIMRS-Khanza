@@ -23,6 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -355,10 +356,10 @@ public class DlgPenjualan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdptg.requestFocus();
             }
             @Override
@@ -369,7 +370,7 @@ public class DlgPenjualan extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
 
         TCari.requestFocus();
 
@@ -1800,14 +1801,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdptgKeyPressed
         switch (evt.getKeyCode()) {
             case KeyEvent.VK_PAGE_DOWN:
-                nmptg.setText(petugas.tampil3(kdptg.getText()));
+                nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
                 break;
             case KeyEvent.VK_PAGE_UP:
-                nmptg.setText(petugas.tampil3(kdptg.getText()));
+                nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
                 Jenisjual.requestFocus();
                 break;
             case KeyEvent.VK_ENTER:
-                nmptg.setText(petugas.tampil3(kdptg.getText()));
+                nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
                 TCari.requestFocus();
                 break;
             case KeyEvent.VK_UP:
@@ -1827,10 +1828,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pasien.getTable().getSelectedRow()!= -1){                   
+                if(pasien.getTable().getSelectedRow()!= -1){
                     kdmem.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),0).toString());
                     nmmem.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 kdmem.requestFocus();
             }
             @Override
@@ -1842,7 +1843,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pasien.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1854,7 +1855,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         pasien.emptTeks();
         pasien.isCek();
         pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -3951,7 +3952,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             BtnSimpan.setEnabled(akses.getpenjualan_obat());
             BtnTambah.setEnabled(akses.getobat());
             kdptg.setText(akses.getkode());
-            nmptg.setText(petugas.tampil3(kdptg.getText()));
+            nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
         }
         try {
             if(Sequel.cariIsi("select set_nota.tampilkan_tombol_nota_penjualan from set_nota").equals("Yes")){
@@ -4414,22 +4415,36 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             Persenppn.setText("0");
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

@@ -943,7 +943,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
 
     private void KdPtgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPtgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            NmPtg.setText(petugas.tampil3(KdPtg.getText()));
+            NmPtg.setText(Sequel.CariPetugas(KdPtg.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
         }else{
@@ -1146,13 +1146,13 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }  
-            hitung(); 
+            }
+            hitung();
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
-        }        
+        }
     }
-    
+
     private void hitung(){
         total=0;
         for(int i=0;i<tabMode.getRowCount();i++){
@@ -1165,8 +1165,8 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
         if(total>0){
-            tabMode.addRow(new Object[]{"",">> Total Pemasukan :","","",total,"","",""}); 
-        }        
+            tabMode.addRow(new Object[]{"",">> Total Pemasukan :","","",total,"","",""});
+        }
     }
 
     public void emptTeks() {
@@ -1216,7 +1216,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
             BtnSimpan.setEnabled(akses.getpemasukan_lain());
             BtnHapus.setEnabled(akses.getpemasukan_lain());
             BtnPrint.setEnabled(akses.getpemasukan_lain());
-            NmPtg.setText(petugas.tampil3(KdPtg.getText()));
+            NmPtg.setText(Sequel.CariPetugas(KdPtg.getText()));
         }
 
     }
@@ -1224,7 +1224,7 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
     private void autoNomor() {
         Valid.autonomorSmc(Nomor, "PL", "", "pemasukan_lain", "no_masuk", 3, "0", Tanggal);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         ceksukses = true;
