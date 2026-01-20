@@ -23,6 +23,7 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -37,6 +38,7 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -49,6 +51,8 @@ public class DlgBarang extends javax.swing.JDialog {
     private validasi Valid = new validasi();
     private Connection koneksi = koneksiDB.condb();
     private double totalstok, stokgudang;
+    private DlgCariSatuan satuan;
+    private DlgCariJenis jenis;
     private PreparedStatement ps, ps2, ps3, ps4;
     private ResultSet rs, rs2, rs3;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -1722,14 +1726,11 @@ public class DlgBarang extends javax.swing.JDialog {
     Valid.pindah(evt, beli, kelas1);
     }//GEN-LAST:event_ralanKeyPressed
 
-    private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanActionPerformed
-        DlgCariSatuan satuan = new DlgCariSatuan(null, false);
-        satuan.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-
+private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanActionPerformed
+    if (satuan == null || !satuan.isDisplayable()) {
+        satuan = new DlgCariSatuan(null, false);
+        satuan.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        satuan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (satuan.getTable().getSelectedRow() != -1) {
@@ -1740,61 +1741,55 @@ public class DlgBarang extends javax.swing.JDialog {
                         Isi.setText("1");
                     }
                 }
+                satuan=null;
             }
-
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {
-                satuan.emptTeks();
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
         });
-        satuan.isCek();
         satuan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         satuan.setLocationRelativeTo(internalFrame1);
-        satuan.setAlwaysOnTop(false);
-        satuan.setVisible(true);
-    }//GEN-LAST:event_BtnSatuanActionPerformed
+    }
+    if (satuan == null) return;
+    if (!satuan.isVisible()) {
+        satuan.emptTeks();
+    }
+
+    if (satuan.isVisible()) {
+        satuan.toFront();
+        return;
+    }
+    satuan.setVisible(true);
+}//GEN-LAST:event_BtnSatuanActionPerformed
 
     private void stok_minimalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stok_minimalKeyPressed
         Valid.pindah(evt, karyawan, DTPExpired);
     }//GEN-LAST:event_stok_minimalKeyPressed
 
     private void BtnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJenisActionPerformed
-        DlgCariJenis jenis = new DlgCariJenis(null, false);
-        jenis.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (jenis.getTable().getSelectedRow() != -1) {
-                    kdjns.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 0).toString());
-                    nmjns.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 1).toString());
+        if (jenis == null || !jenis.isDisplayable()) {
+            jenis = new DlgCariJenis(null, false);
+            jenis.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            jenis.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (jenis.getTable().getSelectedRow() != -1) {
+                        kdjns.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 0).toString());
+                        nmjns.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(), 1).toString());
+                    }
+                    BtnJenis.requestFocus();
+                    jenis=null;
                 }
-                BtnJenis.requestFocus();
-            }
+            });
+            jenis.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            jenis.setLocationRelativeTo(internalFrame1);
+        }
+        if (jenis == null) return;
+        if (!jenis.isVisible()) {
+            jenis.emptTeks();
+        }
 
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        jenis.isCek();
-        jenis.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        jenis.setLocationRelativeTo(internalFrame1);
-        jenis.setAlwaysOnTop(false);
+        if (jenis.isVisible()) {
+            jenis.toFront();
+            return;
+        }
         jenis.setVisible(true);
     }//GEN-LAST:event_BtnJenisActionPerformed
 
@@ -2266,42 +2261,36 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatKeyReleased
 
     private void BtnSatuanBesarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanBesarActionPerformed
-        DlgCariSatuan satuan = new DlgCariSatuan(null, false);
-        satuan.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
+        if (satuan == null || !satuan.isDisplayable()) {
+            satuan = new DlgCariSatuan(null, false);
+            satuan.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            satuan.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (satuan.getTable().getSelectedRow() != -1) {
+                        kdsatBesar.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(), 0).toString());
+                        nmsatBesar.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(), 1).toString());
+                        BtnSatuanBesar.requestFocus();
 
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (satuan.getTable().getSelectedRow() != -1) {
-                    kdsatBesar.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(), 0).toString());
-                    nmsatBesar.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(), 1).toString());
-                    BtnSatuanBesar.requestFocus();
-
-                    if(kdsat.getText().equals(kdsatBesar.getText())){
-                        Isi.setText("1");
+                        if(kdsat.getText().equals(kdsatBesar.getText())){
+                            Isi.setText("1");
+                        }
                     }
+                    satuan=null;
                 }
-            }
+            });
+            satuan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            satuan.setLocationRelativeTo(internalFrame1);
+        }
+        if (satuan == null) return;
+        if (!satuan.isVisible()) {
+            satuan.emptTeks();
+        }
 
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {
-                satuan.emptTeks();
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        satuan.isCek();
-        satuan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        satuan.setLocationRelativeTo(internalFrame1);
-        satuan.setAlwaysOnTop(false);
+        if (satuan.isVisible()) {
+            satuan.toFront();
+            return;
+        }
         satuan.setVisible(true);
     }//GEN-LAST:event_BtnSatuanBesarActionPerformed
 
