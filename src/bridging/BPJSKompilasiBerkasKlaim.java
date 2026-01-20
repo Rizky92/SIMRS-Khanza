@@ -4899,9 +4899,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     private void bulkKompilasiBerkas(final int selectedRowCount) {
-        // TODO: perlu strategi sebagai reminder / checkbox kalau ada SEP gagal kompilasi
-        // jadi bisa ditinggal pergi, kompilasi sebulan semalam juga nggak ada masalah
-        // ...mungkin bisa ditambahkan ke pengaturan kompilasi juga?
         JCheckBox lanjutKompilasiApabilaGagal = new JCheckBox("Lewati berkas gagal diproses", false);
 
         if (JOptionPane.showConfirmDialog(null, new Object[] {"Lakukan kompilasi untuk semua berkas yang dipilih?", lanjutKompilasiApabilaGagal}, "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.NO_OPTION) {
