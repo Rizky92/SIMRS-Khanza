@@ -30,6 +30,7 @@ import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 
 /**
  *
@@ -47,10 +48,10 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
     private String tanggaldatang="",tanggaltempo="";
     private double sisahutang=0,cicilan=0,bayar=0;
     private WarnaTable3 warna=new WarnaTable3();
-    private boolean sukses=true;   
+    private boolean sukses=true;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-    private volatile boolean ceksukses = false; 
-    
+    private volatile boolean ceksukses = false;
+
 
     /** Creates new form DlgLhtBiaya
      * @param parent
@@ -140,8 +141,8 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         petugas.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -827,7 +828,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
                     kdsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
                     nmsup.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdsup.requestFocus();
             }
             @Override
@@ -838,8 +839,8 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {suplier.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         suplier.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -901,7 +902,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
                     sukses=false;
                     JOptionPane.showMessageDialog(rootPane, "Gagal Menyimpan, kemungkinan No.Tagihan sudah ada sebelumnya...!!");
                 }
-                
+
                 if(sukses==true){
                     Sequel.Commit();
                 }else{
@@ -913,7 +914,7 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
                 if(sukses==true){
                     autoNomor();
                     LCount1.setText("0");
-                    for(i=0;i<tbBangsal.getRowCount();i++){  
+                    for(i=0;i<tbBangsal.getRowCount();i++){
                         if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                             sisahutang=sisahutang-Double.parseDouble(tbBangsal.getValueAt(i,9).toString());
                             tabMode.removeRow(i);
@@ -1220,25 +1221,39 @@ public final class KeuanganTagihanDapur extends javax.swing.JDialog {
             BtnPetugas.setEnabled(false);
             nip.setText(akses.getkode());
             BtnSimpan.setEnabled(akses.gettitip_faktur_dapur());
-            nama_petugas.setText(petugas.tampil3(nip.getText()));
+            nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

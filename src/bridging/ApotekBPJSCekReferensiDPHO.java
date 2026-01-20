@@ -27,12 +27,16 @@ import java.awt.Cursor;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.event.DocumentEvent;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
+import javax.swing.SwingUtilities;
 import org.springframework.web.client.HttpClientErrorException;
 
 /**
@@ -45,10 +49,16 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
     private final sekuel Sequel = new sekuel();
     private final ApiApotekBPJS api = new ApiApotekBPJS();
     private final ObjectMapper mapper = new ObjectMapper();
+    private String URL="",link="",utc="";
+    private HttpHeaders headers;
+    private HttpEntity requestEntity;
+    private JsonNode root;
+    private JsonNode nameNode;
+    private JsonNode response;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
-    /**
-     * Creates new form DlgKamar
-     *
+    /** Creates new form DlgKamar
      * @param parent
      * @param modal
      */
@@ -110,21 +120,21 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
             });
@@ -290,9 +300,9 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            tampil();
+            runBackground(() ->tampil());
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            tampil();
+            runBackground(() ->tampil());
         } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
             BtnKeluar.requestFocus();
         } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
@@ -301,9 +311,7 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        tampil();
-        this.setCursor(Cursor.getDefaultCursor());
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -331,7 +339,7 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
         TCari.requestFocus();
     }
     
-    public void tampil() {
+    private void tampil() {
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -393,5 +401,37 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
 
     public JTable getTable() {
         return tbKamar;
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

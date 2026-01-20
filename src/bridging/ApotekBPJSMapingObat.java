@@ -11,11 +11,11 @@
 package bridging;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.DlgBarang;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -28,6 +28,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
@@ -218,11 +219,6 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
-        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Mapping Obat Apotek BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
@@ -644,7 +640,7 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
                     tbJnsPerawatan.setValueAt(TObat.getText(), tbJnsPerawatan.getSelectedRow(), 1);
                     tbJnsPerawatan.setValueAt(KdObatBPJS.getText(), tbJnsPerawatan.getSelectedRow(), 2);
                     tbJnsPerawatan.setValueAt(NmObatBPJS.getText(), tbJnsPerawatan.getSelectedRow(), 3);
-                    tbJnsPerawatan.setValueAt(Double.parseDouble(Harga.getText()), tbJnsPerawatan.getSelectedRow(), 4);
+                    tbJnsPerawatan.setValueAt(Double.valueOf(Harga.getText()), tbJnsPerawatan.getSelectedRow(), 4);
                     tbJnsPerawatan.setValueAt(Restriksi.getText(), tbJnsPerawatan.getSelectedRow(), 5);
                     emptTeks();
                 } else {
@@ -733,8 +729,8 @@ public final class ApotekBPJSMapingObat extends javax.swing.JDialog {
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            tampil();
             TCari.setText("");
+            tampil();
         } else {
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }

@@ -29,7 +29,11 @@ import java.awt.event.KeyEvent;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
 import org.springframework.http.HttpEntity;
@@ -53,7 +57,9 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode nameNode;
-    private JsonNode response;
+    private JsonNode response,responsedetailsep;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgKamar
      * @param parent
@@ -141,19 +147,19 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(NomorSEP.getText().length()>2){
-                        tampil(NomorSEP.getText());
+                        runBackground(() ->tampil(NomorSEP.getText()));
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(NomorSEP.getText().length()>2){
-                        tampil(NomorSEP.getText());
+                        runBackground(() ->tampil(NomorSEP.getText()));
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(NomorSEP.getText().length()>2){
-                        tampil(NomorSEP.getText());
+                        runBackground(() ->tampil(NomorSEP.getText()));
                     }
                 }
             });
@@ -352,10 +358,10 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
 
     private void NomorSEPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NomorSEPKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            tampil(NomorSEP.getText());
+            runBackground(() ->tampil(NomorSEP.getText()));
             BtnPrint.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            tampil(NomorSEP.getText());
+            runBackground(() ->tampil(NomorSEP.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
@@ -367,9 +373,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
         if(NomorSEP.getText().trim().equals("")){
             JOptionPane.showMessageDialog(null,"Silahkan masukkan nomor SEP terlebih dahulu..!!!");
         }else{
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            tampil(NomorSEP.getText());
-            this.setCursor(Cursor.getDefaultCursor());
+            runBackground(() ->tampil(NomorSEP.getText()));
         }
     }//GEN-LAST:event_BtnCariActionPerformed
 
@@ -431,7 +435,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String keyword) {
+    private void tampil(String keyword) {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
@@ -449,14 +453,14 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
             if(nameNode.path("code").asText().equals("200")){
                 Valid.tabelKosong(tabMode);
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc));
-                System.out.println(response.toString());
-                if(response.path("listobat").isArray()){
-                    for(JsonNode list:response.path("listobat")){
+                responsedetailsep=response.path("detailsep");
+                if(response.path("detailsep").path("listobat").isArray()){
+                    for(JsonNode list:response.path("detailsep").path("listobat")){
                         tabMode.addRow(new Object[]{
-                            response.path("noSepApotek").asText(), response.path("noSepAsal").asText(), response.path("noresep").asText(), response.path("nokartu").asText(), response.path("nmpst").asText(),
-                            response.path("kdjnsobat").asText(), response.path("nmjnsobat").asText(), response.path("tglpelayanan").asText(), list.path("kodeobat").asText(), list.path("namaobat").asText(),
-                            list.path("tipeobat").asText(), list.path("signa1").asDouble(), list.path("signa2").asDouble(), list.path("hari").asInt(), list.path("permintaan").asText(""),
-                            list.path("jumlah").asDouble(), list.path("harga").asDouble()
+                            responsedetailsep.path("noSepApotek").asText(),responsedetailsep.path("noSepAsal").asText(),responsedetailsep.path("noresep").asText(),responsedetailsep.path("nokartu").asText(),
+                            responsedetailsep.path("nmpst").asText(),responsedetailsep.path("kdjnsobat").asText(),responsedetailsep.path("nmjnsobat").asText(),responsedetailsep.path("tglpelayanan").asText(),
+                            list.path("kodeobat").asText(),list.path("namaobat").asText(),list.path("tipeobat").asText(),list.path("signa1").asText(),list.path("signa2").asText(),list.path("hari").asText(),
+                            list.path("permintaan").asText(),list.path("jumlah").asText(),Valid.SetAngka(list.path("harga").asDouble())
                         });
                     }
                 }
@@ -485,5 +489,37 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
         public String getMethod() {
             return "DELETE";
         }
+    }
+
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

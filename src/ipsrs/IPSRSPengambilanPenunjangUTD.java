@@ -891,7 +891,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             Nip.setEditable(false);
             btnPetugas.setEnabled(false);
             Nip.setText(akses.getkode());
-            Nama.setText(petugas.tampil3(Nip.getText()));
+            Nama.setText(Sequel.CariPetugas(Nip.getText()));
         }
     }
 

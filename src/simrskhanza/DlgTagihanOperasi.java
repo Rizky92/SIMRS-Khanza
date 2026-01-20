@@ -19,6 +19,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -2038,7 +2039,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdoperator1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmoperator1.setText(dokter.tampil3(kdoperator1.getText()));
+            nmoperator1.setText(Sequel.CariDokter(kdoperator1.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnOperator1ActionPerformed(null);
         }else{
@@ -2256,7 +2257,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdoperator2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator2KeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmoperator2.setText(dokter.tampil3(kdoperator2.getText()));
+            nmoperator2.setText(Sequel.CariDokter(kdoperator2.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnOperator2ActionPerformed(null);
         }else{
@@ -2275,7 +2276,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdoperator3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdoperator3KeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmoperator3.setText(dokter.tampil3(kdoperator3.getText()));
+            nmoperator3.setText(Sequel.CariDokter(kdoperator3.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnOperator3ActionPerformed(null);
         }else{
@@ -2294,7 +2295,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdanestesiKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmanestesi.setText(dokter.tampil3(kdanestesi.getText()));
+            nmanestesi.setText(Sequel.CariDokter(kdanestesi.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnAnastesiActionPerformed(null);
         }else{
@@ -2313,7 +2314,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kddranakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddranakKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmdranak.setText(dokter.tampil3(kddranak.getText()));
+            nmdranak.setText(Sequel.CariDokter(kddranak.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnAnakActionPerformed(null);
         }else{
@@ -2513,7 +2514,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdpjanakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdpjanakKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmpjanak.setText(dokter.tampil3(kdpjanak.getText()));
+            nmpjanak.setText(Sequel.CariDokter(kdpjanak.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btndrpjanakActionPerformed(null);
         }else{
@@ -2532,7 +2533,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kddrumumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddrumumKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmdranak.setText(dokter.tampil3(kddranak.getText()));
+            nmdranak.setText(Sequel.CariDokter(kddranak.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btndrumumActionPerformed(null);
         }else{
@@ -3692,19 +3693,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

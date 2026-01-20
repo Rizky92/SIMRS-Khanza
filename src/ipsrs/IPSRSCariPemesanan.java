@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -878,12 +879,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdptgKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmptg.setText(petugas.tampil3(kdptg.getText()));
+            nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            nmptg.setText(petugas.tampil3(kdptg.getText()));
+            nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
             kdsup.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            nmptg.setText(petugas.tampil3(kdptg.getText()));
+            nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
             kdbar.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnPetugasActionPerformed(null);
@@ -1247,19 +1248,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(!nmsup.getText().trim().equals("")){
                     ps.setString(i,kdsup.getText());
                     i++;
-                }    
+                }
                 if(!nmptg.getText().trim().equals("")){
                     ps.setString(i,kdptg.getText());
                     i++;
-                }    
+                }
                 if(!nmjenis.getText().trim().equals("")){
                     ps.setString(i,kdjenis.getText());
                     i++;
-                }    
+                }
                 if(!nmbar.getText().trim().equals("")){
                     ps.setString(i,kdbar.getText());
                     i++;
-                }    
+                }
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(i,"%"+TCari.getText()+"%");
                     i++;
@@ -1280,8 +1281,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(i,"%"+TCari.getText()+"%");
                     i++;
                     ps.setString(i,"%"+TCari.getText()+"%");
-                }    
-                    
+                }
+
                 rs=ps.executeQuery();
                 tagihan=0;
                 while(rs.next()){
@@ -1303,7 +1304,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(!nmjenis.getText().trim().equals("")){
                             ps2.setString(i,kdjenis.getText());
                             i++;
-                        }   
+                        }
                         if(!nmbar.getText().trim().equals("")){
                             ps2.setString(i,kdbar.getText());
                             i++;
@@ -1316,8 +1317,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             ps2.setString(i,"%"+TCari.getText()+"%");
                             i++;
                             ps2.setString(i,"%"+TCari.getText()+"%");
-                        }    
-                            
+                        }
+
                         rs2=ps2.executeQuery();
                         int no=1;
                         while(rs2.next()){
@@ -1425,19 +1426,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

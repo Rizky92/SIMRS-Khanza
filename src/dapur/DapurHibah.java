@@ -1036,7 +1036,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             kdptg.setText(akses.getkode());
             BtnSimpan.setEnabled(akses.gethibah_dapur());
             BtnTambah.setEnabled(akses.getdapur_barang());
-            nmptg.setText(form.petugas.tampil3(kdptg.getText()));
+            nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
         }
     }
 

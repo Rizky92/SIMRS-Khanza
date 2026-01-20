@@ -22,6 +22,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -140,7 +141,7 @@ public class DlgMutasiBarang extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         bangsal.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -723,17 +724,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         tampil();
         if(tampilkanpermintaan==true){
             runBackground(() ->tampil2());
-        }        
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void kddariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddariKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nmdari.setText(bangsal.tampil3(kddari.getText()));
+            nmdari.setText(Sequel.CariBangsal(kddari.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            nmdari.setText(bangsal.tampil3(kddari.getText()));
+            nmdari.setText(Sequel.CariBangsal(kddari.getText()));
             TCari.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            nmdari.setText(bangsal.tampil3(kddari.getText()));
+            nmdari.setText(Sequel.CariBangsal(kddari.getText()));
             kdke.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnDariActionPerformed(null);
@@ -1129,9 +1130,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     try {
                         ps.setString(1,kddari.getText());
                         rs=ps.executeQuery();
-                        while(rs.next()){        
+                        while(rs.next()){
                             iyembuilder.append("{\"KodeBarang\":\"").append(rs.getString("kode_brng")).append("\",\"NamaBarang\":\"").append(rs.getString("nama_brng").replaceAll("\"","")).append("\",\"Satuan\":\"").append(rs.getString("kode_sat")).append("\",\"NoBatch\":\"").append(rs.getString("no_batch")).append("\",\"NoFaktur\":\"").append(rs.getString("no_faktur")).append("\",\"Kadaluarsa\":\"").append(rs.getString("tgl_kadaluarsa")).append("\",\"Harga\":\"").append(rs.getDouble("dasar")+"").append("\",\"Stok\":\"").append(rs.getDouble("stok")+"").append("\"},");
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println("Note : "+e);
                     } finally{
@@ -1149,9 +1150,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     try {
                         ps.setString(1,kddari.getText());
                         rs=ps.executeQuery();
-                        while(rs.next()){                
+                        while(rs.next()){
                             iyembuilder.append("{\"KodeBarang\":\"").append(rs.getString("kode_brng")).append("\",\"NamaBarang\":\"").append(rs.getString("nama_brng").replaceAll("\"","")).append("\",\"Satuan\":\"").append(rs.getString("kode_sat")).append("\",\"NoBatch\":\"").append("").append("\",\"NoFaktur\":\"").append("").append("\",\"Kadaluarsa\":\"").append(rs.getString("tgl_kadaluarsa")).append("\",\"Harga\":\"").append(rs.getDouble("dasar")+"").append("\",\"Stok\":\"").append(rs.getDouble("stok")+"").append("\"},");
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println("Note : "+e);
                     } finally{
@@ -1162,7 +1163,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             ps.close();
                         }
                     }
-                }  
+                }
                 if (iyembuilder.length() > 0) {
                     iyembuilder.setLength(iyembuilder.length() - 1);
                     fileWriter.write("{\"mutasiobat\":["+iyembuilder+"]}");
@@ -1176,7 +1177,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
         }
     }
-    
+
     private void tampil2() {
         if(!kddari.getText().equals("")){
             try{
@@ -1189,7 +1190,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
                     } catch (Exception e) {
                         jml=jml+0;
-                    } 
+                    }
                 }
 
                 kodebarang=null;
@@ -1209,7 +1210,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 nobatch=new String[jml];
                 nofaktur=new String[jml];
                 kadaluarsa=new String[jml];
-                index=0;        
+                index=0;
                 for(i=0;i<row;i++){
                     try {
                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
@@ -1261,7 +1262,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }
                     }
-                }                            
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }
@@ -1357,7 +1358,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil2(String nopermintaan) {
         runBackground(() ->tampil(nopermintaan));
     }
@@ -1367,7 +1368,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(!akses.getkode().equals("Admin Utama")){
             if(!DEPOAKTIFOBAT.equals("")){
                 kddari.setText(DEPOAKTIFOBAT);
-                nmdari.setText(bangsal.tampil3(DEPOAKTIFOBAT));
+                nmdari.setText(Sequel.CariBangsal(DEPOAKTIFOBAT));
                 btnDari.setEnabled(false);
             }
         }
@@ -1674,22 +1675,36 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
 
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

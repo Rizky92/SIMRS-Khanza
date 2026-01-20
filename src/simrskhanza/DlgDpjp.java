@@ -38,6 +38,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 
 /**
  *
@@ -1052,18 +1053,13 @@ public class DlgDpjp extends javax.swing.JDialog {
                     ps2.setString(i,"%"+TCari.getText().trim()+"%");    
                     i++;
                     ps2.setString(i,"%"+TCari.getText().trim()+"%");   
-                    i++;
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%"); 
                 }            
                      
                 rs=ps2.executeQuery();
                 while(rs.next()){
-                    TabModePasien.addRow(new Object[]{false,rs.getString(1),
-                                   rs.getString(2),
-                                   rs.getString(3),
-                                   rs.getString(4),
-                                   rs.getString(5),
-                                   rs.getString(6)});
+                    TabModePasien.addRow(new Object[]{
+                        false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+                    });
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
@@ -1195,19 +1191,33 @@ public class DlgDpjp extends javax.swing.JDialog {
     
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

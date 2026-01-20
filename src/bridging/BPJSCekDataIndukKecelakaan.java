@@ -24,16 +24,18 @@ import fungsi.validasi;
 import fungsi.akses;
 import fungsi.koneksiDB;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -49,7 +51,7 @@ public final class BPJSCekDataIndukKecelakaan extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private sekuel Sequel=new sekuel();
     private int i=0;
-    private DlgCariPasien pasien=new DlgCariPasien(null,false);
+    private DlgCariPasien pasien;
     private ApiBPJS api=new ApiBPJS();
     private String URL="",link="",utc="";
     private HttpHeaders headers ;
@@ -105,48 +107,7 @@ public final class BPJSCekDataIndukKecelakaan extends javax.swing.JDialog {
         }
         
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        pasien.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgBPJSCekDataIndukKecelakaan")){
-                    if(pasien.getTable().getSelectedRow()!= -1){                   
-                        if(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),19).toString().equals("")){
-                            JOptionPane.showMessageDialog(rootPane,"Maaf pasien tidak punya Nomor Kartu...!");
-                        }else{
-                            NoKartu.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),19).toString());
-                            NamaPasien.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),1).toString());
-                        }                            
-                    }  
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        pasien.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(akses.getform().equals("DlgBPJSCekDataIndukKecelakaan")){
-                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        pasien.dispose();
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        }); 
+         
         try {
             link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
@@ -340,11 +301,45 @@ public final class BPJSCekDataIndukKecelakaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void btnPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienActionPerformed
-        akses.setform("DlgBPJSCekDataIndukKecelakaan");
-        pasien.emptTeks();
-        pasien.isCek();
-        pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        pasien.setLocationRelativeTo(internalFrame1);
+        if (pasien == null || !pasien.isDisplayable()) {
+            pasien=new DlgCariPasien(null,false);
+            pasien.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            pasien.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(pasien.getTable().getSelectedRow()!= -1){                   
+                        if(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),19).toString().equals("")){
+                            JOptionPane.showMessageDialog(rootPane,"Maaf pasien tidak punya Nomor Kartu...!");
+                        }else{
+                            NoKartu.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),19).toString());
+                            NamaPasien.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),1).toString());
+                        }                            
+                    } 
+                    pasien=null;
+                }
+            });
+
+            pasien.getTable().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                        pasien.dispose();
+                    }
+                }
+            });
+            pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            pasien.setLocationRelativeTo(internalFrame1);
+        }
+            
+        if (pasien == null) return;
+        if (!pasien.isVisible()) {
+            pasien.isCek();    
+            pasien.emptTeks();
+        }  
+        if (pasien.isVisible()) {
+            pasien.toFront();
+            return;
+        }    
         pasien.setVisible(true);
     }//GEN-LAST:event_btnPasienActionPerformed
 
@@ -446,19 +441,33 @@ public final class BPJSCekDataIndukKecelakaan extends javax.swing.JDialog {
  
     private void runBackground(Runnable task) {
         if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
         ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        executor.submit(() -> {
-            try {
-                task.run();
-            } finally {
-                ceksukses = false;
-                SwingUtilities.invokeLater(() -> {
-                    this.setCursor(Cursor.getDefaultCursor());
-                });
-            }
-        });
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

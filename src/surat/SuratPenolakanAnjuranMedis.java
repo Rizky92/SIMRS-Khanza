@@ -1703,7 +1703,7 @@ public final class SuratPenolakanAnjuranMedis extends javax.swing.JDialog {
             KodePetugas.setEditable(false);
             btnPetugas.setEnabled(false);
             KodePetugas.setText(akses.getkode());
-            NamaPetugas.setText(petugas.tampil3(KodePetugas.getText()));
+            NamaPetugas.setText(Sequel.CariPetugas(KodePetugas.getText()));
         }
     }
 

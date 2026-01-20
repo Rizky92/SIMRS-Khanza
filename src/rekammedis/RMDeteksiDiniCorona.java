@@ -1796,7 +1796,7 @@ public class RMDeteksiDiniCorona extends javax.swing.JDialog {
             kdptg.setEditable(false);
             BtnPtg.setEnabled(false);
             kdptg.setText(akses.getkode());
-            nmptg.setText(petugas.tampil3(kdptg.getText()));
+            nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
         }
     }
 

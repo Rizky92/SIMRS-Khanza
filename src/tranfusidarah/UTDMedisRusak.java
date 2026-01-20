@@ -1160,7 +1160,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             nip.setEditable(false);
             btnPetugas.setEnabled(false);
             nip.setText(akses.getkode());
-            nmpetugas.setText(petugas.tampil3(nip.getText()));
+            nmpetugas.setText(Sequel.CariPetugas(nip.getText()));
         }
     }
 

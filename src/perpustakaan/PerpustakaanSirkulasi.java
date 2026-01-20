@@ -1281,9 +1281,9 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
 
     private void TNIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNIPKeyPressed
    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        TNmPetugas.setText(petugas.tampil3(TNIP.getText()));
+        TNmPetugas.setText(Sequel.CariPetugas(TNIP.getText()));
     }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        TNmPetugas.setText(petugas.tampil3(TNIP.getText()));
+        TNmPetugas.setText(Sequel.CariPetugas(TNIP.getText()));
         BtnSimpan.requestFocus();
     }else if(evt.getKeyCode()==KeyEvent.VK_UP){
         btnPtgActionPerformed(null);
@@ -1548,7 +1548,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
             BtnIn.setEnabled(akses.getpeminjaman_perpustakaan());
             BtnOut.setEnabled(akses.getpeminjaman_perpustakaan());
             TNIP.setText(akses.getkode());
-            TNmPetugas.setText(petugas.tampil3(TNIP.getText()));
+            TNmPetugas.setText(Sequel.CariPetugas(TNIP.getText()));
         }
     }
 
