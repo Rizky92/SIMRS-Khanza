@@ -3652,7 +3652,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
     }
 
-    private void exportSEP(final String urutan, final boolean ada, final int row) throws Exception {
+    private void exportSEP(final String urutan, final boolean ada, final int row) throws KompilasiException {
         if (!ada) {
             return;
         }
@@ -3680,7 +3680,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         }
     }
 
-    private void exportHasilKlaim(final String urutan, final boolean ada, final int row) throws Exception {
+    private void exportHasilKlaim(final String urutan, final boolean ada, final int row) throws KompilasiException {
         if (!ada) {
             return;
         }
@@ -3691,83 +3691,84 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             return;
         }
 
-        File dir = new File("./berkaspdf/" + tanggalExport);
-        if (!dir.isDirectory() && !dir.mkdirs()) {
-            Files.createDirectory(dir.toPath());
-        }
-
-        HttpURLConnection http;
-        String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/" + filename;
-        String exportPath = "./berkaspdf/" + tanggalExport + "/" + tbKompilasi.getValueAt(row, 2).toString() + "_" + urutan + "_KlaimINACBG.pdf";
-        if (filename.endsWith(".pdf")) {
-            try (FileOutputStream os = new FileOutputStream(exportPath); FileChannel fileChannel = os.getChannel()) {
-                URL fileUrl = new URL(url);
-                http = (HttpURLConnection) fileUrl.openConnection();
-                if (http.getResponseCode() == 200) {
-                    fileChannel.transferFrom(Channels.newChannel(fileUrl.openStream()), 0, Long.MAX_VALUE);
-                    http.disconnect();
-                } else if (http.getResponseCode() / 100 == 4) {
-                    throw new Exception("Terjadi kesalahan pada saat mengakses file klaim INACBG..!! Silahkan hubungi administrator.\nFilename : " + filename);
-                } else {
-                    throw new Exception("Sambungan ke server terputus..!!");
-                }
-            } catch (Exception e) {
-                throw new KompilasiException("Hasil Klaim", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
+        try {
+            File dir = new File("./berkaspdf/" + tanggalExport);
+            if (!dir.isDirectory() && !dir.mkdirs()) {
+                Files.createDirectory(dir.toPath());
             }
+
+            HttpURLConnection http;
+            String url = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/inacbg/" + filename;
+            String exportPath = "./berkaspdf/" + tanggalExport + "/" + tbKompilasi.getValueAt(row, 2).toString() + "_" + urutan + "_KlaimINACBG.pdf";
+            if (filename.endsWith(".pdf")) {
+                try (FileOutputStream os = new FileOutputStream(exportPath); FileChannel fileChannel = os.getChannel()) {
+                    URL fileUrl = new URL(url);
+                    http = (HttpURLConnection) fileUrl.openConnection();
+                    if (http.getResponseCode() == 200) {
+                        fileChannel.transferFrom(Channels.newChannel(fileUrl.openStream()), 0, Long.MAX_VALUE);
+                        http.disconnect();
+                    } else if (http.getResponseCode() / 100 == 4) {
+                        throw new Exception("Terjadi kesalahan pada saat mengakses file klaim INACBG..!! Silahkan hubungi administrator.\nFilename : " + filename);
+                    } else {
+                        throw new Exception("Sambungan ke server terputus..!!");
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new KompilasiException("Hasil Klaim", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
         }
     }
 
-    private void exportResumeRanap(final String urutan, final boolean ada, final int row) throws Exception {
+    private void exportResumeRanap(final String urutan, final boolean ada, final int row) throws KompilasiException {
         if (!ada) {
             return;
         }
 
-        final Map<String, Object> param = new HashMap<>();
-        param.put("namars", akses.getnamars());
-        param.put("alamatrs", akses.getalamatrs());
-        param.put("kotars", akses.getkabupatenrs());
-        param.put("propinsirs", akses.getpropinsirs());
-        param.put("kontakrs", akses.getkontakrs());
-        param.put("emailrs", akses.getemailrs());
-        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-        param.put("norawat", tbKompilasi.getValueAt(row, 1).toString());
-        String waktuKeluar = "", tglKeluar = "", jamKeluar = "";
+        try {
+            final Map<String, Object> param = new HashMap<>();
+            param.put("namars", akses.getnamars());
+            param.put("alamatrs", akses.getalamatrs());
+            param.put("kotars", akses.getkabupatenrs());
+            param.put("propinsirs", akses.getpropinsirs());
+            param.put("kontakrs", akses.getkontakrs());
+            param.put("emailrs", akses.getemailrs());
+            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+            param.put("norawat", tbKompilasi.getValueAt(row, 1).toString());
+            String waktuKeluar = "", tglKeluar = "", jamKeluar = "";
 
-        waktuKeluar = Sequel.cariIsiSmc("select concat(tgl_keluar, ' ', jam_keluar) from kamar_inap where no_rawat = ? and stts_pulang != 'Pindah Kamar' order by concat(tgl_keluar, ' ', jam_keluar) limit 1", tbKompilasi.getValueAt(row, 1).toString());
-        if (!waktuKeluar.isBlank()) {
-            tglKeluar = waktuKeluar.substring(0, 10);
-            jamKeluar = waktuKeluar.substring(11, 19);
-        }
+            waktuKeluar = Sequel.cariIsiSmc("select concat(tgl_keluar, ' ', jam_keluar) from kamar_inap where no_rawat = ? and stts_pulang != 'Pindah Kamar' order by concat(tgl_keluar, ' ', jam_keluar) limit 1", tbKompilasi.getValueAt(row, 1).toString());
+            if (!waktuKeluar.isBlank()) {
+                tglKeluar = waktuKeluar.substring(0, 10);
+                jamKeluar = waktuKeluar.substring(11, 19);
+            }
 
-        String kodeDokter = Sequel.cariIsiSmc("select kd_dokter from resume_pasien_ranap where no_rawat = ?", tbKompilasi.getValueAt(row, 1).toString());
-        String namaDokter = Sequel.cariIsiSmc("select nm_dokter from dokter where kd_dokter = ?", kodeDokter);
-        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", kodeDokter);
-        param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + (finger.isBlank() ? kodeDokter : finger) + "\n" + Valid.SetTgl3(tglKeluar));
-        param.put("ruang", Sequel.cariIsiSmc("select concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) from kamar_inap join kamar on kamar_inap.kd_kamar = kamar.kd_kamar join bangsal on " +
-            "kamar.kd_bangsal = bangsal.kd_bangsal where kamar_inap.no_rawat = ? and kamar_inap.tgl_keluar = ? and kamar_inap.jam_keluar = ?", tbKompilasi.getValueAt(row, 1).toString(), tglKeluar, jamKeluar));
-        param.put("tanggalkeluar", Valid.SetTgl3(tglKeluar));
-        param.put("jamkeluar", jamKeluar);
+            String kodeDokter = Sequel.cariIsiSmc("select kd_dokter from resume_pasien_ranap where no_rawat = ?", tbKompilasi.getValueAt(row, 1).toString());
+            String namaDokter = Sequel.cariIsiSmc("select nm_dokter from dokter where kd_dokter = ?", kodeDokter);
+            finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik = ?", kodeDokter);
+            param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + namaDokter + "\nID " + (finger.isBlank() ? kodeDokter : finger) + "\n" + Valid.SetTgl3(tglKeluar));
+            param.put("ruang", Sequel.cariIsiSmc("select concat(kamar_inap.kd_kamar, ' ', bangsal.nm_bangsal) from kamar_inap join kamar on kamar_inap.kd_kamar = kamar.kd_kamar join bangsal on " +
+                "kamar.kd_bangsal = bangsal.kd_bangsal where kamar_inap.no_rawat = ? and kamar_inap.tgl_keluar = ? and kamar_inap.jam_keluar = ?", tbKompilasi.getValueAt(row, 1).toString(), tglKeluar, jamKeluar));
+            param.put("tanggalkeluar", Valid.SetTgl3(tglKeluar));
+            param.put("jamkeluar", jamKeluar);
 
-        try (PreparedStatement ps = koneksi.prepareStatement("select dpjp_ranap.kd_dokter, dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter != ?")) {
-            ps.setString(1, tbKompilasi.getValueAt(row, 1).toString());
-            ps.setString(2, kodeDokter);
-            try (ResultSet rs = ps.executeQuery()) {
-                for (int i = 2; rs.next(); i++) {
-                    if (i == 2) {
-                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
-                        param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
-                        param.put("namadokter2", rs.getString("nm_dokter"));
-                    }
-                    if (i == 3) {
-                        finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
-                        param.put("finger3", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
-                        param.put("namadokter3", rs.getString("nm_dokter"));
+            try (PreparedStatement ps = koneksi.prepareStatement("select dpjp_ranap.kd_dokter, dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter != ?")) {
+                ps.setString(1, tbKompilasi.getValueAt(row, 1).toString());
+                ps.setString(2, kodeDokter);
+                try (ResultSet rs = ps.executeQuery()) {
+                    for (int i = 2; rs.next(); i++) {
+                        if (i == 2) {
+                            finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                            param.put("finger2", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
+                            param.put("namadokter2", rs.getString("nm_dokter"));
+                        }
+                        if (i == 3) {
+                            finger = Sequel.cariIsiSmc("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id = sidikjari.id where pegawai.nik = ?", rs.getString("kd_dokter"));
+                            param.put("finger3", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + rs.getString("nm_dokter") + "\nID " + (finger.isBlank() ? rs.getString("kd_dokter") : finger) + "\n" + Valid.SetTgl3(tglKeluar));
+                            param.put("namadokter3", rs.getString("nm_dokter"));
+                        }
                     }
                 }
             }
-        }
-
-        try {
             simpanPDF(tbKompilasi.getValueAt(row, 2).toString(), "rptLaporanResumeRanapKompilasi.jasper", urutan + "_ResumePasien", param);
         } catch (Exception e) {
             throw new KompilasiException("Resume Ranap Pasien", urutan, tbKompilasi.getValueAt(row, 2).toString(), e);
