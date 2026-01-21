@@ -103,7 +103,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         KODEPJBPJS = Sequel.cariIsiSmc("select password_asuransi.kd_pj from password_asuransi"),
         NAMAPJBPJS = Sequel.cariIsiSmc("select penjab.png_jawab from penjab where penjab.kd_pj = ?", KODEPJBPJS),
         KODEPPKBPJS = Sequel.cariIsiSmc("select setting.kode_ppk from setting limit 1") + "%";
-
     private RMRiwayatPerawatan resume = null;
     private WebEngine engineKlaim, engineBerkasDigital;
     private String finger = "", tanggalExport = "",
@@ -215,40 +214,34 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             setFlagKlaim();
                             switch (flagklaim) {
                                 case 1:
-                                    btnHasilKlaim.setEnabled(true);
-                                    btnHasilKlaim.setText("Selesai");
-                                    btnHasilKlaim.setGlassColor(new Color(50, 50, 50));
-                                    btnHasilKlaim.setForeground(new Color(255, 255, 255));
+                                    tabMode.setValueAt("Selesai", selectedRow, 11);
+                                    tabMode.setValueAt(1, selectedRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
                                     break;
                                 case 2:
-                                    btnHasilKlaim.setEnabled(false);
-                                    btnHasilKlaim.setText("INACBG Final");
-                                    btnHasilKlaim.setGlassColor(new Color(180, 240, 140));
-                                    btnHasilKlaim.setForeground(new Color(65, 60, 40));
+                                    tabMode.setValueAt("INACBG Final", selectedRow, 11);
+                                    tabMode.setValueAt(2, selectedRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
                                     break;
                                 case 3:
-                                    btnHasilKlaim.setEnabled(false);
-                                    btnHasilKlaim.setText("INACBG Final");
-                                    btnHasilKlaim.setGlassColor(new Color(180, 240, 140));
-                                    btnHasilKlaim.setForeground(new Color(65, 60, 40));
+                                    tabMode.setValueAt("INACBG Grouping", selectedRow, 11);
+                                    tabMode.setValueAt(3, selectedRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
                                     break;
                                 case 4:
-                                    btnHasilKlaim.setEnabled(false);
-                                    btnHasilKlaim.setText("IDRG Final");
-                                    btnHasilKlaim.setGlassColor(new Color(30, 230, 255));
-                                    btnHasilKlaim.setForeground(new Color(45, 40, 55));
+                                    tabMode.setValueAt("IDRG Final", selectedRow, 11);
+                                    tabMode.setValueAt(4, selectedRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
                                     break;
                                 case 5:
-                                    btnHasilKlaim.setEnabled(false);
-                                    btnHasilKlaim.setText("IDRG Grouping");
-                                    btnHasilKlaim.setGlassColor(new Color(30, 230, 255));
-                                    btnHasilKlaim.setForeground(new Color(45, 40, 55));
+                                    tabMode.setValueAt("IDRG Grouping", selectedRow, 11);
+                                    tabMode.setValueAt(5, selectedRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
                                     break;
                                 default:
-                                    btnHasilKlaim.setEnabled(false);
-                                    btnHasilKlaim.setText("Belum");
-                                    btnHasilKlaim.setGlassColor(new Color(240, 240, 240));
-                                    btnHasilKlaim.setForeground(new Color(50, 50, 50));
+                                    tabMode.setValueAt("Belum", selectedRow, 11);
+                                    tabMode.setValueAt(6, selectedRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
                                     break;
                             }
                         });
@@ -1158,11 +1151,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         tbKompilasi.setName("tbKompilasi"); // NOI18N
         tbKompilasi.setPreferredScrollableViewportSize(null);
         tbKompilasi.setPreferredSize(null);
-        tbKompilasi.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tbKompilasiMouseReleased(evt);
-            }
-        });
         tbKompilasi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 tbKompilasiKeyReleased(evt);
@@ -2857,7 +2845,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 hapusOtomatisDiagnosaProsedur = hapusotomatis;
                 kategoriUploadBerkas = kategoriUpload;
                 if (selectedRow >= 0) {
-                    tbKompilasiMouseReleased(null);
+                    onListSelectionModelValueChanged(null);
                 }
                 JOptionPane.showMessageDialog(null, "Pengaturan kompilasi berhasil disimpan..!!");
                 WindowPengaturan.dispose();
@@ -2959,16 +2947,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             tbKompilasi.setValueAt(false, i, 0);
         }
     }//GEN-LAST:event_ppBersihkanActionPerformed
-
-    private void tbKompilasiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKompilasiMouseReleased
-        if (evt != null && evt.getClickCount() >= 2) {
-            evt.consume();
-        } else {
-            if (tbKompilasi.getRowCount() > 0) {
-
-            }
-        }
-    }//GEN-LAST:event_tbKompilasiMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
