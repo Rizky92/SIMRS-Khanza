@@ -1184,7 +1184,7 @@ public class DlgPiutang extends javax.swing.JDialog {
             return;
         }
         caripiutang.setVisible(true);
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
             dispose();

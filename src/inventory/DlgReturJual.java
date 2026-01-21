@@ -833,7 +833,7 @@ public class DlgReturJual extends javax.swing.JDialog {
             return;
         }
         cariretur.setVisible(true);
-}//GEN-LAST:event_BtnCariActionPerformed
+    }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
             dispose();
@@ -1003,7 +1003,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_KdbarKeyPressed
 
-private void BtnBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBrgActionPerformed
+    private void BtnBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBrgActionPerformed
         if (barang == null || !barang.isDisplayable()) {
             barang=new DlgBarang(null,false);
             barang.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -1077,7 +1077,7 @@ private void BtnBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             return;
         }
         barang.setVisible(true);
-}//GEN-LAST:event_BtnBrgActionPerformed
+    }//GEN-LAST:event_BtnBrgActionPerformed
 
     private void JmlreturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JmlreturKeyPressed
         Valid.pindah(evt, NoNota,Hargaretur);

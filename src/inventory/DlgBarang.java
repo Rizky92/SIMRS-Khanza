@@ -1719,45 +1719,45 @@ public class DlgBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_kelas2KeyPressed
 
     private void LetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LetakKeyPressed
-    Valid.pindah(evt, Nm,BtnSatuanBesar);
+        Valid.pindah(evt, Nm,BtnSatuanBesar);
     }//GEN-LAST:event_LetakKeyPressed
 
     private void ralanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ralanKeyPressed
-    Valid.pindah(evt, beli, kelas1);
+        Valid.pindah(evt, beli, kelas1);
     }//GEN-LAST:event_ralanKeyPressed
 
-private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanActionPerformed
-    if (satuan == null || !satuan.isDisplayable()) {
-        satuan = new DlgCariSatuan(null, false);
-        satuan.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-        satuan.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (satuan.getTable().getSelectedRow() != -1) {
-                    kdsat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(), 0).toString());
-                    nmsat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(), 1).toString());
-                    BtnSatuan.requestFocus();
-                    if(kdsat.getText().equals(kdsatBesar.getText())){
-                        Isi.setText("1");
+    private void BtnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSatuanActionPerformed
+        if (satuan == null || !satuan.isDisplayable()) {
+            satuan = new DlgCariSatuan(null, false);
+            satuan.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            satuan.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (satuan.getTable().getSelectedRow() != -1) {
+                        kdsat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(), 0).toString());
+                        nmsat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(), 1).toString());
+                        BtnSatuan.requestFocus();
+                        if(kdsat.getText().equals(kdsatBesar.getText())){
+                            Isi.setText("1");
+                        }
                     }
+                    satuan=null;
                 }
-                satuan=null;
-            }
-        });
-        satuan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        satuan.setLocationRelativeTo(internalFrame1);
-    }
-    if (satuan == null) return;
-    if (!satuan.isVisible()) {
-        satuan.emptTeks();
-    }
+            });
+            satuan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            satuan.setLocationRelativeTo(internalFrame1);
+        }
+        if (satuan == null) return;
+        if (!satuan.isVisible()) {
+            satuan.emptTeks();
+        }
 
-    if (satuan.isVisible()) {
-        satuan.toFront();
-        return;
-    }
-    satuan.setVisible(true);
-}//GEN-LAST:event_BtnSatuanActionPerformed
+        if (satuan.isVisible()) {
+            satuan.toFront();
+            return;
+        }
+        satuan.setVisible(true);
+    }//GEN-LAST:event_BtnSatuanActionPerformed
 
     private void stok_minimalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_stok_minimalKeyPressed
         Valid.pindah(evt, karyawan, DTPExpired);
