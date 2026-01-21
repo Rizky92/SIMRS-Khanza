@@ -80,7 +80,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
         NPWP.setDocument(new batasInput((byte) 30).getOnlyAngka(Telp));
         TCari.setDocument(new batasInput((int) 100).getKata(TCari));
         Password.setDocument(new batasInput((int) 100).getKata(Password));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -103,7 +103,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         penjab.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -111,7 +111,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
                     Kd.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 1).toString());
                 }
             }
-            
+
         });
         penjab.getTable().addKeyListener(new KeyAdapter() {
             @Override
@@ -119,9 +119,9 @@ public class DlgPerusahaan extends javax.swing.JDialog {
                 penjab.dispose();
             }
         });
-        
+
         ChkInput.setSelected(false);
-        isForm();           
+        isForm();
     }
 
     /** This method is called from within the constructor to
@@ -676,16 +676,16 @@ public class DlgPerusahaan extends javax.swing.JDialog {
                     " perusahaan_pasien.alamat like '%"+TCari.getText().trim()+"%' or "+
                     " perusahaan_pasien.kota like '%"+TCari.getText().trim()+"%' or "+
                     " perusahaan_pasien.no_telp like '%"+TCari.getText().trim()+"%' order by perusahaan_pasien.kode_perusahaan";
-            } 
-            Map<String, Object> param = new HashMap<>(); 
+            }
+            Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
                 param.put("kotars",akses.getkabupatenrs());
                 param.put("propinsirs",akses.getpropinsirs());
                 param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());   
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
-            Valid.MyReportqry("rptPerusahaan.jasper","report","::[ Data Instansi/Perusahaan ]::",sql,param);            
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            Valid.MyReportqry("rptPerusahaan.jasper","report","::[ Data Instansi/Perusahaan ]::",sql,param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -708,12 +708,12 @@ public class DlgPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();  
+            dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){            
-            dispose();              
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            dispose();
         }
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
@@ -750,7 +750,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         ChkInput.setSelected(true);
-        isForm(); 
+        isForm();
         emptTeks();
     }//GEN-LAST:event_BtnBatalActionPerformed
 
@@ -773,7 +773,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
     }//GEN-LAST:event_TelpMouseMoved
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-        isForm();                
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -782,7 +782,7 @@ public class DlgPerusahaan extends javax.swing.JDialog {
 
     private void BtnPilihAsuransiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPilihAsuransiActionPerformed
         akses.setform("DlgPerusahaan");
-        penjab.onCari();
+        // penjab.onCari();
         penjab.isCek();
         penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penjab.setLocationRelativeTo(internalFrame1);
@@ -917,26 +917,26 @@ public class DlgPerusahaan extends javax.swing.JDialog {
     public JTable getTable(){
         return tbDokter;
     }
-    
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getperusahaan_pasien());
         BtnHapus.setEnabled(akses.getperusahaan_pasien());
         BtnEdit.setEnabled(akses.getperusahaan_pasien());
         BtnPrint.setEnabled(akses.getperusahaan_pasien());
     }
-    
+
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,128));
-            FormInput.setVisible(true);      
+            FormInput.setVisible(true);
             ChkInput.setVisible(true);
-        }else if(ChkInput.isSelected()==false){           
-            ChkInput.setVisible(false);            
+        }else if(ChkInput.isSelected()==false){
+            ChkInput.setVisible(false);
             PanelInput.setPreferredSize(new Dimension(WIDTH,20));
-            FormInput.setVisible(false);      
+            FormInput.setVisible(false);
             ChkInput.setVisible(true);
         }
-    }    
- 
+    }
+
 }
