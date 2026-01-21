@@ -16005,8 +16005,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(carabayar.getTable().getSelectedRow()!= -1){
-                    kdpenjab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString());
-                    nmpenjab.setText(carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),2).toString());
+                    perJenisAsuransi = " and reg_periksa.kd_pj = '" + carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString() + "' ";
+                    tampil();
                 }
                 kdpenjab.requestFocus();
             }
