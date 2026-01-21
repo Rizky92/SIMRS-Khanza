@@ -1884,7 +1884,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
             metadata = root.path("metaData");
             System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
-            Valid.popupInfoDialog(metadata.path("message").asText(), 3);
+            Valid.popupInfoDialog(metadata.path("message").asText(), 5);
             if (metadata.path("code").asText().equals("200")) {
                 noSEP = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("sep").path("noSep").asText();
                 System.out.println("No. SEP: " + noSEP);

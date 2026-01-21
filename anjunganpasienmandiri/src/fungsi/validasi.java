@@ -270,7 +270,7 @@ public final class validasi {
 
         popup.setVisible(true);
 
-        return (Integer) (pane.getValue() == null ? -1 : pane.getValue());
+        return (Integer) (pane.getValue() == null || pane.getValue().equals(JOptionPane.UNINITIALIZED_VALUE) ? -1 : pane.getValue());
     }
 
     public int popupInfoDialog(String pesan, int timeout) {
