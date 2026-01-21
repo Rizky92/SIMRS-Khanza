@@ -69,18 +69,19 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
         this.setLocation(10, 2);
         setSize(628, 674);
 
-        tabMode = new DefaultTableModel(null, new String[] {"Kode Obat", "Nama Obat", "PRB", "Kronis", "Kemo", "Harga", "Restriksi", "Generik", "Aktif"}) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false;
-            }
+        tabMode=new DefaultTableModel(null,new String[]{
+                "Kode Obat","Nama Obat","PRB","Kronis","Kemo","Harga","Restriksi","Generik","Aktif","Sedia","Stok"
+            }){
+            @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+            Class[] types = new Class[]{
+                java.lang.Object.class,java.lang.Object.class,java.lang.Boolean.class,java.lang.Boolean.class,java.lang.Boolean.class,
+                java.lang.Double.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
+                java.lang.Object.class
+            };
 
             @Override
-            public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex == 5) {
-                    return java.lang.Double.class;
-                }
-                return java.lang.String.class;
+            public Class getColumnClass(int columnIndex) {
+                return types[columnIndex];
             }
         };
         tbKamar.setModel(tabMode);
@@ -89,7 +90,7 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 9; i++) {
+        for (int i = 0; i < 11; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(90);
@@ -104,11 +105,15 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
             } else if (i == 5) {
                 column.setPreferredWidth(80);
             } else if (i == 6) {
-                column.setPreferredWidth(170);
+                column.setPreferredWidth(200);
             } else if (i == 7) {
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(150);
             } else if (i == 8) {
                 column.setPreferredWidth(60);
+            }else if(i==9){
+                column.setPreferredWidth(40);
+            }else if(i==10){
+                column.setPreferredWidth(40);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -338,7 +343,7 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
     public void emptTeks() {
         TCari.requestFocus();
     }
-    
+
     private void tampil() {
         try {
             HttpHeaders headers = new HttpHeaders();
@@ -361,12 +366,11 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
                         response.path("list").forEach((JsonNode item) -> {
                             tabMode.addRow(new Object[] {
                                 item.path("kodeobat").asText(), item.path("namaobat").asText(),
-                                Boolean.parseBoolean(item.path("prb").asText()) ? "Ya" : "Tidak",
-                                Boolean.parseBoolean(item.path("kronis").asText()) ? "Ya" : "Tidak",
-                                Boolean.parseBoolean(item.path("kemo").asText()) ? "Ya" : "Tidak",
-                                item.path("harga").asDouble(),
+                                item.path("prb").asBoolean(), item.path("kronis").asBoolean(),
+                                item.path("kemo").asBoolean(), item.path("harga").asDouble(),
                                 item.path("restriksi").asText(), item.path("generik").asText(),
-                                item.path("aktif").isNull() ? "" : item.path("aktif").asText()
+                                item.path("aktif").isNull() ? "" : item.path("aktif").asText(),
+                                item.path("sedia").asText(), item.path("stok").asText()
                             });
                         });
                     } else {
@@ -378,12 +382,11 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
                             ) {
                                 tabMode.addRow(new Object[] {
                                     item.path("kodeobat").asText(), item.path("namaobat").asText(),
-                                    Boolean.parseBoolean(item.path("prb").asText()) ? "Ya" : "Tidak",
-                                    Boolean.parseBoolean(item.path("kronis").asText()) ? "Ya" : "Tidak",
-                                    Boolean.parseBoolean(item.path("kemo").asText()) ? "Ya" : "Tidak",
-                                    item.path("harga").asDouble(),
+                                    item.path("prb").asBoolean(), item.path("kronis").asBoolean(),
+                                    item.path("kemo").asBoolean(), item.path("harga").asDouble(),
                                     item.path("restriksi").asText(), item.path("generik").asText(),
-                                    item.path("aktif").isNull() ? "" : item.path("aktif").asText()
+                                    item.path("aktif").isNull() ? "" : item.path("aktif").asText(),
+                                    item.path("sedia").asText(), item.path("stok").asText()
                                 });
                             }
                         });
@@ -402,7 +405,7 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
     public JTable getTable() {
         return tbKamar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -428,7 +431,7 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

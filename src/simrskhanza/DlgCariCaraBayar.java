@@ -604,15 +604,11 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
             System.out.println("Notif : " + e);
             tampil();
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void onCari() {
-        TCari.requestFocus();
-    }
-
-    private void isPhoto() {
-        if (ChkAccor.isSelected() == true) {
+    private void isPhoto(){
+        if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
             PanelAccor.setPreferredSize(new Dimension(500, HEIGHT));
             FormPhoto.setVisible(true);
@@ -659,7 +655,7 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -685,7 +681,7 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

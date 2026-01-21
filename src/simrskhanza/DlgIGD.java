@@ -49,8 +49,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
@@ -224,6 +226,7 @@ import surat.SuratSakit;
 import surat.SuratSakitPihak2;
 import surat.SuratTidakHamil;
 import java.util.List;
+import javax.swing.WindowConstants;
 import rekammedis.RMDataSkriningGiziKehamilan;
 
 /**
@@ -237,6 +240,7 @@ public final class DlgIGD extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private DlgPasien pasien=new DlgPasien(null,false);
     private PreparedStatement ps,ps3,pscaripiutang;
+    private DlgCariCaraBayar penjab;
     private ResultSet rs;
     private boolean ceksukses=false;
     private int i=0,jmlparsial=0;
@@ -497,8 +501,8 @@ public final class DlgIGD extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         pasien.kab.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -570,7 +574,7 @@ public final class DlgIGD extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         DlgCatatan.setSize(595,34);
 
         try {
@@ -5557,12 +5561,12 @@ public final class DlgIGD extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgIGD")){
-                    if(dokter.getTable().getSelectedRow()!= -1){    
+                    if(dokter.getTable().getSelectedRow()!= -1){
                             KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                             TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                             isNumber();
                             KdDokter.requestFocus();
-                    }                
+                    }
                 }
             }
             @Override
@@ -6047,46 +6051,42 @@ public final class DlgIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_kdpnjKeyPressed
 
     private void btnPenjabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenjabActionPerformed
-        DlgCariCaraBayar penjab=new DlgCariCaraBayar(null,false);
-        penjab.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(penjab.getTable().getSelectedRow()!= -1){
-                    kdpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
-                    nmpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }  
-                kdpnj.requestFocus();
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        penjab.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    penjab.dispose();
-                } 
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-        penjab.isCek();
-        penjab.onCari();
-        penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        penjab.setLocationRelativeTo(internalFrame1);
+        if (penjab == null || !penjab.isDisplayable()) {
+            penjab=new DlgCariCaraBayar(null,false);
+            penjab.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            penjab.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(penjab.getTable().getSelectedRow()!= -1){
+                        kdpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
+                        nmpnj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
+                    }
+                    kdpnj.requestFocus();
+                    penjab=null;
+                }
+            });
+
+            penjab.getTable().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                        penjab.dispose();
+                    }
+                }
+            });
+            penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            penjab.setLocationRelativeTo(internalFrame1);
+        }
+
+        if (penjab == null) return;
+        if (!penjab.isVisible()) {
+            penjab.emptTeks();
+            penjab.isCek();
+        }
+        if (penjab.isVisible()) {
+            penjab.toFront();
+            return;
+        }
         penjab.setVisible(true);
     }//GEN-LAST:event_btnPenjabActionPerformed
 
@@ -6301,7 +6301,7 @@ public final class DlgIGD extends javax.swing.JDialog {
                     if(rujukmasuk.tbPerujuk.getSelectedRow()!= -1){
                         AsalRujukan.setText(rujukmasuk.tbPerujuk.getValueAt(rujukmasuk.tbPerujuk.getSelectedRow(),0).toString());
                         alamatperujuk=rujukmasuk.tbPerujuk.getValueAt(rujukmasuk.tbPerujuk.getSelectedRow(),1).toString();
-                    }    
+                    }
                     AsalRujukan.requestFocus();
                 }
             }
@@ -6392,10 +6392,10 @@ public final class DlgIGD extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgIGD")){
-                    if(dokter.getTable().getSelectedRow()!= -1){    
+                    if(dokter.getTable().getSelectedRow()!= -1){
                         CrDokter3.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         KdDokter.requestFocus();
-                    }                
+                    }
                 }
             }
             @Override
@@ -12306,11 +12306,11 @@ public final class DlgIGD extends javax.swing.JDialog {
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
                 form.tampil();
-                this.setCursor(Cursor.getDefaultCursor());  
-            }                
+                this.setCursor(Cursor.getDefaultCursor());
+            }
         }
     }
-    
+
     private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningGiziBtnPrintActionPerformed
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
@@ -14099,12 +14099,12 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnSkriningCURB65.setName("MnSkriningCURB65");
         MnSkriningCURB65.setPreferredSize(new java.awt.Dimension(200, 26));
         MnSkriningCURB65.addActionListener(this::MnSkriningCURB65ActionPerformed);
-        
+
         MnSkriningGiziKehamilan = new javax.swing.JMenuItem();
         MnSkriningGiziKehamilan.setBackground(new java.awt.Color(255, 255, 254));
         MnSkriningGiziKehamilan.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSkriningGiziKehamilan.setForeground(new java.awt.Color(50, 50, 50));
-        MnSkriningGiziKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSkriningGiziKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
         MnSkriningGiziKehamilan.setText("Skrining Gizi Kehamilan/Obstetri/Nifas");
         MnSkriningGiziKehamilan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSkriningGiziKehamilan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -14318,7 +14318,7 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnDataRM.add(ppResume);
         MnDataRM.add(ppRiwayat);
         MnDataRM.add(ppDeteksiDIniCorona);
-        
+
         MnGizi.add(ppSkriningNutrisiDewasa);
         MnGizi.add(ppSkriningNutrisiLansia);
         MnGizi.add(ppSkriningNutrisiAnak);
