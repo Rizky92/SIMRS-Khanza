@@ -1628,7 +1628,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
                 kdgudang.requestFocus();
-                kdgudang.requestFocus();
                 bangsal=null;
             }
         });

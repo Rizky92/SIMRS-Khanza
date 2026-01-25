@@ -29,6 +29,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -48,6 +49,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -82,7 +84,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                    Persediaan_Obat_Rawat_Inap="",hppfarmasi="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),
                    VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="";
     private WarnaTable2 warna=new WarnaTable2();
-    private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
+    private DlgCariBangsal lokasidepo;
     private DlgCariAturanPakai aturanpakai = null;
     private WarnaTable2 warna2=new WarnaTable2();
     private WarnaTable2 warna3=new WarnaTable2();
@@ -99,6 +101,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private FileWriter fileWriter;
     private FileReader myObj;
     private String TANGGALMUNDUR="yes";
+    private DlgResepObat ResepObat;
     private Map<String, Object> map;
     private boolean autovalidasi = false, previewLembarObat = false, previewAturanPakai = false;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
@@ -337,31 +340,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             });
         }
         jam();
-
-        caribangsal.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(caribangsal.getTable().getSelectedRow()!= -1){
-                    kdgudang.setText(caribangsal.getTable().getValueAt(caribangsal.getTable().getSelectedRow(),0).toString());
-                    nmgudang.setText(caribangsal.getTable().getValueAt(caribangsal.getTable().getSelectedRow(),1).toString());
-                    BtnAllActionPerformed(null);
-                }
-                TCari.requestFocus();
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
+        
         try {
             aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
             if(aktifkanbatch.equals("no")){
@@ -1483,8 +1462,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                             resep.isCek();
                             resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),"ranap");
                             resep.tampil2();
-                            //resep.setAlwaysOnTop(true);
-                            resep.dokter.setAlwaysOnTop(true);
                             resep.setVisible(true);
                         }
                         dispose();
@@ -1560,14 +1537,32 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
     private void ChkNoResepItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkNoResepItemStateChanged
         if(ChkNoResep.isSelected()==true){
-            DlgResepObat resep=new DlgResepObat(null,false);
-            resep.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-            resep.setLocationRelativeTo(internalFrame1);
-            resep.emptTeks();
-            resep.isCek();
-            resep.setNoRm(TNoRw.getText(),DTPTgl.getDate(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),"ralan");
-            resep.tampil2();
-            resep.setVisible(true);
+            if (ResepObat == null || !ResepObat.isDisplayable()) {
+                ResepObat=new DlgResepObat(null,false);
+                ResepObat.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                ResepObat.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        ResepObat=null;
+                    }
+                }); 
+
+                ResepObat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                ResepObat.setLocationRelativeTo(internalFrame1);
+            }
+            if (ResepObat == null) return;
+            if (!ResepObat.isVisible()) { 
+                ResepObat.emptTeks();
+                ResepObat.isCek();
+                ResepObat.setNoRm(TNoRw.getText(),DTPTgl.getDate(),DTPTgl.getDate(),cmbJam.getSelectedItem().toString(),cmbMnt.getSelectedItem().toString(),cmbDtk.getSelectedItem().toString(),"ralan");
+                ResepObat.tampil2();
+            }
+
+            if (ResepObat.isVisible()) {
+                ResepObat.toFront();
+                return;
+            }
+            ResepObat.setVisible(true);
         }
     }//GEN-LAST:event_ChkNoResepItemStateChanged
 
@@ -1617,12 +1612,35 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }//GEN-LAST:event_kdgudangKeyPressed
 
     private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
-        caribangsal.isCek();
-        caribangsal.emptTeks();
-        caribangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        caribangsal.setLocationRelativeTo(internalFrame1);
-        caribangsal.setAlwaysOnTop(false);
-        caribangsal.setVisible(true);
+        if (lokasidepo == null || !lokasidepo.isDisplayable()) {
+            lokasidepo=new DlgCariBangsal(null,false);
+            lokasidepo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            lokasidepo.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if(lokasidepo.getTable().getSelectedRow()!= -1){                   
+                        kdgudang.setText(lokasidepo.getTable().getValueAt(lokasidepo.getTable().getSelectedRow(),0).toString());
+                        nmgudang.setText(lokasidepo.getTable().getValueAt(lokasidepo.getTable().getSelectedRow(),1).toString());
+                    } 
+                    kdgudang.requestFocus();
+                    lokasidepo=null;
+                }
+            }); 
+
+            lokasidepo.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            lokasidepo.setLocationRelativeTo(internalFrame1);
+        }
+        if (lokasidepo == null) return;
+        if (!lokasidepo.isVisible()) {
+            lokasidepo.isCek();    
+            lokasidepo.emptTeks();
+        }
+
+        if (lokasidepo.isVisible()) {
+            lokasidepo.toFront();
+            return;
+        }
+        lokasidepo.setVisible(true);
     }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void tbObatRacikanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatRacikanKeyPressed

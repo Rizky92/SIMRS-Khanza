@@ -621,7 +621,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                                     "\"identifier\": [" +
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/acsn/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString()+"."+tbObat.getValueAt(i,17).toString()+"\"" +
+                                            "\"value\": \""+tbObat.getValueAt(i,9).toString().replaceAll("PR","")+tbObat.getValueAt(i,17).toString()+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"active\"," +
@@ -732,7 +732,7 @@ public final class SatuSehatKirimServiceRequestRadiologi extends javax.swing.JDi
                                     "\"identifier\": [" +
                                         "{" +
                                             "\"system\": \"http://sys-ids.kemkes.go.id/acsn/"+koneksiDB.IDSATUSEHAT()+"\"," +
-                                            "\"value\": \""+tbObat.getValueAt(i,9).toString()+"."+tbObat.getValueAt(i,17).toString()+"\"" +
+                                            "\"value\": \""+tbObat.getValueAt(i,9).toString().replaceAll("PR","")+tbObat.getValueAt(i,17).toString()+"\"" +
                                         "}" +
                                     "]," +
                                     "\"status\": \"active\"," +
