@@ -1400,7 +1400,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             dokter.setLocationRelativeTo(internalFrame1);
         }
         if (dokter == null) return;
-        dokter.isCek();
+        if (!dokter.isVisible()) {
+            dokter.isCek();
+            dokter.emptTeks();
+        }
         if (dokter.isVisible()) {
             dokter.toFront();
             return;

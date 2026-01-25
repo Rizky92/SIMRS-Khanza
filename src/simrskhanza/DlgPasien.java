@@ -5327,7 +5327,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
             if (kelurahanref == null) return;
             if (!kelurahanref.isVisible()) {
-                kelurahanref.setPropinsi(KdKab.getText(),Kabupaten.getText());
+                kelurahanref.setPropinsi(KdKec.getText(),Kecamatan.getText());
             }  
             if (kelurahanref.isVisible()) {
                 kelurahanref.toFront();
@@ -5432,7 +5432,6 @@ public class DlgPasien extends javax.swing.JDialog {
                             KdKab.setText(kabupatenref.getTable().getValueAt(kabupatenref.getTable().getSelectedRow(),1).toString());
                             kdkab="";
                             Kabupaten.setText(kabupatenref.getTable().getValueAt(kabupatenref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                            KabupatenPj.setText(kabupatenref.getTable().getValueAt(kabupatenref.getTable().getSelectedRow(),2).toString().toUpperCase());
                         } 
                         kabupatenref=null;
                     }
@@ -6262,7 +6261,7 @@ public class DlgPasien extends javax.swing.JDialog {
 
                 if (kelurahanref == null) return;
                 if (!kelurahanref.isVisible()) {
-                    kelurahanref.setPropinsi(KdKab.getText(),Kabupaten.getText());
+                    kelurahanref.setPropinsi(KdKec.getText(),KecamatanPj.getText());
                 }  
                 if (kelurahanref.isVisible()) {
                     kelurahanref.toFront();

@@ -7125,15 +7125,15 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         formrawatjalan.isCek();
                         formrawatjalan.SetPoli(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),18).toString());
                         formrawatjalan.SetPj(tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),17).toString());
-                        formrawatjalan.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());  
-                    }  
+                        formrawatjalan.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());
+                    }
                     if (formrawatjalan.isVisible()) {
                         formrawatjalan.toFront();
                         return;
-                    }    
+                    }
                     formrawatjalan.setVisible(true);
-                } 
-            }                               
+                }
+            }
         }
     }//GEN-LAST:event_MnDataRalanActionPerformed
 
@@ -8682,7 +8682,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             if(tbKasirRalan2.getSelectedRow()!= -1){
                 if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),10).toString())>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Pasien sudah masuk Kamar Inap. Gunakan billing Ranap..!!!");
-                }else{      
+                }else{
                     if (formrawatjalan == null || !formrawatjalan.isDisplayable()) {
                         formrawatjalan=new DlgRawatJalan(null,false);
                         formrawatjalan.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -8708,15 +8708,15 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             DTPCari1.getDate(),DTPCari2.getDate(),
                             tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),0).toString(),
                             tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),1).toString()
-                        );   
-                    }  
+                        );
+                    }
                     if (formrawatjalan.isVisible()) {
                         formrawatjalan.toFront();
                         return;
-                    }    
+                    }
                     formrawatjalan.setVisible(true);
-                } 
-            }                               
+                }
+            }
         }
     }//GEN-LAST:event_MnDataRalan1ActionPerformed
 
@@ -11468,7 +11468,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     resume.setLocationRelativeTo(internalFrame1);
                     resume.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                    resume.tampil();
+                    resume.tampil2();
                     resume.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }

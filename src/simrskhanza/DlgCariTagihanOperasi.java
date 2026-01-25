@@ -1901,8 +1901,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         WindowGantiDokterParamedis.dispose();
-        petugas.dispose();
-        dokter.dispose();
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
