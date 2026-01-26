@@ -31,6 +31,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.TimeUnit;
@@ -472,6 +473,24 @@ public final class validasi {
         } catch (Exception e) {}
 
         return 0;
+    }
+
+    public String setAngkaSmc(Double value) {
+        if (value == null || value.equals("0")) {
+            return "0";
+        }
+
+        try {
+            BigDecimal bd = new BigDecimal(value);
+            bd.setScale(2, RoundingMode.HALF_UP);
+            return bd.toPlainString();
+        } catch (Exception e) {}
+
+        try {
+            return Double.toString(value);
+        } catch (Exception e) {}
+
+        return "";
     }
 
     public boolean umurcacheSmc(String path, int hari) {

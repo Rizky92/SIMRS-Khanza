@@ -12,19 +12,16 @@
 package keuangan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import java.awt.Component;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
-import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
@@ -36,14 +33,16 @@ import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
-import javax.swing.JLabel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import simrskhanza.DlgCariCaraBayar;
@@ -77,12 +76,23 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(885,674);
 
-        Object[] rowRwJlDr={"Tanggal","No.Rawat","No.Nota","No.RM","Nama Pasien","Jenis Bayar","Perujuk",
-                            "Registrasi","Obat+Emb+Tsl","Paket Tindakan","Operasi",
-                            "Laborat","Radiologi","Tambahan","Potongan",
-                            "Total","Ekses","Sudah Dibayar","Diskon Bayar","Tidak Terbayar","Sisa","Dokter"};
-        tabMode=new DefaultTableModel(null,rowRwJlDr){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        Object[] rowRwJlDr = {"Tanggal", "No.Rawat", "No.Nota", "No.RM", "Nama Pasien", "Jenis Bayar", "Perujuk",
+            "Registrasi", "Obat+Emb+Tsl", "Paket Tindakan", "Operasi",
+            "Laborat", "Radiologi", "Tambahan", "Potongan",
+            "Total", "Ekses", "Sudah Dibayar", "Diskon Bayar", "Tidak Terbayar", "Sisa", "Dokter"};
+        tabMode = new DefaultTableModel(null, rowRwJlDr) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex >= 7 && columnIndex <= 20) {
+                    return Double.class;
+                }
+                return String.class;
+            }
         };
         tbBangsal.setModel(tabMode);
         //tbBangsal.setDefaultRenderer(Object.class, new WarnaTable(jPanel2.getBackground(),tbBangsal.getBackground()));
@@ -113,19 +123,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                 column.setPreferredWidth(85);
             }
         }
-        tbBangsal.setDefaultRenderer(Object.class, new WarnaTable() {
-            @Override
-            public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
-                JLabel c = (JLabel) super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                if (column > 6 && column < 21) {
-                    c.setHorizontalAlignment(JLabel.RIGHT);
-                } else {
-                    c.setHorizontalAlignment(JLabel.LEFT);
-                }
-
-                return c;
-            }
-        });
+        tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
     }
@@ -605,33 +603,60 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                             Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
-                            htmlContent = new StringBuilder();
-                            htmlContent.append(
-                                "\"Tanggal\";\"No.Nota\";\"No.RM\";\"Nama Pasien\";\"Jenis Bayar\";\"Perujuk\";\"Registrasi\";\"Obat+Emb+Tsl\";\"Paket Tindakan\";\"Operasi\";\"Laborat\";\"Radiologi\";\"Tambahan\";\"Potongan\";\"Total\";\"Ekses\";\"Sudah Dibayar\";\"Diskon Bayar\";\"Tidak Terbayar\";\"Sisa\";\"Dokter\"\n"
-                            );
-                            for(int i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "\"").append(tabMode.getValueAt(i,0)).append("\";\"").append(tabMode.getValueAt(i,1)).append("\";\"").append(tabMode.getValueAt(i,2)).append("\";\"").append(tabMode.getValueAt(i,3)).append("\";\"").append(tabMode.getValueAt(i,4)).append("\";\"").append(tabMode.getValueAt(i,5)).append("\";\"").append(tabMode.getValueAt(i,6)).append("\";\"").append(tabMode.getValueAt(i,7)).append("\";\"").append(tabMode.getValueAt(i,8)).append("\";\"").append(tabMode.getValueAt(i,9)).append("\";\"").append(tabMode.getValueAt(i,10)).append("\";\"").append(tabMode.getValueAt(i,11)).append("\";\"").append(tabMode.getValueAt(i,12)).append("\";\"").append(tabMode.getValueAt(i,13)).append("\";\"").append(tabMode.getValueAt(i,14)).append("\";\"").append(tabMode.getValueAt(i,15)).append("\";\"").append(tabMode.getValueAt(i,16)).append("\";\"").append(tabMode.getValueAt(i,17)).append("\";\"").append(tabMode.getValueAt(i,18)).append("\";\"").append(tabMode.getValueAt(i,19)).append("\";\"").append(tabMode.getValueAt(i,20)).append("\"\n"
-                                );
+                        htmlContent = new StringBuilder();
+                        htmlContent.append("\"Tanggal\";\"No.Rawat\";\"No.Nota\";\"No.RM\";\"Nama Pasien\";\"Jenis Bayar\";\"Perujuk\";\"Registrasi\";\"Obat+Emb+Tsl\";")
+                            .append("\"Paket Tindakan\";\"Operasi\";\"Laborat\";\"Radiologi\";\"Tambahan\";\"Potongan\";\"Total\";\"Ekses\";\"Sudah Dibayar\";\"Diskon Bayar\";")
+                            .append("\"Tidak Terbayar\";\"Sisa\";\"Dokter\"\n");
+                        for(int i=0;i<tabMode.getRowCount();i++){
+                            htmlContent.append("\"").append((String) tabMode.getValueAt(i, 0)).append("\";\"").append((String) tabMode.getValueAt(i, 1)).append("\";\"")
+                                .append((String) tabMode.getValueAt(i, 2)).append("\";\"").append((String) tabMode.getValueAt(i, 3)).append("\";\"").append((String) tabMode.getValueAt(i, 4)).append("\";\"")
+                                .append((String) tabMode.getValueAt(i, 5)).append("\";\"").append((String) tabMode.getValueAt(i, 6)).append("\";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 7)))
+                                .append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 8))).append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 9)))
+                                .append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 10))).append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 11)))
+                                .append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 12))).append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 13)))
+                                .append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 14))).append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 15)))
+                                .append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 16))).append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 17)))
+                                .append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 18))).append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 19)))
+                                .append(";").append(Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 20))).append(";\"").append((String) tabMode.getValueAt(i, 21)).append("\"\n");
+                        }
+                        JFileChooser fc = new JFileChooser();
+                        fc.setDialogTitle("Simpan CSV");
+                        fc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+                        fc.setFileFilter(new FileNameExtensionFilter("CSV Files (*.csv)", "csv"));
+                        fc.setSelectedFile(new File("PiutangRalan.csv"));
+                        int result = fc.showSaveDialog(this);
+                        if (result == JFileChooser.APPROVE_OPTION) {
+                            f = fc.getSelectedFile();
+                            if (!f.getName().toLowerCase().endsWith(".csv")) {
+                                f = new File(f.getParentFile(), f.getName() + ".csv");
                             }
+                            if (f.exists()) {
+                                if (JOptionPane.showConfirmDialog(null, "Anda yakin ingin replace file ini?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                                    bw = new BufferedWriter(new FileWriter(f));
+                                    bw.write(htmlContent.toString());
 
-                            f = new File("PiutangRalan.csv");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(htmlContent.toString());
+                                    bw.close();
+                                    Desktop.getDesktop().browse(f.toURI());
+                                }
+                            } else {
+                                bw = new BufferedWriter(new FileWriter(f));
+                                bw.write(htmlContent.toString());
 
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                                bw.close();
+                                Desktop.getDesktop().browse(f.toURI());
+                            }
+                        }
                         break;
                     case "Laporan 4 (Jasper)":
                         Sequel.deleteTemporary();
                         for (int i = 0; i < tabMode.getRowCount(); i++) {
                             Sequel.temporary(String.valueOf(i),
                                 (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2), (String) tabMode.getValueAt(i, 3),
-                                (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6), (String) tabMode.getValueAt(i, 7),
-                                (String) tabMode.getValueAt(i, 8), (String) tabMode.getValueAt(i, 9), (String) tabMode.getValueAt(i, 10), (String) tabMode.getValueAt(i, 11),
-                                (String) tabMode.getValueAt(i, 12), (String) tabMode.getValueAt(i, 13), (String) tabMode.getValueAt(i, 14), (String) tabMode.getValueAt(i, 15),
-                                (String) tabMode.getValueAt(i, 16), (String) tabMode.getValueAt(i, 17), (String) tabMode.getValueAt(i, 18), (String) tabMode.getValueAt(i, 19),
-                                (String) tabMode.getValueAt(i, 20), (String) tabMode.getValueAt(i, 21));
+                                (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6), Valid.SetAngka((Double) tabMode.getValueAt(i, 7)),
+                                Valid.SetAngka((Double) tabMode.getValueAt(i, 8)), Valid.SetAngka((Double) tabMode.getValueAt(i, 9)), Valid.SetAngka((Double) tabMode.getValueAt(i, 10)), Valid.SetAngka((Double) tabMode.getValueAt(i, 11)),
+                                Valid.SetAngka((Double) tabMode.getValueAt(i, 12)), Valid.SetAngka((Double) tabMode.getValueAt(i, 13)), Valid.SetAngka((Double) tabMode.getValueAt(i, 14)), Valid.SetAngka((Double) tabMode.getValueAt(i, 15)),
+                                Valid.SetAngka((Double) tabMode.getValueAt(i, 16)), Valid.SetAngka((Double) tabMode.getValueAt(i, 17)), Valid.SetAngka((Double) tabMode.getValueAt(i, 18)), Valid.SetAngka((Double) tabMode.getValueAt(i, 19)),
+                                Valid.SetAngka((Double) tabMode.getValueAt(i, 20)), (String) tabMode.getValueAt(i, 21));
                         }
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars", akses.getnamars());
@@ -888,7 +913,6 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                     ttlObat = 0, ttlRalan_Dokter = 0, ttlRalan_Paramedis = 0, ttlTambahan = 0,
                     ttlPotongan = 0, ttlRegistrasi = 0, ttlekses = 0, ttldibayar = 0, ttlsisa = 0,
                     ttldiskon = 0, ttltidakdibayar = 0;
-                private int count = 0;
                 @Override
                 protected Void doInBackground() {
                     String statuspiutang = "";
@@ -954,22 +978,22 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                                 ttlsisa += rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan") -
                                            rs.getDouble("diskon_piutang") - rs.getDouble("tidak_terbayar");
 
-                                ++count;
-
                                 publish(new Object[] {
                                     rs.getString("tgl_registrasi"), rs.getString("no_rawat"), rs.getString("no_nota"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
-                                    rs.getString("png_jawab") + " (" + rs.getString("kd_pj") + ")", rs.getString("asal_rujuk"), Valid.SetAngka(rs.getDouble("registrasi")),
-                                    Valid.SetAngka(rs.getDouble("obat")), Valid.SetAngka(rs.getDouble("ralan_dr") + rs.getDouble("ralan_pr") + rs.getDouble("ralan_drpr")),
-                                    Valid.SetAngka(rs.getDouble("operasi")), Valid.SetAngka(rs.getDouble("laborat")), Valid.SetAngka(rs.getDouble("radiologi")),
-                                    Valid.SetAngka(rs.getDouble("tambahan")), Valid.SetAngka(rs.getDouble("potongan")), Valid.SetAngka(rs.getDouble("laborat") +
-                                    rs.getDouble("radiologi") + rs.getDouble("obat") + rs.getDouble("ralan_dr") + rs.getDouble("ralan_pr") + rs.getDouble("ralan_drpr") +
-                                    rs.getDouble("tambahan") + rs.getDouble("potongan") + rs.getDouble("registrasi") + rs.getDouble("operasi")), Valid.SetAngka(rs.getDouble("uangmuka")),
-                                    Valid.SetAngka(rs.getDouble("besar_cicilan")), Valid.SetAngka(rs.getDouble("diskon_piutang")), Valid.SetAngka(rs.getDouble("tidak_terbayar")),
-                                    Valid.SetAngka(rs.getDouble("totalpiutang") - rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan") - rs.getDouble("diskon_piutang") -
-                                    rs.getDouble("tidak_terbayar")), rs.getString("nm_dokter")
+                                    rs.getString("png_jawab") + " (" + rs.getString("kd_pj") + ")", rs.getString("asal_rujuk"), rs.getDouble("registrasi"), rs.getDouble("obat"),
+                                    rs.getDouble("ralan_dr") + rs.getDouble("ralan_pr") + rs.getDouble("ralan_drpr"), rs.getDouble("operasi"), rs.getDouble("laborat"), rs.getDouble("radiologi"),
+                                    rs.getDouble("tambahan"), rs.getDouble("potongan"), rs.getDouble("laborat") + rs.getDouble("radiologi") + rs.getDouble("obat") + rs.getDouble("ralan_dr") +
+                                    rs.getDouble("ralan_pr") + rs.getDouble("ralan_drpr") + rs.getDouble("tambahan") + rs.getDouble("potongan") + rs.getDouble("registrasi") + rs.getDouble("operasi"),
+                                    rs.getDouble("uangmuka"), rs.getDouble("besar_cicilan"), rs.getDouble("diskon_piutang"), rs.getDouble("tidak_terbayar"), rs.getDouble("totalpiutang") -
+                                    rs.getDouble("uangmuka") - rs.getDouble("besar_cicilan") - rs.getDouble("diskon_piutang") - rs.getDouble("tidak_terbayar"), rs.getString("nm_dokter")
                                 });
                             }
                         }
+                        publish(new Object[] {
+                            ">> Total", ":", "", "", "", "", "", ttlRegistrasi, ttlObat, ttlRalan_Dokter + ttlRalan_Paramedis, ttlOperasi, ttlLaborat,
+                            ttlRadiologi, ttlTambahan, ttlPotongan, ttlLaborat + ttlRadiologi + ttlObat + ttlRalan_Dokter + ttlRalan_Paramedis + ttlTambahan +
+                            ttlPotongan + ttlRegistrasi + ttlOperasi, ttlekses, ttldibayar, ttldiskon, ttltidakdibayar, ttlsisa, ""
+                        });
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
@@ -984,15 +1008,9 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
 
                 @Override
                 protected void done() {
-                    tabMode.addRow(new Object[] {
-                        ">> Total", ":", "", "", "", "", "", Valid.SetAngka(ttlRegistrasi), Valid.SetAngka(ttlObat), Valid.SetAngka(ttlRalan_Dokter + ttlRalan_Paramedis),
-                        Valid.SetAngka(ttlOperasi), Valid.SetAngka(ttlLaborat), Valid.SetAngka(ttlRadiologi), Valid.SetAngka(ttlTambahan), Valid.SetAngka(ttlPotongan),
-                        Valid.SetAngka(ttlLaborat + ttlRadiologi + ttlObat + ttlRalan_Dokter + ttlRalan_Paramedis + ttlTambahan + ttlPotongan + ttlRegistrasi + ttlOperasi),
-                        Valid.SetAngka(ttlekses), Valid.SetAngka(ttldibayar), Valid.SetAngka(ttldiskon), Valid.SetAngka(ttltidakdibayar), Valid.SetAngka(ttlsisa), ""
-                    });
                     tabMode.fireTableDataChanged();
                     LCount.setText(Valid.SetAngka(all));
-                    LCount2.setText("" + count);
+                    LCount2.setText("" + tabMode.getRowCount());
                     setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
