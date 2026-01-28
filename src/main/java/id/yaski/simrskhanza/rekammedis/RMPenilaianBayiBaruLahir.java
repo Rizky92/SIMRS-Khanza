@@ -1,0 +1,4656 @@
+/*
+ * Kontribusi dari windiarto
+ */
+
+
+package id.yaski.simrskhanza.rekammedis;
+
+import id.yaski.simrskhanza.fungsi.WarnaTable;
+import id.yaski.simrskhanza.fungsi.WarnaTable5;
+import id.yaski.simrskhanza.fungsi.batasInput;
+import id.yaski.simrskhanza.fungsi.koneksiDB;
+import id.yaski.simrskhanza.fungsi.sekuel;
+import id.yaski.simrskhanza.fungsi.validasi;
+import id.yaski.simrskhanza.fungsi.akses;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.Date;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import javax.swing.text.Document;
+import javax.swing.text.html.HTMLEditorKit;
+import javax.swing.text.html.StyleSheet;
+import id.yaski.simrskhanza.kepegawaian.DlgCariDokter;
+import id.yaski.simrskhanza.simrskhanza.DlgCariPasien;
+
+
+/**
+ *
+ * @author perpustakaan
+ */
+public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
+    private final DefaultTableModel tabMode,tabModeRiwayatKehamilan,tabModeAPGAR;
+    private Connection koneksi=koneksiDB.condb();
+    private sekuel Sequel=new sekuel();
+    private validasi Valid=new validasi();
+    private PreparedStatement ps;
+    private ResultSet rs;
+    private int i=0;
+    private DlgCariDokter dokter=new DlgCariDokter(null,false);
+    private StringBuilder htmlContent;
+    private String TANGGALMUNDUR="yes";
+
+    /** Creates new form DlgRujuk
+     * @param parent
+     * @param modal */
+    public RMPenilaianBayiBaruLahir(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        DlgRiwayatPersalinan.setSize(650,192);
+
+        tabMode=new DefaultTableModel(null,new Object[]{
+            "No.Rawat","No.RM","Nama Pasien","Tgl.Lahir","J.K.","No.RM IBU","Nama Ibu","Tgl.Lahir Ibu","NIK Ibu","Perkawinan Ibu","Kode Dokter","Nama Dokter","Tanggal","Penyakit Ibu",
+            "Keterangan Penyakit Diderita Ibu","Obat Dikonsumsi Selama Kehamilan","Perawatan Antenatal","Keterangan Perawatan Antenatal","Terdaftar Ekohort","Keterangan Terdaftar Ekohort",
+            "Penyulit Kehamilan","Keterangan Penyulit Kehamilan","Alergi","Keterangan Lainnya Riwayat Maternal","Umur Kehamilan","Kehamilan","Keterangan Kehamilan","Urutan Kehamilan","Jam Ketuban Pecah",
+            "Menit Ketuban Pecah","Jumlah Air Ketuban","Warna Air Ketuban","Bau Air Ketuban","Letak Bayi","Macam Persalinan","Keterangan Macam Persalinan","Indikasi Persalinan Operatif",
+            "Keterangan Indikasi Persalinan Operatif","Lama Gawat Janin","Obat Selama Persalinan","Berat Placenta","Kelainan Placenta","Keterangan Lainnya Riwayat Persalinan","F 1","U 1",
+            "T 1","R 1","W 1","N 1'","F 5","U 5","T 5","R 5","W 5","N 5'","F 10","U 10","T 10","R 10","W 10","N 10'","B.B.","P.B.","L.K.","L.D.","Resusitasi Lahir","Keterangan Resusitasi Saat Lahir",
+            "Obat Diberikan Saat Lahir","Keterangan Lainnya Keadaan Bayi","Kondisi Umum","Keterangan Kondisi Umum","Kulit","Keterangan Kulit","Kepala","Keterangan Kepala","Leher","Keterangan Leher",
+            "Mata","Keterangan Mata","Hidung","Keterangan Hidung","Telinga","Keterangan Telinga","Dada","Keterangan Dada","Paru","Keterangan Paru","Jantung","Keterangan Jantung","Perut","Keterangan Perut",
+            "Tali Pusat","Keterangan Tali Pusat","Alat Kelamin","Keterangan Alat Kelamin","Ruas Tulang Belakang","Keterangan Ruas Tulang Belakang","Extrimitas","Keterangan Extrimitas","Anus",
+            "Keterangan Anus","Refleks","Keterangan Refleks","Denyut Femoral","Keterangan Denyut Femoral","Pemeriksaan Fisik Lainnya","Pemeriksaan Penunjang","Diagnosa","Tatalaksana"
+        }){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+
+        tbObat.setModel(tabMode);
+        tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
+        tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (i = 0; i < 109; i++) {
+            TableColumn column = tbObat.getColumnModel().getColumn(i);
+            if(i==0){
+                column.setPreferredWidth(105);
+            }else if(i==1){
+                column.setPreferredWidth(70);
+            }else if(i==2){
+                column.setPreferredWidth(150);
+            }else if(i==3){
+                column.setPreferredWidth(65);
+            }else if(i==4){
+                column.setPreferredWidth(60);
+            }else if(i==5){
+                column.setPreferredWidth(80);
+            }else if(i==6){
+                column.setPreferredWidth(150);
+            }else if(i==7){
+                column.setPreferredWidth(70);
+            }else if(i==8){
+                column.setPreferredWidth(110);
+            }else if(i==9){
+                column.setPreferredWidth(90);
+            }else if(i==10){
+                column.setPreferredWidth(90);
+            }else if(i==11){
+                column.setPreferredWidth(150);
+            }else if(i==12){
+                column.setPreferredWidth(115);
+            }else if(i==13){
+                column.setPreferredWidth(70);
+            }else if(i==14){
+                column.setPreferredWidth(170);
+            }else if(i==15){
+                column.setPreferredWidth(200);
+            }else if(i==16){
+                column.setPreferredWidth(110);
+            }else if(i==17){
+                column.setPreferredWidth(170);
+            }else if(i==18){
+                column.setPreferredWidth(95);
+            }else if(i==19){
+                column.setPreferredWidth(155);
+            }else if(i==20){
+                column.setPreferredWidth(101);
+            }else if(i==21){
+                column.setPreferredWidth(163);
+            }else if(i==22){
+                column.setPreferredWidth(120);
+            }else if(i==23){
+                column.setPreferredWidth(200);
+            }else if(i==24){
+                column.setPreferredWidth(88);
+            }else if(i==25){
+                column.setPreferredWidth(62);
+            }else if(i==26){
+                column.setPreferredWidth(125);
+            }else if(i==27){
+                column.setPreferredWidth(97);
+            }else if(i==28){
+                column.setPreferredWidth(105);
+            }else if(i==29){
+                column.setPreferredWidth(110);
+            }else if(i==30){
+                column.setPreferredWidth(105);
+            }else if(i==31){
+                column.setPreferredWidth(120);
+            }else if(i==32){
+                column.setPreferredWidth(120);
+            }else if(i==33){
+                column.setPreferredWidth(150);
+            }else if(i==34){
+                column.setPreferredWidth(97);
+            }else if(i==35){
+                column.setPreferredWidth(157);
+            }else if(i==36){
+                column.setPreferredWidth(146);
+            }else if(i==37){
+                column.setPreferredWidth(206);
+            }else if(i==38){
+                column.setPreferredWidth(100);
+            }else if(i==39){
+                column.setPreferredWidth(200);
+            }else if(i==40){
+                column.setPreferredWidth(80);
+            }else if(i==41){
+                column.setPreferredWidth(100);
+            }else if(i==42){
+                column.setPreferredWidth(200);
+            }else if(i==43){
+                column.setPreferredWidth(30);
+            }else if(i==44){
+                column.setPreferredWidth(30);
+            }else if(i==45){
+                column.setPreferredWidth(30);
+            }else if(i==46){
+                column.setPreferredWidth(30);
+            }else if(i==47){
+                column.setPreferredWidth(30);
+            }else if(i==48){
+                column.setPreferredWidth(40);
+            }else if(i==49){
+                column.setPreferredWidth(30);
+            }else if(i==50){
+                column.setPreferredWidth(30);
+            }else if(i==51){
+                column.setPreferredWidth(30);
+            }else if(i==52){
+                column.setPreferredWidth(30);
+            }else if(i==53){
+                column.setPreferredWidth(30);
+            }else if(i==54){
+                column.setPreferredWidth(40);
+            }else if(i==55){
+                column.setPreferredWidth(35);
+            }else if(i==56){
+                column.setPreferredWidth(35);
+            }else if(i==57){
+                column.setPreferredWidth(35);
+            }else if(i==58){
+                column.setPreferredWidth(35);
+            }else if(i==59){
+                column.setPreferredWidth(35);
+            }else if(i==60){
+                column.setPreferredWidth(45);
+            }else if(i==61){
+                column.setPreferredWidth(50);
+            }else if(i==62){
+                column.setPreferredWidth(50);
+            }else if(i==63){
+                column.setPreferredWidth(50);
+            }else if(i==64){
+                column.setPreferredWidth(50);
+            }else if(i==65){
+                column.setPreferredWidth(126);
+            }else if(i==66){
+                column.setPreferredWidth(172);
+            }else if(i==67){
+                column.setPreferredWidth(200);
+            }else if(i==68){
+                column.setPreferredWidth(200);
+            }else if(i==69){
+                column.setPreferredWidth(82);
+            }else if(i==70){
+                column.setPreferredWidth(138);
+            }else if(i==71){
+                column.setPreferredWidth(82);
+            }else if(i==72){
+                column.setPreferredWidth(138);
+            }else if(i==73){
+                column.setPreferredWidth(82);
+            }else if(i==74){
+                column.setPreferredWidth(138);
+            }else if(i==75){
+                column.setPreferredWidth(82);
+            }else if(i==76){
+                column.setPreferredWidth(138);
+            }else if(i==77){
+                column.setPreferredWidth(82);
+            }else if(i==78){
+                column.setPreferredWidth(138);
+            }else if(i==79){
+                column.setPreferredWidth(82);
+            }else if(i==80){
+                column.setPreferredWidth(138);
+            }else if(i==81){
+                column.setPreferredWidth(82);
+            }else if(i==82){
+                column.setPreferredWidth(138);
+            }else if(i==83){
+                column.setPreferredWidth(82);
+            }else if(i==84){
+                column.setPreferredWidth(138);
+            }else if(i==85){
+                column.setPreferredWidth(82);
+            }else if(i==86){
+                column.setPreferredWidth(138);
+            }else if(i==87){
+                column.setPreferredWidth(82);
+            }else if(i==88){
+                column.setPreferredWidth(138);
+            }else if(i==89){
+                column.setPreferredWidth(82);
+            }else if(i==90){
+                column.setPreferredWidth(138);
+            }else if(i==91){
+                column.setPreferredWidth(82);
+            }else if(i==92){
+                column.setPreferredWidth(138);
+            }else if(i==93){
+                column.setPreferredWidth(82);
+            }else if(i==94){
+                column.setPreferredWidth(138);
+            }else if(i==95){
+                column.setPreferredWidth(119);
+            }else if(i==96){
+                column.setPreferredWidth(176);
+            }else if(i==97){
+                column.setPreferredWidth(82);
+            }else if(i==98){
+                column.setPreferredWidth(138);
+            }else if(i==99){
+                column.setPreferredWidth(82);
+            }else if(i==100){
+                column.setPreferredWidth(138);
+            }else if(i==101){
+                column.setPreferredWidth(82);
+            }else if(i==102){
+                column.setPreferredWidth(138);
+            }else if(i==103){
+                column.setPreferredWidth(87);
+            }else if(i==104){
+                column.setPreferredWidth(145);
+            }else if(i==105){
+                column.setPreferredWidth(200);
+            }else if(i==106){
+                column.setPreferredWidth(200);
+            }else if(i==107){
+                column.setPreferredWidth(200);
+            }else if(i==108){
+                column.setPreferredWidth(250);
+            }
+        }
+        tbObat.setDefaultRenderer(Object.class, new WarnaTable());
+
+        tabModeRiwayatKehamilan=new DefaultTableModel(null,new Object[]{
+                "No","Tgl/Thn","Tempat Persalinan","Usia Hamil","Jenis Persalinan","Penolong","Penyulit","J.K.","BB/PB","Keadaan"
+            }){
+              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        };
+        tbRiwayatKehamilan.setModel(tabModeRiwayatKehamilan);
+
+        tbRiwayatKehamilan.setPreferredScrollableViewportSize(new Dimension(500,500));
+        tbRiwayatKehamilan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (i = 0; i < 10; i++) {
+            TableColumn column = tbRiwayatKehamilan.getColumnModel().getColumn(i);
+            if(i==0){
+                column.setPreferredWidth(30);
+            }else if(i==1){
+                column.setPreferredWidth(65);
+            }else if(i==2){
+                column.setPreferredWidth(170);
+            }else if(i==3){
+                column.setPreferredWidth(65);
+            }else if(i==4){
+                column.setPreferredWidth(100);
+            }else if(i==5){
+                column.setPreferredWidth(150);
+            }else if(i==6){
+                column.setPreferredWidth(150);
+            }else if(i==7){
+                column.setPreferredWidth(30);
+            }else if(i==8){
+                column.setPreferredWidth(60);
+            }else if(i==9){
+                column.setPreferredWidth(150);
+            }
+        }
+        tbRiwayatKehamilan.setDefaultRenderer(Object.class, new WarnaTable());
+
+        tabModeAPGAR=new DefaultTableModel(null,new Object[]{
+                "Tanda","0","1","2","N 1'","N 5'","N 10'"
+            }){
+             @Override public boolean isCellEditable(int rowIndex, int colIndex){
+                    boolean a = false;
+                    if ((colIndex==4)||(colIndex==5)||(colIndex==6)) {
+                        a=true;
+                    }
+                    return a;
+             }
+             Class[] types = new Class[] {
+                java.lang.String.class,java.lang.String.class,java.lang.String.class,java.lang.String.class,
+                java.lang.String.class,java.lang.String.class,java.lang.String.class
+             };
+             @Override
+             public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+             }
+        };
+        tbAPGAR.setModel(tabModeAPGAR);
+        tbAPGAR.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+
+        for (int i = 0; i < 7; i++) {
+            TableColumn column = tbAPGAR.getColumnModel().getColumn(i);
+            if(i==0){
+                column.setPreferredWidth(146);
+            }else if(i==1){
+                column.setPreferredWidth(146);
+            }else if(i==2){
+                column.setPreferredWidth(250);
+            }else if(i==3){
+                column.setPreferredWidth(145);
+            }else if(i==4){
+                column.setPreferredWidth(28);
+            }else if(i==5){
+                column.setPreferredWidth(28);
+            }else if(i==6){
+                column.setPreferredWidth(33);
+            }
+        }
+
+        tbAPGAR.setRowHeight(22);
+        tbAPGAR.setDefaultRenderer(Object.class, new WarnaTable5());
+        tabModeAPGAR.addRow(new Object[]{"Frekuensi Jantung","Tidak Ada","< 100","> 100","","",""});
+        tabModeAPGAR.addRow(new Object[]{"Usaha Nafas","Tidak Ada","Lambat Tak Teratur","Menangis Kuat","","",""});
+        tabModeAPGAR.addRow(new Object[]{"Tanus Otot","Lumpuh","Ext. Fleksi Sedikit","Gerakan Aktif","","",""});
+        tabModeAPGAR.addRow(new Object[]{"Refleks","Tidak Ada Respon","Pergerakan Sedikit","Menangis","","",""});
+        tabModeAPGAR.addRow(new Object[]{"Warna","Biru Pucat","Tubuh Kemerahan, Tangan & Kaki Biru","Kemerahan","","",""});
+
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        N1.setDocument(new batasInput((int)2).getOnlyAngka(N1));
+        N5.setDocument(new batasInput((int)2).getOnlyAngka(N5));
+        N10.setDocument(new batasInput((int)2).getOnlyAngka(N10));
+        TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        TempatPersalinan.setDocument(new batasInput((byte)30).getKata(TempatPersalinan));
+        UsiaHamil.setDocument(new batasInput((byte)20).getKata(UsiaHamil));
+        JenisPersalinan.setDocument(new batasInput((byte)20).getKata(JenisPersalinan));
+        Penolong.setDocument(new batasInput((byte)30).getKata(Penolong));
+        Penyulit.setDocument(new batasInput((byte)40).getKata(Penyulit));
+        BBPB.setDocument(new batasInput((byte)10).getKata(BBPB));
+        Keadaan.setDocument(new batasInput((byte)40).getKata(Keadaan));
+
+        KeteranganPenyakitIbu.setDocument(new batasInput((int)70).getKata(KeteranganPenyakitIbu));
+        ObatSelamaHamil.setDocument(new batasInput((int)150).getKata(ObatSelamaHamil));
+        KeteranganPerawatanAntenatal.setDocument(new batasInput((byte)40).getKata(KeteranganPerawatanAntenatal));
+        KeteranganTerdaftarEkohort.setDocument(new batasInput((byte)40).getKata(KeteranganTerdaftarEkohort));
+        KeteranganPenyulitKehamilan.setDocument(new batasInput((byte)60).getKata(KeteranganPenyulitKehamilan));
+        AlergiIbu.setDocument(new batasInput((byte)60).getKata(AlergiIbu));
+        KeteranganRiwayatMaternal.setDocument(new batasInput((int)150).getKata(KeteranganRiwayatMaternal));
+        UmurKehamilan.setDocument(new batasInput((byte)30).getKata(UmurKehamilan));
+        KeteranganKehamilan.setDocument(new batasInput((byte)30).getKata(KeteranganKehamilan));
+        UrutanKehamilan.setDocument(new batasInput((byte)4).getKata(UrutanKehamilan));
+        JamKetubanPecah.setDocument(new batasInput((byte)4).getKata(JamKetubanPecah));
+        MenitKetubanPecah.setDocument(new batasInput((byte)4).getKata(MenitKetubanPecah));
+        JumlahAirKetuban.setDocument(new batasInput((byte)20).getKata(JumlahAirKetuban));
+        WarnaAirKetuban.setDocument(new batasInput((byte)20).getKata(WarnaAirKetuban));
+        BauAirKetuban.setDocument(new batasInput((byte)20).getKata(BauAirKetuban));
+        LetakBayi.setDocument(new batasInput((byte)70).getKata(LetakBayi));
+        KeteranganMacamPersalinan.setDocument(new batasInput((byte)40).getKata(KeteranganMacamPersalinan));
+        KeteranganIndikasiPersalinanOperatif.setDocument(new batasInput((byte)50).getKata(KeteranganIndikasiPersalinanOperatif));
+        LamaGawatJanin.setDocument(new batasInput((byte)4).getKata(LamaGawatJanin));
+        ObatSelamaPersalinan.setDocument(new batasInput((byte)150).getKata(ObatSelamaPersalinan));
+        BeratPlacenta.setDocument(new batasInput((byte)4).getKata(BeratPlacenta));
+        KelainanPlacenta.setDocument(new batasInput((byte)70).getKata(KelainanPlacenta));
+        KeteranganRiwayatPersalinan.setDocument(new batasInput((int)150).getKata(KeteranganRiwayatPersalinan));
+        BBLahir.setDocument(new batasInput((byte)5).getKata(BBLahir));
+        PanjangBadan.setDocument(new batasInput((byte)5).getKata(PanjangBadan));
+        LingkarKepala.setDocument(new batasInput((byte)5).getKata(LingkarKepala));
+        LingkarDada.setDocument(new batasInput((byte)5).getKata(LingkarDada));
+        KeteranganResusitasiLahir.setDocument(new batasInput((byte)70).getKata(KeteranganResusitasiLahir));
+        ObatSaatLahir.setDocument(new batasInput((int)150).getKata(ObatSaatLahir));
+        KeteranganKeadaanBayi.setDocument(new batasInput((int)150).getKata(KeteranganKeadaanBayi));
+        KeteranganKondisiUmum.setDocument(new batasInput((byte)40).getKata(KeteranganKondisiUmum));
+        KeteranganKulit.setDocument(new batasInput((byte)40).getKata(KeteranganKulit));
+        KeteranganKepala.setDocument(new batasInput((byte)40).getKata(KeteranganKepala));
+        KeteranganLeher.setDocument(new batasInput((byte)40).getKata(KeteranganLeher));
+        KeteranganMata.setDocument(new batasInput((byte)40).getKata(KeteranganMata));
+        KeteranganHidung.setDocument(new batasInput((byte)40).getKata(KeteranganHidung));
+        KeteranganTelinga.setDocument(new batasInput((byte)40).getKata(KeteranganTelinga));
+        KeteranganDada.setDocument(new batasInput((byte)40).getKata(KeteranganDada));
+        KeteranganParu.setDocument(new batasInput((byte)40).getKata(KeteranganParu));
+        KeteranganJantung.setDocument(new batasInput((byte)40).getKata(KeteranganJantung));
+        KeteranganPerut.setDocument(new batasInput((byte)40).getKata(KeteranganPerut));
+        KeteranganTaliPusat.setDocument(new batasInput((byte)40).getKata(KeteranganTaliPusat));
+        KeteranganAlatKelamin.setDocument(new batasInput((byte)40).getKata(KeteranganAlatKelamin));
+        KeteranganRuasTulangBelakang.setDocument(new batasInput((byte)40).getKata(KeteranganRuasTulangBelakang));
+        KeteranganExtrimitas.setDocument(new batasInput((byte)40).getKata(KeteranganExtrimitas));
+        KeteranganAnus.setDocument(new batasInput((byte)40).getKata(KeteranganAnus));
+        KeteranganRefleks.setDocument(new batasInput((byte)40).getKata(KeteranganRefleks));
+        KeteranganDenyutFemoral.setDocument(new batasInput((byte)40).getKata(KeteranganDenyutFemoral));
+        // PemeriksaanLainnya.setDocument(new batasInput((int)300).getKata(PemeriksaanLainnya));
+        // PemeriksaanPenunjang.setDocument(new batasInput((int)500).getKata(PemeriksaanPenunjang));
+        // Diagnosis.setDocument(new batasInput((int)300).getKata(Diagnosis));
+        // Tatalaksana.setDocument(new batasInput((int)1000).getKata(Tatalaksana));
+
+        if(koneksiDB.CARICEPAT().equals("aktif")){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        tampil();
+                    }
+                }
+            });
+        }
+
+        dokter.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(dokter.getTable().getSelectedRow()!= -1){
+                    KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
+                    NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                    KdDokter.requestFocus();
+                }
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+
+        HTMLEditorKit kit = new HTMLEditorKit();
+        LoadHTML.setEditable(true);
+        LoadHTML.setEditorKit(kit);
+        StyleSheet styleSheet = kit.getStyleSheet();
+        styleSheet.addRule(
+                ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
+                ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
+                ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
+                ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
+                ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
+                ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
+        );
+        Document doc = kit.createDefaultDocument();
+        LoadHTML.setDocument(doc);
+
+        try {
+            TANGGALMUNDUR=koneksiDB.TANGGALMUNDUR();
+        } catch (Exception e) {
+            TANGGALMUNDUR="yes";
+        }
+    }
+
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        LoadHTML = new id.yaski.simrskhanza.widget.editorpane();
+        DlgRiwayatPersalinan = new javax.swing.JDialog();
+        internalFrame4 = new id.yaski.simrskhanza.widget.InternalFrame();
+        panelBiasa2 = new id.yaski.simrskhanza.widget.PanelBiasa();
+        TanggalPersalinan = new id.yaski.simrskhanza.widget.Tanggal();
+        jLabel100 = new id.yaski.simrskhanza.widget.Label();
+        BtnKeluarKehamilan = new id.yaski.simrskhanza.widget.Button();
+        jLabel107 = new id.yaski.simrskhanza.widget.Label();
+        UsiaHamil = new id.yaski.simrskhanza.widget.TextBox();
+        BtnSimpanRiwayatKehamilan = new id.yaski.simrskhanza.widget.Button();
+        jLabel108 = new id.yaski.simrskhanza.widget.Label();
+        TempatPersalinan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel109 = new id.yaski.simrskhanza.widget.Label();
+        JenisPersalinan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel110 = new id.yaski.simrskhanza.widget.Label();
+        JK = new id.yaski.simrskhanza.widget.ComboBox();
+        jLabel111 = new id.yaski.simrskhanza.widget.Label();
+        Penolong = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel112 = new id.yaski.simrskhanza.widget.Label();
+        BBPB = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel113 = new id.yaski.simrskhanza.widget.Label();
+        Penyulit = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel114 = new id.yaski.simrskhanza.widget.Label();
+        Keadaan = new id.yaski.simrskhanza.widget.TextBox();
+        TanggalRegistrasi = new id.yaski.simrskhanza.widget.TextBox();
+        internalFrame1 = new id.yaski.simrskhanza.widget.InternalFrame();
+        panelGlass8 = new id.yaski.simrskhanza.widget.panelisi();
+        BtnSimpan = new id.yaski.simrskhanza.widget.Button();
+        BtnBatal = new id.yaski.simrskhanza.widget.Button();
+        BtnHapus = new id.yaski.simrskhanza.widget.Button();
+        BtnEdit = new id.yaski.simrskhanza.widget.Button();
+        BtnPrint = new id.yaski.simrskhanza.widget.Button();
+        BtnAll = new id.yaski.simrskhanza.widget.Button();
+        BtnKeluar = new id.yaski.simrskhanza.widget.Button();
+        TabRawat = new javax.swing.JTabbedPane();
+        internalFrame2 = new id.yaski.simrskhanza.widget.InternalFrame();
+        scrollInput = new id.yaski.simrskhanza.widget.ScrollPane();
+        FormInput = new id.yaski.simrskhanza.widget.PanelBiasa();
+        TNoRw = new id.yaski.simrskhanza.widget.TextBox();
+        TPasien = new id.yaski.simrskhanza.widget.TextBox();
+        TNoRM = new id.yaski.simrskhanza.widget.TextBox();
+        label14 = new id.yaski.simrskhanza.widget.Label();
+        KdDokter = new id.yaski.simrskhanza.widget.TextBox();
+        NmDokter = new id.yaski.simrskhanza.widget.TextBox();
+        BtnDokter = new id.yaski.simrskhanza.widget.Button();
+        jLabel8 = new id.yaski.simrskhanza.widget.Label();
+        TglLahir = new id.yaski.simrskhanza.widget.TextBox();
+        Jk = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel10 = new id.yaski.simrskhanza.widget.Label();
+        jLabel11 = new id.yaski.simrskhanza.widget.Label();
+        jSeparator1 = new javax.swing.JSeparator();
+        jLabel99 = new id.yaski.simrskhanza.widget.Label();
+        label11 = new id.yaski.simrskhanza.widget.Label();
+        TglAsuhan = new id.yaski.simrskhanza.widget.Tanggal();
+        Scroll6 = new id.yaski.simrskhanza.widget.ScrollPane();
+        tbRiwayatKehamilan = new id.yaski.simrskhanza.widget.Table();
+        BtnTambahMasalah = new id.yaski.simrskhanza.widget.Button();
+        BtnHapusRiwayatPersalinan = new id.yaski.simrskhanza.widget.Button();
+        jSeparator2 = new javax.swing.JSeparator();
+        jLabel115 = new id.yaski.simrskhanza.widget.Label();
+        jLabel74 = new id.yaski.simrskhanza.widget.Label();
+        Scroll2 = new id.yaski.simrskhanza.widget.ScrollPane();
+        tbAPGAR = new id.yaski.simrskhanza.widget.Table();
+        label71 = new id.yaski.simrskhanza.widget.Label();
+        N1 = new id.yaski.simrskhanza.widget.TextBox2();
+        N5 = new id.yaski.simrskhanza.widget.TextBox2();
+        N10 = new id.yaski.simrskhanza.widget.TextBox2();
+        jLabel14 = new id.yaski.simrskhanza.widget.Label();
+        NoRMIbu = new id.yaski.simrskhanza.widget.TextBox();
+        NmIbu = new id.yaski.simrskhanza.widget.TextBox();
+        BtnIbuBayi = new id.yaski.simrskhanza.widget.Button();
+        jLabel9 = new id.yaski.simrskhanza.widget.Label();
+        TglLahirIbu = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel15 = new id.yaski.simrskhanza.widget.Label();
+        NIKIbu = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel17 = new id.yaski.simrskhanza.widget.Label();
+        StatusPerkawinanIbu = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel16 = new id.yaski.simrskhanza.widget.Label();
+        jLabel38 = new id.yaski.simrskhanza.widget.Label();
+        PenyakitIbu = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganPenyakitIbu = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel39 = new id.yaski.simrskhanza.widget.Label();
+        ObatSelamaHamil = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel18 = new id.yaski.simrskhanza.widget.Label();
+        jLabel40 = new id.yaski.simrskhanza.widget.Label();
+        jLabel41 = new id.yaski.simrskhanza.widget.Label();
+        PerawatanAntenatal = new id.yaski.simrskhanza.widget.ComboBox();
+        jLabel42 = new id.yaski.simrskhanza.widget.Label();
+        KeteranganPerawatanAntenatal = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel20 = new id.yaski.simrskhanza.widget.Label();
+        KeteranganTerdaftarEkohort = new id.yaski.simrskhanza.widget.TextBox();
+        TerdaftarEkohort = new id.yaski.simrskhanza.widget.ComboBox();
+        jLabel43 = new id.yaski.simrskhanza.widget.Label();
+        jLabel22 = new id.yaski.simrskhanza.widget.Label();
+        PenyulitKehamilan = new id.yaski.simrskhanza.widget.ComboBox();
+        jLabel44 = new id.yaski.simrskhanza.widget.Label();
+        KeteranganPenyulitKehamilan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel45 = new id.yaski.simrskhanza.widget.Label();
+        AlergiIbu = new id.yaski.simrskhanza.widget.TextBox();
+        KeteranganRiwayatMaternal = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel46 = new id.yaski.simrskhanza.widget.Label();
+        jLabel23 = new id.yaski.simrskhanza.widget.Label();
+        UmurKehamilan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel24 = new id.yaski.simrskhanza.widget.Label();
+        jLabel25 = new id.yaski.simrskhanza.widget.Label();
+        jLabel47 = new id.yaski.simrskhanza.widget.Label();
+        Kehamilan = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganKehamilan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel48 = new id.yaski.simrskhanza.widget.Label();
+        UrutanKehamilan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel26 = new id.yaski.simrskhanza.widget.Label();
+        jLabel27 = new id.yaski.simrskhanza.widget.Label();
+        JamKetubanPecah = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel49 = new id.yaski.simrskhanza.widget.Label();
+        jLabel28 = new id.yaski.simrskhanza.widget.Label();
+        MenitKetubanPecah = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel29 = new id.yaski.simrskhanza.widget.Label();
+        jLabel30 = new id.yaski.simrskhanza.widget.Label();
+        JumlahAirKetuban = new id.yaski.simrskhanza.widget.TextBox();
+        WarnaAirKetuban = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel31 = new id.yaski.simrskhanza.widget.Label();
+        BauAirKetuban = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel32 = new id.yaski.simrskhanza.widget.Label();
+        jLabel34 = new id.yaski.simrskhanza.widget.Label();
+        LetakBayi = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel33 = new id.yaski.simrskhanza.widget.Label();
+        jLabel50 = new id.yaski.simrskhanza.widget.Label();
+        MacamPersalinan = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganMacamPersalinan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel35 = new id.yaski.simrskhanza.widget.Label();
+        jLabel36 = new id.yaski.simrskhanza.widget.Label();
+        IndikasiPersalinanOperatif = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganIndikasiPersalinanOperatif = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel37 = new id.yaski.simrskhanza.widget.Label();
+        LamaGawatJanin = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel51 = new id.yaski.simrskhanza.widget.Label();
+        jLabel52 = new id.yaski.simrskhanza.widget.Label();
+        jLabel53 = new id.yaski.simrskhanza.widget.Label();
+        ObatSelamaPersalinan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel54 = new id.yaski.simrskhanza.widget.Label();
+        jLabel56 = new id.yaski.simrskhanza.widget.Label();
+        BeratPlacenta = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel55 = new id.yaski.simrskhanza.widget.Label();
+        jLabel57 = new id.yaski.simrskhanza.widget.Label();
+        jLabel58 = new id.yaski.simrskhanza.widget.Label();
+        KelainanPlacenta = new id.yaski.simrskhanza.widget.TextBox();
+        jSeparator3 = new javax.swing.JSeparator();
+        jLabel116 = new id.yaski.simrskhanza.widget.Label();
+        jLabel60 = new id.yaski.simrskhanza.widget.Label();
+        BBLahir = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel59 = new id.yaski.simrskhanza.widget.Label();
+        jLabel61 = new id.yaski.simrskhanza.widget.Label();
+        jLabel62 = new id.yaski.simrskhanza.widget.Label();
+        PanjangBadan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel63 = new id.yaski.simrskhanza.widget.Label();
+        jLabel64 = new id.yaski.simrskhanza.widget.Label();
+        LingkarKepala = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel65 = new id.yaski.simrskhanza.widget.Label();
+        jLabel66 = new id.yaski.simrskhanza.widget.Label();
+        LingkarDada = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel67 = new id.yaski.simrskhanza.widget.Label();
+        jLabel69 = new id.yaski.simrskhanza.widget.Label();
+        jLabel70 = new id.yaski.simrskhanza.widget.Label();
+        ResusitasiLahir = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganResusitasiLahir = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel71 = new id.yaski.simrskhanza.widget.Label();
+        ObatSaatLahir = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel72 = new id.yaski.simrskhanza.widget.Label();
+        jLabel73 = new id.yaski.simrskhanza.widget.Label();
+        jLabel75 = new id.yaski.simrskhanza.widget.Label();
+        KeteranganRiwayatPersalinan = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel76 = new id.yaski.simrskhanza.widget.Label();
+        jLabel77 = new id.yaski.simrskhanza.widget.Label();
+        KeteranganKeadaanBayi = new id.yaski.simrskhanza.widget.TextBox();
+        jSeparator4 = new javax.swing.JSeparator();
+        jLabel117 = new id.yaski.simrskhanza.widget.Label();
+        KondisiUmum = new id.yaski.simrskhanza.widget.ComboBox();
+        jLabel78 = new id.yaski.simrskhanza.widget.Label();
+        KeteranganKondisiUmum = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel79 = new id.yaski.simrskhanza.widget.Label();
+        jLabel80 = new id.yaski.simrskhanza.widget.Label();
+        Kulit = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganKulit = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel81 = new id.yaski.simrskhanza.widget.Label();
+        Kepala = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganKepala = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel82 = new id.yaski.simrskhanza.widget.Label();
+        Leher = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganLeher = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel83 = new id.yaski.simrskhanza.widget.Label();
+        Mata = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganMata = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel84 = new id.yaski.simrskhanza.widget.Label();
+        Hidung = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganHidung = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel85 = new id.yaski.simrskhanza.widget.Label();
+        Telinga = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganTelinga = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel86 = new id.yaski.simrskhanza.widget.Label();
+        Dada = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganDada = new id.yaski.simrskhanza.widget.TextBox();
+        KeteranganParu = new id.yaski.simrskhanza.widget.TextBox();
+        Paru = new id.yaski.simrskhanza.widget.ComboBox();
+        jLabel87 = new id.yaski.simrskhanza.widget.Label();
+        jLabel88 = new id.yaski.simrskhanza.widget.Label();
+        Jantung = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganJantung = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel89 = new id.yaski.simrskhanza.widget.Label();
+        Perut = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganPerut = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel90 = new id.yaski.simrskhanza.widget.Label();
+        TaliPusat = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganTaliPusat = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel91 = new id.yaski.simrskhanza.widget.Label();
+        AlatKelamin = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganAlatKelamin = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel92 = new id.yaski.simrskhanza.widget.Label();
+        RuasTulangBelakang = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganRuasTulangBelakang = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel93 = new id.yaski.simrskhanza.widget.Label();
+        Extrimitas = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganExtrimitas = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel94 = new id.yaski.simrskhanza.widget.Label();
+        Anus = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganAnus = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel95 = new id.yaski.simrskhanza.widget.Label();
+        Refleks = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganRefleks = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel96 = new id.yaski.simrskhanza.widget.Label();
+        DenyutFemoral = new id.yaski.simrskhanza.widget.ComboBox();
+        KeteranganDenyutFemoral = new id.yaski.simrskhanza.widget.TextBox();
+        jLabel97 = new id.yaski.simrskhanza.widget.Label();
+        scrollPane12 = new id.yaski.simrskhanza.widget.ScrollPane();
+        PemeriksaanLainnya = new id.yaski.simrskhanza.widget.TextArea();
+        jSeparator14 = new javax.swing.JSeparator();
+        jLabel139 = new id.yaski.simrskhanza.widget.Label();
+        scrollPane13 = new id.yaski.simrskhanza.widget.ScrollPane();
+        PemeriksaanPenunjang = new id.yaski.simrskhanza.widget.TextArea();
+        jSeparator15 = new javax.swing.JSeparator();
+        jLabel140 = new id.yaski.simrskhanza.widget.Label();
+        scrollPane14 = new id.yaski.simrskhanza.widget.ScrollPane();
+        Diagnosis = new id.yaski.simrskhanza.widget.TextArea();
+        jSeparator16 = new javax.swing.JSeparator();
+        jLabel141 = new id.yaski.simrskhanza.widget.Label();
+        scrollPane15 = new id.yaski.simrskhanza.widget.ScrollPane();
+        Tatalaksana = new id.yaski.simrskhanza.widget.TextArea();
+        internalFrame3 = new id.yaski.simrskhanza.widget.InternalFrame();
+        Scroll = new id.yaski.simrskhanza.widget.ScrollPane();
+        tbObat = new id.yaski.simrskhanza.widget.Table();
+        panelGlass9 = new id.yaski.simrskhanza.widget.panelisi();
+        jLabel19 = new id.yaski.simrskhanza.widget.Label();
+        DTPCari1 = new id.yaski.simrskhanza.widget.Tanggal();
+        jLabel21 = new id.yaski.simrskhanza.widget.Label();
+        DTPCari2 = new id.yaski.simrskhanza.widget.Tanggal();
+        jLabel6 = new id.yaski.simrskhanza.widget.Label();
+        TCari = new id.yaski.simrskhanza.widget.TextBox();
+        BtnCari = new id.yaski.simrskhanza.widget.Button();
+        jLabel7 = new id.yaski.simrskhanza.widget.Label();
+        LCount = new id.yaski.simrskhanza.widget.Label();
+
+        LoadHTML.setBorder(null);
+        LoadHTML.setName("LoadHTML"); // NOI18N
+
+        DlgRiwayatPersalinan.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        DlgRiwayatPersalinan.setName("DlgRiwayatPersalinan"); // NOI18N
+        DlgRiwayatPersalinan.setUndecorated(true);
+        DlgRiwayatPersalinan.setResizable(false);
+
+        internalFrame4.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(230, 235, 225)), "::[ Riwayat Persalinan Ibu Bayi ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 70, 50))); // NOI18N
+        internalFrame4.setName("internalFrame4"); // NOI18N
+        internalFrame4.setLayout(new java.awt.BorderLayout(1, 1));
+
+        panelBiasa2.setName("panelBiasa2"); // NOI18N
+        panelBiasa2.setLayout(null);
+
+        TanggalPersalinan.setForeground(new java.awt.Color(50, 70, 50));
+        TanggalPersalinan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-03-2025" }));
+        TanggalPersalinan.setDisplayFormat("dd-MM-yyyy");
+        TanggalPersalinan.setName("TanggalPersalinan"); // NOI18N
+        TanggalPersalinan.setOpaque(false);
+        panelBiasa2.add(TanggalPersalinan);
+        TanggalPersalinan.setBounds(530, 10, 95, 23);
+
+        jLabel100.setText("Tempat Persalinan :");
+        jLabel100.setName("jLabel100"); // NOI18N
+        panelBiasa2.add(jLabel100);
+        jLabel100.setBounds(0, 10, 110, 23);
+
+        BtnKeluarKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnKeluarKehamilan.setMnemonic('U');
+        BtnKeluarKehamilan.setText("Tutup");
+        BtnKeluarKehamilan.setToolTipText("Alt+U");
+        BtnKeluarKehamilan.setName("BtnKeluarKehamilan"); // NOI18N
+        BtnKeluarKehamilan.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnKeluarKehamilan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluarKehamilanActionPerformed(evt);
+            }
+        });
+        panelBiasa2.add(BtnKeluarKehamilan);
+        BtnKeluarKehamilan.setBounds(530, 130, 100, 30);
+
+        jLabel107.setText("Usia Hamil :");
+        jLabel107.setName("jLabel107"); // NOI18N
+        panelBiasa2.add(jLabel107);
+        jLabel107.setBounds(430, 40, 96, 23);
+
+        UsiaHamil.setName("UsiaHamil"); // NOI18N
+        UsiaHamil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                UsiaHamilKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(UsiaHamil);
+        UsiaHamil.setBounds(530, 40, 95, 23);
+
+        BtnSimpanRiwayatKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanRiwayatKehamilan.setMnemonic('S');
+        BtnSimpanRiwayatKehamilan.setText("Simpan");
+        BtnSimpanRiwayatKehamilan.setToolTipText("Alt+S");
+        BtnSimpanRiwayatKehamilan.setName("BtnSimpanRiwayatKehamilan"); // NOI18N
+        BtnSimpanRiwayatKehamilan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanRiwayatKehamilanActionPerformed(evt);
+            }
+        });
+        panelBiasa2.add(BtnSimpanRiwayatKehamilan);
+        BtnSimpanRiwayatKehamilan.setBounds(420, 130, 100, 30);
+
+        jLabel108.setText("Tanggal/Tahun :");
+        jLabel108.setName("jLabel108"); // NOI18N
+        panelBiasa2.add(jLabel108);
+        jLabel108.setBounds(430, 10, 96, 23);
+
+        TempatPersalinan.setName("TempatPersalinan"); // NOI18N
+        TempatPersalinan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TempatPersalinanKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(TempatPersalinan);
+        TempatPersalinan.setBounds(114, 10, 290, 23);
+
+        jLabel109.setText("Jenis Persalinan :");
+        jLabel109.setName("jLabel109"); // NOI18N
+        panelBiasa2.add(jLabel109);
+        jLabel109.setBounds(0, 40, 110, 23);
+
+        JenisPersalinan.setName("JenisPersalinan"); // NOI18N
+        JenisPersalinan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JenisPersalinanKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(JenisPersalinan);
+        JenisPersalinan.setBounds(114, 40, 290, 23);
+
+        jLabel110.setText("Jenis Kelamin :");
+        jLabel110.setName("jLabel110"); // NOI18N
+        panelBiasa2.add(jLabel110);
+        jLabel110.setBounds(430, 70, 96, 23);
+
+        JK.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Laki-Laki", "Perempuan", "-" }));
+        JK.setName("JK"); // NOI18N
+        JK.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JKKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(JK);
+        JK.setBounds(530, 70, 95, 23);
+
+        jLabel111.setText("Penolong :");
+        jLabel111.setName("jLabel111"); // NOI18N
+        panelBiasa2.add(jLabel111);
+        jLabel111.setBounds(0, 70, 110, 23);
+
+        Penolong.setName("Penolong"); // NOI18N
+        Penolong.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PenolongKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(Penolong);
+        Penolong.setBounds(114, 70, 290, 23);
+
+        jLabel112.setText("BB/PB :");
+        jLabel112.setName("jLabel112"); // NOI18N
+        panelBiasa2.add(jLabel112);
+        jLabel112.setBounds(430, 100, 96, 23);
+
+        BBPB.setName("BBPB"); // NOI18N
+        BBPB.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BBPBKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(BBPB);
+        BBPB.setBounds(530, 100, 95, 23);
+
+        jLabel113.setText("Penyulit :");
+        jLabel113.setName("jLabel113"); // NOI18N
+        panelBiasa2.add(jLabel113);
+        jLabel113.setBounds(0, 100, 110, 23);
+
+        Penyulit.setName("Penyulit"); // NOI18N
+        Penyulit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PenyulitKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(Penyulit);
+        Penyulit.setBounds(114, 100, 290, 23);
+
+        jLabel114.setText("Keadaan :");
+        jLabel114.setName("jLabel114"); // NOI18N
+        panelBiasa2.add(jLabel114);
+        jLabel114.setBounds(0, 130, 110, 23);
+
+        Keadaan.setName("Keadaan"); // NOI18N
+        Keadaan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeadaanKeyPressed(evt);
+            }
+        });
+        panelBiasa2.add(Keadaan);
+        Keadaan.setBounds(114, 130, 290, 23);
+
+        internalFrame4.add(panelBiasa2, java.awt.BorderLayout.CENTER);
+
+        DlgRiwayatPersalinan.getContentPane().add(internalFrame4, java.awt.BorderLayout.CENTER);
+
+        TanggalRegistrasi.setName("TanggalRegistrasi"); // NOI18N
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pengkajian Bayi Baru Lahir ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
+        internalFrame1.setName("internalFrame1"); // NOI18N
+        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+
+        panelGlass8.setName("panelGlass8"); // NOI18N
+        panelGlass8.setPreferredSize(new java.awt.Dimension(44, 54));
+        panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpan.setMnemonic('S');
+        BtnSimpan.setText("Simpan");
+        BtnSimpan.setToolTipText("Alt+S");
+        BtnSimpan.setName("BtnSimpan"); // NOI18N
+        BtnSimpan.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnSimpan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSimpanActionPerformed(evt);
+            }
+        });
+        BtnSimpan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnSimpanKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnSimpan);
+
+        BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
+        BtnBatal.setMnemonic('B');
+        BtnBatal.setText("Baru");
+        BtnBatal.setToolTipText("Alt+B");
+        BtnBatal.setName("BtnBatal"); // NOI18N
+        BtnBatal.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnBatal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnBatalActionPerformed(evt);
+            }
+        });
+        BtnBatal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnBatalKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnBatal);
+
+        BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapus.setMnemonic('H');
+        BtnHapus.setText("Hapus");
+        BtnHapus.setToolTipText("Alt+H");
+        BtnHapus.setName("BtnHapus"); // NOI18N
+        BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHapusActionPerformed(evt);
+            }
+        });
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnHapusKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnHapus);
+
+        BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEdit.setMnemonic('G');
+        BtnEdit.setText("Ganti");
+        BtnEdit.setToolTipText("Alt+G");
+        BtnEdit.setName("BtnEdit"); // NOI18N
+        BtnEdit.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnEdit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnEditActionPerformed(evt);
+            }
+        });
+        BtnEdit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnEditKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnEdit);
+
+        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
+        BtnPrint.setText("Cetak");
+        BtnPrint.setToolTipText("Alt+T");
+        BtnPrint.setName("BtnPrint"); // NOI18N
+        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnPrintKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnPrint);
+
+        BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setMnemonic('M');
+        BtnAll.setText("Semua");
+        BtnAll.setToolTipText("Alt+M");
+        BtnAll.setName("BtnAll"); // NOI18N
+        BtnAll.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAllActionPerformed(evt);
+            }
+        });
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnAllKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnAll);
+
+        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
+        BtnKeluar.setText("Keluar");
+        BtnKeluar.setToolTipText("Alt+K");
+        BtnKeluar.setName("BtnKeluar"); // NOI18N
+        BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluarActionPerformed(evt);
+            }
+        });
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKeluarKeyPressed(evt);
+            }
+        });
+        panelGlass8.add(BtnKeluar);
+
+        internalFrame1.add(panelGlass8, java.awt.BorderLayout.PAGE_END);
+
+        TabRawat.setBackground(new java.awt.Color(254, 255, 254));
+        TabRawat.setForeground(new java.awt.Color(50, 50, 50));
+        TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        TabRawat.setName("TabRawat"); // NOI18N
+
+        internalFrame2.setBorder(null);
+        internalFrame2.setName("internalFrame2"); // NOI18N
+        internalFrame2.setLayout(new java.awt.BorderLayout(1, 1));
+
+        scrollInput.setName("scrollInput"); // NOI18N
+        scrollInput.setPreferredSize(new java.awt.Dimension(102, 557));
+
+        FormInput.setBackground(new java.awt.Color(255, 255, 255));
+        FormInput.setBorder(null);
+        FormInput.setName("FormInput"); // NOI18N
+        FormInput.setPreferredSize(new java.awt.Dimension(870, 1673));
+        FormInput.setLayout(null);
+
+        TNoRw.setName("TNoRw"); // NOI18N
+        TNoRw.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TNoRwKeyPressed(evt);
+            }
+        });
+        FormInput.add(TNoRw);
+        TNoRw.setBounds(74, 10, 131, 23);
+
+        TPasien.setEditable(false);
+        TPasien.setName("TPasien"); // NOI18N
+        FormInput.add(TPasien);
+        TPasien.setBounds(309, 10, 260, 23);
+
+        TNoRM.setEditable(false);
+        TNoRM.setName("TNoRM"); // NOI18N
+        FormInput.add(TNoRM);
+        TNoRM.setBounds(207, 10, 100, 23);
+
+        label14.setText("Dokter PJ :");
+        label14.setName("label14"); // NOI18N
+        label14.setPreferredSize(new java.awt.Dimension(70, 23));
+        FormInput.add(label14);
+        label14.setBounds(0, 40, 70, 23);
+
+        KdDokter.setEditable(false);
+        KdDokter.setName("KdDokter"); // NOI18N
+        KdDokter.setPreferredSize(new java.awt.Dimension(80, 23));
+        FormInput.add(KdDokter);
+        KdDokter.setBounds(74, 40, 130, 23);
+
+        NmDokter.setEditable(false);
+        NmDokter.setName("NmDokter"); // NOI18N
+        NmDokter.setPreferredSize(new java.awt.Dimension(207, 23));
+        FormInput.add(NmDokter);
+        NmDokter.setBounds(206, 40, 417, 23);
+
+        BtnDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnDokter.setMnemonic('2');
+        BtnDokter.setToolTipText("Alt+2");
+        BtnDokter.setName("BtnDokter"); // NOI18N
+        BtnDokter.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnDokter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnDokterActionPerformed(evt);
+            }
+        });
+        BtnDokter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnDokterKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnDokter);
+        BtnDokter.setBounds(625, 40, 28, 23);
+
+        jLabel8.setText("Tgl.Lahir :");
+        jLabel8.setName("jLabel8"); // NOI18N
+        FormInput.add(jLabel8);
+        jLabel8.setBounds(580, 10, 60, 23);
+
+        TglLahir.setEditable(false);
+        TglLahir.setName("TglLahir"); // NOI18N
+        FormInput.add(TglLahir);
+        TglLahir.setBounds(644, 10, 80, 23);
+
+        Jk.setEditable(false);
+        Jk.setName("Jk"); // NOI18N
+        FormInput.add(Jk);
+        Jk.setBounds(774, 10, 80, 23);
+
+        jLabel10.setText("No.Rawat :");
+        jLabel10.setName("jLabel10"); // NOI18N
+        FormInput.add(jLabel10);
+        jLabel10.setBounds(0, 10, 70, 23);
+
+        jLabel11.setText("J.K. :");
+        jLabel11.setName("jLabel11"); // NOI18N
+        FormInput.add(jLabel11);
+        jLabel11.setBounds(740, 10, 30, 23);
+
+        jSeparator1.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator1.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator1.setName("jSeparator1"); // NOI18N
+        FormInput.add(jSeparator1);
+        jSeparator1.setBounds(0, 100, 880, 1);
+
+        jLabel99.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel99.setText("I. RIWAYAT MATERNAL");
+        jLabel99.setName("jLabel99"); // NOI18N
+        FormInput.add(jLabel99);
+        jLabel99.setBounds(10, 100, 180, 23);
+
+        label11.setText("Tanggal :");
+        label11.setName("label11"); // NOI18N
+        label11.setPreferredSize(new java.awt.Dimension(70, 23));
+        FormInput.add(label11);
+        label11.setBounds(668, 40, 52, 23);
+
+        TglAsuhan.setForeground(new java.awt.Color(50, 70, 50));
+        TglAsuhan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-03-2025 03:45:27" }));
+        TglAsuhan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
+        TglAsuhan.setName("TglAsuhan"); // NOI18N
+        TglAsuhan.setOpaque(false);
+        TglAsuhan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TglAsuhanKeyPressed(evt);
+            }
+        });
+        FormInput.add(TglAsuhan);
+        TglAsuhan.setBounds(724, 40, 130, 23);
+
+        Scroll6.setName("Scroll6"); // NOI18N
+        Scroll6.setOpaque(true);
+
+        tbRiwayatKehamilan.setName("tbRiwayatKehamilan"); // NOI18N
+        Scroll6.setViewportView(tbRiwayatKehamilan);
+
+        FormInput.add(Scroll6);
+        Scroll6.setBounds(110, 200, 744, 93);
+
+        BtnTambahMasalah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
+        BtnTambahMasalah.setMnemonic('3');
+        BtnTambahMasalah.setToolTipText("Alt+3");
+        BtnTambahMasalah.setName("BtnTambahMasalah"); // NOI18N
+        BtnTambahMasalah.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnTambahMasalah.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnTambahMasalahActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnTambahMasalah);
+        BtnTambahMasalah.setBounds(77, 200, 28, 23);
+
+        BtnHapusRiwayatPersalinan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapusRiwayatPersalinan.setMnemonic('3');
+        BtnHapusRiwayatPersalinan.setToolTipText("Alt+3");
+        BtnHapusRiwayatPersalinan.setName("BtnHapusRiwayatPersalinan"); // NOI18N
+        BtnHapusRiwayatPersalinan.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnHapusRiwayatPersalinan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHapusRiwayatPersalinanActionPerformed(evt);
+            }
+        });
+        FormInput.add(BtnHapusRiwayatPersalinan);
+        BtnHapusRiwayatPersalinan.setBounds(77, 230, 28, 23);
+
+        jSeparator2.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator2.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator2.setName("jSeparator2"); // NOI18N
+        FormInput.add(jSeparator2);
+        jSeparator2.setBounds(0, 410, 880, 1);
+
+        jLabel115.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel115.setText("II. RIWAYAT PERSALINAN");
+        jLabel115.setName("jLabel115"); // NOI18N
+        FormInput.add(jLabel115);
+        jLabel115.setBounds(10, 410, 180, 23);
+
+        jLabel74.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel74.setText("APGAR Score :");
+        jLabel74.setName("jLabel74"); // NOI18N
+        FormInput.add(jLabel74);
+        jLabel74.setBounds(44, 700, 182, 23);
+
+        Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        Scroll2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        Scroll2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        Scroll2.setName("Scroll2"); // NOI18N
+
+        tbAPGAR.setAutoResizeMode(javax.swing.JTable.AUTO_RESIZE_OFF);
+        tbAPGAR.setAutoscrolls(false);
+        tbAPGAR.setGridColor(new java.awt.Color(150, 150, 150));
+        tbAPGAR.setName("tbAPGAR"); // NOI18N
+        tbAPGAR.setRowHeight(150);
+        tbAPGAR.getTableHeader().setResizingAllowed(false);
+        tbAPGAR.getTableHeader().setReorderingAllowed(false);
+        tbAPGAR.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tbAPGARPropertyChange(evt);
+            }
+        });
+        Scroll2.setViewportView(tbAPGAR);
+
+        FormInput.add(Scroll2);
+        Scroll2.setBounds(77, 720, 777, 127);
+
+        label71.setText("Jumlah Nilai :");
+        label71.setName("label71"); // NOI18N
+        label71.setPreferredSize(new java.awt.Dimension(65, 23));
+        FormInput.add(label71);
+        label71.setBounds(660, 846, 100, 27);
+
+        N1.setEditable(false);
+        N1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        N1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        N1.setName("N1"); // NOI18N
+        FormInput.add(N1);
+        N1.setBounds(764, 846, 29, 27);
+
+        N5.setEditable(false);
+        N5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        N5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        N5.setName("N5"); // NOI18N
+        FormInput.add(N5);
+        N5.setBounds(792, 846, 29, 27);
+
+        N10.setEditable(false);
+        N10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(150, 150, 150)));
+        N10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        N10.setName("N10"); // NOI18N
+        FormInput.add(N10);
+        N10.setBounds(820, 846, 34, 27);
+
+        jLabel14.setText("Ibu Bayi :");
+        jLabel14.setName("jLabel14"); // NOI18N
+        FormInput.add(jLabel14);
+        jLabel14.setBounds(0, 70, 70, 23);
+
+        NoRMIbu.setEditable(false);
+        NoRMIbu.setName("NoRMIbu"); // NOI18N
+        FormInput.add(NoRMIbu);
+        NoRMIbu.setBounds(74, 70, 100, 23);
+
+        NmIbu.setEditable(false);
+        NmIbu.setName("NmIbu"); // NOI18N
+        FormInput.add(NmIbu);
+        NmIbu.setBounds(176, 70, 270, 23);
+
+        BtnIbuBayi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnIbuBayi.setMnemonic('2');
+        BtnIbuBayi.setToolTipText("Alt+2");
+        BtnIbuBayi.setName("BtnIbuBayi"); // NOI18N
+        BtnIbuBayi.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnIbuBayi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnIbuBayiActionPerformed(evt);
+            }
+        });
+        BtnIbuBayi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnIbuBayiKeyPressed(evt);
+            }
+        });
+        FormInput.add(BtnIbuBayi);
+        BtnIbuBayi.setBounds(448, 70, 28, 23);
+
+        jLabel9.setText("Tgl.Lahir Ibu :");
+        jLabel9.setName("jLabel9"); // NOI18N
+        FormInput.add(jLabel9);
+        jLabel9.setBounds(479, 70, 90, 23);
+
+        TglLahirIbu.setEditable(false);
+        TglLahirIbu.setName("TglLahirIbu"); // NOI18N
+        FormInput.add(TglLahirIbu);
+        TglLahirIbu.setBounds(573, 70, 80, 23);
+
+        jLabel15.setText("NIK Ibu :");
+        jLabel15.setName("jLabel15"); // NOI18N
+        FormInput.add(jLabel15);
+        jLabel15.setBounds(660, 70, 60, 23);
+
+        NIKIbu.setEditable(false);
+        NIKIbu.setName("NIKIbu"); // NOI18N
+        FormInput.add(NIKIbu);
+        NIKIbu.setBounds(724, 70, 130, 23);
+
+        jLabel17.setText(":");
+        jLabel17.setName("jLabel17"); // NOI18N
+        FormInput.add(jLabel17);
+        jLabel17.setBounds(0, 120, 160, 23);
+
+        StatusPerkawinanIbu.setEditable(false);
+        StatusPerkawinanIbu.setName("StatusPerkawinanIbu"); // NOI18N
+        FormInput.add(StatusPerkawinanIbu);
+        StatusPerkawinanIbu.setBounds(164, 120, 110, 23);
+
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("Status Perkawinan Ibu");
+        jLabel16.setName("jLabel16"); // NOI18N
+        FormInput.add(jLabel16);
+        jLabel16.setBounds(44, 120, 130, 23);
+
+        jLabel38.setText("Penyakit Yang Diderita Ibu :");
+        jLabel38.setName("jLabel38"); // NOI18N
+        FormInput.add(jLabel38);
+        jLabel38.setBounds(275, 120, 150, 23);
+
+        PenyakitIbu.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Ada", "Ada" }));
+        PenyakitIbu.setName("PenyakitIbu"); // NOI18N
+        PenyakitIbu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PenyakitIbuKeyPressed(evt);
+            }
+        });
+        FormInput.add(PenyakitIbu);
+        PenyakitIbu.setBounds(429, 120, 100, 23);
+
+        KeteranganPenyakitIbu.setName("KeteranganPenyakitIbu"); // NOI18N
+        KeteranganPenyakitIbu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganPenyakitIbuKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganPenyakitIbu);
+        KeteranganPenyakitIbu.setBounds(532, 120, 322, 23);
+
+        jLabel39.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel39.setText("Obat Yang Dikonsumsi Selama Kehamilan");
+        jLabel39.setName("jLabel39"); // NOI18N
+        FormInput.add(jLabel39);
+        jLabel39.setBounds(44, 150, 220, 23);
+
+        ObatSelamaHamil.setName("ObatSelamaHamil"); // NOI18N
+        ObatSelamaHamil.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ObatSelamaHamilKeyPressed(evt);
+            }
+        });
+        FormInput.add(ObatSelamaHamil);
+        ObatSelamaHamil.setBounds(257, 150, 597, 23);
+
+        jLabel18.setText(":");
+        jLabel18.setName("jLabel18"); // NOI18N
+        FormInput.add(jLabel18);
+        jLabel18.setBounds(0, 150, 253, 23);
+
+        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel40.setText("Riwayat Kehamilan Terdahulu :");
+        jLabel40.setName("jLabel40"); // NOI18N
+        FormInput.add(jLabel40);
+        jLabel40.setBounds(44, 180, 190, 23);
+
+        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel41.setText("Kehamilan Sekarang :");
+        jLabel41.setName("jLabel41"); // NOI18N
+        FormInput.add(jLabel41);
+        jLabel41.setBounds(44, 300, 190, 23);
+
+        PerawatanAntenatal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
+        PerawatanAntenatal.setName("PerawatanAntenatal"); // NOI18N
+        PerawatanAntenatal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PerawatanAntenatalKeyPressed(evt);
+            }
+        });
+        FormInput.add(PerawatanAntenatal);
+        PerawatanAntenatal.setBounds(190, 320, 80, 23);
+
+        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel42.setText("Perawatan Antenatal");
+        jLabel42.setName("jLabel42"); // NOI18N
+        FormInput.add(jLabel42);
+        jLabel42.setBounds(77, 320, 140, 23);
+
+        KeteranganPerawatanAntenatal.setName("KeteranganPerawatanAntenatal"); // NOI18N
+        KeteranganPerawatanAntenatal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganPerawatanAntenatalKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganPerawatanAntenatal);
+        KeteranganPerawatanAntenatal.setBounds(273, 320, 200, 23);
+
+        jLabel20.setText(":");
+        jLabel20.setName("jLabel20"); // NOI18N
+        FormInput.add(jLabel20);
+        jLabel20.setBounds(0, 320, 186, 23);
+
+        KeteranganTerdaftarEkohort.setName("KeteranganTerdaftarEkohort"); // NOI18N
+        KeteranganTerdaftarEkohort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganTerdaftarEkohortKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganTerdaftarEkohort);
+        KeteranganTerdaftarEkohort.setBounds(694, 320, 160, 23);
+
+        TerdaftarEkohort.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ya", "Tidak" }));
+        TerdaftarEkohort.setName("TerdaftarEkohort"); // NOI18N
+        TerdaftarEkohort.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TerdaftarEkohortKeyPressed(evt);
+            }
+        });
+        FormInput.add(TerdaftarEkohort);
+        TerdaftarEkohort.setBounds(611, 320, 80, 23);
+
+        jLabel43.setText("Terdaftar Di EKohort :");
+        jLabel43.setName("jLabel43"); // NOI18N
+        FormInput.add(jLabel43);
+        jLabel43.setBounds(467, 320, 140, 23);
+
+        jLabel22.setText(":");
+        jLabel22.setName("jLabel22"); // NOI18N
+        FormInput.add(jLabel22);
+        jLabel22.setBounds(0, 350, 177, 23);
+
+        PenyulitKehamilan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Ada", "Hiperemesis", "CPD", "Kelainan Letak", "Solutio Placenta", "Placenta Previa", "KPD", "Oligohydramnion", "Polyhydramnion", "Prolaps Tali Pusat", "IUGR", "Pre-eklamsi", "Lainnya" }));
+        PenyulitKehamilan.setName("PenyulitKehamilan"); // NOI18N
+        PenyulitKehamilan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PenyulitKehamilanKeyPressed(evt);
+            }
+        });
+        FormInput.add(PenyulitKehamilan);
+        PenyulitKehamilan.setBounds(181, 350, 140, 23);
+
+        jLabel44.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel44.setText("Penyulit Kehamilan");
+        jLabel44.setName("jLabel44"); // NOI18N
+        FormInput.add(jLabel44);
+        jLabel44.setBounds(77, 350, 140, 23);
+
+        KeteranganPenyulitKehamilan.setName("KeteranganPenyulitKehamilan"); // NOI18N
+        KeteranganPenyulitKehamilan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganPenyulitKehamilanKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganPenyulitKehamilan);
+        KeteranganPenyulitKehamilan.setBounds(324, 350, 255, 23);
+
+        jLabel45.setText("Alergi :");
+        jLabel45.setName("jLabel45"); // NOI18N
+        FormInput.add(jLabel45);
+        jLabel45.setBounds(580, 350, 60, 23);
+
+        AlergiIbu.setName("AlergiIbu"); // NOI18N
+        AlergiIbu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AlergiIbuKeyPressed(evt);
+            }
+        });
+        FormInput.add(AlergiIbu);
+        AlergiIbu.setBounds(644, 350, 210, 23);
+
+        KeteranganRiwayatMaternal.setName("KeteranganRiwayatMaternal"); // NOI18N
+        KeteranganRiwayatMaternal.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganRiwayatMaternalKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganRiwayatMaternal);
+        KeteranganRiwayatMaternal.setBounds(151, 380, 703, 23);
+
+        jLabel46.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel46.setText("Keterangan Lainnya");
+        jLabel46.setName("jLabel46"); // NOI18N
+        FormInput.add(jLabel46);
+        jLabel46.setBounds(44, 380, 120, 23);
+
+        jLabel23.setText(":");
+        jLabel23.setName("jLabel23"); // NOI18N
+        FormInput.add(jLabel23);
+        jLabel23.setBounds(0, 380, 147, 23);
+
+        UmurKehamilan.setName("UmurKehamilan"); // NOI18N
+        UmurKehamilan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                UmurKehamilanKeyPressed(evt);
+            }
+        });
+        FormInput.add(UmurKehamilan);
+        UmurKehamilan.setBounds(135, 430, 180, 23);
+
+        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel24.setText("Umur Kehamilan");
+        jLabel24.setName("jLabel24"); // NOI18N
+        FormInput.add(jLabel24);
+        jLabel24.setBounds(44, 430, 130, 23);
+
+        jLabel25.setText(":");
+        jLabel25.setName("jLabel25"); // NOI18N
+        FormInput.add(jLabel25);
+        jLabel25.setBounds(0, 430, 131, 23);
+
+        jLabel47.setText("Kehamilan :");
+        jLabel47.setName("jLabel47"); // NOI18N
+        FormInput.add(jLabel47);
+        jLabel47.setBounds(320, 430, 80, 23);
+
+        Kehamilan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tunggal", "Kembar" }));
+        Kehamilan.setName("Kehamilan"); // NOI18N
+        Kehamilan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KehamilanKeyPressed(evt);
+            }
+        });
+        FormInput.add(Kehamilan);
+        Kehamilan.setBounds(404, 430, 90, 23);
+
+        KeteranganKehamilan.setName("KeteranganKehamilan"); // NOI18N
+        KeteranganKehamilan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganKehamilanKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganKehamilan);
+        KeteranganKehamilan.setBounds(497, 430, 185, 23);
+
+        jLabel48.setText("Urutan Kehamilan :");
+        jLabel48.setName("jLabel48"); // NOI18N
+        FormInput.add(jLabel48);
+        jLabel48.setBounds(690, 430, 110, 23);
+
+        UrutanKehamilan.setName("UrutanKehamilan"); // NOI18N
+        UrutanKehamilan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                UrutanKehamilanKeyPressed(evt);
+            }
+        });
+        FormInput.add(UrutanKehamilan);
+        UrutanKehamilan.setBounds(804, 430, 50, 23);
+
+        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel26.setText("Air Ketuban :");
+        jLabel26.setName("jLabel26"); // NOI18N
+        FormInput.add(jLabel26);
+        jLabel26.setBounds(310, 460, 90, 23);
+
+        jLabel27.setText(":");
+        jLabel27.setName("jLabel27"); // NOI18N
+        FormInput.add(jLabel27);
+        jLabel27.setBounds(0, 480, 104, 23);
+
+        JamKetubanPecah.setName("JamKetubanPecah"); // NOI18N
+        JamKetubanPecah.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JamKetubanPecahKeyPressed(evt);
+            }
+        });
+        FormInput.add(JamKetubanPecah);
+        JamKetubanPecah.setBounds(108, 480, 50, 23);
+
+        jLabel49.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel49.setText("Jam");
+        jLabel49.setName("jLabel49"); // NOI18N
+        FormInput.add(jLabel49);
+        jLabel49.setBounds(77, 480, 40, 23);
+
+        jLabel28.setText("Menit :");
+        jLabel28.setName("jLabel28"); // NOI18N
+        FormInput.add(jLabel28);
+        jLabel28.setBounds(155, 480, 50, 23);
+
+        MenitKetubanPecah.setName("MenitKetubanPecah"); // NOI18N
+        MenitKetubanPecah.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                MenitKetubanPecahKeyPressed(evt);
+            }
+        });
+        FormInput.add(MenitKetubanPecah);
+        MenitKetubanPecah.setBounds(209, 480, 50, 23);
+
+        jLabel29.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel29.setText("Ketuban Pecah Sebelum Lahir :");
+        jLabel29.setName("jLabel29"); // NOI18N
+        FormInput.add(jLabel29);
+        jLabel29.setBounds(44, 460, 180, 23);
+
+        jLabel30.setText("Jumlah :");
+        jLabel30.setName("jLabel30"); // NOI18N
+        FormInput.add(jLabel30);
+        jLabel30.setBounds(335, 480, 50, 23);
+
+        JumlahAirKetuban.setName("JumlahAirKetuban"); // NOI18N
+        JumlahAirKetuban.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JumlahAirKetubanKeyPressed(evt);
+            }
+        });
+        FormInput.add(JumlahAirKetuban);
+        JumlahAirKetuban.setBounds(389, 480, 120, 23);
+
+        WarnaAirKetuban.setName("WarnaAirKetuban"); // NOI18N
+        WarnaAirKetuban.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                WarnaAirKetubanKeyPressed(evt);
+            }
+        });
+        FormInput.add(WarnaAirKetuban);
+        WarnaAirKetuban.setBounds(569, 480, 120, 23);
+
+        jLabel31.setText("Warna :");
+        jLabel31.setName("jLabel31"); // NOI18N
+        FormInput.add(jLabel31);
+        jLabel31.setBounds(515, 480, 50, 23);
+
+        BauAirKetuban.setName("BauAirKetuban"); // NOI18N
+        BauAirKetuban.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BauAirKetubanKeyPressed(evt);
+            }
+        });
+        FormInput.add(BauAirKetuban);
+        BauAirKetuban.setBounds(734, 480, 120, 23);
+
+        jLabel32.setText("Bau :");
+        jLabel32.setName("jLabel32"); // NOI18N
+        FormInput.add(jLabel32);
+        jLabel32.setBounds(680, 480, 50, 23);
+
+        jLabel34.setText(":");
+        jLabel34.setName("jLabel34"); // NOI18N
+        FormInput.add(jLabel34);
+        jLabel34.setBounds(0, 510, 99, 23);
+
+        LetakBayi.setName("LetakBayi"); // NOI18N
+        LetakBayi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LetakBayiKeyPressed(evt);
+            }
+        });
+        FormInput.add(LetakBayi);
+        LetakBayi.setBounds(103, 510, 330, 23);
+
+        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel33.setText("Letak Bayi");
+        jLabel33.setName("jLabel33"); // NOI18N
+        FormInput.add(jLabel33);
+        jLabel33.setBounds(44, 510, 130, 23);
+
+        jLabel50.setText("Macam Persalinan :");
+        jLabel50.setName("jLabel50"); // NOI18N
+        FormInput.add(jLabel50);
+        jLabel50.setBounds(451, 510, 100, 23);
+
+        MacamPersalinan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Spontan", "Porceps", "Vacum", "Sectio Caesarea", "Lainnya" }));
+        MacamPersalinan.setName("MacamPersalinan"); // NOI18N
+        MacamPersalinan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                MacamPersalinanKeyPressed(evt);
+            }
+        });
+        FormInput.add(MacamPersalinan);
+        MacamPersalinan.setBounds(555, 510, 132, 23);
+
+        KeteranganMacamPersalinan.setName("KeteranganMacamPersalinan"); // NOI18N
+        KeteranganMacamPersalinan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganMacamPersalinanKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganMacamPersalinan);
+        KeteranganMacamPersalinan.setBounds(690, 510, 164, 23);
+
+        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel35.setText("Indikasi Persalinan Operatif");
+        jLabel35.setName("jLabel35"); // NOI18N
+        FormInput.add(jLabel35);
+        jLabel35.setBounds(44, 540, 150, 23);
+
+        jLabel36.setText(":");
+        jLabel36.setName("jLabel36"); // NOI18N
+        FormInput.add(jLabel36);
+        jLabel36.setBounds(0, 540, 187, 23);
+
+        IndikasiPersalinanOperatif.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak Ada", "Gawat Janin", "SC Sebelumnya", "Kala II Memanjang", "Komplikasi Tali Pusat", "Malposisi", "Gawat Ibu", "CPD", "Lainnya" }));
+        IndikasiPersalinanOperatif.setName("IndikasiPersalinanOperatif"); // NOI18N
+        IndikasiPersalinanOperatif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                IndikasiPersalinanOperatifKeyPressed(evt);
+            }
+        });
+        FormInput.add(IndikasiPersalinanOperatif);
+        IndikasiPersalinanOperatif.setBounds(191, 540, 155, 23);
+
+        KeteranganIndikasiPersalinanOperatif.setName("KeteranganIndikasiPersalinanOperatif"); // NOI18N
+        KeteranganIndikasiPersalinanOperatif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganIndikasiPersalinanOperatifKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganIndikasiPersalinanOperatif);
+        KeteranganIndikasiPersalinanOperatif.setBounds(349, 540, 225, 23);
+
+        jLabel37.setText("Lama Gawat Janin Sebelum Lahir :");
+        jLabel37.setName("jLabel37"); // NOI18N
+        FormInput.add(jLabel37);
+        jLabel37.setBounds(581, 540, 187, 23);
+
+        LamaGawatJanin.setName("LamaGawatJanin"); // NOI18N
+        LamaGawatJanin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LamaGawatJaninKeyPressed(evt);
+            }
+        });
+        FormInput.add(LamaGawatJanin);
+        LamaGawatJanin.setBounds(772, 540, 50, 23);
+
+        jLabel51.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel51.setText("gram");
+        jLabel51.setName("jLabel51"); // NOI18N
+        FormInput.add(jLabel51);
+        jLabel51.setBounds(167, 880, 40, 23);
+
+        jLabel52.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel52.setText("Obat-obatan Selama Persalinan");
+        jLabel52.setName("jLabel52"); // NOI18N
+        FormInput.add(jLabel52);
+        jLabel52.setBounds(44, 570, 180, 23);
+
+        jLabel53.setText(":");
+        jLabel53.setName("jLabel53"); // NOI18N
+        FormInput.add(jLabel53);
+        jLabel53.setBounds(0, 570, 206, 23);
+
+        ObatSelamaPersalinan.setName("ObatSelamaPersalinan"); // NOI18N
+        ObatSelamaPersalinan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ObatSelamaPersalinanKeyPressed(evt);
+            }
+        });
+        FormInput.add(ObatSelamaPersalinan);
+        ObatSelamaPersalinan.setBounds(210, 570, 644, 23);
+
+        jLabel54.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel54.setText("Placenta :");
+        jLabel54.setName("jLabel54"); // NOI18N
+        FormInput.add(jLabel54);
+        jLabel54.setBounds(44, 600, 180, 23);
+
+        jLabel56.setText(":");
+        jLabel56.setName("jLabel56"); // NOI18N
+        FormInput.add(jLabel56);
+        jLabel56.setBounds(0, 620, 110, 23);
+
+        BeratPlacenta.setName("BeratPlacenta"); // NOI18N
+        BeratPlacenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BeratPlacentaKeyPressed(evt);
+            }
+        });
+        FormInput.add(BeratPlacenta);
+        BeratPlacenta.setBounds(114, 620, 50, 23);
+
+        jLabel55.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel55.setText("Berat");
+        jLabel55.setName("jLabel55"); // NOI18N
+        FormInput.add(jLabel55);
+        jLabel55.setBounds(77, 620, 50, 23);
+
+        jLabel57.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel57.setText("menit");
+        jLabel57.setName("jLabel57"); // NOI18N
+        FormInput.add(jLabel57);
+        jLabel57.setBounds(824, 540, 40, 23);
+
+        jLabel58.setText("Kelainan :");
+        jLabel58.setName("jLabel58"); // NOI18N
+        FormInput.add(jLabel58);
+        jLabel58.setBounds(200, 620, 60, 23);
+
+        KelainanPlacenta.setName("KelainanPlacenta"); // NOI18N
+        KelainanPlacenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KelainanPlacentaKeyPressed(evt);
+            }
+        });
+        FormInput.add(KelainanPlacenta);
+        KelainanPlacenta.setBounds(264, 620, 590, 23);
+
+        jSeparator3.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator3.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator3.setName("jSeparator3"); // NOI18N
+        FormInput.add(jSeparator3);
+        jSeparator3.setBounds(0, 680, 880, 1);
+
+        jLabel116.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel116.setText("III. KEADAAN BAYI");
+        jLabel116.setName("jLabel116"); // NOI18N
+        FormInput.add(jLabel116);
+        jLabel116.setBounds(10, 680, 180, 23);
+
+        jLabel60.setText(":");
+        jLabel60.setName("jLabel60"); // NOI18N
+        FormInput.add(jLabel60);
+        jLabel60.setBounds(0, 880, 91, 23);
+
+        BBLahir.setName("BBLahir"); // NOI18N
+        BBLahir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BBLahirKeyPressed(evt);
+            }
+        });
+        FormInput.add(BBLahir);
+        BBLahir.setBounds(95, 880, 70, 23);
+
+        jLabel59.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel59.setText("BB Lahir");
+        jLabel59.setName("jLabel59"); // NOI18N
+        FormInput.add(jLabel59);
+        jLabel59.setBounds(44, 880, 70, 23);
+
+        jLabel61.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel61.setText("gram");
+        jLabel61.setName("jLabel61"); // NOI18N
+        FormInput.add(jLabel61);
+        jLabel61.setBounds(166, 620, 40, 23);
+
+        jLabel62.setText("Panjang Badan :");
+        jLabel62.setName("jLabel62"); // NOI18N
+        FormInput.add(jLabel62);
+        jLabel62.setBounds(228, 880, 91, 23);
+
+        PanjangBadan.setName("PanjangBadan"); // NOI18N
+        PanjangBadan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PanjangBadanKeyPressed(evt);
+            }
+        });
+        FormInput.add(PanjangBadan);
+        PanjangBadan.setBounds(323, 880, 70, 23);
+
+        jLabel63.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel63.setText("cm");
+        jLabel63.setName("jLabel63"); // NOI18N
+        FormInput.add(jLabel63);
+        jLabel63.setBounds(395, 880, 40, 23);
+
+        jLabel64.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel64.setText("cm");
+        jLabel64.setName("jLabel64"); // NOI18N
+        FormInput.add(jLabel64);
+        jLabel64.setBounds(635, 880, 40, 23);
+
+        LingkarKepala.setName("LingkarKepala"); // NOI18N
+        LingkarKepala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LingkarKepalaKeyPressed(evt);
+            }
+        });
+        FormInput.add(LingkarKepala);
+        LingkarKepala.setBounds(563, 880, 70, 23);
+
+        jLabel65.setText("Lingkar Kepala (FO) :");
+        jLabel65.setName("jLabel65"); // NOI18N
+        FormInput.add(jLabel65);
+        jLabel65.setBounds(439, 880, 120, 23);
+
+        jLabel66.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel66.setText("cm");
+        jLabel66.setName("jLabel66"); // NOI18N
+        FormInput.add(jLabel66);
+        jLabel66.setBounds(839, 880, 40, 23);
+
+        LingkarDada.setName("LingkarDada"); // NOI18N
+        LingkarDada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LingkarDadaKeyPressed(evt);
+            }
+        });
+        FormInput.add(LingkarDada);
+        LingkarDada.setBounds(767, 880, 70, 23);
+
+        jLabel67.setText("Lingkar Dada :");
+        jLabel67.setName("jLabel67"); // NOI18N
+        FormInput.add(jLabel67);
+        jLabel67.setBounds(672, 880, 91, 23);
+
+        jLabel69.setText(":");
+        jLabel69.setName("jLabel69"); // NOI18N
+        FormInput.add(jLabel69);
+        jLabel69.setBounds(0, 910, 154, 23);
+
+        jLabel70.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel70.setText("Resusitasi Saat Lahir");
+        jLabel70.setName("jLabel70"); // NOI18N
+        FormInput.add(jLabel70);
+        jLabel70.setBounds(44, 910, 130, 23);
+
+        ResusitasiLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Rangsang Taktil", "O2", "Ventilasi Dengan Maskre", "Ventilasi Dengan EET", "Lainnya" }));
+        ResusitasiLahir.setName("ResusitasiLahir"); // NOI18N
+        ResusitasiLahir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ResusitasiLahirKeyPressed(evt);
+            }
+        });
+        FormInput.add(ResusitasiLahir);
+        ResusitasiLahir.setBounds(158, 910, 171, 23);
+
+        KeteranganResusitasiLahir.setName("KeteranganResusitasiLahir"); // NOI18N
+        KeteranganResusitasiLahir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganResusitasiLahirKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganResusitasiLahir);
+        KeteranganResusitasiLahir.setBounds(332, 910, 522, 23);
+
+        jLabel71.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel71.setText("Obat Yang Diberikan Saat Lahir");
+        jLabel71.setName("jLabel71"); // NOI18N
+        FormInput.add(jLabel71);
+        jLabel71.setBounds(44, 940, 180, 23);
+
+        ObatSaatLahir.setName("ObatSaatLahir"); // NOI18N
+        ObatSaatLahir.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ObatSaatLahirKeyPressed(evt);
+            }
+        });
+        FormInput.add(ObatSaatLahir);
+        ObatSaatLahir.setBounds(208, 940, 646, 23);
+
+        jLabel72.setText(":");
+        jLabel72.setName("jLabel72"); // NOI18N
+        FormInput.add(jLabel72);
+        jLabel72.setBounds(0, 940, 204, 23);
+
+        jLabel73.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel73.setText("Keterangan Lainnya");
+        jLabel73.setName("jLabel73"); // NOI18N
+        FormInput.add(jLabel73);
+        jLabel73.setBounds(44, 650, 120, 23);
+
+        jLabel75.setText(":");
+        jLabel75.setName("jLabel75"); // NOI18N
+        FormInput.add(jLabel75);
+        jLabel75.setBounds(0, 650, 147, 23);
+
+        KeteranganRiwayatPersalinan.setName("KeteranganRiwayatPersalinan"); // NOI18N
+        KeteranganRiwayatPersalinan.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganRiwayatPersalinanKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganRiwayatPersalinan);
+        KeteranganRiwayatPersalinan.setBounds(151, 650, 703, 23);
+
+        jLabel76.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel76.setText("Keterangan Lainnya");
+        jLabel76.setName("jLabel76"); // NOI18N
+        FormInput.add(jLabel76);
+        jLabel76.setBounds(44, 970, 120, 23);
+
+        jLabel77.setText(":");
+        jLabel77.setName("jLabel77"); // NOI18N
+        FormInput.add(jLabel77);
+        jLabel77.setBounds(0, 970, 147, 23);
+
+        KeteranganKeadaanBayi.setName("KeteranganKeadaanBayi"); // NOI18N
+        KeteranganKeadaanBayi.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganKeadaanBayiKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganKeadaanBayi);
+        KeteranganKeadaanBayi.setBounds(151, 970, 703, 23);
+
+        jSeparator4.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator4.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator4.setName("jSeparator4"); // NOI18N
+        FormInput.add(jSeparator4);
+        jSeparator4.setBounds(0, 1000, 880, 1);
+
+        jLabel117.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel117.setText("IV. PEMERIKSAAN FISIK");
+        jLabel117.setName("jLabel117"); // NOI18N
+        FormInput.add(jLabel117);
+        jLabel117.setBounds(10, 1000, 180, 23);
+
+        KondisiUmum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        KondisiUmum.setName("KondisiUmum"); // NOI18N
+        KondisiUmum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KondisiUmumKeyPressed(evt);
+            }
+        });
+        FormInput.add(KondisiUmum);
+        KondisiUmum.setBounds(124, 1020, 129, 23);
+
+        jLabel78.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel78.setText("Kondisi Umum");
+        jLabel78.setName("jLabel78"); // NOI18N
+        FormInput.add(jLabel78);
+        jLabel78.setBounds(44, 1020, 128, 23);
+
+        KeteranganKondisiUmum.setFocusTraversalPolicyProvider(true);
+        KeteranganKondisiUmum.setName("KeteranganKondisiUmum"); // NOI18N
+        KeteranganKondisiUmum.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganKondisiUmumKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganKondisiUmum);
+        KeteranganKondisiUmum.setBounds(256, 1020, 160, 23);
+
+        jLabel79.setText(":");
+        jLabel79.setName("jLabel79"); // NOI18N
+        FormInput.add(jLabel79);
+        jLabel79.setBounds(0, 1020, 120, 23);
+
+        jLabel80.setText("Kulit :");
+        jLabel80.setName("jLabel80"); // NOI18N
+        FormInput.add(jLabel80);
+        jLabel80.setBounds(0, 1050, 120, 23);
+
+        Kulit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Kulit.setName("Kulit"); // NOI18N
+        Kulit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KulitKeyPressed(evt);
+            }
+        });
+        FormInput.add(Kulit);
+        Kulit.setBounds(124, 1050, 129, 23);
+
+        KeteranganKulit.setFocusTraversalPolicyProvider(true);
+        KeteranganKulit.setName("KeteranganKulit"); // NOI18N
+        KeteranganKulit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganKulitKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganKulit);
+        KeteranganKulit.setBounds(256, 1050, 160, 23);
+
+        jLabel81.setText("Kepala :");
+        jLabel81.setName("jLabel81"); // NOI18N
+        FormInput.add(jLabel81);
+        jLabel81.setBounds(0, 1080, 120, 23);
+
+        Kepala.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Kepala.setName("Kepala"); // NOI18N
+        Kepala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KepalaKeyPressed(evt);
+            }
+        });
+        FormInput.add(Kepala);
+        Kepala.setBounds(124, 1080, 129, 23);
+
+        KeteranganKepala.setFocusTraversalPolicyProvider(true);
+        KeteranganKepala.setName("KeteranganKepala"); // NOI18N
+        KeteranganKepala.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganKepalaKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganKepala);
+        KeteranganKepala.setBounds(256, 1080, 160, 23);
+
+        jLabel82.setText("Leher :");
+        jLabel82.setName("jLabel82"); // NOI18N
+        FormInput.add(jLabel82);
+        jLabel82.setBounds(0, 1110, 120, 23);
+
+        Leher.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Leher.setName("Leher"); // NOI18N
+        Leher.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                LeherKeyPressed(evt);
+            }
+        });
+        FormInput.add(Leher);
+        Leher.setBounds(124, 1110, 129, 23);
+
+        KeteranganLeher.setFocusTraversalPolicyProvider(true);
+        KeteranganLeher.setName("KeteranganLeher"); // NOI18N
+        KeteranganLeher.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganLeherKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganLeher);
+        KeteranganLeher.setBounds(256, 1110, 160, 23);
+
+        jLabel83.setText("Mata :");
+        jLabel83.setName("jLabel83"); // NOI18N
+        FormInput.add(jLabel83);
+        jLabel83.setBounds(0, 1140, 120, 23);
+
+        Mata.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Mata.setName("Mata"); // NOI18N
+        Mata.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                MataKeyPressed(evt);
+            }
+        });
+        FormInput.add(Mata);
+        Mata.setBounds(124, 1140, 129, 23);
+
+        KeteranganMata.setFocusTraversalPolicyProvider(true);
+        KeteranganMata.setName("KeteranganMata"); // NOI18N
+        KeteranganMata.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganMataKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganMata);
+        KeteranganMata.setBounds(256, 1140, 160, 23);
+
+        jLabel84.setText("Hidung :");
+        jLabel84.setName("jLabel84"); // NOI18N
+        FormInput.add(jLabel84);
+        jLabel84.setBounds(0, 1170, 120, 23);
+
+        Hidung.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Hidung.setName("Hidung"); // NOI18N
+        Hidung.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                HidungKeyPressed(evt);
+            }
+        });
+        FormInput.add(Hidung);
+        Hidung.setBounds(124, 1170, 129, 23);
+
+        KeteranganHidung.setFocusTraversalPolicyProvider(true);
+        KeteranganHidung.setName("KeteranganHidung"); // NOI18N
+        KeteranganHidung.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganHidungKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganHidung);
+        KeteranganHidung.setBounds(256, 1170, 160, 23);
+
+        jLabel85.setText("Telinga :");
+        jLabel85.setName("jLabel85"); // NOI18N
+        FormInput.add(jLabel85);
+        jLabel85.setBounds(0, 1200, 120, 23);
+
+        Telinga.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Telinga.setName("Telinga"); // NOI18N
+        Telinga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TelingaKeyPressed(evt);
+            }
+        });
+        FormInput.add(Telinga);
+        Telinga.setBounds(124, 1200, 129, 23);
+
+        KeteranganTelinga.setFocusTraversalPolicyProvider(true);
+        KeteranganTelinga.setName("KeteranganTelinga"); // NOI18N
+        KeteranganTelinga.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganTelingaKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganTelinga);
+        KeteranganTelinga.setBounds(256, 1200, 160, 23);
+
+        jLabel86.setText("Dada :");
+        jLabel86.setName("jLabel86"); // NOI18N
+        FormInput.add(jLabel86);
+        jLabel86.setBounds(0, 1230, 120, 23);
+
+        Dada.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Dada.setName("Dada"); // NOI18N
+        Dada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DadaKeyPressed(evt);
+            }
+        });
+        FormInput.add(Dada);
+        Dada.setBounds(124, 1230, 129, 23);
+
+        KeteranganDada.setFocusTraversalPolicyProvider(true);
+        KeteranganDada.setName("KeteranganDada"); // NOI18N
+        KeteranganDada.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganDadaKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganDada);
+        KeteranganDada.setBounds(256, 1230, 160, 23);
+
+        KeteranganParu.setFocusTraversalPolicyProvider(true);
+        KeteranganParu.setName("KeteranganParu"); // NOI18N
+        KeteranganParu.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganParuKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganParu);
+        KeteranganParu.setBounds(256, 1260, 160, 23);
+
+        Paru.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Paru.setName("Paru"); // NOI18N
+        Paru.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ParuKeyPressed(evt);
+            }
+        });
+        FormInput.add(Paru);
+        Paru.setBounds(124, 1260, 129, 23);
+
+        jLabel87.setText("Paru :");
+        jLabel87.setName("jLabel87"); // NOI18N
+        FormInput.add(jLabel87);
+        jLabel87.setBounds(0, 1260, 120, 23);
+
+        jLabel88.setText("Jantung :");
+        jLabel88.setName("jLabel88"); // NOI18N
+        FormInput.add(jLabel88);
+        jLabel88.setBounds(0, 1290, 120, 23);
+
+        Jantung.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Jantung.setName("Jantung"); // NOI18N
+        Jantung.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JantungKeyPressed(evt);
+            }
+        });
+        FormInput.add(Jantung);
+        Jantung.setBounds(124, 1290, 129, 23);
+
+        KeteranganJantung.setFocusTraversalPolicyProvider(true);
+        KeteranganJantung.setName("KeteranganJantung"); // NOI18N
+        KeteranganJantung.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganJantungKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganJantung);
+        KeteranganJantung.setBounds(256, 1290, 160, 23);
+
+        jLabel89.setText("Perut :");
+        jLabel89.setName("jLabel89"); // NOI18N
+        FormInput.add(jLabel89);
+        jLabel89.setBounds(0, 1320, 120, 23);
+
+        Perut.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Perut.setName("Perut"); // NOI18N
+        Perut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PerutKeyPressed(evt);
+            }
+        });
+        FormInput.add(Perut);
+        Perut.setBounds(124, 1320, 129, 23);
+
+        KeteranganPerut.setFocusTraversalPolicyProvider(true);
+        KeteranganPerut.setName("KeteranganPerut"); // NOI18N
+        KeteranganPerut.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganPerutKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganPerut);
+        KeteranganPerut.setBounds(256, 1320, 160, 23);
+
+        jLabel90.setText("Tali Pusat :");
+        jLabel90.setName("jLabel90"); // NOI18N
+        FormInput.add(jLabel90);
+        jLabel90.setBounds(417, 1020, 141, 23);
+
+        TaliPusat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        TaliPusat.setName("TaliPusat"); // NOI18N
+        TaliPusat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TaliPusatKeyPressed(evt);
+            }
+        });
+        FormInput.add(TaliPusat);
+        TaliPusat.setBounds(562, 1020, 129, 23);
+
+        KeteranganTaliPusat.setFocusTraversalPolicyProvider(true);
+        KeteranganTaliPusat.setName("KeteranganTaliPusat"); // NOI18N
+        KeteranganTaliPusat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganTaliPusatKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganTaliPusat);
+        KeteranganTaliPusat.setBounds(694, 1020, 160, 23);
+
+        jLabel91.setText("Alat Kelamin :");
+        jLabel91.setName("jLabel91"); // NOI18N
+        FormInput.add(jLabel91);
+        jLabel91.setBounds(417, 1050, 141, 23);
+
+        AlatKelamin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        AlatKelamin.setName("AlatKelamin"); // NOI18N
+        AlatKelamin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AlatKelaminKeyPressed(evt);
+            }
+        });
+        FormInput.add(AlatKelamin);
+        AlatKelamin.setBounds(562, 1050, 129, 23);
+
+        KeteranganAlatKelamin.setFocusTraversalPolicyProvider(true);
+        KeteranganAlatKelamin.setName("KeteranganAlatKelamin"); // NOI18N
+        KeteranganAlatKelamin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganAlatKelaminKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganAlatKelamin);
+        KeteranganAlatKelamin.setBounds(694, 1050, 160, 23);
+
+        jLabel92.setText("Ruas Tulang Belakang :");
+        jLabel92.setName("jLabel92"); // NOI18N
+        FormInput.add(jLabel92);
+        jLabel92.setBounds(417, 1080, 141, 23);
+
+        RuasTulangBelakang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        RuasTulangBelakang.setName("RuasTulangBelakang"); // NOI18N
+        RuasTulangBelakang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                RuasTulangBelakangKeyPressed(evt);
+            }
+        });
+        FormInput.add(RuasTulangBelakang);
+        RuasTulangBelakang.setBounds(562, 1080, 129, 23);
+
+        KeteranganRuasTulangBelakang.setFocusTraversalPolicyProvider(true);
+        KeteranganRuasTulangBelakang.setName("KeteranganRuasTulangBelakang"); // NOI18N
+        KeteranganRuasTulangBelakang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganRuasTulangBelakangKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganRuasTulangBelakang);
+        KeteranganRuasTulangBelakang.setBounds(694, 1080, 160, 23);
+
+        jLabel93.setText("Extrimitas :");
+        jLabel93.setName("jLabel93"); // NOI18N
+        FormInput.add(jLabel93);
+        jLabel93.setBounds(417, 1110, 141, 23);
+
+        Extrimitas.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Extrimitas.setName("Extrimitas"); // NOI18N
+        Extrimitas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                ExtrimitasKeyPressed(evt);
+            }
+        });
+        FormInput.add(Extrimitas);
+        Extrimitas.setBounds(562, 1110, 129, 23);
+
+        KeteranganExtrimitas.setFocusTraversalPolicyProvider(true);
+        KeteranganExtrimitas.setName("KeteranganExtrimitas"); // NOI18N
+        KeteranganExtrimitas.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganExtrimitasKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganExtrimitas);
+        KeteranganExtrimitas.setBounds(694, 1110, 160, 23);
+
+        jLabel94.setText("Anus :");
+        jLabel94.setName("jLabel94"); // NOI18N
+        FormInput.add(jLabel94);
+        jLabel94.setBounds(417, 1140, 141, 23);
+
+        Anus.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Anus.setName("Anus"); // NOI18N
+        Anus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                AnusKeyPressed(evt);
+            }
+        });
+        FormInput.add(Anus);
+        Anus.setBounds(562, 1140, 129, 23);
+
+        KeteranganAnus.setFocusTraversalPolicyProvider(true);
+        KeteranganAnus.setName("KeteranganAnus"); // NOI18N
+        KeteranganAnus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganAnusKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganAnus);
+        KeteranganAnus.setBounds(694, 1140, 160, 23);
+
+        jLabel95.setText("Refleks :");
+        jLabel95.setName("jLabel95"); // NOI18N
+        FormInput.add(jLabel95);
+        jLabel95.setBounds(417, 1170, 141, 23);
+
+        Refleks.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        Refleks.setName("Refleks"); // NOI18N
+        Refleks.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                RefleksKeyPressed(evt);
+            }
+        });
+        FormInput.add(Refleks);
+        Refleks.setBounds(562, 1170, 129, 23);
+
+        KeteranganRefleks.setFocusTraversalPolicyProvider(true);
+        KeteranganRefleks.setName("KeteranganRefleks"); // NOI18N
+        KeteranganRefleks.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganRefleksKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganRefleks);
+        KeteranganRefleks.setBounds(694, 1170, 160, 23);
+
+        jLabel96.setText("Pemeriksaan Lainnya :");
+        jLabel96.setName("jLabel96"); // NOI18N
+        FormInput.add(jLabel96);
+        jLabel96.setBounds(417, 1230, 141, 23);
+
+        DenyutFemoral.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Abnormal", "Tidak Diperiksa" }));
+        DenyutFemoral.setName("DenyutFemoral"); // NOI18N
+        DenyutFemoral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DenyutFemoralKeyPressed(evt);
+            }
+        });
+        FormInput.add(DenyutFemoral);
+        DenyutFemoral.setBounds(562, 1200, 129, 23);
+
+        KeteranganDenyutFemoral.setFocusTraversalPolicyProvider(true);
+        KeteranganDenyutFemoral.setName("KeteranganDenyutFemoral"); // NOI18N
+        KeteranganDenyutFemoral.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KeteranganDenyutFemoralKeyPressed(evt);
+            }
+        });
+        FormInput.add(KeteranganDenyutFemoral);
+        KeteranganDenyutFemoral.setBounds(694, 1200, 160, 23);
+
+        jLabel97.setText("Denyut Femoral/Radial :");
+        jLabel97.setName("jLabel97"); // NOI18N
+        FormInput.add(jLabel97);
+        jLabel97.setBounds(417, 1200, 141, 23);
+
+        scrollPane12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane12.setName("scrollPane12"); // NOI18N
+
+        PemeriksaanLainnya.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        PemeriksaanLainnya.setColumns(20);
+        PemeriksaanLainnya.setRows(20);
+        PemeriksaanLainnya.setName("PemeriksaanLainnya"); // NOI18N
+        PemeriksaanLainnya.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PemeriksaanLainnyaKeyPressed(evt);
+            }
+        });
+        scrollPane12.setViewportView(PemeriksaanLainnya);
+
+        FormInput.add(scrollPane12);
+        scrollPane12.setBounds(562, 1230, 292, 113);
+
+        jSeparator14.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator14.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator14.setName("jSeparator14"); // NOI18N
+        FormInput.add(jSeparator14);
+        jSeparator14.setBounds(0, 1350, 880, 1);
+
+        jLabel139.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel139.setText("V. PEMERIKSAAN PENUNJANG");
+        jLabel139.setName("jLabel139"); // NOI18N
+        FormInput.add(jLabel139);
+        jLabel139.setBounds(10, 1350, 190, 23);
+
+        scrollPane13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane13.setName("scrollPane13"); // NOI18N
+
+        PemeriksaanPenunjang.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        PemeriksaanPenunjang.setColumns(20);
+        PemeriksaanPenunjang.setRows(3);
+        PemeriksaanPenunjang.setName("PemeriksaanPenunjang"); // NOI18N
+        PemeriksaanPenunjang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                PemeriksaanPenunjangKeyPressed(evt);
+            }
+        });
+        scrollPane13.setViewportView(PemeriksaanPenunjang);
+
+        FormInput.add(scrollPane13);
+        scrollPane13.setBounds(44, 1370, 810, 43);
+
+        jSeparator15.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator15.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator15.setName("jSeparator15"); // NOI18N
+        FormInput.add(jSeparator15);
+        jSeparator15.setBounds(0, 1420, 880, 1);
+
+        jLabel140.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel140.setText("VI. DIAGNOSIS/ASESMEN");
+        jLabel140.setName("jLabel140"); // NOI18N
+        FormInput.add(jLabel140);
+        jLabel140.setBounds(10, 1420, 190, 23);
+
+        scrollPane14.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane14.setName("scrollPane14"); // NOI18N
+
+        Diagnosis.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Diagnosis.setColumns(20);
+        Diagnosis.setRows(3);
+        Diagnosis.setName("Diagnosis"); // NOI18N
+        Diagnosis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                DiagnosisKeyPressed(evt);
+            }
+        });
+        scrollPane14.setViewportView(Diagnosis);
+
+        FormInput.add(scrollPane14);
+        scrollPane14.setBounds(44, 1440, 810, 43);
+
+        jSeparator16.setBackground(new java.awt.Color(239, 244, 234));
+        jSeparator16.setForeground(new java.awt.Color(239, 244, 234));
+        jSeparator16.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(239, 244, 234)));
+        jSeparator16.setName("jSeparator16"); // NOI18N
+        FormInput.add(jSeparator16);
+        jSeparator16.setBounds(0, 1490, 880, 1);
+
+        jLabel141.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel141.setText("VII. TATALAKSANA");
+        jLabel141.setName("jLabel141"); // NOI18N
+        FormInput.add(jLabel141);
+        jLabel141.setBounds(10, 1490, 190, 23);
+
+        scrollPane15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        scrollPane15.setName("scrollPane15"); // NOI18N
+
+        Tatalaksana.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        Tatalaksana.setColumns(30);
+        Tatalaksana.setRows(20);
+        Tatalaksana.setName("Tatalaksana"); // NOI18N
+        Tatalaksana.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TatalaksanaKeyPressed(evt);
+            }
+        });
+        scrollPane15.setViewportView(Tatalaksana);
+
+        FormInput.add(scrollPane15);
+        scrollPane15.setBounds(44, 1510, 810, 153);
+
+        scrollInput.setViewportView(FormInput);
+
+        internalFrame2.add(scrollInput, java.awt.BorderLayout.CENTER);
+
+        TabRawat.addTab("Input Pengkajian", internalFrame2);
+
+        internalFrame3.setBorder(null);
+        internalFrame3.setName("internalFrame3"); // NOI18N
+        internalFrame3.setLayout(new java.awt.BorderLayout(1, 1));
+
+        Scroll.setName("Scroll"); // NOI18N
+        Scroll.setOpaque(true);
+        Scroll.setPreferredSize(new java.awt.Dimension(452, 200));
+
+        tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbObat.setName("tbObat"); // NOI18N
+        tbObat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tbObatMouseClicked(evt);
+            }
+        });
+        tbObat.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                tbObatKeyPressed(evt);
+            }
+        });
+        Scroll.setViewportView(tbObat);
+
+        internalFrame3.add(Scroll, java.awt.BorderLayout.CENTER);
+
+        panelGlass9.setName("panelGlass9"); // NOI18N
+        panelGlass9.setPreferredSize(new java.awt.Dimension(44, 44));
+        panelGlass9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        jLabel19.setText("Tgl.Asuhan :");
+        jLabel19.setName("jLabel19"); // NOI18N
+        jLabel19.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass9.add(jLabel19);
+
+        DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-03-2025" }));
+        DTPCari1.setDisplayFormat("dd-MM-yyyy");
+        DTPCari1.setName("DTPCari1"); // NOI18N
+        DTPCari1.setOpaque(false);
+        DTPCari1.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass9.add(DTPCari1);
+
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("s.d.");
+        jLabel21.setName("jLabel21"); // NOI18N
+        jLabel21.setPreferredSize(new java.awt.Dimension(23, 23));
+        panelGlass9.add(jLabel21);
+
+        DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "02-03-2025" }));
+        DTPCari2.setDisplayFormat("dd-MM-yyyy");
+        DTPCari2.setName("DTPCari2"); // NOI18N
+        DTPCari2.setOpaque(false);
+        DTPCari2.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass9.add(DTPCari2);
+
+        jLabel6.setText("Key Word :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        jLabel6.setPreferredSize(new java.awt.Dimension(80, 23));
+        panelGlass9.add(jLabel6);
+
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(195, 23));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariKeyPressed(evt);
+            }
+        });
+        panelGlass9.add(TCari);
+
+        BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('3');
+        BtnCari.setToolTipText("Alt+3");
+        BtnCari.setName("BtnCari"); // NOI18N
+        BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCariActionPerformed(evt);
+            }
+        });
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCariKeyPressed(evt);
+            }
+        });
+        panelGlass9.add(BtnCari);
+
+        jLabel7.setText("Record :");
+        jLabel7.setName("jLabel7"); // NOI18N
+        jLabel7.setPreferredSize(new java.awt.Dimension(60, 23));
+        panelGlass9.add(jLabel7);
+
+        LCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LCount.setText("0");
+        LCount.setName("LCount"); // NOI18N
+        LCount.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass9.add(LCount);
+
+        internalFrame3.add(panelGlass9, java.awt.BorderLayout.PAGE_END);
+
+        TabRawat.addTab("Data Pengkajian", internalFrame3);
+
+        internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
+
+        getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            isRawat();
+        }else{
+            Valid.pindah(evt,TCari,BtnDokter);
+        }
+    }//GEN-LAST:event_TNoRwKeyPressed
+
+    private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
+        if(TNoRM.getText().trim().equals("")){
+            Valid.textKosong(TNoRw,"Nama Pasien");
+        }else if(NmDokter.getText().trim().equals("")){
+            Valid.textKosong(BtnDokter,"Dokter");
+        }else if(NoRMIbu.getText().trim().equals("")){
+            Valid.textKosong(BtnIbuBayi,"Ibu Bayi");
+        }else if(tbAPGAR.getValueAt(0,4).toString().equals("")||tbAPGAR.getValueAt(1,4).toString().equals("")||tbAPGAR.getValueAt(2,4).toString().equals("")||
+                tbAPGAR.getValueAt(3,4).toString().equals("")||tbAPGAR.getValueAt(4,4).toString().equals("")||tbAPGAR.getValueAt(0,5).toString().equals("")||
+                tbAPGAR.getValueAt(1,5).toString().equals("")||tbAPGAR.getValueAt(2,5).toString().equals("")||tbAPGAR.getValueAt(3,5).toString().equals("")||
+                tbAPGAR.getValueAt(4,5).toString().equals("")||tbAPGAR.getValueAt(0,6).toString().equals("")||tbAPGAR.getValueAt(1,6).toString().equals("")||
+                tbAPGAR.getValueAt(2,6).toString().equals("")||tbAPGAR.getValueAt(3,6).toString().equals("")||tbAPGAR.getValueAt(4,6).toString().equals("")){
+            JOptionPane.showMessageDialog(null,"Nilai APGAR harus valid...!!!");
+        }else{
+            if(akses.getkode().equals("Admin Utama")){
+                simpan();
+            }else{
+                if(TanggalRegistrasi.getText().equals("")){
+                    TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
+                }
+                if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19))==true){
+                    simpan();
+                }
+            }
+        }
+
+    }//GEN-LAST:event_BtnSimpanActionPerformed
+
+    private void BtnSimpanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSimpanKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnSimpanActionPerformed(null);
+        }else{
+            Valid.pindah(evt,Tatalaksana,BtnBatal);
+        }
+    }//GEN-LAST:event_BtnSimpanKeyPressed
+
+    private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
+        emptTeks();
+    }//GEN-LAST:event_BtnBatalActionPerformed
+
+    private void BtnBatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnBatalKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            emptTeks();
+        }else{Valid.pindah(evt, BtnSimpan, BtnHapus);}
+    }//GEN-LAST:event_BtnBatalKeyPressed
+
+    private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
+        if(tbObat.getSelectedRow()>-1){
+            if(akses.getkode().equals("Admin Utama")){
+                hapus();
+            }else{
+                if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString())){
+                    if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString(),Sequel.ambiltanggalsekarang())==true){
+                        hapus();
+                    }
+                }else{
+                    JOptionPane.showMessageDialog(null,"Hanya bisa dihapus oleh dokter yang bersangkutan..!!");
+                }
+            }
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
+        }
+    }//GEN-LAST:event_BtnHapusActionPerformed
+
+    private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnHapusActionPerformed(null);
+        }else{
+            Valid.pindah(evt, BtnBatal, BtnEdit);
+        }
+    }//GEN-LAST:event_BtnHapusKeyPressed
+
+    private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
+        if(TNoRM.getText().trim().equals("")){
+            Valid.textKosong(TNoRw,"Nama Pasien");
+        }else if(NmDokter.getText().trim().equals("")){
+            Valid.textKosong(BtnDokter,"Dokter");
+        }else if(NoRMIbu.getText().trim().equals("")){
+            Valid.textKosong(BtnIbuBayi,"Ibu Bayi");
+        }else if(tbAPGAR.getValueAt(0,4).toString().equals("")||tbAPGAR.getValueAt(1,4).toString().equals("")||tbAPGAR.getValueAt(2,4).toString().equals("")||
+                tbAPGAR.getValueAt(3,4).toString().equals("")||tbAPGAR.getValueAt(4,4).toString().equals("")||tbAPGAR.getValueAt(0,5).toString().equals("")||
+                tbAPGAR.getValueAt(1,5).toString().equals("")||tbAPGAR.getValueAt(2,5).toString().equals("")||tbAPGAR.getValueAt(3,5).toString().equals("")||
+                tbAPGAR.getValueAt(4,5).toString().equals("")||tbAPGAR.getValueAt(0,6).toString().equals("")||tbAPGAR.getValueAt(1,6).toString().equals("")||
+                tbAPGAR.getValueAt(2,6).toString().equals("")||tbAPGAR.getValueAt(3,6).toString().equals("")||tbAPGAR.getValueAt(4,6).toString().equals("")){
+            JOptionPane.showMessageDialog(null,"Nilai APGAR harus valid...!!!");
+        }else{
+            if(tbObat.getSelectedRow()>-1){
+                if(akses.getkode().equals("Admin Utama")){
+                    ganti();
+                }else{
+                    if(KdDokter.getText().equals(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString())){
+                        if(Sequel.cekTanggal48jam(tbObat.getValueAt(tbObat.getSelectedRow(),12).toString(),Sequel.ambiltanggalsekarang())==true){
+                            if(TanggalRegistrasi.getText().equals("")){
+                                TanggalRegistrasi.setText(Sequel.cariIsi("select concat(reg_periksa.tgl_registrasi,' ',reg_periksa.jam_reg) from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
+                            }
+                            if(Sequel.cekTanggalRegistrasi(TanggalRegistrasi.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19))==true){
+                                ganti();
+                            }
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh dokter yang bersangkutan..!!");
+                    }
+                }
+            }else{
+                JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
+            }
+        }
+    }//GEN-LAST:event_BtnEditActionPerformed
+
+    private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnEditActionPerformed(null);
+        }else{
+            Valid.pindah(evt, BtnHapus, BtnPrint);
+        }
+    }//GEN-LAST:event_BtnEditKeyPressed
+
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
+
+    private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnKeluarActionPerformed(null);
+        }else{Valid.pindah(evt,BtnEdit,TCari);}
+    }//GEN-LAST:event_BtnKeluarKeyPressed
+
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+            BtnBatal.requestFocus();
+        }else if(tabMode.getRowCount()!=0){
+            try{
+                htmlContent = new StringBuilder();
+                htmlContent.append(
+                    "<tr class='isi'>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM IBU</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Ibu</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir Ibu</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>NIK Ibu</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Perkawinan Ibu</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kode Dokter</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Dokter</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tanggal</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penyakit Ibu</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Penyakit Diderita Ibu</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat Dikonsumsi Selama Kehamilan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Perawatan Antenatal</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Perawatan Antenatal</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Terdaftar Ekohort</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Terdaftar Ekohort</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Penyulit Kehamilan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Penyulit Kehamilan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alergi</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Lainnya Riwayat Maternal</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Umur Kehamilan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kehamilan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Kehamilan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Urutan Kehamilan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jam Ketuban Pecah</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Menit Ketuban Pecah</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jumlah Air Ketuban</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Warna Air Ketuban</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Bau Air Ketuban</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Letak Bayi</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Macam Persalinan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Macam Persalinan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Indikasi Persalinan Operatif</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Indikasi Persalinan Operatif</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lama Gawat Janin</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat Selama Persalinan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Berat Placenta</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kelainan Placenta</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Lainnya Riwayat Persalinan</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>F 1</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>U 1</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>T 1</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>R 1</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>W 1</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N 1'</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>F 5</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>U 5</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>T 5</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>R 5</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>W 5</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N 5'</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>F 10</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>U 10</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>T 10</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>R 10</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>W 10</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>N 10'</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>B.B.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>P.B.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>L.K.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>L.D.</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Resusitasi Lahir</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Resusitasi Saat Lahir</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Obat Diberikan Saat Lahir</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Lainnya Keadaan Bayi</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kondisi Umum</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Kondisi Umum</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kulit</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Kulit</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kepala</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Kepala</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Leher</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Leher</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Mata</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Mata</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Hidung</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Hidung</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Telinga</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Telinga</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Dada</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Dada</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Paru</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Paru</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Jantung</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Jantung</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Perut</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Perut</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tali Pusat</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Tali Pusat</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alat Kelamin</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Alat Kelamin</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ruas Tulang Belakang</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Ruas Tulang Belakang</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Extrimitas</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Extrimitas</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Anus</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Anus</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Refleks</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Refleks</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Denyut Femoral</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Keterangan Denyut Femoral</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pemeriksaan Fisik Lainnya</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Pemeriksaan Penunjang</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Diagnosa</b></td>"+
+                        "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tatalaksana</b></td>"+
+                    "</tr>"
+                );
+                for (i = 0; i < tabMode.getRowCount(); i++) {
+                    htmlContent.append(
+                        "<tr class='isi'>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,11).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,12).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,13).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,14).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,15).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,16).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,17).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,18).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,19).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,20).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,21).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,22).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,23).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,24).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,25).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,26).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,27).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,28).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,29).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,30).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,31).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,32).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,33).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,34).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,35).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,36).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,37).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,38).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,39).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,40).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,41).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,42).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,43).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,44).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,45).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,46).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,47).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,48).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,49).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,50).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,51).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,52).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,53).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,54).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,55).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,56).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,57).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,58).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,59).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,60).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,61).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,62).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,63).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,64).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,65).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,66).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,67).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,68).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,69).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,70).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,71).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,72).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,73).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,74).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,75).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,76).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,77).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,78).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,79).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,80).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,81).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,82).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,83).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,84).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,85).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,86).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,87).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,88).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,89).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,90).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,91).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,92).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,93).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,94).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,95).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,96).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,97).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,98).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,99).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,100).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,101).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,102).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,103).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,104).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,105).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,106).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,107).toString()+"</td>"+
+                            "<td valign='top'>"+tbObat.getValueAt(i,108).toString()+"</td>"+
+                        "</tr>");
+                }
+                LoadHTML.setText(
+                    "<html>"+
+                      "<table width='9000px' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
+                       htmlContent.toString()+
+                      "</table>"+
+                    "</html>"
+                );
+
+                File g = new File("file2.css");
+                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+                bg.write(
+                    ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                    ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
+                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                    ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
+                    ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
+                    ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
+                    ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
+                    ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
+                );
+                bg.close();
+
+                File f = new File("DataPenilaianBayiBaruLahir.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
+                            "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                            "<table width='9000px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                "<tr class='isi2'>"+
+                                    "<td valign='top' align='center'>"+
+                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                        "<font size='2' face='Tahoma'>DATA PENGKAJIAN BAYI BARU LAHIR<br><br></font>"+
+                                    "</td>"+
+                               "</tr>"+
+                            "</table>")
+                );
+                bw.close();
+                Desktop.getDesktop().browse(f.toURI());
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }//GEN-LAST:event_BtnPrintActionPerformed
+
+    private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnPrintActionPerformed(null);
+        }else{
+            Valid.pindah(evt, BtnEdit, BtnKeluar);
+        }
+    }//GEN-LAST:event_BtnPrintKeyPressed
+
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
+    }//GEN-LAST:event_TCariKeyPressed
+
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        tampil();
+    }//GEN-LAST:event_BtnCariActionPerformed
+
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnCariActionPerformed(null);
+        }else{
+            Valid.pindah(evt, TCari, BtnAll);
+        }
+    }//GEN-LAST:event_BtnCariKeyPressed
+
+    private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        TCari.setText("");
+        tampil();
+    }//GEN-LAST:event_BtnAllActionPerformed
+
+    private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            TCari.setText("");
+            tampil();
+        }else{
+            Valid.pindah(evt, BtnCari, TPasien);
+        }
+    }//GEN-LAST:event_BtnAllKeyPressed
+
+    private void tbObatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbObatMouseClicked
+        if(tabMode.getRowCount()!=0){
+            try {
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
+            if((evt.getClickCount()==2)&&(tbObat.getSelectedColumn()==0)){
+                TabRawat.setSelectedIndex(0);
+                tampilPersalinan();
+            }
+        }
+    }//GEN-LAST:event_tbObatMouseClicked
+
+    private void tbObatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbObatKeyPressed
+        if(tabMode.getRowCount()!=0){
+            if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
+                try {
+                    getData();
+                } catch (java.lang.NullPointerException e) {
+                }
+            }else if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+                try {
+                    getData();
+                    TabRawat.setSelectedIndex(0);
+                    tampilPersalinan();
+                } catch (java.lang.NullPointerException e) {
+                }
+            }
+        }
+    }//GEN-LAST:event_tbObatKeyPressed
+
+    private void BtnDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDokterActionPerformed
+        dokter.isCek();
+        dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        dokter.setLocationRelativeTo(internalFrame1);
+        dokter.setAlwaysOnTop(false);
+        dokter.setVisible(true);
+    }//GEN-LAST:event_BtnDokterActionPerformed
+
+    private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
+        Valid.pindah(evt,BtnSimpan,TglAsuhan);
+    }//GEN-LAST:event_BtnDokterKeyPressed
+
+    private void TglAsuhanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglAsuhanKeyPressed
+        Valid.pindah2(evt,BtnDokter,BtnIbuBayi);
+    }//GEN-LAST:event_TglAsuhanKeyPressed
+
+    private void BtnTambahMasalahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahMasalahActionPerformed
+        if(NoRMIbu.getText().equals("")){
+            JOptionPane.showMessageDialog(null,"Pilih terlebih dahulu ibu bayi yang mau dimasukkan data kelahirannya...");
+            //HbsAg.requestFocus();
+        }else{
+            emptTeksPersalinan();
+            DlgRiwayatPersalinan.setLocationRelativeTo(internalFrame1);
+            DlgRiwayatPersalinan.setVisible(true);
+        }
+    }//GEN-LAST:event_BtnTambahMasalahActionPerformed
+
+    private void BtnHapusRiwayatPersalinanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusRiwayatPersalinanActionPerformed
+        if(tbRiwayatKehamilan.getSelectedRow()>-1){
+            Sequel.meghapus("riwayat_persalinan_pasien","no_rkm_medis","tgl_thn",NoRMIbu.getText(),tbRiwayatKehamilan.getValueAt(tbRiwayatKehamilan.getSelectedRow(),1).toString());
+            tampilPersalinan();
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih data terlebih dahulu..!!");
+        }
+    }//GEN-LAST:event_BtnHapusRiwayatPersalinanActionPerformed
+
+    private void BtnKeluarKehamilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarKehamilanActionPerformed
+        DlgRiwayatPersalinan.dispose();
+    }//GEN-LAST:event_BtnKeluarKehamilanActionPerformed
+
+    private void UsiaHamilKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UsiaHamilKeyPressed
+        Valid.pindah(evt,Keadaan,JK);
+    }//GEN-LAST:event_UsiaHamilKeyPressed
+
+    private void BtnSimpanRiwayatKehamilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanRiwayatKehamilanActionPerformed
+        if(TempatPersalinan.getText().trim().equals("")){
+            Valid.textKosong(TempatPersalinan,"Tempat Persalinan");
+        }else if(JenisPersalinan.getText().trim().equals("")){
+            Valid.textKosong(JenisPersalinan,"Jenis Persalinan");
+        }else if(Penolong.getText().trim().equals("")){
+            Valid.textKosong(Penolong,"Penolong Persalinan");
+        }else if(Penyulit.getText().trim().equals("")){
+            Valid.textKosong(Penyulit,"Penyulit Persalinan");
+        }else if(Keadaan.getText().trim().equals("")){
+            Valid.textKosong(Keadaan,"Keadaan Persalinan");
+        }else if(UsiaHamil.getText().trim().equals("")){
+            Valid.textKosong(UsiaHamil,"Usia Hamil");
+        }else if(BBPB.getText().trim().equals("")){
+            Valid.textKosong(BBPB,"BB/PB");
+        }else{
+            if(Sequel.menyimpantf("riwayat_persalinan_pasien","?,?,?,?,?,?,?,?,?,?","Riwayat Persalinan",10,new String[]{
+                NoRMIbu.getText(),Valid.SetTgl(TanggalPersalinan.getSelectedItem()+""),TempatPersalinan.getText(),UsiaHamil.getText(),JenisPersalinan.getText(),Penolong.getText(),Penyulit.getText(),JK.getSelectedItem().toString().substring(0,1),BBPB.getText(),Keadaan.getText()
+            })==true){
+                emptTeksPersalinan();
+                tampilPersalinan();
+            }
+        }
+    }//GEN-LAST:event_BtnSimpanRiwayatKehamilanActionPerformed
+
+    private void TempatPersalinanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TempatPersalinanKeyPressed
+        Valid.pindah(evt,BtnKeluarKehamilan,JenisPersalinan);
+    }//GEN-LAST:event_TempatPersalinanKeyPressed
+
+    private void JenisPersalinanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JenisPersalinanKeyPressed
+        Valid.pindah(evt,TempatPersalinan,Penolong);
+    }//GEN-LAST:event_JenisPersalinanKeyPressed
+
+    private void JKKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JKKeyPressed
+        Valid.pindah(evt,UsiaHamil,BBPB);
+    }//GEN-LAST:event_JKKeyPressed
+
+    private void PenolongKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenolongKeyPressed
+        Valid.pindah(evt,JenisPersalinan,Penyulit);
+    }//GEN-LAST:event_PenolongKeyPressed
+
+    private void BBPBKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BBPBKeyPressed
+        Valid.pindah(evt,JK,BtnSimpanRiwayatKehamilan);
+    }//GEN-LAST:event_BBPBKeyPressed
+
+    private void PenyulitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenyulitKeyPressed
+        Valid.pindah(evt,Penolong,Keadaan);
+    }//GEN-LAST:event_PenyulitKeyPressed
+
+    private void KeadaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeadaanKeyPressed
+        Valid.pindah(evt,Penyulit,UsiaHamil);
+    }//GEN-LAST:event_KeadaanKeyPressed
+
+    private void tbAPGARPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbAPGARPropertyChange
+        if(this.isVisible()==true){
+            getDataApgar();
+        }
+    }//GEN-LAST:event_tbAPGARPropertyChange
+
+    private void BtnIbuBayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnIbuBayiActionPerformed
+        DlgCariPasien ibubayi=new DlgCariPasien(null,false);
+        ibubayi.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(ibubayi.getTable().getSelectedRow()!= -1){
+                    NoRMIbu.setText(ibubayi.getTable().getValueAt(ibubayi.getTable().getSelectedRow(),0).toString());
+                    NmIbu.setText(ibubayi.getTable().getValueAt(ibubayi.getTable().getSelectedRow(),1).toString());
+                    TglLahirIbu.setText(ibubayi.getTable().getValueAt(ibubayi.getTable().getSelectedRow(),5).toString());
+                    NIKIbu.setText(ibubayi.getTable().getValueAt(ibubayi.getTable().getSelectedRow(),2).toString());
+                    StatusPerkawinanIbu.setText(ibubayi.getTable().getValueAt(ibubayi.getTable().getSelectedRow(),10).toString());
+                    tampilPersalinan();
+                }
+                BtnIbuBayi.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+
+        });
+
+        ibubayi.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    ibubayi.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        ibubayi.emptTeks();
+        ibubayi.isCek();
+        ibubayi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        ibubayi.setLocationRelativeTo(internalFrame1);
+        ibubayi.setAlwaysOnTop(false);
+        ibubayi.setVisible(true);
+    }//GEN-LAST:event_BtnIbuBayiActionPerformed
+
+    private void BtnIbuBayiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnIbuBayiKeyPressed
+        Valid.pindah(evt,TglAsuhan,PenyakitIbu);
+    }//GEN-LAST:event_BtnIbuBayiKeyPressed
+
+    private void PenyakitIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenyakitIbuKeyPressed
+        Valid.pindah(evt,BtnIbuBayi,KeteranganPenyakitIbu);
+    }//GEN-LAST:event_PenyakitIbuKeyPressed
+
+    private void PerawatanAntenatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PerawatanAntenatalKeyPressed
+        Valid.pindah(evt,ObatSelamaHamil,KeteranganPerawatanAntenatal);
+    }//GEN-LAST:event_PerawatanAntenatalKeyPressed
+
+    private void TerdaftarEkohortKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TerdaftarEkohortKeyPressed
+        Valid.pindah(evt,KeteranganPerawatanAntenatal,KeteranganTerdaftarEkohort);
+    }//GEN-LAST:event_TerdaftarEkohortKeyPressed
+
+    private void PenyulitKehamilanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenyulitKehamilanKeyPressed
+        Valid.pindah(evt,KeteranganTerdaftarEkohort,KeteranganPenyulitKehamilan);
+    }//GEN-LAST:event_PenyulitKehamilanKeyPressed
+
+    private void KehamilanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KehamilanKeyPressed
+        Valid.pindah(evt,UmurKehamilan,KeteranganKehamilan);
+    }//GEN-LAST:event_KehamilanKeyPressed
+
+    private void MacamPersalinanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MacamPersalinanKeyPressed
+        Valid.pindah(evt,LetakBayi,KeteranganMacamPersalinan);
+    }//GEN-LAST:event_MacamPersalinanKeyPressed
+
+    private void IndikasiPersalinanOperatifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IndikasiPersalinanOperatifKeyPressed
+        Valid.pindah(evt,KeteranganMacamPersalinan,KeteranganIndikasiPersalinanOperatif);
+    }//GEN-LAST:event_IndikasiPersalinanOperatifKeyPressed
+
+    private void ResusitasiLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ResusitasiLahirKeyPressed
+        Valid.pindah(evt,LingkarDada,KeteranganResusitasiLahir);
+    }//GEN-LAST:event_ResusitasiLahirKeyPressed
+
+    private void KondisiUmumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KondisiUmumKeyPressed
+        Valid.pindah(evt,KeteranganKeadaanBayi,KeteranganKondisiUmum);
+    }//GEN-LAST:event_KondisiUmumKeyPressed
+
+    private void KeteranganKondisiUmumKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKondisiUmumKeyPressed
+        Valid.pindah(evt,KondisiUmum,Kulit);
+    }//GEN-LAST:event_KeteranganKondisiUmumKeyPressed
+
+    private void KulitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KulitKeyPressed
+        Valid.pindah(evt,KeteranganKondisiUmum,KeteranganKulit);
+    }//GEN-LAST:event_KulitKeyPressed
+
+    private void KeteranganKulitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKulitKeyPressed
+        Valid.pindah(evt,Kulit,Kepala);
+    }//GEN-LAST:event_KeteranganKulitKeyPressed
+
+    private void KepalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KepalaKeyPressed
+        Valid.pindah(evt,KeteranganKulit,KeteranganKepala);
+    }//GEN-LAST:event_KepalaKeyPressed
+
+    private void KeteranganKepalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKepalaKeyPressed
+        Valid.pindah(evt,Kepala,Leher);
+    }//GEN-LAST:event_KeteranganKepalaKeyPressed
+
+    private void LeherKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LeherKeyPressed
+        Valid.pindah(evt,KeteranganKepala,KeteranganLeher);
+    }//GEN-LAST:event_LeherKeyPressed
+
+    private void KeteranganLeherKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganLeherKeyPressed
+        Valid.pindah(evt,Leher,Mata);
+    }//GEN-LAST:event_KeteranganLeherKeyPressed
+
+    private void MataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MataKeyPressed
+        Valid.pindah(evt,KeteranganLeher,KeteranganMata);
+    }//GEN-LAST:event_MataKeyPressed
+
+    private void KeteranganMataKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganMataKeyPressed
+        Valid.pindah(evt,Mata,Hidung);
+    }//GEN-LAST:event_KeteranganMataKeyPressed
+
+    private void HidungKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_HidungKeyPressed
+        Valid.pindah(evt,KeteranganMata,KeteranganHidung);
+    }//GEN-LAST:event_HidungKeyPressed
+
+    private void KeteranganHidungKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganHidungKeyPressed
+        Valid.pindah(evt,Hidung,Telinga);
+    }//GEN-LAST:event_KeteranganHidungKeyPressed
+
+    private void TelingaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TelingaKeyPressed
+        Valid.pindah(evt,KeteranganHidung,KeteranganTelinga);
+    }//GEN-LAST:event_TelingaKeyPressed
+
+    private void KeteranganTelingaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganTelingaKeyPressed
+        Valid.pindah(evt,Telinga,Dada);
+    }//GEN-LAST:event_KeteranganTelingaKeyPressed
+
+    private void DadaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DadaKeyPressed
+        Valid.pindah(evt,KeteranganTelinga,KeteranganDada);
+    }//GEN-LAST:event_DadaKeyPressed
+
+    private void KeteranganDadaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganDadaKeyPressed
+        Valid.pindah(evt,Dada,Paru);
+    }//GEN-LAST:event_KeteranganDadaKeyPressed
+
+    private void KeteranganParuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganParuKeyPressed
+        Valid.pindah(evt,Paru,Jantung);
+    }//GEN-LAST:event_KeteranganParuKeyPressed
+
+    private void ParuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ParuKeyPressed
+        Valid.pindah(evt,KeteranganDada,KeteranganParu);
+    }//GEN-LAST:event_ParuKeyPressed
+
+    private void JantungKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JantungKeyPressed
+        Valid.pindah(evt,KeteranganParu,KeteranganJantung);
+    }//GEN-LAST:event_JantungKeyPressed
+
+    private void KeteranganJantungKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganJantungKeyPressed
+        Valid.pindah(evt,Jantung,Perut);
+    }//GEN-LAST:event_KeteranganJantungKeyPressed
+
+    private void PerutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PerutKeyPressed
+        Valid.pindah(evt,KeteranganJantung,KeteranganPerut);
+    }//GEN-LAST:event_PerutKeyPressed
+
+    private void KeteranganPerutKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganPerutKeyPressed
+        Valid.pindah(evt,Perut,TaliPusat);
+    }//GEN-LAST:event_KeteranganPerutKeyPressed
+
+    private void TaliPusatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TaliPusatKeyPressed
+        Valid.pindah(evt,KeteranganPerut,KeteranganTaliPusat);
+    }//GEN-LAST:event_TaliPusatKeyPressed
+
+    private void KeteranganTaliPusatKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganTaliPusatKeyPressed
+        Valid.pindah(evt,TaliPusat,AlatKelamin);
+    }//GEN-LAST:event_KeteranganTaliPusatKeyPressed
+
+    private void AlatKelaminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlatKelaminKeyPressed
+        Valid.pindah(evt,KeteranganTaliPusat,KeteranganAlatKelamin);
+    }//GEN-LAST:event_AlatKelaminKeyPressed
+
+    private void KeteranganAlatKelaminKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganAlatKelaminKeyPressed
+        Valid.pindah(evt,AlatKelamin,RuasTulangBelakang);
+    }//GEN-LAST:event_KeteranganAlatKelaminKeyPressed
+
+    private void RuasTulangBelakangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RuasTulangBelakangKeyPressed
+        Valid.pindah(evt,KeteranganAlatKelamin,KeteranganRuasTulangBelakang);
+    }//GEN-LAST:event_RuasTulangBelakangKeyPressed
+
+    private void KeteranganRuasTulangBelakangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganRuasTulangBelakangKeyPressed
+        Valid.pindah(evt,RuasTulangBelakang,Extrimitas);
+    }//GEN-LAST:event_KeteranganRuasTulangBelakangKeyPressed
+
+    private void ExtrimitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ExtrimitasKeyPressed
+        Valid.pindah(evt,KeteranganRuasTulangBelakang,KeteranganExtrimitas);
+    }//GEN-LAST:event_ExtrimitasKeyPressed
+
+    private void KeteranganExtrimitasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganExtrimitasKeyPressed
+        Valid.pindah(evt,Extrimitas,Anus);
+    }//GEN-LAST:event_KeteranganExtrimitasKeyPressed
+
+    private void AnusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AnusKeyPressed
+        Valid.pindah(evt,KeteranganExtrimitas,KeteranganAnus);
+    }//GEN-LAST:event_AnusKeyPressed
+
+    private void KeteranganAnusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganAnusKeyPressed
+        Valid.pindah(evt,Anus,Refleks);
+    }//GEN-LAST:event_KeteranganAnusKeyPressed
+
+    private void RefleksKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_RefleksKeyPressed
+        Valid.pindah(evt,KeteranganAnus,KeteranganRefleks);
+    }//GEN-LAST:event_RefleksKeyPressed
+
+    private void KeteranganRefleksKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganRefleksKeyPressed
+        Valid.pindah(evt,Refleks,DenyutFemoral);
+    }//GEN-LAST:event_KeteranganRefleksKeyPressed
+
+    private void DenyutFemoralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DenyutFemoralKeyPressed
+        Valid.pindah(evt,KeteranganRefleks,KeteranganDenyutFemoral);
+    }//GEN-LAST:event_DenyutFemoralKeyPressed
+
+    private void KeteranganDenyutFemoralKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganDenyutFemoralKeyPressed
+        Valid.pindah(evt,DenyutFemoral,PemeriksaanLainnya);
+    }//GEN-LAST:event_KeteranganDenyutFemoralKeyPressed
+
+    private void PemeriksaanLainnyaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PemeriksaanLainnyaKeyPressed
+        Valid.pindah2(evt,KeteranganDenyutFemoral,PemeriksaanPenunjang);
+    }//GEN-LAST:event_PemeriksaanLainnyaKeyPressed
+
+    private void PemeriksaanPenunjangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PemeriksaanPenunjangKeyPressed
+        Valid.pindah2(evt,PemeriksaanLainnya,Diagnosis);
+    }//GEN-LAST:event_PemeriksaanPenunjangKeyPressed
+
+    private void DiagnosisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DiagnosisKeyPressed
+        Valid.pindah2(evt,PemeriksaanPenunjang,Tatalaksana);
+    }//GEN-LAST:event_DiagnosisKeyPressed
+
+    private void TatalaksanaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TatalaksanaKeyPressed
+        Valid.pindah2(evt,Diagnosis,BtnSimpan);
+    }//GEN-LAST:event_TatalaksanaKeyPressed
+
+    private void KeteranganPenyakitIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganPenyakitIbuKeyPressed
+        Valid.pindah(evt,PenyakitIbu,ObatSelamaHamil);
+    }//GEN-LAST:event_KeteranganPenyakitIbuKeyPressed
+
+    private void ObatSelamaHamilKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ObatSelamaHamilKeyPressed
+        Valid.pindah(evt,KeteranganPenyakitIbu,PerawatanAntenatal);
+    }//GEN-LAST:event_ObatSelamaHamilKeyPressed
+
+    private void KeteranganPerawatanAntenatalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganPerawatanAntenatalKeyPressed
+        Valid.pindah(evt,PerawatanAntenatal,TerdaftarEkohort);
+    }//GEN-LAST:event_KeteranganPerawatanAntenatalKeyPressed
+
+    private void KeteranganTerdaftarEkohortKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganTerdaftarEkohortKeyPressed
+        Valid.pindah(evt,TerdaftarEkohort,PenyulitKehamilan);
+    }//GEN-LAST:event_KeteranganTerdaftarEkohortKeyPressed
+
+    private void KeteranganPenyulitKehamilanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganPenyulitKehamilanKeyPressed
+        Valid.pindah(evt,PenyulitKehamilan,AlergiIbu);
+    }//GEN-LAST:event_KeteranganPenyulitKehamilanKeyPressed
+
+    private void AlergiIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlergiIbuKeyPressed
+        Valid.pindah(evt,KeteranganPenyulitKehamilan,KeteranganRiwayatMaternal);
+    }//GEN-LAST:event_AlergiIbuKeyPressed
+
+    private void KeteranganRiwayatMaternalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganRiwayatMaternalKeyPressed
+        Valid.pindah(evt,AlergiIbu,UmurKehamilan);
+    }//GEN-LAST:event_KeteranganRiwayatMaternalKeyPressed
+
+    private void UmurKehamilanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurKehamilanKeyPressed
+        Valid.pindah(evt,KeteranganRiwayatMaternal,Kehamilan);
+    }//GEN-LAST:event_UmurKehamilanKeyPressed
+
+    private void KeteranganKehamilanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKehamilanKeyPressed
+        Valid.pindah(evt,Kehamilan,UrutanKehamilan);
+    }//GEN-LAST:event_KeteranganKehamilanKeyPressed
+
+    private void UrutanKehamilanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UrutanKehamilanKeyPressed
+        Valid.pindah(evt,KeteranganKehamilan,JamKetubanPecah);
+    }//GEN-LAST:event_UrutanKehamilanKeyPressed
+
+    private void JamKetubanPecahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JamKetubanPecahKeyPressed
+        Valid.pindah(evt,UrutanKehamilan,MenitKetubanPecah);
+    }//GEN-LAST:event_JamKetubanPecahKeyPressed
+
+    private void MenitKetubanPecahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MenitKetubanPecahKeyPressed
+        Valid.pindah(evt,JamKetubanPecah,JumlahAirKetuban);
+    }//GEN-LAST:event_MenitKetubanPecahKeyPressed
+
+    private void JumlahAirKetubanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JumlahAirKetubanKeyPressed
+        Valid.pindah(evt,MenitKetubanPecah,WarnaAirKetuban);
+    }//GEN-LAST:event_JumlahAirKetubanKeyPressed
+
+    private void WarnaAirKetubanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_WarnaAirKetubanKeyPressed
+        Valid.pindah(evt,JumlahAirKetuban,BauAirKetuban);
+    }//GEN-LAST:event_WarnaAirKetubanKeyPressed
+
+    private void BauAirKetubanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BauAirKetubanKeyPressed
+        Valid.pindah(evt,WarnaAirKetuban,LetakBayi);
+    }//GEN-LAST:event_BauAirKetubanKeyPressed
+
+    private void LetakBayiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LetakBayiKeyPressed
+        Valid.pindah(evt,BauAirKetuban,MacamPersalinan);
+    }//GEN-LAST:event_LetakBayiKeyPressed
+
+    private void KeteranganMacamPersalinanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganMacamPersalinanKeyPressed
+        Valid.pindah(evt,MacamPersalinan,IndikasiPersalinanOperatif);
+    }//GEN-LAST:event_KeteranganMacamPersalinanKeyPressed
+
+    private void KeteranganIndikasiPersalinanOperatifKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganIndikasiPersalinanOperatifKeyPressed
+        Valid.pindah(evt,IndikasiPersalinanOperatif,LamaGawatJanin);
+    }//GEN-LAST:event_KeteranganIndikasiPersalinanOperatifKeyPressed
+
+    private void LamaGawatJaninKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LamaGawatJaninKeyPressed
+        Valid.pindah(evt,KeteranganIndikasiPersalinanOperatif,ObatSelamaPersalinan);
+    }//GEN-LAST:event_LamaGawatJaninKeyPressed
+
+    private void ObatSelamaPersalinanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ObatSelamaPersalinanKeyPressed
+        Valid.pindah(evt,LamaGawatJanin,BeratPlacenta);
+    }//GEN-LAST:event_ObatSelamaPersalinanKeyPressed
+
+    private void BeratPlacentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BeratPlacentaKeyPressed
+        Valid.pindah(evt,ObatSelamaPersalinan,KelainanPlacenta);
+    }//GEN-LAST:event_BeratPlacentaKeyPressed
+
+    private void KelainanPlacentaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KelainanPlacentaKeyPressed
+        Valid.pindah(evt,BeratPlacenta,KeteranganRiwayatPersalinan);
+    }//GEN-LAST:event_KelainanPlacentaKeyPressed
+
+    private void KeteranganRiwayatPersalinanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganRiwayatPersalinanKeyPressed
+        Valid.pindah(evt,KelainanPlacenta,BBLahir);
+    }//GEN-LAST:event_KeteranganRiwayatPersalinanKeyPressed
+
+    private void BBLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BBLahirKeyPressed
+        Valid.pindah(evt,KeteranganRiwayatPersalinan,PanjangBadan);
+    }//GEN-LAST:event_BBLahirKeyPressed
+
+    private void PanjangBadanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PanjangBadanKeyPressed
+        Valid.pindah(evt,BBLahir,LingkarKepala);
+    }//GEN-LAST:event_PanjangBadanKeyPressed
+
+    private void LingkarKepalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LingkarKepalaKeyPressed
+        Valid.pindah(evt,PanjangBadan,LingkarDada);
+    }//GEN-LAST:event_LingkarKepalaKeyPressed
+
+    private void LingkarDadaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LingkarDadaKeyPressed
+        Valid.pindah(evt,LingkarKepala,ResusitasiLahir);
+    }//GEN-LAST:event_LingkarDadaKeyPressed
+
+    private void KeteranganResusitasiLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganResusitasiLahirKeyPressed
+        Valid.pindah(evt,ResusitasiLahir,ObatSaatLahir);
+    }//GEN-LAST:event_KeteranganResusitasiLahirKeyPressed
+
+    private void ObatSaatLahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ObatSaatLahirKeyPressed
+        Valid.pindah(evt,KeteranganResusitasiLahir,KeteranganKeadaanBayi);
+    }//GEN-LAST:event_ObatSaatLahirKeyPressed
+
+    private void KeteranganKeadaanBayiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeadaanBayiKeyPressed
+        Valid.pindah(evt,ObatSaatLahir,KondisiUmum);
+    }//GEN-LAST:event_KeteranganKeadaanBayiKeyPressed
+
+    /**
+    * @param args the command line arguments
+    */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> {
+            RMPenilaianBayiBaruLahir dialog = new RMPenilaianBayiBaruLahir(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private id.yaski.simrskhanza.widget.ComboBox AlatKelamin;
+    private id.yaski.simrskhanza.widget.TextBox AlergiIbu;
+    private id.yaski.simrskhanza.widget.ComboBox Anus;
+    private id.yaski.simrskhanza.widget.TextBox BBLahir;
+    private id.yaski.simrskhanza.widget.TextBox BBPB;
+    private id.yaski.simrskhanza.widget.TextBox BauAirKetuban;
+    private id.yaski.simrskhanza.widget.TextBox BeratPlacenta;
+    private id.yaski.simrskhanza.widget.Button BtnAll;
+    private id.yaski.simrskhanza.widget.Button BtnBatal;
+    private id.yaski.simrskhanza.widget.Button BtnCari;
+    private id.yaski.simrskhanza.widget.Button BtnDokter;
+    private id.yaski.simrskhanza.widget.Button BtnEdit;
+    private id.yaski.simrskhanza.widget.Button BtnHapus;
+    private id.yaski.simrskhanza.widget.Button BtnHapusRiwayatPersalinan;
+    private id.yaski.simrskhanza.widget.Button BtnIbuBayi;
+    private id.yaski.simrskhanza.widget.Button BtnKeluar;
+    private id.yaski.simrskhanza.widget.Button BtnKeluarKehamilan;
+    private id.yaski.simrskhanza.widget.Button BtnPrint;
+    private id.yaski.simrskhanza.widget.Button BtnSimpan;
+    private id.yaski.simrskhanza.widget.Button BtnSimpanRiwayatKehamilan;
+    private id.yaski.simrskhanza.widget.Button BtnTambahMasalah;
+    private id.yaski.simrskhanza.widget.Tanggal DTPCari1;
+    private id.yaski.simrskhanza.widget.Tanggal DTPCari2;
+    private id.yaski.simrskhanza.widget.ComboBox Dada;
+    private id.yaski.simrskhanza.widget.ComboBox DenyutFemoral;
+    private id.yaski.simrskhanza.widget.TextArea Diagnosis;
+    private javax.swing.JDialog DlgRiwayatPersalinan;
+    private id.yaski.simrskhanza.widget.ComboBox Extrimitas;
+    private id.yaski.simrskhanza.widget.PanelBiasa FormInput;
+    private id.yaski.simrskhanza.widget.ComboBox Hidung;
+    private id.yaski.simrskhanza.widget.ComboBox IndikasiPersalinanOperatif;
+    private id.yaski.simrskhanza.widget.ComboBox JK;
+    private id.yaski.simrskhanza.widget.TextBox JamKetubanPecah;
+    private id.yaski.simrskhanza.widget.ComboBox Jantung;
+    private id.yaski.simrskhanza.widget.TextBox JenisPersalinan;
+    private id.yaski.simrskhanza.widget.TextBox Jk;
+    private id.yaski.simrskhanza.widget.TextBox JumlahAirKetuban;
+    private id.yaski.simrskhanza.widget.TextBox KdDokter;
+    private id.yaski.simrskhanza.widget.TextBox Keadaan;
+    private id.yaski.simrskhanza.widget.ComboBox Kehamilan;
+    private id.yaski.simrskhanza.widget.TextBox KelainanPlacenta;
+    private id.yaski.simrskhanza.widget.ComboBox Kepala;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganAlatKelamin;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganAnus;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganDada;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganDenyutFemoral;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganExtrimitas;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganHidung;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganIndikasiPersalinanOperatif;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganJantung;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganKeadaanBayi;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganKehamilan;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganKepala;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganKondisiUmum;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganKulit;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganLeher;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganMacamPersalinan;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganMata;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganParu;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganPenyakitIbu;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganPenyulitKehamilan;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganPerawatanAntenatal;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganPerut;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganRefleks;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganResusitasiLahir;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganRiwayatMaternal;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganRiwayatPersalinan;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganRuasTulangBelakang;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganTaliPusat;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganTelinga;
+    private id.yaski.simrskhanza.widget.TextBox KeteranganTerdaftarEkohort;
+    private id.yaski.simrskhanza.widget.ComboBox KondisiUmum;
+    private id.yaski.simrskhanza.widget.ComboBox Kulit;
+    private id.yaski.simrskhanza.widget.Label LCount;
+    private id.yaski.simrskhanza.widget.TextBox LamaGawatJanin;
+    private id.yaski.simrskhanza.widget.ComboBox Leher;
+    private id.yaski.simrskhanza.widget.TextBox LetakBayi;
+    private id.yaski.simrskhanza.widget.TextBox LingkarDada;
+    private id.yaski.simrskhanza.widget.TextBox LingkarKepala;
+    private id.yaski.simrskhanza.widget.editorpane LoadHTML;
+    private id.yaski.simrskhanza.widget.ComboBox MacamPersalinan;
+    private id.yaski.simrskhanza.widget.ComboBox Mata;
+    private id.yaski.simrskhanza.widget.TextBox MenitKetubanPecah;
+    private id.yaski.simrskhanza.widget.TextBox2 N1;
+    private id.yaski.simrskhanza.widget.TextBox2 N10;
+    private id.yaski.simrskhanza.widget.TextBox2 N5;
+    private id.yaski.simrskhanza.widget.TextBox NIKIbu;
+    private id.yaski.simrskhanza.widget.TextBox NmDokter;
+    private id.yaski.simrskhanza.widget.TextBox NmIbu;
+    private id.yaski.simrskhanza.widget.TextBox NoRMIbu;
+    private id.yaski.simrskhanza.widget.TextBox ObatSaatLahir;
+    private id.yaski.simrskhanza.widget.TextBox ObatSelamaHamil;
+    private id.yaski.simrskhanza.widget.TextBox ObatSelamaPersalinan;
+    private id.yaski.simrskhanza.widget.TextBox PanjangBadan;
+    private id.yaski.simrskhanza.widget.ComboBox Paru;
+    private id.yaski.simrskhanza.widget.TextArea PemeriksaanLainnya;
+    private id.yaski.simrskhanza.widget.TextArea PemeriksaanPenunjang;
+    private id.yaski.simrskhanza.widget.TextBox Penolong;
+    private id.yaski.simrskhanza.widget.ComboBox PenyakitIbu;
+    private id.yaski.simrskhanza.widget.TextBox Penyulit;
+    private id.yaski.simrskhanza.widget.ComboBox PenyulitKehamilan;
+    private id.yaski.simrskhanza.widget.ComboBox PerawatanAntenatal;
+    private id.yaski.simrskhanza.widget.ComboBox Perut;
+    private id.yaski.simrskhanza.widget.ComboBox Refleks;
+    private id.yaski.simrskhanza.widget.ComboBox ResusitasiLahir;
+    private id.yaski.simrskhanza.widget.ComboBox RuasTulangBelakang;
+    private id.yaski.simrskhanza.widget.ScrollPane Scroll;
+    private id.yaski.simrskhanza.widget.ScrollPane Scroll2;
+    private id.yaski.simrskhanza.widget.ScrollPane Scroll6;
+    private id.yaski.simrskhanza.widget.TextBox StatusPerkawinanIbu;
+    private id.yaski.simrskhanza.widget.TextBox TCari;
+    private id.yaski.simrskhanza.widget.TextBox TNoRM;
+    private id.yaski.simrskhanza.widget.TextBox TNoRw;
+    private id.yaski.simrskhanza.widget.TextBox TPasien;
+    private javax.swing.JTabbedPane TabRawat;
+    private id.yaski.simrskhanza.widget.ComboBox TaliPusat;
+    private id.yaski.simrskhanza.widget.Tanggal TanggalPersalinan;
+    private id.yaski.simrskhanza.widget.TextBox TanggalRegistrasi;
+    private id.yaski.simrskhanza.widget.TextArea Tatalaksana;
+    private id.yaski.simrskhanza.widget.ComboBox Telinga;
+    private id.yaski.simrskhanza.widget.TextBox TempatPersalinan;
+    private id.yaski.simrskhanza.widget.ComboBox TerdaftarEkohort;
+    private id.yaski.simrskhanza.widget.Tanggal TglAsuhan;
+    private id.yaski.simrskhanza.widget.TextBox TglLahir;
+    private id.yaski.simrskhanza.widget.TextBox TglLahirIbu;
+    private id.yaski.simrskhanza.widget.TextBox UmurKehamilan;
+    private id.yaski.simrskhanza.widget.TextBox UrutanKehamilan;
+    private id.yaski.simrskhanza.widget.TextBox UsiaHamil;
+    private id.yaski.simrskhanza.widget.TextBox WarnaAirKetuban;
+    private id.yaski.simrskhanza.widget.InternalFrame internalFrame1;
+    private id.yaski.simrskhanza.widget.InternalFrame internalFrame2;
+    private id.yaski.simrskhanza.widget.InternalFrame internalFrame3;
+    private id.yaski.simrskhanza.widget.InternalFrame internalFrame4;
+    private id.yaski.simrskhanza.widget.Label jLabel10;
+    private id.yaski.simrskhanza.widget.Label jLabel100;
+    private id.yaski.simrskhanza.widget.Label jLabel107;
+    private id.yaski.simrskhanza.widget.Label jLabel108;
+    private id.yaski.simrskhanza.widget.Label jLabel109;
+    private id.yaski.simrskhanza.widget.Label jLabel11;
+    private id.yaski.simrskhanza.widget.Label jLabel110;
+    private id.yaski.simrskhanza.widget.Label jLabel111;
+    private id.yaski.simrskhanza.widget.Label jLabel112;
+    private id.yaski.simrskhanza.widget.Label jLabel113;
+    private id.yaski.simrskhanza.widget.Label jLabel114;
+    private id.yaski.simrskhanza.widget.Label jLabel115;
+    private id.yaski.simrskhanza.widget.Label jLabel116;
+    private id.yaski.simrskhanza.widget.Label jLabel117;
+    private id.yaski.simrskhanza.widget.Label jLabel139;
+    private id.yaski.simrskhanza.widget.Label jLabel14;
+    private id.yaski.simrskhanza.widget.Label jLabel140;
+    private id.yaski.simrskhanza.widget.Label jLabel141;
+    private id.yaski.simrskhanza.widget.Label jLabel15;
+    private id.yaski.simrskhanza.widget.Label jLabel16;
+    private id.yaski.simrskhanza.widget.Label jLabel17;
+    private id.yaski.simrskhanza.widget.Label jLabel18;
+    private id.yaski.simrskhanza.widget.Label jLabel19;
+    private id.yaski.simrskhanza.widget.Label jLabel20;
+    private id.yaski.simrskhanza.widget.Label jLabel21;
+    private id.yaski.simrskhanza.widget.Label jLabel22;
+    private id.yaski.simrskhanza.widget.Label jLabel23;
+    private id.yaski.simrskhanza.widget.Label jLabel24;
+    private id.yaski.simrskhanza.widget.Label jLabel25;
+    private id.yaski.simrskhanza.widget.Label jLabel26;
+    private id.yaski.simrskhanza.widget.Label jLabel27;
+    private id.yaski.simrskhanza.widget.Label jLabel28;
+    private id.yaski.simrskhanza.widget.Label jLabel29;
+    private id.yaski.simrskhanza.widget.Label jLabel30;
+    private id.yaski.simrskhanza.widget.Label jLabel31;
+    private id.yaski.simrskhanza.widget.Label jLabel32;
+    private id.yaski.simrskhanza.widget.Label jLabel33;
+    private id.yaski.simrskhanza.widget.Label jLabel34;
+    private id.yaski.simrskhanza.widget.Label jLabel35;
+    private id.yaski.simrskhanza.widget.Label jLabel36;
+    private id.yaski.simrskhanza.widget.Label jLabel37;
+    private id.yaski.simrskhanza.widget.Label jLabel38;
+    private id.yaski.simrskhanza.widget.Label jLabel39;
+    private id.yaski.simrskhanza.widget.Label jLabel40;
+    private id.yaski.simrskhanza.widget.Label jLabel41;
+    private id.yaski.simrskhanza.widget.Label jLabel42;
+    private id.yaski.simrskhanza.widget.Label jLabel43;
+    private id.yaski.simrskhanza.widget.Label jLabel44;
+    private id.yaski.simrskhanza.widget.Label jLabel45;
+    private id.yaski.simrskhanza.widget.Label jLabel46;
+    private id.yaski.simrskhanza.widget.Label jLabel47;
+    private id.yaski.simrskhanza.widget.Label jLabel48;
+    private id.yaski.simrskhanza.widget.Label jLabel49;
+    private id.yaski.simrskhanza.widget.Label jLabel50;
+    private id.yaski.simrskhanza.widget.Label jLabel51;
+    private id.yaski.simrskhanza.widget.Label jLabel52;
+    private id.yaski.simrskhanza.widget.Label jLabel53;
+    private id.yaski.simrskhanza.widget.Label jLabel54;
+    private id.yaski.simrskhanza.widget.Label jLabel55;
+    private id.yaski.simrskhanza.widget.Label jLabel56;
+    private id.yaski.simrskhanza.widget.Label jLabel57;
+    private id.yaski.simrskhanza.widget.Label jLabel58;
+    private id.yaski.simrskhanza.widget.Label jLabel59;
+    private id.yaski.simrskhanza.widget.Label jLabel6;
+    private id.yaski.simrskhanza.widget.Label jLabel60;
+    private id.yaski.simrskhanza.widget.Label jLabel61;
+    private id.yaski.simrskhanza.widget.Label jLabel62;
+    private id.yaski.simrskhanza.widget.Label jLabel63;
+    private id.yaski.simrskhanza.widget.Label jLabel64;
+    private id.yaski.simrskhanza.widget.Label jLabel65;
+    private id.yaski.simrskhanza.widget.Label jLabel66;
+    private id.yaski.simrskhanza.widget.Label jLabel67;
+    private id.yaski.simrskhanza.widget.Label jLabel69;
+    private id.yaski.simrskhanza.widget.Label jLabel7;
+    private id.yaski.simrskhanza.widget.Label jLabel70;
+    private id.yaski.simrskhanza.widget.Label jLabel71;
+    private id.yaski.simrskhanza.widget.Label jLabel72;
+    private id.yaski.simrskhanza.widget.Label jLabel73;
+    private id.yaski.simrskhanza.widget.Label jLabel74;
+    private id.yaski.simrskhanza.widget.Label jLabel75;
+    private id.yaski.simrskhanza.widget.Label jLabel76;
+    private id.yaski.simrskhanza.widget.Label jLabel77;
+    private id.yaski.simrskhanza.widget.Label jLabel78;
+    private id.yaski.simrskhanza.widget.Label jLabel79;
+    private id.yaski.simrskhanza.widget.Label jLabel8;
+    private id.yaski.simrskhanza.widget.Label jLabel80;
+    private id.yaski.simrskhanza.widget.Label jLabel81;
+    private id.yaski.simrskhanza.widget.Label jLabel82;
+    private id.yaski.simrskhanza.widget.Label jLabel83;
+    private id.yaski.simrskhanza.widget.Label jLabel84;
+    private id.yaski.simrskhanza.widget.Label jLabel85;
+    private id.yaski.simrskhanza.widget.Label jLabel86;
+    private id.yaski.simrskhanza.widget.Label jLabel87;
+    private id.yaski.simrskhanza.widget.Label jLabel88;
+    private id.yaski.simrskhanza.widget.Label jLabel89;
+    private id.yaski.simrskhanza.widget.Label jLabel9;
+    private id.yaski.simrskhanza.widget.Label jLabel90;
+    private id.yaski.simrskhanza.widget.Label jLabel91;
+    private id.yaski.simrskhanza.widget.Label jLabel92;
+    private id.yaski.simrskhanza.widget.Label jLabel93;
+    private id.yaski.simrskhanza.widget.Label jLabel94;
+    private id.yaski.simrskhanza.widget.Label jLabel95;
+    private id.yaski.simrskhanza.widget.Label jLabel96;
+    private id.yaski.simrskhanza.widget.Label jLabel97;
+    private id.yaski.simrskhanza.widget.Label jLabel99;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator14;
+    private javax.swing.JSeparator jSeparator15;
+    private javax.swing.JSeparator jSeparator16;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
+    private id.yaski.simrskhanza.widget.Label label11;
+    private id.yaski.simrskhanza.widget.Label label14;
+    private id.yaski.simrskhanza.widget.Label label71;
+    private id.yaski.simrskhanza.widget.PanelBiasa panelBiasa2;
+    private id.yaski.simrskhanza.widget.panelisi panelGlass8;
+    private id.yaski.simrskhanza.widget.panelisi panelGlass9;
+    private id.yaski.simrskhanza.widget.ScrollPane scrollInput;
+    private id.yaski.simrskhanza.widget.ScrollPane scrollPane12;
+    private id.yaski.simrskhanza.widget.ScrollPane scrollPane13;
+    private id.yaski.simrskhanza.widget.ScrollPane scrollPane14;
+    private id.yaski.simrskhanza.widget.ScrollPane scrollPane15;
+    private id.yaski.simrskhanza.widget.Table tbAPGAR;
+    private id.yaski.simrskhanza.widget.Table tbObat;
+    private id.yaski.simrskhanza.widget.Table tbRiwayatKehamilan;
+    // End of variables declaration//GEN-END:variables
+
+    public void tampil() {
+        Valid.tabelKosong(tabMode);
+        try{
+            if(TCari.getText().trim().equals("")){
+                ps=koneksi.prepareStatement(
+                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_bayi_baru_lahir.no_rkm_medis_ibu,ibupasien.nm_pasien as nama_ibu,ibupasien.stts_nikah as sttsnikahibu,ibupasien.tgl_lahir as lahiribu,ibupasien.no_ktp as ktpibu,"+
+                        "penilaian_bayi_baru_lahir.tanggal,penilaian_bayi_baru_lahir.kd_dokter,dokter.nm_dokter,penilaian_bayi_baru_lahir.penyakit_diderita_ibu,penilaian_bayi_baru_lahir.keterangan_penyakit_diderita_ibu,penilaian_bayi_baru_lahir.obat_dikonsumsi_selama_kehamilan,penilaian_bayi_baru_lahir.perawatan_antenatal,penilaian_bayi_baru_lahir.keterangan_perawatan_antenatal,"+
+                        "penilaian_bayi_baru_lahir.terdaftar_ekohort,penilaian_bayi_baru_lahir.keterangan_terdaftar_ekohort,penilaian_bayi_baru_lahir.penyulit_kehamilan,penilaian_bayi_baru_lahir.keterangan_penyulit_kehamilan,penilaian_bayi_baru_lahir.alergi,penilaian_bayi_baru_lahir.keterangan_lainnya_riwayat_maternal,penilaian_bayi_baru_lahir.umur_kehamilan,penilaian_bayi_baru_lahir.kehamilan,"+
+                        "penilaian_bayi_baru_lahir.keterangan_kehamilan,penilaian_bayi_baru_lahir.urutan_kehamilan,penilaian_bayi_baru_lahir.jam_ketuban_pecah,penilaian_bayi_baru_lahir.menit_ketuban_pecah,penilaian_bayi_baru_lahir.jumlah_air_ketuban,penilaian_bayi_baru_lahir.warna_air_ketuban,penilaian_bayi_baru_lahir.bau_air_ketuban,penilaian_bayi_baru_lahir.letak_bayi,"+
+                        "penilaian_bayi_baru_lahir.macam_persalinan,penilaian_bayi_baru_lahir.keterangan_macam_persalinan,penilaian_bayi_baru_lahir.indikasi_persalinan_operatif,penilaian_bayi_baru_lahir.keterangan_indikasi_persalinan_operatif,penilaian_bayi_baru_lahir.lama_gawat_janin,penilaian_bayi_baru_lahir.obat_selama_persalinan,penilaian_bayi_baru_lahir.berat_placenta,"+
+                        "penilaian_bayi_baru_lahir.kelainan_placenta,penilaian_bayi_baru_lahir.keterangan_lainnya_riwayat_persalinan,penilaian_bayi_baru_lahir.f1,penilaian_bayi_baru_lahir.u1,penilaian_bayi_baru_lahir.t1,penilaian_bayi_baru_lahir.r1,penilaian_bayi_baru_lahir.w1,penilaian_bayi_baru_lahir.n1,penilaian_bayi_baru_lahir.f5,penilaian_bayi_baru_lahir.u5,penilaian_bayi_baru_lahir.t5,"+
+                        "penilaian_bayi_baru_lahir.r5,penilaian_bayi_baru_lahir.w5,penilaian_bayi_baru_lahir.n5,penilaian_bayi_baru_lahir.f10,penilaian_bayi_baru_lahir.u10,penilaian_bayi_baru_lahir.t10,penilaian_bayi_baru_lahir.r10,penilaian_bayi_baru_lahir.w10,penilaian_bayi_baru_lahir.n10,penilaian_bayi_baru_lahir.bblahir,penilaian_bayi_baru_lahir.panjang_badan,penilaian_bayi_baru_lahir.lingkar_kepala,"+
+                        "penilaian_bayi_baru_lahir.lingkar_dada,penilaian_bayi_baru_lahir.resusitasi_saat_lahir,penilaian_bayi_baru_lahir.keterangan_resusitasi_saat_lahir,penilaian_bayi_baru_lahir.obat_diberikan_saat_lahir,penilaian_bayi_baru_lahir.keterangan_lainnya_keadaan_bayi,penilaian_bayi_baru_lahir.kondisi_umum,penilaian_bayi_baru_lahir.keterangan_kondisi_umum,"+
+                        "penilaian_bayi_baru_lahir.kulit,penilaian_bayi_baru_lahir.keterangan_kulit,penilaian_bayi_baru_lahir.kepala,penilaian_bayi_baru_lahir.keterangan_kepala,penilaian_bayi_baru_lahir.leher,penilaian_bayi_baru_lahir.keterangan_leher,penilaian_bayi_baru_lahir.mata,penilaian_bayi_baru_lahir.keterangan_mata,penilaian_bayi_baru_lahir.hidung,penilaian_bayi_baru_lahir.keterangan_hidung,"+
+                        "penilaian_bayi_baru_lahir.telinga,penilaian_bayi_baru_lahir.keterangan_telinga,penilaian_bayi_baru_lahir.dada,penilaian_bayi_baru_lahir.keterangan_dada,penilaian_bayi_baru_lahir.paru,penilaian_bayi_baru_lahir.keterangan_paru,penilaian_bayi_baru_lahir.jantung,penilaian_bayi_baru_lahir.keterangan_jantung,penilaian_bayi_baru_lahir.perut,penilaian_bayi_baru_lahir.keterangan_perut,"+
+                        "penilaian_bayi_baru_lahir.tali_pusat,penilaian_bayi_baru_lahir.keterangan_tali_pusat,penilaian_bayi_baru_lahir.alat_kelamin,penilaian_bayi_baru_lahir.keterangan_alat_kelamin,penilaian_bayi_baru_lahir.ruas_tulang_belakang,penilaian_bayi_baru_lahir.keterangan_ruas_tulang_belakang,penilaian_bayi_baru_lahir.extrimitas,penilaian_bayi_baru_lahir.keterangan_extrimitas,"+
+                        "penilaian_bayi_baru_lahir.anus,penilaian_bayi_baru_lahir.keterangan_anus,penilaian_bayi_baru_lahir.refleks,penilaian_bayi_baru_lahir.keterangan_refleks,penilaian_bayi_baru_lahir.denyut_femoral,penilaian_bayi_baru_lahir.keterangan_denyut_femoral,penilaian_bayi_baru_lahir.pemeriksaan_fisik_lainnya,penilaian_bayi_baru_lahir.pemeriksaan_penunjang,penilaian_bayi_baru_lahir.diagnosa,"+
+                        "penilaian_bayi_baru_lahir.tatalaksana from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                        "inner join penilaian_bayi_baru_lahir on reg_periksa.no_rawat=penilaian_bayi_baru_lahir.no_rawat "+
+                        "inner join dokter on penilaian_bayi_baru_lahir.kd_dokter=dokter.kd_dokter "+
+                        "inner join pasien as ibupasien on ibupasien.no_rkm_medis=penilaian_bayi_baru_lahir.no_rkm_medis_ibu where "+
+                        "penilaian_bayi_baru_lahir.tanggal between ? and ? order by penilaian_bayi_baru_lahir.tanggal");
+            }else{
+                ps=koneksi.prepareStatement(
+                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_bayi_baru_lahir.no_rkm_medis_ibu,ibupasien.nm_pasien as nama_ibu,ibupasien.stts_nikah as sttsnikahibu,ibupasien.tgl_lahir as lahiribu,ibupasien.no_ktp as ktpibu,"+
+                        "penilaian_bayi_baru_lahir.tanggal,penilaian_bayi_baru_lahir.kd_dokter,dokter.nm_dokter,penilaian_bayi_baru_lahir.penyakit_diderita_ibu,penilaian_bayi_baru_lahir.keterangan_penyakit_diderita_ibu,penilaian_bayi_baru_lahir.obat_dikonsumsi_selama_kehamilan,penilaian_bayi_baru_lahir.perawatan_antenatal,penilaian_bayi_baru_lahir.keterangan_perawatan_antenatal,"+
+                        "penilaian_bayi_baru_lahir.terdaftar_ekohort,penilaian_bayi_baru_lahir.keterangan_terdaftar_ekohort,penilaian_bayi_baru_lahir.penyulit_kehamilan,penilaian_bayi_baru_lahir.keterangan_penyulit_kehamilan,penilaian_bayi_baru_lahir.alergi,penilaian_bayi_baru_lahir.keterangan_lainnya_riwayat_maternal,penilaian_bayi_baru_lahir.umur_kehamilan,penilaian_bayi_baru_lahir.kehamilan,"+
+                        "penilaian_bayi_baru_lahir.keterangan_kehamilan,penilaian_bayi_baru_lahir.urutan_kehamilan,penilaian_bayi_baru_lahir.jam_ketuban_pecah,penilaian_bayi_baru_lahir.menit_ketuban_pecah,penilaian_bayi_baru_lahir.jumlah_air_ketuban,penilaian_bayi_baru_lahir.warna_air_ketuban,penilaian_bayi_baru_lahir.bau_air_ketuban,penilaian_bayi_baru_lahir.letak_bayi,"+
+                        "penilaian_bayi_baru_lahir.macam_persalinan,penilaian_bayi_baru_lahir.keterangan_macam_persalinan,penilaian_bayi_baru_lahir.indikasi_persalinan_operatif,penilaian_bayi_baru_lahir.keterangan_indikasi_persalinan_operatif,penilaian_bayi_baru_lahir.lama_gawat_janin,penilaian_bayi_baru_lahir.obat_selama_persalinan,penilaian_bayi_baru_lahir.berat_placenta,"+
+                        "penilaian_bayi_baru_lahir.kelainan_placenta,penilaian_bayi_baru_lahir.keterangan_lainnya_riwayat_persalinan,penilaian_bayi_baru_lahir.f1,penilaian_bayi_baru_lahir.u1,penilaian_bayi_baru_lahir.t1,penilaian_bayi_baru_lahir.r1,penilaian_bayi_baru_lahir.w1,penilaian_bayi_baru_lahir.n1,penilaian_bayi_baru_lahir.f5,penilaian_bayi_baru_lahir.u5,penilaian_bayi_baru_lahir.t5,"+
+                        "penilaian_bayi_baru_lahir.r5,penilaian_bayi_baru_lahir.w5,penilaian_bayi_baru_lahir.n5,penilaian_bayi_baru_lahir.f10,penilaian_bayi_baru_lahir.u10,penilaian_bayi_baru_lahir.t10,penilaian_bayi_baru_lahir.r10,penilaian_bayi_baru_lahir.w10,penilaian_bayi_baru_lahir.n10,penilaian_bayi_baru_lahir.bblahir,penilaian_bayi_baru_lahir.panjang_badan,penilaian_bayi_baru_lahir.lingkar_kepala,"+
+                        "penilaian_bayi_baru_lahir.lingkar_dada,penilaian_bayi_baru_lahir.resusitasi_saat_lahir,penilaian_bayi_baru_lahir.keterangan_resusitasi_saat_lahir,penilaian_bayi_baru_lahir.obat_diberikan_saat_lahir,penilaian_bayi_baru_lahir.keterangan_lainnya_keadaan_bayi,penilaian_bayi_baru_lahir.kondisi_umum,penilaian_bayi_baru_lahir.keterangan_kondisi_umum,"+
+                        "penilaian_bayi_baru_lahir.kulit,penilaian_bayi_baru_lahir.keterangan_kulit,penilaian_bayi_baru_lahir.kepala,penilaian_bayi_baru_lahir.keterangan_kepala,penilaian_bayi_baru_lahir.leher,penilaian_bayi_baru_lahir.keterangan_leher,penilaian_bayi_baru_lahir.mata,penilaian_bayi_baru_lahir.keterangan_mata,penilaian_bayi_baru_lahir.hidung,penilaian_bayi_baru_lahir.keterangan_hidung,"+
+                        "penilaian_bayi_baru_lahir.telinga,penilaian_bayi_baru_lahir.keterangan_telinga,penilaian_bayi_baru_lahir.dada,penilaian_bayi_baru_lahir.keterangan_dada,penilaian_bayi_baru_lahir.paru,penilaian_bayi_baru_lahir.keterangan_paru,penilaian_bayi_baru_lahir.jantung,penilaian_bayi_baru_lahir.keterangan_jantung,penilaian_bayi_baru_lahir.perut,penilaian_bayi_baru_lahir.keterangan_perut,"+
+                        "penilaian_bayi_baru_lahir.tali_pusat,penilaian_bayi_baru_lahir.keterangan_tali_pusat,penilaian_bayi_baru_lahir.alat_kelamin,penilaian_bayi_baru_lahir.keterangan_alat_kelamin,penilaian_bayi_baru_lahir.ruas_tulang_belakang,penilaian_bayi_baru_lahir.keterangan_ruas_tulang_belakang,penilaian_bayi_baru_lahir.extrimitas,penilaian_bayi_baru_lahir.keterangan_extrimitas,"+
+                        "penilaian_bayi_baru_lahir.anus,penilaian_bayi_baru_lahir.keterangan_anus,penilaian_bayi_baru_lahir.refleks,penilaian_bayi_baru_lahir.keterangan_refleks,penilaian_bayi_baru_lahir.denyut_femoral,penilaian_bayi_baru_lahir.keterangan_denyut_femoral,penilaian_bayi_baru_lahir.pemeriksaan_fisik_lainnya,penilaian_bayi_baru_lahir.pemeriksaan_penunjang,penilaian_bayi_baru_lahir.diagnosa,"+
+                        "penilaian_bayi_baru_lahir.tatalaksana from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                        "inner join penilaian_bayi_baru_lahir on reg_periksa.no_rawat=penilaian_bayi_baru_lahir.no_rawat "+
+                        "inner join dokter on penilaian_bayi_baru_lahir.kd_dokter=dokter.kd_dokter "+
+                        "inner join pasien as ibupasien on ibupasien.no_rkm_medis=penilaian_bayi_baru_lahir.no_rkm_medis_ibu where "+
+                        "penilaian_bayi_baru_lahir.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
+                        "penilaian_bayi_baru_lahir.kd_dokter like ? or dokter.nm_dokter like ?) order by penilaian_bayi_baru_lahir.tanggal");
+            }
+
+            try {
+                if(TCari.getText().trim().equals("")){
+                    ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                    ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                }else{
+                    ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00");
+                    ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59");
+                    ps.setString(3,"%"+TCari.getText()+"%");
+                    ps.setString(4,"%"+TCari.getText()+"%");
+                    ps.setString(5,"%"+TCari.getText()+"%");
+                    ps.setString(6,"%"+TCari.getText()+"%");
+                    ps.setString(7,"%"+TCari.getText()+"%");
+                }
+                rs=ps.executeQuery();
+                while(rs.next()){
+                    tabMode.addRow(new Object[]{
+                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getDate("tgl_lahir"),rs.getString("jk"),rs.getString("no_rkm_medis_ibu"),rs.getString("nama_ibu"),rs.getString("lahiribu"),
+                        rs.getString("ktpibu"),rs.getString("sttsnikahibu"),rs.getString("kd_dokter"),rs.getString("nm_dokter"),rs.getString("tanggal"),rs.getString("penyakit_diderita_ibu"),rs.getString("keterangan_penyakit_diderita_ibu"),
+                        rs.getString("obat_dikonsumsi_selama_kehamilan"),rs.getString("perawatan_antenatal"),rs.getString("keterangan_perawatan_antenatal"),rs.getString("terdaftar_ekohort"),rs.getString("keterangan_terdaftar_ekohort"),
+                        rs.getString("penyulit_kehamilan"),rs.getString("keterangan_penyulit_kehamilan"),rs.getString("alergi"),rs.getString("keterangan_lainnya_riwayat_maternal"),rs.getString("umur_kehamilan"),rs.getString("kehamilan"),
+                        rs.getString("keterangan_kehamilan"),rs.getString("urutan_kehamilan"),rs.getString("jam_ketuban_pecah"),rs.getString("menit_ketuban_pecah"),rs.getString("jumlah_air_ketuban"),rs.getString("warna_air_ketuban"),
+                        rs.getString("bau_air_ketuban"),rs.getString("letak_bayi"),rs.getString("macam_persalinan"),rs.getString("keterangan_macam_persalinan"),rs.getString("indikasi_persalinan_operatif"),rs.getString("keterangan_indikasi_persalinan_operatif"),
+                        rs.getString("lama_gawat_janin"),rs.getString("obat_selama_persalinan"),rs.getString("berat_placenta"),rs.getString("kelainan_placenta"),rs.getString("keterangan_lainnya_riwayat_persalinan"),rs.getString("f1"),rs.getString("u1"),
+                        rs.getString("t1"),rs.getString("r1"),rs.getString("w1"),rs.getString("n1"),rs.getString("f5"),rs.getString("u5"),rs.getString("t5"),rs.getString("r5"),rs.getString("w5"),rs.getString("n5"),rs.getString("f10"),rs.getString("u10"),
+                        rs.getString("t10"),rs.getString("r10"),rs.getString("w10"),rs.getString("n10"),rs.getString("bblahir"),rs.getString("panjang_badan"),rs.getString("lingkar_kepala"),rs.getString("lingkar_dada"),rs.getString("resusitasi_saat_lahir"),
+                        rs.getString("keterangan_resusitasi_saat_lahir"),rs.getString("obat_diberikan_saat_lahir"),rs.getString("keterangan_lainnya_keadaan_bayi"),rs.getString("kondisi_umum"),rs.getString("keterangan_kondisi_umum"),rs.getString("kulit"),
+                        rs.getString("keterangan_kulit"),rs.getString("kepala"),rs.getString("keterangan_kepala"),rs.getString("leher"),rs.getString("keterangan_leher"),rs.getString("mata"),rs.getString("keterangan_mata"),rs.getString("hidung"),
+                        rs.getString("keterangan_hidung"),rs.getString("telinga"),rs.getString("keterangan_telinga"),rs.getString("dada"),rs.getString("keterangan_dada"),rs.getString("paru"),rs.getString("keterangan_paru"),rs.getString("jantung"),
+                        rs.getString("keterangan_jantung"),rs.getString("perut"),rs.getString("keterangan_perut"),rs.getString("tali_pusat"),rs.getString("keterangan_tali_pusat"),rs.getString("alat_kelamin"),rs.getString("keterangan_alat_kelamin"),
+                        rs.getString("ruas_tulang_belakang"),rs.getString("keterangan_ruas_tulang_belakang"),rs.getString("extrimitas"),rs.getString("keterangan_extrimitas"),rs.getString("anus"),rs.getString("keterangan_anus"),rs.getString("refleks"),
+                        rs.getString("keterangan_refleks"),rs.getString("denyut_femoral"),rs.getString("keterangan_denyut_femoral"),rs.getString("pemeriksaan_fisik_lainnya"),rs.getString("pemeriksaan_penunjang"),rs.getString("diagnosa"),rs.getString("tatalaksana")
+                    });
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
+        LCount.setText(""+tabMode.getRowCount());
+    }
+
+    public void emptTeks() {
+        TglAsuhan.setDate(new Date());
+        NoRMIbu.setText("");
+        NmIbu.setText("");
+        TglLahirIbu.setText("");
+        NIKIbu.setText("");
+        StatusPerkawinanIbu.setText("");
+        PenyakitIbu.setSelectedIndex(0);
+        KeteranganPenyakitIbu.setText("");
+        ObatSelamaHamil.setText("");
+        PerawatanAntenatal.setSelectedIndex(0);
+        KeteranganPerawatanAntenatal.setText("");
+        TerdaftarEkohort.setSelectedIndex(0);
+        KeteranganTerdaftarEkohort.setText("");
+        PenyulitKehamilan.setSelectedIndex(0);
+        KeteranganPenyulitKehamilan.setText("");
+        AlergiIbu.setText("");
+        KeteranganRiwayatMaternal.setText("");
+        UmurKehamilan.setText("");
+        Kehamilan.setSelectedIndex(0);
+        KeteranganKehamilan.setText("");
+        UrutanKehamilan.setText("");
+        JamKetubanPecah.setText("");
+        MenitKetubanPecah.setText("");
+        JumlahAirKetuban.setText("");
+        WarnaAirKetuban.setText("");
+        BauAirKetuban.setText("");
+        LetakBayi.setText("");
+        MacamPersalinan.setSelectedIndex(0);
+        KeteranganMacamPersalinan.setText("");
+        IndikasiPersalinanOperatif.setSelectedIndex(0);
+        KeteranganIndikasiPersalinanOperatif.setText("");
+        LamaGawatJanin.setText("");
+        ObatSelamaPersalinan.setText("");
+        BeratPlacenta.setText("");
+        KelainanPlacenta.setText("");
+        KeteranganRiwayatPersalinan.setText("");
+        BBLahir.setText("");
+        PanjangBadan.setText("");
+        LingkarKepala.setText("");
+        LingkarDada.setText("");
+        ResusitasiLahir.setSelectedIndex(0);
+        KeteranganResusitasiLahir.setText("");
+        ObatSaatLahir.setText("");
+        KeteranganKeadaanBayi.setText("");
+        KondisiUmum.setSelectedIndex(0);
+        KeteranganKondisiUmum.setText("");
+        Kulit.setSelectedIndex(0);
+        KeteranganKulit.setText("");
+        Kepala.setSelectedIndex(0);
+        KeteranganKepala.setText("");
+        Leher.setSelectedIndex(0);
+        KeteranganLeher.setText("");
+        Mata.setSelectedIndex(0);
+        KeteranganMata.setText("");
+        Hidung.setSelectedIndex(0);
+        KeteranganHidung.setText("");
+        Telinga.setSelectedIndex(0);
+        KeteranganTelinga.setText("");
+        Dada.setSelectedIndex(0);
+        KeteranganDada.setText("");
+        Paru.setSelectedIndex(0);
+        KeteranganParu.setText("");
+        Jantung.setSelectedIndex(0);
+        KeteranganJantung.setText("");
+        Perut.setSelectedIndex(0);
+        KeteranganPerut.setText("");
+        TaliPusat.setSelectedIndex(0);
+        KeteranganTaliPusat.setText("");
+        AlatKelamin.setSelectedIndex(0);
+        KeteranganAlatKelamin.setText("");
+        RuasTulangBelakang.setSelectedIndex(0);
+        KeteranganRuasTulangBelakang.setText("");
+        Extrimitas.setSelectedIndex(0);
+        KeteranganExtrimitas.setText("");
+        Anus.setSelectedIndex(0);
+        KeteranganAnus.setText("");
+        Refleks.setSelectedIndex(0);
+        KeteranganRefleks.setText("");
+        DenyutFemoral.setSelectedIndex(0);
+        KeteranganDenyutFemoral.setText("");
+        PemeriksaanLainnya.setText("");
+        PemeriksaanPenunjang.setText("");
+        Diagnosis.setText("");
+        Tatalaksana.setText("");
+        Valid.tabelKosong(tabModeRiwayatKehamilan);
+        Valid.tabelKosong(tabModeAPGAR);
+        tabModeAPGAR.addRow(new Object[]{"Frekuensi Jantung","Tidak Ada","< 100","> 100","","",""});
+        tabModeAPGAR.addRow(new Object[]{"Usaha Nafas","Tidak Ada","Lambat Tak Teratur","Menangis Kuat","","",""});
+        tabModeAPGAR.addRow(new Object[]{"Tanus Otot","Lumpuh","Ext. Fleksi Sedikit","Gerakan Aktif","","",""});
+        tabModeAPGAR.addRow(new Object[]{"Refleks","Tidak Ada Respon","Pergerakan Sedikit","Menangis","","",""});
+        tabModeAPGAR.addRow(new Object[]{"Warna","Biru Pucat","Tubuh Kemerahan, Tangan & Kaki Biru","Kemerahan","","",""});
+        N1.setText("");
+        N5.setText("");
+        N10.setText("");
+        TabRawat.setSelectedIndex(0);
+        BtnIbuBayi.requestFocus();
+    }
+
+    private void getData() {
+        if(tbObat.getSelectedRow()!= -1){
+           TNoRw.setText(tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
+           TNoRM.setText(tbObat.getValueAt(tbObat.getSelectedRow(),1).toString());
+           TPasien.setText(tbObat.getValueAt(tbObat.getSelectedRow(),2).toString());
+           TglLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
+           Jk.setText(tbObat.getValueAt(tbObat.getSelectedRow(),4).toString());
+           NoRMIbu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
+           NmIbu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),6).toString());
+           TglLahirIbu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString());
+           NIKIbu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
+           StatusPerkawinanIbu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
+           PenyakitIbu.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString());
+           KeteranganPenyakitIbu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString());
+           ObatSelamaHamil.setText(tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
+           PerawatanAntenatal.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),16).toString());
+           KeteranganPerawatanAntenatal.setText(tbObat.getValueAt(tbObat.getSelectedRow(),17).toString());
+           TerdaftarEkohort.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),18).toString());
+           KeteranganTerdaftarEkohort.setText(tbObat.getValueAt(tbObat.getSelectedRow(),19).toString());
+           PenyulitKehamilan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),20).toString());
+           KeteranganPenyulitKehamilan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),21).toString());
+           AlergiIbu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),22).toString());
+           KeteranganRiwayatMaternal.setText(tbObat.getValueAt(tbObat.getSelectedRow(),23).toString());
+           UmurKehamilan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),24).toString());
+           Kehamilan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),25).toString());
+           KeteranganKehamilan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),26).toString());
+           UrutanKehamilan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),27).toString());
+           JamKetubanPecah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),28).toString());
+           MenitKetubanPecah.setText(tbObat.getValueAt(tbObat.getSelectedRow(),29).toString());
+           JumlahAirKetuban.setText(tbObat.getValueAt(tbObat.getSelectedRow(),30).toString());
+           WarnaAirKetuban.setText(tbObat.getValueAt(tbObat.getSelectedRow(),31).toString());
+           BauAirKetuban.setText(tbObat.getValueAt(tbObat.getSelectedRow(),32).toString());
+           LetakBayi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),33).toString());
+           MacamPersalinan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),34).toString());
+           KeteranganMacamPersalinan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),35).toString());
+           IndikasiPersalinanOperatif.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),36).toString());
+           KeteranganIndikasiPersalinanOperatif.setText(tbObat.getValueAt(tbObat.getSelectedRow(),37).toString());
+           LamaGawatJanin.setText(tbObat.getValueAt(tbObat.getSelectedRow(),38).toString());
+           ObatSelamaPersalinan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),39).toString());
+           BeratPlacenta.setText(tbObat.getValueAt(tbObat.getSelectedRow(),40).toString());
+           KelainanPlacenta.setText(tbObat.getValueAt(tbObat.getSelectedRow(),41).toString());
+           KeteranganRiwayatPersalinan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),42).toString());
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),43).toString(),0,4);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),44).toString(),1,4);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),45).toString(),2,4);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),46).toString(),3,4);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),47).toString(),4,4);
+           N1.setText(tbObat.getValueAt(tbObat.getSelectedRow(),48).toString());
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),49).toString(),0,5);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),50).toString(),1,5);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),51).toString(),2,5);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),52).toString(),3,5);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),53).toString(),4,5);
+           N5.setText(tbObat.getValueAt(tbObat.getSelectedRow(),54).toString());
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),55).toString(),0,6);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),56).toString(),1,6);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),57).toString(),2,6);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),58).toString(),3,6);
+           tbAPGAR.setValueAt(tbObat.getValueAt(tbObat.getSelectedRow(),59).toString(),4,6);
+           N10.setText(tbObat.getValueAt(tbObat.getSelectedRow(),60).toString());
+           BBLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),61).toString());
+           PanjangBadan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),62).toString());
+           LingkarKepala.setText(tbObat.getValueAt(tbObat.getSelectedRow(),63).toString());
+           LingkarDada.setText(tbObat.getValueAt(tbObat.getSelectedRow(),64).toString());
+           ResusitasiLahir.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),65).toString());
+           KeteranganResusitasiLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),66).toString());
+           ObatSaatLahir.setText(tbObat.getValueAt(tbObat.getSelectedRow(),67).toString());
+           KeteranganKeadaanBayi.setText(tbObat.getValueAt(tbObat.getSelectedRow(),68).toString());
+           KondisiUmum.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),69).toString());
+           KeteranganKondisiUmum.setText(tbObat.getValueAt(tbObat.getSelectedRow(),70).toString());
+           Kulit.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),71).toString());
+           KeteranganKulit.setText(tbObat.getValueAt(tbObat.getSelectedRow(),72).toString());
+           Kepala.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),73).toString());
+           KeteranganKepala.setText(tbObat.getValueAt(tbObat.getSelectedRow(),74).toString());
+           Leher.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),75).toString());
+           KeteranganLeher.setText(tbObat.getValueAt(tbObat.getSelectedRow(),76).toString());
+           Mata.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),77).toString());
+           KeteranganMata.setText(tbObat.getValueAt(tbObat.getSelectedRow(),78).toString());
+           Hidung.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),79).toString());
+           KeteranganHidung.setText(tbObat.getValueAt(tbObat.getSelectedRow(),80).toString());
+           Telinga.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),81).toString());
+           KeteranganTelinga.setText(tbObat.getValueAt(tbObat.getSelectedRow(),82).toString());
+           Dada.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),83).toString());
+           KeteranganDada.setText(tbObat.getValueAt(tbObat.getSelectedRow(),84).toString());
+           Paru.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),85).toString());
+           KeteranganParu.setText(tbObat.getValueAt(tbObat.getSelectedRow(),86).toString());
+           Jantung.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),87).toString());
+           KeteranganJantung.setText(tbObat.getValueAt(tbObat.getSelectedRow(),88).toString());
+           Perut.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),89).toString());
+           KeteranganPerut.setText(tbObat.getValueAt(tbObat.getSelectedRow(),90).toString());
+           TaliPusat.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),91).toString());
+           KeteranganTaliPusat.setText(tbObat.getValueAt(tbObat.getSelectedRow(),92).toString());
+           AlatKelamin.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),93).toString());
+           KeteranganAlatKelamin.setText(tbObat.getValueAt(tbObat.getSelectedRow(),94).toString());
+           RuasTulangBelakang.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),95).toString());
+           KeteranganRuasTulangBelakang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),96).toString());
+           Extrimitas.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),97).toString());
+           KeteranganExtrimitas.setText(tbObat.getValueAt(tbObat.getSelectedRow(),98).toString());
+           Anus.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),99).toString());
+           KeteranganAnus.setText(tbObat.getValueAt(tbObat.getSelectedRow(),100).toString());
+           Refleks.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),101).toString());
+           KeteranganRefleks.setText(tbObat.getValueAt(tbObat.getSelectedRow(),102).toString());
+           DenyutFemoral.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),103).toString());
+           KeteranganDenyutFemoral.setText(tbObat.getValueAt(tbObat.getSelectedRow(),104).toString());
+           PemeriksaanLainnya.setText(tbObat.getValueAt(tbObat.getSelectedRow(),105).toString());
+           PemeriksaanPenunjang.setText(tbObat.getValueAt(tbObat.getSelectedRow(),106).toString());
+           Diagnosis.setText(tbObat.getValueAt(tbObat.getSelectedRow(),107).toString());
+           Tatalaksana.setText(tbObat.getValueAt(tbObat.getSelectedRow(),108).toString());
+           Valid.SetTgl2(TglAsuhan,tbObat.getValueAt(tbObat.getSelectedRow(),12).toString());
+        }
+    }
+
+    private void isRawat() {
+        try {
+            ps=koneksi.prepareStatement(
+                    "select reg_periksa.no_rkm_medis,pasien.nm_pasien, if(pasien.jk='L','Laki-laki','Perempuan') as jk,pasien.tgl_lahir,reg_periksa.tgl_registrasi,reg_periksa.jam_reg, "+
+                    "reg_periksa.umurdaftar,reg_periksa.sttsumur,pasien.no_ktp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                    "where reg_periksa.no_rawat=?");
+            try {
+                ps.setString(1,TNoRw.getText());
+                rs=ps.executeQuery();
+                if(rs.next()){
+                    TNoRM.setText(rs.getString("no_rkm_medis"));
+                    DTPCari1.setDate(rs.getDate("tgl_registrasi"));
+                    TPasien.setText(rs.getString("nm_pasien"));
+                    Jk.setText(rs.getString("jk"));
+                    TglLahir.setText(rs.getString("tgl_lahir"));
+                    TanggalRegistrasi.setText(rs.getString("tgl_registrasi")+" "+rs.getString("jam_reg"));
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }
+    }
+
+    public void setNoRm(String norwt,Date tgl2) {
+        TNoRw.setText(norwt);
+        TCari.setText(norwt);
+        DTPCari2.setDate(tgl2);
+        isRawat();
+    }
+
+    public void isCek(){
+        BtnSimpan.setEnabled(akses.getpenilaian_bayi_baru_lahir());
+        BtnHapus.setEnabled(akses.getpenilaian_bayi_baru_lahir());
+        BtnEdit.setEnabled(akses.getpenilaian_bayi_baru_lahir());
+        if(akses.getjml2()>=1){
+            KdDokter.setEditable(false);
+            BtnDokter.setEnabled(false);
+            KdDokter.setText(akses.getkode());
+            NmDokter.setText(Sequel.CariDokter(KdDokter.getText()));
+            if(NmDokter.getText().equals("")){
+                KdDokter.setText("");
+                JOptionPane.showMessageDialog(null,"User login bukan Dokter...!!");
+            }
+        }
+
+        if(TANGGALMUNDUR.equals("no")){
+            if(!akses.getkode().equals("Admin Utama")){
+                TglAsuhan.setEditable(false);
+                TglAsuhan.setEnabled(false);
+            }
+        }
+    }
+
+    public void setTampil(){
+       TabRawat.setSelectedIndex(1);
+    }
+
+    private void hapus() {
+        if(Sequel.queryu2tf("delete from penilaian_bayi_baru_lahir where no_rawat=?",1,new String[]{
+            tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+        })==true){
+            tabMode.removeRow(tbObat.getSelectedRow());
+            LCount.setText(""+tabMode.getRowCount());
+            TabRawat.setSelectedIndex(1);
+        }else{
+            JOptionPane.showMessageDialog(null,"Gagal menghapus..!!");
+        }
+    }
+
+    private void ganti() {
+        if(Sequel.mengedittf("penilaian_bayi_baru_lahir","no_rawat=?","no_rawat=?,tanggal=?,kd_dokter=?,no_rkm_medis_ibu=?,penyakit_diderita_ibu=?,keterangan_penyakit_diderita_ibu=?,obat_dikonsumsi_selama_kehamilan=?,perawatan_antenatal=?,keterangan_perawatan_antenatal=?,terdaftar_ekohort=?,keterangan_terdaftar_ekohort=?,penyulit_kehamilan=?,"+
+                "keterangan_penyulit_kehamilan=?,alergi=?,keterangan_lainnya_riwayat_maternal=?,umur_kehamilan=?,kehamilan=?,keterangan_kehamilan=?,urutan_kehamilan=?,jam_ketuban_pecah=?,menit_ketuban_pecah=?,jumlah_air_ketuban=?,warna_air_ketuban=?,bau_air_ketuban=?,letak_bayi=?,macam_persalinan=?,keterangan_macam_persalinan=?,indikasi_persalinan_operatif=?,"+
+                "keterangan_indikasi_persalinan_operatif=?,lama_gawat_janin=?,obat_selama_persalinan=?,berat_placenta=?,kelainan_placenta=?,keterangan_lainnya_riwayat_persalinan=?,f1=?,u1=?,t1=?,r1=?,w1=?,n1=?,f5=?,u5=?,t5=?,r5=?,w5=?,n5=?,f10=?,u10=?,t10=?,r10=?,w10=?,n10=?,bblahir=?,panjang_badan=?,lingkar_kepala=?,lingkar_dada=?,resusitasi_saat_lahir=?,"+
+                "keterangan_resusitasi_saat_lahir=?,obat_diberikan_saat_lahir=?,keterangan_lainnya_keadaan_bayi=?,kondisi_umum=?,keterangan_kondisi_umum=?,kulit=?,keterangan_kulit=?,kepala=?,keterangan_kepala=?,leher=?,keterangan_leher=?,mata=?,keterangan_mata=?,hidung=?,keterangan_hidung=?,telinga=?,keterangan_telinga=?,dada=?,keterangan_dada=?,paru=?,"+
+                "keterangan_paru=?,jantung=?,keterangan_jantung=?,perut=?,keterangan_perut=?,tali_pusat=?,keterangan_tali_pusat=?,alat_kelamin=?,keterangan_alat_kelamin=?,ruas_tulang_belakang=?,keterangan_ruas_tulang_belakang=?,extrimitas=?,keterangan_extrimitas=?,anus=?,keterangan_anus=?,refleks=?,keterangan_refleks=?,denyut_femoral=?,keterangan_denyut_femoral=?,"+
+                "pemeriksaan_fisik_lainnya=?,pemeriksaan_penunjang=?,diagnosa=?,tatalaksana=?",101,new String[]{
+                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),NoRMIbu.getText(),PenyakitIbu.getSelectedItem().toString(),KeteranganPenyakitIbu.getText(),ObatSelamaHamil.getText(),PerawatanAntenatal.getSelectedItem().toString(),
+                KeteranganPerawatanAntenatal.getText(),TerdaftarEkohort.getSelectedItem().toString(),KeteranganTerdaftarEkohort.getText(),PenyulitKehamilan.getSelectedItem().toString(),KeteranganPenyulitKehamilan.getText(),AlergiIbu.getText(),KeteranganRiwayatMaternal.getText(),UmurKehamilan.getText(),Kehamilan.getSelectedItem().toString(),
+                KeteranganKehamilan.getText(),UrutanKehamilan.getText(),JamKetubanPecah.getText(),MenitKetubanPecah.getText(),JumlahAirKetuban.getText(),WarnaAirKetuban.getText(),BauAirKetuban.getText(),LetakBayi.getText(),MacamPersalinan.getSelectedItem().toString(),KeteranganMacamPersalinan.getText(),IndikasiPersalinanOperatif.getSelectedItem().toString(),
+                KeteranganIndikasiPersalinanOperatif.getText(),LamaGawatJanin.getText(),ObatSelamaPersalinan.getText(),BeratPlacenta.getText(),KelainanPlacenta.getText(),KeteranganRiwayatPersalinan.getText(),tbAPGAR.getValueAt(0,4).toString(),tbAPGAR.getValueAt(1,4).toString(),tbAPGAR.getValueAt(2,4).toString(),tbAPGAR.getValueAt(3,4).toString(),
+                tbAPGAR.getValueAt(4,4).toString(),N1.getText(),tbAPGAR.getValueAt(0,5).toString(),tbAPGAR.getValueAt(1,5).toString(),tbAPGAR.getValueAt(2,5).toString(),tbAPGAR.getValueAt(3,5).toString(),tbAPGAR.getValueAt(4,5).toString(),N5.getText(),tbAPGAR.getValueAt(0,6).toString(),tbAPGAR.getValueAt(1,6).toString(),tbAPGAR.getValueAt(2,6).toString(),
+                tbAPGAR.getValueAt(3,6).toString(),tbAPGAR.getValueAt(4,6).toString(),N10.getText(),BBLahir.getText(),PanjangBadan.getText(),LingkarKepala.getText(),LingkarDada.getText(),ResusitasiLahir.getSelectedItem().toString(),KeteranganResusitasiLahir.getText(),ObatSaatLahir.getText(),KeteranganKeadaanBayi.getText(),
+                KondisiUmum.getSelectedItem().toString(),KeteranganKondisiUmum.getText(),Kulit.getSelectedItem().toString(),KeteranganKulit.getText(),Kepala.getSelectedItem().toString(),KeteranganKepala.getText(),Leher.getSelectedItem().toString(),KeteranganLeher.getText(),Mata.getSelectedItem().toString(),KeteranganMata.getText(),
+                Hidung.getSelectedItem().toString(),KeteranganHidung.getText(),Telinga.getSelectedItem().toString(),KeteranganTelinga.getText(),Dada.getSelectedItem().toString(),KeteranganDada.getText(),Paru.getSelectedItem().toString(),KeteranganParu.getText(),Jantung.getSelectedItem().toString(),KeteranganJantung.getText(),
+                Perut.getSelectedItem().toString(),KeteranganPerut.getText(),TaliPusat.getSelectedItem().toString(),KeteranganTaliPusat.getText(),AlatKelamin.getSelectedItem().toString(),KeteranganAlatKelamin.getText(),RuasTulangBelakang.getSelectedItem().toString(),KeteranganRuasTulangBelakang.getText(),Extrimitas.getSelectedItem().toString(),
+                KeteranganExtrimitas.getText(),Anus.getSelectedItem().toString(),KeteranganAnus.getText(),Refleks.getSelectedItem().toString(),KeteranganRefleks.getText(),DenyutFemoral.getSelectedItem().toString(),KeteranganDenyutFemoral.getText(),PemeriksaanLainnya.getText(),PemeriksaanPenunjang.getText(),Diagnosis.getText(),Tatalaksana.getText(),
+                tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
+            })==true){
+               tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),0);
+               tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),1);
+               tbObat.setValueAt(TPasien.getText(),tbObat.getSelectedRow(),2);
+               tbObat.setValueAt(TglLahir.getText(),tbObat.getSelectedRow(),3);
+               tbObat.setValueAt(Jk.getText(),tbObat.getSelectedRow(),4);
+               tbObat.setValueAt(NoRMIbu.getText(),tbObat.getSelectedRow(),5);
+               tbObat.setValueAt(NmIbu.getText(),tbObat.getSelectedRow(),6);
+               tbObat.setValueAt(TglLahirIbu.getText(),tbObat.getSelectedRow(),7);
+               tbObat.setValueAt(NIKIbu.getText(),tbObat.getSelectedRow(),8);
+               tbObat.setValueAt(StatusPerkawinanIbu.getText(),tbObat.getSelectedRow(),9);
+               tbObat.setValueAt(KdDokter.getText(),tbObat.getSelectedRow(),10);
+               tbObat.setValueAt(NmDokter.getText(),tbObat.getSelectedRow(),11);
+               tbObat.setValueAt(Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),tbObat.getSelectedRow(),12);
+               tbObat.setValueAt(PenyakitIbu.getSelectedItem().toString(),tbObat.getSelectedRow(),13);
+               tbObat.setValueAt(KeteranganPenyakitIbu.getText(),tbObat.getSelectedRow(),14);
+               tbObat.setValueAt(ObatSelamaHamil.getText(),tbObat.getSelectedRow(),15);
+               tbObat.setValueAt(PerawatanAntenatal.getSelectedItem().toString(),tbObat.getSelectedRow(),16);
+               tbObat.setValueAt(KeteranganPerawatanAntenatal.getText(),tbObat.getSelectedRow(),17);
+               tbObat.setValueAt(TerdaftarEkohort.getSelectedItem().toString(),tbObat.getSelectedRow(),18);
+               tbObat.setValueAt(KeteranganTerdaftarEkohort.getText(),tbObat.getSelectedRow(),19);
+               tbObat.setValueAt(PenyulitKehamilan.getSelectedItem().toString(),tbObat.getSelectedRow(),20);
+               tbObat.setValueAt(KeteranganPenyulitKehamilan.getText(),tbObat.getSelectedRow(),21);
+               tbObat.setValueAt(AlergiIbu.getText(),tbObat.getSelectedRow(),22);
+               tbObat.setValueAt(KeteranganRiwayatMaternal.getText(),tbObat.getSelectedRow(),23);
+               tbObat.setValueAt(UmurKehamilan.getText(),tbObat.getSelectedRow(),24);
+               tbObat.setValueAt(Kehamilan.getSelectedItem().toString(),tbObat.getSelectedRow(),25);
+               tbObat.setValueAt(KeteranganKehamilan.getText(),tbObat.getSelectedRow(),26);
+               tbObat.setValueAt(UrutanKehamilan.getText(),tbObat.getSelectedRow(),27);
+               tbObat.setValueAt(JamKetubanPecah.getText(),tbObat.getSelectedRow(),28);
+               tbObat.setValueAt(MenitKetubanPecah.getText(),tbObat.getSelectedRow(),29);
+               tbObat.setValueAt(JumlahAirKetuban.getText(),tbObat.getSelectedRow(),30);
+               tbObat.setValueAt(WarnaAirKetuban.getText(),tbObat.getSelectedRow(),31);
+               tbObat.setValueAt(BauAirKetuban.getText(),tbObat.getSelectedRow(),32);
+               tbObat.setValueAt(LetakBayi.getText(),tbObat.getSelectedRow(),33);
+               tbObat.setValueAt(MacamPersalinan.getSelectedItem().toString(),tbObat.getSelectedRow(),34);
+               tbObat.setValueAt(KeteranganMacamPersalinan.getText(),tbObat.getSelectedRow(),35);
+               tbObat.setValueAt(IndikasiPersalinanOperatif.getSelectedItem().toString(),tbObat.getSelectedRow(),36);
+               tbObat.setValueAt(KeteranganIndikasiPersalinanOperatif.getText(),tbObat.getSelectedRow(),37);
+               tbObat.setValueAt(LamaGawatJanin.getText(),tbObat.getSelectedRow(),38);
+               tbObat.setValueAt(ObatSelamaPersalinan.getText(),tbObat.getSelectedRow(),39);
+               tbObat.setValueAt(BeratPlacenta.getText(),tbObat.getSelectedRow(),40);
+               tbObat.setValueAt(KelainanPlacenta.getText(),tbObat.getSelectedRow(),41);
+               tbObat.setValueAt(KeteranganRiwayatPersalinan.getText(),tbObat.getSelectedRow(),42);
+               tbObat.setValueAt(tbAPGAR.getValueAt(0,4).toString(),tbObat.getSelectedRow(),43);
+               tbObat.setValueAt(tbAPGAR.getValueAt(1,4).toString(),tbObat.getSelectedRow(),44);
+               tbObat.setValueAt(tbAPGAR.getValueAt(2,4).toString(),tbObat.getSelectedRow(),45);
+               tbObat.setValueAt(tbAPGAR.getValueAt(3,4).toString(),tbObat.getSelectedRow(),46);
+               tbObat.setValueAt(tbAPGAR.getValueAt(4,4).toString(),tbObat.getSelectedRow(),47);
+               tbObat.setValueAt(N1.getText(),tbObat.getSelectedRow(),48);
+               tbObat.setValueAt(tbAPGAR.getValueAt(0,5).toString(),tbObat.getSelectedRow(),49);
+               tbObat.setValueAt(tbAPGAR.getValueAt(1,5).toString(),tbObat.getSelectedRow(),50);
+               tbObat.setValueAt(tbAPGAR.getValueAt(2,5).toString(),tbObat.getSelectedRow(),51);
+               tbObat.setValueAt(tbAPGAR.getValueAt(3,5).toString(),tbObat.getSelectedRow(),52);
+               tbObat.setValueAt(tbAPGAR.getValueAt(4,5).toString(),tbObat.getSelectedRow(),53);
+               tbObat.setValueAt(N5.getText(),tbObat.getSelectedRow(),54);
+               tbObat.setValueAt(tbAPGAR.getValueAt(0,6).toString(),tbObat.getSelectedRow(),55);
+               tbObat.setValueAt(tbAPGAR.getValueAt(1,6).toString(),tbObat.getSelectedRow(),56);
+               tbObat.setValueAt(tbAPGAR.getValueAt(2,6).toString(),tbObat.getSelectedRow(),57);
+               tbObat.setValueAt(tbAPGAR.getValueAt(3,6).toString(),tbObat.getSelectedRow(),58);
+               tbObat.setValueAt(tbAPGAR.getValueAt(4,6).toString(),tbObat.getSelectedRow(),59);
+               tbObat.setValueAt(N10.getText(),tbObat.getSelectedRow(),60);
+               tbObat.setValueAt(BBLahir.getText(),tbObat.getSelectedRow(),61);
+               tbObat.setValueAt(PanjangBadan.getText(),tbObat.getSelectedRow(),62);
+               tbObat.setValueAt(LingkarKepala.getText(),tbObat.getSelectedRow(),63);
+               tbObat.setValueAt(LingkarDada.getText(),tbObat.getSelectedRow(),64);
+               tbObat.setValueAt(ResusitasiLahir.getSelectedItem().toString(),tbObat.getSelectedRow(),65);
+               tbObat.setValueAt(KeteranganResusitasiLahir.getText(),tbObat.getSelectedRow(),66);
+               tbObat.setValueAt(ObatSaatLahir.getText(),tbObat.getSelectedRow(),67);
+               tbObat.setValueAt(KeteranganKeadaanBayi.getText(),tbObat.getSelectedRow(),68);
+               tbObat.setValueAt(KondisiUmum.getSelectedItem().toString(),tbObat.getSelectedRow(),69);
+               tbObat.setValueAt(KeteranganKondisiUmum.getText(),tbObat.getSelectedRow(),70);
+               tbObat.setValueAt(Kulit.getSelectedItem().toString(),tbObat.getSelectedRow(),71);
+               tbObat.setValueAt(KeteranganKulit.getText(),tbObat.getSelectedRow(),72);
+               tbObat.setValueAt(Kepala.getSelectedItem().toString(),tbObat.getSelectedRow(),73);
+               tbObat.setValueAt(KeteranganKepala.getText(),tbObat.getSelectedRow(),74);
+               tbObat.setValueAt(Leher.getSelectedItem().toString(),tbObat.getSelectedRow(),75);
+               tbObat.setValueAt(KeteranganLeher.getText(),tbObat.getSelectedRow(),76);
+               tbObat.setValueAt(Mata.getSelectedItem().toString(),tbObat.getSelectedRow(),77);
+               tbObat.setValueAt(KeteranganMata.getText(),tbObat.getSelectedRow(),78);
+               tbObat.setValueAt(Hidung.getSelectedItem().toString(),tbObat.getSelectedRow(),79);
+               tbObat.setValueAt(KeteranganHidung.getText(),tbObat.getSelectedRow(),80);
+               tbObat.setValueAt(Telinga.getSelectedItem().toString(),tbObat.getSelectedRow(),81);
+               tbObat.setValueAt(KeteranganTelinga.getText(),tbObat.getSelectedRow(),82);
+               tbObat.setValueAt(Dada.getSelectedItem().toString(),tbObat.getSelectedRow(),83);
+               tbObat.setValueAt(KeteranganDada.getText(),tbObat.getSelectedRow(),84);
+               tbObat.setValueAt(Paru.getSelectedItem().toString(),tbObat.getSelectedRow(),85);
+               tbObat.setValueAt(KeteranganParu.getText(),tbObat.getSelectedRow(),86);
+               tbObat.setValueAt(Jantung.getSelectedItem().toString(),tbObat.getSelectedRow(),87);
+               tbObat.setValueAt(KeteranganJantung.getText(),tbObat.getSelectedRow(),88);
+               tbObat.setValueAt(Perut.getSelectedItem().toString(),tbObat.getSelectedRow(),89);
+               tbObat.setValueAt(KeteranganPerut.getText(),tbObat.getSelectedRow(),90);
+               tbObat.setValueAt(TaliPusat.getSelectedItem().toString(),tbObat.getSelectedRow(),91);
+               tbObat.setValueAt(KeteranganTaliPusat.getText(),tbObat.getSelectedRow(),92);
+               tbObat.setValueAt(AlatKelamin.getSelectedItem().toString(),tbObat.getSelectedRow(),93);
+               tbObat.setValueAt(KeteranganAlatKelamin.getText(),tbObat.getSelectedRow(),94);
+               tbObat.setValueAt(RuasTulangBelakang.getSelectedItem().toString(),tbObat.getSelectedRow(),95);
+               tbObat.setValueAt(KeteranganRuasTulangBelakang.getText(),tbObat.getSelectedRow(),96);
+               tbObat.setValueAt(Extrimitas.getSelectedItem().toString(),tbObat.getSelectedRow(),97);
+               tbObat.setValueAt(KeteranganExtrimitas.getText(),tbObat.getSelectedRow(),98);
+               tbObat.setValueAt(Anus.getSelectedItem().toString(),tbObat.getSelectedRow(),99);
+               tbObat.setValueAt(KeteranganAnus.getText(),tbObat.getSelectedRow(),100);
+               tbObat.setValueAt(Refleks.getSelectedItem().toString(),tbObat.getSelectedRow(),101);
+               tbObat.setValueAt(KeteranganRefleks.getText(),tbObat.getSelectedRow(),102);
+               tbObat.setValueAt(DenyutFemoral.getSelectedItem().toString(),tbObat.getSelectedRow(),103);
+               tbObat.setValueAt(KeteranganDenyutFemoral.getText(),tbObat.getSelectedRow(),104);
+               tbObat.setValueAt(PemeriksaanLainnya.getText(),tbObat.getSelectedRow(),105);
+               tbObat.setValueAt(PemeriksaanPenunjang.getText(),tbObat.getSelectedRow(),106);
+               tbObat.setValueAt(Diagnosis.getText(),tbObat.getSelectedRow(),107);
+               tbObat.setValueAt(Tatalaksana.getText(),tbObat.getSelectedRow(),108);
+               TabRawat.setSelectedIndex(1);
+        }
+    }
+
+    private void getDataApgar() {
+        try {
+            if(tbAPGAR.getValueAt(0,4).toString().equals("")||tbAPGAR.getValueAt(1,4).toString().equals("")||tbAPGAR.getValueAt(2,4).toString().equals("")||
+                tbAPGAR.getValueAt(3,4).toString().equals("")||tbAPGAR.getValueAt(4,4).toString().equals("")){
+                N1.setText("");
+            }else{
+                N1.setText((Valid.SetInteger(tbAPGAR.getValueAt(0,4).toString())+Valid.SetInteger(tbAPGAR.getValueAt(1,4).toString())+Valid.SetInteger(tbAPGAR.getValueAt(2,4).toString())+Valid.SetInteger(tbAPGAR.getValueAt(3,4).toString())+Valid.SetInteger(tbAPGAR.getValueAt(4,4).toString()))+"");
+            }
+        } catch (Exception e) {
+            N1.setText("");
+        }
+
+        try {
+            if(tbAPGAR.getValueAt(0,5).toString().equals("")||tbAPGAR.getValueAt(1,5).toString().equals("")||tbAPGAR.getValueAt(2,5).toString().equals("")||
+                tbAPGAR.getValueAt(3,5).toString().equals("")||tbAPGAR.getValueAt(4,5).toString().equals("")){
+                N5.setText("");
+            }else{
+                N5.setText((Valid.SetInteger(tbAPGAR.getValueAt(0,5).toString())+Valid.SetInteger(tbAPGAR.getValueAt(1,5).toString())+Valid.SetInteger(tbAPGAR.getValueAt(2,5).toString())+Valid.SetInteger(tbAPGAR.getValueAt(3,5).toString())+Valid.SetInteger(tbAPGAR.getValueAt(4,5).toString()))+"");
+            }
+        } catch (Exception e) {
+            N5.setText("");
+        }
+
+        try {
+            if(tbAPGAR.getValueAt(0,6).toString().equals("")||tbAPGAR.getValueAt(1,6).toString().equals("")||tbAPGAR.getValueAt(2,6).toString().equals("")||
+                tbAPGAR.getValueAt(3,6).toString().equals("")||tbAPGAR.getValueAt(4,6).toString().equals("")){
+                N10.setText("");
+            }else{
+                N10.setText((Valid.SetInteger(tbAPGAR.getValueAt(0,6).toString())+Valid.SetInteger(tbAPGAR.getValueAt(1,6).toString())+Valid.SetInteger(tbAPGAR.getValueAt(2,6).toString())+Valid.SetInteger(tbAPGAR.getValueAt(3,6).toString())+Valid.SetInteger(tbAPGAR.getValueAt(4,6).toString()))+"");
+            }
+        } catch (Exception e) {
+            N10.setText("");
+        }
+    }
+
+    private void getNilaiDownScore() {
+        /*try {
+            if(NilaiFrekuensiNapas.getText().equals("")||NilaiRetraksi.getText().equals("")||NilaiSianosis.getText().equals("")||NilaiJalanMasukUdara.getText().equals("")||NilaiGrunting.getText().equals("")){
+                TotalNilaiDownScore.setText("0");
+            }else{
+                TotalNilaiDownScore.setText((Integer.parseInt(NilaiFrekuensiNapas.getText())+Integer.parseInt(NilaiRetraksi.getText())+Integer.parseInt(NilaiSianosis.getText())+Integer.parseInt(NilaiJalanMasukUdara.getText())+Integer.parseInt(NilaiGrunting.getText()))+"");
+            }
+        } catch (Exception e) {
+            TotalNilaiDownScore.setText("0");
+        }*/
+    }
+
+    private void emptTeksPersalinan() {
+        TempatPersalinan.setText("");
+        JenisPersalinan.setText("");
+        Penolong.setText("");
+        Penyulit.setText("");
+        Keadaan.setText("");
+        UsiaHamil.setText("");
+        BBPB.setText("");
+        TanggalPersalinan.setDate(new Date());
+        JK.setSelectedIndex(0);
+        TempatPersalinan.requestFocus();
+    }
+
+    private void tampilPersalinan() {
+        Valid.tabelKosong(tabModeRiwayatKehamilan);
+        try {
+            ps=koneksi.prepareStatement("select * from riwayat_persalinan_pasien where riwayat_persalinan_pasien.no_rkm_medis=? order by riwayat_persalinan_pasien.tgl_thn");
+            try {
+                ps.setString(1,NoRMIbu.getText());
+                rs=ps.executeQuery();
+                i=1;
+                while(rs.next()){
+                    tabModeRiwayatKehamilan.addRow(new Object[]{
+                        i+"",rs.getString("tgl_thn"),rs.getString("tempat_persalinan"),rs.getString("usia_hamil"),rs.getString("jenis_persalinan"),
+                        rs.getString("penolong"),rs.getString("penyulit"),rs.getString("jk"),rs.getString("bbpb"),rs.getString("keadaan")
+                    });
+                    i++;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            } finally{
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }
+    }
+
+    private void simpan() {
+        if(Sequel.menyimpantf("penilaian_bayi_baru_lahir","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Rawat",100,new String[]{
+                TNoRw.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),KdDokter.getText(),NoRMIbu.getText(),PenyakitIbu.getSelectedItem().toString(),KeteranganPenyakitIbu.getText(),ObatSelamaHamil.getText(),PerawatanAntenatal.getSelectedItem().toString(),
+                KeteranganPerawatanAntenatal.getText(),TerdaftarEkohort.getSelectedItem().toString(),KeteranganTerdaftarEkohort.getText(),PenyulitKehamilan.getSelectedItem().toString(),KeteranganPenyulitKehamilan.getText(),AlergiIbu.getText(),KeteranganRiwayatMaternal.getText(),UmurKehamilan.getText(),Kehamilan.getSelectedItem().toString(),
+                KeteranganKehamilan.getText(),UrutanKehamilan.getText(),JamKetubanPecah.getText(),MenitKetubanPecah.getText(),JumlahAirKetuban.getText(),WarnaAirKetuban.getText(),BauAirKetuban.getText(),LetakBayi.getText(),MacamPersalinan.getSelectedItem().toString(),KeteranganMacamPersalinan.getText(),IndikasiPersalinanOperatif.getSelectedItem().toString(),
+                KeteranganIndikasiPersalinanOperatif.getText(),LamaGawatJanin.getText(),ObatSelamaPersalinan.getText(),BeratPlacenta.getText(),KelainanPlacenta.getText(),KeteranganRiwayatPersalinan.getText(),tbAPGAR.getValueAt(0,4).toString(),tbAPGAR.getValueAt(1,4).toString(),tbAPGAR.getValueAt(2,4).toString(),tbAPGAR.getValueAt(3,4).toString(),
+                tbAPGAR.getValueAt(4,4).toString(),N1.getText(),tbAPGAR.getValueAt(0,5).toString(),tbAPGAR.getValueAt(1,5).toString(),tbAPGAR.getValueAt(2,5).toString(),tbAPGAR.getValueAt(3,5).toString(),tbAPGAR.getValueAt(4,5).toString(),N5.getText(),tbAPGAR.getValueAt(0,6).toString(),tbAPGAR.getValueAt(1,6).toString(),tbAPGAR.getValueAt(2,6).toString(),
+                tbAPGAR.getValueAt(3,6).toString(),tbAPGAR.getValueAt(4,6).toString(),N10.getText(),BBLahir.getText(),PanjangBadan.getText(),LingkarKepala.getText(),LingkarDada.getText(),ResusitasiLahir.getSelectedItem().toString(),KeteranganResusitasiLahir.getText(),ObatSaatLahir.getText(),KeteranganKeadaanBayi.getText(),
+                KondisiUmum.getSelectedItem().toString(),KeteranganKondisiUmum.getText(),Kulit.getSelectedItem().toString(),KeteranganKulit.getText(),Kepala.getSelectedItem().toString(),KeteranganKepala.getText(),Leher.getSelectedItem().toString(),KeteranganLeher.getText(),Mata.getSelectedItem().toString(),KeteranganMata.getText(),
+                Hidung.getSelectedItem().toString(),KeteranganHidung.getText(),Telinga.getSelectedItem().toString(),KeteranganTelinga.getText(),Dada.getSelectedItem().toString(),KeteranganDada.getText(),Paru.getSelectedItem().toString(),KeteranganParu.getText(),Jantung.getSelectedItem().toString(),KeteranganJantung.getText(),
+                Perut.getSelectedItem().toString(),KeteranganPerut.getText(),TaliPusat.getSelectedItem().toString(),KeteranganTaliPusat.getText(),AlatKelamin.getSelectedItem().toString(),KeteranganAlatKelamin.getText(),RuasTulangBelakang.getSelectedItem().toString(),KeteranganRuasTulangBelakang.getText(),Extrimitas.getSelectedItem().toString(),
+                KeteranganExtrimitas.getText(),Anus.getSelectedItem().toString(),KeteranganAnus.getText(),Refleks.getSelectedItem().toString(),KeteranganRefleks.getText(),DenyutFemoral.getSelectedItem().toString(),KeteranganDenyutFemoral.getText(),PemeriksaanLainnya.getText(),PemeriksaanPenunjang.getText(),Diagnosis.getText(),Tatalaksana.getText()
+            })==true){
+                tabMode.addRow(new Object[]{
+                    TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText(),NoRMIbu.getText(),NmIbu.getText(),TglLahirIbu.getText(),NIKIbu.getText(),StatusPerkawinanIbu.getText(),KdDokter.getText(),NmDokter.getText(),Valid.SetTgl(TglAsuhan.getSelectedItem()+"")+" "+TglAsuhan.getSelectedItem().toString().substring(11,19),
+                    PenyakitIbu.getSelectedItem().toString(),KeteranganPenyakitIbu.getText(),ObatSelamaHamil.getText(),PerawatanAntenatal.getSelectedItem().toString(),KeteranganPerawatanAntenatal.getText(),TerdaftarEkohort.getSelectedItem().toString(),KeteranganTerdaftarEkohort.getText(),PenyulitKehamilan.getSelectedItem().toString(),
+                    KeteranganPenyulitKehamilan.getText(),AlergiIbu.getText(),KeteranganRiwayatMaternal.getText(),UmurKehamilan.getText(),Kehamilan.getSelectedItem().toString(),KeteranganKehamilan.getText(),UrutanKehamilan.getText(),JamKetubanPecah.getText(),MenitKetubanPecah.getText(),JumlahAirKetuban.getText(),WarnaAirKetuban.getText(),
+                    BauAirKetuban.getText(),LetakBayi.getText(),MacamPersalinan.getSelectedItem().toString(),KeteranganMacamPersalinan.getText(),IndikasiPersalinanOperatif.getSelectedItem().toString(),KeteranganIndikasiPersalinanOperatif.getText(),LamaGawatJanin.getText(),ObatSelamaPersalinan.getText(),BeratPlacenta.getText(),KelainanPlacenta.getText(),
+                    KeteranganRiwayatPersalinan.getText(),tbAPGAR.getValueAt(0,4).toString(),tbAPGAR.getValueAt(1,4).toString(),tbAPGAR.getValueAt(2,4).toString(),tbAPGAR.getValueAt(3,4).toString(),tbAPGAR.getValueAt(4,4).toString(),N1.getText(),tbAPGAR.getValueAt(0,5).toString(),tbAPGAR.getValueAt(1,5).toString(),tbAPGAR.getValueAt(2,5).toString(),
+                    tbAPGAR.getValueAt(3,5).toString(),tbAPGAR.getValueAt(4,5).toString(),N5.getText(),tbAPGAR.getValueAt(0,6).toString(),tbAPGAR.getValueAt(1,6).toString(),tbAPGAR.getValueAt(2,6).toString(),tbAPGAR.getValueAt(3,6).toString(),tbAPGAR.getValueAt(4,6).toString(),N10.getText(),BBLahir.getText(),PanjangBadan.getText(),LingkarKepala.getText(),
+                    LingkarDada.getText(),ResusitasiLahir.getSelectedItem().toString(),KeteranganResusitasiLahir.getText(),ObatSaatLahir.getText(),KeteranganKeadaanBayi.getText(),KondisiUmum.getSelectedItem().toString(),KeteranganKondisiUmum.getText(),Kulit.getSelectedItem().toString(),KeteranganKulit.getText(),Kepala.getSelectedItem().toString(),
+                    KeteranganKepala.getText(),Leher.getSelectedItem().toString(),KeteranganLeher.getText(),Mata.getSelectedItem().toString(),KeteranganMata.getText(),Hidung.getSelectedItem().toString(),KeteranganHidung.getText(),Telinga.getSelectedItem().toString(),KeteranganTelinga.getText(),Dada.getSelectedItem().toString(),KeteranganDada.getText(),
+                    Paru.getSelectedItem().toString(),KeteranganParu.getText(),Jantung.getSelectedItem().toString(),KeteranganJantung.getText(),Perut.getSelectedItem().toString(),KeteranganPerut.getText(),TaliPusat.getSelectedItem().toString(),KeteranganTaliPusat.getText(),AlatKelamin.getSelectedItem().toString(),KeteranganAlatKelamin.getText(),
+                    RuasTulangBelakang.getSelectedItem().toString(),KeteranganRuasTulangBelakang.getText(),Extrimitas.getSelectedItem().toString(),KeteranganExtrimitas.getText(),Anus.getSelectedItem().toString(),KeteranganAnus.getText(),Refleks.getSelectedItem().toString(),KeteranganRefleks.getText(),DenyutFemoral.getSelectedItem().toString(),
+                    KeteranganDenyutFemoral.getText(),PemeriksaanLainnya.getText(),PemeriksaanPenunjang.getText(),Diagnosis.getText(),Tatalaksana.getText()
+                });
+                LCount.setText(""+tabMode.getRowCount());
+                emptTeks();
+        }
+    }
+}
