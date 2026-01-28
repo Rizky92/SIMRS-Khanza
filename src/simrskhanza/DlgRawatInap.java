@@ -6842,7 +6842,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             form.emptTeks();
             form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -6860,7 +6859,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             form.emptTeks();
             form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -7058,7 +7056,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnCatatanObservasiRanapActionPerformed
@@ -7076,7 +7073,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnCatatanObservasiRanapKebidananActionPerformed
@@ -7094,7 +7090,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnCatatanObservasiRanapPostPartumActionPerformed
@@ -7156,7 +7151,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnCatatanKeperawatanActionPerformed
@@ -7174,7 +7168,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPemantauanPEWSAnakActionPerformed
@@ -7243,7 +7236,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianLanjutanResikoJatuhDewasaActionPerformed
@@ -7261,7 +7253,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianLanjutanResikoJatuhAnakActionPerformed
@@ -7414,7 +7405,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnSkriningGiziLanjutActionPerformed
@@ -7432,7 +7422,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnKonselingFarmasiActionPerformed
@@ -7450,7 +7439,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnInformasiObatActionPerformed
@@ -7485,7 +7473,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnCatatanCekGDSActionPerformed
@@ -7605,7 +7592,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianPasienTerminalActionPerformed
@@ -7623,7 +7609,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnMonitoringReaksiTranfusiActionPerformed
@@ -7658,7 +7643,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianLanjutanResikoJatuhLansiaActionPerformed
@@ -7693,7 +7677,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPemantauanPEWSDewasaActionPerformed
@@ -7711,7 +7694,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianTambahanBunuhDiriActionPerformed
@@ -7729,7 +7711,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianTambahanPerilakuKekerasanActionPerformed
@@ -7747,7 +7728,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianTambahanMelarikanDiriActionPerformed
@@ -7765,7 +7745,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPemantauanMEOWSActionPerformed
@@ -7781,7 +7760,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             form.setLocationRelativeTo(internalFrame1);
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             form.emptTeks();
             form.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
@@ -7835,7 +7813,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianResikoDekubitusActionPerformed
@@ -7853,7 +7830,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnDokumentasiESWLActionPerformed
@@ -7905,7 +7881,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnFollowUpDBDActionPerformed
@@ -7923,7 +7898,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianLanjutanResikoJatuhNeonatusActionPerformed
@@ -7941,7 +7915,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianLanjutanResikoJatuhGeriatriActionPerformed
@@ -7959,7 +7932,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPemantauanEWSNeonatusActionPerformed
@@ -8011,7 +7983,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianLanjutanResikoJatuhPsikiatriActionPerformed
@@ -8029,7 +8000,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPenilaianLanjutanSkriningFungsionalActionPerformed
@@ -8065,7 +8035,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPengkajianRestrainActionPerformed
@@ -8083,7 +8052,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnCatatanPersalinanActionPerformed
@@ -8101,7 +8069,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnSkorAldrettePascaAnestesiActionPerformed
@@ -8119,7 +8086,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnSkorStewardPascaAnestesiActionPerformed
@@ -8161,7 +8127,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -8374,7 +8339,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -8445,7 +8409,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -8463,7 +8426,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -8481,7 +8443,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -8499,7 +8460,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }
@@ -8639,7 +8599,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }

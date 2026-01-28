@@ -3114,7 +3114,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     form.setLocationRelativeTo(internalFrame1);
                     form.emptTeks();
                     form.setNoRm(NoRawat,NoRM,Pasien);
-                    form.tampil();
                     form.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }

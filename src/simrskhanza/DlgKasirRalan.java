@@ -9264,7 +9264,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             aplikasi.setLocationRelativeTo(internalFrame1);
             aplikasi.isCek();
             aplikasi.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate(),tbKasirRalan.getValueAt(tbKasirRalan.getSelectedRow(),4).toString());
-            aplikasi.tampil();
             aplikasi.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -9282,7 +9281,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 aplikasi.setLocationRelativeTo(internalFrame1);
                 aplikasi.isCek();
                 aplikasi.setNoRm(tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),10).toString(),DTPCari1.getDate(),DTPCari2.getDate(),tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),4).toString());
-                aplikasi.tampil();
                 aplikasi.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -10462,7 +10460,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setLocationRelativeTo(internalFrame1);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }
@@ -11311,7 +11308,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -11675,7 +11671,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -11818,7 +11813,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -11841,7 +11835,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -11977,7 +11970,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12000,7 +11992,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12023,7 +12014,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12072,7 +12062,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12097,7 +12086,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     form.setVisible(true);
                     form.emptTeks();
                     form.setNoRm(TNoRw.getText(),TNoRMCari.getText(),TPasienCari.getText());
-                    form.tampil();
                 }
             }
         }
@@ -12165,7 +12153,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -12326,7 +12313,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     form.setVisible(true);
                     form.emptTeks();
                     form.setNoRm(TNoRwCari.getText(),TNoRMCari.getText(),TPasienCari.getText());
-                    form.tampil();
                 }
             }
         }
@@ -12349,7 +12335,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12392,7 +12377,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -12440,7 +12424,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12485,7 +12468,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12505,7 +12487,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -12531,7 +12512,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12554,7 +12534,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12577,7 +12556,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12664,7 +12642,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -12764,7 +12741,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     resume.setVisible(true);
                     resume.emptTeks();
                     resume.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                    resume.tampil();
                     this.setCursor(Cursor.getDefaultCursor());
                 }
             }
@@ -12788,7 +12764,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12833,7 +12808,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12856,7 +12830,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -12876,7 +12849,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -13050,7 +13022,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13073,7 +13044,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13182,7 +13152,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -13227,7 +13196,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.isCek();
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 form.setLocationRelativeTo(internalFrame1);
                 form.setVisible(true);
@@ -13253,7 +13221,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13276,7 +13243,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13299,7 +13265,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -13322,7 +13287,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14385,7 +14349,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14545,7 +14508,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14864,7 +14826,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -14956,7 +14917,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15204,7 +15164,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15273,7 +15232,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -15865,7 +15823,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }

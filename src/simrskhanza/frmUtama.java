@@ -9579,7 +9579,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         InventarisSirkulasi ktginventaris=new InventarisSirkulasi(this,false);
-        ktginventaris.tampil();
         ktginventaris.isCek();
         ktginventaris.emptTeks();
         ktginventaris.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
@@ -13012,7 +13011,6 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.isCek();
-        aplikasi.tampil();
         aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnInsidenKeselamatanPasienActionPerformed
@@ -16317,7 +16315,6 @@ public class frmUtama extends javax.swing.JFrame {
         form.isCek();
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
-        form.tampil();
         form.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
@@ -16390,7 +16387,6 @@ public class frmUtama extends javax.swing.JFrame {
         form.isCek();
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
-        form.tampil();
         form.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
@@ -16872,7 +16868,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMDeteksiDiniCorona form=new RMDeteksiDiniCorona(this,false);
         form.isCek();
-        form.tampil();
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
@@ -17522,7 +17517,6 @@ public class frmUtama extends javax.swing.JFrame {
         form.isCek();
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
-        form.tampil();
         form.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
@@ -19885,7 +19879,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPenilaianLanjutanRisikoJatuhDewasa aplikasi=new RMPenilaianLanjutanRisikoJatuhDewasa(this,false);
         aplikasi.isCek();
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -19898,7 +19891,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPenilaianLanjutanRisikoJatuhAnak aplikasi=new RMPenilaianLanjutanRisikoJatuhAnak(this,false);
         aplikasi.isCek();
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -19911,7 +19903,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPenilaianLanjutanRisikoJatuhLansia aplikasi=new RMPenilaianLanjutanRisikoJatuhLansia(this,false);
         aplikasi.isCek();
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -20902,7 +20893,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPenilaianRisikoJatuhNeonatus aplikasi=new RMPenilaianRisikoJatuhNeonatus(this,false);
         aplikasi.isCek();
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -20927,7 +20917,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPenilaianLanjutanRisikoJatuhGeriatri aplikasi=new RMPenilaianLanjutanRisikoJatuhGeriatri(this,false);
         aplikasi.isCek();
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -20952,7 +20941,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPemantauanEWSNeonatus aplikasi=new RMPemantauanEWSNeonatus(this,false);
         aplikasi.isCek();
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -21053,7 +21041,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPenilaianLanjutanRisikoJatuhPsikiatri aplikasi=new RMPenilaianLanjutanRisikoJatuhPsikiatri(this,false);
         aplikasi.isCek();
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -21066,7 +21053,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         RMPenilaianLanjutanSkriningFungsional aplikasi=new RMPenilaianLanjutanSkriningFungsional(this,false);
         aplikasi.isCek();
-        aplikasi.emptTeks();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -22777,7 +22763,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         InventarisSirkulasiCSSD ktginventaris=new InventarisSirkulasiCSSD(this,false);
-        ktginventaris.tampil();
         ktginventaris.isCek();
         ktginventaris.emptTeks();
         ktginventaris.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
@@ -23501,7 +23486,7 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void btnBPJSRekapPesertaPRBObatApotekActionPerformed(java.awt.event.ActionEvent evt) {
         isTutup();
         DlgHome.dispose();
@@ -27224,7 +27209,7 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnBPJSRiwayatPelayananObatApotek);
                 jmlmenu++;
             }
-            
+
             if(akses.getbpjs_rekap_peserta_prb_apotek()==true){
                 Panelmenu.add(btnBPJSRekapPesertaPRBObatApotek);
                 jmlmenu++;
@@ -33066,7 +33051,7 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnBPJSRiwayatPelayananObatApotek);
             jmlmenu++;
         }
-        
+
         if(akses.getbpjs_rekap_peserta_prb_apotek()==true){
             Panelmenu.add(btnBPJSRekapPesertaPRBObatApotek);
             jmlmenu++;
@@ -40031,12 +40016,12 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
         }
-        
+
         if(akses.getbpjs_rekap_peserta_prb_apotek()==true){
             if(btnBPJSRekapPesertaPRBObatApotek.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnBPJSRekapPesertaPRBObatApotek);
                 jmlmenu++;
-            } 
+            }
         }
 
         if(akses.getriwayat_perawatan_icare_bpjs()==true){
@@ -49862,18 +49847,18 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatPelayananObatApotek.setName("btnBPJSRiwayatPelayananObatApotek");
         btnBPJSRiwayatPelayananObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatPelayananObatApotek.addActionListener(this::btnBPJSRiwayatPelayananObatApotekActionPerformed);
-        
+
         btnBPJSRekapPesertaPRBObatApotek = new widget.ButtonBig();
         btnBPJSRekapPesertaPRBObatApotek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_apotek.png")));
         btnBPJSRekapPesertaPRBObatApotek.setText("Rekap Peserta PRB Apotek BPJS");
         btnBPJSRekapPesertaPRBObatApotek.setIconTextGap(0);
-        btnBPJSRekapPesertaPRBObatApotek.setName("btnBPJSRekapPesertaPRBObatApotek"); 
+        btnBPJSRekapPesertaPRBObatApotek.setName("btnBPJSRekapPesertaPRBObatApotek");
         btnBPJSRekapPesertaPRBObatApotek.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRekapPesertaPRBObatApotek.addActionListener(this::btnBPJSRekapPesertaPRBObatApotekActionPerformed);
 
         btnSkriningGiziKehamilan = new widget.ButtonBig();
         btnSkriningGiziKehamilan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/meal_4814223.png")));
-        btnSkriningGiziKehamilan.setText("Skrining Nutrisi Kehamilan");
+        btnSkriningGiziKehamilan.setText("Skrining Gizi Kehamilan");
         btnSkriningGiziKehamilan.setIconTextGap(0);
         btnSkriningGiziKehamilan.setName("btnSkriningGiziKehamilan");
         btnSkriningGiziKehamilan.setPreferredSize(new java.awt.Dimension(200, 90));
