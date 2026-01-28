@@ -7333,7 +7333,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnSkriningNutrisiDewasaActionPerformed
@@ -7369,7 +7368,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setVisible(true);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnSkriningNutrisiLansiaActionPerformed
@@ -7387,7 +7385,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             form.setLocationRelativeTo(internalFrame1);
             form.emptTeks();
             form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            form.tampil();
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnSkriningNutrisiAnakActionPerformed
