@@ -2362,36 +2362,4 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
         executor.shutdownNow();
         super.dispose();
     }
-
-    private void runBackground(Runnable task) {
-        if (ceksukses) return;
-        if (executor.isShutdown() || executor.isTerminated()) return;
-        if (!isDisplayable()) return;
-
-        ceksukses = true;
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        try {
-            executor.submit(() -> {
-                try {
-                    task.run();
-                } finally {
-                    ceksukses = false;
-                    SwingUtilities.invokeLater(() -> {
-                        if (isDisplayable()) {
-                            setCursor(Cursor.getDefaultCursor());
-                        }
-                    });
-                }
-            });
-        } catch (RejectedExecutionException ex) {
-            ceksukses = false;
-        }
-    }
-
-    @Override
-    public void dispose() {
-        executor.shutdownNow();
-        super.dispose();
-    }
 }

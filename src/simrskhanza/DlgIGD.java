@@ -9848,7 +9848,6 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 form.setVisible(true);
                 form.emptTeks();
                 form.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                form.tampil();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }
@@ -11820,7 +11819,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }
 
-    private void MnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenilaianPreOpActionPerformed
+    private void MnCatatanPengkajianPaskaOperasiActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -11979,7 +11978,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }
 
-    private void MnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+    private void MnPersetujuanPemeriksaanHIVActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -12025,7 +12024,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }
 
-    private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+    private void MnPernyataanMemilihDPJPActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -12071,7 +12070,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }
 
-    private void MnCheckListKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCheckListKriteriaMasukHCUActionPerformed
+    private void MnCheckListKriteriaMasukNICUActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -12093,7 +12092,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }
 
-    private void MnCheckListKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnCheckListKriteriaMasukHCUActionPerformed
+    private void MnCheckListKriteriaMasukPICUActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -12252,7 +12251,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         }
     }
 
-    private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningGiziBtnPrintActionPerformed
+    private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();

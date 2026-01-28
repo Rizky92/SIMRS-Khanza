@@ -44,7 +44,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPetugas;
-import widget.TextBox;
 
 
 /**
@@ -1771,7 +1770,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             "nip = ?, ttl_input = ?, ufg = ?, ttl_output = ?, balance = ?",
             "no_rawat = ? and tgl_perawatan = ? and jam_rawat = ?",
             TNoRw.getText(), Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), Minum.getText(), Infus.getText(), Tranfusi.getText(),
-            Priming.getText(), WashOut.getText(), Urine.getText(), Pendarahan.getText(), Muntah.getText(), Keterangan.getText(), NIP.getText(),
+            Priming.getText(), WashOut.getText(), Urine.getText(), Pendarahan.getText(), Muntah.getText(), Keterangan.getText(), KdPetugas.getText(),
             TtlInput.getText(), UFG.getText(), TtlOutput.getText(), Balance.getText(), tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(),
             tbObat.getValueAt(tbObat.getSelectedRow(), 6).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 7).toString()
         )) {
@@ -1796,8 +1795,8 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
             tbObat.setValueAt(TtlOutput.getText(), tbObat.getSelectedRow(), 18);
             tbObat.setValueAt(Balance.getText(), tbObat.getSelectedRow(), 18);
             tbObat.setValueAt(Keterangan.getText(), tbObat.getSelectedRow(), 20);
-            tbObat.setValueAt(NIP.getText(), tbObat.getSelectedRow(), 21);
-            tbObat.setValueAt(NamaPetugas.getText(), tbObat.getSelectedRow(), 22);
+            tbObat.setValueAt(KdPetugas.getText(), tbObat.getSelectedRow(), 21);
+            tbObat.setValueAt(NmPetugas.getText(), tbObat.getSelectedRow(), 22);
             emptTeks();
         }
     }
@@ -1817,14 +1816,14 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
     private void simpan() {
         if (Sequel.menyimpantfSmc("catatan_cairan_hemodialisa", null,
             TNoRw.getText(), Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), Minum.getText(), Infus.getText(), Tranfusi.getText(),
-            Priming.getText(), WashOut.getText(), Urine.getText(), Pendarahan.getText(), Muntah.getText(), Keterangan.getText(), NIP.getText(),
+            Priming.getText(), WashOut.getText(), Urine.getText(), Pendarahan.getText(), Muntah.getText(), Keterangan.getText(), KdPetugas.getText(),
             TtlInput.getText(), UFG.getText(), TtlOutput.getText(), Balance.getText()
         )) {
             tabMode.addRow(new Object[] {
                 TNoRw.getText(), TNoRM.getText(), TPasien.getText(), Umur.getText(), JK.getText(), TglLahir.getText(),
                 Valid.getTglSmc(Tanggal), Valid.getJamSmc(Jam, Menit, Detik), Minum.getText(), Infus.getText(),
                 Tranfusi.getText(), Priming.getText(), WashOut.getText(), TtlInput.getText(), Urine.getText(), Pendarahan.getText(), Muntah.getText(), UFG.getText(), TtlOutput.getText(),
-                Balance.getText(), Keterangan.getText(), NIP.getText(), NamaPetugas.getText()
+                Balance.getText(), Keterangan.getText(), KdPetugas.getText(), NmPetugas.getText()
             });
             LCount.setText(String.valueOf(tabMode.getRowCount()));
             emptTeks();

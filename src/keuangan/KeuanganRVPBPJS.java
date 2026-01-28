@@ -1117,8 +1117,6 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        kdptg.setText("");
-        nmptg.setText("");
         chkRalan.setSelected(true);
         chkRanap.setSelected(true);
         chkInternal.setSelected(true);
