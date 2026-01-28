@@ -142,6 +142,8 @@ ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_4`(`kddpjp
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_5`(`tglsep`, `no_sep`) USING BTREE;
 
+ALTER TABLE `bridging_surat_kontrol_bpjs` ADD COLUMN IF NOT EXISTS `keterangan` varchar(200) NULL DEFAULT NULL AFTER `Hamil`;
+
 CREATE TABLE IF NOT EXISTS `bridging_sep_manual`  (
   `no_sep` varchar(40) NOT NULL,
   `tgl_simpan` datetime NOT NULL,
