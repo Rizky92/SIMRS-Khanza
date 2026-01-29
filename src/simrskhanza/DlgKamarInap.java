@@ -45,6 +45,7 @@ import inventory.DlgPermintaanStokPasien;
 import inventory.DlgResepObat;
 import inventory.DlgResepPulang;
 import inventory.DlgReturJual;
+import inventory.DlgReturJualSMC;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Window;
@@ -8874,7 +8875,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                     }else{
                                         akses.setkdbangsal(bangsal);
                                     }
-                                    DlgReturJual returjual=new DlgReturJual(null,false);
+                                    // DlgReturJual returjual=new DlgReturJual(null,false);
+                                    DlgReturJualSMC returjual=new DlgReturJualSMC(null,false);
                                     returjual.emptTeks();
                                     returjual.isCek();
                                     returjual.setPasien(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),rs2.getString("no_rawat2"));
@@ -8915,7 +8917,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         }else{
                             akses.setkdbangsal(bangsal);
                         }
-                        DlgReturJual returjual=new DlgReturJual(null,false);
+                        // DlgReturJual returjual=new DlgReturJual(null,false);
+                        DlgReturJualSMC returjual=new DlgReturJualSMC(null,false);
                         returjual.emptTeks();
                         returjual.isCek();
                         returjual.setPasien(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),1).toString(),norawat.getText());
