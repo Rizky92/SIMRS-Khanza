@@ -29,8 +29,12 @@ public class WarnaTable extends DefaultTableCellRenderer {
             component.setForeground(new Color(255, 0, 0));
             component.setFont(component.getFont().deriveFont(Font.BOLD));
         } else {
-            component.setForeground(new Color(50, 50, 50));
             component.setFont(component.getFont().deriveFont(Font.PLAIN));
+            if (!table.isEnabled()) {
+                component.setForeground(new Color(180, 180, 180));
+            } else {
+                component.setForeground(new Color(50, 50, 50));
+            }
         }
 
         return component;

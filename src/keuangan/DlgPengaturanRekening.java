@@ -13,12 +13,14 @@ import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -484,10 +486,24 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
         TabRawat = new javax.swing.JTabbedPane();
         Scroll = new widget.ScrollPane();
         tbPengaturan = new widget.Table();
+        panelisi1 = new widget.panelisi();
+        panelGlass11 = new widget.panelisi();
+        ChkTarifRalan = new widget.CekBox();
+        panelGlass9 = new widget.panelisi();
+        jLabel6 = new widget.Label();
+        TCari = new widget.TextBox();
+        BtnCari = new widget.Button();
         Scroll1 = new widget.ScrollPane();
         tbPengaturanRalan = new widget.Table();
+        panelisi2 = new widget.panelisi();
         Scroll2 = new widget.ScrollPane();
         tbPengaturanRanap = new widget.Table();
+        panelGlass10 = new widget.panelisi();
+        jLabel7 = new widget.Label();
+        TCari1 = new widget.TextBox();
+        BtnCari1 = new widget.Button();
+        panelGlass12 = new widget.panelisi();
+        ChkTarifRanap = new widget.CekBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -586,6 +602,62 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
 
         TabRawat.addTab("Pengaturan Umum", Scroll);
 
+        panelisi1.setName("panelisi1"); // NOI18N
+        panelisi1.setLayout(new java.awt.BorderLayout());
+
+        panelGlass11.setName("panelGlass11"); // NOI18N
+        panelGlass11.setPreferredSize(new java.awt.Dimension(44, 44));
+        panelGlass11.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        ChkTarifRalan.setText("Aktifkan Pengaturan Rekening per Tarif Rawat Jalan");
+        ChkTarifRalan.setName("ChkTarifRalan"); // NOI18N
+        ChkTarifRalan.setPreferredSize(new java.awt.Dimension(276, 23));
+        ChkTarifRalan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkTarifRalanItemStateChanged(evt);
+            }
+        });
+        panelGlass11.add(ChkTarifRalan);
+
+        panelisi1.add(panelGlass11, java.awt.BorderLayout.PAGE_START);
+
+        panelGlass9.setName("panelGlass9"); // NOI18N
+        panelGlass9.setPreferredSize(new java.awt.Dimension(44, 44));
+        panelGlass9.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        jLabel6.setText("Key Word :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        jLabel6.setPreferredSize(new java.awt.Dimension(60, 23));
+        panelGlass9.add(jLabel6);
+
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(300, 23));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariKeyPressed(evt);
+            }
+        });
+        panelGlass9.add(TCari);
+
+        BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('7');
+        BtnCari.setToolTipText("Alt+7");
+        BtnCari.setName("BtnCari"); // NOI18N
+        BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCariActionPerformed(evt);
+            }
+        });
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCariKeyPressed(evt);
+            }
+        });
+        panelGlass9.add(BtnCari);
+
+        panelisi1.add(panelGlass9, java.awt.BorderLayout.PAGE_END);
+
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
@@ -604,7 +676,12 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
         });
         Scroll1.setViewportView(tbPengaturanRalan);
 
-        TabRawat.addTab("Tarif Ralan", Scroll1);
+        panelisi1.add(Scroll1, java.awt.BorderLayout.CENTER);
+
+        TabRawat.addTab("Tarif Ralan", panelisi1);
+
+        panelisi2.setName("panelisi2"); // NOI18N
+        panelisi2.setLayout(new java.awt.BorderLayout());
 
         Scroll2.setName("Scroll2"); // NOI18N
         Scroll2.setOpaque(true);
@@ -619,7 +696,57 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
         });
         Scroll2.setViewportView(tbPengaturanRanap);
 
-        TabRawat.addTab("Tarif Ranap", Scroll2);
+        panelisi2.add(Scroll2, java.awt.BorderLayout.CENTER);
+
+        panelGlass10.setName("panelGlass10"); // NOI18N
+        panelGlass10.setPreferredSize(new java.awt.Dimension(44, 44));
+        panelGlass10.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        jLabel7.setText("Key Word :");
+        jLabel7.setName("jLabel7"); // NOI18N
+        jLabel7.setPreferredSize(new java.awt.Dimension(60, 23));
+        panelGlass10.add(jLabel7);
+
+        TCari1.setName("TCari1"); // NOI18N
+        TCari1.setPreferredSize(new java.awt.Dimension(300, 23));
+        TCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCari1KeyPressed(evt);
+            }
+        });
+        panelGlass10.add(TCari1);
+
+        BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari1.setMnemonic('7');
+        BtnCari1.setToolTipText("Alt+7");
+        BtnCari1.setName("BtnCari1"); // NOI18N
+        BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCari1ActionPerformed(evt);
+            }
+        });
+        BtnCari1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCari1KeyPressed(evt);
+            }
+        });
+        panelGlass10.add(BtnCari1);
+
+        panelisi2.add(panelGlass10, java.awt.BorderLayout.PAGE_END);
+
+        panelGlass12.setName("panelGlass12"); // NOI18N
+        panelGlass12.setPreferredSize(new java.awt.Dimension(44, 44));
+        panelGlass12.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        ChkTarifRanap.setText("Aktifkan Pengaturan Rekening per Tarif Rawat Inap");
+        ChkTarifRanap.setName("ChkTarifRanap"); // NOI18N
+        ChkTarifRanap.setPreferredSize(new java.awt.Dimension(276, 23));
+        panelGlass12.add(ChkTarifRanap);
+
+        panelisi2.add(panelGlass12, java.awt.BorderLayout.PAGE_START);
+
+        TabRawat.addTab("Tarif Ranap", panelisi2);
 
         internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
 
@@ -1008,7 +1135,7 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
                     });
                 }
             }
-            runBackground(() ->tampilralan());
+            tampilRalanSmc();
         }else if(TabRawat.getSelectedIndex()==2){
             for(i=0;i<tbPengaturanRanap.getRowCount();i++){
                 if((!tbPengaturanRanap.getValueAt(i,6).equals(""))&&(!tbPengaturanRanap.getValueAt(i,7).equals(""))&&(!tbPengaturanRanap.getValueAt(i,8).equals(""))&&
@@ -1077,7 +1204,7 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
         if(TabRawat.getSelectedIndex()==0){
             runBackground(() ->tampil());
         }else if(TabRawat.getSelectedIndex()==1){
-            runBackground(() ->tampilralan());
+            tampilRalanSmc();
         }else if(TabRawat.getSelectedIndex()==2){
             runBackground(() ->tampilranap());
         }
@@ -1208,7 +1335,7 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
                             tbPengaturanRalan.getValueAt(barisdicopy,23).toString(),tbPengaturanRalan.getValueAt(barisdicopy,25).toString(),
                             tbPengaturanRalan.getValueAt(barisdicopy,27).toString(),tbPengaturanRalan.getValueAt(barisdicopy,29).toString()
                         });
-                        runBackground(() ->tampilralan());
+                        tampilRalanSmc();
                         barisdicopy=-1;
                         copyakun="";
                     }else{
@@ -1219,6 +1346,58 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tbPengaturanRalanMouseClicked
+
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
+    }//GEN-LAST:event_TCariKeyPressed
+
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if (ChkTarifRalan.isSelected()) {
+            tampilRalanSmc();
+        }
+    }//GEN-LAST:event_BtnCariActionPerformed
+
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnCariActionPerformed(null);
+        } else {
+            Valid.pindahSmc(evt, TCari, BtnSimpan);
+        }
+    }//GEN-LAST:event_BtnCariKeyPressed
+
+    private void TCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCari1KeyPressed
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            BtnCariActionPerformed(null);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            BtnCari.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            BtnKeluar.requestFocus();
+        }
+    }//GEN-LAST:event_TCari1KeyPressed
+
+    private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
+        
+    }//GEN-LAST:event_BtnCari1ActionPerformed
+
+    private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
+        
+    }//GEN-LAST:event_BtnCari1KeyPressed
+
+    private void ChkTarifRalanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkTarifRalanItemStateChanged
+        if (ChkTarifRalan.isSelected()) {
+            tbPengaturanRalan.setEnabled(true);
+        } else {
+            tbPengaturanRalan.clearSelection();
+            tbPengaturanRalan.setEnabled(false);
+        }
+        tabMode.fireTableDataChanged();
+    }//GEN-LAST:event_ChkTarifRalanItemStateChanged
 
     /**
     * @param args the command line arguments
@@ -1237,16 +1416,30 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.Button BtnCari;
+    private widget.Button BtnCari1;
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
+    private widget.CekBox ChkTarifRalan;
+    private widget.CekBox ChkTarifRanap;
     private javax.swing.JMenuItem MnCopyRekening;
     private widget.ScrollPane Scroll;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
+    private widget.TextBox TCari;
+    private widget.TextBox TCari1;
     private javax.swing.JTabbedPane TabRawat;
     private widget.InternalFrame internalFrame1;
+    private widget.Label jLabel6;
+    private widget.Label jLabel7;
     private javax.swing.JPopupMenu jPopupMenu1;
+    private widget.panelisi panelGlass10;
+    private widget.panelisi panelGlass11;
+    private widget.panelisi panelGlass12;
     private widget.panelisi panelGlass8;
+    private widget.panelisi panelGlass9;
+    private widget.panelisi panelisi1;
+    private widget.panelisi panelisi2;
     private widget.Table tbPengaturan;
     private widget.Table tbPengaturanRalan;
     private widget.Table tbPengaturanRanap;
@@ -2891,6 +3084,81 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpengaturan_rekening());
+    }
+
+    private void tampilRalanSmc() {
+        Valid.tabelKosongSmc(tabModeRalan);
+        if (!ceksukses) {
+            ceksukses = true;
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            new SwingWorker<Void, Object[]>() {
+                @Override
+                protected Void doInBackground() {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "with matrik as (select m.kd_jenis_prw, m.pendapatan_tindakan, rpt.nm_rek as nm_rek_pendapatan_tindakan, m.beban_jasa_dokter, rbjmd.nm_rek as nm_rek_beban_jasa_dokter, " +
+                        "m.utang_jasa_dokter, rujmd.nm_rek as nm_rek_utang_jasa_dokter, m.beban_jasa_paramedis, rbjmp.nm_rek as nm_rek_beban_jasa_paramedis, m.utang_jasa_paramedis, " +
+                        "rujmp.nm_rek as nm_rek_utang_jasa_paramedis, m.beban_kso, rbk.nm_rek as nm_rek_beban_kso, m.utang_kso, ruk.nm_rek as nm_rek_utang_kso, m.hpp_persediaan, " +
+                        "rhpp.nm_rek as nm_rek_hpp_persediaan, m.persediaan_bhp, rpbhp.nm_rek as nm_rek_persediaan_bhp, m.beban_jasa_sarana, rbjs.nm_rek as nm_rek_beban_jasa_sarana, " +
+                        "m.utang_jasa_sarana, rujs.nm_rek as nm_rek_utang_jasa_sarana, m.beban_menejemen, rbm.nm_rek as nm_rek_beban_menejemen, m.utang_menejemen, rum.nm_rek as " +
+                        "nm_rek_utang_menejemen from matrik_akun_jns_perawatan as m left join rekening as rpt on m.pendapatan_tindakan = rpt.kd_rek left join rekening as rbjmd on " +
+                        "m.beban_jasa_dokter = rbjmd.kd_rek left join rekening as rujmd on m.utang_jasa_dokter = rujmd.kd_rek left join rekening as rbjmp on " +
+                        "m.beban_jasa_paramedis = rbjmp.kd_rek left join rekening as rujmp on m.utang_jasa_paramedis = rujmp.kd_rek left join rekening as rbk on m.beban_kso = rbk.kd_rek " +
+                        "left join rekening as ruk on m.utang_kso = ruk.kd_rek left join rekening as rhpp on m.hpp_persediaan = rhpp.kd_rek left join rekening as rpbhp on " +
+                        "m.persediaan_bhp = rpbhp.kd_rek left join rekening as rbjs on m.beban_jasa_sarana = rbjs.kd_rek left join rekening as rujs on m.utang_jasa_sarana = rujs.kd_rek " +
+                        "left join rekening as rbm on m.beban_menejemen = rbm.kd_rek left join rekening as rum on m.utang_menejemen = rum.kd_rek group by m.kd_jenis_prw) select " +
+                        "jns_perawatan.kd_jenis_prw, jns_perawatan.nm_perawatan, kategori_perawatan.nm_kategori, penjab.png_jawab, poliklinik.nm_poli, matrik.pendapatan_tindakan, " +
+                        "matrik.nm_rek_pendapatan_tindakan, matrik.beban_jasa_dokter, matrik.nm_rek_beban_jasa_dokter, matrik.utang_jasa_dokter, matrik.nm_rek_utang_jasa_dokter, " +
+                        "matrik.beban_jasa_paramedis, matrik.nm_rek_beban_jasa_paramedis, matrik.utang_jasa_paramedis, matrik.nm_rek_utang_jasa_paramedis, matrik.beban_kso, " +
+                        "matrik.nm_rek_beban_kso, matrik.utang_kso, matrik.nm_rek_utang_kso, matrik.hpp_persediaan, matrik.nm_rek_hpp_persediaan, matrik.persediaan_bhp, " +
+                        "matrik.nm_rek_persediaan_bhp, matrik.beban_jasa_sarana, matrik.nm_rek_beban_jasa_sarana, matrik.utang_jasa_sarana, matrik.nm_rek_utang_jasa_sarana, " +
+                        "matrik.beban_menejemen, matrik.nm_rek_beban_menejemen, matrik.utang_menejemen, matrik.nm_rek_utang_menejemen from jns_perawatan inner join " +
+                        "kategori_perawatan on jns_perawatan.kd_kategori = kategori_perawatan.kd_kategori inner join penjab on penjab.kd_pj = jns_perawatan.kd_pj " +
+                        "inner join poliklinik on poliklinik.kd_poli = jns_perawatan.kd_poli left join matrik on jns_perawatan.kd_jenis_prw = matrik.kd_jenis_prw " +
+                        "where jns_perawatan.status = '1' " + (TCari.getText().isBlank() ? "" : "and (jns_perawatan.kd_jenis_prw like ? or jns_perawatan.nm_perawatan like ? " +
+                        "or kategori_perawatan.nm_kategori like ? or penjab.png_jawab like ? or poliklinik.nm_poli like ?) ") + "order by jns_perawatan.kd_jenis_prw"
+                    )) {
+                        int p = 0;
+                        if (!TCari.getText().isBlank()) {
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getString("nm_kategori"), rs.getString("png_jawab"), rs.getString("nm_poli"),
+                                    rs.getString("pendapatan_tindakan"), rs.getString("nm_rek_pendapatan_tindakan"), rs.getString("beban_jasa_dokter"), rs.getString("nm_rek_beban_jasa_dokter"),
+                                    rs.getString("utang_jasa_dokter"), rs.getString("nm_rek_utang_jasa_dokter"), rs.getString("beban_jasa_paramedis"), rs.getString("nm_rek_beban_jasa_paramedis"),
+                                    rs.getString("utang_jasa_paramedis"), rs.getString("nm_rek_utang_jasa_paramedis"), rs.getString("beban_kso"), rs.getString("nm_rek_beban_kso"),
+                                    rs.getString("utang_kso"), rs.getString("nm_rek_utang_kso"), rs.getString("hpp_persediaan"), rs.getString("nm_rek_hpp_persediaan"), rs.getString("persediaan_bhp"),
+                                    rs.getString("nm_rek_persediaan_bhp"), rs.getString("beban_jasa_sarana"), rs.getString("nm_rek_beban_jasa_sarana"), rs.getString("utang_jasa_sarana"),
+                                    rs.getString("nm_rek_utang_jasa_sarana"), rs.getString("beban_menejemen"), rs.getString("nm_rek_beban_menejemen"), rs.getString("utang_menejemen"),
+                                    rs.getString("nm_rek_utang_menejemen"),
+                                });
+                            }
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabModeRalan::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    ceksukses = false;
+                    setCursor(Cursor.getDefaultCursor());
+                    tabModeRalan.fireTableDataChanged();
+                }
+            }.execute();
+        }
     }
 
     private void tampilralan() {
