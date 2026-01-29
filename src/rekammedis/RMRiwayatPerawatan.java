@@ -5888,7 +5888,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                                        "<td valign='top'></td>").append(
                                                                        "<td valign='top'></td>").append(
                                                                        "<td valign='top'>").append(rs3.getString("Pemeriksaan")).append("</td>").append(
-                                                                       "<td valign='top' style='color:#0000FF'>").append(rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append(" ").append(rs3.getString("satuan")).append("</td>").append(
+                                                                       "<td valign='top' style='background-color:#0000FF; color: #FFFFFF'>").append(rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append(" ").append(rs3.getString("satuan")).append("</td>").append(
                                                                        "<td valign='top'>").append(rs3.getString("nilai_rujukan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
                                                                        "<td valign='top' align='right'>").append(Valid.SetAngka(rs3.getDouble("biaya_item"))).append("</td>").append(
                                                                     "</tr>");
@@ -5902,7 +5902,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                                        "<td valign='top'></td>").append(
                                                                        "<td valign='top'></td>").append(
                                                                        "<td valign='top'>").append(rs3.getString("Pemeriksaan")).append("</td>").append(
-                                                                       "<td valign='top' style='color:#FF0000'>").append(rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append(" ").append(rs3.getString("satuan")).append("</td>").append(
+                                                                       "<td valign='top' style='background-color:#FF0000; color: #FFFFFF'>").append(rs3.getString("nilai").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append(" ").append(rs3.getString("satuan")).append("</td>").append(
                                                                        "<td valign='top'>").append(rs3.getString("nilai_rujukan").replaceAll("<","&lt;").replaceAll(">","&gt;").replaceAll("(\r\n|\r|\n|\n\r)","<br>")).append("</td>").append(
                                                                        "<td valign='top' align='right'>").append(Valid.SetAngka(rs3.getDouble("biaya_item"))).append("</td>").append(
                                                                     "</tr>");
@@ -7780,7 +7780,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'>" + rs3.getString("Pemeriksaan") + "</td>"
-                                                                + "<td valign='top' style='color:#0000FF'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
+                                                                + "<td valign='top' style='background-color: #0000FF; color: #FFFFFF'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
                                                                 + "<td valign='top'>" + rs3.getString("nilai_rujukan").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + "</td>"
                                                                 + "<td valign='top' align='right'>" + Valid.SetAngka(rs3.getDouble("biaya_item")) + "</td>"
                                                                 + "</tr>");
@@ -7794,7 +7794,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'></td>"
                                                                 + "<td valign='top'>" + rs3.getString("Pemeriksaan") + "</td>"
-                                                                + "<td valign='top' style='color:#FF0000'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
+                                                                + "<td valign='top' style='background-color: #FF0000; color: #FFFFFF'>" + rs3.getString("nilai").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + " " + rs3.getString("satuan") + "</td>"
                                                                 + "<td valign='top'>" + rs3.getString("nilai_rujukan").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll("(\r\n|\r|\n|\n\r)", "<br>") + "</td>"
                                                                 + "<td valign='top' align='right'>" + Valid.SetAngka(rs3.getDouble("biaya_item")) + "</td>"
                                                                 + "</tr>");
@@ -17827,7 +17827,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     }
                 }
             }
-            
+
             //menampilkan skrining gizi kehamilan
             if(chkSkriningGiziKehamilan.isSelected()==true){
                 try {
@@ -17904,7 +17904,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>"); 
+                                        append("</tr>");
                         }while(rs2.next());
                         htmlContent.append("</table>").
                                     append("</td>").
@@ -38266,7 +38266,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
