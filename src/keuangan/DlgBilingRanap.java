@@ -592,7 +592,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             }
         }
         tbApotek.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         try {
             psrekening=koneksi.prepareStatement(
                     "select set_nota.cetaknotasimpanranap,set_nota.centangdokterranap,set_nota.rinciandokterranap,"+
@@ -3594,6 +3594,8 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         }else if(i==0){
             if (Math.round(sekarang) != Math.round(tagihanppn)) {
                 JOptionPane.showMessageDialog(null, "Terjadi perubahan total tagihan\nSilahkan cek kembali data tagihan pasien...!!!", "Gagal", JOptionPane.WARNING_MESSAGE);
+            } else if (this.belumDischargeRanap()) {
+                JOptionPane.showMessageDialog(null, "Masih ada kamar yang belum dilakukan discharge..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             } else {
                 if(piutang<=0){
                     if(kekurangan<0){
@@ -7724,5 +7726,12 @@ public class DlgBilingRanap extends javax.swing.JDialog {
         }
 
         return -1;
+    }
+
+    private boolean belumDischargeRanap() {
+        if (!koneksiDB.VALIDASIPULANGRANAPSEBELUMCLOSEBILLING()) {
+            return false;
+        }
+        return Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.no_rawat = ? and kamar_inap.tgl_keluar = '0000-00-00'", TNoRw.getText());
     }
 }
