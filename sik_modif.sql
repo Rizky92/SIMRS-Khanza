@@ -212,7 +212,9 @@ CREATE TABLE IF NOT EXISTS `detail_pemberian_obat_selanjutnya`  (
 
 ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double NULL DEFAULT NULL AFTER `sisapiutang`;
 
-ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(700) NOT NULL AFTER `id_template`;
+ALTER TABLE `detail_periksa_lab` DROP INDEX IF EXISTS `nilai`;
+
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` text NOT NULL DEFAULT '' AFTER `id_template`;
 
 ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(700) NOT NULL AFTER `nilai`;
 
@@ -422,6 +424,10 @@ ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_pasien` varchar(60) NULL DEFAUL
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `tmp_lahir` varchar(30) NULL DEFAULT NULL AFTER `jk`;
 
 ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_ibu` varchar(60) NOT NULL AFTER `tgl_lahir`;
+
+ALTER TABLE `pasien` ADD INDEX IF NOT EXISTS `tgl_daftar`(`tgl_daftar`) USING BTREE;
+
+ALTER TABLE `pasien` ADD INDEX IF NOT EXISTS `tgl_lahir`(`tgl_lahir`) USING BTREE;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 
@@ -1495,6 +1501,8 @@ ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `pemberlakuan_2x24_jam` enum('Yes
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `sistem_import_koding` enum('','IDRG','INA-CBG') NULL DEFAULT NULL AFTER `pemberlakuan_2x24_jam`;
 
 ALTER TABLE `setting` ADD COLUMN IF NOT EXISTS `kode_ppkapotek` varchar(15) NULL DEFAULT NULL AFTER `sistem_import_koding`;
+
+ALTER TABLE `spesialis` MODIFY COLUMN IF EXISTS `nm_sps` varchar(60) NULL DEFAULT NULL AFTER `kd_sps`;
 
 ALTER TABLE `surat_keterangan_rawat_inap` ADD COLUMN IF NOT EXISTS `kd_dokter` varchar(20) NOT NULL AFTER `tanggalakhir`;
 

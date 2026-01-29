@@ -57,6 +57,7 @@ import java.time.ZoneId;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringJoiner;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
@@ -509,8 +510,8 @@ public class DlgPasien extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
             ps=koneksi.prepareStatement("select * from set_alamat_pasien");
             try {
@@ -833,6 +834,11 @@ public class DlgPasien extends javax.swing.JDialog {
         jLabel11 = new widget.Label();
         Carialamat = new widget.TextBox();
         jSeparator5 = new javax.swing.JSeparator();
+        ChkTgl1 = new widget.CekBox();
+        CmbTgl = new widget.ComboBox();
+        Tgl1 = new widget.Tanggal();
+        ChkTgl2 = new widget.CekBox();
+        Tgl2 = new widget.Tanggal();
         jLabel7 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
@@ -2354,7 +2360,7 @@ public class DlgPasien extends javax.swing.JDialog {
         panelGlass9.add(jLabel11);
 
         Carialamat.setName("Carialamat"); // NOI18N
-        Carialamat.setPreferredSize(new java.awt.Dimension(335, 23));
+        Carialamat.setPreferredSize(new java.awt.Dimension(280, 23));
         Carialamat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 CarialamatKeyPressed(evt);
@@ -2369,6 +2375,45 @@ public class DlgPasien extends javax.swing.JDialog {
         jSeparator5.setOpaque(true);
         jSeparator5.setPreferredSize(new java.awt.Dimension(1, 23));
         panelGlass9.add(jSeparator5);
+
+        ChkTgl1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkTgl1.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        ChkTgl1.setName("ChkTgl1"); // NOI18N
+        ChkTgl1.setPreferredSize(new java.awt.Dimension(28, 23));
+        ChkTgl1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkTgl1ItemStateChanged(evt);
+            }
+        });
+        panelGlass9.add(ChkTgl1);
+
+        CmbTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tgl. Lahir :", "Tgl. Daftar :" }));
+        CmbTgl.setEnabled(false);
+        CmbTgl.setName("CmbTgl"); // NOI18N
+        CmbTgl.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass9.add(CmbTgl);
+
+        Tgl1.setDisplayFormat("dd-MM-yyyy");
+        Tgl1.setEnabled(false);
+        Tgl1.setName("Tgl1"); // NOI18N
+        Tgl1.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass9.add(Tgl1);
+
+        ChkTgl2.setText("s.d.");
+        ChkTgl2.setName("ChkTgl2"); // NOI18N
+        ChkTgl2.setPreferredSize(new java.awt.Dimension(44, 23));
+        ChkTgl2.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkTgl2ItemStateChanged(evt);
+            }
+        });
+        panelGlass9.add(ChkTgl2);
+
+        Tgl2.setDisplayFormat("dd-MM-yyyy");
+        Tgl2.setEnabled(false);
+        Tgl2.setName("Tgl2"); // NOI18N
+        Tgl2.setPreferredSize(new java.awt.Dimension(90, 23));
+        panelGlass9.add(Tgl2);
 
         jLabel7.setText("Key Word :");
         jLabel7.setName("jLabel7"); // NOI18N
@@ -2401,9 +2446,9 @@ public class DlgPasien extends javax.swing.JDialog {
         });
         panelGlass9.add(BtnCari);
 
-        jLabel6.setText("Limit Data :");
+        jLabel6.setText("Limit :");
         jLabel6.setName("jLabel6"); // NOI18N
-        jLabel6.setPreferredSize(new java.awt.Dimension(70, 23));
+        jLabel6.setPreferredSize(new java.awt.Dimension(40, 23));
         panelGlass9.add(jLabel6);
 
         cmbHlm.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "100", "200", "300", "400", "500", "1000", "Semua" }));
@@ -2502,7 +2547,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(jLabel13);
         jLabel13.setBounds(4, 102, 95, 23);
 
-        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-06-2025" }));
+        DTPLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-01-2026" }));
         DTPLahir.setDisplayFormat("dd-MM-yyyy");
         DTPLahir.setName("DTPLahir"); // NOI18N
         DTPLahir.setOpaque(false);
@@ -2631,7 +2676,7 @@ public class DlgPasien extends javax.swing.JDialog {
         FormInput.add(TKtp);
         TKtp.setBounds(743, 132, 130, 23);
 
-        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "04-06-2025" }));
+        DTPDaftar.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-01-2026" }));
         DTPDaftar.setDisplayFormat("dd-MM-yyyy");
         DTPDaftar.setName("DTPDaftar"); // NOI18N
         DTPDaftar.setOpaque(false);
@@ -4757,7 +4802,7 @@ public class DlgPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    pilihantampil();
+        pilihantampil();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -4769,11 +4814,11 @@ public class DlgPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void TTmpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TTmpKeyPressed
-   Valid.pindah(evt,CMbGd,DTPLahir);
+        Valid.pindah(evt,CMbGd,DTPLahir);
     }//GEN-LAST:event_TTmpKeyPressed
 
     private void CmbJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_CmbJkKeyPressed
-   Valid.pindah(evt,TNm,CMbGd);
+        Valid.pindah(evt,TNm,CMbGd);
     }//GEN-LAST:event_CmbJkKeyPressed
 
     private void TNmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNmKeyPressed
@@ -5304,23 +5349,23 @@ public class DlgPasien extends javax.swing.JDialog {
                 kelurahanref.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(kelurahanref.getTable().getSelectedRow()!= -1){   
+                        if(kelurahanref.getTable().getSelectedRow()!= -1){
                             KdKel.setText(kelurahanref.getTable().getValueAt(kelurahanref.getTable().getSelectedRow(),1).toString());
                             kdkel="";
                             Kelurahan.setText(kelurahanref.getTable().getValueAt(kelurahanref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                        } 
+                        }
                         kelurahanref=null;
                     }
-                }); 
+                });
 
                 kelurahanref.getTable().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             kelurahanref.dispose();
-                        } 
+                        }
                     }
-                });   
+                });
                 kelurahanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 kelurahanref.setLocationRelativeTo(internalFrame1);
             }
@@ -5328,11 +5373,11 @@ public class DlgPasien extends javax.swing.JDialog {
             if (kelurahanref == null) return;
             if (!kelurahanref.isVisible()) {
                 kelurahanref.setPropinsi(KdKec.getText(),Kecamatan.getText());
-            }  
+            }
             if (kelurahanref.isVisible()) {
                 kelurahanref.toFront();
                 return;
-            }    
+            }
             kelurahanref.setVisible(true);
         }
    }
@@ -5366,23 +5411,23 @@ public class DlgPasien extends javax.swing.JDialog {
                 kecamatanref.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(kecamatanref.getTable().getSelectedRow()!= -1){   
+                        if(kecamatanref.getTable().getSelectedRow()!= -1){
                             KdKec.setText(kecamatanref.getTable().getValueAt(kecamatanref.getTable().getSelectedRow(),1).toString());
                             kdkec="";
                             Kecamatan.setText(kecamatanref.getTable().getValueAt(kecamatanref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                        } 
+                        }
                         kecamatanref=null;
                     }
-                }); 
+                });
 
                 kecamatanref.getTable().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             kecamatanref.dispose();
-                        } 
+                        }
                     }
-                });   
+                });
                 kecamatanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 kecamatanref.setLocationRelativeTo(internalFrame1);
             }
@@ -5390,11 +5435,11 @@ public class DlgPasien extends javax.swing.JDialog {
             if (kecamatanref == null) return;
             if (!kecamatanref.isVisible()) {
                 kecamatanref.setPropinsi(KdKab.getText(),Kabupaten.getText());
-            }  
+            }
             if (kecamatanref.isVisible()) {
                 kecamatanref.toFront();
                 return;
-            }    
+            }
             kecamatanref.setVisible(true);
         }
    }
@@ -5428,23 +5473,23 @@ public class DlgPasien extends javax.swing.JDialog {
                 kabupatenref.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(kabupatenref.getTable().getSelectedRow()!= -1){   
+                        if(kabupatenref.getTable().getSelectedRow()!= -1){
                             KdKab.setText(kabupatenref.getTable().getValueAt(kabupatenref.getTable().getSelectedRow(),1).toString());
                             kdkab="";
                             Kabupaten.setText(kabupatenref.getTable().getValueAt(kabupatenref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                        } 
+                        }
                         kabupatenref=null;
                     }
-                }); 
+                });
 
                 kabupatenref.getTable().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             kabupatenref.dispose();
-                        } 
+                        }
                     }
-                });   
+                });
                 kabupatenref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 kabupatenref.setLocationRelativeTo(internalFrame1);
             }
@@ -5452,11 +5497,11 @@ public class DlgPasien extends javax.swing.JDialog {
             if (kabupatenref == null) return;
             if (!kabupatenref.isVisible()) {
                 kabupatenref.setPropinsi(KdProp.getText(),Propinsi.getText());
-            }  
+            }
             if (kabupatenref.isVisible()) {
                 kabupatenref.toFront();
                 return;
-            }    
+            }
             kabupatenref.setVisible(true);
         }
    }
@@ -5473,20 +5518,20 @@ public class DlgPasien extends javax.swing.JDialog {
                         Kelurahan.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
                         kdkel=kel.getTable().getValueAt(kel.getTable().getSelectedRow(),1).toString();
                         Kelurahan.requestFocus();
-                    } 
+                    }
                     kel=null;
                 }
             });
         }
-        
+
         if (kel == null) return;
         if (!kel.isVisible()) {
             kel.emptTeks();
-        }  
+        }
         if (kel.isVisible()) {
             kel.toFront();
             return;
-        }    
+        }
         kel.setVisible(true);
     }//GEN-LAST:event_BtnKelurahanActionPerformed
 
@@ -5501,20 +5546,20 @@ public class DlgPasien extends javax.swing.JDialog {
                         Kecamatan.setText(kec.getTable().getValueAt(kec.getTable().getSelectedRow(),0).toString());
                         kdkec=kec.getTable().getValueAt(kec.getTable().getSelectedRow(),1).toString();
                         Kecamatan.requestFocus();
-                    } 
+                    }
                     kec=null;
                 }
             });
         }
-        
+
         if (kec == null) return;
         if (!kec.isVisible()) {
             kec.emptTeks();
-        }  
+        }
         if (kec.isVisible()) {
             kec.toFront();
             return;
-        }    
+        }
         kec.setVisible(true);
     }//GEN-LAST:event_BtnKecamatanActionPerformed
 
@@ -5529,7 +5574,7 @@ public class DlgPasien extends javax.swing.JDialog {
                         Kabupaten.setText(kab.getTable().getValueAt(kab.getTable().getSelectedRow(),0).toString());
                         kdkab=kab.getTable().getValueAt(kab.getTable().getSelectedRow(),1).toString();
                         Kabupaten.requestFocus();
-                    } 
+                    }
                     kab=null;
                 }
             });
@@ -5537,11 +5582,11 @@ public class DlgPasien extends javax.swing.JDialog {
         if (kab == null) return;
         if (!kab.isVisible()) {
             kab.emptTeks();
-        }  
+        }
         if (kab.isVisible()) {
             kab.toFront();
             return;
-        }    
+        }
         kab.setVisible(true);
     }//GEN-LAST:event_BtnKabupatenActionPerformed
 
@@ -5630,20 +5675,20 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(kel.getTable().getSelectedRow()!= -1){
                         Kelurahan2.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
                         Kelurahan2.requestFocus();
-                    } 
+                    }
                     kel=null;
                 }
             });
         }
-        
+
         if (kel == null) return;
         if (!kel.isVisible()) {
             kel.emptTeks();
-        }  
+        }
         if (kel.isVisible()) {
             kel.toFront();
             return;
-        }    
+        }
         kel.setVisible(true);
    }
     }//GEN-LAST:event_BtnSeek8ActionPerformed
@@ -5661,20 +5706,20 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(kec.getTable().getSelectedRow()!= -1){
                         Kecamatan2.setText(kec.getTable().getValueAt(kec.getTable().getSelectedRow(),0).toString());
                         Kecamatan2.requestFocus();
-                    } 
+                    }
                     kec=null;
                 }
             });
         }
-        
+
         if (kec == null) return;
         if (!kec.isVisible()) {
             kec.emptTeks();
-        }  
+        }
         if (kec.isVisible()) {
             kec.toFront();
             return;
-        }    
+        }
         kec.setVisible(true);
    }
     }//GEN-LAST:event_BtnSeek9ActionPerformed
@@ -5692,20 +5737,20 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(kab.getTable().getSelectedRow()!= -1){
                         Kabupaten2.setText(kab.getTable().getValueAt(kab.getTable().getSelectedRow(),0).toString());
                         Kabupaten2.requestFocus();
-                    } 
+                    }
                     kab=null;
                 }
             });
         }
-        
+
         if (kab == null) return;
         if (!kab.isVisible()) {
             kab.emptTeks();
-        }  
+        }
         if (kab.isVisible()) {
             kab.toFront();
             return;
-        }    
+        }
         kab.setVisible(true);
     }
     }//GEN-LAST:event_BtnSeek10ActionPerformed
@@ -6009,23 +6054,23 @@ public class DlgPasien extends javax.swing.JDialog {
                     kecamatanref.addWindowListener(new WindowAdapter() {
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(kecamatanref.getTable().getSelectedRow()!= -1){   
+                            if(kecamatanref.getTable().getSelectedRow()!= -1){
                                 KdKec.setText(kecamatanref.getTable().getValueAt(kecamatanref.getTable().getSelectedRow(),1).toString());
                                 kdkec="";
                                 KecamatanPj.setText(kecamatanref.getTable().getValueAt(kecamatanref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                            } 
+                            }
                             kecamatanref=null;
                         }
-                    }); 
+                    });
 
                     kecamatanref.getTable().addKeyListener(new KeyAdapter() {
                         @Override
                         public void keyPressed(KeyEvent e) {
                             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                                 kecamatanref.dispose();
-                            } 
+                            }
                         }
-                    });   
+                    });
                     kecamatanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     kecamatanref.setLocationRelativeTo(internalFrame1);
                 }
@@ -6033,11 +6078,11 @@ public class DlgPasien extends javax.swing.JDialog {
                 if (kecamatanref == null) return;
                 if (!kecamatanref.isVisible()) {
                     kecamatanref.setPropinsi(KdKab.getText(),Kabupaten.getText());
-                }  
+                }
                 if (kecamatanref.isVisible()) {
                     kecamatanref.toFront();
                     return;
-                }    
+                }
                 kecamatanref.setVisible(true);
             }
         }
@@ -6053,21 +6098,21 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(kec.getTable().getSelectedRow()!= -1){
                         KecamatanPj.setText(kec.getTable().getValueAt(kec.getTable().getSelectedRow(),0).toString());
                         KecamatanPj.requestFocus();
-                    } 
+                    }
                     kec=null;
                 }
             });
         }
-        
+
         if (kec == null) return;
         if (!kec.isVisible()) {
             kec.emptTeks();
-        }  
+        }
         if (kec.isVisible()) {
             kec.toFront();
             return;
-        }    
-        kec.setVisible(true);      
+        }
+        kec.setVisible(true);
     }//GEN-LAST:event_BtnKecamatanPjActionPerformed
 
     private void KabupatenPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenPjMouseMoved
@@ -6110,23 +6155,23 @@ public class DlgPasien extends javax.swing.JDialog {
                     kabupatenref.addWindowListener(new WindowAdapter() {
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(kabupatenref.getTable().getSelectedRow()!= -1){   
+                            if(kabupatenref.getTable().getSelectedRow()!= -1){
                                 KdKab.setText(kabupatenref.getTable().getValueAt(kabupatenref.getTable().getSelectedRow(),1).toString());
                                 kdkab="";
                                 KabupatenPj.setText(kabupatenref.getTable().getValueAt(kabupatenref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                            } 
+                            }
                             kabupatenref=null;
                         }
-                    }); 
+                    });
 
                     kabupatenref.getTable().addKeyListener(new KeyAdapter() {
                         @Override
                         public void keyPressed(KeyEvent e) {
                             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                                 kabupatenref.dispose();
-                            } 
+                            }
                         }
-                    });   
+                    });
                     kabupatenref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     kabupatenref.setLocationRelativeTo(internalFrame1);
                 }
@@ -6134,11 +6179,11 @@ public class DlgPasien extends javax.swing.JDialog {
                 if (kabupatenref == null) return;
                 if (!kabupatenref.isVisible()) {
                     kabupatenref.setPropinsi(KdProp.getText(),Propinsi.getText());
-                }  
+                }
                 if (kabupatenref.isVisible()) {
                     kabupatenref.toFront();
                     return;
-                }    
+                }
                 kabupatenref.setVisible(true);
             }
         }
@@ -6154,20 +6199,20 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(kab.getTable().getSelectedRow()!= -1){
                         KabupatenPj.setText(kab.getTable().getValueAt(kab.getTable().getSelectedRow(),0).toString());
                         KabupatenPj.requestFocus();
-                    } 
+                    }
                     kab=null;
                 }
             });
         }
-        
+
         if (kab == null) return;
         if (!kab.isVisible()) {
             kab.emptTeks();
-        }  
+        }
         if (kab.isVisible()) {
             kab.toFront();
             return;
-        }    
+        }
         kab.setVisible(true);
     }//GEN-LAST:event_BtnKabupatenPjActionPerformed
 
@@ -6181,20 +6226,20 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(kel.getTable().getSelectedRow()!= -1){
                         KelurahanPj.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
                         KelurahanPj.requestFocus();
-                    } 
+                    }
                     kel=null;
                 }
             });
         }
-        
+
         if (kel == null) return;
         if (!kel.isVisible()) {
             kel.emptTeks();
-        }  
+        }
         if (kel.isVisible()) {
             kel.toFront();
             return;
-        }    
+        }
         kel.setVisible(true);
     }//GEN-LAST:event_BtnKelurahanPjActionPerformed
 
@@ -6238,23 +6283,23 @@ public class DlgPasien extends javax.swing.JDialog {
                     kelurahanref.addWindowListener(new WindowAdapter() {
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(kelurahanref.getTable().getSelectedRow()!= -1){   
+                            if(kelurahanref.getTable().getSelectedRow()!= -1){
                                 KdKel.setText(kelurahanref.getTable().getValueAt(kelurahanref.getTable().getSelectedRow(),1).toString());
                                 kdkel="";
                                 KelurahanPj.setText(kelurahanref.getTable().getValueAt(kelurahanref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                            } 
+                            }
                             kelurahanref=null;
                         }
-                    }); 
+                    });
 
                     kelurahanref.getTable().addKeyListener(new KeyAdapter() {
                         @Override
                         public void keyPressed(KeyEvent e) {
                             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                                 kelurahanref.dispose();
-                            } 
+                            }
                         }
-                    });   
+                    });
                     kelurahanref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     kelurahanref.setLocationRelativeTo(internalFrame1);
                 }
@@ -6262,11 +6307,11 @@ public class DlgPasien extends javax.swing.JDialog {
                 if (kelurahanref == null) return;
                 if (!kelurahanref.isVisible()) {
                     kelurahanref.setPropinsi(KdKec.getText(),KecamatanPj.getText());
-                }  
+                }
                 if (kelurahanref.isVisible()) {
                     kelurahanref.toFront();
                     return;
-                }    
+                }
                 kelurahanref.setVisible(true);
             }
         }
@@ -7538,33 +7583,33 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(pangkattni.getTable().getSelectedRow()!= -1){
                         kdpangkattni.setText(pangkattni.getTable().getValueAt(pangkattni.getTable().getSelectedRow(),0).toString());
                         nmpangkattni.setText(pangkattni.getTable().getValueAt(pangkattni.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     kdpangkattni.requestFocus();
                     pangkattni=null;
                 }
-            }); 
+            });
 
             pangkattni.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         pangkattni.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             pangkattni.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             pangkattni.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (pangkattni == null) return;
         if (!pangkattni.isVisible()) {
             pangkattni.emptTeks();
             pangkattni.isCek();
-        }  
+        }
         if (pangkattni.isVisible()) {
             pangkattni.toFront();
             return;
-        }    
+        }
         pangkattni.setVisible(true);
     }//GEN-LAST:event_BtnPangkatTNIActionPerformed
 
@@ -7578,33 +7623,33 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(jabatantni.getTable().getSelectedRow()!= -1){
                         kdjabatantni.setText(jabatantni.getTable().getValueAt(jabatantni.getTable().getSelectedRow(),0).toString());
                         nmjabatantni.setText(jabatantni.getTable().getValueAt(jabatantni.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     kdjabatantni.requestFocus();
                     jabatantni=null;
                 }
-            }); 
+            });
 
             jabatantni.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         jabatantni.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             jabatantni.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             jabatantni.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (jabatantni == null) return;
         if (!jabatantni.isVisible()) {
             jabatantni.emptTeks();
             jabatantni.isCek();
-        }  
+        }
         if (jabatantni.isVisible()) {
             jabatantni.toFront();
             return;
-        }    
+        }
         jabatantni.setVisible(true);
     }//GEN-LAST:event_BtnJabatanTNIActionPerformed
 
@@ -7618,33 +7663,33 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(golonganpolri.getTable().getSelectedRow()!= -1){
                         kdgolonganpolri.setText(golonganpolri.getTable().getValueAt(golonganpolri.getTable().getSelectedRow(),0).toString());
                         nmgolonganpolri.setText(golonganpolri.getTable().getValueAt(golonganpolri.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     kdgolonganpolri.requestFocus();
                     golonganpolri=null;
                 }
-            }); 
+            });
 
             golonganpolri.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         golonganpolri.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             golonganpolri.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             golonganpolri.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (golonganpolri == null) return;
         if (!golonganpolri.isVisible()) {
             golonganpolri.emptTeks();
             golonganpolri.isCek();
-        }  
+        }
         if (golonganpolri.isVisible()) {
             golonganpolri.toFront();
             return;
-        }    
+        }
         golonganpolri.setVisible(true);
     }//GEN-LAST:event_BtnGolonganPolriActionPerformed
 
@@ -7658,33 +7703,33 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(satuanpolri.getTable().getSelectedRow()!= -1){
                         kdsatuanpolri.setText(satuanpolri.getTable().getValueAt(satuanpolri.getTable().getSelectedRow(),0).toString());
                         nmsatuanpolri.setText(satuanpolri.getTable().getValueAt(satuanpolri.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     kdsatuanpolri.requestFocus();
                     satuanpolri=null;
                 }
-            }); 
+            });
 
             satuanpolri.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         satuanpolri.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             satuanpolri.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             satuanpolri.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (satuanpolri == null) return;
         if (!satuanpolri.isVisible()) {
             satuanpolri.emptTeks();
             satuanpolri.isCek();
-        }  
+        }
         if (satuanpolri.isVisible()) {
             satuanpolri.toFront();
             return;
-        }    
+        }
         satuanpolri.setVisible(true);
     }//GEN-LAST:event_BtnSatuanPolriActionPerformed
 
@@ -7698,33 +7743,33 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(pangkatpolri.getTable().getSelectedRow()!= -1){
                         kdpangkatpolri.setText(pangkatpolri.getTable().getValueAt(pangkatpolri.getTable().getSelectedRow(),0).toString());
                         nmpangkatpolri.setText(pangkatpolri.getTable().getValueAt(pangkatpolri.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     kdpangkatpolri.requestFocus();
                     pangkatpolri=null;
                 }
-            }); 
+            });
 
             pangkatpolri.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         pangkatpolri.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             pangkatpolri.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             pangkatpolri.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (pangkatpolri == null) return;
         if (!pangkatpolri.isVisible()) {
             pangkatpolri.emptTeks();
             pangkatpolri.isCek();
-        }  
+        }
         if (pangkatpolri.isVisible()) {
             pangkatpolri.toFront();
             return;
-        }    
+        }
         pangkatpolri.setVisible(true);
     }//GEN-LAST:event_BtnPangkatPolriActionPerformed
 
@@ -7738,33 +7783,33 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(jabatanpolri.getTable().getSelectedRow()!= -1){
                         kdjabatanpolri.setText(jabatanpolri.getTable().getValueAt(jabatanpolri.getTable().getSelectedRow(),0).toString());
                         nmjabatanpolri.setText(jabatanpolri.getTable().getValueAt(jabatanpolri.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     kdjabatanpolri.requestFocus();
                     jabatanpolri=null;
                 }
-            }); 
+            });
 
             jabatanpolri.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         jabatanpolri.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             jabatanpolri.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             jabatanpolri.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (jabatanpolri == null) return;
         if (!jabatanpolri.isVisible()) {
             jabatanpolri.emptTeks();
             jabatanpolri.isCek();
-        }  
+        }
         if (jabatanpolri.isVisible()) {
             jabatanpolri.toFront();
             return;
-        }    
+        }
         jabatanpolri.setVisible(true);
     }//GEN-LAST:event_BtnJabatanPolriActionPerformed
 
@@ -7935,20 +7980,20 @@ public class DlgPasien extends javax.swing.JDialog {
                         Propinsi.setText(prop.getTable().getValueAt(prop.getTable().getSelectedRow(),0).toString());
                         kdprop=prop.getTable().getValueAt(prop.getTable().getSelectedRow(),1).toString();
                         Propinsi.requestFocus();
-                    } 
+                    }
                     prop=null;
                 }
             });
         }
-        
+
         if (prop == null) return;
         if (!prop.isVisible()) {
             prop.emptTeks();
-        }  
+        }
         if (prop.isVisible()) {
             prop.toFront();
             return;
-        }    
+        }
         prop.setVisible(true);
     }//GEN-LAST:event_BtnPropinsiActionPerformed
 
@@ -7988,23 +8033,23 @@ public class DlgPasien extends javax.swing.JDialog {
                 propinsiref.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(propinsiref.getTable().getSelectedRow()!= -1){   
+                        if(propinsiref.getTable().getSelectedRow()!= -1){
                             KdProp.setText(propinsiref.getTable().getValueAt(propinsiref.getTable().getSelectedRow(),1).toString());
                             kdprop="";
                             Propinsi.setText(propinsiref.getTable().getValueAt(propinsiref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                        } 
+                        }
                         propinsiref=null;
                     }
-                }); 
+                });
 
                 propinsiref.getTable().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             propinsiref.dispose();
-                        } 
+                        }
                     }
-                });   
+                });
                 propinsiref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 propinsiref.setLocationRelativeTo(internalFrame1);
             }
@@ -8013,7 +8058,7 @@ public class DlgPasien extends javax.swing.JDialog {
             if (propinsiref.isVisible()) {
                 propinsiref.toFront();
                 return;
-            }    
+            }
             propinsiref.setVisible(true);
         }
     }//GEN-LAST:event_PropinsiKeyPressed
@@ -8051,23 +8096,23 @@ public class DlgPasien extends javax.swing.JDialog {
                 propinsiref.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(propinsiref.getTable().getSelectedRow()!= -1){   
+                        if(propinsiref.getTable().getSelectedRow()!= -1){
                             KdProp.setText(propinsiref.getTable().getValueAt(propinsiref.getTable().getSelectedRow(),1).toString());
                             kdprop="";
                             PropinsiPj.setText(propinsiref.getTable().getValueAt(propinsiref.getTable().getSelectedRow(),2).toString().toUpperCase());
-                        } 
+                        }
                         propinsiref=null;
                     }
-                }); 
+                });
 
                 propinsiref.getTable().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             propinsiref.dispose();
-                        } 
+                        }
                     }
-                });   
+                });
                 propinsiref.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 propinsiref.setLocationRelativeTo(internalFrame1);
             }
@@ -8076,7 +8121,7 @@ public class DlgPasien extends javax.swing.JDialog {
             if (propinsiref.isVisible()) {
                 propinsiref.toFront();
                 return;
-            }    
+            }
             propinsiref.setVisible(true);
         }
     }//GEN-LAST:event_PropinsiPjKeyPressed
@@ -8091,20 +8136,20 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(prop.getTable().getSelectedRow()!= -1){
                         PropinsiPj.setText(prop.getTable().getValueAt(prop.getTable().getSelectedRow(),0).toString());
                         PropinsiPj.requestFocus();
-                    } 
+                    }
                     prop=null;
                 }
             });
         }
-        
+
         if (prop == null) return;
         if (!prop.isVisible()) {
             prop.emptTeks();
-        }  
+        }
         if (prop.isVisible()) {
             prop.toFront();
             return;
-        }    
+        }
         prop.setVisible(true);
     }//GEN-LAST:event_btnPropinsiPjActionPerformed
 
@@ -8180,20 +8225,20 @@ public class DlgPasien extends javax.swing.JDialog {
                     if(prop.getTable().getSelectedRow()!= -1){
                         Propinsi2.setText(prop.getTable().getValueAt(prop.getTable().getSelectedRow(),0).toString());
                         Propinsi2.requestFocus();
-                    } 
+                    }
                     prop=null;
                 }
             });
         }
-        
+
         if (prop == null) return;
         if (!prop.isVisible()) {
             prop.emptTeks();
-        }  
+        }
         if (prop.isVisible()) {
             prop.toFront();
             return;
-        }    
+        }
         prop.setVisible(true);
     }//GEN-LAST:event_BtnSeek11ActionPerformed
 
@@ -8608,6 +8653,19 @@ public class DlgPasien extends javax.swing.JDialog {
         Valid.pindah(evt,NmIbu,Saudara);
     }//GEN-LAST:event_CmbKeluargaKeyPressed
 
+    private void ChkTgl2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkTgl2ItemStateChanged
+        Tgl2.setEnabled(ChkTgl2.isSelected());
+    }//GEN-LAST:event_ChkTgl2ItemStateChanged
+
+    private void ChkTgl1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkTgl1ItemStateChanged
+        CmbTgl.setEnabled(ChkTgl1.isSelected());
+        Tgl1.setEnabled(ChkTgl1.isSelected());
+        ChkTgl2.setEnabled(ChkTgl1.isSelected());
+        if (!ChkTgl1.isSelected()) {
+            ChkTgl2.setSelected(false);
+        }
+    }//GEN-LAST:event_ChkTgl1ItemStateChanged
+
     /**
      * @data args the command line arguments
      */
@@ -8699,9 +8757,12 @@ public class DlgPasien extends javax.swing.JDialog {
     private widget.CekBox ChkAlamatPJ;
     private widget.CekBox ChkDaftar;
     private widget.CekBox ChkRM;
+    private widget.CekBox ChkTgl1;
+    private widget.CekBox ChkTgl2;
     private widget.ComboBox CmbJk;
     private widget.ComboBox CmbKeluarga;
     private widget.ComboBox CmbStts;
+    private widget.ComboBox CmbTgl;
     private widget.Tanggal DTPDaftar;
     private widget.Tanggal DTPLahir;
     private javax.swing.JDialog DlgDemografi;
@@ -8820,6 +8881,8 @@ public class DlgPasien extends javax.swing.JDialog {
     private widget.TextBox TUmurHr;
     private widget.TextBox TUmurTh;
     private javax.swing.JTabbedPane TabRawat;
+    private widget.Tanggal Tgl1;
+    private widget.Tanggal Tgl2;
     private javax.swing.JDialog WindowGabungRM;
     private widget.Button btnAmbilPhoto;
     private widget.Button btnPropinsiPj;
@@ -8929,183 +8992,128 @@ public class DlgPasien extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        if(ceksukses==false){
-            ceksukses=true;
+        if (!ceksukses) {
+            ceksukses = true;
             Valid.tabelKosong(tabMode);
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             new SwingWorker<Void, Object[]>() {
                 @Override
-                protected Void doInBackground() {
-                    try{
-                        if(cmbHlm.getSelectedItem().toString().equals("Semua")){
-                             if(Carialamat.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                                  ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
-                                       "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,"+
-                                       "pasien.gol_darah, pasien.pekerjaan,pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
-                                       "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.no_peserta,pasien.pekerjaanpj,"+
-                                       "pasien.alamatpj,pasien.kelurahanpj,pasien.kecamatanpj,pasien.kabupatenpj,pasien.propinsipj,"+
-                                       "perusahaan_pasien.kode_perusahaan,perusahaan_pasien.nama_perusahaan,pasien.bahasa_pasien,"+
-                                       "bahasa_pasien.nama_bahasa,pasien.suku_bangsa,suku_bangsa.nama_suku_bangsa,pasien.nip,pasien.email,cacat_fisik.nama_cacat,pasien.cacat_fisik,pasien.kd_pj from pasien "+
-                                       "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                                       "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                                       "inner join cacat_fisik on pasien.cacat_fisik=cacat_fisik.id inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                                       "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien inner join suku_bangsa on suku_bangsa.id=pasien.suku_bangsa "+
-                                       "inner join penjab on pasien.kd_pj=penjab.kd_pj order by pasien.no_rkm_medis desc");
-                             }else{
-                                  ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
-                                       "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,"+
-                                       "pasien.gol_darah, pasien.pekerjaan,pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
-                                       "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.no_peserta,pasien.pekerjaanpj,"+
-                                       "pasien.alamatpj,pasien.kelurahanpj,pasien.kecamatanpj,pasien.kabupatenpj,pasien.propinsipj,"+
-                                       "perusahaan_pasien.kode_perusahaan,perusahaan_pasien.nama_perusahaan,pasien.bahasa_pasien,"+
-                                       "bahasa_pasien.nama_bahasa,pasien.suku_bangsa,suku_bangsa.nama_suku_bangsa,pasien.nip,pasien.email,cacat_fisik.nama_cacat,pasien.cacat_fisik,pasien.kd_pj from pasien "+
-                                       "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                                       "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                                       "inner join cacat_fisik on pasien.cacat_fisik=cacat_fisik.id inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                                       "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien inner join suku_bangsa on suku_bangsa.id=pasien.suku_bangsa "+
-                                       "inner join penjab on pasien.kd_pj=penjab.kd_pj "+
-                                       "where concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) like ? "+
-                                       "and (pasien.no_rkm_medis like ? or  pasien.nm_pasien like ? or pasien.no_ktp like ? or pasien.no_peserta like ? or pasien.tmp_lahir like ? "+
-                                       "or pasien.tgl_lahir like ? or penjab.png_jawab like ? or pasien.alamat like ? or pasien.gol_darah like ? or pasien.pekerjaan like ? "+
-                                       "or pasien.stts_nikah like ? or pasien.nip like ? or cacat_fisik.nama_cacat like ? or pasien.namakeluarga like ? or perusahaan_pasien.nama_perusahaan like ? "+
-                                       "or bahasa_pasien.nama_bahasa like ? or suku_bangsa.nama_suku_bangsa like ? or pasien.agama like ? or pasien.nm_ibu like ? or pasien.tgl_daftar like ? "+
-                                       "or pasien.no_tlp like ?) order by pasien.no_rkm_medis desc");
-                             }
-                        }else{
-                            if(Carialamat.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                                ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
-                                       "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,"+
-                                       "pasien.gol_darah, pasien.pekerjaan,pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
-                                       "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.no_peserta,pasien.pekerjaanpj,"+
-                                       "pasien.alamatpj,pasien.kelurahanpj,pasien.kecamatanpj,pasien.kabupatenpj,pasien.propinsipj,"+
-                                       "perusahaan_pasien.kode_perusahaan,perusahaan_pasien.nama_perusahaan,pasien.bahasa_pasien,"+
-                                       "bahasa_pasien.nama_bahasa,pasien.suku_bangsa,suku_bangsa.nama_suku_bangsa,pasien.nip,pasien.email,cacat_fisik.nama_cacat,pasien.cacat_fisik,pasien.kd_pj from pasien "+
-                                       "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                                       "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                                       "inner join cacat_fisik on pasien.cacat_fisik=cacat_fisik.id inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                                       "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien inner join suku_bangsa on suku_bangsa.id=pasien.suku_bangsa "+
-                                       "inner join penjab on pasien.kd_pj=penjab.kd_pj order by pasien.no_rkm_medis desc LIMIT ? ");
-                            }else{
-                                ps=koneksi.prepareStatement("select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, "+
-                                       "pasien.tmp_lahir, pasien.tgl_lahir,pasien.nm_ibu, pasien.alamat,kelurahan.nm_kel,kecamatan.nm_kec,kabupaten.nm_kab,propinsi.nm_prop,"+
-                                       "pasien.gol_darah, pasien.pekerjaan,pasien.stts_nikah,pasien.agama,pasien.tgl_daftar,pasien.no_tlp,pasien.umur,"+
-                                       "pasien.pnd, pasien.keluarga, pasien.namakeluarga,penjab.png_jawab,pasien.no_peserta,pasien.pekerjaanpj,"+
-                                       "pasien.alamatpj,pasien.kelurahanpj,pasien.kecamatanpj,pasien.kabupatenpj,pasien.propinsipj,"+
-                                       "perusahaan_pasien.kode_perusahaan,perusahaan_pasien.nama_perusahaan,pasien.bahasa_pasien,"+
-                                       "bahasa_pasien.nama_bahasa,pasien.suku_bangsa,suku_bangsa.nama_suku_bangsa,pasien.nip,pasien.email,cacat_fisik.nama_cacat,pasien.cacat_fisik,pasien.kd_pj from pasien "+
-                                       "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                                       "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab inner join perusahaan_pasien on perusahaan_pasien.kode_perusahaan=pasien.perusahaan_pasien "+
-                                       "inner join cacat_fisik on pasien.cacat_fisik=cacat_fisik.id inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                                       "inner join bahasa_pasien on bahasa_pasien.id=pasien.bahasa_pasien inner join suku_bangsa on suku_bangsa.id=pasien.suku_bangsa "+
-                                       "inner join penjab on pasien.kd_pj=penjab.kd_pj "+
-                                       "where concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) like ? "+
-                                       "and (pasien.no_rkm_medis like ? or  pasien.nm_pasien like ? or pasien.no_ktp like ? or pasien.no_peserta like ? or pasien.tmp_lahir like ? "+
-                                       "or pasien.tgl_lahir like ? or penjab.png_jawab like ? or pasien.alamat like ? or pasien.gol_darah like ? or pasien.pekerjaan like ? "+
-                                       "or pasien.stts_nikah like ? or pasien.nip like ? or cacat_fisik.nama_cacat like ? or pasien.namakeluarga like ? or perusahaan_pasien.nama_perusahaan like ? "+
-                                       "or bahasa_pasien.nama_bahasa like ? or suku_bangsa.nama_suku_bangsa like ? or pasien.agama like ? or pasien.nm_ibu like ? or pasien.tgl_daftar like ? "+
-                                       "or pasien.no_tlp like ?)  order by pasien.no_rkm_medis desc LIMIT ? ");
-                            }
-                        }
-                        try{
-                            if(cmbHlm.getSelectedItem().toString().equals("Semua")){
-                                if(Carialamat.getText().trim().equals("")&&TCari.getText().trim().equals("")){}else{
-                                    ps.setString(1,"%"+Carialamat.getText().trim()+"%");
-                                    ps.setString(2,"%"+TCari.getText().trim()+"%");
-                                    ps.setString(3, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(4, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(5, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(6, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(7, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(8, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(9, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(10, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(11, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(12, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(13, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(14, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(15, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(16, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(17, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(18, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(19, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(20, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(21, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(22, "%"+TCari.getText().trim()+"%");
-                                }
-                            }else{
-                                if(Carialamat.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                                    ps.setInt(1,Integer.parseInt(cmbHlm.getSelectedItem().toString()));
-                                }else{
-                                    ps.setString(1,"%"+Carialamat.getText().trim()+"%");
-                                    ps.setString(2,"%"+TCari.getText().trim()+"%");
-                                    ps.setString(3, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(4, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(5, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(6, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(7, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(8, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(9, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(10, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(11, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(12, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(13, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(14, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(15, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(16, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(17, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(18, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(19, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(20, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(21, "%"+TCari.getText().trim()+"%");
-                                    ps.setString(22, "%"+TCari.getText().trim()+"%");
-                                    ps.setInt(23,Integer.parseInt(cmbHlm.getSelectedItem().toString()));
-                                }
-                            }
-                            rs=ps.executeQuery();
-                            z=0;
-                            while(rs.next()){
-                                Object[] row = new Object[]{
-                                    false,rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getString("no_ktp"),rs.getString("jk"),rs.getString("tmp_lahir"),rs.getDate("tgl_lahir"),rs.getString("nm_ibu"),
-                                    rs.getString("alamat")+", "+rs.getString("nm_kel")+", "+rs.getString("nm_kec")+", "+rs.getString("nm_kab")+", "+rs.getString("nm_prop"),rs.getString("gol_darah"),rs.getString("pekerjaan"),
-                                    rs.getString("stts_nikah"),rs.getString("agama"),rs.getString("tgl_daftar"),rs.getString("no_tlp"),rs.getString("umur"),rs.getString("pnd"),rs.getString("keluarga"),
-                                    rs.getString("namakeluarga"),rs.getString("png_jawab"),rs.getString("no_peserta"),"Klik Kanan, Tampilkan Banyak Daftar",rs.getString("pekerjaanpj"),
-                                    rs.getString("alamatpj")+", "+rs.getString("kelurahanpj")+", "+rs.getString("kecamatanpj")+", "+rs.getString("kabupatenpj")+", "+rs.getString("propinsipj"),
-                                    rs.getString("suku_bangsa"),rs.getString("nama_suku_bangsa"),rs.getString("bahasa_pasien"),rs.getString("nama_bahasa"),
-                                    rs.getString("kode_perusahaan"),rs.getString("nama_perusahaan"),rs.getString("nip"),rs.getString("email"),rs.getString("cacat_fisik"),
-                                    rs.getString("nama_cacat"),rs.getString("kd_pj"),rs.getString("alamat"),rs.getString("nm_kel"),rs.getString("nm_kec"),
-                                    rs.getString("nm_kab"),rs.getString("nm_prop"),rs.getString("alamatpj"),rs.getString("kelurahanpj"),
-                                    rs.getString("kecamatanpj"),rs.getString("kabupatenpj"),rs.getString("propinsipj")
-                                };
-                                z++;
-                                publish(row);
-                            }
-                        }catch(Exception e){
-                            System.out.println("Notifikasi : "+e);
-                        }finally{
-                            if(rs != null){
-                                rs.close();
-                            }
+                protected Void doInBackground() throws Exception {
+                    StringJoiner sj = new StringJoiner(" and ");
 
-                            if(ps != null){
-                                ps.close();
+                    if (ChkTgl1.isSelected()) {
+                        String tgl = "pasien.tgl_lahir";
+                        String opt = "= ?";
+
+                        if (CmbTgl.getSelectedIndex() == 1) {
+                            tgl = "pasien.tgl_daftar";
+                        }
+
+                        if (ChkTgl2.isSelected()) {
+                            opt = "between ? and ?";
+                        }
+
+                        sj.add(tgl + " " + opt);
+                    }
+
+                    if (!Carialamat.getText().isBlank()) {
+                        sj.add("concat(pasien.alamat, ', ', kelurahan.nm_kel, ', ', kecamatan.nm_kec, ', ', kabupaten.nm_kab, ', ', propinsi.nm_prop) like ?");
+                    }
+
+                    if (!TCari.getText().isBlank()) {
+                        sj.add("(pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or pasien.no_ktp like ? or pasien.no_peserta like ? or " +
+                            "pasien.tmp_lahir like ? or pasien.tgl_lahir like ? or penjab.png_jawab like ? or pasien.alamat like ? or pasien.gol_darah like ? or " +
+                            "pasien.pekerjaan like ? or pasien.stts_nikah like ? or pasien.nip like ? or cacat_fisik.nama_cacat like ? or pasien.namakeluarga like ? or " +
+                            "perusahaan_pasien.nama_perusahaan like ? or bahasa_pasien.nama_bahasa like ? or suku_bangsa.nama_suku_bangsa like ? or pasien.agama like ? or " +
+                            "pasien.nm_ibu like ? or pasien.tgl_daftar like ? or pasien.no_tlp like ?)");
+                    }
+
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select pasien.no_rkm_medis, pasien.nm_pasien, pasien.no_ktp, pasien.jk, pasien.tmp_lahir, pasien.tgl_lahir, pasien.nm_ibu, pasien.alamat, " +
+                        "kelurahan.nm_kel, kecamatan.nm_kec, kabupaten.nm_kab, propinsi.nm_prop, pasien.gol_darah, pasien.pekerjaan, pasien.stts_nikah, pasien.agama, " +
+                        "pasien.tgl_daftar, pasien.no_tlp, pasien.umur, pasien.pnd, pasien.keluarga, pasien.namakeluarga, penjab.png_jawab, pasien.no_peserta, " +
+                        "pasien.pekerjaanpj, pasien.alamatpj, pasien.kelurahanpj, pasien.kecamatanpj, pasien.kabupatenpj, pasien.propinsipj, perusahaan_pasien.kode_perusahaan, " +
+                        "perusahaan_pasien.nama_perusahaan, pasien.bahasa_pasien, bahasa_pasien.nama_bahasa, pasien.suku_bangsa, suku_bangsa.nama_suku_bangsa, pasien.nip, " +
+                        "pasien.email, cacat_fisik.nama_cacat, pasien.cacat_fisik, pasien.kd_pj from pasien inner join kelurahan on pasien.kd_kel = kelurahan.kd_kel " +
+                        "inner join kecamatan on pasien.kd_kec = kecamatan.kd_kec inner join kabupaten on pasien.kd_kab = kabupaten.kd_kab inner join propinsi on " +
+                        "pasien.kd_prop = propinsi.kd_prop inner join perusahaan_pasien on pasien.perusahaan_pasien = perusahaan_pasien.kode_perusahaan inner join " +
+                        "cacat_fisik on pasien.cacat_fisik = cacat_fisik.id inner join bahasa_pasien on pasien.bahasa_pasien = bahasa_pasien.id inner join suku_bangsa " +
+                        "on pasien.suku_bangsa = suku_bangsa.id inner join penjab on pasien.kd_pj = penjab.kd_pj " + (sj.length() > 0 ? "where " + sj.toString() + " " : "") +
+                        "order by pasien.no_rkm_medis desc " + (cmbHlm.getSelectedIndex() < 6 ? "limit " + cmbHlm.getSelectedItem().toString() : "")
+                    )) {
+                        int p = 0;
+                        if (ChkTgl1.isSelected()) {
+                            ps.setString(++p, Valid.getTglSmc(Tgl1));
+                            if (ChkTgl2.isSelected()) {
+                                ps.setString(++p, Valid.getTglSmc(Tgl2));
                             }
                         }
-                    }catch(Exception e){
-                        System.out.println(e);
+
+                        if (!Carialamat.getText().isBlank()) {
+                            ps.setString(++p, "%" + Carialamat.getText().trim() + "%");
+                        }
+
+                        if (!TCari.getText().isBlank()) {
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                            ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                        }
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            System.out.println(ps.toString());
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    false, rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("no_ktp"), rs.getString("jk"), rs.getString("tmp_lahir"), rs.getDate("tgl_lahir"),
+                                    rs.getString("nm_ibu"), rs.getString("alamat") + ", " + rs.getString("nm_kel") + ", " + rs.getString("nm_kec") + ", " + rs.getString("nm_kab") + ", " +
+                                    rs.getString("nm_prop"), rs.getString("gol_darah"), rs.getString("pekerjaan"), rs.getString("stts_nikah"), rs.getString("agama"), rs.getString("tgl_daftar"),
+                                    rs.getString("no_tlp"), rs.getString("umur"), rs.getString("pnd"), rs.getString("keluarga"), rs.getString("namakeluarga"), rs.getString("png_jawab"),
+                                    rs.getString("no_peserta"), "Klik Kanan, Tampilkan Banyak Daftar", rs.getString("pekerjaanpj"), rs.getString("alamatpj") + ", " + rs.getString("kelurahanpj") +
+                                    ", " + rs.getString("kecamatanpj") + ", " + rs.getString("kabupatenpj") + ", " + rs.getString("propinsipj"), rs.getString("suku_bangsa"),
+                                    rs.getString("nama_suku_bangsa"), rs.getString("bahasa_pasien"), rs.getString("nama_bahasa"), rs.getString("kode_perusahaan"),
+                                    rs.getString("nama_perusahaan"), rs.getString("nip"), rs.getString("email"), rs.getString("cacat_fisik"), rs.getString("nama_cacat"),
+                                    rs.getString("kd_pj"), rs.getString("alamat"), rs.getString("nm_kel"), rs.getString("nm_kec"), rs.getString("nm_kab"), rs.getString("nm_prop"),
+                                    rs.getString("alamatpj"), rs.getString("kelurahanpj"), rs.getString("kecamatanpj"), rs.getString("kabupatenpj"), rs.getString("propinsipj")
+                                });
+                            }
+                        }
                     }
+
                     return null;
                 }
 
                 @Override
-                protected void process(List<Object[]> data) {
-                    for (Object[] row : data) {
-                        tabMode.addRow(row);
-                    }
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
                 }
 
                 @Override
                 protected void done() {
-                    LCount.setText(""+z);
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    LCount.setText("" + tabMode.getRowCount());
                     ceksukses = false;
+                    DlgPasien.this.setCursor(Cursor.getDefaultCursor());
                 }
             }.execute();
         }
