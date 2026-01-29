@@ -38,8 +38,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -208,9 +208,9 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             });
 
             engineKlaim.locationProperty().addListener((observable, oldValue, newValue) -> {
-                if (!btnSEP.getText().equals("Tidak ada")) {
-                    if (newValue != null && newValue.toLowerCase().contains("action")) {
-                        SwingUtilities.invokeLater(() -> {
+                if (newValue != null && newValue.toLowerCase().contains("action")) {
+                    SwingUtilities.invokeLater(() -> {
+                        if (!btnSEP.getText().equals("Tidak ada")) {
                             setFlagKlaim();
                             switch (flagklaim) {
                                 case 1:
@@ -244,8 +244,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                     tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
                                     break;
                             }
-                        });
-                    }
+                        }
+                    });
                 }
             });
 
@@ -3094,110 +3094,135 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     private void tampil() {
-        Valid.tabelKosong(tabMode);
-        String statusklaim = "";
-        switch (CmbStatusKirim.getSelectedIndex()) {
-            case 1:
-                statusklaim = "and inc.no_sep is not null ";
-                break;
-            case 2:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null and inc.no_sep is null ";
-                break;
-            case 3:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') and inf.no_sep is null and inc.no_sep is null ";
-                break;
-            case 4:
-                statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null and (left(ing.code_cbg, 1) = 'X'))) and inf.no_sep is null and inc.no_sep is null ";
-                break;
-            case 5:
-                statusklaim = "and idg.no_sep is not null and idg.mdc_number != '36' and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null ";
-                break;
-            case 6:
-                statusklaim = "and (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null ";
-                break;
-            default:
-                statusklaim = "";
-                break;
-        }
-
-        String statusrawat = "";
-        if (CmbStatusRawat.getSelectedIndex() == 1) {
-            statusrawat = "and s.jnspelayanan = '2' ";
-        } else if (CmbStatusRawat.getSelectedIndex() == 2) {
-            statusrawat = "and s.jnspelayanan = '1' ";
-        }
-
-        try (PreparedStatement ps = koneksi.prepareStatement(
-            "select s.no_rawat, s.no_sep, r.no_rkm_medis, px.nm_pasien, r.status_lanjut, s.tglsep, date(s.tglpulang) as tglpulang, ki.stts_pulang, case when " +
-            "r.status_lanjut = 'Ranap' then concat(ki.kd_kamar, ' ', b.nm_bangsal) when r.status_lanjut = 'Ralan' then p.nm_poli end as ruangan, d.nm_dokter, " +
-            "case when inc.no_sep is not null then 1 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null " +
-            "and inc.no_sep is null then 2 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') and " +
-            "inf.no_sep is null and inc.no_sep is null then 3 when idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null " +
-            "and (left(ing.code_cbg, 1) = 'X'))) and inf.no_sep is null and inc.no_sep is null then 4 when idg.no_sep is not null and idg.mdc_number != '36' and " +
-            "idf.no_sep is null and inf.no_sep is null and inc.no_sep is null then 5 when (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) " +
-            "and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null then 6 end as statusklaim from bridging_sep s use index (bridging_sep_ibfk_5) join " +
-            "reg_periksa r on s.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join poliklinik p on r.kd_poli = p.kd_poli left join " +
-            "kamar_inap ki on r.no_rawat = ki.no_rawat and ki.stts_pulang != 'Pindah Kamar' left join kamar k on ki.kd_kamar = k.kd_kamar left join bangsal b " +
-            "on k.kd_bangsal = b.kd_bangsal left join maping_dokter_dpjpvclaim md on s.kddpjp = md.kd_dokter_bpjs left join dokter d on md.kd_dokter = d.kd_dokter " +
-            "left join idrg_grouping_smc idg on s.no_sep = idg.no_sep left join idrg_klaim_final_smc idf on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 " +
-            "ing on s.no_sep = ing.no_sep left join inacbg_klaim_final_smc inf on s.no_sep = inf.no_sep left join inacbg_cetak_klaim inc on s.no_sep = inc.no_sep " +
-            "where s.no_sep like ? and s.tglsep between ? and ? and length(s.no_sep) = 19 " + statusrawat + "and (if(s.jnspelayanan = '1', 'Ranap', 'Ralan')) = r.status_lanjut and " +
-            "r.status_bayar = 'Sudah Bayar' " + (kodePJ.getText().isBlank() ? "" : "and r.kd_pj = ? ") + statusklaim + (TCari.getText().isBlank() ? ""
-            : "and (s.no_sep like ? or s.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or p.nm_poli like ? or concat(ki.kd_kamar, ' ', " +
-            "b.nm_bangsal) like ? or d.nm_dokter like ?) ") + "group by s.no_sep, s.no_rawat, r.no_rkm_medis order by s.no_sep, s.jnspelayanan desc"
-        )) {
-            int p = 0;
-            ps.setString(++p, KODEPPKBPJS);
-            ps.setString(++p, Valid.getTglSmc(DTPCari1));
-            ps.setString(++p, Valid.getTglSmc(DTPCari2));
-            if (!kodePJ.getText().isBlank()) {
-                ps.setString(++p, kodePJ.getText());
-            } else {
-                ps.setString(++p, "%");
-            }
-            if (!TCari.getText().isBlank()) {
-                ps.setString(++p, "%" + TCari.getText() + "%");
-                ps.setString(++p, "%" + TCari.getText() + "%");
-                ps.setString(++p, "%" + TCari.getText() + "%");
-                ps.setString(++p, "%" + TCari.getText() + "%");
-                ps.setString(++p, "%" + TCari.getText() + "%");
-                ps.setString(++p, "%" + TCari.getText() + "%");
-                ps.setString(++p, "%" + TCari.getText() + "%");
-            }
-            try (ResultSet rs = ps.executeQuery()) {
-                String keterangan = "Belum";
-                while (rs.next()) {
-                    switch (rs.getInt("statusklaim")) {
+        if (!isLoading) {
+            isLoading = true;
+            Valid.tabelKosong(tabMode);
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            new SwingWorker<Void, Object[]>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    String statusklaim = "";
+                    switch (CmbStatusKirim.getSelectedIndex()) {
                         case 1:
-                            keterangan = "Selesai";
+                            statusklaim = "and inc.no_sep is not null ";
                             break;
                         case 2:
-                            keterangan = "INACBG Final";
+                            statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null and inc.no_sep is null ";
                             break;
                         case 3:
-                            keterangan = "INACBG Grouping";
+                            statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') and inf.no_sep is null and inc.no_sep is null ";
                             break;
                         case 4:
-                            keterangan = "IDRG Final";
+                            statusklaim = "and idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null and (left(ing.code_cbg, 1) = 'X'))) and inf.no_sep is null and inc.no_sep is null ";
                             break;
                         case 5:
-                            keterangan = "IDRG Grouping";
+                            statusklaim = "and idg.no_sep is not null and idg.mdc_number != '36' and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null ";
+                            break;
+                        case 6:
+                            statusklaim = "and (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null ";
                             break;
                         default:
-                            keterangan = "Belum";
+                            statusklaim = "";
                             break;
                     }
-                    tabMode.addRow(new Object[] {
-                        false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
-                        rs.getString("status_lanjut"), rs.getString("tglsep"), rs.getString("tglpulang"), rs.getString("stts_pulang"),
-                        rs.getString("ruangan"), rs.getString("nm_dokter"), keterangan, rs.getInt("statusklaim")
-                    });
+
+                    String statusrawat = "";
+                    if (CmbStatusRawat.getSelectedIndex() == 1) {
+                        statusrawat = "and s.jnspelayanan = '2' ";
+                    } else if (CmbStatusRawat.getSelectedIndex() == 2) {
+                        statusrawat = "and s.jnspelayanan = '1' ";
+                    }
+
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select s.no_rawat, s.no_sep, r.no_rkm_medis, px.nm_pasien, r.status_lanjut, s.tglsep, date(s.tglpulang) as tglpulang, ki.stts_pulang, case when " +
+                        "r.status_lanjut = 'Ranap' then concat(ki.kd_kamar, ' ', b.nm_bangsal) when r.status_lanjut = 'Ralan' then p.nm_poli end as ruangan, d.nm_dokter, " +
+                        "case when inc.no_sep is not null then 1 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null " +
+                        "and inc.no_sep is null then 2 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') and " +
+                        "inf.no_sep is null and inc.no_sep is null then 3 when idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null " +
+                        "and (left(ing.code_cbg, 1) = 'X'))) and inf.no_sep is null and inc.no_sep is null then 4 when idg.no_sep is not null and idg.mdc_number != '36' and " +
+                        "idf.no_sep is null and inf.no_sep is null and inc.no_sep is null then 5 when (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) " +
+                        "and idf.no_sep is null and inf.no_sep is null and inc.no_sep is null then 6 end as statusklaim from bridging_sep s use index (bridging_sep_ibfk_5) join " +
+                        "reg_periksa r on s.no_rawat = r.no_rawat join pasien px on r.no_rkm_medis = px.no_rkm_medis join poliklinik p on r.kd_poli = p.kd_poli left join " +
+                        "kamar_inap ki on r.no_rawat = ki.no_rawat and ki.stts_pulang != 'Pindah Kamar' left join kamar k on ki.kd_kamar = k.kd_kamar left join bangsal b " +
+                        "on k.kd_bangsal = b.kd_bangsal left join maping_dokter_dpjpvclaim md on s.kddpjp = md.kd_dokter_bpjs left join dokter d on md.kd_dokter = d.kd_dokter " +
+                        "left join idrg_grouping_smc idg on s.no_sep = idg.no_sep left join idrg_klaim_final_smc idf on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 " +
+                        "ing on s.no_sep = ing.no_sep left join inacbg_klaim_final_smc inf on s.no_sep = inf.no_sep left join inacbg_cetak_klaim inc on s.no_sep = inc.no_sep " +
+                        "where s.no_sep like ? and s.tglsep between ? and ? and length(s.no_sep) = 19 " + statusrawat + "and (if(s.jnspelayanan = '1', 'Ranap', 'Ralan')) = r.status_lanjut " +
+                        "and r.status_bayar = 'Sudah Bayar' " + (kodePJ.getText().isBlank() ? "" : "and r.kd_pj = ? ") + statusklaim + (TCari.getText().isBlank() ? ""
+                        : "and (s.no_sep like ? or s.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or p.nm_poli like ? or concat(ki.kd_kamar, ' ', " +
+                        "b.nm_bangsal) like ? or d.nm_dokter like ?) ") + "group by s.no_sep, s.no_rawat, r.no_rkm_medis order by s.no_sep, s.jnspelayanan desc"
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, KODEPPKBPJS);
+                        ps.setString(++p, Valid.getTglSmc(DTPCari1));
+                        ps.setString(++p, Valid.getTglSmc(DTPCari2));
+                        if (!kodePJ.getText().isBlank()) {
+                            ps.setString(++p, kodePJ.getText());
+                        } else {
+                            ps.setString(++p, "%");
+                        }
+                        if (!TCari.getText().isBlank()) {
+                            ps.setString(++p, "%" + TCari.getText() + "%");
+                            ps.setString(++p, "%" + TCari.getText() + "%");
+                            ps.setString(++p, "%" + TCari.getText() + "%");
+                            ps.setString(++p, "%" + TCari.getText() + "%");
+                            ps.setString(++p, "%" + TCari.getText() + "%");
+                            ps.setString(++p, "%" + TCari.getText() + "%");
+                            ps.setString(++p, "%" + TCari.getText() + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            String keterangan = "Belum";
+                            while (rs.next()) {
+                                switch (rs.getInt("statusklaim")) {
+                                    case 1:
+                                        keterangan = "Selesai";
+                                        break;
+                                    case 2:
+                                        keterangan = "INACBG Final";
+                                        break;
+                                    case 3:
+                                        keterangan = "INACBG Grouping";
+                                        break;
+                                    case 4:
+                                        keterangan = "IDRG Final";
+                                        break;
+                                    case 5:
+                                        keterangan = "IDRG Grouping";
+                                        break;
+                                    default:
+                                        keterangan = "Belum";
+                                        break;
+                                }
+                                publish(new Object[] {
+                                    false, rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"),
+                                    rs.getString("status_lanjut"), rs.getString("tglsep"), rs.getString("tglpulang"), rs.getString("stts_pulang"),
+                                    rs.getString("ruangan"), rs.getString("nm_dokter"), keterangan, rs.getInt("statusklaim")
+                                });
+                            }
+                        }
+                    }
+
+                    return null;
                 }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    isLoading = false;
+                    LCount.setText(String.valueOf(tabMode.getRowCount()));
+                    BPJSKompilasiBerkasKlaim.this.setCursor(Cursor.getDefaultCursor());
+                }
+            }.execute();
         }
-        LCount.setText(String.valueOf(tabMode.getRowCount()));
     }
 
     private void emptTeks() {
@@ -4791,7 +4816,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 throw new KompilasiException("Kompilasi", "", tbKompilasi.getValueAt(row, 2).toString(), e);
             }
         } else {
-            System.out.println("No PDF files found in the folder: ./berkaspdf/" + tanggalExport);
+            System.out.println("Tidak ada file PDF ditemukan dalam folder : " + folder.getAbsolutePath());
         }
     }
 
@@ -4829,7 +4854,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             if (gunakanTanggalExport.equals("sep")) {
                 tanggalExport = lblTglSEP.getText();
             } else {
-                tanggalExport = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                tanggalExport = LocalDate.now().toString();
             }
 
             if (tbKompilasi.getValueAt(selectedRow, 5).toString().equals("Ralan")) {
@@ -4909,6 +4934,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         SwingWorker<Void, String> worker = new SwingWorker<>() {
             private final Object lock = new Object();
             private volatile Boolean lanjut = null;
+            private String tglSekarang = LocalDate.now().toString();
 
             @Override
             protected Void doInBackground() throws Exception {
@@ -4945,7 +4971,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                     if (gunakanTanggalExport.equals("sep")) {
                                         tanggalExport = tbKompilasi.getValueAt(i, 6).toString();
                                     } else {
-                                        tanggalExport = new SimpleDateFormat("yyyy-MM-dd").format(Calendar.getInstance().getTime());
+                                        tanggalExport = tglSekarang;
                                     }
 
                                     try {
@@ -4993,7 +5019,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                                         mergePDF(i);
                                         hapusTemporaryPDF(i);
                                     } catch (KompilasiException e) {
-                                        publish("Terjadi kesalahan pada saat mengkompilasi SEP " + tbKompilasi.getValueAt(i, 2).toString());
+                                        publish(e.getMessage());
                                         synchronized (lock) {
                                             while (lanjut == null) {
                                                 // perlu timeout
