@@ -9078,7 +9078,6 @@ public class DlgPasien extends javax.swing.JDialog {
                         }
 
                         try (ResultSet rs = ps.executeQuery()) {
-                            System.out.println(ps.toString());
                             while (rs.next()) {
                                 publish(new Object[] {
                                     false, rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("no_ktp"), rs.getString("jk"), rs.getString("tmp_lahir"), rs.getDate("tgl_lahir"),
