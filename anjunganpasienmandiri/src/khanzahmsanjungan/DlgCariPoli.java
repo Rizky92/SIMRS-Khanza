@@ -99,7 +99,7 @@ public final class DlgCariPoli extends widget.Dialog {
     }//GEN-LAST:event_tbPoliMouseReleased
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        Valid.tabelKosong(tabMode);
+        Valid.tabelKosongSmc(tabMode);
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select p.kd_poli, p.nm_poli, p.registrasi, p.registrasilama from poliklinik as p where p.status = '1' and " +
             "exists(select * from jadwal as j where j.kd_poli = p.kd_poli and j.hari_kerja = ?) order by p.nm_poli"

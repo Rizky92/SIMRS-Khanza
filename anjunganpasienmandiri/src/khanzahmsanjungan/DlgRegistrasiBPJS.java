@@ -1062,25 +1062,25 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         cekStatusFinger();
         if (namaPasien.getText().isBlank()) {
-            Valid.textKosong(namaPasien, "Pasien");
+            Valid.teksKosongSmc(namaPasien, "Pasien");
         } else if (noPeserta.getText().isBlank()) {
-            Valid.textKosong(noPeserta, "Nomor Kartu");
+            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else if (!Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ?", noRM.getText())) {
             Valid.popupPeringatanDialog("Maaf, No. RM. tidak sesuai..!!");
         } else if (kodePPKRujukan.getText().isBlank() || namaPPKRujukan.getText().isBlank()) {
-            Valid.textKosong(kodePPKRujukan, "PPK Rujukan");
+            Valid.teksKosongSmc(kodePPKRujukan, "PPK Rujukan");
         } else if (kodePPK.getText().isBlank() || namaPPK.getText().isBlank()) {
-            Valid.textKosong(kodePPK, "PPK Pelayanan");
+            Valid.teksKosongSmc(kodePPK, "PPK Pelayanan");
         } else if (kodeDiagnosa.getText().isBlank() || namaDiagnosa.getText().isBlank()) {
-            Valid.textKosong(kodeDiagnosa, "Diagnosa");
+            Valid.teksKosongSmc(kodeDiagnosa, "Diagnosa");
         } else if (catatan.getText().isBlank()) {
-            Valid.textKosong(catatan, "Catatan");
+            Valid.teksKosongSmc(catatan, "Catatan");
         } else if (namaPoli.getText().isBlank()) {
-            Valid.textKosong(namaPoli, "Poli Tujuan");
+            Valid.teksKosongSmc(namaPoli, "Poli Tujuan");
         } else if ((lakaLantas.getSelectedIndex() == 1) && keterangan.getText().isBlank()) {
-            Valid.textKosong(keterangan, "Keterangan");
+            Valid.teksKosongSmc(keterangan, "Keterangan");
         } else if (kodeDokter.isBlank() || namaDokter.getText().isBlank()) {
-            Valid.textKosong(namaDokter, "DPJP");
+            Valid.teksKosongSmc(namaDokter, "DPJP");
         } else if (!statusFinger && Sequel.cariIntegerSmc("select timestampdiff(year, ?, CURRENT_DATE())", tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
             Valid.popupPeringatanDialog("Silahkan lakukan validasi biometrik dahulu..!!", 3);
         } else {
@@ -1804,7 +1804,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         try {
             tglkll = "0000-00-00";
             if (lakaLantas.getSelectedIndex() > 0) {
-                tglkll = Valid.SetTgl(tglKLL.getSelectedItem() + "");
+                tglkll = Valid.getTglSmc(tglKLL);
             }
 
             url = koneksiDB.URLAPIBPJS() + "/SEP/2.0/insert";

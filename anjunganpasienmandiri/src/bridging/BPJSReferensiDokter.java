@@ -286,7 +286,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
         try {
-            Valid.tabelKosong(tabMode);
+            Valid.tabelKosongSmc(tabMode);
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
@@ -295,7 +295,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
             headers.add("X-Signature", api.getHmac(utc));
             headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
             requestEntity = new HttpEntity(headers);
-            URL = link + "/referensi/dokter/pelayanan/1/tglPelayanan/" + Valid.SetTgl(DTPCari1.getSelectedItem() + "") + "/Spesialis/" + KdPoli.getText();
+            URL = link + "/referensi/dokter/pelayanan/1/tglPelayanan/" + Valid.getTglSmc(DTPCari1) + "/Spesialis/" + KdPoli.getText();
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if (nameNode.path("code").asText().equals("200")) {
@@ -333,7 +333,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
     public void tampil2(String poli) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
-            URL = link + "/referensi/dokter/pelayanan/2/tglPelayanan/" + Valid.SetTgl(DTPCari1.getSelectedItem() + "") + "/Spesialis/" + KdPoli.getText();
+            URL = link + "/referensi/dokter/pelayanan/2/tglPelayanan/" + Valid.getTglSmc(DTPCari1) + "/Spesialis/" + KdPoli.getText();
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if (nameNode.path("code").asText().equals("200")) {

@@ -10,6 +10,7 @@ import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
@@ -19,9 +20,11 @@ import javax.print.PrintServiceLookup;
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
 import javax.print.attribute.standard.Copies;
+import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JOptionPane;
 import javax.swing.Timer;
+import javax.swing.table.DefaultTableModel;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -243,5 +246,29 @@ public final class validasi {
 
     public int popupGagalDialog(String pesan) {
         return popupGagalDialog(pesan, 0);
+    }
+
+    public void pindahSmc(KeyEvent evt, JComponent kiri, JComponent kanan) {
+        if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            kiri.requestFocus();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+            kanan.requestFocus();
+        }
+    }
+
+    public void tabelKosongSmc(DefaultTableModel model, boolean fireEvent) {
+        model.getDataVector().removeAllElements();
+        if (fireEvent) {
+            model.fireTableDataChanged();
+        }
+    }
+
+    public void tabelKosongSmc(DefaultTableModel model) {
+        tabelKosongSmc(model, true);
+    }
+
+    public void teksKosongSmc(JComponent component, String nama) {
+        popupPeringatanDialog("Maaf, " + nama + " tidak boleh kosong..!!", 3);
+        component.requestFocus();
     }
 }

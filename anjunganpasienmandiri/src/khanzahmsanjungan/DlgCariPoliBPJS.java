@@ -92,7 +92,7 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        Valid.tabelKosong(tabMode);
+        Valid.tabelKosongSmc(tabMode);
         if (REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select jadwal.kd_poli, concat(left(jadwal.jam_mulai, 5), '-', left(jadwal.jam_selesai, 5)) as jampraktek, " +
