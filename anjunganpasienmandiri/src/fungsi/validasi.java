@@ -178,13 +178,14 @@ public final class validasi {
         FlatLabel message = new FlatLabel();
         message.setForeground(new Color(0, 131, 62));
         message.setFont(new java.awt.Font("Inter Medium", Font.PLAIN, 18));
-        message.setText(pesan);
+        message.setText("<html><body>" + pesan.replace("\n", "<br>") + "</body></html>");
 
         JOptionPane pane = new JOptionPane(message, messageType, JOptionPane.DEFAULT_OPTION);
         pane.setInitialValue(POPUP_OKE);
 
         Button ya = new Button();
         ya.setFont(new java.awt.Font("Inter", Font.BOLD, 18));
+        ya.setPreferredSize(new Dimension(100, 35));
         ya.setForeground(new Color(255, 255, 255));
         ya.setBackground(new Color(0, 131, 62));
         ya.setText("Ya");
@@ -192,6 +193,7 @@ public final class validasi {
 
         Button tidak = new Button();
         tidak.setFont(new java.awt.Font("Inter Medium", Font.PLAIN, 18));
+        tidak.setPreferredSize(new Dimension(90, 35));
         tidak.setForeground(new Color(255, 30, 0));
         tidak.setBackground(new Color(255, 255, 255));
         tidak.setText("Tidak");
@@ -199,6 +201,7 @@ public final class validasi {
 
         Button oke = new Button();
         oke.setFont(new java.awt.Font("Inter Medium", Font.PLAIN, 18));
+        oke.setPreferredSize(new Dimension(100, 35));
         oke.setForeground(new Color(0, 131, 62));
         oke.setBackground(new Color(255, 255, 255));
         oke.setText("Oke");

@@ -265,7 +265,7 @@ public class DlgCekDataPasien extends widget.Dialog {
 
     public void setFlag(int flag) {
         if (flag <= 0) {
-            Valid.popupInfoDialog("Flag tidak valid..!!");
+            Valid.popupPeringatanDialog("Flag tidak valid..!!");
             return;
         }
 
@@ -290,11 +290,11 @@ public class DlgCekDataPasien extends widget.Dialog {
     private void cek() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (NoRMPasien.getText().isBlank()) {
-            Valid.popupInfoDialog("Isian masih kosong..!!");
+            Valid.popupPeringatanDialog("Isian masih kosong..!!");
         } else {
             String noRM = Sequel.cariIsiSmc("select pasien.no_rkm_medis from pasien where (pasien.no_rkm_medis = ? or trim(pasien.no_ktp) = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
             if (noRM.isBlank()) {
-                Valid.popupInfoDialog("Data pasien tidak ditemukan..!!");
+                Valid.popupGagalDialog("Data pasien tidak ditemukan..!!");
             } else {
                 switch (flag) {
                     case CEKIN_BOOKING:
