@@ -85,6 +85,8 @@ truncate table `inventaris_gambar`;
 truncate table `password_perusahaan_pasien`;
 truncate table `referensi_mobilejkn_bpjs_taskid_response2`;
 truncate table `referensi_mobilejkn_bpjs_taskid`;
+truncate table `satu_sehat_referensi_patient`;
+truncate table `satu_sehat_referensi_practitioneer`;
 truncate table `set_akses_edit_sementara`;
 truncate table `tampbeli1`;
 truncate table `tampjual1`;
