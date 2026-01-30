@@ -298,7 +298,7 @@ public class HalamanUtama extends javax.swing.JFrame {
     private void btnSatusehatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSatusehatActionPerformed
         JOptionPane.showMessageDialog(null, "Mohon maaf, fitur masih dalam tahap pengembangan");
         // this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        // String nikktppetugas = Sequel.cariIsi("select no_ktp from pegawai where nik='0132' ");
+        // String nikktppetugas = Sequel.cariIsiSmc("select no_ktp from pegawai where nik='0132' ");
         // Valid.panggilUrl("kyc/index.php?&nikagent=" + nikktppetugas + "");
         // this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnSatusehatActionPerformed

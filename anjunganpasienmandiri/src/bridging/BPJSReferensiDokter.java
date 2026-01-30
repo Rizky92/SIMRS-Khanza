@@ -246,7 +246,6 @@ public final class BPJSReferensiDokter extends widget.Dialog {
             btnCariPoli.requestFocus();
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            tampil(TCari.getText());
             tampil2(TCari.getText());
             this.setCursor(Cursor.getDefaultCursor());
         }
@@ -282,9 +281,8 @@ public final class BPJSReferensiDokter extends widget.Dialog {
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String poli) {
+    public void tampil2(String poli) {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
         try {
             Valid.tabelKosongSmc(tabMode);
             headers = new HttpHeaders();
@@ -295,44 +293,6 @@ public final class BPJSReferensiDokter extends widget.Dialog {
             headers.add("X-Signature", api.getHmac(utc));
             headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
             requestEntity = new HttpEntity(headers);
-            URL = link + "/referensi/dokter/pelayanan/1/tglPelayanan/" + Valid.getTglSmc(DTPCari1) + "/Spesialis/" + KdPoli.getText();
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-            if (nameNode.path("code").asText().equals("200")) {
-//                tabMode.addRow(new Object[]{
-//                    "A", "Rawat Inap", ""
-//                });
-                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-                //response = root.path("response");
-                if (response.path("list").isArray()) {
-                    i = 1;
-                    for (JsonNode list : response.path("list")) {
-                        if (list.path("kode").asText().toLowerCase().contains(poli.toLowerCase()) ||
-                            list.path("nama").asText().toLowerCase().contains(poli.toLowerCase())) {
-//                            tabMode.addRow(new Object[]{
-//                                i + ".", list.path("kode").asText(), list.path("nama").asText()
-//                            });
-                        }
-                        i++;
-                    }
-                }
-            } else {
-                if (!nameNode.path("code").asText().equals("201")) {
-                    JOptionPane.showMessageDialog(null, nameNode.path("message").asText());
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
-        }
-        this.setCursor(Cursor.getDefaultCursor());
-    }
-
-    public void tampil2(String poli) {
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        try {
             URL = link + "/referensi/dokter/pelayanan/2/tglPelayanan/" + Valid.getTglSmc(DTPCari1) + "/Spesialis/" + KdPoli.getText();
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
@@ -344,7 +304,6 @@ public final class BPJSReferensiDokter extends widget.Dialog {
                     "B", "Rawat Jalan", ""
                 });
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-                //response = root.path("response");
                 if (response.path("list").isArray()) {
                     i = 1;
                     for (JsonNode list : response.path("list")) {

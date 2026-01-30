@@ -1334,7 +1334,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }//GEN-LAST:event_btnAksiKonfirmasiActionPerformed
 
     private void userAksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userAksiKeyPressed
-        Valid.pindah(evt, btnAksiBatal, passAksi);
+        Valid.pindahSmc(evt, btnAksiBatal, passAksi);
     }//GEN-LAST:event_userAksiKeyPressed
 
     private void passAksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passAksiKeyPressed

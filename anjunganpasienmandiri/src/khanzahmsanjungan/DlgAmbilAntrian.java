@@ -253,7 +253,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('A', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
                     String.valueOf(Integer.parseInt(HurufA.getText().substring(HurufA.getText().indexOf("(") + 2, HurufA.getText().length() - 1)) + 1)
                 )) {
-                    param.put("logo", Sequel.cariGambar("select logo from setting"));
+                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
                     Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'A' and tanggal = current_date() order by nomor desc limit 1");
@@ -264,7 +264,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('B', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
                     String.valueOf(Integer.parseInt(HurufB.getText().substring(HurufB.getText().indexOf("(") + 2, HurufB.getText().length() - 1)) + 1)
                 )) {
-                    param.put("logo", Sequel.cariGambar("select logo from setting"));
+                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
                     Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'B' and tanggal = current_date() order by nomor desc limit 1");
@@ -275,7 +275,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('C', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
                     String.valueOf(Integer.parseInt(HurufC.getText().substring(HurufC.getText().indexOf("(") + 2, HurufC.getText().length() - 1)) + 1)
                 )) {
-                    param.put("logo", Sequel.cariGambar("select logo from setting"));
+                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
                     Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'C' and tanggal = current_date() order by nomor desc limit 1");
@@ -286,7 +286,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('D', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
                     String.valueOf(Integer.parseInt(HurufD.getText().substring(HurufD.getText().indexOf("(") + 2, HurufD.getText().length() - 1)) + 1)
                 )) {
-                    param.put("logo", Sequel.cariGambar("select logo from setting"));
+                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
                     Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'D' and tanggal = current_date() order by nomor desc limit 1");
@@ -297,7 +297,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('E', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
                     String.valueOf(Integer.parseInt(HurufE.getText().substring(HurufE.getText().indexOf("(") + 2, HurufE.getText().length() - 1)) + 1)
                 )) {
-                    param.put("logo", Sequel.cariGambar("select logo from setting"));
+                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
                     Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'E' and tanggal = current_date() order by nomor desc limit 1");
@@ -308,7 +308,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     "insert into antriloketcetak_smc (nomor, tanggal, jam) values (concat('F', lpad(?, greatest(length(substring(nomor, 2)), 3), '0')), current_date(), current_time())",
                     String.valueOf(Integer.parseInt(HurufF.getText().substring(HurufF.getText().indexOf("(") + 2, HurufF.getText().length() - 1)) + 1)
                 )) {
-                    param.put("logo", Sequel.cariGambar("select logo from setting"));
+                    param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
                     Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'F' and tanggal = current_date() order by nomor desc limit 1");

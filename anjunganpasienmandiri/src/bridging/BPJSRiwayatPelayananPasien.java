@@ -22,6 +22,8 @@ import fungsi.sekuel;
 import fungsi.koneksiDB;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
+import java.time.LocalDate;
+import java.util.Calendar;
 import javax.swing.JOptionPane;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -104,11 +106,9 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
             System.out.println("E : " + e);
         }
 
-        String tanggal90harikemarin = Sequel.cariIsi("SELECT DATE_SUB(CURRENT_DATE(), INTERVAL 90 DAY)");
-        Valid.SetTgl(DTPCari1, tanggal90harikemarin);
-//        DTPCari1.setDate(Year);
-//        System.out.println(Year);
-//        Valid.SetTgl(DTPCari1,Sequel.cariIsi("select "))
+        Calendar cal = Calendar.getInstance();
+        cal.add(Calendar.DAY_OF_MONTH, -90);
+        DTPCari1.setDate(cal.getTime());
     }
 
     /**
@@ -226,7 +226,7 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
         } else {
-            Valid.pindah(evt, NoKartu, BtnKeluar);
+            Valid.pindahSmc(evt, NoKartu, BtnKeluar);
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
@@ -309,7 +309,7 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
     }
 
     public void cekDataSEPHariIni(String nomorkartu) {
-        String tglhariini = Sequel.cariIsi("select current_date()");
+        String tglhariini = LocalDate.now().toString();
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
