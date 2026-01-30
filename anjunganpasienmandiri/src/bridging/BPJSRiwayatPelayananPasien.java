@@ -98,8 +98,6 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
             }
         }
 
-        NoKartu.setDocument(new BatasInput((byte) 100).getKata(NoKartu));
-
         try {
             link = koneksiDB.URLAPIBPJS();
         } catch (Exception e) {

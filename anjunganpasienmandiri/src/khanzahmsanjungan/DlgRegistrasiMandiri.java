@@ -345,15 +345,15 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
         if (noRM.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "No. RM Kosong..!!");
+            Valid.popupInfoDialog("No. RM Kosong..!!");
         } else if (kdPoli.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Pilih poli terlebih dahulu..!!");
+            Valid.popupInfoDialog("Pilih poli terlebih dahulu..!!");
         } else if (kdDokter.isBlank()) {
-            JOptionPane.showMessageDialog(null, "Pilih Dokter terlebih dahulu..!!");
+            Valid.popupInfoDialog("Pilih Dokter terlebih dahulu..!!");
         } else if (Sequel.cariExistsSmc("select * from reg_periksa where kd_pj = 'A09' and no_rkm_medis = ? and tgl_registrasi = current_date() and kd_poli = ? and kd_dokter = ?", noRM.getText(), kdPoli, kdDokter)) {
-            JOptionPane.showMessageDialog(null, "Maaf, anda sudah terdaftar pada hari ini dengan dokter dan poli yang sama..!!");
+            Valid.popupInfoDialog("Maaf, anda sudah terdaftar pada hari ini dengan dokter dan poli yang sama..!!");
         } else if (Sequel.cariExistsSmc("select * from reg_periksa join kamar_inap on reg_periksa.no_rawat = kamar_inap.no_rawat where kamar_inap.stts_pulang = '-' and reg_periksa.no_rkm_medis = ?", noRM.getText())) {
-            JOptionPane.showMessageDialog(null, "Maaf, pasien sedang dalam masa perawatan di rawat inap..!!");
+            Valid.popupInfoDialog("Maaf, pasien sedang dalam masa perawatan di rawat inap..!!");
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             int next = 0, retries = 5;
@@ -388,9 +388,9 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
                 param.put("kontakrs", instansiKontak);
                 param.put("norawat", noRawat);
                 Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), koneksiDB.PRINTJUMLAHBARCODE());
-                JOptionPane.showMessageDialog(null, "Berhasil!");
+                Valid.popupInfoDialog("Berhasil!");
             } else {
-                JOptionPane.showMessageDialog(null, "Pendaftaran gagal..!!\nSilahkan coba kembali.");
+                Valid.popupInfoDialog("Pendaftaran gagal..!!\nSilahkan coba kembali.");
             }
             this.setCursor(Cursor.getDefaultCursor());
             btnKeluarActionPerformed(null);

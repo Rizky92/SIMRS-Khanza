@@ -19,7 +19,6 @@ import java.sql.ResultSet;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +26,7 @@ import javax.swing.JOptionPane;
  */
 public final class sekuel {
     private final Connection connect = koneksiDB.condb();
+    private final validasi Valid = new validasi();
     private final boolean AKTIFKANTRACKSQL = koneksiDB.AKTIFKANTRACKSQL();
     private String track = "";
 
@@ -210,7 +210,7 @@ public final class sekuel {
             SimpanTrack(track.substring(track.indexOf("insert")));
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal menyimpan data!");
+            Valid.popupInfoDialog("Gagal menyimpan data!");
         }
     }
 
@@ -253,7 +253,7 @@ public final class sekuel {
             SimpanTrack(track.substring(track.indexOf("update")));
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Gagal mengupdate data!");
+            Valid.popupInfoDialog("Gagal mengupdate data!");
         }
     }
 
@@ -294,9 +294,9 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             if (e.getMessage().contains("constraint")) {
-                JOptionPane.showMessageDialog(null, "Gagal menghapus data, kemungkinan masih digunakan di bagian lainnya!");
+                Valid.popupInfoDialog("Gagal menghapus data, kemungkinan masih digunakan di bagian lainnya!");
             } else {
-                JOptionPane.showMessageDialog(null, "Gagal menghapus data!");
+                Valid.popupInfoDialog("Gagal menghapus data!");
             }
         }
     }

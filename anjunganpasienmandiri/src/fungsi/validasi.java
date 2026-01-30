@@ -103,7 +103,7 @@ public final class validasi {
                         jv.setVisible(true);
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Printer tidak ditemukan!");
+                    popupInfoDialog("Printer tidak ditemukan!");
                     JasperViewer jv = new JasperViewer(jp, false);
                     jv.setTitle(judul);
                     Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -115,7 +115,7 @@ public final class validasi {
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat melakukan proses cetak..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            popupGagalDialog("Terjadi kesalahan pada saat melakukan proses cetak..!!");
         }
     }
 
@@ -159,7 +159,7 @@ public final class validasi {
                     jv.setVisible(true);
                 }
             } else {
-                JOptionPane.showMessageDialog(null, "Printer tidak ditemukan!");
+                popupInfoDialog("Printer tidak ditemukan!");
                 JasperViewer jv = new JasperViewer(jp, false);
                 jv.setTitle(judul);
                 Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -170,7 +170,7 @@ public final class validasi {
             }
         } catch (JRException e) {
             System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat melakukan proses cetak..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+            popupGagalDialog("Terjadi kesalahan pada saat melakukan proses cetak..!!");
         }
     }
 

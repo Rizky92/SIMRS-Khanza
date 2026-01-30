@@ -247,7 +247,7 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
                 }
             }
             if (tabMode.getRowCount() == 0) {
-                JOptionPane.showMessageDialog(null, "Tidak ditemukan rujukan...!!");
+                Valid.popupInfoDialog("Tidak ditemukan rujukan...!!");
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : " + ex);

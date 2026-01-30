@@ -61,6 +61,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private final DlgCariPoliBPJS poli;
     private final BPJSRiwayatRujukanPasien riwayatRujukan;
     private final BPJSRiwayatPelayananPasien riwayatPelayanan;
+    private DlgLogin login = null;
     private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
     private final Set<String> VALIDASIBIOMETRIKAKTIF = new HashSet<>(Arrays.asList(koneksiDB.VALIDASIBIOMETRIKAKTIF()));
     private String hari = "",
@@ -69,7 +70,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         url = "",
         payload = "",
         utc = "",
-        aksi = "",
         kodeBPJS = "",
         instansiNama = "",
         instansiKota = "",
@@ -197,7 +197,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
 
-        barcode.setDocument(new BatasInput((byte) 3).getOnlyAngka(barcode));
+        barcode.setDocument(new BatasInput().hanyaInteger(2));
         emptTeks();
     }
 
@@ -209,16 +209,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
-        dlgAksiFP = new widget.Dialog();
-        judulAksi = new widget.Label();
-        panelTengahAksi = new widget.Panel();
-        userAksi = new widget.PasswordField();
-        passAksi = new widget.PasswordField();
-        label1 = new widget.Label();
-        label2 = new widget.Label();
-        panelBawahAksi = new widget.Panel();
-        btnAksiKonfirmasi = new widget.Button();
-        btnAksiBatal = new widget.Button();
         panelAtas = new widget.Panel();
         label4 = new widget.Label();
         emptyKiri = new widget.Panel();
@@ -320,80 +310,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         toggleInfoTambahan = new widget.PaneToggle();
         btnKonfirmasi = new widget.Button();
         btnBatal = new widget.Button();
-
-        dlgAksiFP.setUndecorated(false);
-
-        judulAksi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        judulAksi.setText("KONFIRMASI AKSI");
-        judulAksi.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
-        judulAksi.setPreferredSize(new java.awt.Dimension(400, 30));
-        dlgAksiFP.getContentPane().add(judulAksi, java.awt.BorderLayout.PAGE_START);
-
-        panelTengahAksi.setOpaque(false);
-        panelTengahAksi.setLayout(null);
-
-        userAksi.setForeground(new java.awt.Color(40, 40, 40));
-        userAksi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        userAksi.setPreferredSize(new java.awt.Dimension(270, 30));
-        userAksi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                userAksiKeyPressed(evt);
-            }
-        });
-        panelTengahAksi.add(userAksi);
-        userAksi.setBounds(120, 30, 270, 30);
-
-        passAksi.setForeground(new java.awt.Color(40, 40, 40));
-        passAksi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        passAksi.setPreferredSize(new java.awt.Dimension(270, 30));
-        passAksi.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                passAksiKeyPressed(evt);
-            }
-        });
-        panelTengahAksi.add(passAksi);
-        passAksi.setBounds(120, 70, 270, 30);
-
-        label1.setText("User ID :");
-        label1.setFocusable(false);
-        label1.setPreferredSize(new java.awt.Dimension(60, 30));
-        panelTengahAksi.add(label1);
-        label1.setBounds(0, 30, 110, 30);
-
-        label2.setText("Password :");
-        label2.setFocusable(false);
-        label2.setPreferredSize(new java.awt.Dimension(60, 30));
-        panelTengahAksi.add(label2);
-        label2.setBounds(0, 70, 110, 30);
-
-        dlgAksiFP.getContentPane().add(panelTengahAksi, java.awt.BorderLayout.CENTER);
-
-        panelBawahAksi.setOpaque(false);
-        panelBawahAksi.setPreferredSize(new java.awt.Dimension(50, 50));
-
-        btnAksiKonfirmasi.setText("KONFIRMASI");
-        btnAksiKonfirmasi.setFont(new java.awt.Font("Inter", 1, 14)); // NOI18N
-        btnAksiKonfirmasi.setPreferredSize(new java.awt.Dimension(140, 35));
-        btnAksiKonfirmasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAksiKonfirmasiActionPerformed(evt);
-            }
-        });
-        panelBawahAksi.add(btnAksiKonfirmasi);
-
-        btnAksiBatal.setBackground(new java.awt.Color(255, 255, 255));
-        btnAksiBatal.setForeground(new java.awt.Color(255, 23, 26));
-        btnAksiBatal.setText("Batal");
-        btnAksiBatal.setFont(new java.awt.Font("Inter", 0, 14)); // NOI18N
-        btnAksiBatal.setPreferredSize(new java.awt.Dimension(90, 35));
-        btnAksiBatal.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAksiBatalActionPerformed(evt);
-            }
-        });
-        panelBawahAksi.add(btnAksiBatal);
-
-        dlgAksiFP.getContentPane().add(panelBawahAksi, java.awt.BorderLayout.PAGE_END);
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -1205,152 +1121,112 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }//GEN-LAST:event_btnRiwayatPelayananActionPerformed
 
     private void btnApprovalFPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovalFPActionPerformed
-        resetAksi();
         if (noPeserta.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Maaf, No. Kartu Peserta tidak ada...!!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            Valid.popupPeringatanDialog("Maaf, No. Kartu Peserta tidak ada..!!");
         } else {
-            aksi = "Approval";
-            dlgAksiFP.setSize(415, 250);
-            dlgAksiFP.setLocationRelativeTo(null);
-            dlgAksiFP.setVisible(true);
+            if (login == null) {
+                login = new DlgLogin(null, true);
+                login.setSize(415, 250);
+                login.setLocationRelativeTo(getContentPane());
+            }
+            login.requireAkses("bpjs_sep");
+            login.setOnLoginListener(e -> {
+                try {
+                    url = koneksiDB.URLAPIBPJS() + "/Sep/aprovalSEP";
+                    System.out.println("URL : " + url);
+                    System.out.print("Approval FP : ");
+                    utc = api.getUTCDateTimeAsString();
+                    headers = new HttpHeaders();
+                    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                    headers.add("X-Timestamp", utc);
+                    headers.add("X-Signature", api.getHmac(utc));
+                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                    payload = " {" +
+                        "\"request\": {" +
+                        "\"t_sep\": {" +
+                        "\"noKartu\": \"" + noPeserta.getText() + "\"," +
+                        "\"tglSep\": \"" + tglSEP.getText() + "\"," +
+                        "\"jnsPelayanan\": \"2\"," +
+                        "\"jnsPengajuan\": \"2\"," +
+                        "\"keterangan\": \"Approval Fingerprint karena Gagal FP melalui Anjungan Pasien Mandiri " + instansiNama + "\"," +
+                        "\"user\": \"NoRM:" + noRM.getText() + "\"" +
+                        "}" +
+                        "}" +
+                        "}";
+                    entity = new HttpEntity(payload, headers);
+                    root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
+                    metadata = root.path("metaData");
+                    System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
+                    if (metadata.path("code").asText().equals("200")) {
+                        Valid.popupInfoDialog("Approval Berhasil");
+                    } else {
+                        Valid.popupInfoDialog(metadata.path("message").asText());
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Notif : " + ex);
+                    if (ex.toString().contains("UnknownHostException")) {
+                        Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
+                    }
+                }
+            });
+            login.setVisible(true);
         }
     }//GEN-LAST:event_btnApprovalFPActionPerformed
 
     private void btnPengajuanFPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPengajuanFPActionPerformed
-        resetAksi();
         if (noPeserta.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Maaf, No. Kartu Peserta tidak ada...!!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            Valid.popupPeringatanDialog("Maaf, No. Kartu Peserta tidak ada..!!");
         } else {
-            aksi = "Pengajuan";
-            dlgAksiFP.setSize(415, 250);
-            dlgAksiFP.setLocationRelativeTo(null);
-            dlgAksiFP.setVisible(true);
-        }
-    }//GEN-LAST:event_btnPengajuanFPActionPerformed
-
-    private void btnAksiKonfirmasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAksiKonfirmasiActionPerformed
-        if (noPeserta.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Maaf, No. Kartu Peserta tidak ada...!!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
-        } else {
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            try (PreparedStatement ps = koneksi.prepareStatement("select id_user from user where id_user = aes_encrypt(?, 'nur') and password = aes_encrypt(?, 'windi') limit 1")) {
-                ps.setString(1, new String(userAksi.getPassword()));
-                ps.setString(2, new String(passAksi.getPassword()));
-                try (ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        switch (aksi) {
-                            case "Pengajuan":
-                                try {
-                                    url = koneksiDB.URLAPIBPJS() + "/Sep/pengajuanSEP";
-                                    System.out.println("URL : " + url);
-                                    System.out.print("Pengajuan FP : ");
-                                    utc = api.getUTCDateTimeAsString();
-                                    headers = new HttpHeaders();
-                                    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-                                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-                                    headers.add("X-Timestamp", utc);
-                                    headers.add("X-Signature", api.getHmac(utc));
-                                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-                                    payload = " {" +
-                                        "\"request\": {" +
-                                        "\"t_sep\": {" +
-                                        "\"noKartu\": \"" + noPeserta.getText() + "\"," +
-                                        "\"tglSep\": \"" + tglSEP.getText() + "\"," +
-                                        "\"jnsPelayanan\": \"2\"," +
-                                        "\"jnsPengajuan\": \"2\"," +
-                                        "\"keterangan\": \"Pengajuan SEP Finger oleh Anjungan Pasien Mandiri RS Samarinda Medika Citra\"," +
-                                        "\"user\": \"NoRM:" + noRM.getText() + "\"" +
-                                        "}" +
-                                        "}" +
-                                        "}";
-                                    entity = new HttpEntity(payload, headers);
-                                    root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
-                                    metadata = root.path("metaData");
-                                    System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
-                                    if (metadata.path("code").asText().equals("200")) {
-                                        JOptionPane.showMessageDialog(null, "Pengajuan Berhasil");
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, metadata.path("message").asText());
-                                    }
-                                } catch (Exception ex) {
-                                    System.out.println("Notif : " + ex);
-                                    if (ex.toString().contains("UnknownHostException")) {
-                                        JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus...!");
-                                    }
-                                }
-                                break;
-                            case "Approval":
-                                try {
-                                    url = koneksiDB.URLAPIBPJS() + "/Sep/aprovalSEP";
-                                    System.out.println("URL : " + url);
-                                    System.out.print("Approval FP : ");
-                                    utc = api.getUTCDateTimeAsString();
-                                    headers = new HttpHeaders();
-                                    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-                                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-                                    headers.add("X-Timestamp", utc);
-                                    headers.add("X-Signature", api.getHmac(utc));
-                                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-                                    payload = " {" +
-                                        "\"request\": {" +
-                                        "\"t_sep\": {" +
-                                        "\"noKartu\": \"" + noPeserta.getText() + "\"," +
-                                        "\"tglSep\": \"" + tglSEP.getText() + "\"," +
-                                        "\"jnsPelayanan\": \"2\"," +
-                                        "\"jnsPengajuan\": \"2\"," +
-                                        "\"keterangan\": \"Approval FingerPrint karena Gagal FP melalui Anjungan Pasien Mandiri\"," +
-                                        "\"user\": \"NoRM:" + noRM.getText() + "\"" +
-                                        "}" +
-                                        "}" +
-                                        "}";
-                                    entity = new HttpEntity(payload, headers);
-                                    root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
-                                    metadata = root.path("metaData");
-                                    System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
-                                    if (metadata.path("code").asText().equals("200")) {
-                                        JOptionPane.showMessageDialog(null, "Approval Berhasil");
-                                    } else {
-                                        JOptionPane.showMessageDialog(null, metadata.path("message").asText());
-                                    }
-                                } catch (Exception ex) {
-                                    System.out.println("Notif : " + ex);
-                                    if (ex.toString().contains("UnknownHostException")) {
-                                        JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus...!");
-                                    }
-                                }
-                                break;
-                            default:
-                                JOptionPane.showMessageDialog(null, "Anda tidak diizinkan untuk melakukan aksi ini...!!!");
-                                break;
-                        }
+            if (login == null) {
+                login = new DlgLogin(null, true);
+                login.setSize(415, 250);
+                login.setLocationRelativeTo(getContentPane());
+            }
+            login.requireAkses("bpjs_sep");
+            login.setOnLoginListener(e -> {
+                try {
+                    url = koneksiDB.URLAPIBPJS() + "/Sep/pengajuanSEP";
+                    System.out.println("URL : " + url);
+                    System.out.print("Pengajuan FP : ");
+                    utc = api.getUTCDateTimeAsString();
+                    headers = new HttpHeaders();
+                    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                    headers.add("X-Timestamp", utc);
+                    headers.add("X-Signature", api.getHmac(utc));
+                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                    payload = " {" +
+                        "\"request\": {" +
+                        "\"t_sep\": {" +
+                        "\"noKartu\": \"" + noPeserta.getText() + "\"," +
+                        "\"tglSep\": \"" + tglSEP.getText() + "\"," +
+                        "\"jnsPelayanan\": \"2\"," +
+                        "\"jnsPengajuan\": \"2\"," +
+                        "\"keterangan\": \"Pengajuan SEP Finger oleh Anjungan Pasien Mandiri " + instansiNama + "\"," +
+                        "\"user\": \"NoRM:" + noRM.getText() + "\"" +
+                        "}" +
+                        "}" +
+                        "}";
+                    entity = new HttpEntity(payload, headers);
+                    root = mapper.readTree(api.getRest().exchange(url, HttpMethod.POST, entity, String.class).getBody());
+                    metadata = root.path("metaData");
+                    System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
+                    if (metadata.path("code").asText().equals("200")) {
+                        Valid.popupInfoDialog("Pengajuan Berhasil");
+                    } else {
+                        Valid.popupInfoDialog(metadata.path("message").asText());
+                    }
+                } catch (Exception ex) {
+                    System.out.println("Notif : " + ex);
+                    if (ex.toString().contains("UnknownHostException")) {
+                        Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
                     }
                 }
-            } catch (Exception e) {
-                System.out.println("Notif : " + e);
-                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses aksi...!!!");
-            }
-            this.setCursor(Cursor.getDefaultCursor());
+            });
+            login.setVisible(true);
         }
-    }//GEN-LAST:event_btnAksiKonfirmasiActionPerformed
-
-    private void userAksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_userAksiKeyPressed
-        Valid.pindahSmc(evt, btnAksiBatal, passAksi);
-    }//GEN-LAST:event_userAksiKeyPressed
-
-    private void passAksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passAksiKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            btnAksiKonfirmasiActionPerformed(null);
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            userAksi.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            btnAksiKonfirmasi.requestFocus();
-        }
-    }//GEN-LAST:event_passAksiKeyPressed
-
-    private void btnAksiBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAksiBatalActionPerformed
-        resetAksi();
-        dlgAksiFP.dispose();
-    }//GEN-LAST:event_btnAksiBatalActionPerformed
+    }//GEN-LAST:event_btnPengajuanFPActionPerformed
 
     private void btnFingerprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFingerprintActionPerformed
         if (noPeserta.getText().isBlank()) {
@@ -1592,8 +1468,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private widget.ComboBox asalRujukan;
     private widget.ComboBox asesmenPelayanan;
     private widget.TextField barcode;
-    private widget.Button btnAksiBatal;
-    private widget.Button btnAksiKonfirmasi;
     private widget.Button btnApprovalFP;
     private widget.Button btnBatal;
     private widget.Button btnFingerprint;
@@ -1606,7 +1480,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private widget.Button cariNoRujukan;
     private widget.Button cariPoli;
     private widget.TextField catatan;
-    private widget.Dialog dlgAksiFP;
     private widget.Panel emptyKanan;
     private widget.Panel emptyKiri;
     private widget.ComboBox flagProsedur;
@@ -1641,7 +1514,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private widget.TextField jenisPelayanan;
     private widget.TextField jenisPeserta;
     private widget.TextField jk;
-    private widget.Label judulAksi;
     private widget.ComboBox katarak;
     private widget.TextField kdKabKLL;
     private widget.TextField kdKecKLL;
@@ -1652,8 +1524,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private widget.TextField kodeDiagnosa;
     private widget.TextField kodePPK;
     private widget.TextField kodePPKRujukan;
-    private widget.Label label1;
-    private widget.Label label2;
     private widget.Label label4;
     private widget.Label labelValidasi;
     private widget.ComboBox lakaLantas;
@@ -1676,13 +1546,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private widget.TextField noTelp;
     private widget.Panel panelAtas;
     private widget.Panel panelBawah;
-    private widget.Panel panelBawahAksi;
     private widget.Numpad panelNumpad;
     private widget.Panel panelTambahan;
     private widget.Panel panelTengah;
-    private widget.Panel panelTengahAksi;
     private widget.Panel panelUtama;
-    private widget.PasswordField passAksi;
     private widget.ComboBox penunjang;
     private widget.TextField statusPeserta;
     private widget.ComboBox suplesi;
@@ -1692,7 +1559,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private widget.TextField tglSEP;
     private widget.PaneToggle toggleInfoTambahan;
     private widget.ComboBox tujuanKunjungan;
-    private widget.PasswordField userAksi;
     // End of variables declaration//GEN-END:variables
 
     private void setNomorRegistrasi() {
@@ -2723,7 +2589,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 } catch (Exception e) {
                     sukses = false;
                     System.out.println("Notif : " + e);
-                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan..!!\nSilahkan hubungi petugas", "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                    Valid.popupGagalDialog("Terjadi kesalahan..!!\nSilahkan hubungi petugas");
                 }
             }
         } else {
@@ -2807,7 +2673,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             } else {
                                 sukses = false;
                                 System.out.println("Jadwal praktek tidak ditemukan...!!!");
-                                JOptionPane.showMessageDialog(null, "Jadwal praktek tidak ditemukan...!!!", "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                                Valid.popupGagalDialog("Jadwal praktek tidak ditemukan...!!!");
                             }
                         }
                     } catch (Exception e) {
@@ -2924,28 +2790,28 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                             if (!metadata.path("code").asText().equals("200")) {
                                 sukses = false;
-                                JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                                Valid.popupPeringatanDialog(metadata.path("message").asText());
                             }
                         } catch (HttpClientErrorException e) {
                             sukses = false;
                             System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
                             Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
-                            JOptionPane.showMessageDialog(null, e.getMessage(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                            Valid.popupPeringatanDialog(e.getMessage());
                         } catch (HttpServerErrorException e) {
                             sukses = false;
                             System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
                             Sequel.logTaskid(noRawat, noRawat, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), "", datajam);
-                            JOptionPane.showMessageDialog(null, e.getMessage(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                            Valid.popupPeringatanDialog(e.getMessage());
                         } catch (Exception e) {
                             sukses = false;
                             System.out.println("Notif : " + e);
-                            JOptionPane.showMessageDialog(null, "Terjadi kesalahan..!!\nSilahkan hubungi petugas", "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                            Valid.popupGagalDialog("Terjadi kesalahan..!!\nSilahkan hubungi petugas");
                         }
                     }
                 } catch (Exception e) {
                     sukses = false;
                     System.out.println("Notif : " + e);
-                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan..!!\nSilahkan hubungi petugas", "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                    Valid.popupGagalDialog("Terjadi kesalahan..!!\nSilahkan hubungi petugas");
                 }
             }
         }
@@ -3004,7 +2870,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
         toggleInfoTambahan.setSelected(false);
         panelNumpad.setVisible(false);
-        resetAksi();
 
         statusFinger = false;
         isMobileJKN = false;
@@ -3043,7 +2908,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void updateSuratKontrol() {
         if (noSKDP.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Maaf, surat kontrol masih kosong..!!");
+            Valid.popupInfoDialog("Maaf, surat kontrol masih kosong..!!");
             return;
         }
 
@@ -3100,7 +2965,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         isCekPasien();
 
         if (Sequel.cariExistsSmc("select * from reg_periksa where no_rkm_medis = ? and tgl_registrasi = ? and kd_poli = ? and kd_dokter = ? and kd_pj = ?", noRM.getText(), tglSEP.getText(), kodePoliReg, kodeDokterReg, kodeBPJS)) {
-            JOptionPane.showMessageDialog(null, "Maaf, Telah terdaftar pemeriksaan hari ini\nSilahkan hubungi bagian pendaftaran..!!");
+            Valid.popupInfoDialog("Maaf, Telah terdaftar pemeriksaan hari ini\nSilahkan hubungi bagian pendaftaran..!!");
             return false;
         }
 
@@ -3145,12 +3010,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         } while (next++ < retries && !sukses);
 
         return sukses;
-    }
-
-    private void resetAksi() {
-        userAksi.setText("");
-        passAksi.setText("");
-        aksi = "";
     }
 
     private void isForm() {

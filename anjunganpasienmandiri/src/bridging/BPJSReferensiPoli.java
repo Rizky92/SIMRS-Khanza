@@ -76,8 +76,6 @@ public final class BPJSReferensiPoli extends widget.Dialog {
             }
         }
 
-        Poli.setDocument(new BatasInput((byte) 100).getKata(Poli));
-
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             Poli.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override

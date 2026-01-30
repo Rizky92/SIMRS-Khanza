@@ -77,8 +77,6 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
             }
         }
 
-        diagnosa.setDocument(new BatasInput((byte) 100).getKata(diagnosa));
-
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             diagnosa.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -211,7 +209,7 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (diagnosa.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Silahkan masukkan pencarian terlebih dahulu..!!!");
+            Valid.popupInfoDialog("Silahkan masukkan pencarian terlebih dahulu..!!!");
         } else {
             tampil(diagnosa.getText());
         }

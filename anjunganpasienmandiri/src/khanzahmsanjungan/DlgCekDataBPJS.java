@@ -1,13 +1,12 @@
 package khanzahmsanjungan;
 
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 public class DlgCekDataBPJS extends widget.Dialog {
-
     public static final int SEP_KUNJUNGAN_PERTAMA = 1;
     public static final int SEP_KONTROL = 2;
     public static final int SEP_KONTROL_BEDA_POLI = 3;
@@ -22,6 +21,7 @@ public class DlgCekDataBPJS extends widget.Dialog {
     private static final String INPUT_MOBILEJKN = "No. RM / NIK / Peserta BPJS / Surat Kontrol :";
 
     private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
     private final DlgRegistrasiBPJS regist;
 
     private int flag = -1;
@@ -259,7 +259,7 @@ public class DlgCekDataBPJS extends widget.Dialog {
 
     public void setFlag(int flag) {
         if (flag <= 0) {
-            JOptionPane.showMessageDialog(null, "Flag tidak valid..!!");
+            Valid.popupInfoDialog("Flag tidak valid..!!");
             return;
         }
 
@@ -295,7 +295,7 @@ public class DlgCekDataBPJS extends widget.Dialog {
     private void cek() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (NoRMPasien.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Isian masih kosong..!!");
+            Valid.popupInfoDialog("Isian masih kosong..!!");
         } else {
             if (flag == SEP_MOBILEJKN) {
                 String noKartu = Sequel.cariIsiSmc("select pasien.no_peserta from pasien where (pasien.no_ktp = ? or pasien.no_peserta = ? or pasien.no_rkm_medis = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
@@ -303,7 +303,7 @@ public class DlgCekDataBPJS extends widget.Dialog {
                     noKartu = Sequel.cariIsiSmc("select bridging_sep.no_kartu from bridging_surat_kontrol_bpjs join bridging_sep on bridging_surat_kontrol_bpjs.no_sep = bridging_sep.no_sep where bridging_surat_kontrol_bpjs.no_surat = ?", NoRMPasien.getText().trim());
                 }
                 if (noKartu.isBlank()) {
-                    JOptionPane.showMessageDialog(null, "Data pasien tidak ditemukan..!!");
+                    Valid.popupInfoDialog("Data pasien tidak ditemukan..!!");
                 } else {
                     if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noKartu)) {
                         regist.tampilMobileJKN(noKartu);
@@ -313,18 +313,18 @@ public class DlgCekDataBPJS extends widget.Dialog {
                         flag = -1;
                         dispose();
                     } else {
-                        JOptionPane.showMessageDialog(null, "Data booking MobileJKN tidak ditemukan..!!");
+                        Valid.popupInfoDialog("Data booking MobileJKN tidak ditemukan..!!");
                     }
                 }
             } else if (flag == SEP_KONTROL) {
                 String noSKDP = Sequel.cariIsiSmc("select bridging_surat_kontrol_bpjs.no_surat from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?", NoRMPasien.getText().trim());
                 if (noSKDP.isBlank()) {
-                    JOptionPane.showMessageDialog(null, "Data rujukan tidak ditemukan..!!");
+                    Valid.popupInfoDialog("Data rujukan tidak ditemukan..!!");
                 } else {
                     if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorreferensi = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noSKDP)) {
-                        JOptionPane.showMessageDialog(null, "Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
+                        Valid.popupInfoDialog("Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
                     } else if (Sequel.cariIntegerSmc("select datediff((select tgl_rencana from bridging_surat_kontrol_bpjs where no_surat = ?), current_date())", noSKDP) > 0) {
-                        JOptionPane.showMessageDialog(null, "Jadwal kontrol pasien tidak boleh dimajukan..!!");
+                        Valid.popupInfoDialog("Jadwal kontrol pasien tidak boleh dimajukan..!!");
                     } else {
                         regist.tampilKontrol(noSKDP);
                         regist.setSize(getContentPane().getSize());
@@ -337,10 +337,10 @@ public class DlgCekDataBPJS extends widget.Dialog {
             } else {
                 String noKartu = Sequel.cariIsiSmc("select pasien.no_peserta from pasien where (pasien.no_ktp = ? or pasien.no_peserta = ? or pasien.no_rkm_medis = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
                 if (noKartu.isBlank()) {
-                    JOptionPane.showMessageDialog(null, "Data pasien tidak ditemukan..!!");
+                    Valid.popupInfoDialog("Data pasien tidak ditemukan..!!");
                 } else {
                     if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Belum', 'Checkin')", noKartu)) {
-                        JOptionPane.showMessageDialog(null, "Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
+                        Valid.popupInfoDialog("Pasien telah mengambil antrian menggunakan Mobile JKN.\nSilahkan cekin melalui menu \"Cek In MobileJKN\"..!!");
                     } else {
                         switch (flag) {
                             case SEP_KUNJUNGAN_PERTAMA:

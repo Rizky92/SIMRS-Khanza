@@ -1,19 +1,19 @@
 package khanzahmsanjungan;
 
 import fungsi.koneksiDB;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author it-rsib
  */
 public class HalamanUtama extends javax.swing.JFrame {
-
+    private final validasi Valid = new validasi();
     private final ArrayList<String> TOMBOLDIMATIKAN = new ArrayList(Arrays.asList(koneksiDB.TOMBOLDIMATIKAN()));
     private DlgCekDataPasien umum = null;
     private DlgCekDataBPJS bpjs = null;
@@ -234,7 +234,7 @@ public class HalamanUtama extends javax.swing.JFrame {
 
     private void btnBookingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBookingActionPerformed
         if (!koneksiDB.BOOKINGLANGSUNGREGISTRASI()) {
-            JOptionPane.showMessageDialog(null, "Mohon maaf, fitur masih dalam tahap pengembangan");
+            Valid.popupInfoDialog("Mohon maaf, fitur masih dalam tahap pengembangan");
         } else {
             if (umum == null) {
                 umum = new DlgCekDataPasien(this, false);
@@ -296,7 +296,7 @@ public class HalamanUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAntrianActionPerformed
 
     private void btnSatusehatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSatusehatActionPerformed
-        JOptionPane.showMessageDialog(null, "Mohon maaf, fitur masih dalam tahap pengembangan");
+        Valid.popupInfoDialog("Mohon maaf, fitur masih dalam tahap pengembangan");
         // this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         // String nikktppetugas = Sequel.cariIsiSmc("select no_ktp from pegawai where nik='0132' ");
         // Valid.panggilUrl("kyc/index.php?&nikagent=" + nikktppetugas + "");

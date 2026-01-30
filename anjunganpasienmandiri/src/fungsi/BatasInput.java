@@ -4,10 +4,9 @@
  */
 package fungsi;
 
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.text.AttributeSet;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DocumentFilter;
 import javax.swing.text.PlainDocument;
 
 /**
@@ -15,179 +14,46 @@ import javax.swing.text.PlainDocument;
  * @author Owner
  */
 public class BatasInput {
-    private final int length;
-    private PlainDocument filter;
+    private int length;
 
     public BatasInput(int length) {
         this.length = length;
     }
 
-    public PlainDocument getFilter(final JTextField inputan) {
-        filter = new PlainDocument() {
-            @Override
-            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-                StringBuilder buf = new StringBuilder();
-                int c = 0;
-                char[] upp = str.toCharArray();
-                for (int i = 0; i < upp.length; i++) {
-                    upp[i] = Character.toUpperCase(upp[i]);
-                    boolean isOnlyAngka = Character.isDigit(upp[i]);
-                    boolean isOnlyLetter = Character.isLetter(upp[i]);
-                    boolean isOnlySpasi = Character.isSpaceChar(upp[i]);
-                    if (isOnlyLetter == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlyAngka == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlySpasi == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlyLetter == false) {
-                        upp[c] = upp[i];
-                        c++;
-                    }
-                }
-                buf.append(upp, 0, c);
-                int x = inputan.getText().length();
-                if (x < length) {
-                    super.insertString(offs, new String(buf).replaceAll("'", "").replaceAll("\\\\", ""), a);
-                }
-            }
-        };
-        return filter;
+    public BatasInput() {
+
     }
 
-    public PlainDocument getFilter(final JTextArea inputan) {
-        filter = new PlainDocument() {
+    public PlainDocument hanyaInteger(final int limit) {
+        PlainDocument document = new PlainDocument();
+        document.setDocumentFilter(new DocumentFilter() {
             @Override
-            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-                StringBuilder buf = new StringBuilder();
-                int c = 0;
-                char[] upp = str.toCharArray();
-                for (int i = 0; i < upp.length; i++) {
-                    upp[i] = Character.toUpperCase(upp[i]);
-                    boolean isOnlyAngka = Character.isDigit(upp[i]);
-                    boolean isOnlyLetter = Character.isLetter(upp[i]);
-                    boolean isOnlySpasi = Character.isSpaceChar(upp[i]);
-                    if (isOnlyLetter == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlyAngka == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlySpasi == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlyLetter == false) {
-                        upp[c] = upp[i];
-                        c++;
-                    }
+            public void insertString(DocumentFilter.FilterBypass fb, int offset, String text, AttributeSet attr) throws BadLocationException {
+                if (text == null) {
+                    return;
                 }
-                buf.append(upp, 0, c);
-                int x = inputan.getText().length();
-                if (x < length) {
-                    super.insertString(offs, new String(buf).replaceAll("'", "").replaceAll("\\\\", ""), a);
+
+                String newText = fb.getDocument().getText(0, fb.getDocument().getLength());
+                newText = newText.substring(0, offset) + text + newText.substring(offset);
+
+                if (newText.matches("\\d*") && newText.length() <= limit) {
+                    super.insertString(fb, offset, text, attr);
                 }
             }
-        };
-        return filter;
-    }
 
-    public PlainDocument getOnlyAngka(final JTextField inputan) {
-        filter = new PlainDocument() {
             @Override
-            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-                StringBuffer buf = new StringBuffer();
-                int c = 0;
-                char[] upp = str.toCharArray();
-                for (int i = 0; i < upp.length; i++) {
-                    upp[i] = Character.toUpperCase(upp[i]);
-                    boolean isOnlyAngka = Character.isDigit(upp[i]);
-                    if (isOnlyAngka == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    }
-                }
-                buf.append(upp, 0, c);
-                int x = inputan.getText().length();
-                if (x < length) {
-                    super.insertString(offs, new String(buf), a);
+            public void replace(DocumentFilter.FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                String current = fb.getDocument().getText(0, fb.getDocument().getLength());
+                String newText = current.substring(0, offset) +
+                    (text == null ? "" : text) +
+                    current.substring(offset + length);
+
+                if (newText.matches("\\d*") && newText.length() <= limit) {
+                    super.replace(fb, offset, length, text, attrs);
                 }
             }
-        };
-        return filter;
-    }
+        });
 
-    public PlainDocument getKata(final JTextField inputan) {
-        filter = new PlainDocument() {
-            @Override
-            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-                StringBuilder buf = new StringBuilder();
-                int c = 0;
-                char[] upp = str.toCharArray();
-                for (int i = 0; i < upp.length; i++) {
-                    boolean isOnlyAngka = Character.isDigit(upp[i]);
-                    boolean isOnlyLetter = Character.isLetter(upp[i]);
-                    boolean isOnlySpasi = Character.isSpaceChar(upp[i]);
-
-                    if (isOnlyLetter == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlyAngka == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlySpasi == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlyLetter == false) {
-                        upp[c] = upp[i];
-                        c++;
-                    }
-                }
-                buf.append(upp, 0, c);
-                int x = inputan.getText().length();
-                if (x < length) {
-                    super.insertString(offs, new String(buf).replaceAll("'", "").replaceAll("\\\\", ""), a);
-                }
-            }
-        };
-        return filter;
-    }
-
-    public PlainDocument getKata(final JTextArea inputan) {
-        filter = new PlainDocument() {
-            @Override
-            public void insertString(int offs, String str, AttributeSet a) throws BadLocationException {
-                StringBuilder buf = new StringBuilder();
-                int c = 0;
-                char[] upp = str.toCharArray();
-                for (int i = 0; i < upp.length; i++) {
-                    boolean isOnlyAngka = Character.isDigit(upp[i]);
-                    boolean isOnlyLetter = Character.isLetter(upp[i]);
-                    boolean isOnlySpasi = Character.isSpaceChar(upp[i]);
-
-                    if (isOnlyLetter == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlyAngka == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlySpasi == true) {
-                        upp[c] = upp[i];
-                        c++;
-                    } else if (isOnlyLetter == false) {
-                        upp[c] = upp[i];
-                        c++;
-                    }
-                }
-                buf.append(upp, 0, c);
-                int x = inputan.getText().length();
-                if (x < length) {
-                    super.insertString(offs, new String(buf).replaceAll("'", "").replaceAll("\\\\", ""), a);
-                }
-            }
-        };
-        return filter;
+        return document;
     }
 }

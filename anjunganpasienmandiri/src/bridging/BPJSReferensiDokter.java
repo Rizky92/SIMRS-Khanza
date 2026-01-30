@@ -69,8 +69,6 @@ public final class BPJSReferensiDokter extends widget.Dialog {
             }
         }
 
-        TCari.setDocument(new BatasInput((byte) 100).getKata(TCari));
-
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -242,7 +240,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         if (KdPoli.getText().trim().equals("") || NmPoli.getText().trim().equals("")) {
-            JOptionPane.showMessageDialog(null, "Silahkan pilih spesialis dulu..!!");
+            Valid.popupInfoDialog("Silahkan pilih spesialis dulu..!!");
             btnCariPoli.requestFocus();
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
@@ -324,7 +322,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
         } catch (Exception ex) {
             System.out.println("Notifikasi : " + ex);
             if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus...!");
+                Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
             }
         }
         this.setCursor(Cursor.getDefaultCursor());

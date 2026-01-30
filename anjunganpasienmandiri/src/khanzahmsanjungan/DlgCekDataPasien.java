@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.border.TitledBorder;
 
 public class DlgCekDataPasien extends widget.Dialog {
-
     public static final int REGIST_MANDIRI = 1;
     public static final int CEKIN_BOOKING = 2;
 
@@ -266,7 +265,7 @@ public class DlgCekDataPasien extends widget.Dialog {
 
     public void setFlag(int flag) {
         if (flag <= 0) {
-            JOptionPane.showMessageDialog(null, "Flag tidak valid..!!");
+            Valid.popupInfoDialog("Flag tidak valid..!!");
             return;
         }
 
@@ -291,11 +290,11 @@ public class DlgCekDataPasien extends widget.Dialog {
     private void cek() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (NoRMPasien.getText().isBlank()) {
-            JOptionPane.showMessageDialog(null, "Isian masih kosong..!!");
+            Valid.popupInfoDialog("Isian masih kosong..!!");
         } else {
             String noRM = Sequel.cariIsiSmc("select pasien.no_rkm_medis from pasien where (pasien.no_rkm_medis = ? or trim(pasien.no_ktp) = ?)", NoRMPasien.getText().trim(), NoRMPasien.getText().trim());
             if (noRM.isBlank()) {
-                JOptionPane.showMessageDialog(null, "Data pasien tidak ditemukan..!!");
+                Valid.popupInfoDialog("Data pasien tidak ditemukan..!!");
             } else {
                 switch (flag) {
                     case CEKIN_BOOKING:
@@ -333,29 +332,29 @@ public class DlgCekDataPasien extends widget.Dialog {
                     param.put("namars", Sequel.cariIsiSmc("select setting.nama_instansi from setting limit 1"));
                     param.put("kotars", Sequel.cariIsiSmc("select setting.kabupaten from setting limit 1"));
                     if (!rs.getString("stts").equals("Belum") || rs.getBoolean("ada_pemeriksaan")) {
-                        JOptionPane.showMessageDialog(null, "Anda sudah menerima pelayanan pada hari ini..!!\nSilahkan konfirmasi ke petugas.", "Gagal", JOptionPane.ERROR_MESSAGE);
+                        Valid.popupPeringatanDialog("Anda sudah menerima pelayanan pada hari ini..!!\nSilahkan konfirmasi ke petugas.");
                     } else if (rs.getString("status").equals("Checkin")) {
                         if (koneksiDB.PRINTJUMLAHBARCODE() > 0) {
                             if (JOptionPane.showConfirmDialog(null, "Anda sudah melakukan checkin pada hari ini\nApakah mau mencetak barcode?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
                                 Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), koneksiDB.PRINTJUMLAHBARCODE());
-                                JOptionPane.showMessageDialog(null, "Barcode berhasil dicetak..!!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                                Valid.popupInfoDialog("Barcode berhasil dicetak..!!");
                             }
                         } else {
-                            JOptionPane.showMessageDialog(null, "Anda sudah melakukan checkin pada hari ini..!!");
+                            Valid.popupInfoDialog("Anda sudah melakukan checkin pada hari ini..!!");
                         }
                     } else {
                         Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", rs.getString("no_rawat"));
                         Sequel.mengupdateSmc("booking_registrasi", "waktu_kunjungan = now(), status = 'Checkin'", "no_rawat = ?", rs.getString("no_rawat"));
-                        JOptionPane.showMessageDialog(null, "Check in berhasil..!!", "Berhasil", JOptionPane.INFORMATION_MESSAGE);
+                        Valid.popupInfoDialog("Check in berhasil..!!");
                         Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), koneksiDB.PRINTJUMLAHBARCODE());
                     }
                 } else {
-                    JOptionPane.showMessageDialog(null, "Maaf, jadwal booking untuk hari ini tidak ditemukan\nSilahkan konfirmasi ke pendaftaran..!!");
+                    Valid.popupInfoDialog("Maaf, jadwal booking untuk hari ini tidak ditemukan\nSilahkan konfirmasi ke pendaftaran..!!");
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
-            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mencari data pasien\nSilahkan konfirmasi ke pendaftaran..!!");
+            Valid.popupInfoDialog("Terjadi kesalahan pada saat mencari data pasien\nSilahkan konfirmasi ke pendaftaran..!!");
         }
     }
 }
