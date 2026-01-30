@@ -13,7 +13,7 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
 import java.awt.Cursor;
@@ -69,7 +69,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
             }
         }
 
-        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+        TCari.setDocument(new BatasInput((byte) 100).getKata(TCari));
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {

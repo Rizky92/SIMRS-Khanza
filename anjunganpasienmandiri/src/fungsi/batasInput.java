@@ -14,11 +14,11 @@ import javax.swing.text.PlainDocument;
  *
  * @author Owner
  */
-public class batasInput {
+public class BatasInput {
     private final int length;
     private PlainDocument filter;
 
-    public batasInput(int length) {
+    public BatasInput(int length) {
         this.length = length;
     }
 

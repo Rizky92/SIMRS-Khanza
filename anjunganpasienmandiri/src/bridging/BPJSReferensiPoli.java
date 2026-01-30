@@ -13,7 +13,7 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -76,7 +76,7 @@ public final class BPJSReferensiPoli extends widget.Dialog {
             }
         }
 
-        Poli.setDocument(new batasInput((byte) 100).getKata(Poli));
+        Poli.setDocument(new BatasInput((byte) 100).getKata(Poli));
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             Poli.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {

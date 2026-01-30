@@ -11,7 +11,7 @@ import com.sun.jna.Native;
 import com.sun.jna.Pointer;
 import com.sun.jna.platform.win32.User32;
 import com.sun.jna.platform.win32.WinDef;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -197,7 +197,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
         });
 
-        barcode.setDocument(new batasInput((byte) 3).getOnlyAngka(barcode));
+        barcode.setDocument(new BatasInput((byte) 3).getOnlyAngka(barcode));
         emptTeks();
     }
 

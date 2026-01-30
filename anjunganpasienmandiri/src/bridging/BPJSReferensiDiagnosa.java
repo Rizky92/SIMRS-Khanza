@@ -13,7 +13,7 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.batasInput;
+import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -77,7 +77,7 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
             }
         }
 
-        diagnosa.setDocument(new batasInput((byte) 100).getKata(diagnosa));
+        diagnosa.setDocument(new BatasInput((byte) 100).getKata(diagnosa));
 
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             diagnosa.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
