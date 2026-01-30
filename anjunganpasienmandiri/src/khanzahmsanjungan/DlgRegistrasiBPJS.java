@@ -982,7 +982,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         } else if (noPeserta.getText().isBlank()) {
             Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else if (!Sequel.cariExistsSmc("select * from pasien where no_rkm_medis = ?", noRM.getText())) {
-            Valid.popupPeringatanDialog("Maaf, No. RM. tidak sesuai..!!");
+            Valid.popupPeringatanDialog("Maaf, No. RM. tidak sesuai..!!", 5);
         } else if (kodePPKRujukan.getText().isBlank() || namaPPKRujukan.getText().isBlank()) {
             Valid.teksKosongSmc(kodePPKRujukan, "PPK Rujukan");
         } else if (kodePPK.getText().isBlank() || namaPPK.getText().isBlank()) {
@@ -1096,7 +1096,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void cariNoRujukanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariNoRujukanActionPerformed
         if (noPeserta.getText().isBlank()) {
-            Valid.popupPeringatanDialog("No. Kartu masih kosong..!!");
+            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             riwayatRujukan.setSize(getContentPane().getSize());
@@ -1109,7 +1109,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void btnRiwayatPelayananActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRiwayatPelayananActionPerformed
         if (noPeserta.getText().isBlank()) {
-            Valid.popupPeringatanDialog("No. Kartu masih kosong..!!");
+            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             riwayatPelayanan.setSize(getContentPane().getSize());
@@ -1122,7 +1122,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void btnApprovalFPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApprovalFPActionPerformed
         if (noPeserta.getText().isBlank()) {
-            Valid.popupPeringatanDialog("Maaf, No. Kartu Peserta tidak ada..!!");
+            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             if (login == null) {
                 login = new DlgLogin(null, true);
@@ -1161,12 +1161,12 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     if (metadata.path("code").asText().equals("200")) {
                         Valid.popupInfoDialog("Approval Berhasil");
                     } else {
-                        Valid.popupInfoDialog(metadata.path("message").asText());
+                        Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
                     }
                 } catch (Exception ex) {
                     System.out.println("Notif : " + ex);
                     if (ex.toString().contains("UnknownHostException")) {
-                        Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
+                        Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
             });
@@ -1176,7 +1176,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void btnPengajuanFPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPengajuanFPActionPerformed
         if (noPeserta.getText().isBlank()) {
-            Valid.popupPeringatanDialog("Maaf, No. Kartu Peserta tidak ada..!!");
+            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             if (login == null) {
                 login = new DlgLogin(null, true);
@@ -1215,12 +1215,12 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     if (metadata.path("code").asText().equals("200")) {
                         Valid.popupInfoDialog("Pengajuan Berhasil");
                     } else {
-                        Valid.popupInfoDialog(metadata.path("message").asText());
+                        Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
                     }
                 } catch (Exception ex) {
                     System.out.println("Notif : " + ex);
                     if (ex.toString().contains("UnknownHostException")) {
-                        Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
+                        Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
             });
@@ -1230,7 +1230,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void btnFingerprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFingerprintActionPerformed
         if (noPeserta.getText().isBlank()) {
-            Valid.popupPeringatanDialog("No. Kartu masih kosong..!!");
+            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             SwingUtilities.invokeLater(() -> {
                 try {
@@ -1313,7 +1313,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void btnFristaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFristaActionPerformed
         if (noPeserta.getText().isBlank()) {
-            Valid.popupPeringatanDialog("No. Kartu masih kosong..!!");
+            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             SwingUtilities.invokeLater(() -> {
                 try {
@@ -1804,7 +1804,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         } catch (Exception ex) {
             System.out.println("Notif : " + ex);
             if (ex.toString().contains("UnknownHostException")) {
-                Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
             }
         }
     }
@@ -1813,7 +1813,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         statusFinger = false;
         String keteranganValidasi = "";
         if (noPeserta.getText().isBlank()) {
-            Valid.popupPeringatanDialog("No. Kartu masih kosong..!!");
+            Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
             if (Sequel.cariIntegerSmc("select timestampdiff(year, ?, current_date())", tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
                 try {
@@ -1862,7 +1862,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 } catch (Exception ex) {
                     System.out.println("Notif : " + ex);
                     if (ex.toString().contains("UnknownHostException")) {
-                        Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                        Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
             }
@@ -2030,14 +2030,14 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 } catch (Exception e) {
                     System.out.println("Notif : " + e);
                     if (e.toString().contains("UnknownHostException")) {
-                        Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                        Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
             if (e.toString().contains("UnknownHostException")) {
-                Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
             }
         }
     }
@@ -2136,7 +2136,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         } catch (Exception e) {
                             System.out.println("Notif : " + e);
                             if (e.toString().contains("UnknownHostException")) {
-                                Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                                Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                             }
                         }
                     } else {
@@ -2222,7 +2222,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         } catch (Exception ex) {
                             System.out.println("Notif : " + ex);
                             if (ex.toString().contains("UnknownHostException")) {
-                                Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                                Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                             }
                         }
                     }
@@ -2350,7 +2350,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                     } catch (Exception e) {
                                         System.out.println("Notif : " + e);
                                         if (e.toString().contains("UnknownHostException")) {
-                                            Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                                            Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                         }
                                         emptTeks();
                                     }
@@ -2389,7 +2389,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                     } catch (Exception e) {
                                         System.out.println("Notif : " + e);
                                         if (e.toString().contains("UnknownHostException")) {
-                                            Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                                            Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                         }
                                         emptTeks();
                                     }
@@ -2463,7 +2463,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                                     } catch (Exception e) {
                                                         System.out.println("Notif : " + e);
                                                         if (e.toString().contains("UnknownHostException")) {
-                                                            Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                                                            Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                                                         }
                                                         emptTeks();
                                                     }
@@ -2493,7 +2493,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         emptTeks();
                         System.out.println("Notif : " + e);
                         if (e.toString().contains("UnknownHostException")) {
-                            Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+                            Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                         }
                     }
                 } else {
@@ -2908,48 +2908,47 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
     private void updateSuratKontrol() {
         if (noSKDP.getText().isBlank()) {
-            Valid.popupInfoDialog("Maaf, surat kontrol masih kosong..!!");
-            return;
-        }
-
-        try {
-            url = koneksiDB.URLAPIBPJS() + "/RencanaKontrol/Update";
-            System.out.println("URL : " + url);
-            System.out.print("Update rencana kontrol [" + noSKDP.getText() + "] : ");
-            utc = api.getUTCDateTimeAsString();
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-            headers.add("X-Timestamp", utc);
-            headers.add("X-Signature", api.getHmac(utc));
-            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            payload = "{" +
-                "\"request\": {" +
-                "\"noSuratKontrol\":\"" + noSKDP.getText() + "\"," +
-                "\"noSEP\":\"" + Sequel.cariIsiSmc("select no_sep from bridging_surat_kontrol_bpjs where no_surat = ?", noSKDP.getText()) + "\"," +
-                "\"kodeDokter\":\"" + kodeDokter + "\"," +
-                "\"poliKontrol\":\"" + kodePoli + "\"," +
-                "\"tglRencanaKontrol\":\"" + tglSEP.getText() + "\"," +
-                "\"user\":\"" + noPeserta.getText() + "\"" +
-                "}" +
-                "}";
-            entity = new HttpEntity(payload, headers);
-            root = mapper.readTree(api.getRest().exchange(url, HttpMethod.PUT, entity, String.class).getBody());
-            metadata = root.path("metaData");
-            System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
-            if (metadata.path("code").asText().equals("200")) {
-                Sequel.mengupdateSmc("bridging_surat_kontrol_bpjs",
-                    "tgl_rencana = ?, kd_dokter_bpjs = ?, nm_dokter_bpjs = ?, kd_poli_bpjs = ?, nm_poli_bpjs = ?", "no_surat = ?",
-                    tglSEP.getText(), kodeDokter, namaDokter.getText(), kodePoli, namaPoli.getText(), noSKDP.getText()
-                );
-                tglRencanaKontrol = tglSEP.getText();
-            } else {
-                JOptionPane.showMessageDialog(null, metadata.path("message").asText());
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            if (e.toString().contains("UnknownHostException")) {
-                Valid.popupPeringatanDialog("Koneksi ke server BPJS terputus..!!");
+            Valid.teksKosongSmc(noSKDP, "No. Surat Kontrol");
+        } else {
+            try {
+                url = koneksiDB.URLAPIBPJS() + "/RencanaKontrol/Update";
+                System.out.println("URL : " + url);
+                System.out.print("Update rencana kontrol [" + noSKDP.getText() + "] : ");
+                utc = api.getUTCDateTimeAsString();
+                headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                headers.add("X-Timestamp", utc);
+                headers.add("X-Signature", api.getHmac(utc));
+                headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                payload = "{" +
+                    "\"request\": {" +
+                    "\"noSuratKontrol\":\"" + noSKDP.getText() + "\"," +
+                    "\"noSEP\":\"" + Sequel.cariIsiSmc("select no_sep from bridging_surat_kontrol_bpjs where no_surat = ?", noSKDP.getText()) + "\"," +
+                    "\"kodeDokter\":\"" + kodeDokter + "\"," +
+                    "\"poliKontrol\":\"" + kodePoli + "\"," +
+                    "\"tglRencanaKontrol\":\"" + tglSEP.getText() + "\"," +
+                    "\"user\":\"" + noPeserta.getText() + "\"" +
+                    "}" +
+                    "}";
+                entity = new HttpEntity(payload, headers);
+                root = mapper.readTree(api.getRest().exchange(url, HttpMethod.PUT, entity, String.class).getBody());
+                metadata = root.path("metaData");
+                System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
+                if (metadata.path("code").asText().equals("200")) {
+                    Sequel.mengupdateSmc("bridging_surat_kontrol_bpjs",
+                        "tgl_rencana = ?, kd_dokter_bpjs = ?, nm_dokter_bpjs = ?, kd_poli_bpjs = ?, nm_poli_bpjs = ?", "no_surat = ?",
+                        tglSEP.getText(), kodeDokter, namaDokter.getText(), kodePoli, namaPoli.getText(), noSKDP.getText()
+                    );
+                    tglRencanaKontrol = tglSEP.getText();
+                } else {
+                    JOptionPane.showMessageDialog(null, metadata.path("message").asText());
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                if (e.toString().contains("UnknownHostException")) {
+                    Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
+                }
             }
         }
     }
