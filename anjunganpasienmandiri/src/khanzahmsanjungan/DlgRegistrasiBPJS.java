@@ -2973,7 +2973,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     );
                     tglRencanaKontrol = tglSEP.getText();
                 } else {
-                    JOptionPane.showMessageDialog(null, metadata.path("message").asText());
+                    Valid.popupPeringatanDialog(metadata.path("message").asText());
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
