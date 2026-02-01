@@ -189,38 +189,26 @@ public class DlgAmbilAntrian extends widget.Dialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void HurufAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufAActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         cetakAntrianHuruf("A");
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_HurufAActionPerformed
 
     private void HurufBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufBActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        cetakAntrianHuruf("B");
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_HurufBActionPerformed
 
     private void HurufCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufCActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        cetakAntrianHuruf("C");
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_HurufCActionPerformed
 
     private void HurufDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufDActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        cetakAntrianHuruf("D");
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_HurufDActionPerformed
 
     private void HurufEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufEActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        cetakAntrianHuruf("E");
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_HurufEActionPerformed
 
     private void HurufFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufFActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        cetakAntrianHuruf("F");
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_HurufFActionPerformed
 
@@ -247,6 +235,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
     // End of variables declaration//GEN-END:variables
 
     private void cetakAntrianHuruf(String prefix) {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         switch (prefix) {
             case "A":
                 if (Sequel.executeRawSmc(
@@ -316,6 +305,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                 break;
         }
         tampil();
+        this.setCursor(Cursor.getDefaultCursor());
     }
 
     private void tampil() {
