@@ -46,7 +46,6 @@ public class DlgAbout extends javax.swing.JDialog {
         panelGlass1 = new usu.widget.glass.PanelGlass();
         jLabel7 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jLabel18 = new javax.swing.JLabel();
         jLabel29 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jLabel30 = new javax.swing.JLabel();
@@ -103,17 +102,10 @@ public class DlgAbout extends javax.swing.JDialog {
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel17.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel17.setText("2025-12-10");
+        jLabel17.setText("2026-02-02");
         jLabel17.setName("jLabel17"); // NOI18N
         panelGlass1.add(jLabel17);
-        jLabel17.setBounds(107, 8, 58, 17);
-
-        jLabel18.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        jLabel18.setForeground(new java.awt.Color(50, 50, 50));
-        jLabel18.setText("Patch 1");
-        jLabel18.setName("jLabel18"); // NOI18N
-        panelGlass1.add(jLabel18);
-        jLabel18.setBounds(168, 8, 90, 17);
+        jLabel17.setBounds(107, 8, 330, 17);
 
         jLabel29.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         jLabel29.setForeground(new java.awt.Color(50, 50, 50));
@@ -333,7 +325,6 @@ public class DlgAbout extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame1;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
