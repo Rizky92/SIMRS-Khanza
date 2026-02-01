@@ -1078,38 +1078,20 @@ import setting.DlgSetHargaKamar;
 import setting.DlgSetHargaObatRalan;
 import setting.DlgSetHargaObatRanap;
 import setting.DlgSetHargaToko;
-import simrskhanza.DlgAbout;
-import simrskhanza.DlgBahasa;
-import simrskhanza.DlgCacatFisik;
-import simrskhanza.DlgCariPeriksaLab;
-import simrskhanza.DlgCariPeriksaLabMB;
-import simrskhanza.DlgCariPeriksaLabPA;
-import simrskhanza.DlgCariPeriksaRadiologi;
-import simrskhanza.DlgCariTagihanOperasi;
-import simrskhanza.DlgDpjp;
-import simrskhanza.DlgGolonganPolri;
-import simrskhanza.DlgGolonganTNI;
-import simrskhanza.DlgIGD;
-import simrskhanza.DlgIKBBayi;
-import simrskhanza.DlgJabatanPolri;
-import simrskhanza.DlgJabatanTNI;
-import simrskhanza.DlgKamarInap;
-import simrskhanza.DlgKasirRalan;
-import simrskhanza.DlgLhtCatatanPasien;
-import simrskhanza.DlgPangkatPolri;
-import simrskhanza.DlgPangkatTNI;
-import simrskhanza.DlgPasienMati;
-import simrskhanza.DlgPemberianDiet;
-import simrskhanza.DlgPenanggungJawab;
-import simrskhanza.DlgPerusahaan;
-import simrskhanza.DlgRawatInap;
-import simrskhanza.DlgRawatJalan;
-import simrskhanza.DlgReg;
-import simrskhanza.DlgRujuk;
-import simrskhanza.DlgRujukMasuk;
-import simrskhanza.DlgSatuanPolri;
-import simrskhanza.DlgSatuanTNI;
-import simrskhanza.DlgSuku;
+import setting.DlgSetInputParsial;
+import setting.DlgSetKamarInap;
+import setting.DlgSetKeterlambatan;
+import setting.DlgSetNota;
+import setting.DlgSetOtoLokasi;
+import setting.DlgSetOtoRalan;
+import setting.DlgSetPenjabLab;
+import setting.DlgSetRM;
+import setting.DlgSetTampilJenisObatResep;
+import setting.DlgSetTarif;
+import setting.DlgUser;
+import setting.DlgUserSmc;
+import setting.DlgVakum;
+import setting.WindowInputPassword;
 import smsui.frmSmsView;
 import surat.MasterMenolakAnjuranMedis;
 import surat.MasterTemplatePersetujuanPenolakanTindakan;
@@ -8662,21 +8644,20 @@ public class frmUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnToolRegActionPerformed
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
-    if(this.getState()==1){
-        isTutup();
-    }
+        if(this.getState()==1){
+            isTutup();
+        }
     }//GEN-LAST:event_formWindowStateChanged
 
     private void MnGantiPasswordBtnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnGantiPasswordBtnLogActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    isTutup();
-    WindowInputPassword barcode=new WindowInputPassword(this,true);
-    barcode.SetUserPass(lblUser.getText(),edPwd.getText());
-    barcode.setLocationRelativeTo(PanelUtama);
-    barcode.setVisible(true);
-    DlgHome.dispose();
-    this.setCursor(Cursor.getDefaultCursor());
-
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        isTutup();
+        WindowInputPassword barcode=new WindowInputPassword(this,true);
+        barcode.SetUserPass(lblUser.getText(),edPwd.getText());
+        barcode.setLocationRelativeTo(PanelUtama);
+        barcode.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_MnGantiPasswordBtnLogActionPerformed
 
     private void button1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button1ActionPerformed

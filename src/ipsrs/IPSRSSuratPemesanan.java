@@ -932,6 +932,7 @@ private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdp
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        IPSRSCariSuratPemesanan form=new IPSRSCariSuratPemesanan(null,false);
         form.emptTeks();
         form.isCek();
         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
