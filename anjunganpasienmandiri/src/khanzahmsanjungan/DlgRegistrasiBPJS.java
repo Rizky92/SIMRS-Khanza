@@ -1,5 +1,6 @@
 package khanzahmsanjungan;
 
+import AESsecurity.EnkripsiAES;
 import bridging.ApiBPJS;
 import bridging.BPJSReferensiDiagnosa;
 import bridging.BPJSReferensiDokter;
@@ -25,6 +26,8 @@ import java.awt.datatransfer.StringSelection;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,11 +40,8 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 import java.util.StringJoiner;
-import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -62,8 +62,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private final BPJSRiwayatRujukanPasien riwayatRujukan;
     private final BPJSRiwayatPelayananPasien riwayatPelayanan;
     private DlgLogin login = null;
-    private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN(), REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
-    private final Set<String> VALIDASIBIOMETRIKAKTIF = new HashSet<>(Arrays.asList(koneksiDB.VALIDASIBIOMETRIKAKTIF()));
+    private final boolean ADDANTRIANAPIMOBILEJKN = koneksiDB.ADDANTRIANAPIMOBILEJKN();
     private String hari = "",
         tglkll = "0000-00-00",
         datajam = "",
@@ -96,21 +95,29 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         umurDaftar = "0",
         statusUmur = "Th",
         umurPasien = "",
-        noTelpBPJS = "";
-    private int kuota = 0, sisaKuota = 0;
+        noTelpBPJS = "",
+        printerRegistrasi = koneksiDB.PRINTER_REGISTRASI(),
+        printerBarcode = koneksiDB.PRINTER_BARCODE(),
+        pathFingerprint = koneksiDB.URLAPLIKASIFINGERPRINTBPJS(),
+        pathFrista = koneksiDB.URLAPLIKASIFRISTABPJS(),
+        userLoginValidasi = "",
+        passLoginValidasi = "";
+    private int kuota = 0, sisaKuota = 0, printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
     private final ObjectMapper mapper = new ObjectMapper();
     private JsonNode root, response, metadata;
     private HttpHeaders headers;
     private HttpEntity entity;
-    private boolean statusFinger = false, fingerprintAktif = false, fristaAktif = false, isMobileJKN = false, bisaTampilkanNumpad = false;
+    private boolean statusFinger = false,
+        fingerprintAktif = false,
+        fristaAktif = false,
+        isMobileJKN = false,
+        bisaTampilkanNumpad = false,
+        batasRegistrasiSatuJam = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
     private Date parsedDate;
 
     public DlgRegistrasiBPJS(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-
-        btnFrista.setVisible(VALIDASIBIOMETRIKAKTIF.contains("frista"));
-        btnFingerprint.setVisible(VALIDASIBIOMETRIKAKTIF.contains("fingerprint"));
 
         kodeBPJS = Sequel.cariIsiSmc("select kd_pj from password_asuransi");
         try (ResultSet rs = koneksi.createStatement().executeQuery("select kode_ppk, nama_instansi, kabupaten from setting")) {
@@ -209,6 +216,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private void initComponents() {
         java.awt.GridBagConstraints gridBagConstraints;
 
+        btnFrista = new widget.Button();
+        btnFingerprint = new widget.Button();
         panelAtas = new widget.Panel();
         label4 = new widget.Label();
         emptyKiri = new widget.Panel();
@@ -258,12 +267,11 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         cariDiagnosa = new widget.Button();
         cariNoRujukan = new widget.Button();
         btnRiwayatPelayanan = new widget.Button();
-        btnFingerprint = new widget.Button();
-        btnFrista = new widget.Button();
         panelNumpad = new widget.Numpad();
         tglRujukan = new widget.TextField();
         tglSEP = new widget.TextField();
         labelValidasi = new widget.Label();
+        panelValidasi = new widget.Panel();
         panelTambahan = new widget.Panel();
         jLabel13 = new widget.Label();
         jLabel42 = new widget.Label();
@@ -300,16 +308,47 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         nmKecKLL = new widget.TextField();
         jLabel14 = new widget.Label();
         catatan = new widget.TextField();
-        btnApprovalFP = new widget.Button();
-        btnPengajuanFP = new widget.Button();
         jLabel15 = new widget.Label();
         barcode = new widget.TextField();
         jenisPelayanan = new widget.TextField();
+        panelTambahanValidasi = new widget.Panel();
+        btnPengajuanFP = new widget.Button();
+        btnApprovalFP = new widget.Button();
         emptyKanan = new widget.Panel();
         panelBawah = new widget.Panel();
         toggleInfoTambahan = new widget.PaneToggle();
         btnKonfirmasi = new widget.Button();
         btnBatal = new widget.Button();
+
+        btnFrista.setBackground(new java.awt.Color(255, 255, 255));
+        btnFrista.setForeground(new java.awt.Color(0, 131, 62));
+        btnFrista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/face-scan.png"))); // NOI18N
+        btnFrista.setText("<html><body style=\"text-align: center\">\nREKAM<br>WAJAH\n</body></html>"); // NOI18N
+        btnFrista.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        btnFrista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFrista.setMinimumSize(new java.awt.Dimension(160, 120));
+        btnFrista.setPreferredSize(new java.awt.Dimension(160, 120));
+        btnFrista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFrista.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFristaActionPerformed(evt);
+            }
+        });
+
+        btnFingerprint.setBackground(new java.awt.Color(255, 255, 255));
+        btnFingerprint.setForeground(new java.awt.Color(0, 131, 62));
+        btnFingerprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/fingerprint.png"))); // NOI18N
+        btnFingerprint.setText("<html><body style=\"text-align: center\">\nREKAM<br>SIDIK JARI\n</body></html>"); // NOI18N
+        btnFingerprint.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
+        btnFingerprint.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnFingerprint.setMinimumSize(new java.awt.Dimension(160, 120));
+        btnFingerprint.setPreferredSize(new java.awt.Dimension(160, 120));
+        btnFingerprint.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnFingerprint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFingerprintActionPerformed(evt);
+            }
+        });
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -592,36 +631,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         panelUtama.add(btnRiwayatPelayanan);
         btnRiwayatPelayanan.setBounds(1105, 145, 45, 40);
 
-        btnFingerprint.setBackground(new java.awt.Color(255, 255, 255));
-        btnFingerprint.setForeground(new java.awt.Color(0, 131, 62));
-        btnFingerprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/fingerprint.png"))); // NOI18N
-        btnFingerprint.setText("<html><body style=\"text-align: center\">\nREKAM<br>SIDIK JARI\n</body></html>"); // NOI18N
-        btnFingerprint.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        btnFingerprint.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnFingerprint.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnFingerprint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFingerprintActionPerformed(evt);
-            }
-        });
-        panelUtama.add(btnFingerprint);
-        btnFingerprint.setBounds(645, 480, 160, 120);
-
-        btnFrista.setBackground(new java.awt.Color(255, 255, 255));
-        btnFrista.setForeground(new java.awt.Color(0, 131, 62));
-        btnFrista.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/face-scan.png"))); // NOI18N
-        btnFrista.setText("<html><body style=\"text-align: center\">\nREKAM<br>WAJAH\n</body></html>"); // NOI18N
-        btnFrista.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
-        btnFrista.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnFrista.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnFrista.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnFristaActionPerformed(evt);
-            }
-        });
-        panelUtama.add(btnFrista);
-        btnFrista.setBounds(475, 480, 160, 120);
-
         panelNumpad.setFocusable(false);
         panelNumpad.setFontSize(36);
         panelNumpad.setTextBox(noTelp);
@@ -642,6 +651,12 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         labelValidasi.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
         panelUtama.add(labelValidasi);
         labelValidasi.setBounds(235, 415, 520, 90);
+
+        panelValidasi.setMinimumSize(new java.awt.Dimension(340, 120));
+        panelValidasi.setPreferredSize(new java.awt.Dimension(340, 120));
+        panelValidasi.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 0));
+        panelUtama.add(panelValidasi);
+        panelValidasi.setBounds(470, 480, 340, 120);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -826,34 +841,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         panelTambahan.add(catatan);
         catatan.setBounds(880, 325, 395, 40);
 
-        btnApprovalFP.setBackground(new java.awt.Color(255, 255, 255));
-        btnApprovalFP.setForeground(new java.awt.Color(0, 131, 62));
-        btnApprovalFP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/approvalfp.png"))); // NOI18N
-        btnApprovalFP.setText("Approval FP");
-        btnApprovalFP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnApprovalFP.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnApprovalFP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnApprovalFPActionPerformed(evt);
-            }
-        });
-        panelTambahan.add(btnApprovalFP);
-        btnApprovalFP.setBounds(645, 380, 160, 90);
-
-        btnPengajuanFP.setBackground(new java.awt.Color(255, 255, 255));
-        btnPengajuanFP.setForeground(new java.awt.Color(0, 131, 62));
-        btnPengajuanFP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pengajuan.png"))); // NOI18N
-        btnPengajuanFP.setText("Pengajuan FP");
-        btnPengajuanFP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnPengajuanFP.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnPengajuanFP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnPengajuanFPActionPerformed(evt);
-            }
-        });
-        panelTambahan.add(btnPengajuanFP);
-        btnPengajuanFP.setBounds(475, 380, 160, 90);
-
         jLabel15.setText("Jumlah Barcode :");
         panelTambahan.add(jLabel15);
         jLabel15.setBounds(5, 325, 225, 40);
@@ -867,6 +854,44 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         jenisPelayanan.setToolTipText("");
         panelTambahan.add(jenisPelayanan);
         jenisPelayanan.setBounds(235, 10, 150, 40);
+
+        panelTambahanValidasi.setMinimumSize(new java.awt.Dimension(680, 120));
+        panelTambahanValidasi.setOpaque(false);
+        panelTambahanValidasi.setPreferredSize(new java.awt.Dimension(680, 120));
+        panelTambahanValidasi.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.CENTER, 10, 0));
+
+        btnPengajuanFP.setBackground(new java.awt.Color(255, 255, 255));
+        btnPengajuanFP.setForeground(new java.awt.Color(0, 131, 62));
+        btnPengajuanFP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/pengajuan.png"))); // NOI18N
+        btnPengajuanFP.setText("<html><body style=\"text-align: center\">PENGAJUAN<br>VALIDASI</body></html>");
+        btnPengajuanFP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnPengajuanFP.setMinimumSize(new java.awt.Dimension(160, 120));
+        btnPengajuanFP.setPreferredSize(new java.awt.Dimension(160, 120));
+        btnPengajuanFP.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnPengajuanFP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPengajuanFPActionPerformed(evt);
+            }
+        });
+        panelTambahanValidasi.add(btnPengajuanFP);
+
+        btnApprovalFP.setBackground(new java.awt.Color(255, 255, 255));
+        btnApprovalFP.setForeground(new java.awt.Color(0, 131, 62));
+        btnApprovalFP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/approvalfp.png"))); // NOI18N
+        btnApprovalFP.setText("<html><body style=\"text-align: center\">APPROVAL<br>VALIDASI</body></html>"); // NOI18N
+        btnApprovalFP.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnApprovalFP.setMinimumSize(new java.awt.Dimension(160, 120));
+        btnApprovalFP.setPreferredSize(new java.awt.Dimension(160, 120));
+        btnApprovalFP.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnApprovalFP.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnApprovalFPActionPerformed(evt);
+            }
+        });
+        panelTambahanValidasi.add(btnApprovalFP);
+
+        panelTambahan.add(panelTambahanValidasi);
+        panelTambahanValidasi.setBounds(300, 370, 680, 120);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 1;
@@ -900,6 +925,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
         toggleInfoTambahan.setForeground(new java.awt.Color(150, 155, 159));
         toggleInfoTambahan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        toggleInfoTambahan.setMnemonic('I');
         toggleInfoTambahan.setToolTipText("Alt+I");
         toggleInfoTambahan.setMaximumSize(new java.awt.Dimension(32767, 30));
         toggleInfoTambahan.setMinimumSize(new java.awt.Dimension(140, 30));
@@ -907,9 +933,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         toggleInfoTambahan.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         toggleInfoTambahan.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         toggleInfoTambahan.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
-        toggleInfoTambahan.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                toggleInfoTambahanActionPerformed(evt);
+        toggleInfoTambahan.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                toggleInfoTambahanItemStateChanged(evt);
             }
         });
         gridBagConstraints = new java.awt.GridBagConstraints();
@@ -921,6 +947,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         panelBawah.add(toggleInfoTambahan, gridBagConstraints);
 
         btnKonfirmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/konfirmasi.png"))); // NOI18N
+        btnKonfirmasi.setMnemonic('S');
         btnKonfirmasi.setText("KONFIRMASI");
         btnKonfirmasi.setToolTipText("Alt+S");
         btnKonfirmasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -941,6 +968,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         btnBatal.setBackground(new java.awt.Color(255, 255, 255));
         btnBatal.setForeground(new java.awt.Color(255, 33, 32));
         btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        btnBatal.setMnemonic('K');
         btnBatal.setText("Batal");
         btnBatal.setToolTipText("Alt+K");
         btnBatal.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
@@ -1079,9 +1107,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }//GEN-LAST:event_lakaLantasItemStateChanged
 
     private void cariPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariPoliActionPerformed
-        if (REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
+        if (batasRegistrasiSatuJam) {
             poli.setHari(tglSEP.getText());
-            poli.setDokter(Sequel.cariIsiSmc("select maping_dokter_dpjpvclaim.kd_dokter from maping_dokter_dpjpvclaim where maping_dokter_dpjpvclaim.kd_dokter_bpjs = ?", kodeDokter));
+            poli.setDokter(kodeDokterReg);
         }
         poli.setSize(getContentPane().getSize());
         poli.setLocationRelativeTo(getContentPane());
@@ -1273,9 +1301,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         r.keyRelease(KeyEvent.VK_V);
                         r.keyRelease(KeyEvent.VK_CONTROL);
                     } else {
-                        Runtime.getRuntime().exec("\"" + koneksiDB.URLAPLIKASIFINGERPRINTBPJS() + "\"");
+                        Runtime.getRuntime().exec("\"" + pathFingerprint + "\"");
                         Thread.sleep(2000);
-                        ss = new StringSelection(koneksiDB.USERFINGERPRINTBPJS());
+                        ss = new StringSelection(EnkripsiAES.decrypt(userLoginValidasi));
                         c.setContents(ss, ss);
 
                         r.keyPress(KeyEvent.VK_CONTROL);
@@ -1286,7 +1314,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         r.keyRelease(KeyEvent.VK_TAB);
                         Thread.sleep(1000);
 
-                        ss = new StringSelection(koneksiDB.PASSWORDFINGERPRINTBPJS());
+                        ss = new StringSelection(EnkripsiAES.decrypt(passLoginValidasi));
                         c.setContents(ss, ss);
 
                         r.keyPress(KeyEvent.VK_CONTROL);
@@ -1359,7 +1387,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         r.keyRelease(KeyEvent.VK_V);
                         r.keyRelease(KeyEvent.VK_CONTROL);
                     } else {
-                        Runtime.getRuntime().exec("\"" + koneksiDB.URLAPLIKASIFRISTABPJS() + "\"");
+                        Runtime.getRuntime().exec("\"" + pathFrista + "\"");
                         while (true) {
                             if (u32.IsWindowVisible(u32.FindWindow(null, "Login Frista (Face Recognition BPJS Kesehatan)"))) {
                                 fristaAktif = true;
@@ -1368,7 +1396,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         }
                         Thread.sleep(1000);
 
-                        ss = new StringSelection(koneksiDB.USERFINGERPRINTBPJS());
+                        ss = new StringSelection(EnkripsiAES.decrypt(userLoginValidasi));
                         c.setContents(ss, ss);
                         r.keyPress(KeyEvent.VK_CONTROL);
                         r.keyPress(KeyEvent.VK_V);
@@ -1378,7 +1406,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         r.keyRelease(KeyEvent.VK_TAB);
                         Thread.sleep(1000);
 
-                        ss = new StringSelection(koneksiDB.PASSWORDFINGERPRINTBPJS());
+                        ss = new StringSelection(EnkripsiAES.decrypt(passLoginValidasi));
                         c.setContents(ss, ss);
                         r.keyPress(KeyEvent.VK_CONTROL);
                         r.keyPress(KeyEvent.VK_V);
@@ -1424,10 +1452,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         }
     }//GEN-LAST:event_btnFristaActionPerformed
 
-    private void toggleInfoTambahanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_toggleInfoTambahanActionPerformed
-        isForm();
-    }//GEN-LAST:event_toggleInfoTambahanActionPerformed
-
     private void noTelpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_noTelpMouseClicked
         if (!toggleInfoTambahan.isSelected() && bisaTampilkanNumpad) {
             panelNumpad.setVisible(true);
@@ -1454,8 +1478,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }//GEN-LAST:event_noTelpFocusGained
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        loadPengaturanAPM();
         isForm();
     }//GEN-LAST:event_formWindowActivated
+
+    private void toggleInfoTambahanItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_toggleInfoTambahanItemStateChanged
+        isForm();
+    }//GEN-LAST:event_toggleInfoTambahanItemStateChanged
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Label LabelKelas;
@@ -1548,8 +1577,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private widget.Panel panelBawah;
     private widget.Numpad panelNumpad;
     private widget.Panel panelTambahan;
+    private widget.Panel panelTambahanValidasi;
     private widget.Panel panelTengah;
     private widget.Panel panelUtama;
+    private widget.Panel panelValidasi;
     private widget.ComboBox penunjang;
     private widget.TextField statusPeserta;
     private widget.ComboBox suplesi;
@@ -1662,8 +1693,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         param.put("parameter", noSEP);
         param.put("namars", instansiNama);
         param.put("kotars", instansiKota);
-        Valid.printReportSmc("rptBridgingSEPAPM2.jasper", "report", "::[ Cetak SEP Model 4 ]::", param, koneksiDB.PRINTER_REGISTRASI(), 1);
-        Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), Integer.parseInt(barcode.getText().trim()));
+        Valid.printReportSmc("rptBridgingSEPAPM2.jasper", "report", "::[ Cetak SEP Model 4 ]::", param, printerRegistrasi, 1);
+        Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, printerBarcode, Integer.parseInt(barcode.getText().trim()));
     }
 
     private void insertSEP() {
@@ -2574,18 +2605,18 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         Sequel.mengupdateSmc("referensi_mobilejkn_bpjs", "statuskirim = 'Sudah'", "nobooking = ?", noBooking);
                     } else {
                         sukses = false;
-                        JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                        Valid.popupGagalDialog(metadata.path("message").asText(), 5);
                     }
                 } catch (HttpClientErrorException e) {
                     sukses = false;
                     System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
                     Sequel.logTaskid(noRawat, noBooking, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), e.getResponseBodyAsString(), datajam);
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                    Valid.popupGagalDialog(e.getMessage(), 5);
                 } catch (HttpServerErrorException e) {
                     sukses = false;
                     System.out.println(e.getStatusCode().toString() + " " + e.getMessage());
                     Sequel.logTaskid(noRawat, noBooking, "Onsite", "addantrean", payload, e.getStatusCode().toString(), e.getMessage(), "", datajam);
-                    JOptionPane.showMessageDialog(null, e.getMessage(), "Gagal Kirim Antrian", JOptionPane.ERROR_MESSAGE);
+                    Valid.popupGagalDialog(e.getMessage(), 5);
                 } catch (Exception e) {
                     sukses = false;
                     System.out.println("Notif : " + e);
@@ -2855,7 +2886,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         asesmenPelayanan.setEnabled(true);
         kodeDPJPLayanan.setText("");
         namaDPJPLayanan.setText("");
-        barcode.setText(String.valueOf(koneksiDB.PRINTJUMLAHBARCODE()));
+        barcode.setText(String.valueOf(printJumlahBarcode));
         lakaLantas.setSelectedIndex(0);
         lakaLantasItemStateChanged(null);
         suplesi.setSelectedIndex(0);
@@ -2942,7 +2973,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     );
                     tglRencanaKontrol = tglSEP.getText();
                 } else {
-                    JOptionPane.showMessageDialog(null, metadata.path("message").asText());
+                    Valid.popupPeringatanDialog(metadata.path("message").asText());
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
@@ -3012,6 +3043,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }
 
     private void isForm() {
+        loadPengaturanAPM();
         int preferredWidth = 1280,
             height = panelTengah.getHeight();
 
@@ -3032,7 +3064,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }
 
     private boolean cekWaktuRegistrasi() {
-        if (!REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
+        if (!batasRegistrasiSatuJam) {
             return true;
         }
 
@@ -3045,5 +3077,60 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         Instant jamMasuk = cal.toInstant();
 
         return now.isAfter(jamMasuk.minus(1, ChronoUnit.HOURS));
+    }
+
+    private void loadPengaturanAPM() {
+        if (new File("./cache/pengaturanapmsmc.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+                final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
+                final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
+
+                if (decrypted.hasNonNull("frista")) {
+                    pathFrista = decrypted.path("frista").path("path").asText(koneksiDB.URLAPLIKASIFRISTABPJS());
+                    if (decrypted.path("frista").path("aktifkan").asBoolean(Arrays.asList(koneksiDB.VALIDASIBIOMETRIKAKTIF()).contains("frista"))) {
+                        panelValidasi.add(btnFrista);
+                        panelTambahanValidasi.remove(btnFrista);
+                    } else {
+                        panelValidasi.remove(btnFrista);
+                        panelTambahanValidasi.add(btnFrista);
+                    }
+                }
+
+                if (decrypted.hasNonNull("fingerprint")) {
+                    pathFingerprint = decrypted.path("fingerprint").path("path").asText(koneksiDB.URLAPLIKASIFINGERPRINTBPJS());
+                    if (decrypted.path("fingerprint").path("aktifkan").asBoolean(Arrays.asList(koneksiDB.VALIDASIBIOMETRIKAKTIF()).contains("fingerprint"))) {
+                        panelValidasi.add(btnFingerprint);
+                        panelTambahanValidasi.remove(btnFingerprint);
+                    } else {
+                        panelValidasi.remove(btnFingerprint);
+                        panelTambahanValidasi.add(btnFingerprint);
+                    }
+                }
+                panelValidasi.repaint();
+                panelTambahanValidasi.repaint();
+
+                if (decrypted.hasNonNull("userFP")) {
+                    userLoginValidasi = decrypted.path("userFP").asText(EnkripsiAES.encrypt(""));
+                }
+
+                if (decrypted.hasNonNull("passFP")) {
+                    passLoginValidasi = decrypted.path("passFP").asText(EnkripsiAES.encrypt(""));
+                }
+
+                if (decrypted.hasNonNull("printerRegist")) {
+                    printerRegistrasi = decrypted.path("printerRegist").asText(koneksiDB.PRINTER_REGISTRASI());
+                }
+
+                if (decrypted.hasNonNull("printerBarcode")) {
+                    printerBarcode = decrypted.path("printerBarcode").asText(koneksiDB.PRINTER_BARCODE());
+                }
+
+                if (decrypted.hasNonNull("printJumlahBarcode")) {
+                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(koneksiDB.PRINTJUMLAHBARCODE());
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
     }
 }

@@ -1,6 +1,74 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.8" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JDialogFormInfo">
+  <NonVisualComponents>
+    <Component class="widget.MenuButton" name="HurufA">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ANTRIAN A"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="36" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufAActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="widget.MenuButton" name="HurufB">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ANTRIAN B"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="36" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufBActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="widget.MenuButton" name="HurufC">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ANTRIAN C"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="36" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufCActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="widget.MenuButton" name="HurufD">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ANTRIAN D"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="36" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufDActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="widget.MenuButton" name="HurufE">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ANTRIAN E"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="36" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufEActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="widget.MenuButton" name="HurufF">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ANTRIAN F"/>
+        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+          <Font name="Inter" size="36" style="1"/>
+        </Property>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufFActionPerformed"/>
+      </Events>
+    </Component>
+  </NonVisualComponents>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
     <SyntheticProperty name="generateCenter" type="boolean" value="false"/>
@@ -63,74 +131,6 @@
         <Property name="columns" type="int" value="2"/>
         <Property name="rows" type="int" value="0"/>
       </Layout>
-      <SubComponents>
-        <Component class="widget.MenuButton" name="HurufA">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ANTRIAN A"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="36" style="1"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufAActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.MenuButton" name="HurufB">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ANTRIAN B"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="36" style="1"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufBActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.MenuButton" name="HurufC">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ANTRIAN C"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="36" style="1"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufCActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.MenuButton" name="HurufD">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ANTRIAN D"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="36" style="1"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufDActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.MenuButton" name="HurufE">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ANTRIAN E"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="36" style="1"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufEActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="widget.MenuButton" name="HurufF">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="ANTRIAN F"/>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Inter" size="36" style="1"/>
-            </Property>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="HurufFActionPerformed"/>
-          </Events>
-        </Component>
-      </SubComponents>
     </Container>
     <Container class="widget.Panel" name="panelBawah">
       <Constraints>

@@ -4,12 +4,17 @@
  */
 package khanzahmsanjungan;
 
+import AESsecurity.EnkripsiAES;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.time.LocalDate;
@@ -19,17 +24,15 @@ import javax.swing.AbstractAction;
 import javax.swing.ActionMap;
 import javax.swing.InputMap;
 import javax.swing.JComponent;
-import javax.swing.JDialog;
-import javax.swing.JOptionPane;
 import javax.swing.KeyStroke;
-import javax.swing.SwingUtilities;
 
 public class DlgAmbilAntrianFarmasi extends widget.Dialog {
-
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final String templateAntrian = "<html><body><center>TEKAN<br>⟶&nbsp;&nbsp;DISINI&nbsp;&nbsp;⟵<br>(%s)</center></body></html>";
+    private String printerAntrian = "";
+    private int printJumlahAntrianFarmasi = 0;
 
     private Map<String, Object> param = new HashMap<>();
 
@@ -130,7 +133,6 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
         btnKeluar.setBackground(new java.awt.Color(240, 249, 255));
         btnKeluar.setForeground(new java.awt.Color(255, 78, 21));
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        btnKeluar.setMnemonic('U');
         btnKeluar.setToolTipText("Keluar");
         btnKeluar.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
         btnKeluar.setIconTextGap(2);
@@ -154,6 +156,7 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
     }//GEN-LAST:event_AmbilAntrianActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        loadPengaturanAPM();
         tampil();
     }//GEN-LAST:event_formWindowActivated
 
@@ -175,20 +178,9 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
         if (Sequel.executeRawSmc("insert into antriloketfarmasi_smc (nomor, tanggal, jam) values (lpad(?, greatest(length(nomor), 4), '0'), current_date(), current_time())",
             String.valueOf(Integer.parseInt(AmbilAntrian.getText().substring(AmbilAntrian.getText().indexOf("(") + 1, AmbilAntrian.getText().indexOf(")"))))
         )) {
-            Valid.printReportSmc("rptAntriFarmasiAPM.jasper", "report", "::[ Antrian Farmasi ]::", param, koneksiDB.PRINTER_ANTRIAN(), koneksiDB.PRINTJUMLAHANTRIANFARMASI(),
+            Valid.printReportSmc("rptAntriFarmasiAPM.jasper", "report", "::[ Antrian Farmasi ]::", param, printerAntrian, printJumlahAntrianFarmasi,
                 "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from antriloketfarmasi_smc where tanggal = current_date() order by nomor desc limit 1");
-            final JOptionPane wait = new JOptionPane("Silahkan ambil antrian anda..!!", JOptionPane.INFORMATION_MESSAGE);
-            final JDialog dialog = wait.createDialog(null, "Ambil antrian");
-            dialog.setAlwaysOnTop(true);
-            SwingUtilities.invokeLater(() -> {
-                try {
-                    Thread.sleep(3000);
-                    dialog.setVisible(false);
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
-                }
-            });
-            dialog.setVisible(true);
+            Valid.popupInfoDialog("Silahkan ambil antrian anda..!!", 3);
         }
         tampil();
     }
@@ -198,5 +190,25 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
         AmbilAntrian.setText(String.format(templateAntrian,
             Sequel.cariIsiSmc("select lpad(ifnull(max(convert(nomor, unsigned)), 0) + 1, greatest(length(ifnull(nomor, 0)), 4), '0') from antriloketfarmasi_smc where tanggal = current_date()")
         ));
+    }
+
+    private void loadPengaturanAPM() {
+        if (new File("./cache/pengaturanapmsmc.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+                final ObjectMapper mapper = new ObjectMapper();
+                final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
+                final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
+
+                if (decrypted.hasNonNull("printerAntrian")) {
+                    printerAntrian = decrypted.path("printerAntrian").asText(koneksiDB.PRINTER_ANTRIAN());
+                }
+
+                if (decrypted.hasNonNull("printJumlahAntrianFarmasi")) {
+                    printJumlahAntrianFarmasi = decrypted.path("printJumlahAntrianFarmasi").asInt(koneksiDB.PRINTJUMLAHANTRIANFARMASI());
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
     }
 }

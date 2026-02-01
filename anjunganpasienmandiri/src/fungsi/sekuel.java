@@ -347,7 +347,7 @@ public final class sekuel {
             return;
         }
 
-        try (PreparedStatement ps = connect.prepareStatement("insert into tracksql values(now(), ?, ?)")) {
+        try (PreparedStatement ps = connect.prepareStatement("insert into trackersql values(now(), ?, ?)")) {
             InetAddress inetAddress = InetAddress.getLocalHost();
             ps.setString(1, inetAddress.getHostAddress() + " " + sql);
             ps.setString(2, "APM");

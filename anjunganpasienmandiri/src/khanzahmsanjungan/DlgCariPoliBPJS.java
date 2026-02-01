@@ -1,7 +1,12 @@
 package khanzahmsanjungan;
 
+import AESsecurity.EnkripsiAES;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.validasi;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,7 +18,7 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
-    private static final boolean REGISTRASISATUJAMSEBELUMJAMPRAKTEK = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
+    private boolean batasRegistrasiSatuJam = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
     private String hari = "";
     private String kodeDokter = "";
 
@@ -33,7 +38,7 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
         tbPoli.getColumnModel().getColumn(1).setPreferredWidth(500);
         tbPoli.getColumnModel().getColumn(2).setMinWidth(0);
         tbPoli.getColumnModel().getColumn(2).setMaxWidth(0);
-        if (REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
+        if (batasRegistrasiSatuJam) {
             tbPoli.getColumnModel().getColumn(3).setPreferredWidth(250);
         } else {
             tbPoli.getColumnModel().getColumn(3).setMinWidth(0);
@@ -92,8 +97,9 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        loadPengaturanAPM();
         Valid.tabelKosongSmc(tabMode);
-        if (REGISTRASISATUJAMSEBELUMJAMPRAKTEK) {
+        if (batasRegistrasiSatuJam) {
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select jadwal.kd_poli, concat(left(jadwal.jam_mulai, 5), '-', left(jadwal.jam_selesai, 5)) as jampraktek, " +
                 "maping_poli_bpjs.kd_poli_bpjs, maping_poli_bpjs.nm_poli_bpjs from jadwal join maping_poli_bpjs on " +
@@ -187,5 +193,18 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
 
     public void setDokter(String kodeDokter) {
         this.kodeDokter = kodeDokter;
+    }
+
+    private void loadPengaturanAPM() {
+        if (new File("./cache/pengaturanapmsmc.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+                final ObjectMapper mapper = new ObjectMapper();
+                final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
+
+                batasRegistrasiSatuJam = mapper.readTree(EnkripsiAES.decrypt(root.asText())).path("batasRegistrasiSatuJam").asBoolean(koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK());
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
     }
 }

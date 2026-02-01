@@ -103,7 +103,7 @@ public final class validasi {
                         jv.setVisible(true);
                     }
                 } else {
-                    popupInfoDialog("Printer tidak ditemukan!");
+                    popupPeringatanDialog("Printer tidak ditemukan!", 3);
                     JasperViewer jv = new JasperViewer(jp, false);
                     jv.setTitle(judul);
                     Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
@@ -159,7 +159,7 @@ public final class validasi {
                     jv.setVisible(true);
                 }
             } else {
-                popupInfoDialog("Printer tidak ditemukan!");
+                popupPeringatanDialog("Printer tidak ditemukan!", 3);
                 JasperViewer jv = new JasperViewer(jp, false);
                 jv.setTitle(judul);
                 Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();

@@ -5,6 +5,11 @@
  */
 package khanzahmsanjungan;
 
+import AESsecurity.EnkripsiAES;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import com.formdev.flatlaf.FlatLightLaf;
 import com.formdev.flatlaf.util.ColorFunctions;
 import fungsi.koneksiDB;
@@ -12,6 +17,12 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.awt.Insets;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.swing.SwingUtilities;
@@ -41,6 +52,8 @@ public class KhanzaHMSAnjungan {
             UIManager.setLookAndFeel(new FlatLightLaf());
             System.setProperty("flatlaf.animation", "true");
             UIManager.put("TitlePane.background", panelBackground);
+            UIManager.put("CheckBox.icon.style", "filled");
+            UIManager.put("CheckBox.icon[filled].selectedBackground", foreground);
             UIManager.put("ComboBox.background", Color.WHITE);
             UIManager.put("ComboBox.editableBackground", Color.WHITE);
             UIManager.put("ComboBox.foreground", foreground);
@@ -76,44 +89,144 @@ public class KhanzaHMSAnjungan {
             UIManager.put("ScrollPane.smoothScrolling", true);
             UIManager.put("Button.arc", 16);
             UIManager.put("Component.arc", 8);
-            UIManager.put("CheckBox.arc", 16);
+            UIManager.put("CheckBox.arc", 8);
             UIManager.put("ProgressBar.arc", 16);
             UIManager.put("TextComponent.arc", 8);
-        } catch (Exception ex) {
+        } catch (Exception e) {
             System.err.println("Failed to initialize LaF");
         }
-        SwingUtilities.invokeLater(() -> {
-            new HalamanUtama().setVisible(true);
 
-            String printerBarcode = null, printerRegistrasi = null, printerAntrian = null;
+        try {
+            File iyem = new File("./cache/pengaturanapmsmc.iyem");
 
-            for (PrintService ps : PrintServiceLookup.lookupPrintServices(null, null)) {
-                System.out.println("Printer ditemukan: " + ps.getName());
+            if (iyem.isFile()) {
+                final ObjectMapper mapper = new ObjectMapper();
+                try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+                    final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
+                    final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
 
-                if (ps.getName().equals(koneksiDB.PRINTER_BARCODE())) {
-                    printerBarcode = ps.getName();
+                    String printerBarcode = null, printerRegistrasi = null, printerAntrian = null;
+
+                    for (PrintService ps : PrintServiceLookup.lookupPrintServices(null, null)) {
+                        System.out.println("Printer ditemukan: " + ps.getName());
+
+                        if (ps.getName().equals(decrypted.path("printerRegist").asText(koneksiDB.PRINTER_REGISTRASI()))) {
+                            printerRegistrasi = ps.getName();
+                        }
+
+                        if (ps.getName().equals(decrypted.path("printerBarcode").asText(koneksiDB.PRINTER_BARCODE()))) {
+                            printerBarcode = ps.getName();
+                        }
+
+                        if (ps.getName().equals(decrypted.path("printerAntrian").asText(koneksiDB.PRINTER_ANTRIAN()))) {
+                            printerAntrian = ps.getName();
+                        }
+                    }
+
+                    if (printerBarcode != null) {
+                        System.out.println("Setting PRINTER_BARCODE menggunakan printer: " + printerBarcode);
+                    }
+
+                    if (printerRegistrasi != null) {
+                        System.out.println("Setting PRINTER_REGISTRASI menggunakan printer: " + printerRegistrasi);
+                    }
+
+                    if (printerAntrian != null) {
+                        System.out.println("Setting PRINTER_ANTRIAN menggunakan printer: " + printerAntrian);
+                    }
                 }
+            } else {
+                iyem.createNewFile();
 
-                if (ps.getName().equals(koneksiDB.PRINTER_REGISTRASI())) {
-                    printerRegistrasi = ps.getName();
+                try (FileWriter fw = new FileWriter(iyem)) {
+                    final ObjectMapper mapper = new ObjectMapper();
+                    final ObjectNode root = mapper.createObjectNode();
+
+                    String printerBarcode = null, printerRegistrasi = null, printerAntrian = null;
+
+                    for (PrintService ps : PrintServiceLookup.lookupPrintServices(null, null)) {
+                        System.out.println("Printer ditemukan: " + ps.getName());
+
+                        if (ps.getName().equals(koneksiDB.PRINTER_REGISTRASI())) {
+                            printerRegistrasi = ps.getName();
+                        }
+
+                        if (ps.getName().equals(koneksiDB.PRINTER_BARCODE())) {
+                            printerBarcode = ps.getName();
+                        }
+
+                        if (ps.getName().equals(koneksiDB.PRINTER_ANTRIAN())) {
+                            printerAntrian = ps.getName();
+                        }
+                    }
+
+                    if (printerBarcode != null) {
+                        System.out.println("Setting PRINTER_BARCODE menggunakan printer: " + printerBarcode);
+                    }
+
+                    if (printerRegistrasi != null) {
+                        System.out.println("Setting PRINTER_REGISTRASI menggunakan printer: " + printerRegistrasi);
+                    }
+
+                    if (printerAntrian != null) {
+                        System.out.println("Setting PRINTER_ANTRIAN menggunakan printer: " + printerAntrian);
+                    }
+
+                    root.put("printerRegist", printerRegistrasi);
+                    root.put("printerBarcode", printerBarcode);
+                    root.put("printerAntrian", printerAntrian);
+                    root.put("printJumlahBarcode", koneksiDB.PRINTJUMLAHBARCODE());
+                    root.put("printJumlahAntrianFarmasi", koneksiDB.PRINTJUMLAHANTRIANFARMASI());
+                    Set<String> valbiomAktif = new HashSet(Arrays.asList(koneksiDB.VALIDASIBIOMETRIKAKTIF()));
+                    root.withObject("fingerprint").put("path", koneksiDB.URLAPLIKASIFINGERPRINTBPJS());
+                    root.withObject("fingerprint").put("aktifkan", valbiomAktif.contains("fingerprint"));
+                    root.withObject("frista").put("path", koneksiDB.URLAPLIKASIFRISTABPJS());
+                    root.withObject("frista").put("aktifkan", valbiomAktif.contains("frista"));
+                    root.put("kodePoliEksekutif", koneksiDB.KODEPOLIEKSEKUTIF());
+                    root.put("userFP", EnkripsiAES.encrypt(koneksiDB.USERFINGERPRINTBPJS()));
+                    root.put("passFP", EnkripsiAES.encrypt(koneksiDB.PASSWORDFINGERPRINTBPJS()));
+
+                    final Set<String> tm = new HashSet(Arrays.asList(koneksiDB.TOMBOLDIMATIKAN()));
+                    final ArrayNode ta = mapper.createArrayNode();
+
+                    if (!tm.contains("antrian")) {
+                        ta.add("antrian");
+                    }
+                    if (!tm.contains("antrianfarmasi")) {
+                        ta.add("antrianfarmasi");
+                    }
+                    if (!tm.contains("cekin")) {
+                        ta.add("cekin");
+                    }
+                    if (!tm.contains("daftarpoli")) {
+                        ta.add("daftarpoli");
+                    }
+                    if (!tm.contains("seppertama")) {
+                        ta.add("seppertama");
+                    }
+                    if (!tm.contains("sepkontrol")) {
+                        ta.add("sepkontrol");
+                    }
+                    if (!tm.contains("sepbedapoli")) {
+                        ta.add("sepbedapoli");
+                    }
+                    if (!tm.contains("mobilejkn")) {
+                        ta.add("mobilejkn");
+                    }
+                    if (!tm.contains("satusehat")) {
+                        ta.add("satusehat");
+                    }
+                    root.set("tombolDiaktifkan", ta);
+                    root.put("batasRegistrasiSatuJam", koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK());
+
+                    String encrypted = EnkripsiAES.encrypt(mapper.writeValueAsString(root));
+                    fw.write(mapper.writeValueAsString(mapper.createObjectNode().put("pengaturanapmsmc", encrypted)));
+                    fw.flush();
                 }
-
-                if (ps.getName().equals(koneksiDB.PRINTER_ANTRIAN())) {
-                    printerAntrian = ps.getName();
-                }
             }
-
-            if (printerBarcode != null) {
-                System.out.println("Setting PRINTER_BARCODE menggunakan printer: " + printerBarcode);
-            }
-
-            if (printerRegistrasi != null) {
-                System.out.println("Setting PRINTER_REGISTRASI menggunakan printer: " + printerRegistrasi);
-            }
-
-            if (printerAntrian != null) {
-                System.out.println("Setting PRINTER_ANTRIAN menggunakan printer: " + printerAntrian);
-            }
-        });
+        } catch (Exception e) {
+            System.err.println("Gagal membaca pengaturan awal");
+        }
+        SwingUtilities.invokeLater(() -> new HalamanUtama().setVisible(true));
     }
 }
