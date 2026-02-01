@@ -33,7 +33,11 @@ import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
@@ -55,6 +59,8 @@ public class DlgBookingMCUPerusahaan extends javax.swing.JDialog {
     private int i=0;
     private String status="",BASENOREG="",URUTNOREG="",umur="0",sttsumur="Th";
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -809,7 +815,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     if(NmPerusahaan.getText().trim().equals("")){
         Valid.textKosong(BtnPerusahaan,"Perusahaan/Instansi MCU");
     }else{
-        tampil();
+        runBackground(() ->tampil());
     }
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
@@ -1063,7 +1069,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 @Override
                 public void windowClosed(WindowEvent e) {
                     if(pasienbaru.status=="Selesai"){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
@@ -1321,5 +1327,37 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
 
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(reg_periksa.no_rawat,6),signed)),0) from reg_periksa where reg_periksa.tgl_registrasi='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ",dateformat.format(Tanggal.getDate())+"/",6,TNoRw);
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

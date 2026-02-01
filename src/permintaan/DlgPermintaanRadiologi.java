@@ -698,8 +698,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
 
     private void BtnAllPeriksaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllPeriksaActionPerformed
         TCariPeriksa.setText("");
-        runBackground(() -> tampil());
-        runBackground(() -> tampil2());
+        runBackground(() -> LoadData());
     }//GEN-LAST:event_BtnAllPeriksaActionPerformed
 
     private void BtnAllPeriksaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllPeriksaKeyPressed
@@ -1428,5 +1427,10 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
+    }
+
+    private void LoadData() {
+        tampil();
+        tampil2();
     }
 }
