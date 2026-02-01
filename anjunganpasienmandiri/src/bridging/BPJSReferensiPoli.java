@@ -221,7 +221,7 @@ public final class BPJSReferensiPoli extends widget.Dialog {
             new SwingWorker<Void, Object[]>() {
                 private volatile int i = 0;
                 private String pesan = null;
-                
+
                 @Override
                 protected Void doInBackground() throws Exception {
                     HttpHeaders headers = new HttpHeaders();
@@ -231,7 +231,7 @@ public final class BPJSReferensiPoli extends widget.Dialog {
                     headers.add("X-Timestamp", utc);
                     headers.add("X-Signature", api.getHmac(utc));
                     headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-                    
+
                     final ObjectMapper mapper = new ObjectMapper();
                     JsonNode root = mapper.readTree(api.getRest().exchange(
                         koneksiDB.URLAPIBPJS() + "/referensi/poli/" + cari,

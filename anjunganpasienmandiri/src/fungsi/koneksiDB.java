@@ -16,13 +16,10 @@ import javax.swing.JOptionPane;
  * @author khanzasoft
  */
 public class koneksiDB {
-
     private static Connection connection = null;
     private static final Properties prop = new Properties();
     private static final MysqlDataSource dataSource = new MysqlDataSource();
 
-    public koneksiDB() {
-    }
 
     public static Connection condb() {
         try {
@@ -89,7 +86,7 @@ public class koneksiDB {
             prop.loadFromXML(fs);
             return prop.getProperty(key, defaultValue).trim();
         } catch (Exception e) {
-            return "";
+            return defaultValue;
         }
     }
 
@@ -103,7 +100,7 @@ public class koneksiDB {
             prop.loadFromXML(fs);
             return EnkripsiAES.decrypt(prop.getProperty(key, defaultValue)).trim();
         } catch (Exception e) {
-            return "";
+            return EnkripsiAES.decrypt(defaultValue).trim();
         }
     }
 
@@ -116,7 +113,7 @@ public class koneksiDB {
             prop.loadFromXML(fs);
             return prop.getProperty(key, defaultValue).trim();
         } catch (Exception e) {
-            return "";
+            return defaultValue;
         }
     }
 
@@ -130,7 +127,7 @@ public class koneksiDB {
             prop.loadFromXML(fs);
             return EnkripsiAES.decrypt(prop.getProperty(key, defaultValue)).trim();
         } catch (Exception e) {
-            return "";
+            return EnkripsiAES.decrypt(defaultValue).trim();
         }
     }
 
@@ -287,5 +284,7 @@ public class koneksiDB {
 
     public static boolean AKTIFKANTRACKSQL() {
         return rawe("AKTIFKANTRACKSQL", "no").equalsIgnoreCase("yes");
+    }
+    public koneksiDB() {
     }
 }

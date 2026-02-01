@@ -223,7 +223,9 @@ public class DlgLogin extends widget.Dialog {
         }
 
         public boolean punyaAkses(String namaAkses) {
-            if (this.isAdmin()) return true;
+            if (this.isAdmin()) {
+                return true;
+            }
 
             return akses.equals(namaAkses);
         }
