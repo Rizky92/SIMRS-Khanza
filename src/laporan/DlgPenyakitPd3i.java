@@ -16,6 +16,7 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
@@ -24,8 +25,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -40,6 +45,8 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgAdmin
      * @param parent
@@ -56,7 +63,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         };
 
         tbAdmin.setModel(tabMode);
-        //tampil();
+        //runBackground(() ->tampil());
         //tbJabatan.setDefaultRenderer(Object.class, new WarnaTable(Scroll.getBackground(),Color.GREEN));
         tbAdmin.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbAdmin.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
@@ -81,31 +88,8 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
 
         kdpenyakit.setDocument(new batasInput((byte)30).getKata(kdpenyakit));
-        nmpenyakit.setDocument(new batasInput((byte)30).getKata(nmpenyakit));
-
-        penyakit.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){
-                    kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
-                    nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }
-                kdpenyakit.requestFocus();
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
+        nmpenyakit.setDocument(new batasInput((byte)30).getKata(nmpenyakit)); 
+        
         try {
             ps=koneksi.prepareStatement("select penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
                 "kategori_penyakit.nm_kategori,kategori_penyakit.ciri_umum from kategori_penyakit inner join penyakit inner join penyakit_pd3i "+
@@ -115,7 +99,6 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
             System.out.println(e);
         }
     }
-    private DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -310,7 +293,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
             Valid.textKosong(nmpenyakit,"Nama Penyakit");
         }else{
             Sequel.menyimpan("penyakit_pd3i","'"+kdpenyakit.getText()+"'","Penyakit");
-            tampil();
+            runBackground(() ->tampil());
             emptTeks();
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -341,7 +324,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
         }else if(! nmpenyakit.getText().trim().equals("")){
             Sequel.queryu("delete from penyakit_pd3i where kd_penyakit='"+kdpenyakit.getText()+"'");
-            tampil();
+            runBackground(() ->tampil());
             emptTeks();
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
@@ -404,6 +387,29 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
     }//GEN-LAST:event_nmpenyakitKeyPressed
 
     private void btnBangsalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBangsalActionPerformed
+        DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
+        penyakit.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                    kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
+                    nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
+                }     
+                kdpenyakit.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         penyakit.isCek();
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penyakit.setLocationRelativeTo(internalFrame1);
@@ -415,7 +421,7 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBangsalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -479,5 +485,37 @@ public class DlgPenyakitPd3i extends javax.swing.JDialog {
         kdpenyakit.setText("");
         nmpenyakit.setText("");
         kdpenyakit.requestFocus();
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

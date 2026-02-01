@@ -2170,8 +2170,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_NoRawatKeyPressed
 
     private void BtnCloseIn4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseIn4ActionPerformed
-        dokter.dispose();
-        petugas.dispose();
         WindowGantiDokterParamedis.dispose();
     }//GEN-LAST:event_BtnCloseIn4ActionPerformed
 
@@ -2350,8 +2348,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                      tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()
                 })==true){
                 runBackground(() -> tampil());
-                dokter.dispose();
-                petugas.dispose();
                 WindowGantiDokterParamedis.dispose();
             }
         }

@@ -30,8 +30,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -50,6 +54,8 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     private ResultSet rs;
     private int i=0;
     private String sql;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgObatPenyakit
      * @param parent
@@ -135,135 +141,24 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        runBackground(() ->tampil());
                     }
                 }
             });
-        }
-        penyakit.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgObatPenyakit")){
-                    if( penyakit.getTable().getSelectedRow()!= -1){
-                        kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
-                        TPenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                        PenyakitCari.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                        tampil();
-                    }
-                    kdpenyakit.requestFocus();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        barang.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgObatPenyakit")){
-                    if(barang.getTable().getSelectedRow()!= -1){
-                        kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
-                        nmobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                    }
-                    kdobat.requestFocus();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        barang.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(akses.getform().equals("DlgObatPenyakit")){
-                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        barang.dispose();
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-
-
-        ktg.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgObatPenyakit")){
-                    if(ktg.getTable().getSelectedRow()!= -1){
-                        KtgCari.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
-                    }
-                    KtgCari.requestFocus();
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
-        ktg.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(akses.getform().equals("DlgObatPenyakit")){
-                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        ktg.dispose();
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-
+        } 
     }
-
-    private DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
-    private DlgKtgPenyakit ktg=new DlgKtgPenyakit(null,false);
-    private DlgBarang barang=new DlgBarang(null,false);
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -724,7 +619,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
                     //menyimpan-------------------------------------------------
                     Sequel.menyimpan("obat_penyakit","'"+kdpenyakit.getText()+"','"+kdobat.getText()+"','"+TRef.getText()+"'","Data Sama");
                     //----------------------------------------------------------
-                    tampil();
+                    runBackground(() ->tampil());
                     emptTeks();
                 }
                 kdpenyakit.requestFocus();
@@ -760,7 +655,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
                 });
             }
         }
-        tampil();
+        runBackground(() ->tampil());
         emptTeks();
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -839,7 +734,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         KtgCari.setText("");
         PenyakitCari.setText("");
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -861,7 +756,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -880,7 +775,29 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyTyped
 
     private void btnpenyakitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnpenyakitActionPerformed
-        akses.setform("DlgObatPenyakit");
+        DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
+        penyakit.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if( penyakit.getTable().getSelectedRow()!= -1){                   
+                    kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
+                    TPenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
+                }  
+                kdpenyakit.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         penyakit.isCek();
         penyakit.emptTeks();
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -893,7 +810,42 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnpenyakitKeyPressed
 
     private void btnobatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnobatActionPerformed
-        akses.setform("DlgObatPenyakit");
+        DlgBarang barang=new DlgBarang(null,false);
+        barang.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(barang.getTable().getSelectedRow()!= -1){                   
+                    kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                    nmobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
+                }    
+                kdobat.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        barang.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    barang.dispose();
+                } 
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         barang.isCek();
         barang.emptTeks();
         barang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -949,12 +901,46 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
    if(evt.getKeyCode()==KeyEvent.VK_UP){
        btnKategoriCariActionPerformed(null);
    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-       tampil();
+       runBackground(() ->tampil());
    }
     }//GEN-LAST:event_KtgCariKeyPressed
 
     private void btnKategoriCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKategoriCariActionPerformed
-        akses.setform("DlgObatPenyakit");
+        DlgKtgPenyakit ktg=new DlgKtgPenyakit(null,false);
+        ktg.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(ktg.getTable().getSelectedRow()!= -1){                                   
+                    KtgCari.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
+                }   
+                KtgCari.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        
+        ktg.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    ktg.dispose();
+                }  
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         ktg.emptTeks();
         ktg.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         ktg.setLocationRelativeTo(internalFrame1);
@@ -969,14 +955,36 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
    if(evt.getKeyCode()==KeyEvent.VK_UP){
        btnPenyakitCariActionPerformed(null);
    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-       tampil();
+       runBackground(() ->tampil());
    }
     }//GEN-LAST:event_PenyakitCariKeyPressed
 
     private void btnPenyakitCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenyakitCariActionPerformed
-        akses.setform("DlgObatPenyakit");
-        penyakit.emptTeks();
+        DlgCariPenyakit penyakit=new DlgCariPenyakit(null,false);
+        penyakit.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if( penyakit.getTable().getSelectedRow()!= -1){                   
+                    PenyakitCari.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
+                    runBackground(() ->tampil());
+                }  
+                kdpenyakit.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         penyakit.isCek();
+        penyakit.emptTeks();
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);
@@ -987,7 +995,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPenyakitCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
+        runBackground(() ->tampil());
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1119,5 +1127,37 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getobat_penyakit());
         BtnHapus.setEnabled(akses.getobat_penyakit());
         BtnPrint.setEnabled(akses.getobat_penyakit());
+    }
+    
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
     }
 }

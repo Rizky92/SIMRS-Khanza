@@ -31,7 +31,11 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -40,6 +44,9 @@ public class SKPRekapitulasiPenilaianPegawai extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
+    private sekuel Sequel=new sekuel();
     private PreparedStatement ps;
     private ResultSet rs;
     private int jml=0,i=0,row=0,index=0;
@@ -857,7 +864,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(Valid.daysOld("./cache/skppenilaianpegawai.iyem")<30){
                 tampil2();
             }else{
-                tampil();
+                runBackground(() ->tampil());
                 tampil2();
             }
         } catch (Exception e) {
@@ -873,9 +880,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_btnPenilaiActionPerformed
 
     private void KdPenilaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPenilaiKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            NmPenilai.setText(pegawai.tampil3(KdPenilai.getText()));
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             NoPenilaian.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             KdDInilai.requestFocus();
@@ -904,7 +909,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         KdKategori.setText("");
         NmKategori.setText("");
         Sasaran.setSelectedIndex(0);
-        tampil();
+        runBackground(() ->tampil());
         tampil2();*/
     }//GEN-LAST:event_BtnAllActionPerformed
 
@@ -918,7 +923,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void KdDInilaiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdDInilaiKeyPressed
         /*if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            NmDinilai.setText(pegawai.tampil3(KdDInilai.getText()));
+            NmDinilai.setText(Sequel.CariPegawai(KdDInilai.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             KdDInilai.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
@@ -1152,7 +1157,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             btnPenilai.setEnabled(false);
             KdPenilai.setText(akses.getkode());
             BtnSimpan.setEnabled(akses.getskp_penilaian());
-            NmPenilai.setText(pegawai.tampil3(KdPenilai.getText()));
+            NmPenilai.setText(Sequel.CariPegawai(KdPenilai.getText()));
         }
     }
 
@@ -1161,5 +1166,35 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 "SKP"+Tanggal.getSelectedItem().toString().substring(6,10)+Tanggal.getSelectedItem().toString().substring(3,5)+Tanggal.getSelectedItem().toString().substring(0,2),4,NoPenilaian);
     }
 
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
 
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+    
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
+    }
 }
