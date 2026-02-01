@@ -13,17 +13,16 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
+import java.util.List;
+import java.util.stream.StreamSupport;
+import javax.swing.SwingWorker;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,17 +34,10 @@ import org.springframework.http.MediaType;
  */
 public final class BPJSReferensiPoli extends widget.Dialog {
     private final DefaultTableModel tabMode;
-    private validasi Valid = new validasi();
-    private sekuel Sequel = new sekuel();
-    private int i = 0;
-    private ApiBPJS api = new ApiBPJS();
-    private String URL = "", link = "", utc = "";
-    private HttpHeaders headers;
-    private HttpEntity requestEntity;
-    private ObjectMapper mapper = new ObjectMapper();
-    private JsonNode root;
-    private JsonNode nameNode;
-    private JsonNode response;
+    private final validasi Valid = new validasi();
+    private final ApiBPJS api = new ApiBPJS();
+    private volatile boolean isLoading = false;
+    private boolean isOpened = false;
 
     /**
      * Creates new form DlgKamar
@@ -63,10 +55,10 @@ public final class BPJSReferensiPoli extends widget.Dialog {
                 return false;
             }
         };
-        tbKamar.setModel(tabMode);
+        tbPoli.setModel(tabMode);
 
         for (int i = 0; i < 3; i++) {
-            TableColumn column = tbKamar.getColumnModel().getColumn(i);
+            TableColumn column = tbPoli.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(40);
             } else if (i == 1) {
@@ -75,38 +67,6 @@ public final class BPJSReferensiPoli extends widget.Dialog {
                 column.setPreferredWidth(470);
             }
         }
-
-        if (koneksiDB.CARICEPAT().equals("aktif")) {
-            Poli.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if (Poli.getText().length() > 2) {
-                        tampil(Poli.getText());
-                    }
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if (Poli.getText().length() > 2) {
-                        tampil(Poli.getText());
-                    }
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if (Poli.getText().length() > 2) {
-                        tampil(Poli.getText());
-                    }
-                }
-            });
-        }
-
-        try {
-            link = koneksiDB.URLAPIBPJS();
-        } catch (Exception e) {
-            System.out.println("E : " + e);
-        }
-
     }
 
     /**
@@ -117,28 +77,33 @@ public final class BPJSReferensiPoli extends widget.Dialog {
     private void initComponents() {
 
         Scroll = new widget.ScrollPane();
-        tbKamar = new widget.Table();
+        tbPoli = new widget.Table();
         panelGlass6 = new widget.Panel();
-        btnKeluar = new widget.Button();
+        BtnKeluar = new widget.Button();
         jLabel16 = new widget.Label();
-        Poli = new widget.TextField();
+        TCari = new widget.TextField();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
 
         setIconImage(null);
         setIconImages(null);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setAutoCreateRowSorter(true);
-        tbKamar.setName("tbKamar"); // NOI18N
-        tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbPoli.setAutoCreateRowSorter(true);
+        tbPoli.setName("tbPoli"); // NOI18N
+        tbPoli.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tbKamarMouseReleased(evt);
+                tbPoliMouseReleased(evt);
             }
         });
-        Scroll.setViewportView(tbKamar);
+        Scroll.setViewportView(tbPoli);
 
         getContentPane().add(Scroll, java.awt.BorderLayout.CENTER);
 
@@ -146,33 +111,34 @@ public final class BPJSReferensiPoli extends widget.Dialog {
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 68));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        btnKeluar.setBackground(new java.awt.Color(255, 255, 255));
-        btnKeluar.setForeground(new java.awt.Color(255, 23, 26));
-        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
-        btnKeluar.setText("KELUAR");
-        btnKeluar.setName("btnKeluar"); // NOI18N
-        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+        BtnKeluar.setBackground(new java.awt.Color(255, 255, 255));
+        BtnKeluar.setForeground(new java.awt.Color(255, 23, 26));
+        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        BtnKeluar.setText("KELUAR");
+        BtnKeluar.setName("BtnKeluar"); // NOI18N
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKeluarActionPerformed(evt);
+                BtnKeluarActionPerformed(evt);
             }
         });
-        panelGlass6.add(btnKeluar);
+        panelGlass6.add(BtnKeluar);
 
         jLabel16.setText("Key word :");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setPreferredSize(new java.awt.Dimension(110, 36));
         panelGlass6.add(jLabel16);
 
-        Poli.setName("Poli"); // NOI18N
-        Poli.setPreferredSize(new java.awt.Dimension(400, 36));
-        Poli.addKeyListener(new java.awt.event.KeyAdapter() {
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(400, 36));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                PoliKeyPressed(evt);
+                TCariKeyPressed(evt);
             }
         });
-        panelGlass6.add(Poli);
+        panelGlass6.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(36, 36));
@@ -197,22 +163,14 @@ public final class BPJSReferensiPoli extends widget.Dialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void PoliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PoliKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            tampil(Poli.getText());
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            tampil(Poli.getText());
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            btnKeluar.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            BtnCariActionPerformed(null);
+            tampil();
         }
-    }//GEN-LAST:event_PoliKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        tampil(Poli.getText());
-        this.setCursor(Cursor.getDefaultCursor());
+        tampil();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -221,64 +179,109 @@ public final class BPJSReferensiPoli extends widget.Dialog {
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
-    private void tbKamarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseReleased
+    private void tbPoliMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbPoliMouseReleased
+        isOpened = false;
         dispose();
-    }//GEN-LAST:event_tbKamarMouseReleased
+    }//GEN-LAST:event_tbPoliMouseReleased
 
-    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+        isOpened = false;
         dispose();
-    }//GEN-LAST:event_btnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if (!isOpened) {
+            BtnCariActionPerformed(null);
+            isOpened = true;
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;
-    private widget.TextField Poli;
+    private widget.Button BtnKeluar;
     private widget.ScrollPane Scroll;
-    private widget.Button btnKeluar;
+    private widget.TextField TCari;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
     private widget.Panel panelGlass6;
-    private widget.Table tbKamar;
+    private widget.Table tbPoli;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String poli) {
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-            utc = String.valueOf(api.getUTCDateTime());
-            headers.add("X-Timestamp", utc);
-            headers.add("X-Signature", api.getHmac(utc));
-            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            requestEntity = new HttpEntity(headers);
-            URL = link + "/referensi/poli/" + poli;
-            //System.out.println(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-            if (nameNode.path("code").asText().equals("200")) {
-                Valid.tabelKosongSmc(tabMode);
-                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-                //response = root.path("response");
-                if (response.path("poli").isArray()) {
-                    i = 1;
-                    for (JsonNode list : response.path("poli")) {
-                        tabMode.addRow(new Object[] {
-                            i + ".", list.path("kode").asText(), list.path("nama").asText()
-                        });
-                        i++;
+    public void tampil() {
+        if (!isLoading) {
+            isLoading = true;
+            Valid.tabelKosongSmc(tabMode);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+            new SwingWorker<Void, Object[]>() {
+                private final String cari = TCari.getText().trim();
+                private volatile int i = 0;
+                private String pesan = null;
+                
+                @Override
+                protected Void doInBackground() throws Exception {
+                    HttpHeaders headers = new HttpHeaders();
+                    String utc = api.getUTCDateTimeAsString();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                    headers.add("X-Timestamp", utc);
+                    headers.add("X-Signature", api.getHmac(utc));
+                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                    
+                    final ObjectMapper mapper = new ObjectMapper();
+                    JsonNode root = mapper.readTree(api.getRest().exchange(
+                        koneksiDB.URLAPIBPJS() + "/referensi/poli/" + cari,
+                        HttpMethod.GET, new HttpEntity(headers), String.class).getBody());
+                    JsonNode metadata = root.path("metaData");
+
+                    if (metadata.path("code").asText().equals("200")) {
+                        JsonNode response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                        if (response.path("list").isArray()) {
+                            StreamSupport.stream(response.path("list").spliterator(), false)
+                                .filter(list -> list.path("kode").asText().toLowerCase().contains(cari.toLowerCase()) || list.path("nama").asText().toLowerCase().contains(cari.toLowerCase()))
+                                .forEach(list -> publish(new Object[] {(++i) + ".", list.path("kode").asText(), list.path("nama").asText()}));
+                        }
+                    } else {
+                        pesan = metadata.path("message").asText("");
                     }
+
+                    return null;
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, nameNode.path("message").asText());
-            }
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                        if (pesan != null) {
+                            Valid.popupPeringatanDialog(pesan);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                        if (e.toString().contains("UnknownHostException")) {
+                            Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
+                        }
+                    }
+                    BPJSReferensiPoli.this.setCursor(Cursor.getDefaultCursor());
+                    isLoading = false;
+                }
+            }.execute();
         }
     }
 
+    public boolean hasSelection() {
+        return tbPoli.getSelectedRow() >= 0;
+    }
+
+    public Object getSelectedRow(int column) {
+        return tbPoli.getValueAt(tbPoli.getSelectedRow(), column);
+    }
+
     public JTable getTable() {
-        return tbKamar;
+        return tbPoli;
     }
 }

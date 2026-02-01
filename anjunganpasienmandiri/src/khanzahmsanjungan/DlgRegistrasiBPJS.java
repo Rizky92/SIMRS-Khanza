@@ -1038,7 +1038,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     private void cariDokterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cariDokterActionPerformed
         dokter.setSize(getContentPane().getSize());
         dokter.setLocationRelativeTo(getContentPane());
-        dokter.carinamadokter(kodePoli, namaPoli.getText());
+        dokter.setPoli(kodePoli, namaPoli.getText());
         dokter.setVisible(true);
     }//GEN-LAST:event_cariDokterActionPerformed
 
@@ -1114,7 +1114,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             riwayatPelayanan.setSize(getContentPane().getSize());
             riwayatPelayanan.setLocationRelativeTo(getContentPane());
-            riwayatPelayanan.setKartu(noPeserta.getText());
+            riwayatPelayanan.setNoPeserta(noPeserta.getText());
             riwayatPelayanan.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }

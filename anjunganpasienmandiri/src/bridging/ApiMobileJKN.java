@@ -43,7 +43,7 @@ public class ApiMobileJKN {
             Key = koneksiDB.SECRETKEYAPIMOBILEJKN();
             Consid = koneksiDB.CONSIDAPIMOBILEJKN();
         } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
+            System.out.println("Notif : " + ex);
         }
     }
 

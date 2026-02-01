@@ -43,7 +43,7 @@ public class ApiBPJS {
             Key = koneksiDB.SECRETKEYAPIBPJS();
             Consid = koneksiDB.CONSIDAPIBPJS();
         } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
+            System.out.println("Notif : " + ex);
         }
     }
 

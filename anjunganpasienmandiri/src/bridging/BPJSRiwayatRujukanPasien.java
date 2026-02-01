@@ -19,8 +19,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.validasi;
 import fungsi.koneksiDB;
 import java.awt.Cursor;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.stream.StreamSupport;
+import javax.swing.SwingWorker;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -31,18 +32,11 @@ import org.springframework.http.MediaType;
  * @author dosen
  */
 public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
-
     private final DefaultTableModel tabMode;
-    private validasi Valid = new validasi();
-    private int i = 0;
-    private ApiBPJS api = new ApiBPJS();
-    private String URL = "", link = "", utc = "";
-    private HttpHeaders headers;
-    private HttpEntity requestEntity;
-    private ObjectMapper mapper = new ObjectMapper();
-    private JsonNode root;
-    private JsonNode nameNode;
-    private JsonNode response;
+    private final ApiBPJS api = new ApiBPJS();
+    private final validasi Valid = new validasi();
+    private volatile boolean isLoading = false;
+    private boolean isOpened = false;
 
     /**
      * Creates new form DlgKamar
@@ -54,16 +48,18 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
         super(parent, modal);
         initComponents();
 
-        tabMode = new DefaultTableModel(null, new Object[] {"Kode Diagnosa", "Nama Diagnosa", "No. Rujukan", "Kode Tujuan", "Nama Tujuan", "Tgl. Rujukan", "Kode PPK", "Nama PPK", "Status"}) {
+        tabMode = new DefaultTableModel(null, new Object[] {
+            "Kode Diagnosa", "Nama Diagnosa", "No. Rujukan", "Kode Tujuan", "Nama Tujuan", "Tgl. Rujukan", "Kode PPK", "Nama PPK", "Status"
+        }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
         };
-        tbKamar.setModel(tabMode);
+        tbRiwayat.setModel(tabMode);
 
-        for (i = 0; i < 9; i++) {
-            TableColumn column = tbKamar.getColumnModel().getColumn(i);
+        for (int i = 0; i < 9; i++) {
+            TableColumn column = tbRiwayat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(60);
             } else if (i == 1) {
@@ -84,12 +80,6 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
                 column.setPreferredWidth(100);
             }
         }
-
-        try {
-            link = koneksiDB.URLAPIBPJS();
-        } catch (Exception e) {
-            System.out.println("E : " + e);
-        }
     }
 
     /**
@@ -100,28 +90,33 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
     private void initComponents() {
 
         Scroll = new widget.ScrollPane();
-        tbKamar = new widget.Table();
+        tbRiwayat = new widget.Table();
         panelBawah = new widget.Panel();
-        BtnKeluar1 = new widget.Button();
+        BtnKeluar = new widget.Button();
         jLabel16 = new widget.Label();
-        NoKartu = new widget.TextField();
-        NamaPasien = new widget.TextField();
+        noPeserta = new widget.TextField();
+        namaPasien = new widget.TextField();
         jLabel17 = new widget.Label();
 
         setIconImage(null);
         setIconImages(null);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKamar.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbKamar.setName("tbKamar"); // NOI18N
-        tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbKamarMouseClicked(evt);
+        tbRiwayat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbRiwayat.setName("tbRiwayat"); // NOI18N
+        tbRiwayat.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbRiwayatMouseReleased(evt);
             }
         });
-        Scroll.setViewportView(tbKamar);
+        Scroll.setViewportView(tbRiwayat);
 
         getContentPane().add(Scroll, java.awt.BorderLayout.CENTER);
 
@@ -129,32 +124,32 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
         panelBawah.setPreferredSize(new java.awt.Dimension(44, 68));
         panelBawah.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        BtnKeluar1.setBackground(new java.awt.Color(255, 255, 255));
-        BtnKeluar1.setForeground(new java.awt.Color(255, 23, 26));
-        BtnKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
-        BtnKeluar1.setText("KELUAR");
-        BtnKeluar1.setName("BtnKeluar1"); // NOI18N
-        BtnKeluar1.addActionListener(new java.awt.event.ActionListener() {
+        BtnKeluar.setBackground(new java.awt.Color(255, 255, 255));
+        BtnKeluar.setForeground(new java.awt.Color(255, 23, 26));
+        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        BtnKeluar.setText("KELUAR");
+        BtnKeluar.setName("BtnKeluar"); // NOI18N
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnKeluar1ActionPerformed(evt);
+                BtnKeluarActionPerformed(evt);
             }
         });
-        panelBawah.add(BtnKeluar1);
+        panelBawah.add(BtnKeluar);
 
         jLabel16.setText("Pasien :");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setPreferredSize(new java.awt.Dimension(90, 36));
         panelBawah.add(jLabel16);
 
-        NoKartu.setEditable(false);
-        NoKartu.setName("NoKartu"); // NOI18N
-        NoKartu.setPreferredSize(new java.awt.Dimension(200, 36));
-        panelBawah.add(NoKartu);
+        noPeserta.setEditable(false);
+        noPeserta.setName("noPeserta"); // NOI18N
+        noPeserta.setPreferredSize(new java.awt.Dimension(200, 36));
+        panelBawah.add(noPeserta);
 
-        NamaPasien.setEditable(false);
-        NamaPasien.setName("NamaPasien"); // NOI18N
-        NamaPasien.setPreferredSize(new java.awt.Dimension(450, 36));
-        panelBawah.add(NamaPasien);
+        namaPasien.setEditable(false);
+        namaPasien.setName("namaPasien"); // NOI18N
+        namaPasien.setPreferredSize(new java.awt.Dimension(450, 36));
+        panelBawah.add(namaPasien);
 
         jLabel17.setFocusable(false);
         jLabel17.setName("jLabel17"); // NOI18N
@@ -166,108 +161,142 @@ public final class BPJSRiwayatRujukanPasien extends widget.Dialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if (evt.getClickCount() == 1) {
-            dispose();
-        }
-
-        if (evt.getClickCount() == 2) {
-            dispose();
-        }
-    }//GEN-LAST:event_tbKamarMouseClicked
-
-    private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
-    }//GEN-LAST:event_BtnKeluar1ActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
+
+    private void tbRiwayatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRiwayatMouseReleased
+        dispose();
+    }//GEN-LAST:event_tbRiwayatMouseReleased
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if (!isOpened) {
+            tampil();
+            isOpened = true;
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private widget.Button BtnKeluar1;
-    private widget.TextField NamaPasien;
-    private widget.TextField NoKartu;
+    private widget.Button BtnKeluar;
     private widget.ScrollPane Scroll;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
+    private widget.TextField namaPasien;
+    private widget.TextField noPeserta;
     private widget.Panel panelBawah;
-    private widget.Table tbKamar;
+    private widget.Table tbRiwayat;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String nomorkartu, String namapasien) {
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        try {
-            NoKartu.setText(nomorkartu);
-            NamaPasien.setText(namapasien);
+    public void tampil() {
+        if (!isLoading) {
+            isLoading = true;
             Valid.tabelKosongSmc(tabMode);
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-            utc = String.valueOf(api.getUTCDateTime());
-            headers.add("X-Timestamp", utc);
-            headers.add("X-Signature", api.getHmac(utc));
-            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            requestEntity = new HttpEntity(headers);
-            URL = link + "/Rujukan/List/Peserta/" + nomorkartu;
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-            if (nameNode.path("code").asText().equals("200")) {
-                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("rujukan");
-                //response = root.path("response").path("rujukan");
-                if (response.isArray()) {
-                    for (JsonNode list : response) {
-                        tabMode.addRow(new Object[] {
-                            list.path("diagnosa").path("kode").asText(), list.path("diagnosa").path("nama").asText(), list.path("noKunjungan").asText(),
-                            list.path("poliRujukan").path("kode").asText(), list.path("poliRujukan").path("nama").asText(), list.path("tglKunjungan").asText(),
-                            list.path("provPerujuk").path("kode").asText(), list.path("provPerujuk").path("nama").asText(), "FKTP"
-                        });
-                    }
-                }
-            }
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-            utc = String.valueOf(api.getUTCDateTime());
-            headers.add("X-Timestamp", utc);
-            headers.add("X-Signature", api.getHmac(utc));
-            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            requestEntity = new HttpEntity(headers);
-            URL = link + "/Rujukan/RS/List/Peserta/" + nomorkartu;
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-            if (nameNode.path("code").asText().equals("200")) {
-                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("rujukan");
-                //response = root.path("response").path("rujukan");
-                if (response.isArray()) {
-                    for (JsonNode list : response) {
-                        tabMode.addRow(new Object[] {
-                            list.path("diagnosa").path("kode").asText(), list.path("diagnosa").path("nama").asText(), list.path("noKunjungan").asText(),
-                            list.path("poliRujukan").path("kode").asText(), list.path("poliRujukan").path("nama").asText(), list.path("tglKunjungan").asText(),
-                            list.path("provPerujuk").path("kode").asText(), list.path("provPerujuk").path("nama").asText(), "FKTL"
-                        });
+            new SwingWorker<Void, Object[]>() {
+                private final String noPeserta = BPJSRiwayatRujukanPasien.this.noPeserta.getText();
+                private String pesan = null;
+                
+                @Override
+                protected Void doInBackground() throws Exception {
+                    HttpHeaders headers = new HttpHeaders();
+                    String utc = api.getUTCDateTimeAsString();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                    headers.add("X-Timestamp", utc);
+                    headers.add("X-Signature", api.getHmac(utc));
+                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                    
+                    final ObjectMapper mapper = new ObjectMapper();
+                    JsonNode root = mapper.readTree(api.getRest().exchange(
+                        koneksiDB.URLAPIBPJS() + "/Rujukan/List/Peserta/" + noPeserta,
+                        HttpMethod.GET, new HttpEntity(headers), String.class).getBody());
+                    JsonNode metadata = root.path("metaData");
+
+                    if (metadata.path("code").asText().equals("200")) {
+                        JsonNode response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                        if (response.path("list").isArray()) {
+                            StreamSupport.stream(response.path("list").spliterator(), false)
+                                .forEach(list -> publish(new Object[] {
+                                    list.path("diagnosa").path("kode").asText(), list.path("diagnosa").path("nama").asText(), list.path("noKunjungan").asText(),
+                                    list.path("poliRujukan").path("kode").asText(), list.path("poliRujukan").path("nama").asText(), list.path("tglKunjungan").asText(),
+                                    list.path("provPerujuk").path("kode").asText(), list.path("provPerujuk").path("nama").asText(), "FKTP"
+                                }));
+                        }
+                    } else {
+                        pesan = metadata.path("message").asText("");
                     }
+
+                    headers = new HttpHeaders();
+                    utc = api.getUTCDateTimeAsString();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                    headers.add("X-Timestamp", utc);
+                    headers.add("X-Signature", api.getHmac(utc));
+                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+
+                    root = mapper.readTree(api.getRest().exchange(
+                        koneksiDB.URLAPIBPJS() + "/Rujukan/RS/List/Peserta/" + noPeserta,
+                        HttpMethod.GET, new HttpEntity(headers), String.class).getBody());
+                    metadata = root.path("metaData");
+
+                    if (metadata.path("code").asText().equals("200")) {
+                        JsonNode response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                        if (response.path("list").isArray()) {
+                            StreamSupport.stream(response.path("list").spliterator(), false)
+                                .forEach(list -> publish(new Object[] {
+                                    list.path("diagnosa").path("kode").asText(), list.path("diagnosa").path("nama").asText(), list.path("noKunjungan").asText(),
+                                    list.path("poliRujukan").path("kode").asText(), list.path("poliRujukan").path("nama").asText(), list.path("tglKunjungan").asText(),
+                                    list.path("provPerujuk").path("kode").asText(), list.path("provPerujuk").path("nama").asText(), "FKTL"
+                                }));
+                        }
+                    } else {
+                        pesan = metadata.path("message").asText("");
+                    }
+
+                    return null;
                 }
-            }
-            if (tabMode.getRowCount() == 0) {
-                Valid.popupInfoDialog("Tidak ditemukan rujukan...!!");
-            }
-        } catch (Exception ex) {
-            System.out.println("Notifikasi Peserta : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                        if (pesan != null) {
+                            Valid.popupPeringatanDialog(pesan);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                        if (e.toString().contains("UnknownHostException")) {
+                            Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
+                        }
+                    }
+                    BPJSRiwayatRujukanPasien.this.setCursor(Cursor.getDefaultCursor());
+                    isLoading = false;
+                }
+            }.execute();
         }
+    }
 
-        this.setCursor(Cursor.getDefaultCursor());
+    public void setPasien(String noPeserta, String namaPasien) {
+        this.noPeserta.setText(noPeserta);
+        this.namaPasien.setText(namaPasien);
+        isOpened = false;
     }
 
     public boolean hasSelection() {
-        return tbKamar.getSelectedRow() >= 0;
+        return tbRiwayat.getSelectedRow() >= 0;
     }
 
     public Object getSelectedRow(int column) {
-        return tbKamar.getValueAt(tbKamar.getSelectedRow(), column);
+        return tbRiwayat.getValueAt(tbRiwayat.getSelectedRow(), column);
     }
 
     public JTable getTable() {
-        return tbKamar;
+        return tbRiwayat;
     }
 }

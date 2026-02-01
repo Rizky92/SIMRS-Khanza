@@ -227,6 +227,10 @@ public final class validasi {
         return (Integer) (pane.getValue() == null || pane.getValue().equals(JOptionPane.UNINITIALIZED_VALUE) ? -1 : pane.getValue());
     }
 
+    public int popupKonfirmDialog(String pesan) {
+        return popupDialog("Konfirmasi", pesan, POPUPTYPE_KONFIRM, JOptionPane.QUESTION_MESSAGE, 0);
+    }
+
     public int popupInfoDialog(String pesan, int timeout) {
         return popupDialog("Informasi", pesan, POPUPTYPE_INFORMASI, JOptionPane.INFORMATION_MESSAGE, timeout);
     }

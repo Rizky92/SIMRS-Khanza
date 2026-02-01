@@ -13,17 +13,16 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.BatasInput;
 import fungsi.koneksiDB;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
-import javax.swing.event.DocumentEvent;
+import java.util.List;
+import java.util.stream.StreamSupport;
+import javax.swing.SwingWorker;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -34,26 +33,12 @@ import org.springframework.http.MediaType;
  * @author dosen
  */
 public final class BPJSReferensiDiagnosa extends widget.Dialog {
-
     private final DefaultTableModel tabMode;
-    private validasi Valid = new validasi();
-    private sekuel Sequel = new sekuel();
-    private int i = 0;
-    private ApiBPJS api = new ApiBPJS();
-    private String URL = "", link = "", utc = "";
-    private HttpHeaders headers;
-    private HttpEntity requestEntity;
-    private ObjectMapper mapper = new ObjectMapper();
-    private JsonNode root;
-    private JsonNode nameNode;
-    private JsonNode response;
+    private final validasi Valid = new validasi();
+    private final ApiBPJS api = new ApiBPJS();
+    private volatile boolean isLoading = false;
+    private boolean isOpened = false;
 
-    /**
-     * Creates new form DlgKamar
-     *
-     * @param parent
-     * @param modal
-     */
     public BPJSReferensiDiagnosa(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
@@ -64,48 +49,17 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
                 return false;
             }
         };
-        tbKamar.setModel(tabMode);
+        tbDiagnosa.setModel(tabMode);
 
         for (int i = 0; i < 3; i++) {
-            TableColumn column = tbKamar.getColumnModel().getColumn(i);
+            TableColumn column = tbDiagnosa.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setPreferredWidth(40);
+                column.setPreferredWidth(80);
             } else if (i == 1) {
-                column.setPreferredWidth(140);
+                column.setPreferredWidth(170);
             } else if (i == 2) {
-                column.setPreferredWidth(470);
+                column.setPreferredWidth(700);
             }
-        }
-
-        if (koneksiDB.CARICEPAT().equals("aktif")) {
-            diagnosa.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if (diagnosa.getText().length() > 2) {
-                        tampil(diagnosa.getText());
-                    }
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if (diagnosa.getText().length() > 2) {
-                        tampil(diagnosa.getText());
-                    }
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if (diagnosa.getText().length() > 2) {
-                        tampil(diagnosa.getText());
-                    }
-                }
-            });
-        }
-
-        try {
-            link = koneksiDB.URLAPIBPJS();
-        } catch (Exception e) {
-            System.out.println("E : " + e);
         }
     }
 
@@ -117,25 +71,30 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
     private void initComponents() {
 
         Scroll = new widget.ScrollPane();
-        tbKamar = new widget.Table();
+        tbDiagnosa = new widget.Table();
         panelBawah = new widget.Panel();
-        btnKeluar = new widget.Button();
+        BtnKeluar = new widget.Button();
         jLabel16 = new widget.Label();
-        diagnosa = new widget.TextField();
+        TCari = new widget.TextField();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
 
         setIconImage(null);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         Scroll.setName("Scroll"); // NOI18N
 
-        tbKamar.setName("tbKamar"); // NOI18N
-        tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
+        tbDiagnosa.setName("tbDiagnosa"); // NOI18N
+        tbDiagnosa.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tbKamarMouseReleased(evt);
+                tbDiagnosaMouseReleased(evt);
             }
         });
-        Scroll.setViewportView(tbKamar);
+        Scroll.setViewportView(tbDiagnosa);
 
         getContentPane().add(Scroll, java.awt.BorderLayout.CENTER);
 
@@ -143,31 +102,31 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
         panelBawah.setPreferredSize(new java.awt.Dimension(168, 68));
         panelBawah.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT));
 
-        btnKeluar.setBackground(new java.awt.Color(255, 255, 255));
-        btnKeluar.setForeground(new java.awt.Color(255, 23, 26));
-        btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
-        btnKeluar.setText("KELUAR");
-        btnKeluar.setName("btnKeluar"); // NOI18N
-        btnKeluar.addActionListener(new java.awt.event.ActionListener() {
+        BtnKeluar.setBackground(new java.awt.Color(255, 255, 255));
+        BtnKeluar.setForeground(new java.awt.Color(255, 23, 26));
+        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        BtnKeluar.setText("KELUAR");
+        BtnKeluar.setName("BtnKeluar"); // NOI18N
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnKeluarActionPerformed(evt);
+                BtnKeluarActionPerformed(evt);
             }
         });
-        panelBawah.add(btnKeluar);
+        panelBawah.add(BtnKeluar);
 
         jLabel16.setText("Key word :");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setPreferredSize(new java.awt.Dimension(110, 36));
         panelBawah.add(jLabel16);
 
-        diagnosa.setName("diagnosa"); // NOI18N
-        diagnosa.setPreferredSize(new java.awt.Dimension(400, 36));
-        diagnosa.addKeyListener(new java.awt.event.KeyAdapter() {
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(400, 36));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
-                diagnosaKeyPressed(evt);
+                TCariKeyPressed(evt);
             }
         });
-        panelBawah.add(diagnosa);
+        panelBawah.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
         BtnCari.setToolTipText("Alt+6");
@@ -194,26 +153,18 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void diagnosaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_diagnosaKeyPressed
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            tampil(diagnosa.getText());
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            tampil(diagnosa.getText());
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            btnKeluar.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
             BtnCariActionPerformed(null);
         }
-    }//GEN-LAST:event_diagnosaKeyPressed
+    }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if (diagnosa.getText().trim().equals("")) {
+        if (TCari.getText().isBlank()) {
             Valid.popupInfoDialog("Silahkan masukkan pencarian terlebih dahulu..!!!");
         } else {
-            tampil(diagnosa.getText());
+            tampil();
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -222,71 +173,109 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
-    private void tbKamarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseReleased
+    private void tbDiagnosaMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDiagnosaMouseReleased
+        isOpened = false;
         dispose();
-    }//GEN-LAST:event_tbKamarMouseReleased
+    }//GEN-LAST:event_tbDiagnosaMouseReleased
 
-    private void btnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKeluarActionPerformed
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+        isOpened = false;
         dispose();
-    }//GEN-LAST:event_btnKeluarActionPerformed
+    }//GEN-LAST:event_BtnKeluarActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if (!isOpened) {
+            tampil();
+            isOpened = true;
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;
+    private widget.Button BtnKeluar;
     private widget.ScrollPane Scroll;
-    private widget.Button btnKeluar;
-    private widget.TextField diagnosa;
+    private widget.TextField TCari;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
     private widget.Panel panelBawah;
-    private widget.Table tbKamar;
+    private widget.Table tbDiagnosa;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String diagnosa) {
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-            utc = String.valueOf(api.getUTCDateTime());
-            headers.add("X-Timestamp", utc);
-            headers.add("X-Signature", api.getHmac(utc));
-            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            requestEntity = new HttpEntity(headers);
-            URL = link + "/referensi/diagnosa/" + diagnosa;
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-            if (nameNode.path("code").asText().equals("200")) {
-                Valid.tabelKosongSmc(tabMode);
-                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-                //response = root.path("response");
-                if (response.path("diagnosa").isArray()) {
-                    i = 1;
-                    for (JsonNode list : response.path("diagnosa")) {
-                        tabMode.addRow(new Object[] {
-                            i + ".", list.path("kode").asText(), list.path("nama").asText()
-                        });
-                        i++;
+    public void tampil() {
+        if (!isLoading) {
+            isLoading = true;
+            Valid.tabelKosongSmc(tabMode);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+            new SwingWorker<Void, Object[]>() {
+                private final String cari = TCari.getText().trim();
+                private String pesan = null;
+                private volatile int i = 0;
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    HttpHeaders headers = new HttpHeaders();
+                    String utc = api.getUTCDateTimeAsString();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                    headers.add("X-Timestamp", utc);
+                    headers.add("X-Signature", api.getHmac(utc));
+                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+
+                    final ObjectMapper mapper = new ObjectMapper();
+                    JsonNode root = mapper.readTree(api.getRest().exchange(
+                        koneksiDB.URLAPIBPJS() + "/referensi/diagnosa/" + cari,
+                        HttpMethod.GET, new HttpEntity(headers), String.class).getBody());
+                    JsonNode metadata = root.path("metaData");
+
+                    if (metadata.path("code").asText().equals("200")) {
+                        JsonNode response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                        if (response.path("list").isArray()) {
+                            StreamSupport.stream(response.path("list").spliterator(), false)
+                                .filter(list -> list.path("kode").asText().toLowerCase().contains(cari.toLowerCase()) || list.path("nama").asText().toLowerCase().contains(cari.toLowerCase()))
+                                .forEach(list -> publish(new Object[] {(++i) + ".", list.path("kode").asText(), list.path("nama").asText()}));
+                        }
+                    } else {
+                        pesan = metadata.path("message").asText("");
                     }
+
+                    return null;
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, nameNode.path("message").asText());
-            }
-        } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                        if (pesan != null) {
+                            Valid.popupPeringatanDialog(pesan);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                        if (e.toString().contains("UnknownHostException")) {
+                            Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
+                        }
+                    }
+                    BPJSReferensiDiagnosa.this.setCursor(Cursor.getDefaultCursor());
+                    isLoading = false;
+                }
+            }.execute();
         }
     }
 
     public boolean hasSelection() {
-        return tbKamar.getSelectedRow() >= 0;
+        return tbDiagnosa.getSelectedRow() >= 0;
     }
 
     public Object getSelectedRow(int column) {
-        return tbKamar.getValueAt(tbKamar.getSelectedRow(), column);
+        return tbDiagnosa.getValueAt(tbDiagnosa.getSelectedRow(), column);
     }
 
     public JTable getTable() {
-        return tbKamar;
+        return tbDiagnosa;
     }
 }

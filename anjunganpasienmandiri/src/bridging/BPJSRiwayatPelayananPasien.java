@@ -16,15 +16,14 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.BatasInput;
 import fungsi.validasi;
-import fungsi.sekuel;
 import fungsi.koneksiDB;
 import java.awt.Cursor;
 import java.awt.event.KeyEvent;
-import java.time.LocalDate;
 import java.util.Calendar;
-import javax.swing.JOptionPane;
+import java.util.List;
+import java.util.stream.StreamSupport;
+import javax.swing.SwingWorker;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -35,21 +34,12 @@ import org.springframework.http.MediaType;
  * @author dosen
  */
 public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
-
     private final DefaultTableModel tabMode;
-    private validasi Valid = new validasi();
-    private sekuel Sequel = new sekuel();
-    private int i = 0;
-    public int countsephariini = 0;
-    public String keterangansephariini = "";
-    private ApiBPJS api = new ApiBPJS();
-    private String URL = "", link = "", utc = "";
-    private HttpHeaders headers;
-    private HttpEntity requestEntity;
-    private ObjectMapper mapper = new ObjectMapper();
-    private JsonNode root;
-    private JsonNode nameNode;
-    private JsonNode response;
+    private final validasi Valid = new validasi();
+    private final ApiBPJS api = new ApiBPJS();
+    private volatile boolean isLoading = false;
+    private boolean isOpened = false;
+    private String noPeserta = "";
 
     /**
      * Creates new form DlgKamar
@@ -61,7 +51,10 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
         super(parent, modal);
         initComponents();
 
-        tabMode = new DefaultTableModel(null, new Object[] {"No.", "Diagnosa", "Jenis Pelayanan", "Kelas Rawat", "Nama Peserta", "No. Kartu", "No. SEP", "No.Rujukan", "Poli", "PPK Pelayanan", "Pulang SEP", "Tgl. SEP"}) {
+        tabMode = new DefaultTableModel(null, new Object[] {
+            "No.", "Diagnosa", "Jenis Pelayanan", "Kelas Rawat", "Nama Peserta", "No. Kartu",
+            "No. SEP", "No.Rujukan", "Poli", "PPK Pelayanan", "Pulang SEP", "Tgl. SEP"
+        }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -69,7 +62,7 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
         };
         tbRiwayat.setModel(tabMode);
 
-        for (i = 0; i < 12; i++) {
+        for (int i = 0; i < 12; i++) {
             TableColumn column = tbRiwayat.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(50);
@@ -97,16 +90,6 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
                 column.setPreferredWidth(150);
             }
         }
-
-        try {
-            link = koneksiDB.URLAPIBPJS();
-        } catch (Exception e) {
-            System.out.println("E : " + e);
-        }
-
-        Calendar cal = Calendar.getInstance();
-        cal.add(Calendar.DAY_OF_MONTH, -90);
-        DTPCari1.setDate(cal.getTime());
     }
 
     /**
@@ -116,7 +99,6 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        NoKartu = new widget.TextField();
         Scroll = new widget.ScrollPane();
         tbRiwayat = new widget.Table();
         panelBawah = new widget.Panel();
@@ -129,19 +111,21 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
         jLabel17 = new widget.Label();
         jLabel29 = new widget.Label();
 
-        NoKartu.setName("NoKartu"); // NOI18N
-        NoKartu.setPreferredSize(new java.awt.Dimension(130, 23));
-
         setIconImage(null);
         setIconImages(null);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         Scroll.setName("Scroll"); // NOI18N
 
         tbRiwayat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbRiwayat.setName("tbRiwayat"); // NOI18N
         tbRiwayat.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbRiwayatMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbRiwayatMouseReleased(evt);
             }
         });
         Scroll.setViewportView(tbRiwayat);
@@ -223,40 +207,38 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnCariActionPerformed(null);
-        } else {
-            Valid.pindahSmc(evt, NoKartu, BtnKeluar);
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if (NoKartu.getText().equals("")) {
-            Valid.teksKosongSmc(NoKartu, "No.Kartu");
+        if (noPeserta.isBlank()) {
+            Valid.popupPeringatanDialog("Silahkan pilih data peserta terlebih dahulu..!!");
+            dispose();
         } else {
-            tampil(NoKartu.getText());
+            tampil();
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
-
-    private void tbRiwayatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRiwayatMouseClicked
-        if (evt.getClickCount() == 2) {
-            dispose();
-        }
-        if (evt.getClickCount() == 1) {
-            dispose();
-        }
-    }//GEN-LAST:event_tbRiwayatMouseClicked
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
         dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
+
+    private void tbRiwayatMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbRiwayatMouseReleased
+        dispose();
+    }//GEN-LAST:event_tbRiwayatMouseReleased
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        if (!isOpened) {
+            tampil();
+            isOpened = true;
+        }
+    }//GEN-LAST:event_formWindowActivated
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnCari;
     private widget.Button BtnKeluar;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
-    private widget.TextField NoKartu;
     private widget.ScrollPane Scroll;
     private widget.Label jLabel17;
     private widget.Label jLabel19;
@@ -266,90 +248,95 @@ public final class BPJSRiwayatPelayananPasien extends widget.Dialog {
     private widget.Table tbRiwayat;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil(String nomorrujukan) {
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-            utc = String.valueOf(api.getUTCDateTime());
-            headers.add("X-Timestamp", utc);
-            headers.add("X-Signature", api.getHmac(utc));
-            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            requestEntity = new HttpEntity(headers);
-            URL = link + "/monitoring/HistoriPelayanan/NoKartu/" + nomorrujukan + "/tglMulai/" + Valid.getTglSmc(DTPCari1) + "/tglAkhir/" + Valid.getTglSmc(DTPCari2);
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-            if (nameNode.path("code").asText().equals("200")) {
-                Valid.tabelKosongSmc(tabMode);
-                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("histori");
-                //response = root.path("response").path("histori");
-                if (response.isArray()) {
-                    i = 1;
-                    for (JsonNode list : response) {
-                        tabMode.addRow(new Object[] {
-                            i + ".", list.path("diagnosa").asText(), list.path("jnsPelayanan").asText().replaceAll("1", "Rawat Inap").replaceAll("2", "Rawat Jalan"),
-                            list.path("kelasRawat").asText(), list.path("namaPeserta").asText(), list.path("noKartu").asText(), list.path("noSep").asText(),
-                            list.path("noRujukan").asText(), list.path("poli").asText(), list.path("ppkPelayanan").asText(), list.path("tglPlgSep").asText(),
-                            list.path("tglSep").asText()
-                        });
-                        i++;
+    public void tampil() {
+        if (!isLoading) {
+            isLoading = true;
+            Valid.tabelKosongSmc(tabMode);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+            new SwingWorker<Void, Object[]>() {
+                private final String tglAwal = Valid.getTglSmc(DTPCari1);
+                private final String tglAkhir = Valid.getTglSmc(DTPCari2);
+                private volatile int i = 0;
+                private String pesan = null;
+                
+                @Override
+                protected Void doInBackground() throws Exception {
+                    HttpHeaders headers = new HttpHeaders();
+                    String utc = api.getUTCDateTimeAsString();
+                    headers.setContentType(MediaType.APPLICATION_JSON);
+                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                    headers.add("X-Timestamp", utc);
+                    headers.add("X-Signature", api.getHmac(utc));
+                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                    
+                    final ObjectMapper mapper = new ObjectMapper();
+                    JsonNode root = mapper.readTree(api.getRest().exchange(
+                        koneksiDB.URLAPIBPJS() + "/monitoring/HistoriPelayanan/NoKartu/" + noPeserta + "/tglMulai/" + tglAwal + "/tglAkhir/" + tglAkhir,
+                        HttpMethod.GET, new HttpEntity(headers), String.class).getBody());
+                    JsonNode metadata = root.path("metaData");
+
+                    if (metadata.path("code").asText().equals("200")) {
+                        JsonNode response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                        if (response.path("list").isArray()) {
+                            StreamSupport.stream(response.path("list").spliterator(), false)
+                                .forEach(list -> publish(new Object[] {
+                                    (++i) + ".", list.path("diagnosa").asText(), list.path("jnsPelayanan").asText().replaceAll("1", "Rawat Inap").replaceAll("2", "Rawat Jalan"),
+                                    list.path("kelasRawat").asText(), list.path("namaPeserta").asText(), list.path("noKartu").asText(), list.path("noSep").asText(),
+                                    list.path("noRujukan").asText(), list.path("poli").asText(), list.path("ppkPelayanan").asText(), list.path("tglPlgSep").asText(),
+                                    list.path("tglSep").asText()
+                                }));
+                        }
+                    } else {
+                        pesan = metadata.path("message").asText("");
                     }
+
+                    return null;
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, nameNode.path("message").asText());
-            }
-        } catch (Exception ex) {
-            System.out.println("Notifikasi Peserta : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                        if (pesan != null) {
+                            Valid.popupPeringatanDialog(pesan);
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                        if (e.toString().contains("UnknownHostException")) {
+                            Valid.popupInfoDialog("Koneksi ke server BPJS terputus...!");
+                        }
+                    }
+                    BPJSRiwayatPelayananPasien.this.setCursor(Cursor.getDefaultCursor());
+                    isLoading = false;
+                }
+            }.execute();
         }
     }
 
-    public void cekDataSEPHariIni(String nomorkartu) {
-        String tglhariini = LocalDate.now().toString();
-        try {
-            headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-            utc = String.valueOf(api.getUTCDateTime());
-            headers.add("X-Timestamp", utc);
-            headers.add("X-Signature", api.getHmac(utc));
-            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-            requestEntity = new HttpEntity(headers);
-            URL = link + "/monitoring/HistoriPelayanan/NoKartu/" + nomorkartu + "/tglMulai/" + tglhariini + "/tglAkhir/" + tglhariini;
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-            countsephariini = 0;
-            keterangansephariini = "";
-            if (nameNode.path("code").asText().equals("200")) {
-                Valid.tabelKosongSmc(tabMode);
-                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc)).path("histori");
-                //response = root.path("response").path("histori");
-                if (response.isArray()) {
-                    i = 1;
-                    for (JsonNode list : response) {
-                        if (list.path("tglSep").asText().equals(tglhariini)) {
-                            countsephariini++;
-                            keterangansephariini = keterangansephariini + "Sudah terbit sep hari ini di Faskes :  " + list.path("ppkPelayanan").asText() + " dengan layana poli " + list.path("poli").asText() + "\n";
-                        }
-                    }
-                }
-            }
-        } catch (Exception ex) {
-            System.out.println("Notifikasi Peserta : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
-            }
-        }
+    public void setNoPeserta(String noPeserta) {
+        this.noPeserta = noPeserta;
+        Calendar cal = Calendar.getInstance();
+        DTPCari2.setDate(cal.getTime());
+        cal.add(Calendar.DAY_OF_MONTH, -90);
+        DTPCari1.setDate(cal.getTime());
+        this.isOpened = false;
     }
 
     public JTable getTable() {
         return tbRiwayat;
     }
 
-    public void setKartu(String Kartu) {
-        this.NoKartu.setText(Kartu);
-        BtnCariActionPerformed(null);
+    public boolean hasSelection() {
+        return tbRiwayat.getSelectedRow() >= 0;
+    }
+
+    public Object getSelectedRow(int column) {
+        return tbRiwayat.getValueAt(tbRiwayat.getSelectedRow(), column);
     }
 }

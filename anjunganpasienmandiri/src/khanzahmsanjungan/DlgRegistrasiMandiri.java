@@ -529,7 +529,7 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
             }
 
         } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+            System.out.println("Notif : " + e);
         }
     }
 

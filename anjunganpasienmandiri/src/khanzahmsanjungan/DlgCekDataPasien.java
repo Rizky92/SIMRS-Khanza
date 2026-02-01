@@ -332,10 +332,10 @@ public class DlgCekDataPasien extends widget.Dialog {
                     param.put("namars", Sequel.cariIsiSmc("select setting.nama_instansi from setting limit 1"));
                     param.put("kotars", Sequel.cariIsiSmc("select setting.kabupaten from setting limit 1"));
                     if (!rs.getString("stts").equals("Belum") || rs.getBoolean("ada_pemeriksaan")) {
-                        Valid.popupPeringatanDialog("Anda sudah menerima pelayanan pada hari ini..!!\nSilahkan konfirmasi ke petugas.");
+                        Valid.popupInfoDialog("Anda sudah menerima pelayanan pada hari ini..!!\nSilahkan konfirmasi ke petugas.");
                     } else if (rs.getString("status").equals("Checkin")) {
                         if (koneksiDB.PRINTJUMLAHBARCODE() > 0) {
-                            if (JOptionPane.showConfirmDialog(null, "Anda sudah melakukan checkin pada hari ini\nApakah mau mencetak barcode?", "Konfirmasi", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.YES_OPTION) {
+                            if (Valid.popupKonfirmDialog("Anda sudah melakukan checkin pada hari ini\nApakah mau mencetak barcode?") == validasi.POPUP_YA) {
                                 Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), koneksiDB.PRINTJUMLAHBARCODE());
                                 Valid.popupInfoDialog("Barcode berhasil dicetak..!!", 5);
                             }
