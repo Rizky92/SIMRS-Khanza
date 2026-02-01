@@ -4,22 +4,26 @@
  */
 package khanzahmsanjungan;
 
+import AESsecurity.EnkripsiAES;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
+import java.io.File;
+import java.io.FileReader;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
 
 public class DlgAmbilAntrian extends widget.Dialog {
-
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final String[] PREFIXHURUFAKTIF = koneksiDB.PREFIXHURUFAKTIF();
-
+    private String printerAntrian = "";
     private Map<String, Object> param = new HashMap<>();
 
     public DlgAmbilAntrian(java.awt.Frame parent, boolean id) {
@@ -40,13 +44,6 @@ public class DlgAmbilAntrian extends widget.Dialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-
-        panelTengah.remove(HurufA);
-        panelTengah.remove(HurufB);
-        panelTengah.remove(HurufC);
-        panelTengah.remove(HurufD);
-        panelTengah.remove(HurufE);
-        panelTengah.remove(HurufF);
 
         for (String huruf : PREFIXHURUFAKTIF) {
             switch (huruf) {
@@ -80,17 +77,65 @@ public class DlgAmbilAntrian extends widget.Dialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelAtas = new widget.Panel();
-        judul = new widget.Label();
-        panelTengah = new widget.Panel();
         HurufA = new widget.MenuButton();
         HurufB = new widget.MenuButton();
         HurufC = new widget.MenuButton();
         HurufD = new widget.MenuButton();
         HurufE = new widget.MenuButton();
         HurufF = new widget.MenuButton();
+        panelAtas = new widget.Panel();
+        judul = new widget.Label();
+        panelTengah = new widget.Panel();
         panelBawah = new widget.Panel();
         btnKeluar = new widget.Button();
+
+        HurufA.setText("ANTRIAN A");
+        HurufA.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        HurufA.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HurufAActionPerformed(evt);
+            }
+        });
+
+        HurufB.setText("ANTRIAN B");
+        HurufB.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        HurufB.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HurufBActionPerformed(evt);
+            }
+        });
+
+        HurufC.setText("ANTRIAN C");
+        HurufC.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        HurufC.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HurufCActionPerformed(evt);
+            }
+        });
+
+        HurufD.setText("ANTRIAN D");
+        HurufD.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        HurufD.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HurufDActionPerformed(evt);
+            }
+        });
+
+        HurufE.setText("ANTRIAN E");
+        HurufE.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        HurufE.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HurufEActionPerformed(evt);
+            }
+        });
+
+        HurufF.setText("ANTRIAN F");
+        HurufF.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
+        HurufF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                HurufFActionPerformed(evt);
+            }
+        });
 
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -110,67 +155,11 @@ public class DlgAmbilAntrian extends widget.Dialog {
         getContentPane().add(panelAtas, java.awt.BorderLayout.PAGE_START);
 
         panelTengah.setLayout(new java.awt.GridLayout(0, 2));
-
-        HurufA.setText("ANTRIAN A");
-        HurufA.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
-        HurufA.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HurufAActionPerformed(evt);
-            }
-        });
-        panelTengah.add(HurufA);
-
-        HurufB.setText("ANTRIAN B");
-        HurufB.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
-        HurufB.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HurufBActionPerformed(evt);
-            }
-        });
-        panelTengah.add(HurufB);
-
-        HurufC.setText("ANTRIAN C");
-        HurufC.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
-        HurufC.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HurufCActionPerformed(evt);
-            }
-        });
-        panelTengah.add(HurufC);
-
-        HurufD.setText("ANTRIAN D");
-        HurufD.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
-        HurufD.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HurufDActionPerformed(evt);
-            }
-        });
-        panelTengah.add(HurufD);
-
-        HurufE.setText("ANTRIAN E");
-        HurufE.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
-        HurufE.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HurufEActionPerformed(evt);
-            }
-        });
-        panelTengah.add(HurufE);
-
-        HurufF.setText("ANTRIAN F");
-        HurufF.setFont(new java.awt.Font("Inter", 1, 36)); // NOI18N
-        HurufF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                HurufFActionPerformed(evt);
-            }
-        });
-        panelTengah.add(HurufF);
-
         getContentPane().add(panelTengah, java.awt.BorderLayout.CENTER);
 
         btnKeluar.setBackground(new java.awt.Color(240, 249, 255));
         btnKeluar.setForeground(new java.awt.Color(255, 33, 32));
         btnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
-        btnKeluar.setMnemonic('U');
         btnKeluar.setText("KELUAR");
         btnKeluar.setToolTipText("Alt+U");
         btnKeluar.setFont(new java.awt.Font("Inter", 1, 24)); // NOI18N
@@ -213,6 +202,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
     }//GEN-LAST:event_HurufFActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        loadPengaturanAPM();
         tampil();
     }//GEN-LAST:event_formWindowActivated
 
@@ -243,7 +233,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     String.valueOf(Integer.parseInt(HurufA.getText().substring(HurufA.getText().indexOf("(") + 2, HurufA.getText().length() - 1)) + 1)
                 )) {
                     param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
+                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'A' and tanggal = current_date() order by nomor desc limit 1");
                 }
@@ -254,7 +244,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     String.valueOf(Integer.parseInt(HurufB.getText().substring(HurufB.getText().indexOf("(") + 2, HurufB.getText().length() - 1)) + 1)
                 )) {
                     param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
+                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'B' and tanggal = current_date() order by nomor desc limit 1");
                 }
@@ -265,7 +255,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     String.valueOf(Integer.parseInt(HurufC.getText().substring(HurufC.getText().indexOf("(") + 2, HurufC.getText().length() - 1)) + 1)
                 )) {
                     param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
+                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'C' and tanggal = current_date() order by nomor desc limit 1");
                 }
@@ -276,7 +266,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     String.valueOf(Integer.parseInt(HurufD.getText().substring(HurufD.getText().indexOf("(") + 2, HurufD.getText().length() - 1)) + 1)
                 )) {
                     param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
+                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'D' and tanggal = current_date() order by nomor desc limit 1");
                 }
@@ -287,7 +277,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     String.valueOf(Integer.parseInt(HurufE.getText().substring(HurufE.getText().indexOf("(") + 2, HurufE.getText().length() - 1)) + 1)
                 )) {
                     param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
+                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'E' and tanggal = current_date() order by nomor desc limit 1");
                 }
@@ -298,7 +288,7 @@ public class DlgAmbilAntrian extends widget.Dialog {
                     String.valueOf(Integer.parseInt(HurufF.getText().substring(HurufF.getText().indexOf("(") + 2, HurufF.getText().length() - 1)) + 1)
                 )) {
                     param.put("logo", Sequel.cariGambarSmc("select logo from setting"));
-                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, koneksiDB.PRINTER_ANTRIAN(), 1,
+                    Valid.printReportSmc("rptAntriLoketAPM.jasper", "report", "::[ Antrian Loket ]::", param, printerAntrian, 1,
                         "select date_format(tanggal, '%d-%m-%Y') as tanggal, nomor, jam from " +
                         "antriloketcetak_smc where left(nomor, 1) = 'F' and tanggal = current_date() order by nomor desc limit 1");
                 }
@@ -329,6 +319,19 @@ public class DlgAmbilAntrian extends widget.Dialog {
                 case "F":
                     HurufF.setText("ANTRIAN F (" + Sequel.cariIsiSmc("select ifnull(max(nomor), 'F000') from antriloketcetak_smc where tanggal = current_date() and left(nomor, 1) = 'F'") + ")");
                     break;
+            }
+        }
+    }
+
+    private void loadPengaturanAPM() {
+        if (new File("./cache/pengaturanapmsmc.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+                final ObjectMapper mapper = new ObjectMapper();
+                final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
+
+                printerAntrian = mapper.readTree(EnkripsiAES.decrypt(root.asText())).path("printerAntrian").asText(koneksiDB.PRINTER_ANTRIAN());
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
         }
     }

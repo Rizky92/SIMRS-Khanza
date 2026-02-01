@@ -1,10 +1,16 @@
 package khanzahmsanjungan;
 
+import AESsecurity.EnkripsiAES;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.koneksiDB;
 import fungsi.validasi;
 import java.awt.Cursor;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.awt.Dimension;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileReader;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
@@ -14,53 +20,17 @@ import javax.swing.JFrame;
  */
 public class HalamanUtama extends javax.swing.JFrame {
     private final validasi Valid = new validasi();
-    private final ArrayList<String> TOMBOLDIMATIKAN = new ArrayList(Arrays.asList(koneksiDB.TOMBOLDIMATIKAN()));
     private DlgCekDataPasien umum = null;
     private DlgCekDataBPJS bpjs = null;
     private DlgAmbilAntrian antrian = null;
     private DlgAmbilAntrianFarmasi antrianfarmasi = null;
+    private DlgLogin login = null;
 
     public HalamanUtama() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/logo.png")).getImage());
 
-        TOMBOLDIMATIKAN.forEach(tombol -> {
-            switch (tombol) {
-                case "antrian":
-                    panelTengah.remove(btnAntrian);
-                    break;
-                case "antrianfarmasi":
-                    panelTengah.remove(btnAntrianFarmasi);
-                    break;
-                case "cekin":
-                    panelTengah.remove(btnBooking);
-                    break;
-                case "daftarpoli":
-                    panelTengah.remove(btnDaftarpoli);
-                    break;
-                case "seppertama":
-                    panelTengah.remove(btnSEPPertama);
-                    break;
-                case "sepkontrol":
-                    panelTengah.remove(btnSEPKontrol);
-                    break;
-                case "sepbedapoli":
-                    panelTengah.remove(btnSEPKontrolBedaPoli);
-                    break;
-                case "mobilejkn":
-                    panelTengah.remove(btnMobilejkn);
-                    break;
-                case "satusehat":
-                    panelTengah.remove(btnSatusehat);
-                    break;
-            }
-        });
-
-        if (panelTengah.getComponentCount() == 1) {
-            panelTengah.setLayout(new java.awt.GridLayout(0, 1));
-        }
-
-        panelTengah.repaint();
+        cekPengaturan();
 
         pack();
 
@@ -74,9 +44,6 @@ public class HalamanUtama extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelAtas = new widget.Panel();
-        flatLabel1 = new com.formdev.flatlaf.extras.components.FlatLabel();
-        panelTengah = new widget.Panel();
         btnAntrian = new widget.MenuButton();
         btnAntrianFarmasi = new widget.MenuButton();
         btnBooking = new widget.MenuButton();
@@ -86,9 +53,84 @@ public class HalamanUtama extends javax.swing.JFrame {
         btnSEPKontrolBedaPoli = new widget.MenuButton();
         btnMobilejkn = new widget.MenuButton();
         btnSatusehat = new widget.MenuButton();
+        panelAtas = new widget.Panel();
+        flatLabel1 = new com.formdev.flatlaf.extras.components.FlatLabel();
+        panelTengah = new widget.Panel();
         panelBawah = new widget.Panel();
         judul = new widget.Label();
-        versi = new widget.Label();
+        versi = new widget.Button();
+
+        btnAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/antrianpasien.png"))); // NOI18N
+        btnAntrian.setText("ANTRIAN LOKET PENDAFTARAN");
+        btnAntrian.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAntrianActionPerformed(evt);
+            }
+        });
+
+        btnAntrianFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/farmasi.png"))); // NOI18N
+        btnAntrianFarmasi.setText("ANTRIAN RESEP FARMASI");
+        btnAntrianFarmasi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAntrianFarmasiActionPerformed(evt);
+            }
+        });
+
+        btnBooking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checkin.png"))); // NOI18N
+        btnBooking.setText("CEK IN BOOKING");
+        btnBooking.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBookingActionPerformed(evt);
+            }
+        });
+
+        btnDaftarpoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kioskselfservice.png"))); // NOI18N
+        btnDaftarpoli.setText("PENDAFTARAN EKSEKUTIF");
+        btnDaftarpoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDaftarpoliActionPerformed(evt);
+            }
+        });
+
+        btnSEPPertama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_kesehatan.png"))); // NOI18N
+        btnSEPPertama.setText("SEP KUNJUNGAN PERTAMA");
+        btnSEPPertama.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSEPPertamaActionPerformed(evt);
+            }
+        });
+
+        btnSEPKontrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_kesehatan.png"))); // NOI18N
+        btnSEPKontrol.setText("SEP KONTROL");
+        btnSEPKontrol.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSEPKontrolActionPerformed(evt);
+            }
+        });
+
+        btnSEPKontrolBedaPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_kesehatan.png"))); // NOI18N
+        btnSEPKontrolBedaPoli.setText("KONTROL BEDA POLI");
+        btnSEPKontrolBedaPoli.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSEPKontrolBedaPoliActionPerformed(evt);
+            }
+        });
+
+        btnMobilejkn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mobilejkn48.png"))); // NOI18N
+        btnMobilejkn.setText("CEK IN MOBILEJKN");
+        btnMobilejkn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMobilejknActionPerformed(evt);
+            }
+        });
+
+        btnSatusehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/logo-satset.png"))); // NOI18N
+        btnSatusehat.setText("AKTIVASI SATUSEHAT");
+        btnSatusehat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSatusehatActionPerformed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("ANJUNGAN PASIEN MANDIRI");
@@ -107,88 +149,6 @@ public class HalamanUtama extends javax.swing.JFrame {
 
         panelTengah.setPreferredSize(new java.awt.Dimension(1280, 1024));
         panelTengah.setLayout(new java.awt.GridLayout(0, 2));
-
-        btnAntrian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/antrianpasien.png"))); // NOI18N
-        btnAntrian.setText("ANTRIAN LOKET PENDAFTARAN");
-        btnAntrian.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAntrianActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnAntrian);
-
-        btnAntrianFarmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/farmasi.png"))); // NOI18N
-        btnAntrianFarmasi.setText("ANTRIAN RESEP FARMASI");
-        btnAntrianFarmasi.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAntrianFarmasiActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnAntrianFarmasi);
-
-        btnBooking.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/checkin.png"))); // NOI18N
-        btnBooking.setText("CEK IN BOOKING");
-        btnBooking.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBookingActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnBooking);
-
-        btnDaftarpoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/kioskselfservice.png"))); // NOI18N
-        btnDaftarpoli.setText("PENDAFTARAN EKSEKUTIF");
-        btnDaftarpoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDaftarpoliActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnDaftarpoli);
-
-        btnSEPPertama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_kesehatan.png"))); // NOI18N
-        btnSEPPertama.setText("SEP KUNJUNGAN PERTAMA");
-        btnSEPPertama.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSEPPertamaActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnSEPPertama);
-
-        btnSEPKontrol.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_kesehatan.png"))); // NOI18N
-        btnSEPKontrol.setText("SEP KONTROL");
-        btnSEPKontrol.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSEPKontrolActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnSEPKontrol);
-
-        btnSEPKontrolBedaPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs_kesehatan.png"))); // NOI18N
-        btnSEPKontrolBedaPoli.setText("KONTROL BEDA POLI");
-        btnSEPKontrolBedaPoli.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSEPKontrolBedaPoliActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnSEPKontrolBedaPoli);
-
-        btnMobilejkn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mobilejkn48.png"))); // NOI18N
-        btnMobilejkn.setText("CEK IN MOBILEJKN");
-        btnMobilejkn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMobilejknActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnMobilejkn);
-
-        btnSatusehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/logo-satset.png"))); // NOI18N
-        btnSatusehat.setText("AKTIVASI SATUSEHAT");
-        btnSatusehat.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSatusehatActionPerformed(evt);
-            }
-        });
-        panelTengah.add(btnSatusehat);
-
         getContentPane().add(panelTengah, java.awt.BorderLayout.CENTER);
 
         panelBawah.setLayout(new java.awt.BorderLayout());
@@ -199,12 +159,18 @@ public class HalamanUtama extends javax.swing.JFrame {
         judul.setPreferredSize(new java.awt.Dimension(750, 40));
         panelBawah.add(judul, java.awt.BorderLayout.CENTER);
 
-        versi.setForeground(new java.awt.Color(150, 155, 159));
-        versi.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        versi.setBackground(new java.awt.Color(240, 249, 255));
+        versi.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        versi.setForeground(new java.awt.Color(180, 180, 180));
         versi.setText("Versi : 2026-01-20      ");
         versi.setFocusable(false);
-        versi.setFont(new java.awt.Font("Inter Medium", 0, 12)); // NOI18N
-        versi.setPreferredSize(new java.awt.Dimension(1, 20));
+        versi.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
+        versi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        versi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                versiActionPerformed(evt);
+            }
+        });
         panelBawah.add(versi, java.awt.BorderLayout.PAGE_END);
 
         getContentPane().add(panelBawah, java.awt.BorderLayout.PAGE_END);
@@ -312,6 +278,29 @@ public class HalamanUtama extends javax.swing.JFrame {
         antrianfarmasi.setVisible(true);
     }//GEN-LAST:event_btnAntrianFarmasiActionPerformed
 
+    private void versiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_versiActionPerformed
+        if (login == null) {
+            login = new DlgLogin(this, false);
+            login.setSize(415, 250);
+            login.setLocationRelativeTo(getContentPane());
+            login.requireAkses("kasir_ralan");
+            login.setOnLoginListener(e -> {
+                DlgPengaturanAPM pengaturan = new DlgPengaturanAPM(HalamanUtama.this, false);
+                pengaturan.setSize(new Dimension(960, 600));
+                pengaturan.setLocationRelativeTo(HalamanUtama.this);
+                pengaturan.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        cekPengaturan();
+                    }
+                });
+                pengaturan.tampil(e.isAdmin());
+                pengaturan.setVisible(true);
+            });
+        }
+        login.setVisible(true);
+    }//GEN-LAST:event_versiActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.MenuButton btnAntrian;
     private widget.MenuButton btnAntrianFarmasi;
@@ -327,6 +316,60 @@ public class HalamanUtama extends javax.swing.JFrame {
     private widget.Panel panelAtas;
     private widget.Panel panelBawah;
     private widget.Panel panelTengah;
-    private widget.Label versi;
+    private widget.Button versi;
     // End of variables declaration//GEN-END:variables
+
+    private void cekPengaturan() {
+        if (new File("./cache/pengaturanapmsmc.iyem").isFile()) {
+            final ObjectMapper mapper = new ObjectMapper();
+            try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+                final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
+                final JsonNode tombolDiaktifkan = mapper.readTree(EnkripsiAES.decrypt(root.asText())).path("tombolDiaktifkan");
+
+                panelTengah.removeAll();
+                tombolDiaktifkan.iterator().forEachRemaining(node -> {
+                    switch (node.asText("")) {
+                        case "antrian":
+                            panelTengah.add(btnAntrian);
+                            break;
+                        case "antrianfarmasi":
+                            panelTengah.add(btnAntrianFarmasi);
+                            break;
+                        case "cekin":
+                            panelTengah.add(btnBooking);
+                            break;
+                        case "daftarpoli":
+                            panelTengah.add(btnDaftarpoli);
+                            break;
+                        case "seppertama":
+                            panelTengah.add(btnSEPPertama);
+                            break;
+                        case "sepkontrol":
+                            panelTengah.add(btnSEPKontrol);
+                            break;
+                        case "sepbedapoli":
+                            panelTengah.add(btnSEPKontrolBedaPoli);
+                            break;
+                        case "mobilejkn":
+                            panelTengah.add(btnMobilejkn);
+                            break;
+                        case "satusehat":
+                            panelTengah.add(btnSatusehat);
+                            break;
+                    }
+
+                    if (panelTengah.getComponentCount() <= 1) {
+                        panelTengah.setLayout(new java.awt.GridLayout(0, 1));
+                    } else {
+                        panelTengah.setLayout(new java.awt.GridLayout(0, 2));
+                    }
+
+                    panelTengah.revalidate();
+                    panelTengah.repaint();
+                });
+            } catch (Exception e) {
+                System.out.println("Notif b : " + e);
+            }
+        }
+    }
 }
