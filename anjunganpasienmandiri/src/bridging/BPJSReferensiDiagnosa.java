@@ -185,7 +185,7 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         if (!isOpened) {
-            tampil();
+            BtnCariActionPerformed(null);
             isOpened = true;
         }
     }//GEN-LAST:event_formWindowActivated
@@ -201,14 +201,14 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
     private widget.Table tbDiagnosa;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         if (!isLoading) {
             isLoading = true;
             Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            final String cari = TCari.getText().trim();
 
             new SwingWorker<Void, Object[]>() {
-                private final String cari = TCari.getText().trim();
                 private String pesan = null;
                 private volatile int i = 0;
 
@@ -230,10 +230,11 @@ public final class BPJSReferensiDiagnosa extends widget.Dialog {
 
                     if (metadata.path("code").asText().equals("200")) {
                         JsonNode response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-                        if (response.path("list").isArray()) {
-                            StreamSupport.stream(response.path("list").spliterator(), false)
-                                .filter(list -> list.path("kode").asText().toLowerCase().contains(cari.toLowerCase()) || list.path("nama").asText().toLowerCase().contains(cari.toLowerCase()))
-                                .forEach(list -> publish(new Object[] {(++i) + ".", list.path("kode").asText(), list.path("nama").asText()}));
+                        if (response.path("diagnosa").isArray()) {
+                            StreamSupport.stream(response.path("diagnosa").spliterator(), false)
+                                .forEach(list -> publish(new Object[] {
+                                    (++i), list.path("kode").asText(), list.path("nama").asText()
+                                }));
                         }
                     } else {
                         pesan = metadata.path("message").asText("");

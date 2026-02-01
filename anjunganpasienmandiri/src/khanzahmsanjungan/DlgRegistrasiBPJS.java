@@ -1101,7 +1101,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             riwayatRujukan.setSize(getContentPane().getSize());
             riwayatRujukan.setLocationRelativeTo(getContentPane());
-            riwayatRujukan.tampil(noPeserta.getText(), namaPasien.getText());
+            riwayatRujukan.setPasien(noPeserta.getText(), namaPasien.getText());
             riwayatRujukan.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }

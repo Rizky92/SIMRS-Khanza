@@ -165,12 +165,16 @@ public final class BPJSReferensiPoli extends widget.Dialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            tampil();
+            BtnCariActionPerformed(null);
         }
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        if (TCari.getText().isBlank()) {
+            Valid.popupInfoDialog("Silahkan masukkan pencarian terlebih dahulu..!!!");
+        } else {
+            tampil();
+        }
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -207,14 +211,14 @@ public final class BPJSReferensiPoli extends widget.Dialog {
     private widget.Table tbPoli;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         if (!isLoading) {
             isLoading = true;
             Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            final String cari = TCari.getText().trim();
 
             new SwingWorker<Void, Object[]>() {
-                private final String cari = TCari.getText().trim();
                 private volatile int i = 0;
                 private String pesan = null;
                 
@@ -236,10 +240,11 @@ public final class BPJSReferensiPoli extends widget.Dialog {
 
                     if (metadata.path("code").asText().equals("200")) {
                         JsonNode response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-                        if (response.path("list").isArray()) {
-                            StreamSupport.stream(response.path("list").spliterator(), false)
-                                .filter(list -> list.path("kode").asText().toLowerCase().contains(cari.toLowerCase()) || list.path("nama").asText().toLowerCase().contains(cari.toLowerCase()))
-                                .forEach(list -> publish(new Object[] {(++i) + ".", list.path("kode").asText(), list.path("nama").asText()}));
+                        if (response.path("poli").isArray()) {
+                            StreamSupport.stream(response.path("poli").spliterator(), false)
+                                .forEach(list -> publish(new Object[] {
+                                    (++i), list.path("kode").asText(), list.path("nama").asText()
+                                }));
                         }
                     } else {
                         pesan = metadata.path("message").asText("");

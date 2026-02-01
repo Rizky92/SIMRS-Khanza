@@ -297,14 +297,14 @@ public final class BPJSReferensiDokter extends widget.Dialog {
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         if (!isLoading) {
             isLoading = true;
             Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            final String kodePoli = KdPoli.getText().trim();
 
             new SwingWorker<Void, Object[]>() {
-                private final String kodePoli = KdPoli.getText().trim();
                 private volatile int i = 0;
                 private String pesan = null;
 
@@ -329,7 +329,9 @@ public final class BPJSReferensiDokter extends widget.Dialog {
                         if (response.path("list").isArray()) {
                             StreamSupport.stream(response.path("list").spliterator(), false)
                                 .filter(list -> list.path("kode").asText().toLowerCase().contains(kodePoli.toLowerCase()) || list.path("nama").asText().toLowerCase().contains(kodePoli.toLowerCase()))
-                                .forEach(list -> publish(new Object[] {(++i) + ".", list.path("kode").asText(), list.path("nama").asText()}));
+                                .forEach(list -> publish(new Object[] {
+                                    (++i), list.path("kode").asText(), list.path("nama").asText()
+                                }));
                         }
                     } else {
                         pesan = metadata.path("message").asText("");
