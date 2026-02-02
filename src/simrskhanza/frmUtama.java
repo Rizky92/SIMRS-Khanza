@@ -444,7 +444,7 @@ import inventory.InventoryRingkasanPiutangBarangMedis;
 import inventory.InventoryRingkasanReturJualBarangMedis;
 import inventory.InventoryRingkasanReturSuplierBarangMedis;
 import inventory.InventoryRingkasanStokKeluarBarangMedis;
-import inventory.InventoryStokAkhirFarmasiPerTanggal;
+import inventory.InventoryStokAkhirFarmasiPerTanggalSMC;
 import inventory.InventorySuplier;
 import inventory.InventorySuratPemesanan;
 import inventory.InventoryTelaahResep;
@@ -18755,7 +18755,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        InventoryStokAkhirFarmasiPerTanggal aplikasi=new InventoryStokAkhirFarmasiPerTanggal(this,false);
+        InventoryStokAkhirFarmasiPerTanggalSMC aplikasi=new InventoryStokAkhirFarmasiPerTanggalSMC(this,false);
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);

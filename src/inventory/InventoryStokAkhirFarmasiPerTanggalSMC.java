@@ -19,15 +19,13 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Period;
 import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -82,6 +80,7 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
             }
         };
         tbDokter.setModel(tabMode);
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
         for (int i = 0; i < tabMode.getColumnCount(); i++) {
             if (i == 0) {
                 tbDokter.getColumnModel().getColumn(i).setPreferredWidth(110);
@@ -805,101 +804,91 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void tampilSmc() {
+        if (KdGudang.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih gudang dahulu..!!");
+            btnBarang1.requestFocus();
+            return;
+        }
         if (!ceksukses) {
             ceksukses = true;
             Valid.tabelKosongSmc(tabMode);
+            
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             final YearMonth ym = YearMonth.of(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()));
-            final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd (EEEE)");
-            LinkedHashMap<String, String> days = IntStream.rangeClosed(1, ym.lengthOfMonth())
-                .collect(LinkedHashMap::new, (map, day) -> map.put(Valid.padleftSmc(String.valueOf(day), 2, '0'), dtf.format(ym.atDay(day))), LinkedHashMap::putAll);
+            final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd (EEEE)", new Locale("id", "ID"));
+            final LinkedList<String> days = IntStream.rangeClosed(1, ym.lengthOfMonth())
+                .collect(LinkedList::new, (list, day) -> list.add(dtf.format(ym.atDay(day))), LinkedList::addAll);
+
+            int i = 4;
+            for (String day : days) {
+                TableColumn column = tbDokter.getColumnModel().getColumn(i++);
+                column.setHeaderValue(day.toUpperCase());
+                column.setMinWidth(0);
+                column.setMaxWidth(Integer.MAX_VALUE);
+                column.setPreferredWidth(75);
+            }
+
+            for (; i < tabMode.getColumnCount(); i++) {
+                TableColumn column = tbDokter.getColumnModel().getColumn(i);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+                column.setPreferredWidth(0);
+            }
+
+            tbDokter.repaint();
 
             new SwingWorker<Void, Object[]>() {
-                private String kodeBarang = "", namaBarang = "";
-                private LocalDate tglSekarang = null, tglAwal = ym.atDay(1), tglAkhir = ym.atEndOfMonth();
-                private double stokAwal = -1;
-
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "with stok_pertanggal_databarang as ((select * from (select row_number() over (partition by riwayat_barang_medis.kd_bangsal, riwayat_barang_medis.kode_brng " +
-                        "order by riwayat_barang_medis.tanggal desc, riwayat_barang_medis.jam desc) as rn, riwayat_barang_medis.kd_bangsal, riwayat_barang_medis.kode_brng, " +
-                        "riwayat_barang_medis.tanggal, riwayat_barang_medis.jam, riwayat_barang_medis.stok_akhir from riwayat_barang_medis use index (riwayat_barang_medis_ibfk_2) " +
-                        "where riwayat_barang_medis.tanggal between '0000-00-00' and ? and riwayat_barang_medis.kd_bangsal = ?) as t where t.rn = 1) union all (select * from (select " +
-                        "row_number() over (partition by riwayat_barang_medis.kd_bangsal, riwayat_barang_medis.kode_brng, riwayat_barang_medis.tanggal order by riwayat_barang_medis.jam " +
-                        "desc) as rn, riwayat_barang_medis.kd_bangsal, riwayat_barang_medis.kode_brng, riwayat_barang_medis.tanggal, riwayat_barang_medis.jam, riwayat_barang_medis.stok_akhir " +
-                        "from riwayat_barang_medis use index (riwayat_barang_medis_ibfk_2) where riwayat_barang_medis.tanggal between ? and ? and riwayat_barang_medis.kd_bangsal = ?) as t " +
-                        "where t.rn = 1)) select databarang.kode_brng, databarang.nama_brng, stok_pertanggal_databarang.kd_bangsal, bangsal.nm_bangsal, stok_pertanggal_databarang.tanggal, " +
-                        "stok_pertanggal_databarang.stok_akhir from databarang join stok_pertanggal_databarang on databarang.kode_brng = stok_pertanggal_databarang.kode_brng join " +
-                        "bangsal on stok_pertanggal_databarang.kd_bangsal = bangsal.kd_bangsal order by databarang.kode_brng, stok_pertanggal_databarang.tanggal"
+                        "select databarang.kode_brng, databarang.nama_brng from databarang " + (TCari.getText().isBlank() ? "" : "where databarang.kode_brng like ? or databarang.nama_brng like ? ") + "order by databarang.nama_brng"
                     )) {
-                        int p = 0;
-                        ps.setString(++p, ThnCari.getSelectedItem().toString() + "-" + BlnCari.getSelectedItem().toString() + "-01");
-                        ps.setString(++p, KdGudang.getText());
-                        ps.setString(++p, ThnCari.getSelectedItem().toString() + "-" + BlnCari.getSelectedItem().toString() + "-01");
-                        ps.setString(++p, ThnCari.getSelectedItem().toString() + "-" + BlnCari.getSelectedItem().toString() + "-" + Valid.padleftSmc(String.valueOf(ym.lengthOfMonth()), 2, '0'));
-                        ps.setString(++p, KdGudang.getText());
+                        if (!TCari.getText().isBlank()) {
+                            ps.setString(1, "%" + TCari.getText().trim() + "%");
+                            ps.setString(2, "%" + TCari.getText().trim() + "%");
+                        }
                         try (ResultSet rs = ps.executeQuery()) {
-                            System.out.println(ps.toString());
-                            // "Kode Barang", "Nama Barang", "Kode Gudang", "Nama Gudang", "01", "02", "03", "04",
-                            // "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-                            // "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
-                            if (rs.next()) {
-                                kodeBarang = rs.getString("kode_brng");
-                                namaBarang = rs.getString("nama_brng");
-                                tglSekarang = tglAwal;
+                            while (rs.next()) {
                                 LinkedHashMap<Integer, Double> tanggal = IntStream.rangeClosed(1, ym.lengthOfMonth())
                                     .collect(LinkedHashMap::new, (map, day) -> map.put(day, 0d), LinkedHashMap::putAll);
 
-                                do {
-                                    if (rs.getString("kode_brng").equals(kodeBarang)) {
-                                        if (rs.getDate("tanggal").toLocalDate().isBefore(tglAwal) || rs.getDate("tanggal").toLocalDate().isEqual(tglAwal)) {
-                                            tglSekarang = tglAwal;
-                                        } else if (rs.getDate("tanggal").toLocalDate().isAfter(tglAwal)) {
-                                            for (int i = 1; i < Period.between(tglSekarang, rs.getDate("tanggal").toLocalDate()).getDays(); i++) {
-                                                tanggal.put(tglSekarang.getDayOfMonth() + i, tanggal.get(tglSekarang.getDayOfMonth()));
+                                try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                    "(select 1 as d, r.stok_akhir from riwayat_barang_medis r where r.tanggal < ? and r.kode_brng = ? and r.kd_bangsal = ? order by r.tanggal desc, r.jam " +
+                                    "limit 1) union all (select day(t.tanggal) as d, t.stok_akhir from (select row_number() over (partition by r.tanggal order by r.jam desc) as rn, r.tanggal, " +
+                                    "r.stok_akhir from riwayat_barang_medis r where r.tanggal between ? and ? and r.kode_brng = ? and r.kd_bangsal = ?) as t where t.rn = 1)"
+                                )) {
+                                    int p = 0;
+                                    ps2.setString(++p, ym.atDay(2).toString());
+                                    ps2.setString(++p, rs.getString("kode_brng"));
+                                    ps2.setString(++p, KdGudang.getText());
+                                    ps2.setString(++p, ym.atDay(2).toString());
+                                    ps2.setString(++p, ym.atEndOfMonth().toString());
+                                    ps2.setString(++p, rs.getString("kode_brng"));
+                                    ps2.setString(++p, KdGudang.getText());
+                                    try (ResultSet rs2 = ps2.executeQuery()) {
+                                        if (rs2.next()) {
+                                            int d = rs2.getInt("d");
+                                            double akhir = rs2.getDouble("stok_akhir");
+                                            tanggal.put(d++, akhir);
+                                            while (rs2.next()) {
+                                                while (d < rs2.getInt("d")) {
+                                                    tanggal.put(d++, akhir);
+                                                }
+                                                akhir = rs2.getDouble("stok_akhir");
                                             }
-                                            tglSekarang = rs.getDate("tanggal").toLocalDate();
+                                            for (; d <= ym.lengthOfMonth(); d++) tanggal.put(d, akhir);
                                         }
-                                        tanggal.put(tglSekarang.getDayOfMonth(), rs.getDouble("stok_akhir"));
-                                    } else {
-                                        if (tglSekarang.isBefore(tglAkhir)) {
-                                            for (int i = 1; i < Period.between(tglSekarang, tglAkhir).getDays(); i++) {
-                                                tanggal.put(tglSekarang.getDayOfMonth() + i, tanggal.get(tglSekarang.getDayOfMonth()));
-                                            }
-                                        }
-                                        publish(new Object[] {
-                                            rs.getString("kode_brng"), rs.getString("nama_brng"), KdGudang.getText(), NmGudang.getText(), tanggal.get(1), tanggal.get(2),
-                                            tanggal.get(3), tanggal.get(4), tanggal.get(5), tanggal.get(6), tanggal.get(7), tanggal.get(8), tanggal.get(9), tanggal.get(10),
-                                            tanggal.get(11), tanggal.get(12), tanggal.get(13), tanggal.get(14), tanggal.get(15), tanggal.get(16), tanggal.get(17),
-                                            tanggal.get(18), tanggal.get(19), tanggal.get(20), tanggal.get(21), tanggal.get(22), tanggal.get(23), tanggal.get(24),
-                                            tanggal.get(25), tanggal.get(26), tanggal.get(27), tanggal.get(28), tanggal.getOrDefault(29, 0d), tanggal.getOrDefault(30, 0d),
-                                            tanggal.getOrDefault(31, 0d),
-                                        });
                                     }
-
-                                    kodeBarang = rs.getString("kode_brng");
-                                    namaBarang = rs.getString("nama_brng");
-                                    stokAwal = rs.getDouble("stok_akhir");
-                                } while (rs.next());
-                            }
-                            /*
-                            while (rs.next()) {
-                                for (int i = 1; i <= 31; i++) {
-                                    if (rs.getString("tanggal").equals(ym.atDay(1).toString())) {
-                                        stokAwal = rs.getDouble("stok_akhir");
-                                    }
-                                    System.out.println("kode barang skrg = " + kodeBarang + ", tgl = " + rs.getString("tanggal") + ", stok = " + Double.toString(rs.getDouble("stok_akhir")));
-                                    System.out.println("kode barang next = " + rs.getString("kode_brng"));
-
-                                    if (!kodeBarang.equals(rs.getString("kode_brng"))) {
-                                        break;
-                                    }
-
-                                    rs.next();
                                 }
+
+                                publish(new Object[] {
+                                    rs.getString("kode_brng"), rs.getString("nama_brng"), KdGudang.getText(), NmGudang.getText(), tanggal.get(1), tanggal.get(2), tanggal.get(3),
+                                    tanggal.get(4), tanggal.get(5), tanggal.get(6), tanggal.get(7), tanggal.get(8), tanggal.get(9), tanggal.get(10), tanggal.get(11), tanggal.get(12),
+                                    tanggal.get(13), tanggal.get(14), tanggal.get(15), tanggal.get(16), tanggal.get(17), tanggal.get(18), tanggal.get(19), tanggal.get(20), tanggal.get(21),
+                                    tanggal.get(22), tanggal.get(23), tanggal.get(24), tanggal.get(25), tanggal.get(26), tanggal.get(27), tanggal.get(28), tanggal.getOrDefault(29, 0d),
+                                    tanggal.getOrDefault(30, 0d), tanggal.getOrDefault(31, 0d)
+                                });
                             }
-                            */
                         }
                     }
 
@@ -918,23 +907,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
-                    // column tanggal dimulai dari index 4
-                    int i = 4;
-                    for (Map.Entry<String, String> day : days.entrySet()) {
-                        TableColumn column = tbDokter.getColumnModel().getColumn(i++);
-                        column.setHeaderValue(day.getValue());
-                        column.setMinWidth(0);
-                        column.setMaxWidth(Integer.MAX_VALUE);
-                        column.setPreferredWidth(75);
-                    }
-
-                    for (; i < tabMode.getRowCount(); i++) {
-                        TableColumn column = tbDokter.getColumnModel().getColumn(i);
-                        column.setMinWidth(0);
-                        column.setMaxWidth(0);
-                        column.setPreferredWidth(0);
-                    }
-                    tabMode.fireTableStructureChanged();
+                    tabMode.fireTableDataChanged();
                     InventoryStokAkhirFarmasiPerTanggalSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
