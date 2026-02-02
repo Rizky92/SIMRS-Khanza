@@ -16955,7 +16955,9 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         if(ceksukses==false){
             ceksukses=true;
             Valid.tabelKosongSmc(tabMode);
-            final String cari = TCari.getText().trim();
+            final String cari = TCari.getText().trim(),
+                tglAwal = Valid.getTglSmc(DTPCari1),
+                tglAkhir = Valid.getTglSmc(DTPCari2);
 
             new SwingWorker<Void, Object[]>() {
                 @Override
@@ -16974,8 +16976,8 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                         "or reg_periksa.p_jawab like ? or reg_periksa.almt_pj like ? or reg_periksa.hubunganpj like ? or penjab.png_jawab like ?) ") + "order by " + order
                     )) {
                         int p = 0;
-                        ps.setString(++p, Valid.getTglSmc(DTPCari1));
-                        ps.setString(++p, Valid.getTglSmc(DTPCari2));
+                        ps.setString(++p, tglAwal);
+                        ps.setString(++p, tglAkhir);
 
                         if (!kodePoliCari.isBlank()) {
                             ps.setString(++p, kodePoliCari);
@@ -17041,7 +17043,9 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         if(ceksukses==false){
             ceksukses=true;
             Valid.tabelKosongSmc(tabMode2);
-            final String cari = TCari.getText().trim();
+            final String cari = TCari.getText().trim(),
+                tglAwal = Valid.getTglSmc(DTPCari1),
+                tglAkhir = Valid.getTglSmc(DTPCari2);
 
             new SwingWorker<Void, Object[]>() {
                 @Override
@@ -17059,8 +17063,8 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                         "order by " + order
                     )) {
                         int p = 0;
-                        ps.setString(++p, Valid.getTglSmc(DTPCari1));
-                        ps.setString(++p, Valid.getTglSmc(DTPCari2));
+                        ps.setString(++p, tglAwal);
+                        ps.setString(++p, tglAkhir);
 
                         if (!kodePoliCari.isBlank()) {
                             ps.setString(++p, kodePoliCari);

@@ -9490,7 +9490,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }//GEN-LAST:event_ppCatatanADIMEGiziBtnPrintActionPerformed
 
     private void MnBelumTerbitSEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnBelumTerbitSEPActionPerformed
-        terbitsep="and reg_periksa.kd_pj in (select password_asuransi.kd_pj from password_asuransi) and reg_periksa.no_rawat not in (select bridging_sep.no_rawat from bridging_sep)";
+        terbitsep="and exists(select * from password_asuransi where password_asuransi.kd_pj = reg_periksa.kd_pj) and not exists(select * from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat) ";
         tampil();
     }//GEN-LAST:event_MnBelumTerbitSEPActionPerformed
 
@@ -10963,7 +10963,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
     }
 
     private void MnSudahTerbitSEPActionPerformed(java.awt.event.ActionEvent evt) {
-        terbitsep="and reg_periksa.kd_pj in (select password_asuransi.kd_pj from password_asuransi) and reg_periksa.no_rawat in (select bridging_sep.no_rawat from bridging_sep)";
+        terbitsep="and exists(select * from password_asuransi where password_asuransi.kd_pj = reg_periksa.kd_pj) and exists(select * from bridging_sep where bridging_sep.no_rawat = reg_periksa.no_rawat) ";
         tampil();
     }
 
@@ -12570,79 +12570,73 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
         if(ceksukses==false){
             ceksukses=true;
             Valid.tabelKosong(tabMode);
+            final String cari = TCari.getText().trim(),
+                tglAwal = Valid.getTglSmc(DTPCari1),
+                tglAkhir = Valid.getTglSmc(DTPCari2);
+
             new SwingWorker<Void, Object[]>() {
                 @Override
-                protected Void doInBackground() {
-                    try{
-                        ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
-                            "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
-                            "reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab,reg_periksa.stts,reg_periksa.kd_pj,reg_periksa.status_bayar "+
-                            "from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab "+
-                            "on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                            "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli  where  "+
-                            "poliklinik.kd_poli='IGDK' and reg_periksa.tgl_registrasi between ? and ? "+
-                            (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_reg like ? or reg_periksa.no_rawat like ? or reg_periksa.tgl_registrasi like ? or "+
-                            "reg_periksa.kd_dokter like ? or dokter.nm_dokter like ? or reg_periksa.no_rkm_medis like ? or "+
-                            "reg_periksa.stts_daftar like ? or pasien.nm_pasien like ? or poliklinik.nm_poli like ? or "+
-                            "reg_periksa.p_jawab like ? or reg_periksa.almt_pj like ? or reg_periksa.hubunganpj like ? or "+
-                            "penjab.png_jawab like ?) ")+terbitsep+" order by reg_periksa.no_rawat ");
-                        try {
-                            ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                            ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                            if(!TCari.getText().trim().equals("")){
-                                ps.setString(3,"%"+TCari.getText().trim()+"%");
-                                ps.setString(4,"%"+TCari.getText().trim()+"%");
-                                ps.setString(5,"%"+TCari.getText().trim()+"%");
-                                ps.setString(6,"%"+TCari.getText().trim()+"%");
-                                ps.setString(7,"%"+TCari.getText().trim()+"%");
-                                ps.setString(8,"%"+TCari.getText().trim()+"%");
-                                ps.setString(9,"%"+TCari.getText().trim()+"%");
-                                ps.setString(10,"%"+TCari.getText().trim()+"%");
-                                ps.setString(11,"%"+TCari.getText().trim()+"%");
-                                ps.setString(12,"%"+TCari.getText().trim()+"%");
-                                ps.setString(13,"%"+TCari.getText().trim()+"%");
-                                ps.setString(14,"%"+TCari.getText().trim()+"%");
-                                ps.setString(15,"%"+TCari.getText().trim()+"%");
-                            }
-                            rs=ps.executeQuery();
-                            i=0;
-                            while(rs.next()){
-                                Object[] row = new Object[]{
-                                    false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
-                                    rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),
-                                    rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),
-                                    Valid.SetAngka(rs.getDouble(15)),rs.getString(16),rs.getString(17),rs.getString(18),
-                                    rs.getString("kd_pj"),rs.getString("status_bayar")
-                                };
-                                i++;
-                                publish(row);
-                            }
-                        } catch (Exception e) {
-                            System.out.println("Notif : "+e);
-                        } finally{
-                            if(rs!=null){
-                                rs.close();
-                            }
-                            if(ps!=null){
-                                ps.close();
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select reg_periksa.no_reg, reg_periksa.no_rawat, reg_periksa.tgl_registrasi, reg_periksa.jam_reg, reg_periksa.kd_dokter, dokter.nm_dokter, reg_periksa.no_rkm_medis, pasien.nm_pasien, " +
+                        "pasien.jk, concat(reg_periksa.umurdaftar, ' ', reg_periksa.sttsumur) as umur, poliklinik.nm_poli, reg_periksa.p_jawab, reg_periksa.almt_pj, reg_periksa.hubunganpj, reg_periksa.biaya_reg, " +
+                        "reg_periksa.stts_daftar, penjab.png_jawab, reg_periksa.stts, reg_periksa.kd_pj, reg_periksa.status_bayar from reg_periksa inner join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
+                        "inner join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli inner join dokter on reg_periksa.kd_dokter = dokter.kd_dokter inner join penjab on reg_periksa.kd_pj = penjab.kd_pj where " +
+                        "reg_periksa.tgl_registrasi between ? and ? and poliklinik.kd_poli = 'IGDK' " + terbitsep + (cari.isBlank() ? "" : "and (reg_periksa.no_reg like ? or reg_periksa.no_rawat like ? or " +
+                        "reg_periksa.tgl_registrasi like ? or reg_periksa.kd_dokter like ? or dokter.nm_dokter like ? or reg_periksa.no_rkm_medis like ? or reg_periksa.stts_daftar like ? or pasien.nm_pasien " +
+                        "like ? or poliklinik.nm_poli like ? or reg_periksa.p_jawab like ? or reg_periksa.almt_pj like ? or reg_periksa.hubunganpj like ? or penjab.png_jawab like ?) ") +
+                        "order by reg_periksa.tgl_registrasi, reg_periksa.jam_reg"
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, tglAwal);
+                        ps.setString(++p, tglAkhir);
+
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    false, rs.getString("no_reg"), rs.getString("no_rawat"), rs.getString("tgl_registrasi"), rs.getString("jam_reg"),
+                                    rs.getString("kd_dokter"), rs.getString("nm_dokter"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("jk"),
+                                    rs.getString("umur"), rs.getString("nm_poli"), rs.getString("p_jawab"), rs.getString("almt_pj"), rs.getString("hubunganpj"),
+                                    Valid.SetAngka(rs.getDouble("biaya_reg")), rs.getString("stts_daftar"), rs.getString("png_jawab"), rs.getString("stts"),
+                                    rs.getString("kd_pj"), rs.getString("status_bayar")
+                                });
                             }
                         }
-                    }catch(Exception e){
-                        System.out.println("Notifikasi : "+e);
                     }
+
                     return null;
                 }
 
                 @Override
-                protected void process(List<Object[]> data) {
-                    for (Object[] row : data) {
-                        tabMode.addRow(row);
-                    }
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
                 }
 
                 @Override
                 protected void done() {
-                    LCount.setText(""+i);
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText("" + tabMode.getRowCount());
                     ceksukses = false;
                 }
             }.execute();
@@ -12698,6 +12692,7 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
             private int nilai_jam;
             private int nilai_menit;
             private int nilai_detik;
+            @Override
             public void actionPerformed(ActionEvent e) {
                 String nol_jam = "";
                 String nol_menit = "";
