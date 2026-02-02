@@ -853,7 +853,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     .collect(LinkedHashMap::new, (map, day) -> map.put(day, 0d), LinkedHashMap::putAll);
 
                                 try (PreparedStatement ps2 = koneksi.prepareStatement(
-                                    "(select 1 as d, r.stok_akhir from riwayat_barang_medis r where r.tanggal < ? and r.kode_brng = ? and r.kd_bangsal = ? order by r.tanggal desc, r.jam " +
+                                    "(select 1 as d, r.stok_akhir from riwayat_barang_medis r where r.tanggal < ? and r.kode_brng = ? and r.kd_bangsal = ? order by r.tanggal desc, r.jam desc " +
                                     "limit 1) union all (select day(t.tanggal) as d, t.stok_akhir from (select row_number() over (partition by r.tanggal order by r.jam desc) as rn, r.tanggal, " +
                                     "r.stok_akhir from riwayat_barang_medis r where r.tanggal between ? and ? and r.kode_brng = ? and r.kd_bangsal = ?) as t where t.rn = 1)"
                                 )) {
