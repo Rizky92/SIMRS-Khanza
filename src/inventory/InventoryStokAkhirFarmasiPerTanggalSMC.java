@@ -67,13 +67,13 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
         initComponents();
 
         tabMode = new DefaultTableModel(null, new String[] {
-            "Kode Barang", "Nama Barang", "Kode Gudang", "Nama Gudang", "01", "02", "03", "04",
-            "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18",
-            "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
+            "Kode Barang", "Nama Barang", "01", "02", "03", "04", "05", "06", "07", "08",
+            "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21",
+            "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
         }) {
             @Override
             public Class<?> getColumnClass(int columnIndex) {
-                if (columnIndex > 3) {
+                if (columnIndex > 1) {
                     return Double.class;
                 }
                 return String.class;
@@ -86,11 +86,6 @@ public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog 
                 tbDokter.getColumnModel().getColumn(i).setPreferredWidth(110);
             } else if (i == 1) {
                 tbDokter.getColumnModel().getColumn(i).setPreferredWidth(210);
-            } else if (i == 2) {
-                tbDokter.getColumnModel().getColumn(i).setMinWidth(0);
-                tbDokter.getColumnModel().getColumn(i).setMaxWidth(0);
-            } else if (i == 1) {
-                tbDokter.getColumnModel().getColumn(i).setPreferredWidth(170);
             } else {
                 tbDokter.getColumnModel().getColumn(i).setMinWidth(0);
                 tbDokter.getColumnModel().getColumn(i).setMaxWidth(0);
@@ -812,17 +807,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if (!ceksukses) {
             ceksukses = true;
             Valid.tabelKosongSmc(tabMode);
-            
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
             final YearMonth ym = YearMonth.of(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()));
             final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd (EEEE)", new Locale("id", "ID"));
             final LinkedList<String> days = IntStream.rangeClosed(1, ym.lengthOfMonth())
-                .collect(LinkedList::new, (list, day) -> list.add(dtf.format(ym.atDay(day))), LinkedList::addAll);
+                .collect(LinkedList::new, (list, day) -> list.add(dtf.format(ym.atDay(day)).toUpperCase()), LinkedList::addAll);
 
-            int i = 4;
+            int i = 2;
             for (String day : days) {
                 TableColumn column = tbDokter.getColumnModel().getColumn(i++);
-                column.setHeaderValue(day.toUpperCase());
+                column.setHeaderValue(day);
                 column.setMinWidth(0);
                 column.setMaxWidth(Integer.MAX_VALUE);
                 column.setPreferredWidth(75);
@@ -841,7 +836,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select databarang.kode_brng, databarang.nama_brng from databarang " + (TCari.getText().isBlank() ? "" : "where databarang.kode_brng like ? or databarang.nama_brng like ? ") + "order by databarang.nama_brng"
+                        "select databarang.kode_brng, databarang.nama_brng from databarang " + (TCari.getText().isBlank() ? "" :
+                        "where databarang.kode_brng like ? or databarang.nama_brng like ? ") + "order by databarang.nama_brng"
                     )) {
                         if (!TCari.getText().isBlank()) {
                             ps.setString(1, "%" + TCari.getText().trim() + "%");
@@ -849,7 +845,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
-                                LinkedHashMap<Integer, Double> tanggal = IntStream.rangeClosed(1, ym.lengthOfMonth())
+                                LinkedHashMap<Integer, Double> tanggal = IntStream.rangeClosed(1, 31)
                                     .collect(LinkedHashMap::new, (map, day) -> map.put(day, 0d), LinkedHashMap::putAll);
 
                                 try (PreparedStatement ps2 = koneksi.prepareStatement(
@@ -870,23 +866,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             int d = rs2.getInt("d");
                                             double akhir = rs2.getDouble("stok_akhir");
                                             tanggal.put(d++, akhir);
+
                                             while (rs2.next()) {
-                                                while (d < rs2.getInt("d")) {
-                                                    tanggal.put(d++, akhir);
-                                                }
+                                                while (d < rs2.getInt("d")) tanggal.put(d++, akhir);
                                                 akhir = rs2.getDouble("stok_akhir");
                                             }
-                                            for (; d <= ym.lengthOfMonth(); d++) tanggal.put(d, akhir);
+
+                                            while (d <= ym.lengthOfMonth()) tanggal.put(d++, akhir);
                                         }
                                     }
                                 }
 
                                 publish(new Object[] {
-                                    rs.getString("kode_brng"), rs.getString("nama_brng"), KdGudang.getText(), NmGudang.getText(), tanggal.get(1), tanggal.get(2), tanggal.get(3),
-                                    tanggal.get(4), tanggal.get(5), tanggal.get(6), tanggal.get(7), tanggal.get(8), tanggal.get(9), tanggal.get(10), tanggal.get(11), tanggal.get(12),
-                                    tanggal.get(13), tanggal.get(14), tanggal.get(15), tanggal.get(16), tanggal.get(17), tanggal.get(18), tanggal.get(19), tanggal.get(20), tanggal.get(21),
-                                    tanggal.get(22), tanggal.get(23), tanggal.get(24), tanggal.get(25), tanggal.get(26), tanggal.get(27), tanggal.get(28), tanggal.getOrDefault(29, 0d),
-                                    tanggal.getOrDefault(30, 0d), tanggal.getOrDefault(31, 0d)
+                                    rs.getString("kode_brng"), rs.getString("nama_brng"), tanggal.get(1), tanggal.get(2), tanggal.get(3), tanggal.get(4),
+                                    tanggal.get(5), tanggal.get(6), tanggal.get(7), tanggal.get(8), tanggal.get(9), tanggal.get(10), tanggal.get(11),
+                                    tanggal.get(12), tanggal.get(13), tanggal.get(14), tanggal.get(15), tanggal.get(16), tanggal.get(17), tanggal.get(18),
+                                    tanggal.get(19), tanggal.get(20), tanggal.get(21), tanggal.get(22), tanggal.get(23), tanggal.get(24), tanggal.get(25),
+                                    tanggal.get(26), tanggal.get(27), tanggal.get(28), tanggal.get(29), tanggal.get(30), tanggal.get(31)
                                 });
                             }
                         }

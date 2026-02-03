@@ -1371,6 +1371,8 @@ ALTER TABLE `riwayat_barang_medis` MODIFY COLUMN IF EXISTS `keterangan` varchar(
 
 ALTER TABLE `riwayat_barang_medis` ADD INDEX IF NOT EXISTS `riwayat_barang_medis_ibfk_2`(`tanggal`) USING BTREE;
 
+ALTER TABLE `riwayat_barang_medis` ADD INDEX IF NOT EXISTS `riwayat_barang_medis_ibfk_3`(`kode_brng`, `kd_bangsal`, `tanggal` DESC, `jam` DESC) USING BTREE;
+
 ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `saran` varchar(1000) NULL DEFAULT NULL AFTER `jam`;
 
 ALTER TABLE `saran_kesan_lab` MODIFY COLUMN IF EXISTS `kesan` varchar(1000) NULL DEFAULT NULL AFTER `saran`;
