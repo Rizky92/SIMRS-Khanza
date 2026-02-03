@@ -289,7 +289,7 @@ public class HalamanUtama extends javax.swing.JFrame {
                 pengaturan.setLocationRelativeTo(HalamanUtama.this);
                 pengaturan.addWindowListener(new WindowAdapter() {
                     @Override
-                    public void windowClosed(WindowEvent e) {
+                    public void windowClosed(WindowEvent evt) {
                         cekPengaturan();
                     }
                 });
@@ -320,8 +320,8 @@ public class HalamanUtama extends javax.swing.JFrame {
 
     private void cekPengaturan() {
         if (new File("./cache/pengaturanapmsmc.iyem").isFile()) {
-            final ObjectMapper mapper = new ObjectMapper();
             try (FileReader fr = new FileReader("./cache/pengaturanapmsmc.iyem")) {
+                final ObjectMapper mapper = new ObjectMapper();
                 final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
                 final JsonNode tombolDiaktifkan = mapper.readTree(EnkripsiAES.decrypt(root.asText())).path("tombolDiaktifkan");
 
