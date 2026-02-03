@@ -136,7 +136,6 @@ public class HalamanUtama extends javax.swing.JFrame {
         setTitle("ANJUNGAN PASIEN MANDIRI");
         setBackground(new java.awt.Color(102, 102, 102));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setPreferredSize(new java.awt.Dimension(1280, 720));
 
         panelAtas.setMinimumSize(new java.awt.Dimension(500, 100));
         panelAtas.setPreferredSize(new java.awt.Dimension(500, 100));
@@ -162,7 +161,7 @@ public class HalamanUtama extends javax.swing.JFrame {
         versi.setBackground(new java.awt.Color(240, 249, 255));
         versi.setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 2, 2, 2));
         versi.setForeground(new java.awt.Color(180, 180, 180));
-        versi.setText("Versi : 2026-01-20      ");
+        versi.setText("Versi : 2026-02-03");
         versi.setFocusable(false);
         versi.setFont(new java.awt.Font("Inter", 1, 12)); // NOI18N
         versi.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
