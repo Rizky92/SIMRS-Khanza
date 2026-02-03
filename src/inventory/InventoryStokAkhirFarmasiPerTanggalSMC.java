@@ -15,6 +15,8 @@ import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -26,6 +28,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
+import java.util.StringJoiner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -565,76 +568,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         break;
                     case "Laporan 3 (CSV)":
                         htmlContent = new StringBuilder();
-                        htmlContent.append(
-                            "\"Kode Barang\";\"Nama Barang\";" +
-                            "\"1(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 1) + ")\";" +
-                            "\"2(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 2) + ")\";" +
-                            "\"3(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 3) + ")\";" +
-                            "\"4(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 4) + ")\";" +
-                            "\"5(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 5) + ")\";" +
-                            "\"6(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 6) + ")\";" +
-                            "\"7(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 7) + ")\";" +
-                            "\"8(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 8) + ")\";" +
-                            "\"9(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 9) + ")\";" +
-                            "\"10(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 10) + ")\";" +
-                            "\"11(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 11) + ")\";" +
-                            "\"12(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 12) + ")\";" +
-                            "\"13(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 13) + ")\";" +
-                            "\"14(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 14) + ")\";" +
-                            "\"15(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 15) + ")\";" +
-                            "\"16(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 16) + ")\";" +
-                            "\"17(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 17) + ")\";" +
-                            "\"18(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 18) + ")\";" +
-                            "\"19(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 19) + ")\";" +
-                            "\"20(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 20) + ")\";" +
-                            "\"21(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 21) + ")\";" +
-                            "\"22(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 22) + ")\";" +
-                            "\"23(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 23) + ")\";" +
-                            "\"24(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 24) + ")\";" +
-                            "\"25(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 25) + ")\";" +
-                            "\"26(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 26) + ")\";" +
-                            "\"27(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 27) + ")\";" +
-                            "\"28(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 28) + ")\";" +
-                            "\"29(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 29) + ")\";" +
-                            "\"30(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 30) + ")\";" +
-                            "\"31(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 31) + ")\"\n"
-                        );
+                        StringJoiner sj = new StringJoiner(";");
+
+                        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+                            sj.add("\"" + tbDokter.getColumnModel().getColumn(i).getHeaderValue() + "\"");
+                        }
+
+                        htmlContent.append(sj.toString()).append("\n");
+
                         for (i = 0; i < tabMode.getRowCount(); i++) {
-                            htmlContent.append(
-                                "\"" + tabMode.getValueAt(i, 0) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 1) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 2) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 3) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 4) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 5) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 6) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 7) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 8) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 9) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 10) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 11) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 12) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 13) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 14) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 15) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 16) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 17) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 18) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 19) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 20) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 21) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 22) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 23) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 24) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 25) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 26) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 27) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 28) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 29) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 30) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 31) + "\";" +
-                                "\"" + tabMode.getValueAt(i, 32) + "\"\n"
-                            );
+                            sj = new StringJoiner(";");
+                            int j = 0;
+                            sj.add("\"" + tabMode.getValueAt(i, j++) + "\"");
+                            sj.add("\"" + tabMode.getValueAt(i, j++) + "\"");
+                            for (; j < tabMode.getColumnCount(); j++) {
+                                sj.add(new BigDecimal((Double) tabMode.getValueAt(i, j)).setScale(2, RoundingMode.HALF_UP).toPlainString().replace(".", ","));
+                            }
+                            htmlContent.append(sj.toString()).append("\n");
                         }
 
                         f = new File("StokAkhirFarmasi.csv");
