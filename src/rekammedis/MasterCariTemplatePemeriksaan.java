@@ -1500,7 +1500,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1524,7 +1524,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
     public void isCek(){
         BtnTambah.setEnabled(akses.gettemplate_pemeriksaan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1550,7 +1550,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
@@ -1567,7 +1567,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                     Plan.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),6).toString());
                     Instruksi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),7).toString());
                     Evaluasi.setText(tabMode.getValueAt(tbDokter.getSelectedRow(),8).toString());
-                    
+
                     Valid.tabelKosong(tabModeDiagnosa);
                     ps=koneksi.prepareStatement(
                             "select template_pemeriksaan_dokter_penyakit.kd_penyakit,penyakit.nm_penyakit,penyakit.ciri_ciri,penyakit.keterangan, "+
@@ -1593,7 +1593,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             ps.close();
                         }
                     }
-                    
+
                     Valid.tabelKosong(tabModeProsedur);
                     ps=koneksi.prepareStatement(
                             "select template_pemeriksaan_dokter_prosedur.kode,icd9.deskripsi_panjang,icd9.deskripsi_pendek,template_pemeriksaan_dokter_prosedur.urut,template_pemeriksaan_dokter_prosedur.jumlah "+
@@ -1615,7 +1615,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             ps.close();
                         }
                     }
-                    
+
                     Valid.tabelKosong(tabModeRadiologi);
                     ps=koneksi.prepareStatement(
                             "select template_pemeriksaan_dokter_permintaan_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan from template_pemeriksaan_dokter_permintaan_radiologi "+
@@ -1637,7 +1637,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             ps.close();
                         }
                     }
-                    
+
                     Valid.tabelKosong(tabModePK);
                     Valid.tabelKosong(tabModeDetailPK);
                     ps=koneksi.prepareStatement(
@@ -1697,7 +1697,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             ps.close();
                         }
                     }
-                    
+
                     Valid.tabelKosong(tabModePA);
                     ps=koneksi.prepareStatement(
                             "select template_pemeriksaan_dokter_permintaan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan from template_pemeriksaan_dokter_permintaan_lab "+
@@ -1719,7 +1719,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             ps.close();
                         }
                     }
-                    
+
                     Valid.tabelKosong(tabModeMB);
                     Valid.tabelKosong(tabModeDetailMB);
                     ps=koneksi.prepareStatement(
@@ -1779,7 +1779,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             ps.close();
                         }
                     }
-                    
+
                     Valid.tabelKosong(tabModeObatUmum);
                     ps=koneksi.prepareStatement(
                             "select template_pemeriksaan_dokter_resep.kode_brng,databarang.nama_brng,kodesatuan.satuan,template_pemeriksaan_dokter_resep.jml,template_pemeriksaan_dokter_resep.aturan_pakai,jenis.nama,industrifarmasi.nama_industri, "+
@@ -1803,7 +1803,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                             ps.close();
                         }
                     }
-                    
+
                     Valid.tabelKosong(tabModeObatRacikan);
                     Valid.tabelKosong(tabModeDetailObatRacikan);
                     ps=koneksi.prepareStatement(

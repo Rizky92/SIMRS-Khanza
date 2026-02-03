@@ -209,7 +209,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
         }
         ChkInput.setSelected(false);
         isForm();
-        
+
         try {
             lembarobat=koneksiDB.CETAKRINCIANOBAT();
         } catch (Exception ex) {
@@ -1240,16 +1240,29 @@ public final class DlgResepObat extends javax.swing.JDialog {
         }else if(NoResep.getText().trim().equals("")){
             Valid.textKosong(NoResep,"No.Resep");
         }else{
-            if(Sequel.menyimpantf("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
+            if(Sequel.menyimpantf2("resep_obat","?,?,?,?,?,?,?,?,?,?","Nomer Resep",10,new String[]{
                     NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
                     cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
-                    TNoRw.getText(),KdDokter.getText(),"0000-00-00","00:00:00",status,"0000-00-00","00:00:00",null
+                    TNoRw.getText(),KdDokter.getText(),"0000-00-00","00:00:00",status,"0000-00-00","00:00:00"
                 })==true){
                 runBackground(() -> tampil());
                 if(lembarobat.equals("yes")){
                     ppLembarObatActionPerformed(null);
                 }
                 emptTeks();
+            }else{
+                autoresep2();
+                if(Sequel.menyimpantf("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
+                        NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
+                        cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
+                        TNoRw.getText(),KdDokter.getText(),"0000-00-00","00:00:00",status,"0000-00-00","00:00:00",null
+                    })==true){
+                    runBackground(() -> tampil());
+                    if(lembarobat.equals("yes")){
+                        ppLembarObatActionPerformed(null);
+                    }
+                    emptTeks();
+                }
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1432,17 +1445,17 @@ public final class DlgResepObat extends javax.swing.JDialog {
             dokter.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(dokter.getTable().getSelectedRow()!= -1){        
+                    if(dokter.getTable().getSelectedRow()!= -1){
                          KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                          NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     KdDokter.requestFocus();
                     dokter=null;
                 }
             });
             dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             dokter.setLocationRelativeTo(internalFrame1);
-        }   
+        }
         if (dokter == null) return;
         dokter.isCek();
         if (dokter.isVisible()) {
@@ -1667,10 +1680,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         public void windowClosing(WindowEvent e) {}
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(aturanpakai.getTable().getSelectedRow()!= -1){ 
+                            if(aturanpakai.getTable().getSelectedRow()!= -1){
                                 tbTambahan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.getSelectedRow(),5);
                                 tbTambahan.requestFocus();
-                            }   
+                            }
                         }
                         @Override
                         public void windowIconified(WindowEvent e) {}
@@ -1699,10 +1712,10 @@ public final class DlgResepObat extends javax.swing.JDialog {
                         public void windowClosing(WindowEvent e) {}
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(aturanpakai.getTable().getSelectedRow()!= -1){ 
+                            if(aturanpakai.getTable().getSelectedRow()!= -1){
                                 tbTambahan1.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.getSelectedRow(),5);
                                 tbTambahan1.requestFocus();
-                            }   
+                            }
                         }
                         @Override
                         public void windowIconified(WindowEvent e) {}
@@ -2579,7 +2592,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil2() {
         runBackground(() -> tampil());
     }
@@ -2768,6 +2781,13 @@ public final class DlgResepObat extends javax.swing.JDialog {
     private void autoresep() {
         if(ChkRM.isSelected()==true){
             Valid.autonomorSmc(NoResep, "", "", "resep_obat", "no_resep", 4, "0", DTPBeri);
+        }
+    }
+
+    private void autoresep2() {
+        if(ChkRM.isSelected()==true){
+            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(resep_obat.no_resep,4),signed)),0) from resep_obat where resep_obat.tgl_peresepan='"+Valid.SetTgl(DTPBeri.getSelectedItem()+"")+"' or resep_obat.tgl_perawatan='"+Valid.SetTgl(DTPBeri.getSelectedItem()+"")+"'",
+                DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),4,NoResep);
         }
     }
 
@@ -2999,7 +3019,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
