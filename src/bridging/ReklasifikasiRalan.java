@@ -137,9 +137,9 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TKd.setDocument(new batasInput((byte)20).getKata(TKd));
-    }    
-    
-     
+    }
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -583,7 +583,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -595,7 +595,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -862,7 +862,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
                             }
                         }
                     }
-                    
+
                     return null;
                 }
 
@@ -877,10 +877,9 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
                         get();
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
-                    } finally {
-                        isLoading = false;
-                        setCursor(Cursor.getDefaultCursor());
                     }
+                    ReklasifikasiRalan.this.setCursor(Cursor.getDefaultCursor());
+                    isLoading = false;
                 }
             }.execute();
         }
@@ -1302,7 +1301,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();
