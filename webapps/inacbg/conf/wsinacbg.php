@@ -1143,7 +1143,7 @@
                    }';
         $msg= Request($request);
         if($msg['metadata']['message']=="Ok"){
-            //KirimKlaimIndividualKeDC($nomor_sep);
+            KirimKlaimIndividualKeDC($nomor_sep);
         }else{
             echo "\n<br>Respon Final Klaim INACBG : ".$msg['metadata']['message'];
         }
@@ -1208,7 +1208,7 @@
                         }
                    }';
         $msg= Request($request);
-        //echo $msg['metadata']['message']."";
+        echo $msg['metadata']['message']."";
     }
 
     function MenarikDataKlaimPeriode($start_dt,$stop_dt,$jenis_rawat){
