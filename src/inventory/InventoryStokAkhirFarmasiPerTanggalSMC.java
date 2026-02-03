@@ -1,0 +1,992 @@
+package inventory;
+
+import fungsi.WarnaTable;
+import fungsi.batasInput;
+import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
+import fungsi.akses;
+import java.awt.Cursor;
+import java.awt.Desktop;
+import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowEvent;
+import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.text.SimpleDateFormat;
+import java.time.YearMonth;
+import java.time.format.DateTimeFormatter;
+import java.util.Date;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import java.util.stream.IntStream;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import kepegawaian.DlgKehadiran2;
+import simrskhanza.DlgCariBangsal;
+
+public class InventoryStokAkhirFarmasiPerTanggalSMC extends javax.swing.JDialog {
+    private final DefaultTableModel tabMode;
+    private final sekuel Sequel = new sekuel();
+    private final validasi Valid = new validasi();
+    private final Connection koneksi = koneksiDB.condb();
+    private PreparedStatement ps;
+    private ResultSet rs;
+    private String pilihan = "", dateString, dayOfWeek, hari;
+    private String stokawal = "", s1 = "", s2 = "", s3 = "", s4 = "", s5 = "", s6 = "", s7 = "", s8 = "", s9 = "", s10 = "", s11 = "", s12 = "", s13 = "", s14 = "", s15 = "", s16 = "", s17 = "", s18 = "", s19 = "", s20 = "",
+        s21 = "", s22 = "", s23 = "", s24 = "", s25 = "", s26 = "", s27 = "", s28 = "", s29 = "", s30 = "", s31 = "";
+    private Date date = null;
+    private StringBuilder htmlContent;
+    private int i = 0;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
+
+    /**
+     * @param parent
+     * @param modal
+     */
+    public InventoryStokAkhirFarmasiPerTanggalSMC(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
+        initComponents();
+
+        tabMode = new DefaultTableModel(null, new String[] {
+            "Kode Barang", "Nama Barang", "01", "02", "03", "04", "05", "06", "07", "08",
+            "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21",
+            "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"
+        }) {
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex > 1) {
+                    return Double.class;
+                }
+                return String.class;
+            }
+        };
+        tbDokter.setModel(tabMode);
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+            if (i == 0) {
+                tbDokter.getColumnModel().getColumn(i).setPreferredWidth(110);
+            } else if (i == 1) {
+                tbDokter.getColumnModel().getColumn(i).setPreferredWidth(210);
+            } else {
+                tbDokter.getColumnModel().getColumn(i).setMinWidth(0);
+                tbDokter.getColumnModel().getColumn(i).setMaxWidth(0);
+            }
+        }
+
+        tbDokter.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tbDokter.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
+        if (koneksiDB.CARICEPAT().equals("aktif")) {
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampilSmc();
+                    }
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampilSmc();
+                    }
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampilSmc();
+                    }
+                }
+            });
+        }
+
+        Valid.LoadTahun(ThnCari);
+    }
+
+    /**
+     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        Kd2 = new widget.TextBox();
+        internalFrame1 = new widget.InternalFrame();
+        scrollPane1 = new widget.ScrollPane();
+        tbDokter = new widget.Table();
+        panelisi4 = new widget.panelisi();
+        label11 = new widget.Label();
+        ThnCari = new widget.ComboBox();
+        BlnCari = new widget.ComboBox();
+        label19 = new widget.Label();
+        KdGudang = new widget.TextBox();
+        NmGudang = new widget.TextBox();
+        btnBarang1 = new widget.Button();
+        panelisi1 = new widget.panelisi();
+        label10 = new widget.Label();
+        TCari = new widget.TextBox();
+        BtnCari = new widget.Button();
+        BtnAll = new widget.Button();
+        label9 = new widget.Label();
+        BtnPrint = new widget.Button();
+        BtnKeluar = new widget.Button();
+
+        Kd2.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Kd2.setName("Kd2"); // NOI18N
+        Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(true);
+        setResizable(false);
+
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Stok Akhir Farmasi Per Tanggal ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setName("internalFrame1"); // NOI18N
+        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+
+        scrollPane1.setName("scrollPane1"); // NOI18N
+        scrollPane1.setOpaque(true);
+
+        tbDokter.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {},
+                {},
+                {},
+                {}
+            },
+            new String [] {
+
+            }
+        ));
+        tbDokter.setName("tbDokter"); // NOI18N
+        scrollPane1.setViewportView(tbDokter);
+
+        internalFrame1.add(scrollPane1, java.awt.BorderLayout.CENTER);
+
+        panelisi4.setName("panelisi4"); // NOI18N
+        panelisi4.setPreferredSize(new java.awt.Dimension(100, 44));
+        panelisi4.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        label11.setText("Tahun & Bulan :");
+        label11.setName("label11"); // NOI18N
+        label11.setPreferredSize(new java.awt.Dimension(85, 23));
+        panelisi4.add(label11);
+
+        ThnCari.setName("ThnCari"); // NOI18N
+        ThnCari.setPreferredSize(new java.awt.Dimension(80, 23));
+        panelisi4.add(ThnCari);
+
+        BlnCari.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12" }));
+        BlnCari.setName("BlnCari"); // NOI18N
+        BlnCari.setPreferredSize(new java.awt.Dimension(62, 23));
+        panelisi4.add(BlnCari);
+
+        label19.setText("Lokasi :");
+        label19.setName("label19"); // NOI18N
+        label19.setPreferredSize(new java.awt.Dimension(65, 23));
+        panelisi4.add(label19);
+
+        KdGudang.setName("KdGudang"); // NOI18N
+        KdGudang.setPreferredSize(new java.awt.Dimension(80, 23));
+        KdGudang.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KdGudangKeyPressed(evt);
+            }
+        });
+        panelisi4.add(KdGudang);
+
+        NmGudang.setEditable(false);
+        NmGudang.setName("NmGudang"); // NOI18N
+        NmGudang.setPreferredSize(new java.awt.Dimension(215, 23));
+        panelisi4.add(NmGudang);
+
+        btnBarang1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnBarang1.setToolTipText("Alt+1");
+        btnBarang1.setName("btnBarang1"); // NOI18N
+        btnBarang1.setPreferredSize(new java.awt.Dimension(28, 23));
+        btnBarang1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBarang1ActionPerformed(evt);
+            }
+        });
+        panelisi4.add(btnBarang1);
+
+        internalFrame1.add(panelisi4, java.awt.BorderLayout.PAGE_START);
+
+        panelisi1.setName("panelisi1"); // NOI18N
+        panelisi1.setPreferredSize(new java.awt.Dimension(100, 56));
+        panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
+
+        label10.setText("Key Word :");
+        label10.setName("label10"); // NOI18N
+        label10.setPreferredSize(new java.awt.Dimension(62, 23));
+        panelisi1.add(label10);
+
+        TCari.setName("TCari"); // NOI18N
+        TCari.setPreferredSize(new java.awt.Dimension(250, 23));
+        TCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TCariKeyPressed(evt);
+            }
+        });
+        panelisi1.add(TCari);
+
+        BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setToolTipText("Alt+2");
+        BtnCari.setName("BtnCari"); // NOI18N
+        BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnCari.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnCariActionPerformed(evt);
+            }
+        });
+        BtnCari.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnCariKeyPressed(evt);
+            }
+        });
+        panelisi1.add(BtnCari);
+
+        BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setToolTipText("Alt+A");
+        BtnAll.setName("BtnAll"); // NOI18N
+        BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAllActionPerformed(evt);
+            }
+        });
+        BtnAll.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnAllKeyPressed(evt);
+            }
+        });
+        panelisi1.add(BtnAll);
+
+        label9.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        label9.setName("label9"); // NOI18N
+        label9.setPreferredSize(new java.awt.Dimension(49, 30));
+        panelisi1.add(label9);
+
+        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setText("Cetak");
+        BtnPrint.setToolTipText("Alt+P");
+        BtnPrint.setName("BtnPrint"); // NOI18N
+        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
+        BtnPrint.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnPrintKeyPressed(evt);
+            }
+        });
+        panelisi1.add(BtnPrint);
+
+        BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setText("Keluar");
+        BtnKeluar.setToolTipText("Alt+K");
+        BtnKeluar.setName("BtnKeluar"); // NOI18N
+        BtnKeluar.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnKeluar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKeluarActionPerformed(evt);
+            }
+        });
+        BtnKeluar.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnKeluarKeyPressed(evt);
+            }
+        });
+        panelisi1.add(BtnKeluar);
+
+        internalFrame1.add(panelisi1, java.awt.BorderLayout.PAGE_END);
+
+        getContentPane().add(internalFrame1, java.awt.BorderLayout.CENTER);
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+/*
+private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+    Valid.pindah(evt,BtnCari,Nm);
+    }//GEN-LAST:event_TKdKeyPressed
+*/
+
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+            BtnPrint.requestFocus();
+        } else if (tabMode.getRowCount() != 0) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                File g = new File("file2.css");
+                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+                bg.write(
+                    ".isi td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}" +
+                    ".isi2 td{font: 11px tahoma;height:12px;background: #ffffff;color:#323232;}" +
+                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}" +
+                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
+                );
+                bg.close();
+
+                File f;
+                BufferedWriter bw;
+
+                pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)"}, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "<tr class='isi'>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85px'>Kode Barang</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='190px'>Nama Barang</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>1(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 1) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>2(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 2) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>3(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 3) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>4(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 4) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>5(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 5) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>6(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 6) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>7(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 7) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>8(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 8) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>9(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 9) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>10(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 10) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>11(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 11) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>12(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 12) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>13(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 13) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>14(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 14) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>15(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 15) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>16(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 16) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>17(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 17) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>18(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 18) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>19(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 19) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>20(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 20) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>21(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 21) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>22(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 22) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>23(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 23) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>24(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 24) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>25(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 25) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>26(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 26) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>27(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 27) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>28(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 28) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>29(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 29) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>30(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 30) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>31(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 31) + ")</td>" +
+                            "</tr>"
+                        );
+                        for (i = 0; i < tabMode.getRowCount(); i++) {
+                            htmlContent.append(
+                                "<tr class='isi'>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 0) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 1) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 2) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 3) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 4) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 5) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 6) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 7) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 8) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 9) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 10) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 11) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 12) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 13) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 14) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 15) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 16) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 17) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 18) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 19) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 20) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 21) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 22) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 23) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 24) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 25) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 26) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 27) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 28) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 29) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 30) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 31) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 32) + "</td>" +
+                                "</tr>"
+                            );
+                        }
+
+                        f = new File("StokAkhirFarmasi.html");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write("<html>" +
+                            "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>" +
+                            "<body>" +
+                            "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                            "<tr class='isi2'>" +
+                            "<td valign='top' align='center'>" +
+                            "<font size='4' face='Tahoma'>" + akses.getnamars() + "</font><br>" +
+                            akses.getalamatrs() + ", " + akses.getkabupatenrs() + ", " + akses.getpropinsirs() + "<br>" +
+                            akses.getkontakrs() + ", E-mail : " + akses.getemailrs() + "<br><br>" +
+                            "<font size='2' face='Tahoma'>STOK AKHIR FARMASI TAHUN " + ThnCari.getSelectedItem() + " BULAN " + BlnCari.getSelectedItem() + "<br><br></font>" +
+                            "</td>" +
+                            "</tr>" +
+                            "</table>" +
+                            "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                            htmlContent.toString() +
+                            "</table>" +
+                            "</body>" +
+                            "</html>"
+                        );
+
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
+                        break;
+                    case "Laporan 2 (WPS)":
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "<tr class='isi'>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='85px'>Kode Barang</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='190px'>Nama Barang</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>1(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 1) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>2(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 2) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>3(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 3) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>4(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 4) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>5(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 5) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>6(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 6) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>7(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 7) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>8(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 8) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>9(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 9) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>10(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 10) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>11(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 11) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>12(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 12) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>13(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 13) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>14(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 14) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>15(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 15) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>16(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 16) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>17(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 17) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>18(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 18) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>19(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 19) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>20(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 20) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>21(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 21) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>22(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 22) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>23(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 23) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>24(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 24) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>25(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 25) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>26(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 26) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>27(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 27) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>28(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 28) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>29(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 29) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>30(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 30) + ")</td>" +
+                            "<td valign='middle' bgcolor='#FFFAFA' align='center' width='63px'>31(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 31) + ")</td>" +
+                            "</tr>"
+                        );
+                        for (i = 0; i < tabMode.getRowCount(); i++) {
+                            htmlContent.append(
+                                "<tr class='isi'>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 0) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 1) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 2) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 3) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 4) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 5) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 6) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 7) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 8) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 9) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 10) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 11) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 12) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 13) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 14) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 15) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 16) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 17) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 18) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 19) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 20) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 21) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 22) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 23) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 24) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 25) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 26) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 27) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 28) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 29) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 30) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 31) + "</td>" +
+                                "<td valign='top'>" + tabMode.getValueAt(i, 32) + "</td>" +
+                                "</tr>"
+                            );
+                        }
+
+                        f = new File("StokAkhirFarmasi.wps");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write("<html>" +
+                            "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>" +
+                            "<body>" +
+                            "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                            "<tr class='isi2'>" +
+                            "<td valign='top' align='center'>" +
+                            "<font size='4' face='Tahoma'>" + akses.getnamars() + "</font><br>" +
+                            akses.getalamatrs() + ", " + akses.getkabupatenrs() + ", " + akses.getpropinsirs() + "<br>" +
+                            akses.getkontakrs() + ", E-mail : " + akses.getemailrs() + "<br><br>" +
+                            "<font size='2' face='Tahoma'>STOK AKHIR FARMASI TAHUN " + ThnCari.getSelectedItem() + " BULAN " + BlnCari.getSelectedItem() + "<br><br></font>" +
+                            "</td>" +
+                            "</tr>" +
+                            "</table>" +
+                            "<table width='1900px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" +
+                            htmlContent.toString() +
+                            "</table>" +
+                            "</body>" +
+                            "</html>"
+                        );
+
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
+                        break;
+                    case "Laporan 3 (CSV)":
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "\"Kode Barang\";\"Nama Barang\";" +
+                            "\"1(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 1) + ")\";" +
+                            "\"2(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 2) + ")\";" +
+                            "\"3(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 3) + ")\";" +
+                            "\"4(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 4) + ")\";" +
+                            "\"5(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 5) + ")\";" +
+                            "\"6(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 6) + ")\";" +
+                            "\"7(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 7) + ")\";" +
+                            "\"8(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 8) + ")\";" +
+                            "\"9(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 9) + ")\";" +
+                            "\"10(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 10) + ")\";" +
+                            "\"11(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 11) + ")\";" +
+                            "\"12(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 12) + ")\";" +
+                            "\"13(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 13) + ")\";" +
+                            "\"14(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 14) + ")\";" +
+                            "\"15(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 15) + ")\";" +
+                            "\"16(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 16) + ")\";" +
+                            "\"17(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 17) + ")\";" +
+                            "\"18(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 18) + ")\";" +
+                            "\"19(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 19) + ")\";" +
+                            "\"20(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 20) + ")\";" +
+                            "\"21(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 21) + ")\";" +
+                            "\"22(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 22) + ")\";" +
+                            "\"23(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 23) + ")\";" +
+                            "\"24(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 24) + ")\";" +
+                            "\"25(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 25) + ")\";" +
+                            "\"26(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 26) + ")\";" +
+                            "\"27(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 27) + ")\";" +
+                            "\"28(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 28) + ")\";" +
+                            "\"29(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 29) + ")\";" +
+                            "\"30(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 30) + ")\";" +
+                            "\"31(" + konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()), 31) + ")\"\n"
+                        );
+                        for (i = 0; i < tabMode.getRowCount(); i++) {
+                            htmlContent.append(
+                                "\"" + tabMode.getValueAt(i, 0) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 1) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 2) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 3) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 4) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 5) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 6) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 7) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 8) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 9) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 10) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 11) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 12) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 13) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 14) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 15) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 16) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 17) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 18) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 19) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 20) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 21) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 22) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 23) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 24) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 25) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 26) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 27) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 28) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 29) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 30) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 31) + "\";" +
+                                "\"" + tabMode.getValueAt(i, 32) + "\"\n"
+                            );
+                        }
+
+                        f = new File("StokAkhirFarmasi.csv");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write(htmlContent.toString());
+
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
+                        break;
+                }
+            } catch (Exception e) {
+            }
+            this.setCursor(Cursor.getDefaultCursor());
+        }
+    }//GEN-LAST:event_BtnPrintActionPerformed
+
+    private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnPrintActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BlnCari, BtnKeluar);
+        }
+    }//GEN-LAST:event_BtnPrintKeyPressed
+
+    private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
+        dispose();
+    }//GEN-LAST:event_BtnKeluarActionPerformed
+
+    private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            dispose();
+        } else {
+            Valid.pindah(evt, BtnPrint, ThnCari);
+        }
+    }//GEN-LAST:event_BtnKeluarKeyPressed
+
+    private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            BtnCariActionPerformed(null);
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+            BtnCari.requestFocus();
+        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+            BtnKeluar.requestFocus();
+        }
+    }//GEN-LAST:event_TCariKeyPressed
+
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        tampilSmc();
+    }//GEN-LAST:event_BtnCariActionPerformed
+
+    private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnCariActionPerformed(null);
+        } else {
+            Valid.pindah(evt, TCari, BtnAll);
+        }
+    }//GEN-LAST:event_BtnCariKeyPressed
+
+    private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        TCari.setText("");
+        KdGudang.setText("");
+        NmGudang.setText("");
+        tampilSmc();
+    }//GEN-LAST:event_BtnAllActionPerformed
+
+    private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnAllActionPerformed(null);
+        } else {
+            Valid.pindah(evt, BtnPrint, BtnKeluar);
+        }
+    }//GEN-LAST:event_BtnAllKeyPressed
+
+    private void btnBarang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarang1ActionPerformed
+        akses.setform("InventoryStokAkhirFarmasiPerTanggal");
+        DlgCariBangsal bangsal = new DlgCariBangsal(null, false);
+        bangsal.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (akses.getform().equals("InventoryStokAkhirFarmasiPerTanggal")) {
+                    if (bangsal.getTable().getSelectedRow() != -1) {
+                        KdGudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(), 0).toString());
+                        NmGudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(), 1).toString());
+                    }
+                    KdGudang.requestFocus();
+                }
+            }
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
+        });
+        bangsal.emptTeks();
+        bangsal.isCek();
+        bangsal.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        bangsal.setLocationRelativeTo(internalFrame1);
+        bangsal.setAlwaysOnTop(false);
+        bangsal.setVisible(true);
+    }//GEN-LAST:event_btnBarang1ActionPerformed
+
+    private void KdGudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdGudangKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KdGudangKeyPressed
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(() -> {
+            InventoryStokAkhirFarmasiPerTanggalSMC dialog = new InventoryStokAkhirFarmasiPerTanggalSMC(new javax.swing.JFrame(), true);
+            dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                @Override
+                public void windowClosing(java.awt.event.WindowEvent e) {
+                    System.exit(0);
+                }
+            });
+            dialog.setVisible(true);
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.ComboBox BlnCari;
+    private widget.Button BtnAll;
+    private widget.Button BtnCari;
+    private widget.Button BtnKeluar;
+    private widget.Button BtnPrint;
+    private widget.TextBox Kd2;
+    private widget.TextBox KdGudang;
+    private widget.TextBox NmGudang;
+    private widget.TextBox TCari;
+    private widget.ComboBox ThnCari;
+    private widget.Button btnBarang1;
+    private widget.InternalFrame internalFrame1;
+    private widget.Label label10;
+    private widget.Label label11;
+    private widget.Label label19;
+    private widget.Label label9;
+    private widget.panelisi panelisi1;
+    private widget.panelisi panelisi4;
+    private widget.ScrollPane scrollPane1;
+    private widget.Table tbDokter;
+    // End of variables declaration//GEN-END:variables
+
+    private void tampilSmc() {
+        if (KdGudang.getText().isBlank()) {
+            JOptionPane.showMessageDialog(null, "Silahkan pilih gudang dahulu..!!");
+            btnBarang1.requestFocus();
+            return;
+        }
+        if (!ceksukses) {
+            ceksukses = true;
+            Valid.tabelKosongSmc(tabMode);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+            final YearMonth ym = YearMonth.of(Integer.parseInt(ThnCari.getSelectedItem().toString()), Integer.parseInt(BlnCari.getSelectedItem().toString()));
+            final DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd (EEEE)", new Locale("id", "ID"));
+            final LinkedList<String> days = IntStream.rangeClosed(1, ym.lengthOfMonth())
+                .collect(LinkedList::new, (list, day) -> list.add(dtf.format(ym.atDay(day)).toUpperCase()), LinkedList::addAll);
+
+            int i = 2;
+            for (String day : days) {
+                TableColumn column = tbDokter.getColumnModel().getColumn(i++);
+                column.setHeaderValue(day);
+                column.setMinWidth(0);
+                column.setMaxWidth(Integer.MAX_VALUE);
+                column.setPreferredWidth(75);
+            }
+
+            for (; i < tabMode.getColumnCount(); i++) {
+                TableColumn column = tbDokter.getColumnModel().getColumn(i);
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+                column.setPreferredWidth(0);
+            }
+
+            tbDokter.repaint();
+
+            new SwingWorker<Void, Object[]>() {
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select databarang.kode_brng, databarang.nama_brng from databarang " + (TCari.getText().isBlank() ? "" :
+                        "where databarang.kode_brng like ? or databarang.nama_brng like ? ") + "order by databarang.nama_brng"
+                    )) {
+                        if (!TCari.getText().isBlank()) {
+                            ps.setString(1, "%" + TCari.getText().trim() + "%");
+                            ps.setString(2, "%" + TCari.getText().trim() + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                LinkedHashMap<Integer, Double> tanggal = IntStream.rangeClosed(1, 31)
+                                    .collect(LinkedHashMap::new, (map, day) -> map.put(day, 0d), LinkedHashMap::putAll);
+
+                                try (PreparedStatement ps2 = koneksi.prepareStatement(
+                                    "(select 1 as d, r.stok_akhir from riwayat_barang_medis r where r.tanggal < ? and r.kode_brng = ? and r.kd_bangsal = ? order by r.tanggal desc, r.jam desc " +
+                                    "limit 1) union all (select day(t.tanggal) as d, t.stok_akhir from (select row_number() over (partition by r.tanggal order by r.jam desc) as rn, r.tanggal, " +
+                                    "r.stok_akhir from riwayat_barang_medis r where r.tanggal between ? and ? and r.kode_brng = ? and r.kd_bangsal = ?) as t where t.rn = 1)"
+                                )) {
+                                    int p = 0;
+                                    ps2.setString(++p, ym.atDay(2).toString());
+                                    ps2.setString(++p, rs.getString("kode_brng"));
+                                    ps2.setString(++p, KdGudang.getText());
+                                    ps2.setString(++p, ym.atDay(2).toString());
+                                    ps2.setString(++p, ym.atEndOfMonth().toString());
+                                    ps2.setString(++p, rs.getString("kode_brng"));
+                                    ps2.setString(++p, KdGudang.getText());
+                                    try (ResultSet rs2 = ps2.executeQuery()) {
+                                        if (rs2.next()) {
+                                            int d = rs2.getInt("d");
+                                            double akhir = rs2.getDouble("stok_akhir");
+                                            tanggal.put(d++, akhir);
+
+                                            while (rs2.next()) {
+                                                while (d < rs2.getInt("d")) tanggal.put(d++, akhir);
+                                                akhir = rs2.getDouble("stok_akhir");
+                                            }
+
+                                            while (d <= ym.lengthOfMonth()) tanggal.put(d++, akhir);
+                                        }
+                                    }
+                                }
+
+                                publish(new Object[] {
+                                    rs.getString("kode_brng"), rs.getString("nama_brng"), tanggal.get(1), tanggal.get(2), tanggal.get(3), tanggal.get(4),
+                                    tanggal.get(5), tanggal.get(6), tanggal.get(7), tanggal.get(8), tanggal.get(9), tanggal.get(10), tanggal.get(11),
+                                    tanggal.get(12), tanggal.get(13), tanggal.get(14), tanggal.get(15), tanggal.get(16), tanggal.get(17), tanggal.get(18),
+                                    tanggal.get(19), tanggal.get(20), tanggal.get(21), tanggal.get(22), tanggal.get(23), tanggal.get(24), tanggal.get(25),
+                                    tanggal.get(26), tanggal.get(27), tanggal.get(28), tanggal.get(29), tanggal.get(30), tanggal.get(31)
+                                });
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    InventoryStokAkhirFarmasiPerTanggalSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    public void isCek() {
+        BtnPrint.setEnabled(akses.getstok_akhir_farmasi_pertanggal());
+    }
+
+    String konversi(int year, int month, int day) {
+        dateString = String.format("%d-%d-%d", year, month, day);
+        try {
+            date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
+        } catch (Exception ex) {
+            Logger.getLogger(DlgKehadiran2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        // Then get the day of week from the Date based on specific locale.
+        dayOfWeek = new SimpleDateFormat("EEEE", Locale.ENGLISH).format(date);
+
+        switch (dayOfWeek) {
+            case "Monday":
+                hari = "Senin";
+                break;
+            case "Tuesday":
+                hari = "Selasa";
+                break;
+            case "Wednesday":
+                hari = "Rabu";
+                break;
+            case "Thursday":
+                hari = "Kamis";
+                break;
+            case "Friday":
+                hari = "Jumat";
+                break;
+            case "Saturday":
+                hari = "Sabtu";
+                break;
+            case "Sunday":
+                hari = "Minggu";
+                break;
+        }
+        return hari;
+    }
+
+    private void runBackground(Runnable task) {
+        if (ceksukses) {
+            return;
+        }
+        if (executor.isShutdown() || executor.isTerminated()) {
+            return;
+        }
+        if (!isDisplayable()) {
+            return;
+        }
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
+    }
+}
