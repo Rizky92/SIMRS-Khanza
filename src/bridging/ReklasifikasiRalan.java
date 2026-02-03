@@ -94,8 +94,24 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
             "Trf Rehabilitasi","Trf Akomodasi","Trf Ruang Intensif",
             "Trf Obat","Trf Alkes","Trf BMHP","Trf Sewa Alat","Potongan",
             "Tarif InaCBG","Untung/Rugi InaCBG"
-            }){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+        }){
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 5) {
+                    return Integer.class;
+                }
+
+                if (columnIndex >= 72) {
+                    return Double.class;
+                }
+
+                return String.class;
+            }
         };
         tbBangsal.setModel(tabMode);
         //tbBangsal.setDefaultRenderer(Object.class, new WarnaTable(jPanel2.getBackground(),tbBangsal.getBackground()));
@@ -545,7 +561,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
     private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            runBackground(() ->tampil());
+            tampilSmc();
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             Valid.pindah(evt, TKd, BtnPrint);
@@ -582,7 +598,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                    runBackground(() ->tampil());
+                    tampilSmc();
                 }
                 kdpenjab.requestFocus();
             }
@@ -622,7 +638,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         kdpenjab.setText("");
         nmpenjab.setText("");
-        runBackground(() ->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -726,7 +742,7 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
                         "bridging_sep join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat and (if(bridging_sep.jnspelayanan = '1', 'Ranap', 'Ralan')) = reg_periksa.status_lanjut " +
                         "join penjab on reg_periksa.kd_pj = penjab.kd_pj join nota_jalan on bridging_sep.no_rawat = nota_jalan.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis " +
                         "left join inacbg_grouping_stage12 on bridging_sep.no_sep = inacbg_grouping_stage12.no_sep where bridging_sep.jnspelayanan = '2' and reg_periksa.tgl_registrasi between ? and ? " +
-                        (kdpenjab.getText().isBlank() ? "" : "and reg_periksa.kd_pj = ? ") + "order by reg_periksa.tgl_registrasi"
+                        (kdpenjab.getText().isBlank() ? "" : "and reg_periksa.kd_pj = ? ") + "order by reg_periksa.kd_dokter, reg_periksa.tgl_registrasi"
                     )) {
                         int p = 0;
                         ps.setString(++p, Valid.getTglSmc(Tgl1));
@@ -776,66 +792,8 @@ public final class ReklasifikasiRalan extends javax.swing.JDialog {
                                     /* "Tipe Rawat", */ "RJ",
                                     /* "Kelas Rawat", */ "Reguler",
                                     /* "Stts Keluar", */ rs.getString("status_keluar"),
-                                    /* "D.U", */ du,
-                                    /* "D.S 1", */ ds.get(d++),
-                                    /* "D.S 2", */ ds.get(d++),
-                                    /* "D.S 3", */ ds.get(d++),
-                                    /* "D.S 4", */ ds.get(d++),
-                                    /* "D.S 5", */ ds.get(d++),
-                                    /* "D.S 6", */ ds.get(d++),
-                                    /* "D.S 7", */ ds.get(d++),
-                                    /* "D.S 8", */ ds.get(d++),
-                                    /* "D.S 9", */ ds.get(d++),
-                                    /* "D.S 10", */ ds.get(d++),
-                                    /* "D.S 11", */ ds.get(d++),
-                                    /* "D.S 12", */ ds.get(d++),
-                                    /* "D.S 13", */ ds.get(d++),
-                                    /* "D.S 14", */ ds.get(d++),
-                                    /* "D.S 15", */ ds.get(d++),
-                                    /* "D.S 16", */ ds.get(d++),
-                                    /* "D.S 17", */ ds.get(d++),
-                                    /* "D.S 18", */ ds.get(d++),
-                                    /* "D.S 19", */ ds.get(d++),
-                                    /* "D.S 20", */ ds.get(d++),
-                                    /* "D.S 21", */ ds.get(d++),
-                                    /* "D.S 22", */ ds.get(d++),
-                                    /* "D.S 23", */ ds.get(d++),
-                                    /* "D.S 24", */ ds.get(d++),
-                                    /* "D.S 25", */ ds.get(d++),
-                                    /* "D.S 26", */ ds.get(d++),
-                                    /* "D.S 27", */ ds.get(d++),
-                                    /* "D.S 28", */ ds.get(d++),
-                                    /* "D.S 29", */ ds.get(d++),
-                                    /* "P 1", */ pp.get(j++),
-                                    /* "P 2", */ pp.get(j++),
-                                    /* "P 3", */ pp.get(j++),
-                                    /* "P 4", */ pp.get(j++),
-                                    /* "P 5", */ pp.get(j++),
-                                    /* "P 6", */ pp.get(j++),
-                                    /* "P 7", */ pp.get(j++),
-                                    /* "P 8", */ pp.get(j++),
-                                    /* "P 9", */ pp.get(j++),
-                                    /* "P 10", */ pp.get(j++),
-                                    /* "P 11", */ pp.get(j++),
-                                    /* "P 12", */ pp.get(j++),
-                                    /* "P 13", */ pp.get(j++),
-                                    /* "P 14", */ pp.get(j++),
-                                    /* "P 15", */ pp.get(j++),
-                                    /* "P 16", */ pp.get(j++),
-                                    /* "P 17", */ pp.get(j++),
-                                    /* "P 18", */ pp.get(j++),
-                                    /* "P 19", */ pp.get(j++),
-                                    /* "P 20", */ pp.get(j++),
-                                    /* "P 21", */ pp.get(j++),
-                                    /* "P 22", */ pp.get(j++),
-                                    /* "P 23", */ pp.get(j++),
-                                    /* "P 24", */ pp.get(j++),
-                                    /* "P 25", */ pp.get(j++),
-                                    /* "P 26", */ pp.get(j++),
-                                    /* "P 27", */ pp.get(j++),
-                                    /* "P 28", */ pp.get(j++),
-                                    /* "P 29", */ pp.get(j++),
-                                    /* "P 30", */ pp.get(j++),
+                                    /* "D.U", */ du, ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++), ds.get(d++),
+                                    /* "P 1", */ pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++), pp.get(j++),
                                     /* "INA-CBG", */ rs.getString("code_cbg"),
                                     /* "Total Trf RS", */ rs.getDouble("ttllaborat") + rs.getDouble("ttlradiologi") + rs.getDouble("ttlobat") + rs.getDouble("ttldokter") + rs.getDouble("ttldokter_paramedis") + rs.getDouble("ttlparamedis") + rs.getDouble("ttltambahan") + rs.getDouble("ttlpotongan") + rs.getDouble("ttlregistrasi") + rs.getDouble("ttloperasi"),
                                     /* "Trf P. Non-Bedah", */ rs.getDouble("ttlkebidanan"),
