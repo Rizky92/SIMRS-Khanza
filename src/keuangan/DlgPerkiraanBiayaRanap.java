@@ -237,8 +237,8 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         ChkCari.setSelected(false);
         isForm();
     }
@@ -781,7 +781,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(bangsal.getTable().getSelectedRow()!= -1){
                     NmBangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 TCari.requestFocus();
             }
             @Override
@@ -793,7 +793,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bangsal.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -849,7 +849,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             Valid.tabelKosong(tabModeNilaiRS);
             Valid.tabelKosong(tabModeNilaiINACBG);
-            runBackground(() ->tampildiagnosa());   
+            runBackground(() ->tampildiagnosa());
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbDiagnosa.requestFocus();
         }
@@ -1231,7 +1231,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
     private void MnPerkiraanBiayaManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPerkiraanBiayaManualActionPerformed
         if(tbBangsal.getSelectedRow()!= -1){
             if(tbDiagnosa.getSelectedRow()!= -1){
-                NilaiPerkiraanManual.setText(Sequel.cariIsi("select perkiraan_biaya_ranap.tarif from perkiraan_biaya_ranap where perkiraan_biaya_ranap.no_rawat=?",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()));  
+                NilaiPerkiraanManual.setText(Sequel.cariIsi("select perkiraan_biaya_ranap.tarif from perkiraan_biaya_ranap where perkiraan_biaya_ranap.no_rawat=?",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()));
                 WindowInput.setSize(590,80);
                 WindowInput.setLocationRelativeTo(internalFrame1);
                 WindowInput.setVisible(true);
@@ -1321,7 +1321,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
                     ps.setString(i,NmBangsal.getText());
                     i++;
                 }
-                
+
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(i,"%"+TCari.getText()+"%");
                     i++;
@@ -1331,7 +1331,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
                     i++;
                     ps.setString(i,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 all=0;ttlLaborat=0;ttlRadiologi=0;ttlOperasi=0;ttlObat=0;
                 ttlRanap_Dokter=0;ttlRanap_Paramedis=0;ttlRalan_Dokter=0;
@@ -1592,9 +1592,9 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
                     pspenyakit.setString(3,"%"+Diagnosa.getText().trim()+"%");
                     pspenyakit.setString(4,"%"+Diagnosa.getText().trim()+"%");
                     pspenyakit.setString(5,"%"+Diagnosa.getText().trim()+"%");
-                    pspenyakit.setString(6,"%"+Diagnosa.getText().trim()+"%"); 
+                    pspenyakit.setString(6,"%"+Diagnosa.getText().trim()+"%");
                 }
-                     
+
                 rs=pspenyakit.executeQuery();
                 while(rs.next()){
                     tabModeDiagnosa.addRow(new Object[]{
@@ -1680,7 +1680,7 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
             }
         });
     }
-    
+
     public void tampil2(){
         runBackground(() ->tampil());
     }
@@ -1710,10 +1710,12 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

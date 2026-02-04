@@ -161,7 +161,7 @@ public class DlgInputStok extends javax.swing.JDialog {
         }
 
         TCari.requestFocus();
-        
+
         try {
             aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
         } catch (Exception e) {
@@ -1097,11 +1097,11 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(bangsal.getTable().getSelectedRow()!= -1){                   
+            if(bangsal.getTable().getSelectedRow()!= -1){
                 kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                 nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
                 runBackground(() ->tampil2());
-            }  
+            }
             kdgudang.requestFocus();
         }
         @Override
@@ -2173,7 +2173,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void LoadData(){
         tampil();
         tampil2();
@@ -2339,14 +2339,16 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 
     private void BelumOpname() {
-        try{  
+        try{
             Valid.tabelKosong(tabMode);
             pstampil=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat, "+
                     "databarang."+hppfarmasi+" as dasar from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
@@ -2360,13 +2362,13 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 pstampil.setString(5,"%"+TCari.getText().trim()+"%");
                 pstampil.setString(6,"%"+TCari.getText().trim()+"%");
                 rstampil=pstampil.executeQuery();
-                while(rstampil.next()){                            
+                while(rstampil.next()){
                     tabMode.addRow(new Object[]{"",rstampil.getString("kode_brng"),
                                    rstampil.getString("nama_brng"),
                                    rstampil.getString("nama"),
                                    rstampil.getString("kode_sat"),
                                    rstampil.getDouble("dasar"),0,0,0,0,0,"",""});
-                }  
+                }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -2376,14 +2378,14 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 if(pstampil!=null){
                     pstampil.close();
                 }
-            }              
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void SudahOpname(){
-        try{  
+        try{
             Valid.tabelKosong(tabMode);
             pstampil=koneksi.prepareStatement("select databarang.kode_brng, databarang.nama_brng,jenis.nama, databarang.kode_sat, "+
                     "databarang."+hppfarmasi+" as dasar from databarang inner join jenis on databarang.kdjns=jenis.kdjns "+
@@ -2397,13 +2399,13 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 pstampil.setString(5,"%"+TCari.getText().trim()+"%");
                 pstampil.setString(6,"%"+TCari.getText().trim()+"%");
                 rstampil=pstampil.executeQuery();
-                while(rstampil.next()){                            
+                while(rstampil.next()){
                     tabMode.addRow(new Object[]{"",rstampil.getString("kode_brng"),
                                    rstampil.getString("nama_brng"),
                                    rstampil.getString("nama"),
                                    rstampil.getString("kode_sat"),
                                    rstampil.getDouble("dasar"),0,0,0,0,0,"",""});
-                }  
+                }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
             } finally{
@@ -2413,7 +2415,7 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 if(pstampil!=null){
                     pstampil.close();
                 }
-            }              
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

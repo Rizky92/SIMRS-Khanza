@@ -1697,9 +1697,11 @@ public class LaporanKedatanganPasienPerJam extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -134,7 +134,7 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
                     }
                 }
             });
-        }     
+        }
     }
 
     /** This method is called from within the constructor to
@@ -749,15 +749,15 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
                                 String norm=Sequel.cariIsi("select piutang_pasien.no_rkm_medis from piutang_pasien where piutang_pasien.no_rawat='"+tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString()+"'");
                                 String nama=Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis='"+norm+"'");
                                 bayarpiutang.setData(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString(),norm,nama);
-                                bayarpiutang.tampil2();  
+                                bayarpiutang.tampil2();
                                 bayarpiutang.setSize(this.getWidth()-20,this.getHeight()-20);
                                 bayarpiutang.setLocationRelativeTo(this);
                                 bayarpiutang.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
-                            }                        
+                            }
                         }else if(kolom==0){
                             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            status=Sequel.cariIsi("select reg_periksa.status_lanjut from reg_periksa where reg_periksa.no_rawat=?",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());   
+                            status=Sequel.cariIsi("select reg_periksa.status_lanjut from reg_periksa where reg_periksa.no_rawat=?",tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
                             if(status.equals("Ralan")){
                                 DlgBilingRalan billing=new DlgBilingRalan(null,false);
                                 billing.TNoRw.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
@@ -768,19 +768,19 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
                                 }
                                 billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 billing.setLocationRelativeTo(internalFrame1);
-                                billing.setVisible(true); 
+                                billing.setVisible(true);
                             }else if(status.equals("Ranap")){
                                 DlgBilingRanap billing=new DlgBilingRanap(null,false);
-                                billing.TNoRw.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());            
+                                billing.TNoRw.setText(tbBangsal.getValueAt(tbBangsal.getSelectedRow(),0).toString());
                                 billing.isCek();
                                 billing.isRawat();
                                 billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 billing.setLocationRelativeTo(internalFrame1);
-                                billing.setVisible(true); 
+                                billing.setVisible(true);
                             }
                             this.setCursor(Cursor.getDefaultCursor());
-                        }  
-                    }             
+                        }
+                    }
                 }
             }
         }
@@ -833,7 +833,7 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -844,8 +844,8 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1072,7 +1072,7 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
         TCari.setText(norm);
         Tgl1.setDate(tgl);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1098,10 +1098,12 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

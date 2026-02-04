@@ -132,8 +132,8 @@ public class TokoReturJual extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-          
+        }
+
         try {
             hpptoko=koneksiDB.HPPTOKO();
         } catch (Exception e) {
@@ -1012,10 +1012,12 @@ private void kdptgKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdp
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

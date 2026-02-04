@@ -59,9 +59,9 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
         tabMode=new DefaultTableModel(null,new Object[]{"Tanggal","No.Nota","No.Rawat","No.RM","Nama Pasien","Akun Bayar","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -91,13 +91,13 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbRawatJalan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode2=new DefaultTableModel(null,new Object[]{"Tanggal","No.Nota","No.Rawat","No.RM","Nama Pasien","Akun Bayar","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -127,13 +127,13 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbRawatInap.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode3=new DefaultTableModel(null,new Object[]{"Tanggal","No.Nota","Jenis Harga","No.RM","Nama Pasien","Akun Bayar","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -163,12 +163,12 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbPenjualanBebas.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode4=new DefaultTableModel(null,new Object[]{"Tanggal","Nomor","Terima Dari","Keperluan","Kategori","Pemasukan"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -196,12 +196,12 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbPemasukanLain.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode5=new DefaultTableModel(null,new Object[]{"Tanggal","No.Deposit","No.Rawat","No.RM","Nama Pasien","Akun Bayar","Deposit"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -231,13 +231,13 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbDeposit.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode6=new DefaultTableModel(null,new Object[]{"Tanggal","No.Tagihan","No.RM","Nama Pasien","Akun Bayar","Akun Piutang","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -267,12 +267,12 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbPiutangPasienDibayar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode7=new DefaultTableModel(null,new Object[]{"Tanggal","No.Tagihan","Kode","Peminjam","Akun Bayar","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -300,12 +300,12 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbPiutangUangDibayar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode8=new DefaultTableModel(null,new Object[]{"Tanggal","No.Tagihan","Kode","Instansi/Perusahaan","Akun Bayar","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -333,13 +333,13 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbPiutangJasaDibayar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode9=new DefaultTableModel(null,new Object[]{"Tanggal","No.Bayar/Nota","No.Permintaan","No.Pelanggan","Nama Pelanggan","Akun Bayar","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Double.class 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Double.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -369,13 +369,13 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbLabKesehatanLingkungan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode10=new DefaultTableModel(null,new Object[]{"Tanggal","No.Nota","Jenis Jual","No.Member","Nama Member","Akun Bayar","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -405,12 +405,12 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbPenjualanToko.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         tabMode11=new DefaultTableModel(null,new Object[]{"Tanggal","No.Tagihan","No.Member","Nama Member","Akun Bayar","Pembayaran"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
               Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, 
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class,
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -438,7 +438,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             }
         }
         tbPiutangTokoDibayar.setDefaultRenderer(Object.class, new WarnaTable());
-    }  
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -990,7 +990,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "inner join detail_nota_jalan on detail_nota_jalan.no_rawat=reg_periksa.no_rawat "+
                 "where nota_jalan.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by nota_jalan.tanggal,nota_jalan.jam ",param);
         }
-        
+
         if(tabMode2.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1008,7 +1008,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "inner join detail_nota_inap on detail_nota_inap.no_rawat=reg_periksa.no_rawat "+
                 "where nota_inap.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by nota_inap.tanggal,nota_inap.jam ",param);
         }
-        
+
         if(tabMode3.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1025,7 +1025,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "where penjualan.status='Sudah Dibayar' and penjualan.tgl_jual between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' "+
                 "group by penjualan.nota_jual order by penjualan.tgl_jual,penjualan.nota_jual ",param);
         }
-        
+
         if(tabMode4.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1041,7 +1041,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "from pemasukan_lain inner join kategori_pemasukan_lain on pemasukan_lain.kode_kategori=kategori_pemasukan_lain.kode_kategori "+
                 "where pemasukan_lain.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00"+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by pemasukan_lain.tanggal ",param);
         }
-        
+
         if(tabMode5.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1056,7 +1056,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "deposit.besar_deposit from deposit inner join reg_periksa on deposit.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                 "where deposit.tgl_deposit between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00"+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59"+"' order by deposit.tgl_deposit ",param);
         }
-        
+
         if(tabMode6.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1074,7 +1074,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "inner join rekening as rekening2 on rekening2.kd_rek=bayar_piutang.kd_rek_kontra "+
                 "where bayar_piutang.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang.tgl_bayar ",param);
         }
-        
+
         if(tabMode7.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1090,7 +1090,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "from bayar_piutang_lainlain inner join peminjampiutang on bayar_piutang_lainlain.kode_peminjam=peminjampiutang.kode_peminjam "+
                 "where bayar_piutang_lainlain.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang_lainlain.tgl_bayar ",param);
         }
-        
+
         if(tabMode8.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1106,7 +1106,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "from bayar_piutang_jasa_perusahaan inner join perusahaan_pasien on bayar_piutang_jasa_perusahaan.kode_perusahaan=perusahaan_pasien.kode_perusahaan "+
                 "where bayar_piutang_jasa_perusahaan.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by bayar_piutang_jasa_perusahaan.tgl_bayar ",param);
         }
-        
+
         if(tabMode9.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1124,7 +1124,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "inner join labkesling_detail_pembayaran_pengujian_sampel on labkesling_detail_pembayaran_pengujian_sampel.no_pembayaran=labkesling_pembayaran_pengujian_sampel.no_pembayaran "+
                 "where labkesling_pembayaran_pengujian_sampel.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by labkesling_pembayaran_pengujian_sampel.tanggal ",param);
         }
-        
+
         if(tabMode10.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1140,7 +1140,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "from tokopenjualan where tokopenjualan.tgl_jual between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' "+
                 "order by tokopenjualan.tgl_jual,tokopenjualan.nota_jual ",param);
         }
-        
+
         if(tabMode11.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
@@ -1157,7 +1157,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 "inner join rekening on rekening.kd_rek=toko_bayar_piutang.kd_rek "+
                 "where toko_bayar_piutang.tgl_bayar between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+" 23:59:59' order by toko_bayar_piutang.tgl_bayar ",param);
         }
-        
+
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
@@ -1239,8 +1239,8 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil(){
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR)); 
-        try{    
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        try{
             Valid.tabelKosong(tabMode);
             rawatjalan=0;
             ps=koneksi.prepareStatement(
@@ -1271,7 +1271,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountRawatJalan.setText(Valid.SetAngka(rawatjalan));
-            
+
             Valid.tabelKosong(tabMode2);
             rawatinap=0;
             ps=koneksi.prepareStatement(
@@ -1302,7 +1302,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountRawatInap.setText(Valid.SetAngka(rawatinap));
-            
+
             Valid.tabelKosong(tabMode3);
             jualbebas=0;
             ps=koneksi.prepareStatement(
@@ -1332,7 +1332,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountJualBebas.setText(Valid.SetAngka(jualbebas));
-            
+
             Valid.tabelKosong(tabMode4);
             pemasukanlain=0;
             ps=koneksi.prepareStatement(
@@ -1361,7 +1361,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountPemasukanLain.setText(Valid.SetAngka(pemasukanlain));
-            
+
             Valid.tabelKosong(tabMode5);
             deposit=0;
             ps=koneksi.prepareStatement(
@@ -1389,7 +1389,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountDeposit.setText(Valid.SetAngka(deposit));
-            
+
             Valid.tabelKosong(tabMode6);
             bayarpiutang=0;
             ps=koneksi.prepareStatement(
@@ -1420,7 +1420,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountPiutangDibayar.setText(Valid.SetAngka(bayarpiutang));
-            
+
             Valid.tabelKosong(tabMode7);
             bayarpiutanguang=0;
             ps=koneksi.prepareStatement(
@@ -1449,7 +1449,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountPiutangUang.setText(Valid.SetAngka(bayarpiutanguang));
-            
+
             Valid.tabelKosong(tabMode8);
             bayarpiutangjasa=0;
             ps=koneksi.prepareStatement(
@@ -1478,7 +1478,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountPiutangJasa.setText(Valid.SetAngka(bayarpiutangjasa));
-            
+
             Valid.tabelKosong(tabMode9);
             labkesling=0;
             ps=koneksi.prepareStatement(
@@ -1509,7 +1509,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountKesehatanLingkungan.setText(Valid.SetAngka(labkesling));
-            
+
             Valid.tabelKosong(tabMode10);
             jualtoko=0;
             ps=koneksi.prepareStatement(
@@ -1537,7 +1537,7 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountJualToko.setText(Valid.SetAngka(jualtoko));
-            
+
             Valid.tabelKosong(tabMode11);
             bayarpiutangtoko=0;
             ps=koneksi.prepareStatement(
@@ -1567,14 +1567,14 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
                 }
             }
             LCountPiutangTokoDibayar.setText(Valid.SetAngka(bayarpiutangtoko));
-            
+
             LCountTotal.setText(Valid.SetAngka(rawatjalan+rawatinap+jualbebas+pemasukanlain+deposit+bayarpiutang+bayarpiutanguang+bayarpiutangjasa+labkesling+jualtoko+bayarpiutangtoko));
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1600,10 +1600,12 @@ public final class DlgOmsetPenerimaan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

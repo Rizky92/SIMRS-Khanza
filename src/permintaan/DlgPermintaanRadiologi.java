@@ -822,23 +822,23 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                         KodePerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                         NmPerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         KodePerujuk.requestFocus();
-                    }  
+                    }
                     dokter=null;
                 }
             });
             dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             dokter.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (dokter == null) return;
         if (!dokter.isVisible()) {
-            dokter.isCek();    
+            dokter.isCek();
             dokter.emptTeks();
-        }  
+        }
         if (dokter.isVisible()) {
             dokter.toFront();
             return;
-        }    
+        }
         dokter.setVisible(true);
     }//GEN-LAST:event_btnDokterActionPerformed
 
@@ -930,7 +930,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
     private void TanggalItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_TanggalItemStateChanged
         if(this.isActive()==true){
             autoNomor();
-        } 
+        }
     }//GEN-LAST:event_TanggalItemStateChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1370,20 +1370,20 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
                     isReset();
                     emptTeks();
                 }else{
-                    Valid.autoNomer7(TNoPermintaan.getText().substring(TNoPermintaan.getText().length()-4),"PR"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaan); 
+                    Valid.autoNomer7(TNoPermintaan.getText().substring(TNoPermintaan.getText().length()-4),"PR"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaan);
                     if(Sequel.menyimpantf2("permintaan_radiologi","?,?,?,?,?,?,?,?,?,?,?,?","No.Permintaan",12,new String[]{
                             TNoPermintaan.getText(),TNoRw.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),
-                            CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(), 
+                            CmbJam.getSelectedItem()+":"+CmbMenit.getSelectedItem()+":"+CmbDetik.getSelectedItem(),
                             "0000-00-00","00:00:00","0000-00-00","00:00:00",KodePerujuk.getText(),status.replaceAll("R","r"),
                             InformasiTambahan.getText(),DiagnosisKlinis.getText()
                         })==true){
-                        for(i=0;i<tbPemeriksaan.getRowCount();i++){ 
+                        for(i=0;i<tbPemeriksaan.getRowCount();i++){
                             if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
                                 Sequel.menyimpan2("permintaan_pemeriksaan_radiologi","?,?,?","pemeriksaan radiologi",3,new String[]{
                                     TNoPermintaan.getText(),tbPemeriksaan.getValueAt(i,1).toString(),"Belum"
                                 });
-                            }                        
-                        } 
+                            }
+                        }
                         isReset();
                         emptTeks();
                     }
@@ -1396,7 +1396,7 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             ChkJln.setSelected(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1422,12 +1422,14 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 
     private void LoadData() {
         tampil();

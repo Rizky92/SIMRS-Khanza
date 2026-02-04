@@ -105,8 +105,8 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML1.setEditable(true);
         LoadHTML1.setEditorKit(kit);
@@ -808,7 +808,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     TKd.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                     TNm.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     JK.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),2).toString());
@@ -817,13 +817,13 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
                     Departemen.setText(Sequel.cariIsi("select nama from departemen where dep_id=?",pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),5).toString()));
                     Jabatan.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),3).toString());
                     JenjangJabatan.setText(Sequel.cariIsi("select nama from jnj_jabatan where kode=?",pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),4).toString()));
- 
+
                     try {
                         runBackground(() ->loadURL("http://" +koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/"+"penggajian/loginberkaspegawai.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&nik="+TKd.getText().replaceAll(" ","_")+"&kategori="+CmbKategori.getSelectedItem().toString().replaceAll(" ","_")+""));
                     } catch (Exception ex) {
                         System.out.println("Notifikasi : "+ex);
                     }
-                }   
+                }
                 TKd.requestFocus();
             }
             @Override
@@ -1582,7 +1582,7 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1608,10 +1608,12 @@ public final class DlgBerkasKepegawaian extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

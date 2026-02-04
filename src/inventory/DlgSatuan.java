@@ -632,7 +632,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{     
+        try{
             ps=koneksi.prepareStatement("select kode_sat,satuan  "+
                 " from kodesatuan where  kode_sat like ? or "+
                 " satuan like ? order by satuan ");
@@ -652,7 +652,7 @@ public final class DlgSatuan extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }   
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -710,10 +710,12 @@ public final class DlgSatuan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

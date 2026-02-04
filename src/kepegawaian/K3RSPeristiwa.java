@@ -213,7 +213,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -2109,7 +2109,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(jenispekerjaan.getTable().getSelectedRow()!= -1){
                     KdJenisPekerjaan.setText(jenispekerjaan.getTable().getValueAt(jenispekerjaan.getTable().getSelectedRow(),0).toString());
                     NmJenisPekerjaan.setText(jenispekerjaan.getTable().getValueAt(jenispekerjaan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 BtnJenisPekerjaan.requestFocus();
             }
             @Override
@@ -2121,7 +2121,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenispekerjaan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2129,7 +2129,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jenispekerjaan.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2152,7 +2152,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(lokasikejadian.getTable().getSelectedRow()!= -1){
                     KdLokasiKejadian.setText(lokasikejadian.getTable().getValueAt(lokasikejadian.getTable().getSelectedRow(),0).toString());
                     NmLokasiKejadian.setText(lokasikejadian.getTable().getValueAt(lokasikejadian.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnLokasiKejadian.requestFocus();
             }
             @Override
@@ -2164,7 +2164,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         lokasikejadian.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2172,7 +2172,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     lokasikejadian.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2195,7 +2195,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(penyebab.getTable().getSelectedRow()!= -1){
                     KdPenyebab.setText(penyebab.getTable().getValueAt(penyebab.getTable().getSelectedRow(),0).toString());
                     NmPenyebab.setText(penyebab.getTable().getValueAt(penyebab.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 BtnPenyebab.requestFocus();
             }
             @Override
@@ -2207,7 +2207,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penyebab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2215,7 +2215,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penyebab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2235,7 +2235,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     NIKKorban.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                     NmKorban.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     JK.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),2).toString().replaceAll("Wanita","P").replaceAll("Pria","L"));
@@ -2244,8 +2244,8 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                     Departemen.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),5).toString());
                     Valid.SetTgl(TglLahir,pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),12).toString());
                     TglInsidenItemStateChanged(null);
-                    btnKorban.requestFocus();  
-                }   
+                    btnKorban.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -2256,7 +2256,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2264,7 +2264,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pegawai.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2317,7 +2317,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(jeniscidera.getTable().getSelectedRow()!= -1){
                     KdJenisCidera.setText(jeniscidera.getTable().getValueAt(jeniscidera.getTable().getSelectedRow(),0).toString());
                     NmJenisCidera.setText(jeniscidera.getTable().getValueAt(jeniscidera.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnJenisCidera.requestFocus();
             }
             @Override
@@ -2329,7 +2329,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jeniscidera.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2337,7 +2337,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jeniscidera.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2360,7 +2360,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(jenisluka.getTable().getSelectedRow()!= -1){
                     KdJenisLuka.setText(jenisluka.getTable().getValueAt(jenisluka.getTable().getSelectedRow(),0).toString());
                     NmJenisLuka.setText(jenisluka.getTable().getValueAt(jenisluka.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnJenisLuka.requestFocus();
             }
             @Override
@@ -2372,7 +2372,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jenisluka.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2380,7 +2380,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jenisluka.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2403,7 +2403,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(bagiantubuh.getTable().getSelectedRow()!= -1){
                     KdBagianTubuh.setText(bagiantubuh.getTable().getValueAt(bagiantubuh.getTable().getSelectedRow(),0).toString());
                     NmBagianTubuh.setText(bagiantubuh.getTable().getValueAt(bagiantubuh.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnBagianTubuh.requestFocus();
             }
             @Override
@@ -2415,7 +2415,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bagiantubuh.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2423,7 +2423,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     bagiantubuh.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2462,7 +2462,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
                 if(dampakcidera.getTable().getSelectedRow()!= -1){
                     KdDampak.setText(dampakcidera.getTable().getValueAt(dampakcidera.getTable().getSelectedRow(),0).toString());
                     NmDampak.setText(dampakcidera.getTable().getValueAt(dampakcidera.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 BtnDampak.requestFocus();
             }
             @Override
@@ -2474,7 +2474,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         dampakcidera.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2482,7 +2482,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     dampakcidera.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2514,13 +2514,13 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){  
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     NIKPelapor.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                     NmPelapor.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
                     BidangPelapor.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),6).toString());
                     DepartemenPelapor.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),5).toString());
                     btnPelapor.requestFocus();
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -2531,7 +2531,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2539,7 +2539,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pegawai.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -2583,10 +2583,10 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     NIKK3.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
                     NmPetugasK3.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -2597,7 +2597,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2605,7 +2605,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pegawai.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3551,7 +3551,7 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getperistiwa_k3rs());
         BtnPrint.setEnabled(akses.getperistiwa_k3rs());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -3577,10 +3577,12 @@ public final class K3RSPeristiwa extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

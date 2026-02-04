@@ -161,10 +161,10 @@ public final class DlgJnsPerawatanRalan extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
 
 
@@ -853,10 +853,10 @@ public final class DlgJnsPerawatanRalan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ktg.getTable().getSelectedRow()!= -1){                   
+                if(ktg.getTable().getSelectedRow()!= -1){
                     KdKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
                     NmKtg.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),2).toString());
-                }     
+                }
                 KdKtg.requestFocus();
             }
             @Override
@@ -868,7 +868,7 @@ public final class DlgJnsPerawatanRalan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ktg.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1157,7 +1157,7 @@ public final class DlgJnsPerawatanRalan extends javax.swing.JDialog {
                 if(poli.getTable().getSelectedRow()!= -1){
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdpoli.requestFocus();
             }
             @Override
@@ -1555,10 +1555,12 @@ public final class DlgJnsPerawatanRalan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

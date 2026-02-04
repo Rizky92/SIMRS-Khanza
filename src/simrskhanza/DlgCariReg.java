@@ -67,11 +67,11 @@ public final class DlgCariReg extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
                  java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
              };
              @Override
@@ -93,7 +93,7 @@ public final class DlgCariReg extends javax.swing.JDialog {
             }else if(i==2){
                 column.setPreferredWidth(70);
             }else if(i==3){
-                column.setPreferredWidth(50);   
+                column.setPreferredWidth(50);
             }else if(i==4){
                 column.setPreferredWidth(70);
             }else if(i==5){
@@ -158,11 +158,11 @@ public final class DlgCariReg extends javax.swing.JDialog {
                     }
                 }
             });
-        }   
-                
+        }
+
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -409,7 +409,7 @@ public final class DlgCariReg extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        Valid.tabelKosong(tabMode);   
+        Valid.tabelKosong(tabMode);
         try {
             ps=koneksi.prepareStatement("select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,"+
                 "reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur)as umur,poliklinik.nm_poli,"+
@@ -418,8 +418,8 @@ public final class DlgCariReg extends javax.swing.JDialog {
                 "inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  "+
                 "reg_periksa.tgl_registrasi between ? and ? "+(TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rawat like ? or reg_periksa.kd_dokter like ? or dokter.nm_dokter like ? or "+
                 "reg_periksa.no_rkm_medis like ? or reg_periksa.stts_daftar like ? or pasien.nm_pasien like ? or poliklinik.nm_poli like ? or reg_periksa.p_jawab like ? or reg_periksa.almt_pj like ? "+
-                "or reg_periksa.hubunganpj like ? or penjab.png_jawab like ?)")+" order by pasien.nm_pasien"); 
-            try{  
+                "or reg_periksa.hubunganpj like ? or penjab.png_jawab like ?)")+" order by pasien.nm_pasien");
+            try{
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 if(!TCari.getText().trim().equals("")){
@@ -435,7 +435,7 @@ public final class DlgCariReg extends javax.swing.JDialog {
                     ps.setString(12,"%"+TCari.getText().trim()+"%");
                     ps.setString(13,"%"+TCari.getText().trim()+"%");
                 }
-                
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[] {rs.getString(1),
@@ -459,14 +459,14 @@ public final class DlgCariReg extends javax.swing.JDialog {
                                    rs.getString("stts"),rs.getString("status_poli"),
                                    rs.getString("kd_poli"),rs.getString("kd_pj")
                     });
-                }                    
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -474,7 +474,7 @@ public final class DlgCariReg extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-    
+
         LCount.setText(""+tabMode.getRowCount());
     }
 
@@ -486,8 +486,8 @@ public final class DlgCariReg extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
-    
+
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -513,10 +513,12 @@ public final class DlgCariReg extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -209,7 +209,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
         }
         ChkInput.setSelected(false);
         isForm();
-        
+
         try {
             link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
@@ -969,11 +969,11 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){  
+                if(dokter.getTable().getSelectedRow()!= -1){
                     KdDPJP.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     NmDPJP.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),2).toString());
-                    KdDPJP.requestFocus();             
-                }  
+                    KdDPJP.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -984,7 +984,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1019,11 +1019,11 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(diagnosa.getTable().getSelectedRow()!= -1){  
+                if(diagnosa.getTable().getSelectedRow()!= -1){
                     KdProgram.setText(diagnosa.getTable().getValueAt(diagnosa.getTable().getSelectedRow(),1).toString());
                     NmProgram.setText(diagnosa.getTable().getValueAt(diagnosa.getTable().getSelectedRow(),2).toString());
-                    KdProgram.requestFocus();             
-                }  
+                    KdProgram.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1034,7 +1034,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         diagnosa.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1556,7 +1556,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void getData() {
         if(tbProgramPRB.getSelectedRow()!= -1){
             NoRawat.setText(tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),0).toString());
@@ -1779,7 +1779,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1805,10 +1805,12 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

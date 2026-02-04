@@ -154,8 +154,8 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
             aktifjadwal=koneksiDB.JADWALDOKTERDIREGISTRASI();
             URUTNOREG=koneksiDB.URUTNOREG();
@@ -1695,7 +1695,7 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
                     Propinsi.setText(prop.getTable().getValueAt(prop.getTable().getSelectedRow(),0).toString());
                     kdprop=prop.getTable().getValueAt(prop.getTable().getSelectedRow(),1).toString();
                     Propinsi.requestFocus();
-                }     
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -2514,9 +2514,11 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

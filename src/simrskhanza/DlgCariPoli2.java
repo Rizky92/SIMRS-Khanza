@@ -490,8 +490,8 @@ public void tampil3() {
             System.out.println("Notifikasi : "+ex);
         }
         LCount.setText(""+tabMode.getRowCount());
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -517,10 +517,12 @@ public void tampil3() {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

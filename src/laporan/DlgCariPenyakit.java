@@ -104,7 +104,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
 
@@ -379,7 +379,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                 (TCari.getText().trim().equals("")?"":"where penyakit.kd_penyakit like ? or penyakit.nm_penyakit like ? or "+
                 "penyakit.ciri_ciri like ? or penyakit.keterangan like ? or kategori_penyakit.nm_kategori like ? or "+
                 "kategori_penyakit.ciri_umum like ? ")+"order by penyakit.kd_penyakit  LIMIT ?,500"
-            );  
+            );
             try{
                 awal="0";
                 if(cmbHlm.getItemCount()>0){
@@ -400,7 +400,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     ps.setString(j,"%"+TCari.getText().trim()+"%");
                     j++;
                 }
-                    
+
                 ps.setInt(j,Integer.parseInt(awal));
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -418,8 +418,8 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
-            
+
+
             ps2=koneksi.prepareStatement(
                 "select count(penyakit.kd_penyakit) as jumlah from kategori_penyakit inner join penyakit on penyakit.kd_ktg=kategori_penyakit.kd_ktg  "+
                 (TCari.getText().trim().equals("")?"":"where penyakit.kd_penyakit like ? or penyakit.nm_penyakit like ? or penyakit.ciri_ciri like ? or "+
@@ -440,11 +440,11 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                     j++;
                     ps2.setString(j,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs2=ps2.executeQuery();
                 jumlah=0;
                 if(rs2.next()){
-                   jumlah=rs2.getDouble("jumlah");   
+                   jumlah=rs2.getDouble("jumlah");
                 }
                 x=jumlah/499;
                 i=Math.ceil(x);
@@ -465,7 +465,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
                 if(ps2!=null){
                     ps2.close();
                 }
-            }   
+            }
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -483,7 +483,7 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
     public void isCek(){
         BtnTambah.setEnabled(akses.getpenyakit());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -509,10 +509,12 @@ public final class DlgCariPenyakit extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -975,7 +975,7 @@ public final class TokoMember extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.gettoko_member());
         BtnPrint.setEnabled(akses.gettoko_member());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1001,10 +1001,12 @@ public final class TokoMember extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -689,7 +689,7 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
         BtnHapus.setEnabled(akses.getkategori_piutang_jasa_perusahaan());
         BtnPrint.setEnabled(akses.getkategori_piutang_jasa_perusahaan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -715,10 +715,12 @@ public final class DlgKategoriPiutangJasaPerusahaan extends javax.swing.JDialog 
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

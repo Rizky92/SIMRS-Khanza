@@ -651,7 +651,7 @@ public class DlgKelurahan extends javax.swing.JDialog {
         TCari.setText("");
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -677,10 +677,12 @@ public class DlgKelurahan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

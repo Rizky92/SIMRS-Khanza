@@ -1243,9 +1243,11 @@ public final class DlgKamar extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

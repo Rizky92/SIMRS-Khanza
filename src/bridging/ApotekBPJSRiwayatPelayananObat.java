@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -146,10 +146,10 @@ public final class ApotekBPJSRiwayatPelayananObat extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("E : " + e);
         }
-              
+
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -339,7 +339,7 @@ public final class ApotekBPJSRiwayatPelayananObat extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(int i=0;i<tabMode.getRowCount();i++){  
+            for(int i=0;i<tabMode.getRowCount();i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
                                 tabMode.getValueAt(i,0).toString()+"','"+
                                 tabMode.getValueAt(i,1).toString()+"','"+
@@ -356,25 +356,25 @@ public final class ApotekBPJSRiwayatPelayananObat extends javax.swing.JDialog {
                                 tabMode.getValueAt(i,12).toString()+"','"+
                                 tabMode.getValueAt(i,14).toString()+"','"+
                                 tabMode.getValueAt(i,15).toString()+"','"+
-                                tabMode.getValueAt(i,16).toString()+"','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Daftar Pelayanan Obat Apotek BPJS"); 
+                                tabMode.getValueAt(i,16).toString()+"','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Daftar Pelayanan Obat Apotek BPJS");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptApotekBPJSDaftarPelayananKlaim.jasper","report","[ Daftar Pelayanan Apotek BPJS ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void NoKaBPJSKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoKaBPJSKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_ENTER){  
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             runBackground(() ->tampil(NoKaBPJS.getText(), Valid.SetTgl(TanggalAwal.getSelectedItem().toString()), Valid.SetTgl(TanggalAkhir.getSelectedItem().toString())));
             BtnPrint.requestFocus();
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -427,16 +427,16 @@ public final class ApotekBPJSRiwayatPelayananObat extends javax.swing.JDialog {
             pasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             pasien.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (pasien == null) return;
         if (!pasien.isVisible()) {
-            pasien.isCek();    
+            pasien.isCek();
             pasien.emptTeks();
-        }  
+        }
         if (pasien.isVisible()) {
             pasien.toFront();
             return;
-        }    
+        }
         pasien.setVisible(true);
     }//GEN-LAST:event_btnPasienActionPerformed
 
@@ -510,12 +510,12 @@ public final class ApotekBPJSRiwayatPelayananObat extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
             }
         }
-    }   
+    }
 
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -541,10 +541,12 @@ public final class ApotekBPJSRiwayatPelayananObat extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

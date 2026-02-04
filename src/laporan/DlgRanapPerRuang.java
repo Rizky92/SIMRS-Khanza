@@ -140,7 +140,7 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
                 }
             });
         }
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -601,7 +601,7 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -612,8 +612,8 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -902,10 +902,12 @@ public final class DlgRanapPerRuang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

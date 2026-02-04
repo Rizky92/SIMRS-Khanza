@@ -110,7 +110,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -551,10 +551,10 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     NIK.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),0).toString());
-                    Nama.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());                                        
-                }   
+                    Nama.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(),1).toString());
+                }
                 NIK.requestFocus();
             }
             @Override
@@ -699,7 +699,7 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getinacbg_coder_nik());
         BtnEdit.setEnabled(akses.getinacbg_coder_nik());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -725,10 +725,12 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -17827,7 +17827,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     }
                 }
             }
-            
+
             //menampilkan skrining gizi kehamilan
             if(chkSkriningGiziKehamilan.isSelected()==true){
                 try {
@@ -17904,7 +17904,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     append("</tr>").
                                                 append("</table>").
                                             append("</td>").
-                                        append("</tr>"); 
+                                        append("</tr>");
                         }while(rs2.next());
                         htmlContent.append("</table>").
                                     append("</td>").
@@ -38266,10 +38266,12 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

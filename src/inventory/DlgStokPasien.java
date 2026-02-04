@@ -2078,7 +2078,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getstok_obat_pasien());
         BtnPrint.setEnabled(akses.getstok_obat_pasien());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2104,10 +2104,12 @@ public final class DlgStokPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

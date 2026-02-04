@@ -48,7 +48,7 @@ public class DlgFrekuensiPenyakitRalan extends javax.swing.JDialog {
     private String diagnosa="";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgProgramStudi
      * @param parent
      * @param modal */
@@ -109,8 +109,8 @@ public class DlgFrekuensiPenyakitRalan extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
 
@@ -1561,7 +1561,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(poli.getTable().getSelectedRow()!= -1){
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     nmpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kdpoli.requestFocus();
             }
             @Override
@@ -1572,7 +1572,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {poli.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
+        });
         poli.isCek();
         poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         poli.setLocationRelativeTo(internalFrame1);
@@ -1608,7 +1608,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -1619,8 +1619,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1660,7 +1660,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -1671,8 +1671,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         dokter.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1707,7 +1707,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosed(WindowEvent e) {
                 if(kabupaten.getTable().getSelectedRow()!= -1){
                     nmkabupaten.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),0).toString());
-                }      
+                }
                 nmkabupaten.requestFocus();
             }
             @Override
@@ -1718,8 +1718,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {kabupaten.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         kabupaten.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1753,7 +1753,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosed(WindowEvent e) {
                 if(kecamatan.getTable().getSelectedRow()!= -1){
                     nmkecamatan.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),0).toString());
-                }      
+                }
                 nmkecamatan.requestFocus();
             }
             @Override
@@ -1764,8 +1764,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {kecamatan.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         kecamatan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1799,7 +1799,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosed(WindowEvent e) {
                 if(kelurahan.getTable().getSelectedRow()!= -1){
                     nmkelurahan.setText(kelurahan.getTable().getValueAt(kelurahan.getTable().getSelectedRow(),0).toString());
-                }      
+                }
                 nmkelurahan.requestFocus();
             }
             @Override
@@ -1810,8 +1810,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowActivated(WindowEvent e) {kelurahan.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         kelurahan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1926,29 +1926,29 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(!nmdokter.getText().trim().equals("")){
                     ps.setString(urut,nmdokter.getText().trim());
                     urut++;
-                }    
+                }
                 if(!nmpenjab.getText().trim().equals("")){
                     ps.setString(urut,nmpenjab.getText().trim());
                     urut++;
-                }    
+                }
                 if(!nmkabupaten.getText().trim().equals("")){
                     ps.setString(urut,nmkabupaten.getText().trim());
                     urut++;
-                }    
+                }
                 if(!nmkecamatan.getText().trim().equals("")){
                     ps.setString(urut,nmkecamatan.getText().trim());
                     urut++;
-                }    
+                }
                 if(!nmkelurahan.getText().trim().equals("")){
                     ps.setString(urut,nmkelurahan.getText().trim());
                     urut++;
-                }    
+                }
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(urut,"%"+TCari.getText().trim()+"%");
                     urut++;
                     ps.setString(urut,"%"+TCari.getText().trim()+"%");
-                }    
-                    
+                }
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     i=0;
@@ -1973,23 +1973,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(!nmdokter.getText().trim().equals("")){
                             ps2.setString(urut,nmdokter.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmpenjab.getText().trim().equals("")){
                             ps2.setString(urut,nmpenjab.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkabupaten.getText().trim().equals("")){
                             ps2.setString(urut,nmkabupaten.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkecamatan.getText().trim().equals("")){
                             ps2.setString(urut,nmkecamatan.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkelurahan.getText().trim().equals("")){
                             ps2.setString(urut,nmkelurahan.getText().trim());
                             urut++;
-                        }  
+                        }
                         ps2.setString(urut,rs.getString("kd_penyakit"));
                         rs2=ps2.executeQuery();
                         Sequel.queryu("delete from temporary_surveilens_penyakit");
@@ -2073,23 +2073,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(!nmdokter.getText().trim().equals("")){
                             ps3.setString(urut,nmdokter.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmpenjab.getText().trim().equals("")){
                             ps3.setString(urut,nmpenjab.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkabupaten.getText().trim().equals("")){
                             ps3.setString(urut,nmkabupaten.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkecamatan.getText().trim().equals("")){
                             ps3.setString(urut,nmkecamatan.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkelurahan.getText().trim().equals("")){
                             ps3.setString(urut,nmkelurahan.getText().trim());
                             urut++;
-                        }  
+                        }
                         ps3.setString(urut,rs.getString("kd_penyakit"));
                         rs3=ps3.executeQuery();
                         rs3.last();
@@ -2116,7 +2116,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "and reg_periksa.tgl_registrasi between ? and ? "+(nmpoli.getText().trim().equals("")?"":"and poliklinik.nm_poli=? ")+
                         (nmdokter.getText().trim().equals("")?"":"and dokter.nm_dokter=?  ")+(nmpenjab.getText().trim().equals("")?"":"and penjab.png_jawab=? ")+
                         (nmkabupaten.getText().trim().equals("")?"":"and kabupaten.nm_kab=? ")+(nmkecamatan.getText().trim().equals("")?"":"and kecamatan.nm_kec=? ")+
-                        (nmkelurahan.getText().trim().equals("")?"":"and kelurahan.nm_kel=? ")+"and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat"); 
+                        (nmkelurahan.getText().trim().equals("")?"":"and kelurahan.nm_kel=? ")+"and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");
                     try{
                         urut=3;
                         ps4.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -2128,23 +2128,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(!nmdokter.getText().trim().equals("")){
                             ps4.setString(urut,nmdokter.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmpenjab.getText().trim().equals("")){
                             ps4.setString(urut,nmpenjab.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkabupaten.getText().trim().equals("")){
                             ps4.setString(urut,nmkabupaten.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkecamatan.getText().trim().equals("")){
                             ps4.setString(urut,nmkecamatan.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkelurahan.getText().trim().equals("")){
                             ps4.setString(urut,nmkelurahan.getText().trim());
                             urut++;
-                        }  
+                        }
                         ps4.setString(urut,rs.getString("kd_penyakit"));
                         rs4=ps4.executeQuery();
                         rs4.last();
@@ -2170,7 +2170,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "and reg_periksa.tgl_registrasi between ? and ? "+(nmpoli.getText().trim().equals("")?"":"and poliklinik.nm_poli=? ")+
                         (nmdokter.getText().trim().equals("")?"":"and dokter.nm_dokter=?  ")+(nmpenjab.getText().trim().equals("")?"":"and penjab.png_jawab=? ")+
                         (nmkabupaten.getText().trim().equals("")?"":"and kabupaten.nm_kab=? ")+(nmkecamatan.getText().trim().equals("")?"":"and kecamatan.nm_kec=? ")+
-                        (nmkelurahan.getText().trim().equals("")?"":"and kelurahan.nm_kel=? ")+"and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");  
+                        (nmkelurahan.getText().trim().equals("")?"":"and kelurahan.nm_kel=? ")+"and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");
                     try{
                         urut=3;
                         ps5.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -2182,23 +2182,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(!nmdokter.getText().trim().equals("")){
                             ps5.setString(urut,nmdokter.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmpenjab.getText().trim().equals("")){
                             ps5.setString(urut,nmpenjab.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkabupaten.getText().trim().equals("")){
                             ps5.setString(urut,nmkabupaten.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkecamatan.getText().trim().equals("")){
                             ps5.setString(urut,nmkecamatan.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkelurahan.getText().trim().equals("")){
                             ps5.setString(urut,nmkelurahan.getText().trim());
                             urut++;
-                        }  
+                        }
                         ps5.setString(urut,rs.getString("kd_penyakit"));
                         rs5=ps5.executeQuery();
                         rs5.last();
@@ -2224,7 +2224,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "and reg_periksa.tgl_registrasi between ? and ? "+(nmpoli.getText().trim().equals("")?"":"and poliklinik.nm_poli=? ")+
                         (nmdokter.getText().trim().equals("")?"":"and dokter.nm_dokter=?  ")+(nmpenjab.getText().trim().equals("")?"":"and penjab.png_jawab=? ")+
                         (nmkabupaten.getText().trim().equals("")?"":"and kabupaten.nm_kab=? ")+(nmkecamatan.getText().trim().equals("")?"":"and kecamatan.nm_kec=? ")+
-                        (nmkelurahan.getText().trim().equals("")?"":"and kelurahan.nm_kel=? ")+"and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");  
+                        (nmkelurahan.getText().trim().equals("")?"":"and kelurahan.nm_kel=? ")+"and diagnosa_pasien.kd_penyakit=? group by diagnosa_pasien.no_rawat");
                     try{
                         urut=3;
                         ps6.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -2236,23 +2236,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(!nmdokter.getText().trim().equals("")){
                             ps6.setString(urut,nmdokter.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmpenjab.getText().trim().equals("")){
                             ps6.setString(urut,nmpenjab.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkabupaten.getText().trim().equals("")){
                             ps6.setString(urut,nmkabupaten.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkecamatan.getText().trim().equals("")){
                             ps6.setString(urut,nmkecamatan.getText().trim());
                             urut++;
-                        }    
+                        }
                         if(!nmkelurahan.getText().trim().equals("")){
                             ps6.setString(urut,nmkelurahan.getText().trim());
                             urut++;
-                        }  
+                        }
                         ps6.setString(urut,rs.getString("kd_penyakit"));
                         rs6=ps6.executeQuery();
                         rs6.last();
@@ -2304,7 +2304,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2330,10 +2330,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

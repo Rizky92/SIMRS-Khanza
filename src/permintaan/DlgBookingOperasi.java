@@ -1453,17 +1453,17 @@ private void BtnOperatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             dokter.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(dokter.getTable().getSelectedRow()!= -1){        
+                    if(dokter.getTable().getSelectedRow()!= -1){
                          KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                          NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     KdDokter.requestFocus();
                     dokter=null;
                 }
             });
             dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             dokter.setLocationRelativeTo(internalFrame1);
-        }   
+        }
         if (dokter == null) return;
         dokter.isCek();
         if (dokter.isVisible()) {
@@ -1568,17 +1568,17 @@ private void BtnOperatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }else if(posisi.equals("Ralan")){
             kelas="Rawat Jalan";
         }
-    
+
         if (operasi == null || !operasi.isDisplayable()) {
             operasi=new DlgCariDaftarOperasi(null,false);
             operasi.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             operasi.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(operasi.getTable().getSelectedRow()!= -1){                   
+                    if(operasi.getTable().getSelectedRow()!= -1){
                         KdOperasi.setText(operasi.getTable().getValueAt(operasi.getTable().getSelectedRow(),0).toString());
                         NmOperasi.setText(operasi.getTable().getValueAt(operasi.getTable().getSelectedRow(),1).toString());
-                    } 
+                    }
                     KdOperasi.requestFocus();
                     operasi=null;
                 }
@@ -1587,16 +1587,16 @@ private void BtnOperatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             operasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             operasi.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (operasi == null) return;
         if (!operasi.isVisible()) {
-            operasi.isCek();    
+            operasi.isCek();
             operasi.setBayar(penjab, kelas);
-        }  
+        }
         if (operasi.isVisible()) {
             operasi.toFront();
             return;
-        }    
+        }
         operasi.setVisible(true);
     }//GEN-LAST:event_BtnOperasiActionPerformed
 
@@ -1798,10 +1798,10 @@ private void BtnOperatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             ruangok.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(ruangok.getTable().getSelectedRow()!= -1){                   
+                    if(ruangok.getTable().getSelectedRow()!= -1){
                         KdRuangOperasi.setText(ruangok.getTable().getValueAt(ruangok.getTable().getSelectedRow(),0).toString());
                         NmRuangOperasi.setText(ruangok.getTable().getValueAt(ruangok.getTable().getSelectedRow(),1).toString());
-                    } 
+                    }
                     KdRuangOperasi.requestFocus();
                     ruangok=null;
                 }
@@ -1810,15 +1810,15 @@ private void BtnOperatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             ruangok.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             ruangok.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (ruangok == null) return;
         if (!ruangok.isVisible()) {
-            ruangok.isCek();    
-        }  
+            ruangok.isCek();
+        }
         if (ruangok.isVisible()) {
             ruangok.toFront();
             return;
-        }    
+        }
         ruangok.setVisible(true);
     }//GEN-LAST:event_BtnRuangOperasiActionPerformed
 
@@ -2431,10 +2431,12 @@ private void BtnOperatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -148,7 +148,7 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
 
         TNoValidasi.setDocument(new batasInput((byte)20).getKata(TNoValidasi));
         Catatan.setDocument(new batasInput((int)100).getKata(Catatan));
-        
+
         try {
             ps=koneksi.prepareStatement(
                 "select set_akun2.Suspen_Piutang_Pelayanan_Lab_Kesling,set_akun2.Pendapatan_Pelayanan_Lab_Kesling,set_akun2.Beban_Jasa_Sarana_Pelayanan_Lab_Kesling,"+
@@ -807,10 +807,10 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -821,10 +821,10 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -1118,7 +1118,7 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(labkesling_validasi_pengujian_sampel.no_validasi,5),signed)),0) from labkesling_validasi_pengujian_sampel inner join labkesling_permintaan_pengujian_sampel on labkesling_permintaan_pengujian_sampel.no_permintaan=labkesling_validasi_pengujian_sampel.no_permintaan where date_format(labkesling_validasi_pengujian_sampel.tanggal,'%Y')='"+TanggalValidasi.getSelectedItem().toString().substring(6,10)+"' and labkesling_permintaan_pengujian_sampel.kode_sampel='"+KodeSampel.getText()+"'",KodeSampel.getText()+"/"+TanggalValidasi.getSelectedItem().toString().substring(6,10)+"/LHU/",5,TNoValidasi);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1144,10 +1144,12 @@ public final class LabKeslingValidasiPengujianSampel extends javax.swing.JDialog
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

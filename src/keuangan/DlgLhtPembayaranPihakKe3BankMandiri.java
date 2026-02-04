@@ -548,7 +548,7 @@ public final class DlgLhtPembayaranPihakKe3BankMandiri extends javax.swing.JDial
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -574,10 +574,12 @@ public final class DlgLhtPembayaranPihakKe3BankMandiri extends javax.swing.JDial
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

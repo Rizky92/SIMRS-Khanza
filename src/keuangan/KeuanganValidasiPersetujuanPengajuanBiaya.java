@@ -140,7 +140,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
                     }
                 }
             });
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -525,7 +525,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
                     kdpegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     nmpegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdpegawai.requestFocus();
             }
             @Override
@@ -536,8 +536,8 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
             public void windowActivated(WindowEvent e) {pegawai.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -629,7 +629,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
                     ps.setString(i,kdpegawai.getText().trim());
                     i++;
                 }
-                    
+
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(i,"%"+TCari.getText().trim()+"%");
                     i++;
@@ -692,7 +692,7 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
     public void isCek(){
         BtnBayar.setEnabled(akses.getpengeluaran());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -718,10 +718,12 @@ public final class KeuanganValidasiPersetujuanPengajuanBiaya extends javax.swing
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

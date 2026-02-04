@@ -72,7 +72,7 @@ public class DlgDetailPotongan extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());  
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
     }
 
 
@@ -351,7 +351,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     try{
                         pspasien.setString(1,rs.getString("tgl_registrasi"));
                         rspasien=pspasien.executeQuery();
-                        while(rspasien.next()){       
+                        while(rspasien.next()){
                             pstambahan=koneksi.prepareStatement("select pengurangan_biaya.nama_pengurangan,pengurangan_biaya.besar_pengurangan from pengurangan_biaya where pengurangan_biaya.no_rawat=?");
                             try {
                                 pstambahan.setString(1,rspasien.getString("no_rawat"));
@@ -365,7 +365,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     }
                                     jumlah=jumlah+rstambahan.getDouble("besar_pengurangan");
                                     a++;
-                                } 
+                                }
                             }catch (Exception eg) {
                                 System.out.println(eg);
                             }finally{
@@ -375,7 +375,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if(pstambahan!=null){
                                     pstambahan.close();
                                 }
-                            }                    
+                            }
                         }
                     }catch (Exception ef) {
                         System.out.println(ef);
@@ -386,12 +386,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(pspasien!=null){
                             pspasien.close();
                         }
-                    } 
+                    }
                     i++;
                 }
                 if(jumlah>0){
                     tabMode.addRow(new Object[]{">>","Total :","","",jumlah});
-                }   
+                }
             } catch (SQLException e) {
                 System.out.println(e);
             } finally{
@@ -401,12 +401,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }                    
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -432,10 +432,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

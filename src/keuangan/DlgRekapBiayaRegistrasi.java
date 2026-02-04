@@ -788,10 +788,10 @@ public final class DlgRekapBiayaRegistrasi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil(){
-        try{        
+        try{
             htmlContent = new StringBuilder();
             htmlContent.append("<tr class='head'><td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='27px'>No.</td><td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='80px'>Tgl.Periksa</td><td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='170px'>Nama Pasien</td><td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='110px'>NIK</td><td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='250px'>Alamat</td><td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='90px'>No.RM</td><td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='90px'>Diagnosis</td>").append(no>0?"<td valign='middle' bgcolor='#FFFAFA' align='center' colspan='"+no+"' width='"+(no*100)+"px'>Cara Bayar</td>":"").append("<td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='90px'>Biaya</td><td valign='middle' bgcolor='#FFFAFA' align='center' rowspan='2' width='60px'>Status</td></tr>");
-            
+
             if(no>0){
                 htmlContent.append(
                     "<tr class='head'>"
@@ -854,7 +854,7 @@ public final class DlgRekapBiayaRegistrasi extends javax.swing.JDialog {
                             }
                             jumlah[i]=jumlah[i]+sesuai;
                             htmlContent.append("<td valign='middle' align='center'>").append(Integer.toString(sesuai).replaceAll("0","")).append("</td>");
-                        } 
+                        }
                         htmlContent.append("<td valign='middle' align='center'>").append(Valid.SetAngka(rs.getDouble("biaya_reg"))).append("</td><td valign='middle' align='center'>").append(rs.getString("status_lanjut")).append("</td></tr>");
                         baris++;
                     }
@@ -876,9 +876,9 @@ public final class DlgRekapBiayaRegistrasi extends javax.swing.JDialog {
             );
             for(x=0;x<y;x++){
                 htmlContent.append("<td valign='middle' align='center'>").append(jumlah[x]).append("</td>");
-            } 
+            }
             htmlContent.append("<td valign='middle' align='center'>").append(Valid.SetAngka(totalbiaya)).append("</td><td valign='middle' align='center'>&nbsp;</td></tr>");
-            
+
             LoadHTML.setText(
                         "<html>"+
                           "<table width='"+(1000+(no*100))+"px' border='0' align='left' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
@@ -903,7 +903,7 @@ public final class DlgRekapBiayaRegistrasi extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -929,10 +929,12 @@ public final class DlgRekapBiayaRegistrasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

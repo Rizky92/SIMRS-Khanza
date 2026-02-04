@@ -48,9 +48,9 @@ public final class DlgRekapRadiologiPerTahun extends javax.swing.JDialog {
     private ResultSet rs;
     private int i=0,jan=0,feb=0,mar=0,apr=0,mei=0,jun=0,jul=0,agu=0,sep=0,okt=0,nov=0,des=0,
             ttljan=0,ttlfeb=0,ttlmar=0,ttlapr=0,ttlmei=0,ttljun=0,ttljul=0,ttlagu=0,
-            ttlsep=0,ttlokt=0,ttlnov=0,ttldes=0;  
+            ttlsep=0,ttlokt=0,ttlnov=0,ttldes=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
-    private volatile boolean ceksukses = false; 
+    private volatile boolean ceksukses = false;
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -394,7 +394,7 @@ public final class DlgRekapRadiologiPerTahun extends javax.swing.JDialog {
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 i=1;
                 ttljan=0;ttlfeb=0;ttlmar=0;ttlapr=0;ttlmei=0;ttljun=0;
@@ -478,10 +478,12 @@ public final class DlgRekapRadiologiPerTahun extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

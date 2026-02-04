@@ -126,8 +126,8 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         try {
             ps=koneksi.prepareStatement(
                    "select set_harga_kamar.kd_kamar,bangsal.kd_bangsal,bangsal.nm_bangsal,"+
@@ -660,11 +660,11 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kamar.getTable().getSelectedRow()!= -1){                   
+                if(kamar.getTable().getSelectedRow()!= -1){
                     kdkamar.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),1).toString());
                     TKdBngsal.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),2).toString());
                     TBangsal.setText(kamar.getTable().getValueAt(kamar.getTable().getSelectedRow(),3).toString());
-                }  
+                }
                 kdkamar.requestFocus();
             }
             @Override
@@ -676,7 +676,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kamar.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -688,7 +688,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         kamar.load();
         kamar.isCek();
         kamar.emptTeks();
@@ -728,7 +728,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpj.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }  
+                }
                 kdpj.requestFocus();
             }
             @Override
@@ -740,7 +740,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -748,7 +748,7 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     penjab.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -873,10 +873,12 @@ public class DlgSetHargaKamar extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

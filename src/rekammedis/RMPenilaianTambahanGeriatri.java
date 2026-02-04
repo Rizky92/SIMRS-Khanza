@@ -186,7 +186,7 @@ public final class RMPenilaianTambahanGeriatri extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -1576,11 +1576,11 @@ public final class RMPenilaianTambahanGeriatri extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){     
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     NmPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
                     BtnPetugas.requestFocus();
-                }   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -2110,7 +2110,7 @@ public final class RMPenilaianTambahanGeriatri extends javax.swing.JDialog {
                TabRawat.setSelectedIndex(1);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2136,10 +2136,12 @@ public final class RMPenilaianTambahanGeriatri extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

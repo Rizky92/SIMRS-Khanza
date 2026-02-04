@@ -404,7 +404,7 @@ public final class TokoCariJenis extends javax.swing.JDialog {
     public void isCek(){
         BtnTambah.setEnabled(akses.gettoko_jenis());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -430,10 +430,12 @@ public final class TokoCariJenis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -205,7 +205,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
                 }
             });
         }
-        
+
         ChkInput.setSelected(false);
         isForm();
 
@@ -1777,10 +1777,10 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1791,15 +1791,15 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
         }
-        petugas.setVisible(true); 
+        petugas.setVisible(true);
     }//GEN-LAST:event_BtnPetugasActionPerformed
 
     private void BtnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPetugasKeyPressed
@@ -1858,10 +1858,10 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(sekolah.getTable().getSelectedRow()!= -1){                   
+                if(sekolah.getTable().getSelectedRow()!= -1){
                     KdAsalSekolah.setText(sekolah.getTable().getValueAt(sekolah.getTable().getSelectedRow(),0).toString());
                     NmAsalSekolah.setText(sekolah.getTable().getValueAt(sekolah.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 btnAsalSekolah.requestFocus();
             }
             @Override
@@ -2620,10 +2620,12 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

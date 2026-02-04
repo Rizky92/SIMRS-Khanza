@@ -644,7 +644,7 @@ public class K3RSJenisPekerjaan extends javax.swing.JDialog {
        BtnHapus.setEnabled(akses.getjenis_pekerjaan_k3rs());
        BtnEdit.setEnabled(akses.getjenis_pekerjaan_k3rs());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -670,10 +670,12 @@ public class K3RSJenisPekerjaan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

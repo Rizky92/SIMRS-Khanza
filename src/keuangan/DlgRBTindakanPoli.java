@@ -80,7 +80,7 @@ public class DlgRBTindakanPoli extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         kdpoli.setDocument(new batasInput((byte)8).getKata(kdpoli));
-                
+
         try {
             pspoli=koneksi.prepareStatement("select kd_poli,nm_poli from poliklinik where  kd_poli like ?");
             psdokter=koneksi.prepareStatement(
@@ -531,7 +531,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     kdpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                     nmpoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->prosesCari());
-                }    
+                }
                 kdpoli.requestFocus();
             }
             @Override
@@ -579,33 +579,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 public void windowClosed(WindowEvent e) {
                     if(penjab.getTable().getSelectedRow()!= -1){
                         pilihancarabayar=(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
-                    }     
+                    }
                     runBackground(() ->prosesCari3());
                     penjab=null;
                 }
-            }); 
+            });
 
             penjab.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         penjab.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             penjab.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (penjab == null) return;
         if (!penjab.isVisible()) {
             penjab.emptTeks();
             penjab.isCek();
-        }  
+        }
         if (penjab.isVisible()) {
             penjab.toFront();
             return;
-        }    
+        }
         penjab.setVisible(true);
     }//GEN-LAST:event_ppTampilkanSeleksiBtnPrintActionPerformed
 
@@ -657,10 +657,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
-    private void prosesCari() {            
-        try{   
-           Valid.tabelKosong(tabMode); 
-           pspoli.setString(1,"%"+kdpoli.getText()+"%"); 
+    private void prosesCari() {
+        try{
+           Valid.tabelKosong(tabMode);
+           pspoli.setString(1,"%"+kdpoli.getText()+"%");
            rspoli=pspoli.executeQuery();
            i=1;
            ttlbiaya=0;
@@ -797,11 +797,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Catatan  "+e);
         }
     }
-    
-    private void prosesCari2() {            
-        try{ 
-           Valid.tabelKosong(tabMode); 
-           pspoli.setString(1,"%"+kdpoli.getText()+"%"); 
+
+    private void prosesCari2() {
+        try{
+           Valid.tabelKosong(tabMode);
+           pspoli.setString(1,"%"+kdpoli.getText()+"%");
            rspoli=pspoli.executeQuery();
            i=1;
            ttlbiaya=0;
@@ -1261,10 +1261,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -145,7 +145,7 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         try {
             aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
             DEPOAKTIFOBAT = koneksiDB.DEPOAKTIFOBAT();
@@ -1120,9 +1120,9 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
                     (nmkategori.getText().trim().equals("")?"":"and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText().trim()+"%' ")+
                     (nmgolongan.getText().trim().equals("")?"":"and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText().trim()+"%' ")+
                     (TCari.getText().trim().equals("")?"":"and (mutasibarang.kd_bangsaldari like '%"+TCari.getText().trim()+"%' or bangsaldari.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
-                    "mutasibarang.kd_bangsalke like '%"+TCari.getText().trim()+"%' or bangsalke.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+ 
-                    "mutasibarang.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+ 
-                    "mutasibarang.no_batch like '%"+TCari.getText().trim()+"%' or mutasibarang.no_faktur like '%"+TCari.getText().trim()+"%' or "+ 
+                    "mutasibarang.kd_bangsalke like '%"+TCari.getText().trim()+"%' or bangsalke.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
+                    "mutasibarang.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                    "mutasibarang.no_batch like '%"+TCari.getText().trim()+"%' or mutasibarang.no_faktur like '%"+TCari.getText().trim()+"%' or "+
                     "mutasibarang.tanggal like '%"+TCari.getText().trim()+"%' or mutasibarang.keterangan like '%"+TCari.getText().trim()+"%') ");
             }
 
@@ -1252,7 +1252,7 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
                     kdgolongan.setText(golongan.getTable().getValueAt(golongan.getTable().getSelectedRow(), 0).toString());
                     nmgolongan.setText(golongan.getTable().getValueAt(golongan.getTable().getSelectedRow(), 1).toString());
                 }
-                
+
                 TCari.requestFocus();
             }
 
@@ -1500,9 +1500,9 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
                     (nmkategori.getText().trim().equals("")?"":"and concat(databarang.kode_kategori,kategori_barang.nama) like '%"+kdkategori.getText()+nmkategori.getText().trim()+"%' ")+
                     (nmgolongan.getText().trim().equals("")?"":"and concat(databarang.kode_golongan,golongan_barang.nama) like '%"+kdgolongan.getText()+nmgolongan.getText().trim()+"%' ")+
                     (TCari.getText().trim().equals("")?"":"and (mutasibarang.kd_bangsaldari like '%"+TCari.getText().trim()+"%' or bangsaldari.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
-                    "mutasibarang.kd_bangsalke like '%"+TCari.getText().trim()+"%' or bangsalke.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+ 
-                    "mutasibarang.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+ 
-                    "mutasibarang.no_batch like '%"+TCari.getText().trim()+"%' or mutasibarang.no_faktur like '%"+TCari.getText().trim()+"%' or "+ 
+                    "mutasibarang.kd_bangsalke like '%"+TCari.getText().trim()+"%' or bangsalke.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
+                    "mutasibarang.kode_brng like '%"+TCari.getText().trim()+"%' or databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                    "mutasibarang.no_batch like '%"+TCari.getText().trim()+"%' or mutasibarang.no_faktur like '%"+TCari.getText().trim()+"%' or "+
                     "mutasibarang.tanggal like '%"+TCari.getText().trim()+"%' or mutasibarang.keterangan like '%"+TCari.getText().trim()+"%') ")+order);
             }
 
@@ -1562,17 +1562,17 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
                 })==true){
                 if(aktifkanbatch.equals("yes")){
                     Trackobat.catatRiwayat(kdbarang.getText(),Valid.SetAngka(jumlah.getText()),0,"Mutasi",akses.getkode(),kddari.getText(),"Hapus",nobatch.getText(),nofaktur.getText(),Keterangan+", dari "+nmdari.getText()+" ke "+nmke.getText());
-                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kddari.getText()+"','"+jumlah.getText()+"','"+nobatch.getText()+"','"+nofaktur.getText()+"'", 
+                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kddari.getText()+"','"+jumlah.getText()+"','"+nobatch.getText()+"','"+nofaktur.getText()+"'",
                                      "stok=stok+"+jumlah.getText()+"","kode_brng='"+kdbarang.getText()+"' and kd_bangsal='"+kddari.getText()+"' and no_batch='"+nobatch.getText()+"' and no_faktur='"+nofaktur.getText()+"'");
                     Trackobat.catatRiwayat(kdbarang.getText(),0,Valid.SetAngka(jumlah.getText()),"Mutasi",akses.getkode(),kdke.getText(),"Hapus",nobatch.getText(),nofaktur.getText(),Keterangan.getText()+", dari "+nmdari.getText()+" ke "+nmke.getText());
-                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kdke.getText()+"','-"+jumlah.getText()+"','"+nobatch.getText()+"','"+nofaktur.getText()+"'", 
+                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kdke.getText()+"','-"+jumlah.getText()+"','"+nobatch.getText()+"','"+nofaktur.getText()+"'",
                                      "stok=stok-"+jumlah.getText()+"","kode_brng='"+kdbarang.getText()+"' and kd_bangsal='"+kdke.getText()+"' and no_batch='"+nobatch.getText()+"' and no_faktur='"+nofaktur.getText()+"'");
                 }else{
                     Trackobat.catatRiwayat(kdbarang.getText(),Valid.SetAngka(jumlah.getText()),0,"Mutasi",akses.getkode(),kddari.getText(),"Hapus","","",Keterangan.getText()+", dari "+nmdari.getText()+" ke "+nmke.getText());
-                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kddari.getText()+"','"+jumlah.getText()+"','',''", 
+                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kddari.getText()+"','"+jumlah.getText()+"','',''",
                                      "stok=stok+"+jumlah.getText()+"","kode_brng='"+kdbarang.getText()+"' and kd_bangsal='"+kddari.getText()+"' and no_batch='' and no_faktur=''");
                     Trackobat.catatRiwayat(kdbarang.getText(),0,Valid.SetAngka(jumlah.getText()),"Mutasi",akses.getkode(),kdke.getText(),"Hapus","","",Keterangan.getText()+", dari "+nmdari.getText()+" ke "+nmke.getText());
-                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kdke.getText()+"','-"+jumlah.getText()+"','',''", 
+                    Sequel.menyimpan("gudangbarang","'"+kdbarang.getText()+"','"+kdke.getText()+"','-"+jumlah.getText()+"','',''",
                                      "stok=stok-"+jumlah.getText()+"","kode_brng='"+kdbarang.getText()+"' and kd_bangsal='"+kdke.getText()+"' and no_batch='' and no_faktur=''");
                 }
             }else{
@@ -1584,13 +1584,13 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
             }else{
                 JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 Sequel.RollBack();
-            } 
+            }
             Sequel.AutoComitTrue();
             if(sukses==true){
                 LTotalMutasi.setText(""+Valid.SetAngka(nilaitotal-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),8).toString())));
                 tabMode.removeRow(tbKamar.getSelectedRow());
                 LCount.setText(""+tabMode.getRowCount());
-            } 
+            }
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih data untuk menghapus..!!");
         }
@@ -1621,10 +1621,12 @@ public final class DlgPindahGudang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -138,8 +138,8 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                     }
                 }
             });
-        }  
-        
+        }
+
         Harga.getDocument().addDocumentListener(new DocumentListener() {
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -647,7 +647,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
                     kdpegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     nmpegawai.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdpegawai.requestFocus();
             }
             @Override
@@ -658,8 +658,8 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
             public void windowActivated(WindowEvent e) {pegawai.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         pegawai.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -922,7 +922,7 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
             Total.setText(Valid.SetAngka(Double.parseDouble(Harga.getText())*Double.parseDouble(Jumlah.getText())));
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -948,10 +948,12 @@ public final class KeuanganPersetujuanPengajuanBiaya extends javax.swing.JDialog
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

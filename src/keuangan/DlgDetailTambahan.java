@@ -72,7 +72,7 @@ public class DlgDetailTambahan extends javax.swing.JDialog {
                 column.setPreferredWidth(100);
             }
         }
-        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());   
+        tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
     }
 
 
@@ -347,7 +347,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void prosesCari() {
         try {
-            Valid.tabelKosong(tabMode);   
+            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement("select reg_periksa.tgl_registrasi from reg_periksa inner join tambahan_biaya on reg_periksa.no_rawat=tambahan_biaya.no_rawat where reg_periksa.tgl_registrasi between ? and ? group by reg_periksa.tgl_registrasi");
             try {
                 ps.setString(1,Valid.SetTgl(TglBeli1.getSelectedItem()+""));
@@ -361,7 +361,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     try{
                         pspasien.setString(1,rs.getString("tgl_registrasi"));
                         rspasien=pspasien.executeQuery();
-                        while(rspasien.next()){      
+                        while(rspasien.next()){
                             pstambahan=koneksi.prepareStatement("select nama_biaya,besar_biaya from tambahan_biaya where no_rawat=?");
                             try{
                                 pstambahan.setString(1,rspasien.getString("no_rawat"));
@@ -375,7 +375,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     }
                                     jumlah=jumlah+rstambahan.getDouble("besar_biaya");
                                     a++;
-                                } 
+                                }
                             }catch (Exception eg) {
                                 System.out.println(eg);
                             }finally{
@@ -396,12 +396,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(pspasien!=null){
                             pspasien.close();
                         }
-                    } 
+                    }
                     i++;
                 }
                 if(jumlah>0){
                     tabMode.addRow(new Object[]{">>","Total :","","",jumlah});
-                }  
+                }
             } catch (SQLException e) {
                 System.out.println(e);
             } finally{
@@ -411,12 +411,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }                     
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -442,10 +442,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

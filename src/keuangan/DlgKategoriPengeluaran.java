@@ -110,7 +110,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
 
@@ -716,17 +716,17 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgKategoriPengeluaran")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){  
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(pilihan==1){
                             KdAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             NmAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
-                            KdAkun.requestFocus();                       
+                            KdAkun.requestFocus();
                         }else if(pilihan==2){
                             KdKontraAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             NmKontraAKun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
-                            KdKontraAkun.requestFocus();                               
-                        }                         
-                    }                 
+                            KdKontraAkun.requestFocus();
+                        }
+                    }
                 }
             }
             @Override
@@ -738,7 +738,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -752,7 +752,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -799,17 +799,17 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgKategoriPengeluaran")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){  
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(pilihan==1){
                             KdAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             NmAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
-                            KdAkun.requestFocus();                       
+                            KdAkun.requestFocus();
                         }else if(pilihan==2){
                             KdKontraAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             NmKontraAKun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
-                            KdKontraAkun.requestFocus();                               
-                        }                         
-                    }                 
+                            KdKontraAkun.requestFocus();
+                        }
+                    }
                 }
             }
             @Override
@@ -821,7 +821,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -835,7 +835,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -904,7 +904,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     akun=Sequel.cariIsi("select rekening.nm_rek from rekening where rekening.kd_rek=?",rs.getString(3));
@@ -970,7 +970,7 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getkategori_pengeluaran_harian());
         BtnPrint.setEnabled(akses.getkategori_pengeluaran_harian());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -996,10 +996,12 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

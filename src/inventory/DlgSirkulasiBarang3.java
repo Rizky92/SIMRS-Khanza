@@ -168,8 +168,8 @@ public class DlgSirkulasiBarang3 extends javax.swing.JDialog {
                     }
                 }
             });
-        }   
-        
+        }
+
         try {
             aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
         } catch (Exception e) {
@@ -181,7 +181,7 @@ public class DlgSirkulasiBarang3 extends javax.swing.JDialog {
         } catch (Exception e) {
             hppfarmasi="dasar";
         }
-    }    
+    }
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -948,7 +948,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if (golongan.getTable().getSelectedRow() != -1) {
                     nmgolongan.setText(golongan.getTable().getValueAt(golongan.getTable().getSelectedRow(), 1).toString());
                 }
-                
+
                 TCari.requestFocus();
             }
 
@@ -1980,10 +1980,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

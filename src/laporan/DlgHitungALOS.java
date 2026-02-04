@@ -128,7 +128,7 @@ public final class DlgHitungALOS extends javax.swing.JDialog {
         }
 
         Tabel2.setDefaultRenderer(Object.class, new WarnaTable());
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -603,11 +603,11 @@ public final class DlgHitungALOS extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){   
-                    TKd.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());  
-                    Kamar.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());  
+                if(ruang.getTable().getSelectedRow()!= -1){
+                    TKd.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
+                    Kamar.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
                     Kamar.requestFocus();
-                }                      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -853,7 +853,7 @@ public final class DlgHitungALOS extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -879,10 +879,12 @@ public final class DlgHitungALOS extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

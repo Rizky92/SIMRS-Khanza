@@ -1551,11 +1551,13 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 
     private void tampilDetailTemplate() {
         if(tabMode.getRowCount()!=0){

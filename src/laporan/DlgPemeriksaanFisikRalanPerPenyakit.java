@@ -319,10 +319,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -397,7 +397,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void prosesCari() {
         try {
             StringBuilder htmlContent = new StringBuilder();
-            htmlContent.append("<tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'>NAMA PASIEN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>NO.KTP</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>ICD X</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TINGGI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>BERAT</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>L.P.</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TENSI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>TEMPAT LAHIR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TANGGAL LAHIR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>PEKERJAAN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='19%'>ALAMAT</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>NO.RM</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>REGISTRASI</td></tr>"); 
+            htmlContent.append("<tr class='isi'><td valign='middle' bgcolor='#FFFAFA' align='center' width='15%'>NAMA PASIEN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>NO.KTP</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>ICD X</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TINGGI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>BERAT</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>L.P.</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TENSI</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='8%'>TEMPAT LAHIR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>TANGGAL LAHIR</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>PEKERJAAN</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='19%'>ALAMAT</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>NO.RM</td><td valign='middle' bgcolor='#FFFAFA' align='center' width='5%'>REGISTRASI</td></tr>");
             ps=koneksi.prepareStatement(
                     "select pasien.nm_pasien,pasien.no_ktp,pemeriksaan_ralan.tinggi,pemeriksaan_ralan.berat,pemeriksaan_ralan.lingkar_perut,"+
                     "pemeriksaan_ralan.tensi,pasien.tmp_lahir,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab)as alamat,"+
@@ -416,7 +416,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 ps.setString(3,kdpenyakit.getText());
                 rs=ps.executeQuery();
                 while(rs.next()){
-                    htmlContent.append("<tr class='isi'><td align='left'>").append(rs.getString("nm_pasien")).append("</td><td align='center'>").append(rs.getString("no_ktp")).append("</td><td align='center'>").append(kdpenyakit.getText()).append("</td><td align='center'>").append(rs.getString("tinggi")).append("</td><td align='center'>").append(rs.getString("berat")).append("</td><td align='center'>").append(rs.getString("lingkar_perut")).append("</td><td align='center'>").append(rs.getString("tensi")).append("</td><td align='center'>").append(rs.getString("tmp_lahir")).append("</td><td align='center'>").append(rs.getString("tgl_lahir")).append("</td><td align='center'>").append(rs.getString("pekerjaan")).append("</td><td align='left'>").append(rs.getString("alamat")).append("</td><td align='center'>").append(rs.getString("no_rkm_medis")).append("</td><td align='center'>").append(rs.getString("tgl_registrasi")).append("</td></tr>"); 
+                    htmlContent.append("<tr class='isi'><td align='left'>").append(rs.getString("nm_pasien")).append("</td><td align='center'>").append(rs.getString("no_ktp")).append("</td><td align='center'>").append(kdpenyakit.getText()).append("</td><td align='center'>").append(rs.getString("tinggi")).append("</td><td align='center'>").append(rs.getString("berat")).append("</td><td align='center'>").append(rs.getString("lingkar_perut")).append("</td><td align='center'>").append(rs.getString("tensi")).append("</td><td align='center'>").append(rs.getString("tmp_lahir")).append("</td><td align='center'>").append(rs.getString("tgl_lahir")).append("</td><td align='center'>").append(rs.getString("pekerjaan")).append("</td><td align='left'>").append(rs.getString("alamat")).append("</td><td align='center'>").append(rs.getString("no_rkm_medis")).append("</td><td align='center'>").append(rs.getString("tgl_registrasi")).append("</td></tr>");
                 }
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
@@ -437,7 +437,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             htmlContent=null;
         } catch (Exception e) {
             System.out.println("Notif : "+e);
-        } 
+        }
     }
 
     public void isCek(){
@@ -469,10 +469,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

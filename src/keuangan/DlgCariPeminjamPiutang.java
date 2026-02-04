@@ -55,8 +55,8 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
-    
+
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -468,7 +468,7 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
     public void onCari(){
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -494,10 +494,12 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

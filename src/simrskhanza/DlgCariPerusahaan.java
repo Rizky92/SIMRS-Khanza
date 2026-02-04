@@ -473,7 +473,7 @@ public final class DlgCariPerusahaan extends javax.swing.JDialog {
     public void onCari(){
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -499,10 +499,12 @@ public final class DlgCariPerusahaan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

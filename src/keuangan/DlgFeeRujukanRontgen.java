@@ -87,8 +87,8 @@ public class DlgFeeRujukanRontgen extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         kddokter.setDocument(new batasInput((byte)10).getKata(kddokter));
-                
-        try {        
+
+        try {
             pstanggal=koneksi.prepareStatement(
                     "select periksa_radiologi.tgl_periksa from periksa_radiologi "+
                     "where periksa_radiologi.dokter_perujuk=? and "+
@@ -408,7 +408,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->prosesCari());
-                }   
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -594,10 +594,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -55,7 +55,7 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
     private JsonNode response;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-        
+
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -75,7 +75,7 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
         //tbKamar.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbKamar.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         for (int i = 0; i < 3; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
@@ -86,7 +86,7 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
                 column.setPreferredWidth(250);
             }
         }
-        tbKamar.setDefaultRenderer(Object.class, new WarnaTable()); 
+        tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         SEP.setDocument(new batasInput((byte)60).getKata(SEP));
         try {
             URL = koneksiDB.URLAPIBPJS()+"/SEP/";
@@ -95,8 +95,8 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
         }
 
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -238,23 +238,23 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
                                 tabMode.getValueAt(r,1).toString()+"','"+
-                                tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs"); 
+                                tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            Map<String, Object> param = new HashMap<>();                 
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariBPJSDetailSEP.jasper","report","[ Detail SEP Peserta ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -431,8 +431,8 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
                     "","   Nomor Surat",": "+response.path("kontrol").path("noSurat").asText()
                 });
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -440,8 +440,8 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
                 dispose();
             }
         }
-    }    
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -467,10 +467,12 @@ public final class BPJSCekDetailSEP2 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

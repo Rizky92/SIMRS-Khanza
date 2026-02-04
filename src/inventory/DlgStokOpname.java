@@ -1018,8 +1018,8 @@ public final class DlgStokOpname extends javax.swing.JDialog {
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
         if(Valid.hapusTabletf(tabMode,Kdbar,"opname","kd_bangsal='"+kdgudang.getText()+"' and tanggal='"+Tanggal.getSelectedItem()+"' and no_batch='"+nobatch.getText()+"' and no_faktur='"+nofaktur.getText()+"' and kode_brng")==true){
             totalreal=totalreal-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),9).toString().replaceAll(",",""));
-            total=total-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString().replaceAll(",",""));       
-            totallebih=totallebih-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),11).toString().replaceAll(",",""));        
+            total=total-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString().replaceAll(",",""));
+            totallebih=totallebih-Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),11).toString().replaceAll(",",""));
             LTotalReal.setText(df2.format(totalreal));
             LTotalHilang.setText(df2.format(total));
             LTotalLebih.setText(df2.format(totallebih));
@@ -1709,10 +1709,12 @@ public final class DlgStokOpname extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

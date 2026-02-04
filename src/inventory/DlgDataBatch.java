@@ -1575,10 +1575,10 @@ public class DlgDataBatch extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                    if(barang.getTable().getSelectedRow()!= -1){                   
-                        Kd.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                    if(barang.getTable().getSelectedRow()!= -1){
+                        Kd.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                         Nm.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                    }    
+                    }
                     Kd.requestFocus();
             }
             @Override
@@ -1590,7 +1590,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1598,7 +1598,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -1998,10 +1998,12 @@ public class DlgDataBatch extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

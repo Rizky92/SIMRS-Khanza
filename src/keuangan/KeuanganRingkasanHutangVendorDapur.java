@@ -557,10 +557,12 @@ public final class KeuanganRingkasanHutangVendorDapur extends javax.swing.JDialo
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

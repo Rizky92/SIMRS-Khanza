@@ -72,7 +72,7 @@ public class DlgPembayaranPerPoli extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -94,7 +94,7 @@ public class DlgPembayaranPerPoli extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }
 
 
@@ -422,7 +422,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             try {
                 if(!TCari.getText().trim().equals("")){
                     pspoli.setString(1,"%"+TCari.getText().trim()+"%");
-                } 
+                }
                 rspoli=pspoli.executeQuery();
                 i=1;
                 ttljmlpas=0;
@@ -520,7 +520,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Catatan  "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -546,10 +546,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -162,8 +162,8 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
             });
         }
         ChkInput.setSelected(false);
-        isForm(); 
-        
+        isForm();
+
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             URL = prop.getProperty("URLAPISIRS");
@@ -988,10 +988,10 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                   
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     KdKamar.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     NmKamar.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 isCariKetersediaan();
                 KdKamar.requestFocus();
             }
@@ -1003,7 +1003,7 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });  
+        });
         bangsal.emptTeks();
         bangsal.isCek();
         bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1228,7 +1228,7 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
             TersediaMenunggu.setText(Sequel.cariIsi("select count(kd_kamar) from kamar where statusdata='1' and kelas='"+Kelas.getSelectedItem()+"' and status='DIBERSIHKAN' and kd_bangsal=?",KdKamar.getText()));
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1254,10 +1254,12 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

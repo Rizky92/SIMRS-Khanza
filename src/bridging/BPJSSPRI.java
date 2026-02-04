@@ -156,7 +156,7 @@ public class BPJSSPRI extends javax.swing.JDialog {
 
         ChkInput.setSelected(false);
         isForm();
-        
+
         try {
             user=akses.getkode().replace(" ","").substring(0,9);
         } catch (Exception e) {
@@ -1297,9 +1297,9 @@ public class BPJSSPRI extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     Diagnosa.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),2).toString());
-                }                      
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1310,7 +1310,7 @@ public class BPJSSPRI extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         penyakit.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1322,7 +1322,7 @@ public class BPJSSPRI extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         penyakit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penyakit.setLocationRelativeTo(internalFrame1);
         penyakit.setVisible(true);
@@ -1705,10 +1705,12 @@ public class BPJSSPRI extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

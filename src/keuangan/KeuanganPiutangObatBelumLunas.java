@@ -720,7 +720,7 @@ public final class KeuanganPiutangObatBelumLunas extends javax.swing.JDialog {
                 total=0;
                 LCount.setText("0");
                 LCount1.setText("0");
-                for(i=0;i<tbBangsal.getRowCount();i++){  
+                for(i=0;i<tbBangsal.getRowCount();i++){
                     if(tbBangsal.getValueAt(i,0).toString().equals("true")){
                         tabMode.removeRow(i);
                         i--;
@@ -1104,8 +1104,8 @@ public final class KeuanganPiutangObatBelumLunas extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+ex);
             }
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1131,10 +1131,12 @@ public final class KeuanganPiutangObatBelumLunas extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

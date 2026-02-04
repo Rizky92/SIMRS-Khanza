@@ -217,7 +217,7 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
         }
 
         TCari.requestFocus();
-        
+
         jam();
 
         try {
@@ -917,10 +917,10 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(bangsal.getTable().getSelectedRow()!= -1){                   
+            if(bangsal.getTable().getSelectedRow()!= -1){
                 kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                 nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             kdgudang.requestFocus();
             runBackground(() ->tampil());
         }
@@ -985,9 +985,9 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         public void windowClosing(WindowEvent e) {}
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(aturan.getTable().getSelectedRow()!= -1){  
+                            if(aturan.getTable().getSelectedRow()!= -1){
                                 tbDokter.setValueAt(aturan.getTable().getValueAt(aturan.getTable().getSelectedRow(),0).toString(),tbDokter.getSelectedRow(),12);
-                            }   
+                            }
                             tbDokter.requestFocus();
                         }
                         @Override
@@ -3601,10 +3601,12 @@ private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 
 }

@@ -407,7 +407,7 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 i=1;
                 ttljan=0;ttlfeb=0;ttlmar=0;ttlapr=0;ttlmei=0;ttljun=0;ttljul=0;ttlagu=0;ttlsep=0;ttlokt=0;ttlnov=0;ttldes=0;
@@ -773,10 +773,12 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

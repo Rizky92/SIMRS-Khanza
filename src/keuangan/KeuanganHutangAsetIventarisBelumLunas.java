@@ -1991,9 +1991,11 @@ public final class KeuanganHutangAsetIventarisBelumLunas extends javax.swing.JDi
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

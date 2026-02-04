@@ -131,7 +131,7 @@ public class DapurReturBeli extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }
 
     /** This method is called from within the constructor to
@@ -994,10 +994,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

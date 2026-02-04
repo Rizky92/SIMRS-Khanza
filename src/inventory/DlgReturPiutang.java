@@ -767,7 +767,7 @@ public class DlgReturPiutang extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        DlgCariReturPiutang form=new DlgCariReturPiutang(null,false); 
+        DlgCariReturPiutang form=new DlgCariReturPiutang(null,false);
         form.isCek();
         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         form.setLocationRelativeTo(internalFrame1);
@@ -799,10 +799,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){                   
+                if(petugas.getTable().getSelectedRow()!= -1){
                     Kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     Nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Kdptg.requestFocus();
             }
             @Override
@@ -983,10 +983,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(member.getTable().getSelectedRow()!= -1){                   
+                if(member.getTable().getSelectedRow()!= -1){
                     kdmem.setText(member.getTable().getValueAt(member.getTable().getSelectedRow(),1).toString());
                     nmmem.setText(member.getTable().getValueAt(member.getTable().getSelectedRow(),2).toString());
-                } 
+                }
                 kdmem.requestFocus();
             }
             @Override
@@ -998,7 +998,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         member.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1010,7 +1010,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         member.emptTeks();
         member.isCek();
         member.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
@@ -1063,10 +1063,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(bangsal.getTable().getSelectedRow()!= -1){                   
+            if(bangsal.getTable().getSelectedRow()!= -1){
                 kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                 nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-            } 
+            }
             kdgudang.requestFocus();
         }
         @Override
@@ -1117,39 +1117,39 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    Kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    Kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
                     Satuanbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),6).toString());
                     if(Jenisjual.getSelectedItem().equals("Jual Bebas")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),20).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),20).toString());
                     }else if(Jenisjual.getSelectedItem().equals("Karyawan")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),21).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),21).toString());
                     }else if(Jenisjual.getSelectedItem().equals("Beli Luar")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),19).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),19).toString());
                     }else if(Jenisjual.getSelectedItem().equals("Rawat Jalan")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),12).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),12).toString());
                     }else if(Jenisjual.getSelectedItem().equals("Kelas 1")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),13).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),13).toString());
                     }else if(Jenisjual.getSelectedItem().equals("Kelas 2")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),14).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),14).toString());
                     }else if(Jenisjual.getSelectedItem().equals("Kelas 3")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),15).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),15).toString());
                     }else if(Jenisjual.getSelectedItem().equals("Utama/BPJS")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),16).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),16).toString());
                     }else if(Jenisjual.getSelectedItem().equals("VIP")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),17).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),17).toString());
                     }else if(Jenisjual.getSelectedItem().equals("VVIP")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),18).toString()); 
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),18).toString());
                     }else if(Jenisjual.getSelectedItem().equals("Harga Beli")){
-                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),11).toString()); 
-                    }        
+                           Hargaretur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),11).toString());
+                    }
 
                     if(aktifkanbatch.equals("yes")){
                         NoBatch.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),32).toString());
                         NoFaktur.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),33).toString());
                     }
-                }                
+                }
                 Kdbar.requestFocus();
             }
             @Override
@@ -1434,10 +1434,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

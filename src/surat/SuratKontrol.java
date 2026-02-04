@@ -1108,7 +1108,7 @@ public class SuratKontrol extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(dokter.getTable().getSelectedRow()!= -1){                    
+                    if(dokter.getTable().getSelectedRow()!= -1){
                         KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                         NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         isNomer();
@@ -1137,14 +1137,14 @@ public class SuratKontrol extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(dokter2.getTable().getSelectedRow()!= -1){                    
+                    if(dokter2.getTable().getSelectedRow()!= -1){
                         KdDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),0).toString());
                         NmDokter.setText(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),1).toString());
                         if(JADWALDOKTERDIREGISTRASI.equals("aktif")){
                             kuota=Integer.parseInt(dokter2.getTable().getValueAt(dokter2.getTable().getSelectedRow(),13).toString());
                         }
-                        isNomer();                        
-                    }      
+                        isNomer();
+                    }
                 }
                 @Override
                 public void windowIconified(WindowEvent e) {}
@@ -1173,7 +1173,7 @@ public class SuratKontrol extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(dokter.getTable().getSelectedRow()!= -1){                    
+                if(dokter.getTable().getSelectedRow()!= -1){
                     KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     NmDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                     isNomer();
@@ -1445,11 +1445,11 @@ public class SuratKontrol extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(poli.getTable().getSelectedRow()!= -1){                    
+                        if(poli.getTable().getSelectedRow()!= -1){
                             KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                             NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                             isNomer();
-                        }   
+                        }
                     }
                     @Override
                     public void windowIconified(WindowEvent e) {}
@@ -1473,11 +1473,11 @@ public class SuratKontrol extends javax.swing.JDialog {
                     public void windowClosing(WindowEvent e) {}
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(poli2.getTable().getSelectedRow()!= -1){                    
+                        if(poli2.getTable().getSelectedRow()!= -1){
                             KdPoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),0).toString());
                             NmPoli.setText(poli2.getTable().getValueAt(poli2.getTable().getSelectedRow(),1).toString());
                             isNomer();
-                        }    
+                        }
                     }
                     @Override
                     public void windowIconified(WindowEvent e) {}
@@ -1487,7 +1487,7 @@ public class SuratKontrol extends javax.swing.JDialog {
                     public void windowActivated(WindowEvent e) {}
                     @Override
                     public void windowDeactivated(WindowEvent e) {}
-                }); 
+                });
                 poli2.isCek();
                 poli2.SetHari(TanggalPeriksa.getDate());
                 poli2.tampil3();
@@ -1504,11 +1504,11 @@ public class SuratKontrol extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(poli.getTable().getSelectedRow()!= -1){                    
+                    if(poli.getTable().getSelectedRow()!= -1){
                         KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),0).toString());
                         NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
                         isNomer();
-                    }   
+                    }
                 }
                 @Override
                 public void windowIconified(WindowEvent e) {}
@@ -1598,13 +1598,13 @@ public class SuratKontrol extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if( penyakit.getTable().getSelectedRow()!= -1){ 
+                if( penyakit.getTable().getSelectedRow()!= -1){
                     if((penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString()+" - "+penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString()).length()<50){
                         Diagnosa.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString()+" - "+penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
                     }else{
                         Diagnosa.setText((penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString()+" - "+penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString()).substring(0,50));
-                    }   
-                }  
+                    }
+                }
                 Diagnosa.requestFocus();
             }
             @Override
@@ -1724,7 +1724,7 @@ public class SuratKontrol extends javax.swing.JDialog {
         } else if (R3.isSelected()) {
             status = "skdp_bpjs.status != 'Menunggu' and skdp_bpjs.tanggal_rujukan between ? and ? ";
         }
-        
+
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select skdp_bpjs.tahun, skdp_bpjs.no_rkm_medis, pasien.nm_pasien, skdp_bpjs.diagnosa, skdp_bpjs.terapi, skdp_bpjs.alasan1, skdp_bpjs.alasan2, skdp_bpjs.rtl1, " +
             "skdp_bpjs.rtl2, date(skdp_bpjs.tanggal_datang) as tanggal_datang, skdp_bpjs.tanggal_rujukan, skdp_bpjs.no_antrian, skdp_bpjs.kd_dokter, dokter.nm_dokter, " +
@@ -1844,7 +1844,7 @@ public class SuratKontrol extends javax.swing.JDialog {
         }
         Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(skdp_bpjs.no_antrian,6),signed)),0) from skdp_bpjs where skdp_bpjs.tahun='"+TanggalPeriksa.getSelectedItem().toString().substring(6,10)+"' ","",6,NoAntrian);
     }
-    
+
     private void isNomorBooking() {
         switch (URUTNOREG) {
             case "poli":
@@ -2050,7 +2050,7 @@ public class SuratKontrol extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat membuat surat kontrol..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2076,10 +2076,12 @@ public class SuratKontrol extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

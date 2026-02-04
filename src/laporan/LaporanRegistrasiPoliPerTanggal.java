@@ -73,7 +73,7 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
         Valid.LoadTahun(ThnCari);
 
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));  
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -95,10 +95,10 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
     }
-   
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -362,7 +362,7 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        
+
     }//GEN-LAST:event_formWindowOpened
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -582,7 +582,7 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
     private widget.Table tbJadwal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {  
+    private void tampil() {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         Object[] row={"Nama Poli",
             "1("+konversi(Integer.parseInt(ThnCari.getSelectedItem().toString()),Integer.parseInt(BlnCari.getSelectedItem().toString()),1)+")",
@@ -627,13 +627,13 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Object.class, 
+                 java.lang.Object.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, 
+                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
                  java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
              };
              @Override
@@ -642,7 +642,7 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
              }
         };
         tbJadwal.setModel(tabMode);
-        
+
         for (int i = 0; i < 33; i++) {
             TableColumn column = tbJadwal.getColumnModel().getColumn(i);
             if(i==0){
@@ -652,7 +652,7 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
             }
         }
         tbJadwal.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -696,7 +696,7 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
                     h29=Jumlah(ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-29",rs.getString("kd_poli"));
                     h30=Jumlah(ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-30",rs.getString("kd_poli"));
                     h31=Jumlah(ThnCari.getSelectedItem()+"-"+BlnCari.getSelectedItem()+"-31",rs.getString("kd_poli"));
-                    
+
                     tabMode.addRow(new Object[]{
                         rs.getString("nm_poli"),
                         h1,h2,h3,h4,h5,h6,h7,h8,h9,h10,h11,h12,h13,h14,h15,h16,h17,h18,h19,h20,h21,h22,h23,h24,h25,h26,h27,h28,h29,h30,h31,
@@ -720,9 +720,9 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
         this.setCursor(Cursor.getDefaultCursor());
     }
-    
+
     String konversi(int year, int month, int day){
-        dateString = String.format("%d-%d-%d", year, month, day);        
+        dateString = String.format("%d-%d-%d", year, month, day);
         try {
             date = new SimpleDateFormat("yyyy-M-d").parse(dateString);
         } catch (Exception ex) {
@@ -757,7 +757,7 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
         }
         return hari;
     }
-    
+
     private double Jumlah(String tanggal,String kode){
         if(filter.equals("Semua")){
             jml=Sequel.cariIsiAngka("select count(no_rawat) from reg_periksa where kd_poli='"+kode+"' and tgl_registrasi=?",tanggal);
@@ -774,7 +774,7 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
         }
         return jml;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -800,10 +800,12 @@ public class LaporanRegistrasiPoliPerTanggal extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

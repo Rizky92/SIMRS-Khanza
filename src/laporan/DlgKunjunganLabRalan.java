@@ -134,8 +134,8 @@ public final class DlgKunjunganLabRalan extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
 
@@ -1296,10 +1296,12 @@ public final class DlgKunjunganLabRalan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -254,8 +254,8 @@ public final class DlgDataTB extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         try {
             kdwasor = koneksiDB.KABUPATENSITT();
             idrs=koneksiDB.IDSITT();
@@ -2257,11 +2257,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(kelurahan.getTable().getSelectedRow()!= -1){                   
+                    if(kelurahan.getTable().getSelectedRow()!= -1){
                         KdKel.setText(kelurahan.getTable().getValueAt(kelurahan.getTable().getSelectedRow(),1).toString());
                         Kelurahan.setText(kelurahan.getTable().getValueAt(kelurahan.getTable().getSelectedRow(),2).toString().toUpperCase());
                         KdKel.requestFocus();
-                    }                  
+                    }
                 }
                 @Override
                 public void windowIconified(WindowEvent e) {}
@@ -2327,11 +2327,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(kecamatan.getTable().getSelectedRow()!= -1){                   
+                    if(kecamatan.getTable().getSelectedRow()!= -1){
                         KdKec.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),1).toString());
                         Kecamatan.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),2).toString().toUpperCase());
                         KdKec.requestFocus();
-                    }                  
+                    }
                 }
                 @Override
                 public void windowIconified(WindowEvent e) {}
@@ -2371,11 +2371,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(propinsi.getTable().getSelectedRow()!= -1){                   
+                if(propinsi.getTable().getSelectedRow()!= -1){
                     KdProp.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),1).toString());
                     Propinsi.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),2).toString().toUpperCase());
                     KdProp.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -2386,7 +2386,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         propinsi.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2398,7 +2398,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         propinsi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         propinsi.setLocationRelativeTo(internalFrame1);
         propinsi.setVisible(true);
@@ -2439,11 +2439,11 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(kabupaten.getTable().getSelectedRow()!= -1){                   
+                    if(kabupaten.getTable().getSelectedRow()!= -1){
                         KdKab.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),1).toString());
                         Kabupaten.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),2).toString().toUpperCase());
                         KdKab.requestFocus();
-                    }                  
+                    }
                 }
                 @Override
                 public void windowIconified(WindowEvent e) {}
@@ -2466,7 +2466,7 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 }
                 @Override
                 public void keyReleased(KeyEvent e) {}
-            }); 
+            });
             kabupaten.setPropinsi(KdProp.getText(),Propinsi.getText());
             kabupaten.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             kabupaten.setLocationRelativeTo(internalFrame1);
@@ -2810,10 +2810,10 @@ public final class DlgDataTB extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(penyakit.getTable().getSelectedRow()!= -1){                   
+                if(penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     nmpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }     
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -3292,10 +3292,12 @@ public final class DlgDataTB extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

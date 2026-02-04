@@ -998,7 +998,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     pssep.close();
                                 }
                             }
-                        }        
+                        }
                     }else{
                         for(JsonNode list:response.path("klaim")){
                             pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep=?");
@@ -1019,7 +1019,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifGruper").asDouble()),Valid.SetAngka(list.path("biaya").path("byTarifRS").asDouble()),
                                             Valid.SetAngka(list.path("biaya").path("byTopup").asDouble()),Valid.SetAngka(list.path("biaya").path("bySetujui").asDouble()-list.path("biaya").path("byTopup").asDouble()-list.path("biaya").path("byTarifRS").asDouble())
                                         });
-                                    }   
+                                    }
                                 }
                             } catch (Exception e) {
                                 System.out.println("Notif Detail : "+e);
@@ -1167,10 +1167,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

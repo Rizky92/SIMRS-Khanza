@@ -119,7 +119,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
 
         TNoVerifikasi.setDocument(new batasInput((byte)20).getKata(TNoVerifikasi));
         Catatan.setDocument(new batasInput((int)100).getKata(Catatan));
-        
+
         ChkJln.setSelected(true);
         jam();
     }
@@ -671,10 +671,10 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -685,10 +685,10 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -955,7 +955,7 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(labkesling_verifikasi_pengujian_sampel.no_verifikasi,5),signed)),0) from labkesling_verifikasi_pengujian_sampel inner join labkesling_permintaan_pengujian_sampel on labkesling_permintaan_pengujian_sampel.no_permintaan=labkesling_verifikasi_pengujian_sampel.no_permintaan where date_format(labkesling_verifikasi_pengujian_sampel.tanggal,'%Y')='"+TanggalVerifikasi.getSelectedItem().toString().substring(6,10)+"' and labkesling_permintaan_pengujian_sampel.kode_sampel='"+KodeSampel.getText()+"'",KodeSampel.getText()+"/"+TanggalVerifikasi.getSelectedItem().toString().substring(6,10)+"/LHUS/",5,TNoVerifikasi);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -981,10 +981,12 @@ public final class LabKeslingVerifikasiPengujianSampel extends javax.swing.JDial
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

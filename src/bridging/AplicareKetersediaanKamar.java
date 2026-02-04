@@ -163,8 +163,8 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
             });
         }
         ChkInput.setSelected(false);
-        isForm(); 
-        
+        isForm();
+
         try {
             URL = koneksiDB.URLAPIAPLICARE();
             CONSIDAPIAPLICARE=koneksiDB.CONSIDAPIAPLICARE();
@@ -685,14 +685,14 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
             referensi.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(referensi.getTable().getSelectedRow()!= -1){                   
+                    if(referensi.getTable().getSelectedRow()!= -1){
                         KdKelas.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),1).toString());
                         NmKelas.setText(referensi.getTable().getValueAt(referensi.getTable().getSelectedRow(),2).toString());
-                    }     
+                    }
                     KdKamar.requestFocus();
                     referensi=null;
                 }
-            });   
+            });
 
             referensi.getTable().addKeyListener(new KeyAdapter() {
                 @Override
@@ -709,7 +709,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
         if (referensi.isVisible()) {
             referensi.toFront();
             return;
-        }    
+        }
         referensi.setVisible(true);
     }//GEN-LAST:event_btnKelasActionPerformed
 
@@ -1017,25 +1017,25 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
             bangsal.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(bangsal.getTable().getSelectedRow()!= -1){                   
+                    if(bangsal.getTable().getSelectedRow()!= -1){
                         KdKamar.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                         NmKamar.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                    }     
+                    }
                     isCariKetersediaan();
                     KdKamar.requestFocus();
                     bangsal=null;
                 }
-            }); 
-            
+            });
+
             bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             bangsal.setLocationRelativeTo(internalFrame1);
         }
         if (bangsal == null) return;
         if (!bangsal.isVisible()) {
-            bangsal.isCek();    
+            bangsal.isCek();
             bangsal.emptTeks();
         }
-        
+
         if (bangsal.isVisible()) {
             bangsal.toFront();
             return;
@@ -1168,7 +1168,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1255,7 +1255,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
             TersediaPW.setText(Tersedia.getText());
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1281,10 +1281,12 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

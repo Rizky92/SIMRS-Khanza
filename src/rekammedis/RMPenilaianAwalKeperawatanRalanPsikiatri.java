@@ -6419,9 +6419,11 @@ public final class RMPenilaianAwalKeperawatanRalanPsikiatri extends javax.swing.
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -101,8 +101,8 @@ public final class DlgRl37 extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-    }    
+        }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -382,15 +382,15 @@ public final class DlgRl37 extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
-        try{   
-            Valid.tabelKosong(tabMode); 
+    private void tampil(){
+        try{
+            Valid.tabelKosong(tabMode);
             pstindakan=koneksi.prepareStatement(
                 "select jns_perawatan_radiologi.nm_perawatan,count(jns_perawatan_radiologi.nm_perawatan) from periksa_radiologi "+
                 "inner join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw where periksa_radiologi.tgl_periksa between ? and ? "+
                 (TCari.getText().trim().equals("")?"":"and jns_perawatan_radiologi.nm_perawatan like ? ")+"group by jns_perawatan_radiologi.nm_perawatan"
             );
-            try {            
+            try {
                 pstindakan.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 pstindakan.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 if(!TCari.getText().trim().equals("")){
@@ -404,7 +404,7 @@ public final class DlgRl37 extends javax.swing.JDialog {
                         i,rstindakan.getString(1),rstindakan.getInt(2)
                     });
                     ttl=ttl+rstindakan.getInt(2);
-                    i++;                    
+                    i++;
                 }
 
                 if(i>1){
@@ -452,10 +452,12 @@ public final class DlgRl37 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }
