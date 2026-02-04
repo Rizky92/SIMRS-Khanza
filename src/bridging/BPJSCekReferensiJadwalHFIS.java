@@ -880,10 +880,12 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

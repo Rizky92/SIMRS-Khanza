@@ -156,8 +156,8 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
                     }
                 }
             });
-        }  
-        
+        }
+
         ChkJln.setSelected(true);
         jam();
         ChkInput.setSelected(false);
@@ -1112,10 +1112,10 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1126,10 +1126,10 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -1777,7 +1777,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(labkesling_permintaan_pengujian_sampel.no_permintaan,5),signed)),0) from labkesling_permintaan_pengujian_sampel where date_format(labkesling_permintaan_pengujian_sampel.waktu_diterima,'%Y')='"+WaktuDiterima.getSelectedItem().toString().substring(6,10)+"' and labkesling_permintaan_pengujian_sampel.kode_sampel='"+KodeSampel.getText()+"'",KodeSampel.getText()+"/"+WaktuDiterima.getSelectedItem().toString().substring(6,10)+"/PPS/",5,TNoPermintaan);
         }
     }
-    
+
     private void LoadPermintaan(){
         tampil();
         tampil2();
@@ -1808,10 +1808,12 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

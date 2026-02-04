@@ -119,7 +119,7 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
                     }
                 }
             });
-            
+
             User.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -653,10 +653,12 @@ public final class DlgPengembalianDepositPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

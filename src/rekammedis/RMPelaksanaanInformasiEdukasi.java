@@ -58,7 +58,7 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;   
+    private int i=0;
     private String dpjp="";
     private String TANGGALMUNDUR="yes";
     private StringBuilder htmlContent;
@@ -154,7 +154,7 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -1276,10 +1276,10 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){                   
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     NIP.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 NIP.requestFocus();
             }
             @Override
@@ -1290,7 +1290,7 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         pegawai.emptTeks();
         pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pegawai.setLocationRelativeTo(internalFrame1);
@@ -1404,11 +1404,11 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(templateedukasi.getTable().getSelectedRow()!= -1){                   
+                if(templateedukasi.getTable().getSelectedRow()!= -1){
                     Materi.setText(templateedukasi.getTable().getValueAt(templateedukasi.getTable().getSelectedRow(),1).toString());
                     Lama.setText(templateedukasi.getTable().getValueAt(templateedukasi.getTable().getSelectedRow(),2).toString());
                     Metode.setSelectedItem(templateedukasi.getTable().getValueAt(templateedukasi.getTable().getSelectedRow(),3).toString());
-                } 
+                }
                 Materi.requestFocus();
             }
             @Override
@@ -1854,7 +1854,7 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1880,10 +1880,12 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -142,7 +142,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
         }
         ChkInput.setSelected(false);
         isForm();
-        
+
         try {
             aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
         } catch (Exception e) {
@@ -750,12 +750,12 @@ public final class DlgResepPulang extends javax.swing.JDialog {
                 public void windowClosing(WindowEvent e) {}
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(inputresep.getTable().getSelectedRow()!= -1){                   
+                    if(inputresep.getTable().getSelectedRow()!= -1){
                         KdBarang.setText(inputresep.getTable().getValueAt(inputresep.getTable().getSelectedRow(),1).toString());
                         NmBarang.setText(inputresep.getTable().getValueAt(inputresep.getTable().getSelectedRow(),2).toString());
                         Satuan.setText(inputresep.getTable().getValueAt(inputresep.getTable().getSelectedRow(),3).toString());
                         runBackground(() ->tampil());
-                    }    
+                    }
                     KdBarang.requestFocus();
                 }
                 @Override
@@ -962,7 +962,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
                     ps.setString(8,"%"+TCari.getText().trim()+"%");
                     ps.setString(9,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 jumlahtotal=0;
                 while(rs.next()){
@@ -987,7 +987,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1034,7 +1034,7 @@ public final class DlgResepPulang extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getresep_pulang());
         BtnPrint.setEnabled(akses.getresep_pulang());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1060,10 +1060,12 @@ public final class DlgResepPulang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -52,7 +52,7 @@ public final class DlgReturObatPasien extends javax.swing.JDialog {
     private String aktifkanbatch="no";
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
@@ -599,12 +599,12 @@ public final class DlgReturObatPasien extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-    
+
     public void isCek(){
         BtnHapus.setEnabled(akses.getretur_obat_ranap());
         BtnPrint.setEnabled(akses.getretur_obat_ranap());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -630,10 +630,12 @@ public final class DlgReturObatPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

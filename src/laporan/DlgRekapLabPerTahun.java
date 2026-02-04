@@ -392,7 +392,7 @@ public final class DlgRekapLabPerTahun extends javax.swing.JDialog {
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText()+"%");
-                } 
+                }
                 rs=ps.executeQuery();
                 i=1;
                 while(rs.next()){
@@ -487,10 +487,12 @@ public final class DlgRekapLabPerTahun extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -45,10 +45,10 @@ public final class DlgOperasiPerBulan extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;   
+    private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    
+
     /** Creates new form DlgLhtBiaya
      * @param parent
      * @param modal */
@@ -359,9 +359,9 @@ public final class DlgOperasiPerBulan extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){  
-        try { 
-            Valid.tabelKosong(tabMode);  
+    private void tampil(){
+        try {
+            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
                 "select paket_operasi.nm_perawatan,count(paket_operasi.nm_perawatan) from operasi inner join paket_operasi on paket_operasi.kode_paket=operasi.kode_paket "+
                 "where left(operasi.tgl_operasi,4)=? "+(TCari.getText().trim().equals("")?"":"and paket_operasi.nm_perawatan like ? ")+
@@ -432,10 +432,12 @@ public final class DlgOperasiPerBulan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

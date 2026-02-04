@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -56,7 +56,7 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
     private JsonNode response;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-        
+
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -120,17 +120,17 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
                 column.setPreferredWidth(60);
             }
         }
-        
+
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         try {
             link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -281,7 +281,7 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
                                 tabMode.getValueAt(r,1).toString()+"','"+
@@ -299,20 +299,20 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
                                 tabMode.getValueAt(r,13).toString()+"','"+
                                 tabMode.getValueAt(r,14).toString()+"','"+
                                 tabMode.getValueAt(r,15).toString()+"','"+
-                                tabMode.getValueAt(r,16).toString()+"','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs"); 
+                                tabMode.getValueAt(r,16).toString()+"','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariBPJSKlaimJasaRaharja.jasper","report","[ Data Klaim Jasa Raharja ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -370,7 +370,7 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
 	    requestEntity = new HttpEntity(headers);
-            URL = link+"/monitoring/JasaRaharja/JnsPelayanan/2/tglMulai/"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"/tglAkhir/"+Valid.SetTgl(Tanggal2.getSelectedItem()+"");	
+            URL = link+"/monitoring/JasaRaharja/JnsPelayanan/2/tglMulai/"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"/tglAkhir/"+Valid.SetTgl(Tanggal2.getSelectedItem()+"");
             System.out.println("URL : "+URL);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
@@ -387,12 +387,12 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
                             list.path("sep").path("peserta").path("nama").asText(),list.path("jasaRaharja").path("tglKejadian").asText(),list.path("jasaRaharja").path("noRegister").asText(),
                             list.path("jasaRaharja").path("ketStatusDijamin").asText(),list.path("jasaRaharja").path("ketStatusDikirim").asText(),Valid.SetAngka(list.path("jasaRaharja").path("biayaDijamin").asDouble()),
                             Valid.SetAngka(list.path("jasaRaharja").path("plafon").asDouble()),Valid.SetAngka(list.path("jasaRaharja").path("jmlDibayar").asDouble()),list.path("jasaRaharja").path("resultsJasaRaharja").asText(),"Ralan"
-                        });    
+                        });
                         i++;
                     }
-                }                      
-            }  
-            
+                }
+            }
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
 	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
@@ -401,7 +401,7 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
 	    requestEntity = new HttpEntity(headers);
-            URL = link+"/monitoring/JasaRaharja/JnsPelayanan/1/tglMulai/"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"/tglAkhir/"+Valid.SetTgl(Tanggal2.getSelectedItem()+"");	
+            URL = link+"/monitoring/JasaRaharja/JnsPelayanan/1/tglMulai/"+Valid.SetTgl(Tanggal1.getSelectedItem()+"")+"/tglAkhir/"+Valid.SetTgl(Tanggal2.getSelectedItem()+"");
             System.out.println("URL : "+URL);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
@@ -418,19 +418,19 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
                             list.path("sep").path("peserta").path("nama").asText(),list.path("jasaRaharja").path("tglKejadian").asText(),list.path("jasaRaharja").path("noRegister").asText(),
                             list.path("jasaRaharja").path("ketStatusDijamin").asText(),list.path("jasaRaharja").path("ketStatusDikirim").asText(),Valid.SetAngka(list.path("jasaRaharja").path("biayaDijamin").asDouble()),
                             Valid.SetAngka(list.path("jasaRaharja").path("plafon").asDouble()),Valid.SetAngka(list.path("jasaRaharja").path("jmlDibayar").asDouble()),list.path("jasaRaharja").path("resultsJasaRaharja").asText(),"Ranap"
-                        });    
+                        });
                         i++;
                     }
-                }                      
-            } 
+                }
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-    }   
- 
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -456,10 +456,12 @@ public final class BPJSCekKlaimJasaRaharja extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

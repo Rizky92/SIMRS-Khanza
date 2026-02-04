@@ -135,7 +135,7 @@ public final class DapurBarang extends javax.swing.JDialog {
             });
         }
         ChkInput.setSelected(false);
-        isForm();    
+        isForm();
     }
 
 
@@ -797,10 +797,10 @@ public final class DapurBarang extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(satuan.getTable().getSelectedRow()!= -1){                   
-                KodeSatuan.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());                    
+            if(satuan.getTable().getSelectedRow()!= -1){
+                KodeSatuan.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());
                 nama_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             KodeSatuan.requestFocus();
         }
         @Override
@@ -1019,10 +1019,12 @@ public final class DapurBarang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

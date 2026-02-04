@@ -556,10 +556,12 @@ public final class KeuanganRingkasanHutangVendorFarmasi extends javax.swing.JDia
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

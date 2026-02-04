@@ -244,7 +244,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         }
         ChkJln.setSelected(true);
         jam();
-        
+
         try {
             psrekening=koneksi.prepareStatement(
                     "select set_akun_ranap.Suspen_Piutang_Radiologi_Ranap,set_akun_ranap.Radiologi_Ranap,"+
@@ -2525,10 +2525,12 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

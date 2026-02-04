@@ -98,7 +98,7 @@ public class DlgObatPerTanggal extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }
 
 
@@ -540,7 +540,7 @@ public class DlgObatPerTanggal extends javax.swing.JDialog {
                 if (golongan.getTable().getSelectedRow() != -1) {
                     nmgolongan.setText(golongan.getTable().getValueAt(golongan.getTable().getSelectedRow(), 1).toString());
                 }
-                
+
                 TCari.requestFocus();
             }
 
@@ -1171,10 +1171,12 @@ public class DlgObatPerTanggal extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

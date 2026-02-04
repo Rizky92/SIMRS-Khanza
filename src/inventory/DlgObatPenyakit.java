@@ -157,7 +157,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -783,10 +783,10 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if( penyakit.getTable().getSelectedRow()!= -1){                   
+                if( penyakit.getTable().getSelectedRow()!= -1){
                     kdpenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),0).toString());
                     TPenyakit.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -818,10 +818,10 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                }    
+                }
                 kdobat.requestFocus();
             }
             @Override
@@ -833,7 +833,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -841,7 +841,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -914,9 +914,9 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ktg.getTable().getSelectedRow()!= -1){                                   
+                if(ktg.getTable().getSelectedRow()!= -1){
                     KtgCari.setText(ktg.getTable().getValueAt(ktg.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KtgCari.requestFocus();
             }
             @Override
@@ -928,7 +928,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         ktg.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -936,7 +936,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ktg.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -968,10 +968,10 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if( penyakit.getTable().getSelectedRow()!= -1){                   
+                if( penyakit.getTable().getSelectedRow()!= -1){
                     PenyakitCari.setText(penyakit.getTable().getValueAt(penyakit.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }  
+                }
                 kdpenyakit.requestFocus();
             }
             @Override
@@ -1128,7 +1128,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getobat_penyakit());
         BtnPrint.setEnabled(akses.getobat_penyakit());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1154,10 +1154,12 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

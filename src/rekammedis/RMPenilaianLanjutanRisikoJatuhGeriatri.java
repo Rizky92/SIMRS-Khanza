@@ -2472,9 +2472,11 @@ public final class RMPenilaianLanjutanRisikoJatuhGeriatri extends javax.swing.JD
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

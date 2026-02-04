@@ -4152,7 +4152,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         int b=tabMode.getRowCount();
         LCount.setText(""+b);
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -4407,7 +4407,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
             N10.setText("");
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -4433,10 +4433,12 @@ public class DlgIKBBayi extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

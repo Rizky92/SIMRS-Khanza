@@ -106,7 +106,7 @@ public class DlgDiet extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
     /** This method is called from within the constructor to
@@ -646,7 +646,7 @@ public class DlgDiet extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getdiet_pasien());
         BtnEdit.setEnabled(akses.getdiet_pasien());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -672,10 +672,12 @@ public class DlgDiet extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

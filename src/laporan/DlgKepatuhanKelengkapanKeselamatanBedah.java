@@ -130,8 +130,8 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
                     }
                 }
             });
-        }  
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -724,7 +724,7 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
                 if(dokter.getTable().getSelectedRow()!= -1){
                     kddokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     nmdokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }      
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -735,7 +735,7 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
             public void windowActivated(WindowEvent e) {dokter.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
+        });
         dokter.isCek();
         dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         dokter.setLocationRelativeTo(internalFrame1);
@@ -769,7 +769,7 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
                 if(penjab.getTable().getSelectedRow()!= -1){
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),2).toString());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -780,8 +780,8 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1016,10 +1016,12 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

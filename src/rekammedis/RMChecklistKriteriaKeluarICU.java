@@ -53,7 +53,7 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private int i=0;  
+    private int i=0;
     private String finger="";
     private StringBuilder htmlContent;
     private String TANGGALMUNDUR="yes";
@@ -131,7 +131,7 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         ChkInput.setSelected(false);
         isForm();
 
@@ -1204,12 +1204,12 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pegawai.getTable().getSelectedRow()!= -1){  
+                if(pegawai.getTable().getSelectedRow()!= -1){
                     KodePetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
                     btnPetugas.requestFocus();
-                }  
-                    
+                }
+
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1219,7 +1219,7 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
+        });
         pegawai.emptTeks();
         pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pegawai.setLocationRelativeTo(internalFrame1);
@@ -1605,7 +1605,7 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
             emptTeks();
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1631,10 +1631,12 @@ public final class RMChecklistKriteriaKeluarICU extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

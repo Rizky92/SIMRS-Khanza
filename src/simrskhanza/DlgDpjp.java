@@ -1040,21 +1040,21 @@ public class DlgDpjp extends javax.swing.JDialog {
                 ps2.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps2.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
                 if(!TCariPasien.getText().trim().equals("")){
-                    ps2.setString(i,TCariPasien.getText().trim());  
+                    ps2.setString(i,TCariPasien.getText().trim());
                     i++;
                 }
                 if(!TCari.getText().trim().equals("")){
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%");     
-                    i++;
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%");    
+                    ps2.setString(i,"%"+TCari.getText().trim()+"%");
                     i++;
                     ps2.setString(i,"%"+TCari.getText().trim()+"%");
                     i++;
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%");    
+                    ps2.setString(i,"%"+TCari.getText().trim()+"%");
                     i++;
-                    ps2.setString(i,"%"+TCari.getText().trim()+"%");   
-                }            
-                     
+                    ps2.setString(i,"%"+TCari.getText().trim()+"%");
+                    i++;
+                    ps2.setString(i,"%"+TCari.getText().trim()+"%");
+                }
+
                 rs=ps2.executeQuery();
                 while(rs.next()){
                     TabModePasien.addRow(new Object[]{
@@ -1076,7 +1076,7 @@ public class DlgDpjp extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1168,8 +1168,8 @@ public class DlgDpjp extends javax.swing.JDialog {
             try {
                 if(!Dokter.getText().trim().equals("")){
                     ps.setString(1,"%"+Dokter.getText().trim()+"%");
-                    ps.setString(2,"%"+Dokter.getText().trim()+"%");   
-                }         
+                    ps.setString(2,"%"+Dokter.getText().trim()+"%");
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModeDiagnosa.addRow(new Object[]{false,rs.getString(1),rs.getString(2)});
@@ -1188,7 +1188,7 @@ public class DlgDpjp extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1214,10 +1214,12 @@ public class DlgDpjp extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

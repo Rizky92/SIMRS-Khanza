@@ -160,7 +160,7 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         ChkCari.setSelected(false);
         isForm();
         NoRujukan.setDocument(new batasInput((int)100).getKata(NoRujukan));
@@ -3378,20 +3378,20 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                         Kelurahan.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
                         kdkel=kel.getTable().getValueAt(kel.getTable().getSelectedRow(),1).toString();
                         Kelurahan.requestFocus();
-                    } 
+                    }
                     kel=null;
                 }
             });
         }
-        
+
         if (kel == null) return;
         if (!kel.isVisible()) {
             kel.emptTeks();
-        }  
+        }
         if (kel.isVisible()) {
             kel.toFront();
             return;
-        }    
+        }
         kel.setVisible(true);
     }//GEN-LAST:event_BtnKelurahanActionPerformed
 
@@ -3406,20 +3406,20 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                         Kecamatan.setText(kec.getTable().getValueAt(kec.getTable().getSelectedRow(),0).toString());
                         kdkec=kec.getTable().getValueAt(kec.getTable().getSelectedRow(),1).toString();
                         Kecamatan.requestFocus();
-                    } 
+                    }
                     kec=null;
                 }
             });
         }
-        
+
         if (kec == null) return;
         if (!kec.isVisible()) {
             kec.emptTeks();
-        }  
+        }
         if (kec.isVisible()) {
             kec.toFront();
             return;
-        }    
+        }
         kec.setVisible(true);
     }//GEN-LAST:event_BtnKecamatanActionPerformed
 
@@ -3434,7 +3434,7 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                         Kabupaten.setText(kab.getTable().getValueAt(kab.getTable().getSelectedRow(),0).toString());
                         kdkab=kab.getTable().getValueAt(kab.getTable().getSelectedRow(),1).toString();
                         Kabupaten.requestFocus();
-                    } 
+                    }
                     kab=null;
                 }
             });
@@ -3442,11 +3442,11 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         if (kab == null) return;
         if (!kab.isVisible()) {
             kab.emptTeks();
-        }  
+        }
         if (kab.isVisible()) {
             kab.toFront();
             return;
-        }    
+        }
         kab.setVisible(true);
     }//GEN-LAST:event_BtnKabupatenActionPerformed
 
@@ -3581,21 +3581,21 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                     if(kec.getTable().getSelectedRow()!= -1){
                         KecamatanPj.setText(kec.getTable().getValueAt(kec.getTable().getSelectedRow(),0).toString());
                         KecamatanPj.requestFocus();
-                    } 
+                    }
                     kec=null;
                 }
             });
         }
-        
+
         if (kec == null) return;
         if (!kec.isVisible()) {
             kec.emptTeks();
-        }  
+        }
         if (kec.isVisible()) {
             kec.toFront();
             return;
-        }    
-        kec.setVisible(true); 
+        }
+        kec.setVisible(true);
     }//GEN-LAST:event_BtnKecamatanPjActionPerformed
 
     private void KabupatenPjMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_KabupatenPjMouseMoved
@@ -3698,20 +3698,20 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                     if(kab.getTable().getSelectedRow()!= -1){
                         KabupatenPj.setText(kab.getTable().getValueAt(kab.getTable().getSelectedRow(),0).toString());
                         KabupatenPj.requestFocus();
-                    } 
+                    }
                     kab=null;
                 }
             });
         }
-        
+
         if (kab == null) return;
         if (!kab.isVisible()) {
             kab.emptTeks();
-        }  
+        }
         if (kab.isVisible()) {
             kab.toFront();
             return;
-        }    
+        }
         kab.setVisible(true);
     }//GEN-LAST:event_BtnKabupatenPjActionPerformed
 
@@ -3725,20 +3725,20 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                     if(kel.getTable().getSelectedRow()!= -1){
                         KelurahanPj.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
                         KelurahanPj.requestFocus();
-                    } 
+                    }
                     kel=null;
                 }
             });
         }
-        
+
         if (kel == null) return;
         if (!kel.isVisible()) {
             kel.emptTeks();
-        }  
+        }
         if (kel.isVisible()) {
             kel.toFront();
             return;
-        }    
+        }
         kel.setVisible(true);
     }//GEN-LAST:event_BtnKelurahanPjActionPerformed
 
@@ -4187,20 +4187,20 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                         Propinsi.setText(prop.getTable().getValueAt(prop.getTable().getSelectedRow(),0).toString());
                         kdprop=prop.getTable().getValueAt(prop.getTable().getSelectedRow(),1).toString();
                         Propinsi.requestFocus();
-                    } 
+                    }
                     prop=null;
                 }
             });
         }
-        
+
         if (prop == null) return;
         if (!prop.isVisible()) {
             prop.emptTeks();
-        }  
+        }
         if (prop.isVisible()) {
             prop.toFront();
             return;
-        }    
+        }
         prop.setVisible(true);
     }//GEN-LAST:event_BtnPropinsiActionPerformed
 
@@ -4295,20 +4295,20 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                     if(prop.getTable().getSelectedRow()!= -1){
                         PropinsiPj.setText(prop.getTable().getValueAt(prop.getTable().getSelectedRow(),0).toString());
                         PropinsiPj.requestFocus();
-                    } 
+                    }
                     prop=null;
                 }
             });
         }
-        
+
         if (prop == null) return;
         if (!prop.isVisible()) {
             prop.emptTeks();
-        }  
+        }
         if (prop.isVisible()) {
             prop.toFront();
             return;
-        }    
+        }
         prop.setVisible(true);
     }//GEN-LAST:event_btnPropinsiPjActionPerformed
 
@@ -5397,11 +5397,11 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
             propinsikll.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(propinsikll.getTable().getSelectedRow()!= -1){                   
+                    if(propinsikll.getTable().getSelectedRow()!= -1){
                         KdPropinsi.setText(propinsikll.getTable().getValueAt(propinsikll.getTable().getSelectedRow(),1).toString());
                         NmPropinsi.setText(propinsikll.getTable().getValueAt(propinsikll.getTable().getSelectedRow(),2).toString());
                         KdPropinsi.requestFocus();
-                    }     
+                    }
                     propinsikll=null;
                 }
             });
@@ -5413,7 +5413,7 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                         propinsikll.dispose();
                     }
                 }
-            }); 
+            });
             propinsikll.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             propinsikll.setLocationRelativeTo(internalFrame1);
         }
@@ -5421,7 +5421,7 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         if (propinsikll.isVisible()) {
             propinsikll.toFront();
             return;
-        }      
+        }
         propinsikll.setVisible(true);
     }//GEN-LAST:event_btnPropinsiActionPerformed
 
@@ -5440,11 +5440,11 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                 kabupatenkll.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(kabupatenkll.getTable().getSelectedRow()!= -1){                   
+                        if(kabupatenkll.getTable().getSelectedRow()!= -1){
                             KdKabupaten.setText(kabupatenkll.getTable().getValueAt(kabupatenkll.getTable().getSelectedRow(),1).toString());
                             NmKabupaten.setText(kabupatenkll.getTable().getValueAt(kabupatenkll.getTable().getSelectedRow(),2).toString());
                             KdKabupaten.requestFocus();
-                        }     
+                        }
                         kabupatenkll=null;
                     }
                 });
@@ -5456,18 +5456,18 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                             kabupatenkll.dispose();
                         }
                     }
-                }); 
+                });
                 kabupatenkll.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 kabupatenkll.setLocationRelativeTo(internalFrame1);
             }
             if (kabupatenkll == null) return;
             if (!kabupatenkll.isVisible()) {
                 kabupatenkll.setPropinsi(KdPropinsi.getText(),NmPropinsi.getText());
-            } 
+            }
             if (kabupatenkll.isVisible()) {
                 kabupatenkll.toFront();
                 return;
-            }      
+            }
             kabupatenkll.setVisible(true);
         }
     }//GEN-LAST:event_btnKabupatenActionPerformed
@@ -5487,11 +5487,11 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                 kecamatankll.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(kecamatankll.getTable().getSelectedRow()!= -1){                   
+                        if(kecamatankll.getTable().getSelectedRow()!= -1){
                             KdKecamatan.setText(kecamatankll.getTable().getValueAt(kecamatankll.getTable().getSelectedRow(),1).toString());
                             NmKecamatan.setText(kecamatankll.getTable().getValueAt(kecamatankll.getTable().getSelectedRow(),2).toString());
                             KdKecamatan.requestFocus();
-                        }     
+                        }
                         kecamatankll=null;
                     }
                 });
@@ -5503,18 +5503,18 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
                             kecamatankll.dispose();
                         }
                     }
-                }); 
+                });
                 kecamatankll.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 kecamatankll.setLocationRelativeTo(internalFrame1);
             }
             if (kecamatankll == null) return;
             if (!kecamatankll.isVisible()) {
                 kecamatankll.setPropinsi(KdKabupaten.getText(),NmKabupaten.getText());
-            } 
+            }
             if (kecamatankll.isVisible()) {
                 kecamatankll.toFront();
                 return;
-            }      
+            }
             kecamatankll.setVisible(true);
         }
     }//GEN-LAST:event_btnKecamatanActionPerformed
@@ -7803,9 +7803,11 @@ public final class BPJSCekNoRujukanPCare extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

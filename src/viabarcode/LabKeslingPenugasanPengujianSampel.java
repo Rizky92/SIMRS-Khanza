@@ -138,8 +138,8 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
                     }
                 }
             });
-        }  
-        
+        }
+
         ChkJln.setSelected(true);
         jam();
     }
@@ -919,11 +919,11 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPJ.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPJ.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                         KdPJ.requestFocus();
-                    }  
+                    }
                     petugas=null;
                 }
             });
@@ -933,10 +933,10 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -1034,11 +1034,11 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdAnalis.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmAnalis.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                         KdAnalis.requestFocus();
-                    }  
+                    }
                     petugas=null;
                 }
             });
@@ -1048,10 +1048,10 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -1352,7 +1352,7 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
             Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(labkesling_penugasan_pengujian_sampel.no_penugasan,5),signed)),0) from labkesling_penugasan_pengujian_sampel inner join labkesling_permintaan_pengujian_sampel on labkesling_permintaan_pengujian_sampel.no_permintaan=labkesling_penugasan_pengujian_sampel.no_permintaan where date_format(labkesling_penugasan_pengujian_sampel.tanggal,'%Y')='"+TanggalPenugasan.getSelectedItem().toString().substring(6,10)+"' and labkesling_permintaan_pengujian_sampel.kode_sampel='"+KodeSampel.getText()+"'",KodeSampel.getText()+"/"+TanggalPenugasan.getSelectedItem().toString().substring(6,10)+"/STP/",5,TNoPenugasan);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1378,10 +1378,12 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

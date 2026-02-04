@@ -1624,9 +1624,11 @@ public final class RMPenilaianUlangNyeri extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

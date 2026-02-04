@@ -104,7 +104,7 @@ public final class YaskiReferensiKelurahan extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
 
@@ -288,22 +288,22 @@ public final class YaskiReferensiKelurahan extends javax.swing.JDialog {
             kecamatan.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(kecamatan.getTable().getSelectedRow()!= -1){   
+                    if(kecamatan.getTable().getSelectedRow()!= -1){
                         KdKec.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),1).toString());
                         NmKec.setText(kecamatan.getTable().getValueAt(kecamatan.getTable().getSelectedRow(),2).toString().toUpperCase());
-                    } 
+                    }
                     kecamatan=null;
                 }
-            }); 
+            });
 
             kecamatan.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         kecamatan.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             kecamatan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             kecamatan.setLocationRelativeTo(internalFrame1);
         }
@@ -312,7 +312,7 @@ public final class YaskiReferensiKelurahan extends javax.swing.JDialog {
         if (kecamatan.isVisible()) {
             kecamatan.toFront();
             return;
-        }    
+        }
         kecamatan.setVisible(true);
     }//GEN-LAST:event_BtnPropinsiActionPerformed
 
@@ -380,7 +380,7 @@ public final class YaskiReferensiKelurahan extends javax.swing.JDialog {
         this.NmKec.setText(NmProp);
         runBackground(() ->tampil(""));
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -406,10 +406,12 @@ public final class YaskiReferensiKelurahan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

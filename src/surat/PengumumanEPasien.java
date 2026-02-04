@@ -114,7 +114,7 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -722,7 +722,7 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
                 if(petugas.getTable().getSelectedRow()!= -1){
                     KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                     NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KdPetugas.requestFocus();
             }
             @Override
@@ -895,7 +895,7 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
             NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -921,10 +921,12 @@ public final class PengumumanEPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

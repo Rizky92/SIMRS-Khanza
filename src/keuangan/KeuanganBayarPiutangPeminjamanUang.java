@@ -1203,7 +1203,7 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
         LCount.setText(""+tabMode.getRowCount());
         LTotal.setText(Valid.SetAngka(total));
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1330,8 +1330,8 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
                 System.out.println("Notifikasi : "+ex);
             }
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1357,10 +1357,12 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -118,8 +118,8 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -576,7 +576,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(satuantni.getTable().getSelectedRow()!= -1){
                     Satuan.setText(satuantni.getTable().getValueAt(satuantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Satuan.requestFocus();
             }
             @Override
@@ -588,7 +588,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         satuantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -596,7 +596,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         satuantni.dispose();
-                    }                
+                    }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -618,7 +618,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(golongantni.getTable().getSelectedRow()!= -1){
                     Golongan.setText(golongantni.getTable().getValueAt(golongantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Golongan.requestFocus();
             }
             @Override
@@ -630,7 +630,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         golongantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -638,7 +638,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     golongantni.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -660,7 +660,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(jabatantni.getTable().getSelectedRow()!= -1){
                     Jabatan.setText(jabatantni.getTable().getValueAt(jabatantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Jabatan.requestFocus();
             }
             @Override
@@ -672,7 +672,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jabatantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -680,7 +680,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jabatantni.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -702,7 +702,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             public void windowClosed(WindowEvent e) {
                 if(pangkattni.getTable().getSelectedRow()!= -1){
                     Pangkat.setText(pangkattni.getTable().getValueAt(pangkattni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 Pangkat.requestFocus();
             }
             @Override
@@ -714,7 +714,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pangkattni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -722,7 +722,7 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pangkattni.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -783,9 +783,9 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
-        try{    
-            Valid.tabelKosong(tabMode);   
+    private void tampil(){
+        try{
+            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
                 "select pasien.nm_pasien,pangkat_tni.nama_pangkat,pasien.nip,satuan_tni.nama_satuan,"+
                 "reg_periksa.no_rawat,golongan_tni.nama_golongan,jabatan_tni.nama_jabatan from reg_periksa "+
@@ -882,10 +882,12 @@ public final class DlgAnggotaMiliterDirawat extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -588,7 +588,7 @@ public final class DlgPaymentPoint2 extends javax.swing.JDialog {
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                     ps.setString(4,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 all=0;
                 i=1;
@@ -656,10 +656,12 @@ public final class DlgPaymentPoint2 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

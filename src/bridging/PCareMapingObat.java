@@ -112,8 +112,8 @@ public final class PCareMapingObat extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-    
+        }
+
     }
 
     /** This method is called from within the constructor to
@@ -452,7 +452,7 @@ public final class PCareMapingObat extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                    
+                if(barang.getTable().getSelectedRow()!= -1){
                     kdobat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     TObat.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
                 }
@@ -466,8 +466,8 @@ public final class PCareMapingObat extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        }); 
-        
+        });
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -663,11 +663,11 @@ public final class PCareMapingObat extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(barangpcare.getTable().getSelectedRow()!= -1){                   
+            if(barangpcare.getTable().getSelectedRow()!= -1){
                 KdObatPCare.setText(barangpcare.getTable().getValueAt(barangpcare.getTable().getSelectedRow(),1).toString());
                 NmObatPCare.setText(barangpcare.getTable().getValueAt(barangpcare.getTable().getSelectedRow(),2).toString());
                 KdObatPCare.requestFocus();
-            }                  
+            }
         }
         @Override
         public void windowIconified(WindowEvent e) {}
@@ -690,7 +690,7 @@ public final class PCareMapingObat extends javax.swing.JDialog {
         }
         @Override
         public void keyReleased(KeyEvent e) {}
-    });  
+    });
     barangpcare.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
     barangpcare.setLocationRelativeTo(internalFrame1);
     barangpcare.setVisible(true);
@@ -809,7 +809,7 @@ public final class PCareMapingObat extends javax.swing.JDialog {
         return tbJnsPerawatan;
     }
 
-   
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -835,10 +835,12 @@ public final class PCareMapingObat extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

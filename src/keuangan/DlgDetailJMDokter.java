@@ -113,7 +113,7 @@ public class DlgDetailJMDokter extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         kddokter.setDocument(new batasInput((byte)10).getKata(kddokter));
-                
+
         LoadHTML.setEditable(true);
         LoadHTML2.setEditable(true);
         HTMLEditorKit kit = new HTMLEditorKit();
@@ -726,7 +726,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     kelas=false;
                     ranapgabung=false;
                     runBackground(() ->prosesCari());
-                }   
+                }
                 kddokter.requestFocus();
             }
             @Override
@@ -1127,33 +1127,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 public void windowClosed(WindowEvent e) {
                     if(carabayar.getTable().getSelectedRow()!= -1){
                         pilihancarabayar=carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString();
-                    }     
+                    }
                     runBackground(() ->prosesCari());
                     carabayar=null;
                 }
-            }); 
+            });
 
             carabayar.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         carabayar.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             carabayar.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (carabayar == null) return;
         if (!carabayar.isVisible()) {
             carabayar.emptTeks();
             carabayar.isCek();
-        }  
+        }
         if (carabayar.isVisible()) {
             carabayar.toFront();
             return;
-        }    
+        }
         carabayar.setVisible(true);
     }//GEN-LAST:event_ppTampilkanSeleksiBtnPrintActionPerformed
 
@@ -11588,7 +11588,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             System.out.println("Catatan  "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -11614,10 +11614,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -465,7 +465,7 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
     public void isCek(){
         BtnTambah.setEnabled(akses.getipsrs_jenis_barang());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -491,10 +491,12 @@ public final class IPSRSCariJenis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

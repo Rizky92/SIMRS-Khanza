@@ -154,7 +154,7 @@ public class DlgDetailJMDokter2 extends javax.swing.JDialog {
                     }
                 }
             });
-        }      
+        }
     }
 
     /** This method is called from within the constructor to
@@ -1067,33 +1067,33 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 public void windowClosed(WindowEvent e) {
                     if(carabayar.getTable().getSelectedRow()!= -1){
                         pilihancarabayar=carabayar.getTable().getValueAt(carabayar.getTable().getSelectedRow(),1).toString();
-                    }     
+                    }
                     runBackground(() ->prosesCari());
                     carabayar=null;
                 }
-            }); 
+            });
 
             carabayar.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         carabayar.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             carabayar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             carabayar.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (carabayar == null) return;
         if (!carabayar.isVisible()) {
             carabayar.emptTeks();
             carabayar.isCek();
-        }  
+        }
         if (carabayar.isVisible()) {
             carabayar.toFront();
             return;
-        }    
+        }
         carabayar.setVisible(true);
     }//GEN-LAST:event_ppTampilkanSeleksiBtnPrintActionPerformed
 
@@ -1180,7 +1180,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     psreg.setString(7,"%"+TCari.getText().trim()+"%");
                     psreg.setString(8,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rsreg=psreg.executeQuery();
                 totalsarana=0;totaljm=0;totalbayar=0;
                 while(rsreg.next()){
@@ -1734,10 +1734,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

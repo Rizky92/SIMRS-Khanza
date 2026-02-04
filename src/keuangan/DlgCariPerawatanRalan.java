@@ -183,8 +183,8 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
             psset_tarif=koneksi.prepareStatement("select * from set_tarif");
             try {
@@ -991,7 +991,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                         public void windowActivated(WindowEvent e) {}
                         @Override
                         public void windowDeactivated(WindowEvent e) {}
-                    });         
+                    });
                     dokter.isCek();
                     dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     dokter.setLocationRelativeTo(internalFrame1);
@@ -1022,7 +1022,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                     public void windowActivated(WindowEvent e) {}
                     @Override
                     public void windowDeactivated(WindowEvent e) {}
-                });     
+                });
                 petugas.isCek();
                 petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 petugas.setLocationRelativeTo(internalFrame1);
@@ -1053,10 +1053,10 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                         public void windowActivated(WindowEvent e) {}
                         @Override
                         public void windowDeactivated(WindowEvent e) {}
-                    });         
+                    });
                     dokter.isCek();
                     dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                    dokter.setLocationRelativeTo(internalFrame1);    
+                    dokter.setLocationRelativeTo(internalFrame1);
                     dokter.setAlwaysOnTop(false);
                     dokter.setVisible(true);
                     break;
@@ -1125,11 +1125,11 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(petugas.getTable().getSelectedRow()!= -1){    
+                if(petugas.getTable().getSelectedRow()!= -1){
                     Nip2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-                    NmPetugas2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());                        
+                    NmPetugas2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                     Nip2.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1600,7 +1600,7 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             }
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1626,10 +1626,12 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

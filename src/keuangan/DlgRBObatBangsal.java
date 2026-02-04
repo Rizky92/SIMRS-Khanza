@@ -383,12 +383,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                   
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     kdbangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     nmbangsal.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->prosesCari());;
-                }     
-                kdbangsal.requestFocus();                
+                }
+                kdbangsal.requestFocus();
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -399,7 +399,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bangsal.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -481,9 +481,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
-    private void prosesCari() {            
-        try{   
-            Valid.tabelKosong(tabMode); 
+    private void prosesCari() {
+        try{
+            Valid.tabelKosong(tabMode);
             psbangsal=koneksi.prepareStatement("select bangsal.kd_bangsal,bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal in (select bangsal.kd_bangsal from kamar group by bangsal.kd_bangsal) "+(nmbangsal.getText().trim().equals("")?"":"and bangsal.kd_bangsal like ? "));
             try {
                 if(!nmbangsal.getText().trim().equals("")){
@@ -505,13 +505,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         psdokter.setString(3,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                         rsdokter=psdokter.executeQuery();
                         a=1;
-                        while(rsdokter.next()){         
+                        while(rsdokter.next()){
                             tabMode.addRow(new Object[]{"",a+". "+rsdokter.getString(2),"","","","","",""});
                             psobat=koneksi.prepareStatement(
                                 "select detail_pemberian_obat.kode_brng,databarang.nama_brng,sum(detail_pemberian_obat.jml) as jml,(sum(detail_pemberian_obat.total)-sum(detail_pemberian_obat.embalase+detail_pemberian_obat.tuslah)) as biaya,"+
                                 "sum(detail_pemberian_obat.embalase) as embalase,sum(detail_pemberian_obat.tuslah) as tuslah,sum(detail_pemberian_obat.total) as total from detail_pemberian_obat inner join reg_periksa on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat "+
                                 "inner join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat inner join kamar on kamar_inap.kd_kamar=kamar.kd_kamar inner join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng "+
-                                "where kamar_inap.stts_pulang<>'Pindah Kamar' and reg_periksa.kd_dokter=? and detail_pemberian_obat.tgl_perawatan between ? and ? and bangsal.kd_bangsal=? group by detail_pemberian_obat.kode_brng order by databarang.nama_brng");  
+                                "where kamar_inap.stts_pulang<>'Pindah Kamar' and reg_periksa.kd_dokter=? and detail_pemberian_obat.tgl_perawatan between ? and ? and bangsal.kd_bangsal=? group by detail_pemberian_obat.kode_brng order by databarang.nama_brng");
                             try{
                                 psobat.setString(1,rsdokter.getString(1));
                                 psobat.setString(2,Valid.SetTgl(Tgl1.getSelectedItem()+""));
@@ -546,7 +546,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if(psobat!=null){
                                     psobat.close();
                                 }
-                            } 
+                            }
                             a++;
                         }
                     } catch (Exception e) {
@@ -558,9 +558,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                        if(psdokter!=null){
                            psdokter.close();
                        }
-                    }   
+                    }
                     i++;
-                }    
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -571,7 +571,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                    psbangsal.close();
                }
             }
-                
+
             tabMode.addRow(new Object[]{">>","Total ",":","",Valid.SetAngka(ttlbiaya),Valid.SetAngka(ttlembalase),Valid.SetAngka(ttltuslah),Valid.SetAngka(ttltotal)});
         }catch(Exception e){
             System.out.println("Catatan  "+e);
@@ -609,11 +609,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    
+    */
+
 }

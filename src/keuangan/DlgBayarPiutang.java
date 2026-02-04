@@ -1488,7 +1488,7 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1647,8 +1647,8 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+ex);
             }
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1674,10 +1674,12 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

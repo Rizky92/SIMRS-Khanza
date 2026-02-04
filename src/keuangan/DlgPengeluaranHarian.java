@@ -1562,11 +1562,13 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 
     private void tampilAkunBankMandiri() {
         try{

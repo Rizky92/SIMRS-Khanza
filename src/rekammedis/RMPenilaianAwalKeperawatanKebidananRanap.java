@@ -8229,9 +8229,11 @@ public final class RMPenilaianAwalKeperawatanKebidananRanap extends javax.swing.
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

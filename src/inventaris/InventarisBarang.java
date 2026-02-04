@@ -114,7 +114,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
         Valid.LoadTahun(thn_produksi);
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -901,7 +901,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_kode_produsenKeyPressed
 
     private void btnProdusenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdusenActionPerformed
-    InventarisProdusen produsen=new InventarisProdusen(null,false); 
+    InventarisProdusen produsen=new InventarisProdusen(null,false);
     produsen.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -909,10 +909,10 @@ public final class InventarisBarang extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(produsen.getTable().getSelectedRow()!= -1){                   
-                kode_produsen.setText(produsen.getTable().getValueAt(produsen.getTable().getSelectedRow(),0).toString());                    
+            if(produsen.getTable().getSelectedRow()!= -1){
+                kode_produsen.setText(produsen.getTable().getValueAt(produsen.getTable().getSelectedRow(),0).toString());
                 nama_produsen.setText(produsen.getTable().getValueAt(produsen.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             kode_produsen.requestFocus();
         }
         @Override
@@ -933,7 +933,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 produsen.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -959,7 +959,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_id_merkKeyPressed
 
     private void btnMerkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMerkActionPerformed
-    InventarisMerk merk=new InventarisMerk(null,false); 
+    InventarisMerk merk=new InventarisMerk(null,false);
     merk.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -967,10 +967,10 @@ public final class InventarisBarang extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(merk.getTable().getSelectedRow()!= -1){                   
-                id_merk.setText(merk.getTable().getValueAt(merk.getTable().getSelectedRow(),0).toString());                    
+            if(merk.getTable().getSelectedRow()!= -1){
+                id_merk.setText(merk.getTable().getValueAt(merk.getTable().getSelectedRow(),0).toString());
                 nm_merk.setText(merk.getTable().getValueAt(merk.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             id_merk.requestFocus();
         }
         @Override
@@ -991,7 +991,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 merk.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -1025,10 +1025,10 @@ public final class InventarisBarang extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(kategori.getTable().getSelectedRow()!= -1){                   
-                id_kategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),0).toString());                    
+            if(kategori.getTable().getSelectedRow()!= -1){
+                id_kategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),0).toString());
                 nm_kategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             id_kategori.requestFocus();
         }
         @Override
@@ -1049,7 +1049,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 kategori.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -1076,7 +1076,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_id_jenisKeyPressed
 
     private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJenisActionPerformed
-    InventarisJenis jenis=new InventarisJenis(null,false); 
+    InventarisJenis jenis=new InventarisJenis(null,false);
     jenis.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -1084,10 +1084,10 @@ public final class InventarisBarang extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(jenis.getTable().getSelectedRow()!= -1){                   
-                id_jenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());                    
+            if(jenis.getTable().getSelectedRow()!= -1){
+                id_jenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
                 nm_jenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             id_jenis.requestFocus();
         }
         @Override
@@ -1108,7 +1108,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 jenis.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -1321,7 +1321,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
         BtnPrint.setEnabled(akses.getinventaris_koleksi());
         TCari.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1347,10 +1347,12 @@ public final class InventarisBarang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

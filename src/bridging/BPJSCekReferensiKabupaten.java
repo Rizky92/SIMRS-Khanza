@@ -110,8 +110,8 @@ public final class BPJSCekReferensiKabupaten extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
             link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
@@ -302,11 +302,11 @@ public final class BPJSCekReferensiKabupaten extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(propinsi.getTable().getSelectedRow()!= -1){                   
+                if(propinsi.getTable().getSelectedRow()!= -1){
                     KdProp.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),1).toString());
                     NmProp.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),2).toString());
                     KdProp.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -317,7 +317,7 @@ public final class BPJSCekReferensiKabupaten extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         propinsi.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -329,7 +329,7 @@ public final class BPJSCekReferensiKabupaten extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         propinsi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         propinsi.setLocationRelativeTo(internalFrame1);
         propinsi.setVisible(true);
@@ -405,7 +405,7 @@ public final class BPJSCekReferensiKabupaten extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-    }  
+    }
 
     public JTable getTable(){
         return tbKamar;
@@ -415,7 +415,7 @@ public final class BPJSCekReferensiKabupaten extends javax.swing.JDialog {
         this.KdProp.setText(KdProp);
         this.NmProp.setText(NmProp);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -441,10 +441,12 @@ public final class BPJSCekReferensiKabupaten extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

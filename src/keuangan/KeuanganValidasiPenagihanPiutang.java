@@ -111,8 +111,8 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
                     }
                 }
             });
-        }  
-        
+        }
+
         ChkAccor.setSelected(false);
         isPhoto();
         HTMLEditorKit kit = new HTMLEditorKit();
@@ -548,7 +548,7 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
                     kdpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),1).toString());
                     nmpenjab.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(),3).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdpenjab.requestFocus();
             }
             @Override
@@ -559,8 +559,8 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
             public void windowActivated(WindowEvent e) {penjab.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         penjab.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -695,8 +695,8 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
                     ps.setString(i,"%"+TCari.getText()+"%");
                     i++;
                     ps.setString(i,"%"+TCari.getText()+"%");
-                }    
-                    
+                }
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -793,10 +793,12 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

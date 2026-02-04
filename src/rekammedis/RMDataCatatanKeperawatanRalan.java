@@ -1353,9 +1353,11 @@ public final class RMDataCatatanKeperawatanRalan extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

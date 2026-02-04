@@ -111,8 +111,8 @@ public final class BPJSCekReferensiKecamatan extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-        
+        }
+
         try {
             link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
@@ -305,11 +305,11 @@ public final class BPJSCekReferensiKecamatan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(kabupaten.getTable().getSelectedRow()!= -1){                   
+                if(kabupaten.getTable().getSelectedRow()!= -1){
                     KdKab.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),1).toString());
                     NmKab.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),2).toString());
                     KdKab.requestFocus();
-                }                  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -320,7 +320,7 @@ public final class BPJSCekReferensiKecamatan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         kabupaten.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -332,7 +332,7 @@ public final class BPJSCekReferensiKecamatan extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         kabupaten.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         kabupaten.setLocationRelativeTo(internalFrame1);
         kabupaten.setVisible(true);
@@ -408,8 +408,8 @@ public final class BPJSCekReferensiKecamatan extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-    }    
-    
+    }
+
     public JTable getTable(){
         return tbKamar;
     }
@@ -444,10 +444,12 @@ public final class BPJSCekReferensiKecamatan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

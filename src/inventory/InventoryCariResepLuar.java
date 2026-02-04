@@ -172,8 +172,8 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-        
+        }
+
         Valid.SetTgl2(DTPCari1,format.format(new Date())+" 00:00:00");
         Valid.SetTgl2(DTPCari2,format.format(new Date())+" 23:59:59");
     }
@@ -767,7 +767,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                         public void windowClosing(WindowEvent e) {}
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(aturanpakai.getTable().getSelectedRow()!= -1){ 
+                            if(aturanpakai.getTable().getSelectedRow()!= -1){
                                 if(pilihan==1){
                                     tbTambahan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.getSelectedRow(),5);
                                     tbTambahan.requestFocus();
@@ -775,7 +775,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                                     tbTambahan1.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.getSelectedRow(),5);
                                     tbTambahan1.requestFocus();
                                 }
-                            }   
+                            }
                         }
                         @Override
                         public void windowIconified(WindowEvent e) {}
@@ -808,7 +808,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                         public void windowClosing(WindowEvent e) {}
                         @Override
                         public void windowClosed(WindowEvent e) {
-                            if(aturanpakai.getTable().getSelectedRow()!= -1){ 
+                            if(aturanpakai.getTable().getSelectedRow()!= -1){
                                 if(pilihan==1){
                                     tbTambahan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan.getSelectedRow(),5);
                                     tbTambahan.requestFocus();
@@ -816,7 +816,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                                     tbTambahan1.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbTambahan1.getSelectedRow(),5);
                                     tbTambahan1.requestFocus();
                                 }
-                            }   
+                            }
                         }
                         @Override
                         public void windowIconified(WindowEvent e) {}
@@ -1106,7 +1106,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                     ps.setString(7,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1274,7 +1274,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getresep_luar());
         BtnPrint.setEnabled(akses.getresep_luar());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1300,10 +1300,12 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

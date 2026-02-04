@@ -2149,9 +2149,11 @@ public final class RMPenilaianLanjutanSkriningFungsional extends javax.swing.JDi
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

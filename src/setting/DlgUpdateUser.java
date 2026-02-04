@@ -864,7 +864,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         penilaian_awal_medis_ranap_jantung=false;penugasan_pengujian_sampel_lab_kesehatan_lingkungan=false;hasil_pengujian_sampel_lab_kesehatan_lingkungan=false;verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false;
         validasi_pengujian_sampel_lab_kesehatan_lingkungan=false;rekap_pelayanan_lab_kesehatan_lingkungan=false;pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false;skrining_curb65=false;bpjs_potensi_prb=false;
         bpjs_riwayat_pelayanan_obat=false;skrining_gizi_kehamilan=false;bpjs_rekap_peserta_prb_apotek=false;
-        try{    
+        try{
             jml=0;
             for(i=0;i<tbUser.getRowCount();i++){
                 if(tbUser.getValueAt(i,0).toString().equals("true")){
@@ -3360,7 +3360,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             tabMode.addRow(new Object[]{false,"[K]Bayar Beban Hutang Lain",bayar_beban_hutang_lain});
         }
     }
-    
+
     private void setTampil2(){
         if("[L]Cek NIK".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[L]Cek NIK",bpjs_cek_nik});
@@ -4029,11 +4029,11 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[L]Potensi PRB di VClaim".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[L]Potensi PRB di VClaim",bpjs_potensi_prb});
         }
-        
+
         if("[L]Riwayat Pelayanan Obat Apotek BPJS".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[L]Riwayat Pelayanan Obat Apotek BPJS",bpjs_riwayat_pelayanan_obat});
         }
-        
+
         if("[L]Rekap Peserta PRB Apotek BPJS".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[L]Rekap Peserta PRB Apotek BPJS",bpjs_rekap_peserta_prb_apotek});
         }
@@ -5009,7 +5009,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
         if("[M]Skrining CURB-65".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[M]Skrining CURB-65",skrining_curb65});
         }
-        
+
         if("[M]Skrining Gizi Kehamilan".toLowerCase().contains(TCari.getText().toLowerCase())){
             tabMode.addRow(new Object[]{false,"[M]Skrining Gizi Kehamilan",skrining_gizi_kehamilan});
         }
@@ -8732,15 +8732,15 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             if("[L]Potensi PRB di VClaim".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","bpjs_potensi_prb='"+tbUser.getValueAt(i,2).toString()+"'");
             }
-            
+
             if("[L]Riwayat Pelayanan Obat Apotek BPJS".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","bpjs_riwayat_pelayanan_obat='"+tbUser.getValueAt(i,2).toString()+"'");
             }
-            
+
             if("[L]Rekap Peserta PRB Apotek BPJS".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","bpjs_rekap_peserta_prb_apotek='"+tbUser.getValueAt(i,2).toString()+"'");
             }
-                    
+
             if("[M]Pasien".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","pasien='"+tbUser.getValueAt(i,2).toString()+"'");
             }
@@ -9712,7 +9712,7 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             if("[M]Skrining CURB-65".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","skrining_curb65='"+tbUser.getValueAt(i,2).toString()+"'");
             }
-            
+
             if("[M]Skrining Gizi Kehamilan".equals(tbUser.getValueAt(i,1).toString())){
                 Sequel.mengedit("user","id_user=AES_ENCRYPT('"+TKd.getText()+"','nur')","skrining_gizi_kehamilan='"+tbUser.getValueAt(i,2).toString()+"'");
             }
@@ -10705,10 +10705,12 @@ public class DlgUpdateUser extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -135,7 +135,7 @@ public final class IPSRSBarang extends javax.swing.JDialog {
             });
         }
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
 
 
@@ -820,7 +820,7 @@ public final class IPSRSBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_kode_satKeyPressed
 
     private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSatuanActionPerformed
-    DlgCariSatuan satuan=new DlgCariSatuan(null,false); 
+    DlgCariSatuan satuan=new DlgCariSatuan(null,false);
     satuan.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -828,10 +828,10 @@ public final class IPSRSBarang extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(satuan.getTable().getSelectedRow()!= -1){                   
-                kode_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());                    
+            if(satuan.getTable().getSelectedRow()!= -1){
+                kode_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());
                 nama_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),1).toString());
-            }   
+            }
             kode_sat.requestFocus();
         }
         @Override
@@ -883,10 +883,10 @@ public final class IPSRSBarang extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jenis.getTable().getSelectedRow()!= -1){                   
-                    kdjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());                    
+                if(jenis.getTable().getSelectedRow()!= -1){
+                    kdjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
                     nmjenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 kdjenis.requestFocus();
             }
             @Override
@@ -1096,10 +1096,12 @@ public final class IPSRSBarang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

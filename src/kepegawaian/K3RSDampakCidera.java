@@ -644,7 +644,7 @@ public class K3RSDampakCidera extends javax.swing.JDialog {
        BtnHapus.setEnabled(akses.getdampak_cidera_k3rs());
        BtnEdit.setEnabled(akses.getdampak_cidera_k3rs());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -670,10 +670,12 @@ public class K3RSDampakCidera extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

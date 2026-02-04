@@ -1648,23 +1648,23 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                         KodePerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                         NmPerujuk.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
                         KodePerujuk.requestFocus();
-                    }  
+                    }
                     dokter=null;
                 }
             });
             dokter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             dokter.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (dokter == null) return;
         if (!dokter.isVisible()) {
-            dokter.isCek();    
+            dokter.isCek();
             dokter.emptTeks();
-        }  
+        }
         if (dokter.isVisible()) {
             dokter.toFront();
             return;
-        }    
+        }
         dokter.setVisible(true);
     }//GEN-LAST:event_btnDokterActionPerformed
 
@@ -1727,7 +1727,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                     form.setVisible(true);
                     break;
                 }
-            case 2:   
+            case 2:
                 {
                     DlgCariPermintaanLabMB form=new DlgCariPermintaanLabMB(null,false);
                     form.isCek();
@@ -2906,10 +2906,12 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

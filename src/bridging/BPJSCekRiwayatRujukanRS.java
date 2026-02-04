@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -61,7 +61,7 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
     private JsonNode response;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-        
+
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -92,7 +92,7 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
                 column.setPreferredWidth(450);
             }
         }
-        
+
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         pasien.addWindowListener(new WindowListener() {
             @Override
@@ -102,14 +102,14 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgBPJSCekRiwayatPeserta")){
-                    if(pasien.getTable().getSelectedRow()!= -1){                   
+                    if(pasien.getTable().getSelectedRow()!= -1){
                         if(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),20).toString().equals("")){
                             JOptionPane.showMessageDialog(rootPane,"Maaf pasien tidak punya Nomor Kartu...!");
                         }else{
                             NoKartu.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),20).toString());
                             NamaPasien.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(),2).toString());
-                        }                            
-                    }  
+                        }
+                    }
                 }
             }
             @Override
@@ -121,7 +121,7 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pasien.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -135,15 +135,15 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
+        });
         try {
             link=koneksiDB.URLAPIBPJS();
         } catch (Exception e) {
             System.out.println("E : "+e);
         }
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -305,25 +305,25 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
-            for(int r=0;r<row;r++){  
+            for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
                                 tabMode.getValueAt(r,0).toString()+"','"+
                                 tabMode.getValueAt(r,1).toString()+"','"+
-                                tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs"); 
+                                tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
-            
-            Map<String, Object> param = new HashMap<>();                 
+
+            Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
             param.put("kotars",akses.getkabupatenrs());
             param.put("propinsirs",akses.getpropinsirs());
             param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
             param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());   
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting")); 
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptCariBPJS10RiwayatPeserta.jasper","report","[ Pencarian Riwayat Rujukan Peserta ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             this.setCursor(Cursor.getDefaultCursor());
-        }        
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void NoKartuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoKartuKeyPressed
@@ -406,7 +406,7 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
 	    requestEntity = new HttpEntity(headers);
-            URL = link+"/Rujukan/RS/List/Peserta/"+nomorrujukan;	
+            URL = link+"/Rujukan/RS/List/Peserta/"+nomorrujukan;
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
@@ -418,34 +418,34 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
                     for(JsonNode list:response){
                         tabMode.addRow(new Object[]{
                             i+".","Diagnosa",": "+list.path("diagnosa").path("kode").asText()+" "+list.path("diagnosa").path("nama").asText()
-                        });                   
+                        });
                         tabMode.addRow(new Object[]{
                             "","Keluhan",": "+list.path("keluhan").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","No.Kunjungan",": "+list.path("noKunjungan").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","Pelayanan",": "+list.path("pelayanan").path("kode").asText()+" "+list.path("pelayanan").path("nama").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","Peserta",": "
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","       COB",": "
                         });
                         tabMode.addRow(new Object[]{
                             "","              Nama Asuransi",": "+list.path("peserta").path("cob").path("nmAsuransi").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","              No. Asuransi",": "+list.path("peserta").path("cob").path("noAsuransi").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","              Tanggal TAT",": "+list.path("peserta").path("cob").path("tglTAT").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","              Tanggal TMT",": "+list.path("peserta").path("cob").path("tglTMT").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","       Hak Kelas",": "+list.path("peserta").path("hakKelas").path("kode").asText()+". "+list.path("peserta").path("hakKelas").path("keterangan").asText()
                         });
@@ -454,13 +454,13 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
                         });
                         tabMode.addRow(new Object[]{
                             "","              Dinsos",": "+list.path("peserta").path("informasi").path("dinsos").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","              No.SKTM",": "+list.path("peserta").path("informasi").path("noSKTM").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","              Prolanis PRB",": "+list.path("peserta").path("informasi").path("prolanisPRB").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","       Jenis Peserta",": "+list.path("peserta").path("jenisPeserta").path("kode").asText()+". "+list.path("peserta").path("jenisPeserta").path("keterangan").asText()
                         });
@@ -469,7 +469,7 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
                         });
                         tabMode.addRow(new Object[]{
                             "","              Nomor RM",": "+list.path("peserta").path("mr").path("noMR").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","              Nomor Telp",": "+list.path("peserta").path("mr").path("noTelepon").asText()
                         });
@@ -514,27 +514,27 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
                         });
                         tabMode.addRow(new Object[]{
                             "","Poli Rujukan",": "+list.path("poliRujukan").path("kode").asText()+" "+list.path("poliRujukan").path("nama").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "","Provider Perujuk",": "+list.path("provPerujuk").path("kode").asText()+" "+list.path("provPerujuk").path("nama").asText()
                         });
                         tabMode.addRow(new Object[]{
                             "","Tanggal Kunjungan",": "+list.path("tglKunjungan").asText()
-                        });  
+                        });
                         i++;
                     }
-                }                      
+                }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-    }   
- 
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -560,10 +560,12 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

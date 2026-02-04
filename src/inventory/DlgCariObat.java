@@ -4317,11 +4317,13 @@ public final class DlgCariObat extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 
     private void cekObatKronis(int posisi, String kodeObat, String namaObat) {
         if (! VALIDASIRESEPKRONIS) {

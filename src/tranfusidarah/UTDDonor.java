@@ -214,7 +214,7 @@ public final class UTDDonor extends javax.swing.JDialog {
             }
         }
         tbTranfusiDarah.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCariMedis.setDocument(new batasInput((byte)100).getKata(TCariMedis));
         TCariNonMedis.setDocument(new batasInput((byte)100).getKata(TCariNonMedis));
@@ -1933,10 +1933,10 @@ public final class UTDDonor extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas.requestFocus();
                     petugas=null;
                 }
@@ -1947,10 +1947,10 @@ public final class UTDDonor extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -1980,10 +1980,10 @@ public final class UTDDonor extends javax.swing.JDialog {
             petugas.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){                   
+                    if(petugas.getTable().getSelectedRow()!= -1){
                         KdPetugas2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
                         NmPetugas2.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     BtnPetugas2.requestFocus();
                     petugas=null;
                 }
@@ -1994,10 +1994,10 @@ public final class UTDDonor extends javax.swing.JDialog {
         }
         if (petugas == null) return;
         if (!petugas.isVisible()) {
-            petugas.isCek();    
+            petugas.isCek();
             petugas.emptTeks();
         }
-        
+
         if (petugas.isVisible()) {
             petugas.toFront();
             return;
@@ -2357,17 +2357,17 @@ public final class UTDDonor extends javax.swing.JDialog {
                     Alamat.setText(pendonor.getTable().getValueAt(pendonor.getTable().getSelectedRow(),6).toString()+", "+pendonor.getTable().getValueAt(pendonor.getTable().getSelectedRow(),8).toString()+", "+pendonor.getTable().getValueAt(pendonor.getTable().getSelectedRow(),10).toString()+", "+pendonor.getTable().getValueAt(pendonor.getTable().getSelectedRow(),12).toString()+", "+pendonor.getTable().getValueAt(pendonor.getTable().getSelectedRow(),14).toString());
                     GD.setText(pendonor.getTable().getValueAt(pendonor.getTable().getSelectedRow(),15).toString());
                     Resus.setText(pendonor.getTable().getValueAt(pendonor.getTable().getSelectedRow(),16).toString());
-                }  
+                }
                 btnPendonor.requestFocus();
             }
         });
-        
+
         pendonor.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pendonor.dispose();
-                }                
+                }
             }
         });
         pendonor.emptTeks();
@@ -2946,12 +2946,12 @@ public final class UTDDonor extends javax.swing.JDialog {
         ppHapusBHPNonMedis.setEnabled(akses.getutd_donor());
         ppCekal.setEnabled(akses.getutd_cekal_darah());
     }
-    
+
     private void LoadData(){
         tampilMedis();
         tampilNonMedis();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -2977,10 +2977,12 @@ public final class UTDDonor extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

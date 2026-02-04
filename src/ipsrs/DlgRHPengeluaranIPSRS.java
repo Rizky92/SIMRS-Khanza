@@ -389,7 +389,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     kdbarang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
                     nmbarang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->prosesCari());
-                }    
+                }
                 kdbarang.requestFocus();
             }
             @Override
@@ -401,7 +401,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -409,7 +409,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -488,7 +488,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void prosesCari() {
         try {
-            Valid.tabelKosong(tabMode);  
+            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
                     "select ipsrsbarang.kode_brng, ipsrsbarang.nama_brng, kodesatuan.satuan, ipsrsbarang.jenis "+
                     "from ipsrsbarang inner join kodesatuan on ipsrsbarang.kode_sat=kodesatuan.kode_sat "+
@@ -527,16 +527,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(ps2!=null){
                             ps2.close();
                         }
-                    }  
+                    }
                     if((jumlah)>0){
                         tabMode.addRow(new Object[]{
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("satuan"),rs.getString("jenis"),Valid.SetAngka(jumlah),Valid.SetAngka(total)
-                        });                    
-                    }  
-                }   
+                        });
+                    }
+                }
                 if((totalkeluar)>0){
                     tabMode.addRow(new Object[]{"Total Pengeluaran :","","","","",Valid.SetAngka(totalkeluar)});
-                }   
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -546,12 +546,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(ps!=null){
                     ps.close();
                 }
-            }              
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -577,10 +577,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

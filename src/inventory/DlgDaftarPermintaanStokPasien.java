@@ -68,7 +68,7 @@ public class DlgDaftarPermintaanStokPasien extends javax.swing.JDialog {
             }
         }
         tbPemisahan.setDefaultRenderer(Object.class, new WarnaTable());
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -569,7 +569,7 @@ public class DlgDaftarPermintaanStokPasien extends javax.swing.JDialog {
     public void isCek(){
         BtnHapus.setEnabled(akses.getpermintaan_stok_obat_pasien());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -595,10 +595,12 @@ public class DlgDaftarPermintaanStokPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -110,7 +110,7 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }
 
 
@@ -716,17 +716,17 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgKategoriPemasukan")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){  
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(pilihan==1){
                             KdAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             NmAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
-                            KdAkun.requestFocus();                       
+                            KdAkun.requestFocus();
                         }else if(pilihan==2){
                             KdKontraAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             NmKontraAKun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
-                            KdKontraAkun.requestFocus();                               
-                        }                          
-                    }                 
+                            KdKontraAkun.requestFocus();
+                        }
+                    }
                 }
             }
             @Override
@@ -738,7 +738,7 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -752,7 +752,7 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -799,17 +799,17 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(akses.getform().equals("DlgKategoriPemasukan")){
-                    if(rekening.getTabel().getSelectedRow()!= -1){  
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(pilihan==1){
                             KdAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             NmAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
-                            KdAkun.requestFocus();                       
+                            KdAkun.requestFocus();
                         }else if(pilihan==2){
                             KdKontraAkun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
                             NmKontraAKun.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
-                            KdKontraAkun.requestFocus();                               
-                        }                          
-                    }                 
+                            KdKontraAkun.requestFocus();
+                        }
+                    }
                 }
             }
             @Override
@@ -821,7 +821,7 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         rekening.getTabel().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -835,7 +835,7 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        });  
+        });
         rekening.emptTeks();
         rekening.tampil2();
         rekening.isCek();
@@ -897,8 +897,8 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{  
-            ps=koneksi.prepareStatement("select * from kategori_pemasukan_lain "+(TCari.getText().trim().equals("")?"":"where kategori_pemasukan_lain.kode_kategori like ? or kategori_pemasukan_lain.nama_kategori like ?")+" order by kategori_pemasukan_lain.nama_kategori");  
+        try{
+            ps=koneksi.prepareStatement("select * from kategori_pemasukan_lain "+(TCari.getText().trim().equals("")?"":"where kategori_pemasukan_lain.kode_kategori like ? or kategori_pemasukan_lain.nama_kategori like ?")+" order by kategori_pemasukan_lain.nama_kategori");
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -911,7 +911,7 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),akun,kontrakun
                     });
-                }          
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -969,7 +969,7 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getkategori_pemasukan_lain());
         BtnPrint.setEnabled(akses.getkategori_pemasukan_lain());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -995,10 +995,12 @@ public final class DlgKategoriPemasukan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

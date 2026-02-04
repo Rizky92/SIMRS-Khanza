@@ -321,16 +321,16 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
             rekening.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(rekening.getTabel().getSelectedRow()!= -1){      
+                    if(rekening.getTabel().getSelectedRow()!= -1){
                         if(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),3).toString().equals("N")&&
                                 rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),4).toString().equals("D")){
                             kdrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),1).toString());
-                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString()); 
+                            nmrek.setText(rekening.getTabel().getValueAt(rekening.getTabel().getSelectedRow(),2).toString());
                         }else{
                             JOptionPane.showMessageDialog(rootPane,"Rekening harus Tipe N dan Balance D..!!");
                         }
                         kdrek.requestFocus();
-                    } 
+                    }
                     rekening=null;
                 }
             });
@@ -342,17 +342,17 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
                         rekening.dispose();
                     }
                 }
-            });   
+            });
             rekening.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             rekening.setLocationRelativeTo(internalFrame1);
         }
         if (rekening == null) return;
         if (!rekening.isVisible()) {
-            rekening.isCek();    
+            rekening.isCek();
             rekening.emptTeks();
             rekening.tampil2();
         }
-        
+
         if (rekening.isVisible()) {
             rekening.toFront();
             return;
@@ -463,7 +463,7 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbSpesialisKeyPressed
 
     private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-        
+
     }//GEN-LAST:event_tbSpesialisMouseClicked
 
     private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
@@ -561,7 +561,7 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
             TKd.setText(tabMode.getValueAt(row,2).toString());
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -587,10 +587,12 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

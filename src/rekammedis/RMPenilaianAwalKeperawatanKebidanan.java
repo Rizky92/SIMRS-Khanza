@@ -6340,9 +6340,11 @@ public final class RMPenilaianAwalKeperawatanKebidanan extends javax.swing.JDial
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

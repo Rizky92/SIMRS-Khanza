@@ -104,7 +104,7 @@ public final class KeuanganValidasiTagihanNonMedis extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
     }
 
     /** This method is called from within the constructor to
@@ -459,7 +459,7 @@ public final class KeuanganValidasiTagihanNonMedis extends javax.swing.JDialog {
                     kdsuplier.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),0).toString());
                     nmsuplier.setText(suplier.getTable().getValueAt(suplier.getTable().getSelectedRow(),1).toString());
                     runBackground(() ->tampil());
-                }      
+                }
                 kdsuplier.requestFocus();
             }
             @Override
@@ -470,8 +470,8 @@ public final class KeuanganValidasiTagihanNonMedis extends javax.swing.JDialog {
             public void windowActivated(WindowEvent e) {suplier.emptTeks();}
             @Override
             public void windowDeactivated(WindowEvent e) {}
-        });   
-        
+        });
+
         suplier.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -634,7 +634,7 @@ public final class KeuanganValidasiTagihanNonMedis extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -660,10 +660,12 @@ public final class KeuanganValidasiTagihanNonMedis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

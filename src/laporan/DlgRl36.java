@@ -102,8 +102,8 @@ public final class DlgRl36 extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
-    }    
+        }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -389,8 +389,8 @@ public final class DlgRl36 extends javax.swing.JDialog {
 
     private void tampil(){
         try {
-            Valid.tabelKosong(tabMode); 
-            ps=koneksi.prepareStatement("select paket_operasi.kode_paket,paket_operasi.nm_perawatan from paket_operasi where paket_operasi.kategori='Operasi' "+(TCari.getText().trim().equals("")?"":"and paket_operasi.nm_perawatan like ? ")+"order by paket_operasi.nm_perawatan");  
+            Valid.tabelKosong(tabMode);
+            ps=koneksi.prepareStatement("select paket_operasi.kode_paket,paket_operasi.nm_perawatan from paket_operasi where paket_operasi.kategori='Operasi' "+(TCari.getText().trim().equals("")?"":"and paket_operasi.nm_perawatan like ? ")+"order by paket_operasi.nm_perawatan");
             try {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
@@ -454,7 +454,7 @@ public final class DlgRl36 extends javax.swing.JDialog {
                         i,rs.getString("nm_perawatan"),(khusus+besar+sedang+kecil),khusus,besar,sedang,kecil
                     });
                     i++;
-                }   
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -495,10 +495,12 @@ public final class DlgRl36 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

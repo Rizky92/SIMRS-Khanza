@@ -7763,9 +7763,11 @@ public final class BPJSCekNIK2 extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

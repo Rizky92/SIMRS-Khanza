@@ -1496,7 +1496,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
         LTotal.setText(Valid.SetAngka(total));
     }
-    
+
     public void tampil2() {
         runBackground(() ->tampil());
     }
@@ -1686,7 +1686,7 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
              norekening="";
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1712,10 +1712,12 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

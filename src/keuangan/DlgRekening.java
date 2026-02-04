@@ -1126,7 +1126,7 @@ public final class DlgRekening extends javax.swing.JDialog {
                     ps.setString(3,"%"+TCari.getText().trim()+"%");
                     ps.setString(4,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -1270,7 +1270,7 @@ public final class DlgRekening extends javax.swing.JDialog {
                                                                                             ps10.setString(3,"%"+TCari.getText().trim()+"%");
                                                                                             ps10.setString(4,"%"+TCari.getText().trim()+"%");
                                                                                             ps10.setString(5,"%"+TCari.getText().trim()+"%");
-                                                                                        }   
+                                                                                        }
                                                                                         rs10=ps10.executeQuery();
                                                                                         while(rs10.next()){
                                                                                             tabMode.addRow(new Object[]{
@@ -1286,7 +1286,7 @@ public final class DlgRekening extends javax.swing.JDialog {
                                                                                                     ps11.setString(3,"%"+TCari.getText().trim()+"%");
                                                                                                     ps11.setString(4,"%"+TCari.getText().trim()+"%");
                                                                                                     ps11.setString(5,"%"+TCari.getText().trim()+"%");
-                                                                                                } 
+                                                                                                }
                                                                                                 rs11=ps11.executeQuery();
                                                                                                 while(rs11.next()){
                                                                                                     tabMode.addRow(new Object[]{
@@ -1302,7 +1302,7 @@ public final class DlgRekening extends javax.swing.JDialog {
                                                                                                             ps12.setString(3,"%"+TCari.getText().trim()+"%");
                                                                                                             ps12.setString(4,"%"+TCari.getText().trim()+"%");
                                                                                                             ps12.setString(5,"%"+TCari.getText().trim()+"%");
-                                                                                                        } 
+                                                                                                        }
                                                                                                         rs12=ps12.executeQuery();
                                                                                                         while(rs12.next()){
                                                                                                             tabMode.addRow(new Object[]{
@@ -1318,7 +1318,7 @@ public final class DlgRekening extends javax.swing.JDialog {
                                                                                                                     ps13.setString(3,"%"+TCari.getText().trim()+"%");
                                                                                                                     ps13.setString(4,"%"+TCari.getText().trim()+"%");
                                                                                                                     ps13.setString(5,"%"+TCari.getText().trim()+"%");
-                                                                                                                } 
+                                                                                                                }
                                                                                                                 rs13=ps13.executeQuery();
                                                                                                                 while(rs13.next()){
                                                                                                                     tabMode.addRow(new Object[]{
@@ -1476,7 +1476,7 @@ public final class DlgRekening extends javax.swing.JDialog {
     public void tampil3() {
         runBackground(() ->tampil());
     }
-    
+
     private void tampil2() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1599,10 +1599,12 @@ public final class DlgRekening extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

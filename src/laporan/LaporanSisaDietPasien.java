@@ -123,7 +123,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         ChkInput.setSelected(false);
         isForm();
     }
-    
+
     /** This method is called from within the constructor to
      * initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is
@@ -875,10 +875,10 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(bangsal.getTable().getSelectedRow()!= -1){                          
+                if(bangsal.getTable().getSelectedRow()!= -1){
                     NmBangsalCari.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                    NmBangsalCari.requestFocus();                           
-                } 
+                    NmBangsalCari.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -909,11 +909,11 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(jamdiet.getTable().getSelectedRow()!= -1){  
+                if(jamdiet.getTable().getSelectedRow()!= -1){
                     WaktuDiet2.setText(jamdiet.getTable().getValueAt(jamdiet.getTable().getSelectedRow(),0).toString());
                     JamDiet2.setText(jamdiet.getTable().getValueAt(jamdiet.getTable().getSelectedRow(),1).toString());
-                    BtnJam2.requestFocus(); 
-                } 
+                    BtnJam2.requestFocus();
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1186,7 +1186,7 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getsisa_diet_pasien());
         BtnPrint.setEnabled(akses.getsisa_diet_pasien());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1212,10 +1212,12 @@ public class LaporanSisaDietPasien extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

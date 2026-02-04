@@ -181,7 +181,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
         ranapvipperbarang.setDocument(new batasInput((byte)10).getKata(ranapvipperbarang));
         ranapvvipperbarang.setDocument(new batasInput((byte)10).getKata(ranapvvipperbarang));
         beliluarperbarang.setDocument(new batasInput((byte)10).getKata(beliluarperbarang));
-        jualbebasperbarang.setDocument(new batasInput((byte)10).getKata(jualbebasperbarang));   
+        jualbebasperbarang.setDocument(new batasInput((byte)10).getKata(jualbebasperbarang));
     }
 
     /** This method is called from within the constructor to
@@ -2626,10 +2626,10 @@ public class DlgSetHarga extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(barang.getTable().getSelectedRow()!= -1){                   
-                    kdbarang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());                    
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdbarang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                     nmbarang.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),2).toString());
-                }     
+                }
                 kdbarang.requestFocus();
             }
             @Override
@@ -2641,7 +2641,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         barang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -2649,7 +2649,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     barang.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3167,7 +3167,7 @@ public class DlgSetHarga extends javax.swing.JDialog {
             ralanperbarang.requestFocus();
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -3193,10 +3193,12 @@ public class DlgSetHarga extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -1780,7 +1780,7 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
                     pstampil.setString(13,"%"+TCari.getText().trim()+"%");
                     pstampil.setString(14,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=pstampil.executeQuery();
                 while(rs.next()){
                     keluar="";diagnosa="";status="";diagnosa2="";
@@ -1832,8 +1832,8 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
-    
-    public void tampil3() { 
+
+    public void tampil3() {
         runBackground(() ->tampil());
     }
 
@@ -1906,8 +1906,8 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         isRawat();
         ChkInput.setSelected(true);
         isForm();
-    } 
-    
+    }
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getrujukan_masuk());
         BtnHapus.setEnabled(akses.getrujukan_masuk());
@@ -1944,8 +1944,8 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         }
         LCount1.setText(""+tabMode2.getRowCount());
     }
-    
-    public void tampil4() { 
+
+    public void tampil4() {
         runBackground(() ->tampil2());
     }
 
@@ -1995,10 +1995,12 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

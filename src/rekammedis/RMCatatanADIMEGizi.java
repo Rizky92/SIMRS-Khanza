@@ -1564,9 +1564,11 @@ public final class RMCatatanADIMEGizi extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

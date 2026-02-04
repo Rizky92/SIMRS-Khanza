@@ -120,7 +120,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
 
@@ -818,7 +818,7 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getakun_aset_inventaris());
         BtnSemua.setEnabled(akses.getakun_aset_inventaris());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -844,10 +844,12 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -1164,7 +1164,7 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
     public void tampil2() {
         runBackground(() ->tampil());
     }
-    
+
     public void emptTeks() {
         Kd2.setText("");
         Cicilan.setText("0");
@@ -1287,8 +1287,8 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                 System.out.println("Notifikasi : "+ex);
             }
         }
-    } 
-    
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1314,10 +1314,12 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -1574,7 +1574,7 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void tampil2() { 
+    public void tampil2() {
         runBackground(() ->tampil());
     }
 
@@ -1730,10 +1730,12 @@ public class DlgPermintaanRanap extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

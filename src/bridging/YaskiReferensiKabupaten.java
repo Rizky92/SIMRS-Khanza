@@ -104,7 +104,7 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }
 
 
@@ -287,22 +287,22 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
                 propinsi.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(propinsi.getTable().getSelectedRow()!= -1){   
+                        if(propinsi.getTable().getSelectedRow()!= -1){
                             KdProp.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),1).toString());
                             NmProp.setText(propinsi.getTable().getValueAt(propinsi.getTable().getSelectedRow(),2).toString().toUpperCase());
-                        } 
+                        }
                         propinsi=null;
                     }
-                }); 
+                });
 
                 propinsi.getTable().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             propinsi.dispose();
-                        } 
+                        }
                     }
-                });   
+                });
                 propinsi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 propinsi.setLocationRelativeTo(internalFrame1);
             }
@@ -311,7 +311,7 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
             if (propinsi.isVisible()) {
                 propinsi.toFront();
                 return;
-            }    
+            }
             propinsi.setVisible(true);
     }//GEN-LAST:event_BtnPropinsiActionPerformed
 
@@ -379,7 +379,7 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
         this.NmProp.setText(NmProp);
         runBackground(() ->tampil(""));
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -405,10 +405,12 @@ public final class YaskiReferensiKabupaten extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

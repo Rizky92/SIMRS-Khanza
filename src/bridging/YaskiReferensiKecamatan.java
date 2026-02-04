@@ -106,7 +106,7 @@ public final class YaskiReferensiKecamatan extends javax.swing.JDialog {
                     }
                 }
             });
-        }     
+        }
     }
 
 
@@ -290,22 +290,22 @@ public final class YaskiReferensiKecamatan extends javax.swing.JDialog {
                 kabupaten.addWindowListener(new WindowAdapter() {
                     @Override
                     public void windowClosed(WindowEvent e) {
-                        if(kabupaten.getTable().getSelectedRow()!= -1){   
+                        if(kabupaten.getTable().getSelectedRow()!= -1){
                             KdKab.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),1).toString());
                             NmKab.setText(kabupaten.getTable().getValueAt(kabupaten.getTable().getSelectedRow(),2).toString().toUpperCase());
-                        } 
+                        }
                         kabupaten=null;
                     }
-                }); 
+                });
 
                 kabupaten.getTable().addKeyListener(new KeyAdapter() {
                     @Override
                     public void keyPressed(KeyEvent e) {
                         if(e.getKeyCode()==KeyEvent.VK_SPACE){
                             kabupaten.dispose();
-                        } 
+                        }
                     }
-                });   
+                });
                 kabupaten.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                 kabupaten.setLocationRelativeTo(internalFrame1);
             }
@@ -313,7 +313,7 @@ public final class YaskiReferensiKecamatan extends javax.swing.JDialog {
             if (kabupaten.isVisible()) {
                 kabupaten.toFront();
                 return;
-            }    
+            }
             kabupaten.setVisible(true);
     }//GEN-LAST:event_BtnPropinsiActionPerformed
 
@@ -381,7 +381,7 @@ public final class YaskiReferensiKecamatan extends javax.swing.JDialog {
         this.NmKab.setText(NmKab);
         runBackground(() ->tampil(""));
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -407,10 +407,12 @@ public final class YaskiReferensiKecamatan extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

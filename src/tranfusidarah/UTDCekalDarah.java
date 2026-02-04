@@ -123,10 +123,10 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
+        }
         ChkInput.setSelected(false);
         isForm();
-    } 
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -835,7 +835,7 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
                 if(dokter.getTable().getSelectedRow()!= -1){
                     KodePetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
                     NamaPetugas.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                }   
+                }
                 KodePetugas.requestFocus();
             }
             @Override
@@ -1099,10 +1099,12 @@ public final class UTDCekalDarah extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

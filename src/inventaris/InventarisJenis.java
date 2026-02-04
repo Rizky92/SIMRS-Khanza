@@ -634,7 +634,7 @@ public class InventarisJenis extends javax.swing.JDialog {
        BtnHapus.setEnabled(akses.getinventaris_jenis());
        BtnEdit.setEnabled(akses.getinventaris_jenis());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -660,10 +660,12 @@ public class InventarisJenis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

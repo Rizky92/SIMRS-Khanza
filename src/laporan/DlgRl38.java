@@ -101,8 +101,8 @@ public final class DlgRl38 extends javax.swing.JDialog {
                     }
                 }
             });
-        }  
-    }    
+        }
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -380,15 +380,15 @@ public final class DlgRl38 extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
-        try{    
-            Valid.tabelKosong(tabMode);  
+    private void tampil(){
+        try{
+            Valid.tabelKosong(tabMode);
             pstindakan=koneksi.prepareStatement(
                 "select jns_perawatan_lab.nm_perawatan,count(jns_perawatan_lab.nm_perawatan),jns_perawatan_lab.kd_jenis_prw from periksa_lab "+
                 "inner join jns_perawatan_lab on periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw where periksa_lab.tgl_periksa between ? and ? "+
                 (TCari.getText().trim().equals("")?"":"and jns_perawatan_lab.nm_perawatan like ? ")+"group by jns_perawatan_lab.nm_perawatan"
             );
-            try {            
+            try {
                 pstindakan.setString(1,Valid.SetTgl(Tgl1.getSelectedItem()+""));
                 pstindakan.setString(2,Valid.SetTgl(Tgl2.getSelectedItem()+""));
                 if(!TCari.getText().trim().equals("")){
@@ -423,7 +423,7 @@ public final class DlgRl38 extends javax.swing.JDialog {
                                 i+"."+a,rstindakan2.getString(1),rstindakan2.getInt(2)
                             });
                             ttl=ttl+rstindakan2.getInt(2);
-                            a++;                    
+                            a++;
                         }
                     } catch (Exception e) {
                         System.out.println(e);
@@ -436,7 +436,7 @@ public final class DlgRl38 extends javax.swing.JDialog {
                         }
                     }
                     ttl=ttl+rstindakan.getInt(2);
-                    i++;                    
+                    i++;
                 }
                 if(i>1){
                     tabMode.addRow(new Object[]{
@@ -483,10 +483,12 @@ public final class DlgRl38 extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

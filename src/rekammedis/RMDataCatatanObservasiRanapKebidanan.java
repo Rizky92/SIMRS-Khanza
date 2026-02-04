@@ -1664,9 +1664,11 @@ public final class RMDataCatatanObservasiRanapKebidanan extends javax.swing.JDia
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }

@@ -4450,9 +4450,11 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
         }
     }
 
+    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
+    */
 }
