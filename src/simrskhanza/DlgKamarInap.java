@@ -11154,7 +11154,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 }else if(R3.isSelected()==true){
                                     resume.setNoRm(rs2.getString("no_rawat2"),DTPCari4.getDate());
                                 }
-                                resume.tampil();
                                 resume.setVisible(true);
                                 this.setCursor(Cursor.getDefaultCursor());
                             }else{
@@ -11187,7 +11186,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     }else if(R3.isSelected()==true){
                         resume.setNoRm(norawat.getText(),DTPCari4.getDate());
                     }
-                    resume.tampil();
                     resume.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }
@@ -12740,7 +12738,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                     resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                     resume.setLocationRelativeTo(internalFrame1);
                                     resume.setNoRm(rs2.getString("no_rawat2"),new Date());
-                                    resume.tampil2();
                                     resume.setVisible(true);
                                     this.setCursor(Cursor.getDefaultCursor());
                               }else{
@@ -12768,7 +12765,6 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                     resume.setLocationRelativeTo(internalFrame1);
                     resume.setNoRm(TNoRwCari.getText(),new Date());
-                    resume.tampil2();
                     resume.setVisible(true);
                     this.setCursor(Cursor.getDefaultCursor());
                 }

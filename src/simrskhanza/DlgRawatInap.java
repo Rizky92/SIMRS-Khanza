@@ -6824,7 +6824,6 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             resume.setLocationRelativeTo(internalFrame1);
             resume.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-            resume.tampil();
             resume.setVisible(true);
             this.setCursor(Cursor.getDefaultCursor());
         }

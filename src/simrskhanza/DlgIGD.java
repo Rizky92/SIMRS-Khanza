@@ -8576,7 +8576,6 @@ private void btnKabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:
                 resume.setVisible(true);
                 resume.setLocationRelativeTo(internalFrame1);
                 resume.setNoRm(TNoRw.getText(),DTPCari2.getDate());
-                resume.tampil2();
                 this.setCursor(Cursor.getDefaultCursor());
             }
         }

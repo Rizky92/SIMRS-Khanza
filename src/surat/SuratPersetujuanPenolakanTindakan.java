@@ -2483,10 +2483,6 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
         LCount.setText(""+tabMode.getRowCount());
     }
 
-    public void tampil2() {
-        runBackground(() ->tampil());
-    }
-
     public void emptTeks() {
         HubunganDenganPasien.setSelectedIndex(0);
         TglPernyataan.setDate(new Date());
@@ -2603,6 +2599,7 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
         TCari.setText(norwt);
         DTPCari2.setDate(tgl2);
         isRawat();
+        runBackground(() ->tampil());
     }
 
     public void isCek(){
