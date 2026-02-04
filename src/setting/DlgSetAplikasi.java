@@ -474,6 +474,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
+
             }
         }
     }//GEN-LAST:event_tbAdminMouseClicked
@@ -551,7 +552,7 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
 
             emptTeks();
             tampil();
-            
+
             frmUtama.getInstance().isWall();
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -690,22 +691,22 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
     private void getData() {
         int row = tbAdmin.getSelectedRow();
         if (row != -1) {
-            Nm.setText(tbAdmin.getValueAt(row, 0).toString());
-            Almt.setText(tbAdmin.getValueAt(row, 1).toString());
-            Kota.setText(tbAdmin.getValueAt(row, 2).toString());
-            Propinsi.setText(tbAdmin.getValueAt(row, 3).toString());
-            YesNo.setSelectedItem(tbAdmin.getValueAt(row, 4).toString());
-            Kontak.setText(tbAdmin.getValueAt(row, 6).toString());
-            Email.setText(tbAdmin.getValueAt(row, 7).toString());
-            kdPPKBPJS.setText(tbAdmin.getValueAt(row, 9).toString());
-            kdPPKApotekOnline.setText(tbAdmin.getValueAt(row, 10).toString());
-            kdPPKInhealth.setText(tbAdmin.getValueAt(row, 11).toString());
-            kdPPKKemenkes.setText(tbAdmin.getValueAt(row, 12).toString());
-            BatasEdit2x24jam.setSelectedItem(tbAdmin.getValueAt(row, 13).toString());
-            SistemImportKoding.setSelectedItem(tbAdmin.getValueAt(row, 14).toString());
+            Nm.setText((String) tbAdmin.getValueAt(row, 0));
+            Almt.setText((String) tbAdmin.getValueAt(row, 1));
+            Kota.setText((String) tbAdmin.getValueAt(row, 2));
+            Propinsi.setText((String) tbAdmin.getValueAt(row, 3));
+            YesNo.setSelectedItem((String) tbAdmin.getValueAt(row, 4));
+            Kontak.setText((String) tbAdmin.getValueAt(row, 6));
+            Email.setText((String) tbAdmin.getValueAt(row, 7));
+            kdPPKBPJS.setText((String) tbAdmin.getValueAt(row, 9));
+            kdPPKApotekOnline.setText((String) tbAdmin.getValueAt(row, 10));
+            kdPPKInhealth.setText((String) tbAdmin.getValueAt(row, 11));
+            kdPPKKemenkes.setText((String) tbAdmin.getValueAt(row, 12));
+            BatasEdit2x24jam.setSelectedItem((String) tbAdmin.getValueAt(row, 13));
+            SistemImportKoding.setSelectedItem((String) tbAdmin.getValueAt(row, 14));
             try {
-                ((Painter) PhotoGambar).fromBase64(tbAdmin.getValueAt(row, 5).toString());
-                ((Painter) PhotoLogo).fromBase64(tbAdmin.getValueAt(row, 8).toString());
+                ((Painter) PhotoGambar).fromBase64((String) tbAdmin.getValueAt(row, 5));
+                ((Painter) PhotoLogo).fromBase64((String) tbAdmin.getValueAt(row, 8));
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
