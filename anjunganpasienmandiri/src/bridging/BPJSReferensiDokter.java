@@ -303,6 +303,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
             Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             final String kodePoli = KdPoli.getText().trim();
+            final String cari = TCari.getText().trim();
 
             new SwingWorker<Void, Object[]>() {
                 private volatile int i = 0;
@@ -328,7 +329,7 @@ public final class BPJSReferensiDokter extends widget.Dialog {
                         JsonNode response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
                         if (response.path("list").isArray()) {
                             StreamSupport.stream(response.path("list").spliterator(), false)
-                                .filter(list -> list.path("kode").asText().toLowerCase().contains(kodePoli.toLowerCase()) || list.path("nama").asText().toLowerCase().contains(kodePoli.toLowerCase()))
+                                .filter(list -> list.path("kode").asText().toLowerCase().contains(cari.toLowerCase()) || list.path("nama").asText().toLowerCase().contains(cari.toLowerCase()))
                                 .forEach(list -> publish(new Object[] {
                                     (++i), list.path("kode").asText(), list.path("nama").asText()
                                 }));
