@@ -418,7 +418,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 }
             });
         }
-        
+
         try {
             aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
             if(aktifkanbatch.equals("no")){
@@ -1736,13 +1736,13 @@ public final class DlgCariObat extends javax.swing.JDialog {
                                     public void windowClosed(WindowEvent e) {
                                         ResepObat=null;
                                     }
-                                }); 
+                                });
 
                                 ResepObat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 ResepObat.setLocationRelativeTo(internalFrame1);
                             }
                             if (ResepObat == null) return;
-                            if (!ResepObat.isVisible()) { 
+                            if (!ResepObat.isVisible()) {
                                 ResepObat.emptTeks();
                                 ResepObat.isCek();
                                 if(!namadokter.equals("")){
@@ -1897,21 +1897,21 @@ public final class DlgCariObat extends javax.swing.JDialog {
             lokasidepo.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(lokasidepo.getTable().getSelectedRow()!= -1){                   
+                    if(lokasidepo.getTable().getSelectedRow()!= -1){
                         kdgudang.setText(lokasidepo.getTable().getValueAt(lokasidepo.getTable().getSelectedRow(),0).toString());
                         nmgudang.setText(lokasidepo.getTable().getValueAt(lokasidepo.getTable().getSelectedRow(),1).toString());
-                    } 
+                    }
                     kdgudang.requestFocus();
                     lokasidepo=null;
                 }
-            }); 
+            });
 
             lokasidepo.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             lokasidepo.setLocationRelativeTo(internalFrame1);
         }
         if (lokasidepo == null) return;
         if (!lokasidepo.isVisible()) {
-            lokasidepo.isCek();    
+            lokasidepo.isCek();
             lokasidepo.emptTeks();
         }
 
@@ -4454,23 +4454,32 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
     private void cekPengaturanResepRalan() {
         boolean oldValue = ChkNoResep.isSelected();
-        try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
-            JsonNode iyem = mapper.readTree(fr);
-            autovalidasi = iyem.path("autovalidasiralan").asBoolean(false);
-            previewLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false);
-            previewAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false);
-            if (autovalidasi) {
-                ChkNoResep.setSelected(!(previewLembarObat && previewAturanPakai));
-                if (previewLembarObat) {
-                    modelLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
-                    printerLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText("");
+        if (!new File("./cache/pengaturanresep.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
+                JsonNode iyem = mapper.readTree(fr);
+                autovalidasi = iyem.path("autovalidasiralan").asBoolean(false);
+                previewLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false);
+                previewAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false);
+                if (autovalidasi) {
+                    ChkNoResep.setSelected(!(previewLembarObat && previewAturanPakai));
+                    if (previewLembarObat) {
+                        modelLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
+                        printerLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText("");
+                    }
+                    if (previewAturanPakai) {
+                        modelAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText();
+                    }
                 }
-                if (previewAturanPakai) {
-                    modelAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText();
-                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                autovalidasi = false;
+                previewLembarObat = false;
+                previewAturanPakai = false;
+                modelLembarObat = "";
+                modelAturanPakai = "";
+                ChkNoResep.setSelected(oldValue);
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+        } else {
             autovalidasi = false;
             previewLembarObat = false;
             previewAturanPakai = false;
