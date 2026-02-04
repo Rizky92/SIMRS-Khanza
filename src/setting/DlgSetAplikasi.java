@@ -544,14 +544,18 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
             }
 
             Sequel.menghapusSmc("setting");
-            Sequel.executeRawSmc("insert into setting (nama_instansi, alamat_instansi, kabupaten, propinsi, kontak, email, aktifkan, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, " +
+            if (Sequel.executeRawSmc("insert into setting (nama_instansi, alamat_instansi, kabupaten, propinsi, kontak, email, aktifkan, kode_ppk, kode_ppkinhealth, kode_ppkkemenkes, " +
                 "pemberlakuan_2x24_jam, sistem_import_koding, kode_ppkapotek, wallpaper, logo) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, from_base64(?), from_base64(?))",
                 Nm.getText(), Almt.getText(), Kota.getText(), Propinsi.getText(), Kontak.getText(), Email.getText(), YesNo.getSelectedItem().toString(), kdPPKBPJS.getText(),
                 kdPPKInhealth.getText(), kdPPKKemenkes.getText(), BatasEdit2x24jam.getSelectedItem().toString(), SistemImportKoding.getSelectedItem().toString(),
-                kdPPKApotekOnline.getText(), gb, logo);
-
-            emptTeks();
-            tampil();
+                kdPPKApotekOnline.getText(), gb, logo)
+            ) {
+                emptTeks();
+                tampil();
+                JOptionPane.showMessageDialog(null, "Pengaturan berhasil disimpan..!!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Pengaturan gagal disimpan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+            }
 
             frmUtama.getInstance().isWall();
         }
