@@ -155,13 +155,13 @@ public class DlgLogin extends widget.Dialog {
                 if (rs.next()) {
                     if (rs.getBoolean("admine")) {
                         dispose();
-                        LoggedInEvent event = new LoggedInEvent(true, null);
+                        LoggedInEvent event = new LoggedInEvent(true, null, "Admin Utama");
                         if (listener != null) {
                             listener.onLogin(event);
                         }
                     } else if (rs.getString(akses).equals("true")) {
                         dispose();
-                        LoggedInEvent event = new LoggedInEvent(false, akses);
+                        LoggedInEvent event = new LoggedInEvent(false, akses, user);
                         if (listener != null) {
                             listener.onLogin(event);
                         }
@@ -210,12 +210,18 @@ public class DlgLogin extends widget.Dialog {
     }
 
     public static class LoggedInEvent {
-        private boolean admin = false;
-        private String akses = "";
+        private final boolean admin;
+        private final String akses;
+        private final String userID;
 
-        public LoggedInEvent(final boolean admin, final String akses) {
+        public LoggedInEvent(final boolean admin, final String akses, final String userID) {
             this.admin = admin;
             this.akses = akses;
+            this.userID = userID;
+        }
+
+        public String getUserID() {
+            return this.userID;
         }
 
         public boolean isAdmin() {
