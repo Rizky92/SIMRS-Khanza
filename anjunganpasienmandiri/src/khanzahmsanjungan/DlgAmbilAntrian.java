@@ -182,23 +182,23 @@ public class DlgAmbilAntrian extends widget.Dialog {
     }//GEN-LAST:event_HurufAActionPerformed
 
     private void HurufBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufBActionPerformed
-        this.setCursor(Cursor.getDefaultCursor());
+        cetakAntrianHuruf("B");
     }//GEN-LAST:event_HurufBActionPerformed
 
     private void HurufCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufCActionPerformed
-        this.setCursor(Cursor.getDefaultCursor());
+        cetakAntrianHuruf("C");
     }//GEN-LAST:event_HurufCActionPerformed
 
     private void HurufDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufDActionPerformed
-        this.setCursor(Cursor.getDefaultCursor());
+        cetakAntrianHuruf("D");
     }//GEN-LAST:event_HurufDActionPerformed
 
     private void HurufEActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufEActionPerformed
-        this.setCursor(Cursor.getDefaultCursor());
+        cetakAntrianHuruf("E");
     }//GEN-LAST:event_HurufEActionPerformed
 
     private void HurufFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HurufFActionPerformed
-        this.setCursor(Cursor.getDefaultCursor());
+        cetakAntrianHuruf("F");
     }//GEN-LAST:event_HurufFActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

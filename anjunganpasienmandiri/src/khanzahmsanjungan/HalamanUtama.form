@@ -216,7 +216,7 @@
             <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="b4" green="b4" red="b4" type="rgb"/>
             </Property>
-            <Property name="text" type="java.lang.String" value="Versi : 2026-02-03"/>
+            <Property name="text" type="java.lang.String" value="Versi : 2026-02-03 Patch 1"/>
             <Property name="focusable" type="boolean" value="false"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Inter" size="12" style="1"/>
