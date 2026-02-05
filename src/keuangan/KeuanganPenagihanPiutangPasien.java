@@ -178,6 +178,22 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Ditujukan.setDocument(new batasInput((int)150).getKata(Ditujukan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         Diskon.setDocument(new batasInput((int) 4).getOnlyAngka(Diskon));
+        Diskon.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+        });
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
