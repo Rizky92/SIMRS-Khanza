@@ -65,6 +65,7 @@ import bridging.BPJSCekReferensiRuangRawat;
 import bridging.BPJSCekReferensiSpesialistik;
 import bridging.BPJSCekRiwayatRujukanPCare;
 import bridging.BPJSCekRiwayatRujukanRS;
+import bridging.BPJSCekRiwayatSuratKontrolSMC;
 import bridging.BPJSCekRujukanKartuPCare;
 import bridging.BPJSCekRujukanKartuRS;
 import bridging.BPJSCekSKDP;
@@ -49855,7 +49856,7 @@ public class frmUtama extends javax.swing.JFrame {
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
-                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc;
+                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -49945,6 +49946,14 @@ public class frmUtama extends javax.swing.JFrame {
         btnPintuPoliSmc.setName("btnPintuPoliSmc");
         btnPintuPoliSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPintuPoliSmc.addActionListener(this::btnPintuPoliSmcActionPerformed);
+
+        btnBPJSRiwayatSuratKontrolSmc = new widget.ButtonBig();
+        btnBPJSRiwayatSuratKontrolSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/vclaim.png")));
+        btnBPJSRiwayatSuratKontrolSmc.setText("Riwayat Surat Kontrol VClaim");
+        btnBPJSRiwayatSuratKontrolSmc.setIconTextGap(0);
+        btnBPJSRiwayatSuratKontrolSmc.setName("btnBPJSRiwayatSuratKontrolSmc");
+        btnBPJSRiwayatSuratKontrolSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnBPJSRiwayatSuratKontrolSmc.addActionListener(this::btnBPJSRiwayatSuratKontrolSmc);
     }
 
     private void isComboSMC() {
@@ -49981,6 +49990,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if (akses.getbpjs_riwayat_pelayanan_resep_smc()) {
                 Panelmenu.add(btnBPJSRiwayatPelayananResepApotek);
+                jmlmenu++;
+            }
+
+            if (akses.getbpjs_riwayat_surat_smc()) {
+                Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
             }
         } else if (cmbMenu.getSelectedIndex() == 19) {
@@ -50054,6 +50068,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if (akses.getpintu_poli_smc()) {
             Panelmenu.add(btnPintuPoliSmc);
+            jmlmenu++;
+        }
+
+        if (akses.getbpjs_riwayat_surat_smc()) {
+            Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
             jmlmenu++;
         }
     }
@@ -50132,6 +50151,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getpintu_poli_smc()) {
             if (btnPintuPoliSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnPintuPoliSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getbpjs_riwayat_surat_smc()) {
+            if (btnBPJSRiwayatSuratKontrolSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
             }
         }
@@ -50276,6 +50302,17 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgPintuSMC aplikasi = new DlgPintuSMC(this, false);
         aplikasi.emptTeks();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnBPJSRiwayatSuratKontrolSmc(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        BPJSCekRiwayatSuratKontrolSMC aplikasi = new BPJSCekRiwayatSuratKontrolSMC(this, false);
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
