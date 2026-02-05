@@ -49993,7 +49993,7 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
-            if (true) {
+            if (akses.getbpjs_riwayat_surat_smc()) {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
             }
@@ -50071,7 +50071,7 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
-        if (true) {
+        if (akses.getbpjs_riwayat_surat_smc()) {
             Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
             jmlmenu++;
         }
@@ -50155,7 +50155,7 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
-        if (true) {
+        if (akses.getbpjs_riwayat_surat_smc()) {
             if (btnBPJSRiwayatSuratKontrolSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
