@@ -496,6 +496,18 @@ public final class validasi {
         }
     }
 
+    public int clamp(int current, int min, int max) {
+        if (current > max) {
+            return max;
+        }
+
+        if (current < min) {
+            return min;
+        }
+
+        return current;
+    }
+
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){
         s=Integer.toString(tabMode.getRowCount()+1);
         j=s.length();
