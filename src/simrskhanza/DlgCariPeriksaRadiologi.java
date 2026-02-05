@@ -1736,7 +1736,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(Kd2.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu...!!!!");
             }else{
-                if (akses.getpermintaan_radiologi() && !petugas.tampil3(akses.getkode()).isBlank()) {
+                if (akses.getpermintaan_radiologi() && !Sequel.CariPetugas(akses.getkode()).isBlank()) {
                     Sequel.mengupdateSmc("permintaan_radiologi", "diagnosa_klinis = ?", "no_rawat = ? and tgl_hasil = ? and jam_hasil = ?",
                         DiagnosisKlinis.getText().trim(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString(),
                         tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
@@ -2494,7 +2494,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         BtnPrint.setEnabled(akses.getperiksa_radiologi());
         ppRiwayat.setEnabled(akses.getresume_pasien());
         ppBerkasDigital.setEnabled(akses.getberkas_digital_perawatan());
-        DiagnosisKlinis.setEditable(akses.getadmin() || (akses.getpermintaan_radiologi() && !petugas.tampil3(akses.getkode()).isBlank()));
+        DiagnosisKlinis.setEditable(akses.getadmin() || (akses.getpermintaan_radiologi() && !Sequel.CariPetugas(akses.getkode()).isBlank()));
     }
 
     public void setPasien(String pasien){

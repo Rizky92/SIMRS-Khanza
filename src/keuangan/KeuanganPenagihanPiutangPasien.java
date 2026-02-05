@@ -14,6 +14,8 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -176,6 +178,22 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
         Ditujukan.setDocument(new batasInput((int)150).getKata(Ditujukan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         Diskon.setDocument(new batasInput((int) 4).getOnlyAngka(Diskon));
+        Diskon.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                cekDiskon();
+            }
+        });
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -1158,10 +1176,108 @@ public final class KeuanganPenagihanPiutangPasien extends javax.swing.JDialog {
                             jml=tbBelumDitagihkan.getRowCount();
                             for(i=0;i<jml;i++){
                                 if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
-                                    if(Sequel.menyimpantf2("detail_penagihan_piutang","?,?,?","Detail Penagihan",3,new String[]{
-                                        NoPenagihan.getText(),tbBelumDitagihkan.getValueAt(i,1).toString(),tbBelumDitagihkan.getValueAt(i,6).toString()
-                                    })==false){
-                                        sukses=false;
+                                    if(! Sequel.menyimpantfSmc("detail_penagihan_piutang", "no_tagihan, no_rawat, sisapiutang",
+                                        NoPenagihan.getText(), tbBelumDitagihkan.getValueAt(i, 1).toString(), tbBelumDitagihkan.getValueAt(i, 6).toString()
+                                    )) {
+                                        sukses = false;
+                                    }
+                                }
+                            }
+                        }else{
+                            sukses=false;
+                        }
+
+                        if(sukses==true){
+                            Sequel.Commit();
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                            Sequel.RollBack();
+                        }
+                        Sequel.AutoComitTrue();
+                        if(sukses==true){
+                            Valid.tabelKosong(tabMode2);
+                            runBackground(() ->tampil2());
+
+                            jml=0;
+                            total=0;
+                            LCountDipilih1.setText("0");
+                            LCountDipilih2.setText("0");
+                            Catatan.setText("");
+                            TotalPenagihan.setText("0");
+                            Diskon.setText("");
+                            NamaBank.setText("");
+                            NoRek.setText("");
+                            cetakInvoice();
+                        }
+                        autoNomor();
+                    }
+                }
+            } else {
+                if(TabRawat.getSelectedIndex()==0){
+                    int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        Sequel.AutoComitFalse();
+                        sukses=true;
+                        if(Sequel.menyimpantf2("penagihan_piutang","?,?,?,?,?,?,?,?,?,'Proses Penagihan'","No.Penagihan",9,new String[]{
+                            NoPenagihan.getText(), Valid.SetTgl(Tanggal.getSelectedItem()+""),Valid.SetTgl(TanggalTempo.getSelectedItem()+""),Tempo.getText(),kdptg.getText(),kdmenyetujui.getText(),kdpenjab.getText(),Catatan.getText(),KdAkun.getText()
+                        })==true){
+                            jml=tbBelumLunas.getRowCount();
+                            for(i=0;i<jml;i++){
+                                if(tbBelumLunas.getValueAt(i,0).toString().equals("true")){
+                                    if(! Sequel.menyimpantfSmc("detail_penagihan_piutang", "no_tagihan, no_rawat, sisapiutang, diskon",
+                                        NoPenagihan.getText(), tbBelumLunas.getValueAt(i, 1).toString(), tbBelumLunas.getValueAt(i, 6).toString(),
+                                        new BigDecimal(Valid.SetAngka(tbBelumLunas.getValueAt(i, 6).toString()) * (Valid.SetAngka(Diskon.getText()) / 100))
+                                            .setScale(0, RoundingMode.HALF_UP).toPlainString()
+                                    )) {
+                                        sukses = false;
+                                    }
+                                }
+                            }
+                        }else{
+                            sukses=false;
+                        }
+
+                        if(sukses==true){
+                            Sequel.Commit();
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                            Sequel.RollBack();
+                        }
+                        Sequel.AutoComitTrue();
+                        if(sukses==true){
+                            Valid.tabelKosong(tabMode);
+                            runBackground(() ->tampil());
+
+                            jml=0;
+                            total=0;
+                            LCountDipilih1.setText("0");
+                            LCountDipilih2.setText("0");
+                            Catatan.setText("");
+                            TotalPenagihan.setText("0");
+                            Diskon.setText("");
+                            NamaBank.setText("");
+                            NoRek.setText("");
+                            cetakInvoice();
+                        }
+                        autoNomor();
+                    }
+                }else if(TabRawat.getSelectedIndex()==1){
+                    int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                    if (reply == JOptionPane.YES_OPTION) {
+                        Sequel.AutoComitFalse();
+                        sukses=true;
+                        if(Sequel.menyimpantf2("penagihan_piutang","?,?,?,?,?,?,?,?,?,'Proses Penagihan'","No.Penagihan",9,new String[]{
+                            NoPenagihan.getText(), Valid.SetTgl(Tanggal.getSelectedItem()+""),Valid.SetTgl(TanggalTempo.getSelectedItem()+""),Tempo.getText(),kdptg.getText(),kdmenyetujui.getText(),kdpenjab.getText(),Catatan.getText(),KdAkun.getText()
+                        })==true){
+                            jml=tbBelumDitagihkan.getRowCount();
+                            for(i=0;i<jml;i++){
+                                if(tbBelumDitagihkan.getValueAt(i,0).toString().equals("true")){
+                                    if(! Sequel.menyimpantfSmc("detail_penagihan_piutang", "no_tagihan, no_rawat, sisapiutang, diskon",
+                                        NoPenagihan.getText(), tbBelumDitagihkan.getValueAt(i, 1).toString(), tbBelumDitagihkan.getValueAt(i, 6).toString(),
+                                        new BigDecimal(Valid.SetAngka(tbBelumDitagihkan.getValueAt(i, 6).toString()) * (Valid.SetAngka(Diskon.getText()) / 100))
+                                            .setScale(2, RoundingMode.HALF_UP).toPlainString()
+                                    )) {
+                                        sukses = false;
                                     }
                                 }
                             }
