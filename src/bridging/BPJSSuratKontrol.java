@@ -462,10 +462,11 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Surat Kontrol VClaim ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
-        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+        internalFrame1.setLayout(new java.awt.BorderLayout());
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
+        Scroll.setPreferredSize(new java.awt.Dimension(452, 1));
 
         tbObat.setAutoCreateRowSorter(true);
         tbObat.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
@@ -485,10 +486,10 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
 
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
         jPanel3.setName("jPanel3"); // NOI18N
-        jPanel3.setOpaque(false);
         jPanel3.setPreferredSize(new java.awt.Dimension(44, 144));
-        jPanel3.setLayout(new java.awt.BorderLayout(1, 1));
+        jPanel3.setLayout(new java.awt.BorderLayout());
 
         panelGlass8.setName("panelGlass8"); // NOI18N
         panelGlass8.setPreferredSize(new java.awt.Dimension(55, 55));
@@ -683,7 +684,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         R1.setPreferredSize(new java.awt.Dimension(115, 23));
         panelCari.add(R1);
 
-        DTPTanggalSurat1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-01-2026" }));
+        DTPTanggalSurat1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-02-2026" }));
         DTPTanggalSurat1.setDisplayFormat("dd-MM-yyyy");
         DTPTanggalSurat1.setName("DTPTanggalSurat1"); // NOI18N
         DTPTanggalSurat1.setOpaque(false);
@@ -706,7 +707,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel22.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel22);
 
-        DTPTanggalSurat2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-01-2026" }));
+        DTPTanggalSurat2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-02-2026" }));
         DTPTanggalSurat2.setDisplayFormat("dd-MM-yyyy");
         DTPTanggalSurat2.setName("DTPTanggalSurat2"); // NOI18N
         DTPTanggalSurat2.setOpaque(false);
@@ -732,7 +733,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         R2.setPreferredSize(new java.awt.Dimension(120, 23));
         panelCari.add(R2);
 
-        DTPTanggalKontrol1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-01-2026" }));
+        DTPTanggalKontrol1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-02-2026" }));
         DTPTanggalKontrol1.setDisplayFormat("dd-MM-yyyy");
         DTPTanggalKontrol1.setName("DTPTanggalKontrol1"); // NOI18N
         DTPTanggalKontrol1.setOpaque(false);
@@ -755,7 +756,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel25.setPreferredSize(new java.awt.Dimension(25, 23));
         panelCari.add(jLabel25);
 
-        DTPTanggalKontrol2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-01-2026" }));
+        DTPTanggalKontrol2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-02-2026" }));
         DTPTanggalKontrol2.setDisplayFormat("dd-MM-yyyy");
         DTPTanggalKontrol2.setName("DTPTanggalKontrol2"); // NOI18N
         DTPTanggalKontrol2.setOpaque(false);
@@ -777,9 +778,8 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
 
         PanelInput.setName("PanelInput"); // NOI18N
-        PanelInput.setOpaque(false);
         PanelInput.setPreferredSize(new java.awt.Dimension(192, 475));
-        PanelInput.setLayout(new java.awt.BorderLayout(1, 1));
+        PanelInput.setLayout(new java.awt.BorderLayout());
 
         ChkInput.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkInput.setMnemonic('M');
@@ -802,7 +802,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         PanelInput.add(ChkInput, java.awt.BorderLayout.PAGE_END);
 
         scrollInput.setName("scrollInput"); // NOI18N
-        scrollInput.setPreferredSize(new java.awt.Dimension(102, 557));
+        scrollInput.setPreferredSize(new java.awt.Dimension(102, 1));
 
         FormInput.setBorder(null);
         FormInput.setName("FormInput"); // NOI18N
@@ -835,7 +835,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         NoSEP.setBounds(286, 10, 150, 23);
 
         TanggalSurat.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-01-2026" }));
+        TanggalSurat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-02-2026" }));
         TanggalSurat.setDisplayFormat("dd-MM-yyyy");
         TanggalSurat.setEnabled(false);
         TanggalSurat.setName("TanggalSurat"); // NOI18N
@@ -913,7 +913,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel14.setBounds(491, 70, 100, 23);
 
         TanggalKontrol.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalKontrol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-01-2026 21:36:28" }));
+        TanggalKontrol.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-02-2026 13:53:34" }));
         TanggalKontrol.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalKontrol.setName("TanggalKontrol"); // NOI18N
         TanggalKontrol.setOpaque(false);
@@ -2465,7 +2465,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                 ChkInput.setVisible(true);
             }else{
                 ChkInput.setVisible(false);
-                PanelInput.setPreferredSize(new Dimension(WIDTH,internalFrame1.getHeight()-175));
+                PanelInput.setPreferredSize(new Dimension(WIDTH,190));
                 FormInput.setVisible(true);
                 ChkInput.setVisible(true);
             }
