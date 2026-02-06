@@ -925,7 +925,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
         toggleInfoTambahan.setForeground(new java.awt.Color(150, 155, 159));
         toggleInfoTambahan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        toggleInfoTambahan.setMnemonic('I');
         toggleInfoTambahan.setToolTipText("Alt+I");
         toggleInfoTambahan.setMaximumSize(new java.awt.Dimension(32767, 30));
         toggleInfoTambahan.setMinimumSize(new java.awt.Dimension(140, 30));
@@ -947,7 +946,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         panelBawah.add(toggleInfoTambahan, gridBagConstraints);
 
         btnKonfirmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/konfirmasi.png"))); // NOI18N
-        btnKonfirmasi.setMnemonic('S');
         btnKonfirmasi.setText("KONFIRMASI");
         btnKonfirmasi.setToolTipText("Alt+S");
         btnKonfirmasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -968,7 +966,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         btnBatal.setBackground(new java.awt.Color(255, 255, 255));
         btnBatal.setForeground(new java.awt.Color(255, 33, 32));
         btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
-        btnBatal.setMnemonic('K');
         btnBatal.setText("Batal");
         btnBatal.setToolTipText("Alt+K");
         btnBatal.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
@@ -1187,6 +1184,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     metadata = root.path("metaData");
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                     if (metadata.path("code").asText().equals("200")) {
+                        String response = mapper.readTree(api.Decrypt(root.path("response").toString(), utc)).asText("");
+                        Sequel.mengupdatetfSmc("pengajuan_fingerprint_bpjs_smc", "status_approval = ?", "no_rkm_medis = ? and tglsep = ?", "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, noRM.getText(), tglSEP.getText());
                         Valid.popupInfoDialog("Approval Berhasil");
                     } else {
                         Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
@@ -1241,6 +1240,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     metadata = root.path("metaData");
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                     if (metadata.path("code").asText().equals("200")) {
+                        String response = mapper.readTree(api.Decrypt(root.path("response").toString(), utc)).asText("");
+                        Sequel.menyimpantfSmc("pengajuan_fingerprint_bpjs_smc", null, noRM.getText(), noPeserta.getText(), tglSEP.getText(), "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, null, e.getUserID());
                         Valid.popupInfoDialog("Pengajuan Berhasil");
                     } else {
                         Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
@@ -1846,54 +1847,58 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         if (noPeserta.getText().isBlank()) {
             Valid.teksKosongSmc(noPeserta, "Nomor Kartu");
         } else {
-            if (Sequel.cariIntegerSmc("select timestampdiff(year, ?, current_date())", tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
-                try {
-                    url = koneksiDB.URLAPIBPJS() + "/SEP/FingerPrint/Peserta/" + noPeserta.getText() + "/TglPelayanan/" + tglSEP.getText();
-                    System.out.println("URL : " + url);
-                    System.out.print("Cek status FP tgl. " + tglSEP.getText() + " [" + noRM.getText() + "] : ");
-                    utc = api.getUTCDateTimeAsString();
-                    headers = new HttpHeaders();
-                    headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
-                    headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
-                    headers.add("X-Timestamp", utc);
-                    headers.add("X-Signature", api.getHmac(utc));
-                    headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-                    entity = new HttpEntity(headers);
-                    root = mapper.readTree(api.getRest().exchange(url, HttpMethod.GET, entity, String.class).getBody());
-                    metadata = root.path("metaData");
-                    System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
-                    if (metadata.path("code").asText().equals("200")) {
-                        response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-                        if (response.path("kode").asText().equals("1")) {
-                            statusFinger = true;
-                            keteranganValidasi = "";
-                        } else {
-                            statusFinger = false;
-                            StringJoiner sj = new StringJoiner(" atau ");
-
-                            if (btnFrista.isVisible()) {
-                                sj.add("REKAM WAJAH");
-                            }
-                            if (btnFingerprint.isVisible()) {
-                                sj.add("REKAM SIDIK JADI");
-                            }
-
-                            if (sj.length() == 0) {
-                                keteranganValidasi = "<html><body>Silahkan lakukan proses VALIDASI BIOMETRIK ke petugas admisi dahulu</body></html>";
+            if (Sequel.cariExistsSmc("select * from pengajuan_fingerprint_bpjs_smc p where p.no_rkm_medis = ? and p.tglsep = ? and (p.status_approval is not null and p.status_approval like '%200%')", noRM.getText(), tglSEP.getText())) {
+                statusFinger = true;
+            } else {
+                if (Sequel.cariIntegerSmc("select timestampdiff(year, ?, current_date())", tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
+                    try {
+                        url = koneksiDB.URLAPIBPJS() + "/SEP/FingerPrint/Peserta/" + noPeserta.getText() + "/TglPelayanan/" + tglSEP.getText();
+                        System.out.println("URL : " + url);
+                        System.out.print("Cek status FP tgl. " + tglSEP.getText() + " [" + noRM.getText() + "] : ");
+                        utc = api.getUTCDateTimeAsString();
+                        headers = new HttpHeaders();
+                        headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+                        headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                        headers.add("X-Timestamp", utc);
+                        headers.add("X-Signature", api.getHmac(utc));
+                        headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                        entity = new HttpEntity(headers);
+                        root = mapper.readTree(api.getRest().exchange(url, HttpMethod.GET, entity, String.class).getBody());
+                        metadata = root.path("metaData");
+                        System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
+                        if (metadata.path("code").asText().equals("200")) {
+                            response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                            if (response.path("kode").asText().equals("1")) {
+                                statusFinger = true;
+                                keteranganValidasi = "";
                             } else {
-                                keteranganValidasi = "<html><body>Silahkan lakukan proses " + sj.toString() + "<br>terlebih dahulu</body></html>";
-                            }
+                                statusFinger = false;
+                                StringJoiner sj = new StringJoiner(" atau ");
 
+                                if (btnFrista.isVisible()) {
+                                    sj.add("REKAM WAJAH");
+                                }
+                                if (btnFingerprint.isVisible()) {
+                                    sj.add("REKAM SIDIK JADI");
+                                }
+
+                                if (sj.length() == 0) {
+                                    keteranganValidasi = "<html><body>Silahkan lakukan proses VALIDASI BIOMETRIK ke petugas admisi dahulu</body></html>";
+                                } else {
+                                    keteranganValidasi = "<html><body>Silahkan lakukan proses " + sj.toString() + "<br>terlebih dahulu</body></html>";
+                                }
+
+                                System.out.println("Notif : " + response.path("status").asText());
+                            }
+                        } else {
+                            keteranganValidasi = response.path("status").asText();
                             System.out.println("Notif : " + response.path("status").asText());
                         }
-                    } else {
-                        keteranganValidasi = response.path("status").asText();
-                        System.out.println("Notif : " + response.path("status").asText());
-                    }
-                } catch (Exception ex) {
-                    System.out.println("Notif : " + ex);
-                    if (ex.toString().contains("UnknownHostException")) {
-                        Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
+                    } catch (Exception ex) {
+                        System.out.println("Notif : " + ex);
+                        if (ex.toString().contains("UnknownHostException")) {
+                            Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
+                        }
                     }
                 }
             }

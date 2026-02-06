@@ -1282,6 +1282,20 @@ ALTER TABLE `piutang` MODIFY COLUMN IF EXISTS `nota_piutang` varchar(40) NOT NUL
 
 ALTER TABLE `detailpiutang` ADD CONSTRAINT `detailpiutang_ibfk_1` FOREIGN KEY IF NOT EXISTS (`nota_piutang`) REFERENCES `piutang` ON DELETE CASCADE ON UPDATE CASCADE;
 
+CREATE TABLE IF NOT EXISTS `pengajuan_fingerprint_bpjs_smc`  (
+  `no_rkm_medis` varchar(15) NOT NULL,
+  `no_kartu` varchar(25) NOT NULL,
+  `tglsep` date NOT NULL,
+  `status_pengajuan` varchar(100) NULL DEFAULT NULL,
+  `status_approval` varchar(100) NULL DEFAULT NULL,
+  `nip` varchar(20) NOT NULL,
+  PRIMARY KEY (`no_rkm_medis`,`tglsep`) USING BTREE,
+  INDEX `no_kartu`(`no_kartu`) USING BTREE,
+  INDEX `tglsep`(`tglsep`) USING BTREE,
+  INDEX `nip`(`nip`) USING BTREE,
+  CONSTRAINT `pengajuan_fingerprint_bpjs_smc_ibfk_1` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `pintu_smc`  (
   `kd_pintu` varchar(20) NOT NULL DEFAULT '',
   `nm_pintu` varchar(50) NULL DEFAULT NULL,
