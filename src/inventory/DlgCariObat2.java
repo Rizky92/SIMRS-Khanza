@@ -103,7 +103,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private String TANGGALMUNDUR="yes";
     private DlgResepObat ResepObat;
     private Map<String, Object> map;
-    private boolean autovalidasi = false, previewLembarObat = false, previewAturanPakai = false;
+    private boolean autoCetak = false, previewLembarObat = false, previewAturanPakai = false;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
 
     /** Creates new form DlgPenyakit
@@ -1450,7 +1450,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                     }
 
                     if(sukses==true){
-                        if (autovalidasi) {
+                        if (autoCetak) {
                             cetakLembarObat();
                             cetakAturanPakai();
                         }
@@ -3008,7 +3008,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
     private void tampilobat2(String no_resep) {
         this.noresep=no_resep;
-        cekPengaturanResepRanap();
         try{
             Valid.tabelKosong(tabMode);
             Valid.tabelKosong(tabModeObatRacikan);
@@ -3768,6 +3767,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }
 
     public void tampilobat3(String no_resep) {
+        cekPengaturanResepRanap();
         runBackground(() -> tampilobat2(no_resep));
     }
 
@@ -4184,24 +4184,33 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
     private void cekPengaturanResepRanap() {
         boolean oldValue = ChkNoResep.isSelected();
-        try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
-            JsonNode iyem = mapper.readTree(fr);
-            autovalidasi = iyem.path("autovalidasiranap").asBoolean(false);
-            previewLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false);
-            previewAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false);
-            if (autovalidasi) {
-                ChkNoResep.setSelected(!(previewLembarObat && previewAturanPakai));
-                if (previewLembarObat) {
-                    modelLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
-                    printerLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText("");
+        if (new File("./cache/pengaturanresep.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
+                JsonNode iyem = mapper.readTree(fr);
+                autoCetak = iyem.path("autovalidasiranap").asBoolean(false);
+                previewLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false);
+                previewAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false);
+                if (autoCetak) {
+                    ChkNoResep.setSelected(!(previewLembarObat && previewAturanPakai));
+                    if (previewLembarObat) {
+                        modelLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
+                        printerLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText("");
+                    }
+                    if (previewAturanPakai) {
+                        modelAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText();
+                    }
                 }
-                if (previewAturanPakai) {
-                    modelAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText();
-                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                autoCetak = false;
+                previewLembarObat = false;
+                previewAturanPakai = false;
+                modelLembarObat = "";
+                modelAturanPakai = "";
+                ChkNoResep.setSelected(oldValue);
             }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            autovalidasi = false;
+        } else {
+            autoCetak = false;
             previewLembarObat = false;
             previewAturanPakai = false;
             modelLembarObat = "";
