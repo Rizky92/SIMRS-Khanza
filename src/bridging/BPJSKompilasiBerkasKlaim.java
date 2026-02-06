@@ -2374,10 +2374,10 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             if (resume == null) {
                 resume = new RMRiwayatPerawatan(null, false);
             }
-            resume.setNoRMKompilasi(lblNoRawat.getText(), lblNoRM.getText());
             resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
             resume.setLocationRelativeTo(internalFrame1);
             resume.setVisible(true);
+            resume.setNoRMKompilasi(lblNoRawat.getText(), lblNoRM.getText());
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_btnRiwayatPasienActionPerformed
