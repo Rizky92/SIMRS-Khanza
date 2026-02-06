@@ -310,10 +310,5 @@ public class DlgCatatan extends javax.swing.JDialog {
         BtnSimpan.setEnabled(true);
         BtnHapus.setEnabled(true);
         BtnEdit.setEnabled(true);
-
-
     }
-
-
-
 }

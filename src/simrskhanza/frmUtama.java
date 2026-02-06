@@ -1237,42 +1237,6 @@ public class frmUtama extends javax.swing.JFrame {
         jMenu7.setOpaque(false);
         jMenu4.setOpaque(false);
 
-        cariNIK.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    if(cariNIK.getTable().getSelectedRow()!= -1){
-                        coder_nik=cariNIK.getTable().getValueAt(cariNIK.getTable().getSelectedRow(),2).toString();
-                        isTutup();
-                        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        if (akses.getform().equals("BPJSKompilasiBerkasKlaim")) {
-                            BPJSKompilasiBerkasKlaim aplikasi=new BPJSKompilasiBerkasKlaim(null, false);
-                            aplikasi.isCek(coder_nik);
-                            aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
-                            aplikasi.setLocationRelativeTo(PanelUtama);
-                            aplikasi.setVisible(true);
-                        } else {
-                            try {
-                                inacbgklaim.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"inacbg/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&page="+pilihpage+"&codernik="+coder_nik);
-                            } catch (Exception ex) {
-                                System.out.println("Notifikasi : "+ex);
-                            }
-                            inacbgklaim.setJudul(judulform);
-                            inacbgklaim.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-                            inacbgklaim.setLocationRelativeTo(PanelUtama);
-                            inacbgklaim.setVisible(true);
-                            DlgHome.dispose();
-                        }
-                        setCursor(Cursor.getDefaultCursor());
-                    }
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-
         lblTgl.setText(tanggal.getSelectedItem().toString());
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
@@ -1290,28 +1254,6 @@ public class frmUtama extends javax.swing.JFrame {
 
         FlayMenu.setVisible(false);
         TCari.setVisible(false);
-        if(koneksiDB.CARICEPAT().equals("aktif")){
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        isTampil();
-                    }
-                }
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        isTampil();
-                    }
-                }
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        isTampil();
-                    }
-                }
-            });
-        }
 
         try{
             if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
@@ -9787,9 +9729,9 @@ public class frmUtama extends javax.swing.JFrame {
         DlgPenggajian penggajian=new DlgPenggajian(this,false);
         try {
             if(akses.getpegawai_admin()==true){
-                penggajian.loadURL("http://" +koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"penggajian/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&level=admin");
+                penggajian.LoadPenggajian("http://" +koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"penggajian/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&level=admin");
             }else if(akses.getpegawai_user()==true){
-                penggajian.loadURL("http://" +koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"penggajian/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&level=user");
+                penggajian.LoadPenggajian("http://" +koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"penggajian/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&level=user");
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
@@ -11353,6 +11295,57 @@ public class frmUtama extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setToolbar();
+        if(koneksiDB.CARICEPAT().equals("aktif")){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        isTampil();
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        isTampil();
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        isTampil();
+                    }
+                }
+            });
+        }
+
+        cariNIK.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    if(cariNIK.getTable().getSelectedRow()!= -1){
+                        coder_nik=cariNIK.getTable().getValueAt(cariNIK.getTable().getSelectedRow(),2).toString();
+                        isTutup();
+                        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        try {
+                            inacbgklaim.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"inacbg/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&page="+pilihpage+"&codernik="+coder_nik);
+                        } catch (Exception ex) {
+                            System.out.println("Notifikasi : "+ex);
+                        }
+
+                        inacbgklaim.setJudul(judulform);
+                        inacbgklaim.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+                        inacbgklaim.setLocationRelativeTo(PanelUtama);
+                        inacbgklaim.setVisible(true);
+                        DlgHome.dispose();
+                        setCursor(Cursor.getDefaultCursor());
+                    }
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
     }//GEN-LAST:event_formWindowOpened
 
     private void btnHarianKamarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHarianKamarActionPerformed
