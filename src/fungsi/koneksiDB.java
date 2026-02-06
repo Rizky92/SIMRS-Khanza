@@ -357,6 +357,24 @@ public class koneksiDB {
         }
     }
 
+    public static String URLWEBSERVICEEKLAIM() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("URLWEBSERVICEEKLAIM", EnkripsiAES.decrypt("")));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String KEYWEBSERVICEEKLAIM() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("KEYWEBSERVICEEKLAIM", EnkripsiAES.decrypt("")));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);

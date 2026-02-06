@@ -27,6 +27,8 @@
     <entry key="BOOKINGLANGSUNGREGISTRASI">yes</entry>
     <entry key="ANTRIANPOLIPERPINTU">yes</entry>
     <entry key="VALIDASIPULANGRANAPSEBELUMCLOSEBILLING">yes</entry>
+    <entry key="URLWEBSERVICEEKLAIM"></entry>
+    <entry key="KEYWEBSERVICEEKLAIM"></entry>
 
     <entry key="WAHOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="WAPORT">nioxtijcpDaKSUiUiP5FAg==</entry>
