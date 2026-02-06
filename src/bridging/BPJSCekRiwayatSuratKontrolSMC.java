@@ -23,7 +23,10 @@ import fungsi.validasi;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import java.awt.Cursor;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.stream.StreamSupport;
@@ -33,7 +36,7 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.MediaType;
-import simrskhanza.DlgCariPasien;
+import simrskhanza.DlgPasien;
 
 /**
  *
@@ -44,7 +47,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
     private final validasi Valid = new validasi();
     private final sekuel Sequel = new sekuel();
     private final ApiBPJS api = new ApiBPJS();
-    private DlgCariPasien pasien = null;
+    private DlgPasien pasien = null;
     private volatile boolean isLoading = false;
     private int i = 0;
     private String URL = "", link = "";
@@ -146,6 +149,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
         BlnCari = new widget.ComboBox();
         jLabel16 = new widget.Label();
         NoKartu = new widget.TextBox();
+        btnPasien = new widget.Button();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
         BtnKeluar = new widget.Button();
@@ -233,7 +237,25 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
         NoKartu.setPreferredSize(new java.awt.Dimension(130, 23));
         panelGlass6.add(NoKartu);
 
+        btnPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnPasien.setMnemonic('5');
+        btnPasien.setToolTipText("Alt+5");
+        btnPasien.setName("btnPasien"); // NOI18N
+        btnPasien.setPreferredSize(new java.awt.Dimension(28, 23));
+        btnPasien.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPasienActionPerformed(evt);
+            }
+        });
+        btnPasien.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnPasienKeyPressed(evt);
+            }
+        });
+        panelGlass6.add(btnPasien);
+
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -327,6 +349,15 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
         isCek();
     }//GEN-LAST:event_formWindowActivated
 
+    private void btnPasienActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPasienActionPerformed
+        resolveDlgPasien();
+        pasien.setVisible(true);
+    }//GEN-LAST:event_btnPasienActionPerformed
+
+    private void btnPasienKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPasienKeyPressed
+        Valid.pindah(evt, NoKartu, BtnKeluar);
+    }//GEN-LAST:event_btnPasienKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -351,6 +382,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
     private widget.TextBox NoKartu;
     private widget.ScrollPane Scroll;
     private widget.ComboBox ThnCari;
+    private widget.Button btnPasien;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
@@ -438,9 +470,66 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
         ppTarikDataSKDP.setEnabled(akses.getbpjs_surat_kontrol());
     }
 
-    private void resolveDlgCariPasien() {
+    private void resolveDlgPasien() {
         if (pasien == null) {
-            pasien = new DlgCariPasien(null, false);
+            pasien = new DlgPasien(null, false);
+            pasien.emptTeks();
+            pasien.isCek();
+            pasien.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            pasien.setLocationRelativeTo(internalFrame1);
+            pasien.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (pasien.getTable().getSelectedRow() != -1) {
+                        if (pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(), 20).toString().equals("")) {
+                            JOptionPane.showMessageDialog(rootPane, "Maaf pasien tidak punya Nomor Kartu...!");
+                        } else {
+                            NoKartu.setText(pasien.getTable().getValueAt(pasien.getTable().getSelectedRow(), 20).toString());
+                        }
+                    }
+                    if (pasien.getTable2().getSelectedRow() != -1) {
+                        if (pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(), 20).toString().equals("")) {
+                            JOptionPane.showMessageDialog(rootPane, "Maaf pasien tidak punya Nomor Kartu...!");
+                        } else {
+                            NoKartu.setText(pasien.getTable2().getValueAt(pasien.getTable2().getSelectedRow(), 20).toString());
+                        }
+                    }
+                    if (pasien.getTable3().getSelectedRow() != -1) {
+                        if (pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(), 20).toString().equals("")) {
+                            JOptionPane.showMessageDialog(rootPane, "Maaf pasien tidak punya Nomor Kartu...!");
+                        } else {
+                            NoKartu.setText(pasien.getTable3().getValueAt(pasien.getTable3().getSelectedRow(), 20).toString());
+                        }
+                    }
+                }
+            });
+
+            pasien.getTable().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                        pasien.dispose();
+                    }
+                }
+            });
+
+            pasien.getTable2().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                        pasien.dispose();
+                    }
+                }
+            });
+
+            pasien.getTable3().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                        pasien.dispose();
+                    }
+                }
+            });
         }
     }
 }
