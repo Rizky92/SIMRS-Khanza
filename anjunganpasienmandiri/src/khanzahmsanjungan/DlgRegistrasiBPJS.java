@@ -2082,11 +2082,58 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
     }
 
     public void tampilKontrol(String noSurat) {
+        if (Sequel.cariExistsSmc("select * from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?", noSurat.trim())) {
+            tampilKontrol(noSurat);
+        } else {
+            try {
+                url = koneksiDB.URLAPIBPJS() + "/RencanaKontrol/noSuratKontrol/" + noSurat;
+                System.out.println("URL : " + url);
+                System.out.print("Cek Rencana Surat Kontrol Pasien [" + noSurat + "] : ");
+                utc = api.getUTCDateTimeAsString();
+                headers = new HttpHeaders();
+                headers.setContentType(MediaType.APPLICATION_JSON);
+                headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                headers.add("X-Timestamp", utc);
+                headers.add("X-Signature", api.getHmac(utc));
+                headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                entity = new HttpEntity(headers);
+                root = mapper.readTree(api.getRest().exchange(url, HttpMethod.GET, entity, String.class).getBody());
+                metadata = root.path("metaData");
+                System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
+                if (metadata.path("code").asText().equals("200")) {
+                    response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                    if (response.path("jnsKontrol").asText().equals("2")) {
+                        if (Sequel.menyimpantfSmc("bridging_surat_kontrol_bpjs", null, response.path("sep").path("noSep").asText(), response.path("tglTerbit").asText(),
+                            noSurat, response.path("tglRencanaKontrol").asText(), response.path("kodeDokter").asText(), response.path("namaDokter").asText(),
+                            response.path("poliTujuan").asText(), response.path("namaPoliTujuan").asText(), "", "", "", "", "", "", "", "", "", "",
+                            "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
+                        )) {
+                            cekRencanaKontrol(noSurat);
+                        } else {
+                            emptTeks();
+                            Valid.popupGagalDialog("Data rencana kontrol pasien tidak dapat ditemukan..!!");
+                        }
+                    } else {
+                        emptTeks();
+                        Valid.popupPeringatanDialog("Data rencana kontrol pasien tidak dapat ditemukan..!!");
+                    }
+                } else {
+                    emptTeks();
+                    Valid.popupPeringatanDialog("Data rencana kontrol pasien tidak dapat ditemukan..!!");
+                }
+            } catch (Exception e) {
+                emptTeks();
+                Valid.popupGagalDialog("Terjadi kesalahan pada saat mencari data rencana kontrol pasien..!!");
+            }
+        }
+    }
+
+    private void cekRencanaKontrol(String noSurat) {
         emptTeks();
         tentukanHari();
         try (PreparedStatement pskontrol = koneksi.prepareStatement(
-            "select bridging_surat_kontrol_bpjs.*, bridging_sep.no_kartu, left(bridging_sep.asal_rujukan, 1) as asal_rujukan, bridging_sep.jnspelayanan, bridging_sep.no_rujukan, bridging_sep.klsrawat " +
-            "from bridging_surat_kontrol_bpjs join bridging_sep on bridging_surat_kontrol_bpjs.no_sep = bridging_sep.no_sep where bridging_surat_kontrol_bpjs.no_surat = ?"
+            "select k.*, bridging_sep.no_kartu, left(s.asal_rujukan, 1) as asal_rujukan, s.jnspelayanan, s.no_rujukan," +
+            "s.klsrawat from bridging_surat_kontrol_bpjs k join bridging_sep s on k.no_sep = s.no_sep where k.no_surat = ?"
         )) {
             pskontrol.setString(1, noSurat);
             try (ResultSet rskontrol = pskontrol.executeQuery()) {
@@ -2427,6 +2474,46 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                                     break;
                                 case "3":
                                     // CEK JENIS KONTROL DULU
+                                    if (!Sequel.cariExistsSmc("select * from bridging_surat_kontrol_bpjs where bridging_surat_kontrol_bpjs.no_surat = ?", rsjkn.getString("nomorreferensi"))) {
+                                        try {
+                                            url = koneksiDB.URLAPIBPJS() + "/RencanaKontrol/noSuratKontrol/" + rsjkn.getString("nomorreferensi");
+                                            System.out.println("URL : " + url);
+                                            System.out.print("Cek Rencana Surat Kontrol Pasien [" + rsjkn.getString("nomorreferensi") + "] : ");
+                                            utc = api.getUTCDateTimeAsString();
+                                            headers = new HttpHeaders();
+                                            headers.setContentType(MediaType.APPLICATION_JSON);
+                                            headers.add("X-Cons-ID", koneksiDB.CONSIDAPIBPJS());
+                                            headers.add("X-Timestamp", utc);
+                                            headers.add("X-Signature", api.getHmac(utc));
+                                            headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
+                                            entity = new HttpEntity(headers);
+                                            root = mapper.readTree(api.getRest().exchange(url, HttpMethod.GET, entity, String.class).getBody());
+                                            metadata = root.path("metaData");
+                                            System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
+                                            if (metadata.path("code").asText().equals("200")) {
+                                                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
+                                                if (response.path("jnsKontrol").asText().equals("2")) {
+                                                    if (!Sequel.menyimpantfSmc("bridging_surat_kontrol_bpjs", null, response.path("sep").path("noSep").asText(), response.path("tglTerbit").asText(),
+                                                        rsjkn.getString("nomorreferensi"), response.path("tglRencanaKontrol").asText(), response.path("kodeDokter").asText(), response.path("namaDokter").asText(),
+                                                        response.path("poliTujuan").asText(), response.path("namaPoliTujuan").asText(), "", "", "", "", "", "", "", "", "", "", "", "", "",
+                                                        "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", ""
+                                                    )) {
+                                                        emptTeks();
+                                                        Valid.popupGagalDialog("Data rencana kontrol pasien tidak dapat ditemukan..!!");
+                                                    }
+                                                } else {
+                                                    emptTeks();
+                                                    Valid.popupPeringatanDialog("Data rencana kontrol pasien tidak dapat ditemukan..!!");
+                                                }
+                                            } else {
+                                                emptTeks();
+                                                Valid.popupPeringatanDialog("Data rencana kontrol pasien tidak dapat ditemukan..!!");
+                                            }
+                                        } catch (Exception e) {
+                                            emptTeks();
+                                            Valid.popupGagalDialog("Terjadi kesalahan pada saat mencari data rencana kontrol pasien..!!");
+                                        }
+                                    }
                                     try (PreparedStatement pskontrol = koneksi.prepareStatement(
                                         "select bridging_surat_kontrol_bpjs.*, left(bridging_sep.asal_rujukan, 1) as asal_rujukan, bridging_sep.jnspelayanan, bridging_sep.no_rujukan, bridging_sep.klsrawat " +
                                         "from bridging_surat_kontrol_bpjs join bridging_sep on bridging_surat_kontrol_bpjs.no_sep = bridging_sep.no_sep where bridging_surat_kontrol_bpjs.no_surat = ?"
