@@ -28,6 +28,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.time.LocalDate;
+import java.time.YearMonth;
 import java.util.List;
 import java.util.stream.StreamSupport;
 import javax.swing.JOptionPane;
@@ -311,11 +312,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        if (NoKartu.getText().isBlank()) {
-            Valid.textKosong(NoKartu, "No. Kartu");
-        } else {
-            tampilSmc();
-        }
+        tampilSmc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -410,6 +407,7 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
             final String nokartu = NoKartu.getText();
             final String tahun = ThnCari.getSelectedItem().toString();
             final String bulan = BlnCari.getSelectedItem().toString();
+            final YearMonth ym = YearMonth.of(Integer.parseInt(tahun), Integer.parseInt(bulan));
             final String jenis = String.valueOf(JenisTgl.getSelectedIndex() + 1);
 
             new SwingWorker<Void, Object[]>() {
@@ -422,7 +420,11 @@ public final class BPJSCekRiwayatSuratKontrolSMC extends javax.swing.JDialog {
                     headers.add("X-Timestamp", utc);
                     headers.add("X-Signature", api.getHmac(utc));
                     headers.add("user_key", koneksiDB.USERKEYAPIBPJS());
-                    URL = link + "/RencanaKontrol/ListRencanaKontrol/Bulan/" + bulan + "/Tahun/" + tahun + "/Nokartu/" + nokartu + "/filter/" + jenis;
+                    if (nokartu.isBlank()) {
+                        URL = link + "RencanaKontrol/ListRencanaKontrol/tglAwal/" + ym.atDay(1).toString() + "/tglAkhir/" + ym.atEndOfMonth().toString() + "/filter/" + jenis;
+                    } else {
+                        URL = link + "/RencanaKontrol/ListRencanaKontrol/Bulan/" + bulan + "/Tahun/" + tahun + "/Nokartu/" + nokartu + "/filter/" + jenis;
+                    }
                     System.out.println("URL : " + URL);
                     final ObjectMapper mapper = new ObjectMapper();
                     JsonNode root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, new HttpEntity(headers), String.class).getBody());

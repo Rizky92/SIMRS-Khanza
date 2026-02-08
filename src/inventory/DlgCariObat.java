@@ -119,7 +119,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private Map<String, Object> map;
-    private boolean autovalidasi = false, previewLembarObat = false, previewAturanPakai = false;
+    private boolean autocetak = false, previewLembarObat = false, previewAturanPakai = false;
     private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
 
     /** Creates new form DlgPenyakit
@@ -1723,7 +1723,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             }
                         }
 
-                        if (autovalidasi) {
+                        if (autocetak) {
                             cetakAturanPakai();
                             cetakLembarObat();
                         }
@@ -2717,7 +2717,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
         this.load = true;
         this.noresep=no_resep;
         adaObatKronis = false;
-        cekPengaturanResepRalan();
         try {
             Valid.tabelKosong(tabModeobat);
             Valid.tabelKosong(tabModeObatRacikan);
@@ -3320,6 +3319,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     }
 
     public void tampilobat3(String no_resep) {
+        cekPengaturanResepRalan();
         runBackground(() -> tampilobat2(no_resep));
     }
 
@@ -4456,13 +4456,13 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
     private void cekPengaturanResepRalan() {
         boolean oldValue = ChkNoResep.isSelected();
-        if (!new File("./cache/pengaturanresep.iyem").isFile()) {
+        if (new File("./cache/pengaturanresep.iyem").isFile()) {
             try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
                 JsonNode iyem = mapper.readTree(fr);
-                autovalidasi = iyem.path("autovalidasiralan").asBoolean(false);
+                autocetak = iyem.path("autovalidasiralan").asBoolean(false);
                 previewLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false);
                 previewAturanPakai = iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false);
-                if (autovalidasi) {
+                if (autocetak) {
                     ChkNoResep.setSelected(!(previewLembarObat && previewAturanPakai));
                     if (previewLembarObat) {
                         modelLembarObat = iyem.path("setelahvalidasi").path("lembarobat").path("model").asText();
@@ -4474,7 +4474,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
-                autovalidasi = false;
+                autocetak = false;
                 previewLembarObat = false;
                 previewAturanPakai = false;
                 modelLembarObat = "";
@@ -4482,7 +4482,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 ChkNoResep.setSelected(oldValue);
             }
         } else {
-            autovalidasi = false;
+            autocetak = false;
             previewLembarObat = false;
             previewAturanPakai = false;
             modelLembarObat = "";
@@ -4621,7 +4621,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     try (PreparedStatement ps = koneksi.prepareStatement(
                         "select b.nama_brng, a.aturan, d.jml, k.satuan from resep_obat rx join detail_pemberian_obat d on " +
                         "rx.no_rawat = d.no_rawat and rx.tgl_perawatan = d.tgl_perawatan and rx.jam = d.jam join databarang b on " +
-                        "d.kode_brng = b.kode_brng join kodesatuan s on b.kode_sat = k.kode_sat join aturan_pakai a on " +
+                        "d.kode_brng = b.kode_brng join kodesatuan k on b.kode_sat = k.kode_sat join aturan_pakai a on " +
                         "d.kode_brng = a.kode_brng and rx.no_rawat = a.no_rawat and rx.tgl_perawatan = a.tgl_perawatan and " +
                         "rx.jam = a.jam where rx.no_resep = ? and a.aturan != ''"
                     )) {
@@ -4695,7 +4695,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     try (PreparedStatement ps = koneksi.prepareStatement(
                         "select b.nama_brng, a.aturan, d.jml, k.satuan from resep_obat rx join detail_pemberian_obat d on " +
                         "rx.no_rawat = d.no_rawat and rx.tgl_perawatan = d.tgl_perawatan and rx.jam = d.jam join databarang b on " +
-                        "d.kode_brng = b.kode_brng join kodesatuan s on b.kode_sat = k.kode_sat join aturan_pakai a on " +
+                        "d.kode_brng = b.kode_brng join kodesatuan k on b.kode_sat = k.kode_sat join aturan_pakai a on " +
                         "d.kode_brng = a.kode_brng and rx.no_rawat = a.no_rawat and rx.tgl_perawatan = a.tgl_perawatan and " +
                         "rx.jam = a.jam where rx.no_resep = ? and a.aturan != ''"
                     )) {

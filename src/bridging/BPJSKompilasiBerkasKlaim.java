@@ -47,6 +47,7 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.StringJoiner;
 import java.util.concurrent.CancellationException;
+import java.util.stream.Collectors;
 import javafx.application.Platform;
 import javafx.concurrent.Worker;
 import static javafx.concurrent.Worker.State.FAILED;
@@ -4799,7 +4800,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                 for (File file : files.stream()
                     .filter(file -> file.isFile() && file.getName().endsWith(".pdf") && file.getName().startsWith(tbKompilasi.getValueAt(row, 2).toString() + "_"))
                     .sorted((file1, file2) -> file1.getName().compareTo(file2.getName()))
-                    .toList()
+                    .collect(Collectors.toList())
                 ) {
                     try {
                         merger.addSource(file);
