@@ -101,8 +101,7 @@ public final class RMRekonsiliasiObat extends javax.swing.JDialog {
         TNoRekonsialiasi.setDocument(new batasInput((byte)20).getKata(TNoRekonsialiasi));
         AlergiObat.setDocument(new batasInput((int)70).getKata(AlergiObat));
         ManifestasiAlergi.setDocument(new batasInput((int)70).getKata(ManifestasiAlergi));
-
-
+        
         ChkJln.setSelected(true);
         jam();
     }

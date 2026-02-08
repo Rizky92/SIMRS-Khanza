@@ -511,51 +511,7 @@ public final class RMPenilaianAwalKeperawatanBayiAnak extends javax.swing.JDialo
         // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-
-        if(koneksiDB.CARICEPAT().equals("aktif")){
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-            });
-
-            TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if(TCariMasalah.getText().length()>2){
-                        runBackground(() ->tampilMasalah2());
-                    }
-                }
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if(TCariMasalah.getText().length()>2){
-                        runBackground(() ->tampilMasalah2());
-                    }
-                }
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if(TCariMasalah.getText().length()>2){
-                        runBackground(() ->tampilMasalah2());
-                    }
-                }
-            });
-        }
-
+        
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -3992,6 +3948,50 @@ public final class RMPenilaianAwalKeperawatanBayiAnak extends javax.swing.JDialo
                 runBackground(() ->tampilMasalah());
             }
         } catch (Exception e) {
+        }
+        
+        if(koneksiDB.CARICEPAT().equals("aktif")){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+            });
+            
+            TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
+                    }
+                }
+            });
         }
     }//GEN-LAST:event_formWindowOpened
 

@@ -146,30 +146,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         Kekurangan.setDocument(new batasInput((int)50).getKata(Kekurangan));
         Anjungan.setDocument(new batasInput((int)50).getKata(Anjungan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-
-        if(koneksiDB.CARICEPAT().equals("aktif")){
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-            });
-        }
-
+        
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -303,6 +280,11 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Dokumentasi Tindakan ESWL ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 2, 12)); // NOI18N
@@ -556,7 +538,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         label11.setBounds(475, 40, 110, 23);
 
         WaktuSelesai.setForeground(new java.awt.Color(50, 70, 50));
-        WaktuSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-04-2024 07:21:43" }));
+        WaktuSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026 17:51:38" }));
         WaktuSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         WaktuSelesai.setName("WaktuSelesai"); // NOI18N
         WaktuSelesai.setOpaque(false);
@@ -597,7 +579,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         label12.setBounds(181, 40, 110, 23);
 
         WaktuMulai.setForeground(new java.awt.Color(50, 70, 50));
-        WaktuMulai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-04-2024 07:21:43" }));
+        WaktuMulai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026 17:51:39" }));
         WaktuMulai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         WaktuMulai.setName("WaktuMulai"); // NOI18N
         WaktuMulai.setOpaque(false);
@@ -887,7 +869,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-04-2024" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -901,7 +883,7 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-04-2024" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1434,6 +1416,31 @@ public final class RMHasilTindakanESWL extends javax.swing.JDialog {
     private void AnjunganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AnjunganKeyPressed
         Valid.pindah(evt,Kekurangan,BtnSimpan);
     }//GEN-LAST:event_AnjunganKeyPressed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if(koneksiDB.CARICEPAT().equals("aktif")){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+            });
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
     * @param args the command line arguments

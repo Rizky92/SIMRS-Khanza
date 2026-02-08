@@ -525,51 +525,7 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
         KeteranganDiagnosaKhususGizi.setDocument(new batasInput((byte)50).getKata(KeteranganDiagnosaKhususGizi));
         KeteranganDiketahuiDietisen.setDocument(new batasInput((byte)10).getKata(KeteranganDiketahuiDietisen));
         // Rencana.setDocument(new batasInput((int)200).getKata(Rencana));
-
-        if(koneksiDB.CARICEPAT().equals("aktif")){
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
-                    }
-                }
-            });
-
-            TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if(TCariMasalah.getText().length()>2){
-                        runBackground(() ->tampilMasalah2());
-                    }
-                }
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if(TCariMasalah.getText().length()>2){
-                        runBackground(() ->tampilMasalah2());
-                    }
-                }
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if(TCariMasalah.getText().length()>2){
-                        runBackground(() ->tampilMasalah2());
-                    }
-                }
-            });
-        }
-
+        
         tabModeMasalah=new DefaultTableModel(null,new Object[]{
                 "P","KODE","MASALAH KEPERAWATAN"
             }){
@@ -6351,6 +6307,50 @@ public final class RMPenilaianAwalKeperawatanRanap extends javax.swing.JDialog {
                 runBackground(() ->tampilMasalah());
             }
         } catch (Exception e) {
+        }
+        
+        if(koneksiDB.CARICEPAT().equals("aktif")){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCari.getText().length()>2){
+                        runBackground(() ->tampil());
+                    }
+                }
+            });
+            
+            TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TCariMasalah.getText().length()>2){
+                        runBackground(() ->tampilMasalah2());
+                    }
+                }
+            });
         }
     }//GEN-LAST:event_formWindowOpened
 
