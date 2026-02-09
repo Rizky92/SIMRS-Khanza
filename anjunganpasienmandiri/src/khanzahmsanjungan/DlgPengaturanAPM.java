@@ -15,6 +15,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.Collection;
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
@@ -586,7 +587,7 @@ public class DlgPengaturanAPM extends widget.Dialog {
                 userFP.setText("************");
                 passFP.setText("************");
 
-                Collection<String> c = StreamSupport.stream(decrypted.path("tombolDiaktifkan").spliterator(), false).map(JsonNode::asText).toList();
+                Collection<String> c = StreamSupport.stream(decrypted.path("tombolDiaktifkan").spliterator(), false).map(JsonNode::asText).collect(Collectors.toList());
                 enableAntrian.setSelected(c.contains("antrian"));
                 enableAntrianFarmasi.setSelected(c.contains("antrianfarmasi"));
                 enableCekin.setSelected(c.contains("cekin"));
