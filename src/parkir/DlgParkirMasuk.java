@@ -743,8 +743,8 @@ public class DlgParkirMasuk extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbKamInKeyPressed
 
-private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
-    if (petugas == null || !petugas.isDisplayable()) {
+    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
+        if (petugas == null || !petugas.isDisplayable()) {
             petugas=new DlgCariPetugas(null,false);
             petugas.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             petugas.addWindowListener(new WindowAdapter() {
@@ -773,7 +773,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             return;
         }
         petugas.setVisible(true);
-}//GEN-LAST:event_btnPetugasActionPerformed
+    }//GEN-LAST:event_btnPetugasActionPerformed
 
     private void btnPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPetugasKeyPressed
 //   Valid.pindah(evt,DTPCari2,TCari);
@@ -798,7 +798,7 @@ private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     }//GEN-LAST:event_formWindowOpened
 
     private void WindowInputParkirWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowInputParkirWindowActivated
-         akses.setstatus(false);
+        akses.setstatus(false);
     }//GEN-LAST:event_WindowInputParkirWindowActivated
 
     private void BarcodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BarcodeKeyPressed

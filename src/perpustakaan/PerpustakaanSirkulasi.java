@@ -1179,7 +1179,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
          if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             runBackground(() ->tampil());
         }else{Valid.pindah(evt, TglPinjam2, TCari);}
-}//GEN-LAST:event_InventarisCariKeyPressed
+    }//GEN-LAST:event_InventarisCariKeyPressed
 
     private void TNoIKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoIKeyPressed
     if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
@@ -1196,66 +1196,66 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_TNoIKeyPressed
 
     private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed
-    PerpustakaanInventaris perpustakaan_inventaris=new PerpustakaanInventaris(null,false);
-    perpustakaan_inventaris.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(perpustakaan_inventaris.getTable().getSelectedRow()!= -1){
-                TNoI.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),0).toString());
-                TJudul.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),1).toString()+", "+perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),2).toString());
-                Penerbit.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),4).toString());
-                Pengarang.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),8).toString());
-                StatusBuku.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),12).toString());
-                TNoI.requestFocus();
+        PerpustakaanInventaris perpustakaan_inventaris=new PerpustakaanInventaris(null,false);
+        perpustakaan_inventaris.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(perpustakaan_inventaris.getTable().getSelectedRow()!= -1){
+                    TNoI.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),0).toString());
+                    TJudul.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),1).toString()+", "+perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),2).toString());
+                    Penerbit.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),4).toString());
+                    Pengarang.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),8).toString());
+                    StatusBuku.setText(perpustakaan_inventaris.getTable().getValueAt(perpustakaan_inventaris.getTable().getSelectedRow(),12).toString());
+                    TNoI.requestFocus();
+                }
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
-    });
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
-    perpustakaan_inventaris.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                perpustakaan_inventaris.dispose();
+        perpustakaan_inventaris.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    perpustakaan_inventaris.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    perpustakaan_inventaris.isCek();
-    perpustakaan_inventaris.tampil();
-    perpustakaan_inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    perpustakaan_inventaris.setLocationRelativeTo(internalFrame1);
-    perpustakaan_inventaris.setAlwaysOnTop(false);
-    perpustakaan_inventaris.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        perpustakaan_inventaris.isCek();
+        perpustakaan_inventaris.tampil();
+        perpustakaan_inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        perpustakaan_inventaris.setLocationRelativeTo(internalFrame1);
+        perpustakaan_inventaris.setAlwaysOnTop(false);
+        perpustakaan_inventaris.setVisible(true);
     }//GEN-LAST:event_btnInvActionPerformed
 
     private void KdPetugasKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdPetugasKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
-        BtnSimpan.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnPtgActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            NmPetugas.setText(Sequel.CariPetugas(KdPetugas.getText()));
+            BtnSimpan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnPtgActionPerformed(null);
+        }
     }//GEN-LAST:event_KdPetugasKeyPressed
 
     private void btnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPtgActionPerformed
-    if (petugas == null || !petugas.isDisplayable()) {
+        if (petugas == null || !petugas.isDisplayable()) {
             petugas=new DlgCariPetugas(null,false);
             petugas.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             petugas.addWindowListener(new WindowAdapter() {
@@ -1287,7 +1287,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPtgActionPerformed
 
     private void tglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tglKeyPressed
-    Valid.pindah(evt,InventarisCari,TglPinjam2);
+        Valid.pindah(evt,InventarisCari,TglPinjam2);
     }//GEN-LAST:event_tglKeyPressed
 
     private void tbKamInKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyReleased

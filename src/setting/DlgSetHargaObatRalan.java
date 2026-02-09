@@ -577,7 +577,7 @@ public final class DlgSetHargaObatRalan extends javax.swing.JDialog {
 
     private void hargaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_hargaKeyPressed
        Valid.pindah(evt,kdpj,BtnSimpan);
-}//GEN-LAST:event_hargaKeyPressed
+    }//GEN-LAST:event_hargaKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampil());

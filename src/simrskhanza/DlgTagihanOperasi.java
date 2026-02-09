@@ -2154,7 +2154,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAnastesiActionPerformed
 
     private void kddranakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kddranakKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             nmdranak.setText(Sequel.CariDokter(kddranak.getText()));
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnAnakActionPerformed(null);
@@ -2163,7 +2163,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_kddranakKeyPressed
 
-private void btnAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnakActionPerformed
+    private void btnAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnakActionPerformed
         if (dokter == null || !dokter.isDisplayable()) {
             dokter=new DlgCariDokter(null,false);
             dokter.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -2267,7 +2267,7 @@ private void btnAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_btnAsis3ActionPerformed
 
     private void kdInstrumenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdInstrumenKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             Sequel.cariIsi("select nama from petugas where nip='"+kdInstrumen.getText()+"'",nminstrumen);
         }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             btnAsis3ActionPerformed(null);
@@ -2309,7 +2309,7 @@ private void btnAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_btnPrwResActionPerformed
 
     private void kdprwresustKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdprwresustKeyPressed
-    Valid.pindah(evt,kdasistanestesi2,kdonloop1);
+        Valid.pindah(evt,kdasistanestesi2,kdonloop1);
     }//GEN-LAST:event_kdprwresustKeyPressed
 
     private void kdasistanestesiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdasistanestesiKeyPressed
@@ -2433,7 +2433,7 @@ private void btnAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
     }//GEN-LAST:event_btnPrwLuarActionPerformed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-   isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void KategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KategoriKeyPressed

@@ -1038,47 +1038,47 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamInKeyPressed
 
     private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
-    InventarisCariKoleksi inventaris=new InventarisCariKoleksi(null,false);
-    inventaris.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(inventaris.getTable().getSelectedRow()!= -1){
-                InventarisCari.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
-                InventarisCari.requestFocus();
+        InventarisCariKoleksi inventaris=new InventarisCariKoleksi(null,false);
+        inventaris.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(inventaris.getTable().getSelectedRow()!= -1){
+                    InventarisCari.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
+                    InventarisCari.requestFocus();
+                }
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
-    });
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
-    inventaris.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                inventaris.dispose();
+        inventaris.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    inventaris.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    inventaris.isCek();
-    inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    inventaris.setLocationRelativeTo(internalFrame1);
-    inventaris.setAlwaysOnTop(false);
-    inventaris.setVisible(true);
-}//GEN-LAST:event_BtnSeek2ActionPerformed
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        inventaris.isCek();
+        inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        inventaris.setLocationRelativeTo(internalFrame1);
+        inventaris.setAlwaysOnTop(false);
+        inventaris.setVisible(true);
+    }//GEN-LAST:event_BtnSeek2ActionPerformed
 
     private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
    Valid.pindah(evt,TglPinjam2,TCari);

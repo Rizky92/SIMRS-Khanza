@@ -936,16 +936,16 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,KodePj,KodePerujuk);
         }
-}//GEN-LAST:event_KdPtgKeyPressed
+    }//GEN-LAST:event_KdPtgKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    DlgCariPeriksaRadiologi form=new DlgCariPeriksaRadiologi(null,false);
-    form.setPasien(TNoRw.getText());
-    form.setSize(this.getWidth(),this.getHeight());
-    form.setLocationRelativeTo(this);
-    form.setVisible(true);
-    this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPeriksaRadiologi form=new DlgCariPeriksaRadiologi(null,false);
+        form.setPasien(TNoRw.getText());
+        form.setSize(this.getWidth(),this.getHeight());
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void ChkJlnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkJlnActionPerformed

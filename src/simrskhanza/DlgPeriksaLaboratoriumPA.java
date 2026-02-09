@@ -973,17 +973,17 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Pemeriksaan,KodePerujuk);
         }
-}//GEN-LAST:event_KdPtgKeyPressed
+    }//GEN-LAST:event_KdPtgKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    DlgCariPeriksaLabPA form=new DlgCariPeriksaLabPA(null,false);
-    form.isCek();
-    form.setPasien(TNoRw.getText());
-    form.setSize(this.getWidth(),this.getHeight());
-    form.setLocationRelativeTo(this);
-    form.setVisible(true);
-    this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPeriksaLabPA form=new DlgCariPeriksaLabPA(null,false);
+        form.isCek();
+        form.setPasien(TNoRw.getText());
+        form.setSize(this.getWidth(),this.getHeight());
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -999,20 +999,20 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkJlnActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-   try{
-       for(i=0;i<tbPemeriksaan.getRowCount();i++){
-          tbPemeriksaan.setValueAt("",i,1);
-          tbPemeriksaan.setValueAt("",i,2);
-          tbPemeriksaan.setValueAt("",i,3);
-          tbPemeriksaan.setValueAt("",i,4);
-          tbPemeriksaan.setValueAt("",i,5);
-       }
-   }catch(Exception ex){
-   }
+        try{
+            for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                tbPemeriksaan.setValueAt("",i,1);
+                tbPemeriksaan.setValueAt("",i,2);
+                tbPemeriksaan.setValueAt("",i,3);
+                tbPemeriksaan.setValueAt("",i,4);
+                tbPemeriksaan.setValueAt("",i,5);
+            }
+        }catch(Exception ex){
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-       runBackground(() ->tampiltarif());
+        runBackground(() ->tampiltarif());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed

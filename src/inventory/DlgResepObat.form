@@ -734,6 +734,7 @@
   </SyntheticProperties>
   <Events>
     <EventHandler event="windowClosed" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowClosed"/>
+    <EventHandler event="windowOpened" listener="java.awt.event.WindowListener" parameters="java.awt.event.WindowEvent" handler="formWindowOpened"/>
   </Events>
   <AuxValues>
     <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0" />
@@ -1056,7 +1057,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel"
                       editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="02-02-2026 13:30:02"/>
+                        <StringItem index="0" value="08-02-2026 05:08:36"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String"
@@ -1089,7 +1090,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel"
                       editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="02-02-2026 13:30:02"/>
+                        <StringItem index="0" value="08-02-2026 05:08:36"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String"
@@ -1347,7 +1348,7 @@
                     <Property name="model" type="javax.swing.ComboBoxModel"
                       editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="02-02-2026"/>
+                        <StringItem index="0" value="08-02-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy" />

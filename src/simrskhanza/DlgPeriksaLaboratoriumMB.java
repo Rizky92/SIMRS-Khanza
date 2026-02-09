@@ -1024,17 +1024,17 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
         }else{
             Valid.pindah(evt,Pemeriksaan,KodePerujuk);
         }
-}//GEN-LAST:event_KdPtgKeyPressed
+    }//GEN-LAST:event_KdPtgKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    DlgCariPeriksaLabMB form=new DlgCariPeriksaLabMB(null,false);
-    form.isCek();
-    form.setPasien(TNoRw.getText());
-    form.setSize(this.getWidth(),this.getHeight());
-    form.setLocationRelativeTo(this);
-    form.setVisible(true);
-    this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgCariPeriksaLabMB form=new DlgCariPeriksaLabMB(null,false);
+        form.isCek();
+        form.setPasien(TNoRw.getText());
+        form.setSize(this.getWidth(),this.getHeight());
+        form.setLocationRelativeTo(this);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -1050,18 +1050,18 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkJlnActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-   try{
-       for(i=0;i<tbPemeriksaan.getRowCount();i++){
-          if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
-              tabMode.removeRow(i);
-          }
-       }
-   }catch(Exception ex){
-   }
+        try{
+            for(i=0;i<tbPemeriksaan.getRowCount();i++){
+                if(tbPemeriksaan.getValueAt(i,0).toString().equals("true")){
+                    tabMode.removeRow(i);
+                }
+            }
+        }catch(Exception ex){
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-       runBackground(() ->tampiltarif());
+        runBackground(() ->tampiltarif());
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
