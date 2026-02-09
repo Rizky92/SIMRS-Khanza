@@ -969,11 +969,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
         DTPObatKronisSelanjutnya.setName("DTPObatKronisSelanjutnya"); // NOI18N
         DTPObatKronisSelanjutnya.setOpaque(false);
         DTPObatKronisSelanjutnya.setPreferredSize(new java.awt.Dimension(100, 23));
-        DTPObatKronisSelanjutnya.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                DTPObatKronisSelanjutnyaKeyPressed(evt);
-            }
-        });
         FormInput.add(DTPObatKronisSelanjutnya);
         DTPObatKronisSelanjutnya.setBounds(201, 100, 90, 23);
 

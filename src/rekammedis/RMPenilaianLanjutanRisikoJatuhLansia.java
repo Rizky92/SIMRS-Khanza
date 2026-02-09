@@ -136,7 +136,7 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         // HasilSkrining.setDocument(new batasInput((int)200).getKata(HasilSkrining));
         // Saran.setDocument(new batasInput((int)200).getKata(Saran));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();
@@ -701,11 +701,6 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         SkalaResiko1.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 SkalaResiko1ItemStateChanged(evt);
-            }
-        });
-        SkalaResiko1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SkalaResiko1ActionPerformed(evt);
             }
         });
         SkalaResiko1.addKeyListener(new java.awt.event.KeyAdapter() {
