@@ -52,7 +52,7 @@ public class DlgLogin extends widget.Dialog {
         btnAksiKonfirmasi = new widget.Button();
         btnAksiBatal = new widget.Button();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setUndecorated(false);
 
         judulAksi.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         judulAksi.setText("KONFIRMASI AKSI");
