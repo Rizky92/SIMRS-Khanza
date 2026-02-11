@@ -610,7 +610,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         }
 
         try {
-            psrekening=koneksi.prepareStatement("select set_akun_ranap2.Uang_Muka_Ralan,set_akun_ranap2.Sisa_Uang_Muka_Ralan from set_akun_ranap2");
+            psrekening=koneksi.prepareStatement("select set_akun_ralan.Uang_Muka_Ralan,set_akun_ralan.Sisa_Uang_Muka_Ralan from set_akun_ralan");
             try {
                 rsrekening=psrekening.executeQuery();
                 if(rsrekening.next()){

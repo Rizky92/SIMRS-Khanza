@@ -2034,8 +2034,8 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
-ALTER TABLE `set_akun_ranap2` ADD COLUMN IF NOT EXISTS `Uang_Muka_Ralan` varchar(15) NULL DEFAULT NULL AFTER `Sisa_Uang_Muka_Ranap`;
+ALTER TABLE `set_akun_ralan` ADD COLUMN IF NOT EXISTS `Uang_Muka_Ralan` varchar(15) NULL DEFAULT NULL AFTER `Potongan_Ralan`;
 
-ALTER TABLE `set_akun_ranap2` ADD COLUMN IF NOT EXISTS `Sisa_Uang_Muka_Ralan` varchar(15) NULL DEFAULT NULL AFTER `Uang_Muka_Ralan`;
+ALTER TABLE `set_akun_ralan` ADD COLUMN IF NOT EXISTS `Sisa_Uang_Muka_Ralan` varchar(15) NULL DEFAULT NULL AFTER `Uang_Muka_Ralan`;
 
 SET FOREIGN_KEY_CHECKS=1;

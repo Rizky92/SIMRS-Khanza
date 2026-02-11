@@ -63,7 +63,7 @@ public class DlgDepositRalan extends javax.swing.JDialog {
     private DlgCariPetugas petugas;
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date date = new Date();
-    private String now=dateFormat.format(date),Uang_Muka_Ralan=Sequel.cariIsi("select Uang_Muka_Ralan from set_akun_ranap2");
+    private String now=dateFormat.format(date),Uang_Muka_Ralan=Sequel.cariIsi("select Uang_Muka_Ralan from set_akun_ralan");
     private int i=0;
     private PreparedStatement ps;
     private ResultSet rs;
