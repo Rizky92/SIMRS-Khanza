@@ -10462,7 +10462,6 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         DlgSidikJari sidikjari=new DlgSidikJari(this,false);
-        sidikjari.tampil();
         sidikjari.isCek();
         sidikjari.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         sidikjari.setLocationRelativeTo(PanelUtama);

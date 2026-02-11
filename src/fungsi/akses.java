@@ -258,7 +258,7 @@ public final class akses {
             template_pelaksanaan_informasi_edukasi=false,skrining_instrumen_esat=false,penilaian_awal_medis_ranap_jantung=false,e_eksekutif=false,penugasan_pengujian_sampel_lab_kesehatan_lingkungan=false,
             hasil_pengujian_sampel_lab_kesehatan_lingkungan=false,verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false,validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,
             rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false,bpjs_potensi_prb=false,
-            bpjs_riwayat_pelayanan_obat=false,skrining_gizi_kehamilan=false,bpjs_rekap_peserta_prb_apotek=false;
+            bpjs_riwayat_pelayanan_obat=false,skrining_gizi_kehamilan=false,bpjs_rekap_peserta_prb_apotek=false,serah_terima_anggota_tubuh_barang=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -1487,6 +1487,7 @@ public final class akses {
                         akses.skrining_gizi_kehamilan=rs2.getBoolean("skrining_gizi_kehamilan");
                         akses.bpjs_rekap_peserta_prb_apotek=rs2.getBoolean("bpjs_rekap_peserta_prb_apotek");
                         akses.bpjs_riwayat_surat_smc = rs2.getBoolean("bpjs_riwayat_surat_smc");
+                        akses.serah_terima_anggota_tubuh_barang=rs2.getBoolean("serah_terima_anggota_tubuh_barang");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2712,6 +2713,7 @@ public final class akses {
         akses.skrining_gizi_kehamilan=isadmin;
         akses.bpjs_rekap_peserta_prb_apotek=isadmin;
         akses.bpjs_riwayat_surat_smc=isadmin;
+        akses.serah_terima_anggota_tubuh_barang=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3943,6 +3945,7 @@ public final class akses {
     public static boolean getskrining_gizi_kehamilan(){return akses.skrining_gizi_kehamilan;}
     public static boolean getbpjs_rekap_peserta_prb_apotek(){return akses.bpjs_rekap_peserta_prb_apotek;}
     public static boolean getbpjs_riwayat_surat_smc(){return akses.bpjs_riwayat_surat_smc;}
+    public static boolean getserah_terima_anggota_tubuh_barang(){return akses.serah_terima_anggota_tubuh_barang;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
