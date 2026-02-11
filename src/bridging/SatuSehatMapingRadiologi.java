@@ -46,7 +46,7 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private int i=0;
-    private final final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private final SatuSehatReferensiRadiologiLOINC refPeriksa = new SatuSehatReferensiRadiologiLOINC(null, false);
     private final SatuSehatReferensiRadiologiSNOMED refSampel = new SatuSehatReferensiRadiologiSNOMED(null, false);
@@ -95,33 +95,13 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
         KodePemeriksaan.setDocument(new batasInput((byte)15).getKata(KodePemeriksaan));
-        Code.setDocument(new batasInput((byte)15).getKata(Code));
-        RadiologiSystem.setDocument(new batasInput((byte)100).getKata(RadiologiSystem));
-        Display.setDocument(new batasInput((byte)80).getKata(Display));
+        PeriksaCode.setDocument(new batasInput((byte)15).getKata(PeriksaCode));
+        PeriksaSystem.setDocument(new batasInput((byte)100).getKata(PeriksaSystem));
+        PeriksaDisplay.setDocument(new batasInput((byte)80).getKata(PeriksaDisplay));
         SampelCode.setDocument(new batasInput((byte)15).getKata(SampelCode));
-        SampelRadiologiSystem.setDocument(new batasInput((byte)100).getKata(SampelRadiologiSystem));
+        SampelSystem.setDocument(new batasInput((byte)100).getKata(SampelSystem));
         SampelDisplay.setDocument(new batasInput((byte)80).getKata(SampelDisplay));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-
-        pemeriksaan.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (pemeriksaan.getTable().getSelectedRow() != -1) {
-                    KodePemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(), 1).toString());
-                    NamaPemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(), 2).toString());
-                }
-                BtnCariTindakanRadiologi.requestFocus();
-            }
-        });
-
-        pemeriksaan.getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    pemeriksaan.dispose();
-                }
-            }
-        });
 
         refPeriksa.addWindowListener(new WindowAdapter() {
             @Override
@@ -628,40 +608,24 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
 
     private void BtnCariTindakanRadiologiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariTindakanRadiologiActionPerformed
         DlgJnsPerawatanRadiologi pemeriksaan=new DlgJnsPerawatanRadiologi(null,false);
-        pemeriksaan.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
+        pemeriksaan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
-                if(pemeriksaan.getTable().getSelectedRow()!= -1){
-                    KodePemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),1).toString());
-                    NamaPemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),2).toString());
+                if (pemeriksaan.getTable().getSelectedRow() != -1) {
+                    KodePemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(), 1).toString());
+                    NamaPemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(), 2).toString());
                 }
-                btnBarang.requestFocus();
+                BtnCariTindakanRadiologi.requestFocus();
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
         });
 
-        pemeriksaan.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
+        pemeriksaan.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     pemeriksaan.dispose();
                 }
             }
-            @Override
-            public void keyReleased(KeyEvent e) {}
         });
         pemeriksaan.isCek();
         pemeriksaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);

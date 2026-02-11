@@ -91,35 +91,14 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }
         tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
 
-        KodePemeriksaan.setDocument(new batasInput((byte)15).getKata(KodePemeriksaan));
-        Code.setDocument(new batasInput((byte)15).getKata(Code));
-        RadiologiSystem.setDocument(new batasInput((byte)100).getKata(RadiologiSystem));
-        Display.setDocument(new batasInput((byte)80).getKata(Display));
+        IDTemplate.setDocument(new batasInput((byte)15).getKata(IDTemplate));
+        PeriksaCode.setDocument(new batasInput((byte)15).getKata(PeriksaCode));
+        PeriksaSystem.setDocument(new batasInput((byte)100).getKata(PeriksaSystem));
+        PeriksaDisplay.setDocument(new batasInput((byte)80).getKata(PeriksaDisplay));
         SampelCode.setDocument(new batasInput((byte)15).getKata(SampelCode));
-        SampelRadiologiSystem.setDocument(new batasInput((byte)100).getKata(SampelRadiologiSystem));
+        SampelSystem.setDocument(new batasInput((byte)100).getKata(SampelSystem));
         SampelDisplay.setDocument(new batasInput((byte)80).getKata(SampelDisplay));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-
-        pemeriksaan.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(pemeriksaan.getTable().getSelectedRow()!= -1){
-                    IDTemplate.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),2).toString());
-                    NamaPemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),3).toString());
-                    NamaTindakan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),1).toString());
-                }
-                BtnCariTemplateLab.requestFocus();
-            }
-        });
-
-        pemeriksaan.getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    pemeriksaan.dispose();
-                }
-            }
-        });
 
         refPeriksa.addWindowListener(new WindowAdapter() {
             @Override
@@ -640,40 +619,25 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
 
     private void BtnCariTemplateLabActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariTemplateLabActionPerformed
         DlgCariTemplateLaborat pemeriksaan=new DlgCariTemplateLaborat(null,false);
-        pemeriksaan.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
+        pemeriksaan.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if(pemeriksaan.getTable().getSelectedRow()!= -1){
-                    KodePemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),2).toString());
+                    IDTemplate.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),2).toString());
                     NamaPemeriksaan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),3).toString());
+                    NamaTindakan.setText(pemeriksaan.getTable().getValueAt(pemeriksaan.getTable().getSelectedRow(),1).toString());
                 }
-                btnBarang.requestFocus();
+                BtnCariTemplateLab.requestFocus();
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
         });
 
-        pemeriksaan.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
+        pemeriksaan.getTable().addKeyListener(new KeyAdapter() {
             @Override
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pemeriksaan.dispose();
                 }
             }
-            @Override
-            public void keyReleased(KeyEvent e) {}
         });
         pemeriksaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pemeriksaan.setLocationRelativeTo(internalFrame1);
@@ -837,7 +801,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil());
+        runBackground(()->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -850,13 +814,13 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampil());
+        runBackground(()->tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             TCari.setText("");
-            runBackground(() ->tampil());
+            runBackground(()->tampil());
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
@@ -952,19 +916,19 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                       runBackground(()->tampil());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                       runBackground(()->tampil());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil());
+                       runBackground(()->tampil());
                     }
                 }
             });

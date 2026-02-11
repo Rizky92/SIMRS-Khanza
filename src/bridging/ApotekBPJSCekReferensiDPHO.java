@@ -118,7 +118,7 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
 
-        Poli.setDocument(new batasInput((byte)100).getKata(Poli));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
         try {
             link=koneksiDB.URLAPIAPOTEKBPJS();
@@ -320,23 +320,23 @@ public final class ApotekBPJSCekReferensiDPHO extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(koneksiDB.CARICEPAT().equals("aktif")){
-            Poli.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
-                    if(Poli.getText().length()>2){
-                        runBackground(() ->tampil(Poli.getText()));
+                    if(TCari.getText().length()>2){
+                        tampil();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
-                    if(Poli.getText().length()>2){
-                        runBackground(() ->tampil(Poli.getText()));
+                    if(TCari.getText().length()>2){
+                        tampil();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
-                    if(Poli.getText().length()>2){
-                        runBackground(() ->tampil(Poli.getText()));
+                    if(TCari.getText().length()>2){
+                        tampil();
                     }
                 }
             });
