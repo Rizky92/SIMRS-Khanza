@@ -736,6 +736,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         scrollPane8 = new widget.ScrollPane();
         panelBayar = new widget.panelisi();
         TtlSemua = new widget.TextBox();
+        lblDeposit = new widget.Label();
+        Deposit = new widget.TextBox();
         TKembali = new widget.TextBox();
         jLabel5 = new widget.Label();
         jLabel9 = new widget.Label();
@@ -762,6 +764,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         btnCariPiutang = new widget.Button();
         BtnAll = new widget.Button();
         BtnAll1 = new widget.Button();
+        BtnSeek2 = new widget.Button();
         panelPermintaan = new widget.panelisi();
         scrollPane5 = new widget.ScrollPane();
         tbLab = new widget.Table();
@@ -1183,7 +1186,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         internalFrame3.setLayout(null);
 
         BtnCloseIn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnCloseIn1.setMnemonic('U');
         BtnCloseIn1.setText("Tutup");
         BtnCloseIn1.setToolTipText("Alt+U");
         BtnCloseIn1.setName("BtnCloseIn1"); // NOI18N
@@ -1201,7 +1203,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         BtnCloseIn1.setBounds(510, 30, 100, 30);
 
         BtnSimpan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan1.setMnemonic('S');
         BtnSimpan1.setText("Simpan");
         BtnSimpan1.setToolTipText("Alt+S");
         BtnSimpan1.setName("BtnSimpan1"); // NOI18N
@@ -1244,7 +1245,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         TDokter.setBounds(183, 32, 181, 23);
 
         btnCariDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnCariDokter.setMnemonic('7');
         btnCariDokter.setToolTipText("ALt+7");
         btnCariDokter.setName("btnCariDokter"); // NOI18N
         btnCariDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -1282,7 +1282,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         jLabel8.setBounds(0, 30, 57, 23);
 
         BtnCloseIn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnCloseIn.setMnemonic('U');
         BtnCloseIn.setText("Tutup");
         BtnCloseIn.setToolTipText("Alt+U");
         BtnCloseIn.setName("BtnCloseIn"); // NOI18N
@@ -1300,7 +1299,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         BtnCloseIn.setBounds(465, 30, 100, 30);
 
         BtnSimpan2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan2.setMnemonic('S');
         BtnSimpan2.setText("Simpan");
         BtnSimpan2.setToolTipText("Alt+S");
         BtnSimpan2.setName("BtnSimpan2"); // NOI18N
@@ -1318,7 +1316,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         BtnSimpan2.setBounds(255, 30, 100, 30);
 
         BtnBatal1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnBatal1.setMnemonic('H');
         BtnBatal1.setText("Hapus");
         BtnBatal1.setToolTipText("Alt+H");
         BtnBatal1.setName("BtnBatal1"); // NOI18N
@@ -1386,7 +1383,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelisi1.add(norawat);
 
         BtnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/add-file-16x16.png"))); // NOI18N
-        BtnTambah.setMnemonic('T');
         BtnTambah.setText("Tambah");
         BtnTambah.setToolTipText("Alt+T");
         BtnTambah.setName("BtnTambah"); // NOI18N
@@ -1399,7 +1395,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelisi1.add(BtnTambah);
 
         BtnSimpan3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan3.setMnemonic('S');
         BtnSimpan3.setText("Simpan");
         BtnSimpan3.setToolTipText("Alt+S");
         BtnSimpan3.setName("BtnSimpan3"); // NOI18N
@@ -1411,7 +1406,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelisi1.add(BtnSimpan3);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -1424,7 +1418,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelisi1.add(BtnHapus);
 
         BtnKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnKeluar1.setMnemonic('U');
         BtnKeluar1.setText("Tutup");
         BtnKeluar1.setToolTipText("Alt+U");
         BtnKeluar1.setName("BtnKeluar1"); // NOI18N
@@ -1450,7 +1443,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         internalFrame5.setLayout(null);
 
         BtnCloseIn4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnCloseIn4.setMnemonic('U');
         BtnCloseIn4.setText("Tutup");
         BtnCloseIn4.setToolTipText("Alt+U");
         BtnCloseIn4.setName("BtnCloseIn4"); // NOI18N
@@ -1463,7 +1455,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         BtnCloseIn4.setBounds(510, 30, 100, 30);
 
         BtnSimpan4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan4.setMnemonic('S');
         BtnSimpan4.setText("Simpan");
         BtnSimpan4.setToolTipText("Alt+S");
         BtnSimpan4.setName("BtnSimpan4"); // NOI18N
@@ -1496,7 +1487,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         nmpoli.setBounds(183, 32, 181, 23);
 
         btnCariPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnCariPoli.setMnemonic('7');
         btnCariPoli.setToolTipText("ALt+7");
         btnCariPoli.setName("btnCariPoli"); // NOI18N
         btnCariPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -1558,7 +1548,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelisi2.add(norawatpotongan);
 
         BtnTambahPotongan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/add-file-16x16.png"))); // NOI18N
-        BtnTambahPotongan.setMnemonic('T');
         BtnTambahPotongan.setText("Tambah");
         BtnTambahPotongan.setToolTipText("Alt+T");
         BtnTambahPotongan.setName("BtnTambahPotongan"); // NOI18N
@@ -1571,7 +1560,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelisi2.add(BtnTambahPotongan);
 
         BtnSimpanPotongan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpanPotongan.setMnemonic('S');
         BtnSimpanPotongan.setText("Simpan");
         BtnSimpanPotongan.setToolTipText("Alt+S");
         BtnSimpanPotongan.setName("BtnSimpanPotongan"); // NOI18N
@@ -1583,7 +1571,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelisi2.add(BtnSimpanPotongan);
 
         BtnHapusPotongan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapusPotongan.setMnemonic('H');
         BtnHapusPotongan.setText("Hapus");
         BtnHapusPotongan.setToolTipText("Alt+H");
         BtnHapusPotongan.setName("BtnHapusPotongan"); // NOI18N
@@ -1596,7 +1583,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelisi2.add(BtnHapusPotongan);
 
         BtnKeluarPotongan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnKeluarPotongan.setMnemonic('U');
         BtnKeluarPotongan.setText("Tutup");
         BtnKeluarPotongan.setToolTipText("Alt+U");
         BtnKeluarPotongan.setName("BtnKeluarPotongan"); // NOI18N
@@ -1622,7 +1608,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         internalFrame7.setLayout(null);
 
         BtnCloseIn5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
-        BtnCloseIn5.setMnemonic('P');
         BtnCloseIn5.setText("Tutup");
         BtnCloseIn5.setToolTipText("Alt+P");
         BtnCloseIn5.setName("BtnCloseIn5"); // NOI18N
@@ -1635,7 +1620,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         BtnCloseIn5.setBounds(510, 30, 100, 30);
 
         BtnSimpan5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan5.setMnemonic('S');
         BtnSimpan5.setText("Simpan");
         BtnSimpan5.setToolTipText("Alt+S");
         BtnSimpan5.setName("BtnSimpan5"); // NOI18N
@@ -1668,7 +1652,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         nmpenjab.setBounds(183, 32, 181, 23);
 
         btnPenjab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnPenjab.setMnemonic('7');
         btnPenjab.setToolTipText("ALt+7");
         btnPenjab.setName("btnPenjab"); // NOI18N
         btnPenjab.addActionListener(new java.awt.event.ActionListener() {
@@ -1758,7 +1741,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelGlass1.add(TPasien);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('R');
         BtnCari.setToolTipText("Alt+R");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1779,7 +1761,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         jLabel4.setPreferredSize(new java.awt.Dimension(65, 23));
         panelGlass1.add(jLabel4);
 
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "12-01-2026 12:10:38" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-02-2026 06:23:27" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1847,14 +1829,12 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelBayar.add(TtlSemua);
         TtlSemua.setBounds(110, 37, 230, 23);
 
-        lblDeposit = new widget.Label();
         lblDeposit.setText("Deposit : Rp.");
         lblDeposit.setName("lblDeposit"); // NOI18N
         lblDeposit.setPreferredSize(new java.awt.Dimension(95, 23));
         panelBayar.add(lblDeposit);
         lblDeposit.setBounds(0, 377, 109, 23);
 
-        Deposit = new widget.TextBox();
         Deposit.setEditable(false);
         Deposit.setText("0");
         Deposit.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
@@ -2100,7 +2080,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         TCari.setBounds(110, 67, 734, 23);
 
         BtnCariBayar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCariBayar.setMnemonic('3');
         BtnCariBayar.setToolTipText("Alt+3");
         BtnCariBayar.setName("BtnCariBayar"); // NOI18N
         BtnCariBayar.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -2128,7 +2107,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         TCari1.setBounds(110, 222, 734, 23);
 
         btnCariPiutang.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        btnCariPiutang.setMnemonic('3');
         btnCariPiutang.setToolTipText("Alt+3");
         btnCariPiutang.setName("btnCariPiutang"); // NOI18N
         btnCariPiutang.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -2146,7 +2124,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         btnCariPiutang.setBounds(847, 222, 25, 23);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('2');
         BtnAll.setToolTipText("Alt+2");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -2164,7 +2141,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         BtnAll.setBounds(875, 67, 25, 23);
 
         BtnAll1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll1.setMnemonic('2');
         BtnAll1.setToolTipText("Alt+2");
         BtnAll1.setName("BtnAll1"); // NOI18N
         BtnAll1.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -2180,6 +2156,19 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         });
         panelBayar.add(BtnAll1);
         BtnAll1.setBounds(875, 222, 25, 23);
+
+        BtnSeek2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnSeek2.setMnemonic('3');
+        BtnSeek2.setToolTipText("Alt+3");
+        BtnSeek2.setName("BtnSeek2"); // NOI18N
+        BtnSeek2.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnSeek2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnSeek2ActionPerformed(evt);
+            }
+        });
+        panelBayar.add(BtnSeek2);
+        BtnSeek2.setBounds(332, 377, 25, 23);
 
         scrollPane8.setViewportView(panelBayar);
 
@@ -2265,7 +2254,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelGlass8.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -2285,7 +2273,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelGlass8.add(BtnSimpan);
 
         BtnNota.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Agenda-1-16x16.png"))); // NOI18N
-        BtnNota.setMnemonic('N');
         BtnNota.setText(" Nota");
         BtnNota.setToolTipText("Alt+N");
         BtnNota.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -2305,7 +2292,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelGlass8.add(BtnNota);
 
         BtnView.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnView.setMnemonic('L');
         BtnView.setText("Lihat");
         BtnView.setToolTipText("Alt+L");
         BtnView.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -2325,7 +2311,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelGlass8.add(BtnView);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -2493,28 +2478,43 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
                 if(piutang<=0){
                     i++;
-                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TOTAL TAGIHAN',':','','','','','"+TtlSemua.getText()+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','','','','','','','','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                     i++;
-                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','Admin Bank',':','','','','','"+Valid.SetAngka(besarppn)+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TOTAL TAGIHAN',':','','','','','<b>"+TtlSemua.getText()+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                     i++;
-                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TOTAL BAYAR',':','','','','','"+TagihanPPn.getText()+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','Admin Bank',':','','','','','<b>"+Valid.SetAngka(besarppn)+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    i++;
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TOTAL BAYAR',':','','','','','<b>"+TagihanPPn.getText()+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    i++;
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','','','','','','','','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    i++;
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','DEPOSIT',':','','','','','<b>"+Deposit.getText()+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    i++;
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','BAYAR',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                     i++;
                     row2=tbAkunBayar.getRowCount();
                     for(r=0;r<row2;r++){
                         if(Valid.SetAngka(tbAkunBayar.getValueAt(r,2).toString())>0){
-                            Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','-  "+tbAkunBayar.getValueAt(r,0).toString()+"',':','','','','','"+Valid.SetAngka((Valid.SetAngka(tbAkunBayar.getValueAt(r,2).toString())+Valid.SetAngka(tbAkunBayar.getValueAt(r,4).toString())))+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                            Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','-  "+tbAkunBayar.getValueAt(r,0).toString()+"',':','','','','','<b>"+Valid.SetAngka((Valid.SetAngka(tbAkunBayar.getValueAt(r,2).toString())+Valid.SetAngka(tbAkunBayar.getValueAt(r,4).toString())))+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                             i++;
                         }
                     }
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','KEMBALI',':','','','','','<b>"+TKembali.getText()+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                 }else if(piutang>0){
                     i++;
-                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TOTAL TAGIHAN',':','','','','','"+TtlSemua.getText()+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','','','','','','','','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                     i++;
-                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','Admin Bank',':','','','','','"+Valid.SetAngka(besarppn)+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TOTAL TAGIHAN',':','','','','','<b>"+TtlSemua.getText()+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                     i++;
-                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TAGIHAN + Admin Bank',':','','','','','"+TagihanPPn.getText()+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','Admin Bank',':','','','','','<b>"+Valid.SetAngka(besarppn)+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                     i++;
-                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','EKSES',':','','','','','"+Valid.SetAngka(bayar)+"','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','TAGIHAN + Admin Bank',':','','','','','<b>"+TagihanPPn.getText()+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    i++;
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','','','','','','','','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    i++;
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','DEPOSIT',':','','','','','<b>"+Deposit.getText()+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
+                    i++;
+                    Sequel.menyimpan("temporary_bayar_ralan","'"+i+"','EKSES',':','','','','','<b>"+Valid.SetAngka(bayar)+"</b>','Tagihan','"+akses.getkode()+"','','','','','','','',''","Tagihan");
                     i++;
                     row2=tbAkunBayar.getRowCount();
                     for(r=0;r<row2;r++){
@@ -4180,6 +4180,36 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_MnCetakRegisterActionPerformed
 
+    private void BtnSeek2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek2ActionPerformed
+        DlgDepositRalan deposit=new DlgDepositRalan(null,false);
+        deposit.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                depositRalan=getAvailableDepositRalan(TNoRw.getText());
+                Deposit.setText(Valid.SetAngka(depositRalan));
+                isKembali();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        deposit.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        deposit.setLocationRelativeTo(internalFrame1);
+        deposit.isCek();
+        deposit.setNoRm(TNoRw.getText(),Valid.SetTgl2(tgl_registrasi),DTPTgl.getDate());
+        deposit.setAlwaysOnTop(false);
+        deposit.setVisible(true);
+    }//GEN-LAST:event_BtnSeek2ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -4212,6 +4242,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private widget.Button BtnKeluar1;
     private widget.Button BtnKeluarPotongan;
     private widget.Button BtnNota;
+    private widget.Button BtnSeek2;
     private widget.Button BtnSimpan;
     private widget.Button BtnSimpan1;
     private widget.Button BtnSimpan2;
@@ -4223,6 +4254,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private widget.Button BtnTambahPotongan;
     private widget.Button BtnView;
     private widget.Tanggal DTPTgl;
+    private widget.TextBox Deposit;
     private javax.swing.JMenuItem MnCariPeriksaLab;
     private javax.swing.JMenuItem MnCariPeriksaLabMB;
     private javax.swing.JMenuItem MnCariPeriksaLabPA;
@@ -4258,7 +4290,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     public widget.TextBox TNoRw;
     private widget.TextBox TPasien;
     private javax.swing.JTabbedPane TabRawat;
-    private widget.TextBox Deposit;
     private widget.TextBox TagihanPPn;
     private widget.TextBox TotalObat;
     private widget.TextBox TtlSemua;
@@ -4290,7 +4321,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame7;
     private widget.Label jLabel12;
     private widget.Label jLabel13;
-    private widget.Label lblDeposit;
     private widget.Label jLabel14;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
@@ -4307,6 +4337,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private widget.TextBox kdpoli;
     private widget.Label label15;
     private widget.Label label16;
+    private widget.Label lblDeposit;
     private widget.TextBox nmpenjab;
     private widget.TextBox nmpoli;
     private widget.TextBox norawat;
@@ -6361,7 +6392,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             }
                             if(Sequel.queryutf2(
                                 "insert into piutang_pasien values ('"+TNoRw.getText()+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"','"+
-                                TNoRM.getText()+"','Belum Lunas','"+total+"','"+bayar+"','"+piutang+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"')"
+                                TNoRM.getText()+"','Belum Lunas','"+total+"','"+(bayar+depositRalan)+"','"+piutang+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"')"
                             )==false){
                                 sukses=false;
                             }
@@ -6369,8 +6400,14 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             if(sukses==true){
                                 sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBAYARAN PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
                             }
-                            if(Sequel.menyimpantf2("tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19)+"','Pelunasan','"+total+"','"+total+"','Sudah','"+akses.getkode()+"'","No.Rawat")==false){
-                                sukses=false;
+                            if(depositRalan>0){
+                                if(Sequel.menyimpantf2("tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19)+"','Pelunasan','"+total+"','"+(total-depositRalan)+"','Sudah','"+akses.getkode()+"'","No.Rawat")==false){
+                                    sukses=false;
+                                }
+                            }else{
+                                if(Sequel.menyimpantf2("tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19)+"','Pelunasan','"+total+"','"+total+"','Sudah','"+akses.getkode()+"'","No.Rawat")==false){
+                                    sukses=false;
+                                }
                             }
                         }
                     }
