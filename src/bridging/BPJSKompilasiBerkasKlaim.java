@@ -211,7 +211,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             engineKlaim.locationProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null && newValue.toLowerCase().contains("action")) {
                     SwingUtilities.invokeLater(() -> {
-                        if (!btnSEP.getText().equals("Tidak ada")) {
+                        if (selectedRow >= 0) {
                             setFlagKlaim();
                             switch (flagklaim) {
                                 case 1:
