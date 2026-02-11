@@ -376,6 +376,30 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
+                                    <td width="28%">Penggunaan Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <select name="ventilator_use_ind" class="text3" style="font-family: Tahoma; width: 95%">
+                                            <option value="0">Tidak</option>
+                                            <option value="1">Ya</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Waktu Mulai Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <input name="ventilator_start_dttm" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Waktu Selesai Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <input name="ventilator_stop_dttm" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
                                     <td width="28%">Jumlah Jam Penggunaan Ventilator di ICU</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
@@ -388,6 +412,9 @@
                                 <input type="hidden" name="icu_indikator" value="0">
                                 <input type="hidden" name="icu_los" value="0">
                                 <input type="hidden" name="ventilator_hour" value="0">
+                                <input type="hidden" name="ventilator_use_ind" value="0">
+                                <input type="hidden" name="ventilator_start_dttm" value="0">
+                                <input type="hidden" name="ventilator_stop_dttm" value="0">
                             <?php endif; ?>
                             <tr class="head">
                                 <td width="28%">Indikator Upgrade Kelas</td>
@@ -418,6 +445,17 @@
                                 <td width="1%">:</td>
                                 <td width="70%">
                                     <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Naik ke Kelas</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="upgrade_class_payor" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value="peserta">Kelas 1</option>
+                                        <option value="pemberi_kerja">Kelas 2</option>
+                                        <option value="asuransi_tambahan">Kelas VIP</option>
+                                    </select>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -492,6 +530,16 @@
                                 </td>
                             </tr>
                             <tr class="head">
+                                <td width="28%">Status Bayi Lahir CD</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="bayi_lahir_status_cd" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value="1">Ya</Option>
+                                        <option value="0">Tidak</Option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
                                 <td width="28%">Dializer Single Use</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
@@ -499,6 +547,131 @@
                                     <select name="dializer_single_use" class="text2" style="font-family: Tahoma; width: 95%">
                                         <option <?= $dializer_single_use == '1' ? 'selected ' : '' ?>value="1">Ya</Option>
                                         <option <?= $dializer_single_use == '0' ? 'selected ' : '' ?>value="0">Tidak</Option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Kantong darah</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="kantong_darah" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head">
+                                <td width="99%" colspan="3">MENIT 1</td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Appearance</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_1a" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Pulse</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_1p" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Grimace</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_1g" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Activity</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_1a" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Respiration</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_1r" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="99%" colspan="3">MENIT 5</td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Appearance</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_5a" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Pulse</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_5p" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Grimace</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_5g" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Activity</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_5a" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Respiration</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="menit_5r" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head">
+                                <td width="28%">Usia Kehamilan</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="usia_kehamilan" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Gravida</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="gravida" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Partus</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="partus" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Abortus</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="abortus" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Onset kontraksi</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="onset_kontraksi" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value="spontan">Spontan</Option>
+                                        <option value="non_spontan">Non-spontan</Option>
+                                        <option value="induksi">Induksi</Option>
+                                        <option value="non_induksi">Non-induksi</Option>
                                     </select>
                                 </td>
                             </tr>
@@ -521,6 +694,7 @@
                                         SQL
                                     ));
                                 ?>
+                                <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                                 <tr class="head">
                                     <td width="28%">Dilakukan Pemulasaran Jenazah?</td>
                                     <td width="1%">:</td>
