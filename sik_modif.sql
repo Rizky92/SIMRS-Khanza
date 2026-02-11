@@ -226,6 +226,33 @@ ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `nm_dokter` varchar(80) NULL DEFAUL
 
 ALTER TABLE `dokter` MODIFY COLUMN IF EXISTS `almt_tgl` varchar(100) NULL DEFAULT NULL AFTER `agama`;
 
+CREATE TABLE IF NOT EXISTS `deposit_ralan`  (
+  `no_deposit` varchar(17) NOT NULL,
+  `no_rawat` varchar(17) NULL DEFAULT NULL,
+  `no_rkm_medis` varchar(15) NOT NULL,
+  `tgl_deposit` datetime NOT NULL,
+  `nama_bayar` varchar(50) NOT NULL,
+  `besarppn` double NOT NULL DEFAULT 0,
+  `besar_deposit` double NOT NULL,
+  `nip` varchar(20) NOT NULL,
+  `keterangan` varchar(200) NULL DEFAULT NULL,
+  `jenis_deposit` enum('VISIT','PREPAID') NOT NULL DEFAULT 'VISIT',
+  PRIMARY KEY (`no_deposit`) USING BTREE,
+  INDEX `no_rawat`(`no_rawat`) USING BTREE,
+  INDEX `no_rkm_medis`(`no_rkm_medis`) USING BTREE,
+  INDEX `nama_bayar`(`nama_bayar`) USING BTREE,
+  INDEX `nip`(`nip`) USING BTREE,
+  INDEX `tgl_deposit`(`tgl_deposit`) USING BTREE,
+  INDEX `jenis_deposit`(`jenis_deposit`) USING BTREE,
+  INDEX `idx_deposit_ralan_patient`(`no_rkm_medis`, `tgl_deposit`) USING BTREE,
+  INDEX `idx_deposit_ralan_date`(`tgl_deposit`, `jenis_deposit`) USING BTREE,
+  INDEX `idx_deposit_ralan_visit`(`no_rawat`, `tgl_deposit`) USING BTREE,
+  CONSTRAINT `deposit_ralan_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `deposit_ralan_ibfk_2` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `deposit_ralan_ibfk_3` FOREIGN KEY (`nama_bayar`) REFERENCES `akun_bayar` (`nama_bayar`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `deposit_ralan_ibfk_4` FOREIGN KEY (`nip`) REFERENCES `petugas` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `dokter_ttdbasah`  (
   `kd_dokter` varchar(20) NOT NULL,
   `gambar_ttd` longblob NULL DEFAULT NULL,
@@ -458,6 +485,23 @@ CREATE TABLE IF NOT EXISTS `pemeriksaan_labpk_kategori`  (
   `urut` int(10) UNSIGNED NULL DEFAULT NULL,
   PRIMARY KEY (`nama`) USING BTREE,
   INDEX `urut_idx`(`urut`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `pengembalian_deposit_ralan`  (
+  `no_rawat` varchar(17) NOT NULL,
+  `no_deposit` varchar(17) NULL DEFAULT NULL,
+  `tanggal` datetime NOT NULL,
+  `petugas` varchar(20) NOT NULL,
+  `besar_pengembalian` double NOT NULL,
+  `keterangan` varchar(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_rawat`, `tanggal`) USING BTREE,
+  INDEX `no_deposit`(`no_deposit`) USING BTREE,
+  INDEX `petugas`(`petugas`) USING BTREE,
+  INDEX `tanggal`(`tanggal`) USING BTREE,
+  INDEX `idx_pengembalian_date`(`tanggal`) USING BTREE,
+  CONSTRAINT `pengembalian_deposit_ralan_ibfk_1` FOREIGN KEY (`no_rawat`) REFERENCES `reg_periksa` (`no_rawat`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `pengembalian_deposit_ralan_ibfk_2` FOREIGN KEY (`no_deposit`) REFERENCES `deposit_ralan` (`no_deposit`) ON DELETE SET NULL ON UPDATE CASCADE,
+  CONSTRAINT `pengembalian_deposit_ralan_ibfk_3` FOREIGN KEY (`petugas`) REFERENCES `petugas` (`nip`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `pengeluaran_harian` MODIFY COLUMN IF EXISTS `keterangan` varchar(250) NOT NULL DEFAULT '' AFTER `nip`;
@@ -1989,5 +2033,9 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `peminjam_piutang` enum('true','false
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression` enum('true','false') NULL DEFAULT NULL AFTER `konfirmasi_rekonsiliasi_obat`;
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
+
+ALTER TABLE `set_akun_ranap2` ADD COLUMN IF NOT EXISTS `Uang_Muka_Ralan` varchar(15) NULL DEFAULT NULL AFTER `Sisa_Uang_Muka_Ranap`;
+
+ALTER TABLE `set_akun_ranap2` ADD COLUMN IF NOT EXISTS `Sisa_Uang_Muka_Ralan` varchar(15) NULL DEFAULT NULL AFTER `Uang_Muka_Ralan`;
 
 SET FOREIGN_KEY_CHECKS=1;

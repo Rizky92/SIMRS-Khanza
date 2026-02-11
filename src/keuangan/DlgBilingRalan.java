@@ -78,7 +78,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                    bayar=0,total=0,tamkur=0,detailjs=0,detailbhp=0,besarppn=0,tagihanppn=0,
                    ttlLaborat=0,ttlRadiologi=0,ttlObat=0,ttlRalan_Dokter=0,ttlRalan_Paramedis=0,
                    ttlTambahan=0,ttlPotongan=0,ttlRegistrasi=0,ttlRalan_Dokter_Param=0,ppnobat=0,ttlOperasi=0,
-                   kekurangan=0,obatlangsung;
+                   kekurangan=0,obatlangsung,depositRalan=0,sisadeposit=0;
     private int i,r,cek,row2,countbayar=0,z=0,jml=0;
     private String nota_jalan="",dokterrujukan="",polirujukan="",status="",biaya="",tambahan="",totals="",kdptg="",nmptg="",kd_pj="",notaralan="",centangdokterralan="",
             rinciandokterralan="",Tindakan_Ralan="",Laborat_Ralan="",Radiologi_Ralan="",no_rkm_medis, nm_pasien, alamat, jk, umurdaftar, tgl_registrasi, no_nota,
@@ -184,7 +184,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     "on beri_obat_operasi.kd_obat = obatbhp_ok.kd_obat where " +
                     "beri_obat_operasi.no_rawat = ? group by obatbhp_ok.nm_obat",
             sqlpstamkur = "select temporary_tambahan_potongan.biaya from temporary_tambahan_potongan where temporary_tambahan_potongan.no_rawat = ? and temporary_tambahan_potongan.nama_tambahan = ? and temporary_tambahan_potongan.status = ?",
-            Host_to_Host_Bank_Jateng="",Akun_BRI_API="",Host_to_Host_Bank_Papua="",Host_to_Host_Bank_Jabar="",Host_to_Host_Bank_Mandiri="",KodeBankJabar="",PPN_Keluaran="";
+            Host_to_Host_Bank_Jateng="",Akun_BRI_API="",Host_to_Host_Bank_Papua="",Host_to_Host_Bank_Jabar="",Host_to_Host_Bank_Mandiri="",KodeBankJabar="",PPN_Keluaran="",
+            Uang_Muka_Ralan="",Sisa_Uang_Muka_Ralan="";
     private String[] Nama_Akun_Piutang,Kode_Rek_Piutang,Kd_PJ,Besar_Piutang,Jatuh_Tempo,
             Nama_Akun_Bayar,Kode_Rek_Bayar,Bayar,PPN_Persen,PPN_Besar;
 
@@ -650,6 +651,29 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
+
+        try {
+            psrekening=koneksi.prepareStatement("select set_akun_ranap2.Uang_Muka_Ralan,set_akun_ranap2.Sisa_Uang_Muka_Ralan from set_akun_ranap2");
+            try {
+                rsrekening=psrekening.executeQuery();
+                if(rsrekening.next()){
+                    Uang_Muka_Ralan=rsrekening.getString("Uang_Muka_Ralan");
+                    Sisa_Uang_Muka_Ralan=rsrekening.getString("Sisa_Uang_Muka_Ralan");
+                }
+            } catch (Exception e) {
+                System.out.println("Notif Rekening Deposit Ralan : "+e);
+            } finally{
+                if(rsrekening!=null){
+                    rsrekening.close();
+                }
+                if(psrekening!=null){
+                    psrekening.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : "+e);
+        }
+
         jam2();
     }
 
@@ -1866,12 +1890,27 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         panelBayar.add(TtlSemua);
         TtlSemua.setBounds(110, 37, 230, 23);
 
+        lblDeposit = new widget.Label();
+        lblDeposit.setText("Deposit : Rp.");
+        lblDeposit.setName("lblDeposit"); // NOI18N
+        lblDeposit.setPreferredSize(new java.awt.Dimension(95, 23));
+        panelBayar.add(lblDeposit);
+        lblDeposit.setBounds(0, 377, 109, 23);
+
+        Deposit = new widget.TextBox();
+        Deposit.setEditable(false);
+        Deposit.setText("0");
+        Deposit.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
+        Deposit.setName("Deposit"); // NOI18N
+        panelBayar.add(Deposit);
+        Deposit.setBounds(110, 377, 220, 23);
+
         TKembali.setEditable(false);
         TKembali.setText("0");
         TKembali.setFont(new java.awt.Font("Tahoma", 0, 13)); // NOI18N
         TKembali.setName("TKembali"); // NOI18N
         panelBayar.add(TKembali);
-        TKembali.setBounds(110, 377, 230, 23);
+        TKembali.setBounds(642, 377, 230, 23);
 
         jLabel5.setText("Bayar : Rp.");
         jLabel5.setName("jLabel5"); // NOI18N
@@ -2052,7 +2091,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         jLabel6.setName("jLabel6"); // NOI18N
         jLabel6.setPreferredSize(new java.awt.Dimension(95, 23));
         panelBayar.add(jLabel6);
-        jLabel6.setBounds(19, 377, 90, 23);
+        jLabel6.setBounds(531, 377, 110, 23);
 
         scrollPane4.setComponentPopupMenu(PopupPiutang);
         scrollPane4.setName("scrollPane4"); // NOI18N
@@ -4219,6 +4258,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     public widget.TextBox TNoRw;
     private widget.TextBox TPasien;
     private javax.swing.JTabbedPane TabRawat;
+    private widget.TextBox Deposit;
     private widget.TextBox TagihanPPn;
     private widget.TextBox TotalObat;
     private widget.TextBox TtlSemua;
@@ -4250,6 +4290,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private widget.InternalFrame internalFrame7;
     private widget.Label jLabel12;
     private widget.Label jLabel13;
+    private widget.Label lblDeposit;
     private widget.Label jLabel14;
     private widget.Label jLabel16;
     private widget.Label jLabel17;
@@ -4295,6 +4336,27 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private widget.Table tbRadiologi;
     private widget.Table tbTambahan;
     // End of variables declaration//GEN-END:variables
+
+    // Helper methods for deposit ralan integration
+    private double getTotalDepositRalan(String no_rawat) {
+        try {
+            return Sequel.cariIsiAngka("SELECT COALESCE(SUM(besar_deposit), 0) FROM deposit_ralan WHERE no_rawat=?", no_rawat);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private double getTotalRefundRalan(String no_rawat) {
+        try {
+            return Sequel.cariIsiAngka("SELECT COALESCE(SUM(besar_pengembalian), 0) FROM pengembalian_deposit_ralan WHERE no_rawat=?", no_rawat);
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+
+    private double getAvailableDepositRalan(String no_rawat) {
+        return getTotalDepositRalan(no_rawat) - getTotalRefundRalan(no_rawat);
+    }
 
     public void isRawat() {
         TabRawat.setSelectedIndex(0);
@@ -4501,6 +4563,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                 System.out.println("Notifikasi : "+e);
             }
         }
+        depositRalan=getAvailableDepositRalan(TNoRw.getText());
         isKembali();
     }
 
@@ -4597,6 +4660,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         }
 
         isHitung();
+        depositRalan=getAvailableDepositRalan(TNoRw.getText());
         isKembali();
     }
 
@@ -5232,7 +5296,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     }
 
     public void isKembali(){
-        bayar=0;total=0;besarppn=0;tagihanppn=0;y=0;piutang=0;kekurangan=0;countbayar=0;
+        bayar=0;total=0;besarppn=0;tagihanppn=0;y=0;piutang=0;kekurangan=0;countbayar=0;sisadeposit=0;
         row2=tabModeAkunBayar.getRowCount();
         for(r=0;r<row2;r++){
             if(!tabModeAkunBayar.getValueAt(r,2).toString().equals("")){
@@ -5271,10 +5335,18 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
         tagihanppn=besarppn+total;
         TagihanPPn.setText(Valid.SetAngka3(tagihanppn));
+        Deposit.setText(Valid.SetAngka(depositRalan));
+        if(depositRalan>tagihanppn){
+            sisadeposit=depositRalan-tagihanppn;
+        }
 
         if(piutang<=0){
-            kekurangan=(bayar+besarppn)-tagihanppn;
-            jLabel5.setText("Bayar : Rp.");
+            kekurangan=(bayar+besarppn+depositRalan)-tagihanppn;
+            if(depositRalan>0){
+                jLabel5.setText("Bayar+Deposit : Rp.");
+            }else{
+                jLabel5.setText("Bayar : Rp.");
+            }
             if(kekurangan<0){
                 jLabel6.setText("Kekurangan : Rp.");
             }else{
@@ -5283,8 +5355,12 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
             TKembali.setText(Valid.SetAngka3(kekurangan));
         }else{
-            kekurangan=(tagihanppn-(bayar+besarppn)-piutang)* -1;
-            jLabel5.setText("Uang Muka : Rp.");
+            kekurangan=(tagihanppn-(bayar+besarppn+depositRalan)-piutang)* -1;
+            if(depositRalan>0){
+                jLabel5.setText("U.Muka+Deposit : Rp.");
+            }else{
+                jLabel5.setText("Uang Muka : Rp.");
+            }
             if(kekurangan>0){
                 jLabel6.setText("Kelebihan : Rp.");
             }else{
@@ -6267,6 +6343,13 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                             if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Operasi_Ralan, "Operasi Ralan", 0, ttlOperasi);
                         }
 
+                        if(depositRalan>0){
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Uang_Muka_Ralan, "Uang Muka Ralan", depositRalan, 0);
+                        }
+                        if(sisadeposit>0){
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Sisa_Uang_Muka_Ralan, "Sisa Uang Muka Ralan", 0, sisadeposit);
+                        }
+
                         alamat=Sequel.cariIsi("select reg_periksa.almt_pj from reg_periksa where reg_periksa.no_rawat=? ",TNoRw.getText());
 
                         if(piutang>0){
@@ -6290,6 +6373,17 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
+                    }
+                }
+
+                if(sukses==true && sisadeposit>0){
+                    if(Sequel.menyimpantf2("pengembalian_deposit_ralan","?,?,?,?,?,?","Pengembalian Deposit Ralan",6,new String[]{
+                        TNoRw.getText(),
+                        Sequel.cariIsi("select no_deposit from deposit_ralan where no_rawat=? order by tgl_deposit desc limit 1",TNoRw.getText()),
+                        Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19),
+                        akses.getkode(),sisadeposit+"","Sisa deposit otomatis"
+                    })==false){
+                        sukses=false;
                     }
                 }
 

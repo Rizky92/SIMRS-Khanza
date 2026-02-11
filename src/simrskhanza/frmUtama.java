@@ -1398,6 +1398,8 @@ public class frmUtama extends javax.swing.JFrame {
         btnRekapHarian = new widget.ButtonBig();
         btnRekapBulanan = new widget.ButtonBig();
         btnDeposit = new widget.ButtonBig();
+        btnDepositRalan = new widget.ButtonBig();
+        btnPengembalianDepositRalan = new widget.ButtonBig();
         btnSetupRM = new widget.ButtonBig();
         btnResepPulang = new widget.ButtonBig();
         btnSetupTarif = new widget.ButtonBig();
@@ -3100,6 +3102,28 @@ public class frmUtama extends javax.swing.JFrame {
         btnDeposit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDepositActionPerformed(evt);
+            }
+        });
+
+        btnDepositRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Money.png"))); // NOI18N
+        btnDepositRalan.setText("Deposit Rawat Jalan");
+        btnDepositRalan.setIconTextGap(0);
+        btnDepositRalan.setName("btnDepositRalan"); // NOI18N
+        btnDepositRalan.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnDepositRalan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDepositRalanActionPerformed(evt);
+            }
+        });
+
+        btnPengembalianDepositRalan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/Money.png"))); // NOI18N
+        btnPengembalianDepositRalan.setText("Pengembalian Deposit Ralan");
+        btnPengembalianDepositRalan.setIconTextGap(0);
+        btnPengembalianDepositRalan.setName("btnPengembalianDepositRalan"); // NOI18N
+        btnPengembalianDepositRalan.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPengembalianDepositRalan.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPengembalianDepositRalanActionPerformed(evt);
             }
         });
 
@@ -9835,6 +9859,30 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_btnDepositActionPerformed
+
+    private void btnDepositRalanActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        keuangan.DlgDepositRalan deposit = new keuangan.DlgDepositRalan(this, false);
+        deposit.tampil2();
+        deposit.isCek();
+        deposit.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        deposit.setLocationRelativeTo(PanelUtama);
+        deposit.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPengembalianDepositRalanActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        keuangan.DlgPengembalianDepositRalan refund = new keuangan.DlgPengembalianDepositRalan(this, false);
+        refund.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        refund.setLocationRelativeTo(PanelUtama);
+        refund.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
 
     private void btnSetupRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetupRMActionPerformed
         isTutup();
@@ -23628,6 +23676,8 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.ButtonBig btnDataPenyerahanDarah;
     private widget.ButtonBig btnDataSITT;
     private widget.ButtonBig btnDeposit;
+    private widget.ButtonBig btnDepositRalan;
+    private widget.ButtonBig btnPengembalianDepositRalan;
     private widget.ButtonBig btnDetailTindakan;
     private widget.ButtonBig btnDetailVKOK;
     private widget.ButtonBig btnDiagnosa;
@@ -24469,6 +24519,16 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getdeposit_pasien()==true){
                 Panelmenu.add(btnDeposit);
+                jmlmenu++;
+            }
+
+            if(akses.getdeposit_pasien()==true){
+                Panelmenu.add(btnDepositRalan);
+                jmlmenu++;
+            }
+
+            if(akses.getdeposit_pasien()==true){
+                Panelmenu.add(btnPengembalianDepositRalan);
                 jmlmenu++;
             }
 
@@ -25935,6 +25995,16 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
+            if(akses.getdeposit_pasien()==true){
+                Panelmenu.add(btnDepositRalan);
+                jmlmenu++;
+            }
+
+            if(akses.getdeposit_pasien()==true){
+                Panelmenu.add(btnPengembalianDepositRalan);
+                jmlmenu++;
+            }
+
             if(akses.getrekap_per_shift()==true){
                 Panelmenu.add(btnRekapPershift);
                 jmlmenu++;
@@ -26600,6 +26670,16 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getdeposit_pasien()==true){
                 Panelmenu.add(btnDeposit);
+                jmlmenu++;
+            }
+
+            if(akses.getdeposit_pasien()==true){
+                Panelmenu.add(btnDepositRalan);
+                jmlmenu++;
+            }
+
+            if(akses.getdeposit_pasien()==true){
+                Panelmenu.add(btnPengembalianDepositRalan);
                 jmlmenu++;
             }
 
