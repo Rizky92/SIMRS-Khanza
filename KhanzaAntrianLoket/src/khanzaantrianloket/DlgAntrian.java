@@ -11,6 +11,7 @@
 
 package khanzaantrianloket;
 
+import bridging.ApiSMC;
 import fungsi.BackgroundMusic;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -21,6 +22,12 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.sql.Blob;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -39,6 +46,7 @@ import javax.swing.UIManager;
 public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
     private Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
+    private final ApiSMC apiSmc = new ApiSMC();
     private final boolean ANTRIANPREFIXHURUF = koneksiDB.ANTRIANPREFIXHURUF();
     private final String[] PREFIXHURUFAKTIF = koneksiDB.PREFIXHURUFAKTIF();
     private final String ANTRIAN = koneksiDB.ANTRIAN();
@@ -525,6 +533,10 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() : "",
             Antrian.getText().trim()
         );
+        String rawNomor = Antrian.getText().trim();
+        String formattedNomor = padleftSmc(rawNomor, 3, '0');
+        String nomorToSend = cmbhuruf.isVisible() ? cmbhuruf.getSelectedItem().toString() + formattedNomor : formattedNomor;
+        panggilDiWeb(cmbloket.getSelectedItem().toString(), nomorToSend);
     }//GEN-LAST:event_BtnAntriActionPerformed
 
     private void BtnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnResetActionPerformed
@@ -533,6 +545,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
 
     private void BtnStopActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnStopActionPerformed
         Sequel.menghapusSmc("antriloketsmc");
+        stopPanggilDiWeb();
     }//GEN-LAST:event_BtnStopActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -839,5 +852,25 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             }
         };
         new Timer(1000, taskPerformer).start();
+    }
+
+    private boolean panggilDiWeb(String loket, String nomor) {
+        try {
+            apiSmc.panggilAntrean("called", nomor, loket);
+            return true;
+        } catch (Exception e) {
+            System.out.println("Notifikasi Bridging : " + e);
+            return false;
+        }
+    }
+
+    private boolean stopPanggilDiWeb() {
+        try {
+            apiSmc.stopAntrean("stopped");
+            return true;
+        } catch (Exception e) {
+            System.out.println("Notifikasi Bridging : " + e);
+            return false;
+        }
     }
 }

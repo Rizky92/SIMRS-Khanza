@@ -158,5 +158,23 @@ public final class koneksiDB {
         return var;
     }
     
-    
+    public static String SMCAPIKEY(){
+        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fis);
+            var=prop.getProperty("SMCAPIKEY");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
+
+    public static String SMCAPIURL(){
+        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fis);
+            var=prop.getProperty("SMCAPIURL");
+        }catch(Exception e){
+            var=""; 
+        }
+        return var;
+    }
 }
