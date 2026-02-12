@@ -18,8 +18,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -27,19 +31,19 @@ import keuangan.Jurnal;
 import kepegawaian.DlgCariPetugas;
 
 public class DapurCariPengeluaran extends javax.swing.JDialog {
-    private final DefaultTableModel tabMode, tabMode2;
-    private sekuel Sequel = new sekuel();
-    private validasi Valid = new validasi();
-    private Connection koneksi = koneksiDB.condb();
-    public DlgCariPetugas petugas = new DlgCariPetugas(null, false);
-    public DapurBarang barang = new DapurBarang(null, false);
-    private riwayatdapur Trackbarang = new riwayatdapur();
-    private PreparedStatement ps, ps2, psdetailpengeluaran;
-    private Jurnal jur = new Jurnal();
-    private ResultSet rs, rs2;
-    private double tagihan = 0, ttltagihan = 0, total = 0;
-    private int i = 0;
-    private boolean sukses = false;
+    private final DefaultTableModel tabMode,tabMode2;
+    private sekuel Sequel=new sekuel();
+    private validasi Valid=new validasi();
+    private Connection koneksi=koneksiDB.condb();
+    private riwayatdapur Trackbarang=new riwayatdapur();
+    private PreparedStatement ps,ps2,psdetailpengeluaran;
+    private Jurnal jur=new Jurnal();
+    private ResultSet rs,rs2;
+    private double tagihan=0,ttltagihan=0,total=0;
+    private int i=0;
+    private boolean sukses=false;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /**
      * Creates new form DlgProgramStudi
@@ -141,144 +145,10 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         }
         tbDokter2.setDefaultRenderer(Object.class, new WarnaTable());
 
-        NoKeluar.setDocument(new batasInput((byte) 15).getKata(NoKeluar));
-        kdptg.setDocument(new batasInput((byte) 25).getKata(kdptg));
-        kdbar.setDocument(new batasInput((byte) 15).getKata(kdbar));
-        TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
-        if (koneksiDB.CARICEPAT().equals("aktif")) {
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if (TabRawat.getSelectedIndex() == 0) {
-                        if (TCari.getText().length() > 2) {
-                            tampil();
-                        }
-                    } else if (TabRawat.getSelectedIndex() == 1) {
-                        if (TCari.getText().length() > 2) {
-                            tampil2();
-                        }
-                    }
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if (TabRawat.getSelectedIndex() == 0) {
-                        if (TCari.getText().length() > 2) {
-                            tampil();
-                        }
-                    } else if (TabRawat.getSelectedIndex() == 1) {
-                        if (TCari.getText().length() > 2) {
-                            tampil2();
-                        }
-                    }
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if (TabRawat.getSelectedIndex() == 0) {
-                        if (TCari.getText().length() > 2) {
-                            tampil();
-                        }
-                    } else if (TabRawat.getSelectedIndex() == 1) {
-                        if (TCari.getText().length() > 2) {
-                            tampil2();
-                        }
-                    }
-                }
-            });
-        }
-        petugas.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (akses.getform().equals("DlgCariPengeluaranDapur")) {
-                    if (petugas.getTable().getSelectedRow() != -1) {
-                        kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 0).toString());
-                        nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 1).toString());
-                    }
-                    kdptg.requestFocus();
-                }
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-            }
-        });
-
-        barang.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosing(WindowEvent e) {
-            }
-
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (akses.getform().equals("DlgCariPengeluaranDapur")) {
-                    if (barang.getTable().getSelectedRow() != -1) {
-                        kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(), 0).toString());
-                        nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(), 1).toString());
-                    }
-                    kdbar.requestFocus();
-                }
-            }
-
-            @Override
-            public void windowIconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeiconified(WindowEvent e) {
-            }
-
-            @Override
-            public void windowActivated(WindowEvent e) {
-            }
-
-            @Override
-            public void windowDeactivated(WindowEvent e) {
-            }
-        });
-
-        barang.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (akses.getform().equals("DlgCariPengeluaranDapur")) {
-                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                        barang.dispose();
-                    }
-                }
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {
-            }
-        });
+        NoKeluar.setDocument(new batasInput((byte)15).getKata(NoKeluar));
+        kdptg.setDocument(new batasInput((byte)25).getKata(kdptg));
+        kdbar.setDocument(new batasInput((byte)15).getKata(kdbar));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
     }
 
     /**
@@ -350,12 +220,13 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(
-                javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)),
-                "::[ Cari Stok Keluar Barang Dapur Kering & Basah ]::",
-                javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION,
-                new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Cari Stok Keluar Barang Dapur Kering & Basah ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -687,8 +558,30 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
      * }//GEN-LAST:event_TKdKeyPressed
      */
 
-    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnPetugasActionPerformed
-        akses.setform("DlgCariPengeluaranDapur");
+    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
+        DlgCariPetugas petugas=new DlgCariPetugas(null,false);
+        petugas.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(petugas.getTable().getSelectedRow()!= -1){
+                    kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
+                    nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
+                }
+                kdptg.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
         petugas.emptTeks();
         petugas.isCek();
         petugas.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
@@ -701,8 +594,43 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         Valid.pindah(evt, NoKeluar, TglBeli2);
     }// GEN-LAST:event_TglBeli1KeyPressed
 
-    private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_btnBarangActionPerformed
-        akses.setform("DlgCariPengeluaranDapur");
+    private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangActionPerformed
+        DapurBarang barang=new DapurBarang(null,false);
+        barang.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(barang.getTable().getSelectedRow()!= -1){
+                    kdbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
+                    nmbar.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
+                }
+                kdbar.requestFocus();
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+
+        barang.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    barang.dispose();
+                }
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
         barang.emptTeks();
         barang.isCek();
         barang.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
@@ -762,11 +690,11 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         }
     }// GEN-LAST:event_TCariKeyPressed
 
-    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_BtnCariActionPerformed
-        if (TabRawat.getSelectedIndex() == 0) {
-            tampil();
-        } else if (TabRawat.getSelectedIndex() == 1) {
-            tampil2();
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+        if(TabRawat.getSelectedIndex()==0){
+            runBackground(() ->tampil());
+        }else if(TabRawat.getSelectedIndex()==1){
+            runBackground(() ->tampil2());
         }
     }// GEN-LAST:event_BtnCariActionPerformed
 
@@ -786,10 +714,10 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         Jenis.setSelectedIndex(0);
         kdptg.setText("");
         nmptg.setText("");
-        if (TabRawat.getSelectedIndex() == 0) {
-            tampil();
-        } else if (TabRawat.getSelectedIndex() == 1) {
-            tampil2();
+        if(TabRawat.getSelectedIndex()==0){
+            runBackground(() ->tampil());
+        }else if(TabRawat.getSelectedIndex()==1){
+            runBackground(() ->tampil2());
         }
     }// GEN-LAST:event_BtnAllActionPerformed
 
@@ -903,43 +831,43 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         }
     }// GEN-LAST:event_BtnPrintKeyPressed
 
-    private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {// GEN-FIRST:event_ppHapusActionPerformed
-        if (tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString().trim().equals("")) {
-            Valid.textKosong(TCari, tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString());
-        } else {
-            try {
-                psdetailpengeluaran = koneksi.prepareStatement(
-                        "select kode_brng,jumlah,total from dapurdetailpengeluaran where no_keluar=? ");
-                try {
-                    Sequel.AutoComitFalse();
-                    sukses = true;
-                    psdetailpengeluaran.setString(1, tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString());
-                    rs2 = psdetailpengeluaran.executeQuery();
-                    total = 0;
-                    while (rs2.next()) {
-                        Trackbarang.catatRiwayat(rs2.getString("kode_brng"), rs2.getDouble("jumlah"), 0, "Stok Keluar",
-                                akses.getkode(), "Hapus");
-                        Sequel.mengedit("dapurbarang", "kode_brng=?", "stok=stok+?", 2, new String[] {
-                                rs2.getString("jumlah"), rs2.getString("kode_brng")
-                        });
-                        total = total + rs2.getDouble("total");
-                    }
-                    Sequel.deleteTampJurnal();;
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Dapur from set_akun"), "PERSEDIAAN BARANG", 0, total);
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Dapur from set_akun"), "KAS DI TANGAN", total, 0);
-                    sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(), "U",
-                            "PEMBATALAN PENGGUNAAN BARANG DAPUR KERING DAN BASAH" + ", OLEH " + akses.getkode());
-
-                    if (sukses == true) {
-                        Sequel.queryu2("delete from dapurpengeluaran where no_keluar=?", 1,
-                                new String[] { tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString() });
-                        Sequel.Commit();
-                        tampil();
-                    } else {
-                        JOptionPane.showMessageDialog(null,
-                                "Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
-                    }
+private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
+  if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
+      Valid.textKosong(TCari,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+  }else{
+     try {
+         psdetailpengeluaran=koneksi.prepareStatement("select kode_brng,jumlah,total from dapurdetailpengeluaran where no_keluar=? ");
+         try {
+            Sequel.AutoComitFalse();
+            sukses=true;
+            psdetailpengeluaran.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+            rs2=psdetailpengeluaran.executeQuery();
+            total=0;
+            while(rs2.next()){
+               Trackbarang.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jumlah"),0,"Stok Keluar", akses.getkode(),"Hapus");
+               Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok+?",2,new String[]{
+                   rs2.getString("jumlah"),rs2.getString("kode_brng")
+               });
+               total=total+rs2.getDouble("total");
+            }
+            Sequel.queryu("delete from tampjurnal");
+            if(Sequel.menyimpantf2("tampjurnal","?,?,?,?",4,new String[]{Sequel.cariIsi("select Stok_Keluar_Dapur from set_akun"),"PERSEDIAAN BARANG","0",""+total})==false){
+                sukses=false;
+            }
+            if(Sequel.menyimpantf2("tampjurnal","?,?,?,?",4,new String[]{Sequel.cariIsi("select Kontra_Stok_Keluar_Dapur from set_akun"),"KAS DI TANGAN",""+total,"0"})==false){
+                sukses=false;
+            }
+            if(sukses==true){
+                sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN PENGGUNAAN BARANG DAPUR KERING DAN BASAH"+", OLEH "+akses.getkode());
+            }
+            if(sukses==true){
+                Sequel.queryu2("delete from dapurpengeluaran where no_keluar=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
+                Sequel.Commit();
+                runBackground(() ->tampil());
+            }else{
+                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                Sequel.RollBack();
+            }
 
                     Sequel.AutoComitTrue();
                 } catch (Exception e) {
@@ -958,13 +886,56 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         }
     }// GEN-LAST:event_ppHapusActionPerformed
 
-    private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_TabRawatMouseClicked
-        if (TabRawat.getSelectedIndex() == 0) {
-            tampil();
-        } else if (TabRawat.getSelectedIndex() == 1) {
-            tampil2();
+    private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
+        if(TabRawat.getSelectedIndex()==0){
+            runBackground(() ->tampil());
+        }else if(TabRawat.getSelectedIndex()==1){
+            runBackground(() ->tampil2());
         }
-    }// GEN-LAST:event_TabRawatMouseClicked
+    }//GEN-LAST:event_TabRawatMouseClicked
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if(koneksiDB.CARICEPAT().equals("aktif")){
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if(TabRawat.getSelectedIndex()==0){
+                        if(TCari.getText().length()>2){
+                            runBackground(() ->tampil());
+                        }
+                    }else if(TabRawat.getSelectedIndex()==1){
+                        if(TCari.getText().length()>2){
+                            runBackground(() ->tampil2());
+                        }
+                    }
+                }
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if(TabRawat.getSelectedIndex()==0){
+                        if(TCari.getText().length()>2){
+                            runBackground(() ->tampil());
+                        }
+                    }else if(TabRawat.getSelectedIndex()==1){
+                        if(TCari.getText().length()>2){
+                            runBackground(() ->tampil2());
+                        }
+                    }
+                }
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if(TabRawat.getSelectedIndex()==0){
+                        if(TCari.getText().length()>2){
+                            runBackground(() ->tampil());
+                        }
+                    }else if(TabRawat.getSelectedIndex()==1){
+                        if(TCari.getText().length()>2){
+                            runBackground(() ->tampil2());
+                        }
+                    }
+                }
+            });
+        }
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
@@ -1193,4 +1164,35 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         }
     }
 
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
+    }
 }
