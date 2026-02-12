@@ -1251,7 +1251,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
                 }
                 emptTeks();
             }else{
-                autoresep2();
+                autoresep();
                 if(Sequel.menyimpantf("resep_obat","?,?,?,?,?,?,?,?,?,?,?","Nomer Resep",11,new String[]{
                         NoResep.getText(),Valid.SetTgl(DTPBeri.getSelectedItem()+""),
                         cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem(),
