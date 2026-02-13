@@ -14,6 +14,10 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.Map;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
@@ -277,5 +281,17 @@ public final class validasi {
     public void teksKosongSmc(JComponent component, String nama) {
         popupPeringatanDialog("Maaf, " + nama + " tidak boleh kosong..!!", 3);
         component.requestFocus();
+    }
+
+    public long compareTahun(LocalDate tglAwal, LocalDate tglAkhir) {
+        return ChronoUnit.YEARS.between(tglAwal, tglAkhir);
+    }
+
+    public long compareTahun(Date tglAwal, Date tglAkhir) {
+        return compareTahun(LocalDate.ofInstant(tglAwal.toInstant(), ZoneId.systemDefault()), LocalDate.ofInstant(tglAkhir.toInstant(), ZoneId.systemDefault()));
+    }
+
+    public long compareTahun(String tglAwal, String tglAkhir) {
+        return compareTahun(LocalDate.parse(tglAwal), LocalDate.parse(tglAkhir));
     }
 }
