@@ -1192,7 +1192,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                     if (metadata.path("code").asText().equals("200")) {
                         String response = mapper.readTree(api.Decrypt(root.path("response").toString(), utc)).asText("");
-                        Sequel.mengupdatetfSmc("pengajuan_fingerprint_bpjs_smc", "status_approval = ?", "no_rkm_medis = ? and tglsep = ?", "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, noRM.getText(), tglSEP.getText());
+                        Sequel.mengupdateSmc("pengajuan_fingerprint_bpjs_smc", "status_approval = ?", "no_rkm_medis = ? and tglsep = ?", "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, noRM.getText(), tglSEP.getText());
                         Valid.popupInfoDialog("Approval Berhasil");
                     } else {
                         Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);
@@ -1252,7 +1252,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     System.out.println(metadata.path("code").asText() + " " + metadata.path("message").asText());
                     if (metadata.path("code").asText().equals("200")) {
                         String response = mapper.readTree(api.Decrypt(root.path("response").toString(), utc)).asText("");
-                        Sequel.menyimpantfSmc("pengajuan_fingerprint_bpjs_smc", null, noRM.getText(), noPeserta.getText(), tglSEP.getText(), "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, null, e.getUserID());
+                        Sequel.menyimpanSmc("pengajuan_fingerprint_bpjs_smc", null, noRM.getText(), noPeserta.getText(), tglSEP.getText(), "[" + metadata.path("code").asText() + " " + metadata.path("message").asText() + "] " + response, null, e.getUserID());
                         Valid.popupInfoDialog("Pengajuan Berhasil");
                     } else {
                         Valid.popupPeringatanDialog(metadata.path("message").asText(), 3);

@@ -148,7 +148,6 @@ public class DlgLogin extends widget.Dialog {
             ps.setString(2, pass);
             ps.setString(3, user);
             ps.setString(4, pass);
-            user = pass = null;
             try (ResultSet rs = ps.executeQuery()) {
                 userAksi.setText("");
                 passAksi.setText("");
@@ -173,6 +172,7 @@ public class DlgLogin extends widget.Dialog {
                     userAksi.requestFocus();
                     Valid.popupGagalDialog("Terjadi kesalahan..!!", 3);
                 }
+                user = pass = null;
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
