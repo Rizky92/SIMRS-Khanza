@@ -619,16 +619,8 @@ public class DlgSetAplikasi extends javax.swing.JDialog {
         } else {
             BtnCariGb.setEnabled(false);
             EGb.setText("./setting/wallpaper.jpg");
-        }else if(ELogo.getText().trim().equals("")){
-            YesNo.setSelectedItem("No");
-            ELogo.setText("./setting/logo.jpg");
-        }else{
-            Sequel.queryu("delete from setting ");
-            Sequel.menyimpan("setting","'"+Nm.getText()+"','"+Almt.getText()+"','"+Kota.getText()+
-                             "','"+Propinsi.getText()+"','"+Kontak.getText()+"','"+Email.getText()+
-                             "','"+YesNo.getSelectedItem()+"','"+kdPPK.getText()+"','"+kdPPK1.getText()+"','"+kdPPK2.getText()+"'","Setting",EGb,ELogo);
-            runBackground(() ->tampil());
         }
+        runBackground(() ->tampil());
     }//GEN-LAST:event_YesNoItemStateChanged
 
     /**
