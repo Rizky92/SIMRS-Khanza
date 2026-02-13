@@ -122,7 +122,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
         KdDok2.setDocument(new batasInput((byte)20).getKata(KdDok2));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
 
-        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)"}){
+        tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)","Keterangan"}){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if ((colIndex==2)) {
@@ -3620,6 +3620,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                 Bayar=new String[jml];
                 PPN_Persen=new String[jml];
                 PPN_Besar=new String[jml];
+                String[] keterangan = new String[jml];
 
                 jml=0;
                 for(z=0;z<tbAkunBayar.getRowCount();z++){
@@ -3629,6 +3630,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                         Bayar[jml]=tbAkunBayar.getValueAt(z,2).toString();
                         PPN_Persen[jml]=tbAkunBayar.getValueAt(z,3).toString();
                         PPN_Besar[jml]=tbAkunBayar.getValueAt(z,4).toString();
+                        keterangan[jml] = tbAkunBayar.getValueAt(z, 5).toString();
                         jml++;
                     }
                 }
@@ -3637,7 +3639,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
 
                 for(z=0;z<jml;z++){
                     tabModeAkunBayar.addRow(new Object[] {
-                        Nama_Akun_Bayar[z],Kode_Rek_Bayar[z],Bayar[z],PPN_Persen[z],PPN_Besar[z]
+                        Nama_Akun_Bayar[z],Kode_Rek_Bayar[z],Bayar[z],PPN_Persen[z],PPN_Besar[z],keterangan[z]
                     });
                 }
 
@@ -3646,7 +3648,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                     psakunbayar.setString(1,"%"+TCari.getText()+"%");
                     rsakunbayar=psakunbayar.executeQuery();
                     while(rsakunbayar.next()){
-                        tabModeAkunBayar.addRow(new Object[]{rsakunbayar.getString(1),rsakunbayar.getString(2),"",rsakunbayar.getDouble(3),""});
+                        tabModeAkunBayar.addRow(new Object[]{rsakunbayar.getString(1),rsakunbayar.getString(2),"",rsakunbayar.getDouble(3),"",""});
                     }
                 }catch (Exception e) {
                     System.out.println("Notifikasi : "+e);

@@ -344,7 +344,7 @@ public class InformasiJadwal extends javax.swing.JDialog {
 
         Valid.tabelKosong(tabMode);
         try (FileReader fr = new FileReader("./cache/informasijadwal.iyem")) {
-            root = map.readTree(fr).path("data");
+            JsonNode root = new ObjectMapper().readTree(fr).path("data");
             if (root.isArray()) {
                 if (TCari.getText().isBlank()) {
                     for (JsonNode leaf : root) {
