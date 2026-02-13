@@ -16,14 +16,19 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 
@@ -38,6 +43,8 @@ public class DlgSetRM extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private PreparedStatement ps,ps2,ps3,ps4,ps5,ps6;
     private ResultSet rs;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private volatile boolean ceksukses = false;
 
     /** Creates new form DlgAdmin
      * @param parent
@@ -1480,7 +1487,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                     Valid.textKosong(norm,"No.RM Terakhir");
                 }else if(tabMode.getRowCount()==0){
                     Sequel.menyimpan("set_no_rkm_medis","'"+norm.getText()+"'","No.RM Terakhir");
-                    tampilnorm();
+                    runBackground(() ->tampilnorm());
                     emptTeks();
                 }else if(tabMode.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
@@ -1489,7 +1496,7 @@ public class DlgSetRM extends javax.swing.JDialog {
             case 1:
                 if(tabMode2.getRowCount()==0){
                     Sequel.menyimpan("set_urut_no_rkm_medis","'"+cmburut.getSelectedItem()+"','"+cmbYesTahun.getSelectedItem()+"','"+cmbYesBulan.getSelectedItem()+"','"+cmbPosisi.getSelectedItem()+"'","Pengurutan");
-                    tampilurut();
+                    runBackground(() ->tampilurut());
                 }else if(tabMode2.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     cmburut.requestFocus();
@@ -1502,7 +1509,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                             "'"+Kabupaten.getSelectedItem().toString().replaceAll("Yes","true").replaceAll("No","false")+"',"+
                             "'"+Propinsi.getSelectedItem().toString().replaceAll("Yes","true").replaceAll("No","false")+"'","Pengaturan Alamat"
                     );
-                    tampilalamat();
+                    runBackground(() ->tampilalamat());
                 }else if(tabMode3.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     cmburut.requestFocus();
@@ -1559,7 +1566,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                         YesNoKabupatenPJ.getSelectedItem().toString(), PanjangKabupatenPJ.getText(),YesNoPropinsi.getSelectedItem().toString(), PanjangPropinsi.getText(),
                         YesNoPropinsiPJ.getSelectedItem().toString(), PanjangPropinsiPJ.getText()
                     })==true){
-                        tampilkelengkapan();
+                        runBackground(() ->tampilkelengkapan());
                         emptTeks2();
                     }
                 }else if(tabMode4.getRowCount()>0){
@@ -1571,7 +1578,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                     Sequel.menyimpan("set_validasi_registrasi",
                             "'"+ValidasiRegistrasi.getSelectedItem().toString()+"'","Pengaturan Validasi Registrasi"
                     );
-                    tampilvalidasiregistrasi();
+                    runBackground(() ->tampilvalidasiregistrasi());
                 }else if(tabMode5.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     ValidasiRegistrasi.requestFocus();
@@ -1581,7 +1588,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                     Sequel.menyimpan("set_validasi_catatan",
                             "'"+ValidasiCatatan.getSelectedItem().toString()+"'","Pengaturan Validasi Catatan"
                     );
-                    tampilvalidasicatatan();
+                    runBackground(() ->tampilvalidasicatatan());
                 }else if(tabMode6.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     ValidasiCatatan.requestFocus();
@@ -1591,7 +1598,7 @@ public class DlgSetRM extends javax.swing.JDialog {
                     Sequel.menyimpan("set_tni_polri",
                             "'"+TampilkanTNI.getSelectedItem().toString()+"'","Pengaturan Validasi Catatan"
                     );
-                    tampiltni();
+                    runBackground(() ->tampiltni());
                 }else if(tabMode7.getRowCount()>0){
                     JOptionPane.showMessageDialog(null,"Maaf, Hanya diijinkan satu pengaturan ...!!!!");
                     TampilkanTNI.requestFocus();
@@ -1627,32 +1634,32 @@ public class DlgSetRM extends javax.swing.JDialog {
         switch (TabRawat.getSelectedIndex()) {
             case 0:
                 Sequel.queryu("delete from set_no_rkm_medis");
-                tampilnorm();
+                runBackground(() ->tampilnorm());
                 emptTeks();
                 break;
             case 1:
                 Sequel.queryu("delete from set_urut_no_rkm_medis");
-                tampilurut();
+                runBackground(() ->tampilurut());
                 break;
             case 2:
                 Sequel.queryu("delete from set_alamat_pasien");
-                tampilalamat();
+                runBackground(() ->tampilalamat());
                 break;
             case 3:
                 Sequel.queryu("delete from set_kelengkapan_data_pasien");
-                tampilkelengkapan();
+                runBackground(() ->tampilkelengkapan());
                 break;
             case 4:
                 Sequel.queryu("delete from set_validasi_registrasi");
-                tampilvalidasiregistrasi();
+                runBackground(() ->tampilvalidasiregistrasi());
                 break;
             case 5:
                 Sequel.queryu("delete from set_validasi_catatan");
-                tampilvalidasicatatan();
+                runBackground(() ->tampilvalidasicatatan());
                 break;
             case 6:
                 Sequel.queryu("delete from set_tni_polri");
-                tampiltni();
+                runBackground(() ->tampiltni());
                 break;
             default:
                 break;
@@ -1710,37 +1717,37 @@ public class DlgSetRM extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(TabRawat.getSelectedIndex()==0){
-            tampilnorm();
+            runBackground(() ->tampilnorm());
         }else if(TabRawat.getSelectedIndex()==1){
-            tampilurut();
+            runBackground(() ->tampilurut());
         }else if(TabRawat.getSelectedIndex()==2){
-            tampilalamat();
+            runBackground(() ->tampilalamat());
         }else if(TabRawat.getSelectedIndex()==3){
-            tampilkelengkapan();
+            runBackground(() ->tampilkelengkapan());
         }else if(TabRawat.getSelectedIndex()==4){
-            tampilvalidasiregistrasi();
+            runBackground(() ->tampilvalidasiregistrasi());
         }else if(TabRawat.getSelectedIndex()==5){
-            tampilvalidasicatatan();
+            runBackground(() ->tampilvalidasicatatan());
         }else if(TabRawat.getSelectedIndex()==6){
-            tampiltni();
+            runBackground(() ->tampiltni());
         }
     }//GEN-LAST:event_formWindowOpened
 
     private void TabRawatMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TabRawatMouseClicked
         if(TabRawat.getSelectedIndex()==0){
-           tampilnorm();
+            runBackground(() ->tampilnorm());
         }else if(TabRawat.getSelectedIndex()==1){
-           tampilurut();
+            runBackground(() ->tampilurut());
         }else if(TabRawat.getSelectedIndex()==2){
-           tampilalamat();
+            runBackground(() ->tampilalamat());
         }else if(TabRawat.getSelectedIndex()==3){
-           tampilkelengkapan();
+            runBackground(() ->tampilkelengkapan());
         }else if(TabRawat.getSelectedIndex()==4){
-            tampilvalidasiregistrasi();
+            runBackground(() ->tampilvalidasiregistrasi());
         }else if(TabRawat.getSelectedIndex()==5){
-            tampilvalidasicatatan();
+            runBackground(() ->tampilvalidasicatatan());
         }else if(TabRawat.getSelectedIndex()==6){
-            tampiltni();
+            runBackground(() ->tampiltni());
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 
@@ -2384,7 +2391,7 @@ public class DlgSetRM extends javax.swing.JDialog {
         }
     }
 
-    public void tampilkelengkapan() {
+    private void tampilkelengkapan() {
         Valid.tabelKosong(tabMode4);
         try{
             ps4=koneksi.prepareStatement("select * from set_kelengkapan_data_pasien ");
@@ -2582,4 +2589,35 @@ public class DlgSetRM extends javax.swing.JDialog {
         }
     }
 
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
+
+        ceksukses = true;
+        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+
+        try {
+            executor.submit(() -> {
+                try {
+                    task.run();
+                } finally {
+                    ceksukses = false;
+                    SwingUtilities.invokeLater(() -> {
+                        if (isDisplayable()) {
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    });
+                }
+            });
+        } catch (RejectedExecutionException ex) {
+            ceksukses = false;
+        }
+    }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
+    }
 }

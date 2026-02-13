@@ -2120,6 +2120,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         runBackground(() -> tampil2(nopermintaan));
     }
 
+    public void tampil4(){
+        runBackground(() ->tampil());
+    }
+
     public void isCek(){
         BtnSimpan.setEnabled(akses.getstok_obat_pasien());
         TCari.requestFocus();
@@ -2150,7 +2154,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         kenaikan=Sequel.cariIsiAngka2("select (set_harga_obat_ranap.hargajual/100) from set_harga_obat_ranap where set_harga_obat_ranap.kd_pj=? and set_harga_obat_ranap.kelas=?",KdPj.getText(),kelas.getText());
         kdgudang.setText(akses.getkdbangsal());
         nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
-        runBackground(() ->tampil());
     }
 
     private void getData() {

@@ -658,7 +658,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 Valid.textKosong(KodeDepoRalan,"Depo Obat");
             }else {
                 Sequel.menyimpan("set_depo_ralan","'"+KodePoli.getText()+"','"+KodeDepoRalan.getText()+"'","Depo Rawat Jalan");
-                tampilralan();
+                runBackground(() ->tampilralan());
                 emptTeks();
             }
         }else if(TabRawat.getSelectedIndex()==2){
@@ -668,7 +668,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 Valid.textKosong(KodeDepoRanap,"Depo Obat");
             }else {
                 Sequel.menyimpan("set_depo_ranap","'"+KodeBangsalRanap.getText()+"','"+KodeDepoRanap.getText()+"'","Depo Rawat Inap");
-                tampilranap();
+                runBackground(() ->tampilranap());
                 emptTeks();
             }
         }
@@ -713,7 +713,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
             }else if(! NmPoli.getText().trim().equals("")){
                 Sequel.queryu("delete from set_depo_ralan where kd_bangsal='"+KodeDepoRalan.getText()+"' and kd_poli='"+KodePoli.getText()+"'");
-                tampilralan();
+                runBackground(() ->tampilralan());
                 emptTeks();
             }
         }else if(TabRawat.getSelectedIndex()==2){
@@ -724,7 +724,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal menghapus. Pilih dulu data yang mau dihapus.\nKlik data pada table untuk memilih...!!!!");
             }else if(! NamaBangsalRanap.getText().trim().equals("")){
                 Sequel.queryu("delete from set_depo_ranap where kd_bangsal='"+KodeBangsalRanap.getText()+"' and kd_depo='"+KodeDepoRanap.getText()+"'");
-                tampilranap();
+                runBackground(() ->tampilranap());
                 emptTeks();
             }
         }
@@ -852,7 +852,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 Sequel.queryu("update set_depo_ralan set kd_bangsal='"+KodeDepoRalan.getText()+"', kd_poli='"+KodePoli.getText()+"' "+
                               "where kd_bangsal='"+tbRalan.getValueAt(tbRalan.getSelectedRow(),2).toString()+"' and "+
                               "kd_poli='"+tbRalan.getValueAt(tbRalan.getSelectedRow(),0).toString()+"'");
-                tampilralan();
+                runBackground(() ->tampilralan());
                 emptTeks();
             }
         }else if(TabRawat.getSelectedIndex()==2){
@@ -865,7 +865,7 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
                 Sequel.queryu("update set_depo_ranap set kd_bangsal='"+KodeBangsalRanap.getText()+"',kd_depo='"+KodeDepoRanap.getText()+"' "+
                               "where kd_bangsal='"+tbRanap.getValueAt(tbRanap.getSelectedRow(),0).toString()+"' and "+
                               "kd_depo='"+tbRanap.getValueAt(tbRanap.getSelectedRow(),2).toString()+"'");
-                tampilranap();
+                runBackground(() ->tampilranap());
                 emptTeks();
             }
         }
@@ -884,9 +884,9 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
         if(TabRawat.getSelectedIndex()==0){
             runBackground(() ->tampil());
         }else if(TabRawat.getSelectedIndex()==1){
-            tampilralan();
+            runBackground(() ->tampilralan());
         }else if(TabRawat.getSelectedIndex()==2){
-            tampilranap();
+            runBackground(() ->tampilranap());
         }
     }//GEN-LAST:event_TabRawatMouseClicked
 

@@ -9623,7 +9623,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgSetKamarInap form=new DlgSetKamarInap(this,false);
-        form.tampil();
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
@@ -9862,13 +9861,11 @@ public class frmUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_btnResepPulangActionPerformed
 
     private void btnSetupTarifActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSetupTarifActionPerformed
-
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgSetTarif aplikasi=new DlgSetTarif(this,false);
         aplikasi.emptTeks();
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -10316,7 +10313,6 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgDkkSurveilansPD3I aplikasi=new DlgDkkSurveilansPD3I(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -10328,7 +10324,6 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgDkkSurveilansRalan aplikasi=new DlgDkkSurveilansRalan(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -10352,7 +10347,6 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgDkkSurveilansRanap aplikasi=new DlgDkkSurveilansRanap(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -10364,7 +10358,6 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgDkkPenyakitTidakMenularRanap aplikasi=new DlgDkkPenyakitTidakMenularRanap(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -10376,7 +10369,6 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgDkkPenyakitTidakMenularRalan aplikasi=new DlgDkkPenyakitTidakMenularRalan(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -11492,7 +11484,6 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgSensusHarianPoli aplikasi=new DlgSensusHarianPoli(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -12059,7 +12050,6 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgDkkPenyakitMenularRanap aplikasi=new DlgDkkPenyakitMenularRanap(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -12071,7 +12061,6 @@ public class frmUtama extends javax.swing.JFrame {
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgDkkPenyakitMenularRalan aplikasi=new DlgDkkPenyakitMenularRalan(this,false);
-        aplikasi.tampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -12704,7 +12693,6 @@ public class frmUtama extends javax.swing.JFrame {
         frmPengaduan pengaduan=new frmPengaduan();
         pengaduan.setSize(800, PanelUtama.getHeight()-40);
         pengaduan.setLocationRelativeTo(null);
-        pengaduan.isCek();
         pengaduan.setVisible(true);
         DlgHome.dispose();
     }//GEN-LAST:event_btnPengaduanActionPerformed
@@ -23297,7 +23285,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgEEksekutif admin=new DlgEEksekutif(this,false);
-        admin.tampil();
         admin.emptTeks();
         admin.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         admin.setLocationRelativeTo(PanelUtama);
