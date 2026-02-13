@@ -123,12 +123,9 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
 
         tabModeAkunBayar=new DefaultTableModel(null,new Object[]{"Nama Akun","Kode Rek","Bayar","PPN(%)","PPN(Rp)","Keterangan"}){
-            @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if ((colIndex==2)) {
-                    a=true;
-                }
-                return a;
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return colIndex == 2 || colIndex == 5;
             }
             Class[] types = new Class[] {
                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,

@@ -1004,6 +1004,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_KdbarKeyPressed
 
     private void BtnBrgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBrgActionPerformed
+        akses.setform("DlgReturJual");
         if (barang == null || !barang.isDisplayable()) {
             barang=new DlgBarang(null,false);
             barang.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
