@@ -1161,6 +1161,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
             login.requireAkses("bpjs_sep");
             login.setOnLoginListener(e -> {
+                btnKonfirmasi.setEnabled(false);
+                btnBatal.setEnabled(false);
                 try {
                     url = koneksiDB.URLAPIBPJS() + "/Sep/aprovalSEP";
                     System.out.println("URL : " + url);
@@ -1201,6 +1203,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
+                btnKonfirmasi.setEnabled(true);
+                btnBatal.setEnabled(true);
             });
             login.setVisible(true);
         }
@@ -1217,6 +1221,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             }
             login.requireAkses("bpjs_sep");
             login.setOnLoginListener(e -> {
+                btnKonfirmasi.setEnabled(false);
+                btnBatal.setEnabled(false);
                 try {
                     url = koneksiDB.URLAPIBPJS() + "/Sep/pengajuanSEP";
                     System.out.println("URL : " + url);
@@ -1257,6 +1263,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                         Valid.popupGagalDialog("Koneksi ke server BPJS terputus...!", 5);
                     }
                 }
+                btnKonfirmasi.setEnabled(false);
+                btnBatal.setEnabled(false);
             });
             login.setVisible(true);
         }
