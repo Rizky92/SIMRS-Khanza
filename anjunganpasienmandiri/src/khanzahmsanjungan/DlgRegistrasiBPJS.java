@@ -155,7 +155,9 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                     kodePoli = poli.getSelectedRow(0).toString();
                     namaPoli.setText(poli.getSelectedRow(1).toString());
                     kodePoliReg = poli.getSelectedRow(2).toString();
-                    // jamPraktek = poli.getSelectedRow(3).toString();
+                    if (batasRegistrasiSatuJam) {
+                        jamPraktek = poli.getSelectedRow(3).toString();
+                    }
                 }
                 namaPoli.requestFocus();
             }
@@ -925,6 +927,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
         toggleInfoTambahan.setForeground(new java.awt.Color(150, 155, 159));
         toggleInfoTambahan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
+        toggleInfoTambahan.setMnemonic('I');
         toggleInfoTambahan.setToolTipText("Alt+I");
         toggleInfoTambahan.setMaximumSize(new java.awt.Dimension(32767, 30));
         toggleInfoTambahan.setMinimumSize(new java.awt.Dimension(140, 30));
@@ -946,6 +949,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         panelBawah.add(toggleInfoTambahan, gridBagConstraints);
 
         btnKonfirmasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/konfirmasi.png"))); // NOI18N
+        btnKonfirmasi.setMnemonic('S');
         btnKonfirmasi.setText("KONFIRMASI");
         btnKonfirmasi.setToolTipText("Alt+S");
         btnKonfirmasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -966,6 +970,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         btnBatal.setBackground(new java.awt.Color(255, 255, 255));
         btnBatal.setForeground(new java.awt.Color(255, 33, 32));
         btnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/exit.png"))); // NOI18N
+        btnBatal.setMnemonic('K');
         btnBatal.setText("Batal");
         btnBatal.setToolTipText("Alt+K");
         btnBatal.setFont(new java.awt.Font("Inter", 0, 18)); // NOI18N
@@ -1022,7 +1027,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             Valid.teksKosongSmc(keterangan, "Keterangan");
         } else if (kodeDokter.isBlank() || namaDokter.getText().isBlank()) {
             Valid.teksKosongSmc(namaDokter, "DPJP");
-        } else if (!statusFinger && Sequel.cariIntegerSmc("select timestampdiff(year, ?, CURRENT_DATE())", tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
+        } else if (!statusFinger && Valid.compareTahun(tglSEP.getText(), tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
             Valid.popupPeringatanDialog("Silahkan lakukan validasi biometrik dahulu..!!", 3);
         } else {
             if (kodePoliReg.isBlank()) {
@@ -1850,7 +1855,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
             if (Sequel.cariExistsSmc("select * from pengajuan_fingerprint_bpjs_smc p where p.no_rkm_medis = ? and p.tglsep = ? and (p.status_approval is not null and p.status_approval like '%200%')", noRM.getText(), tglSEP.getText())) {
                 statusFinger = true;
             } else {
-                if (Sequel.cariIntegerSmc("select timestampdiff(year, ?, current_date())", tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
+                if (Valid.compareTahun(tglSEP.getText(), tglLahir.getText()) >= 17 && !namaPoli.getText().toLowerCase().contains("darurat")) {
                     try {
                         url = koneksiDB.URLAPIBPJS() + "/SEP/FingerPrint/Peserta/" + noPeserta.getText() + "/TglPelayanan/" + tglSEP.getText();
                         System.out.println("URL : " + url);
@@ -1874,7 +1879,6 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                             } else {
                                 statusFinger = false;
                                 StringJoiner sj = new StringJoiner(" atau ");
-
                                 if (btnFrista.isVisible()) {
                                     sj.add("REKAM WAJAH");
                                 }
@@ -3132,6 +3136,10 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
 
                 if (decrypted.hasNonNull("printJumlahBarcode")) {
                     printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(koneksiDB.PRINTJUMLAHBARCODE());
+                }
+
+                if (decrypted.hasNonNull("batasRegistrasiSatuJam")) {
+                    batasRegistrasiSatuJam = decrypted.path("batasRegistrasiSatuJam").asBoolean(koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK());
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
