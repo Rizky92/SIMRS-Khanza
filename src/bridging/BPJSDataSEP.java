@@ -6169,7 +6169,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
     private widget.Table tbDataSEPInternal;
     // End of variables declaration//GEN-END:variables
 
-    public void tampil() {
+    private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
@@ -6510,6 +6510,7 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
         DTPCari1.setDate(tgl1);
         DTPCari2.setDate(tgl1);
         TabRawat.setSelectedIndex(1);
+        runBackground(() ->tampil());
     }
 
     public void setNoRm3(String norwt, String norm, Date tgl1) {

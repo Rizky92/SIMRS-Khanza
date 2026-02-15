@@ -3087,7 +3087,6 @@ public final class BPJSCekRujukanKartuPCare extends javax.swing.JDialog {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         BPJSDataSEP form=new BPJSDataSEP(null,false);
         form.isCek();
-        form.tampil();
         form.tutupInput();
         form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         form.setLocationRelativeTo(internalFrame1);
