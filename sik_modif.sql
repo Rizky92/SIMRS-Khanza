@@ -1333,6 +1333,8 @@ CREATE TABLE IF NOT EXISTS `referensi_mobilejkn_bpjs_taskid_response2`  (
 
 ALTER TABLE `reg_periksa` MODIFY COLUMN IF EXISTS `stts` enum('Belum','Sudah','Batal','Berkas Diterima','Dirujuk','Meninggal','Dirawat','Pulang Paksa','TTV') NULL DEFAULT NULL AFTER `biaya_reg`;
 
+ALTER TABLE `reg_periksa` MODIFY COLUMN IF EXISTS `status_bayar` enum('Sudah Bayar','Belum Bayar','Parsial') NOT NULL AFTER `sttsumur`;
+
 ALTER TABLE `reg_periksa` ADD INDEX IF NOT EXISTS `tgl_registrasi`(`tgl_registrasi`) USING BTREE;
 
 ALTER TABLE `resep_obat` ADD COLUMN IF NOT EXISTS `nama_template` varchar(100) NULL DEFAULT NULL AFTER `jam_penyerahan`;
