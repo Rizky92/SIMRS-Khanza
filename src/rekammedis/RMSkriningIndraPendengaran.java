@@ -2107,11 +2107,9 @@ public final class RMSkriningIndraPendengaran extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

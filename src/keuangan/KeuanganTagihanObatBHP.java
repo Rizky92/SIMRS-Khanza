@@ -1254,11 +1254,9 @@ public final class KeuanganTagihanObatBHP extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -661,11 +661,9 @@ public final class KeuanganValidasiTagihanDapur extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -1013,11 +1013,9 @@ public final class KeuanganPiutangJasaPerusahaanBelumLunas extends javax.swing.J
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

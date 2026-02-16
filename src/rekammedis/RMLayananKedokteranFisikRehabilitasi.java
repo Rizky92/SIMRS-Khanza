@@ -1871,11 +1871,9 @@ public final class RMLayananKedokteranFisikRehabilitasi extends javax.swing.JDia
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

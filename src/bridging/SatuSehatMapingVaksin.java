@@ -1083,11 +1083,9 @@ public final class SatuSehatMapingVaksin extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

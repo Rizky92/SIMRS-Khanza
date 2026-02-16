@@ -4684,11 +4684,9 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

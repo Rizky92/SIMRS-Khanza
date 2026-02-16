@@ -1675,11 +1675,9 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

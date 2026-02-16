@@ -567,11 +567,9 @@ public final class BPJSHistoriPelayanan extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

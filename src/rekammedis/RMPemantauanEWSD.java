@@ -2087,11 +2087,9 @@ public final class RMPemantauanEWSD extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

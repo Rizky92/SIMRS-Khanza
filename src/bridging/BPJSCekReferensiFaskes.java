@@ -445,11 +445,9 @@ public final class BPJSCekReferensiFaskes extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -997,11 +997,9 @@ public final class DlgKategoriPengeluaran extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }
