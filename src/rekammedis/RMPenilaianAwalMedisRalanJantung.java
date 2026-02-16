@@ -2577,11 +2577,9 @@ public final class RMPenilaianAwalMedisRalanJantung extends javax.swing.JDialog 
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

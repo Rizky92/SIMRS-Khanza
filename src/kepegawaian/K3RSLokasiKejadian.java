@@ -671,11 +671,9 @@ public class K3RSLokasiKejadian extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

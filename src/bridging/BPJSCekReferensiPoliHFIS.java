@@ -415,11 +415,9 @@ public final class BPJSCekReferensiPoliHFIS extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

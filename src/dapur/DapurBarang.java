@@ -1020,11 +1020,9 @@ public final class DapurBarang extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -2215,11 +2215,9 @@ public final class RMChecklistKriteriaMasukHCU extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

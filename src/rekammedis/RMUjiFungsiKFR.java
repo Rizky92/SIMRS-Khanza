@@ -1432,11 +1432,9 @@ public final class RMUjiFungsiKFR extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

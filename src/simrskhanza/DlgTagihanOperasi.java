@@ -4107,11 +4107,9 @@ private void btnAnakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

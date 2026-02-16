@@ -1025,11 +1025,9 @@ public final class KeuanganPemberiHutangLain extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

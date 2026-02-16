@@ -577,11 +577,9 @@ public final class BPJSCekReferensiDokterDPJP extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

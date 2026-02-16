@@ -1187,11 +1187,9 @@ public class InventoryRingkasanReturSuplierBarangMedis extends javax.swing.JDial
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

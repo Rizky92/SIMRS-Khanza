@@ -2595,11 +2595,9 @@ public final class RMPenilaianAwalMedisRalanOrthopedi extends javax.swing.JDialo
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

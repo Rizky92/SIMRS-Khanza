@@ -2864,11 +2864,9 @@ public final class RMPenilaianTambahanPerilakuKekerasan extends javax.swing.JDia
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

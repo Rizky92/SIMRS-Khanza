@@ -1830,11 +1830,9 @@ public final class SuratPersetujuanRawatInap extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

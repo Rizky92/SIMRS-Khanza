@@ -1423,13 +1423,11 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 
     private void LoadData() {
         tampil();

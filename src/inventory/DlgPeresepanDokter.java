@@ -4447,11 +4447,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

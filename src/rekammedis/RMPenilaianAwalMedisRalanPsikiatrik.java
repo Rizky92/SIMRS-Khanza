@@ -3072,11 +3072,9 @@ public final class RMPenilaianAwalMedisRalanPsikiatrik extends javax.swing.JDial
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -2432,11 +2432,9 @@ private void BtnOperatorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -558,11 +558,9 @@ public final class KeuanganRingkasanHutangVendorNonMedis extends javax.swing.JDi
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

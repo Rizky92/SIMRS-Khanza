@@ -3010,11 +3010,9 @@ public final class RMSkriningSRQ extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

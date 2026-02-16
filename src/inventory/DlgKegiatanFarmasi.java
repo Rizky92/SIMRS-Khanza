@@ -875,11 +875,9 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

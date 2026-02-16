@@ -478,12 +478,10 @@ public final class RMCariJumlahObat extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 
 }
