@@ -338,7 +338,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         DlgRestriksi.setMinimumSize(new java.awt.Dimension(400, 300));
         DlgRestriksi.setName("DlgRestriksi"); // NOI18N
         DlgRestriksi.setUndecorated(true);
-        DlgRestriksi.setPreferredSize(new java.awt.Dimension(400, 300));
         DlgRestriksi.setResizable(false);
         DlgRestriksi.setType(java.awt.Window.Type.POPUP);
 
@@ -561,7 +560,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
 
         TglResep.setEditable(false);
         TglResep.setForeground(new java.awt.Color(50, 70, 50));
-        TglResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-12-2025 15:45:35" }));
+        TglResep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-12-2025 09:51:29" }));
         TglResep.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglResep.setName("TglResep"); // NOI18N
         TglResep.setOpaque(false);
@@ -724,6 +723,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         Iterasi.setBounds(225, 100, 140, 23);
 
         JenisObat.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1. Obat PRB", "2. Obat Kronis Belum Stabil", "3. Obat Kemoterapi" }));
+        JenisObat.setSelectedIndex(1);
         JenisObat.setName("JenisObat"); // NOI18N
         JenisObat.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -735,7 +735,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
 
         TglPelayanan.setEditable(false);
         TglPelayanan.setForeground(new java.awt.Color(50, 70, 50));
-        TglPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-12-2025 15:45:35" }));
+        TglPelayanan.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-12-2025 09:51:29" }));
         TglPelayanan.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglPelayanan.setName("TglPelayanan"); // NOI18N
         TglPelayanan.setOpaque(false);

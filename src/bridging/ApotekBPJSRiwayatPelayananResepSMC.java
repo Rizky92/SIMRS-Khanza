@@ -400,5 +400,6 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
                 JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             }
         }
+        LCount.setText(tabMode.getRowCount() + "");
     }
 }
