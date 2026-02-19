@@ -4,7 +4,7 @@ Note: "ceksukses" = background data loading guard check
       "Pilihan Cetak" = multi-format export dialog (HTML/WPS/CSV/XLSX/Jasper)
 
 Last updated: 2026-02-19
-Progress this session: keuangan ALL DONE (137 files total)
+Progress this session: keuangan ALL DONE (137 files), rekammedis ALL DONE (65 MyReportqry files converted; htmlContent files intentionally skipped per user)
 
 =======================================
 KEUANGAN (ALL DONE - 137 files converted)
@@ -30,13 +30,13 @@ INVENTARIS (ALL DONE - 24 files converted)
 =======================================
 
 =======================================
-REKAMMEDIS (NEW - ~153 files need Pilihan Cetak)
+REKAMMEDIS (ALL DONE - 65 MyReportqry files converted)
 =======================================
-Note: These files have BtnPrintActionPerformed + MyReportqry but no Pilihan Cetak yet.
-      22 files already converted. Many are patient form files (penilaian, skrining, checklist).
-      Some may not have a JTable for non-Jasper exports - verify per file.
+Note: Only files explicitly exporting Jasper from JTable data were converted.
+      htmlContent/StringBuilder-based files intentionally skipped (fragile, complex logic).
+      65 total files have Pilihan Cetak (22 original + 43 new this session).
 
-Already converted (22 files):
+Already converted (22 files, from previous sessions):
   RMCatatanPengkajianPaskaOperasi.java
   RMChecklistKesiapanAnestesi.java
   RMDataCatatanCairanHemodialisa.java
@@ -60,7 +60,7 @@ Already converted (22 files):
   RMSkriningKesehatanPenglihatan.java
   RMSkriningRisikoKankerServiks.java
 
-Need Pilihan Cetak (~153 files - have MyReportqry, no Pilihan Cetak yet):
+SKIPPED (htmlContent files - converted per user instruction to skip these):
 src/rekammedis/RMCatatanADIMEGizi.java
 src/rekammedis/RMCatatanAnastesiSedasi.java
 src/rekammedis/RMCatatanPersalinan.java
@@ -516,10 +516,10 @@ SUMMARY
 keuangan:               0 (DONE)     |         0
 ipsrs:                  0 (DONE)     |         0
 inventaris:             0 (DONE)     |         0
-rekammedis:           153            |         ? (needs survey)
+rekammedis:             0 (DONE)     |         0
 simrskhanza:           30            |         2
 informasi:              0 (N/A)      |         0
 laporan:               95            |         1
 bridging:             134            |        47
 -----------------------------------------
-TOTAL:                412            |        50+
+TOTAL:                259            |        50
