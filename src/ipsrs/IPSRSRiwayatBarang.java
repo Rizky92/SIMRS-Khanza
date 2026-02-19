@@ -9,6 +9,9 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -312,46 +315,77 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptRiwayatBarangIPSRS.jasper","report","::[ Riwayat Barang Non Medis dan Penunjang ( Lab & RO ) ]::",
-                    "select ipsrs_riwayat_barang.kode_brng,ipsrsbarang.nama_brng,"+
-                    "ipsrs_riwayat_barang.stok_awal,ipsrs_riwayat_barang.masuk,"+
-                    "ipsrs_riwayat_barang.keluar,ipsrs_riwayat_barang.stok_akhir,"+
-                    "ipsrs_riwayat_barang.posisi,ipsrs_riwayat_barang.tanggal,"+
-                    "ipsrs_riwayat_barang.jam,ipsrs_riwayat_barang.petugas,"+
-                    "ipsrs_riwayat_barang.status from ipsrs_riwayat_barang "+
-                    "inner join ipsrsbarang on ipsrs_riwayat_barang.kode_brng=ipsrsbarang.kode_brng where "+
-                    "ipsrs_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by ipsrs_riwayat_barang.tanggal,ipsrs_riwayat_barang.jam ",param);
-            }else{
-                Valid.MyReportqry("rptRiwayatBarangIPSRS.jasper","report","::[ Riwayat Barang Non Medis dan Penunjang ( Lab & RO ) ]::",
-                    "select ipsrs_riwayat_barang.kode_brng,ipsrsbarang.nama_brng,"+
-                    "ipsrs_riwayat_barang.stok_awal,ipsrs_riwayat_barang.masuk,"+
-                    "ipsrs_riwayat_barang.keluar,ipsrs_riwayat_barang.stok_akhir,"+
-                    "ipsrs_riwayat_barang.posisi,ipsrs_riwayat_barang.tanggal,"+
-                    "ipsrs_riwayat_barang.jam,ipsrs_riwayat_barang.petugas,"+
-                    "ipsrs_riwayat_barang.status from ipsrs_riwayat_barang "+
-                    "inner join ipsrsbarang on ipsrs_riwayat_barang.kode_brng=ipsrsbarang.kode_brng where "+
-                    "ipsrs_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and "+
-                    "(ipsrs_riwayat_barang.kode_brng like '%"+TCari.getText().trim()+"%' or ipsrsbarang.nama_brng like '%"+TCari.getText().trim()+"%' or ipsrs_riwayat_barang.petugas like '%"+TCari.getText().trim()+"%' or "+
-                    "ipsrs_riwayat_barang.status like '%"+TCari.getText().trim()+"%') order by ipsrs_riwayat_barang.tanggal,ipsrs_riwayat_barang.jam ",param);
-            }
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
 
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RiwayatBarangIPSRS.html", "Riwayat Barang Non Medis dan Penunjang ( Lab & RO )", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RiwayatBarangIPSRS.wps", "Riwayat Barang Non Medis dan Penunjang ( Lab & RO )", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RiwayatBarangIPSRS.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RiwayatBarangIPSRS.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
+                            Valid.MyReportqry("rptRiwayatBarangIPSRS.jasper","report","::[ Riwayat Barang Non Medis dan Penunjang ( Lab & RO ) ]::",
+                                "select ipsrs_riwayat_barang.kode_brng,ipsrsbarang.nama_brng,"+
+                                "ipsrs_riwayat_barang.stok_awal,ipsrs_riwayat_barang.masuk,"+
+                                "ipsrs_riwayat_barang.keluar,ipsrs_riwayat_barang.stok_akhir,"+
+                                "ipsrs_riwayat_barang.posisi,ipsrs_riwayat_barang.tanggal,"+
+                                "ipsrs_riwayat_barang.jam,ipsrs_riwayat_barang.petugas,"+
+                                "ipsrs_riwayat_barang.status from ipsrs_riwayat_barang "+
+                                "inner join ipsrsbarang on ipsrs_riwayat_barang.kode_brng=ipsrsbarang.kode_brng where "+
+                                "ipsrs_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' order by ipsrs_riwayat_barang.tanggal,ipsrs_riwayat_barang.jam ",param);
+                        }else{
+                            Valid.MyReportqry("rptRiwayatBarangIPSRS.jasper","report","::[ Riwayat Barang Non Medis dan Penunjang ( Lab & RO ) ]::",
+                                "select ipsrs_riwayat_barang.kode_brng,ipsrsbarang.nama_brng,"+
+                                "ipsrs_riwayat_barang.stok_awal,ipsrs_riwayat_barang.masuk,"+
+                                "ipsrs_riwayat_barang.keluar,ipsrs_riwayat_barang.stok_akhir,"+
+                                "ipsrs_riwayat_barang.posisi,ipsrs_riwayat_barang.tanggal,"+
+                                "ipsrs_riwayat_barang.jam,ipsrs_riwayat_barang.petugas,"+
+                                "ipsrs_riwayat_barang.status from ipsrs_riwayat_barang "+
+                                "inner join ipsrsbarang on ipsrs_riwayat_barang.kode_brng=ipsrsbarang.kode_brng where "+
+                                "ipsrs_riwayat_barang.tanggal between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' and "+
+                                "(ipsrs_riwayat_barang.kode_brng like '%"+TCari.getText().trim()+"%' or ipsrsbarang.nama_brng like '%"+TCari.getText().trim()+"%' or ipsrs_riwayat_barang.petugas like '%"+TCari.getText().trim()+"%' or "+
+                                "ipsrs_riwayat_barang.status like '%"+TCari.getText().trim()+"%') order by ipsrs_riwayat_barang.tanggal,ipsrs_riwayat_barang.jam ",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
             this.setCursor(Cursor.getDefaultCursor());
         }
-
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -639,40 +642,63 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        BtnCariActionPerformed(evt);
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            int row=tabMode.getRowCount();
-            for(i=0;i<row;i++){
-                Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,0).toString()+"','"+
-                                tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,2).toString()+"','"+
-                                tabMode.getValueAt(i,3).toString()+"','"+
-                                tabMode.getValueAt(i,4).toString()+"','"+
-                                tabMode.getValueAt(i,5).toString()+"','"+
-                                tabMode.getValueAt(i,6).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
-            }
-            i++;
-            Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
-            i++;
-            Sequel.menyimpan("temporary","'"+i+"','Jml.Total :','','','','','','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Penerimaan");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
 
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptReturBeliNonMedis.jasper","report","::[ Transaksi Retur Ke Suplier Barang Non Medis dan Penunjang ( Lab & RO ) ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("ReturBeliNonMedis.html", "Transaksi Retur Ke Suplier Barang Non Medis dan Penunjang ( Lab & RO )", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("ReturBeliNonMedis.wps", "Transaksi Retur Ke Suplier Barang Non Medis dan Penunjang ( Lab & RO )", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("ReturBeliNonMedis.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("ReturBeliNonMedis.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        int i = 0;
+                        for (; i < tabMode.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
+                                (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6));
+                        }
+                        Sequel.temporary(String.valueOf(++i));
+                        Sequel.temporary(String.valueOf(++i), "Jml.Total :", "", "", "", "", "", LTotal.getText());
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptReturBeliNonMedis.jasper", "report", "::[ Transaksi Retur Ke Suplier Barang Non Medis dan Penunjang ( Lab & RO ) ]::", param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -688,69 +714,69 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_nmjenisKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tbDokter.getSelectedRow()> -1){
-        if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString().trim().equals("")){
-            Valid.textKosong(TCari,"No.Faktur");
-        }else{
-          try {
-             pscaripesan=koneksi.prepareStatement("select no_retur_beli, total from ipsrsreturbeli where no_retur_beli=?");
-             try {
-                pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                rs=pscaripesan.executeQuery();
-                if(rs.next()){
-                    Sequel.AutoComitFalse();
-                    sukses=true;
-                    psipsrs_detail_returbeli=koneksi.prepareStatement("select kode_brng,jml_retur from ipsrs_detail_returbeli where no_retur_beli=? ");
-                    try {
-                        psipsrs_detail_returbeli.setString(1,rs.getString(1));
-                        rs2=psipsrs_detail_returbeli.executeQuery();
-                        while(rs2.next()){
-                            Trackbarang.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jml_retur"),0,"Retur Beli", akses.getkode(),"Hapus");
-                            Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok+?",2,new String[]{
-                                   rs2.getString("jml_retur"),rs2.getString("kode_brng")
-                            });
+        if(tbDokter.getSelectedRow()> -1){
+            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString().trim().equals("")){
+                Valid.textKosong(TCari,"No.Faktur");
+            }else{
+              try {
+                 pscaripesan=koneksi.prepareStatement("select no_retur_beli, total from ipsrsreturbeli where no_retur_beli=?");
+                 try {
+                    pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    rs=pscaripesan.executeQuery();
+                    if(rs.next()){
+                        Sequel.AutoComitFalse();
+                        sukses=true;
+                        psipsrs_detail_returbeli=koneksi.prepareStatement("select kode_brng,jml_retur from ipsrs_detail_returbeli where no_retur_beli=? ");
+                        try {
+                            psipsrs_detail_returbeli.setString(1,rs.getString(1));
+                            rs2=psipsrs_detail_returbeli.executeQuery();
+                            while(rs2.next()){
+                                Trackbarang.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jml_retur"),0,"Retur Beli", akses.getkode(),"Hapus");
+                                Sequel.mengedit("ipsrsbarang","kode_brng=?","stok=stok+?",2,new String[]{
+                                       rs2.getString("jml_retur"),rs2.getString("kode_brng")
+                                });
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Notif : "+e);
+                        } finally{
+                            if(rs2!=null){
+                                rs2.close();
+                            }
+                            if(psipsrs_detail_returbeli!=null){
+                                psipsrs_detail_returbeli.close();
+                            }
                         }
-                    } catch (Exception e) {
-                        System.out.println("Notif : "+e);
-                    } finally{
-                        if(rs2!=null){
-                            rs2.close();
-                        }
-                        if(psipsrs_detail_returbeli!=null){
-                            psipsrs_detail_returbeli.close();
-                        }
-                    }
-                    Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Beli_Non_Medis from set_akun"), "RETUR BELI NON MEDIS", rs.getDouble("total"), 0);
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Beli_Non_Medis from set_akun"), "KONTA RETUR BELI NON MEDIS", 0, rs.getDouble("total"));
-                    if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL TRANSAKSI RETUR BELI BARANG PENUNJANG/NON MEDIS"+", OLEH "+akses.getkode());
+                        Sequel.deleteTampJurnal();
+                        if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Beli_Non_Medis from set_akun"), "RETUR BELI NON MEDIS", rs.getDouble("total"), 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Beli_Non_Medis from set_akun"), "KONTA RETUR BELI NON MEDIS", 0, rs.getDouble("total"));
+                        if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL TRANSAKSI RETUR BELI BARANG PENUNJANG/NON MEDIS"+", OLEH "+akses.getkode());
 
-                    if(sukses==true){
-                        Sequel.queryu2("delete from ipsrsreturbeli where no_retur_beli=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
-                        Sequel.Commit();
-                        runBackground(() ->tampil());
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
-                    }
+                        if(sukses==true){
+                            Sequel.queryu2("delete from ipsrsreturbeli where no_retur_beli=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                            Sequel.Commit();
+                            runBackground(() ->tampil());
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                            Sequel.RollBack();
+                        }
 
-                    Sequel.AutoComitTrue();
-                }
-             } catch (Exception e) {
-                System.out.println(e);
-             } finally{
-                 if(rs!=null){
-                     rs.close();
+                        Sequel.AutoComitTrue();
+                    }
+                 } catch (Exception e) {
+                    System.out.println(e);
+                 } finally{
+                     if(rs!=null){
+                         rs.close();
+                     }
+                     if(pscaripesan!=null){
+                         pscaripesan.close();
+                     }
                  }
-                 if(pscaripesan!=null){
-                     pscaripesan.close();
-                 }
-             }
-          } catch (Exception ex) {
-             System.out.println(ex);
-          }
+              } catch (Exception ex) {
+                 System.out.println(ex);
+              }
+            }
         }
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

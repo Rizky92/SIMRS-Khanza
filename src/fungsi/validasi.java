@@ -11,7 +11,10 @@ import java.awt.Dialog.ModalExclusionType;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -33,7 +36,9 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 import java.util.Properties;
+import java.util.StringJoiner;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
 import javax.print.attribute.HashPrintRequestAttributeSet;
@@ -49,6 +54,7 @@ import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 import javax.swing.text.JTextComponent;
 import jxl.Workbook;
 import jxl.write.Label;
@@ -66,6 +72,11 @@ import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.export.SimpleExporterInput;
 import net.sf.jasperreports.export.SimplePrintServiceExporterConfiguration;
 import net.sf.jasperreports.view.JasperViewer;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.CellStyle;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.xssf.streaming.SXSSFSheet;
+import org.apache.poi.xssf.streaming.SXSSFWorkbook;
 import uz.ncipro.calendar.JDateTimePicker;
 import widget.Button;
 import widget.ComboBox;
@@ -457,6 +468,14 @@ public final class validasi {
         tabelKosongSmc(model, false);
     }
 
+    public String setAngkaSmc(Double value) {
+        try {
+            return df2.format(value);
+        } catch (Exception e) {
+        }
+        return "";
+    }
+
     public double setAngkaSmc(String value) {
         if (value == null || value.isBlank() || value.trim().equals("0")) {
             return 0;
@@ -506,6 +525,251 @@ public final class validasi {
         }
 
         return current;
+    }
+
+    public void exportHtmlSmc(String filename, String judul, JTable table, int... columnIndexes) {
+        TableModel tabMode = table.getModel();
+        StringBuilder sb = new StringBuilder();
+        StringJoiner sj = new StringJoiner("");
+        judul = judul.replaceAll("\n", "<br>");
+
+        sb.append("<html><head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body><table border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\"><tr class=\"isi2\">")
+            .append("<td valign=\"top\" align=\"center\"><font size=\"4\" face=\"Tahoma\">").append(akses.getnamars()).append("</font><br>").append(akses.getalamatrs()).append(", ").append(akses.getkabupatenrs()).append(", ")
+            .append(akses.getpropinsirs()).append("<br>").append(akses.getkontakrs()).append(", E-mail : ").append(akses.getemailrs()).append("<br><br><font size=\"2\" face=\"Tahoma\">").append(judul)
+            .append("<br><br></font></td></tr></table><table border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\">");
+
+        if (columnIndexes.length == 0) {
+            columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
+                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
+                .toArray();
+        }
+
+        for (int i = 0; i < columnIndexes.length; i++) {
+            sj.add("<td valign=\"middle\" bgcolor=\"#FFFAFA\" align=\"center\">" + table.getColumnModel().getColumn(columnIndexes[i]).getHeaderValue() + "</td>");
+        }
+        sb.append("<tr class=\"isi\">").append(sj.toString()).append("</tr>");
+
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            sj = new StringJoiner("");
+            sb.append("<tr class=\"isi\">");
+            for (int j = 0; j < columnIndexes.length; j++) {
+                if (tabMode.getValueAt(i, columnIndexes[j]) == null) {
+                    sj.add("<td valign=\"top\"></td>");
+                } else {
+                    if (tabMode.getColumnClass(columnIndexes[j]).equals(Double.class)) {
+                        try {
+                            sj.add("<td valign=\"top\" align=\"right\">" + new BigDecimal((Double) tabMode.getValueAt(i, columnIndexes[j])).setScale(2, RoundingMode.HALF_UP).toPlainString().replace(".", ",") + "</td>");
+                        } catch (ClassCastException e) {
+                            sj.add("<td valign=\"top\" align=\"right\">" + tabMode.getValueAt(i, columnIndexes[j]).toString() + "</td>");
+                        }
+                    } else if (tabMode.getColumnClass(columnIndexes[j]).equals(Integer.class)) {
+                        try {
+                            sj.add("<td valign=\"top\" align=\"right\">" + ((Integer) tabMode.getValueAt(i, columnIndexes[j])) + "</td>");
+                        } catch (ClassCastException e) {
+                            sj.add("<td valign=\"top\" align=\"right\">" + tabMode.getValueAt(i, columnIndexes[j]).toString() + "</td>");
+                        }
+                    } else {
+                        sj.add("<td valign=\"top\">" + ((String) tabMode.getValueAt(i, columnIndexes[j])) + "</td>");
+                    }
+                }
+            }
+            sb.append(sj.toString()).append("</tr>");
+        }
+        sb.append("</table></body></html>");
+
+        File file = new File(filename);
+        try (BufferedWriter b = new BufferedWriter(new FileWriter(file))) {
+            b.write(sb.toString());
+            b.flush();
+            Desktop.getDesktop().browse(file.toURI());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    public void exportWPSSmc(String filename, String judul, JTable table, int... columnIndexes) {
+        TableModel tabMode = table.getModel();
+        StringBuilder sb = new StringBuilder();
+        StringJoiner sj = new StringJoiner("");
+        judul = judul.replaceAll("\n", "<br>");
+
+        sb.append("<html><head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head><body><table border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\"><tr class=\"isi2\">")
+            .append("<td valign=\"top\" align=\"center\"><font size=\"4\" face=\"Tahoma\">").append(akses.getnamars()).append("</font><br>").append(akses.getalamatrs()).append(", ").append(akses.getkabupatenrs()).append(", ")
+            .append(akses.getpropinsirs()).append("<br>").append(akses.getkontakrs()).append(", E-mail : ").append(akses.getemailrs()).append("<br><br><font size=\"2\" face=\"Tahoma\">").append(judul)
+            .append("<br><br></font></td></tr></table><table border=\"0\" align=\"center\" cellpadding=\"3px\" cellspacing=\"0\" class=\"tbl_form\">");
+
+        if (columnIndexes.length == 0) {
+            columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
+                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
+                .toArray();
+        }
+
+        for (int i = 0; i < columnIndexes.length; i++) {
+            sj.add("<td valign=\"middle\" bgcolor=\"#FFFAFA\" align=\"center\">" + table.getColumnModel().getColumn(columnIndexes[i]).getHeaderValue() + "</td>");
+        }
+        sb.append("<tr class=\"isi\">").append(sj.toString()).append("</tr>");
+
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            sj = new StringJoiner("");
+            sb.append("<tr class=\"isi\">");
+            for (int j = 0; j < columnIndexes.length; j++) {
+                if (tabMode.getValueAt(i, columnIndexes[j]) == null) {
+                    sj.add("<td valign=\"top\"></td>");
+                } else {
+                    if (tabMode.getColumnClass(columnIndexes[j]).equals(Double.class)) {
+                        try {
+                            sj.add("<td valign=\"top\" align=\"right\">" + new BigDecimal((Double) tabMode.getValueAt(i, columnIndexes[j])).setScale(2, RoundingMode.HALF_UP).toPlainString().replace(".", ",") + "</td>");
+                        } catch (ClassCastException e) {
+                            sj.add("<td valign=\"top\" align=\"right\">" + tabMode.getValueAt(i, columnIndexes[j]) + "</td>");
+                        }
+                    } else if (tabMode.getColumnClass(columnIndexes[j]).equals(Integer.class)) {
+                        try {
+                            sj.add("<td valign=\"top\" align=\"right\">" + ((Integer) tabMode.getValueAt(i, columnIndexes[j])) + "</td>");
+                        } catch (ClassCastException e) {
+                            sj.add("<td valign=\"top\" align=\"right\">" + tabMode.getValueAt(i, columnIndexes[j]).toString() + "</td>");
+                        }
+                    } else {
+                        sj.add("<td valign=\"top\">" + ((String) tabMode.getValueAt(i, columnIndexes[j])) + "</td>");
+                    }
+                }
+            }
+            sb.append(sj.toString()).append("</tr>");
+        }
+        sb.append("</table></body></html>");
+
+        File file = new File(filename);
+        try (BufferedWriter b = new BufferedWriter(new FileWriter(file))) {
+            b.write(sb.toString());
+            b.flush();
+            Desktop.getDesktop().browse(file.toURI());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    public void exportCSVSmc(String filename, JTable table, int... columnIndexes) {
+        TableModel tabMode = table.getModel();
+        StringBuilder sb = new StringBuilder();
+        StringJoiner sj = new StringJoiner(";");
+
+        if (columnIndexes.length == 0) {
+            columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
+                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
+                .toArray();
+        }
+
+        for (int i = 0; i < columnIndexes.length; i++) {
+            sj.add("\"" + table.getColumnModel().getColumn(columnIndexes[i]).getHeaderValue() + "\"");
+        }
+        sb.append(sj.toString()).append("\n");
+
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            sj = new StringJoiner(";");
+            for (int j = 0; j < columnIndexes.length; j++) {
+                if (tabMode.getValueAt(i, columnIndexes[j]) == null) {
+                    sj.add("");
+                } else {
+                    if (tabMode.getColumnClass(columnIndexes[j]).equals(Double.class)) {
+                        try {
+                            sj.add(new BigDecimal((Double) tabMode.getValueAt(i, columnIndexes[j])).setScale(2, RoundingMode.HALF_UP).toPlainString().replace(".", ","));
+                        } catch (ClassCastException e) {
+                            sj.add(tabMode.getValueAt(i, columnIndexes[j]).toString());
+                        }
+                    } else if (tabMode.getColumnClass(columnIndexes[j]).equals(Integer.class) || tabMode.getColumnClass(columnIndexes[j]).equals(Long.class)) {
+                        try {
+                            sj.add((Integer) tabMode.getValueAt(i, columnIndexes[j]) + "");
+                        } catch (ClassCastException e) {
+                            sj.add(tabMode.getValueAt(i, columnIndexes[j]).toString());
+                        }
+                    } else {
+                        sj.add("\"" + ((String) tabMode.getValueAt(i, columnIndexes[j])).replace("\"", "\"\"") + "\"");
+                    }
+                }
+            }
+            sb.append(sj.toString()).append("\n");
+        }
+
+        File file = new File(filename);
+        try (BufferedWriter b = new BufferedWriter(new FileWriter(file))) {
+            b.write(sb.toString());
+            b.flush();
+            Desktop.getDesktop().browse(file.toURI());
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
+    }
+
+    public void exportXlsxSmc(String filename, JTable table, int... columnIndexes) {
+        TableModel tabMode = table.getModel();
+        SXSSFWorkbook workbook = new SXSSFWorkbook(clamp(tabMode.getRowCount() / 100, 500, 5000)); // Keep 100 rows in memory
+        final int MAX_ROWS = 1048576;
+
+        if (columnIndexes.length == 0) {
+            columnIndexes = IntStream.rangeClosed(0, tabMode.getColumnCount() - 1)
+                .filter(i -> !tabMode.getColumnClass(i).equals(Boolean.class))
+                .toArray();
+        }
+
+        int sheetNum = 1;
+        int rowInSheet = 0;
+        SXSSFSheet sheet = workbook.createSheet("Sheet" + sheetNum);
+
+        Row headerRow = sheet.createRow(rowInSheet++);
+        for (int i = 0; i < columnIndexes.length; i++) {
+            Cell cell = headerRow.createCell(i);
+            cell.setCellValue(table.getColumnModel().getColumn(columnIndexes[i]).getHeaderValue().toString());
+        }
+
+        CellStyle style = workbook.createCellStyle();
+        style.setDataFormat(workbook.createDataFormat().getFormat("0.00"));
+
+        for (int i = 0; i < tabMode.getRowCount(); i++) {
+            if (rowInSheet >= MAX_ROWS) {
+                sheetNum++;
+                sheet = workbook.createSheet("Sheet" + sheetNum);
+                rowInSheet = 0;
+
+                headerRow = sheet.createRow(rowInSheet++);
+                for (int j = 0; j < columnIndexes.length; j++) {
+                    Cell cell = headerRow.createCell(j);
+                    cell.setCellValue(table.getColumnModel().getColumn(columnIndexes[j]).getHeaderValue().toString());
+                }
+            }
+
+            Row row = sheet.createRow(rowInSheet++);
+            for (int j = 0; j < columnIndexes.length; j++) {
+                Cell cell = row.createCell(j);
+                if (tabMode.getValueAt(i, columnIndexes[j]) == null) {
+                    cell.setCellValue("");
+                } else {
+                    if (tabMode.getColumnClass(columnIndexes[j]).equals(Double.class)) {
+                        try {
+                            cell.setCellStyle(style);
+                            cell.setCellValue((Double) tabMode.getValueAt(i, columnIndexes[j]));
+                        } catch (ClassCastException e) {
+                            cell.setCellValue(tabMode.getValueAt(i, columnIndexes[j]).toString());
+                        }
+                    } else if (tabMode.getColumnClass(columnIndexes[j]).equals(Integer.class)) {
+                        try {
+                            cell.setCellValue((Integer) tabMode.getValueAt(i, columnIndexes[j]));
+                        } catch (ClassCastException e) {
+                            cell.setCellValue(tabMode.getValueAt(i, columnIndexes[j]).toString());
+                        }
+                    } else {
+                        cell.setCellValue((String) tabMode.getValueAt(i, columnIndexes[j]));
+                    }
+                }
+            }
+        }
+
+        File file = new File(filename);
+        try (FileOutputStream out = new FileOutputStream(file)) {
+            workbook.write(out);
+            workbook.dispose();
+            Desktop.getDesktop().open(file);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
+        }
     }
 
     public void autoNomer(DefaultTableModel tabMode,String strAwal,Integer pnj,javax.swing.JTextField teks){

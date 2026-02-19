@@ -1,0 +1,525 @@
+Remaining Export Conversion Files
+==================================
+Note: "ceksukses" = background data loading guard check
+      "Pilihan Cetak" = multi-format export dialog (HTML/WPS/CSV/XLSX/Jasper)
+
+Last updated: 2026-02-19
+Progress this session: keuangan ALL DONE (137 files total)
+
+=======================================
+KEUANGAN (ALL DONE - 137 files converted)
+=======================================
+SKIP (7 files - HTML-only or complex multi-tab, no JTable):
+  DlgDetailJMDokter2.java    (HTML-only)
+  DlgOmsetPenerimaan.java    (complex multi-tab)
+  KeuanganJasaTindakan.java  (HTML-only)
+  KeuanganRekapPoliAnak.java (HTML-only)
+  KeuanganRingkasanJasaTindakan.java (HTML-only)
+  KeuanganRingkasanTindakan.java     (complex multi-tab)
+  KeuanganSaldoAkunPerBulan.java     (HTML-only)
+
+=======================================
+IPSRS (ALL DONE - 30 files converted, 2 skipped)
+=======================================
+SKIP (2 files):
+  IPSRSVerifikasiPenerimaan.java (HTML-only/LoadHTML)
+  IPSRSSuratPemesanan.java       (opens DlgCetak dialog, no JTable)
+
+=======================================
+INVENTARIS (ALL DONE - 24 files converted)
+=======================================
+
+=======================================
+REKAMMEDIS (NEW - ~153 files need Pilihan Cetak)
+=======================================
+Note: These files have BtnPrintActionPerformed + MyReportqry but no Pilihan Cetak yet.
+      22 files already converted. Many are patient form files (penilaian, skrining, checklist).
+      Some may not have a JTable for non-Jasper exports - verify per file.
+
+Already converted (22 files):
+  RMCatatanPengkajianPaskaOperasi.java
+  RMChecklistKesiapanAnestesi.java
+  RMDataCatatanCairanHemodialisa.java
+  RMDataCatatanObservasiHemodialisa.java
+  RMDataMonitoringReaksiTranfusi.java
+  RMEdukasiPasienKeluargaRawatJalan.java
+  RMLayananProgramKFR.java
+  RMLaporanPemantauanAnastesi.java
+  RMMCU.java
+  RMPenilaianAwalKeperawatanKebidananRanap.java
+  RMPenilaianAwalKeperawatanRanap.java
+  RMPenilaianAwalKeperawatanRanapNeonatus.java
+  RMPenilaianAwalMedisRalanPsikiatrik.java
+  RMPenilaianAwalMedisRanapPsikiatrik.java
+  RMPerencanaanPemulangan.java
+  RMSkriningFrailtySyndrome.java
+  RMSkriningHipertensi.java
+  RMSkriningIndraPendengaran.java
+  RMSkriningKesehatanGigiMulutDewasa.java
+  RMSkriningKesehatanGigiMulutLansia.java
+  RMSkriningKesehatanPenglihatan.java
+  RMSkriningRisikoKankerServiks.java
+
+Need Pilihan Cetak (~153 files - have MyReportqry, no Pilihan Cetak yet):
+src/rekammedis/RMCatatanADIMEGizi.java
+src/rekammedis/RMCatatanAnastesiSedasi.java
+src/rekammedis/RMCatatanPersalinan.java
+src/rekammedis/RMCariRekonsiliasiObat.java
+src/rekammedis/RMChecklistKriteriaKeluarHCU.java
+src/rekammedis/RMChecklistKriteriaKeluarICU.java
+src/rekammedis/RMChecklistKriteriaKeluarNICU.java
+src/rekammedis/RMChecklistKriteriaKeluarPICU.java
+src/rekammedis/RMChecklistKriteriaMasukHCU.java
+src/rekammedis/RMChecklistKriteriaMasukICU.java
+src/rekammedis/RMChecklistKriteriaMasukNICU.java
+src/rekammedis/RMChecklistKriteriaMasukPICU.java
+src/rekammedis/RMChecklistPemberianFibrinolitik.java
+src/rekammedis/RMChecklistPostOperasi.java
+src/rekammedis/RMChecklistPreOperasi.java
+src/rekammedis/RMDataAsuhanGizi.java
+src/rekammedis/RMDataCatatanCekGDS.java
+src/rekammedis/RMDataCatatanKeperawatanRalan.java
+src/rekammedis/RMDataCatatanKeperawatanRanap.java
+src/rekammedis/RMDataCatatanKeseimbanganCairan.java
+src/rekammedis/RMDataCatatanObservasiBayi.java
+src/rekammedis/RMDataCatatanObservasiCHBP.java
+src/rekammedis/RMDataCatatanObservasiIGD.java
+src/rekammedis/RMDataCatatanObservasiInduksiPersalinan.java
+src/rekammedis/RMDataCatatanObservasiRanap.java
+src/rekammedis/RMDataCatatanObservasiRanapKebidanan.java
+src/rekammedis/RMDataCatatanObservasiRanapPostPartum.java
+src/rekammedis/RMDataCatatanObservasiRestrainNonFarmakologi.java
+src/rekammedis/RMDataCatatanObservasiVentilator.java
+src/rekammedis/RMDataFollowUpDBD.java
+src/rekammedis/RMDataMonitoringAsuhanGizi.java
+src/rekammedis/RMDataResumePasien.java
+src/rekammedis/RMDataResumePasienRanap.java
+src/rekammedis/RMDataSkriningGiziKehamilan.java
+src/rekammedis/RMDataSkriningGiziLanjut.java
+src/rekammedis/RMDeteksiDiniCorona.java
+src/rekammedis/RMHasilEndoskopiFaringLaring.java
+src/rekammedis/RMHasilEndoskopiHidung.java
+src/rekammedis/RMHasilEndoskopiTelinga.java
+src/rekammedis/RMHasilPemeriksaanEKG.java
+src/rekammedis/RMHasilPemeriksaanEcho.java
+src/rekammedis/RMHasilPemeriksaanEchoPediatrik.java
+src/rekammedis/RMHasilPemeriksaanOCT.java
+src/rekammedis/RMHasilPemeriksaanSlitLamp.java
+src/rekammedis/RMHasilPemeriksaanTreadmill.java
+src/rekammedis/RMHasilPemeriksaanUSG.java
+src/rekammedis/RMHasilPemeriksaanUSGGynecologi.java
+src/rekammedis/RMHasilPemeriksaanUSGNeonatus.java
+src/rekammedis/RMHasilPemeriksaanUSGUrologi.java
+src/rekammedis/RMHasilTindakanESWL.java
+src/rekammedis/RMHemodialisa.java
+src/rekammedis/RMKonselingFarmasi.java
+src/rekammedis/RMLaporanTindakan.java
+src/rekammedis/RMMonitoringAldrettePascaAnestesi.java
+src/rekammedis/RMMonitoringBromagePascaAnestesi.java
+src/rekammedis/RMMonitoringStewardPascaAnestesi.java
+src/rekammedis/RMPelaksanaanInformasiEdukasi.java
+src/rekammedis/RMPemantauanEWSD.java
+src/rekammedis/RMPemantauanEWSNeonatus.java
+src/rekammedis/RMPemantauanMEOWS.java
+src/rekammedis/RMPemantauanPEWS.java
+src/rekammedis/RMPenatalaksanaanTerapiOkupasi.java
+src/rekammedis/RMPengkajianRestrain.java
+src/rekammedis/RMPenilaianAwalKeperawatanBayiAnak.java
+src/rekammedis/RMPenilaianAwalKeperawatanGigi.java
+src/rekammedis/RMPenilaianAwalKeperawatanIGD.java
+src/rekammedis/RMPenilaianAwalKeperawatanKebidanan.java
+src/rekammedis/RMPenilaianAwalKeperawatanMata.java
+src/rekammedis/RMPenilaianAwalKeperawatanRalan.java
+src/rekammedis/RMPenilaianAwalKeperawatanRalanGeriatri.java
+src/rekammedis/RMPenilaianAwalKeperawatanRalanPsikiatri.java
+src/rekammedis/RMPenilaianAwalMedisHemodialisa.java
+src/rekammedis/RMPenilaianAwalMedisIGD.java
+src/rekammedis/RMPenilaianAwalMedisIGDPsikiatri.java
+src/rekammedis/RMPenilaianAwalMedisRalanAnak.java
+src/rekammedis/RMPenilaianAwalMedisRalanBedah.java
+src/rekammedis/RMPenilaianAwalMedisRalanBedahMulut.java
+src/rekammedis/RMPenilaianAwalMedisRalanDewasa.java
+src/rekammedis/RMPenilaianAwalMedisRalanGeriatri.java
+src/rekammedis/RMPenilaianAwalMedisRalanJantung.java
+src/rekammedis/RMPenilaianAwalMedisRalanKandungan.java
+src/rekammedis/RMPenilaianAwalMedisRalanKulitDanKelamin.java
+src/rekammedis/RMPenilaianAwalMedisRalanMata.java
+src/rekammedis/RMPenilaianAwalMedisRalanNeurologi.java
+src/rekammedis/RMPenilaianAwalMedisRalanOrthopedi.java
+src/rekammedis/RMPenilaianAwalMedisRalanParu.java
+src/rekammedis/RMPenilaianAwalMedisRalanPenyakitDalam.java
+src/rekammedis/RMPenilaianAwalMedisRalanRehabMedik.java
+src/rekammedis/RMPenilaianAwalMedisRalanTHT.java
+src/rekammedis/RMPenilaianAwalMedisRalanUrologi.java
+src/rekammedis/RMPenilaianAwalMedisRanapDewasa.java
+src/rekammedis/RMPenilaianAwalMedisRanapJantung.java
+src/rekammedis/RMPenilaianAwalMedisRanapKandungan.java
+src/rekammedis/RMPenilaianAwalMedisRanapNeonatus.java
+src/rekammedis/RMPenilaianBayiBaruLahir.java
+src/rekammedis/RMPenilaianDerajatDehidrasi.java
+src/rekammedis/RMPenilaianFisioterapi.java
+src/rekammedis/RMPenilaianKorbanKekerasan.java
+src/rekammedis/RMPenilaianLanjutanRisikoJatuhAnak.java
+src/rekammedis/RMPenilaianLanjutanRisikoJatuhDewasa.java
+src/rekammedis/RMPenilaianLanjutanRisikoJatuhGeriatri.java
+src/rekammedis/RMPenilaianLanjutanRisikoJatuhLansia.java
+src/rekammedis/RMPenilaianLanjutanRisikoJatuhPsikiatri.java
+src/rekammedis/RMPenilaianLanjutanSkriningFungsional.java
+src/rekammedis/RMPenilaianLevelKecemasanRanapAnak.java
+src/rekammedis/RMPenilaianPasienImunitasRendah.java
+src/rekammedis/RMPenilaianPasienKeracunan.java
+src/rekammedis/RMPenilaianPasienPenyakitMenular.java
+src/rekammedis/RMPenilaianPasienTerminal.java
+src/rekammedis/RMPenilaianPreAnastesi.java
+src/rekammedis/RMPenilaianPreInduksi.java
+src/rekammedis/RMPenilaianPreOperasi.java
+src/rekammedis/RMPenilaianPsikologi.java
+src/rekammedis/RMPenilaianPsikologiKlinis.java
+src/rekammedis/RMPenilaianRisikoDekubitus.java
+src/rekammedis/RMPenilaianRisikoJatuhNeonatus.java
+src/rekammedis/RMPenilaianTambahanBunuhDiri.java
+src/rekammedis/RMPenilaianTambahanGeriatri.java
+src/rekammedis/RMPenilaianTambahanMelarikanDiri.java
+src/rekammedis/RMPenilaianTambahanPerilakuKekerasan.java
+src/rekammedis/RMPenilaianTerapiWicara.java
+src/rekammedis/RMPenilaianUlangNyeri.java
+src/rekammedis/RMSKriningRawatJalan.java
+src/rekammedis/RMSignInSebelumAnastesi.java
+src/rekammedis/RMSignOutSebelumMenutupLuka.java
+src/rekammedis/RMSkriningAdiksiNikotin.java
+src/rekammedis/RMSkriningAnemia.java
+src/rekammedis/RMSkriningCURB65.java
+src/rekammedis/RMSkriningDiabetesMelitus.java
+src/rekammedis/RMSkriningInstrumenACRS.java
+src/rekammedis/RMSkriningInstrumenAMT.java
+src/rekammedis/RMSkriningInstrumenESAT.java
+src/rekammedis/RMSkriningInstrumenMentalEmosional.java
+src/rekammedis/RMSkriningInstrumenSDQ.java
+src/rekammedis/RMSkriningKankerKolorektal.java
+src/rekammedis/RMSkriningKekerasanPadaPerempuan.java
+src/rekammedis/RMSkriningKesehatanGigiMulutBalita.java
+src/rekammedis/RMSkriningKesehatanGigiMulutRemaja.java
+src/rekammedis/RMSkriningMPP.java
+src/rekammedis/RMSkriningMPPFormA.java
+src/rekammedis/RMSkriningMPPFormB.java
+src/rekammedis/RMSkriningMerokokUsiaSekolahRemaja.java
+src/rekammedis/RMSkriningNutrisiAnak.java
+src/rekammedis/RMSkriningNutrisiDewasa.java
+src/rekammedis/RMSkriningNutrisiLansia.java
+src/rekammedis/RMSkriningObesitas.java
+src/rekammedis/RMSkriningPUMA.java
+src/rekammedis/RMSkriningPneumoniaSeverityIndex.java
+src/rekammedis/RMSkriningRisikoKankerParu.java
+src/rekammedis/RMSkriningRisikoKankerPayudara.java
+src/rekammedis/RMSkriningSRQ.java
+src/rekammedis/RMSkriningTBC.java
+src/rekammedis/RMSkriningTalasemia.java
+src/rekammedis/RMTimeOutSebelumInsisi.java
+src/rekammedis/RMTriaseIGD.java
+src/rekammedis/RMUjiFungsiKFR.java
+
+=======================================
+SIMRSKHANZA (30 files need Pilihan Cetak, 2 also need ceksukses)
+=======================================
+
+Need both Pilihan Cetak AND ceksukses (2 files):
+src/simrskhanza/DlgPintuSMC.java
+src/simrskhanza/DlgSetPintuSMC.java
+
+Need Pilihan Cetak only (28 files, already have ceksukses):
+src/simrskhanza/DlgReg.java
+src/simrskhanza/DlgKasirRalan.java
+src/simrskhanza/DlgKamarInap.java
+src/simrskhanza/DlgIGD.java
+src/simrskhanza/DlgRujukMasuk.java
+src/simrskhanza/DlgRujuk.java
+src/simrskhanza/DlgRawatJalan.java
+src/simrskhanza/DlgRawatInap.java
+src/simrskhanza/DlgPoli.java
+src/simrskhanza/DlgPerusahaan.java
+src/simrskhanza/DlgPeriksaRadiologi.java
+src/simrskhanza/DlgPeriksaLaboratoriumPA.java
+src/simrskhanza/DlgPeriksaLaboratoriumMB.java
+src/simrskhanza/DlgPeriksaLaboratorium.java
+src/simrskhanza/DlgPemberianDiet.java
+src/simrskhanza/DlgPenanggungJawab.java
+src/simrskhanza/DlgPasienMati.java
+src/simrskhanza/DlgPasien.java
+src/simrskhanza/DlgObatOperasi.java
+src/simrskhanza/DlgLhtCatatanPasien.java
+src/simrskhanza/DlgIKBBayi.java
+src/simrskhanza/DlgDpjp.java
+src/simrskhanza/DlgCariTagihanOperasi.java
+src/simrskhanza/DlgCariPeriksaRadiologi.java
+src/simrskhanza/DlgCariPeriksaLabPA.java
+src/simrskhanza/DlgCariPeriksaLabMB.java
+src/simrskhanza/DlgCariPeriksaLab.java
+src/simrskhanza/DlgBangsal.java
+src/simrskhanza/DlgPilihanCetakDokumen.java
+
+=======================================
+INFORMASI (0 files - no BtnPrintActionPerformed)
+=======================================
+
+=======================================
+LAPORAN (95 files need Pilihan Cetak, 1 also needs ceksukses)
+=======================================
+
+Need both Pilihan Cetak AND ceksukses (1 file):
+src/laporan/DlgDiagnosaPenyakit.java
+
+Need Pilihan Cetak only (94 files, already have ceksukses):
+src/laporan/frmPengaduan.java
+src/laporan/LaporanSisaDietPasien.java
+src/laporan/LaporanRekapSkriningPernapasanRalanPerTahun.java
+src/laporan/LaporanRekapKunjunganRuangPerTahun.java
+src/laporan/LaporanRegistrasiPoliPerTanggal.java
+src/laporan/DlgSirkulasiBerkas.java
+src/laporan/DlgSensusHarianRalan.java
+src/laporan/DlgSensusHarianPoli.java
+src/laporan/DlgRl38.java
+src/laporan/DlgRl37.java
+src/laporan/DlgRl36.java
+src/laporan/DlgRl34.java
+src/laporan/DlgRl33.java
+src/laporan/DlgRl32.java
+src/laporan/DlgRekapRadiologiPerTahun.java
+src/laporan/DlgRekapMutasiBerkas.java
+src/laporan/DlgRekapLabPerTahun.java
+src/laporan/DlgRanapPerRuang.java
+src/laporan/DlgRL4B.java
+src/laporan/DlgRL4ASebab.java
+src/laporan/DlgRL4A.java
+src/laporan/DlgRL13KetersediaanTempatTidur.java
+src/laporan/DlgPoliAsalPasienRanap.java
+src/laporan/DlgPerujukRadiologiPerTahun.java
+src/laporan/DlgPerujukLabPerTahun.java
+src/laporan/DlgPenyakitRanapPerCaraBayar.java
+src/laporan/DlgPenyiapanRM.java
+src/laporan/DlgPenyakit.java
+src/laporan/DlgPembatalanPeriksaPerDokter.java
+src/laporan/DlgPelayananRalan.java
+src/laporan/DlgPelayananRadiologi.java
+src/laporan/DlgPelayananPoli.java
+src/laporan/DlgPelayananOperasi.java
+src/laporan/DlgPelayananLabPA.java
+src/laporan/DlgPelayananLabMB.java
+src/laporan/DlgPelayananLab.java
+src/laporan/DlgPelayananCSSD.java
+src/laporan/DlgPelayananApotek.java
+src/laporan/DlgOperasiPerBulan.java
+src/laporan/DlgLaporanPenyakitTNI.java
+src/laporan/DlgLaporanPenyakitPolri.java
+src/laporan/DlgLamaPelayananPasien.java
+src/laporan/DlgKunjunganRanap.java
+src/laporan/DlgKunjunganRadRanap.java
+src/laporan/DlgKunjunganRadRalan.java
+src/laporan/DlgKunjunganLabRanap.java
+src/laporan/DlgKunjunganLabRalan.java
+src/laporan/DlgKtgPenyakit.java
+src/laporan/DlgKlasifikasiPasienPerBangsal.java
+src/laporan/DlgJumlahPorsiDiet.java
+src/laporan/DlgJumlahPengunjungRalanTNI.java
+src/laporan/DlgJumlahMacamDiet.java
+src/laporan/DlgJumlahPengunjungRalanPolri.java
+src/laporan/DlgICD9.java
+src/laporan/DlgInsidenKeselamatan.java
+src/laporan/DlgHarianKlasifikasiPasienRanap.java
+src/laporan/DlgHarianHAIs2.java
+src/laporan/DlgHarianHAIs.java
+src/laporan/DlgHAIsPerBangsal.java
+src/laporan/DlgFrekuensiPenyakitRanap.java
+src/laporan/DlgFrekuensiPenyakitRalan.java
+src/laporan/DlgDosisRadiologi.java
+src/laporan/DlgDokterAsalPasienRanap.java
+src/laporan/DlgDkkSurveilansRanap.java
+src/laporan/DlgDkkSurveilansRalan.java
+src/laporan/DlgDkkSurveilansPD3I.java
+src/laporan/DlgDkkPenyakitTidakMenularRanap.java
+src/laporan/DlgDkkPenyakitTidakMenularRalan.java
+src/laporan/DlgDkkPenyakitMenularRanap.java
+src/laporan/DlgDkkPenyakitMenularRalan.java
+src/laporan/DlgDataSasaranUsiaProduktif.java
+src/laporan/DlgDataSasaranUsiaLansia.java
+src/laporan/DlgDataKlasifikasiPasienRanap.java
+src/laporan/DlgDataInsidenKeselamatan.java
+src/laporan/DlgDataHAIs.java
+src/laporan/DlgDaftarPasienRanapTNI.java
+src/laporan/DlgDaftarPasienRanapPolri.java
+src/laporan/DlgCekEntryRalan.java
+src/laporan/DlgDaftarPasienRanap.java
+src/laporan/DlgBulananKlasifikasiPasienRanap.java
+src/laporan/DlgAnggotaPolriDirawat.java
+src/laporan/DlgAnggotaMiliterDirawat.java
+src/laporan/LaporanKedatanganPasienPerJam.java
+src/laporan/DlgRekapPermintaanDiet.java
+src/laporan/DlgRekapKunjungan.java
+src/laporan/DlgRL4BSebab.java
+src/laporan/DlgPemeriksaanFisikRalanPerPenyakit.java
+src/laporan/DlgKIPPasienRanap.java
+src/laporan/DlgKIPPasienRalan.java
+src/laporan/DlgHitungBOR.java
+src/laporan/DlgHitungALOS.java
+src/laporan/DlgDemografiUmurKunjungan.java
+src/laporan/DlgBulananHAIs.java
+src/laporan/LaporanTahunanPAM.java
+src/laporan/LaporanTahunanIRJ.java
+src/laporan/LaporanTahunanIGD.java
+src/laporan/LaporanBulananIRJ.java
+
+=======================================
+BRIDGING (134 files need Pilihan Cetak, 47 also need ceksukses)
+=======================================
+
+Need both Pilihan Cetak AND ceksukses (47 files):
+src/bridging/ApotekBPJSDaftarPelayananObat2SMC.java
+src/bridging/ApotekBPJSRiwayatPelayananObatSMC.java
+src/bridging/ApotekBPJSRiwayatPelayananResepSMC.java
+src/bridging/BPJSAntreanPerKodebooking.java
+src/bridging/BPJSKompilasiBerkasKlaim.java
+src/bridging/BPJSNik.java
+src/bridging/BPJSPeserta.java
+src/bridging/CoronaPasien.java
+src/bridging/INACBGPerawatanCorona.java
+src/bridging/InhealthCekReferensiFaskes.java
+src/bridging/InhealthCekReferensiPoli.java
+src/bridging/InhealthTagihan.java
+src/bridging/InhealthTindakanLaborat.java
+src/bridging/InhealthTindakanOperasi.java
+src/bridging/MobileJKNFKTPReferensiDokter.java
+src/bridging/MobileJKNFKTPReferensiPoli.java
+src/bridging/PCareCekFaskesAlihRawat.java
+src/bridging/PCareCekFaskesSubspesialis.java
+src/bridging/PCareCekFaskesThalasemia.java
+src/bridging/PCareCekKartu.java
+src/bridging/PCareCekReferensiAlergi.java
+src/bridging/PCareCekReferensiDokter.java
+src/bridging/PCareCekReferensiKesadaran.java
+src/bridging/PCareCekReferensiKhusus.java
+src/bridging/PCareCekReferensiObat.java
+src/bridging/PCareCekReferensiPenyakit.java
+src/bridging/PCareCekReferensiPoli.java
+src/bridging/PCareCekReferensiPrognosa.java
+src/bridging/PCareCekReferensiProvider.java
+src/bridging/PCareCekReferensiSarana.java
+src/bridging/PCareCekReferensiSpesialis.java
+src/bridging/PCareCekReferensiStatusPulang.java
+src/bridging/PCareCekReferensiSubspesialis.java
+src/bridging/PCareCekReferensiTindakan.java
+src/bridging/PCareCekRujukan.java
+src/bridging/PCareClubProlanis.java
+src/bridging/PCareNIK.java
+src/bridging/PCarePeserta.java
+src/bridging/SatuSehatMapingObatAlkes2.java
+src/bridging/SatuSehatReferensiPasien.java
+src/bridging/SatuSehatReferensiPraktisi.java
+src/bridging/SisruteCekReferensiAlasanRujuk.java
+src/bridging/SisruteCekReferensiDiagnosa.java
+src/bridging/SisruteCekReferensiFaskes.java
+src/bridging/SisruteCekReferensiPelayanan.java
+src/bridging/SisruteRujukanKeluar.java
+src/bridging/SisruteRujukanMasukan.java
+
+Need Pilihan Cetak only (87 files, already have ceksukses):
+src/bridging/ApotekBPJSCekReferensiSettingPPK.java
+src/bridging/BPJSCekDataSEPInternal.java
+src/bridging/BPJSCekDetailSEP.java
+src/bridging/BPJSCekDetailSEP2.java
+src/bridging/BPJSCekKartu.java
+src/bridging/BPJSCekKlaimJasaRaharja.java
+src/bridging/BPJSCekNIK2.java
+src/bridging/BPJSCekNoRujukanPCare.java
+src/bridging/BPJSCekNoRujukanRS.java
+src/bridging/BPJSCekReferensiDiagnosaPRB.java
+src/bridging/BPJSCekReferensiDokter.java
+src/bridging/BPJSCekReferensiDokterDPJP.java
+src/bridging/BPJSCekReferensiDokterHFIS.java
+src/bridging/BPJSCekReferensiFaskes.java
+src/bridging/BPJSCekReferensiJadwalHFIS.java
+src/bridging/BPJSCekReferensiObatPRB.java
+src/bridging/BPJSCekReferensiPenyakit.java
+src/bridging/BPJSCekReferensiPoli.java
+src/bridging/BPJSCekReferensiPoliHFIS.java
+src/bridging/BPJSCekReferensiProsedur.java
+src/bridging/BPJSCekRiwayatRujukanPCare.java
+src/bridging/BPJSCekRiwayatRujukanRS.java
+src/bridging/BPJSCekRujukanKartuPCare.java
+src/bridging/BPJSCekRujukanKartuRS.java
+src/bridging/BPJSCekSKDP.java
+src/bridging/BPJSMapingDokterDPJP.java
+src/bridging/BPJSMapingPoli.java
+src/bridging/BPJSMonitoringKlaim.java
+src/bridging/BPJSPotensiPRB.java
+src/bridging/BPJSProgramPRB.java
+src/bridging/BPJSRujukanKeluar.java
+src/bridging/BPJSRujukanKhusus.java
+src/bridging/BPJSSPRI.java
+src/bridging/BPJSSuratKontrol.java
+src/bridging/DlgDataTB.java
+src/bridging/InhealthCekEligibilitas.java
+src/bridging/InhealthDataSJP.java
+src/bridging/InhealthMapingPoli.java
+src/bridging/InhealthTindakanRadiologi.java
+src/bridging/InhealthTindakanRalan.java
+src/bridging/InhealthTindakanRanap.java
+src/bridging/MandiriKodeTransaksiTujuanTransfer.java
+src/bridging/MobileJKNPembatalanPendaftaran.java
+src/bridging/MobileJKNReferensiPendaftaran.java
+src/bridging/PCareDataPemberianObat.java
+src/bridging/PCareDataPemberianTindakan.java
+src/bridging/PCareDataPendaftaran.java
+src/bridging/PCareKegiatanKelompok.java
+src/bridging/PCareMapingDokter.java
+src/bridging/PCareMapingObat.java
+src/bridging/PCareMapingPoli.java
+src/bridging/PCareMapingTindakanRalan.java
+src/bridging/PCareMapingTindakanRanap.java
+src/bridging/PCarePesertaKegiatanKelompok.java
+src/bridging/ReklasifikasiRalan.java
+src/bridging/ReklasifikasiRanap.java
+src/bridging/SatuSehatKirimCarePlan.java
+src/bridging/SatuSehatKirimClinicalImpression.java
+src/bridging/SatuSehatKirimCondition.java
+src/bridging/SatuSehatKirimDiagnosticReportLabMB.java
+src/bridging/SatuSehatKirimDiagnosticReportLabPK.java
+src/bridging/SatuSehatKirimDiagnosticReportRadiologi.java
+src/bridging/SatuSehatKirimDiet.java
+src/bridging/SatuSehatKirimEncounter.java
+src/bridging/SatuSehatKirimMedication.java
+src/bridging/SatuSehatKirimMedicationDispense.java
+src/bridging/SatuSehatKirimMedicationRequest.java
+src/bridging/SatuSehatKirimMedicationStatement.java
+src/bridging/SatuSehatKirimObservationLabMB.java
+src/bridging/SatuSehatKirimObservationLabPK.java
+src/bridging/SatuSehatKirimObservationRadiologi.java
+src/bridging/SatuSehatKirimObservationTTV.java
+src/bridging/SatuSehatKirimProcedure.java
+src/bridging/SatuSehatKirimServiceRequestLabMB.java
+src/bridging/SatuSehatKirimServiceRequestLabPK.java
+src/bridging/SatuSehatKirimServiceRequestRadiologi.java
+src/bridging/SatuSehatKirimSpecimenLabMB.java
+src/bridging/SatuSehatKirimSpecimenLabPK.java
+src/bridging/SatuSehatKirimSpecimenRadiologi.java
+src/bridging/SatuSehatKirimVaksin.java
+src/bridging/SatuSehatMapingLaborat.java
+src/bridging/SatuSehatMapingLokasi.java
+src/bridging/SatuSehatMapingObatAlkes.java
+src/bridging/SatuSehatMapingOrganisasi.java
+src/bridging/SatuSehatMapingRadiologi.java
+src/bridging/SatuSehatMapingVaksin.java
+src/bridging/SiranapKetersediaanKamar.java
+
+=======================================
+SUMMARY
+=======================================
+                  Need Pilihan Cetak  |  Also need ceksukses
+keuangan:               0 (DONE)     |         0
+ipsrs:                  0 (DONE)     |         0
+inventaris:             0 (DONE)     |         0
+rekammedis:           153            |         ? (needs survey)
+simrskhanza:           30            |         2
+informasi:              0 (N/A)      |         0
+laporan:               95            |         1
+bridging:             134            |        47
+-----------------------------------------
+TOTAL:                412            |        50+

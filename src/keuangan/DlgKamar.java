@@ -22,6 +22,9 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -240,7 +243,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelGlass5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -258,7 +260,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelGlass5.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -276,7 +277,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelGlass5.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -294,7 +294,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelGlass5.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -312,7 +311,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelGlass5.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -330,7 +328,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelGlass5.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -371,7 +368,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelGlass6.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('3');
         BtnCari.setToolTipText("Alt+3");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -388,7 +384,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelGlass6.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('4');
         BtnAll.setToolTipText("Alt+4");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -447,7 +442,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelCari.add(BangsalCari);
 
         btnKamarCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnKamarCari.setMnemonic('2');
         btnKamarCari.setToolTipText("Alt+2");
         btnKamarCari.setName("btnKamarCari"); // NOI18N
         btnKamarCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -486,7 +480,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         panelCariKategori.add(panelCari, java.awt.BorderLayout.CENTER);
 
         ChkCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
-        ChkCari.setMnemonic('I');
         ChkCari.setText(".: Pencarian Data");
         ChkCari.setToolTipText("Alt+I");
         ChkCari.setBorderPainted(true);
@@ -499,6 +492,11 @@ public final class DlgKamar extends javax.swing.JDialog {
         ChkCari.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/145.png"))); // NOI18N
         ChkCari.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
         ChkCari.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/143.png"))); // NOI18N
+        ChkCari.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                ChkCariItemStateChanged(evt);
+            }
+        });
         ChkCari.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ChkCariActionPerformed(evt);
@@ -573,7 +571,6 @@ public final class DlgKamar extends javax.swing.JDialog {
         CmbStatus.setBounds(494, 12, 125, 23);
 
         btnKamar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnKamar.setMnemonic('1');
         btnKamar.setToolTipText("Alt+1");
         btnKamar.setName("btnKamar"); // NOI18N
         btnKamar.addActionListener(new java.awt.event.ActionListener() {
@@ -739,60 +736,66 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if((TCari.getText().trim().equals(""))&&(panelCari.isVisible()==false)){
-                Valid.MyReportqry("rptKamar.jasper","report","::[ Data Nomor Kamar ]::",
-                        "select kd_kamar,kamar.kd_bangsal,bangsal.nm_bangsal, "+
-                               "kamar.kelas,trf_kamar,kamar.status "+
-                               "from bangsal,kamar "+
-                               "where kamar.statusdata='1' and kamar.kd_bangsal=bangsal.kd_bangsal "+
-                               "order by kd_kamar",param);
-            }else if((! TCari.getText().trim().equals(""))&&(panelCari.isVisible()==false)){
-                String sql="kamar.statusdata='1' and kamar.kd_bangsal=bangsal.kd_bangsal ";
-                Valid.MyReportqry("rptKamar.jasper","report","::[ Data Nomor Kamar ]::","select kd_kamar,kamar.kd_bangsal,bangsal.nm_bangsal, "+
-                               "kamar.kelas,trf_kamar,kamar.status "+
-                               "from bangsal,kamar where  "+
-                               sql+"and kd_kamar like '%"+TCari.getText().trim()+"%' or "+
-                               sql+"and kamar.kd_bangsal like '%"+TCari.getText().trim()+"%' or "+
-                               sql+"and bangsal.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
-                               sql+"and kamar.kelas like '%"+TCari.getText().trim()+"%' or "+
-                               sql+"and trf_kamar like '%"+TCari.getText().trim()+"%' or "+
-                               sql+"and kamar.status like '%"+TCari.getText().trim()+"%' "+
-                               "order by kd_kamar ",param);
-            }else if((TCari.getText().trim().equals(""))&&(panelCari.isVisible()==true)&&(CmbCrIsi.getItemCount()>0)){
-                String key="and kamar.statusdata='1'";
-                if(BangsalCari.getText().equals("")&&CmbCrIsi.getSelectedItem().toString().equals(" ")){
-                     key="and kamar.statusdata='1'";
-                }else if((! BangsalCari.getText().equals(""))&&CmbCrIsi.getSelectedItem().toString().equals(" ")){
-                     key="and kamar.statusdata='1' and bangsal.nm_bangsal like '%"+BangsalCari.getText().trim()+"%' ";
-                }else if((! BangsalCari.getText().equals(""))&&(! CmbCrIsi.getSelectedItem().toString().equals(" "))){
-                     key="and kamar.statusdata='1' and bangsal.nm_bangsal like '%"+BangsalCari.getText().trim()+"%' "+
-                         "and status like '%"+CmbCrIsi.getSelectedItem().toString().trim()+"%' ";
-                }else if((BangsalCari.getText().equals(""))&&(! CmbCrIsi.getSelectedItem().toString().equals(" "))){
-                     key="and kamar.statusdata='1' and kamar.status like '%"+CmbCrIsi.getSelectedItem().toString().trim()+"%' ";
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
                 }
-                Valid.MyReportqry("rptKamar.jasper","report","::[ Data Nomor Kamar ]::","select kd_kamar,kamar.kd_bangsal,bangsal.nm_bangsal, "+
-                               "kamar.kelas,trf_kamar,kamar.status "+
-                               "from bangsal,kamar "+
-                               "where kamar.kd_bangsal=bangsal.kd_bangsal "+key+
-                               " order by kd_kamar",param);
-            }
-        }
 
-        this.setCursor(Cursor.getDefaultCursor());
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("Kamar.html", "Data Nomor Kamar", tbKamar);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("Kamar.wps", "Data Nomor Kamar", tbKamar);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("Kamar.csv", tbKamar);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("Kamar.xlsx", tbKamar);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        if (panelCari.isVisible()) {
+                            Valid.reportSmc("rptKamar.jasper", "report", "::[ Data Nomor Kamar ]::", param, "select kamar.kd_kamar, kamar.kd_bangsal, bangsal.nm_bangsal, kamar.kelas, kamar.trf_kamar, " +
+                                "kamar.status from kamar inner join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where kamar.statusdata = '1' and (if(trim(?) = '', 1 = 1, kamar.kd_bangsal = ?)) and " +
+                                "(if(trim(?) = '', 1 = 1, kamar.status = ?)) order by kamar.kd_kamar", kdbangsalcari.getText().trim(), kdbangsalcari.getText(), CmbCrIsi.getSelectedItem().toString().trim(),
+                                CmbCrIsi.getSelectedItem().toString());
+                        } else {
+                            Valid.reportSmc("rptKamar.jasper", "report", "::[ Data Nomor Kamar ]::", param, "select kamar.kd_kamar, kamar.kd_bangsal, bangsal.nm_bangsal, kamar.kelas, kamar.trf_kamar, " +
+                                "kamar.status from kamar inner join bangsal on kamar.kd_bangsal = bangsal.kd_bangsal where kamar.statusdata = '1' and (if(trim(?) = '', 1 = 1, kamar.kd_kamar like ? or " +
+                                "kamar.kd_bangsal like ? or bangsal.nm_bangsal like ? or kamar.kelas like ? or kamar.trf_kamar like ? or kamar.status like ?)) order by kamar.kd_kamar", TCari.getText().trim(),
+                                "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%",
+                                "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -848,23 +851,13 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_CmbCrIsiKeyPressed
 
     private void ChkCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkCariActionPerformed
-        if(ChkCari.isSelected()==true){
-            panelCari.setVisible(true);
-            TCari.setText("");
-            runBackground(() ->tampil());
-            posisi();
-        }else if(ChkCari.isSelected()==false){
-            panelCari.setVisible(false);
-            BtnCariActionPerformed(null);
-            posisi();
-        }
+
     }//GEN-LAST:event_ChkCariActionPerformed
 
     private void TCariKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyTyped
         if(ChkCari.isSelected()==true){
             ChkCari.setSelected(false);
-            panelCari.setVisible(false);
-            posisi();
+            ChkCariItemStateChanged(null);
         }
     }//GEN-LAST:event_TCariKeyTyped
 
@@ -950,7 +943,7 @@ public final class DlgKamar extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                load();
+                //load();
                 if(bangsal.getTable().getSelectedRow()!= -1){
                     kdbangsalcari.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
                     BangsalCari.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
@@ -975,7 +968,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKamarCariActionPerformed
 
     private void btnKamarCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnKamarCariKeyPressed
-   Valid.pindah(evt,kdbangsalcari,CmbCrIsi);
+        Valid.pindah(evt,kdbangsalcari,CmbCrIsi);
     }//GEN-LAST:event_btnKamarCariKeyPressed
 
     private void CmbCrIsiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbCrIsiItemStateChanged
@@ -1029,6 +1022,22 @@ public final class DlgKamar extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tbKamarKeyReleased
+
+    private void ChkCariItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ChkCariItemStateChanged
+        if(ChkCari.isSelected()==true){
+            panelCari.setVisible(true);
+            TCari.setText("");
+            runBackground(() ->tampil());
+            posisi();
+        }else if(ChkCari.isSelected()==false){
+            CmbCrIsi.setSelectedIndex(0);
+            BangsalCari.setText("");
+            kdbangsalcari.setText("");
+            panelCari.setVisible(false);
+            runBackground(() ->tampil());
+            posisi();
+        }
+    }//GEN-LAST:event_ChkCariItemStateChanged
 
     /**
     * @param args the command line arguments
@@ -1093,57 +1102,38 @@ public final class DlgKamar extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        try{
-            ps=koneksi.prepareStatement(
-                "select kamar.kd_kamar,kamar.kd_bangsal,bangsal.nm_bangsal,kamar.kelas,kamar.trf_kamar,kamar.status from bangsal inner join kamar on kamar.kd_bangsal=bangsal.kd_bangsal "+
-                "where kamar.statusdata='1' "+(BangsalCari.getText().trim().equals("")?"":"and kamar.kd_bangsal=? ")+(CmbCrIsi.getSelectedIndex()==0?"":"and kamar.status=? ")+
-                (TCari.getText().trim().equals("")?"":"and (kamar.kd_kamar like ? or kamar.kd_bangsal like ? or bangsal.nm_bangsal like ? or kamar.kelas like ? or kamar.trf_kamar like ? or "+
-                "kamar.status like ? ) ")+"order by bangsal.nm_bangsal"
-            );
-            try {
-                i=1;
-                if(!BangsalCari.getText().trim().equals("")){
-                    ps.setString(i,kdbangsalcari.getText().trim());
-                    i++;
-                }
-                if(CmbCrIsi.getSelectedIndex()>0){
-                    ps.setString(i,CmbCrIsi.getSelectedItem().toString().trim());
-                    i++;
-                }
-
-                if(!TCari.getText().trim().equals("")){
-                    ps.setString(i,"%"+TCari.getText().trim()+"%");
-                    i++;
-                    ps.setString(i,"%"+TCari.getText().trim()+"%");
-                    i++;
-                    ps.setString(i,"%"+TCari.getText().trim()+"%");
-                    i++;
-                    ps.setString(i,"%"+TCari.getText().trim()+"%");
-                    i++;
-                    ps.setString(i,"%"+TCari.getText().trim()+"%");
-                    i++;
-                    ps.setString(i,"%"+TCari.getText().trim()+"%");
-                }
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{
-                        false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getDouble(5),rs.getString(6)
+        try (PreparedStatement ps = koneksi.prepareStatement(
+            "select kamar.kd_kamar, kamar.kd_bangsal, bangsal.nm_bangsal, kamar.kelas, kamar.trf_kamar, kamar.status from bangsal inner join kamar on kamar.kd_bangsal = bangsal.kd_bangsal " +
+            "where kamar.statusdata = '1' " + (kdbangsalcari.getText().isBlank() ? "" : "and kamar.kd_bangsal = ? ") + (CmbCrIsi.getSelectedIndex() == 0 ? "" : "and kamar.status = ? ") +
+            (TCari.getText().isBlank() ? "" : "and (kamar.kd_kamar like ? or kamar.kd_bangsal like ? or bangsal.nm_bangsal like ? or kamar.kelas like ? or kamar.trf_kamar like ? or " +
+            "kamar.status like ?) ") + "order by bangsal.nm_bangsal"
+        )) {
+            int p = 0;
+            if (!kdbangsalcari.getText().isBlank()) {
+                ps.setString(++p, kdbangsalcari.getText().trim());
+            }
+            if (CmbCrIsi.getSelectedIndex() > 0) {
+                ps.setString(++p, CmbCrIsi.getSelectedItem().toString());
+            }
+            if (!TCari.getText().isBlank()) {
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+                ps.setString(++p, "%" + TCari.getText().trim() + "%");
+            }
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    tabMode.addRow(new Object[] {
+                        false, rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getDouble(5), rs.getString(6)
                     });
                 }
-            } catch (Exception e) {
-                System.out.println("Notif Kamar : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
             }
-        }catch(Exception e){
-            System.out.println("Notifikasi : "+e);
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
-        LCount.setText(""+tabMode.getRowCount());
+        LCount.setText("" + tabMode.getRowCount());
     }
 
     public void tampil2() {
