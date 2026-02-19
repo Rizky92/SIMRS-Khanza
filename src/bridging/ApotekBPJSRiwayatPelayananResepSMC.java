@@ -282,25 +282,12 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
             //TCari.requestFocus();
         } else if (tabMode.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Sequel.queryu("delete from temporary where temp37='" + akses.getalamatip() + "'");
+            Sequel.deleteTemporary();
             for (int i = 0; i < tabMode.getRowCount(); i++) {
-                Sequel.menyimpan("temporary", "'" + i + "','" +
-                    tabMode.getValueAt(i, 0).toString() + "','" +
-                    tabMode.getValueAt(i, 1).toString() + "','" +
-                    tabMode.getValueAt(i, 2).toString() + "','" +
-                    tabMode.getValueAt(i, 3).toString() + "','" +
-                    tabMode.getValueAt(i, 4).toString() + "','" +
-                    tabMode.getValueAt(i, 5).toString() + "','" +
-                    tabMode.getValueAt(i, 6).toString() + "','" +
-                    tabMode.getValueAt(i, 7).toString() + "','" +
-                    tabMode.getValueAt(i, 8).toString() + "','" +
-                    tabMode.getValueAt(i, 9).toString() + "','" +
-                    tabMode.getValueAt(i, 10).toString() + "','" +
-                    tabMode.getValueAt(i, 11).toString() + "','" +
-                    tabMode.getValueAt(i, 12).toString() + "','" +
-                    tabMode.getValueAt(i, 14).toString() + "','" +
-                    tabMode.getValueAt(i, 15).toString() + "','" +
-                    tabMode.getValueAt(i, 16).toString() + "','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Daftar Pelayanan Obat Apotek BPJS");
+                Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
+                    (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6),
+                    (String) tabMode.getValueAt(i, 7), (String) tabMode.getValueAt(i, 8), (String) tabMode.getValueAt(i, 9), (String) tabMode.getValueAt(i, 10),
+                    (String) tabMode.getValueAt(i, 11));
             }
 
             Map<String, Object> param = new HashMap<>();
@@ -312,7 +299,7 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
             param.put("kontakrs", akses.getkontakrs());
             param.put("emailrs", akses.getemailrs());
             param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptApotekBPJSDaftarPelayananKlaim.jasper", "report", "[ Daftar Pelayanan Apotek BPJS ]", "select * from temporary where temporary.temp37='" + akses.getalamatip() + "' order by temporary.no", param);
+            Valid.reportTempSmc("rptRiwayatPelayananResepApotekBPJSSMC.jasper", "report", "::[ Data Riwayat Pelayanan Resep Apotek BPJS ]::", param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -399,9 +386,16 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
                 if (response.isArray()) {
                     for (JsonNode list : response) {
                         tabMode.addRow(new Object[] {
-                            list.path("NORESEP").asText(), list.path("NOAPOTIK").asText(), list.path("NOSEP_KUNJUNGAN").asText(), list.path("NOKARTU").asText(),
-                            list.path("NAMA").asText(), list.path("TGLENTRY").asText(), list.path("TGLRESEP").asText(), list.path("TGLPELRSP").asText(),
-                            Valid.SetAngka(list.path("BYTAGRSP").asDouble()), Valid.SetAngka(list.path("BYVERRSP").asDouble()),
+                            list.path("NORESEP").asText(),
+                            list.path("NOAPOTIK").asText(),
+                            list.path("NOSEP_KUNJUNGAN").asText(),
+                            list.path("NOKARTU").asText(),
+                            list.path("NAMA").asText(),
+                            list.path("TGLENTRY").asText(),
+                            list.path("TGLRESEP").asText(),
+                            list.path("TGLPELRSP").asText(),
+                            Valid.SetAngka(list.path("BYTAGRSP").asDouble()),
+                            Valid.SetAngka(list.path("BYVERRSP").asDouble()),
                             list.path("KDJNSOBAT").asText().replace("0", "0. Semua").replace("1", "1. Obat PRB").replace("2", "2. Obat Kronis Belum Stabil").replace("3", "3. Obat Kemoterapi"),
                             list.path("FASKESASAL").asText()
                         });
