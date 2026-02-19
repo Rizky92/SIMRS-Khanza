@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -63,7 +63,8 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
         setSize(628, 674);
 
         tabMode = new DefaultTableModel(null, new String[] {
-            "No. Resep", "No. SJP Apotek", "No. SEP", "No. Peserta", "Nama", "Tgl. Entry", "Tgl. Resep", "Tgl. Pelayanan", "BY TAG RESEP", "BY VER RESEP", "JENIS", "Asal Faskes"
+            "No. Resep", "No. SJP Apotek", "No. SEP", "No. Peserta", "Nama", "Tgl. Entry",
+            "Tgl. Resep", "Tgl. Pelayanan", "By Tag Resep", "By Ver Resep", "Jenis Resep", "Asal Faskes"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -80,11 +81,27 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
             if (i == 0) {
                 column.setPreferredWidth(80);
             } else if (i == 1) {
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(140);
             } else if (i == 2) {
+                column.setPreferredWidth(130);
+            } else if (i == 3) {
                 column.setPreferredWidth(110);
-            } else {
-                column.setPreferredWidth(150);
+            } else if (i == 4) {
+                column.setPreferredWidth(250);
+            } else if (i == 5) {
+                column.setPreferredWidth(80);
+            } else if (i == 6) {
+                column.setPreferredWidth(90);
+            } else if (i == 7) {
+                column.setPreferredWidth(110);
+            } else if (i == 8) {
+                column.setPreferredWidth(100);
+            } else if (i == 9) {
+                column.setPreferredWidth(100);
+            } else if (i == 10) {
+                column.setPreferredWidth(160);
+            } else if (i == 11) {
+                column.setPreferredWidth(120);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -120,7 +137,7 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
         setUndecorated(true);
         setResizable(false);
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Daftar Resep Apotek BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Riwayat Pelayanan Resep Apotek BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -162,7 +179,7 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
         panelGlass6.add(JenisTgl);
 
         TanggalAwal.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalAwal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-12-2025" }));
+        TanggalAwal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2026" }));
         TanggalAwal.setDisplayFormat("dd-MM-yyyy");
         TanggalAwal.setName("TanggalAwal"); // NOI18N
         TanggalAwal.setOpaque(false);
@@ -176,7 +193,7 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
         panelGlass6.add(jLabel21);
 
         TanggalAkhir.setForeground(new java.awt.Color(50, 70, 50));
-        TanggalAkhir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "29-12-2025" }));
+        TanggalAkhir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2026" }));
         TanggalAkhir.setDisplayFormat("dd-MM-yyyy");
         TanggalAkhir.setName("TanggalAkhir"); // NOI18N
         TanggalAkhir.setOpaque(false);
@@ -184,7 +201,6 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
         panelGlass6.add(TanggalAkhir);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('6');
         BtnCari.setToolTipText("Alt+6");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -201,7 +217,6 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
         panelGlass6.add(BtnCari);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+T");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -214,7 +229,6 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
         panelGlass6.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -387,7 +401,9 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
                         tabMode.addRow(new Object[] {
                             list.path("NORESEP").asText(), list.path("NOAPOTIK").asText(), list.path("NOSEP_KUNJUNGAN").asText(), list.path("NOKARTU").asText(),
                             list.path("NAMA").asText(), list.path("TGLENTRY").asText(), list.path("TGLRESEP").asText(), list.path("TGLPELRSP").asText(),
-                            list.path("BYTAGRSP").asText(), list.path("BYVERRSP").asText(), list.path("KDJNSOBAT").asText(), list.path("FASKESASAL").asText()
+                            Valid.SetAngka(list.path("BYTAGRSP").asDouble()), Valid.SetAngka(list.path("BYVERRSP").asDouble()),
+                            list.path("KDJNSOBAT").asText().replace("0", "0. Semua").replace("1", "1. Obat PRB").replace("2", "2. Obat Kronis Belum Stabil").replace("3", "3. Obat Kemoterapi"),
+                            list.path("FASKESASAL").asText()
                         });
                     }
                 }
