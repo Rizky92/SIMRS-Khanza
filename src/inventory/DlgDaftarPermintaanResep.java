@@ -87,7 +87,6 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private int jmlparsial=0,nilai_detik,resepbaru=0,i=0;
     private BackgroundMusic music;
     private boolean semua,ceksukses=false;
-    private String modelLembarPemberianObat = "", modelAturanPakai = "";
     private boolean isopening = false, autoaksi = false, autoValidasiRalan = false, autoValidasiRanap = false;
 
     /** Creates new form
@@ -464,6 +463,8 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         label2 = new widget.Label();
         CmbPrinterLembarObat = new widget.ComboBox();
         BtnRefreshPrinterLembarObat = new widget.Button();
+        label3 = new widget.Label();
+        CmbStatusResepDefault = new widget.ComboBox();
         panelBiasa2 = new widget.PanelBiasa();
         BtnSimpanPengaturan = new widget.Button();
         BtnResetPengaturan = new widget.Button();
@@ -591,7 +592,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "31-12-2025 09:53:34" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2026 04:52:22" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -697,6 +698,23 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         });
         panelBiasa1.add(BtnRefreshPrinterLembarObat);
         BtnRefreshPrinterLembarObat.setBounds(499, 130, 28, 23);
+
+        label3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        label3.setText("Default status resep yang tampil pertama :");
+        label3.setName("label3"); // NOI18N
+        panelBiasa1.add(label3);
+        label3.setBounds(28, 190, 210, 23);
+
+        CmbStatusResepDefault.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Semua", "Belum Terlayani", "Menunggu Penyerahan", "Sudah Terlayani" }));
+        CmbStatusResepDefault.setSelectedIndex(2);
+        CmbStatusResepDefault.setName("CmbStatusResepDefault"); // NOI18N
+        CmbStatusResepDefault.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CmbStatusResepDefaultActionPerformed(evt);
+            }
+        });
+        panelBiasa1.add(CmbStatusResepDefault);
+        CmbStatusResepDefault.setBounds(243, 190, 150, 23);
 
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
@@ -818,7 +836,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -832,7 +850,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "07-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -2727,7 +2745,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     public void windowClosed(WindowEvent e) {
                                         pemberianobat=null;
                                     }
-                                }); 
+                                });
 
                                 pemberianobat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 pemberianobat.setLocationRelativeTo(internalFrame1);
@@ -2736,7 +2754,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             if (!pemberianobat.isVisible()) {
                                 pemberianobat.isCek();
                                 pemberianobat.setNoRm3(NoRawat,DTPCari1.getDate(),DTPCari2.getDate(),"ralan");
-                                pemberianobat.tampilPO3();  
+                                pemberianobat.tampilPO3();
                             }
 
                             if (pemberianobat.isVisible()) {
@@ -2774,7 +2792,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     public void windowClosed(WindowEvent e) {
                                         pemberianobat=null;
                                     }
-                                }); 
+                                });
 
                                 pemberianobat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                 pemberianobat.setLocationRelativeTo(internalFrame1);
@@ -2783,7 +2801,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             if (!pemberianobat.isVisible()) {
                                 pemberianobat.isCek();
                                 pemberianobat.setNoRm3(NoRawat,DTPCari1.getDate(),DTPCari2.getDate(),"ranap");
-                                pemberianobat.tampilPO3();  
+                                pemberianobat.tampilPO3();
                             }
 
                             if (pemberianobat.isVisible()) {
@@ -2879,7 +2897,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 piutangjual=null;
                             }
-                        }); 
+                        });
 
                         piutangjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         piutangjual.setLocationRelativeTo(internalFrame1);
@@ -2888,7 +2906,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!piutangjual.isVisible()) {
                         piutangjual.isCek();
                         piutangjual.emptTeks();
-                        piutangjual.setPasien(NoRawat,NoRM,Pasien);  
+                        piutangjual.setPasien(NoRawat,NoRM,Pasien);
                     }
 
                     if (piutangjual.isVisible()) {
@@ -2917,7 +2935,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 piutangjual=null;
                             }
-                        }); 
+                        });
 
                         piutangjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         piutangjual.setLocationRelativeTo(internalFrame1);
@@ -2926,7 +2944,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!piutangjual.isVisible()) {
                         piutangjual.isCek();
                         piutangjual.emptTeks();
-                        piutangjual.setPasien(NoRawat,NoRM,Pasien);  
+                        piutangjual.setPasien(NoRawat,NoRM,Pasien);
                     }
 
                     if (piutangjual.isVisible()) {
@@ -2953,7 +2971,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 piutangjual=null;
                             }
-                        }); 
+                        });
 
                         piutangjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         piutangjual.setLocationRelativeTo(internalFrame1);
@@ -2962,7 +2980,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!piutangjual.isVisible()) {
                         piutangjual.isCek();
                         piutangjual.emptTeks();
-                        piutangjual.setPasien(NoRawat,NoRM,Pasien);  
+                        piutangjual.setPasien(NoRawat,NoRM,Pasien);
                     }
 
                     if (piutangjual.isVisible()) {
@@ -2989,7 +3007,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 piutangjual=null;
                             }
-                        }); 
+                        });
 
                         piutangjual.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         piutangjual.setLocationRelativeTo(internalFrame1);
@@ -2998,7 +3016,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!piutangjual.isVisible()) {
                         piutangjual.isCek();
                         piutangjual.emptTeks();
-                        piutangjual.setPasien(NoRawat,NoRM,Pasien);  
+                        piutangjual.setPasien(NoRawat,NoRM,Pasien);
                     }
 
                     if (piutangjual.isVisible()) {
@@ -3031,7 +3049,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 konselingfamasi=null;
                             }
-                        }); 
+                        });
 
                         konselingfamasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         konselingfamasi.setLocationRelativeTo(internalFrame1);
@@ -3040,7 +3058,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!konselingfamasi.isVisible()) {
                         konselingfamasi.isCek();
                         konselingfamasi.emptTeks();
-                        konselingfamasi.setNoRm(NoRawat,DTPCari2.getDate());  
+                        konselingfamasi.setNoRm(NoRawat,DTPCari2.getDate());
                     }
 
                     if (konselingfamasi.isVisible()) {
@@ -3069,7 +3087,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 konselingfamasi=null;
                             }
-                        }); 
+                        });
 
                         konselingfamasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         konselingfamasi.setLocationRelativeTo(internalFrame1);
@@ -3078,7 +3096,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!konselingfamasi.isVisible()) {
                         konselingfamasi.isCek();
                         konselingfamasi.emptTeks();
-                        konselingfamasi.setNoRm(NoRawat,DTPCari2.getDate());  
+                        konselingfamasi.setNoRm(NoRawat,DTPCari2.getDate());
                     }
 
                     if (konselingfamasi.isVisible()) {
@@ -3105,7 +3123,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 konselingfamasi=null;
                             }
-                        }); 
+                        });
 
                         konselingfamasi.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         konselingfamasi.setLocationRelativeTo(internalFrame1);
@@ -3114,7 +3132,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (!konselingfamasi.isVisible()) {
                         konselingfamasi.isCek();
                         konselingfamasi.emptTeks();
-                        konselingfamasi.setNoRm(NoRawat,DTPCari2.getDate());  
+                        konselingfamasi.setNoRm(NoRawat,DTPCari2.getDate());
                     }
 
                     if (konselingfamasi.isVisible()) {
@@ -3154,14 +3172,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 public void windowClosed(WindowEvent e) {
                                     resume=null;
                                 }
-                            }); 
+                            });
 
                             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             resume.setLocationRelativeTo(internalFrame1);
                         }
                         if (resume == null) return;
                         if (!resume.isVisible()) {
-                            resume.setNoRm(NoRM,Pasien); 
+                            resume.setNoRm(NoRM,Pasien);
                         }
 
                         if (resume.isVisible()) {
@@ -3195,14 +3213,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 public void windowClosed(WindowEvent e) {
                                     resume=null;
                                 }
-                            }); 
+                            });
 
                             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             resume.setLocationRelativeTo(internalFrame1);
                         }
                         if (resume == null) return;
                         if (!resume.isVisible()) {
-                            resume.setNoRm(NoRM,Pasien); 
+                            resume.setNoRm(NoRM,Pasien);
                         }
 
                         if (resume.isVisible()) {
@@ -3234,14 +3252,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 public void windowClosed(WindowEvent e) {
                                     resume=null;
                                 }
-                            }); 
+                            });
 
                             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             resume.setLocationRelativeTo(internalFrame1);
                         }
                         if (resume == null) return;
                         if (!resume.isVisible()) {
-                            resume.setNoRm(NoRM,Pasien); 
+                            resume.setNoRm(NoRM,Pasien);
                         }
 
                         if (resume.isVisible()) {
@@ -3273,14 +3291,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 public void windowClosed(WindowEvent e) {
                                     resume=null;
                                 }
-                            }); 
+                            });
 
                             resume.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             resume.setLocationRelativeTo(internalFrame1);
                         }
                         if (resume == null) return;
                         if (!resume.isVisible()) {
-                            resume.setNoRm(NoRM,Pasien); 
+                            resume.setNoRm(NoRM,Pasien);
                         }
 
                         if (resume.isVisible()) {
@@ -3317,7 +3335,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 pio=null;
                             }
-                        }); 
+                        });
 
                         pio.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         pio.setLocationRelativeTo(internalFrame1);
@@ -3355,7 +3373,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 pio=null;
                             }
-                        }); 
+                        });
 
                         pio.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         pio.setLocationRelativeTo(internalFrame1);
@@ -3391,7 +3409,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 pio=null;
                             }
-                        }); 
+                        });
 
                         pio.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         pio.setLocationRelativeTo(internalFrame1);
@@ -3427,7 +3445,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 pio=null;
                             }
-                        }); 
+                        });
 
                         pio.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         pio.setLocationRelativeTo(internalFrame1);
@@ -3469,7 +3487,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 datasep=null;
                             }
-                        }); 
+                        });
 
                         datasep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         datasep.setLocationRelativeTo(internalFrame1);
@@ -3477,7 +3495,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (datasep == null) return;
                     if (!datasep.isVisible()) {
                         datasep.isCek();
-                        datasep.setNoRm3(NoRawat,DTPCari1.getDate()); 
+                        datasep.setNoRm3(NoRawat,DTPCari1.getDate());
                     }
 
                     if (datasep.isVisible()) {
@@ -3512,14 +3530,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 apol=null;
                             }
-                        }); 
+                        });
 
                         apol.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         apol.setLocationRelativeTo(internalFrame1);
                     }
                     if (apol == null) return;
                     if (!apol.isVisible()) {
-                        //apol.isCek(); 
+                        //apol.isCek();
                     }
 
                     if (apol.isVisible()) {
@@ -3555,7 +3573,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 resepluar=null;
                             }
-                        }); 
+                        });
 
                         resepluar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         resepluar.setLocationRelativeTo(internalFrame1);
@@ -3563,7 +3581,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (resepluar == null) return;
                     if (!resepluar.isVisible()) {
                         resepluar.isCek();
-                        resepluar.setNoRm(NoRawat,KodeDokter,DokterPeresep,NoRM+" "+Pasien); 
+                        resepluar.setNoRm(NoRawat,KodeDokter,DokterPeresep,NoRM+" "+Pasien);
                     }
 
                     if (resepluar.isVisible()) {
@@ -3592,7 +3610,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 resepluar=null;
                             }
-                        }); 
+                        });
 
                         resepluar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         resepluar.setLocationRelativeTo(internalFrame1);
@@ -3600,7 +3618,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (resepluar == null) return;
                     if (!resepluar.isVisible()) {
                         resepluar.isCek();
-                        resepluar.setNoRm(NoRawat,KodeDokter,DokterPeresep,NoRM+" "+Pasien); 
+                        resepluar.setNoRm(NoRawat,KodeDokter,DokterPeresep,NoRM+" "+Pasien);
                     }
 
                     if (resepluar.isVisible()) {
@@ -3627,7 +3645,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 resepluar=null;
                             }
-                        }); 
+                        });
 
                         resepluar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         resepluar.setLocationRelativeTo(internalFrame1);
@@ -3635,7 +3653,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (resepluar == null) return;
                     if (!resepluar.isVisible()) {
                         resepluar.isCek();
-                        resepluar.setNoRm(NoRawat,KodeDokter,DokterPeresep,NoRM+" "+Pasien); 
+                        resepluar.setNoRm(NoRawat,KodeDokter,DokterPeresep,NoRM+" "+Pasien);
                     }
 
                     if (resepluar.isVisible()) {
@@ -3662,7 +3680,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 resepluar=null;
                             }
-                        }); 
+                        });
 
                         resepluar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         resepluar.setLocationRelativeTo(internalFrame1);
@@ -3670,7 +3688,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (resepluar == null) return;
                     if (!resepluar.isVisible()) {
                         resepluar.isCek();
-                        resepluar.setNoRm(NoRawat,KodeDokter,DokterPeresep,NoRM+" "+Pasien); 
+                        resepluar.setNoRm(NoRawat,KodeDokter,DokterPeresep,NoRM+" "+Pasien);
                     }
 
                     if (resepluar.isVisible()) {
@@ -3942,7 +3960,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 telaahresep=null;
                             }
-                        }); 
+                        });
 
                         telaahresep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         telaahresep.setLocationRelativeTo(internalFrame1);
@@ -3980,7 +3998,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 telaahresep=null;
                             }
-                        }); 
+                        });
 
                         telaahresep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         telaahresep.setLocationRelativeTo(internalFrame1);
@@ -4016,7 +4034,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             public void windowClosed(WindowEvent e) {
                                 telaahresep=null;
                             }
-                        }); 
+                        });
 
                         telaahresep.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         telaahresep.setLocationRelativeTo(internalFrame1);
@@ -4139,7 +4157,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_formWindowClosed
 
     private void BtnPengaturanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPengaturanActionPerformed
-        WindowPengaturan.setSize(558, 280);
+        WindowPengaturan.setSize(558, 310);
         WindowPengaturan.setLocationRelativeTo(internalFrame1);
         WindowPengaturan.setVisible(true);
     }//GEN-LAST:event_BtnPengaturanActionPerformed
@@ -4239,11 +4257,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                     iyem.set("setelahvalidasi", setelahValidasi);
                 }
+                iyem.put("statusdefault", CmbStatusResepDefault.getSelectedItem().toString());
                 fw.write(iyem.toString());
                 fw.flush();
                 JOptionPane.showMessageDialog(null, "Pengaturan berhasil disimpan..!!", "Berhasil Simpan", JOptionPane.INFORMATION_MESSAGE);
                 autoValidasiRalan = ChkAutoValidasiRalan.isSelected();
                 autoValidasiRanap = ChkAutoValidasiRanap.isSelected();
+                cmbStatus.setSelectedItem(CmbStatusResepDefault.getSelectedItem().toString());
                 WindowPengaturan.dispose();
             }
         } catch (Exception e) {
@@ -4320,6 +4340,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_BtnDaftarPelayananApotekBPJSActionPerformed
 
+    private void CmbStatusResepDefaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbStatusResepDefaultActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CmbStatusResepDefaultActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -4380,6 +4404,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.ComboBox CmbModelAturanPakai;
     private widget.ComboBox CmbModelLembarObat;
     private widget.ComboBox CmbPrinterLembarObat;
+    private widget.ComboBox CmbStatusResepDefault;
     private widget.TextBox CrDokter;
     private widget.TextBox CrDokter2;
     private widget.TextBox CrPoli;
@@ -4415,6 +4440,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Label label1;
     private widget.Label label10;
     private widget.Label label2;
+    private widget.Label label3;
     private widget.Label label9;
     private widget.PanelBiasa panelBiasa1;
     private widget.PanelBiasa panelBiasa2;
@@ -4843,7 +4869,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     TeksKosong();
                     obatralan=null;
                 }
-            }); 
+            });
 
             obatralan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             obatralan.setLocationRelativeTo(internalFrame1);
@@ -4852,14 +4878,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if (!obatralan.isVisible()) {
             obatralan.setNoRm(NoRawat,NoRM,Pasien,TglPeresepan,JamPeresepan);
             obatralan.isCek();
-            obatralan.tampilobat3(NoResep); 
+            obatralan.tampilobat3(NoResep);
         }
 
         if (obatralan.isVisible()) {
             obatralan.toFront();
             return;
         }
-        obatralan.setVisible(true); 
+        obatralan.setVisible(true);
     }
 
     private void TeksKosong(){
@@ -4897,7 +4923,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     TeksKosong();
                     obatranap=null;
                 }
-            }); 
+            });
 
             obatranap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             obatranap.setLocationRelativeTo(internalFrame1);
@@ -4906,7 +4932,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if (!obatranap.isVisible()) {
             obatranap.setNoRm(NoRawat,NoRM,Pasien,Valid.SetTgl2(TglPeresepan));
             obatranap.isCek();
-            obatranap.tampilobat3(NoResep);  
+            obatranap.tampilobat3(NoResep);
         }
 
         if (obatranap.isVisible()) {
@@ -4937,7 +4963,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     TeksKosong();
                     stokpasien=null;
                 }
-            }); 
+            });
 
             stokpasien.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             stokpasien.setLocationRelativeTo(internalFrame1);
@@ -4946,7 +4972,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if (!stokpasien.isVisible()) {
             stokpasien.setNoRm(NoRawat,NoRM+" "+Pasien);
             stokpasien.isCek();
-            stokpasien.tampil3(NoResep); 
+            stokpasien.tampil3(NoResep);
         }
 
         if (stokpasien.isVisible()) {
@@ -4977,7 +5003,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     TeksKosong();
                     reseppulang=null;
                 }
-            }); 
+            });
 
             reseppulang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             reseppulang.setLocationRelativeTo(internalFrame1);
@@ -4986,14 +5012,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if (!reseppulang.isVisible()) {
             reseppulang.setNoRm(NoRawat,NoRM,Pasien,"-",DTPCari1.getSelectedItem().toString(),Sequel.cariIsi("select current_time()"));
             reseppulang.isCek();
-            reseppulang.tampil3(NoResep);  
+            reseppulang.tampil3(NoResep);
         }
 
         if (reseppulang.isVisible()) {
             reseppulang.toFront();
             return;
         }
-        reseppulang.setVisible(true);       
+        reseppulang.setVisible(true);
     }
 
     private void pilihTab(){
@@ -6398,30 +6424,35 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
 
     private void cekPengaturan() {
-        try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
-            ObjectMapper mapper = new ObjectMapper();
-            JsonNode iyem = mapper.readTree(fr);
-            autoValidasiRalan = iyem.path("autovalidasiralan").asBoolean(false);
-            autoValidasiRanap = iyem.path("autovalidasiranap").asBoolean(false);
-            ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
-            ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
-            ChkAutoValidasiRalanItemStateChanged(null);
-            ChkPreviewLembarObat.setSelected(iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false));
-            if (ChkPreviewLembarObat.isSelected()) {
-                CmbModelLembarObat.setSelectedItem(iyem.path("setelahvalidasi").path("lembarobat").path("model").asText(""));
-                CmbPrinterLembarObat.setSelectedItem(iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText());
+        if (new File("./cache/pengaturanresep.iyem").isFile()) {
+            try (FileReader fr = new FileReader("./cache/pengaturanresep.iyem")) {
+                ObjectMapper mapper = new ObjectMapper();
+                JsonNode iyem = mapper.readTree(fr);
+                autoValidasiRalan = iyem.path("autovalidasiralan").asBoolean(false);
+                autoValidasiRanap = iyem.path("autovalidasiranap").asBoolean(false);
+                ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
+                ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
+                ChkAutoValidasiRalanItemStateChanged(null);
+                ChkPreviewLembarObat.setSelected(iyem.path("setelahvalidasi").path("lembarobat").path("preview").asBoolean(false));
+                if (ChkPreviewLembarObat.isSelected()) {
+                    CmbModelLembarObat.setSelectedItem(iyem.path("setelahvalidasi").path("lembarobat").path("model").asText(""));
+                    CmbPrinterLembarObat.setSelectedItem(iyem.path("setelahvalidasi").path("lembarobat").path("printer").asText());
+                }
+                ChkPreviewAturanPakai.setSelected(iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false));
+                if (ChkPreviewAturanPakai.isSelected()) {
+                    CmbModelAturanPakai.setSelectedItem(iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText(""));
+                }
+                cmbStatus.setSelectedItem(iyem.path("statusdefault").asText("Semua"));
+                CmbStatusResepDefault.setSelectedItem(iyem.path("statusdefault").asText("Semua"));
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+                autoValidasiRalan = false;
+                autoValidasiRanap = false;
+                ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
+                ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
+                cmbStatus.setSelectedItem("Semua");
+                ChkAutoValidasiRalanItemStateChanged(null);
             }
-            ChkPreviewAturanPakai.setSelected(iyem.path("setelahvalidasi").path("aturanpakai").path("preview").asBoolean(false));
-            if (ChkPreviewAturanPakai.isSelected()) {
-                CmbModelAturanPakai.setSelectedItem(iyem.path("setelahvalidasi").path("aturanpakai").path("model").asText(""));
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            autoValidasiRalan = false;
-            autoValidasiRanap = false;
-            ChkAutoValidasiRalan.setSelected(autoValidasiRalan);
-            ChkAutoValidasiRanap.setSelected(autoValidasiRanap);
-            ChkAutoValidasiRalanItemStateChanged(null);
         }
     }
 
