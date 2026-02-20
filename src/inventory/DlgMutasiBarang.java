@@ -608,8 +608,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
                 Sequel.AutoComitTrue();
                 if(sukses==true){
-                    tampil();
-                    runBackground(() ->tampil2());
+                    runBackground(() ->loadTabel());
                 }
             }
         }
@@ -1295,16 +1294,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         Valid.tabelKosong(tabMode);
         try{
             kdke.setText(Sequel.cariIsi("select permintaan_medis.kd_bangsal from permintaan_medis where permintaan_medis.no_permintaan=?", nopermintaan));
-            nmke.setText(Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",kdke.getText()));
+            nmke.setText(Sequel.CariBangsal(kdke.getText()));
             kddari.setText(Sequel.cariIsi("select permintaan_medis.kd_bangsaltujuan from permintaan_medis where permintaan_medis.no_permintaan=?", nopermintaan));
-            nmdari.setText(Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",kddari.getText()));
+            nmdari.setText(Sequel.CariBangsal(kddari.getText()));
             Keterangan.setText("Permintaan No. "+nopermintaan);
             nomorpermintaan=nopermintaan;
             ps=koneksi.prepareStatement(
                 "select databarang.kode_brng, databarang.nama_brng,detail_permintaan_medis.kode_sat,detail_permintaan_medis.jumlah,"+
                 "databarang."+hppfarmasi+" as dasar,(detail_permintaan_medis.jumlah*databarang."+hppfarmasi+") as total,ifnull(databarang.expire,'0000-00-00') as expire "+
-                "from databarang inner join detail_permintaan_medis "+
-                "on detail_permintaan_medis.kode_brng=databarang.kode_brng "+
+                "from databarang inner join detail_permintaan_medis on detail_permintaan_medis.kode_brng=databarang.kode_brng "+
                 "where detail_permintaan_medis.no_permintaan=? order by databarang.nama_brng");
             try {
                 ps.setString(1,nopermintaan);
@@ -1341,9 +1339,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
                     }else{
                         psstok=koneksi.prepareStatement(
-                                "select ifnull(gudangbarang.stok,'0') from gudangbarang "+
-                                "where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and "+
-                                "gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                            "select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.stok>0 and gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''"
+                        );
                         try {
                             psstok.setString(1,kddari.getText());
                             psstok.setString(2,rs.getString("kode_brng"));
@@ -1351,6 +1348,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             if(rsstok.next()){
                                 tabMode.addRow(new Object[]{rs.getString("jumlah"),rs.getDouble("dasar"),rs.getDouble("total"),rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("kode_sat"),rsstok.getDouble(1),0,"","",rs.getString("expire")});
                             }else{
+                                JOptionPane.showMessageDialog(null,"Eiiitsss, stok tidak mencukupi..!!");
                                 tabMode.addRow(new Object[]{"",rs.getDouble("dasar"),rs.getDouble("total"),rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("kode_sat"),0,0,"","",rs.getString("expire")});
                             }
                         } catch (Exception e) {
@@ -1375,7 +1373,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.close();
                 }
             }
-            runBackground(() ->isCekStok2());
+            isCekStok2();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
@@ -1613,7 +1611,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }
 
-    public void isCekStok2(){
+    private void isCekStok2(){
         for(i=0;i<tbDokter.getRowCount();i++){
             if(Valid.SetAngka(tabMode.getValueAt(i,0).toString())>0){
                 try {
