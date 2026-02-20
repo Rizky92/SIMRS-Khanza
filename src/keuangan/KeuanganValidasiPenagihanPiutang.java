@@ -14,6 +14,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -420,32 +423,53 @@ public final class KeuanganValidasiPenagihanPiutang extends javax.swing.JDialog 
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptRValidasiPiutang.jasper","report","::[ Data Tagihan Piutang ]::",
-                "select penagihan_piutang.no_tagihan,penagihan_piutang.tanggal,penagihan_piutang.tanggaltempo,bagianpenagihan.nama,"+
-                 "penjab.nama_perusahaan,akun_penagihan_piutang.nama_bank,sum(detail_penagihan_piutang.sisapiutang) as total "+
-                 "from penagihan_piutang inner join pegawai as bagianpenagihan on bagianpenagihan.nik=penagihan_piutang.nip "+
-                 "inner join penjab on penagihan_piutang.kd_pj=penjab.kd_pj "+
-                 "inner join akun_penagihan_piutang on akun_penagihan_piutang.kd_rek=penagihan_piutang.kd_rek "+
-                 "inner join detail_penagihan_piutang on detail_penagihan_piutang.no_tagihan=penagihan_piutang.no_tagihan "+
-                 "where penagihan_piutang.status='Proses Penagihan' and penjab.nama_perusahaan like '%"+nmpenjab.getText()+"%' and "+
-                 "(penagihan_piutang.no_tagihan like '%"+TCari.getText()+"%' or bagianpenagihan.nama like '%"+TCari.getText()+"%' or "+
-                 "penjab.nama_perusahaan like '%"+TCari.getText()+"%' or akun_penagihan_piutang.nama_bank like '%"+TCari.getText()+"%')"+
-                 "group by penagihan_piutang.no_tagihan order by penagihan_piutang.tanggal",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)": Valid.exportHtmlSmc("ValidasiPiutang.html", "::[ Data Tagihan Piutang ]::", tbBangsal); break;
+                    case "Laporan 2 (WPS)": Valid.exportWPSSmc("ValidasiPiutang.wps", "::[ Data Tagihan Piutang ]::", tbBangsal); break;
+                    case "Laporan 3 (CSV)": Valid.exportCSVSmc("ValidasiPiutang.csv", tbBangsal); break;
+                    case "Laporan 4 (XLSX)": Valid.exportXlsxSmc("ValidasiPiutang.xlsx", tbBangsal); break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptRValidasiPiutang.jasper","report","::[ Data Tagihan Piutang ]::",
+                            "select penagihan_piutang.no_tagihan,penagihan_piutang.tanggal,penagihan_piutang.tanggaltempo,bagianpenagihan.nama,"+
+                             "penjab.nama_perusahaan,akun_penagihan_piutang.nama_bank,sum(detail_penagihan_piutang.sisapiutang) as total "+
+                             "from penagihan_piutang inner join pegawai as bagianpenagihan on bagianpenagihan.nik=penagihan_piutang.nip "+
+                             "inner join penjab on penagihan_piutang.kd_pj=penjab.kd_pj "+
+                             "inner join akun_penagihan_piutang on akun_penagihan_piutang.kd_rek=penagihan_piutang.kd_rek "+
+                             "inner join detail_penagihan_piutang on detail_penagihan_piutang.no_tagihan=penagihan_piutang.no_tagihan "+
+                             "where penagihan_piutang.status='Proses Penagihan' and penjab.nama_perusahaan like '%"+nmpenjab.getText()+"%' and "+
+                             "(penagihan_piutang.no_tagihan like '%"+TCari.getText()+"%' or bagianpenagihan.nama like '%"+TCari.getText()+"%' or "+
+                             "penjab.nama_perusahaan like '%"+TCari.getText()+"%' or akun_penagihan_piutang.nama_bank like '%"+TCari.getText()+"%')"+
+                             "group by penagihan_piutang.no_tagihan order by penagihan_piutang.tanggal",param);
+                        break;
+                }
+            } catch (Exception e) { System.out.println("Notif : " + e); }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

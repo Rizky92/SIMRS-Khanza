@@ -27,6 +27,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -1293,52 +1296,70 @@ public final class RMSkriningMPP extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){ JOptionPane.showMessageDialog(null,"Proses loading..."); return; }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select logo from setting"));
-                if(TCari.getText().equals("")){
-                    Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
-                        "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
-                        "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
-                        "mpp_skrining.param8,mpp_skrining.param9,mpp_skrining.param10,mpp_skrining.param11,mpp_skrining.param12,"+
-                        "mpp_skrining.param13,mpp_skrining.param14,mpp_skrining.param15,mpp_skrining.param16,mpp_skrining.nip,pegawai.nama "+
-                        "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join mpp_skrining on reg_periksa.no_rawat=mpp_skrining.no_rawat "+
-                        "inner join pegawai on mpp_skrining.nip=pegawai.nik "+
-                        "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
-                        "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                        "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
-                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
-                        "mpp_skrining.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' order by mpp_skrining.tanggal",param);
-                }else{
-                    Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
-                        "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
-                        "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
-                        "mpp_skrining.param8,mpp_skrining.param9,mpp_skrining.param10,mpp_skrining.param11,mpp_skrining.param12,"+
-                        "mpp_skrining.param13,mpp_skrining.param14,mpp_skrining.param15,mpp_skrining.param16,mpp_skrining.nip,pegawai.nama "+
-                        "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join mpp_skrining on reg_periksa.no_rawat=mpp_skrining.no_rawat "+
-                        "inner join pegawai on mpp_skrining.nip=pegawai.nik "+
-                        "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
-                        "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                        "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
-                        "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
-                        "mpp_skrining.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
-                        "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
-                        "mpp_skrining.nip like '%"+TCari.getText().trim()+"%' or pegawai.nama like '%"+TCari.getText().trim()+"%') order by mpp_skrining.tanggal",param);
+            try{
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
+                String pilihan = (String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)": Valid.exportHtmlSmc("DataSkriningMPP.html","Data Skrining Manajer Pelayanan Pasien",tbObat); break;
+                    case "Laporan 2 (WPS)": Valid.exportWPSSmc("DataSkriningMPP.wps","Data Skrining Manajer Pelayanan Pasien",tbObat); break;
+                    case "Laporan 3 (CSV)": Valid.exportCSVSmc("DataSkriningMPP.csv",tbObat); break;
+                    case "Laporan 4 (XLSX)": Valid.exportXlsxSmc("DataSkriningMPP.xlsx",tbObat); break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select logo from setting"));
+                        if(TCari.getText().equals("")){
+                            Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
+                                "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
+                                "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
+                                "mpp_skrining.param8,mpp_skrining.param9,mpp_skrining.param10,mpp_skrining.param11,mpp_skrining.param12,"+
+                                "mpp_skrining.param13,mpp_skrining.param14,mpp_skrining.param15,mpp_skrining.param16,mpp_skrining.nip,pegawai.nama "+
+                                "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join mpp_skrining on reg_periksa.no_rawat=mpp_skrining.no_rawat "+
+                                "inner join pegawai on mpp_skrining.nip=pegawai.nik "+
+                                "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
+                                "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                                "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
+                                "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
+                                "mpp_skrining.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' order by mpp_skrining.tanggal",param);
+                        }else{
+                            Valid.MyReportqry("rptDataSkriningMPP.jasper","report","::[ Data Skrining Manajer Pelayanan Pasien ]::",
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat,"+
+                                "mpp_skrining.tanggal,mpp_skrining.param1,mpp_skrining.param2,mpp_skrining.param3,mpp_skrining.param3,"+
+                                "mpp_skrining.param4,mpp_skrining.param5,mpp_skrining.param5,mpp_skrining.param6,mpp_skrining.param7,"+
+                                "mpp_skrining.param8,mpp_skrining.param9,mpp_skrining.param10,mpp_skrining.param11,mpp_skrining.param12,"+
+                                "mpp_skrining.param13,mpp_skrining.param14,mpp_skrining.param15,mpp_skrining.param16,mpp_skrining.nip,pegawai.nama "+
+                                "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join mpp_skrining on reg_periksa.no_rawat=mpp_skrining.no_rawat "+
+                                "inner join pegawai on mpp_skrining.nip=pegawai.nik "+
+                                "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
+                                "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                                "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
+                                "inner join propinsi on pasien.kd_prop=propinsi.kd_prop where "+
+                                "mpp_skrining.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
+                                "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
+                                "mpp_skrining.nip like '%"+TCari.getText().trim()+"%' or pegawai.nama like '%"+TCari.getText().trim()+"%') order by mpp_skrining.tanggal",param);
+                        }
+                        break;
+                }
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

@@ -26,6 +26,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -788,55 +791,72 @@ public final class RMSkriningMPPFormB extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){ JOptionPane.showMessageDialog(null,"Proses loading..."); return; }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select logo from setting"));
-            tgl=" mpp_evaluasi_catatan.tgl_implementasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' ";
-            if(TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptDataMPPCatatan.jasper","report","::[ Data Evaluasi Catatan MPP ]::",
-                     "select mpp_evaluasi_catatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,"+
-                     "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat, "+
-                     "mpp_evaluasi_catatan.tgl_implementasi,mpp_evaluasi_catatan.masalah,mpp_evaluasi_catatan.tinjut, "+
-                     "mpp_evaluasi_catatan.evaluasi,mpp_evaluasi_catatan.nip,petugas.nama "+
-                     "from mpp_evaluasi_catatan "+
-                     "inner join reg_periksa on mpp_evaluasi_catatan.no_rawat=reg_periksa.no_rawat "+
-                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                     "inner join petugas on mpp_evaluasi_catatan.nip=petugas.nip "+
-                     "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
-                     "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                     "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
-                     "inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                     "where "+tgl+" order by mpp_evaluasi_catatan.no_rawat",param);
-            }else{
-                Valid.MyReportqry("rptDataMPPCatatan.jasper","report","::[ Data Evaluasi Catatan MPP ]::",
-                     "select mpp_evaluasi_catatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,"+
-                     "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat, "+
-                     "mpp_evaluasi_catatan.tgl_implementasi,mpp_evaluasi_catatan.masalah,mpp_evaluasi_catatan.tinjut, "+
-                     "mpp_evaluasi_catatan.evaluasi,mpp_evaluasi_catatan.nip,petugas.nama "+
-                     "from mpp_evaluasi_catatan "+
-                     "inner join reg_periksa on mpp_evaluasi_catatan.no_rawat=reg_periksa.no_rawat "+
-                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                     "inner join petugas on mpp_evaluasi_catatan.nip=petugas.nip "+
-                     "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
-                     "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                     "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
-                     "inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
-                     "where "+tgl+" and (mpp_evaluasi_catatan.no_rawat like '%"+TCari.getText().trim()+"%' or "+
-                     "reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
-                     "pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or  petugas.nama like '%"+TCari.getText().trim()+"%') "+
-                     "order by mpp_evaluasi_catatan.no_rawat",param);
+            try{
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)": Valid.exportHtmlSmc("DataMPPCatatan.html","Data Evaluasi Catatan MPP",tbObat); break;
+                    case "Laporan 2 (WPS)": Valid.exportWPSSmc("DataMPPCatatan.wps","Data Evaluasi Catatan MPP",tbObat); break;
+                    case "Laporan 3 (CSV)": Valid.exportCSVSmc("DataMPPCatatan.csv",tbObat); break;
+                    case "Laporan 4 (XLSX)": Valid.exportXlsxSmc("DataMPPCatatan.xlsx",tbObat); break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select logo from setting"));
+                        tgl=" mpp_evaluasi_catatan.tgl_implementasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' ";
+                        if(TCari.getText().trim().equals("")){
+                            Valid.MyReportqry("rptDataMPPCatatan.jasper","report","::[ Data Evaluasi Catatan MPP ]::",
+                                 "select mpp_evaluasi_catatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,"+
+                                 "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat, "+
+                                 "mpp_evaluasi_catatan.tgl_implementasi,mpp_evaluasi_catatan.masalah,mpp_evaluasi_catatan.tinjut, "+
+                                 "mpp_evaluasi_catatan.evaluasi,mpp_evaluasi_catatan.nip,petugas.nama "+
+                                 "from mpp_evaluasi_catatan "+
+                                 "inner join reg_periksa on mpp_evaluasi_catatan.no_rawat=reg_periksa.no_rawat "+
+                                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                 "inner join petugas on mpp_evaluasi_catatan.nip=petugas.nip "+
+                                 "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
+                                 "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                                 "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
+                                 "inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
+                                 "where "+tgl+" order by mpp_evaluasi_catatan.no_rawat",param);
+                        }else{
+                            Valid.MyReportqry("rptDataMPPCatatan.jasper","report","::[ Data Evaluasi Catatan MPP ]::",
+                                 "select mpp_evaluasi_catatan.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,"+
+                                 "concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab,', ',propinsi.nm_prop) as alamat, "+
+                                 "mpp_evaluasi_catatan.tgl_implementasi,mpp_evaluasi_catatan.masalah,mpp_evaluasi_catatan.tinjut, "+
+                                 "mpp_evaluasi_catatan.evaluasi,mpp_evaluasi_catatan.nip,petugas.nama "+
+                                 "from mpp_evaluasi_catatan "+
+                                 "inner join reg_periksa on mpp_evaluasi_catatan.no_rawat=reg_periksa.no_rawat "+
+                                 "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                 "inner join petugas on mpp_evaluasi_catatan.nip=petugas.nip "+
+                                 "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
+                                 "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                                 "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
+                                 "inner join propinsi on pasien.kd_prop=propinsi.kd_prop "+
+                                 "where "+tgl+" and (mpp_evaluasi_catatan.no_rawat like '%"+TCari.getText().trim()+"%' or "+
+                                 "reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
+                                 "pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or  petugas.nama like '%"+TCari.getText().trim()+"%') "+
+                                 "order by mpp_evaluasi_catatan.no_rawat",param);
+                        }
+                        break;
+                }
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
             }
-
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

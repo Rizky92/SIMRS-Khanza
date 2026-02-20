@@ -33,6 +33,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import java.awt.Cursor;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import javax.swing.SwingUtilities;
 
 
@@ -982,34 +985,67 @@ public final class PengajuanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengajuanInventaris.jasper","report","::[ Data Pengajuan Inventaris ]::",
-                   "select pengajuan_inventaris.no_pengajuan,pengajuan_inventaris.tanggal,pengajuan_inventaris.nik,peg1.nama as namapengaju,"+
-                   "peg1.bidang,peg1.departemen,pengajuan_inventaris.urgensi,pengajuan_inventaris.latar_belakang,pengajuan_inventaris.nama_barang,"+
-                   "pengajuan_inventaris.spesifikasi,pengajuan_inventaris.jumlah,pengajuan_inventaris.harga,pengajuan_inventaris.total,"+
-                   "pengajuan_inventaris.keterangan,pengajuan_inventaris.nik_pj,peg2.nama as namapj,pengajuan_inventaris.status "+
-                   "from pengajuan_inventaris inner join pegawai as peg1 inner join pegawai as peg2 on pengajuan_inventaris.nik=peg1.nik "+
-                   "and pengajuan_inventaris.nik_pj=peg2.nik where "+
-                   "pengajuan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
-                   (TCari.getText().trim().equals("")?"":"and (pengajuan_inventaris.no_pengajuan like '%"+TCari.getText().trim()+"%' or pengajuan_inventaris.nik like '%"+TCari.getText().trim()+"%' or peg1.nama like '%"+TCari.getText().trim()+"%' or "+
-                   "peg1.bidang like '%"+TCari.getText().trim()+"%' or peg1.departemen like '%"+TCari.getText().trim()+"%' or pengajuan_inventaris.urgensi like '%"+TCari.getText().trim()+"%' or "+
-                   "pengajuan_inventaris.latar_belakang like '%"+TCari.getText().trim()+"%' or pengajuan_inventaris.nama_barang like '%"+TCari.getText().trim()+"%' or "+
-                   "pengajuan_inventaris.spesifikasi like '%"+TCari.getText().trim()+"%' or pengajuan_inventaris.keterangan like '%"+TCari.getText().trim()+"%' or pengajuan_inventaris.nik_pj like '%"+TCari.getText().trim()+"%' or "+
-                   "peg2.nama like '%"+TCari.getText().trim()+"%' or pengajuan_inventaris.status like '%"+TCari.getText().trim()+"%')")+" order by pengajuan_inventaris.tanggal",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("PengajuanInventaris.html", "Data Pengajuan Inventaris", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("PengajuanInventaris.wps", "Data Pengajuan Inventaris", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("PengajuanInventaris.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("PengajuanInventaris.xlsx", tbObat);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportSmc("rptPengajuanInventaris.jasper", "report", "::[ Data Pengajuan Inventaris ]::", param, "select pengajuan_inventaris.no_pengajuan, pengajuan_inventaris.tanggal, " +
+                            "pengajuan_inventaris.nik, peg1.nama as namapengaju, peg1.bidang, peg1.departemen, pengajuan_inventaris.urgensi, pengajuan_inventaris.latar_belakang, " +
+                            "pengajuan_inventaris.nama_barang, pengajuan_inventaris.spesifikasi, pengajuan_inventaris.jumlah, pengajuan_inventaris.harga, pengajuan_inventaris.total, " +
+                            "pengajuan_inventaris.keterangan, pengajuan_inventaris.nik_pj, peg2.nama as namapj, pengajuan_inventaris.status from pengajuan_inventaris inner join pegawai " +
+                            "as peg1 on pengajuan_inventaris.nik = peg1.nik inner join pegawai as peg2 on pengajuan_inventaris.nik_pj = peg2.nik where pengajuan_inventaris.tanggal " +
+                            "between ? and ? and (if(trim(?) = '', 1 = 1, pengajuan_inventaris.no_pengajuan like ? or pengajuan_inventaris.nik like ? or peg1.nama like ? or peg1.bidang " +
+                            "like ? or peg1.departemen like ? or pengajuan_inventaris.urgensi like ? or pengajuan_inventaris.latar_belakang like ? or pengajuan_inventaris.nama_barang like ? " +
+                            "or pengajuan_inventaris.spesifikasi like ? or pengajuan_inventaris.keterangan like ? or pengajuan_inventaris.nik_pj like ? or peg2.nama like ? or " +
+                            "pengajuan_inventaris.status like ?)) order by pengajuan_inventaris.tanggal", Valid.getTglSmc(DTPCari1), Valid.getTglSmc(DTPCari2), TCari.getText().trim(),
+                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + 
+                            TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + 
+                            TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + 
+                            TCari.getText().trim() + "%");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

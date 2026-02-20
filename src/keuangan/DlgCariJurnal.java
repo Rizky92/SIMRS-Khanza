@@ -11,7 +11,11 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +48,18 @@ public class DlgCariJurnal extends javax.swing.JDialog {
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{"No.Jurnal","No.Bukti","Tgl.Jurnal","Jenis","Keterangan","Debet","Kredit"}){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+
+            @Override
+            public Class getColumnClass(int columnIndex) {
+                if (columnIndex == 5 || columnIndex == 6) {
+                    return Double.class;
+                }
+                return String.class;
+            }
         };
         tbDokter.setModel(tabMode);
 
@@ -120,12 +135,14 @@ public class DlgCariJurnal extends javax.swing.JDialog {
         panelisi3 = new widget.panelisi();
         label15 = new widget.Label();
         NoJur = new widget.TextBox();
+        label16 = new widget.Label();
+        NoBukti = new widget.TextBox();
         label11 = new widget.Label();
+        TglJurnal1 = new widget.Tanggal();
+        label12 = new widget.Label();
         TglJurnal2 = new widget.Tanggal();
         label32 = new widget.Label();
         Jenis = new widget.ComboBox();
-        label12 = new widget.Label();
-        TglJurnal1 = new widget.Tanggal();
 
         Kd2.setName("Kd2"); // NOI18N
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
@@ -366,73 +383,83 @@ public class DlgCariJurnal extends javax.swing.JDialog {
 
         panelisi3.setName("panelisi3"); // NOI18N
         panelisi3.setPreferredSize(new java.awt.Dimension(100, 47));
-        panelisi3.setLayout(null);
+        panelisi3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         label15.setText("No.Jurnal :");
         label15.setName("label15"); // NOI18N
-        label15.setPreferredSize(new java.awt.Dimension(60, 23));
+        label15.setPreferredSize(new java.awt.Dimension(65, 23));
         panelisi3.add(label15);
-        label15.setBounds(0, 12, 65, 23);
 
         NoJur.setName("NoJur"); // NOI18N
-        NoJur.setPreferredSize(new java.awt.Dimension(207, 23));
+        NoJur.setPreferredSize(new java.awt.Dimension(180, 23));
         NoJur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoJurKeyPressed(evt);
             }
         });
         panelisi3.add(NoJur);
-        NoJur.setBounds(69, 12, 155, 23);
+
+        label16.setText("No. Bukti :");
+        label16.setName("label16"); // NOI18N
+        label16.setPreferredSize(new java.awt.Dimension(65, 23));
+        panelisi3.add(label16);
+
+        NoBukti.setName("NoBukti"); // NOI18N
+        NoBukti.setPreferredSize(new java.awt.Dimension(180, 23));
+        NoBukti.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                NoBuktiKeyPressed(evt);
+            }
+        });
+        panelisi3.add(NoBukti);
 
         label11.setText("Tgl.Jurnal :");
         label11.setName("label11"); // NOI18N
-        label11.setPreferredSize(new java.awt.Dimension(70, 23));
+        label11.setPreferredSize(new java.awt.Dimension(65, 23));
         panelisi3.add(label11);
-        label11.setBounds(241, 12, 75, 23);
-
-        TglJurnal2.setDisplayFormat("dd-MM-yyyy");
-        TglJurnal2.setName("TglJurnal2"); // NOI18N
-        TglJurnal2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TglJurnal2KeyPressed(evt);
-            }
-        });
-        panelisi3.add(TglJurnal2);
-        TglJurnal2.setBounds(440, 12, 90, 23);
-
-        label32.setText("Jenis Jurnal :");
-        label32.setName("label32"); // NOI18N
-        label32.setPreferredSize(new java.awt.Dimension(35, 23));
-        panelisi3.add(label32);
-        label32.setBounds(546, 12, 90, 23);
-
-        Jenis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Umum", "Penyesuaian" }));
-        Jenis.setName("Jenis"); // NOI18N
-        Jenis.setPreferredSize(new java.awt.Dimension(45, 23));
-        Jenis.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                JenisKeyPressed(evt);
-            }
-        });
-        panelisi3.add(Jenis);
-        Jenis.setBounds(640, 12, 130, 23);
-
-        label12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label12.setText("s.d.");
-        label12.setName("label12"); // NOI18N
-        label12.setPreferredSize(new java.awt.Dimension(70, 23));
-        panelisi3.add(label12);
-        label12.setBounds(412, 12, 27, 23);
 
         TglJurnal1.setDisplayFormat("dd-MM-yyyy");
+        TglJurnal1.setMinimumSize(new java.awt.Dimension(90, 23));
         TglJurnal1.setName("TglJurnal1"); // NOI18N
+        TglJurnal1.setPreferredSize(new java.awt.Dimension(90, 23));
         TglJurnal1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TglJurnal1KeyPressed(evt);
             }
         });
         panelisi3.add(TglJurnal1);
-        TglJurnal1.setBounds(320, 12, 90, 23);
+
+        label12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label12.setText("s.d.");
+        label12.setName("label12"); // NOI18N
+        label12.setPreferredSize(new java.awt.Dimension(27, 23));
+        panelisi3.add(label12);
+
+        TglJurnal2.setDisplayFormat("dd-MM-yyyy");
+        TglJurnal2.setMinimumSize(new java.awt.Dimension(90, 23));
+        TglJurnal2.setName("TglJurnal2"); // NOI18N
+        TglJurnal2.setPreferredSize(new java.awt.Dimension(90, 23));
+        TglJurnal2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TglJurnal2KeyPressed(evt);
+            }
+        });
+        panelisi3.add(TglJurnal2);
+
+        label32.setText("Jenis :");
+        label32.setName("label32"); // NOI18N
+        label32.setPreferredSize(new java.awt.Dimension(45, 23));
+        panelisi3.add(label32);
+
+        Jenis.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Umum", "Penyesuaian" }));
+        Jenis.setName("Jenis"); // NOI18N
+        Jenis.setPreferredSize(new java.awt.Dimension(100, 23));
+        Jenis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                JenisKeyPressed(evt);
+            }
+        });
+        panelisi3.add(Jenis);
 
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_START);
 
@@ -526,7 +553,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil();
+        tampilSmc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -542,7 +569,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         NoJur.setText("");
         kdrek.setText("");
         nmrek.setText("");
-        tampil();
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -554,11 +581,62 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("Jurnal.html", "Bayar Piutang", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("Jurnal.wps", "Bayar Piutang", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("Jurnal.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("Jurnal.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        int i = 0;
+                        for (; i < tabMode.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
+                                (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (tabMode.getValueAt(i, 5) == null ? "" : Valid.SetAngka((Double) tabMode.getValueAt(i, 5))),
+                                (tabMode.getValueAt(i, 6) == null ? "" : Valid.SetAngka((Double) tabMode.getValueAt(i, 6))));
+                        }
+                        Sequel.temporary(String.valueOf(i + 1), "Jumlah Total :", "", "", "", "", debet.getText(), kredit.getText());
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptJurnal.jasper", "report", "::[ Transaksi Posting Jurnal ]::", param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+            /*
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
@@ -584,8 +662,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             i++;
             Sequel.menyimpan("temporary","'"+i+"','Jumlah Total :','','','','','"+debet.getText()+"','"+kredit.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Pembelian");
             Valid.MyReportqry("rptJurnal.jasper","report","::[ Transaksi Posting Jurnal ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+            */
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
@@ -607,25 +686,25 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
+        tampilSmc();
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        tampilSmc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        tampilSmc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        tampil();
+                        tampilSmc();
                     }
                 }
             });
@@ -635,6 +714,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         BtnPrint.setEnabled(akses.getposting_jurnal());
     }//GEN-LAST:event_formWindowActivated
+
+    private void NoBuktiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoBuktiKeyPressed
+        Valid.pindah(evt, NoJur, TglJurnal1);
+    }//GEN-LAST:event_NoBuktiKeyPressed
 
     /**
     * @param args the command line arguments
@@ -660,6 +743,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button BtnPrint;
     private widget.ComboBox Jenis;
     private widget.TextBox Kd2;
+    private widget.TextBox NoBukti;
     private widget.TextBox NoJur;
     private widget.TextBox TCari;
     private widget.Tanggal TglJurnal1;
@@ -674,6 +758,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Label label11;
     private widget.Label label12;
     private widget.Label label15;
+    private widget.Label label16;
     private widget.Label label17;
     private widget.Label label21;
     private widget.Label label22;
@@ -691,6 +776,113 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Table tbDokter;
     private widget.TextBox tipe;
     // End of variables declaration//GEN-END:variables
+
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            new SwingWorker<Void, Object[]>() {
+                private final String tgl1 = Valid.getTglSmc(TglJurnal1);
+                private final String tgl2 = Valid.getTglSmc(TglJurnal2);
+                private final String jenis = Jenis.getSelectedItem().toString().substring(0, 1);
+                private final String nobukti = NoBukti.getText().trim();
+                private final String nojurnal = NoJur.getText().trim();
+                private final String kodeRek = kdrek.getText();
+                private final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select jurnal.no_jurnal, jurnal.no_bukti, jurnal.tgl_jurnal, jurnal.jam_jurnal, if(jurnal.jenis = 'U', 'Umum', 'Penyesuaian') as jenis, jurnal.keterangan, " +
+                        "detailjurnal.kd_rek, rekening.nm_rek, detailjurnal.debet, detailjurnal.kredit from jurnal use index (tgl_jurnal) inner join detailjurnal on " +
+                        "detailjurnal.no_jurnal = jurnal.no_jurnal inner join rekening on detailjurnal.kd_rek = rekening.kd_rek where jurnal.tgl_jurnal between ? and ? " +
+                        "and jurnal.jenis = ? " + (nobukti.isBlank() ? "" : "and jurnal.no_bukti = ? ") + (nojurnal.isBlank() ? "" : "and jurnal.no_jurnal = ? ") +
+                        (kodeRek.isBlank() ? "" : "and detailjurnal.kd_rek = ? ") + (cari.isBlank() ? "" : "and (jurnal.no_jurnal like ? or jurnal.no_bukti like ? or " +
+                        "jurnal.keterangan like ? or detailjurnal.kd_rek like ? or rekening.nm_rek like ?) ") + "order by jurnal.tgl_jurnal, jurnal.jam_jurnal, " +
+                        "jurnal.no_jurnal, detailjurnal.debet desc, detailjurnal.kredit desc"
+                    )) {
+                        int p = 0;
+                        ps.setString(++p, tgl1);
+                        ps.setString(++p, tgl2);
+                        ps.setString(++p, jenis);
+                        if (!nobukti.isBlank()) {
+                            ps.setString(++p, nobukti);
+                        }
+                        if (!nojurnal.isBlank()) {
+                            ps.setString(++p, nojurnal);
+                        }
+                        if (!kodeRek.isBlank()) {
+                            ps.setString(++p, kodeRek);
+                        }
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            if (rs.next()) {
+                                double debet = rs.getDouble("debet"), kredit = rs.getDouble("kredit");
+                                int no = 1;
+                                String nj = rs.getString("no_jurnal");
+                                // "No.Jurnal", "No.Bukti", "Tgl.Jurnal", "Jenis", "Keterangan", "Debet", "Kredit"
+                                //  0            1           2             3        4             5        6
+                                publish(new Object[] {
+                                    rs.getString("no_jurnal"), rs.getString("no_bukti"), rs.getString("tgl_jurnal") + " " +
+                                    rs.getString("jam_jurnal"), rs.getString("jenis"), rs.getString("keterangan"), null, null
+                                });
+                                do {
+                                    if (!nj.equals(rs.getString("no_jurnal"))) {
+                                        publish(new Object[] {"", "", "", "", "Total :", debet, kredit});
+                                        no = 1;
+                                        nj = rs.getString("no_jurnal");
+                                        debet = rs.getDouble("debet");
+                                        kredit = rs.getDouble("kredit");
+
+                                        publish(new Object[] {
+                                            rs.getString("no_jurnal"), rs.getString("no_bukti"), rs.getString("tgl_jurnal") + " " +
+                                            rs.getString("jam_jurnal"), rs.getString("jenis"), rs.getString("keterangan"), null, null
+                                        });
+                                        publish(new Object[] {"", "", "", "", no + ". " + rs.getString("kd_rek") + ", " + rs.getString("nm_rek"), rs.getDouble("debet"), rs.getDouble("kredit")});
+                                    } else {
+                                        publish(new Object[] {"", "", "", "", (++no) + ". " + rs.getString("kd_rek") + ", " + rs.getString("nm_rek"), rs.getDouble("debet"), rs.getDouble("kredit")});
+                                        debet += rs.getDouble("debet");
+                                        kredit += rs.getDouble("kredit");
+                                    }
+
+                                    ttldebet += rs.getDouble("debet");
+                                    ttlkredit += rs.getDouble("kredit");
+                                } while (rs.next());
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    debet.setText(Valid.SetAngka(ttldebet));
+                    kredit.setText(Valid.SetAngka(ttlkredit));
+                    DlgCariJurnal.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
 
     private void tampil() {
         if(ceksukses==false){

@@ -19,6 +19,9 @@ import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
@@ -1135,8 +1139,82 @@ public final class DlgPengeluaranPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(tabModeBayarPesanObat.getRowCount()!=0){
+        try {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                bw.flush();
+            }
+            String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+            }, "Laporan 1 (HTML)");
+            switch (pilihan) {
+                case "Laporan 1 (HTML)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0) Valid.exportHtmlSmc("BayarPesanObat.html","Pembayaran Pemesanan Obat BHP",tbBayarPesanObat);
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0) Valid.exportHtmlSmc("BayarPesanNonMedis.html","Pembayaran Pemesanan Non Medis",tbBayarPesanNonMedis);
+                    if(tabModeBayarPesanAset.getRowCount()!=0) Valid.exportHtmlSmc("BayarPesanAset.html","Pembayaran Pemesanan Aset",tbBayarPesanAset);
+                    if(tabModeBayarPesanDapur.getRowCount()!=0) Valid.exportHtmlSmc("BayarPesanDapur.html","Pembayaran Pemesanan Dapur",tbBayarPesanDapur);
+                    if(tabModeBayarJM.getRowCount()!=0) Valid.exportHtmlSmc("BayarJMDokter.html","Pembayaran JM Dokter",tbBayarJM);
+                    if(tabModePengeluaranHarian.getRowCount()!=0) Valid.exportHtmlSmc("PengeluaranHarian.html","Pengeluaran Harian",tbPengeluaranHarian);
+                    if(tabModeBebanHutang.getRowCount()!=0) Valid.exportHtmlSmc("BayarBebanHutangLain.html","Bayar Beban Hutang Lain",tbBebanHutang);
+                    if(tabModePengadaanObat.getRowCount()!=0) Valid.exportHtmlSmc("BayarPengadaanObat.html","Pembayaran Pengadaan Obat BHP",tbPengadaanObat);
+                    if(tabModePengadaanNonMedis.getRowCount()!=0) Valid.exportHtmlSmc("BayarPengadaanNonMedis.html","Pembayaran Pengadaan Non Medis",tbPengadaanNonMedis);
+                    if(tabModePengadaanInventaris.getRowCount()!=0) Valid.exportHtmlSmc("BayarPengadaanInventaris.html","Pembayaran Pengadaan Aset Inventaris",tbPengadaanAsetInventaris);
+                    if(tabModePengadaanDapur.getRowCount()!=0) Valid.exportHtmlSmc("BayarPengadaanDapur.html","Pembayaran Pengadaan Dapur",tbPengadaanDapur);
+                    if(tabModeBayarPesanToko.getRowCount()!=0) Valid.exportHtmlSmc("BayarPesanToko.html","Pembayaran Pemesanan Toko",tbBayarPesanToko);
+                    if(tabModePengadaanToko.getRowCount()!=0) Valid.exportHtmlSmc("BayarPengadaanToko.html","Pembayaran Pengadaan Toko",tbPengadaanToko);
+                    break;
+                case "Laporan 2 (WPS)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0) Valid.exportWPSSmc("BayarPesanObat.wps","Pembayaran Pemesanan Obat BHP",tbBayarPesanObat);
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0) Valid.exportWPSSmc("BayarPesanNonMedis.wps","Pembayaran Pemesanan Non Medis",tbBayarPesanNonMedis);
+                    if(tabModeBayarPesanAset.getRowCount()!=0) Valid.exportWPSSmc("BayarPesanAset.wps","Pembayaran Pemesanan Aset",tbBayarPesanAset);
+                    if(tabModeBayarPesanDapur.getRowCount()!=0) Valid.exportWPSSmc("BayarPesanDapur.wps","Pembayaran Pemesanan Dapur",tbBayarPesanDapur);
+                    if(tabModeBayarJM.getRowCount()!=0) Valid.exportWPSSmc("BayarJMDokter.wps","Pembayaran JM Dokter",tbBayarJM);
+                    if(tabModePengeluaranHarian.getRowCount()!=0) Valid.exportWPSSmc("PengeluaranHarian.wps","Pengeluaran Harian",tbPengeluaranHarian);
+                    if(tabModeBebanHutang.getRowCount()!=0) Valid.exportWPSSmc("BayarBebanHutangLain.wps","Bayar Beban Hutang Lain",tbBebanHutang);
+                    if(tabModePengadaanObat.getRowCount()!=0) Valid.exportWPSSmc("BayarPengadaanObat.wps","Pembayaran Pengadaan Obat BHP",tbPengadaanObat);
+                    if(tabModePengadaanNonMedis.getRowCount()!=0) Valid.exportWPSSmc("BayarPengadaanNonMedis.wps","Pembayaran Pengadaan Non Medis",tbPengadaanNonMedis);
+                    if(tabModePengadaanInventaris.getRowCount()!=0) Valid.exportWPSSmc("BayarPengadaanInventaris.wps","Pembayaran Pengadaan Aset Inventaris",tbPengadaanAsetInventaris);
+                    if(tabModePengadaanDapur.getRowCount()!=0) Valid.exportWPSSmc("BayarPengadaanDapur.wps","Pembayaran Pengadaan Dapur",tbPengadaanDapur);
+                    if(tabModeBayarPesanToko.getRowCount()!=0) Valid.exportWPSSmc("BayarPesanToko.wps","Pembayaran Pemesanan Toko",tbBayarPesanToko);
+                    if(tabModePengadaanToko.getRowCount()!=0) Valid.exportWPSSmc("BayarPengadaanToko.wps","Pembayaran Pengadaan Toko",tbPengadaanToko);
+                    break;
+                case "Laporan 3 (CSV)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0) Valid.exportCSVSmc("BayarPesanObat.csv",tbBayarPesanObat);
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0) Valid.exportCSVSmc("BayarPesanNonMedis.csv",tbBayarPesanNonMedis);
+                    if(tabModeBayarPesanAset.getRowCount()!=0) Valid.exportCSVSmc("BayarPesanAset.csv",tbBayarPesanAset);
+                    if(tabModeBayarPesanDapur.getRowCount()!=0) Valid.exportCSVSmc("BayarPesanDapur.csv",tbBayarPesanDapur);
+                    if(tabModeBayarJM.getRowCount()!=0) Valid.exportCSVSmc("BayarJMDokter.csv",tbBayarJM);
+                    if(tabModePengeluaranHarian.getRowCount()!=0) Valid.exportCSVSmc("PengeluaranHarian.csv",tbPengeluaranHarian);
+                    if(tabModeBebanHutang.getRowCount()!=0) Valid.exportCSVSmc("BayarBebanHutangLain.csv",tbBebanHutang);
+                    if(tabModePengadaanObat.getRowCount()!=0) Valid.exportCSVSmc("BayarPengadaanObat.csv",tbPengadaanObat);
+                    if(tabModePengadaanNonMedis.getRowCount()!=0) Valid.exportCSVSmc("BayarPengadaanNonMedis.csv",tbPengadaanNonMedis);
+                    if(tabModePengadaanInventaris.getRowCount()!=0) Valid.exportCSVSmc("BayarPengadaanInventaris.csv",tbPengadaanAsetInventaris);
+                    if(tabModePengadaanDapur.getRowCount()!=0) Valid.exportCSVSmc("BayarPengadaanDapur.csv",tbPengadaanDapur);
+                    if(tabModeBayarPesanToko.getRowCount()!=0) Valid.exportCSVSmc("BayarPesanToko.csv",tbBayarPesanToko);
+                    if(tabModePengadaanToko.getRowCount()!=0) Valid.exportCSVSmc("BayarPengadaanToko.csv",tbPengadaanToko);
+                    break;
+                case "Laporan 4 (XLSX)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0) Valid.exportXlsxSmc("BayarPesanObat.xlsx",tbBayarPesanObat);
+                    if(tabModeBayarPesanNonMedis.getRowCount()!=0) Valid.exportXlsxSmc("BayarPesanNonMedis.xlsx",tbBayarPesanNonMedis);
+                    if(tabModeBayarPesanAset.getRowCount()!=0) Valid.exportXlsxSmc("BayarPesanAset.xlsx",tbBayarPesanAset);
+                    if(tabModeBayarPesanDapur.getRowCount()!=0) Valid.exportXlsxSmc("BayarPesanDapur.xlsx",tbBayarPesanDapur);
+                    if(tabModeBayarJM.getRowCount()!=0) Valid.exportXlsxSmc("BayarJMDokter.xlsx",tbBayarJM);
+                    if(tabModePengeluaranHarian.getRowCount()!=0) Valid.exportXlsxSmc("PengeluaranHarian.xlsx",tbPengeluaranHarian);
+                    if(tabModeBebanHutang.getRowCount()!=0) Valid.exportXlsxSmc("BayarBebanHutangLain.xlsx",tbBebanHutang);
+                    if(tabModePengadaanObat.getRowCount()!=0) Valid.exportXlsxSmc("BayarPengadaanObat.xlsx",tbPengadaanObat);
+                    if(tabModePengadaanNonMedis.getRowCount()!=0) Valid.exportXlsxSmc("BayarPengadaanNonMedis.xlsx",tbPengadaanNonMedis);
+                    if(tabModePengadaanInventaris.getRowCount()!=0) Valid.exportXlsxSmc("BayarPengadaanInventaris.xlsx",tbPengadaanAsetInventaris);
+                    if(tabModePengadaanDapur.getRowCount()!=0) Valid.exportXlsxSmc("BayarPengadaanDapur.xlsx",tbPengadaanDapur);
+                    if(tabModeBayarPesanToko.getRowCount()!=0) Valid.exportXlsxSmc("BayarPesanToko.xlsx",tbBayarPesanToko);
+                    if(tabModePengadaanToko.getRowCount()!=0) Valid.exportXlsxSmc("BayarPengadaanToko.xlsx",tbPengadaanToko);
+                    break;
+                case "Laporan 5 (Jasper)":
+                    if(tabModeBayarPesanObat.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -1363,6 +1441,9 @@ public final class DlgPengeluaranPengeluaran extends javax.swing.JDialog {
                 "inner join rekening on rekening.kd_rek=tokopembelian.kd_rek "+
                 "where tokopembelian.tgl_beli between '"+Valid.SetTgl(DTPCari1.getSelectedItem().toString()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem().toString()+"")+"' order by tokopembelian.tgl_beli",param);
         }
+                    break;
+            }
+        } catch (Exception e) { System.out.println("Notif : " + e); }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 

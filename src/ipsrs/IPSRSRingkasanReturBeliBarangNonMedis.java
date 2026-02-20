@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -987,56 +990,69 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("tanggal1",Valid.SetTgl(TglBeli1.getSelectedItem()+""));
-            param.put("tanggal2",Valid.SetTgl(TglBeli2.getSelectedItem()+""));
-            param.put("parameter","%"+TCari.getText().trim()+"%");
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            carifaktur="";carisuplier="";caripetugas="";carijenis="";caribarang="";
-            if(!NoFaktur.getText().equals("")){
-                carifaktur=" and ipsrsreturbeli.no_retur_beli like '%"+NoFaktur.getText()+"%' ";
-            }
-            if(!nmsup.getText().equals("")){
-                carisuplier=" and ipsrssuplier.nama_suplier like '%"+nmsup.getText()+"%' ";
-            }
-            if(!nmptg.getText().equals("")){
-                caripetugas=" and petugas.nama like '%"+nmptg.getText()+"%' ";
-            }
-            if(!nmjenis.getText().equals("")){
-                carijenis=" and ipsrsjenisbarang.nm_jenis like '%"+nmjenis.getText()+"%' ";
-            }
-            if(!nmbar.getText().equals("")){
-                caribarang= " and ipsrsbarang.nama_brng like '%"+nmbar.getText()+"%' ";
-            }
-            Valid.MyReportqry("rptRingkasanReturSuplierNonMedis.jasper","report","::[ Laporan Ringkasan Retur Ke Suplier Barang Non Medis ]::",
-                    "select ipsrs_detail_returbeli.kode_brng,ipsrsbarang.nama_brng,ipsrsjenisbarang.nm_jenis as namajenis, "+
-                    "ipsrs_detail_returbeli.kode_sat,kodesatuan.satuan,sum(ipsrs_detail_returbeli.jml_retur) as jumlah, "+
-                    "sum(ipsrs_detail_returbeli.total) as total "+
-                    " from ipsrsreturbeli inner join ipsrssuplier inner join petugas  "+
-                    " inner join ipsrs_detail_returbeli inner join ipsrsbarang inner join kodesatuan "+
-                    " inner join ipsrsjenisbarang "+
-                    " on ipsrs_detail_returbeli.kode_brng=ipsrsbarang.kode_brng "+
-                    " and ipsrs_detail_returbeli.kode_sat=kodesatuan.kode_sat "+
-                    " and ipsrsreturbeli.no_retur_beli=ipsrs_detail_returbeli.no_retur_beli "+
-                    " and ipsrsreturbeli.kode_suplier=ipsrssuplier.kode_suplier "+
-                    " and ipsrsreturbeli.nip=petugas.nip and ipsrsbarang.jenis=ipsrsjenisbarang.kd_jenis"+
-                    " where ipsrsreturbeli.tgl_retur between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' "+carifaktur+carisuplier+caripetugas+carijenis+caribarang+
-                    (TCari.getText().trim().equals("")?"":" and (ipsrsreturbeli.no_retur_beli like '%"+TCari.getText()+"%' or ipsrsreturbeli.kode_suplier like '%"+TCari.getText()+"%' or ipsrssuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
-                    " ipsrsreturbeli.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%' or ipsrs_detail_returbeli.kode_brng like '%"+TCari.getText()+"%' or "+
-                    " ipsrsbarang.nama_brng like '%"+TCari.getText()+"%' or ipsrs_detail_returbeli.kode_sat like '%"+TCari.getText()+"%' or ipsrsjenisbarang.nm_jenis like '%"+TCari.getText()+"%') ")+
-                    " group by ipsrs_detail_returbeli.kode_brng "+order,param);
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
 
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RingkasanReturSuplierNonMedis.html", "Laporan Ringkasan Retur Ke Suplier Barang Non Medis", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RingkasanReturSuplierNonMedis.wps", "Laporan Ringkasan Retur Ke Suplier Barang Non Medis", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RingkasanReturSuplierNonMedis.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RingkasanReturSuplierNonMedis.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("tanggal1", Valid.SetTgl(TglBeli1.getSelectedItem() + ""));
+                        param.put("tanggal2", Valid.SetTgl(TglBeli2.getSelectedItem() + ""));
+                        param.put("parameter", "%" + TCari.getText().trim() + "%");
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportSmc("rptRingkasanReturSuplierNonMedis.jasper", "report", "::[ Laporan Ringkasan Retur Ke Suplier Barang Non Medis ]::", param, "select ipsrs_detail_returbeli.kode_brng, " +
+                            "ipsrsbarang.nama_brng, ipsrsjenisbarang.nm_jenis as namajenis, ipsrs_detail_returbeli.kode_sat, kodesatuan.satuan, sum(ipsrs_detail_returbeli.jml_retur) as jumlah, " +
+                            "sum(ipsrs_detail_returbeli.total) as total from ipsrsreturbeli inner join ipsrssuplier on ipsrsreturbeli.kode_suplier = ipsrssuplier.kode_suplier inner join petugas " +
+                            "on ipsrsreturbeli.nip = petugas.nip inner join ipsrs_detail_returbeli on ipsrsreturbeli.no_retur_beli = ipsrs_detail_returbeli.no_retur_beli inner join ipsrsbarang on " +
+                            "ipsrs_detail_returbeli.kode_brng = ipsrsbarang.kode_brng inner join kodesatuan on ipsrs_detail_returbeli.kode_sat = kodesatuan.kode_sat inner join ipsrsjenisbarang on " +
+                            "ipsrsbarang.jenis = ipsrsjenisbarang.kd_jenis     where ipsrsreturbeli.tgl_retur between ? and ? and (if(trim(?) = '', 1 = 1, ipsrsreturbeli.no_retur_beli like ?)) and " +
+                            "(if(trim(?) = '', 1 = 1, ipsrsreturbeli.kode_suplier like ?)) and (if(trim(?) = '', 1 = 1, ipsrsreturbeli.nip like ?)) and (if(trim(?) = '', 1 = 1, ipsrsbarang.kd_jenis " +
+                            "like ?)) and (if(trim(?) = '', 1 = 1, ipsrs_detail_returbeli.kode_brng like ?)) and (if(trim(?) = '', 1 = 1, ipsrsreturbeli.no_retur_beli like ? or ipsrsreturbeli.kode_suplier " +
+                            "like ? or ipsrssuplier.nama_suplier like ? or ipsrsreturbeli.nip like ? or petugas.nama like ? or ipsrs_detail_returbeli.kode_brng like ? or ipsrsbarang.nama_brng like ? or " +
+                            "ipsrs_detail_returbeli.kode_sat like ? or ipsrsjenisbarang.nm_jenis like ?)) group by ipsrs_detail_returbeli.kode_brng " + order, Valid.getTglSmc(TglBeli1), Valid.getTglSmc(TglBeli2),
+                            NoFaktur.getText().trim(), NoFaktur.getText().trim() + "%", kdsup.getText().trim(), kdsup.getText().trim() + "%", kdptg.getText().trim(), kdptg.getText().trim() + "%",
+                            kdjenis.getText().trim(), kdjenis.getText().trim() + "%", kdbar.getText().trim(), kdbar.getText().trim() + "%", TCari.getText().trim(), "%" + TCari.getText().trim() + "%",
+                            "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() +
+                            "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

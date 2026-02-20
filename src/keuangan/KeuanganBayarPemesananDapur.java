@@ -28,6 +28,7 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -1029,30 +1030,51 @@ public final class KeuanganBayarPemesananDapur extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnKeluar.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptBayarPemesananDapur.jasper","report","::[ Bayar Pemesanan ]::",
-                    "select bayar_pemesanan_dapur.tgl_bayar,dapurpemesanan.tgl_faktur,dapurpemesanan.tgl_pesan,dapurpemesanan.tgl_tempo, bayar_pemesanan_dapur.no_faktur,"+
-                    "dapursuplier.nama_suplier,bayar_pemesanan_dapur.nama_bayar,bayar_pemesanan_dapur.no_bukti,bayar_pemesanan_dapur.besar_bayar,bayar_pemesanan_dapur.keterangan,"+
-                    "bayar_pemesanan_dapur.nip,petugas.nama from bayar_pemesanan_dapur inner join petugas on bayar_pemesanan_dapur.nip=petugas.nip "+
-                    "inner join dapurpemesanan on bayar_pemesanan_dapur.no_faktur=dapurpemesanan.no_faktur "+
-                    "inner join dapursuplier on dapurpemesanan.kode_suplier=dapursuplier.kode_suplier where "+
-                    "bayar_pemesanan_dapur.tgl_bayar between '"+Valid.SetTgl(TglCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglCari2.getSelectedItem()+"")+"' and dapursuplier.nama_suplier like '%"+nmsup.getText().trim()+"%' "+
-                    (TCari.getText().trim().equals("")?"":"and (bayar_pemesanan_dapur.no_faktur like '%"+TCari.getText().trim()+"%' or dapursuplier.nama_suplier like '%"+TCari.getText().trim()+"%' or bayar_pemesanan_dapur.nama_bayar like '%"+TCari.getText().trim()+"%' or "+
-                    "bayar_pemesanan_dapur.no_bukti like '%"+TCari.getText().trim()+"%' or bayar_pemesanan_dapur.keterangan like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') ")+"order by bayar_pemesanan_dapur.tgl_bayar",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)": Valid.exportHtmlSmc("BayarPemesananDapur.html", "::[ Bayar Pemesanan ]::", tbKamar); break;
+                    case "Laporan 2 (WPS)": Valid.exportWPSSmc("BayarPemesananDapur.wps", "::[ Bayar Pemesanan ]::", tbKamar); break;
+                    case "Laporan 3 (CSV)": Valid.exportCSVSmc("BayarPemesananDapur.csv", tbKamar); break;
+                    case "Laporan 4 (XLSX)": Valid.exportXlsxSmc("BayarPemesananDapur.xlsx", tbKamar); break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptBayarPemesananDapur.jasper","report","::[ Bayar Pemesanan ]::",
+                                "select bayar_pemesanan_dapur.tgl_bayar,dapurpemesanan.tgl_faktur,dapurpemesanan.tgl_pesan,dapurpemesanan.tgl_tempo, bayar_pemesanan_dapur.no_faktur,"+
+                                "dapursuplier.nama_suplier,bayar_pemesanan_dapur.nama_bayar,bayar_pemesanan_dapur.no_bukti,bayar_pemesanan_dapur.besar_bayar,bayar_pemesanan_dapur.keterangan,"+
+                                "bayar_pemesanan_dapur.nip,petugas.nama from bayar_pemesanan_dapur inner join petugas on bayar_pemesanan_dapur.nip=petugas.nip "+
+                                "inner join dapurpemesanan on bayar_pemesanan_dapur.no_faktur=dapurpemesanan.no_faktur "+
+                                "inner join dapursuplier on dapurpemesanan.kode_suplier=dapursuplier.kode_suplier where "+
+                                "bayar_pemesanan_dapur.tgl_bayar between '"+Valid.SetTgl(TglCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglCari2.getSelectedItem()+"")+"' and dapursuplier.nama_suplier like '%"+nmsup.getText().trim()+"%' "+
+                                (TCari.getText().trim().equals("")?"":"and (bayar_pemesanan_dapur.no_faktur like '%"+TCari.getText().trim()+"%' or dapursuplier.nama_suplier like '%"+TCari.getText().trim()+"%' or bayar_pemesanan_dapur.nama_bayar like '%"+TCari.getText().trim()+"%' or "+
+                                "bayar_pemesanan_dapur.no_bukti like '%"+TCari.getText().trim()+"%' or bayar_pemesanan_dapur.keterangan like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') ")+"order by bayar_pemesanan_dapur.tgl_bayar",param);
+                        break;
+                }
+            } catch (Exception e) { System.out.println("Notif : " + e); }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

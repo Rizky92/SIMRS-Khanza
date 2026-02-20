@@ -7,10 +7,12 @@ import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -333,96 +335,112 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(i=0;i<tabMode.getRowCount();i++){
-                try {
-                    sjmlvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
-                } catch (Exception e) {
-                    sjmlvisit="";
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
                 }
 
-                try {
-                    sjmlbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
-                } catch (Exception e) {
-                    sjmlbyphone="";
-                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
 
-                try {
-                    starifvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
-                } catch (Exception e) {
-                    starifvisit="";
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("FeeVisitDokter.html", "Rekap Jasa Visit Dokter", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("FeeVisitDokter.wps", "Rekap Jasa Visit Dokter", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("FeeVisitDokter.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("FeeVisitDokter.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        int i = 0;
+                        for (; i < tabMode.getRowCount(); i++) {
+                            try {
+                                sjmlvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
+                            } catch (Exception e) {
+                                sjmlvisit="";
+                            }
+                            try {
+                                sjmlbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
+                            } catch (Exception e) {
+                                sjmlbyphone="";
+                            }
+                            try {
+                                starifvisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
+                            } catch (Exception e) {
+                                starifvisit="";
+                            }
+                            try {
+                                starifbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()));
+                            } catch (Exception e) {
+                                starifbyphone="";
+                            }
+                            try {
+                                svisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()));
+                            } catch (Exception e) {
+                                svisit="";
+                            }
+                            try {
+                                sbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()));
+                            } catch (Exception e) {
+                                sbyphone="";
+                            }
+                            try {
+                                sbruto=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()));
+                            } catch (Exception e) {
+                                sbruto="";
+                            }
+                            try {
+                                sjasa=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()));
+                            } catch (Exception e) {
+                                sjasa="";
+                            }
+                            try {
+                                suangrs=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()));
+                            } catch (Exception e) {
+                                suangrs="";
+                            }
+                            Sequel.temporary(String.valueOf(i + 1),
+                                tabMode.getValueAt(i,0).toString(),
+                                tabMode.getValueAt(i,1).toString(),
+                                tabMode.getValueAt(i,2).toString(),
+                                tabMode.getValueAt(i,3).toString(),
+                                tabMode.getValueAt(i,4).toString(),
+                                tabMode.getValueAt(i,5).toString(),
+                                sjmlvisit, sjmlbyphone, starifvisit, starifbyphone,
+                                svisit, sbyphone, sbruto, sjasa, suangrs
+                            );
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptFeeVisitDokter.jasper", "report", "[ Rekap Jasa Visit Dokter ]", param);
+                        break;
                 }
-
-                try {
-                    starifbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()));
-                } catch (Exception e) {
-                    starifbyphone="";
-                }
-
-                try {
-                    svisit=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()));
-                } catch (Exception e) {
-                    svisit="";
-                }
-
-                try {
-                    sbyphone=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()));
-                } catch (Exception e) {
-                    sbyphone="";
-                }
-
-                try {
-                    sbruto=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()));
-                } catch (Exception e) {
-                    sbruto="";
-                }
-
-                try {
-                    sjasa=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()));
-                } catch (Exception e) {
-                    sjasa="";
-                }
-
-                try {
-                    suangrs=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()));
-                } catch (Exception e) {
-                    suangrs="";
-                }
-                Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
-                                tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
-                                sjmlvisit+"','"+
-                                sjmlbyphone+"','"+
-                                starifvisit+"','"+
-                                starifbyphone+"','"+
-                                svisit+"','"+
-                                sbyphone+"','"+
-                                sbruto+"','"+
-                                sjasa+"','"+
-                                suangrs+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("dokter",nmdokter.getText());
-                param.put("periode",Tgl1.getSelectedItem()+" s/d "+Tgl2.getSelectedItem());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptFeeVisitDokter.jasper","report","[ Rekap Jasa Visit Dokter ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

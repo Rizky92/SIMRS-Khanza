@@ -38,6 +38,9 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 
 
 /**
@@ -906,42 +909,60 @@ public final class RMKonselingFarmasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){ JOptionPane.showMessageDialog(null,"Proses loading..."); return; }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptKonselingFarmasi.jasper","report","::[ Data Konseling Farmasi ]::",
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,konseling_farmasi.tanggal,"+
-                    "konseling_farmasi.diagnosa,konseling_farmasi.obat_pemakaian,konseling_farmasi.riwayat_alergi,konseling_farmasi.keluhan,"+
-                    "konseling_farmasi.pernah_datang,konseling_farmasi.tindak_lanjut,konseling_farmasi.nip,petugas.nama,pasien.jk "+
-                    "from konseling_farmasi inner join reg_periksa on konseling_farmasi.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on konseling_farmasi.nip=petugas.nip where "+
-                    "konseling_farmasi.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
-                    "order by konseling_farmasi.tanggal",param);
-            }else{
-                Valid.MyReportqry("rptKonselingFarmasi.jasper","report","::[ Data Konseling Farmasi ]::",
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,konseling_farmasi.tanggal,"+
-                    "konseling_farmasi.diagnosa,konseling_farmasi.obat_pemakaian,konseling_farmasi.riwayat_alergi,konseling_farmasi.keluhan,"+
-                    "konseling_farmasi.pernah_datang,konseling_farmasi.tindak_lanjut,konseling_farmasi.nip,petugas.nama,pasien.jk "+
-                    "from konseling_farmasi inner join reg_periksa on konseling_farmasi.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on konseling_farmasi.nip=petugas.nip where "+
-                    "konseling_farmasi.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
-                    "and (reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
-                    "pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or konseling_farmasi.obat_pemakaian like '%"+TCari.getText().trim()+"%' or "+
-                    "konseling_farmasi.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
-                    "order by konseling_farmasi.tanggal ",param);
+            try{
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)": Valid.exportHtmlSmc("KonselingFarmasi.html","Data Konseling Farmasi",tbObat); break;
+                    case "Laporan 2 (WPS)": Valid.exportWPSSmc("KonselingFarmasi.wps","Data Konseling Farmasi",tbObat); break;
+                    case "Laporan 3 (CSV)": Valid.exportCSVSmc("KonselingFarmasi.csv",tbObat); break;
+                    case "Laporan 4 (XLSX)": Valid.exportXlsxSmc("KonselingFarmasi.xlsx",tbObat); break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(TCari.getText().trim().equals("")){
+                            Valid.MyReportqry("rptKonselingFarmasi.jasper","report","::[ Data Konseling Farmasi ]::",
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,konseling_farmasi.tanggal,"+
+                                "konseling_farmasi.diagnosa,konseling_farmasi.obat_pemakaian,konseling_farmasi.riwayat_alergi,konseling_farmasi.keluhan,"+
+                                "konseling_farmasi.pernah_datang,konseling_farmasi.tindak_lanjut,konseling_farmasi.nip,petugas.nama,pasien.jk "+
+                                "from konseling_farmasi inner join reg_periksa on konseling_farmasi.no_rawat=reg_periksa.no_rawat "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join petugas on konseling_farmasi.nip=petugas.nip where "+
+                                "konseling_farmasi.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
+                                "order by konseling_farmasi.tanggal",param);
+                        }else{
+                            Valid.MyReportqry("rptKonselingFarmasi.jasper","report","::[ Data Konseling Farmasi ]::",
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,konseling_farmasi.tanggal,"+
+                                "konseling_farmasi.diagnosa,konseling_farmasi.obat_pemakaian,konseling_farmasi.riwayat_alergi,konseling_farmasi.keluhan,"+
+                                "konseling_farmasi.pernah_datang,konseling_farmasi.tindak_lanjut,konseling_farmasi.nip,petugas.nama,pasien.jk "+
+                                "from konseling_farmasi inner join reg_periksa on konseling_farmasi.no_rawat=reg_periksa.no_rawat "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join petugas on konseling_farmasi.nip=petugas.nip where "+
+                                "konseling_farmasi.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
+                                "and (reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
+                                "pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or konseling_farmasi.obat_pemakaian like '%"+TCari.getText().trim()+"%' or "+
+                                "konseling_farmasi.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
+                                "order by konseling_farmasi.tanggal ",param);
+                        }
+                        break;
+                }
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
             }
         }
         this.setCursor(Cursor.getDefaultCursor());

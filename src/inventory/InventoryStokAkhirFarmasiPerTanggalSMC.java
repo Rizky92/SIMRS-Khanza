@@ -337,6 +337,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnPrint.requestFocus();
@@ -783,15 +787,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             tbDokter.repaint();
 
             new SwingWorker<Void, Object[]>() {
+                private final String cari = TCari.getText().trim();
+                private final String kdgudang = KdGudang.getText();
                 @Override
                 protected Void doInBackground() throws Exception {
                     try (PreparedStatement ps = koneksi.prepareStatement(
-                        "select databarang.kode_brng, databarang.nama_brng from databarang " + (TCari.getText().isBlank() ? "" :
+                        "select databarang.kode_brng, databarang.nama_brng from databarang " + (cari.isBlank() ? "" :
                         "where databarang.kode_brng like ? or databarang.nama_brng like ? ") + "order by databarang.nama_brng"
                     )) {
-                        if (!TCari.getText().isBlank()) {
-                            ps.setString(1, "%" + TCari.getText().trim() + "%");
-                            ps.setString(2, "%" + TCari.getText().trim() + "%");
+                        if (!cari.isBlank()) {
+                            ps.setString(1, "%" + cari + "%");
+                            ps.setString(2, "%" + cari + "%");
                         }
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
@@ -806,11 +812,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     int p = 0;
                                     ps2.setString(++p, ym.atDay(2).toString());
                                     ps2.setString(++p, rs.getString("kode_brng"));
-                                    ps2.setString(++p, KdGudang.getText());
+                                    ps2.setString(++p, kdgudang);
                                     ps2.setString(++p, ym.atDay(2).toString());
                                     ps2.setString(++p, ym.atEndOfMonth().toString());
                                     ps2.setString(++p, rs.getString("kode_brng"));
-                                    ps2.setString(++p, KdGudang.getText());
+                                    ps2.setString(++p, kdgudang);
                                     try (ResultSet rs2 = ps2.executeQuery()) {
                                         if (rs2.next()) {
                                             int d = rs2.getInt("d");

@@ -17,6 +17,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -776,54 +777,80 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            row=tabMode.getRowCount();
-            ttlpiutang=0;ttliur=0;ttlsudahdibayar=0;ttlsisapiutang=0;ttlinacbg=0;total=0;
-            for(i=0;i<row;i++){
-                sisapiutang=0;
-                try {
-                    sisapiutang=Double.parseDouble(tabMode.getValueAt(i,10).toString());
-                } catch (Exception e) {
-                    sisapiutang=0;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
                 }
-                ttlpiutang=ttlpiutang+Double.parseDouble(tabMode.getValueAt(i,5).toString());
-                ttliur=ttliur+Double.parseDouble(tabMode.getValueAt(i,6).toString());
-                ttlsudahdibayar=ttlsudahdibayar+Double.parseDouble(tabMode.getValueAt(i,7).toString());
-                ttlsisapiutang=ttlsisapiutang+Double.parseDouble(tabMode.getValueAt(i,8).toString());
-                ttlinacbg=ttlinacbg+Double.parseDouble(tabMode.getValueAt(i,9).toString());
-                total=total+sisapiutang;
-                Sequel.menyimpan("temporary","'"+i+"','"+
-                            tabMode.getValueAt(i,1).toString()+"','"+
-                            tabMode.getValueAt(i,2).toString()+"','"+
-                            tabMode.getValueAt(i,3).toString()+"','"+
-                            tabMode.getValueAt(i,4).toString()+"','"+
-                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()))+"','"+
-                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()))+"','"+
-                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"','"+
-                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"','"+
-                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"','"+
-                            Valid.SetAngka(sisapiutang)+"','"+
-                            Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","RVP Piutang");
-            }
-            i++;
-            Sequel.menyimpan("temporary","'"+i+"','Total :','','','','"+Valid.SetAngka(ttlpiutang)+"','"+Valid.SetAngka(ttliur)+"','"+Valid.SetAngka(ttlsudahdibayar)+"','"+Valid.SetAngka(ttlsisapiutang)+"','"+Valid.SetAngka(ttlinacbg)+"','"+Valid.SetAngka(total)+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","RVP Piutangr");
-
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptRVPPiutang.jasper","report","::[ Data Piutang BPJS Sebelum RVP ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)": Valid.exportHtmlSmc("RVPPiutang.html", "::[ Data Piutang BPJS Sebelum RVP ]::", tbBangsal); break;
+                    case "Laporan 2 (WPS)": Valid.exportWPSSmc("RVPPiutang.wps", "::[ Data Piutang BPJS Sebelum RVP ]::", tbBangsal); break;
+                    case "Laporan 3 (CSV)": Valid.exportCSVSmc("RVPPiutang.csv", tbBangsal); break;
+                    case "Laporan 4 (XLSX)": Valid.exportXlsxSmc("RVPPiutang.xlsx", tbBangsal); break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        row=tabMode.getRowCount();
+                        ttlpiutang=0;ttliur=0;ttlsudahdibayar=0;ttlsisapiutang=0;ttlinacbg=0;total=0;
+                        for(i=0;i<row;i++){
+                            sisapiutang=0;
+                            try {
+                                sisapiutang=Double.parseDouble(tabMode.getValueAt(i,10).toString());
+                            } catch (Exception e) {
+                                sisapiutang=0;
+                            }
+                            ttlpiutang=ttlpiutang+Double.parseDouble(tabMode.getValueAt(i,5).toString());
+                            ttliur=ttliur+Double.parseDouble(tabMode.getValueAt(i,6).toString());
+                            ttlsudahdibayar=ttlsudahdibayar+Double.parseDouble(tabMode.getValueAt(i,7).toString());
+                            ttlsisapiutang=ttlsisapiutang+Double.parseDouble(tabMode.getValueAt(i,8).toString());
+                            ttlinacbg=ttlinacbg+Double.parseDouble(tabMode.getValueAt(i,9).toString());
+                            total=total+sisapiutang;
+                            Sequel.temporary(String.valueOf(i),
+                                        tabMode.getValueAt(i,1).toString(),
+                                        tabMode.getValueAt(i,2).toString(),
+                                        tabMode.getValueAt(i,3).toString(),
+                                        tabMode.getValueAt(i,4).toString(),
+                                        Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString())),
+                                        Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString())),
+                                        Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString())),
+                                        Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString())),
+                                        Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString())),
+                                        Valid.SetAngka(sisapiutang),
+                                        Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString())));
+                        }
+                        i++;
+                        Sequel.temporary(String.valueOf(i),"Total :","","","",
+                                    Valid.SetAngka(ttlpiutang),
+                                    Valid.SetAngka(ttliur),
+                                    Valid.SetAngka(ttlsudahdibayar),
+                                    Valid.SetAngka(ttlsisapiutang),
+                                    Valid.SetAngka(ttlinacbg),
+                                    Valid.SetAngka(total),"");
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptRVPPiutang.jasper","report","::[ Data Piutang BPJS Sebelum RVP ]::",param);
+                        break;
+                }
+            } catch (Exception e) { System.out.println("Notif : " + e); }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

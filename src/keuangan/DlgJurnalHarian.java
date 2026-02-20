@@ -12,6 +12,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -21,6 +24,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.stream.IntStream;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -135,12 +139,12 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
         panelisi3 = new widget.panelisi();
         label15 = new widget.Label();
         NoJur = new widget.TextBox();
-        label11 = new widget.Label();
-        TglJurnal2 = new widget.Tanggal();
-        label12 = new widget.Label();
-        TglJurnal1 = new widget.Tanggal();
         label16 = new widget.Label();
         NoBukti = new widget.TextBox();
+        label11 = new widget.Label();
+        TglJurnal1 = new widget.Tanggal();
+        label12 = new widget.Label();
+        TglJurnal2 = new widget.Tanggal();
 
         Kd2.setName("Kd2"); // NOI18N
         Kd2.setPreferredSize(new java.awt.Dimension(207, 23));
@@ -378,72 +382,68 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
 
         panelisi3.setName("panelisi3"); // NOI18N
         panelisi3.setPreferredSize(new java.awt.Dimension(100, 47));
-        panelisi3.setLayout(null);
+        panelisi3.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         label15.setText("No.Jurnal :");
         label15.setName("label15"); // NOI18N
-        label15.setPreferredSize(new java.awt.Dimension(60, 23));
+        label15.setPreferredSize(new java.awt.Dimension(65, 23));
         panelisi3.add(label15);
-        label15.setBounds(0, 12, 65, 23);
 
         NoJur.setName("NoJur"); // NOI18N
-        NoJur.setPreferredSize(new java.awt.Dimension(207, 23));
+        NoJur.setPreferredSize(new java.awt.Dimension(180, 23));
         NoJur.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoJurKeyPressed(evt);
             }
         });
         panelisi3.add(NoJur);
-        NoJur.setBounds(69, 12, 180, 23);
-
-        label11.setText("Tgl.Jurnal :");
-        label11.setName("label11"); // NOI18N
-        label11.setPreferredSize(new java.awt.Dimension(70, 23));
-        panelisi3.add(label11);
-        label11.setBounds(510, 12, 65, 23);
-
-        TglJurnal2.setDisplayFormat("dd-MM-yyyy");
-        TglJurnal2.setName("TglJurnal2"); // NOI18N
-        TglJurnal2.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TglJurnal2KeyPressed(evt);
-            }
-        });
-        panelisi3.add(TglJurnal2);
-        TglJurnal2.setBounds(704, 12, 90, 23);
-
-        label12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label12.setText("s.d.");
-        label12.setName("label12"); // NOI18N
-        label12.setPreferredSize(new java.awt.Dimension(70, 23));
-        panelisi3.add(label12);
-        label12.setBounds(673, 12, 27, 23);
-
-        TglJurnal1.setDisplayFormat("dd-MM-yyyy");
-        TglJurnal1.setName("TglJurnal1"); // NOI18N
-        TglJurnal1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                TglJurnal1KeyPressed(evt);
-            }
-        });
-        panelisi3.add(TglJurnal1);
-        TglJurnal1.setBounds(579, 12, 90, 23);
 
         label16.setText("No. Bukti :");
         label16.setName("label16"); // NOI18N
-        label16.setPreferredSize(new java.awt.Dimension(60, 23));
+        label16.setPreferredSize(new java.awt.Dimension(65, 23));
         panelisi3.add(label16);
-        label16.setBounds(253, 12, 65, 23);
 
         NoBukti.setName("NoBukti"); // NOI18N
-        NoBukti.setPreferredSize(new java.awt.Dimension(207, 23));
+        NoBukti.setPreferredSize(new java.awt.Dimension(180, 23));
         NoBukti.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 NoBuktiKeyPressed(evt);
             }
         });
         panelisi3.add(NoBukti);
-        NoBukti.setBounds(322, 12, 180, 23);
+
+        label11.setText("Tgl.Jurnal :");
+        label11.setName("label11"); // NOI18N
+        label11.setPreferredSize(new java.awt.Dimension(65, 23));
+        panelisi3.add(label11);
+
+        TglJurnal1.setDisplayFormat("dd-MM-yyyy");
+        TglJurnal1.setMinimumSize(new java.awt.Dimension(90, 23));
+        TglJurnal1.setName("TglJurnal1"); // NOI18N
+        TglJurnal1.setPreferredSize(new java.awt.Dimension(90, 23));
+        TglJurnal1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TglJurnal1KeyPressed(evt);
+            }
+        });
+        panelisi3.add(TglJurnal1);
+
+        label12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        label12.setText("s.d.");
+        label12.setName("label12"); // NOI18N
+        label12.setPreferredSize(new java.awt.Dimension(27, 23));
+        panelisi3.add(label12);
+
+        TglJurnal2.setDisplayFormat("dd-MM-yyyy");
+        TglJurnal2.setMinimumSize(new java.awt.Dimension(90, 23));
+        TglJurnal2.setName("TglJurnal2"); // NOI18N
+        TglJurnal2.setPreferredSize(new java.awt.Dimension(90, 23));
+        TglJurnal2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                TglJurnal2KeyPressed(evt);
+            }
+        });
+        panelisi3.add(TglJurnal2);
 
         internalFrame1.add(panelisi3, java.awt.BorderLayout.PAGE_START);
 
@@ -564,46 +564,61 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        BtnCariActionPerformed(evt);
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
 
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            int row=tabMode.getRowCount();
-            for(int i=0;i<row;i++){
-                tanggal1="";
-                try {
-                    tanggal1=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,4).toString()));
-                } catch (Exception e) {
-                    tanggal1="";
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("JurnalHarian.html", "Jurnal Harian", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("JurnalHarian.wps", "Jurnal Harian", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("JurnalHarian.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("JurnalHarian.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        for (int i = 0; i < tabMode.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1),
+                                (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2), (String) tabMode.getValueAt(i, 3),
+                                Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 4)), Valid.setAngkaSmc((Double) tabMode.getValueAt(i, 5)));
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptJurnalHarian.jasper", "report", "::[ Jurnal Harian ]::", param);
+                        break;
                 }
-                try {
-                    tanggal2=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,5).toString()));
-                } catch (Exception e) {
-                    tanggal2="";
-                }
-                Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,0).toString()+"','"+
-                                tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,2).toString()+"','"+
-                                tabMode.getValueAt(i,3).toString()+"','"+
-                                tanggal1+"','"+tanggal2+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Posting Jurnal");
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-
-            Valid.MyReportqry("rptJurnalHarian.jasper","report","::[ Jurnal Harian ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

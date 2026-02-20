@@ -12,6 +12,9 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import fungsi.akses;
 import java.awt.Cursor;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -254,42 +257,74 @@ public final class KeuanganRekapPengajuanBiaya extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(int r=0;r<tabMode.getRowCount();r++){
-                if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
-                    Sequel.menyimpan("temporary","'"+i+"','"+
-                                    tabMode.getValueAt(r,0).toString()+"','"+
-                                    tabMode.getValueAt(r,1).toString()+"','"+
-                                    tabMode.getValueAt(r,2).toString()+"','"+
-                                    tabMode.getValueAt(r,3).toString()+"','"+
-                                    tabMode.getValueAt(r,4).toString()+"','"+
-                                    tabMode.getValueAt(r,5).toString()+"','"+
-                                    tabMode.getValueAt(r,6).toString()+"','"+
-                                    tabMode.getValueAt(r,7).toString()+"','"+
-                                    tabMode.getValueAt(r,8).toString()+"','"+
-                                    tabMode.getValueAt(r,9).toString()+"','"+
-                                    tabMode.getValueAt(r,10).toString()+"','"+
-                                    tabMode.getValueAt(r,11).toString()+"','"+
-                                    tabMode.getValueAt(r,12).toString()+"','"+
-                                    tabMode.getValueAt(r,13).toString()+"','"+
-                                    tabMode.getValueAt(r,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Pengajuan Biaya");
-                    i++;
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
                 }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RekapPengajuanBiaya.html", "Rekap Pengajuan Biaya", tbBangsal);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RekapPengajuanBiaya.wps", "Rekap Pengajuan Biaya", tbBangsal);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RekapPengajuanBiaya.csv", tbBangsal);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RekapPengajuanBiaya.xlsx", tbBangsal);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        int i = 0;
+                        for (int r = 0; r < tabMode.getRowCount(); r++) {
+                            if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
+                                Sequel.temporary(String.valueOf(i + 1),
+                                    tabMode.getValueAt(r,0).toString(),
+                                    tabMode.getValueAt(r,1).toString(),
+                                    tabMode.getValueAt(r,2).toString(),
+                                    tabMode.getValueAt(r,3).toString(),
+                                    tabMode.getValueAt(r,4).toString(),
+                                    tabMode.getValueAt(r,5).toString(),
+                                    tabMode.getValueAt(r,6).toString(),
+                                    tabMode.getValueAt(r,7).toString(),
+                                    tabMode.getValueAt(r,8).toString(),
+                                    tabMode.getValueAt(r,9).toString(),
+                                    tabMode.getValueAt(r,10).toString(),
+                                    tabMode.getValueAt(r,11).toString(),
+                                    tabMode.getValueAt(r,12).toString(),
+                                    tabMode.getValueAt(r,13).toString(),
+                                    tabMode.getValueAt(r,14).toString());
+                                i++;
+                            }
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptRekapPengajuanBiaya.jasper", "report", "::[ Laporan Rekap Pengajuan Biaya/Anggaran Per Departemen ]::", param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-
-            Valid.MyReportqry("rptRekapPengajuanBiaya.jasper","report","::[ Laporan Rekap Pengajuan Biaya/Anggaran Per Departemen ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

@@ -11,6 +11,9 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -19,6 +22,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.stream.IntStream;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -804,32 +808,59 @@ public final class DlgJnsPerawatanUTD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if(! TCari.getText().trim().equals("")){
-            BtnCariActionPerformed(evt);
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
         }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReportqry("rptTarifUtd.jasper","report","::[ Data Tarif Radiologi ]::","select jns_perawatan_utd.kd_jenis_prw,jns_perawatan_utd.nm_perawatan,jns_perawatan_utd.bagian_rs,"+
-                    "jns_perawatan_utd.bhp,jns_perawatan_utd.tarif_perujuk,jns_perawatan_utd.tarif_tindakan_dokter,jns_perawatan_utd.tarif_tindakan_petugas,jns_perawatan_utd.kso,"+
-                    "jns_perawatan_utd.manajemen,jns_perawatan_utd.total_byr,penjab.png_jawab "+
-                    "from jns_perawatan_utd inner join penjab on penjab.kd_pj=jns_perawatan_utd.kd_pj where "+
-                    " jns_perawatan_utd.status='1' and jns_perawatan_utd.kd_jenis_prw like '%"+TCari.getText().trim()+"%' or "+
-                    " jns_perawatan_utd.status='1' and jns_perawatan_utd.nm_perawatan like '%"+TCari.getText().trim()+"%' or "+
-                    " jns_perawatan_utd.status='1' and penjab.png_jawab like '%"+TCari.getText().trim()+"%' "+
-                    "order by jns_perawatan_utd.kd_jenis_prw",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("TarifUtd.html", "Data Tarif UTD", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("TarifUtd.wps", "Data Tarif UTD", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("TarifUtd.csv", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("TarifUtd.xlsx", tbJnsPerawatan, IntStream.rangeClosed(1, tabMode.getColumnCount() - 1).toArray());
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportSmc("rptTarifUtd.jasper", "report", "::[ Data Tarif UTD ]::", param, "select jns_perawatan_utd.kd_jenis_prw, jns_perawatan_utd.nm_perawatan, jns_perawatan_utd.bagian_rs, " +
+                            "jns_perawatan_utd.bhp, jns_perawatan_utd.tarif_perujuk, jns_perawatan_utd.tarif_tindakan_dokter, jns_perawatan_utd.tarif_tindakan_petugas, jns_perawatan_utd.kso, " +
+                            "jns_perawatan_utd.manajemen, jns_perawatan_utd.total_byr, penjab.png_jawab from jns_perawatan_utd inner join penjab on penjab.kd_pj = jns_perawatan_utd.kd_pj where " +
+                            "jns_perawatan_utd.status = '1' and (if(trim(?) = '', 1 = 1, jns_perawatan_utd.kd_jenis_prw like ? or jns_perawatan_utd.nm_perawatan like ? or penjab.png_jawab like ?)) " +
+                            "order by jns_perawatan_utd.kd_jenis_prw", TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

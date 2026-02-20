@@ -22,6 +22,9 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -736,26 +739,59 @@ public final class KeslingMutuAirLimbah extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptMutuAirLimbah.jasper","report","::[ Data Mutu Air Limbah ]::",
-                   "select kesling_mutu_air_limbah.nip,petugas.nama,kesling_mutu_air_limbah.tanggal,kesling_mutu_air_limbah.meteran,kesling_mutu_air_limbah.jumlahharian,kesling_mutu_air_limbah.ph,"+
-                   "kesling_mutu_air_limbah.suhu,kesling_mutu_air_limbah.tds,kesling_mutu_air_limbah.ec,kesling_mutu_air_limbah.salt from kesling_mutu_air_limbah inner join petugas on kesling_mutu_air_limbah.nip=petugas.nip "+
-                   "where kesling_mutu_air_limbah.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
-                   (TCari.getText().trim().equals("")?"":" and (kesling_mutu_air_limbah.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "),param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {
+                    "Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"
+                }, "Laporan 1 (HTML)");
+
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("MutuAirLimbah.html", "Data Mutu Air Limbah", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("MutuAirLimbah.wps", "Data Mutu Air Limbah", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("MutuAirLimbah.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("MutuAirLimbah.xlsx", tbObat);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportSmc("rptMutuAirLimbah.jasper", "report", "::[ Data Mutu Air Limbah ]::", param, "select kesling_mutu_air_limbah.nip, petugas.nama, kesling_mutu_air_limbah.tanggal, " +
+                            "kesling_mutu_air_limbah.meteran, kesling_mutu_air_limbah.jumlahharian, kesling_mutu_air_limbah.ph, kesling_mutu_air_limbah.suhu, kesling_mutu_air_limbah.tds, " +
+                            "kesling_mutu_air_limbah.ec, kesling_mutu_air_limbah.salt from kesling_mutu_air_limbah inner join petugas on kesling_mutu_air_limbah.nip = petugas.nip where " +
+                            "kesling_mutu_air_limbah.tanggal between ? and ? and (if(trim(?) = '', 1 = 1, kesling_mutu_air_limbah.nip like ? or petugas.nama like ?))", Valid.getTglSmc(DTPCari1) +
+                            " 00:00:00.000", Valid.getTglSmc(DTPCari2) + " 23:59:59.999", TCari.getText().trim(), "%" + TCari.getText().trim() + "%", "%" + TCari.getText().trim() + "%");
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
