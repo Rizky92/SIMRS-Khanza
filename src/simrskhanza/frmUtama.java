@@ -50119,7 +50119,7 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
                 jmlmenu++;
             }
-        } else if (cmbMenu.getSelectedIndex() == 19) {
+        } else if (cmbMenu.getSelectedIndex() == 20) {
             if (akses.getuser()) {
                 Panelmenu.add(btnUserSmc);
                 jmlmenu++;
