@@ -1785,7 +1785,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             );
             param.put("tanggalkeluar", Valid.SetTgl3(tglKeluar));
             param.put("jamkeluar", jamKeluar);
-            try (PreparedStatement ps = koneksi.prepareStatement("select dpjp_ranap.kd_dokter, dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter != ?")) {
+            try (PreparedStatement ps = koneksi.prepareStatement("select dpjp_ranap.kd_dokter, dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter != ? order by dpjp_ranap.status='utama' desc")) {
                 ps.setString(1, lblNoRawat.getText());
                 ps.setString(2, kodeDokter);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -3755,7 +3755,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             param.put("tanggalkeluar", Valid.SetTgl3(tglKeluar));
             param.put("jamkeluar", jamKeluar);
 
-            try (PreparedStatement ps = koneksi.prepareStatement("select dpjp_ranap.kd_dokter, dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter != ?")) {
+            try (PreparedStatement ps = koneksi.prepareStatement("select dpjp_ranap.kd_dokter, dokter.nm_dokter from dpjp_ranap join dokter on dpjp_ranap.kd_dokter = dokter.kd_dokter where dpjp_ranap.no_rawat = ? and dpjp_ranap.kd_dokter != ? order by dpjp_ranap.status='utama' desc")) {
                 ps.setString(1, tbKompilasi.getValueAt(row, 1).toString());
                 ps.setString(2, kodeDokter);
                 try (ResultSet rs = ps.executeQuery()) {

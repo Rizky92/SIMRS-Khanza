@@ -12,8 +12,8 @@
 	<parameter name="logo" class="java.io.InputStream"/>
 	<queryString>
 		<![CDATA[select reg_periksa.tgl_registrasi,dpjp_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,
-dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join reg_periksa inner join pasien inner join dokter 
-on dpjp_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+dpjp_ranap.kd_dokter,dokter.nm_dokter,dpjp_ranap.status from dpjp_ranap inner join reg_periksa inner join pasien inner join dokter
+on dpjp_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
 and dpjp_ranap.kd_dokter=dokter.kd_dokter]]>
 	</queryString>
 	<field name="tgl_registrasi" class="java.sql.Date">
@@ -32,6 +32,9 @@ and dpjp_ranap.kd_dokter=dokter.kd_dokter]]>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="nm_dokter" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="status" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<background>
@@ -127,11 +130,18 @@ and dpjp_ranap.kd_dokter=dokter.kd_dokter]]>
 				<text><![CDATA[KD.DOKTER]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Opaque" x="513" y="0" width="289" height="17" forecolor="#000000" backcolor="#F0F0DC"/>
+				<reportElement mode="Opaque" x="513" y="0" width="209" height="17" forecolor="#000000" backcolor="#F0F0DC"/>
 				<textElement verticalAlignment="Middle" lineSpacing="Single">
 					<font fontName="Tahoma" size="8" isBold="false"/>
 				</textElement>
 				<text><![CDATA[NAMA DOKTER]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="722" y="0" width="80" height="17" forecolor="#000000" backcolor="#F0F0DC"/>
+				<textElement verticalAlignment="Middle" lineSpacing="Single">
+					<font fontName="Tahoma" size="8" isBold="false"/>
+				</textElement>
+				<text><![CDATA[STATUS]]></text>
 			</staticText>
 			<line>
 				<reportElement x="0" y="0" width="802" height="1"/>
@@ -185,11 +195,18 @@ and dpjp_ranap.kd_dokter=dokter.kd_dokter]]>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{no_rawat}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="513" y="0" width="289" height="10"/>
+				<reportElement x="513" y="0" width="209" height="10"/>
 				<textElement lineSpacing="Single">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
 				<textFieldExpression class="java.lang.String"><![CDATA[$F{nm_dokter}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="722" y="0" width="80" height="10"/>
+				<textElement lineSpacing="Single">
+					<font fontName="Tahoma" size="8"/>
+				</textElement>
+				<textFieldExpression class="java.lang.String"><![CDATA["utama".equals($F{status}) ? "DPJP Utama" : "DPJP"]]></textFieldExpression>
 			</textField>
 		</band>
 	</detail>

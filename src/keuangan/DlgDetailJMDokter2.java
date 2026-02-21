@@ -1193,7 +1193,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 pskamar.close();
                             }
                         }
-                        dpjp=Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=?",rsreg.getString("no_rawat"));
+                        dpjp=Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=? order by dpjp_ranap.status='utama' desc limit 1",rsreg.getString("no_rawat"));
                         if(dpjp.equals("")){
                             dpjp=rsreg.getString("nm_dokter");
                         }

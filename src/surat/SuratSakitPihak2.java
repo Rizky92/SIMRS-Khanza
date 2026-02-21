@@ -1085,7 +1085,7 @@ public final class SuratSakitPihak2 extends javax.swing.JDialog {
                 if (kodedokter.isBlank()) {
                     kodedokter = Sequel.cariIsiSmc("select maping_dokter_dpjpvclaim.kd_dokter from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs where bridging_sep.no_rawat = ? and bridging_sep.jnspelayanan = '1'", tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString());
                     if (kodedokter.isBlank()) {
-                        kodedokter = Sequel.cariIsiSmc("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat = ?", tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString());
+                        kodedokter = Sequel.cariIsiSmc("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat = ? order by dpjp_ranap.status='utama' desc limit 1", tbObat.getValueAt(tbObat.getSelectedRow(), 1).toString());
                     }
                 }
             } else {

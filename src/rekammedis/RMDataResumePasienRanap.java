@@ -1899,6 +1899,11 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                         KetKeadaanPulang.getText(),CaraKeluar.getSelectedItem().toString(),KetKeluar.getText(),DIlanjutkan.getSelectedItem().toString(),KetDilanjutkan.getText(),
                         tglJam,ObatPulang.getText(),KdPj.getText(),CaraBayar.getText()
                     });
+                    String cntDpjp=Sequel.cariIsi("select count(*) from dpjp_ranap where no_rawat=? and kd_dokter=?",TNoRw.getText(),KdDokter.getText());
+                    if(!cntDpjp.equals("0")&&!cntDpjp.equals("")){
+                        Sequel.queryu2("update dpjp_ranap set status='' where no_rawat=? and status='utama'",1,new String[]{TNoRw.getText()});
+                        Sequel.queryu2("update dpjp_ranap set status='utama' where no_rawat=? and kd_dokter=?",2,new String[]{TNoRw.getText(),KdDokter.getText()});
+                    }
                     emptTeks();
                     LCount.setText(""+tabMode.getRowCount());
                     JOptionPane.showMessageDialog(null, "Resume medis pasien berhasil disimpan!");
@@ -2248,7 +2253,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),4).toString()+"\nID "+(finger.equals("")?tbObat.getValueAt(tbObat.getSelectedRow(),3).toString():finger)+"\n"+Valid.SetTgl3(Keluar.getText()));
             try {
-                ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
+                ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>? order by dpjp_ranap.status='utama' desc");
                 try {
                     ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                     ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),3).toString());
@@ -2775,7 +2780,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
             param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             param.put("finger","#1A");
             try {
-                ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
+                ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>? order by dpjp_ranap.status='utama' desc");
                 try {
                     ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                     ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
@@ -2916,7 +2921,7 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                 param.put("norawat",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                 param.put("finger","#");
                 try {
-                    ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>?");
+                    ps=koneksi.prepareStatement("select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? and dpjp_ranap.kd_dokter<>? order by dpjp_ranap.status='utama' desc");
                     try {
                         ps.setString(1,tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
                         ps.setString(2,tbObat.getValueAt(tbObat.getSelectedRow(),5).toString());
@@ -3685,6 +3690,11 @@ public final class RMDataResumePasienRanap extends javax.swing.JDialog {
                    tbObat.setValueAt(ObatPulang.getText(),tbObat.getSelectedRow(),51);
                    tbObat.setValueAt(KdPj.getText(),tbObat.getSelectedRow(),52);
                    tbObat.setValueAt(CaraBayar.getText(),tbObat.getSelectedRow(),53);
+                   String cntDpjp=Sequel.cariIsi("select count(*) from dpjp_ranap where no_rawat=? and kd_dokter=?",TNoRw.getText(),KdDokter.getText());
+                   if(!cntDpjp.equals("0")&&!cntDpjp.equals("")){
+                       Sequel.queryu2("update dpjp_ranap set status='' where no_rawat=? and status='utama'",1,new String[]{TNoRw.getText()});
+                       Sequel.queryu2("update dpjp_ranap set status='utama' where no_rawat=? and kd_dokter=?",2,new String[]{TNoRw.getText(),KdDokter.getText()});
+                   }
                    emptTeks();
 
                    JOptionPane.showMessageDialog(null, "Resume medis pasien telah diganti!");

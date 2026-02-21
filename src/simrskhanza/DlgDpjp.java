@@ -52,6 +52,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     private PreparedStatement ps,ps2;
     private ResultSet rs;
     private int jml=0,i=0,index=0;
+    private widget.Button BtnDPJPUtama;
     private String[] kode,nama;
     private boolean[] pilih;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -64,7 +65,15 @@ public class DlgDpjp extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        Object[] row={"P","Tgl.Rawat","No.Rawat","No.R.M.","Nama Pasien","Kode Dokter","Nama Dokter"};
+        BtnDPJPUtama = new widget.Button();
+        BtnDPJPUtama.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png")));
+        BtnDPJPUtama.setText("DPJP Utama");
+        BtnDPJPUtama.setToolTipText("Set sebagai DPJP Utama");
+        BtnDPJPUtama.setPreferredSize(new java.awt.Dimension(120, 30));
+        BtnDPJPUtama.addActionListener(e -> BtnDPJPUtamaActionPerformed(e));
+        panelGlass8.add(BtnDPJPUtama, 3);
+
+        Object[] row={"P","Tgl.Rawat","No.Rawat","No.R.M.","Nama Pasien","Kode Dokter","Nama Dokter","Status"};
         TabModePasien=new DefaultTableModel(null,row){
             @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
@@ -75,7 +84,7 @@ public class DlgDpjp extends javax.swing.JDialog {
              }
              Class[] types = new Class[] {
                 java.lang.Boolean.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -88,7 +97,7 @@ public class DlgDpjp extends javax.swing.JDialog {
         tbPasien.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbPasien.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < 8; i++) {
             TableColumn column = tbPasien.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(20);
@@ -104,6 +113,8 @@ public class DlgDpjp extends javax.swing.JDialog {
                 column.setPreferredWidth(90);
             }else if(i==6){
                 column.setPreferredWidth(200);
+            }else if(i==7){
+                column.setPreferredWidth(80);
             }
         }
         tbPasien.setDefaultRenderer(Object.class, new WarnaTable());
@@ -646,15 +657,20 @@ public class DlgDpjp extends javax.swing.JDialog {
         }else if(jml==0){
             Valid.textKosong(Dokter,"Data Dokter");
         }else{
+            boolean hasUtama = !Sequel.cariIsi("select count(*) from dpjp_ranap where no_rawat=? and status='utama'",TNoRw.getText()).equals("0");
             for(i=0;i<tbDiagnosa.getRowCount();i++){
                 if(tbDiagnosa.getValueAt(i,0).toString().equals("true")){
-                    if(Sequel.menyimpantf("dpjp_ranap","?,?","Dokter",2,new String[]{
-                            TNoRw.getText(),tbDiagnosa.getValueAt(i,1).toString()
+                    String statusDpjp = !hasUtama ? "utama" : "";
+                    if(Sequel.menyimpantf("dpjp_ranap","?,?,?","Dokter",3,new String[]{
+                            TNoRw.getText(),tbDiagnosa.getValueAt(i,1).toString(),statusDpjp
                         })==true){
                         TabModePasien.addRow(new Object[]{
-                            false,Tanggal.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),tbDiagnosa.getValueAt(i,1).toString(),tbDiagnosa.getValueAt(i,2).toString()
+                            false,Tanggal.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),tbDiagnosa.getValueAt(i,1).toString(),tbDiagnosa.getValueAt(i,2).toString(),statusDpjp.equals("utama")?"DPJP Utama":"DPJP"
                         });
                         tbDiagnosa.setValueAt(false,i,0);
+                        if(!hasUtama){
+                            hasUtama=true;
+                        }
                     }
                 }
             }
@@ -731,7 +747,7 @@ public class DlgDpjp extends javax.swing.JDialog {
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptDpjp.jasper","report","::[ Data Diagnosa Pasien ]::",
                     "select reg_periksa.tgl_registrasi,dpjp_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                    "dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join reg_periksa inner join pasien inner join dokter "+
+                    "dpjp_ranap.kd_dokter,dokter.nm_dokter,dpjp_ranap.status from dpjp_ranap inner join reg_periksa inner join pasien inner join dokter "+
                     "on dpjp_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "and dpjp_ranap.kd_dokter=dokter.kd_dokter "+
                     "where reg_periksa.tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and reg_periksa.no_rkm_medis like '%"+TCariPasien.getText()+"%' and reg_periksa.tgl_registrasi like '%"+TCari.getText().trim()+"%' or "+
@@ -1028,7 +1044,7 @@ public class DlgDpjp extends javax.swing.JDialog {
         Valid.tabelKosong(TabModePasien);
         try{
             ps2=koneksi.prepareStatement("select reg_periksa.tgl_registrasi,dpjp_ranap.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                    "dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join reg_periksa inner join pasien inner join dokter "+
+                    "dpjp_ranap.kd_dokter,dokter.nm_dokter,dpjp_ranap.status from dpjp_ranap inner join reg_periksa inner join pasien inner join dokter "+
                     "on dpjp_ranap.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "and dpjp_ranap.kd_dokter=dokter.kd_dokter "+
                     "where reg_periksa.tgl_registrasi between ? and ? "+(TCariPasien.getText().trim().equals("")?"":"and reg_periksa.no_rkm_medis=? ")+
@@ -1057,7 +1073,7 @@ public class DlgDpjp extends javax.swing.JDialog {
                 rs=ps2.executeQuery();
                 while(rs.next()){
                     TabModePasien.addRow(new Object[]{
-                        false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)
+                        false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),"utama".equals(rs.getString(7))?"DPJP Utama":"DPJP"
                     });
                 }
             } catch (Exception e) {
@@ -1098,6 +1114,23 @@ public class DlgDpjp extends javax.swing.JDialog {
         }
     }
 
+    private void BtnDPJPUtamaActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tbPasien.getSelectedRow()==-1){
+            JOptionPane.showMessageDialog(null,"Silahkan pilih data dokter yang ingin dijadikan DPJP Utama...!!!!");
+        }else{
+            int row=tbPasien.getSelectedRow();
+            String noRawat=tbPasien.getValueAt(row,2).toString();
+            String kdDokter=tbPasien.getValueAt(row,5).toString();
+            String nmDokter=tbPasien.getValueAt(row,6).toString();
+            int reply=JOptionPane.showConfirmDialog(rootPane,"Set dr. "+nmDokter+" sebagai DPJP Utama untuk No.Rawat "+noRawat+"?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+            if(reply==JOptionPane.YES_OPTION){
+                Sequel.queryu2("update dpjp_ranap set status='' where no_rawat=? and status='utama'",1,new String[]{noRawat});
+                Sequel.queryu2("update dpjp_ranap set status='utama' where no_rawat=? and kd_dokter=?",2,new String[]{noRawat,kdDokter});
+                runBackground(() ->tampil());
+            }
+        }
+    }
+
     public void setNoRm(String norwt, Date tgl1, Date tgl2,String status) {
         TNoRw.setText(norwt);
         TCari.setText(norwt);
@@ -1127,6 +1160,7 @@ public class DlgDpjp extends javax.swing.JDialog {
     public void isCek(){
         BtnSimpan.setEnabled(akses.getdpjp_ranap());
         BtnHapus.setEnabled(akses.getdpjp_ranap());
+        BtnDPJPUtama.setEnabled(akses.getdpjp_ranap());
         btnTarif.setEnabled(akses.getdokter());
         BtnPrint.setEnabled(akses.getdpjp_ranap());
 

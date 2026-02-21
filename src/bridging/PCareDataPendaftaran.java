@@ -4855,7 +4855,7 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
                 }else{
                     if(Sequel.cariInteger("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.no_rawat=?",TNoRw.getText())>0){
                         DlgCariPerawatanRanap perawatan=new DlgCariPerawatanRanap(null,false);
-                        kdptg=Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=?",TNoRw.getText());
+                        kdptg=Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=? order by dpjp_ranap.status='utama' desc limit 1",TNoRw.getText());
                         if(kdptg.equals("")){
                             kdptg=Sequel.cariIsi("select reg_periksa.kd_dokter from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText());
                         }

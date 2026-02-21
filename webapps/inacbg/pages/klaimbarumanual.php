@@ -296,7 +296,7 @@
                 
                 $nm_dokter2="";
                 $a=1;
-                $hasildokter=bukaquery("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$baris["no_rawat"]."'");
+                $hasildokter=bukaquery("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$baris["no_rawat"]."' order by dpjp_ranap.status='utama' desc");
                 while($barisdokter = mysqli_fetch_array($hasildokter)) {
                     if($a==1){
                         $nm_dokter2=$barisdokter["nm_dokter"];
@@ -453,7 +453,7 @@
 
                 $nm_dokter2="";
                 $a=1;
-                $hasildokter=bukaquery("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$baris["no_rawat"]."'");
+                $hasildokter=bukaquery("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$baris["no_rawat"]."' order by dpjp_ranap.status='utama' desc");
                 while($barisdokter = mysqli_fetch_array($hasildokter)) {
                     if($a==1){
                         $nm_dokter2=$barisdokter["nm_dokter"];
