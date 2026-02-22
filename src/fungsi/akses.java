@@ -259,7 +259,8 @@ public final class akses {
             hasil_pengujian_sampel_lab_kesehatan_lingkungan=false,verifikasi_pengujian_sampel_lab_kesehatan_lingkungan=false,validasi_pengujian_sampel_lab_kesehatan_lingkungan=false,
             rekap_pelayanan_lab_kesehatan_lingkungan=false,pembayaran_pengujian_sampel_lab_kesehatan_lingkungan=false,skrining_curb65=false,bpjs_potensi_prb=false,
             bpjs_riwayat_pelayanan_obat=false,skrining_gizi_kehamilan=false,bpjs_rekap_peserta_prb_apotek=false,serah_terima_anggota_tubuh_barang=false,pcra_icra_jenis_aktivitas_proyek=false,
-            pcra_icra_lokasi_kelompok_risiko_area=false,pcra_icra_kelas_risiko_pencegahan=false,pcra_icra_tindakan_pengendalian=false;
+            pcra_icra_lokasi_kelompok_risiko_area=false,pcra_icra_kelas_risiko_pencegahan=false,pcra_icra_tindakan_pengendalian=false,pcra_icra_identifkasi_risiko_infeksi=false,
+            pcra_icra_identifkasi_risiko_keselamatan=false,pcra_icra_identifkasi_risiko_kebakaran=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -1493,6 +1494,9 @@ public final class akses {
                         akses.pcra_icra_lokasi_kelompok_risiko_area=rs2.getBoolean("pcra_icra_lokasi_kelompok_risiko_area");
                         akses.pcra_icra_kelas_risiko_pencegahan=rs2.getBoolean("pcra_icra_kelas_risiko_pencegahan");
                         akses.pcra_icra_tindakan_pengendalian=rs2.getBoolean("pcra_icra_tindakan_pengendalian");
+                        akses.pcra_icra_identifkasi_risiko_infeksi=rs2.getBoolean("pcra_icra_identifkasi_risiko_infeksi");
+                        akses.pcra_icra_identifkasi_risiko_keselamatan=rs2.getBoolean("pcra_icra_identifkasi_risiko_keselamatan");
+                        akses.pcra_icra_identifkasi_risiko_kebakaran=rs2.getBoolean("pcra_icra_identifkasi_risiko_kebakaran");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2723,6 +2727,9 @@ public final class akses {
         akses.pcra_icra_lokasi_kelompok_risiko_area=isadmin;
         akses.pcra_icra_kelas_risiko_pencegahan=isadmin;
         akses.pcra_icra_tindakan_pengendalian=isadmin;
+        akses.pcra_icra_identifkasi_risiko_infeksi=isadmin;
+        akses.pcra_icra_identifkasi_risiko_keselamatan=isadmin;
+        akses.pcra_icra_identifkasi_risiko_kebakaran=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3959,6 +3966,9 @@ public final class akses {
     public static boolean getpcra_icra_lokasi_kelompok_risiko_area(){return akses.pcra_icra_lokasi_kelompok_risiko_area;}
     public static boolean getpcra_icra_kelas_risiko_pencegahan(){return akses.pcra_icra_kelas_risiko_pencegahan;}
     public static boolean getpcra_icra_tindakan_pengendalian(){return akses.pcra_icra_tindakan_pengendalian;}
+    public static boolean getpcra_icra_identifkasi_risiko_infeksi(){return akses.pcra_icra_identifkasi_risiko_infeksi;}
+    public static boolean getpcra_icra_identifkasi_risiko_keselamatan(){return akses.pcra_icra_identifkasi_risiko_keselamatan;}
+    public static boolean getpcra_icra_identifkasi_risiko_kebakaran(){return akses.pcra_icra_identifkasi_risiko_kebakaran;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {

@@ -817,9 +817,13 @@ import laporan.frmPengaduan;
 import parkir.DlgParkirBarcode;
 import parkir.DlgParkirJenis;
 import parkir.DlgParkirMasuk;
+import pcraicra.PCRAICRAIdentifikasiRisikoInfeksi;
+import pcraicra.PCRAICRAIdentifikasiRisikoKebakaran;
+import pcraicra.PCRAICRAIdentifikasiRisikoKeselamatan;
 import pcraicra.PCRAICRAJenisAktivitasProyek;
 import pcraicra.PCRAICRAKelasRisikoPencegahan;
 import pcraicra.PCRAICRALokasiKelompokRisikoArea;
+import pcraicra.PCRAICRATindakanPengendalian;
 import permintaan.DlgBookingMCUPerusahaan;
 import permintaan.DlgBookingOperasi;
 import permintaan.DlgBookingPeriksa;
@@ -23476,8 +23480,8 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         PCRAICRAJenisAktivitasProyek form=new PCRAICRAJenisAktivitasProyek(this,false);
-        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
         DlgHome.dispose();
@@ -23488,8 +23492,8 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         PCRAICRALokasiKelompokRisikoArea form=new PCRAICRALokasiKelompokRisikoArea(this,false);
-        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
         DlgHome.dispose();
@@ -23500,8 +23504,56 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         PCRAICRAKelasRisikoPencegahan form=new PCRAICRAKelasRisikoPencegahan(this,false);
-        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnPCRAICRATindakanPengendalianActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        isTutup();
+        PCRAICRATindakanPengendalian form=new PCRAICRATindakanPengendalian(this,false);
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnPCRAICRAIdentifikasiRisikoInfeksiActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        isTutup();
+        PCRAICRAIdentifikasiRisikoInfeksi form=new PCRAICRAIdentifikasiRisikoInfeksi(this,false);
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnPCRAICRAIdentifikasiRisikoKeselamatanActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        isTutup();
+        PCRAICRAIdentifikasiRisikoKeselamatan form=new PCRAICRAIdentifikasiRisikoKeselamatan(this,false);
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+    
+    private void btnPCRAICRAIdentifikasiRisikoKebakaranActionPerformed(java.awt.event.ActionEvent evt) {                                                
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));        
+        isTutup();
+        PCRAICRAIdentifikasiRisikoKebakaran form=new PCRAICRAIdentifikasiRisikoKebakaran(this,false);
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
         DlgHome.dispose();
@@ -24226,7 +24278,8 @@ public class frmUtama extends javax.swing.JFrame {
             btnEEksekutif,btnLabKeslingPengujianSampelTidakDapatDilayani,btnLabKeslingPengujianSampelDapatDilayani,btnLabKeslingPenugasanPengujianSampel,btnLabKeslingHasilPengujianSampel,
             btnLabKeslingVerifikasiPengujianSampel,btnLabKeslingValidasiPengujianSampel,btnLabKeslingRekapPelayanan,btnLabKeslingPembyaranPengujianSampel,btnLabKeslingRekapPembayaran,
             btnSkriningCURB65,btnBPJSPotensiPRB,btnBPJSRiwayatPelayananObatApotek,btnSkriningGiziKehamilan,btnBPJSRekapPesertaPRBObatApotek,btnSuratSerahTerimaBarangAnggotaTubuh,btnPCRAICRAJenisAktivitasProyek,
-            btnPCRAICRALokasiKelompokRisiko,btnPCRAICRAKelasRisikoPencegahan;
+            btnPCRAICRALokasiKelompokRisiko,btnPCRAICRAKelasRisikoPencegahan,btnPCRAICRATindakanPengendalian,btnPCRAICRAIdentifikasiRisikoInfeksi,btnPCRAICRAIdentifikasiRisikoKeselamatan,
+            btnPCRAICRAIdentifikasiRisikoKebakaran;
 
     public void isWall(){
         try{
@@ -29878,6 +29931,26 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getpcra_icra_kelas_risiko_pencegahan()==true){
                 Panelmenu.add(btnPCRAICRAKelasRisikoPencegahan);
+                jmlmenu++;
+            }
+            
+            if(akses.getpcra_icra_tindakan_pengendalian()==true){
+                Panelmenu.add(btnPCRAICRATindakanPengendalian);
+                jmlmenu++;
+            }
+            
+            if(akses.getpcra_icra_identifkasi_risiko_infeksi()==true){
+                Panelmenu.add(btnPCRAICRAIdentifikasiRisikoInfeksi);
+                jmlmenu++;
+            }
+            
+            if(akses.getpcra_icra_identifkasi_risiko_keselamatan()==true){
+                Panelmenu.add(btnPCRAICRAIdentifikasiRisikoKeselamatan);
+                jmlmenu++;
+            }
+            
+            if(akses.getpcra_icra_identifkasi_risiko_kebakaran()==true){
+                Panelmenu.add(btnPCRAICRAIdentifikasiRisikoKebakaran);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==18){
@@ -35720,6 +35793,26 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getpcra_icra_kelas_risiko_pencegahan()==true){
             Panelmenu.add(btnPCRAICRAKelasRisikoPencegahan);
+            jmlmenu++;
+        }
+        
+        if(akses.getpcra_icra_tindakan_pengendalian()==true){
+            Panelmenu.add(btnPCRAICRATindakanPengendalian);
+            jmlmenu++;
+        }
+        
+        if(akses.getpcra_icra_identifkasi_risiko_infeksi()==true){
+            Panelmenu.add(btnPCRAICRAIdentifikasiRisikoInfeksi);
+            jmlmenu++;
+        }
+        
+        if(akses.getpcra_icra_identifkasi_risiko_keselamatan()==true){
+            Panelmenu.add(btnPCRAICRAIdentifikasiRisikoKeselamatan);
+            jmlmenu++;
+        }
+        
+        if(akses.getpcra_icra_identifkasi_risiko_kebakaran()==true){
+            Panelmenu.add(btnPCRAICRAIdentifikasiRisikoKebakaran);
             jmlmenu++;
         }
 
@@ -43759,6 +43852,34 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
         }
+        
+        if(akses.getpcra_icra_tindakan_pengendalian()==true){
+            if(btnPCRAICRATindakanPengendalian.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPCRAICRATindakanPengendalian);
+                jmlmenu++;
+            }
+        }
+        
+        if(akses.getpcra_icra_identifkasi_risiko_infeksi()==true){
+            if(btnPCRAICRAIdentifikasiRisikoInfeksi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPCRAICRAIdentifikasiRisikoInfeksi);
+                jmlmenu++;
+            }
+        }
+        
+        if(akses.getpcra_icra_identifkasi_risiko_keselamatan()==true){
+            if(btnPCRAICRAIdentifikasiRisikoKeselamatan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPCRAICRAIdentifikasiRisikoKeselamatan);
+                jmlmenu++;
+            }
+        }
+        
+        if(akses.getpcra_icra_identifkasi_risiko_kebakaran()==true){
+            if(btnPCRAICRAIdentifikasiRisikoKebakaran.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPCRAICRAIdentifikasiRisikoKebakaran);
+                jmlmenu++;
+            }
+        }
 
         if(btnPenelitianPerpustakaan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
             Panelmenu.add(btnPenelitianPerpustakaan);
@@ -49975,6 +50096,38 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAKelasRisikoPencegahan.setName("btnPCRAICRAKelasRisikoPencegahan");
         btnPCRAICRAKelasRisikoPencegahan.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAKelasRisikoPencegahan.addActionListener(this::btnPCRAICRAKelasRisikoPencegahanActionPerformed);
+        
+        btnPCRAICRATindakanPengendalian = new widget.ButtonBig();
+        btnPCRAICRATindakanPengendalian.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/real-estate_3309891.png")));
+        btnPCRAICRATindakanPengendalian.setText("Tindakan Pengendalian PCRA");
+        btnPCRAICRATindakanPengendalian.setIconTextGap(0);
+        btnPCRAICRATindakanPengendalian.setName("btnPCRAICRATindakanPengendalian"); 
+        btnPCRAICRATindakanPengendalian.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPCRAICRATindakanPengendalian.addActionListener(this::btnPCRAICRATindakanPengendalianActionPerformed);
+        
+        btnPCRAICRAIdentifikasiRisikoInfeksi = new widget.ButtonBig();
+        btnPCRAICRAIdentifikasiRisikoInfeksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/virus_3182541.png")));
+        btnPCRAICRAIdentifikasiRisikoInfeksi.setText("Identifikasi Risiko Infeksi PCRA");
+        btnPCRAICRAIdentifikasiRisikoInfeksi.setIconTextGap(0);
+        btnPCRAICRAIdentifikasiRisikoInfeksi.setName("btnPCRAICRAIdentifikasiRisikoInfeksi"); 
+        btnPCRAICRAIdentifikasiRisikoInfeksi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPCRAICRAIdentifikasiRisikoInfeksi.addActionListener(this::btnPCRAICRAIdentifikasiRisikoInfeksiActionPerformed);
+        
+        btnPCRAICRAIdentifikasiRisikoKeselamatan = new widget.ButtonBig();
+        btnPCRAICRAIdentifikasiRisikoKeselamatan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/project-management_2422121.png")));
+        btnPCRAICRAIdentifikasiRisikoKeselamatan.setText("Identifikasi Risiko Keselamatan PCRA");
+        btnPCRAICRAIdentifikasiRisikoKeselamatan.setIconTextGap(0);
+        btnPCRAICRAIdentifikasiRisikoKeselamatan.setName("btnPCRAICRAIdentifikasiRisikoKeselamatan"); 
+        btnPCRAICRAIdentifikasiRisikoKeselamatan.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPCRAICRAIdentifikasiRisikoKeselamatan.addActionListener(this::btnPCRAICRAIdentifikasiRisikoKeselamatanActionPerformed);
+        
+        btnPCRAICRAIdentifikasiRisikoKebakaran = new widget.ButtonBig();
+        btnPCRAICRAIdentifikasiRisikoKebakaran.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/fire_2278480.png")));
+        btnPCRAICRAIdentifikasiRisikoKebakaran.setText("Identifikasi Risiko Kebakaran PCRA");
+        btnPCRAICRAIdentifikasiRisikoKebakaran.setIconTextGap(0);
+        btnPCRAICRAIdentifikasiRisikoKebakaran.setName("btnPCRAICRAIdentifikasiRisikoKebakaran"); 
+        btnPCRAICRAIdentifikasiRisikoKebakaran.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPCRAICRAIdentifikasiRisikoKebakaran.addActionListener(this::btnPCRAICRAIdentifikasiRisikoKebakaranActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
