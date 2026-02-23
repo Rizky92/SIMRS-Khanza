@@ -30,9 +30,9 @@ public class koneksiDB {
     private static final Object LOCK=new Object();
     private static volatile long lastCheck =0;
     private static final long CHECK_INTERVAL =30000;
-    
+
     private koneksiDB(){}
-    
+
     static {
         Runtime.getRuntime().addShutdownHook(new Thread(koneksiDB::closeConnection));
     }
@@ -102,8 +102,8 @@ public class koneksiDB {
                 connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
                 System.out.println(
                     "  Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n"+
-                    "	Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
-                    "  Puskesmas yang  gratis dan boleh digunakan siapa saja tanpa dikenai \n" +
+                    "  Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
+                    "  Puskesmas yang gratis dan boleh digunakan siapa saja tanpa dikenai \n" +
                     "  biaya apapun. Dilarang keras memperjualbelikan/mengambil \n" +
                     "  keuntungan dari Software ini dalam bentuk apapun tanpa seijin pembuat \n" +
                     "  software (Khanza.Soft Media). Bagi yang sengaja memperjualbelikan/\n"+
@@ -121,7 +121,7 @@ public class koneksiDB {
                     "  Informasi dan panduan bisa dicek di halaman https://github.com/mas-elkhanza/SIMRS-Khanza/wiki \n"+
                     "  Bagi yang ingin berdonasi untuk pengembangan aplikasi ini bisa ke BSI 1015369872 atas nama Windiarto\n"+
                     "                                                                           "
-                );         
+                );
                 return;
             } catch (SQLException e) {
                 retries--;
@@ -265,7 +265,7 @@ public class koneksiDB {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
             return prop.getProperty("VALIDASIULANGHASILPERMINTAAN", "").toLowerCase().trim().contains(kategori);
-        } catch (IOException e) {
+        } catch (Exception e) {
             return false;
         }
     }
@@ -274,7 +274,7 @@ public class koneksiDB {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
             return prop.getProperty("VALIDASIRESEPKRONIS", "no").toLowerCase().trim().equals("yes");
-        } catch (IOException e) {
+        } catch (Exception e) {
             return false;
         }
     }
