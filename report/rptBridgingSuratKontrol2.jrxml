@@ -37,7 +37,7 @@ bridging_sep.nama_pasien, bridging_sep.tanggal_lahir, bridging_sep.jkel, bridgin
 bridging_sep.nmdiagnosaawal, bridging_sep.jnspelayanan, bridging_surat_kontrol_bpjs.tgl_surat,
 bridging_surat_kontrol_bpjs.no_surat, bridging_surat_kontrol_bpjs.tgl_rencana,
 bridging_surat_kontrol_bpjs.kd_dokter_bpjs, bridging_surat_kontrol_bpjs.nm_dokter_bpjs,
-bridging_surat_kontrol_bpjs.kd_poli_bpjs, bridging_surat_kontrol_bpjs.nm_poli_bpjs,bridging_sep.jnspelayanan from
+bridging_surat_kontrol_bpjs.kd_poli_bpjs, bridging_surat_kontrol_bpjs.nm_poli_bpjs from
 bridging_sep join bridging_surat_kontrol_bpjs on bridging_surat_kontrol_bpjs.no_sep = bridging_sep.no_sep
 where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 	</queryString>
@@ -95,10 +95,6 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 		<property name="com.jaspersoft.studio.field.name" value="nmdiagnosaawal"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="jnspelayanan" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="jnspelayanan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="bridging_sep"/>
-	</field>
 	<field name="tgl_surat" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="tgl_surat"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="bridging_surat_kontrol_bpjs"/>
@@ -140,10 +136,6 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 		<property name="com.jaspersoft.studio.field.tree.path" value="bridging_surat_kontrol_bpjs"/>
 		<property name="com.jaspersoft.studio.field.name" value="nm_poli_bpjs"/>
 		<fieldDescription><![CDATA[]]></fieldDescription>
-	</field>
-	<field name="COLUMN_18" class="java.lang.String">
-		<property name="com.jaspersoft.studio.field.label" value="jnspelayanan"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="bridging_sep"/>
 	</field>
 	<background>
 		<band/>
@@ -447,7 +439,7 @@ where bridging_surat_kontrol_bpjs.no_surat = $P{nosurat}]]>
 			<staticText>
 				<reportElement x="0" y="280" width="318" height="30" uuid="a1e13333-81c9-4d60-9ef4-f1a66a748bda">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
-					<printWhenExpression><![CDATA[$F{jnspelayanan}.equals("1");]]></printWhenExpression>
+					<printWhenExpression><![CDATA[$P{jnspelayanan}]]></printWhenExpression>
 				</reportElement>
 				<textElement verticalAlignment="Top">
 					<font fontName="Tahoma" size="7" isBold="false" isItalic="true"/>
