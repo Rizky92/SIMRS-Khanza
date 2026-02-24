@@ -11,10 +11,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v4
+
     - name: Set up JDK 17
       uses: actions/setup-java@v4
       with:
         java-version: '17'
         distribution: 'liberica'
+
+    - name: Cache libraries
+      id: cache-libs
+      uses: actions/cache/restore@v5
+      with:
+        path: ${{ github.workspace }}/lib
+        key: simrs-lib-${{ hashFiles('nbproject/project.properties') }}
+
+    - name: Download libraries from Google Drive
+      if: steps.cache-libs.outputs.cache-hit != 'true'
+      run: |
+        pip install gdown
+        gdown "1ZPzgwFljlbF2XgR1LvO63XSAiJ09L6GH" -O /tmp/libactions.zip
+        unzip -q /tmp/libactions.zip -d ${{ github.workspace }}/lib
+
+    - name: Save cached libraries
+      if: steps.cache-libs.outputs.cache-hit != 'true'
+      uses: actions/cache/save@v5
+      with:
+        path: ${{ github.workspace }}/lib
+        key: ${{ steps.cache-libs.outputs.cache-primary-key }}
+
     - name: Build with Ant
-      run: ant -noinput -buildfile build.xml
+      run: ant jar -silent -noinput -buildfile build.xml -Dpath.file-reference=${{ github.workspace }}/lib -Dplatforms.Liberica_JDK_17.home=$JAVA_HOME -Djar.compress=true
+
+    - name: Upload artifact
+      uses: actions/upload-artifact@v4
+      with:
+        name: Package
+        path: ${{ github.workspace }}/dist
