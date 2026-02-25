@@ -22,6 +22,7 @@ import java.awt.BorderLayout;
 import java.awt.Cursor;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.nio.charset.StandardCharsets;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -358,7 +359,7 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
             System.out.println("JSON : "+requestJson+"\n");
             System.out.println("URL:"+link+"/validate");
 	    requestEntity = new HttpEntity(requestJson,headers);
-            requestJson= mapper.writeValueAsString(api.getRest().exchange(link+"/validate", HttpMethod.POST, requestEntity,Object.class).getBody());
+            requestJson= new String(api.getRest().exchange(link+"/validate", HttpMethod.POST, requestEntity,String.class).getBody().getBytes(StandardCharsets.UTF_16BE), StandardCharsets.UTF_8).replace("\0", "").trim();
             System.out.println("JSON : "+requestJson);
             root = mapper.readTree(requestJson);
             nameNode = root.path("metaData");
