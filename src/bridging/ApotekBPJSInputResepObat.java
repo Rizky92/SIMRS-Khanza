@@ -26,6 +26,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.sql.Connection;
@@ -37,6 +38,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import keuangan.Jurnal;
@@ -59,7 +61,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
     private PreparedStatement psobat,psracikan,psstok,ps2,psbatch,psrekening,psobatracikan,psdiagnosa;
     private ResultSet rsobat,rsracikan,rsstok,rs2,rsbatch,rsrekening,rscariobat,rsdiagnosa,rsobatracikan;
     private double h_belicari=0, hargacari=0, sisacari=0,x=0,y=0,embalase=Sequel.cariIsiAngka("select set_embalase.embalase_per_obat from set_embalase"),
-                   tuslah=Sequel.cariIsiAngka("select set_embalase.tuslah_per_obat from set_embalase"),kenaikan=0,stokbarang=0,ttl=0,ppnobat=0,ttlhpp,ttljual,Hari=0;
+                   kenaikan=0,stokbarang=0,ttl=0,ppnobat=0,ttlhpp,ttljual,Hari=0,jumlahralan=0;
     private int i=0,z=0,row=0,row2,r,subttl;
     private Jurnal jur=new Jurnal();
     private boolean[] pilih; 
@@ -70,9 +72,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         sqlpscariobat2="select databarang.nama_brng,jenis.nama,detail_pemberian_obat.biaya_obat, detail_pemberian_obat.jml, detail_pemberian_obat.total, databarang.kode_brng, aturan_pakai.aturan "
                         + "from detail_pemberian_obat inner join databarang inner join jenis on detail_pemberian_obat.kode_brng=databarang.kode_brng and databarang.kdjns=jenis.kdjns LEFT JOIN aturan_pakai ON detail_pemberian_obat.no_rawat=aturan_pakai.no_rawat AND "
                         + "databarang.kode_brng=aturan_pakai.kode_brng and detail_pemberian_obat.jam=aturan_pakai.jam where detail_pemberian_obat.no_rawat=? and detail_pemberian_obat.tgl_perawatan=? AND detail_pemberian_obat.jam=? group by detail_pemberian_obat.kode_brng order by jenis.nama";
-    private DlgCariBangsal caribangsal=new DlgCariBangsal(null,false);
-    public DlgCariAturanPakai aturanpakai=new DlgCariAturanPakai(null,false);
-    private DlgCariMetodeRacik metoderacik=new DlgCariMetodeRacik(null,false);
+    private DlgCariBangsal lokasidepo;
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
     private WarnaTable2 warna3=new WarnaTable2();
@@ -98,12 +98,13 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         setSize(656,250);
 
         tabModeobat=new DefaultTableModel(null,new Object[]{
-                "Jumlah","Kode Barang","Nama Barang","Signa 1","Signa 2","Jumlah Hari"
+                "Jml","Kode Barang","Nama Barang","Signa 1","Signa 2","Hari","Jml.Piutang","Harga Beli",
+                "Harga Jual","Stok","Aturan Pakai","Kode Obat RS","Satuan","No.Batch","No.Faktur","Kadaluarsa"
             }){
             @Override 
             public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if ((colIndex==3)||(colIndex==4)||(colIndex==5)) {
+                if ((colIndex==0)||(colIndex==3)||(colIndex==4)||(colIndex==5)||(colIndex==6)||(colIndex==10)||(colIndex==13)||(colIndex==14)||(colIndex==15)) {
                     a=true;
                 }
                 return a;
@@ -111,7 +112,9 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
             
             Class[] types = new Class[] {
                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,
-                java.lang.Object.class,java.lang.Object.class
+                java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,java.lang.Double.class,
+                java.lang.Double.class,java.lang.Double.class,java.lang.Object.class,java.lang.Object.class,
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
             };
              
             @Override
@@ -123,28 +126,49 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         tbObat.setModel(tabModeobat);
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        for (i = 0; i < 6; i++) {
+        for (i = 0; i < 16; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
-                column.setPreferredWidth(45);
+                column.setPreferredWidth(35);
             }else if(i==1){
-                column.setPreferredWidth(75);
+                column.setPreferredWidth(85);
             }else if(i==2){
                 column.setPreferredWidth(200);
             }else if(i==3){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(44);
             }else if(i==4){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(44);
             }else if(i==5){
-                column.setPreferredWidth(100);
-            }            
+                column.setPreferredWidth(35);
+            }else if(i==6){
+                column.setPreferredWidth(66);
+            }else if(i==7){
+                column.setPreferredWidth(80);
+            }else if(i==8){
+                column.setPreferredWidth(80);
+            }else if(i==9){
+                column.setPreferredWidth(45);
+            }else if(i==10){
+                column.setPreferredWidth(85);
+            }else if(i==11){
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }else if(i==12){
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }else if(i==13){
+                column.setPreferredWidth(70);
+            }else if(i==14){
+                column.setPreferredWidth(90);
+            }else if(i==15){
+                column.setPreferredWidth(65);
+            }                
         }
-        warna.kolom=1;
+        warna.kolom=6;
         tbObat.setDefaultRenderer(Object.class,warna);
         
         tabModeObatRacikan=new DefaultTableModel(null,new Object[]{
-                "No","Nama Racikan","Kode Racik","Metode Racik","Jml.Racik",
-                "Aturan Pakai","Keterangan"
+                "No","Nama Racikan","Kode Racik","Metode Racik","Jml.Racik","Aturan Pakai","Keterangan"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 return true;
@@ -168,18 +192,18 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
             if(i==0){
                 column.setPreferredWidth(25);
             }else if(i==1){
-                column.setPreferredWidth(250);
+                column.setPreferredWidth(160);
             }else if(i==2){
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
             }else if(i==3){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(80);
             }else if(i==4){
-                column.setPreferredWidth(60);
+                column.setPreferredWidth(57);
             }else if(i==5){
-                column.setPreferredWidth(200);
+                column.setPreferredWidth(85);
             }else if(i==6){
-                column.setPreferredWidth(250);
+                column.setPreferredWidth(200);
             }
         }
 
@@ -187,19 +211,21 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         tbObatRacikan.setDefaultRenderer(Object.class,warna2);
         
         tabModeDetailObatRacikan=new DefaultTableModel(null,new Object[]{
-                "No","Jumlah","Kode Barang","Nama Barang","Signa 1","Signa 2","Jumlah Hari"
+                "No","Jml","Kode Barang","Nama Barang","Signa 1","Signa 2","Hari","Jml.Piutang",
+                "Harga Beli","Harga Jual","Stok","Kode Obat RS","Kode Satuan","No.Batch","No.Faktur","Kadaluarsa"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
-                if ((colIndex==0) || (colIndex==4) || (colIndex==5) || (colIndex==6)) {
+                if ((colIndex==1) || (colIndex==4) || (colIndex==5) || (colIndex==6)|| (colIndex==7)|| (colIndex==13)|| (colIndex==14)|| (colIndex==15)) {
                     a=true;
                 }
                 return a;
              }
              Class[] types = new Class[] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, 
-                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class,java.lang.Double.class,java.lang.Object.class,java.lang.Object.class,
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Double.class,
+                java.lang.Double.class,java.lang.Double.class,java.lang.Double.class,java.lang.Object.class,
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class,java.lang.Object.class 
              };
              @Override
              public Class getColumnClass(int columnIndex) {
@@ -211,89 +237,47 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         tbDetailObatRacikan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbDetailObatRacikan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);        
         
-        for (i = 0; i < 7; i++) {
+        for (i = 0; i < 16; i++) {
             TableColumn column = tbDetailObatRacikan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(25);
             }else if(i==1){
-                column.setPreferredWidth(40);
+                column.setPreferredWidth(35);
             }else if(i==2){
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(85);
             }else if(i==3){
                 column.setPreferredWidth(200);
             }else if(i==4){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(44);
             }else if(i==5){
-                column.setPreferredWidth(50);
+                column.setPreferredWidth(44);
             }else if(i==6){
-                column.setPreferredWidth(100);
-            }   
+                column.setPreferredWidth(35);
+            }else if(i==7){
+                column.setPreferredWidth(66);
+            }else if(i==8){
+                column.setPreferredWidth(80);
+            }else if(i==9){
+                column.setPreferredWidth(80);
+            }else if(i==10){
+                column.setPreferredWidth(45);
+            }else if(i==11){
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }else if(i==12){
+                column.setMinWidth(0);
+                column.setMaxWidth(0);
+            }else if(i==13){
+                column.setPreferredWidth(70);
+            }else if(i==14){
+                column.setPreferredWidth(90);
+            }else if(i==15){
+                column.setPreferredWidth(65);
+            } 
         }
 
-        warna3.kolom=9;
+        warna3.kolom=7;
         tbDetailObatRacikan.setDefaultRenderer(Object.class,warna3);
-        
-        aturanpakai.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(aturanpakai.getTable().getSelectedRow()!= -1){  
-                    if(TabRawat.getSelectedIndex()==0){
-                        tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),11);
-                        tbObat.requestFocus();
-                    }else if(TabRawat.getSelectedIndex()==1){
-                        tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
-                        tbObatRacikan.requestFocus();
-                    }                        
-                }   
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        metoderacik.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(metoderacik.getTable().getSelectedRow()!= -1){  
-                    tbObatRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),1).toString(),tbObatRacikan.getSelectedRow(),2);
-                    tbObatRacikan.setValueAt(metoderacik.getTable().getValueAt(metoderacik.getTable().getSelectedRow(),2).toString(),tbObatRacikan.getSelectedRow(),3);
-                }  
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-        
-        metoderacik.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    metoderacik.dispose();
-                }
-            }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        }); 
         
         try {
             hppfarmasi=koneksiDB.HPPFARMASI();
@@ -367,6 +351,8 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         panelisi3 = new widget.panelisi();
         jLabel5 = new widget.Label();
         LTotal = new widget.Label();
+        jLabel6 = new widget.Label();
+        LPpn = new widget.Label();
         jLabel7 = new widget.Label();
         LTotalTagihan = new widget.Label();
         BtnSimpan = new widget.Button();
@@ -445,11 +431,11 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         setUndecorated(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
+            }
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
             }
         });
 
@@ -471,8 +457,20 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         LTotal.setText("0");
         LTotal.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LTotal.setName("LTotal"); // NOI18N
-        LTotal.setPreferredSize(new java.awt.Dimension(181, 23));
+        LTotal.setPreferredSize(new java.awt.Dimension(121, 23));
         panelisi3.add(LTotal);
+
+        jLabel6.setText("PPN :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        jLabel6.setPreferredSize(new java.awt.Dimension(35, 23));
+        panelisi3.add(jLabel6);
+
+        LPpn.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LPpn.setText("0");
+        LPpn.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        LPpn.setName("LPpn"); // NOI18N
+        LPpn.setPreferredSize(new java.awt.Dimension(85, 23));
+        panelisi3.add(LPpn);
 
         jLabel7.setText("Total+PPN :");
         jLabel7.setName("jLabel7"); // NOI18N
@@ -483,7 +481,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         LTotalTagihan.setText("0");
         LTotalTagihan.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         LTotalTagihan.setName("LTotalTagihan"); // NOI18N
-        LTotalTagihan.setPreferredSize(new java.awt.Dimension(270, 23));
+        LTotalTagihan.setPreferredSize(new java.awt.Dimension(200, 23));
         panelisi3.add(LTotalTagihan);
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
@@ -563,7 +561,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         TglResep.setBounds(84, 70, 135, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-02-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "26-02-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -722,12 +720,12 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         NoSEP.setHighlighter(null);
         NoSEP.setName("NoSEP"); // NOI18N
         FormInput.add(NoSEP);
-        NoSEP.setBounds(524, 40, 190, 23);
+        NoSEP.setBounds(529, 40, 185, 23);
 
         jLabel18.setText("No.SEP :");
         jLabel18.setName("jLabel18"); // NOI18N
         FormInput.add(jLabel18);
-        jLabel18.setBounds(470, 40, 50, 23);
+        jLabel18.setBounds(475, 40, 50, 23);
 
         TNoRW.setHighlighter(null);
         TNoRW.setName("TNoRW"); // NOI18N
@@ -754,12 +752,12 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         TglSEP.setHighlighter(null);
         TglSEP.setName("TglSEP"); // NOI18N
         FormInput.add(TglSEP);
-        TglSEP.setBounds(325, 40, 135, 23);
+        TglSEP.setBounds(327, 40, 135, 23);
 
         jLabel19.setText("Tanggal SEP :");
         jLabel19.setName("jLabel19"); // NOI18N
         FormInput.add(jLabel19);
-        jLabel19.setBounds(241, 40, 80, 23);
+        jLabel19.setBounds(243, 40, 80, 23);
 
         LabelDepo.setText("Depo :");
         LabelDepo.setName("LabelDepo"); // NOI18N
@@ -1373,27 +1371,27 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     }//GEN-LAST:event_kdgudangKeyPressed
 
     private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
-        /*if (lokasidepo == null || !lokasidepo.isDisplayable()) {
+        if (lokasidepo == null || !lokasidepo.isDisplayable()) {
             lokasidepo=new DlgCariBangsal(null,false);
             lokasidepo.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             lokasidepo.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(lokasidepo.getTable().getSelectedRow()!= -1){
+                    if(lokasidepo.getTable().getSelectedRow()!= -1){                   
                         kdgudang.setText(lokasidepo.getTable().getValueAt(lokasidepo.getTable().getSelectedRow(),0).toString());
                         nmgudang.setText(lokasidepo.getTable().getValueAt(lokasidepo.getTable().getSelectedRow(),1).toString());
-                    }
+                    } 
                     kdgudang.requestFocus();
                     lokasidepo=null;
                 }
-            });
+            }); 
 
             lokasidepo.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             lokasidepo.setLocationRelativeTo(internalFrame1);
         }
         if (lokasidepo == null) return;
         if (!lokasidepo.isVisible()) {
-            lokasidepo.isCek();
+            lokasidepo.isCek();    
             lokasidepo.emptTeks();
         }
 
@@ -1401,7 +1399,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             lokasidepo.toFront();
             return;
         }
-        lokasidepo.setVisible(true);*/
+        lokasidepo.setVisible(true);
     }//GEN-LAST:event_BtnGudangActionPerformed
 
     /**
@@ -1435,6 +1433,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.TextBox KdDPJP;
     private widget.TextBox KdPj;
     private widget.TextBox KdPoli;
+    private widget.Label LPpn;
     private widget.Label LTotal;
     private widget.Label LTotalTagihan;
     private widget.Label LabelDepo;
@@ -1468,6 +1467,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Label jLabel3;
     private widget.Label jLabel4;
     private widget.Label jLabel5;
+    private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel8;
     private javax.swing.JPanel jPanel3;
@@ -1826,8 +1826,6 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         return BtnSimpan;
     }
     
-
-    
     public void setNoRm(String norwt,String norm,String nama,String tanggal,String jam,String resep,String no_sep,String no_kartu,String kdpolitujuan,String nmpolitujuan,String kddpjp,String nmdpdjp,String tglsep) {  
         TNoRW.setText(norwt);
         TNoRM.setText(norm);
@@ -1841,7 +1839,368 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         NmDPJP.setText(nmdpdjp);
         KdPoli.setText(kdpolitujuan);
         NmPoli.setText(nmpolitujuan);
+        KdPj.setText(Sequel.cariIsi("select reg_periksa.kd_pj from reg_periksa where reg_periksa.no_rawat=?",norwt));
+        kenaikan=Sequel.cariIsiAngka("select (set_harga_obat_ralan.hargajual/100) from set_harga_obat_ralan where set_harga_obat_ralan.kd_pj=?",KdPj.getText());
         
+        if(!DEPOAKTIFOBAT.equals("")){
+            kdgudang.setText(DEPOAKTIFOBAT);
+            nmgudang.setText(Sequel.CariBangsal(DEPOAKTIFOBAT));
+        }else{
+            bangsal=Sequel.cariIsi("select set_depo_ralan.kd_bangsal from set_depo_ralan where set_depo_ralan.kd_poli=?",Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat=?",norwt));
+            if(bangsal.equals("")){
+                bangsal=bangsaldefault;
+            }     
+            kdgudang.setText(bangsal);
+            nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
+        }
+        
+        try {
+            Valid.tabelKosong(tabModeobat);
+            Valid.tabelKosong(tabModeObatRacikan);
+            Valid.tabelKosong(tabModeDetailObatRacikan);
+            if(kenaikan>0){
+                psobat=koneksi.prepareStatement(
+                    "select maping_obat_apotek_bpjs.kode_brng_apotek_bpjs,maping_obat_apotek_bpjs.nama_brng_apotek_bpjs,databarang.kode_brng,databarang.kode_sat,databarang.expire,"+
+                    "(databarang.h_beli+(databarang.h_beli*?)) as harga,databarang."+hppfarmasi+" as dasar,resep_dokter.jml,resep_dokter.aturan_pakai from databarang "+
+                    "inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
+                    "inner join maping_obat_apotek_bpjs on databarang.kode_brng=maping_obat_apotek_bpjs.kode_brng "+
+                    "where resep_dokter.no_resep=? and databarang.status='1'"
+                );
+                try{
+                    psobat.setDouble(1,kenaikan);
+                    psobat.setString(2,resep);
+                    rsobat=psobat.executeQuery();
+                    while(rsobat.next()){
+                        sisacari=0;
+                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                        try {
+                            psstok.setString(1,kdgudang.getText());
+                            psstok.setString(2,rsobat.getString("kode_brng"));
+                            rsstok=psstok.executeQuery();
+                            if(rsstok.next()){
+                                sisacari=rsstok.getDouble(1);
+                            }                                
+                        } catch (Exception e) {
+                            sisacari=0;
+                            System.out.println("Notifikasi : "+e);
+                        }finally{
+                            if(rsstok != null){
+                                rsstok.close();
+                            }
+                            if(psstok != null){
+                                psstok.close();
+                            }
+                        }
+                        
+                        arrSplit = rsobat.getString("aturan_pakai").toLowerCase().split("x");
+                        signa1="1";
+                        try {
+                            if(!arrSplit[0].replaceAll("[^0-9.]+", "").equals("")){
+                                signa1=arrSplit[0].replaceAll("[^0-9.]+", "");
+                            }
+                        } catch (Exception e) {
+                            signa1="1";
+                        }
+                        signa2="1";
+                        try {
+                            if(!arrSplit[1].replaceAll("[^0-9.]+", "").equals("")){
+                                signa2=arrSplit[1].replaceAll("[^0-9.]+", "");
+                            }
+                        } catch (Exception e) {
+                            signa2="1";
+                        } 
+                        
+                        jumlahralan=Sequel.cariIsiAngka("select detail_pemberian_obat.jml from detail_pemberian_obat where detail_pemberian_obat.no_rawat='"+norwt+"' and detail_pemberian_obat.kode_brng='"+rsobat.getString("kode_brng")+"' and detail_pemberian_obat.tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"'");
+                        tabModeobat.addRow(new Object[] {
+                           rsobat.getString("jml"),rsobat.getString("kode_brng_apotek_bpjs"),rsobat.getString("nama_brng_apotek_bpjs"),signa1,signa2,"30",(rsobat.getDouble("jml")-jumlahralan),rsobat.getDouble("dasar"),Valid.roundUp(rsobat.getDouble("harga"),100),sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("kode_brng"),rsobat.getString("kode_sat"),"","",rsobat.getString("expire")
+                        });    
+                    }  
+                }catch(Exception e){
+                    System.out.println("Notifikasi : "+e);
+                }finally{
+                    if(rsobat != null){
+                        rsobat.close();
+                    }
+                    if(psobat != null){
+                        psobat.close();
+                    }
+                }                                                      
+            }else{   
+                psobat=koneksi.prepareStatement(
+                    "select maping_obat_apotek_bpjs.kode_brng_apotek_bpjs,maping_obat_apotek_bpjs.nama_brng_apotek_bpjs,databarang.kode_brng,databarang.kode_sat,databarang.expire,"+
+                    "databarang.ralan as harga,databarang."+hppfarmasi+" as dasar,resep_dokter.jml,resep_dokter.aturan_pakai from databarang "+
+                    "inner join resep_dokter on resep_dokter.kode_brng=databarang.kode_brng "+
+                    "inner join maping_obat_apotek_bpjs on databarang.kode_brng=maping_obat_apotek_bpjs.kode_brng "+
+                    "where resep_dokter.no_resep=? and databarang.status='1'"
+                );
+                try{
+                    psobat.setString(1,resep);
+                    rsobat=psobat.executeQuery();
+                    while(rsobat.next()){
+                        sisacari=0;
+                        psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                        try {
+                            psstok.setString(1,kdgudang.getText());
+                            psstok.setString(2,rsobat.getString("kode_brng"));
+                            rsstok=psstok.executeQuery();
+                            if(rsstok.next()){
+                                sisacari=rsstok.getDouble(1);
+                            }                                
+                        } catch (Exception e) {
+                            sisacari=0;
+                            System.out.println("Notifikasi : "+e);
+                        }finally{
+                            if(rsstok != null){
+                                rsstok.close();
+                            }
+                            if(psstok != null){
+                                psstok.close();
+                            }
+                        }
+                        
+                        arrSplit = rsobat.getString("aturan_pakai").toLowerCase().split("x");
+                        signa1="1";
+                        try {
+                            if(!arrSplit[0].replaceAll("[^0-9.]+", "").equals("")){
+                                signa1=arrSplit[0].replaceAll("[^0-9.]+", "");
+                            }
+                        } catch (Exception e) {
+                            signa1="1";
+                        }
+                        signa2="1";
+                        try {
+                            if(!arrSplit[1].replaceAll("[^0-9.]+", "").equals("")){
+                                signa2=arrSplit[1].replaceAll("[^0-9.]+", "");
+                            }
+                        } catch (Exception e) {
+                            signa2="1";
+                        } 
+                        
+                        jumlahralan=Sequel.cariIsiAngka("select detail_pemberian_obat.jml from detail_pemberian_obat where detail_pemberian_obat.no_rawat='"+norwt+"' and detail_pemberian_obat.kode_brng='"+rsobat.getString("kode_brng")+"' and detail_pemberian_obat.tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"'");
+                        tabModeobat.addRow(new Object[] {
+                           rsobat.getString("jml"),rsobat.getString("kode_brng_apotek_bpjs"),rsobat.getString("nama_brng_apotek_bpjs"),signa1,signa2,"30",(rsobat.getDouble("jml")-jumlahralan),rsobat.getDouble("dasar"),Valid.roundUp(rsobat.getDouble("harga"),100),sisacari,rsobat.getString("aturan_pakai"),rsobat.getString("kode_brng"),rsobat.getString("kode_sat"),"","",rsobat.getString("expire")
+                        });            
+                    }
+                }catch(Exception e){
+                    System.out.println("Notifikasi : "+e);
+                }finally{
+                    if(rsobat != null){
+                        rsobat.close();
+                    }
+
+                    if(psobat != null){
+                        psobat.close();
+                    }
+                }
+            } 
+            
+            psobat=koneksi.prepareStatement(
+                    "select resep_dokter_racikan.no_racik,resep_dokter_racikan.nama_racik,"+
+                    "resep_dokter_racikan.kd_racik,metode_racik.nm_racik as metode,"+
+                    "resep_dokter_racikan.jml_dr,resep_dokter_racikan.aturan_pakai,"+
+                    "resep_dokter_racikan.keterangan from resep_dokter_racikan inner join metode_racik "+
+                    "on resep_dokter_racikan.kd_racik=metode_racik.kd_racik where "+
+                    "resep_dokter_racikan.no_resep=? ");
+            try {
+                psobat.setString(1,resep);
+                rsobat=psobat.executeQuery();
+                if(rsobat.next()){
+                    TabRawat.setSelectedIndex(1);
+                    do{
+                        tabModeObatRacikan.addRow(new Object[]{
+                            rsobat.getString("no_racik"),rsobat.getString("nama_racik"),rsobat.getString("kd_racik"),
+                            rsobat.getString("metode"),rsobat.getString("jml_dr"),rsobat.getString("aturan_pakai"),
+                            rsobat.getString("keterangan")
+                        });
+                        
+                        arrSplit = rsobat.getString("aturan_pakai").toLowerCase().split("x");
+                        signa1="1";
+                        try {
+                            if(!arrSplit[0].replaceAll("[^0-9.]+", "").equals("")){
+                                signa1=arrSplit[0].replaceAll("[^0-9.]+", "");
+                            }
+                        } catch (Exception e) {
+                            signa1="1";
+                        }
+                        signa2="1";
+                        try {
+                            if(!arrSplit[1].replaceAll("[^0-9.]+", "").equals("")){
+                                signa2=arrSplit[1].replaceAll("[^0-9.]+", "");
+                            }
+                        } catch (Exception e) {
+                            signa2="1";
+                        }
+                        
+                        if(kenaikan>0){
+                            ps2=koneksi.prepareStatement(
+                                "select maping_obat_apotek_bpjs.kode_brng_apotek_bpjs,maping_obat_apotek_bpjs.nama_brng_apotek_bpjs,resep_dokter_racikan_detail.jml,"+
+                                "databarang.kode_sat,(databarang.h_beli+(databarang.h_beli*?)) as harga,databarang."+hppfarmasi+" as dasar,databarang.kode_brng,databarang.expire "+
+                                "from resep_dokter_racikan_detail inner join databarang on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
+                                "inner join maping_obat_apotek_bpjs on databarang.kode_brng=maping_obat_apotek_bpjs.kode_brng "+
+                                "where resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=?"
+                            );
+                            try {
+                                ps2.setDouble(1,kenaikan);
+                                ps2.setString(2,resep);
+                                ps2.setString(3,rsobat.getString("no_racik"));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    sisacari=0;
+                                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                                    try {
+                                        psstok.setString(1,kdgudang.getText());
+                                        psstok.setString(2,rs2.getString("kode_brng"));
+                                        rsstok=psstok.executeQuery();
+                                        if(rsstok.next()){
+                                            sisacari=rsstok.getDouble(1);
+                                        }                                
+                                    } catch (Exception e) {
+                                        sisacari=0;
+                                        System.out.println("Notifikasi : "+e);
+                                    }finally{
+                                        if(rsstok != null){
+                                            rsstok.close();
+                                        }
+                                        if(psstok != null){
+                                            psstok.close();
+                                        }
+                                    }
+                                    
+                                    jumlahralan=Sequel.cariIsiAngka("select detail_pemberian_obat.jml from detail_pemberian_obat where detail_pemberian_obat.no_rawat='"+norwt+"' and detail_pemberian_obat.kode_brng='"+rs2.getString("kode_brng")+"' and detail_pemberian_obat.tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"'");
+                                    tabModeDetailObatRacikan.addRow(new Object[]{
+                                        rsobat.getString("no_racik"),rs2.getDouble("jml"),rs2.getString("kode_brng_apotek_bpjs"),rs2.getString("nama_brng_apotek_bpjs"),
+                                        signa1,signa2,"30",(rs2.getDouble("jml")-jumlahralan),rs2.getDouble("dasar"),Valid.roundUp(rs2.getDouble("harga"),100),sisacari,
+                                        rs2.getString("kode_brng"),rs2.getString("kode_sat"),"","",rs2.getString("expire")                                    
+                                    });                 
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notifikasi 3 : "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                        }else{
+                            ps2=koneksi.prepareStatement(
+                                "select maping_obat_apotek_bpjs.kode_brng_apotek_bpjs,maping_obat_apotek_bpjs.nama_brng_apotek_bpjs,resep_dokter_racikan_detail.jml,"+
+                                "databarang.kode_sat,databarang.ralan as harga,databarang."+hppfarmasi+" as dasar,databarang.kode_brng,databarang.expire "+
+                                "from resep_dokter_racikan_detail inner join databarang on resep_dokter_racikan_detail.kode_brng=databarang.kode_brng "+
+                                "inner join maping_obat_apotek_bpjs on databarang.kode_brng=maping_obat_apotek_bpjs.kode_brng "+
+                                "where resep_dokter_racikan_detail.no_resep=? and resep_dokter_racikan_detail.no_racik=?"
+                            );
+                            try {
+                                ps2.setString(1,resep);
+                                ps2.setString(2,rsobat.getString("no_racik"));
+                                rs2=ps2.executeQuery();
+                                while(rs2.next()){
+                                    sisacari=0;
+                                    psstok=koneksi.prepareStatement("select ifnull(gudangbarang.stok,'0') from gudangbarang where gudangbarang.kd_bangsal=? and gudangbarang.kode_brng=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''");
+                                    try {
+                                        psstok.setString(1,kdgudang.getText());
+                                        psstok.setString(2,rs2.getString("kode_brng"));
+                                        rsstok=psstok.executeQuery();
+                                        if(rsstok.next()){
+                                            sisacari=rsstok.getDouble(1);
+                                        }                                
+                                    } catch (Exception e) {
+                                        sisacari=0;
+                                        System.out.println("Notifikasi : "+e);
+                                    }finally{
+                                        if(rsstok != null){
+                                            rsstok.close();
+                                        }
+                                        if(psstok != null){
+                                            psstok.close();
+                                        }
+                                    }
+                                    
+                                    jumlahralan=Sequel.cariIsiAngka("select detail_pemberian_obat.jml from detail_pemberian_obat where detail_pemberian_obat.no_rawat='"+norwt+"' and detail_pemberian_obat.kode_brng='"+rs2.getString("kode_brng")+"' and detail_pemberian_obat.tgl_perawatan='"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+"'");
+                                    tabModeDetailObatRacikan.addRow(new Object[]{
+                                        rsobat.getString("no_racik"),rs2.getDouble("jml"),rs2.getString("kode_brng_apotek_bpjs"),rs2.getString("nama_brng_apotek_bpjs"),
+                                        signa1,signa2,"30",(rs2.getDouble("jml")-jumlahralan),rs2.getDouble("dasar"),Valid.roundUp(rs2.getDouble("harga"),100),sisacari,
+                                        rs2.getString("kode_brng"),rs2.getString("kode_sat"),"","",rs2.getString("expire")                                    
+                                    });                               
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notifikasi 3 : "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(ps2!=null){
+                                    ps2.close();
+                                }
+                            }
+                        }
+                    }while(rsobat.next());  
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi 2 : "+e);
+            } finally{
+                if(rsobat!=null){
+                    rsobat.close();
+                }
+                if(psobat!=null){
+                    psobat.close();
+                }
+            }
+            /*for(i=0;i<tbDetailObatRacikan.getRowCount();i++){
+                getDatadetailobatracikan(i);
+            }
+            hitungObat();*/
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        } 
+    }
+    
+    private void hitungObat() {
+        ttl=0;
+        y=0;
+        row2=tabModeobat.getRowCount();
+        for(r=0;r<row2;r++){ 
+            try {
+                if(Double.parseDouble(tabModeobat.getValueAt(r,1).toString())>0){
+                    try {                
+                        y=Math.round(Double.parseDouble(tabModeobat.getValueAt(r,1).toString())*
+                          Double.parseDouble(tabModeobat.getValueAt(r,6).toString())+
+                          Double.parseDouble(tabModeobat.getValueAt(r,8).toString())+
+                          Double.parseDouble(tabModeobat.getValueAt(r,9).toString()));                                                
+                    } catch (Exception e) {
+                        y=0;
+                    }
+                    ttl=ttl+y;
+                }  
+            } catch (Exception e) {
+            }                           
+        }
+        row2=tabModeDetailObatRacikan.getRowCount();
+        for(r=0;r<row2;r++){ 
+            try {
+                if(Double.parseDouble(tabModeDetailObatRacikan.getValueAt(r,10).toString())>0){
+                    try {
+                        y=Math.round(Double.parseDouble(tabModeDetailObatRacikan.getValueAt(r,10).toString())*
+                          Double.parseDouble(tabModeDetailObatRacikan.getValueAt(r,4).toString())+
+                          Double.parseDouble(tabModeDetailObatRacikan.getValueAt(r,11).toString())+
+                          Double.parseDouble(tabModeDetailObatRacikan.getValueAt(r,12).toString()));
+                    } catch (Exception e) {
+                        y=0;
+                    }
+                    ttl=ttl+y;
+                }
+            } catch (Exception e) {
+            }    
+        }
+        LTotal.setText(Valid.SetAngka(ttl));
+        ppnobat=0;
+        if(tampilkan_ppnobat_ralan.equals("Yes")){
+            ppnobat=Math.round(ttl*0.11);
+            ttl=ttl+ppnobat;
+            LPpn.setText(Valid.SetAngka(ppnobat));
+            LTotalTagihan.setText(Valid.SetAngka(ttl));
+        }
     }
     
     private void jam(){
