@@ -449,7 +449,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
+				<text><![CDATA[dr. ELSA INDAH SURYANI]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="652" y="94" width="145" height="11" uuid="26d0b2fa-6dee-4675-897e-42912fed494f">
@@ -459,7 +459,7 @@ and ipsrspemesanan.kode_suplier=ipsrssuplier.kode_suplier]]>
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PLT DIREKTUR " + $P{namars}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
