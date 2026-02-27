@@ -445,4 +445,10 @@ public final class MasterCariTemplatePersetujuanPenolakanTindakan extends javax.
             }
         });
     }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
+    }
 }

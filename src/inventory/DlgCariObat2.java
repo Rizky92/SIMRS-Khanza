@@ -4499,4 +4499,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
+    }
 }

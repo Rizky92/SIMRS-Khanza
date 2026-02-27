@@ -1412,4 +1412,10 @@ public class PanelDiagnosa extends widget.panelisi {
             ceksukses = false;
         }
     }
+
+    @Override
+    public void dispose() {
+        executor.shutdownNow();
+        super.dispose();
+    }
 }
