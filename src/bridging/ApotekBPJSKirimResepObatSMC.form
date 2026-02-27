@@ -400,7 +400,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="31-12-2025 09:51:29"/>
+                    <StringItem index="0" value="19-02-2026 04:45:49"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -699,6 +699,7 @@
                     <StringItem index="2" value="3. Obat Kemoterapi"/>
                   </StringArray>
                 </Property>
+                <Property name="selectedIndex" type="int" value="1"/>
                 <Property name="name" type="java.lang.String" value="JenisObat" noResource="true"/>
               </Properties>
               <Events>
@@ -718,7 +719,7 @@
                 </Property>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="31-12-2025 09:51:29"/>
+                    <StringItem index="0" value="19-02-2026 04:45:50"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
