@@ -438,7 +438,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<text><![CDATA[dr. ISMET ALIMIN, MM, MARS]]></text>
+				<text><![CDATA[dr. ELSA INDAH SURYANI]]></text>
 			</staticText>
 			<textField>
 				<reportElement x="798" y="94" width="145" height="11" uuid="0dfcd862-d34b-407f-8e39-3a61487baabf">
@@ -448,7 +448,7 @@
 				<textElement textAlignment="Center">
 					<font fontName="Tahoma" size="8"/>
 				</textElement>
-				<textFieldExpression><![CDATA["DIREKTUR " + $P{namars}]]></textFieldExpression>
+				<textFieldExpression><![CDATA["PLT DIREKTUR " + $P{namars}]]></textFieldExpression>
 			</textField>
 		</band>
 	</summary>
