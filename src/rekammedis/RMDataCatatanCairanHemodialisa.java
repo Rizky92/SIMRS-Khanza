@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -159,7 +159,7 @@ public final class RMDataCatatanCairanHemodialisa extends javax.swing.JDialog {
         UFG.getDocument().addDocumentListener((widget.TextBox.CustomDocumentListener)e -> hitungBalanceCairan());
         Keterangan.setDocument(new batasInput((byte)100).getKata(Keterangan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();

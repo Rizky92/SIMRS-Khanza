@@ -185,7 +185,7 @@ public final class RMChecklistPostOperasi extends javax.swing.JDialog {
         AreaLukaOperasi.setDocument(new batasInput((int)120).getKata(AreaLukaOperasi));
         JumlahUrine.setDocument(new batasInput((byte)4).getKata(JumlahUrine));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

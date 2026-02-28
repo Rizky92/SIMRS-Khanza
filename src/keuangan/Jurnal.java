@@ -107,7 +107,7 @@ public class Jurnal {
 
         return sukses;
     }
-    
+
     private int max(int a, int b) {
         if (a > b) {
             return a;

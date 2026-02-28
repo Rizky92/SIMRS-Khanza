@@ -12,15 +12,15 @@
 
 package simrskhanza;
 
-import kepegawaian.DlgCariDokter;
-import kepegawaian.DlgCariDokter2;
-import fungsi.sekuel;
-import fungsi.validasi;
 import fungsi.akses;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariDokter2;
 
 /**
  *

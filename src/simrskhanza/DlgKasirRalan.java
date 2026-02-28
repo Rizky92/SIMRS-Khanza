@@ -60,10 +60,10 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import javax.swing.WindowConstants;
 import kepegawaian.DlgCariDokter;
 import keuangan.DlgBilingParsialRalan;
 import keuangan.DlgBilingRalan;
@@ -108,8 +108,8 @@ import rekammedis.RMDataCatatanObservasiIGD;
 import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
-import rekammedis.RMDataSkriningGiziKehamilan;
 import rekammedis.RMDataResumePasien;
+import rekammedis.RMDataSkriningGiziKehamilan;
 import rekammedis.RMDataSkriningGiziLanjut;
 import rekammedis.RMDeteksiDiniCorona;
 import rekammedis.RMEdukasiPasienKeluargaRawatJalan;
@@ -8794,7 +8794,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                                 public void windowClosed(WindowEvent e) {
                                     dlgrwjl=null;
                                 }
-                            }); 
+                            });
 
                             dlgrwjl.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             dlgrwjl.setLocationRelativeTo(internalFrame1);
@@ -8808,7 +8808,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                                 "rawat_jl_dr","-","-"
                             );
                             dlgrwjl.isCek();
-                            dlgrwjl.setPoli(tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),13).toString());   
+                            dlgrwjl.setPoli(tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),13).toString());
                         }
 
                         if (dlgrwjl.isVisible()) {
@@ -15802,7 +15802,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppSkriningGiziBtnPrintActionPerformed
+    private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {                                                       
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -15824,8 +15824,8 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             }
         }
     }
-    
-    private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+
+    private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -18160,12 +18160,12 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         MnPernyataanMemilihDPJP.setName("MnPernyataanMemilihDPJP");
         MnPernyataanMemilihDPJP.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPernyataanMemilihDPJP.addActionListener(this::MnPernyataanMemilihDPJPActionPerformed);
-        
+
         MnSerahTerimaBarangAnggotaTubuh = new javax.swing.JMenuItem();
         MnSerahTerimaBarangAnggotaTubuh.setBackground(new java.awt.Color(255, 255, 254));
         MnSerahTerimaBarangAnggotaTubuh.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSerahTerimaBarangAnggotaTubuh.setForeground(new java.awt.Color(50, 50, 50));
-        MnSerahTerimaBarangAnggotaTubuh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSerahTerimaBarangAnggotaTubuh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
         MnSerahTerimaBarangAnggotaTubuh.setText("Serah Terima Anggota Tubuh/Barang");
         MnSerahTerimaBarangAnggotaTubuh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSerahTerimaBarangAnggotaTubuh.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);

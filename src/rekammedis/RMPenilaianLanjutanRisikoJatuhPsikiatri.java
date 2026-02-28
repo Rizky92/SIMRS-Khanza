@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -135,7 +135,7 @@ public final class RMPenilaianLanjutanRisikoJatuhPsikiatri extends javax.swing.J
         // HasilSkrining.setDocument(new batasInput((int)200).getKata(HasilSkrining));
         // Saran.setDocument(new batasInput((int)200).getKata(Saran));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();

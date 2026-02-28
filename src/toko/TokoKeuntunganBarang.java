@@ -12,11 +12,11 @@
 package toko;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import fungsi.validasi;
-import fungsi.akses;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -649,7 +649,7 @@ public final class TokoKeuntunganBarang extends javax.swing.JDialog {
     private void isHitung(){
         Total.setText("Total Keuntungan = Keuntungan Barang Penjualan + Keuntungan Barang Piutang = "+Valid.SetAngka(totalpenjualan)+" + "+Valid.SetAngka(totalpiutang)+" = "+Valid.SetAngka(totalpenjualan+totalpiutang));
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -675,7 +675,7 @@ public final class TokoKeuntunganBarang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

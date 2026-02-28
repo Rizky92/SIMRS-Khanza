@@ -46,7 +46,7 @@ public class ApiSOFTMEDIX {
     private JsonNode response;
     private ObjectMapper mapper = new ObjectMapper();
     private int i=0;
-    
+
     public ApiSOFTMEDIX(){
         super();
         try {
@@ -59,7 +59,7 @@ public class ApiSOFTMEDIX {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void kirimRalan(String nopermintaan) {
         try {
              ps=koneksi.prepareStatement(
@@ -99,7 +99,7 @@ public class ApiSOFTMEDIX {
                             ps2.close();
                         }
                     }
-                    
+
                     requestJson="{" +
                                     "\"order\": {" +
                                         "\"msh\": {" +
@@ -147,7 +147,7 @@ public class ApiSOFTMEDIX {
                                             "]"+
                                         "}" +
                                     "}"+
-                                "}"; 
+                                "}";
                     System.out.println("JSON : "+requestJson);
                     requestEntity = new HttpEntity(requestJson,headers);	
                     System.out.println("URL : "+URLAPISOFTMEDIX+"/order");
@@ -174,7 +174,7 @@ public class ApiSOFTMEDIX {
             }
         }
     }
-    
+
     public void kirimRanap(String nopermintaan) {
         try {
              ps=koneksi.prepareStatement(
@@ -216,7 +216,7 @@ public class ApiSOFTMEDIX {
                             ps2.close();
                         }
                     }
-                    
+
                     requestJson="{" +
                                     "\"order\": {" +
                                         "\"msh\": {" +
@@ -264,7 +264,7 @@ public class ApiSOFTMEDIX {
                                             "]"+
                                         "}" +
                                     "}"+
-                                "}"; 
+                                "}";
                     System.out.println("JSON : "+requestJson);
                     requestEntity = new HttpEntity(requestJson,headers);	
                     System.out.println("URL : "+URLAPISOFTMEDIX+"/order");
@@ -291,7 +291,7 @@ public class ApiSOFTMEDIX {
             }
         }
     }
-    
+
     public void ambil(String nopermintaan) {
         try{
             headers = new HttpHeaders();
@@ -315,7 +315,7 @@ public class ApiSOFTMEDIX {
                             list.path("nilai_normal").asText()+"','"+
                             list.path("satuan").asText()+"','"+
                             list.path("flag").asText().replaceAll("null","")+"','"+
-                            list.path("test_id").asText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Periksa Lab"); 
+                            list.path("test_id").asText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Periksa Lab");
                     i++;
                 }
             }
@@ -326,7 +326,7 @@ public class ApiSOFTMEDIX {
             }
         }
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {
@@ -343,5 +343,5 @@ public class ApiSOFTMEDIX {
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         return new RestTemplate(factory);
     }
-    
+
 }

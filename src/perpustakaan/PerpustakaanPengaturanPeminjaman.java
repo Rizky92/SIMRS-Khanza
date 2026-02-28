@@ -516,7 +516,7 @@ public class PerpustakaanPengaturanPeminjaman extends javax.swing.JDialog {
         Denda.setText("0");
         MakBuku.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -542,7 +542,7 @@ public class PerpustakaanPengaturanPeminjaman extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

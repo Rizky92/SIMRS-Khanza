@@ -1,10 +1,10 @@
 package tranfusidarah;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -13,15 +13,15 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
 import java.util.Map;
-import javax.swing.JOptionPane;
-import javax.swing.JTable;
-import javax.swing.event.DocumentEvent;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 public class UTDKomponenDarah extends javax.swing.JDialog {
     private final DefaultTableModel tabModeKomponen;
@@ -74,15 +74,15 @@ public class UTDKomponenDarah extends javax.swing.JDialog {
         tbKomponen.setDefaultRenderer(Object.class, new WarnaTable());
 
         Kode.setDocument(new batasInput((byte)5).getKata(Kode));
-        Nama.setDocument(new batasInput((byte)70).getKata(Nama));      
-        Lama.setDocument(new batasInput((byte)5).getOnlyAngka(Lama));  
-        JasaSarana.setDocument(new batasInput((byte)10).getOnlyAngka(JasaSarana));  
-        PaketBHP.setDocument(new batasInput((byte)10).getOnlyAngka(PaketBHP));  
-        KSO.setDocument(new batasInput((byte)10).getOnlyAngka(KSO));  
-        Manajemen.setDocument(new batasInput((byte)10).getOnlyAngka(Manajemen));  
-        Total.setDocument(new batasInput((byte)10).getOnlyAngka(Total));  
-        Pembatalan.setDocument(new batasInput((byte)10).getOnlyAngka(Pembatalan));        
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
+        Nama.setDocument(new batasInput((byte)70).getKata(Nama));
+        Lama.setDocument(new batasInput((byte)5).getOnlyAngka(Lama));
+        JasaSarana.setDocument(new batasInput((byte)10).getOnlyAngka(JasaSarana));
+        PaketBHP.setDocument(new batasInput((byte)10).getOnlyAngka(PaketBHP));
+        KSO.setDocument(new batasInput((byte)10).getOnlyAngka(KSO));
+        Manajemen.setDocument(new batasInput((byte)10).getOnlyAngka(Manajemen));
+        Total.setDocument(new batasInput((byte)10).getOnlyAngka(Total));
+        Pembatalan.setDocument(new batasInput((byte)10).getOnlyAngka(Pembatalan));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
         isForm();
     }
@@ -835,7 +835,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void JasaSaranaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JasaSaranaKeyPressed
@@ -940,7 +940,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabModeKomponen.addRow(new Object[]{
@@ -1049,7 +1049,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

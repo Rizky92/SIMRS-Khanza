@@ -24,6 +24,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -50,13 +51,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
+import javax.swing.WindowConstants;
 import keuangan.DlgBilingRalan;
 import keuangan.DlgBilingRanap;
 import laporan.DlgDiagnosaPenyakit;
 import rekammedis.RMRiwayatPerawatan;
-import java.util.concurrent.RejectedExecutionException;
-import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 
 /**
  *
@@ -206,17 +206,17 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                                 diagnosa.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                                 diagnosa.setLocationRelativeTo(internalFrame1);
                                             }
-                                                
+
                                             if (diagnosa == null) return;
                                             if (!diagnosa.isVisible()) {
                                                 diagnosa.isCek();
                                                 diagnosa.setNoRm(rs.getString("no_rawat"),rs.getDate("tgl_registrasi"),rs.getDate("tgl_registrasi"),rs.getString("status_lanjut"));
-                                            }  
+                                            }
                                             if (diagnosa.isVisible()) {
                                                 diagnosa.toFront();
                                                 return;
-                                            } 
-                                                
+                                            }
+
                                             diagnosa.setVisible(true);
                                         }
                                     } catch (Exception e) {
@@ -310,11 +310,11 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                             if (!resume.isVisible()) {
                                                 resume.setNoRawat(rs.getString("no_rawat"));
                                                 resume.setNoRm(rs.getString("no_rkm_medis"),rs.getString("nm_pasien"));
-                                            }  
+                                            }
                                             if (resume.isVisible()) {
                                                 resume.toFront();
                                                 return;
-                                            }    
+                                            }
                                             resume.setVisible(true);
                                         }
                                     } catch (Exception e) {
@@ -358,19 +358,19 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                                     });
                                                     dlgbil.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                                     dlgbil.setLocationRelativeTo(internalFrame1);
-                                                }   
-                                                
+                                                }
+
                                                 if (dlgbil == null) return;
                                                 if (!dlgbil.isVisible()) {
                                                     dlgbil.TNoRw.setText(rs.getString("no_rawat"));
                                                     dlgbil.isCek();
                                                     dlgbil.isRawat();
-                                                }  
+                                                }
                                                 if (dlgbil.isVisible()) {
                                                     dlgbil.toFront();
                                                     return;
-                                                } 
-                                                
+                                                }
+
                                                 dlgbil.setVisible(true);
                                             }else if(rs.getString("status_lanjut").equals("Ranap")){
                                                 if (billing == null || !billing.isDisplayable()) {
@@ -397,19 +397,19 @@ public class INACBGHybrid extends javax.swing.JDialog {
                                                     });
                                                     billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                                                     billing.setLocationRelativeTo(internalFrame1);
-                                                }  
-                                                
+                                                }
+
                                                 if (billing == null) return;
                                                 if (!billing.isVisible()) {
-                                                    billing.TNoRw.setText(rs.getString("no_rawat"));                   
-                                                    billing.isCek();  
-                                                    billing.isRawat(); 
-                                                }  
+                                                    billing.TNoRw.setText(rs.getString("no_rawat"));
+                                                    billing.isCek();
+                                                    billing.isRawat();
+                                                }
                                                 if (billing.isVisible()) {
                                                     billing.toFront();
                                                     return;
-                                                }  
-                                                
+                                                }
+
                                                 billing.setVisible(true);
                                             }
                                         }

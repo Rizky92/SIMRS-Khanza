@@ -13,13 +13,12 @@ package toko;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import keuangan.*;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -46,6 +45,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import keuangan.*;
 
 /**
  *
@@ -132,27 +132,27 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
         Kdmem.setDocument(new batasInput((byte)15).getKata(Kdmem));
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         Cicilan.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
                 Sisa.setText(Valid.SetAngka(sisapiutang));
-                if(!Cicilan.getText().equals("")){                           
-                     Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));                           
+                if(!Cicilan.getText().equals("")){
+                     Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));
                 }
             }
             @Override
             public void removeUpdate(DocumentEvent e) {
                 Sisa.setText(Valid.SetAngka(sisapiutang));
-                if(!Cicilan.getText().equals("")){                           
-                     Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));                           
+                if(!Cicilan.getText().equals("")){
+                     Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));
                 }
             }
             @Override
             public void changedUpdate(DocumentEvent e) {
                 Sisa.setText(Valid.SetAngka(sisapiutang));
-                if(!Cicilan.getText().equals("")){                           
-                     Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));                           
+                if(!Cicilan.getText().equals("")){
+                     Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));
                 }
             }
         });
@@ -972,18 +972,18 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(tokomember.getTable().getSelectedRow()!= -1){                   
+                if(tokomember.getTable().getSelectedRow()!= -1){
                     Kdmem.setText(tokomember.getTable().getValueAt(tokomember.getTable().getSelectedRow(),1).toString());
                     Nmmem.setText(tokomember.getTable().getValueAt(tokomember.getTable().getSelectedRow(),2).toString());
                     sisapiutang=Sequel.cariIsiAngka("SELECT ifnull(SUM(tokopiutang.sisapiutang),0) FROM tokopiutang where tokopiutang.no_member=?",Kdmem.getText())
-                               - 
+                               -
                                Sequel.cariIsiAngka("SELECT ifnull(SUM(toko_bayar_piutang.besar_cicilan),0) FROM toko_bayar_piutang where toko_bayar_piutang.no_member=?",Kdmem.getText());
                     Sisa.setText(Valid.SetAngka(sisapiutang));
-                    if(!Cicilan.getText().equals("")){                           
-                           Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));                           
+                    if(!Cicilan.getText().equals("")){
+                           Sisa.setText(Valid.SetAngka(sisapiutang-Double.parseDouble(Cicilan.getText())));
                     }
                     Sequel.cariIsi("select tokopiutang.nota_piutang from tokopiutang where tokopiutang.no_member=? order by tokopiutang.tgl_piutang desc limit 1", NoNota,Kdmem.getText());
-                }  
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -994,7 +994,7 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         tokomember.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1062,7 +1062,7 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -1273,7 +1273,7 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1299,7 +1299,7 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

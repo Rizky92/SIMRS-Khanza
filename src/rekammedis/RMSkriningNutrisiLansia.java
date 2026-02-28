@@ -165,7 +165,7 @@ public final class RMSkriningNutrisiLansia extends javax.swing.JDialog {
         SpO2.setDocument(new batasInput((byte)5).getKata(SpO2));
         Alergi.setDocument(new batasInput((int)100).getKata(Alergi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

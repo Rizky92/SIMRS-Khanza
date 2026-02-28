@@ -19,7 +19,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -138,7 +137,7 @@ public final class RMSkriningNutrisiDewasa extends javax.swing.JDialog {
         SpO2.setDocument(new batasInput((byte)5).getKata(SpO2));
         Alergi.setDocument(new batasInput((int)100).getKata(Alergi));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

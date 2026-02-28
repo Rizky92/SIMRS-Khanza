@@ -353,7 +353,7 @@ public class ApiBPJSLZString {
             }
         });
     }
-        
+
     private static String _decompress(int length, int resetValue, DecompressFunctionWrapper getNextValue) {
         List<String> dictionary = new ArrayList<String>();
         // TODO: is next an unused variable in original lz-string?

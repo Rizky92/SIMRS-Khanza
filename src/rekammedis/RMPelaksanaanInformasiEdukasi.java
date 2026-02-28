@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -135,7 +135,7 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
         Materi.setDocument(new batasInput((int)1000).getKata(Materi));
         Lama.setDocument(new batasInput((byte)10).getKata(Lama));
         KeteranganKepada.setDocument(new batasInput((byte)40).getKata(KeteranganKepada));
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -1260,25 +1260,25 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
             pegawai.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(pegawai.getTable().getSelectedRow()!= -1){                   
+                    if(pegawai.getTable().getSelectedRow()!= -1){
                         NIP.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                         NamaPetugas.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                    }  
+                    }
                     NIP.requestFocus();
                     pegawai=null;
                 }
-            }); 
+            });
             pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             pegawai.setLocationRelativeTo(internalFrame1);
         }
         if (pegawai == null) return;
         if (!pegawai.isVisible()) {
             pegawai.emptTeks();
-        }  
+        }
         if (pegawai.isVisible()) {
             pegawai.toFront();
             return;
-        }     
+        }
         pegawai.setVisible(true);
     }//GEN-LAST:event_btnPetugasActionPerformed
 
@@ -1413,13 +1413,13 @@ public final class RMPelaksanaanInformasiEdukasi extends javax.swing.JDialog {
         }
         if (templateedukasi == null) return;
         if (!templateedukasi.isVisible()) {
-            templateedukasi.isCek();    
+            templateedukasi.isCek();
             templateedukasi.emptTeks();
-        }  
+        }
         if (templateedukasi.isVisible()) {
             templateedukasi.toFront();
             return;
-        }    
+        }
         templateedukasi.setVisible(true);
     }//GEN-LAST:event_BtnSeekActionPerformed
 

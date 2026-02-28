@@ -159,7 +159,7 @@ public final class RMSkriningDiabetesMelitus extends javax.swing.JDialog {
         HasilGDP.setDocument(new batasInput((int)10).getKata(HasilGDP));
         KeteranganGDP.setDocument(new batasInput((int)50).getKata(KeteranganGDP));
         KeteranganSkrining.setDocument(new batasInput((int)60).getKata(KeteranganSkrining));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

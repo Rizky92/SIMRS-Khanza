@@ -144,7 +144,7 @@ public final class RMSkriningHipertensi extends javax.swing.JDialog {
         Diastole.setDocument(new batasInput((int)3).getKata(Diastole));
         HasilSkrining.setDocument(new batasInput((int)40).getKata(HasilSkrining));
         Keterangan.setDocument(new batasInput((int)100).getKata(Keterangan));
-        
+
         Sistole.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {

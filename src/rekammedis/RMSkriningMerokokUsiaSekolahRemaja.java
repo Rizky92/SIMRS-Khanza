@@ -182,7 +182,7 @@ public final class RMSkriningMerokokUsiaSekolahRemaja extends javax.swing.JDialo
         KeteranganYangPalingSeringMerokokDiSekolah.setDocument(new batasInput((byte)40).getKata(KeteranganYangPalingSeringMerokokDiSekolah));
         HasilPemeriksaanCO.setDocument(new batasInput((byte)5).getKata(HasilPemeriksaanCO));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

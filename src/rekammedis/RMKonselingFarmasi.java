@@ -121,7 +121,7 @@ public final class RMKonselingFarmasi extends javax.swing.JDialog {
         TindakLanjut.setDocument(new batasInput((int)400).getKata(TindakLanjut));
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();

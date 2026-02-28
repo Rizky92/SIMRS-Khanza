@@ -13,11 +13,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -372,7 +372,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
         SekunderCatatan.setDocument(new batasInput((int)100).getKata(SekunderCatatan));
         PrimerKeluhanUtama.setDocument(new batasInput((int)400).getKata(PrimerKeluhanUtama));
         SekunderAnamnesa.setDocument(new batasInput((int)400).getKata(SekunderAnamnesa));
-       
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
@@ -3322,7 +3322,7 @@ public final class RMTriaseIGD extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void TNoRMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TNoRMActionPerformed

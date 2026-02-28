@@ -1,24 +1,21 @@
 package tranfusidarah;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -92,9 +89,9 @@ public class UTDStokDarah extends javax.swing.JDialog {
 
         NoKantong.setDocument(new batasInput((byte)20).getKata(NoKantong));
         KodeKomponen.setDocument(new batasInput((byte)5).getKata(KodeKomponen));
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));    
-          
-        
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
+
         ChkInput.setSelected(false);
         panelCari.setVisible(false);
         posisi();
@@ -946,7 +943,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void KodeKomponenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeKomponenKeyPressed
@@ -963,7 +960,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             komponen.addWindowListener(new WindowAdapter() {
                 @Override
                 public void windowClosed(WindowEvent e) {
-                    if(komponen.getTable().getSelectedRow()!= -1){ 
+                    if(komponen.getTable().getSelectedRow()!= -1){
                         KodeKomponen.setText(komponen.getTable().getValueAt(komponen.getTable().getSelectedRow(),0).toString());
                         NoKantong.setText(komponen.getTable().getValueAt(komponen.getTable().getSelectedRow(),0).toString()+NoKantong.getText());
                         NamaKomponen.setText(komponen.getTable().getValueAt(komponen.getTable().getSelectedRow(),1).toString());
@@ -974,7 +971,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         sdf = new SimpleDateFormat("yyyy-MM-dd");
                         Valid.SetTgl(Kadaluarsa,sdf.format(cal.getTime()));
                         NoKantong.requestFocus();
-                    } 
+                    }
                     komponen=null;
                 }
             });
@@ -986,19 +983,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         komponen.dispose();
                     }
                 }
-            });  
+            });
             komponen.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            komponen.setLocationRelativeTo(internalFrame1);   
+            komponen.setLocationRelativeTo(internalFrame1);
         }
         if (komponen == null) return;
         if (!komponen.isVisible()) {
             komponen.emptTeks();
-        }  
+        }
         if (komponen.isVisible()) {
             komponen.toFront();
             return;
-        }     
-        komponen.setVisible(true);   
+        }
+        komponen.setVisible(true);
     }//GEN-LAST:event_btnKomponenActionPerformed
 
     private void GolonganDarahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_GolonganDarahKeyPressed
@@ -1298,7 +1295,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

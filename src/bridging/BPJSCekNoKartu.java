@@ -39,7 +39,7 @@ public class BPJSCekNoKartu {
     private JsonNode nameNode;
     private JsonNode response;
     private HttpHeaders headers;
-        
+
     public BPJSCekNoKartu(){
         super();
         try {
@@ -48,7 +48,7 @@ public class BPJSCekNoKartu {
             System.out.println("E : "+e);
         }
     }
-    
+
     public void tampil(String nokartu) {
         try {
             headers = new HttpHeaders();
@@ -98,8 +98,8 @@ public class BPJSCekNoKartu {
                 umurumurSekarang=response.path("peserta").path("umur").path("umurSekarang").asText();
                 informasi="OK";
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -107,5 +107,5 @@ public class BPJSCekNoKartu {
             }
         }
     }
-    
+
 }

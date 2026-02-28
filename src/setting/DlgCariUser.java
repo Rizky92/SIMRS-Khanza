@@ -334,7 +334,7 @@ public final class DlgCariUser extends javax.swing.JDialog {
 
     private void tampil3() {
         Valid.tabelKosong(tabMode);
-        
+
         try {
             file = new File("./cache/cariuser.iyem");
             file.createNewFile();

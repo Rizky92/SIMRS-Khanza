@@ -509,7 +509,7 @@ public class DlgSetHargaToko extends javax.swing.JDialog {
         Retail.setText("");
         Distributor.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -535,7 +535,7 @@ public class DlgSetHargaToko extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

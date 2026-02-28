@@ -41,7 +41,7 @@ public class DUKCAPILJakartaCekNik {
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode nameNode;
-    
+
     public DUKCAPILJakartaCekNik(){
         super();
         try {
@@ -50,7 +50,7 @@ public class DUKCAPILJakartaCekNik {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void tampil(String nik) {
         try {
             URL = prop.getProperty("URLDUKCAPILJAKARTA")+"?usernm="+koneksiDB.USERDUKCAPILJAKARTA()+"&pass="+koneksiDB.PASSDUKCAPILJAKARTA()+"&app=SILaporLahir&pget=Kelahiran&pusr=admin&proc=GETNIK&nik="+nik+"&pkey="+Sequel.cariIsi("select md5(concat('"+prop.getProperty("VAR1DUKCAPILJAKARTA")+"',md5(date_format(current_date(),'%d%m%Y')),'"+prop.getProperty("VAR2DUKCAPILJAKARTA")+"'))");
@@ -114,7 +114,7 @@ public class DUKCAPILJakartaCekNik {
                 DSC_STAT_KWN="";
                 DSC_STAT_HBKEL="";
                 DSC_GOL_DRH="";
-            }            
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi Peserta : "+ex);
             if(ex.toString().contains("UnknownHostException")){
@@ -122,5 +122,5 @@ public class DUKCAPILJakartaCekNik {
             }
         }
     }
-    
+
 }

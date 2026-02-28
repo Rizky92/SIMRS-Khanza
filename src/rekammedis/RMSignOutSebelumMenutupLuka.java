@@ -145,7 +145,7 @@ public final class RMSignOutSebelumMenutupLuka extends javax.swing.JDialog {
         PerhatianUtamaFasePemulihan.setDocument(new batasInput((byte)100).getKata(PerhatianUtamaFasePemulihan));
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

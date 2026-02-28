@@ -15,11 +15,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
+import fungsi.akses;
+import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import fungsi.batasInput;
 import inventory.DlgPiutang;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -1649,7 +1649,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         for (int i = 0; i < tabModeObat.getRowCount(); i++) {
             total += (Double) tabModeObat.getValueAt(i, 8);
         }
-        
+
         for (int i = 0; i < tabModeDetailRacikanObat.getRowCount(); i++) {
             total += (Double) tabModeDetailRacikanObat.getValueAt(i, 9);
         }

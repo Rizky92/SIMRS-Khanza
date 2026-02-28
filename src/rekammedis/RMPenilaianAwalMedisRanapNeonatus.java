@@ -7,11 +7,11 @@ package rekammedis;
 
 import fungsi.WarnaTable;
 import fungsi.WarnaTable5;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -473,7 +473,7 @@ public final class RMPenilaianAwalMedisRanapNeonatus extends javax.swing.JDialog
         Penyulit.setDocument(new batasInput((byte)40).getKata(Penyulit));
         BBPB.setDocument(new batasInput((byte)10).getKata(BBPB));
         Keadaan.setDocument(new batasInput((byte)40).getKata(Keadaan));
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);

@@ -12,11 +12,11 @@
 package perpustakaan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -599,7 +599,7 @@ public class PerpustakaanJenis extends javax.swing.JDialog {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2)});
@@ -645,7 +645,7 @@ public class PerpustakaanJenis extends javax.swing.JDialog {
        BtnHapus.setEnabled(akses.getjenis_perpustakaan());
        BtnEdit.setEnabled(akses.getjenis_perpustakaan());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -671,7 +671,7 @@ public class PerpustakaanJenis extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -11,10 +11,10 @@
 
 package setting;
 
+import fungsi.WarnaTable;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.WarnaTable;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -671,7 +671,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -707,7 +707,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
         YesNo10.setSelectedIndex(0);
         YesNo11.setSelectedIndex(0);
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -733,7 +733,7 @@ public class DlgSetTarif extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

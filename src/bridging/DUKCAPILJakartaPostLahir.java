@@ -40,16 +40,16 @@ public class DUKCAPILJakartaPostLahir {
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode nameNode;
-    
+
     public DUKCAPILJakartaPostLahir(){
         super();
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));            
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public boolean post(String nokk,String nmbayi,String tgllhr,String jamlhr,String jk,String jnslhr,String lahirke,
                        String brt,String pjg,String pnlglhr,String nikibu,String nmibu,String alamatibu,String kerjaibu,
                        String nikayah,String nmayah,String alamatayah,String kerjaayah,String noskl,String pnlgnama,
@@ -78,7 +78,7 @@ public class DUKCAPILJakartaPostLahir {
             }else{
                 status=false;
                 JOptionPane.showMessageDialog(null,nameNode.path("STATUS").asText());
-            }                     
+            }
         } catch (Exception ex) {
             status=false;
             System.out.println("Notifikasi Peserta : "+ex);
@@ -86,8 +86,8 @@ public class DUKCAPILJakartaPostLahir {
                 JOptionPane.showMessageDialog(null,"Koneksi ke server Dukcapil terputus...!");
             }
         }
-        
+
         return status;
     }
-    
+
 }

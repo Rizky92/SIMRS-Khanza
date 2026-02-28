@@ -66,28 +66,28 @@ public class OrthancDICOM extends javax.swing.JDialog {
         initComponents();
         initComponents2();
     }
-    
-    private void initComponents2() {           
+
+    private void initComponents2() {
         txtURL.addActionListener((ActionEvent e) -> {
             loadURL(txtURL.getText());
         });
-  
+
         progressBar.setPreferredSize(new Dimension(550, 508));
         progressBar.setStringPainted(true);
         panel.add(jfxPanel, BorderLayout.CENTER);
         internalFrame1.setLayout(new BorderLayout());
-        internalFrame1.add(panel, BorderLayout.CENTER);    
-        internalFrame1.add(PanelMenu,BorderLayout.AFTER_LAST_LINE);        
+        internalFrame1.add(panel, BorderLayout.CENTER);
+        internalFrame1.add(PanelMenu,BorderLayout.AFTER_LAST_LINE);
     }
-    
-     private void createScene() {        
+
+     private void createScene() {
         Platform.runLater(new Runnable() {
             public void run() {
                 WebView view = new WebView();
-                
+
                 engine = view.getEngine();
                 engine.setJavaScriptEnabled(true);
-                
+
                 engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
                     @Override
                     public WebEngine call(PopupFeatures p) {
@@ -95,27 +95,27 @@ public class OrthancDICOM extends javax.swing.JDialog {
                         return view.getEngine();
                     }
                 });
-                
+
                 engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         OrthancDICOM.this.setTitle(newValue);
                     });
                 });
-                
-                
+
+
                 engine.setOnStatusChanged((final WebEvent<String> event) -> {
                     SwingUtilities.invokeLater(() -> {
                         lblStatus.setText(event.getData());
                     });
                 });
-                
-                
+
+
                 engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         progressBar.setValue(newValue.intValue());
-                    });                                                   
+                    });
                 });
-                
+
                 engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
                     if (engine.getLoadWorker().getState() == FAILED) {
                         SwingUtilities.invokeLater(() -> {
@@ -129,13 +129,13 @@ public class OrthancDICOM extends javax.swing.JDialog {
                         });
                     }
                 });
-                
+
                 engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
                     SwingUtilities.invokeLater(() -> {
                         txtURL.setText(newValue);
                     });
                 });
-                
+
                 engine.getLoadWorker().stateProperty().addListener(new ChangeListener<Worker.State>() {
                     @Override
                     public void changed(ObservableValue ov, Worker.State oldState, Worker.State newState) {
@@ -150,22 +150,22 @@ public class OrthancDICOM extends javax.swing.JDialog {
                             } catch (Exception ex) {
                                 System.out.println("Notifikasi : "+ex);
                             }
-                        } 
+                        }
                     }
                 });
-                
+
                 jfxPanel.setScene(new Scene(view));
             }
         });
     }
- 
-    public void loadURL(String url) {  
+
+    public void loadURL(String url) {
         urlpanggil=url;
         try {
             createScene();
         } catch (Exception e) {
         }
-        
+
         Platform.runLater(() -> {
             try {
                 engine.getCreatePopupHandler();
@@ -175,13 +175,13 @@ public class OrthancDICOM extends javax.swing.JDialog {
             }catch (Exception exception) {
                 engine.load(url);
             }
-        });        
-    }    
-    
+        });
+    }
+
     public void CloseScane(){
         Platform.setImplicitExit(false);
     }
-    
+
     public void print(final Node node) {
         Printer printer = Printer.getDefaultPrinter();
         PageLayout pageLayout = printer.createPageLayout(Paper.NA_LETTER, PageOrientation.PORTRAIT, Printer.MarginType.DEFAULT);
@@ -197,7 +197,7 @@ public class OrthancDICOM extends javax.swing.JDialog {
             }
         }
     }
-    
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -380,6 +380,6 @@ public class OrthancDICOM extends javax.swing.JDialog {
     public void setJudul(String Judul,String NoRawat,String Series){
         norawat=NoRawat;
         series=Series;
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70,70,70))); 
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), Judul, javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(70,70,70)));
     }
 }

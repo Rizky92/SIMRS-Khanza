@@ -3,11 +3,11 @@ package inventory;
 
 
 import fungsi.WarnaTable2;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventaris.InventarisAsalHibah;
 import java.awt.Cursor;
 import java.awt.Dimension;

@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -114,7 +114,7 @@ public final class RMDataCatatanCekGDS extends javax.swing.JDialog {
         GDP.setDocument(new batasInput((byte)5).getKata(GDP));
         Insulin.setDocument(new batasInput((byte)30).getKata(Insulin));
         ObatGula.setDocument(new batasInput((byte)30).getKata(ObatGula));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();

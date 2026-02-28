@@ -165,7 +165,7 @@ public final class RMTimeOutSebelumInsisi extends javax.swing.JDialog {
         HalKhususDiperhatikan.setDocument(new batasInput((byte)100).getKata(HalKhususDiperhatikan));
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

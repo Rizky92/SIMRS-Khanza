@@ -14,11 +14,11 @@ package viabarcode;
 
 import fungsi.WarnaTable;
 import fungsi.WarnaTable2;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.riwayatobat;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -205,7 +205,7 @@ public final class DlgBarcodeRanap extends javax.swing.JDialog {
             System.out.println("E : "+e);
             aktifkanbatch = "no";
         }
-        
+
         try {
             hppfarmasi=koneksiDB.HPPFARMASI();
         } catch (Exception e) {
@@ -875,11 +875,11 @@ public final class DlgBarcodeRanap extends javax.swing.JDialog {
                 if(psrekening!=null){
                     psrekening.close();
                 }
-            }            
+            }
         } catch (Exception e) {
             System.out.println(e);
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCariTindakan.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -967,7 +967,7 @@ public final class DlgBarcodeRanap extends javax.swing.JDialog {
             rawatinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             rawatinap.setLocationRelativeTo(internalFrame1);
             rawatinap.isCek();
-            rawatinap.setNoRm(NoRawat.getText(),new Date(),new Date()); 
+            rawatinap.setNoRm(NoRawat.getText(),new Date(),new Date());
             rawatinap.setVisible(true);
         }
     }//GEN-LAST:event_BtnCariActionPerformed
@@ -1667,7 +1667,7 @@ public final class DlgBarcodeRanap extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

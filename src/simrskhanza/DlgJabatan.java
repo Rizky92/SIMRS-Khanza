@@ -54,7 +54,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Kode Jabatan","Nama Jabatan"};
         tabMode=new DefaultTableModel(null,row){
@@ -593,7 +593,7 @@ public final class DlgJabatan extends javax.swing.JDialog {
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
-                }   
+                }
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{

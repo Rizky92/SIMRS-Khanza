@@ -12,11 +12,11 @@
 
 package toko;
 import fungsi.WarnaTable2;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -110,8 +110,8 @@ public class TokoInputStok extends javax.swing.JDialog {
         warna.kolom=0;
         tbDokter.setDefaultRenderer(Object.class,warna);
 
-        catatan.setDocument(new batasInput((byte)60).getKata(catatan));  
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari)); 
+        catatan.setDocument(new batasInput((byte)60).getKata(catatan));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
 
         try {
@@ -589,7 +589,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
@@ -815,7 +815,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

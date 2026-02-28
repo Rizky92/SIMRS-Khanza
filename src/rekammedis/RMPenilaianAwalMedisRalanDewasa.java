@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -190,7 +190,7 @@ public final class RMPenilaianAwalMedisRalanDewasa extends javax.swing.JDialog {
         // Tatalaksana.setDocument(new batasInput((int)5000).getKata(Tatalaksana));
         // Konsul.setDocument(new batasInput((int)1000).getKata(Konsul));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);

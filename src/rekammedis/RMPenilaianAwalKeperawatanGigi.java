@@ -15,11 +15,11 @@ package rekammedis;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -385,7 +385,7 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
         KetKebiasaanLain.setDocument(new batasInput((int)30).getKata(KetKebiasaanLain));
         ObatDiminum.setDocument(new batasInput((int)100).getKata(ObatDiminum));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         BB.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {
@@ -3104,7 +3104,7 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -3126,7 +3126,7 @@ public final class RMPenilaianAwalKeperawatanGigi extends javax.swing.JDialog {
                     }
                 }
             });
-            
+
             TCariMasalah.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {

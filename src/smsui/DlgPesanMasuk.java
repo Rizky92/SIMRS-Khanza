@@ -12,11 +12,11 @@
 package smsui;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -78,7 +78,7 @@ public final class DlgPesanMasuk extends javax.swing.JDialog {
         tbBangsal.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-    }    
+    }
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -380,9 +380,9 @@ public final class DlgPesanMasuk extends javax.swing.JDialog {
     private widget.Table tbBangsal;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil(){        
-        try{   
-            Valid.tabelKosong(tabMode);  
+    private void tampil(){
+        try{
+            Valid.tabelKosong(tabMode);
             ps=koneksi.prepareStatement(
                 "select * from sms where sms.tgl_sms between ? and ? "+(TCari.getText().trim().equals("")?"":"and (sms.sms_masuk like ? or sms.no_hp like ? or sms.pdu_pesan like ?) ")+" order by sms.id_pesan desc");
             try {
@@ -398,7 +398,7 @@ public final class DlgPesanMasuk extends javax.swing.JDialog {
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7)
                     });
-                } 
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -408,12 +408,12 @@ public final class DlgPesanMasuk extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }              
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -439,7 +439,7 @@ public final class DlgPesanMasuk extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

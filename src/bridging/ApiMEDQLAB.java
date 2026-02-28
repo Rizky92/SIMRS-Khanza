@@ -30,7 +30,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiMEDQLAB {        
+public class ApiMEDQLAB {
     private Connection koneksi=koneksiDB.condb();
     private String Consid,Secretkey;
     private PreparedStatement ps,ps2,ps3;
@@ -43,17 +43,17 @@ public class ApiMEDQLAB {
     private JsonNode response,response2,response3,response4;
     private ObjectMapper mapper = new ObjectMapper();
     private int i=0;
-    
+
     public ApiMEDQLAB(){
-        try {                   
+        try {
             Secretkey = koneksiDB.SECRETKEYAPIMEDQLAB();
-            Consid = koneksiDB.CONSIDAPIMEDQLAB();    
+            Consid = koneksiDB.CONSIDAPIMEDQLAB();
             URL = koneksiDB.URLAPIMEDQLAB();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
     }
-    public String getSignature() {        
+    public String getSignature() {
         String generateHmacSHA256Signature = null;
 	try {
 	    generateHmacSHA256Signature = generateHmacSHA256Signature(Consid,Secretkey);
@@ -78,12 +78,12 @@ public class ApiMEDQLAB {
 	    throw new GeneralSecurityException(e);
 	}
     }
-        
-    public long GetUTCdatetimeAsString(){    
-        long millis = System.currentTimeMillis();   
+
+    public long GetUTCdatetimeAsString(){
+        long millis = System.currentTimeMillis();
         return millis/1000;
     }
-    
+
     public void kirimRalan(String nopermintaan) {
         try {
              ps=koneksi.prepareStatement(
@@ -106,7 +106,7 @@ public class ApiMEDQLAB {
                     headers.add("X-key",Secretkey);
                     headers.add("X-Time",String.valueOf(GetUTCdatetimeAsString()));
                     headers.add("X-Sign",getSignature());
-                    
+
                     ps2=koneksi.prepareStatement(
                             "select permintaan_pemeriksaan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan "+
                             "from permintaan_pemeriksaan_lab inner join jns_perawatan_lab on permintaan_pemeriksaan_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
@@ -162,7 +162,7 @@ public class ApiMEDQLAB {
                             ps2.close();
                         }
                     }
-                    
+
                     requestJson="{" +
                                     "\"no_pendaftaran\": \""+rs.getString("noorder").substring(4,14)+"\"," +
                                     "\"no_rm\": \""+rs.getString("no_rkm_medis")+"\"," +
@@ -185,15 +185,15 @@ public class ApiMEDQLAB {
                                     "\"order\": ["+
                                         requestJson2+
                                     "]" +
-                                "}"; 
+                                "}";
                     System.out.println("URL : "+URL+"/api/v1/saveOrder");
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);	    
+                    requestEntity = new HttpEntity(requestJson,headers);	
                     root = mapper.readTree(getRest().exchange(URL+"/api/v1/saveOrder", HttpMethod.POST, requestEntity, String.class).getBody());
                     if(root.path("metaData").path("code").asText().equals("200")){
-                        JOptionPane.showMessageDialog(null,"Berhasil terkirim..");   
+                        JOptionPane.showMessageDialog(null,"Berhasil terkirim..");
                     }else{
-                        JOptionPane.showMessageDialog(null,root.path("metaData").path("message").asText());  
+                        JOptionPane.showMessageDialog(null,root.path("metaData").path("message").asText());
                     }
                 }
              } catch (Exception e) {
@@ -201,7 +201,7 @@ public class ApiMEDQLAB {
                  if(e.toString().contains("UnknownHostException")||e.toString().contains("404")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server MEDQLAB terputus...!");
                  }else{
-                    JOptionPane.showMessageDialog(null,"Pengiriman gagal, silahkan hubungi Administrator...!"); 
+                    JOptionPane.showMessageDialog(null,"Pengiriman gagal, silahkan hubungi Administrator...!");
                  }
              } finally{
                  if(rs!=null){
@@ -218,7 +218,7 @@ public class ApiMEDQLAB {
             }
         }
     }
-    
+
     public void kirimRanap(String nopermintaan) {
         try {
              ps=koneksi.prepareStatement(
@@ -242,7 +242,7 @@ public class ApiMEDQLAB {
                     headers.add("X-key",Secretkey);
                     headers.add("X-Time",String.valueOf(GetUTCdatetimeAsString()));
                     headers.add("X-Sign",getSignature());
-                    
+
                     ps2=koneksi.prepareStatement(
                             "select permintaan_pemeriksaan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan "+
                             "from permintaan_pemeriksaan_lab inner join jns_perawatan_lab on permintaan_pemeriksaan_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw "+
@@ -298,7 +298,7 @@ public class ApiMEDQLAB {
                             ps2.close();
                         }
                     }
-                    
+
                     requestJson="{" +
                                     "\"no_pendaftaran\": \""+rs.getString("noorder").substring(4,14)+"\"," +
                                     "\"no_rm\": \""+rs.getString("no_rkm_medis")+"\"," +
@@ -321,15 +321,15 @@ public class ApiMEDQLAB {
                                     "\"order\": ["+
                                         requestJson2+
                                     "]" +
-                                "}"; 
+                                "}";
                     System.out.println("URL : "+URL+"/api/v1/saveOrder");
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);	    
+                    requestEntity = new HttpEntity(requestJson,headers);	
                     root = mapper.readTree(getRest().exchange(URL+"/api/v1/saveOrder", HttpMethod.POST, requestEntity, String.class).getBody());
                     if(root.path("metaData").path("code").asText().equals("200")){
-                        JOptionPane.showMessageDialog(null,root.path("metaData").path("message").asText());  
+                        JOptionPane.showMessageDialog(null,root.path("metaData").path("message").asText());
                     }else{
-                        JOptionPane.showMessageDialog(null,"Gagal terkirim. Silahkan hubungi administrator");  
+                        JOptionPane.showMessageDialog(null,"Gagal terkirim. Silahkan hubungi administrator");
                     }
                 }
              } catch (Exception e) {
@@ -337,7 +337,7 @@ public class ApiMEDQLAB {
                  if(e.toString().contains("UnknownHostException")||e.toString().contains("404")){
                     JOptionPane.showMessageDialog(null,"Koneksi ke server MEDQLAB terputus...!");
                  }else{
-                    JOptionPane.showMessageDialog(null,"Pengiriman gagal, silahkan hubungi Administrator...!"); 
+                    JOptionPane.showMessageDialog(null,"Pengiriman gagal, silahkan hubungi Administrator...!");
                  }
              } finally{
                  if(rs!=null){
@@ -354,7 +354,7 @@ public class ApiMEDQLAB {
             }
         }
     }
-    
+
     public void ambil(String nopermintaan) {
         try {
             headers = new HttpHeaders();
@@ -370,7 +370,7 @@ public class ApiMEDQLAB {
             root = mapper.readTree(requestJson);
             if(root.path("metaData").path("code").asText().equals("200")){
                 Sequel.queryu("delete from temporary_permintaan_lab where temp37='"+akses.getalamatip()+"'");
-                response = root.path("response").path("data").path("pemeriksaan"); 
+                response = root.path("response").path("data").path("pemeriksaan");
                 if(response.isArray()){
                     i=0;
                     for(JsonNode list:response){
@@ -384,13 +384,13 @@ public class ApiMEDQLAB {
                         if(!list.path("value_memo").asText().equals("")){
                             hasil=list.path("value_memo").asText();
                         }
-                        
+
                         System.out.println(" id : "+list.path("testid_simrs").asText()+", name : "+list.path("name").asText()+", value : "+list.path("value").asText()+", value_string : "+list.path("value_string").asText()+", value_memo : "+list.path("value_memo").asText()+", keterangan : "+list.path("flag").asText()+", nilai_normal : "+list.path("nilai_normal").asText());
                         Sequel.menyimpan(
                             "temporary_permintaan_lab","'"+i+"','"+list.path("testid_simrs").asText()+"','"+list.path("name").asText()+"','"+hasil+"','"+list.path("flag").asText()+"','"+list.path("nilai_normal").asText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Periksa Lab"
-                        ); 
+                        );
                         i++;
-                        
+
                         response2 = list.path("childs");
                         if(response2.isArray()){
                             for(JsonNode list2:response2){
@@ -404,7 +404,7 @@ public class ApiMEDQLAB {
                                 if(!list2.path("value_memo").asText().equals("")){
                                     hasil=list2.path("value_memo").asText();
                                 }
-                                
+
                                 System.out.println(" id : "+list2.path("testid_simrs").asText()+", name : "+list2.path("name").asText()+", value : "+list2.path("value").asText()+", value_string : "+list2.path("value_string").asText()+", value_memo : "+list2.path("value_memo").asText()+", keterangan : "+list2.path("flag").asText()+", nilai_normal : "+list2.path("nilai_normal").asText());
                                 Sequel.menyimpan(
                                     "temporary_permintaan_lab","'"+i+"','"+list2.path("testid_simrs").asText()+"','"+list2.path("name").asText()+"','"+hasil+"','"+list2.path("flag").asText()+"','"+list2.path("nilai_normal").asText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Periksa Lab"
@@ -457,7 +457,7 @@ public class ApiMEDQLAB {
                     }
                 }
             }else{
-                JOptionPane.showMessageDialog(null,root.path("metaData").path("message").asText());  
+                JOptionPane.showMessageDialog(null,root.path("metaData").path("message").asText());
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
@@ -466,7 +466,7 @@ public class ApiMEDQLAB {
             }
         }
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {

@@ -12,11 +12,11 @@
 package inventaris;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -61,7 +61,7 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         tabMode=new DefaultTableModel(null,new Object[]{
                 "No.Inventaris","Kode Barang","Nama Barang","Ruang","Kategori"

@@ -733,7 +733,7 @@ public class PanelInacbgSmc extends widget.panelisi {
             if (!hapusOtomatis) {
                 dx = Sequel.cariIntegerSmc("select max(inacbg_diagnosa_pasien_smc.urut) from inacbg_diagnosa_pasien_smc where inacbg_diagnosa_pasien_smc.no_sep = ?", nosep) + 1;
             }
-            
+
             if (!Diagnosa.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                     if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
@@ -828,7 +828,7 @@ public class PanelInacbgSmc extends widget.panelisi {
             if (!hapusOtomatis) {
                 px = Sequel.cariIntegerSmc("select max(inacbg_prosedur_pasien_smc.urut) from inacbg_prosedur_pasien_smc where inacbg_prosedur_pasien_smc.no_sep = ?", nosep) + 1;
             }
-            
+
             if (pilihPertama && !Prosedur.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                     if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
@@ -980,7 +980,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                 try {
                     Sequel.AutoComitFalse();
                     boolean sukses = true;
-                    
+
                     if (hapusOtomatis) {
                         for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                             if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
@@ -1035,7 +1035,7 @@ public class PanelInacbgSmc extends widget.panelisi {
                 try {
                     Sequel.AutoComitFalse();
                     boolean sukses = true;
-                    
+
                     if (hapusOtomatis) {
                         for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                             if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {

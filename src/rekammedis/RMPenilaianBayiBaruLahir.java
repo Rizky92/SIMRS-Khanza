@@ -7,11 +7,11 @@ package rekammedis;
 
 import fungsi.WarnaTable;
 import fungsi.WarnaTable5;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -464,7 +464,7 @@ public final class RMPenilaianBayiBaruLahir extends javax.swing.JDialog {
         // PemeriksaanPenunjang.setDocument(new batasInput((int)500).getKata(PemeriksaanPenunjang));
         // Diagnosis.setDocument(new batasInput((int)300).getKata(Diagnosis));
         // Tatalaksana.setDocument(new batasInput((int)1000).getKata(Tatalaksana));
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);

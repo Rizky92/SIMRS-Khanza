@@ -727,7 +727,7 @@ public class PanelIdrgSmc extends widget.panelisi {
             if (!hapusOtomatis) {
                 dx = Sequel.cariIntegerSmc("select max(idrg_diagnosa_pasien_smc.urut) from idrg_diagnosa_pasien_smc where idrg_diagnosa_pasien_smc.no_sep = ?", nosep) + 1;
             }
-            
+
             if (!Diagnosa.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD10.getRowCount(); i++) {
                     if ((Boolean) tabModeICD10.getValueAt(i, 0)) {
@@ -825,7 +825,7 @@ public class PanelIdrgSmc extends widget.panelisi {
             if (!hapusOtomatis) {
                 px = Sequel.cariIntegerSmc("select max(idrg_prosedur_pasien_smc.urut) from idrg_prosedur_pasien_smc where idrg_prosedur_pasien_smc.no_sep = ?", nosep) + 1;
             }
-            
+
             if (pilihPertama && !Prosedur.getText().isBlank()) {
                 for (int i = 0; i < tabModeICD9CM.getRowCount(); i++) {
                     if ((Boolean) tabModeICD9CM.getValueAt(i, 0)) {
@@ -1006,7 +1006,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                             break;
                         }
                     }
-                    
+
                     if (updateProsedur) {
                         Sequel.menghapusSmc("idrg_prosedur_pasien_smc", "no_sep = ?", nosep);
                     }

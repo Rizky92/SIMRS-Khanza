@@ -10,17 +10,16 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -106,13 +105,13 @@ public final class RMSkriningMPPFormB extends javax.swing.JDialog {
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
-        
-        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));            
-        TCari.setDocument(new batasInput((int)100).getKata(TCari));           
-        TMasalah.setDocument(new batasInput((int)500).getKata(TMasalah));           
-        TTinjut.setDocument(new batasInput((int)500).getKata(TTinjut));           
-        TEvaluasi.setDocument(new batasInput((int)500).getKata(TEvaluasi));    
-        
+
+        TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
+        TCari.setDocument(new batasInput((int)100).getKata(TCari));
+        TMasalah.setDocument(new batasInput((int)500).getKata(TMasalah));
+        TTinjut.setDocument(new batasInput((int)500).getKata(TTinjut));
+        TEvaluasi.setDocument(new batasInput((int)500).getKata(TEvaluasi));
+
         ChkInput.setSelected(false);
         isForm();
     }

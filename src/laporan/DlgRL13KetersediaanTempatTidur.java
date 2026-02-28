@@ -1,6 +1,6 @@
 package laporan;
-import fungsi.koneksiDB;
 import fungsi.akses;
+import fungsi.koneksiDB;
 import fungsi.sekuel;
 import java.awt.Cursor;
 import java.awt.Desktop;
@@ -332,7 +332,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     public void isCek(){
         BtnPrint.setEnabled(akses.getrl1_3_ketersediaan_kamar());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -358,7 +358,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

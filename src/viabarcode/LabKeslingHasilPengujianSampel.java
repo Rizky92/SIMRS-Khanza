@@ -14,11 +14,11 @@ package viabarcode;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -111,7 +111,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
         tbPengujian.setDefaultRenderer(Object.class, new WarnaTable());
 
         TCariPeriksa.setDocument(new batasInput((int)100).getKata(TCariPeriksa));
-        
+
         ChkJln.setSelected(true);
         jam();
     }
@@ -754,7 +754,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void TNoPenugasanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoPenugasanKeyPressed
@@ -1024,7 +1024,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
             ChkInput.setVisible(true);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1050,7 +1050,7 @@ public final class LabKeslingHasilPengujianSampel extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

@@ -8,11 +8,11 @@ import bridging.ApiOrthanc;
 import bridging.OrthancDICOM;
 import com.fasterxml.jackson.databind.JsonNode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -132,7 +132,7 @@ public final class RMHasilPemeriksaanOCT extends javax.swing.JDialog {
         DiagnosaKlinis.setDocument(new batasInput((int)50).getKata(DiagnosaKlinis));
         HasilPemeriksaan.setDocument(new batasInput((int)1000).getKata(HasilPemeriksaan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
 

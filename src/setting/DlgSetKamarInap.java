@@ -653,7 +653,7 @@ public class DlgSetKamarInap extends javax.swing.JDialog {
         cmbYes5.setSelectedItem("No");
         Jam.requestFocus();
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -679,7 +679,7 @@ public class DlgSetKamarInap extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

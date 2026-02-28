@@ -11,20 +11,17 @@
 
 package bridging;
 
-import fungsi.WarnaTable;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Color;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -35,16 +32,18 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.WindowConstants;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
+import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.apache.commons.codec.binary.Base64;
 import org.springframework.http.MediaType;
 import simrskhanza.DlgCariBahasa;
 import simrskhanza.DlgCariCacatFisik;
@@ -212,8 +211,8 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             }
             @Override
             public void keyReleased(KeyEvent e) {}
-        }); 
-        
+        });
+
         ChkCari.setSelected(false);
         isForm();
         NoKartu.setDocument(new batasInput((int)80).getKata(NoKartu));
@@ -2510,32 +2509,32 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                                 chkPolri.setSelected(true);
                             }
                         }
-                    } 
+                    }
                     penjab=null;
                 }
-            }); 
+            });
 
             penjab.getTable().addKeyListener(new KeyAdapter() {
                 @Override
                 public void keyPressed(KeyEvent e) {
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
                         penjab.dispose();
-                    } 
+                    }
                 }
-            });   
+            });
             penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             penjab.setLocationRelativeTo(internalFrame1);
         }
-               
+
         if (penjab == null) return;
         if (!penjab.isVisible()) {
             penjab.emptTeks();
             penjab.isCek();
-        }  
+        }
         if (penjab.isVisible()) {
             penjab.toFront();
             return;
-        }    
+        }
         penjab.setVisible(true);
     }//GEN-LAST:event_BtnPenjabActionPerformed
 
@@ -2652,20 +2651,20 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                         Kelurahan.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
                         kdkel=kel.getTable().getValueAt(kel.getTable().getSelectedRow(),1).toString();
                         Kelurahan.requestFocus();
-                    } 
+                    }
                     kel=null;
                 }
             });
         }
-        
+
         if (kel == null) return;
         if (!kel.isVisible()) {
             kel.emptTeks();
-        }  
+        }
         if (kel.isVisible()) {
             kel.toFront();
             return;
-        }    
+        }
         kel.setVisible(true);
     }//GEN-LAST:event_BtnKelurahanActionPerformed
 
@@ -2680,20 +2679,20 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                         Kecamatan.setText(kec.getTable().getValueAt(kec.getTable().getSelectedRow(),0).toString());
                         kdkec=kec.getTable().getValueAt(kec.getTable().getSelectedRow(),1).toString();
                         Kecamatan.requestFocus();
-                    } 
+                    }
                     kec=null;
                 }
             });
         }
-        
+
         if (kec == null) return;
         if (!kec.isVisible()) {
             kec.emptTeks();
-        }  
+        }
         if (kec.isVisible()) {
             kec.toFront();
             return;
-        }    
+        }
         kec.setVisible(true);
     }//GEN-LAST:event_BtnKecamatanActionPerformed
 
@@ -2708,7 +2707,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                         Kabupaten.setText(kab.getTable().getValueAt(kab.getTable().getSelectedRow(),0).toString());
                         kdkab=kab.getTable().getValueAt(kab.getTable().getSelectedRow(),1).toString();
                         Kabupaten.requestFocus();
-                    } 
+                    }
                     kab=null;
                 }
             });
@@ -2716,11 +2715,11 @@ public final class PCareCekKartu extends javax.swing.JDialog {
         if (kab == null) return;
         if (!kab.isVisible()) {
             kab.emptTeks();
-        }  
+        }
         if (kab.isVisible()) {
             kab.toFront();
             return;
-        }    
+        }
         kab.setVisible(true);
     }//GEN-LAST:event_BtnKabupatenActionPerformed
 
@@ -2812,20 +2811,20 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                     if(kec.getTable().getSelectedRow()!= -1){
                         KecamatanPj.setText(kec.getTable().getValueAt(kec.getTable().getSelectedRow(),0).toString());
                         KecamatanPj.requestFocus();
-                    } 
+                    }
                     kec=null;
                 }
             });
         }
-        
+
         if (kec == null) return;
         if (!kec.isVisible()) {
             kec.emptTeks();
-        }  
+        }
         if (kec.isVisible()) {
             kec.toFront();
             return;
-        }    
+        }
         kec.setVisible(true);
     }//GEN-LAST:event_BtnKecamatanPjActionPerformed
 
@@ -2873,20 +2872,20 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                     if(kab.getTable().getSelectedRow()!= -1){
                         KabupatenPj.setText(kab.getTable().getValueAt(kab.getTable().getSelectedRow(),0).toString());
                         KabupatenPj.requestFocus();
-                    } 
+                    }
                     kab=null;
                 }
             });
         }
-        
+
         if (kab == null) return;
         if (!kab.isVisible()) {
             kab.emptTeks();
-        }  
+        }
         if (kab.isVisible()) {
             kab.toFront();
             return;
-        }    
+        }
         kab.setVisible(true);
     }//GEN-LAST:event_BtnKabupatenPjActionPerformed
 
@@ -2900,20 +2899,20 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                     if(kel.getTable().getSelectedRow()!= -1){
                         KelurahanPj.setText(kel.getTable().getValueAt(kel.getTable().getSelectedRow(),0).toString());
                         KelurahanPj.requestFocus();
-                    } 
+                    }
                     kel=null;
                 }
             });
         }
-        
+
         if (kel == null) return;
         if (!kel.isVisible()) {
             kel.emptTeks();
-        }  
+        }
         if (kel.isVisible()) {
             kel.toFront();
             return;
-        }    
+        }
         kel.setVisible(true);
     }//GEN-LAST:event_BtnKelurahanPjActionPerformed
 
@@ -3187,7 +3186,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(suku.getTable().getSelectedRow()!= -1){
                     kdsuku.setText(suku.getTable().getValueAt(suku.getTable().getSelectedRow(),0).toString());
                     nmsukubangsa.setText(suku.getTable().getValueAt(suku.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdsuku.requestFocus();
             }
             @Override
@@ -3199,7 +3198,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         suku.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3207,7 +3206,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     suku.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3240,7 +3239,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(bahasa.getTable().getSelectedRow()!= -1){
                     kdbahasa.setText(bahasa.getTable().getValueAt(bahasa.getTable().getSelectedRow(),0).toString());
                     nmbahasa.setText(bahasa.getTable().getValueAt(bahasa.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdbahasa.requestFocus();
             }
             @Override
@@ -3252,7 +3251,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         bahasa.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3260,7 +3259,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     bahasa.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3293,7 +3292,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(cacat.getTable().getSelectedRow()!= -1){
                     kdcacat.setText(cacat.getTable().getValueAt(cacat.getTable().getSelectedRow(),0).toString());
                     nmcacat.setText(cacat.getTable().getValueAt(cacat.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdcacat.requestFocus();
             }
             @Override
@@ -3305,7 +3304,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         cacat.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3313,7 +3312,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     cacat.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3349,7 +3348,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(perusahaan.getTable().getSelectedRow()!= -1){
                     kdperusahaan.setText(perusahaan.getTable().getValueAt(perusahaan.getTable().getSelectedRow(),0).toString());
                     nmperusahaan.setText(perusahaan.getTable().getValueAt(perusahaan.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdperusahaan.requestFocus();
             }
             @Override
@@ -3361,7 +3360,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         perusahaan.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3443,20 +3442,20 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                         Propinsi.setText(prop.getTable().getValueAt(prop.getTable().getSelectedRow(),0).toString());
                         kdprop=prop.getTable().getValueAt(prop.getTable().getSelectedRow(),1).toString();
                         Propinsi.requestFocus();
-                    } 
+                    }
                     prop=null;
                 }
             });
         }
-        
+
         if (prop == null) return;
         if (!prop.isVisible()) {
             prop.emptTeks();
-        }  
+        }
         if (prop.isVisible()) {
             prop.toFront();
             return;
-        }    
+        }
         prop.setVisible(true);
     }//GEN-LAST:event_BtnPropinsiActionPerformed
 
@@ -3501,20 +3500,20 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                     if(prop.getTable().getSelectedRow()!= -1){
                         PropinsiPj.setText(prop.getTable().getValueAt(prop.getTable().getSelectedRow(),0).toString());
                         PropinsiPj.requestFocus();
-                    } 
+                    }
                     prop=null;
                 }
             });
         }
-        
+
         if (prop == null) return;
         if (!prop.isVisible()) {
             prop.emptTeks();
-        }  
+        }
         if (prop.isVisible()) {
             prop.toFront();
             return;
-        }    
+        }
         prop.setVisible(true);
     }//GEN-LAST:event_btnPropinsiPjActionPerformed
 
@@ -3552,7 +3551,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(golongantni.getTable().getSelectedRow()!= -1){
                     kdgolongantni.setText(golongantni.getTable().getValueAt(golongantni.getTable().getSelectedRow(),0).toString());
                     nmgolongantni.setText(golongantni.getTable().getValueAt(golongantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdgolongantni.requestFocus();
             }
             @Override
@@ -3564,7 +3563,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         golongantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3595,7 +3594,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(satuantni.getTable().getSelectedRow()!= -1){
                     kdsatuantni.setText(satuantni.getTable().getValueAt(satuantni.getTable().getSelectedRow(),0).toString());
                     nmsatuantni.setText(satuantni.getTable().getValueAt(satuantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdsatuantni.requestFocus();
             }
             @Override
@@ -3607,7 +3606,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         satuantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3615,7 +3614,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     satuantni.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3638,7 +3637,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(pangkattni.getTable().getSelectedRow()!= -1){
                     kdpangkattni.setText(pangkattni.getTable().getValueAt(pangkattni.getTable().getSelectedRow(),0).toString());
                     nmpangkattni.setText(pangkattni.getTable().getValueAt(pangkattni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdpangkattni.requestFocus();
             }
             @Override
@@ -3650,7 +3649,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pangkattni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3658,7 +3657,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pangkattni.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3681,7 +3680,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(jabatantni.getTable().getSelectedRow()!= -1){
                     kdjabatantni.setText(jabatantni.getTable().getValueAt(jabatantni.getTable().getSelectedRow(),0).toString());
                     nmjabatantni.setText(jabatantni.getTable().getValueAt(jabatantni.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdjabatantni.requestFocus();
             }
             @Override
@@ -3693,7 +3692,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jabatantni.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3701,7 +3700,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jabatantni.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3746,7 +3745,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(golonganpolri.getTable().getSelectedRow()!= -1){
                     kdgolonganpolri.setText(golonganpolri.getTable().getValueAt(golonganpolri.getTable().getSelectedRow(),0).toString());
                     nmgolonganpolri.setText(golonganpolri.getTable().getValueAt(golonganpolri.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdgolonganpolri.requestFocus();
             }
             @Override
@@ -3758,7 +3757,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         golonganpolri.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3766,7 +3765,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     golonganpolri.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3789,7 +3788,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(satuanpolri.getTable().getSelectedRow()!= -1){
                     kdsatuanpolri.setText(satuanpolri.getTable().getValueAt(satuanpolri.getTable().getSelectedRow(),0).toString());
                     nmsatuanpolri.setText(satuanpolri.getTable().getValueAt(satuanpolri.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdsatuanpolri.requestFocus();
             }
             @Override
@@ -3801,7 +3800,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         satuanpolri.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3832,7 +3831,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(pangkatpolri.getTable().getSelectedRow()!= -1){
                     kdpangkatpolri.setText(pangkatpolri.getTable().getValueAt(pangkatpolri.getTable().getSelectedRow(),0).toString());
                     nmpangkatpolri.setText(pangkatpolri.getTable().getValueAt(pangkatpolri.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdpangkatpolri.requestFocus();
             }
             @Override
@@ -3844,7 +3843,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         pangkatpolri.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3852,7 +3851,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     pangkatpolri.dispose();
-                } 
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -3875,7 +3874,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
                 if(jabatanpolri.getTable().getSelectedRow()!= -1){
                     kdjabatanpolri.setText(jabatanpolri.getTable().getValueAt(jabatanpolri.getTable().getSelectedRow(),0).toString());
                     nmjabatanpolri.setText(jabatanpolri.getTable().getValueAt(jabatanpolri.getTable().getSelectedRow(),1).toString());
-                }  
+                }
                 kdjabatanpolri.requestFocus();
             }
             @Override
@@ -3887,7 +3886,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
-        
+
         jabatanpolri.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -3895,7 +3894,7 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     jabatanpolri.dispose();
-                }  
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}

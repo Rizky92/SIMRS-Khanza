@@ -12,11 +12,11 @@
 package perpustakaan;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -99,7 +99,7 @@ public final class PerpustakaanPenerbit extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
 
 
@@ -828,7 +828,7 @@ public final class PerpustakaanPenerbit extends javax.swing.JDialog {
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                     ps.setString(6,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
@@ -926,7 +926,7 @@ public final class PerpustakaanPenerbit extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

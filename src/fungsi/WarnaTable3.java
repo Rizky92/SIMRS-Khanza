@@ -24,7 +24,7 @@ public class WarnaTable3 extends DefaultTableCellRenderer {
             component.setBackground(new Color(255,244,244));
         }else{
             component.setBackground(new Color(255,255,255));
-        } 
+        }
         if (column == kolom){
             component.setBackground(new Color(215,215,255));
             component.setForeground(new Color(255,255,255));

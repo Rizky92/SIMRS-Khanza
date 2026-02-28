@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -122,7 +122,7 @@ public final class RMDataCatatanObservasiVentilator extends javax.swing.JDialog 
         REEFPS.setDocument(new batasInput((byte)5).getKata(REEFPS));
         EE.setDocument(new batasInput((byte)5).getKata(EE));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();

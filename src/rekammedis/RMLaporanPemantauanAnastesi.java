@@ -1,11 +1,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -594,7 +594,7 @@ public final class RMLaporanPemantauanAnastesi extends javax.swing.JDialog {
         KeteranganDiketahuiDietisen.setDocument(new batasInput((int)10).getKata(KeteranganDiketahuiDietisen));
         Masalah.setDocument(new batasInput((int)1000).getKata(Masalah));
         Tindakan.setDocument(new batasInput((int)1000).getKata(Tindakan));
-        
+
         ChkAccor.setSelected(false);
         isMenu();
     }

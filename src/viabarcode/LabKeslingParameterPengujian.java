@@ -1,10 +1,10 @@
 package viabarcode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -100,7 +100,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
         Manajemen.setDocument(new batasInput((int)15).getOnlyAngka(Manajemen));
         TotalTarif.setDocument(new batasInput((int)20).getOnlyAngka(TotalTarif));
 
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));          
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
         isForm();
     }
@@ -960,7 +960,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void JasaPJLabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JasaPJLabKeyPressed
@@ -1243,7 +1243,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1269,7 +1269,7 @@ public final class LabKeslingParameterPengujian extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

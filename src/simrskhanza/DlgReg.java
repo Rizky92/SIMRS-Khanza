@@ -19,8 +19,13 @@ import bridging.BPJSProgramPRB;
 import bridging.BPJSSPRI;
 import bridging.BPJSSuratKontrol;
 import bridging.CoronaPasien;
+import bridging.DlgDataTB;
+import bridging.ICareRiwayatPerawatan;
+import bridging.ICareRiwayatPerawatanFKTP;
+import bridging.INACBGPerawatanCorona;
 import bridging.InhealthDataSJP;
 import bridging.PCareDataPendaftaran;
+import bridging.PilihanBridgingAsuransi;
 import bridging.SisruteRujukanKeluar;
 import fungsi.WarnaTable;
 import fungsi.akses;
@@ -37,6 +42,7 @@ import grafikanalisa.grafikperiksaperpekerjaan;
 import grafikanalisa.grafikperiksaperpoli;
 import grafikanalisa.grafikperiksapertahun;
 import grafikanalisa.grafiksql;
+import inventory.DlgCopyResep;
 import inventory.DlgPemberianObat;
 import inventory.DlgPeresepanDokter;
 import inventory.DlgResepObat;
@@ -45,8 +51,10 @@ import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.BufferedReader;
@@ -63,6 +71,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -70,7 +79,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
+import javax.swing.SwingWorker;
 import javax.swing.Timer;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -81,15 +92,6 @@ import keuangan.DlgBilingRalan;
 import keuangan.DlgLhtPiutang;
 import laporan.DlgBerkasRawat;
 import laporan.DlgDataInsidenKeselamatan;
-import bridging.DlgDataTB;
-import bridging.ICareRiwayatPerawatan;
-import bridging.ICareRiwayatPerawatanFKTP;
-import bridging.INACBGPerawatanCorona;
-import bridging.PilihanBridgingAsuransi;
-import inventory.DlgCopyResep;
-import java.awt.event.KeyAdapter;
-import java.awt.event.WindowAdapter;
-import javax.swing.SwingWorker;
 import laporan.DlgDiagnosaPenyakit;
 import laporan.DlgFrekuensiPenyakitRalan;
 import org.jfree.chart.ChartFactory;
@@ -129,6 +131,7 @@ import rekammedis.RMDataCatatanObservasiInduksiPersalinan;
 import rekammedis.RMDataMonitoringAsuhanGizi;
 import rekammedis.RMDataMonitoringReaksiTranfusi;
 import rekammedis.RMDataResumePasien;
+import rekammedis.RMDataSkriningGiziKehamilan;
 import rekammedis.RMDataSkriningGiziLanjut;
 import rekammedis.RMDeteksiDiniCorona;
 import rekammedis.RMEdukasiPasienKeluargaRawatJalan;
@@ -275,11 +278,8 @@ import surat.SuratPersetujuanUmum;
 import surat.SuratPulangAtasPermintaanSendiri;
 import surat.SuratSakit;
 import surat.SuratSakitPihak2;
-import surat.SuratTidakHamil;
-import java.util.List;
-import javax.swing.WindowConstants;
-import rekammedis.RMDataSkriningGiziKehamilan;
 import surat.SuratSerahTerimaBarangAnggotaTubuh;
+import surat.SuratTidakHamil;
 /**
  *
  * @author dosen
@@ -7593,7 +7593,7 @@ public final class DlgReg extends javax.swing.JDialog {
                             public void windowClosed(WindowEvent e) {
                                 dlgrwjl=null;
                             }
-                        }); 
+                        });
 
                         dlgrwjl.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         dlgrwjl.setLocationRelativeTo(internalFrame1);
@@ -7603,7 +7603,7 @@ public final class DlgReg extends javax.swing.JDialog {
                         dlgrwjl.isCek();
                         dlgrwjl.SetPoli(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),21).toString());
                         dlgrwjl.SetPj(tbPetugas.getValueAt(tbPetugas.getSelectedRow(),22).toString());
-                        dlgrwjl.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());   
+                        dlgrwjl.setNoRm(TNoRw.getText(),DTPCari1.getDate(),DTPCari2.getDate());
                     }
 
                     if (dlgrwjl.isVisible()) {
@@ -9720,7 +9720,7 @@ public final class DlgReg extends javax.swing.JDialog {
                             public void windowClosed(WindowEvent e) {
                                 dlgrwjl=null;
                             }
-                        }); 
+                        });
 
                         dlgrwjl.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         dlgrwjl.setLocationRelativeTo(internalFrame1);
@@ -9734,7 +9734,7 @@ public final class DlgReg extends javax.swing.JDialog {
                             DTPCari1.getDate(),DTPCari2.getDate(),
                             tbPetugas2.getValueAt(tbPetugas2.getSelectedRow(),4).toString(),
                             tbPetugas2.getValueAt(tbPetugas2.getSelectedRow(),5).toString()
-                        );  
+                        );
                     }
 
                     if (dlgrwjl.isVisible()) {
@@ -16462,8 +16462,8 @@ public final class DlgReg extends javax.swing.JDialog {
             }
         }
     }
-    
-    private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnPenolakanAnjuranMedisActionPerformed
+
+    private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {                                                        
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data registrasi sudah habis...!!!!");
             TNoRM.requestFocus();
@@ -18941,12 +18941,12 @@ public final class DlgReg extends javax.swing.JDialog {
         MnPernyataanMemilihDPJP.setName("MnPernyataanMemilihDPJP");
         MnPernyataanMemilihDPJP.setPreferredSize(new java.awt.Dimension(260, 26));
         MnPernyataanMemilihDPJP.addActionListener(this::MnPernyataanMemilihDPJPActionPerformed);
-        
+
         MnSerahTerimaBarangAnggotaTubuh = new javax.swing.JMenuItem();
         MnSerahTerimaBarangAnggotaTubuh.setBackground(new java.awt.Color(255, 255, 254));
         MnSerahTerimaBarangAnggotaTubuh.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSerahTerimaBarangAnggotaTubuh.setForeground(new java.awt.Color(50, 50, 50));
-        MnSerahTerimaBarangAnggotaTubuh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSerahTerimaBarangAnggotaTubuh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
         MnSerahTerimaBarangAnggotaTubuh.setText("Serah Terima Anggota Tubuh/Barang");
         MnSerahTerimaBarangAnggotaTubuh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSerahTerimaBarangAnggotaTubuh.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);

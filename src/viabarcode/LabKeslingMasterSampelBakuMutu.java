@@ -12,11 +12,11 @@
 package viabarcode;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -56,7 +56,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         tabMode=new DefaultTableModel(null,new Object[]{"Kode Sampel","Nama Sampel","Baku Mutu"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -671,7 +671,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getmaster_sampel_bakumutu());
         BtnEdit.setEnabled(akses.getmaster_sampel_bakumutu());
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -697,7 +697,7 @@ public class LabKeslingMasterSampelBakuMutu extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

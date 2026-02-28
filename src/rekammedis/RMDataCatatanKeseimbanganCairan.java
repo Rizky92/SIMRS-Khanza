@@ -133,7 +133,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         IWL.setDocument(new batasInput((byte)15).getOnlyAngka(IWL));
         Keseimbangan.setDocument(new batasInput((byte)15).getNilai(Keseimbangan));
         Keterangan.setDocument(new batasInput((int)200).getKata(Keterangan));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();

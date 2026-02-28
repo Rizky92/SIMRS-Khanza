@@ -12,11 +12,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -176,7 +176,7 @@ public final class RMDataAsuhanGizi extends javax.swing.JDialog {
         Monitoring.setDocument(new batasInput((int)1000).getKata(Monitoring));
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         BB.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
             @Override
             public void insertUpdate(DocumentEvent e) {

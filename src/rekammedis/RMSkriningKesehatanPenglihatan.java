@@ -145,7 +145,7 @@ public final class RMSkriningKesehatanPenglihatan extends javax.swing.JDialog {
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         HasilSkrining.setDocument(new batasInput((int)40).getKata(HasilSkrining));
         Keterangan.setDocument(new batasInput((int)100).getKata(Keterangan));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

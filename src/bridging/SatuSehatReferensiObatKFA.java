@@ -1,6 +1,6 @@
 /*
-  Kontribusi dari Mas Abdul Wahid RSUD Cipayung & Mas Fanji dari RSUD Kramatjati 
-  
+  Kontribusi dari Mas Abdul Wahid RSUD Cipayung & Mas Fanji dari RSUD Kramatjati
+
  */
 package bridging;
 
@@ -9,16 +9,16 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.validasi;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.net.URI;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import org.apache.http.client.utils.URIBuilder;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -398,29 +398,29 @@ public final class SatuSehatReferensiObatKFA extends javax.swing.JDialog {
             lastProductType = ProductType.getSelectedItem().toString();
             page = 1;
         }
-        
+
         if (page == 1) {
             Valid.tabelKosong(tabMode);
         }
-        
+
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("Authorization", "Bearer " + api.TokenSatuSehat());
             requestEntity = new HttpEntity(headers);
-            
+
             URIBuilder builder = new URIBuilder(koneksiDB.URLKFAV2SATUSEHAT() + "/products/all")
                 .addParameter("page", "1")
                 .addParameter("size", LimitData.getSelectedItem().toString())
                 .addParameter("product_type", ProductType.getSelectedItem().toString());
-            
+
             if (!TCari.getText().isBlank()) {
                 builder.addParameter("keyword", TCari.getText().trim());
             }
-            
+
             URI uri = builder.build();
             System.out.println("URL : " + uri.toString());
-            
+
             root = mapper.readTree(api.getRest().exchange(uri, HttpMethod.GET, requestEntity, String.class).getBody());
             System.out.println("RESULT JSON : " + root.toString());
             response = root.path("items").path("data");

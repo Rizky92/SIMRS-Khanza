@@ -12,11 +12,12 @@
 package simrskhanza;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;
@@ -31,7 +32,6 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import java.awt.Cursor;
 
 /**
  *
@@ -55,7 +55,7 @@ public class DlgBahasa extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         tabMode=new DefaultTableModel(null,new Object[]{"ID","Bahasa Pasien"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}

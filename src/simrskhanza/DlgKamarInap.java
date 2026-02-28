@@ -68,6 +68,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -213,11 +214,6 @@ import surat.SuratPersetujuanUmum;
 import surat.SuratPulangAtasPermintaanSendiri;
 import surat.SuratSakit;
 import surat.SuratSakitPihak2;
-import java.util.List;
-import javax.swing.WindowConstants;
-import kepegawaian.DlgCariDokter;
-import keuangan.DlgDeposit;
-import rekammedis.RMDataSkriningGiziKehamilan;
 import surat.SuratSerahTerimaBarangAnggotaTubuh;
 
 /**
@@ -393,8 +389,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
         CmbTgl.setSelectedItem(now.substring(8,10));
         cmbJam.setSelectedItem(now.substring(11,13));
         cmbMnt.setSelectedItem(now.substring(14,16));
-        cmbDtk.setSelectedItem(now.substring(17,19));  
-        
+        cmbDtk.setSelectedItem(now.substring(17,19));
+
         try {
             KUNCIDOKTERRANAP=koneksiDB.KUNCIDOKTERRANAP();
         } catch (Exception e) {
@@ -8111,18 +8107,18 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Set Kamar Inap : "+e);
-        } 
-        
+        }
+
         try {
             if(diagnosa_akhir.equals("Yes")){
-                diagnosaakhir.setEditable(true); 
+                diagnosaakhir.setEditable(true);
             }else{
-                diagnosaakhir.setEditable(false); 
+                diagnosaakhir.setEditable(false);
             }
         } catch (Exception e) {
             diagnosaakhir.setEditable(false);
         }
-        
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -19152,8 +19148,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
             }
         }
     }
-    
-    private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {                                                      
+
+    private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();
@@ -19162,7 +19158,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
                     try {
                         psanak=koneksi.prepareStatement(
-                            "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");            
+                            "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
                         try {
                             psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
                             rs2=psanak.executeQuery();
@@ -19209,11 +19205,11 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         form.setNoRm(norawat.getText(),DTPCari2.getDate());
                     }else if(R3.isSelected()==true){
                         form.setNoRm(norawat.getText(),DTPCari4.getDate());
-                    }  
+                    }
                     form.emptTeks();
                 }
             }
-        } 
+        }
     }
 
     /**
@@ -21050,12 +21046,12 @@ public class DlgKamarInap extends javax.swing.JDialog {
         MnSkriningGiziKehamilan.setName("MnSkriningGiziKehamilan");
         MnSkriningGiziKehamilan.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSkriningGiziKehamilan.addActionListener(this::MnSkriningGiziKehamilanActionPerformed);
-        
+
         MnSerahTerimaBarangAnggotaTubuh = new javax.swing.JMenuItem();
         MnSerahTerimaBarangAnggotaTubuh.setBackground(new java.awt.Color(255, 255, 254));
         MnSerahTerimaBarangAnggotaTubuh.setFont(new java.awt.Font("Tahoma", 0, 11));
         MnSerahTerimaBarangAnggotaTubuh.setForeground(new java.awt.Color(50, 50, 50));
-        MnSerahTerimaBarangAnggotaTubuh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); 
+        MnSerahTerimaBarangAnggotaTubuh.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
         MnSerahTerimaBarangAnggotaTubuh.setText("Serah Terima Anggota Tubuh/Barang");
         MnSerahTerimaBarangAnggotaTubuh.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         MnSerahTerimaBarangAnggotaTubuh.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);

@@ -1,10 +1,10 @@
 package viabarcode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -71,13 +71,13 @@ public class LabKeslingPelanggan extends javax.swing.JDialog {
         tbDokter.setDefaultRenderer(Object.class, new WarnaTable());
 
         Kode.setDocument(new batasInput((byte)6).getKata(Kode));
-        Nama.setDocument(new batasInput((byte)50).getKata(Nama));      
-        Alamat.setDocument(new batasInput((byte)50).getKata(Alamat));  
-        Kota.setDocument(new batasInput((byte)20).getKata(Kota));    
-        Telp.setDocument(new batasInput((byte)13).getOnlyAngka(Telp)); 
-        PersonalDihubungi.setDocument(new batasInput((byte)30).getKata(PersonalDihubungi));   
-        KegiatanUsaha.setDocument(new batasInput((byte)30).getKata(KegiatanUsaha));  
-        TCari.setDocument(new batasInput((byte)100).getKata(TCari));   
+        Nama.setDocument(new batasInput((byte)50).getKata(Nama));
+        Alamat.setDocument(new batasInput((byte)50).getKata(Alamat));
+        Kota.setDocument(new batasInput((byte)20).getKata(Kota));
+        Telp.setDocument(new batasInput((byte)13).getOnlyAngka(Telp));
+        PersonalDihubungi.setDocument(new batasInput((byte)30).getKata(PersonalDihubungi));
+        KegiatanUsaha.setDocument(new batasInput((byte)30).getKata(KegiatanUsaha));
+        TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         ChkInput.setSelected(false);
         isForm();
     }
@@ -751,7 +751,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void KodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeKeyPressed
@@ -969,7 +969,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

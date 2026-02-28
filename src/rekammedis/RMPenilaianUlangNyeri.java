@@ -7,11 +7,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -129,7 +129,7 @@ public final class RMPenilaianUlangNyeri extends javax.swing.JDialog {
         Lokasi.setDocument(new batasInput((int)50).getKata(Lokasi));
         Durasi.setDocument(new batasInput((int)25).getKata(Durasi));
         KetNyeri.setDocument(new batasInput((int)40).getKata(KetNyeri));
-        
+
         ChkInput.setSelected(false);
         isForm();
         jam();

@@ -9,11 +9,11 @@ import bridging.ApiOrthanc;
 import bridging.OrthancDICOM;
 import com.fasterxml.jackson.databind.JsonNode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -166,7 +166,7 @@ public final class RMHasilEndoskopiHidung extends javax.swing.JDialog {
         LainlainKanan.setDocument(new batasInput((int)100).getKata(LainlainKanan));
         LainlainKiri.setDocument(new batasInput((int)100).getKata(LainlainKiri));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkAccor.setSelected(false);
         isPhoto();
 

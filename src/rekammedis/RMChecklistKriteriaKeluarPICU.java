@@ -107,7 +107,7 @@ public final class RMChecklistKriteriaKeluarPICU extends javax.swing.JDialog {
         TNoRw.setDocument(new batasInput((byte)17).getKata(TNoRw));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         Keterangan.setDocument(new batasInput((int)50).getKata(Keterangan));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

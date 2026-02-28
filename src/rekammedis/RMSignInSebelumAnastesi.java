@@ -149,7 +149,7 @@ public final class RMSignInSebelumAnastesi extends javax.swing.JDialog {
         RencanaAntisipasiKesiapanAlat.setDocument(new batasInput((byte)50).getKata(RencanaAntisipasiKesiapanAlat));
 
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

@@ -10,11 +10,11 @@
  */
 package setting;
 
-import fungsi.batasInput;
 import fungsi.WarnaTable;
-import fungsi.validasi;
-import fungsi.sekuel;
+import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Canvas;
 import java.awt.Cursor;
 import java.awt.Dimension;

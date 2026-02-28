@@ -1,11 +1,11 @@
 package dapur;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -27,8 +27,8 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import keuangan.Jurnal;
 import kepegawaian.DlgCariPetugas;
+import keuangan.Jurnal;
 
 public class DapurCariPengeluaran extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2;
@@ -558,7 +558,7 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
      * }//GEN-LAST:event_TKdKeyPressed
      */
 
-    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
+    private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {                                           
         DlgCariPetugas petugas=new DlgCariPetugas(null,false);
         petugas.addWindowListener(new WindowListener() {
             @Override
@@ -594,7 +594,7 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         Valid.pindah(evt, NoKeluar, TglBeli2);
     }// GEN-LAST:event_TglBeli1KeyPressed
 
-    private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangActionPerformed
+    private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {                                          
         DapurBarang barang=new DapurBarang(null,false);
         barang.addWindowListener(new WindowListener() {
             @Override
@@ -690,7 +690,7 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         }
     }// GEN-LAST:event_TCariKeyPressed
 
-    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
+    private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {                                        
         if(TabRawat.getSelectedIndex()==0){
             runBackground(() ->tampil());
         }else if(TabRawat.getSelectedIndex()==1){
@@ -831,7 +831,7 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
         }
     }// GEN-LAST:event_BtnPrintKeyPressed
 
-private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
+private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {                                        
   if(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim().equals("")){
       Valid.textKosong(TCari,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
   }else{

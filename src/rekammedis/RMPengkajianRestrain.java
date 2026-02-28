@@ -5,18 +5,17 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -151,7 +150,7 @@ public final class RMPengkajianRestrain extends javax.swing.JDialog {
         KeteranganNonRestrainFarmakologi.setDocument(new batasInput((int)50).getKata(KeteranganNonRestrainFarmakologi));
         // RestrainFarmakologi.setDocument(new batasInput((int)200).getKata(RestrainFarmakologi));
         Keluarga.setDocument(new batasInput((int)100).getKata(Keluarga));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

@@ -44,7 +44,7 @@ public class INACBGCariCoderNIK extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"NIP","Petugas","Coder NIK"};
         tabMode=new DefaultTableModel(null,row){

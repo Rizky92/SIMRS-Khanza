@@ -1,8 +1,7 @@
 package laporan;
-import keuangan.Jurnal;
+import fungsi.akses;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;

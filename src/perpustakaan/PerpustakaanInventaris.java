@@ -11,25 +11,23 @@
 
 package perpustakaan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
-import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -125,7 +123,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         TCari.requestFocus();
 
         ChkInput.setSelected(false);
-        isForm(); 
+        isForm();
     }
     private double nilai_inven=0;
 
@@ -979,7 +977,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_kode_bukuKeyPressed
 
     private void btnBarangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBarangActionPerformed
-    PerpustakaanKoleksi barang=new PerpustakaanKoleksi(null,false); 
+    PerpustakaanKoleksi barang=new PerpustakaanKoleksi(null,false);
     barang.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -987,14 +985,14 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(barang.getTable().getSelectedRow()!= -1){    
+            if(barang.getTable().getSelectedRow()!= -1){
                 kode_buku.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),0).toString());
                 judul_buku.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),1).toString());
                 nm_produsen.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),3).toString());
                 nm_merk.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),4).toString());
                 nm_kategori.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),7).toString());
                 nm_jenis.setText(barang.getTable().getValueAt(barang.getTable().getSelectedRow(),8).toString());
-            }   
+            }
             kode_buku.requestFocus();
         }
         @Override
@@ -1015,7 +1013,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 barang.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -1040,7 +1038,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_kd_ruangKeyPressed
 
     private void btnRuangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuangActionPerformed
-    PerpustakaanRuang ruang=new PerpustakaanRuang(null,false); 
+    PerpustakaanRuang ruang=new PerpustakaanRuang(null,false);
     ruang.addWindowListener(new WindowListener() {
         @Override
         public void windowOpened(WindowEvent e) {}
@@ -1048,11 +1046,11 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         public void windowClosing(WindowEvent e) {}
         @Override
         public void windowClosed(WindowEvent e) {
-            if(ruang.getTable().getSelectedRow()!= -1){ 
-                kd_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());                    
+            if(ruang.getTable().getSelectedRow()!= -1){
+                kd_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),0).toString());
                 nm_ruang.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
-                kd_ruang.requestFocus();          
-            }                   
+                kd_ruang.requestFocus();
+            }
         }
         @Override
         public void windowIconified(WindowEvent e) {}
@@ -1072,7 +1070,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
         public void keyPressed(KeyEvent e) {
             if(e.getKeyCode()==KeyEvent.VK_SPACE){
                 ruang.dispose();
-            }                
+            }
         }
         @Override
         public void keyReleased(KeyEvent e) {}
@@ -1162,7 +1160,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBarcodeBtnPrintActionPerformed
 
     private void btnRuang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRuang1ActionPerformed
-        PerpustakaanRuang ruang=new PerpustakaanRuang(null,false); 
+        PerpustakaanRuang ruang=new PerpustakaanRuang(null,false);
         ruang.addWindowListener(new WindowListener() {
             @Override
             public void windowOpened(WindowEvent e) {}
@@ -1170,10 +1168,10 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(ruang.getTable().getSelectedRow()!= -1){ 
+                if(ruang.getTable().getSelectedRow()!= -1){
                     nm_ruangcari.setText(ruang.getTable().getValueAt(ruang.getTable().getSelectedRow(),1).toString());
                     TCari.requestFocus();
-                }                   
+                }
             }
             @Override
             public void windowIconified(WindowEvent e) {}
@@ -1185,7 +1183,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void windowDeactivated(WindowEvent e) {}
 
         });
-        
+
         ruang.getTable().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {}
@@ -1193,7 +1191,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(e.getKeyCode()==KeyEvent.VK_SPACE){
                     ruang.dispose();
-                }                
+                }
             }
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -1554,7 +1552,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

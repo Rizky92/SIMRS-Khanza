@@ -125,7 +125,7 @@ public final class RMChecklistKesiapanAnestesi extends javax.swing.JDialog {
         KeteranganLainnya.setDocument(new batasInput((int)1000).getKata(KeteranganLainnya));
         TeknikAnestesi.setDocument(new batasInput((int)30).getKata(TeknikAnestesi));
         Tindakan.setDocument(new batasInput((int)100).getKata(Tindakan));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

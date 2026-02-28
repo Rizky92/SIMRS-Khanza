@@ -2,11 +2,11 @@
 
 package perpustakaan;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -109,7 +109,7 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
         InventarisCari.setDocument(new batasInput((byte)100).getKata(InventarisCari));
 
         WindowInput.setSize(735,245);
-        WindowInput.setLocationRelativeTo(null);  
+        WindowInput.setLocationRelativeTo(null);
     }
 
 

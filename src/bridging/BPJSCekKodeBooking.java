@@ -10,17 +10,17 @@
 
 package bridging;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.koneksiDB;
+import fungsi.validasi;
 import java.awt.Dimension;
+import java.awt.event.KeyEvent;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import fungsi.validasi;
-import fungsi.koneksiDB;
-import java.awt.event.KeyEvent;
-import javax.swing.JOptionPane;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -41,7 +41,7 @@ public final class BPJSCekKodeBooking extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode nameNode;
     private JsonNode response;
-        
+
     /** Creates new form DlgKamar
      * @param parent
      * @param modal */
@@ -61,7 +61,7 @@ public final class BPJSCekKodeBooking extends javax.swing.JDialog {
         //tbKamar.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbKamar.getBackground()));
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
-        
+
         for (int i = 0; i < 2; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
@@ -70,10 +70,10 @@ public final class BPJSCekKodeBooking extends javax.swing.JDialog {
                 column.setPreferredWidth(250);
             }
         }
-        tbKamar.setDefaultRenderer(Object.class, new WarnaTable());  
+        tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
     }
-    
-    
+
+
 
     /** This method is called from within the constructor to
      * initialize the form.
@@ -212,20 +212,20 @@ public final class BPJSCekKodeBooking extends javax.swing.JDialog {
                         });
                         tabMode.addRow(new Object[]{
                             "Kode Booking",": "+list.path("kodebooking").asText()
-                        }); 
+                        });
                         tabMode.addRow(new Object[]{
                             "",""
-                        }); 
+                        });
                     }
-                }        
+                }
             }else {
-                System.out.println("Notif : "+nameNode.path("message").asText());               
-            }   
+                System.out.println("Notif : "+nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){
                 JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
-    }   
+    }
 }

@@ -13,7 +13,6 @@ package perpustakaan;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -21,7 +20,6 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Properties;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -363,7 +361,7 @@ public final class PerpustakaanCariInventaris extends javax.swing.JDialog {
                 "or perpustakaan_inventaris.tgl_pengadaan like ? or perpustakaan_inventaris.status_buku like ? or perpustakaan_ruang.nm_ruang like ? or perpustakaan_buku.jml_halaman like ? or perpustakaan_buku.judul_buku like ? "+
                 "or perpustakaan_pengarang.nama_pengarang like ? or perpustakaan_buku.thn_terbit like ? or perpustakaan_buku.isbn like ? or perpustakaan_kategori.nama_kategori like ? or perpustakaan_jenis_buku.nama_jenis like ? ")+
                 "order by perpustakaan_buku.kode_buku,perpustakaan_inventaris.no_inventaris");
-            try{ 
+            try{
                 if(!TCari.getText().trim().equals("")){
                     ps.setString(1,"%"+TCari.getText().trim()+"%");
                     ps.setString(2,"%"+TCari.getText().trim()+"%");
@@ -405,7 +403,7 @@ public final class PerpustakaanCariInventaris extends javax.swing.JDialog {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -431,7 +429,7 @@ public final class PerpustakaanCariInventaris extends javax.swing.JDialog {
             ceksukses = false;
         }
     }
-    
+
     @Override
     public void dispose() {
         executor.shutdownNow();

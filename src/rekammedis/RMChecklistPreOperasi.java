@@ -173,7 +173,7 @@ public final class RMChecklistPreOperasi extends javax.swing.JDialog {
         KeteranganCTScan.setDocument(new batasInput((byte)20).getKata(KeteranganCTScan));
         KeteranganMRI.setDocument(new batasInput((byte)20).getKata(KeteranganMRI));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

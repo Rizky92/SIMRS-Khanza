@@ -11,14 +11,13 @@
 
 package simrskhanza;
 
-import laporan.DlgCariPenyakit;
-import inventory.DlgObatPenyakit;
 import fungsi.WarnaTable2;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
+import inventory.DlgObatPenyakit;
 import inventory.riwayatobat;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -43,6 +42,7 @@ import javax.swing.Timer;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import laporan.DlgCariPenyakit;
 
 /**
  *

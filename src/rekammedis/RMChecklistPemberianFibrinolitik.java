@@ -194,7 +194,7 @@ public final class RMChecklistPemberianFibrinolitik extends javax.swing.JDialog 
         KdPetugas.setDocument(new batasInput((byte)20).getKata(KdPetugas));
         Kesimpulan.setDocument(new batasInput((int)300).getKata(Kesimpulan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

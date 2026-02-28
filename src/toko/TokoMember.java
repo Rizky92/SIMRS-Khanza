@@ -13,11 +13,11 @@
 package toko;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -104,7 +104,7 @@ public final class TokoMember extends javax.swing.JDialog {
         Alamat.setDocument(new batasInput((byte)60).getKata(Alamat));
         NoTelp.setDocument(new batasInput((byte)40).getOnlyAngka(NoTelp));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         ChkInput.setSelected(false);
         isForm();
     }
@@ -782,7 +782,7 @@ public final class TokoMember extends javax.swing.JDialog {
                     }
                 }
             });
-        } 
+        }
     }//GEN-LAST:event_formWindowOpened
 
     private void tbPetugasKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbPetugasKeyReleased
@@ -898,7 +898,7 @@ public final class TokoMember extends javax.swing.JDialog {
                     ps.setString(4,"%"+TCari.getText().trim()+"%");
                     ps.setString(5,"%"+TCari.getText().trim()+"%");
                 }
-                    
+
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{

@@ -57,7 +57,7 @@ public class DlgSetInputParsial extends javax.swing.JDialog {
         initComponents();
 
         this.setLocation(10,10);
-        
+
 
         Object[] row={"Kode Bayar","Cara Bayar"};
         tabMode=new DefaultTableModel(null,row){

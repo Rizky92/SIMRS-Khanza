@@ -15,13 +15,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.DlgPemberianObat;
 import inventory.DlgPiutang;
 import inventory.riwayatobat;
@@ -39,7 +37,9 @@ import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
 import keuangan.Jurnal;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -1231,7 +1231,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
 
     private void prosesHapusPemberianObat() {
         if (this.ispiutang) return;
-        
+
         String obat = kodeobat.stream().map(it -> "'" + it.replaceAll("'", "''") + "'").collect(Collectors.joining(", "));
 
         if (!obat.isBlank()) {
@@ -1377,7 +1377,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
         }
 
         double sisapiutang = 0, ttlpiutang = 0, ppn = 0, psr_ppn = 0, kembali = 0;
-        
+
         // detailpiutang hpp pakai h_jual
         if (sukses) {
             try (PreparedStatement ps = koneksi.prepareStatement("select piutang.nota_piutang, round(piutang.ppn / (piutang.sisapiutang - piutang.ppn), 2) as psr_ppn, piutang.ppn, piutang.ongkir, piutang.uangmuka, piutang.sisapiutang, piutang.kd_bangsal from piutang where piutang.nota_piutang = ?")) {
@@ -1388,7 +1388,7 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                         psr_ppn = rs.getDouble("psr_ppn");
                         sisapiutang = rs.getDouble("sisapiutang");
                         ttlpiutang = sisapiutang - psr_ppn;
-                        
+
                         Sequel.AutoComitFalse();
                         try (PreparedStatement ps2 = koneksi.prepareStatement(
                             "select detailpiutang.kode_brng, detailpiutang.h_jual, detailpiutang.jumlah, detailpiutang.subtotal, detailpiutang.dis, " +
@@ -1447,9 +1447,9 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                                             sukses = jur.simpanJurnal(rs.getString("nota_piutang"), "U", "BATAL PIUTANG OBAT DI " + Sequel.cariIsiSmc("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal = ?", rs.getString("kd_bangsal")).toUpperCase() + ", OLEH " + akses.getkode());
                                         }
                                     }
-                                    
+
                                     if (sukses) {
-                                        
+
                                     }
                                 }
                             }

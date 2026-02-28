@@ -20,7 +20,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -138,7 +137,7 @@ public final class RMSkriningKesehatanGigiMulutBalita extends javax.swing.JDialo
         Keterangan.setDocument(new batasInput((int)100).getKata(Keterangan));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
         HasilSkrining.setDocument(new batasInput((int)50).getKata(HasilSkrining));
-        
+
         ChkInput.setSelected(false);
         isForm();
 

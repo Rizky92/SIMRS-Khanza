@@ -33,7 +33,7 @@ public class batasInput {
                     upp[i]=Character.toUpperCase(upp[i]);
                         boolean isOnlyAngka=Character.isDigit(upp[i]);
                         boolean isOnlyLetter=Character.isLetter(upp[i]);
-                        boolean isOnlySpasi=Character.isSpaceChar(upp[i]);                        
+                        boolean isOnlySpasi=Character.isSpaceChar(upp[i]);
                         if(isOnlyLetter==true){
                             upp[c]=upp[i];
                             c++;
@@ -91,7 +91,7 @@ public class batasInput {
             }
         };return filter;
     }
-  
+
     public PlainDocument getOnlyAngka(final JTextField inputan) {
         filter=new PlainDocument(){
             @Override
@@ -162,7 +162,7 @@ public PlainDocument getNilai(final JTextField inputan) {
                         boolean isOnlyAngka=Character.isDigit(upp[i]);
                         boolean isOnlyLetter=Character.isLetter(upp[i]);
                         boolean isOnlySpasi=Character.isSpaceChar(upp[i]);
-                        
+
                         if(isOnlyLetter==true){
                             upp[c]=upp[i];
                             c++;
@@ -185,7 +185,7 @@ public PlainDocument getNilai(final JTextField inputan) {
             }
         };return filter;
     }
-    
+
     public PlainDocument getTensi(final JTextComponent inputan) {
         return new PlainDocument() {
             @Override
@@ -212,7 +212,7 @@ public PlainDocument getNilai(final JTextField inputan) {
             }
         };
     }
-   
+
     public PlainDocument getKata(final JTextArea inputan){
         filter=new PlainDocument(){
             @Override
@@ -224,7 +224,7 @@ public PlainDocument getNilai(final JTextField inputan) {
                         boolean isOnlyAngka=Character.isDigit(upp[i]);
                         boolean isOnlyLetter=Character.isLetter(upp[i]);
                         boolean isOnlySpasi=Character.isSpaceChar(upp[i]);
-                        
+
                         if(isOnlyLetter==true){
                             upp[c]=upp[i];
                             c++;

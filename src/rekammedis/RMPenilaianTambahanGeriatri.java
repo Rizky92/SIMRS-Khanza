@@ -6,11 +6,11 @@
 package rekammedis;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
@@ -163,7 +163,7 @@ public final class RMPenilaianTambahanGeriatri extends javax.swing.JDialog {
         KeteranganOlahraga.setDocument(new batasInput((int)50).getKata(KeteranganOlahraga));
         DiagnosaMedis.setDocument(new batasInput((byte)100).getKata(DiagnosaMedis));
         TCari.setDocument(new batasInput((int)100).getKata(TCari));
-        
+
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML.setEditable(true);
         LoadHTML.setEditorKit(kit);
