@@ -11325,17 +11325,26 @@ public class frmUtama extends javax.swing.JFrame {
                     if(cariNIK.getTable().getSelectedRow()!= -1){
                         coder_nik=cariNIK.getTable().getValueAt(cariNIK.getTable().getSelectedRow(),2).toString();
                         isTutup();
-                        try {
-                            inacbgklaim.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"inacbg/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&page="+pilihpage+"&codernik="+coder_nik);
-                        } catch (Exception ex) {
-                            System.out.println("Notifikasi : "+ex);
+                        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                        if (akses.getform().equals("BPJSKompilasiBerkasKlaim")) {
+                            BPJSKompilasiBerkasKlaim aplikasi=new BPJSKompilasiBerkasKlaim(null, false);
+                            aplikasi.isCek(coder_nik);
+                            aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+                            aplikasi.setLocationRelativeTo(PanelUtama);
+                            aplikasi.setVisible(true);
+                        } else {
+                            try {
+                                inacbgklaim.loadURL("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/"+"inacbg/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&page="+pilihpage+"&codernik="+coder_nik);
+                            } catch (Exception ex) {
+                                System.out.println("Notifikasi : "+ex);
+                            }
+                            inacbgklaim.setJudul(judulform);
+                            inacbgklaim.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+                            inacbgklaim.setLocationRelativeTo(PanelUtama);
+                            inacbgklaim.setVisible(true);
+                            DlgHome.dispose();
                         }
-
-                        inacbgklaim.setJudul(judulform);
-                        inacbgklaim.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
-                        inacbgklaim.setLocationRelativeTo(PanelUtama);
-                        inacbgklaim.setVisible(true);
-                        DlgHome.dispose();
+                        setCursor(Cursor.getDefaultCursor());
                     }
                 }
             }
