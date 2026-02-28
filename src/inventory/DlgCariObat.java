@@ -2986,9 +2986,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 }
             }
 
-            for(i=0;i<tbObat.getRowCount();i++){
+            /*for(i=0;i<tbObat.getRowCount();i++){
                 getDataobat(i);
-            }
+            }*/
 
             psobat=koneksi.prepareStatement(
                     "select resep_dokter_racikan.no_racik,resep_dokter_racikan.nama_racik,"+
@@ -3291,9 +3291,9 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     psobat.close();
                 }
             }
-            for(i=0;i<tbDetailObatRacikan.getRowCount();i++){
+            /*for(i=0;i<tbDetailObatRacikan.getRowCount();i++){
                 getDatadetailobatracikan(i);
-            }
+            }*/
             hitungObat();
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
