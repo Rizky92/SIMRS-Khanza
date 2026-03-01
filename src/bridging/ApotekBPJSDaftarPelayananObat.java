@@ -49,7 +49,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private validasi Valid=new validasi();
     private sekuel Sequel=new sekuel();
-    private int i=0;
+    private int i=0,reply=0;
     private ApiApotekBPJS api=new ApiApotekBPJS();
     private String URL="",link="",utc="",requestJson="";
     private HttpHeaders headers;
