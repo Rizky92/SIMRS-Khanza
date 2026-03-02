@@ -61,5 +61,24 @@ The coding guidelines should cater to users' netbeans configuration, which as fo
 #### User's specific coding guidelines
 - Before starting the changes, ensure current branch is in `custom` branch. Then switch to new branch. Branch format name must begin with `claude/` and styled as `kebab-case` with at-most 4 words in length.
 - Changes related to database migration (e.g. table structure change) MUST BE in `sik_modif.sql`. DO NOT CHANGE other `.sql` files. Their changes follow upstream repository.
-- When modifying codes that touches `sekuel` and `validasi` class methods, usually named `Sequel` and `Valid` respectively (e.g. `Sequel.menyimpantf("dpjp_ranap", "?, ?, ?", 3, new String[]{"a", "b", "c"})`), look for its alternative in those class affixed by `Smc`. Carefully read the parameter requirement.
-- Adding new parameter to `database.xml.example` MUST BE reflected in `src/fungsi/koneksiDB.java` class. By default, parameter values are unecrypted.
+- When modifying codes that touches `sekuel` and `validasi` class methods, usually named `Sequel` and `Valid` respectively (e.g. `Sequel.menyimpantf("dpjp_ranap", "?, ?, ?", 3, new String[]{"a", "b", "c"})`), look for its alternative in those class affixed by `Smc`. Carefully read the parameter requirements.
+- Adding new parameter to `database.xml.example` MUST BE reflected in `src/fungsi/koneksiDB.java` class. By default, parameter values are unecrypted. Sensitive parameters such as secret keys must be encrypted. Therefore, the reading the value from java counterpart requires decryption.
+
+#### Building the UI
+When building UI components, use primary components from `src/widget`. Following is the list of used components.
+- `ScrollPane.java` - Custom JScrollPane
+- `Table.java` - Custom JTable
+- `TabPane.java` - Custom JTabbedPane
+- `Tanggal.java` - Custom JCalendar, uses `java.util.Date` for handling dates.
+- `TextArea.java` - Custom JTextArea
+- `TextBox.java` - Custom JTextField
+- `Button.java` - Custom JButton
+- `ButtonBig.java` - Custom JButton, for menu items in `frmUtama`
+- `CekBox.java` - Custom JCheckBox
+- `ComboBox.java` - Custom JComboBox
+- `InternalFrame.java` - Act as a wrapper to house components inside JDialog.
+- `Label.java` - Custom JLabel
+- `PanelBiasa.java` - Custom JPanel
+- `PasswordBox.java` - Custom JPasswordField
+
+Any other components not stated will fallback to swing counterpart.
