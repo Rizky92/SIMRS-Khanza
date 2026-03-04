@@ -83,7 +83,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             formalarm="",nol_detik,detik,NoResep="",TglPeresepan="",JamPeresepan="",finger="",
             NoRawat="",NoRM="",Pasien="",DokterPeresep="",Status="",KodeDokter="",Ruang="",KodeRuang="",
             kdDokter = "", kdPoli = "", kdDokter2 = "", kdBangsal = "";
-    private int jmlparsial=0,nilai_detik,resepbaru=0,i=0;
+    private int jmlparsial=0,nilai_detik,resepbaru=0,i=0,baris=0;
     private BackgroundMusic music;
     private boolean semua,ceksukses=false;
     private boolean isopening = false, autoaksi = false, autoValidasiRalan = false, autoValidasiRanap = false;
@@ -4805,6 +4805,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             KodeDokter=tbResepRalan.getValueAt(tbResepRalan.getSelectedRow(),8).toString();
             Ruang=tbResepRalan.getValueAt(tbResepRalan.getSelectedRow(),9).toString();
             KodeRuang=tbResepRalan.getValueAt(tbResepRalan.getSelectedRow(),10).toString();
+            baris=tbResepRalan.getSelectedRow();
         }
     }
 
@@ -4821,6 +4822,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             KodeDokter=tbResepRanap.getValueAt(tbResepRanap.getSelectedRow(),8).toString();
             Ruang=tbResepRanap.getValueAt(tbResepRanap.getSelectedRow(),9).toString();
             KodeRuang=tbResepRanap.getValueAt(tbResepRanap.getSelectedRow(),10).toString();
+            baris=tbResepRanap.getSelectedRow();
         }
     }
 
@@ -4837,6 +4839,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             KodeDokter=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),8).toString();
             Ruang=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),9).toString();
             KodeRuang=tbPermintaanStok.getValueAt(tbPermintaanStok.getSelectedRow(),10).toString();
+            baris=tbPermintaanStok.getSelectedRow();
         }
     }
 
@@ -4853,6 +4856,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             KodeDokter=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),8).toString();
             Ruang=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),9).toString();
             KodeRuang=tbPermintaanResepPulang.getValueAt(tbPermintaanResepPulang.getSelectedRow(),10).toString();
+            baris=tbPermintaanResepPulang.getSelectedRow();
         }
     }
 
@@ -4890,6 +4894,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 @Override
                 public void windowClosed(WindowEvent e) {
                     TeksKosong();
+                    if(obatralan.sukses==true){
+                        tbResepRalan.setValueAt("Sudah Terlayani",baris, 7);
+                    }
                     obatralan=null;
                 }
             });
@@ -4923,6 +4930,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         KodeDokter="";
         Ruang="";
         KodeRuang="";
+        baris=0;
     }
 
     private void panggilform2() {

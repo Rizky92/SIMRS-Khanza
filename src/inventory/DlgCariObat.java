@@ -111,7 +111,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private JsonNode response;
     private ApiPcare api=new ApiPcare();
     private String[] arrSplit;
-    private boolean sukses=true, lanjut = true, adaObatKronis = false, cekKolomObatKronis = false, cekKolomObatRacikanKronis = false, VALIDASIRESEPKRONIS = koneksiDB.VALIDASIRESEPKRONIS(), load = false;
+    public boolean sukses=true;
+    private boolean lanjut = true, adaObatKronis = false, cekKolomObatKronis = false, cekKolomObatRacikanKronis = false, VALIDASIRESEPKRONIS = koneksiDB.VALIDASIRESEPKRONIS(), load = false;
     private File file;
     private FileWriter fileWriter;
     private FileReader myObj;
@@ -3432,7 +3433,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     }
                 }
             }
-        }   
+        }
     }
 
     private void getDataobat(int data) {
