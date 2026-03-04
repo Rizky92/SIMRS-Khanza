@@ -20,8 +20,11 @@
 *.wps
 *.xls
 *.xlsx
+*.py
+*.txt
 
 # Don't ignore these
+!README.TXT
 !sik_bersih.sql
 !sik_bridging_eklaim.sql
 !sik_bridging_lab.sql
