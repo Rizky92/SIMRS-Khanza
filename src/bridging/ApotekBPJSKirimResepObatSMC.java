@@ -1514,10 +1514,9 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                                 JOptionPane.showMessageDialog(null, "Gagal menyimpan " + tbObat.getValueAt(i, 1).toString() + " - " + tbObat.getValueAt(i, 2).toString() + " ke resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
+                            sukses = false;
                             JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Obat " + tbObat.getValueAt(i, 1).toString() + " - " + tbObat.getValueAt(i, 2).toString() + " diresepkan kosong..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
                 }
             } catch (Exception ex) {
@@ -1584,6 +1583,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                                     JOptionPane.showMessageDialog(null, "Gagal menyimpan " + tbDetailRacikanObat.getValueAt(i, 2).toString() + " - " + tbDetailRacikanObat.getValueAt(i, 3).toString() + " ke resep racikan..!!", "Error", JOptionPane.ERROR_MESSAGE);
                                 }
                             } else {
+                                sukses = false;
                                 JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                             }
                         }
@@ -1649,7 +1649,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         for (int i = 0; i < tabModeObat.getRowCount(); i++) {
             total += (Double) tabModeObat.getValueAt(i, 8);
         }
-        
+
         for (int i = 0; i < tabModeDetailRacikanObat.getRowCount(); i++) {
             total += (Double) tabModeDetailRacikanObat.getValueAt(i, 9);
         }
