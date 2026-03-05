@@ -8123,6 +8123,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                     Sequel.menghapustfSmc("bayar_rawat_inap_drpr", "no_rawat = ?", TNoRw.getText());
                     Sequel.menghapustfSmc("bayar_rawat_jl_dr", "no_rawat = ?", TNoRw.getText());
                     Sequel.menghapustfSmc("bayar_rawat_jl_drpr", "no_rawat = ?", TNoRw.getText());
+                    Sequel.menghapustfSmc("bridging_sep", "no_rawat = ?", TNoRw.getText());
                     if (Sequel.menghapustfSmc("reg_periksa", "no_rawat = ?", TNoRw.getText())) {
                         if(tbKasirRalan.getSelectedRow()>-1){
                             tabModekasir.removeRow(tbKasirRalan.getSelectedRow());
@@ -15802,7 +15803,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+    private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();
@@ -15825,7 +15826,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {                                                        
+    private void MnSerahTerimaBarangAnggotaTubuhActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();

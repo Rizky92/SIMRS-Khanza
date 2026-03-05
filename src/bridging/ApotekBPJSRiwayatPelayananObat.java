@@ -367,7 +367,7 @@ public final class ApotekBPJSRiwayatPelayananObat extends javax.swing.JDialog {
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
         if(NoKaBPJS.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(null,"Silahkan masukkan nomor kartu terlebih dahulu..!!!");  
+            JOptionPane.showMessageDialog(null,"Silahkan masukkan nomor kartu terlebih dahulu..!!!");
         }else{
             runBackground(() ->tampil(NoKaBPJS.getText(), Valid.SetTgl(TanggalAwal.getSelectedItem().toString()), Valid.SetTgl(TanggalAkhir.getSelectedItem().toString())));
         }
