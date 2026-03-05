@@ -556,7 +556,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         ));
         tbDokter.setComponentPopupMenu(jPopupMenu1);
         tbDokter.setName("tbDokter"); // NOI18N
-        tbDokter.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbDokter.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tbDokterMouseReleased(evt);
@@ -2186,12 +2185,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tbDokterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseReleased
         if(tabMode.getRowCount()!=0){
-            try {
-                getData();
-                isPhoto();
-                panggilPhoto();
-                tampilOrthanc();
-            } catch (java.lang.NullPointerException e) {
+            int row = tbDokter.rowAtPoint(evt.getPoint());
+            if(row >= 0){
+                tbDokter.setRowSelectionInterval(row, row);
+                try {
+                    getData();
+                    isPhoto();
+                    panggilPhoto();
+                    tampilOrthanc();
+                } catch (java.lang.NullPointerException e) {
+                }
             }
         }
     }//GEN-LAST:event_tbDokterMouseReleased

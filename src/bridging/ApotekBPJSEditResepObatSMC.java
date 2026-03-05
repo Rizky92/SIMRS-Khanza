@@ -1953,6 +1953,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
                             JOptionPane.showMessageDialog(null, "Gagal menyimpan " + tbObat.getValueAt(i, 1).toString() + " - " + tbObat.getValueAt(i, 2).toString() + " ke resep..!!", "Error", JOptionPane.ERROR_MESSAGE);
                         }
                     } else {
+                        sukses = false;
                         JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
                 }
@@ -2023,6 +2024,7 @@ public final class ApotekBPJSEditResepObatSMC extends javax.swing.JDialog {
                                 JOptionPane.showMessageDialog(null, "Gagal menyimpan " + tbDetailRacikanObat.getValueAt(i, 2).toString() + " - " + tbDetailRacikanObat.getValueAt(i, 3).toString() + " ke resep racikan..!!", "Error", JOptionPane.ERROR_MESSAGE);
                             }
                         } else {
+                            sukses = false;
                             JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
                     }
