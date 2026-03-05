@@ -88,7 +88,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         }
         tbUser.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
-        
+
         setTampilSmc();
     }
 
@@ -464,6 +464,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("kasir_ralan", "[A] Rawat Jalan");
         namaakses.put("registrasi", "[A] Registrasi");
         namaakses.put("resep_pulang", "[A] Resep Pulang");
+        namaakses.put("pintu_poli", "[A] Ruangan Praktek Poli");
         namaakses.put("rujukan_keluar", "[A] Rujukan Keluar");
         namaakses.put("rujukan_masuk", "[A] Rujukan Masuk");
         namaakses.put("rujukan_poli_internal", "[A] Rujukan Poli Internal");
@@ -1046,6 +1047,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("bpjs_kunjungan_sep_apotek", "[L] Pencarian SEP Apotek BPJS");
         namaakses.put("perawatan_pasien_corona", "[L] Perawatan Pasien Corona");
         namaakses.put("pcare_peserta_kegiatan_kelompok", "[L] Peserta Keg Kelompok PCare");
+        namaakses.put("bpjs_potensi_prb", "[L] Potensi PRB di VClaim");
         namaakses.put("bpjs_program_prb", "[L] Program PRB di VClaim");
         namaakses.put("sisrute_referensi_alasanrujuk", "[L] Referensi Alasan Rujuk Sisrute");
         namaakses.put("pcare_cek_alergi", "[L] Referensi Alergi PCare");
@@ -1100,11 +1102,14 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pcare_alasan_tacc", "[L] Referensi TACC PCare");
         namaakses.put("pcare_cek_tindakan", "[L] Referensi Tindakan PCare");
         namaakses.put("duta_parkir_rekap_keluar", "[L] Rekap Keluar Duta Parking");
+        namaakses.put("bpjs_rekap_peserta_prb_apotek", "[L] Rekap Peserta PRB Apotek BPJS");
         namaakses.put("reklasifikasi_ralan", "[L] Reklasifikasi Ralan");
         namaakses.put("reklasifikasi_ranap", "[L] Reklasifikasi Ranap");
         namaakses.put("bpjs_riwayat_obat_smc", "[L] Riwayat Obat Apotek BPJS SMC");
+        namaakses.put("bpjs_riwayat_pelayanan_obat", "[L] Riwayat Pelayanan Obat Apotek BPJS");
         namaakses.put("bpjs_riwayat_pelayanan_obat_smc", "[L] Riwayat Pelayanan Obat Apotek BPJS SMC");
         namaakses.put("bpjs_riwayat_pelayanan_resep_smc", "[L] Riwayat Pelayanan Resep Apotek BPJS SMC");
+        namaakses.put("bpjs_riwayat_surat_smc", "[L] Riwayat Penerbitan SKDP/SPRI VClaim SMC");
         namaakses.put("riwayat_perawatan_icare_bpjs", "[L] Riwayat Perawatan ICare BPJS");
         namaakses.put("bpjs_cek_riwayat", "[L] Riwayat Rujukan PCare di VClaim");
         namaakses.put("bpjs_cek_riwayat_rujukanrs", "[L] Riwayat Rujukan RS di VClaim");
@@ -1329,6 +1334,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("skrining_curb65", "[M] Skrining CURB-65");
         namaakses.put("skrining_diabetes_melitus", "[M] Skrining Diabetes Melitus");
         namaakses.put("skrining_frailty_syndrome", "[M] Skrining Frailty Syndrome");
+        namaakses.put("skrining_gizi_kehamilan", "[M] Skrining Gizi Kehamilan");
         namaakses.put("skrining_gizi", "[M] Skrining Gizi Lanjut");
         namaakses.put("skrining_hipertensi", "[M] Skrining Hipertensi");
         namaakses.put("skrining_indra_pendengaran", "[M] Skrining Indra Pendengaran");
