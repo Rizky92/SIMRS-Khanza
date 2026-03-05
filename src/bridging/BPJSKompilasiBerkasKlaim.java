@@ -109,7 +109,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private String finger = "", tanggalExport = "",
         gunakanTanggalExport = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
         aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF(),
-        kategoriUploadBerkas = "", diagnosa = "", kamar = "", unit = "";
+        kategoriUploadBerkas = "", kamar = "", unit = "";
     private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false;
     private int flagklaim = -1, flagInacbgTopup = -1, selectedRow = -1;
     private long maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
@@ -1872,7 +1872,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                             param.put("umur", rs.getString("umur"));
                             param.put("lahir", new SimpleDateFormat("dd-MM-yyyy").format((Date) rs.getDate("tgl_lahir")));
                             param.put("alamat", rs.getString("alamat"));
-                            param.put("diagnosa", diagnosa);
                             param.put("pekerjaan", rs.getString("pekerjaan"));
                             param.put("noktp", rs.getString("no_ktp"));
                             param.put("namars", akses.getnamars());
@@ -3273,7 +3272,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             lblTglSEP.setText(tbKompilasi.getValueAt(selectedRow, 6).toString());
             btnSEP.setText(tbKompilasi.getValueAt(selectedRow, 2).toString());
             unit = tbKompilasi.getValueAt(selectedRow, 9).toString();
-            diagnosa = tbKompilasi.getValueAt(selectedRow, 10).toString();
             String noSuratKontrol = Sequel.cariIsiSmc("select noskdp from bridging_sep where no_sep = ?", btnSEP.getText());
             if (noSuratKontrol.isBlank()) {
                 noSuratKontrol = Sequel.cariIsiSmc("select noskdp from bridging_sep where no_rawat = ? and noskdp != ''", lblNoRawat.getText());
