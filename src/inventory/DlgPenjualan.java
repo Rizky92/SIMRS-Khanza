@@ -2241,6 +2241,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if((i==6)){
+                    evt.consume();
+                    if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
                     if(tbObatRacikan.getSelectedRow()!= -1){
                         if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString().equals("")||
                                 tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).toString().equals("")||
@@ -2256,6 +2258,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else{
                         JOptionPane.showMessageDialog(null,"Silahkan pilih racikan..!!");
                     }
+                } else {
+                    evt.consume();
+                    if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
+                    tbObatRacikan.changeSelection(tbObatRacikan.getSelectedRow(), i + 1, false, false);
                 }
             }
         }
@@ -2932,6 +2938,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil3() {
         try{
+            final String noRacikan = tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(), 0).toString();
             String[] no,kodebarang,kandungan,namabarang,kategori,satuan,nobatch,nofaktur,kadaluarsa;
             double[] harga,hbeli,jumlah,kps,subtotal,diskon,besardiskon,totaljual,tambahan,embalase,tuslah,stok;
             row=tabModeDetailRacikan.getRowCount();
@@ -3101,7 +3108,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(Jenisjual.getSelectedItem().equals("Karyawan")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("karyawan"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3109,7 +3116,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Jual Bebas")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("jualbebas"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3117,7 +3124,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Beli Luar")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("beliluar"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3125,7 +3132,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Rawat Jalan")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("ralan"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3133,7 +3140,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Kelas 1")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("kelas1"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3141,7 +3148,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Kelas 2")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("kelas2"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3149,7 +3156,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Kelas 3")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("kelas3"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3157,7 +3164,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Utama/BPJS")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("utama"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3165,7 +3172,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("VIP")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("vip"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3173,7 +3180,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("VVIP")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("vvip"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),rs.getDouble("dasar"),"","",""
                         });
@@ -3196,6 +3203,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampil4() {
         try{
+            final String noRacikan = tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(), 0).toString();
             String[] no,kodebarang,kandungan,namabarang,kategori,satuan,nobatch,nofaktur,kadaluarsa;
             double[] harga,hbeli,jumlah,kps,subtotal,diskon,besardiskon,totaljual,tambahan,embalase,tuslah,stok;
             row=tabModeDetailRacikan.getRowCount();
@@ -3369,7 +3377,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(Jenisjual.getSelectedItem().equals("Karyawan")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("karyawan"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3378,7 +3386,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Jual Bebas")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("jualbebas"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3387,7 +3395,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Beli Luar")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("beliluar"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3396,7 +3404,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Rawat Jalan")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("ralan"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3405,7 +3413,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Kelas 1")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("kelas1"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3414,7 +3422,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Kelas 2")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("kelas2"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3423,7 +3431,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Kelas 3")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("kelas3"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3432,7 +3440,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("Utama/BPJS")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("utama"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3441,7 +3449,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("VIP")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("vip"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
@@ -3450,7 +3458,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }else if(Jenisjual.getSelectedItem().equals("VVIP")){
                     while(rs.next()){
                         tabModeDetailRacikan.addRow(new Object[]{
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),
+                            noRacikan,
                             rs.getString("kode_brng"),rs.getString("nama_brng"),rs.getString("nama"),rs.getString("kode_sat"),
                             rs.getDouble("vvip"),rs.getDouble("kapasitas"),"",0,0,0,0,0,0,0,0,rs.getDouble("stok"),
                             rs.getDouble("dasar"),rs.getString("no_batch"),rs.getString("no_faktur"),rs.getString("tgl_kadaluarsa")
