@@ -1005,11 +1005,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
             if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
-                Valid.textKosong(TCari,"No.Faktur");
+                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 try {
                     ps=koneksi.prepareStatement(
-                          "select piutang.nota_piutang, piutang.kd_bangsal from piutang where piutang.nota_piutang=?");
+                          "select piutang.nota_piutang,piutang.kd_bangsal,piutang.sisapiutang from piutang where piutang.nota_piutang=?");
                     try {
                         ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
@@ -1048,12 +1048,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
 
                             if(sukses==true){
-                                double sisaPiutangPasien = Sequel.cariDoubleSmc("select sisapiutang from piutang where nota_piutang = ?", rs.getString("nota_piutang"));
-
                                 Sequel.deleteTampJurnal();
-                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Piutang_Obat from set_akun"), "PIUTANG PASIEN", 0, sisaPiutangPasien);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", sisaPiutangPasien, 0);
-                                if (sukses) sukses = jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG OBAT DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                                if (sukses) {
+                                    sukses = Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Piutang_Obat from set_akun"), "PIUTANG PASIEN", 0, rs.getDouble("sisapiutang"));
+                                }
+                                if (sukses) {
+                                    sukses = Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", rs.getDouble("sisapiutang"), 0);
+                                }
+                                if (sukses) {
+                                    sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG OBAT DI "+Sequel.CariBangsal(rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
+                                }
                             }
 
                             if(sukses==true){
@@ -1061,13 +1065,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 Sequel.Commit();
                             }else{
                                 sukses=false;
-                                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                                 Sequel.RollBack();
                             }
-
                             Sequel.AutoComitTrue();
                             if(sukses==true){
                                 runBackground(() ->tampil());
+                            } else {
+                                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                             }
                         }
                     } catch (Exception e) {
