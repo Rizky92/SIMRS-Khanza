@@ -508,7 +508,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         panelisi3.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('1');
         BtnCari.setToolTipText("Alt+1");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -525,7 +524,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         panelisi3.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnAll.setMnemonic('2');
         BtnAll.setToolTipText("Alt+2");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -562,7 +560,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         panelisi3.add(Jeniskelas);
 
         BtnTambah.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
-        BtnTambah.setMnemonic('3');
         BtnTambah.setToolTipText("Alt+3");
         BtnTambah.setName("BtnTambah"); // NOI18N
         BtnTambah.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -574,7 +571,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         panelisi3.add(BtnTambah);
 
         BtnSeek5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/011.png"))); // NOI18N
-        BtnSeek5.setMnemonic('4');
         BtnSeek5.setToolTipText("Alt+4");
         BtnSeek5.setName("BtnSeek5"); // NOI18N
         BtnSeek5.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -591,7 +587,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         panelisi3.add(BtnSeek5);
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
         BtnSimpan.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -603,7 +598,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         panelisi3.add(BtnSimpan);
 
         BtnTambah1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
-        BtnTambah1.setMnemonic('3');
         BtnTambah1.setToolTipText("Alt+3");
         BtnTambah1.setName("BtnTambah1"); // NOI18N
         BtnTambah1.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -615,7 +609,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         panelisi3.add(BtnTambah1);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
         BtnHapus.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -627,7 +620,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         panelisi3.add(BtnHapus);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('5');
         BtnKeluar.setToolTipText("Alt+5");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
         BtnKeluar.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -684,7 +676,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel13.setBounds(0, 72, 72, 23);
 
         btnDokter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnDokter.setMnemonic('3');
         btnDokter.setToolTipText("Alt+3");
         btnDokter.setName("btnDokter"); // NOI18N
         btnDokter.addActionListener(new java.awt.event.ActionListener() {
@@ -720,7 +711,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         jLabel8.setBounds(0, 42, 72, 23);
 
         DTPBeri.setForeground(new java.awt.Color(50, 70, 50));
-        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-01-2026" }));
+        DTPBeri.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "30-01-2026" }));
         DTPBeri.setDisplayFormat("dd-MM-yyyy");
         DTPBeri.setName("DTPBeri"); // NOI18N
         DTPBeri.setOpaque(false);
@@ -845,7 +836,6 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         textTemplateResep.setBounds(143, 102, 283, 23);
 
         btnPilihTemplateResep.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        btnPilihTemplateResep.setMnemonic('3');
         btnPilihTemplateResep.setToolTipText("Pilih template resep");
         btnPilihTemplateResep.setName("btnPilihTemplateResep"); // NOI18N
         btnPilihTemplateResep.addActionListener(new java.awt.event.ActionListener() {
@@ -911,6 +901,11 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
         Scroll1.setPreferredSize(new java.awt.Dimension(454, 90));
 
         tbObatResepRacikan.setName("tbObatResepRacikan"); // NOI18N
+        tbObatResepRacikan.addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                tbObatResepRacikanPropertyChange(evt);
+            }
+        });
         tbObatResepRacikan.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 tbObatResepRacikanKeyPressed(evt);
@@ -1549,7 +1544,14 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     }
                 }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                     if(i==6){
+                        evt.consume();
+                        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
                         runBackground(() -> tampildetailracikanresep());
+                        TCari.requestFocus();
+                    } else {
+                        evt.consume();
+                        if (tbObatResepRacikan.isEditing()) tbObatResepRacikan.getCellEditor().stopCellEditing();
+                        tbObatResepRacikan.changeSelection(tbObatResepRacikan.getSelectedRow(), i + 1, false, false);
                     }
                 }
             } catch (Exception e) {
@@ -1706,6 +1708,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             textTemplateResep.setText(null);
         }
     }//GEN-LAST:event_checkboxSimpanTemplateResepItemStateChanged
+
+    private void tbObatResepRacikanPropertyChange(java.beans.PropertyChangeEvent evt) {//GEN-FIRST:event_tbObatResepRacikanPropertyChange
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tbObatResepRacikanPropertyChange
 
     /**
     * @param args the command line arguments
@@ -2282,6 +2288,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
     private void tampildetailracikanresep() {
         try {
+            final String noRacikan = tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(), 0).toString();
             boolean[] pilih;
             double[] jumlah,harga,beli,stok,kapasitas,p1,p2;
             String[] no,kodebarang,namabarang,kodesatuan,kandungan,letakbarang,namajenis,aturan,industri,komposisi,namakategori;
@@ -2428,7 +2435,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         for(JsonNode list:response){
                             if (arrlist.contains(list.path("kdjns").asText())) {
                                 tabModeDetailResepRacikan.addRow(new Object[] {
-                                    tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),0).toString(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
+                                    noRacikan,list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                                     list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
                                     list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),1,"/",1,"",0,
                                     list.path("IndustriFarmasi").asText(),list.path("Kandungan").asText(),list.path("Kategori").asText()
@@ -2440,7 +2447,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                             if (arrlist.contains(list.path("kdjns").asText())) {
                                 if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kandungan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                                     tabModeDetailResepRacikan.addRow(new Object[] {
-                                        tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),0).toString(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
+                                        noRacikan,list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                                         list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
                                         list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),1,"/",1,"",0,
                                         list.path("IndustriFarmasi").asText(),list.path("Kandungan").asText(),list.path("Kategori").asText()
@@ -2453,7 +2460,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                     if(TCari.getText().trim().equals("")){
                         for(JsonNode list:response){
                             tabModeDetailResepRacikan.addRow(new Object[] {
-                                tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),0).toString(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
+                                noRacikan,list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                                 list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
                                 list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),1,"/",1,"",0,
                                 list.path("IndustriFarmasi").asText(),list.path("Kandungan").asText(),list.path("Kategori").asText()
@@ -2463,7 +2470,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                         for(JsonNode list:response){
                             if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kandungan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                                 tabModeDetailResepRacikan.addRow(new Object[] {
-                                    tbObatResepRacikan.getValueAt(tbObatResepRacikan.getSelectedRow(),0).toString(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
+                                    noRacikan,list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                                     list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
                                     list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),1,"/",1,"",0,
                                     list.path("IndustriFarmasi").asText(),list.path("Kandungan").asText(),list.path("Kategori").asText()

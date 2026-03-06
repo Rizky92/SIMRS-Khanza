@@ -1966,6 +1966,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 }
             }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
                 if((i==6)){
+                    evt.consume();
+                    if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
                     if(tbObatRacikan.getSelectedRow()!= -1){
                         if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString().equals("")||
                                 tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).toString().equals("")||
@@ -1981,6 +1983,10 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     }else{
                         JOptionPane.showMessageDialog(null,"Silahkan pilih racikan..!!");
                     }
+                } else {
+                    evt.consume();
+                    if (tbObatRacikan.isEditing()) tbObatRacikan.getCellEditor().stopCellEditing();
+                    tbObatRacikan.changeSelection(tbObatRacikan.getSelectedRow(), i + 1, false, false);
                 }
             }
         }
@@ -3625,6 +3631,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         }
 
         try {
+            final String noRacikan = tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(), 0).toString();
             boolean[] pilih,kronis;
             double[] jumlah,harga,eb,ts,stok,beli,kapasitas,kandungan;
             int[] obatKronisSisaHari;
@@ -3782,7 +3789,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                 if(TCari.getText().trim().equals("")){
                     for(JsonNode list:response){
                         tabModeDetailObatRacikan.addRow(new Object[] {
-                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
+                            noRacikan,list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                             list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
                             list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),"",0,0,0,
                             list.path("IndustriFarmasi").asText(),list.path("Kategori").asText(),list.path("Golongan").asText(),list.path("NoBatch").asText(),
@@ -3793,7 +3800,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     for(JsonNode list:response){
                         if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kandungan").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NoBatch").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
                             tabModeDetailObatRacikan.addRow(new Object[] {
-                                tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
+                                noRacikan,list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                                 list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
                                 list.path("Jenis").asText(),list.path("Stok").asDouble(),list.path("Kapasitas").asDouble(),"",0,0,0,
                                 list.path("IndustriFarmasi").asText(),list.path("Kategori").asText(),list.path("Golongan").asText(),list.path("NoBatch").asText(),
