@@ -531,7 +531,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                 }
             }
             if (adaTask99) {
-                JOptionPane.showMessageDialog(null, "Beberapa data tidak dapat dibatalkan karena pasien sudah Checkin di BPJS (task 99 telah dikirim).");
+                JOptionPane.showMessageDialog(null, "<html><body>Antrian berhasil dibatalkan.<br>Beberapa data tidak dapat dibatalkan karena pasien sudah Checkin di BPJS (task 99 telah dikirim).</body></html>");
             }
             runBackground(() ->tampil());
         }
