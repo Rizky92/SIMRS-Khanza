@@ -247,6 +247,10 @@ public class frmUtama extends javax.swing.JFrame {
                         ps.setString(2, tgl.format(Tanggal1.getDate()) + " 23:59:59.999");
                         try (ResultSet rs = ps.executeQuery()) {
                             while (rs.next()) {
+                                if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs_taskid where no_rawat = ? and taskid = '99'", rs.getString("no_rawat_batal"))) {
+                                    Sequel.mengupdateSmc("referensi_mobilejkn_bpjs_batal", "statuskirim = 'Sudah'", "nomorreferensi = ?", rs.getString("nomorreferensi"));
+                                    continue;
+                                }
                                 json = mapper.createObjectNode();
                                 json.put("kodebooking", rs.getString("nobooking"));
                                 json.put("keterangan", rs.getString("keterangan"));
