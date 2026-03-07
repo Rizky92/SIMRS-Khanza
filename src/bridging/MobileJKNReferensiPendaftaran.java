@@ -513,8 +513,13 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         } else {
+            boolean adaTask99 = false;
             for (int i = 0; i < tabMode.getRowCount(); i++) {
                 if (tbJnsPerawatan.getValueAt(i, 0).toString().equals("true")) {
+                    if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs_taskid where no_rawat = ? and taskid = '99'", tbJnsPerawatan.getValueAt(i, 1).toString())) {
+                        adaTask99 = true;
+                        continue;
+                    }
                     if(Sequel.mengedittf("referensi_mobilejkn_bpjs","nobooking=?","status='Batal',validasi=now()",1,new String[]{
                         tbJnsPerawatan.getValueAt(i,15).toString()
                     })==true){
@@ -524,6 +529,9 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                         });
                     }
                 }
+            }
+            if (adaTask99) {
+                JOptionPane.showMessageDialog(null, "<html><body>Antrian berhasil dibatalkan.<br>Beberapa data tidak dapat dibatalkan karena pasien sudah Checkin di BPJS (task 99 telah dikirim).</body></html>");
             }
             runBackground(() ->tampil());
         }
