@@ -4311,6 +4311,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 }
             }
         } catch (Exception e) {
+            sukses=false;
             System.out.println("Notif : "+e);
         }
     }
