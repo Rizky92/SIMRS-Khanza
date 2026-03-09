@@ -98,7 +98,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private widget.Button BtnNextPerawatan;
     private widget.Label LabelHasilCariPerawatan;
     // Search state
-    private String rawHtmlPerawatan = "";
+    private volatile String rawHtmlPerawatan = "";
     private List<int[]> htmlRangesPerawatan = new ArrayList<>();
     private int currentMatchPerawatan = -1;
     private HttpClient http = new HttpClient();
@@ -327,43 +327,64 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         String keyword = TxtCariPerawatan.getText().trim();
         htmlRangesPerawatan.clear();
         currentMatchPerawatan = -1;
-        LabelHasilCariPerawatan.setText("");
+        LabelHasilCariPerawatan.setText("Mencari...");
+        BtnCariPerawatan.setEnabled(false);
         BtnPrevPerawatan.setEnabled(false);
         BtnNextPerawatan.setEnabled(false);
 
-        if (keyword.isEmpty() || rawHtmlPerawatan.isEmpty()) {
-            LoadHTMLRiwayatPerawatan.setText(rawHtmlPerawatan);
+        final String htmlSnapshot = rawHtmlPerawatan;
+        if (keyword.isEmpty() || htmlSnapshot.isEmpty()) {
+            LoadHTMLRiwayatPerawatan.setText(htmlSnapshot);
+            LabelHasilCariPerawatan.setText("");
+            BtnCariPerawatan.setEnabled(true);
             return;
         }
 
-        htmlRangesPerawatan = rebuildHtmlRanges(keyword);
-        if (htmlRangesPerawatan.isEmpty()) {
-            LabelHasilCariPerawatan.setText("Tidak ditemukan");
-            LoadHTMLRiwayatPerawatan.setText(rawHtmlPerawatan);
-            return;
-        }
-
-        currentMatchPerawatan = 0;
-        applyHighlightsPerawatan(currentMatchPerawatan);
-        int total = htmlRangesPerawatan.size();
-        LabelHasilCariPerawatan.setText("1 dari " + total + " temuan");
-        if (total > 1) {
-            BtnPrevPerawatan.setEnabled(true);
-            BtnNextPerawatan.setEnabled(true);
-        }
-        scrollToMatchPerawatan(currentMatchPerawatan);
+        new javax.swing.SwingWorker<List<int[]>, Void>() {
+            @Override
+            protected List<int[]> doInBackground() {
+                return rebuildHtmlRanges(keyword, htmlSnapshot);
+            }
+            @Override
+            protected void done() {
+                try {
+                    List<int[]> ranges = get();
+                    BtnCariPerawatan.setEnabled(true);
+                    htmlRangesPerawatan = ranges;
+                    if (ranges.isEmpty()) {
+                        LabelHasilCariPerawatan.setText("Tidak ditemukan");
+                        LoadHTMLRiwayatPerawatan.setText(htmlSnapshot);
+                        return;
+                    }
+                    currentMatchPerawatan = 0;
+                    LoadHTMLRiwayatPerawatan.setText(buildHighlightedHtml(htmlSnapshot, ranges, 0));
+                    int total = ranges.size();
+                    LabelHasilCariPerawatan.setText("1 dari " + total + " temuan");
+                    BtnPrevPerawatan.setEnabled(total > 1);
+                    BtnNextPerawatan.setEnabled(total > 1);
+                    scrollToMatchPerawatan(0, keyword);
+                } catch (Exception ex) {
+                    BtnCariPerawatan.setEnabled(true);
+                    LabelHasilCariPerawatan.setText("");
+                }
+            }
+        }.execute();
     }
 
-    private List<int[]> rebuildHtmlRanges(String keyword) {
+    /**
+     * Builds plain-text→HTML position map and searches for keyword matches.
+     * Runs on a background thread. Uses int[] (not List&lt;Integer&gt;) to avoid boxing.
+     * ASCII fast-path avoids JNI; NFD normalization only for non-ASCII chars.
+     */
+    private List<int[]> rebuildHtmlRanges(String keyword, String html) {
         List<int[]> ranges = new ArrayList<>();
-        if (rawHtmlPerawatan.isEmpty() || keyword.isEmpty()) {
-            return ranges;
-        }
+        if (html.isEmpty() || keyword.isEmpty()) return ranges;
 
-        List<Integer> plainToHtml = new ArrayList<>();
-        StringBuilder normalizedPlain = new StringBuilder();
-        String html = rawHtmlPerawatan;
         int htmlLen = html.length();
+        // plain char buffer and its html-position map (primitives, no boxing)
+        char[] rawBuf = new char[htmlLen];
+        int[] rawToHtml = new int[htmlLen + 1];
+        int plainSize = 0;
         boolean inTag = false;
 
         int idx = 0;
@@ -378,46 +399,54 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             } else if (inTag) {
                 idx++;
             } else if (c == '&') {
-                // parse HTML entity
                 int semi = html.indexOf(';', idx);
                 if (semi > idx && semi - idx <= 8) {
-                    String entity = html.substring(idx, semi + 1);
-                    char decoded = decodeHtmlEntity(entity);
-                    String norm = normalizeText(String.valueOf(decoded));
-                    for (char nc : norm.toCharArray()) {
-                        plainToHtml.add(idx);
-                        normalizedPlain.append(nc);
-                    }
+                    rawToHtml[plainSize] = idx;
+                    rawBuf[plainSize++] = decodeHtmlEntity(html.substring(idx, semi + 1));
                     idx = semi + 1;
                 } else {
-                    String norm = normalizeText(String.valueOf(c));
-                    for (char nc : norm.toCharArray()) {
-                        plainToHtml.add(idx);
-                        normalizedPlain.append(nc);
-                    }
+                    rawToHtml[plainSize] = idx;
+                    rawBuf[plainSize++] = c;
                     idx++;
                 }
             } else {
-                String norm = normalizeText(String.valueOf(c));
-                for (char nc : norm.toCharArray()) {
-                    plainToHtml.add(idx);
-                    normalizedPlain.append(nc);
-                }
+                rawToHtml[plainSize] = idx;
+                rawBuf[plainSize++] = c;
                 idx++;
+            }
+        }
+        rawToHtml[plainSize] = htmlLen; // sentinel for end-of-plain lookups
+
+        // Build normBuf+normToRaw in one pass: ASCII fast-path (no JNI), NFD only for non-ASCII
+        char[] normBuf = new char[plainSize];
+        int[] normToRaw = new int[plainSize];
+        int normSize = 0;
+        for (int ri = 0; ri < plainSize; ri++) {
+            char rc = rawBuf[ri];
+            if (rc < 128) {
+                normToRaw[normSize] = ri;
+                normBuf[normSize++] = (char) Character.toLowerCase(rc);
+            } else {
+                String nfd = Normalizer.normalize(String.valueOf(rc), Normalizer.Form.NFD);
+                for (char nc : nfd.toCharArray()) {
+                    if (Character.getType(nc) != Character.NON_SPACING_MARK) {
+                        normToRaw[normSize] = ri;
+                        normBuf[normSize++] = Character.toLowerCase(nc);
+                    }
+                }
             }
         }
 
         String normKeyword = normalizeText(keyword);
         int kLen = normKeyword.length();
-        String plainStr = normalizedPlain.toString();
-        int plainLen = plainStr.length();
+        String normPlain = new String(normBuf, 0, normSize);
 
         int pos = 0;
-        while (pos <= plainLen - kLen) {
-            if (plainStr.startsWith(normKeyword, pos)) {
-                int htmlStart = plainToHtml.get(pos);
-                int htmlEnd = (pos + kLen < plainToHtml.size()) ? plainToHtml.get(pos + kLen) : htmlLen;
-                ranges.add(new int[]{htmlStart, htmlEnd});
+        while (pos <= normSize - kLen) {
+            if (normPlain.startsWith(normKeyword, pos)) {
+                int rawStart = normToRaw[pos];
+                int rawEnd = (pos + kLen < normSize) ? normToRaw[pos + kLen] : plainSize;
+                ranges.add(new int[]{rawToHtml[rawStart], rawToHtml[rawEnd]});
                 pos += kLen;
             } else {
                 pos++;
@@ -426,32 +455,54 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
         return ranges;
     }
 
-    private void applyHighlightsPerawatan(int currentIdx) {
-        if (rawHtmlPerawatan.isEmpty() || htmlRangesPerawatan.isEmpty()) {
-            return;
+    /** Builds highlighted HTML in a single O(n) forward pass. Thread-safe (pure function). */
+    private String buildHighlightedHtml(String htmlSnapshot, List<int[]> ranges, int currentIdx) {
+        StringBuilder result = new StringBuilder(htmlSnapshot.length() + ranges.size() * 60);
+        int lastPos = 0;
+        for (int i = 0; i < ranges.size(); i++) {
+            int[] range = ranges.get(i);
+            result.append(htmlSnapshot, lastPos, range[0]);
+            result.append("<span style=\"background:").append(i == currentIdx ? "#FFA500" : "#FFD700").append(";\">");
+            result.append(htmlSnapshot, range[0], range[1]);
+            result.append("</span>");
+            lastPos = range[1];
         }
-        StringBuilder modified = new StringBuilder(rawHtmlPerawatan);
-        // process in reverse order to preserve earlier offsets
-        for (int i = htmlRangesPerawatan.size() - 1; i >= 0; i--) {
-            int[] range = htmlRangesPerawatan.get(i);
-            String color = (i == currentIdx) ? "#FFA500" : "#FFD700";
-            modified.insert(range[1], "</span>");
-            modified.insert(range[0], "<span style=\"background:" + color + ";\">");
-        }
-        LoadHTMLRiwayatPerawatan.setText(modified.toString());
+        result.append(htmlSnapshot, lastPos, htmlSnapshot.length());
+        return result.toString();
     }
 
     private void navCariPerawatan(int delta) {
         int size = htmlRangesPerawatan.size();
         if (size == 0) return;
         currentMatchPerawatan = (currentMatchPerawatan + delta + size) % size;
-        applyHighlightsPerawatan(currentMatchPerawatan);
-        LabelHasilCariPerawatan.setText((currentMatchPerawatan + 1) + " dari " + size + " temuan");
-        scrollToMatchPerawatan(currentMatchPerawatan);
+        final int matchIdx = currentMatchPerawatan;
+        final String htmlSnapshot = rawHtmlPerawatan;
+        final List<int[]> rangesSnapshot = htmlRangesPerawatan;
+        final String keyword = TxtCariPerawatan.getText().trim();
+        BtnPrevPerawatan.setEnabled(false);
+        BtnNextPerawatan.setEnabled(false);
+        new javax.swing.SwingWorker<String, Void>() {
+            @Override
+            protected String doInBackground() {
+                return buildHighlightedHtml(htmlSnapshot, rangesSnapshot, matchIdx);
+            }
+            @Override
+            protected void done() {
+                try {
+                    LoadHTMLRiwayatPerawatan.setText(get());
+                    LabelHasilCariPerawatan.setText((matchIdx + 1) + " dari " + size + " temuan");
+                    BtnPrevPerawatan.setEnabled(size > 1);
+                    BtnNextPerawatan.setEnabled(size > 1);
+                    scrollToMatchPerawatan(matchIdx, keyword);
+                } catch (Exception ex) {
+                    BtnPrevPerawatan.setEnabled(size > 1);
+                    BtnNextPerawatan.setEnabled(size > 1);
+                }
+            }
+        }.execute();
     }
 
-    private void scrollToMatchPerawatan(int matchIndex) {
-        String keyword = TxtCariPerawatan.getText().trim();
+    private void scrollToMatchPerawatan(int matchIndex, String keyword) {
         if (keyword.isEmpty()) return;
         String normKeyword = normalizeText(keyword);
         SwingUtilities.invokeLater(() -> {
@@ -7066,17 +7117,17 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     );
                 }
 
-                String builtHtml = "<html><table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" + htmlContent.toString() + "</table></html>";
-                rawHtmlPerawatan = builtHtml;
-                LoadHTMLRiwayatPerawatan.setText(builtHtml);
-                htmlRangesPerawatan.clear();
-                currentMatchPerawatan = -1;
+                final String builtHtml = "<html><table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" + htmlContent.toString() + "</table></html>";
+                rawHtmlPerawatan = builtHtml; // volatile write — safe from background thread
+                htmlContent=null;
                 SwingUtilities.invokeLater(() -> {
+                    LoadHTMLRiwayatPerawatan.setText(builtHtml);
+                    htmlRangesPerawatan.clear();
+                    currentMatchPerawatan = -1;
                     LabelHasilCariPerawatan.setText("");
                     BtnPrevPerawatan.setEnabled(false);
                     BtnNextPerawatan.setEnabled(false);
                 });
-                htmlContent=null;
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{
