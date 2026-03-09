@@ -41,8 +41,11 @@ import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -86,6 +89,18 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
     private double biayaperawatan=0;
     private String kddpjp="",dpjp="",json,dokterrujukan="",polirujukan="",keputusan="",ke1="",ke2="",ke3="",ke4="",ke5="",ke6="",file="", TAMPILANDEFAULTRIWAYATPASIEN=koneksiDB.TAMPILANDEFAULTRIWAYATPASIEN();
     private StringBuilder htmlContent;
+    // Search bar components for "Riwayat Perawatan" tab
+    private widget.PanelBiasa PanelCariPerawatan;
+    private widget.Label LabelCariPerawatan;
+    private widget.TextBox TxtCariPerawatan;
+    private widget.Button BtnCariPerawatan;
+    private widget.Button BtnPrevPerawatan;
+    private widget.Button BtnNextPerawatan;
+    private widget.Label LabelHasilCariPerawatan;
+    // Search state
+    private String rawHtmlPerawatan = "";
+    private List<int[]> htmlRangesPerawatan = new ArrayList<>();
+    private int currentMatchPerawatan = -1;
     private HttpClient http = new HttpClient();
     private GetMethod get;
     private boolean esign=false,sertisign=false;
@@ -254,8 +269,238 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
             }
         });
 
+        setupCariPerawatan();
         ChkAccor.setSelected(false);
         isMenu();
+    }
+
+    private void setupCariPerawatan() {
+        PanelCariPerawatan = new widget.PanelBiasa();
+        PanelCariPerawatan.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 3));
+        PanelCariPerawatan.setBackground(new java.awt.Color(245, 250, 245));
+        PanelCariPerawatan.setBorder(javax.swing.BorderFactory.createMatteBorder(0, 0, 1, 0, new java.awt.Color(180, 210, 180)));
+
+        LabelCariPerawatan = new widget.Label();
+        LabelCariPerawatan.setText("Temukan:");
+
+        TxtCariPerawatan = new widget.TextBox();
+        TxtCariPerawatan.setPreferredSize(new java.awt.Dimension(200, 22));
+        TxtCariPerawatan.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) {
+                    cariTeksPerawatan();
+                }
+            }
+        });
+
+        BtnCariPerawatan = new widget.Button();
+        BtnCariPerawatan.setText("Cari");
+        BtnCariPerawatan.addActionListener(e -> cariTeksPerawatan());
+
+        BtnPrevPerawatan = new widget.Button();
+        BtnPrevPerawatan.setText("< Prev");
+        BtnPrevPerawatan.setEnabled(false);
+        BtnPrevPerawatan.addActionListener(e -> navCariPerawatan(-1));
+
+        BtnNextPerawatan = new widget.Button();
+        BtnNextPerawatan.setText("Next >");
+        BtnNextPerawatan.setEnabled(false);
+        BtnNextPerawatan.addActionListener(e -> navCariPerawatan(1));
+
+        LabelHasilCariPerawatan = new widget.Label();
+        LabelHasilCariPerawatan.setText("");
+        LabelHasilCariPerawatan.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        LabelHasilCariPerawatan.setPreferredSize(new java.awt.Dimension(130, 22));
+
+        PanelCariPerawatan.add(LabelCariPerawatan);
+        PanelCariPerawatan.add(TxtCariPerawatan);
+        PanelCariPerawatan.add(BtnCariPerawatan);
+        PanelCariPerawatan.add(BtnPrevPerawatan);
+        PanelCariPerawatan.add(BtnNextPerawatan);
+        PanelCariPerawatan.add(LabelHasilCariPerawatan);
+
+        internalFrame2.add(PanelCariPerawatan, java.awt.BorderLayout.PAGE_START);
+    }
+
+    private void cariTeksPerawatan() {
+        String keyword = TxtCariPerawatan.getText().trim();
+        htmlRangesPerawatan.clear();
+        currentMatchPerawatan = -1;
+        LabelHasilCariPerawatan.setText("");
+        BtnPrevPerawatan.setEnabled(false);
+        BtnNextPerawatan.setEnabled(false);
+
+        if (keyword.isEmpty() || rawHtmlPerawatan.isEmpty()) {
+            LoadHTMLRiwayatPerawatan.setText(rawHtmlPerawatan);
+            return;
+        }
+
+        htmlRangesPerawatan = rebuildHtmlRanges(keyword);
+        if (htmlRangesPerawatan.isEmpty()) {
+            LabelHasilCariPerawatan.setText("Tidak ditemukan");
+            LoadHTMLRiwayatPerawatan.setText(rawHtmlPerawatan);
+            return;
+        }
+
+        currentMatchPerawatan = 0;
+        applyHighlightsPerawatan(currentMatchPerawatan);
+        int total = htmlRangesPerawatan.size();
+        LabelHasilCariPerawatan.setText("1 dari " + total + " temuan");
+        if (total > 1) {
+            BtnPrevPerawatan.setEnabled(true);
+            BtnNextPerawatan.setEnabled(true);
+        }
+        scrollToMatchPerawatan(currentMatchPerawatan);
+    }
+
+    private List<int[]> rebuildHtmlRanges(String keyword) {
+        List<int[]> ranges = new ArrayList<>();
+        if (rawHtmlPerawatan.isEmpty() || keyword.isEmpty()) {
+            return ranges;
+        }
+
+        List<Integer> plainToHtml = new ArrayList<>();
+        StringBuilder normalizedPlain = new StringBuilder();
+        String html = rawHtmlPerawatan;
+        int htmlLen = html.length();
+        boolean inTag = false;
+
+        int idx = 0;
+        while (idx < htmlLen) {
+            char c = html.charAt(idx);
+            if (c == '<') {
+                inTag = true;
+                idx++;
+            } else if (c == '>' && inTag) {
+                inTag = false;
+                idx++;
+            } else if (inTag) {
+                idx++;
+            } else if (c == '&') {
+                // parse HTML entity
+                int semi = html.indexOf(';', idx);
+                if (semi > idx && semi - idx <= 8) {
+                    String entity = html.substring(idx, semi + 1);
+                    char decoded = decodeHtmlEntity(entity);
+                    String norm = normalizeText(String.valueOf(decoded));
+                    for (char nc : norm.toCharArray()) {
+                        plainToHtml.add(idx);
+                        normalizedPlain.append(nc);
+                    }
+                    idx = semi + 1;
+                } else {
+                    String norm = normalizeText(String.valueOf(c));
+                    for (char nc : norm.toCharArray()) {
+                        plainToHtml.add(idx);
+                        normalizedPlain.append(nc);
+                    }
+                    idx++;
+                }
+            } else {
+                String norm = normalizeText(String.valueOf(c));
+                for (char nc : norm.toCharArray()) {
+                    plainToHtml.add(idx);
+                    normalizedPlain.append(nc);
+                }
+                idx++;
+            }
+        }
+
+        String normKeyword = normalizeText(keyword);
+        int kLen = normKeyword.length();
+        String plainStr = normalizedPlain.toString();
+        int plainLen = plainStr.length();
+
+        int pos = 0;
+        while (pos <= plainLen - kLen) {
+            if (plainStr.startsWith(normKeyword, pos)) {
+                int htmlStart = plainToHtml.get(pos);
+                int htmlEnd = (pos + kLen < plainToHtml.size()) ? plainToHtml.get(pos + kLen) : htmlLen;
+                ranges.add(new int[]{htmlStart, htmlEnd});
+                pos += kLen;
+            } else {
+                pos++;
+            }
+        }
+        return ranges;
+    }
+
+    private void applyHighlightsPerawatan(int currentIdx) {
+        if (rawHtmlPerawatan.isEmpty() || htmlRangesPerawatan.isEmpty()) {
+            return;
+        }
+        StringBuilder modified = new StringBuilder(rawHtmlPerawatan);
+        // process in reverse order to preserve earlier offsets
+        for (int i = htmlRangesPerawatan.size() - 1; i >= 0; i--) {
+            int[] range = htmlRangesPerawatan.get(i);
+            String color = (i == currentIdx) ? "#FFA500" : "#FFD700";
+            modified.insert(range[1], "</span>");
+            modified.insert(range[0], "<span style=\"background:" + color + ";\">");
+        }
+        LoadHTMLRiwayatPerawatan.setText(modified.toString());
+    }
+
+    private void navCariPerawatan(int delta) {
+        int size = htmlRangesPerawatan.size();
+        if (size == 0) return;
+        currentMatchPerawatan = (currentMatchPerawatan + delta + size) % size;
+        applyHighlightsPerawatan(currentMatchPerawatan);
+        LabelHasilCariPerawatan.setText((currentMatchPerawatan + 1) + " dari " + size + " temuan");
+        scrollToMatchPerawatan(currentMatchPerawatan);
+    }
+
+    private void scrollToMatchPerawatan(int matchIndex) {
+        String keyword = TxtCariPerawatan.getText().trim();
+        if (keyword.isEmpty()) return;
+        String normKeyword = normalizeText(keyword);
+        SwingUtilities.invokeLater(() -> {
+            try {
+                javax.swing.text.Document doc = LoadHTMLRiwayatPerawatan.getDocument();
+                String docText = doc.getText(0, doc.getLength());
+                String normDoc = normalizeText(docText);
+                int count = 0;
+                int pos = 0;
+                int found = -1;
+                while (pos <= normDoc.length() - normKeyword.length()) {
+                    if (normDoc.startsWith(normKeyword, pos)) {
+                        if (count == matchIndex) {
+                            found = pos;
+                            break;
+                        }
+                        count++;
+                        pos += normKeyword.length();
+                    } else {
+                        pos++;
+                    }
+                }
+                if (found >= 0) {
+                    LoadHTMLRiwayatPerawatan.setCaretPosition(found);
+                    java.awt.Rectangle rect = LoadHTMLRiwayatPerawatan.modelToView(found);
+                    if (rect != null) {
+                        LoadHTMLRiwayatPerawatan.scrollRectToVisible(rect);
+                    }
+                }
+            } catch (Exception ex) {
+                // ignore scroll errors
+            }
+        });
+    }
+
+    private String normalizeText(String input) {
+        return Normalizer.normalize(input, Normalizer.Form.NFD).replaceAll("\\p{InCombiningDiacriticalMarks}", "").toLowerCase();
+    }
+
+    private char decodeHtmlEntity(String entity) {
+        switch (entity) {
+            case "&amp;": return '&';
+            case "&lt;": return '<';
+            case "&gt;": return '>';
+            case "&nbsp;": return ' ';
+            case "&apos;": return '\'';
+            case "&quot;": return '"';
+            default: return ' ';
+        }
     }
 
     /** This method is called from within the constructor to
@@ -6821,12 +7066,16 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     );
                 }
 
-                LoadHTMLRiwayatPerawatan.setText(
-                    "<html>"+
-                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                       htmlContent.toString()+
-                      "</table>"+
-                    "</html>");
+                String builtHtml = "<html><table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>" + htmlContent.toString() + "</table></html>";
+                rawHtmlPerawatan = builtHtml;
+                LoadHTMLRiwayatPerawatan.setText(builtHtml);
+                htmlRangesPerawatan.clear();
+                currentMatchPerawatan = -1;
+                SwingUtilities.invokeLater(() -> {
+                    LabelHasilCariPerawatan.setText("");
+                    BtnPrevPerawatan.setEnabled(false);
+                    BtnNextPerawatan.setEnabled(false);
+                });
                 htmlContent=null;
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
