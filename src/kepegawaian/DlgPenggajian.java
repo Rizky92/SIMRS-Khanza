@@ -12,7 +12,6 @@ import fungsi.koneksiDB;
 import fungsi.validasi;
 import java.awt.BorderLayout;
 import java.awt.Cursor;
-import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.FileInputStream;
@@ -21,7 +20,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Worker.State;
 import static javafx.concurrent.Worker.State.FAILED;
@@ -33,18 +31,14 @@ import javafx.print.Printer;
 import javafx.print.PrinterJob;
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.ProgressBar;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.transform.Scale;
-import javafx.scene.web.PopupFeatures;
 import javafx.scene.web.WebEngine;
 import javafx.scene.web.WebEvent;
 import javafx.scene.web.WebView;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 
@@ -55,12 +49,13 @@ import javax.swing.SwingUtilities;
 public class DlgPenggajian extends javax.swing.JDialog {
     private final JFXPanel jfxPanel = new JFXPanel();
     private WebEngine engine;
+    private ProgressBar progressBar;
 
-    private final JPanel panel = new JPanel(new BorderLayout());
+    // private final JPanel panel = new JPanel(new BorderLayout());
     private final JLabel lblStatus = new JLabel();
 
     private final JTextField txtURL = new JTextField();
-    private final JProgressBar progressBar = new JProgressBar();
+    // private final JProgressBar progressBar = new JProgressBar();
     private final Properties prop = new Properties();
     private final validasi Valid=new validasi();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -68,6 +63,7 @@ public class DlgPenggajian extends javax.swing.JDialog {
 
     public DlgPenggajian(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
+        Platform.setImplicitExit(false);
         initComponents();
         initComponents2();
         try {
@@ -78,114 +74,93 @@ public class DlgPenggajian extends javax.swing.JDialog {
 
     private void initComponents2() {
         txtURL.addActionListener((ActionEvent e) -> {
-            runBackground(() ->loadURL(txtURL.getText()));
+            runBackground(() -> loadURL(txtURL.getText()));
         });
 
-        progressBar.setPreferredSize(new Dimension(150, 18));
-        progressBar.setStringPainted(true);
+        Platform.runLater(() -> {
+            WebView view = new WebView();
+            engine = view.getEngine();
+            engine.setJavaScriptEnabled(true);
+            engine.setCreatePopupHandler(p -> view.getEngine());
 
-        panel.add(jfxPanel, BorderLayout.CENTER);
-
-        internalFrame1.setLayout(new BorderLayout());
-        internalFrame1.add(panel);
-    }
-
-     private void createScene() {
-        Platform.runLater(new Runnable() {
-
-            public void run() {
-                WebView view = new WebView();
-
-                engine = view.getEngine();
-                engine.setJavaScriptEnabled(true);
-
-                engine.setCreatePopupHandler(new Callback<PopupFeatures, WebEngine>() {
-                    @Override
-                    public WebEngine call(PopupFeatures p) {
-                        Stage stage = new Stage(StageStyle.TRANSPARENT);
-                        return view.getEngine();
-                    }
-                });
-
-                engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
-                    SwingUtilities.invokeLater(() -> {
-                        if(engine.getLocation().contains("/webapps/penggajian/index.php?act=HomeAdmin")){
-                            try{
-                                if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                                    DlgPenggajian.this.setOpacity(0.77f);
-                                }
-                            }catch(Exception e){
+            engine.titleProperty().addListener((ObservableValue<? extends String> observable, String oldValue, final String newValue) -> {
+                SwingUtilities.invokeLater(() -> {
+                    if (engine.getLocation().contains("/webapps/penggajian/index.php?act=HomeAdmin")) {
+                        try {
+                            if (prop.getProperty("MENUTRANSPARAN").equals("yes")) {
+                                DlgPenggajian.this.setOpacity(0.77f);
                             }
-                        }else{
-                            try{
-                                if(prop.getProperty("MENUTRANSPARAN").equals("yes")){
-                                    DlgPenggajian.this.setOpacity(1f);
-                                }
-                            }catch(Exception e){
-                            }
+                        } catch (Exception e) {
                         }
-                        DlgPenggajian.this.setTitle(newValue);
-                    });
-                });
-
-
-                engine.setOnStatusChanged((final WebEvent<String> event) -> {
-                    SwingUtilities.invokeLater(() -> {
-                        lblStatus.setText(event.getData());
-                    });
-                });
-
-
-                engine.getLoadWorker().workDoneProperty().addListener((ObservableValue<? extends Number> observableValue, Number oldValue, final Number newValue) -> {
-                    SwingUtilities.invokeLater(() -> {
-                        progressBar.setValue(newValue.intValue());
-                    });
-                });
-
-                engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
-                    if (engine.getLoadWorker().getState() == FAILED) {
-                        SwingUtilities.invokeLater(() -> {
-                            JOptionPane.showMessageDialog(
-                                    panel,
-                                    (value != null) ?
-                                            engine.getLocation() + "\n" + value.getMessage() :
-                                            engine.getLocation() + "\nUnexpected Catatan.",
-                                    "Loading Catatan...",
-                                    JOptionPane.ERROR_MESSAGE);
-                        });
-                    }
-                });
-
-
-                engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
-                    SwingUtilities.invokeLater(() -> {
-                        txtURL.setText(newValue);
-                    });
-                });
-
-                engine.getLoadWorker().stateProperty().addListener(new ChangeListener<State>() {
-                    @Override
-                    public void changed(ObservableValue ov, State oldState, State newState) {
-                        if (newState == State.SUCCEEDED) {
-                            try {
-                                if(engine.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("penggajian/pages")){
-                                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                    Valid.panggilUrl(engine.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/","").replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+"/"+prop.getProperty("HYBRIDWEB")+"/",""));
-                                    engine.executeScript("history.back()");
-                                    setCursor(Cursor.getDefaultCursor());
-                                }else if(engine.getLocation().replaceAll("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+prop.getProperty("PORTWEB")+"/"+prop.getProperty("HYBRIDWEB")+"/","").contains("Keluar")){
-                                    dispose();
-                                }
-                            } catch (Exception ex) {
-                                System.out.println("Notifikasi : "+ex);
+                    } else {
+                        try {
+                            if (prop.getProperty("MENUTRANSPARAN").equals("yes")) {
+                                DlgPenggajian.this.setOpacity(1f);
                             }
+                        } catch (Exception e) {
                         }
                     }
+                    DlgPenggajian.this.setTitle(newValue);
                 });
+            });
 
-                jfxPanel.setScene(new Scene(view));
-            }
+            engine.setOnStatusChanged((final WebEvent<String> event) -> {
+                SwingUtilities.invokeLater(() -> lblStatus.setText(event.getData()));
+            });
+
+            engine.getLoadWorker().exceptionProperty().addListener((ObservableValue<? extends Throwable> o, Throwable old, final Throwable value) -> {
+                if (engine.getLoadWorker().getState() == FAILED) {
+                    SwingUtilities.invokeLater(() -> JOptionPane.showMessageDialog(null, (value != null)
+                        ? engine.getLocation() + "\n" + value.getMessage() : engine.getLocation() + "\nUnexpected Catatan.",
+                        "Loading Catatan...", JOptionPane.ERROR_MESSAGE
+                    ));
+                }
+            });
+
+            engine.locationProperty().addListener((ObservableValue<? extends String> ov, String oldValue, final String newValue) -> {
+                SwingUtilities.invokeLater(() -> {
+                    txtURL.setText(newValue);
+                });
+            });
+
+            engine.getLoadWorker().stateProperty().addListener((ov, oldState, newState) -> {
+                if (newState == State.RUNNING) {
+                    if (progressBar != null) {
+                        progressBar.setVisible(true);
+                    }
+                } else if (newState == State.SUCCEEDED || newState == FAILED) {
+                    if (progressBar != null) {
+                        progressBar.setVisible(false);
+                    }
+                    if (newState == State.SUCCEEDED) {
+                        try {
+                            if (engine.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/", "").contains("penggajian/pages")) {
+                                setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                Valid.panggilUrl(engine.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/", "").replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + prop.getProperty("HYBRIDWEB") + "/", ""));
+                                engine.executeScript("history.back()");
+                                setCursor(Cursor.getDefaultCursor());
+                            } else if (engine.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + prop.getProperty("PORTWEB") + "/" + prop.getProperty("HYBRIDWEB") + "/", "").contains("Keluar")) {
+                                SwingUtilities.invokeLater(() -> dispose());
+                            }
+                        } catch (Exception ex) {
+                            System.out.println("Notifikasi : " + ex);
+                        }
+                    }
+                }
+            });
+
+            progressBar = new ProgressBar(0);
+            progressBar.setMaxWidth(Double.MAX_VALUE);
+            progressBar.setPrefHeight(10);
+            progressBar.progressProperty().bind(engine.getLoadWorker().progressProperty());
+
+            BorderPane pane = new BorderPane(view);
+            pane.setTop(progressBar);
+
+            jfxPanel.setScene(new Scene(pane));
         });
+
+        internalFrame1.add(jfxPanel, BorderLayout.CENTER);
     }
 
     public void LoadPenggajian(String url){
@@ -193,11 +168,6 @@ public class DlgPenggajian extends javax.swing.JDialog {
     }
 
     private void loadURL(String url) {
-        try {
-            createScene();
-        } catch (Exception e) {
-        }
-
         Platform.runLater(() -> {
             try {
                 engine.load(url);
