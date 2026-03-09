@@ -9310,7 +9310,8 @@ public class DlgPasien extends javax.swing.JDialog {
                             rs=ps.executeQuery();
                             z=0;
                             while(rs.next()){
-                                Object[] row = new Object[]{
+                                z++;
+                                publish(new Object[]{
                                     false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
                                     rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),
                                     rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),
@@ -9322,9 +9323,7 @@ public class DlgPasien extends javax.swing.JDialog {
                                     rs.getString("nama_satuan"),rs.getString("pangkat_tni"),rs.getString("nama_pangkat"),
                                     rs.getString("jabatan_tni"),rs.getString("nama_jabatan"),
                                     rs.getString("nip"),rs.getString("email"),rs.getString("cacat_fisik"),rs.getString("nama_cacat")
-                                };
-                                z++;
-                                publish(row);
+                                });
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi : "+e);
@@ -9526,7 +9525,8 @@ public class DlgPasien extends javax.swing.JDialog {
                             rs=ps.executeQuery();
                             z=0;
                             while(rs.next()){
-                                Object[] row = new Object[]{
+                                z++;
+                                publish(new Object[]{
                                     false,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
                                     rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getString(9),
                                     rs.getString(10),rs.getString(11),rs.getString(12),rs.getString(13),rs.getString(14),
@@ -9538,9 +9538,7 @@ public class DlgPasien extends javax.swing.JDialog {
                                     rs.getString("nama_satuan"),rs.getString("pangkat_polri"),rs.getString("nama_pangkat"),
                                     rs.getString("jabatan_polri"),rs.getString("nama_jabatan"),
                                     rs.getString("nip"),rs.getString("email"),rs.getString("cacat_fisik"),rs.getString("nama_cacat")
-                                };
-                                z++;
-                                publish(row);
+                                });
                             }
                         }catch(Exception e){
                             System.out.println("Notifikasi : "+e);
