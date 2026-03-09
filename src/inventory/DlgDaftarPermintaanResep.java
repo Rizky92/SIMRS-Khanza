@@ -2526,13 +2526,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else if(NoRawat.equals("")){
                         JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter yang mau dihapus..!!");
                     }else{
-                        if(Status.equals("Sudah Terlayani")){
-                            JOptionPane.showMessageDialog(rootPane,"Resep sudah tervalidasi ..!!");
-                        }else {
+                        if(akses.getkode().equals("Admin Utama")){
                             if(Sequel.meghapustf("resep_obat","no_resep",NoResep)==true){
                                 TeksKosong();
                                 if(tbResepRalan.getSelectedRow()!= -1){
                                     tabMode.removeRow(tbResepRalan.getSelectedRow());
+                                }
+                            }
+                        }else{
+                            if(Status.equals("Sudah Terlayani")){
+                                JOptionPane.showMessageDialog(rootPane,"Resep sudah tervalidasi ..!!");
+                            }else {
+                                if(Sequel.meghapustf("resep_obat","no_resep",NoResep)==true){
+                                    TeksKosong();
+                                    if(tbResepRalan.getSelectedRow()!= -1){
+                                        tabMode.removeRow(tbResepRalan.getSelectedRow());
+                                    }
                                 }
                             }
                         }
@@ -2551,13 +2560,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else if(NoRawat.equals("")){
                         JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter yang mau dihapus..!!");
                     }else{
-                        if(Status.equals("Sudah Terlayani")){
-                            JOptionPane.showMessageDialog(rootPane,"Resep sudah tervalidasi ..!!");
-                        }else {
+                        if(akses.getkode().equals("Admin Utama")){
                             if(Sequel.meghapustf("resep_obat","no_resep",NoResep)==true){
                                 TeksKosong();
                                 if(tbResepRanap.getSelectedRow()!= -1){
                                     tabMode3.removeRow(tbResepRanap.getSelectedRow());
+                                }
+                            }
+                        }else{
+                            if(Status.equals("Sudah Terlayani")){
+                                JOptionPane.showMessageDialog(rootPane,"Resep sudah tervalidasi ..!!");
+                            }else {
+                                if(Sequel.meghapustf("resep_obat","no_resep",NoResep)==true){
+                                    TeksKosong();
+                                    if(tbResepRanap.getSelectedRow()!= -1){
+                                        tabMode3.removeRow(tbResepRanap.getSelectedRow());
+                                    }
                                 }
                             }
                         }
@@ -2574,13 +2592,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else if(NoRawat.equals("")){
                         JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data permintaan stok yang mau dihapus..!!");
                     }else{
-                        if(Status.equals("Sudah Terlayani")){
-                            JOptionPane.showMessageDialog(rootPane,"permintaan stok sudah tervalidasi ..!!");
-                        }else {
+                        if(akses.getkode().equals("Admin Utama")){
                             if(Sequel.meghapustf("permintaan_stok_obat_pasien","no_permintaan",NoResep)==true){
                                 TeksKosong();
                                 if(tbPermintaanStok.getSelectedRow()!= -1){
                                     tabMode5.removeRow(tbPermintaanStok.getSelectedRow());
+                                }
+                            }
+                        }else{
+                            if(Status.equals("Sudah Terlayani")){
+                                JOptionPane.showMessageDialog(rootPane,"permintaan stok sudah tervalidasi ..!!");
+                            }else {
+                                if(Sequel.meghapustf("permintaan_stok_obat_pasien","no_permintaan",NoResep)==true){
+                                    TeksKosong();
+                                    if(tbPermintaanStok.getSelectedRow()!= -1){
+                                        tabMode5.removeRow(tbPermintaanStok.getSelectedRow());
+                                    }
                                 }
                             }
                         }
@@ -2597,13 +2624,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else if(NoRawat.equals("")){
                         JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data permintaan stok yang mau dihapus..!!");
                     }else{
-                        if(Status.equals("Sudah Terlayani")){
-                            JOptionPane.showMessageDialog(rootPane,"permintaan resep pulang sudah tervalidasi ..!!");
-                        }else {
+                        if(akses.getkode().equals("Admin Utama")){
                             if(Sequel.meghapustf("permintaan_resep_pulang","no_permintaan",NoResep)==true){
                                 TeksKosong();
                                 if(tbPermintaanResepPulang.getSelectedRow()!= -1){
                                     tabMode7.removeRow(tbPermintaanResepPulang.getSelectedRow());
+                                }
+                            }
+                        }else{
+                            if(Status.equals("Sudah Terlayani")){
+                                JOptionPane.showMessageDialog(rootPane,"permintaan resep pulang sudah tervalidasi ..!!");
+                            }else {
+                                if(Sequel.meghapustf("permintaan_resep_pulang","no_permintaan",NoResep)==true){
+                                    TeksKosong();
+                                    if(tbPermintaanResepPulang.getSelectedRow()!= -1){
+                                        tabMode7.removeRow(tbPermintaanResepPulang.getSelectedRow());
+                                    }
                                 }
                             }
                         }
@@ -3575,7 +3611,66 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.requestFocus();
             }
         }else if(TabPilihRawat.getSelectedIndex()==1){
-            JOptionPane.showMessageDialog(null,"Maaf, hanya untuk rawat jalan kebutuhan klaim obat Apotek Online BPJS...!!!!");
+            if(TabRawatInap.getSelectedIndex()==0){
+                if(tabMode3.getRowCount()==0){
+                    JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+                    TCari.requestFocus();
+                }else if(NoRawat.equals("")){
+                    JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data resep dokter yang mau divalidasi..!!");
+                }else{
+                    if(Status.equals("Sudah Terlayani")){
+                        try {
+                            ps3=koneksi.prepareStatement("select bridging_sep.no_sep,bridging_sep.no_kartu,bridging_sep.kdpolitujuan,bridging_sep.nmpolitujuan,bridging_sep.kddpjp,bridging_sep.nmdpdjp,bridging_sep.tglsep from bridging_sep where bridging_sep.no_rawat=?");
+                            try {
+                                ps3.setString(1,NoRawat);
+                                rs3=ps3.executeQuery();
+                                if(rs3.next()){
+                                    if (apol == null || !apol.isDisplayable()) {
+                                        apol=new ApotekBPJSInputResepObat(null,false);
+                                        apol.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                                        apol.addWindowListener(new WindowAdapter() {
+                                            @Override
+                                            public void windowClosed(WindowEvent e) {
+                                                apol=null;
+                                            }
+                                        });
+
+                                        apol.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                        apol.setLocationRelativeTo(internalFrame1);
+                                    }
+                                    if (apol == null) return;
+                                    if (!apol.isVisible()) {
+                                        apol.setNoRm(NoRawat,NoRM,Pasien,TglPeresepan,JamPeresepan,NoResep,rs3.getString("no_sep"),rs3.getString("no_kartu"),rs3.getString("kdpolitujuan"),rs3.getString("nmpolitujuan"),rs3.getString("kddpjp"),rs3.getString("nmdpdjp"),rs3.getString("tglsep"));
+                                    }
+                                    if (apol.isVisible()) {
+                                        apol.toFront();
+                                        return;
+                                    }
+                                    apol.setVisible(true);
+                                }else{
+                                    JOptionPane.showMessageDialog(null,"Maaf, data SEP tidak ditemukan...!!!!");
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notifikasi : "+e);
+                            } finally{
+                                if(rs3!=null){
+                                    rs3.close();
+                                }
+                                if(ps3!=null){
+                                    ps3.close();
+                                }
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Notifikasi : "+e);
+                        }
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data yang sudah divalidasi..!!");
+                    }
+                }
+            }else {
+                JOptionPane.showMessageDialog(null,"Maaf, hanya untuk rawat inap kebutuhan klaim obat Apotek Online BPJS...!!!!");
+           TCari.requestFocus();
+            }
         }
     }//GEN-LAST:event_BtnObat23HariBPJSActionPerformed
 

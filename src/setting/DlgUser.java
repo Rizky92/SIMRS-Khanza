@@ -7139,7 +7139,8 @@ public class DlgUser extends javax.swing.JDialog {
                                     if(rs.getString(1).toLowerCase().contains(TCari.getText().toLowerCase())||
                                             user.toLowerCase().contains(TCari.getText().toLowerCase())||
                                             jabatan.toLowerCase().contains(TCari.getText().toLowerCase())){
-                                        Object[] row = new Object[]{rs.getString(1),
+                                        i++;
+                                        publish(new Object[]{rs.getString(1),
                                            user,jabatan,rs.getString(2),
                                            rs.getBoolean("penyakit"),
                                            rs.getBoolean("obat_penyakit"),
@@ -8323,12 +8324,11 @@ public class DlgUser extends javax.swing.JDialog {
                                            rs.getBoolean("pcra_icra_identifkasi_risiko_kebakaran"),
                                            rs.getBoolean("pcra_icra_identifkasi_risiko_utilitas"),
                                            rs.getBoolean("bpjs_daftar_resep_apotek")
-                                        };
-                                        i++;
-                                        publish(row);
+                                        });
                                     }
                                 } catch (Exception e) {
-                                    Object[] row = new Object[]{rs.getString(1),
+                                    i++;
+                                    publish(new Object[]{rs.getString(1),
                                        "Turn Out","Jabatan",rs.getString(2),
                                        rs.getBoolean("penyakit"),
                                        rs.getBoolean("obat_penyakit"),
@@ -9512,9 +9512,7 @@ public class DlgUser extends javax.swing.JDialog {
                                        rs.getBoolean("pcra_icra_identifkasi_risiko_kebakaran"),
                                        rs.getBoolean("pcra_icra_identifkasi_risiko_utilitas"),
                                        rs.getBoolean("bpjs_daftar_resep_apotek")
-                                    };
-                                    i++;
-                                    publish(row);
+                                    });
                                 }
                              }
                         } catch (Exception e) {

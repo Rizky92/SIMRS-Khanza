@@ -58,11 +58,12 @@ The coding guidelines should cater to users' netbeans configuration, which as fo
 - Use 4 spaces as indentation
 - No hard line wrap. Soft line wrap is around 200-300 characters.
 
-#### User's specific coding guidelines
+#### Workflow guideline
 - Before starting the changes, ensure current branch is in `custom` branch. Then switch to new branch. Branch format name must begin with `claude/` and styled as `kebab-case` with at-most 4 words in length.
 - Changes related to database migration (e.g. table structure change) MUST BE in `sik_modif.sql`. DO NOT CHANGE other `.sql` files. Their changes follow upstream repository.
 - When modifying codes that touches `sekuel` and `validasi` class methods, usually named `Sequel` and `Valid` respectively (e.g. `Sequel.menyimpantf("dpjp_ranap", "?, ?, ?", 3, new String[]{"a", "b", "c"})`), look for its alternative in those class affixed by `Smc`. Carefully read the parameter requirements.
 - Adding new parameter to `database.xml.example` MUST BE reflected in `src/fungsi/koneksiDB.java` class. By default, parameter values are unecrypted. Sensitive parameters such as secret keys must be encrypted. Therefore, the reading the value from java counterpart requires decryption.
+- Whenever you finish the task, ask the user to review your work. If user approves, make a draft PR and assign `rizky92` as reviewer. Only the title PR must be translated into Indonesian language. If the PR is a fix for current issues or supersedes other PR, attach the issue/PR number in PR body. The PR title doesn't need to include standard prefix such as "fix" or "chore". A simple title is enough.
 
 #### Building the UI
 When building UI components, use primary components from `src/widget`. Following is the list of used components.
