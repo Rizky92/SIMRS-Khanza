@@ -488,11 +488,9 @@ public final class DlgCariAturanPakai extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

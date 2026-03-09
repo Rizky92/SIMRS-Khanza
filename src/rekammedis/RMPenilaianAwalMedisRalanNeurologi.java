@@ -2714,11 +2714,9 @@ public final class RMPenilaianAwalMedisRalanNeurologi extends javax.swing.JDialo
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

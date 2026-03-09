@@ -1284,11 +1284,9 @@ public final class RMSkriningMPPFormB extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

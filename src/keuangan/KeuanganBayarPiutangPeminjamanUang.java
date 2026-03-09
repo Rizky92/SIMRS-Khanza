@@ -1359,11 +1359,9 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

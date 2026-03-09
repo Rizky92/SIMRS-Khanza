@@ -2166,11 +2166,9 @@ public final class RMSkriningKesehatanPenglihatan extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

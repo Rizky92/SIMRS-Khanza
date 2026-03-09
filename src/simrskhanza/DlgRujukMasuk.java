@@ -2003,11 +2003,9 @@ public final class DlgRujukMasuk extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -2317,11 +2317,9 @@ public final class RMPenilaianPasienKeracunan extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

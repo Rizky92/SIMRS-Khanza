@@ -2514,11 +2514,9 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

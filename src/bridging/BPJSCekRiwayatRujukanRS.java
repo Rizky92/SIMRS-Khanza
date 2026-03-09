@@ -561,11 +561,9 @@ public final class BPJSCekRiwayatRujukanRS extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

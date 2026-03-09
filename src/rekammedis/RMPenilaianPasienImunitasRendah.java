@@ -1644,11 +1644,9 @@ public final class RMPenilaianPasienImunitasRendah extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

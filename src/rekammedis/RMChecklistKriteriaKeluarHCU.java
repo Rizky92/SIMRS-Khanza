@@ -1672,11 +1672,9 @@ public final class RMChecklistKriteriaKeluarHCU extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

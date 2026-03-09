@@ -1406,11 +1406,9 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

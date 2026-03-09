@@ -1737,11 +1737,9 @@ public final class RMSkriningNutrisiDewasa extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

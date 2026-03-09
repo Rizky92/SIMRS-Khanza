@@ -1045,11 +1045,9 @@ public final class KeslingLimbahB3Medis extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -2002,11 +2002,9 @@ public final class RMPenilaianLanjutanRisikoJatuhLansia extends javax.swing.JDia
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

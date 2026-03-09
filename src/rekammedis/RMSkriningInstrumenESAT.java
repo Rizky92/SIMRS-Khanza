@@ -2051,11 +2051,9 @@ public final class RMSkriningInstrumenESAT extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

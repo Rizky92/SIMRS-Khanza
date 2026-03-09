@@ -996,11 +996,9 @@ public final class KeslingPemakaiaanAirPDAM extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

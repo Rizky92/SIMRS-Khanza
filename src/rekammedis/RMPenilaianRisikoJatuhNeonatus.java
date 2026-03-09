@@ -2156,11 +2156,9 @@ public final class RMPenilaianRisikoJatuhNeonatus extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

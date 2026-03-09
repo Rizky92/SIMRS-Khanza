@@ -495,11 +495,9 @@ public final class DlgCariPeminjamPiutang extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

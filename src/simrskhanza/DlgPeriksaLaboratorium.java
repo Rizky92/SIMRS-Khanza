@@ -3424,11 +3424,9 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

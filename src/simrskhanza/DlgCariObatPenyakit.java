@@ -1124,12 +1124,10 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 
 }

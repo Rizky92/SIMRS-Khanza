@@ -1906,11 +1906,9 @@ public final class RMChecklistKriteriaKeluarPICU extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

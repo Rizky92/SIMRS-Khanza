@@ -7764,11 +7764,9 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

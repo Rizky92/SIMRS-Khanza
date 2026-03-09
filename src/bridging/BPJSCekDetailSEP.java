@@ -401,11 +401,9 @@ public final class BPJSCekDetailSEP extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -937,11 +937,9 @@ public final class DlgRekapBiayaRegistrasi extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

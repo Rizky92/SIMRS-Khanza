@@ -488,11 +488,9 @@ public final class DlgPerujukRadiologiPerTahun extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

@@ -435,11 +435,9 @@ public final class ApotekBPJSCekReferensiObat extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

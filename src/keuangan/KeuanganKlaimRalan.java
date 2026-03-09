@@ -920,11 +920,9 @@ public final class KeuanganKlaimRalan extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

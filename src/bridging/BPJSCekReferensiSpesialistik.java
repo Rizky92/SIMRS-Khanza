@@ -364,11 +364,9 @@ public final class BPJSCekReferensiSpesialistik extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

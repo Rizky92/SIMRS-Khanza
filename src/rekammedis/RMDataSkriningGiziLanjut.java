@@ -1814,11 +1814,9 @@ public final class RMDataSkriningGiziLanjut extends javax.swing.JDialog {
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }

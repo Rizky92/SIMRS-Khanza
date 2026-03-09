@@ -1843,11 +1843,9 @@ public final class RMSkriningKesehatanGigiMulutLansia extends javax.swing.JDialo
         }
     }
 
-    /*
     @Override
     public void dispose() {
         executor.shutdownNow();
         super.dispose();
     }
-    */
 }
