@@ -4,7 +4,7 @@
     }
 ?>
 <div id="post">
-    <div class="entry">   
+    <div class="entry">
 	<form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
                 echo "";
@@ -13,7 +13,7 @@
                 $tanggalawal    = validTeks4((isset($_GET['tanggalawal'])?$_GET['tanggalawal']:NULL),2);
                 $tahunakhir     = validTeks4((isset($_GET['tahunakhir'])?$_GET['tahunakhir']:NULL),4);
                 $bulanakhir     = validTeks4((isset($_GET['bulanakhir'])?$_GET['bulanakhir']:NULL),2);
-                $tanggalakhir   = validTeks4((isset($_GET['tanggalakhir'])?$_GET['tanggalakhir']:NULL),2);  
+                $tanggalakhir   = validTeks4((isset($_GET['tanggalakhir'])?$_GET['tanggalakhir']:NULL),2);
                 $action         = validTeks(isset($_GET['action'])?$_GET['action']:NULL);
                 $norawat        = validTeks4((isset($_GET['norawat'])?$_GET['norawat']:NULL),20);
                 $codernik       = validTeks4((isset($_GET['codernik'])?$_GET['codernik']:NULL),30);
@@ -26,7 +26,7 @@
         <div style="width: 100%; height: 85%; overflow: auto;">
         <?php
             $BtnCari  =isset($_POST['BtnCari'])?$_POST['BtnCari']:NULL;
-            if (isset($BtnCari)) {    
+            if (isset($BtnCari)) {
                     $keyword        =isset($_POST['keyword'])?trim($_POST['keyword']):NULL;
                     $keyword        = validTeks4($keyword,20);
                     $tahunawal      = validTeks4(trim($_POST['tahunawal']),4);
@@ -35,7 +35,7 @@
                     $tahunakhir     = validTeks4(trim($_POST['tahunakhir']),4);
                     $bulanakhir     = validTeks4(trim($_POST['bulanakhir']),2);
                     $tanggalakhir   = validTeks4(trim($_POST['tanggalakhir']),2);
-                    $codernik       = validTeks4(trim($_POST['codernik']),30); 
+                    $codernik       = validTeks4(trim($_POST['codernik']),30);
                     $carabayar      = validTeks4((str_replace("_"," ",isset($_POST['carabayar']))?str_replace("_"," ",trim($_POST['carabayar'])):NULL),40);
                     $statuskirim    = validTeks((str_replace("_"," ",isset($_POST['statuskirim']))?str_replace("_"," ",trim($_POST['statuskirim'])):NULL),40);
             }
@@ -59,11 +59,11 @@
             }
             $_sql = "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,
                     reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.umur,poliklinik.nm_poli,
-                    reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_bayar,penjab.png_jawab 
+                    reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.status_bayar,penjab.png_jawab
                     from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
-                    inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where  
+                    inner join poliklinik on reg_periksa.kd_poli=poliklinik.kd_poli inner join penjab on reg_periksa.kd_pj=penjab.kd_pj where
                     reg_periksa.stts<>'Batal' ".(!empty($carabayar)?"and penjab.png_jawab like '%".$carabayar."%'":"")." and tgl_registrasi between '".$tahunawal."-".$bulanawal."-".$tanggalawal."' and '".$tahunakhir."-".$bulanakhir."-".$tanggalakhir."' ".
-                    (!empty($keyword)?"and (reg_periksa.no_reg like '%".$keyword."%' or reg_periksa.no_rawat like '%".$keyword."%' or reg_periksa.tgl_registrasi like '%".$keyword."%' or reg_periksa.kd_dokter like '%".$keyword."%' or dokter.nm_dokter like '%".$keyword."%' or 
+                    (!empty($keyword)?"and (reg_periksa.no_reg like '%".$keyword."%' or reg_periksa.no_rawat like '%".$keyword."%' or reg_periksa.tgl_registrasi like '%".$keyword."%' or reg_periksa.kd_dokter like '%".$keyword."%' or dokter.nm_dokter like '%".$keyword."%' or
                     reg_periksa.no_rkm_medis like '%".$keyword."%' or reg_periksa.status_bayar like '%".$keyword."%' or pasien.nm_pasien like '%".$keyword."%' or poliklinik.nm_poli like '%".$keyword."%' or penjab.png_jawab like '%".$keyword."%') ":"").
                     " order by reg_periksa.tgl_registrasi,reg_periksa.jam_reg desc ";
             $hasil=bukaquery($_sql);
@@ -109,7 +109,7 @@
                                                 $penyakit=$barispenyakit["kd_penyakit"];
                                             }else{
                                                 $penyakit=$penyakit.", ".$barispenyakit["kd_penyakit"];
-                                            }                
+                                            }
                                             $a++;
                                         }
                                         echo $penyakit."<br>";
@@ -122,9 +122,9 @@
                                                 $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                                             }else{
                                                 $prosedur=$prosedur.", ".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                                            }                
+                                            }
                                             $a++;
-                                        } 
+                                        }
                                         echo $prosedur;
                                  echo  "</td>
                                         <td valign='center' align='center'>
@@ -133,12 +133,12 @@
                                             <a href='?act=KlaimBaruManual2&action=DataBilling&norawat=".$baris["no_rawat"]."&tahunawal=$tahunawal&bulanawal=$bulanawal&tanggalawal=$tanggalawal&tahunakhir=$tahunakhir&bulanakhir=$bulanakhir&tanggalakhir=$tanggalakhir&codernik=$codernik&keyword=$keyword&carabayar=$carabayar&statuskirim=$statuskirim'>[Billing]</a><br>
                                             <a href='?act=KlaimBaruManual2&action=InputDiagnosa&norawat=".$baris["no_rawat"]."&tahunawal=$tahunawal&bulanawal=$bulanawal&tanggalawal=$tanggalawal&tahunakhir=$tahunakhir&bulanakhir=$bulanakhir&tanggalakhir=$tanggalakhir&codernik=$codernik&keyword=$keyword&carabayar=$carabayar&statuskirim=$statuskirim'>[Input Diagnosa]</a><br>
                                             ".$status."
-                                        </td>                                
+                                        </td>
                                      </tr>";
                                  $jumlah++;
                             }
                         }
-                echo "</table>";           
+                echo "</table>";
             }else{
                 echo "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                         <tr class='head2'>
@@ -149,7 +149,7 @@
                             <td width='10%'><div align='center'>Status</div></td>
                         </tr>
                        </table>";
-            }         
+            }
 
             if(($action=="InputDiagnosa")||($action=="InputCorona")||($action=="RiwayatPerawatan")||($action=="DataBilling")) {
                 HapusAll("temppanggilnorawat");
@@ -165,30 +165,30 @@
         ?>
         </div>
             <table width="100%" align="center" border="0" align="center" cellpadding="0" cellspacing="0">
-                <tr class="head3">					
+                <tr class="head3">
                     <td width="690px">
-                        Periode : 
+                        Periode :
                         <select name="tanggalawal" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi3'));" id="TxtIsi3">
                              <?php
                                 if(!$tanggalawal==""){
                                     echo "<option id='TxtIsi3' value=$tanggalawal>$tanggalawal</option>";
-                                }                                    
+                                }
                                 loadTglnow();
                              ?>
-                        </select>                        
+                        </select>
                         <select name="bulanawal" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" id="TxtIsi2">
                              <?php
                                 if(!$bulanawal==""){
                                     echo "<option id='TxtIsi2' value=$bulanawal>$bulanawal</option>";
-                                }                                    
+                                }
                                 loadBlnnow();
                              ?>
-                        </select>                        
+                        </select>
                         <select name="tahunawal" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" id="TxtIsi1">
                              <?php
                                 if(!$tahunawal==""){
                                     echo "<option id='TxtIsi1' value=$tahunawal>$tahunawal</option>";
-                                }                                    
+                                }
                                 loadThnnow();
                              ?>
                         </select>
@@ -197,15 +197,15 @@
                              <?php
                                 if(!$tanggalakhir==""){
                                     echo "<option id='TxtIsi6' value=$tanggalakhir>$tanggalakhir</option>";
-                                }                                    
+                                }
                                 loadTglnow();
                              ?>
-                        </select>                        
+                        </select>
                         <select name="bulanakhir" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi5'));" id="TxtIsi5">
                              <?php
                                 if(!$bulanakhir==""){
                                     echo "<option id='TxtIsi5' value=$bulanakhir>$bulanakhir</option>";
-                                }                                    
+                                }
                                 loadBlnnow();
                              ?>
                         </select>
@@ -213,18 +213,18 @@
                              <?php
                                 if(!$tahunakhir==""){
                                     echo "<option id='TxtIsi4' value=$tahunakhir>$tahunakhir</option>";
-                                }                                    
+                                }
                                 loadThnnow();
                              ?>
-                        </select> 
+                        </select>
                         &nbsp;
-                        Cara Bayar : 
+                        Cara Bayar :
                         <select name="carabayar" class="text4">
                             <?php
                                 if(!empty($carabayar)){
                                     echo "<option value='$carabayar'>$carabayar</option>";
                                 }
-                                
+
                                 if(!isset($_SESSION["penjab"])){
                                     $penjab = "<option value=''>Semua</option>";
                                     $_sql   = "SELECT penjab.png_jawab FROM penjab  ORDER BY penjab.png_jawab";
@@ -239,10 +239,10 @@
                                     echo $_SESSION["penjab"];
                                 }
                             ?>
-                        </select>                        
+                        </select>
                     </td>
                 </tr>
-                <tr class="head3">					
+                <tr class="head3">
                     <td width="690px">
                         Status :
                         <select name="statuskirim" class="text">

@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $besok            = date("Y-m-d", strtotime("+1 day"));
     $thnbesok         = substr($besok,0,4);
     $blnbesok         = substr($besok,5,2);
@@ -59,7 +59,7 @@
     $nip              = NULL;
     $propinsi         = NULL;
     $propinsipj       = NULL;
-    
+
     if(isset($_GET['iyem'])){
         $json = json_decode(encrypt_decrypt($_GET['iyem'],"d"),true);
         if (isset($json["tgl_cari_mcu"])) {
@@ -78,7 +78,7 @@
             $nopengajuanhapus = validTeks($json["nopengajuanhapus"]);
             $status           = "Aktif";
         }
-        
+
         if (isset($json["nopengajuanubah"])) {
             $nopengajuanubah  = validTeks($json["nopengajuanubah"]);
             $nm_pasien        = validTeks(trim(isset($json['nm_pasien']))?$json['nm_pasien']:NULL);
@@ -126,7 +126,7 @@
             }
         }
     }
-    
+
     if(isset($_POST["BtnCari"])){
         $thncarimcu  = validTeks(trim(isset($_POST['tgl_cari_mcu']))?substr($_POST['tgl_cari_mcu'],6,4):$thnsekarang);
         $blncarimcu  = validTeks(trim(isset($_POST['tgl_cari_mcu']))?substr($_POST['tgl_cari_mcu'],3,2):$blnsekarang);
@@ -135,7 +135,7 @@
         $blncarimcu2 = validTeks(trim(isset($_POST['tgl_cari_mcu2']))?substr($_POST['tgl_cari_mcu2'],3,2):$blnsekarang);
         $tglcarimcu2 = validTeks(trim(isset($_POST['tgl_cari_mcu2']))?substr($_POST['tgl_cari_mcu2'],0,2):$tglsekarang);
     }
-    
+
     if(isset($_POST["BtnSimpan"])){
         $nm_pasien        = validTeks(trim(isset($_POST['nm_pasien']))?$_POST['nm_pasien']:NULL);
         $no_ktp           = validTeks(trim(isset($_POST['no_ktp']))?$_POST['no_ktp']:NULL);
@@ -173,7 +173,7 @@
         $propinsipj       = validTeks(trim(isset($_POST['propinsipj']))?$_POST['propinsipj']:NULL);
         $nopengajuanubah  = validTeks(trim(isset($_POST['nopengajuanubah']))?$_POST['nopengajuanubah']:NULL);
     }
-    
+
     if(isset($_POST["BtnCari"])){
         $status="Aktif";
     }
@@ -194,7 +194,7 @@
                 <div class="tab-content">
                     <div role="tabpanel" <?=($status=="Aktif"?"class='tab-pane fade'":"class='tab-pane fade in active'")?> id="home">
                         <form id="form_validation" action="" method="POST">
-                            <?php 
+                            <?php
                                 if (!empty($nopengajuanubah)) {
                                     echo "<input type='hidden' name='nopengajuanubah' value='$nopengajuanubah'/>";
                                 }
@@ -732,7 +732,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                <?php 
+                                <?php
                                     $querypasiencari = bukaquery(
                                         "select booking_mcu_perusahaan_pasien_baru.no_pengajuan,booking_mcu_perusahaan_pasien_baru.nm_pasien,booking_mcu_perusahaan_pasien_baru.no_ktp,".
                                         "booking_mcu_perusahaan_pasien_baru.jk,booking_mcu_perusahaan_pasien_baru.tmp_lahir,booking_mcu_perusahaan_pasien_baru.tgl_lahir,booking_mcu_perusahaan_pasien_baru.nm_ibu,".
@@ -796,7 +796,7 @@
                             </table>
                         </div>
                     </div>
-                </div>  
+                </div>
             </div>
         </div>
     </div>

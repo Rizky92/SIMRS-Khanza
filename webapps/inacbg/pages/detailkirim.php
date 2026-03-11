@@ -5,7 +5,7 @@
 ?>
 <div id="post">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
-    <div class="entry">        
+    <div class="entry">
         <?php
             echo "";
             $codernik       = validTeks(isset($_GET['codernik'])?$_GET['codernik']:NULL);
@@ -16,7 +16,7 @@
             $tanggalawal    = validTeks(isset($_GET['tanggalawal'])?$_GET['tanggalawal']:NULL);
             $tahunakhir     = validTeks(isset($_GET['tahunakhir'])?$_GET['tahunakhir']:NULL);
             $bulanakhir     = validTeks(isset($_GET['bulanakhir'])?$_GET['bulanakhir']:NULL);
-            $tanggalakhir   = validTeks(isset($_GET['tanggalakhir'])?$_GET['tanggalakhir']:NULL);  
+            $tanggalakhir   = validTeks(isset($_GET['tanggalakhir'])?$_GET['tanggalakhir']:NULL);
             $action         = validTeks(isset($_GET['action'])?$_GET['action']:NULL);
             $codernik       = validTeks(isset($_GET['codernik'])?$_GET['codernik']:NULL);
             $carabayar      = validTeks(str_replace("_"," ",isset($_GET['carabayar']))?str_replace("_"," ",$_GET['carabayar']):NULL);
@@ -24,9 +24,9 @@
             $_sql           = "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,
                                reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.jk,
                                pasien.umur,pasien.tgl_lahir,poliklinik.nm_poli,reg_periksa.status_lanjut,reg_periksa.umurdaftar,reg_periksa.sttsumur,
-                               reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab 
-                               from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab 
-                               on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                               reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab
+                               from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab
+                               on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                                and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='$norawat' ";
             $hasil        = bukaquery($_sql);
             $baris        = mysqli_fetch_array($hasil);
@@ -49,10 +49,10 @@
                     $nm_dokter2=$barisdokter["nm_dokter"];
                 }else{
                     $nm_dokter2=$nm_dokter2."#".$barisdokter["nm_dokter"];
-                }                
+                }
                 $a++;
-            } 
-            
+            }
+
             $nm_dokter    = "";
             if(!empty($nm_dokter2)){
                 $nm_dokter=$nm_dokter2;
@@ -103,17 +103,17 @@
                     Tambah3("inacbg_noklaim_corona","'$norawat','$nosep'");
                 }
             }
-            
+
             $naikkelas=getOne("select bridging_sep.klsnaik from bridging_sep where bridging_sep.no_sep='$nosep'");
             if(empty($naikkelas)){
                 $naikkelas=getOne("select bridging_sep_internal.klsnaik from bridging_sep_internal where bridging_sep_internal.no_rawat='$norawat'");
             }
-            
+
             $asalrujukan=getOne("select bridging_sep.asal_rujukan from bridging_sep where bridging_sep.no_sep='$nosep'");
             if(empty($asalrujukan)){
                 $asalrujukan=getOne("select bridging_sep_internal.asal_rujukan from bridging_sep_internal where bridging_sep_internal.no_rawat='$norawat'");
             }
-            
+
             if($asalrujukan=="1. Faskes 1"){
                 $asalrujukan="<option value='gp'>Rujukan FKTP</option>";
             }else if($asalrujukan=="2. Faskes 2(RS)"){
@@ -121,7 +121,7 @@
             }else{
                 $asalrujukan="<option value='other'>Lain-lain</option>";
             }
-            
+
             $upgrade_class_ind="0";
             if(!empty($naikkelas)){
                 $upgrade_class_ind="1";
@@ -135,11 +135,11 @@
                     $naikkelas="kelas_2";
                 }else{
                     $naikkelas="";
-                }   
+                }
             }else{
                 $naikkelas="";
             }
-            
+
             echo "<input type=hidden name=no_rawat value='$norawat'>
                   <input type=hidden name=tgl_registrasi value='$tgl_registrasi $jam_reg'>
                   <input type=hidden name=tgl_lahir value='$tgl_lahir'>
@@ -178,19 +178,19 @@
             <tr class="head">
                 <td width="25%">Tgl.Registrasi</td><td width="">:</td>
                 <td width="75%"><?php echo $tgl_registrasi." ".$jam_reg;?></td>
-            </tr>   
+            </tr>
             <tr class="head">
                 <td width="25%">Poliklinik</td><td width="">:</td>
                 <td width="75%"><?php echo $nm_poli;?></td>
-            </tr> 
+            </tr>
             <tr class="head">
                 <td width="25%">Dokter</td><td width="">:</td>
                 <td width="75%"><?php echo $nm_dokter;?></td>
-            </tr> 
+            </tr>
             <tr class="head">
                 <td width="25%">Status</td><td width="">:</td>
                 <td width="75%"><?php echo $status_lanjut." (".$png_jawab.")";?></td>
-            </tr>   
+            </tr>
             <tr class="head">
                 <td width="41%" >No.SEP</td><td width="">:</td>
                 <td width="57%">
@@ -204,7 +204,7 @@
                     <input name="nokartu" class="text" type=text class="inputbox" value="<?php echo getOne("select no_peserta from pasien where no_rkm_medis='$no_rkm_medis'");?>" size="40" maxlength="40" pattern="[A-Z0-9-]{1,40}" title=" A-Z0-9- (Maksimal 40 karakter)" autocomplete="off" required>
                 </td>
             </tr>
-            
+
             <tr class="head">
                 <td width="41%" >Cara Masuk</td><td width="">:</td>
                 <td width="57%">
@@ -221,13 +221,13 @@
                        <option value="psych">Rujukan Dari RS Jiwa</option>
                        <option value="rehab">Rujukan Fasilitas Rehab</option>
                        <option value="other">Lain-lain</option>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <tr class="head">
                 <td width="41%" >Tgl.Keluar</td><td width="">:</td>
                 <td width="57%">
-                    <input name="keluar" class="text" type=text class="inputbox" 
+                    <input name="keluar" class="text" type=text class="inputbox"
                         value="<?php if($status_lanjut=="Ralan"){
                                          echo $tgl_registrasi." 23:59:59";
                                      }else{
@@ -248,7 +248,7 @@
                     <select name="kelas_rawat" class="text3">
                         <?php if($status_lanjut=="Ralan"){
                                   echo "<option value='3'>Kelas Reguler</option>
-                                        <option value='1'>Kelas Eksekutif</option>";                            
+                                        <option value='1'>Kelas Eksekutif</option>";
                               }else{
                                   $kelas=getOne("select bridging_sep.klsrawat from bridging_sep where bridging_sep.no_sep='$nosep'");
                                   echo "<option value='$kelas'>Kelas $kelas</option>
@@ -257,33 +257,33 @@
                                         <option value='3'>Kelas 3</option>";
                               }
                         ?>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <tr class="head">
                 <td width="41%" >ADL Sub Acute</td><td width="">:</td>
                 <td width="57%">
-                    <select name="adl_sub_acute" class="text3">                            
+                    <select name="adl_sub_acute" class="text3">
                         <option value=""></option>
-                        <?php 
-                            for($i=12; $i<=60; $i++){                        
+                        <?php
+                            for($i=12; $i<=60; $i++){
                                echo "<option value=$i>$i</option>";
                             }
                         ?>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <tr class="head">
                 <td width="41%" >ADL Chronic</td><td width="">:</td>
                 <td width="57%">
-                    <select name="adl_chronic" class="text3">                            
+                    <select name="adl_chronic" class="text3">
                         <option value=""></option>
-                        <?php 
-                            for($i=12; $i<=60; $i++){                        
+                        <?php
+                            for($i=12; $i<=60; $i++){
                                echo "<option value=$i>$i</option>";
                             }
                         ?>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <tr class="head">
@@ -292,7 +292,7 @@
                     <select name="icu_indikator" class="text3">
                        <option value="0">0</option>
                        <option value="1">1</option>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <tr class="head">
@@ -314,7 +314,7 @@
                        <option value="<?php echo $upgrade_class_ind;?>"><?php echo $upgrade_class_ind;?></option>
                        <option value="0">0</option>
                        <option value="1">1</option>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <tr class="head">
@@ -326,7 +326,7 @@
                        <option value="kelas_2">Kelas 2</option>
                        <option value="vip">Kelas VIP</option>
                        <option value="vvip">Kelas VVIP</option>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <tr class="head">
@@ -363,7 +363,7 @@
                 <td width="41%" >Status Pulang</td><td width="">:</td>
                 <td width="57%">
                     <select name="discharge_status" class="text2">
-                        <?php 
+                        <?php
                             if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Sembuh' and kamar_inap.no_rawat='".$norawat."'")>0){
                                 echo "<option value='1'>Atas persetujuan dokter</option>";
                             }else if(getOne("select count(kamar_inap.no_rawat) from kamar_inap where kamar_inap.stts_pulang='Sehat' and kamar_inap.no_rawat='".$norawat."'")>0){
@@ -393,14 +393,14 @@
                         <option value="3">Atas permintaan sendiri</option>
                         <option value="4">Meninggal</option>
                         <option value="5">Lain-lain</option>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <tr class="head">
                 <td width="41%" >Diagnosa IDRG</td><td width="">:</td>
                 <td width="57%">
-                    <input name="diagnosa" class="text" type=text class="inputbox" 
-                           value="<?php  
+                    <input name="diagnosa" class="text" type=text class="inputbox"
+                           value="<?php
                                         $penyakit="";
                                         $a=1;
                                         $hasilpenyakit=bukaquery("select diagnosa_pasien.kd_penyakit from diagnosa_pasien where diagnosa_pasien.no_rawat='".$norawat."' order by diagnosa_pasien.prioritas asc");
@@ -409,7 +409,7 @@
                                                 $penyakit=$barispenyakit["kd_penyakit"];
                                             }else{
                                                 $penyakit=$penyakit."#".$barispenyakit["kd_penyakit"];
-                                            }                
+                                            }
                                             $a++;
                                         }
                                         echo $penyakit;
@@ -419,8 +419,8 @@
             <tr class="head">
                 <td width="41%" >Prosedur IDRG</td><td width="">:</td>
                 <td width="57%">
-                    <input name="procedure" class="text" type=text class="inputbox" 
-                        value="<?php  
+                    <input name="procedure" class="text" type=text class="inputbox"
+                        value="<?php
                                     $prosedur="";
                                     $a=1;
                                     $hasilprosedur=bukaquery("select prosedur_pasien.kode,prosedur_pasien.jumlah from prosedur_pasien where prosedur_pasien.no_rawat='".$norawat."' order by prosedur_pasien.prioritas asc");
@@ -429,9 +429,9 @@
                                             $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                                         }else{
                                             $prosedur=$prosedur."#".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                                        }                
+                                        }
                                         $a++;
-                                    } 
+                                    }
                                     echo $prosedur;
                               ?>" size="60" maxlength="100">
                 </td>
@@ -439,8 +439,8 @@
             <tr class="head">
                 <td width="41%" >Diagnosa INACBG</td><td width="">:</td>
                 <td width="57%">
-                    <input name="diagnosainacbg" class="text" type=text class="inputbox" 
-                           value="<?php  
+                    <input name="diagnosainacbg" class="text" type=text class="inputbox"
+                           value="<?php
                                         $penyakit="";
                                         $a=1;
                                         $hasilpenyakit=bukaquery("select diagnosa_pasien.kd_penyakit from diagnosa_pasien inner join penyakit on diagnosa_pasien.kd_penyakit=penyakit.kd_penyakit where penyakit.im='0' and diagnosa_pasien.no_rawat='".$norawat."' order by diagnosa_pasien.prioritas asc");
@@ -449,7 +449,7 @@
                                                 $penyakit=$barispenyakit["kd_penyakit"];
                                             }else{
                                                 $penyakit=$penyakit."#".$barispenyakit["kd_penyakit"];
-                                            }                
+                                            }
                                             $a++;
                                         }
                                         echo $penyakit;
@@ -459,8 +459,8 @@
             <tr class="head">
                 <td width="41%" >Prosedur INACBG</td><td width="">:</td>
                 <td width="57%">
-                    <input name="procedureinacbg" class="text" type=text class="inputbox" 
-                        value="<?php  
+                    <input name="procedureinacbg" class="text" type=text class="inputbox"
+                        value="<?php
                                     $prosedur="";
                                     $a=1;
                                     $hasilprosedur=bukaquery("select prosedur_pasien.kode,prosedur_pasien.jumlah from prosedur_pasien inner join icd9 on prosedur_pasien.kode=icd9.kode where icd9.im='0' and prosedur_pasien.no_rawat='".$norawat."' order by prosedur_pasien.prioritas asc");
@@ -469,14 +469,14 @@
                                             $prosedur=$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
                                         }else{
                                             $prosedur=$prosedur."#".$barisprosedur["kode"].str_replace("+1","","+".$barisprosedur["jumlah"]);
-                                        }                
+                                        }
                                         $a++;
-                                    } 
+                                    }
                                     echo $prosedur;
                               ?>" size="60" maxlength="100">
                 </td>
             </tr>
-            <?php 
+            <?php
                 $prosedur_non_bedah=getOne("select if(sum(billing.totalbiaya)='','0',sum(billing.totalbiaya)) from billing where billing.no_rawat='".$norawat."' and billing.status='Ralan Dokter Paramedis' and billing.nm_perawatan not like '%terapi%'")+
                                     getOne("select if(sum(billing.totalbiaya)='','0',sum(billing.totalbiaya)) from billing where billing.no_rawat='".$norawat."' and billing.status='Ranap Dokter Paramedis' and billing.nm_perawatan not like '%terapi%'");
                 if($prosedur_non_bedah==""){
@@ -522,7 +522,7 @@
                 }
                 if($obat_kemoterapi==""){
                     $obat_kemoterapi="0";
-                }        
+                }
                 if($obat_kronis==""){
                     $obat_kronis="0";
                 }
@@ -660,28 +660,28 @@
                 <td width="57%">
                     <select name="nama_dokter" class="text2">
                        <option value="<?php echo $nm_dokter;?>"><?php echo $nm_dokter;?></option>
-                       <?php        
+                       <?php
                             $hasildokter=bukaquery("select dokter.nm_dokter from dokter order by dokter.nm_dokter asc");
                             while($barisdokter = mysqli_fetch_array($hasildokter)) {
                                 echo "<option value=".$barisdokter["nm_dokter"].">".$barisdokter["nm_dokter"]."</option>";
                             }
                        ?>
-                    </select> 
+                    </select>
                 </td>
             </tr>
             <?php
                 if($corona=="PasienCorona"){
                     $hasilcorona=bukaquery(
-                            "select pemulasaraan_jenazah,if(pemulasaraan_jenazah='Ya',1,0) as ytpemulasaraan_jenazah, 
-                            kantong_jenazah,if(kantong_jenazah='Ya',1,0) as ytkantong_jenazah, 
-                            peti_jenazah,if(peti_jenazah='Ya',1,0) as ytpeti_jenazah,  
-                            plastik_erat,if(plastik_erat='Ya',1,0) as ytplastik_erat,  
-                            desinfektan_jenazah,if(desinfektan_jenazah='Ya',1,0) as ytdesinfektan_jenazah,   
-                            mobil_jenazah,if(mobil_jenazah='Ya',1,0) as ytmobil_jenazah,    
-                            desinfektan_mobil_jenazah,if(desinfektan_mobil_jenazah='Ya',1,0) as ytdesinfektan_mobil_jenazah,  
-                            covid19_status_cd,if(covid19_status_cd='ODP',1,if(covid19_status_cd='PDP',2,3)) as ytcovid19_status_cd, 
-                            nomor_kartu_t, episodes1, episodes2,episodes3, episodes4, episodes5, episodes6, 
-                            covid19_cc_ind,if(covid19_cc_ind='Ya',1,0) as ytcovid19_cc_ind 
+                            "select pemulasaraan_jenazah,if(pemulasaraan_jenazah='Ya',1,0) as ytpemulasaraan_jenazah,
+                            kantong_jenazah,if(kantong_jenazah='Ya',1,0) as ytkantong_jenazah,
+                            peti_jenazah,if(peti_jenazah='Ya',1,0) as ytpeti_jenazah,
+                            plastik_erat,if(plastik_erat='Ya',1,0) as ytplastik_erat,
+                            desinfektan_jenazah,if(desinfektan_jenazah='Ya',1,0) as ytdesinfektan_jenazah,
+                            mobil_jenazah,if(mobil_jenazah='Ya',1,0) as ytmobil_jenazah,
+                            desinfektan_mobil_jenazah,if(desinfektan_mobil_jenazah='Ya',1,0) as ytdesinfektan_mobil_jenazah,
+                            covid19_status_cd,if(covid19_status_cd='ODP',1,if(covid19_status_cd='PDP',2,3)) as ytcovid19_status_cd,
+                            nomor_kartu_t, episodes1, episodes2,episodes3, episodes4, episodes5, episodes6,
+                            covid19_cc_ind,if(covid19_cc_ind='Ya',1,0) as ytcovid19_cc_ind
                             from perawatan_corona where no_rawat='".$norawat."'");
                     while($bariscorona = mysqli_fetch_array($hasilcorona)) {
                         echo "<tr class='head'>
@@ -691,7 +691,7 @@
                                        <option value='".$bariscorona["ytpemulasaraan_jenazah"]."'>".$bariscorona["pemulasaraan_jenazah"]."</option>
                                        <option value='1'>Ya</option>
                                        <option value='0'>Tidak</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class='head'>
@@ -701,7 +701,7 @@
                                        <option value='".$bariscorona["ytkantong_jenazah"]."'>".$bariscorona["kantong_jenazah"]."</option>
                                        <option value='1'>Ya</option>
                                        <option value='0'>Tidak</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class='head'>
@@ -711,7 +711,7 @@
                                        <option value='".$bariscorona["ytpeti_jenazah"]."'>".$bariscorona["peti_jenazah"]."</option>
                                        <option value='1'>Ya</option>
                                        <option value='0'>Tidak</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class='head'>
@@ -721,7 +721,7 @@
                                        <option value='".$bariscorona["ytplastik_erat"]."'>".$bariscorona["plastik_erat"]."</option>
                                        <option value='1'>Ya</option>
                                        <option value='0'>Tidak</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class='head'>
@@ -731,7 +731,7 @@
                                        <option value='".$bariscorona["ytdesinfektan_jenazah"]."'>".$bariscorona["desinfektan_jenazah"]."</option>
                                        <option value='1'>Ya</option>
                                        <option value='0'>Tidak</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class='head'>
@@ -741,7 +741,7 @@
                                        <option value='".$bariscorona["ytmobil_jenazah"]."'>".$bariscorona["mobil_jenazah"]."</option>
                                        <option value='1'>Ya</option>
                                        <option value='0'>Tidak</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class='head'>
@@ -751,7 +751,7 @@
                                        <option value='".$bariscorona["ytdesinfektan_mobil_jenazah"]."'>".$bariscorona["desinfektan_mobil_jenazah"]."</option>
                                        <option value='1'>Ya</option>
                                        <option value='0'>Tidak</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class='head'>
@@ -762,7 +762,7 @@
                                        <option value='1'>ODP</option>
                                        <option value='2'>PDP</option>
                                        <option value='3'>Positif</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>
                             <tr class='head'>
@@ -814,14 +814,14 @@
                                        <option value='".$bariscorona["ytcovid19_cc_ind"]."'>".$bariscorona["covid19_cc_ind"]."</option>
                                        <option value='1'>Ya</option>
                                        <option value='0'>Tidak</option>
-                                    </select> 
+                                    </select>
                                 </td>
                             </tr>";
                     }
-                        
+
                 }
             ?>
-        </table>                
+        </table>
         </div>
         <?php
             $BtnSimpan=isset($_POST['BtnSimpan'])?$_POST['BtnSimpan']:NULL;
@@ -883,7 +883,7 @@
                 }else{
                     $gender="2";
                 }
-                
+
                 if($corona=="PasienCorona"){
                     $pemulasaraan_jenazah       = validTeks(trim($_POST['pemulasaraan_jenazah']));
                     $kantong_jenazah            = validTeks(trim($_POST['kantong_jenazah']));
@@ -901,20 +901,20 @@
                     $episodes5                  = validTeks(trim($_POST['episodes5']));
                     $episodes6                  = validTeks(trim($_POST['episodes6']));
                     $covid19_cc_ind             = validTeks(trim($_POST['covid19_cc_ind']));
-                    $episodes                   = ($episodes1==0?"":"1;$episodes1#").($episodes2==0?"":"2;$episodes2#").($episodes3==0?"":"3;$episodes3#").($episodes4==0?"":"4;$episodes4#").($episodes5==0?"":"5;$episodes5#").($episodes6==0?"":"6;$episodes6#");  
-                    $episodes                   = substr($episodes, 0, -1); 
-                    
-                    if ((!empty($norawat))&&(!empty($nosep))&&(!empty($nokartu))&&(!empty($nomor_kartu_t))) {        
+                    $episodes                   = ($episodes1==0?"":"1;$episodes1#").($episodes2==0?"":"2;$episodes2#").($episodes3==0?"":"3;$episodes3#").($episodes4==0?"":"4;$episodes4#").($episodes5==0?"":"5;$episodes5#").($episodes6==0?"":"6;$episodes6#");
+                    $episodes                   = substr($episodes, 0, -1);
+
+                    if ((!empty($norawat))&&(!empty($nosep))&&(!empty($nokartu))&&(!empty($nomor_kartu_t))) {
                         MenghapusKlaim($nosep,$codernik);
                         BuatKlaimBaru2($nokartu,$nosep,$no_rkm_medis,$nm_pasien,$tgl_lahir." 00:00:00", $gender,$norawat);
                         EditUlangKlaim($nosep);
                         UpdateDataKlaim3($nosep,$nokartu,$tgl_registrasi,$keluar,$jnsrawat,$kelas_rawat,$adl_sub_acute,
                             $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
-                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg, 
+                            $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
                             $tarif_poli_eks,$nama_dokter,getKelasRS(),"71","COVID-19","#",$codernik,
                             $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                             $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
-                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$pemulasaraan_jenazah,$kantong_jenazah, 
+                            $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$pemulasaraan_jenazah,$kantong_jenazah,
                             $peti_jenazah,$plastik_erat,$desinfektan_jenazah,$mobil_jenazah,$desinfektan_mobil_jenazah,
                             $covid19_status_cd,$nomor_kartu_t,$episodes,$covid19_cc_ind,$sistole,$diastole,$cara_masuk);
                         echo "<meta http-equiv='refresh' content='1;URL=?act=KlaimBaruManual2&tahunawal=$tahunawal&bulanawal=$bulanawal&tanggalawal=$tanggalawal&tahunakhir=$tahunakhir&bulanakhir=$bulanakhir&tanggalakhir=$tanggalakhir&codernik=$codernik&carabayar=".str_replace(" ","_",$carabayar)."&statuskirim=".str_replace(" ","_",$statuskirim)."'>";
@@ -922,28 +922,27 @@
                         echo 'Semua field harus isi..!!!';
                     }
                 }else{
-                    if ((!empty($norawat))&&(!empty($nosep))&&(!empty($nokartu))) {    
+                    if ((!empty($norawat))&&(!empty($nosep))&&(!empty($nokartu))) {
                         BuatKlaimBaru2($nokartu,$nosep,$no_rkm_medis,$nm_pasien,$tgl_lahir." 00:00:00", $gender,$norawat);
                         EditUlangKlaim($nosep);
                         if(UpdateDataKlaim2(
                                 $nosep,$nokartu,$tgl_registrasi,$keluar,$jnsrawat,$kelas_rawat,$adl_sub_acute,
                                 $adl_chronic,$icu_indikator,$icu_los,$ventilator_hour,$upgrade_class_ind,$upgrade_class_class,
-                                $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,  
+                                $upgrade_class_los,$add_payment_pct,$birth_weight,$discharge_status,$diagnosa,$procedure,$diagnosainacbg,$procedureinacbg,
                                 $tarif_poli_eks,$nama_dokter,getKelasRS(),"3","JKN","#",$codernik,
                                 $prosedur_non_bedah,$prosedur_bedah,$konsultasi,$tenaga_ahli,$keperawatan,$penunjang,
                                 $radiologi,$laboratorium,$pelayanan_darah,$rehabilitasi,$kamar,$rawat_intensif,$obat,
                                 $obat_kronis,$obat_kemoterapi,$alkes,$bmhp,$sewa_alat,$sistole,$diastole,$cara_masuk
                             )=="Berhasil"){
                             echo "<meta http-equiv='refresh' content='1;URL=?act=KlaimBaruManual2&tahunawal=$tahunawal&bulanawal=$bulanawal&tanggalawal=$tanggalawal&tahunakhir=$tahunakhir&bulanakhir=$bulanakhir&tanggalakhir=$tanggalakhir&codernik=$codernik&carabayar=".str_replace(" ","_",$carabayar)."&statuskirim=".str_replace(" ","_",$statuskirim)."'>";
-                        }   
+                        }
                     }else if ((empty($norawat))||(empty($nosep))||(empty($nokartu))){
                         echo 'Semua field harus isi..!!!';
                     }
-                }   
+                }
             }
-        ?>         
+        ?>
     </div>
     <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;"></div>
     </form>
 </div>
-

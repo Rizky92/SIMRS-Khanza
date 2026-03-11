@@ -5,7 +5,7 @@
         }
     }
 ?>
-<div id="entry">       
+<div id="entry">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             echo "";
@@ -16,7 +16,7 @@
             echo "<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
             $_sql               = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
             $hasil              = bukaquery($_sql);
-            $baris              = mysqli_fetch_row($hasil);   
+            $baris              = mysqli_fetch_row($hasil);
             $_sqlnext         	= "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' order by pegawai.id asc limit 1";
             $hasilnext        	= bukaquery($_sqlnext);
             $barisnext        	= mysqli_fetch_row($hasilnext);
@@ -81,7 +81,7 @@
                     <input name="pejabat_pemberi" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi5'));" type=text id="TxtIsi5" class="inputbox" value="<?php echo isset($pejabat_pemberi)?$pejabat_pemberi:NULL;?>" size="40" maxlength="40">
                     <span id="MsgIsi5" style="color:#CC0000; font-size:10px;"></span>
                 </td>
-            </tr>  
+            </tr>
             <tr class="isi2">
                 <td width="17%" >Nama Penghargaan</td><td width="">:</td>
                 <td width="31%">
@@ -119,20 +119,20 @@
                                         echo"<meta http-equiv='refresh' content='1;URL=?act=InputRiwayatPenghargaan&action=TAMBAH&id=$id'>";
                                     }else{
                                         echo "Berkas harus JPEG/JPG";
-                                    } 
+                                    }
                                 }else{
                                     echo "Berkas harus JPEG/JPG";
-                                } 
+                                }
                             }else{
                                 echo "Berkas harus JPEG/JPG";
-                            } 
+                            }
                             break;
                     }
                 }else if ((empty($id))||(empty($jenis))||(empty($nama_penghargaan))){
                     echo 'Semua field harus isi..!!!';
                 }
             }
-            
+
             $_sql       = "SELECT riwayat_penghargaan.jenis,riwayat_penghargaan.nama_penghargaan,riwayat_penghargaan.tanggal,riwayat_penghargaan.instansi,riwayat_penghargaan.pejabat_pemberi,riwayat_penghargaan.berkas from riwayat_penghargaan where riwayat_penghargaan.id='$id' ORDER BY riwayat_penghargaan.tanggal ASC ";
             $hasil      = bukaquery($_sql);
             $jumlah     = mysqli_num_rows($hasil);
@@ -148,10 +148,10 @@
                             <td width='20%'><div align='center'>Instansi Pemberi Penghargaan</div></td>
                             <td width='20%'><div align='center'>Pejabat Pemberi Penghargaan</div></td>
                         </tr>";
-                while($baris = mysqli_fetch_array($hasil)) {   
+                while($baris = mysqli_fetch_array($hasil)) {
                     $gb="-";
                     if($baris["berkas"]=="pages/riwayatpenghargaan/berkas"){
-                        $gb="-";                            
+                        $gb="-";
                     }else{
                         $gb="<img src='".$baris["berkas"]."' width='850px' height='950px'>";
                     }
@@ -170,7 +170,7 @@
                           <tr class='isi'>
                             <td width='70'></td>
                             <td valign='top' align='center' colspan='7'><a target=_blank href=../penggajian/".$baris["berkas"].">".$gb."</a></td>
-                          </tr>";   
+                          </tr>";
                 }
                 echo "</table>";
             } else {
@@ -183,10 +183,10 @@
                                 <td width='20%'><div align='center'>Instansi Pemberi Penghargaan</div></td>
                                 <td width='20%'><div align='center'>Pejabat Pemberi Penghargaan</div></td>
                             </tr>
-                      </table>";            
+                      </table>";
             }
         ?>
-        </div>                        
+        </div>
     </form>
     <?php
         if ($action=="HAPUS") {

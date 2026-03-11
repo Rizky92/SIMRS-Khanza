@@ -1,4 +1,4 @@
-<?php 
+<?php
     require_once('../conf/conf.php');
     $keyword    = trim(isset($_POST['value']))?trim($_POST['value']):NULL;
     $keyword    = cleankar($keyword);

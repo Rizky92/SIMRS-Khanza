@@ -176,9 +176,9 @@ $jam = date("H:i");
                 </td>
             </tr>
             <?php
-            $_sql = "select reg_periksa.no_reg,reg_periksa.no_rawat,pasien.nm_pasien 
+            $_sql = "select reg_periksa.no_reg,reg_periksa.no_rawat,pasien.nm_pasien
                      from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
-                     where reg_periksa.kd_poli = '{$kd_poli}' and reg_periksa.kd_dokter = '{$kd_dokter}' 
+                     where reg_periksa.kd_poli = '{$kd_poli}' and reg_periksa.kd_dokter = '{$kd_dokter}'
                      and reg_periksa.tgl_registrasi = '" . date("Y-m-d", $tanggal) . "' and stts = 'Belum' order by reg_periksa.no_reg";
             $hasil = bukaquery($_sql);
             ?>

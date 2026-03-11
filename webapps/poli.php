@@ -43,7 +43,7 @@ $jam = date("H:i");
 		</noscript>
 		<?php
 		$setting =  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
-		echo "   
+		echo "
 		   <table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>
 			  <tr>
 				<td  width='10%' align='right' valign='center'>
@@ -53,18 +53,18 @@ $jam = date("H:i");
 				   <center>
 					  <font size='7' color='#AA00AA' face='Tahoma'>" . $setting["nama_instansi"] . "</font><br>
 					  <font size='5' color='#AA00AA' face='Tahoma'>
-						  " . $setting["alamat_instansi"] . ", " . $setting["kabupaten"] . ", " . $setting["propinsi"] . "<br>   
-					  </font> 
+						  " . $setting["alamat_instansi"] . ", " . $setting["kabupaten"] . ", " . $setting["propinsi"] . "<br>
+					  </font>
 					  <font size='5' color='#AAAA00' face='Tahoma' >" . date("d-M-Y", $tanggal) . "  " . $jam . "</font>
 					  <br><br>
 				   </center>
-				</td>   
+				</td>
 				<td  width='10%' align='left'>
 					&nbsp;
-				</td>  
+				</td>
 				<td  width='10%' align='left' valign='top'>
 					<img width='180' height='130' src='header-kanan.jpg'/>
-				</td>                                                          
+				</td>
 			 </tr>
 		  </table> ";
 		?>
@@ -122,8 +122,8 @@ $jam = date("H:i");
 			} else if ($hari == "Saturday") {
 				$namahari = "SABTU";
 			}
-			$_sql = "Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai,poliklinik.kd_poli, 
-		       dokter.kd_dokter from jadwal inner join dokter inner join poliklinik on dokter.kd_dokter=jadwal.kd_dokter 
+			$_sql = "Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai,poliklinik.kd_poli,
+		       dokter.kd_dokter from jadwal inner join dokter inner join poliklinik on dokter.kd_dokter=jadwal.kd_dokter
 		       and jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja='$namahari'";
 			$hasil = bukaquery($_sql);
 

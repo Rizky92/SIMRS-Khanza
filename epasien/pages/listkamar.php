@@ -11,7 +11,7 @@
                           <h2>Kamar</h2>
                      </div>
                 </div>
-                       
+
                 <div class="col-md-12 col-sm-12">
                      <div class="news-thumb wow fadeInUp" data-wow-delay="0.3s">
                          <form id="cariKamar" name="frmCariKamar" method="post" action="" enctype=multipart/form-data>
@@ -33,7 +33,7 @@
                                    <th width="15%"><center>Tarif Kamar</center></th>
                                    <th width="15%"><center>Status Kamar</center></th>
                                </tr>
-                               <?php 
+                               <?php
                                   $kamar      = trim(isset($_POST['kamar']))?trim($_POST['kamar']):NULL;
                                   $kamar      = cleankar($kamar);
                                   if(strlen($kamar)>20){
@@ -51,7 +51,7 @@
                                         }
                                   }
                               ?>
-                            </table> 
+                            </table>
                          </div>
                      </div>
                 </div>

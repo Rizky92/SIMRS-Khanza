@@ -6,7 +6,7 @@
     }
 ?>
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 echo "";
@@ -33,7 +33,7 @@
                     <tr class="head">
                         <td width="31%">Pasien</td><td width="">:</td>
                         <td width="67%"><?php echo $no_rm." ".$nama_pasien;?></td>
-                    </tr>  
+                    </tr>
                     <tr class="head">
                         <td width="31%">Tanggal & Jam</td><td width="">:</td>
                         <td width="67%"><?php echo $tanggal." ".$jam;?></td>
@@ -48,7 +48,7 @@
                             <input name="gambar" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type=file id="TxtIsi1" value="<?php echo $gambar;?>" size="50" maxlength="500" accept="image/jpeg,image/jpg"/>
                             <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                         </td>
-                    </tr>        
+                    </tr>
                 </table>
             </div>
             <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;"></div><br>
@@ -67,7 +67,7 @@
                                     if(Tambah(" detail_periksa_labpa_gambar "," '$no_rawat','$kd_jenis_prw','$tanggal','$jam','$gambar'", " Gambar Lab PA " )){
                                         move_uploaded_file($_FILES['gambar']['tmp_name'],$gambar);
                                     }
-                                    echo"<meta http-equiv='refresh' content='1;URL=?act=List&no_rawat=$no_rawat&tanggal=$tanggal&jam=$jam&kd_jenis_prw=$kd_jenis_prw'>";                              
+                                    echo"<meta http-equiv='refresh' content='1;URL=?act=List&no_rawat=$no_rawat&tanggal=$tanggal&jam=$jam&kd_jenis_prw=$kd_jenis_prw'>";
                                 }else if ((empty($no_rawat))||(empty($gambar))||(empty($kd_jenis_prw))){
                                     echo 'Semua field harus isi..!!!';
                                 }
@@ -80,7 +80,7 @@
                     }else{
                         echo "Berkas harus JPEG/JPG";
                     }
-                        
+
                 }
             ?>
             <div style="width: 100%; height: 78%; overflow: auto;">
@@ -94,7 +94,7 @@
                                 <td width='5%'><div align='center'>Proses</div></td>
                                 <td width='95%'><div align='center'>File/Gambar</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td valign='Top' align='center'>
                                     <center>"; ?>
@@ -116,7 +116,7 @@
                 unlink($_GET['gambar']);
                 Hapus(" detail_periksa_labpa_gambar "," no_rawat ='".validTeks4($_GET['no_rawat'],20)."' and tgl_periksa ='".validTeks4($_GET['tanggal'],14)."' and jam ='".validTeks4($_GET['jam'],14)."' and photo ='".validTeks($_GET['gambar'])."' and kd_jenis_prw ='".validTeks4($_GET['kd_jenis_prw'],20)."'","?act=List&action=TAMBAH&no_rawat=$no_rawat&tanggal=$tanggal&jam=$jam&kd_jenis_prw=$kd_jenis_prw");
             }
-        
+
         ?>
     </div>
 

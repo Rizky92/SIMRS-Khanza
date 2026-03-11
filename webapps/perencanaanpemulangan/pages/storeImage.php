@@ -4,7 +4,7 @@
     if(file_exists(host()."/webapps/perencanaanpemulangan/pages/upload/".str_replace("/","",$norawat).".jpeg")){
         @unlink(host()."/webapps/perencanaanpemulangan/pages/upload/".str_replace("/","",$norawat).".jpeg");
     }
-    
+
     $img                    = $_POST["image"];
     $folderPath             = "upload/";
     $image_parts            = explode(";base64,", $img);
@@ -14,7 +14,7 @@
     $fileName               = str_replace("/","",$norawat).".jpeg";
     $file                   = $folderPath . $fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("bukti_perencanaan_pemulangan_saksikeluarga","'".$norawat."','pages/upload/$fileName'");
 ?>
 <head>

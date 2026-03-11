@@ -33,7 +33,7 @@ public class frmUtama extends javax.swing.JFrame {
     private Connection koneksi;
     private PreparedStatement ps,ps2;
     private Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
-    private ResultSet rs; 
+    private ResultSet rs;
     int i=0,j=0;
     Properties prop = new Properties();
     /**
@@ -51,8 +51,8 @@ public class frmUtama extends javax.swing.JFrame {
                 return a;
              }
              Class[] types = new Class[] {
-                 java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,  
-                java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,  
+                 java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,
+                java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,  java.lang.Object.class,
                 java.lang.Object.class,  java.lang.Object.class, java.lang.Object.class,
              };
              @Override
@@ -173,7 +173,7 @@ public class frmUtama extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
-       
+
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -187,7 +187,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -229,7 +229,7 @@ public class frmUtama extends javax.swing.JFrame {
         for(i=0;i<j;i++){
             tabMode.removeRow(0);
         }
-        try{   
+        try{
             cekserver();
             ps=koneksi.prepareStatement(
                     "SELECT pegawai.id, pegawai.nik, pegawai.nama, temporary_presensi.shift, " +
@@ -237,7 +237,7 @@ public class frmUtama extends javax.swing.JFrame {
                     "temporary_presensi.keterlambatan, ((unix_timestamp(now()) - unix_timestamp(jam_datang))/3600) as durasi,temporary_presensi.photo  from pegawai  " +
                     "inner join temporary_presensi on pegawai.id=temporary_presensi.id ");
             try {
-                rs=ps.executeQuery(); 
+                rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
                         rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),
@@ -262,27 +262,27 @@ public class frmUtama extends javax.swing.JFrame {
             textArea1.append("Notifikasi : "+e+"  ");
         }
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             private int nilai_detik;
             public void actionPerformed(ActionEvent e) {
-                String nol_detik = "";                
+                String nol_detik = "";
                 Date now = Calendar.getInstance().getTime();
                 nilai_detik = now.getSeconds();
                 if (nilai_detik <= 9) {
                     nol_detik = "0";
                 }
-                
+
                 String detik = nol_detik + Integer.toString(nilai_detik);
                 textArea1.append("detik : "+detik+"  ");
-                if(detik.equals("15")){   
+                if(detik.equals("15")){
                     textArea1.setText("");
                     try {
                         cekserver();
                         textArea1.append("Melakukan Pengecekan data"+"  ");
                         koneksi.setAutoCommit(false);
-                        for(i=0;i<tbTemporary.getRowCount();i++){ 
+                        for(i=0;i<tbTemporary.getRowCount();i++){
                             if(Double.parseDouble(tbTemporary.getValueAt(i,8).toString())>18){
                                 ps2=koneksi.prepareStatement("insert into rekap_presensi values(?,?,?,?,?,?,?,?,?)");
                                 try {
@@ -304,7 +304,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         ps2.close();
                                     }
                                 }
-                                    
+
                                 ps2=koneksi.prepareStatement("delete from temporary_presensi where id=? and jam_datang=?");
                                 try {
                                     ps2.setString(1,tbTemporary.getValueAt(i,0).toString());
@@ -323,7 +323,7 @@ public class frmUtama extends javax.swing.JFrame {
                         tampil();
                     } catch (Exception ez) {
                         textArea1.append("Notifikasi : "+ez+"  ");
-                    }                                              
+                    }
                 }
             }
         };

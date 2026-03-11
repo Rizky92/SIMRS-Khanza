@@ -28,11 +28,11 @@
                     $hasilprev        	= bukaquery($_sqlprev);
                     $barisprev        	= mysqli_fetch_row($hasilprev);
                     $prev               = $barisprev[0];
-                    
+
                     if(empty($prev)){
                         $prev=$next;
                     }
-                    
+
                     if(empty($next)){
                         $next=$prev;
                     }
@@ -94,7 +94,7 @@
                                 <td width='10%'><div align='center'>Proses</div></td>
                                 <td width='90%'><div align='center'>Jumlah Pasien</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>"; ?>

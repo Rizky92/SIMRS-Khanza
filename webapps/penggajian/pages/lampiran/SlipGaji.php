@@ -27,7 +27,7 @@
         <link href="../../css/default.css" rel="stylesheet" type="text/css" />
     </head>
     <body>
-	
+
    <?php
         echo "<table  border='0' align='left'>
             <caption><center><font color='333333' size='2' face='Arial'>Slip Gaji Karyawan Tahun ".$tahun." Bulan ".$bulan."</font></center></caption>
@@ -35,7 +35,7 @@
              <td>
             ";
         $id=validTeks($_GET['id']);
-        
+
         $_sql = "select pegawai.id,pegawai.nik,pegawai.nama,pegawai.jbtn,pegawai.pendidikan,pegawai.mulai_kerja,pegawai.wajibmasuk,departemen.nama as departemen,
                 kelompok_jabatan.indek as indekkelompok,resiko_kerja.indek as indekresiko,emergency_index.indek as indekemergency,jnj_jabatan.nama as jnj_jabatan,
                 jnj_jabatan.indek as indekjabatan,jnj_jabatan.tnj,pegawai.indexins,CONCAT(FLOOR(PERIOD_DIFF(DATE_FORMAT('$tahun-$bulan-$hari', '%Y%m'),
@@ -71,23 +71,23 @@
                         }else if(validangka($baris["masker"])>=7){
                             $masa_kerja=14;
                         }
-                          
-                          $indexevaluasi= getOne("select evaluasi_kinerja.indek from evaluasi_kinerja inner join evaluasi_kinerja_pegawai 
-                                        on evaluasi_kinerja_pegawai.kode_evaluasi=evaluasi_kinerja.kode_evaluasi where 
+
+                          $indexevaluasi= getOne("select evaluasi_kinerja.indek from evaluasi_kinerja inner join evaluasi_kinerja_pegawai
+                                        on evaluasi_kinerja_pegawai.kode_evaluasi=evaluasi_kinerja.kode_evaluasi where
                                         evaluasi_kinerja_pegawai.id='$baris[0]' order by evaluasi_kinerja_pegawai.tahun,
                                         evaluasi_kinerja_pegawai.bulan desc limit 1");
                           if(empty($indexevaluasi)){
                             $indexevaluasi=0;
                           }
 
-                          $indexpencapaian= getOne("select pencapaian_kinerja.indek from pencapaian_kinerja inner join pencapaian_kinerja_pegawai 
-                                                on pencapaian_kinerja_pegawai.kode_pencapaian=pencapaian_kinerja.kode_pencapaian where 
+                          $indexpencapaian= getOne("select pencapaian_kinerja.indek from pencapaian_kinerja inner join pencapaian_kinerja_pegawai
+                                                on pencapaian_kinerja_pegawai.kode_pencapaian=pencapaian_kinerja.kode_pencapaian where
                                                 pencapaian_kinerja_pegawai.id='$baris[0]' order by pencapaian_kinerja_pegawai.tahun,
                                                 pencapaian_kinerja_pegawai.bulan desc limit 1");
                           if(empty($indexpencapaian)){
                             $indexpencapaian=0;
                           }
-                          
+
                           $total=0;
                           if($baris["pengurang"]==0){
                             $total=($baris["index_pendidikan"]+$masa_kerja+$baris["index_status"]+$baris["index_struktural"]+
@@ -97,8 +97,8 @@
                             $total=($baris["index_pendidikan"]+$masa_kerja+$baris["index_status"]+$baris["index_struktural"]+
                                     $baris["indekjabatan"]+$baris["indekkelompok"]+$baris["indekresiko"]+$baris["indekemergency"]+
                                     $indexevaluasi+$indexpencapaian)*($baris["pengurang"]/100);
-                          } 
-                          
+                          }
+
                           $totalind=($baris["index_pendidikan"]+$masa_kerja+$baris["index_status"]+$baris["index_struktural"]);
 
                          $_sql2         = "SELECT normal-$jumlahlibur,jmlhr,normal FROM set_tahun";
@@ -155,7 +155,7 @@
                             $hasil6   = bukaquery($_sql6);
                             $baris6   = mysqli_fetch_row($hasil6);
                             $ttlc     = (isset($baris6[0])?$baris6[0]:0)+getOne("select sum(jumlah) from pengajuan_cuti where tanggal_awal like '%".$tahun."-".$bulan."%' and status='Disetujui' and nik='".$baris["nik"]."'");
-                
+
                             $_sql7    = "SELECT sum(jml)
                             from ketidakhadiran  where id='$id'
                             and tgl like '%".$tahun."-".$bulan."%' and jns='I' group by id";
@@ -183,7 +183,7 @@
 				</tr>
                                 <tr class='isi6'>
 				  <td width='60px'>Stts.Kerja</td><td width='3px'>:</td><td width='90px' colspan=4>$baris[statuskerja]</td>
-				  
+
 				</tr>
 			     </table>";
 		}
@@ -229,7 +229,7 @@
                 $ttllain=0;
                 $ttlttlditerima=0;
                 $ttljasalain=0;
-        if(mysqli_num_rows($hasil)!=0) {	
+        if(mysqli_num_rows($hasil)!=0) {
                     while($baris = mysqli_fetch_array($hasil)) {
                         $_sqlgp    = "SELECT `gapok1`, `kenaikan`, `maksimal`
                           from pendidikan  where tingkat='".$baris["pendidikan"]."' ";
@@ -239,7 +239,7 @@
                           @$gapok1    = $barisgp["gapok1"];
                           @$kenaikan  = $barisgp["kenaikan"];
                           @$maksimal  = $barisgp["maksimal"];
-                          
+
                           if($baris["maskon"]<$maksimal){
                              $gapokgp=$gapok1+($kenaikan*round($baris["maskon"]));
                           }elseif($baris["maskon"]>=$maksimal){
@@ -264,23 +264,23 @@
                             }else if(validangka($baris["masker"])>=7){
                                 $masa_kerja=14;
                             }
-                          
-                          $indexevaluasi= getOne("select evaluasi_kinerja.indek from evaluasi_kinerja inner join evaluasi_kinerja_pegawai 
-                                        on evaluasi_kinerja_pegawai.kode_evaluasi=evaluasi_kinerja.kode_evaluasi where 
+
+                          $indexevaluasi= getOne("select evaluasi_kinerja.indek from evaluasi_kinerja inner join evaluasi_kinerja_pegawai
+                                        on evaluasi_kinerja_pegawai.kode_evaluasi=evaluasi_kinerja.kode_evaluasi where
                                         evaluasi_kinerja_pegawai.id='$baris[0]' order by evaluasi_kinerja_pegawai.tahun,
                                         evaluasi_kinerja_pegawai.bulan desc limit 1");
                           if(empty($indexevaluasi)){
                             $indexevaluasi=0;
                           }
 
-                          $indexpencapaian= getOne("select pencapaian_kinerja.indek from pencapaian_kinerja inner join pencapaian_kinerja_pegawai 
-                                                on pencapaian_kinerja_pegawai.kode_pencapaian=pencapaian_kinerja.kode_pencapaian where 
+                          $indexpencapaian= getOne("select pencapaian_kinerja.indek from pencapaian_kinerja inner join pencapaian_kinerja_pegawai
+                                                on pencapaian_kinerja_pegawai.kode_pencapaian=pencapaian_kinerja.kode_pencapaian where
                                                 pencapaian_kinerja_pegawai.id='$baris[0]' order by pencapaian_kinerja_pegawai.tahun,
                                                 pencapaian_kinerja_pegawai.bulan desc limit 1");
                           if(empty($indexpencapaian)){
                             $indexpencapaian=0;
                           }
-                          
+
                           $total=0;
                           if($baris["pengurang"]==0){
                             $total=($baris["index_pendidikan"]+$masa_kerja+$baris["index_status"]+$baris["index_struktural"]+
@@ -290,7 +290,7 @@
                             $total=($baris["index_pendidikan"]+$masa_kerja+$baris["index_status"]+$baris["index_struktural"]+
                                     $baris["indekjabatan"]+$baris["indekkelompok"]+$baris["indekresiko"]+$baris["indekemergency"]+
                                     $indexevaluasi+$indexpencapaian)*($baris["pengurang"]/100);
-                          } 
+                          }
                           $ttltotal=$ttltotal+$total;
 
                          $_sql2         = "SELECT normal-$jumlahlibur,jmlhr,normal FROM set_tahun";
@@ -347,7 +347,7 @@
                             $hasil6   = bukaquery($_sql6);
                             $baris6   = mysqli_fetch_row($hasil6);
                             $ttlc     = (isset($baris6[0])?$baris6[0]:0)+getOne("select sum(jumlah) from pengajuan_cuti where tanggal_awal like '%".$tahun."-".$bulan."%' and status='Disetujui' and nik='".$baris["nik"]."'");
-                                
+
                             $_sql7    = "SELECT sum(jml)
                             from ketidakhadiran  where id='$baris[0]'
                             and tgl like '%".$tahun."-".$bulan."%' and jns='I' group by id";
@@ -435,7 +435,7 @@
                     $tnjhadir=(isset($baris19[0])?$baris19[0]:0);
                }
                             $ttltnjhadir=$ttltnjhadir+$tnjhadir;
-                            
+
                             //potongan kurang kehadiran 25.000
                             $ptg_krghadir=0;
                             if($ttln<$jmlmsk){
@@ -455,8 +455,8 @@
                             $ttllemburhr=$ttllemburhr+$lemburhr;
 
                             $_sql22  ="SELECT ($ttln/sum(n))*100 from indekref where kdindex='".$baris["indexins"]."'";
-                            
-                            
+
+
 			    $hasil22 =bukaquery($_sql22);
 			    $baris22 = mysqli_fetch_array($hasil22);
                 $indexjaga=round((isset($baris22[0])?$baris22[0]:0),2);
@@ -467,7 +467,7 @@
 
                             $ttlindexjaga=$ttlindexjaga+$indexjaga;
 
-			    $_sqlpassum  ="select sum(jumpasien.jml) from jumpasien  
+			    $_sqlpassum  ="select sum(jumpasien.jml) from jumpasien
                                  where thn='".$tahun."' and bln='".$bulanindex."'";
                             $hasilpassum =bukaquery($_sqlpassum);
                             $barispassum = mysqli_fetch_array($hasilpassum);
@@ -475,13 +475,13 @@
                             $indexpas=0;
                             if(!empty ($indexpassum)){
                                 $_sqlpas  ="select (jumpasien.jml/$indexpassum)*100
-                                from jumpasien  where id='$baris[0]' 
+                                from jumpasien  where id='$baris[0]'
 			        and thn='".$tahun."' and bln='".$bulanindex."'";
                                 $hasilpas =bukaquery($_sqlpas);
                                 $barispas = mysqli_fetch_array($hasilpas);
                                 $indexpas=$barispas[0];
-                            }  
-				
+                            }
+
 			    $ttlindex=$total+$indexjaga+$indexpas;
 
                             $_sql24="select sum(tindakan.jm)
@@ -522,7 +522,7 @@
                                 from indextotal,set_warung,pembagian_warung where pembagian_warung.id='$baris[0]'
                                 and set_warung.tahun='$tahun' and set_warung.bulan='$bulanindex'
                                 and indextotal.kdindex='".$baris["indexins"]."'";
-                            
+
 			    $hasil31=bukaquery($_sql31);
 			    $baris31 = mysqli_fetch_array($hasil31);
 
@@ -532,7 +532,7 @@
                 (isset($baris29[0])?$baris29[0]:0)+
                 (isset($baris31[0])?$baris31[0]:0);
                 $ttljasalain=$ttljasalain+$jl;
-                            
+
                         echo "     <table width='270px' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
 				      <caption><b><font size='1px' face='Arial' color='333333'>Kehadiran</font></b></caption>
                                         <TR class='isi6'>
@@ -560,7 +560,7 @@
                                          <TD>$ttli</TD>
                                        </TR>
                                      </table>
-                                     
+
 				     <table width='270px' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
 					<caption><font size='1px' face='Arial' color='333333'><b>Gaji & Tunjangan diterima</b></font></caption>
 				       <tr class='isi6'>
@@ -576,7 +576,7 @@
                                        </TR>";
                                        echo "<tr class='isi6'>
 						 <td width='130px'>Tunjangan KaSift</td><td width='3px'>:</td><td width='140px'> ".formatDuit($ttlkasift)."</td></tr>";
-                                       
+
 					 $_sql16="select master_tunjangan_harian.nama,
 						    master_tunjangan_harian.tnj,master_tunjangan_harian.id
 						    from pnm_tnj_harian,master_tunjangan_harian
@@ -586,25 +586,25 @@
                                             $tnjtnj=0;
                                             while($baris16 = mysqli_fetch_array($hasil16)) {
                                                 $tunjanganpengurang=0;
-						$_sqltnjpengurang="select master_tunjangan_bulanan.tnj 
+						$_sqltnjpengurang="select master_tunjangan_bulanan.tnj
                                                     from master_tunjangan_bulanan inner join harian_kurangi_bulanan
                                                     inner join pnm_tnj_bulanan on master_tunjangan_bulanan.id=harian_kurangi_bulanan.bulanan
 						    and pnm_tnj_bulanan.id_tnj=harian_kurangi_bulanan.bulanan where
 						    harian_kurangi_bulanan.harian='".$baris16["id"]."' and pnm_tnj_bulanan.id='".$baris[0]."' ";
 						$hasilpengurang=bukaquery($_sqltnjpengurang);
 						$barispengurang=mysqli_fetch_array($hasilpengurang);
-						$tunjanganpengurang=isset($barispengurang["tnj"])?$barispengurang["tnj"]:0;						
+						$tunjanganpengurang=isset($barispengurang["tnj"])?$barispengurang["tnj"]:0;
                                                     $nilaitunjangan=0;
                                                     $nilaitunjangan=($ttln*(isset($baris16[1])?$baris16[1]:0))-$tunjanganpengurang;
                                                     if($nilaitunjangan<0){
                                                         $nilaitunjangan=0;
                                                     }
-												 
+
                                                 $tnjtnj=$tnjtnj+$nilaitunjangan;
                                                 echo "<tr class='isi6'>
 						 <td width='130px'>$baris16[0]</td><td width='3px'>:</td><td width='140px'> ".formatDuit($nilaitunjangan)."</td></tr>";
                                          }
-                                         
+
                                          $_sql50="select master_tunjangan_bulanan.nama,
 				             master_tunjangan_bulanan.tnj
 					     from pnm_tnj_bulanan,master_tunjangan_bulanan
@@ -619,28 +619,28 @@
                                             }
                                          $ttltnjtnj=$ttltnjtnj+$tnjtnj+$tnjtnjbln+$ttlkasift;
                                          $ttljmlgaji=$ttljmlgaji+$gapok+$tnjjbtn+$tnjtnj+$tnjtnjbln+$ttlkasift+$tmbhjgmlm+$tmbahanjg+$tnjhadir;
-                                         
+
 				    if($tmbhjgmlm!=0){
                                         echo"
 					<TR class='isi6'>
                                           <TD width='130px'>Tunjangan Jaga Malam</TD><td width='3px'>:</td><td width='140px'>".formatDuit($tmbhjgmlm)."</td>
 					</TR>";
-                                    }				   
-				    
+                                    }
+
                                     if($tmbahanjg!=0){
                                         echo "
 					<TR class='isi6'>
                                           <TD width='130px'>Tunjangan Tambahan Jaga</TD><td width='3px'>:</td><td width='140px'>".formatDuit($tmbahanjg)."</td>
 					</TR>";
                                     }
-                                    
+
                                     if($tnjhadir!=0){
                                         echo "
 					<TR class='isi6'>
                                           <TD width='130px'>Tunjangan Kehadiran</TD><td width='3px'>:</td><td width='140px'>".formatDuit($tnjhadir)."</td>
 				        </TR>";
                                     }
-                                    
+
                                     echo "
 					 <TR class='isi6'>
                                            <TD width='130px'>&nbsp;&nbsp;&nbsp;<i>Jumlah Gaji & Tunjangan</i></TD>
@@ -656,22 +656,22 @@
                                              <TD width='130px'>Lembur Hari Biasa</TD><td width='3px'>:</td><td width='140px'>".formatDuit($lemburhb)."</td>
 					 </TR>";
                                     }
-                                    
+
                                     if($lemburhr!=0){
                                         echo "
 					 <TR class='isi6'>
                                            <TD width='130px'>Lembur Hari Raya</TD><td width='3px'>:</td><td width='140px'>".formatDuit($lemburhr)."</td>
 					 </TR>";
                                     }
-                                    
-                                    
+
+
                                     echo"
 					 <TR class='isi6'>
                                             <TD width='130px'>&nbsp;&nbsp;&nbsp;<i>Jumlah Lembur Diterima</i></TD>
 					    <td width='3px'>:</td>
 					    <td width='140px' align=right><i>".formatDuit($lemburhb+$lemburhr)."</i></td>
-					 </TR>                                         
-                                         
+					 </TR>
+
 					 <TR class='isi6'>
                                             <TD width='130px'>Tambahan :</TD><td></td><td></td>
 					 </TR>";
@@ -705,45 +705,45 @@
 				         while($baris30 = mysqli_fetch_array($hasil30)) {
 					     echo "<tr class='isi6'><td width='130px'>&nbsp;&nbsp;- $baris30[0]</td><td width='3px'>:</td><td width='140px'>".formatDuit($baris30[1])."</td></tr>";
 				         }
-                                         
-                                echo" 
+
+                                echo"
                                       <TR class='isi6'>
                                          <TD width='130px'>Jasa Lain :</TD><td width='3px'></td><td width='140px'></td>
 				      </TR>";
-                                         
+
                                 $_sqljs="select jasa_lain.ktg,jasa_lain.bsr_jasa
-                                    from jasa_lain  where id='$baris[0]' 
+                                    from jasa_lain  where id='$baris[0]'
                                     and thn='".$tahun."' and bln='".$bulanindex."' ";
                                 $hasiljs=bukaquery($_sqljs);
                                 while($barisjs = mysqli_fetch_array($hasiljs)) {
-				      echo" 
+				      echo"
                                       <TR class='isi6'>
                                          <TD width='130px'>".$barisjs[0]."</TD><td width='3px'>:</td><td width='140px'>".formatDuit($barisjs[1])."</td>
 				      </TR>";
 				}
-                            
-                                
+
+
                                  if(isset($baris27[0])!=0){
                                      echo"
                                       <TR class='isi6'>
                                          <TD width='130px'>Pembagian Akte</TD><td width='3px'>:</td><td width='140px'>".formatDuit($baris27[0])."</td>
 				      </TR>";
                                  }
-                                 
+
                                  if(isset($baris28[0])!=0){
                                      echo"
                                       <TR class='isi6'>
                                          <TD width='130px'>Pembagian Resume</TD><td width='3px'>:</td><td width='140px'>".formatDuit($baris28[0])."</td>
 				      </TR>";
                                  }
-                                 
+
                                  if(isset($baris29[0])!=0){
                                      echo"
                                       <TR class='isi6'>
                                          <TD width='130px'>Pembagian Tuslah</TD><td width='3px'>:</td><td width='140px'>".formatDuit($baris29[0])."</td>
 				      </TR>";
                                  }
-                                 
+
                                  if(isset($baris31[0])!=0){
                                      echo"
                                       <TR class='isi6'>
@@ -812,30 +812,30 @@
                                          <TD width='130px'>BPJS</TD><td width='3px'>:</td><td width='140px'>".formatDuit($bpjs)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  if($jamsostek!=0){
                                      echo"
 				       <TR class='isi6'>
                                          <TD width='130px'>Jamsostek</TD><td width='3px'>:</td><td width='140px'>".formatDuit($jamsostek)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  if($dansos!=0){
                                      echo"
 				       <TR class='isi6'>
                                          <TD width='130px'>Dana Sosial</TD><td width='3px'>:</td><td width='140px'>".formatDuit($dansos)."</td>
 				       </TR>";
-                                 }    
-                                 
+                                 }
+
                                  if($simwajib!=0){
                                      echo "
 				       <TR class='isi6'>
                                          <TD width='130px'>Simpanan Wajib</TD><td width='3px'>:</td><td width='140px'>".formatDuit($simwajib)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  if($angkop!=0){
-									 $_sqlj = "select count(angsuran_koperasi.id) from angsuran_koperasi,peminjaman_koperasi 
+									 $_sqlj = "select count(angsuran_koperasi.id) from angsuran_koperasi,peminjaman_koperasi
 									           where angsuran_koperasi.id='$id' and angsuran_koperasi.id=peminjaman_koperasi.id
 									           and angsuran_koperasi.tanggal_pinjam=peminjaman_koperasi.tanggal group by angsuran_koperasi.id";
 									$hasilj=bukaquery($_sqlj);
@@ -845,56 +845,56 @@
 				       <TR class='isi6'>
                                          <TD width='130px'>Angsuran Koperasi</TD><td width='3px'>:</td><td width='140px'>".formatDuit($angkop)." (Ke $jml_sdh_angsur)</td>
 				       </TR>";
-                                 }  
-                                 
+                                 }
+
                                  if($angla!=0){
                                      echo "
 				       <TR class='isi6'>
                                          <TD width='130px'>Angsuran Lain</TD><td width='3px'>:</td><td width='140px'>".formatDuit($angla)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  if($telpri!=0){
                                      echo "
 				       <TR class='isi6'>
                                          <TD width='130px'>Telepon Pribadi</TD><td width='3px'>:</td><td width='140px'>".formatDuit($telpri)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  if($pajak!=0){
                                      echo "
 				       <TR class='isi6'>
                                          <TD width='130px'>Pajak</TD><td width='3px'>:</td><td width='140px'>".formatDuit($pajak)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  if($pribadi!=0){
                                      echo "
 				       <TR class='isi6'>
                                          <TD width='130px'>Pribadi</TD><td width='3px'>:</td><td width='140px'>".formatDuit($pribadi)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  if(($lain-$alpha)>0){
                                      echo "
 				       <TR class='isi6'>
                                          <TD width='130px'>$ktg</TD><td width='3px'>:</td><td width='140px'>".formatDuit($lain-$alpha)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  if($alpha!=0){
                                      echo "
 				       <TR class='isi6'>
                                          <TD width='130px'>Kurang Jaga</TD><td width='3px'>:</td><td width='140px'>".formatDuit($alpha)."</td>
 				       </TR>";
                                  }
-                                 
+
                                  echo"<TR class='isi6'>
                                             <TD width='130px'>&nbsp;&nbsp;&nbsp;<i>Jumlah Potongan </i></TD>
 					    <td width='3px'>:</td>
 					    <td width='140px' align=right><i>".formatDuit($bpjs+$jamsostek+$dansos+$simwajib+$angkop+$angla+$telpri+$pajak+$pribadi+$lain)."</i></td>
-					 </TR> 
-                                         
+					 </TR>
+
 				       <TR class='isi6'>
                                          <TD width='130px'>&nbsp;&nbsp;&nbsp;<i>TOTAL GAJI DITERIMA</i></TD>
 					 <td width='3px'>:</td>
@@ -907,7 +907,7 @@
                                         }else{
                                             echo Terbilang(abs($ttlditerima));
                                         }
-                                           
+
                                        echo "</i>
                                          </td>
 				      </TR>
@@ -942,8 +942,8 @@
                                      </table>" ;
                     }
         }
-        
+
     ?>
-            
+
     </body>
 </html>

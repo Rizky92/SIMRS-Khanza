@@ -8,11 +8,11 @@
     <body bgcolor='#ffffff'>
     <?php
         $nobooking = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-        $nobooking = json_decode(encrypt_decrypt($nobooking,"d"),true); 
+        $nobooking = json_decode(encrypt_decrypt($nobooking,"d"),true);
         if(isset($nobooking["nobooking"])){
             $nobooking = cleankar2($nobooking["nobooking"]);
             $querybooking=bukaquery("select booking_periksa.no_booking,DATE_FORMAT(booking_periksa.tanggal,'%d-%m-%Y')as tanggal,booking_periksa.nama,booking_periksa.alamat,booking_periksa.no_telp,booking_periksa.email,poliklinik.nm_poli,booking_periksa.tambahan_pesan,DATE_FORMAT(booking_periksa.tanggal_booking,'%d-%m-%Y %H:%i:%s')as tanggal_booking from booking_periksa inner join poliklinik on booking_periksa.kd_poli=poliklinik.kd_poli where booking_periksa.no_booking='$nobooking'");
-            if(mysqli_num_rows($querybooking)!=0) { 
+            if(mysqli_num_rows($querybooking)!=0) {
                 $setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
                 echo "<table width='100%' bgcolor='#ffffff' align='left' border='0' padding='0' class='tbl_form' cellspacing='0' cellpadding='0'>
                         <tr class='isi12' padding='0'>
@@ -28,7 +28,7 @@
                                                 <font size='1'  face='Tahoma'>
                                                     ".$setting["alamat_instansi"].", ".$setting["kabupaten"].", ".$setting["propinsi"]."<br/>
                                                     ".$setting["kontak"].", E-mail : ".$setting["email"]."
-                                                </font> 
+                                                </font>
                                             </center>
                                         </td>
                                         <td width='20%'>
@@ -39,7 +39,7 @@
                               <hr>
                                <h3>Bukti Booking<h3>
                             </td>
-                        </tr>";  
+                        </tr>";
                 while($rsquerybooking = mysqli_fetch_array($querybooking)) {
                    echo "<tr class='isi12'>
                             <td width='95%' align='center'>
@@ -58,18 +58,18 @@
                               </table>
                               <hr>
                             </td>
-                         </tr>";                                 
-                }     
-                echo "</table> 
+                         </tr>";
+                }
+                echo "</table>
                      <script type=\"text/javascript\">
                         window.onload = function() { window.print(); }
                      </script>";
             }else{
                 echo "<br/><br/><br/><br/><center>Tidak ditemukan</center>";
-            } 
+            }
         }else{
             echo "<br/><br/><br/><br/><center>Tidak ditemukan</center>";
-        } 
-    ?>  
+        }
+    ?>
     </body>
 </html>

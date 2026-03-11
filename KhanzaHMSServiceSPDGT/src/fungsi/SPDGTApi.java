@@ -20,17 +20,17 @@ import org.springframework.http.MediaType;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.web.client.RestTemplate;
 
-public class SPDGTApi {        
+public class SPDGTApi {
     private static final Properties prop = new Properties();
     private String user,pass,url,token;
     private HttpHeaders header ;
     private JsonNode root;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
-    
+
     public SPDGTApi(){
-        try {            
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));   
+        try {
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
             url  = koneksiDB.URLAPISPDGT();
             pass = koneksiDB.PASSSPDGT();
             user = koneksiDB.USERSPDGT();
@@ -38,9 +38,9 @@ public class SPDGTApi {
             System.out.println("Notifikasi : "+ex);
         }
     }
-    
+
     public String TokenSPDGT(){
-        try {    
+        try {
             header = new HttpHeaders();
             header.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             requestEntity = new HttpEntity("username="+user+"&password="+pass,header);
@@ -51,7 +51,7 @@ public class SPDGTApi {
         }
         return token;
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {

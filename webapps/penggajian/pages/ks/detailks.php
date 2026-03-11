@@ -6,7 +6,7 @@
 <div id="post">
    <div align="center" class="link">
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
@@ -129,8 +129,8 @@
 
                 echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
 
             ?>

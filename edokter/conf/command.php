@@ -4,7 +4,7 @@
         $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
         $judul = str_replace(array('.','-','/',',')," ",$judul);
         $judul = trim($judul);
-        echo "$judul";	
+        echo "$judul";
     }
 
     function cekSessiAdmin() {
@@ -27,7 +27,7 @@
         } else {
             return true;
         }
-     }	
+     }
 
 
     function formProtek() {
@@ -41,7 +41,7 @@
                     break;
                 }
             }
-        }	
+        }
     }
 
     function actionPages() {
@@ -51,7 +51,7 @@
             case "Pasien"                                  : include_once("pages/listpasien.php"); break;
             case "HomeUser"                                : include_once("pages/listhome.php"); break;
             default                                        : include_once("pages/listhome.php");
-        }   
+        }
     }
- 
+
 ?>

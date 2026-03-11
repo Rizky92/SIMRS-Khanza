@@ -1,8 +1,8 @@
  <?php
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  date_default_timezone_set("Asia/Makassar");
@@ -22,7 +22,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php  
+                      <?php
                           $hari=getOne("select DAYNAME(current_date())");
                             $namahari="";
                             if($hari=="Sunday"){
@@ -40,9 +40,9 @@
                           }else if($hari=="Saturday"){
                             $namahari="SABTU";
                           }
-                          $_sql="Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai 
-                              from jadwal inner join dokter inner join poliklinik on dokter.kd_dokter=jadwal.kd_dokter 
-                              and jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja='$namahari'" ;  
+                          $_sql="Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai
+                              from jadwal inner join dokter inner join poliklinik on dokter.kd_dokter=jadwal.kd_dokter
+                              and jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja='$namahari'" ;
                           $hasil=bukaquery($_sql);
 
                           while ($data = mysqli_fetch_array ($hasil)){
@@ -69,8 +69,8 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <?php  
-                          $_sql="Select kelas from kamar where statusdata='1' group by kelas" ;  
+                      <?php
+                          $_sql="Select kelas from kamar where statusdata='1' group by kelas" ;
                           $hasil=bukaquery($_sql);
 
                           while ($data = mysqli_fetch_array ($hasil)){

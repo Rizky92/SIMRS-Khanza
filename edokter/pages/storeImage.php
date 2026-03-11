@@ -1,10 +1,10 @@
 <?php
     require_once('../conf/conf.php');
-    
+
     if(file_exists($_POST["nik"].".jpeg")){
         @unlink($_POST["nik"].".jpeg");
     }
-    
+
     $img            = $_POST["image"];
     $image_parts    = explode(";base64,", $img);
     $image_type_aux = explode("image/", $image_parts[0]);
@@ -15,4 +15,3 @@
     Ubah2("daftarteman","photo='pages/$fileName' where nik='".$_POST["nik"]."'");
     exit(header("Location:index.php"));
 ?>
-

@@ -11,8 +11,8 @@
         <a href=?act=InputTuslah&action=TAMBAH>| Input Pendapatan Tuslah |</a>
         <a href=?act=InputPenerimaTuslah&action=TAMBAH>| Input Bagian Tuslah |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
-    &nbsp;Pendapatan Tuslah : 
+    </div>
+    &nbsp;Pendapatan Tuslah :
     <div style="width: 100%; height: 65px;overflow: auto;">
     <?php
         $_sql              = "SELECT set_tuslah.pendapatan_tuslah,set_tuslah.persen_rs,set_tuslah.bagian_rs,set_tuslah.persen_kry,set_tuslah.bagian_kry FROM set_tuslah WHERE set_tuslah.tahun='$tahun' and set_tuslah.bulan='$bulan' ORDER BY set_tuslah.bagian_kry";
@@ -22,13 +22,13 @@
         if(mysqli_num_rows($hasil)!=0) {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td width='12%'><div align='center'>Proses</div></td>                        
+                        <td width='12%'><div align='center'>Proses</div></td>
                         <td width='25%'><div align='center'>Pendapatan Tuslah</div></td>
                         <td width='6%'><div align='center'>% RS</div></td>
 			<td width='25%'><div align='center'>Bagian RS</div></td>
                         <td width='7%'><div align='center'>% Kry</div></td>
                         <td width='25%'><div align='center'>Bagian Kry</div></td>
-                    </tr>";					
+                    </tr>";
             while($baris = mysqli_fetch_array($hasil)) {
                 $pendapatan_tuslah=$baris[4];
                 echo "<tr class='isi'>
@@ -49,19 +49,19 @@
         } else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td width='12%'><div align='center'>Proses</div></td>                        
+                        <td width='12%'><div align='center'>Proses</div></td>
                         <td width='25%'><div align='center'>Pendapatan Tuslah</div></td>
                         <td width='6%'><div align='center'>% RS</div></td>
 			<td width='25%'><div align='center'>Bagian RS</div></td>
                         <td width='7%'><div align='center'>% Kry</div></td>
                         <td width='25%'><div align='center'>Bagian Kry</div></td>
                     </tr>
-                  </table>";	
+                  </table>";
         }
 
-    ?>      
+    ?>
     </div>
-    &nbsp;Pembagian Tuslah : 
+    &nbsp;Pembagian Tuslah :
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -134,8 +134,8 @@
         }
         echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Bagian : ".formatDuit($ttl)." | <a target=_blank href=../penggajian/pages/tuslah/LaporanTuslah.php?&keyword=$keyword>Laporan</a> | <a target=_blank href=../penggajian/pages/tuslah/LaporanTuslahExel.php?&keyword=$keyword>Excel</a> |</div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Bagian : ".formatDuit($ttl)." | <a target=_blank href=../penggajian/pages/tuslah/LaporanTuslah.php?&keyword=$keyword>Laporan</a> | <a target=_blank href=../penggajian/pages/tuslah/LaporanTuslahExel.php?&keyword=$keyword>Excel</a> |</div></td>
+                </tr>
              </table>");
     ?>
 </div>

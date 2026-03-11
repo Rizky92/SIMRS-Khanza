@@ -1220,23 +1220,23 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
-                
+
                 if(sukses==true){
                     if(JADIKANPIUTANGAPOTEKBPJS.equals("yes")){
                         reply = JOptionPane.showConfirmDialog(rootPane,"Apakah mau cetak etiket obat...?","Konfirmasi",JOptionPane.YES_NO_OPTION);
                         if (reply == JOptionPane.YES_OPTION) {
-                            Map<String, Object> param = new HashMap<>();  
+                            Map<String, Object> param = new HashMap<>();
                             param.put("namars",akses.getnamars());
                             param.put("alamatrs",akses.getalamatrs());
                             param.put("kotars",akses.getkabupatenrs());
                             param.put("propinsirs",akses.getpropinsirs());
                             param.put("kontakrs",akses.getkontakrs());
-                            param.put("emailrs",akses.getemailrs());   
+                            param.put("emailrs",akses.getemailrs());
                             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                             try {
                                 String pilihanetiket = (String)JOptionPane.showInputDialog(null,"Silahkan pilih cetak aturan pakai..!!","Cetak Aturan Pakai",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Cetak Aturan Pakai Model 1","Cetak Aturan Pakai Model 2","Cetak Aturan Pakai Model 3"},"Cetak Aturan Pakai Model 1");
                                 switch (pilihanetiket) {
-                                    case "Cetak Aturan Pakai Model 1": 
+                                    case "Cetak Aturan Pakai Model 1":
                                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                         if(Sequel.cariInteger(
                                                 "select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",nopiutang)>0){
@@ -1248,10 +1248,10 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 "inner join databarang on detailpiutang.kode_brng=databarang.kode_brng "+
                                                 "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
                                                 "where piutang.nota_piutang='"+nopiutang+"' and detailpiutang.aturan_pakai<>''",param);
-                                        }            
+                                        }
                                         this.setCursor(Cursor.getDefaultCursor());
                                         break;
-                                    case "Cetak Aturan Pakai Model 2": 
+                                    case "Cetak Aturan Pakai Model 2":
                                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                         if(Sequel.cariInteger(
                                                 "select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",nopiutang)>0){
@@ -1264,10 +1264,10 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
                                                 "inner join jenis on databarang.kdjns=jenis.kdjns "+
                                                 "where piutang.nota_piutang='"+nopiutang+"' and detailpiutang.aturan_pakai<>''",param);
-                                        }               
+                                        }
                                         this.setCursor(Cursor.getDefaultCursor());
                                         break;
-                                    case "Cetak Aturan Pakai Model 3": 
+                                    case "Cetak Aturan Pakai Model 3":
                                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                         if(Sequel.cariInteger(
                                                 "select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",nopiutang)>0){
@@ -1279,7 +1279,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 "inner join databarang on detailpiutang.kode_brng=databarang.kode_brng "+
                                                 "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
                                                 "where piutang.nota_piutang='"+nopiutang+"' and detailpiutang.aturan_pakai<>''",param);
-                                        }              
+                                        }
                                         this.setCursor(Cursor.getDefaultCursor());
                                         break;
                                     default:
@@ -1294,7 +1294,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                                 "inner join databarang on detailpiutang.kode_brng=databarang.kode_brng "+
                                                 "inner join kodesatuan on databarang.kode_sat=kodesatuan.kode_sat "+
                                                 "where piutang.nota_piutang='"+nopiutang+"' and detailpiutang.aturan_pakai<>''",param);
-                                        }            
+                                        }
                                         this.setCursor(Cursor.getDefaultCursor());
                                         break;
                                 }
@@ -1302,7 +1302,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             }
                         }
                     }
-                    
+
                     if(Iterasi.getSelectedIndex()>0){
                         JOptionPane.showMessageDialog(null,"Silahkan melanjutkan untuk menyimpan permintaan resep iterasi..!!");
                         try {
@@ -1322,7 +1322,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
                             fileWriter.close();
                             iyembuilder=null;
-                            
+
                             file=new File("./cache/resepracikaniter.iyem");
                             file.createNewFile();
                             fileWriter = new FileWriter(file);
@@ -1339,7 +1339,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
 
                             fileWriter.close();
                             iyembuilder=null;
-                            
+
                             file=new File("./cache/resepdetailracikaniter.iyem");
                             file.createNewFile();
                             fileWriter = new FileWriter(file);
@@ -1359,7 +1359,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
                         }
-                        
+
                         if (resepiter == null || !resepiter.isDisplayable()) {
                             resepiter=new ApotekBPJSPermintaanIterResep(null,false);
                             resepiter.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
@@ -1368,7 +1368,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                 public void windowClosed(WindowEvent e) {
                                     resepiter=null;
                                 }
-                            }); 
+                            });
 
                             resepiter.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             resepiter.setLocationRelativeTo(internalFrame1);
@@ -1377,7 +1377,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                         if (!resepiter.isVisible()) {
                             resepiter.setNoRm(TNoRW.getText(),TNoRM.getText(),NmPasien.getText(),DTPTgl.getDate(),KdDPJP.getText(),Iterasi.getSelectedItem().toString(),NoResep.getText());
                         }
-                        
+
                         if (resepiter.isVisible()) {
                             resepiter.toFront();
                             return;
@@ -1514,7 +1514,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 public void windowClosed(WindowEvent e) {
                     rekapdaftarobat=null;
                 }
-            }); 
+            });
 
             rekapdaftarobat.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             rekapdaftarobat.setLocationRelativeTo(internalFrame1);
@@ -1542,7 +1542,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     tabModeDetailObatRacikan.removeRow(tbDetailObatRacikan.getSelectedRow());
                 }
             }
-        }   
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -1675,8 +1675,8 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
     private widget.Table tbObat;
     private widget.Table tbObatRacikan;
     // End of variables declaration//GEN-END:variables
-    
-    public void setNoRm(String norwt,String norm,String nama,String tanggal,String jam,String resep,String no_sep,String no_kartu,String kdpolitujuan,String nmpolitujuan,String kddpjp,String nmdpdjp,String tglsep) {  
+
+    public void setNoRm(String norwt,String norm,String nama,String tanggal,String jam,String resep,String no_sep,String no_kartu,String kdpolitujuan,String nmpolitujuan,String kddpjp,String nmdpdjp,String tglsep) {
         TNoRW.setText(norwt);
         TNoRM.setText(norm);
         NmPasien.setText(nama);

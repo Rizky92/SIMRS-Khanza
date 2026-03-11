@@ -26,8 +26,8 @@
                     </tr>";
                     while($baris = mysqli_fetch_array($hasil)) {
                         echo "<tr class='isi'>
-				<td>$no</td>  
-                                <td>$baris[0]</td>  
+				<td>$no</td>
+                                <td>$baris[0]</td>
                              </tr>";$no++;
                     }
             echo "</table>";
@@ -39,7 +39,7 @@
                         <td width='90%'><div align='center'>Bidang</strong></div></td>
                     </tr>
                   </table>";
-        } 
+        }
     ?>
     </body>
 </html>

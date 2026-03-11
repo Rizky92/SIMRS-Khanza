@@ -5,7 +5,7 @@
         }
     }
 ?>
-<div id="entry">       
+<div id="entry">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             echo "";
@@ -16,7 +16,7 @@
             echo "<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
             $_sql               = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
             $hasil              = bukaquery($_sql);
-            $baris              = mysqli_fetch_row($hasil);   
+            $baris              = mysqli_fetch_row($hasil);
             $_sqlnext         	= "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' order by pegawai.id asc limit 1";
             $hasilnext        	= bukaquery($_sqlnext);
             $barisnext        	= mysqli_fetch_row($hasilnext);
@@ -71,7 +71,7 @@
                     <input name="biaya_penelitian" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi6'));" type=text id="TxtIsi6" class="inputbox" value="<?php echo isset($biaya_penelitian)?$biaya_penelitian:NULL;?>" size="25" maxlength="15">
                     <span id="MsgIsi6" style="color:#CC0000; font-size:10px;"></span>
                 </td>
-            </tr>  
+            </tr>
             <tr class="isi2">
                 <td width="17%" >Peranan Dalam Penelitian</td><td width="">:</td>
                 <td width="31%">
@@ -95,7 +95,7 @@
                     <input name="dokumen" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi8'));" type=file id="TxtIsi8" value="<?php echo $dokumen;?>" size="40" maxlength="255" accept="application/pdf"/>
                     <span id="MsgIsi8" style="color:#CC0000; font-size:10px;"></span>
                 </td>
-            </tr> 
+            </tr>
         </table>
         <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;SIMPAN&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;KOSONG&nbsp;&nbsp;"></div><br>
         <div style="width: 100%; height: 60%; overflow: auto;">
@@ -123,20 +123,20 @@
                                         echo"<meta http-equiv='refresh' content='1;URL=?act=InputRiwayatPenelitian&action=TAMBAH&id=$id'>";
                                     }else{
                                         echo "Berkas harus JPEG/JPG";
-                                    } 
+                                    }
                                 }else{
                                     echo "Berkas harus JPEG/JPG";
-                                } 
+                                }
                             }else{
                                 echo "Berkas harus pdf";
-                            } 
+                            }
                             break;
                     }
                 }else if ((empty($id))||(empty($jenis_penelitian))||(empty($judul_penelitian))){
                     echo 'Semua field harus isi..!!!';
                 }
             }
-            
+
             $_sql       = "SELECT riwayat_penelitian.jenis_penelitian,riwayat_penelitian.peranan,riwayat_penelitian.judul_penelitian,riwayat_penelitian.judul_jurnal,riwayat_penelitian.tahun,riwayat_penelitian.biaya_penelitian,riwayat_penelitian.asal_dana,riwayat_penelitian.berkas from riwayat_penelitian where riwayat_penelitian.id='$id' ORDER BY riwayat_penelitian.tahun ASC ";
             $hasil      = bukaquery($_sql);
             $jumlah     = mysqli_num_rows($hasil);
@@ -155,7 +155,7 @@
                             <td width='10%'><div align='center'>Asal Dana</div></td>
                             <td width='10%'><div align='center'>Makalah/Berkas</div></td>
                         </tr>";
-                while($baris = mysqli_fetch_array($hasil)) {   
+                while($baris = mysqli_fetch_array($hasil)) {
                     echo "<tr class='isi'>
                             <td width='70' valign='top'>
                                 <center>
@@ -186,7 +186,7 @@
                                 <td width='10%'><div align='center'>Asal Dana</div></td>
                                 <td width='10%'><div align='center'>Makalah/Berkas</div></td>
                             </tr>
-                      </table>";            
+                      </table>";
             }
         ?>
         </div>

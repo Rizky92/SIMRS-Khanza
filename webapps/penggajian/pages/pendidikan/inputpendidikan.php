@@ -3,7 +3,7 @@
         <a href=?act=InputPendidikan&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListPendidikan>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>  
+    </div>
     <div class="entry">
         <form name="frm_pendidikan" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
@@ -88,4 +88,3 @@
         </form>
     </div>
 </div>
-

@@ -1,4 +1,4 @@
-<?php 
+<?php
     if(isset($_SESSION["ses_pasien"])){
         $halaman                            = isset($_GET["hal"])?$_GET["hal"]:NULL;
         $subhalaman                         = isset($_GET["act"])?$_GET["act"]:NULL;
@@ -554,4 +554,3 @@
     <script src="conf/validator.js" type="text/javascript"></script>
 </body>
 </html>
-

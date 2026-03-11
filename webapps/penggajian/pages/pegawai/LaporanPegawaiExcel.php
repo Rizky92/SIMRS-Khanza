@@ -17,7 +17,7 @@
     }else{
         $bulan=$blnini;
     }
- 
+
     $bulanindex = empty($baristhn[1])?date("m"):$baristhn[1];
 
     $_sqllibur   = "select `tanggal`, `ktg` from set_hari_libur where tanggal like '%".$tahun."-".$bulan."%' ORDER BY tanggal";

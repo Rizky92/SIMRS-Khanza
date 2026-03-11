@@ -5,12 +5,12 @@
 ?>
 
 <div id="post">
-    <div class="entry">   
+    <div class="entry">
     <div align="center" class="link">
         <a href=?act=InputBank&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListBank>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
                 $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -35,7 +35,7 @@
         $_sql = "SELECT bank.namabank FROM bank where bank.namabank like '%".$keyword."%' ORDER BY bank.namabank ";
         $hasil=bukaquery($_sql);
         $jumlah=mysqli_num_rows($hasil);
-        
+
         if(mysqli_num_rows($hasil)!=0) {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -54,7 +54,7 @@
                              </tr>";
                     }
             echo "</table>";
-            
+
         } else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -63,7 +63,7 @@
                     </tr>
                   </table>";
         }
-        
+
         $aksi=isset($_GET['action'])?$_GET['action']:NULL;
         if ($aksi=="HAPUS") {
             Hapus(" bank "," namabank ='".validTeks($_GET['namabank'])."' ","?act=ListBank");
@@ -74,8 +74,8 @@
         if(mysqli_num_rows($hasil)!=0) {
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/bank/LaporanBank.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/bank/LaporanBankExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/bank/LaporanBank.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/bank/LaporanBankExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>
+                    </tr>
                  </table>");
         }
     ?>

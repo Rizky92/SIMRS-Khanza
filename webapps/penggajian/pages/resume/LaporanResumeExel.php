@@ -35,14 +35,14 @@
                             <td width='25%'><div align='center'>Bagian Kry</div></td>
                         </tr>";
                         while($baris = mysqli_fetch_array($hasil)) {
-                            $total_resume=$baris[0];	
+                            $total_resume=$baris[0];
                             echo "<tr class='isi'>
-                                    <td>$no</td>  
+                                    <td>$no</td>
                                     <td>".formatDuit($baris[0])."</td>
                                     <td>$baris[1]%</td>
                                     <td>".formatDuit($baris[2])."</td>
                                     <td>$baris[3]%</td>
-                                    <td>".formatDuit($baris[4])."</td>                             
+                                    <td>".formatDuit($baris[4])."</td>
                                  </tr>";$no++;
                         }
                 echo "</table>";
@@ -76,25 +76,25 @@
                             <td width='45%'><div align='center'>Nama Karyawan</div></td>
                             <td width='25%'><div align='center'>Porsi Bagian</div></td>
                             <td width='25%'><div align='center'>Bagian Karyawan</div></td>
-                        </tr>";                    
+                        </tr>";
                 $bagiankry=0;
                 while($baris = mysqli_fetch_array($hasil)) {
                     $bagiankry = ($baris[2]/100)*$total_resume;
                     $ttl       = $ttl+$bagiankry;
                     $prosen    = $prosen+$baris[2];
                     echo "<tr class='isi'>
-                            <td>$no</td>  
+                            <td>$no</td>
                             <td>$baris[1]</td>
                             <td>$baris[2]%</td>
-                            <td>".formatDuit($bagiankry)."</td>                            
+                            <td>".formatDuit($bagiankry)."</td>
                          </tr>";
                     $no++;
                 }
                 echo "</table>
                       <table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                         <tr class='head'>
-                            <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Bagian : ".formatDuit($ttl)." </div></td>                        
-                        </tr>     
+                            <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Bagian : ".formatDuit($ttl)." </div></td>
+                        </tr>
                       </table>";
             }else{
                 echo "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
@@ -104,7 +104,7 @@
                             <td width='25%'><div align='center'>Porsi Bagian</div></td>
                             <td width='25%'><div align='center'>Bagian Karyawan</div></td>
                         </tr>
-                     </table>";  
+                     </table>";
             }
         ?>
     </body>

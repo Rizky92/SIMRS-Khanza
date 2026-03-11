@@ -1,10 +1,10 @@
 <div id="post">
-    <div class="entry">   
+    <div class="entry">
     <div align="center" class="link">
         <a href=?act=InputSttswp&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListSttswp>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -29,7 +29,7 @@
         $jumlah = mysqli_num_rows($hasil);
         if(mysqli_num_rows($hasil)!=0) {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                    <tr class='head'>					    
+                    <tr class='head'>
                         <td width='12%'><div align='center'>Proses</div></td>
                         <td width='28%'><div align='center'>Status WP</div></td>
                         <td width='60%'><div align='center'>Keterangan</div></td>
@@ -43,20 +43,20 @@
                             </center>
                         </td>
                         <td>$baris[0]</td>
-                        <td>$baris[1]</td>                                
+                        <td>$baris[1]</td>
                      </tr>";
             }
             echo "</table>";
         } else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                    <tr class='head'>					    
+                    <tr class='head'>
                         <td width='12%'><div align='center'>Proses</div></td>
                         <td width='28%'><div align='center'>Status WP</div></td>
                         <td width='60%'><div align='center'>Keterangan</div></td>
                     </tr>
                   </table>";
         }
-        
+
         $aksi=isset($_GET['action'])?$_GET['action']:NULL;
         if ($aksi=="HAPUS") {
             Hapus(" stts_wp "," stts ='".validTeks(str_replace("_"," ",$_GET['stts']))."' ","?act=ListSttswp");
@@ -66,8 +66,8 @@
     <?php
         echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/statuswp/LaporanStatusWp.php?&keyword=$keyword>Laporan</a> | <a target=_blank href=../penggajian/pages/statuswp/LaporanStatusWpExel.php?&keyword=$keyword>Excel</a> |</div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/statuswp/LaporanStatusWp.php?&keyword=$keyword>Laporan</a> | <a target=_blank href=../penggajian/pages/statuswp/LaporanStatusWpExel.php?&keyword=$keyword>Excel</a> |</div></td>
+                </tr>
              </table>");
     ?>
     </div>

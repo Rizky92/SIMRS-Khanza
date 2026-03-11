@@ -5,7 +5,7 @@
         }
     }
 ?>
-<div class="entry">        
+<div class="entry">
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             echo "";
@@ -49,7 +49,7 @@
                     </select>
                     <input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;">
                 </td>
-            </tr>   
+            </tr>
         </table>
         <br>
         <?php
@@ -75,10 +75,10 @@
                                     }
                                 }else{
                                     echo "Berkas harus JPEG/JPG/PDF";
-                                } 
+                                }
                             }else{
                                 echo "Berkas harus JPEG/JPG/PDF";
-                            } 
+                            }
                             break;
                     }
                 }else if ((empty($nik))||(empty($kode))||(empty($dokumen))){
@@ -90,9 +90,9 @@
         <?php
             $keyword = validTeks($keyword);
             $_sql = "SELECT berkas_pegawai.nik, berkas_pegawai.tgl_uploud,berkas_pegawai.kode_berkas,
-                    master_berkas_pegawai.nama_berkas,berkas_pegawai.berkas from berkas_pegawai inner join 
-                    master_berkas_pegawai on berkas_pegawai.kode_berkas=master_berkas_pegawai.kode 
-                    where berkas_pegawai.nik='$nik' and master_berkas_pegawai.kategori='$kategori' 
+                    master_berkas_pegawai.nama_berkas,berkas_pegawai.berkas from berkas_pegawai inner join
+                    master_berkas_pegawai on berkas_pegawai.kode_berkas=master_berkas_pegawai.kode
+                    where berkas_pegawai.nik='$nik' and master_berkas_pegawai.kategori='$kategori'
                     and master_berkas_pegawai.nama_berkas like '%$keyword%' order by master_berkas_pegawai.no_urut";
             $hasil=bukaquery($_sql);
             $jumlah=mysqli_num_rows($hasil);
@@ -106,17 +106,17 @@
                             <td width='88%'><div align='center'>Nama Berkas</div></td>
                         </tr>";
                 $i=1;
-                while($baris = mysqli_fetch_array($hasil)) { 
+                while($baris = mysqli_fetch_array($hasil)) {
                     $gb="-";
                     if($baris["berkas"]=="pages/berkaspegawai/berkas"){
-                        $gb="-";                            
+                        $gb="-";
                     }else{
                         if((strtolower(substr($baris["berkas"],-3))=="jpg")||(strtolower(substr($baris["berkas"],-4))=="jpeg")){
                             $gb="<img src='".$baris["berkas"]."' width='850px' height='950px'>";
                         }else{
                             $gb= str_replace("pages/berkaspegawai/berkas","",$baris["berkas"]);
                         }
-                            
+
                     }
                     echo "<tr class='isi'>
                             <td valign='top'>
@@ -147,11 +147,11 @@
                         </tr>
                       </table>";
         }
-        if ($action=="HAPUS") {      
+        if ($action=="HAPUS") {
             unlink($_GET['berkas']);
             Hapus(" berkas_pegawai "," nik ='".validTeks($_GET['nik'])."' and kode_berkas ='".validTeks($_GET['kode'])."' ","?act=DetailBerkasPegawai&action=TAMBAH&nik=".str_replace(" ","_",$nik)."&kategori=".str_replace(" ","_",$kategori));
         }
     ?>
-    </div>   
+    </div>
     </form>
 </div>

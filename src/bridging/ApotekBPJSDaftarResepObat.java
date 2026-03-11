@@ -28,8 +28,6 @@ import inventory.riwayatobat;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -47,7 +45,6 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.X509TrustManager;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
-import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
@@ -1575,7 +1572,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
                         rs=ps.executeQuery();
                         while(rs.next()){
                             Sequel.meghapus("resep_obat","no_resep",rs.getString("no_resep"));
-                        } 
+                        }
                     } catch (Exception e) {
                         System.out.println("Notif : "+e);
                     } finally{

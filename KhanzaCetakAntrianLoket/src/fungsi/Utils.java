@@ -14,11 +14,11 @@ public class Utils
     {
         try {
             int pos = str.lastIndexOf(substr);
-            
+
             if (pos > -1) {
                 return str.substring(0, pos) + replace + str.substring(pos + substr.length());
             }
-            
+
             return str;
         } catch (Exception e) {
             return str;

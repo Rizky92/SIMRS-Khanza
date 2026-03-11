@@ -6,7 +6,7 @@
     }
 ?>
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 $action             = isset($_GET['action'])?$_GET['action']:NULL;
@@ -27,7 +27,7 @@
                             <input name="gambar" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" type=file id="TxtIsi1" value="<?php echo $gambar;?>" size="50" maxlength="500" accept="image/jpeg,image/jpg"/>
                             <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                         </td>
-                    </tr>        
+                    </tr>
                 </table>
             </div>
             <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;"></div><br>
@@ -43,7 +43,7 @@
                                     if(Tambah(" inventaris_gambar "," '$no_inventaris','$gambar'", " Gambar Inventaris " )){
                                         move_uploaded_file($_FILES['gambar']['tmp_name'],$gambar);
                                     }
-                                    echo"<meta http-equiv='refresh' content='1;URL=?act=List&no_inventaris=$no_inventaris'>";                              
+                                    echo"<meta http-equiv='refresh' content='1;URL=?act=List&no_inventaris=$no_inventaris'>";
                                 }else if ((empty($no_inventaris))||(empty($gambar))){
                                     echo 'Semua field harus isi..!!!';
                                 }
@@ -55,7 +55,7 @@
                         }
                     }else{
                         echo "Berkas harus JPEG/JPG";
-                    }  
+                    }
                 }
             ?>
             <div style="width: 100%; height: 78%; overflow: auto;">
@@ -69,7 +69,7 @@
                                 <td width='5%'><div align='center'>Proses</div></td>
                                 <td width='95%'><div align='center'>File/Gambar</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td valign='Top' align='center'>
                                     <center>"; ?>
@@ -91,7 +91,7 @@
                 unlink($_GET['gambar']);
                 Hapus(" inventaris_gambar "," no_inventaris ='".validTeks4($_GET['no_inventaris'],30)."' ","?act=List&action=TAMBAH&no_inventaris=$no_inventaris");
             }
-        
+
         ?>
     </div>
 

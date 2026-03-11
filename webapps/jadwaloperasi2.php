@@ -43,7 +43,7 @@ $jam = date("H:i");
 		</noscript>
 		<?php
 		$setting =  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
-		echo "   
+		echo "
 		   <table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>
 			  <tr>
 				<td  width='10%' align='right' valign='center'>
@@ -53,18 +53,18 @@ $jam = date("H:i");
 				   <center>
 					  <font size='7' color='#AA00AA' face='Tahoma'>" . $setting["nama_instansi"] . "</font><br>
 					  <font size='5' color='#AA00AA' face='Tahoma'>
-						  " . $setting["alamat_instansi"] . ", " . $setting["kabupaten"] . ", " . $setting["propinsi"] . "<br>   
-					  </font> 
+						  " . $setting["alamat_instansi"] . ", " . $setting["kabupaten"] . ", " . $setting["propinsi"] . "<br>
+					  </font>
 					  <font size='5' color='#AAAA00' face='Tahoma' >" . date("d-M-Y", $tanggal) . "  " . $jam . "</font>
 					  <br><br>
 				   </center>
-				</td>   
+				</td>
 				<td  width='10%' align='left'>
 					&nbsp;
-				</td>  
+				</td>
 				<td  width='10%' align='left' valign='top'>
 					<img width='180' height='130' src='header-kanan.jpg'/>
-				</td>                                                          
+				</td>
 			 </tr>
 		  </table> ";
 		?>
@@ -124,9 +124,9 @@ $jam = date("H:i");
 			$_sql = "select booking_operasi.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,booking_operasi.tanggal,
                      booking_operasi.jam_mulai,booking_operasi.jam_selesai,booking_operasi.status,booking_operasi.kd_dokter,
                      dokter.nm_dokter,booking_operasi.kode_paket,paket_operasi.nm_perawatan,concat(reg_periksa.umurdaftar,' ',reg_periksa.sttsumur) as umur,pasien.jk
-                     from booking_operasi inner join reg_periksa inner join pasien inner join paket_operasi inner join dokter 
-                     on booking_operasi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
-                     and booking_operasi.kd_dokter=dokter.kd_dokter and booking_operasi.kode_paket=paket_operasi.kode_paket 
+                     from booking_operasi inner join reg_periksa inner join pasien inner join paket_operasi inner join dokter
+                     on booking_operasi.no_rawat=reg_periksa.no_rawat and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
+                     and booking_operasi.kd_dokter=dokter.kd_dokter and booking_operasi.kode_paket=paket_operasi.kode_paket
                      where tanggal='" . date("Y-m-d", $tanggal) . "' order by booking_operasi.tanggal,booking_operasi.jam_mulai";
 			$hasil = bukaquery($_sql);
 

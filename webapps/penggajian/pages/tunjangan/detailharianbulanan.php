@@ -5,7 +5,7 @@
         <a href=?act=DetailHarianBulanan&action=TAMBAH>| Harian-Bulanan |</a>
         <a href=?act=ListTunjangan>| List Penerima |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
@@ -67,7 +67,7 @@
             ?>
             <div style="width: 100%; height: 69%; overflow: auto;">
             <?php
-                $_sql   = "SELECT master_tunjangan_harian.nama,master_tunjangan_bulanan.nama,master_tunjangan_harian.id,master_tunjangan_bulanan.id 
+                $_sql   = "SELECT master_tunjangan_harian.nama,master_tunjangan_bulanan.nama,master_tunjangan_harian.id,master_tunjangan_bulanan.id
                            from harian_kurangi_bulanan inner join master_tunjangan_harian on harian_kurangi_bulanan.harian=master_tunjangan_harian.id
 			   inner join master_tunjangan_bulanan on harian_kurangi_bulanan.bulanan=master_tunjangan_bulanan.id ORDER BY master_tunjangan_harian.nama ASC ";
                 $hasil  = bukaquery($_sql);
@@ -109,10 +109,9 @@
             }
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
         ?>
     </div>
 </div>
-

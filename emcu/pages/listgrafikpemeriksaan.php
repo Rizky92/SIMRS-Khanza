@@ -111,7 +111,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataSubmandibula = [];
@@ -137,7 +137,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataAxilla = [];
@@ -163,7 +163,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataSupraklavikula = [];
@@ -189,7 +189,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataLeher = [];
@@ -215,7 +215,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataInguinal = [];
@@ -241,7 +241,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataOedema = [];
@@ -267,7 +267,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataSinusFrontalis = [];
@@ -293,7 +293,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataSinusMaxilaris = [];
@@ -319,7 +319,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataPalpebra = [];
@@ -345,7 +345,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataSklera = [];
@@ -371,7 +371,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataCornea = [];
@@ -397,7 +397,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataButaWarna = [];
@@ -423,7 +423,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataKonjungtiva = [];
@@ -449,7 +449,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataLensa = [];
@@ -475,7 +475,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataPupil = [];
@@ -501,7 +501,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataMenggunakanKacamata = [];
@@ -527,7 +527,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataLuasLapangPandang = [];
@@ -553,7 +553,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataLubangTelinga = [];
@@ -579,7 +579,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataDaunTelinga = [];
@@ -605,7 +605,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataSelaputPendengaran = [];
@@ -631,7 +631,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataProcMastoideus = [];
@@ -657,7 +657,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataSeptumNasi = [];
@@ -683,7 +683,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataLubangHidung = [];
@@ -709,7 +709,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataSinusHidung = [];
@@ -735,7 +735,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataBibir = [];
@@ -761,7 +761,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataGusi = [];
@@ -787,7 +787,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataGigi = [];
@@ -813,7 +813,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataCaries = [];
@@ -839,7 +839,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataLidah = [];
@@ -865,7 +865,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataFaring = [];
@@ -891,7 +891,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataTonsil = [];
@@ -917,7 +917,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataKelenjarLimfe = [];
@@ -943,7 +943,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataKelenjarGondok = [];
@@ -969,7 +969,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataGerakanDada = [];
@@ -995,7 +995,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataVocalFemitus = [];
@@ -1021,7 +1021,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataPerkusiDada = [];
@@ -1047,7 +1047,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataBunyiNapas = [];
@@ -1073,7 +1073,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataBunyiTambahan = [];
@@ -1099,7 +1099,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataIctusCordis = [];
@@ -1125,7 +1125,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataBunyiJantung = [];
@@ -1151,7 +1151,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataBatasJantung = [];
@@ -1177,7 +1177,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataMamae = [];
@@ -1203,7 +1203,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataInspeksi = [];
@@ -1229,7 +1229,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataPalpasi = [];
@@ -1255,7 +1255,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataHepar = [];
@@ -1281,7 +1281,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataPerkusiAbdomen = [];
@@ -1307,7 +1307,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataAuskultasi = [];
@@ -1333,7 +1333,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataLimpa = [];
@@ -1359,7 +1359,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataCostovertebral = [];
@@ -1385,7 +1385,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataScoliosis = [];
@@ -1411,7 +1411,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataKondisiKulit = [];
@@ -1437,7 +1437,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataEkstrimitasAtas = [];
@@ -1463,7 +1463,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataEkstrimitasBawah = [];
@@ -1489,7 +1489,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataAreaGenitalia = [];
@@ -1515,7 +1515,7 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <div class="col-md-6">
                         <?php
                             $dataAnusPerianal = [];
@@ -1541,8 +1541,8 @@
                             </div>
                         </div>
                     </div>
-                    
-                </div>  
+
+                </div>
             </div>
         </div>
     </div>
@@ -1580,7 +1580,7 @@ $(function() {
     } else {
         $("#pie_chart_bmi").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataPinggang = <?= json_encode($dataPinggang) ?>;
     if (dataPinggang.length > 0) {
         $.plot("#pie_chart_pinggang", dataPinggang, {
@@ -1604,7 +1604,7 @@ $(function() {
     } else {
         $("#pie_chart_pinggang").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataSubmandibula = <?= json_encode($dataSubmandibula) ?>;
     if (dataSubmandibula.length > 0) {
         $.plot("#pie_chart_submandibula", dataSubmandibula, {
@@ -1628,7 +1628,7 @@ $(function() {
     } else {
         $("#pie_chart_submandibula").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataAxilla = <?= json_encode($dataAxilla) ?>;
     if (dataAxilla.length > 0) {
         $.plot("#pie_chart_axilla", dataAxilla, {
@@ -1652,7 +1652,7 @@ $(function() {
     } else {
         $("#pie_chart_axilla").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataSupraklavikula = <?= json_encode($dataSupraklavikula) ?>;
     if (dataSupraklavikula.length > 0) {
         $.plot("#pie_chart_supraklavikula", dataSupraklavikula, {
@@ -1676,7 +1676,7 @@ $(function() {
     } else {
         $("#pie_chart_supraklavikula").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataLeher = <?= json_encode($dataLeher) ?>;
     if (dataLeher.length > 0) {
         $.plot("#pie_chart_leher", dataLeher, {
@@ -1700,7 +1700,7 @@ $(function() {
     } else {
         $("#pie_chart_leher").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataInguinal = <?= json_encode($dataInguinal) ?>;
     if (dataInguinal.length > 0) {
         $.plot("#pie_chart_inguinal", dataInguinal, {
@@ -1724,7 +1724,7 @@ $(function() {
     } else {
         $("#pie_chart_inguinal").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataOedema = <?= json_encode($dataOedema) ?>;
     if (dataOedema.length > 0) {
         $.plot("#pie_chart_oedema", dataOedema, {
@@ -1748,7 +1748,7 @@ $(function() {
     } else {
         $("#pie_chart_oedema").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataSinusFrontalis = <?= json_encode($dataSinusFrontalis) ?>;
     if (dataSinusFrontalis.length > 0) {
         $.plot("#pie_chart_sinus_frontalis", dataSinusFrontalis, {
@@ -1772,7 +1772,7 @@ $(function() {
     } else {
         $("#pie_chart_sinus_frontalis").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataSinusMaxilaris = <?= json_encode($dataSinusMaxilaris) ?>;
     if (dataSinusMaxilaris.length > 0) {
         $.plot("#pie_chart_sinus_maxilaris", dataSinusMaxilaris, {
@@ -1796,7 +1796,7 @@ $(function() {
     } else {
         $("#pie_chart_sinus_maxilaris").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataPalpebra = <?= json_encode($dataPalpebra) ?>;
     if (dataPalpebra.length > 0) {
         $.plot("#pie_chart_palpebra", dataPalpebra, {
@@ -1820,7 +1820,7 @@ $(function() {
     } else {
         $("#pie_chart_palpebra").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataSklera = <?= json_encode($dataSklera) ?>;
     if (dataSklera.length > 0) {
         $.plot("#pie_chart_sklera", dataSklera, {
@@ -1844,7 +1844,7 @@ $(function() {
     } else {
         $("#pie_chart_sklera").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataCornea = <?= json_encode($dataCornea) ?>;
     if (dataCornea.length > 0) {
         $.plot("#pie_chart_cornea", dataCornea, {
@@ -1868,7 +1868,7 @@ $(function() {
     } else {
         $("#pie_chart_cornea").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataButaWarna = <?= json_encode($dataButaWarna) ?>;
     if (dataButaWarna.length > 0) {
         $.plot("#pie_chart_buta_warna", dataButaWarna, {
@@ -1892,7 +1892,7 @@ $(function() {
     } else {
         $("#pie_chart_buta_warna").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataKonjungtiva = <?= json_encode($dataKonjungtiva) ?>;
     if (dataKonjungtiva.length > 0) {
         $.plot("#pie_chart_konjungtiva", dataKonjungtiva, {
@@ -1916,7 +1916,7 @@ $(function() {
     } else {
         $("#pie_chart_konjungtiva").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataLensa = <?= json_encode($dataLensa) ?>;
     if (dataLensa.length > 0) {
         $.plot("#pie_chart_lensa", dataLensa, {
@@ -1940,7 +1940,7 @@ $(function() {
     } else {
         $("#pie_chart_lensa").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataPupil = <?= json_encode($dataPupil) ?>;
     if (dataPupil.length > 0) {
         $.plot("#pie_chart_pupil", dataPupil, {
@@ -1964,7 +1964,7 @@ $(function() {
     } else {
         $("#pie_chart_pupil").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataMenggunakanKacamata = <?= json_encode($dataMenggunakanKacamata) ?>;
     if (dataMenggunakanKacamata.length > 0) {
         $.plot("#pie_chart_menggunakan_kacamata", dataMenggunakanKacamata, {
@@ -1988,7 +1988,7 @@ $(function() {
     } else {
         $("#pie_chart_menggunakan_kacamata").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataLuasLapangPandang = <?= json_encode($dataLuasLapangPandang) ?>;
     if (dataLuasLapangPandang.length > 0) {
         $.plot("#pie_chart_luas_lapang_pandang", dataLuasLapangPandang, {
@@ -2012,7 +2012,7 @@ $(function() {
     } else {
         $("#pie_chart_luas_lapang_pandang").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataLubangTelinga = <?= json_encode($dataLubangTelinga) ?>;
     if (dataLubangTelinga.length > 0) {
         $.plot("#pie_chart_lubang_telinga", dataLubangTelinga, {
@@ -2036,7 +2036,7 @@ $(function() {
     } else {
         $("#pie_chart_lubang_telinga").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataDaunTelinga = <?= json_encode($dataDaunTelinga) ?>;
     if (dataDaunTelinga.length > 0) {
         $.plot("#pie_chart_daun_telinga", dataDaunTelinga, {
@@ -2060,7 +2060,7 @@ $(function() {
     } else {
         $("#pie_chart_daun_telinga").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataSelaputPendengaran = <?= json_encode($dataSelaputPendengaran) ?>;
     if (dataSelaputPendengaran.length > 0) {
         $.plot("#pie_chart_selaput_pendengaran", dataSelaputPendengaran, {
@@ -2084,7 +2084,7 @@ $(function() {
     } else {
         $("#pie_chart_selaput_pendengaran").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataProcMastoideus = <?= json_encode($dataProcMastoideus) ?>;
     if (dataProcMastoideus.length > 0) {
         $.plot("#pie_chart_proc_mastoideus", dataProcMastoideus, {
@@ -2108,7 +2108,7 @@ $(function() {
     } else {
         $("#pie_chart_proc_mastoideus").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataSeptumNasi = <?= json_encode($dataSeptumNasi) ?>;
     if (dataSeptumNasi.length > 0) {
         $.plot("#pie_chart_septum_nasi", dataSeptumNasi, {
@@ -2132,7 +2132,7 @@ $(function() {
     } else {
         $("#pie_chart_septum_nasi").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataLubangHidung = <?= json_encode($dataLubangHidung) ?>;
     if (dataLubangHidung.length > 0) {
         $.plot("#pie_chart_lubang_hidung", dataLubangHidung, {
@@ -2156,7 +2156,7 @@ $(function() {
     } else {
         $("#pie_chart_lubang_hidung").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataSinusHidung = <?= json_encode($dataSinusHidung) ?>;
     if (dataSinusHidung.length > 0) {
         $.plot("#pie_chart_sinus", dataSinusHidung, {
@@ -2180,7 +2180,7 @@ $(function() {
     } else {
         $("#pie_chart_sinus").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataBibir = <?= json_encode($dataBibir) ?>;
     if (dataBibir.length > 0) {
         $.plot("#pie_chart_bibir", dataBibir, {
@@ -2204,7 +2204,7 @@ $(function() {
     } else {
         $("#pie_chart_bibir").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataGusi = <?= json_encode($dataGusi) ?>;
     if (dataGusi.length > 0) {
         $.plot("#pie_chart_gusi", dataGusi, {
@@ -2228,7 +2228,7 @@ $(function() {
     } else {
         $("#pie_chart_gusi").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataGigi = <?= json_encode($dataGigi) ?>;
     if (dataGigi.length > 0) {
         $.plot("#pie_chart_gigi", dataGigi, {
@@ -2252,7 +2252,7 @@ $(function() {
     } else {
         $("#pie_chart_gigi").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataCaries = <?= json_encode($dataCaries) ?>;
     if (dataCaries.length > 0) {
         $.plot("#pie_chart_caries", dataCaries, {
@@ -2276,7 +2276,7 @@ $(function() {
     } else {
         $("#pie_chart_caries").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataLidah = <?= json_encode($dataLidah) ?>;
     if (dataLidah.length > 0) {
         $.plot("#pie_chart_lidah", dataLidah, {
@@ -2300,7 +2300,7 @@ $(function() {
     } else {
         $("#pie_chart_lidah").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataFaring = <?= json_encode($dataFaring) ?>;
     if (dataFaring.length > 0) {
         $.plot("#pie_chart_faring", dataFaring, {
@@ -2324,7 +2324,7 @@ $(function() {
     } else {
         $("#pie_chart_faring").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataTonsil = <?= json_encode($dataTonsil) ?>;
     if (dataTonsil.length > 0) {
         $.plot("#pie_chart_tonsil", dataTonsil, {
@@ -2348,7 +2348,7 @@ $(function() {
     } else {
         $("#pie_chart_tonsil").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataKelenjarLimfe = <?= json_encode($dataKelenjarLimfe) ?>;
     if (dataKelenjarLimfe.length > 0) {
         $.plot("#pie_chart_kelenjar_limfe", dataKelenjarLimfe, {
@@ -2372,7 +2372,7 @@ $(function() {
     } else {
         $("#pie_chart_kelenjar_limfe").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataKelenjarGondok = <?= json_encode($dataKelenjarGondok) ?>;
     if (dataKelenjarGondok.length > 0) {
         $.plot("#pie_chart_kelenjar_gondok", dataKelenjarGondok, {
@@ -2396,7 +2396,7 @@ $(function() {
     } else {
         $("#pie_chart_kelenjar_gondok").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataGerakanDada = <?= json_encode($dataGerakanDada) ?>;
     if (dataGerakanDada.length > 0) {
         $.plot("#pie_chart_gerakan_dada", dataGerakanDada, {
@@ -2420,7 +2420,7 @@ $(function() {
     } else {
         $("#pie_chart_gerakan_dada").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataVocalFemitus = <?= json_encode($dataVocalFemitus) ?>;
     if (dataVocalFemitus.length > 0) {
         $.plot("#pie_chart_vocal_femitus", dataVocalFemitus, {
@@ -2444,7 +2444,7 @@ $(function() {
     } else {
         $("#pie_chart_vocal_femitus").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataPerkusiDada = <?= json_encode($dataPerkusiDada) ?>;
     if (dataPerkusiDada.length > 0) {
         $.plot("#pie_chart_perkusi_dada", dataPerkusiDada, {
@@ -2468,7 +2468,7 @@ $(function() {
     } else {
         $("#pie_chart_perkusi_dada").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataBunyiNapas = <?= json_encode($dataBunyiNapas) ?>;
     if (dataBunyiNapas.length > 0) {
         $.plot("#pie_chart_bunyi_napas", dataBunyiNapas, {
@@ -2492,7 +2492,7 @@ $(function() {
     } else {
         $("#pie_chart_bunyi_napas").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataBunyiTambahan = <?= json_encode($dataBunyiTambahan) ?>;
     if (dataBunyiTambahan.length > 0) {
         $.plot("#pie_chart_bunyi_tambahan", dataBunyiTambahan, {
@@ -2516,7 +2516,7 @@ $(function() {
     } else {
         $("#pie_chart_bunyi_tambahan").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataIctusCordis = <?= json_encode($dataIctusCordis) ?>;
     if (dataIctusCordis.length > 0) {
         $.plot("#pie_chart_ictus_cordis", dataIctusCordis, {
@@ -2540,7 +2540,7 @@ $(function() {
     } else {
         $("#pie_chart_ictus_cordis").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataBunyiJantung = <?= json_encode($dataBunyiJantung) ?>;
     if (dataBunyiJantung.length > 0) {
         $.plot("#pie_chart_bunyi_jantung", dataBunyiJantung, {
@@ -2564,7 +2564,7 @@ $(function() {
     } else {
         $("#pie_chart_bunyi_jantung").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataBatasJantung = <?= json_encode($dataBatasJantung) ?>;
     if (dataBatasJantung.length > 0) {
         $.plot("#pie_chart_batas", dataBatasJantung, {
@@ -2588,7 +2588,7 @@ $(function() {
     } else {
         $("#pie_chart_batas").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataMamae = <?= json_encode($dataMamae) ?>;
     if (dataMamae.length > 0) {
         $.plot("#pie_chart_mamae", dataMamae, {
@@ -2612,7 +2612,7 @@ $(function() {
     } else {
         $("#pie_chart_mamae").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataInspeksi = <?= json_encode($dataInspeksi) ?>;
     if (dataInspeksi.length > 0) {
         $.plot("#pie_chart_inspeksi", dataInspeksi, {
@@ -2636,7 +2636,7 @@ $(function() {
     } else {
         $("#pie_chart_inspeksi").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataPalpasi = <?= json_encode($dataPalpasi) ?>;
     if (dataPalpasi.length > 0) {
         $.plot("#pie_chart_palpasi", dataPalpasi, {
@@ -2660,7 +2660,7 @@ $(function() {
     } else {
         $("#pie_chart_palpasi").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataHepar = <?= json_encode($dataHepar) ?>;
     if (dataHepar.length > 0) {
         $.plot("#pie_chart_hepar", dataHepar, {
@@ -2684,7 +2684,7 @@ $(function() {
     } else {
         $("#pie_chart_hepar").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataPerkusiAbdomen = <?= json_encode($dataPerkusiAbdomen) ?>;
     if (dataPerkusiAbdomen.length > 0) {
         $.plot("#pie_chart_perkusi_abdomen", dataPerkusiAbdomen, {
@@ -2708,7 +2708,7 @@ $(function() {
     } else {
         $("#pie_chart_perkusi_abdomen").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataAuskultasi = <?= json_encode($dataAuskultasi) ?>;
     if (dataAuskultasi.length > 0) {
         $.plot("#pie_chart_auskultasi", dataAuskultasi, {
@@ -2732,7 +2732,7 @@ $(function() {
     } else {
         $("#pie_chart_auskultasi").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataLimpa = <?= json_encode($dataLimpa) ?>;
     if (dataLimpa.length > 0) {
         $.plot("#pie_chart_limpa", dataLimpa, {
@@ -2756,7 +2756,7 @@ $(function() {
     } else {
         $("#pie_chart_limpa").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataCostovertebral = <?= json_encode($dataCostovertebral) ?>;
     if (dataCostovertebral.length > 0) {
         $.plot("#pie_chart_costovertebral", dataCostovertebral, {
@@ -2780,7 +2780,7 @@ $(function() {
     } else {
         $("#pie_chart_costovertebral").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataScoliosis = <?= json_encode($dataScoliosis) ?>;
     if (dataScoliosis.length > 0) {
         $.plot("#pie_chart_scoliosis", dataScoliosis, {
@@ -2804,7 +2804,7 @@ $(function() {
     } else {
         $("#pie_chart_scoliosis").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataKondisiKulit = <?= json_encode($dataKondisiKulit) ?>;
     if (dataKondisiKulit.length > 0) {
         $.plot("#pie_chart_kondisi_kulit", dataKondisiKulit, {
@@ -2828,7 +2828,7 @@ $(function() {
     } else {
         $("#pie_chart_kondisi_kulit").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataEkstrimitasAtas = <?= json_encode($dataEkstrimitasAtas) ?>;
     if (dataEkstrimitasAtas.length > 0) {
         $.plot("#pie_chart_ekstrimitas_atas", dataEkstrimitasAtas, {
@@ -2852,7 +2852,7 @@ $(function() {
     } else {
         $("#pie_chart_ekstrimitas_atas").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataEkstrimitasBawah = <?= json_encode($dataEkstrimitasBawah) ?>;
     if (dataEkstrimitasBawah.length > 0) {
         $.plot("#pie_chart_ekstrimitas_bawah", dataEkstrimitasBawah, {
@@ -2876,7 +2876,7 @@ $(function() {
     } else {
         $("#pie_chart_ekstrimitas_bawah").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataAreaGenitalia = <?= json_encode($dataAreaGenitalia) ?>;
     if (dataAreaGenitalia.length > 0) {
         $.plot("#pie_chart_area_genitalia", dataAreaGenitalia, {
@@ -2900,7 +2900,7 @@ $(function() {
     } else {
         $("#pie_chart_area_genitalia").html("<div class='text-center text-muted mt-5'>Kosong</div>");
     }
-    
+
     var dataAnusPerianal = <?= json_encode($dataAnusPerianal) ?>;
     if (dataAnusPerianal.length > 0) {
         $.plot("#pie_chart_anus_perianal", dataAnusPerianal, {

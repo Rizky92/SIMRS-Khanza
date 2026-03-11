@@ -2,14 +2,14 @@
     if(strpos($_SERVER['REQUEST_URI'],"conf")){
         exit(header("Location:../index.php"));
     }
-    
+
 function title(){
         $judul ="Presensi Pegawai  --)(*!!@#$%";
         $judul = preg_replace("[^A-Za-z0-9_\-\./,|]"," ",$judul);
         $judul = str_replace(array('.','-','/',',')," ",$judul);
         $judul = trim($judul);
-        echo "$judul";	
-}      
+        echo "$judul";
+}
 
 
 function cekSessiKunjung() {
@@ -81,10 +81,10 @@ function samping()
                 //calender();
                 //kategori();
 
-        endif;	
+        endif;
 }
 
-function bawah() 
+function bawah()
 {
   echo	"<p id=\"legal\">Copyright &copy; KhanzaSoft Media. All Rights Reserved. Design by Khanza.Soft Media</p>
         ";
@@ -113,12 +113,12 @@ function tampilMenu() {
                         'Presensi Datang'	=> 'index.php?page=TampilDatang',
                         'Presensi Pulang'       => 'index.php?page=TampilPulang',
                         'Cari Presensi'       => 'index.php?page=Cari');
-        }		
+        }
         echo "<ul id=\"navlist\">";
         $i=0;
         foreach ($menu as $key => $val) {
                 $i++;
-                if ($key=='Sign Out')	$klik = "onclick=\"return confirm('Yakinkah anda akan logout.?');\""; 
+                if ($key=='Sign Out')	$klik = "onclick=\"return confirm('Yakinkah anda akan logout.?');\"";
                 if (isGuest()) {
                         if ($i == 5) $last = "id='current'";
                 } else {
@@ -127,7 +127,7 @@ function tampilMenu() {
                 echo "<li title='$key'><a href='$val' >$key</a></li>";
         }
         echo "</ul>";
-} 	
+}
 
 
 function ListArtikel()
@@ -137,20 +137,20 @@ function ListArtikel()
         {
           $judul=$row['1'];
           $isi  = substr($row['1'],0,160);
-          $post =konversiTanggal((substr($row[4],0,10)));  	
+          $post =konversiTanggal((substr($row[4],0,10)));
           echo "<ul><li><b>$judul</b><br />
                                 <small>posted on $post</small><br/>";
-          echo	"$isi<a href=\"index.php?act=News&id=$row[0]\">...detail</a>";	  	
-          echo "</li></ul>";	
-        } 
+          echo	"$isi<a href=\"index.php?act=News&id=$row[0]\">...detail</a>";
+          echo "</li></ul>";
+        }
 }
 
 function calender() {
-        echo "  
-                <h2>.: KALENDER :.</h2>                     
+        echo "
+                <h2>.: KALENDER :.</h2>
                 <p>";
         include_once "include/calender.php";
-        echo "    
+        echo "
                 </p>
                 <br>
               ";
@@ -158,11 +158,11 @@ function calender() {
 
 function kategori() {
         echo "
-                <h2>.: KATEGORI :.</h2>                      
+                <h2>.: KATEGORI :.</h2>
               <p>
                   ";
         include_once "pages/subside.php";
-        echo "    
+        echo "
                </p>";
 }
 
@@ -252,5 +252,5 @@ echo "  <br>
     </p>
     <br>
     ";
- }	
+ }
 ?>

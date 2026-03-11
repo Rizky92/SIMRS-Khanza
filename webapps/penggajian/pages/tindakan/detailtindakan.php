@@ -5,11 +5,11 @@
         <a href=?act=ListTindakanDokter>| Tindakan Dokter |</a>
         <a href=?act=ListTindakanSpesialis>| Tindakan Spesialis |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
-                $action   = isset($_GET['action'])?$_GET['action']:NULL;				
+                $action   = isset($_GET['action'])?$_GET['action']:NULL;
 		$id       = validTeks(isset($_GET['id'])?$_GET['id']:NULL);
 		$nama     = validTeks(str_replace("_"," ",isset($_GET['nama']))?str_replace("_"," ",$_GET['nama']):NULL);
 		$jm       = validangka(isset($_GET['jm'])?$_GET['jm']:NULL);
@@ -116,11 +116,11 @@
             if ($action=="HAPUS") {
                 Hapus(" master_tindakan "," id ='".validTeks($_GET['id'])."' ","?act=DetailTindakan&action=TAMBAH&nama=$nama");
             }
-            
+
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
         ?>
     </div>

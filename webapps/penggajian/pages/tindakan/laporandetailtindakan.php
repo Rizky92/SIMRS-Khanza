@@ -22,7 +22,7 @@
 	$id        = validTeks($_GET['id']);
         $_sql 	   = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
         $hasil	   = bukaquery($_sql);
-        $baris 	   = mysqli_fetch_row($hasil); 
+        $baris 	   = mysqli_fetch_row($hasil);
 	$nik	   = $baris[0];
 	$nama	   = $baris[1];
         $_sql      = "select tindakan.tgl,tindakan.id,tindakan.tnd,master_tindakan.nama,tindakan.jm,tindakan.nm_pasien,tindakan.kamar,tindakan.diagnosa,tindakan.jmlh from tindakan inner join master_tindakan on tindakan.tnd=master_tindakan.id where tindakan.id='$id' and tindakan.tgl like '%".$tahun."-".$bulan."%' ORDER BY tindakan.tgl ASC";
@@ -48,10 +48,10 @@
             echo "</table>
                   <table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td>Jumlah Total JM : ".formatDuit($ttljm)." </td>                        
-                    </tr>     
+                        <td>Jumlah Total JM : ".formatDuit($ttljm)." </td>
+                    </tr>
                   </table>";
-        } 
+        }
     ?>
     </body>
 </html>

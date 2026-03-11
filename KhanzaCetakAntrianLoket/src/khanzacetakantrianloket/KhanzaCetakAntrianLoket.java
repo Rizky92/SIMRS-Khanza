@@ -29,7 +29,7 @@ public class KhanzaCetakAntrianLoket {
         }
         if (printerAntrean != null) {
             System.out.println("Setting PRINTERCETAKANTREAN menggunakan printer: " + printerAntrean);
-        } 
+        }
         frmUtama antrian=new frmUtama();
         antrian.setVisible(true);
     }

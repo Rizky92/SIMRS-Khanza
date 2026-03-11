@@ -1,7 +1,7 @@
 <?php
     include_once "conf/command.php";
     require_once('../conf/conf.php');
-    
+
     $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
     $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
     if ($_GET['act']=="login"){
@@ -12,7 +12,7 @@
                 'no_rawat'   => validTeks4($_GET['no_rawat'], 20),
                 'noexit'     => isset($_GET['noexit']) ? validTeks4($_GET['noexit'], 1) : '',
                 'kodeberkas' => isset($_GET['kodeberkas']) ? validTeks4($_GET['kodeberkas'], 4) : '',
-            ]), "e");			
+            ]), "e");
         }else{
             session_start();
             session_destroy();

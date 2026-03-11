@@ -18,7 +18,7 @@
                 echo "<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
 				$_sql  = "SELECT nik,nama FROM pegawai where id='$id'";
                 $hasil =bukaquery($_sql);
-                $baris = mysqli_fetch_row($hasil);   
+                $baris = mysqli_fetch_row($hasil);
 
                 $_sqlnext         	= "SELECT id FROM pegawai WHERE id>'$id' order by id asc limit 1";
                 $hasilnext        	= bukaquery($_sqlnext);
@@ -29,11 +29,11 @@
                 $hasilprev        	= bukaquery($_sqlprev);
                 $barisprev        	= mysqli_fetch_row($hasilprev);
                 @$prev              = $barisprev[0];
-                
+
                 if(empty($next)){
                     $next=$prev;
                 }
-                
+
                 if(empty($prev)){
                     $prev=$next;
                 }
@@ -121,7 +121,7 @@
                                 <td width='50%'><div align='center'>Keterangan</div></td>
                                 <td width='20%'><div align='center'>Dankes Diambil</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>"; ?>

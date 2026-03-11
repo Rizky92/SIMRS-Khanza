@@ -1,12 +1,12 @@
 <div id="post">
-    <div class="entry"> 
+    <div class="entry">
         <div align="center" class="link">
             <a href=?act=DetailTunjanganBulanan&action=TAMBAH>| Ms.Tunj Bulanan |</a>
             <a href=?act=DetailTunjanganHarian&action=TAMBAH>| Ms.Tunj Harian |</a>
             <a href=?act=DetailHarianBulanan&action=TAMBAH>| Harian-Bulanan |</a>
             <a href=?act=ListTunjangan>| List Penerima |</a>
             <a href=?act=HomeAdmin>| Menu Utama |</a>
-        </div>   
+        </div>
 	<form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -21,7 +21,7 @@
                         <input name=BtnCari type=submit class="button" value="&nbsp;&nbsp;Cari&nbsp;&nbsp;">
                     </td>
                 </tr>
-            </table><br> 
+            </table><br>
             <div style="width: 100%; height: 78%; overflow: auto;">
             <?php
                 $_sql    = "select pegawai.id,pegawai.nik,pegawai.nama,pegawai.departemen from pegawai where pegawai.stts_aktif='AKTIF' and (pegawai.nik like '%".$keyword."%' or pegawai.nama like '%".$keyword."%' or pegawai.departemen like '%".$keyword."%') order by pegawai.id ASC ";
@@ -59,7 +59,7 @@
                                         </td>
                                      </tr>";
                             }
-                    echo "</table>";           
+                    echo "</table>";
                 } else {
                     echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                             <tr class='head'>
@@ -78,10 +78,9 @@
         <?php
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/tunjangan/LaporanTunjangan.php?&keyword=$keyword>| Laporan |</a> </div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/tunjangan/LaporanTunjangan.php?&keyword=$keyword>| Laporan |</a> </div></td>
+                    </tr>
                   </table>");
         ?>
     </div>
 </div>
-

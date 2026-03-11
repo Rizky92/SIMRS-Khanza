@@ -73,7 +73,7 @@
                     <td width="25%" >Jenis Lembur</td><td width="">:</td>
                     <td width="75%">
                         <select name="jns" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" id="TxtIsi2">
-                            <!-- <option id='TxtIsi2' value=' '>- Jenis Kelamin -</option> -->                            
+                            <!-- <option id='TxtIsi2' value=' '>- Jenis Kelamin -</option> -->
                             <option id='TxtIsi2' value='HB'>HB</option>
                             <option id='TxtIsi2' value='HR'>HR</option>
                         </select>
@@ -161,8 +161,8 @@
             }
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah, Ttl.Lembur HB : ".$ttllembur." , Ttl.Lembur HR : ".$ttlhr." <a target=_blank href=../penggajian/pages/presensi/LaporanPresensiDetail.php?&id=$id>| Laporan |</a></div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah, Ttl.Lembur HB : ".$ttllembur." , Ttl.Lembur HR : ".$ttlhr." <a target=_blank href=../penggajian/pages/presensi/LaporanPresensiDetail.php?&id=$id>| Laporan |</a></div></td>
+                </tr>
              </table>");
         ?>
     </div>

@@ -57,7 +57,7 @@
 			<td width='250px'><div align='center'>Tnj. Harian Diterima</div></td>
                     </tr>
                 </table>";
-        } 
+        }
     ?>
     </body>
 </html>

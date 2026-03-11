@@ -55,7 +55,7 @@ $jam = date("H:i");
         $kd_dokter  = validTeks4($kd_dokter, 20);
 
         $setting    = mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
-        echo "   
+        echo "
            <table width='100%' align='center' border='0' class='tbl_form' cellspacing='0' cellpadding='0'>
                   <tr>
                         <td  width='10%' align='right' valign='center'>
@@ -65,18 +65,18 @@ $jam = date("H:i");
                            <center>
                                   <font size='6' color='#AA00AA' face='Tahoma'>" . $setting["nama_instansi"] . "</font><br>
                                   <font size='5' color='#AA00AA' face='Tahoma'>
-                                          " . $setting["alamat_instansi"] . ", " . $setting["kabupaten"] . ", " . $setting["propinsi"] . "<br>   
-                                  </font> 
+                                          " . $setting["alamat_instansi"] . ", " . $setting["kabupaten"] . ", " . $setting["propinsi"] . "<br>
+                                  </font>
                                   <font size='5' color='#AAAA00' face='Tahoma' >Antrian Poli " . getOne("select nm_poli from poliklinik where kd_poli='" . $kd_poli . "'") . ", Dokter " . getOne("select nm_dokter from dokter where kd_dokter='" . $kd_dokter . "'") . "<br> " . date("d-M-Y", $tanggal) . "  " . $jam . "</font>
                                   <br><br>
                            </center>
-                        </td>   
+                        </td>
                         <td  width='10%' align='left'>
                                 &nbsp;
-                        </td>  
+                        </td>
                         <td  width='10%' align='left' valign='top'>
                                 <img width='180' height='130' src='header-kanan.jpg'/>
-                        </td>                                                          
+                        </td>
                  </tr>
           </table> ";
         ?>
@@ -149,9 +149,9 @@ $jam = date("H:i");
                 </td>
             </tr>
             <?php
-            $_sql = "select reg_periksa.no_reg,reg_periksa.no_rawat,pasien.nm_pasien 
+            $_sql = "select reg_periksa.no_reg,reg_periksa.no_rawat,pasien.nm_pasien
                        from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
-                       where reg_periksa.kd_poli='" . $kd_poli . "' and reg_periksa.kd_dokter='" . $kd_dokter . "' 
+                       where reg_periksa.kd_poli='" . $kd_poli . "' and reg_periksa.kd_dokter='" . $kd_dokter . "'
                        and reg_periksa.tgl_registrasi='" . date("Y-m-d", $tanggal) . "' and stts='Belum' order by reg_periksa.no_reg";
             $hasil = bukaquery($_sql);
 

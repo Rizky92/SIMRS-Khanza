@@ -31,7 +31,7 @@
                     </div>
                     <center><button class="btn btn-danger waves-effect" type="submit" name="btnSimpan">Simpan</button></center>
                 </form>
-                <?php 
+                <?php
                     $btnSimpan=isset($_POST['btnSimpan'])?$_POST['btnSimpan']:NULL;
                     if (isset($btnSimpan)) {
                          $passwordlama        = validTeks4($_POST['passwordlama'],25);

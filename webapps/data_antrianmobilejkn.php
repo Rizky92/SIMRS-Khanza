@@ -1,8 +1,8 @@
  <?php
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  date_default_timezone_set("Asia/Makassar");
@@ -26,11 +26,11 @@
                </tr>
             </thead>
             <tbody>
-            <?php  
+            <?php
               $_sql="SELECT referensi_mobilejkn_bpjs.norm,referensi_mobilejkn_bpjs.nomorkartu,referensi_mobilejkn_bpjs.kodedokter,referensi_mobilejkn_bpjs.jampraktek,
                     referensi_mobilejkn_bpjs.jeniskunjungan,referensi_mobilejkn_bpjs.nomorreferensi,referensi_mobilejkn_bpjs.status,referensi_mobilejkn_bpjs.validasi,
-                    referensi_mobilejkn_bpjs.nobooking FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa='".date("Y-m-d", $tanggal)."' 
-                    order by referensi_mobilejkn_bpjs.validasi" ;  
+                    referensi_mobilejkn_bpjs.nobooking FROM referensi_mobilejkn_bpjs WHERE referensi_mobilejkn_bpjs.tanggalperiksa='".date("Y-m-d", $tanggal)."'
+                    order by referensi_mobilejkn_bpjs.validasi" ;
               $hasil=bukaquery($_sql);
 
               while ($data = mysqli_fetch_array ($hasil)){

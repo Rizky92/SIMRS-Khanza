@@ -43,11 +43,11 @@
                     if(empty($prev)){
                         $prev=$next;
                     }
-                    
+
                     if(empty($next)){
                         $next=$prev;
                     }
-                    
+
                     echo "<div align='center' class='link'>
                           <a href=?act=InputTidakHadir&action=TAMBAH&id=$prev><<--</a>
                           <a href=?act=ListLampiran&action=LIHAT>| List Lampiran |</a>
@@ -143,7 +143,7 @@
                         if($baris[2]=='I'){
                             $ttli=$ttli+$baris[4];
                         }
-                        
+
                       echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>"; ?>
@@ -167,10 +167,10 @@
             }
                 echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah, A : ".$ttla." , S : ".$ttls.", C : ".$ttlc.", I : ".$ttli."</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah, A : ".$ttla." , S : ".$ttls.", C : ".$ttlc.", I : ".$ttli."</div></td>
+                    </tr>
                  </table>");
-        
+
         ?>
     </div>
 

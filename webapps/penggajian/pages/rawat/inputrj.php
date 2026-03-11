@@ -59,7 +59,7 @@
                 <tr class="head">
                     <td width="31%">Nama</td><td width="">:</td>
                     <td width="67%"><?php echo @$baris[1];?></td>
-                </tr>                
+                </tr>
 		<tr class="head">
                     <td width="25%" >Tindakan</td><td width="">:</td>
                     <td width="75%">
@@ -81,7 +81,7 @@
                         </select>
                         <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                     </td>
-                </tr>                
+                </tr>
                 <tr class="head">
                     <td width="31%" >Jumlah Tindakan</td><td width="">:</td>
                     <td width="67%">
@@ -128,7 +128,7 @@
             ?>
             <div style="width: 100%; height: 59%; overflow: auto;">
             <?php
-                $_sql   = "select rawatjalan.tgl,rawatjalan.id,rawatjalan.tnd,master_tindakan.nama,rawatjalan.jm,rawatjalan.nm_pasien,rawatjalan.kamar,rawatjalan.diagnosa,rawatjalan.jmlh 
+                $_sql   = "select rawatjalan.tgl,rawatjalan.id,rawatjalan.tnd,master_tindakan.nama,rawatjalan.jm,rawatjalan.nm_pasien,rawatjalan.kamar,rawatjalan.diagnosa,rawatjalan.jmlh
                            from rawatjalan inner join master_tindakan on rawatjalan.tnd=master_tindakan.id where rawatjalan.id='$id' and rawatjalan.tgl like '%".$tahun."-".$bulan."%' ORDER BY rawatjalan.tgl ASC";
                 $hasil  = bukaquery($_sql);
                 $jumlah = mysqli_num_rows($hasil);
@@ -175,8 +175,8 @@
             }
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljm)." <a target=_blank href=../penggajian/pages/rawat/laporandetailrj.php?&id=$id>| Laporan |</a></div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljm)." <a target=_blank href=../penggajian/pages/rawat/laporandetailrj.php?&id=$id>| Laporan |</a></div></td>
+                    </tr>
                  </table>");
         ?>
     </div>

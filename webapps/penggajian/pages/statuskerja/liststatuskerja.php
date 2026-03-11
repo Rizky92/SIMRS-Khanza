@@ -1,10 +1,10 @@
 <div id="post">
-    <div class="entry"> 
+    <div class="entry">
         <div align="center" class="link">
             <a href=?act=InputSttskerja&action=TAMBAH>| Input Data |</a>
             <a href=?act=ListSttskerja>| List Data |</a>
             <a href=?act=HomeAdmin>| Menu Utama |</a>
-        </div>   
+        </div>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                     $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -29,7 +29,7 @@
             $jumlah = mysqli_num_rows($hasil);
             if(mysqli_num_rows($hasil)!=0) {
                 echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                        <tr class='head'>					   
+                        <tr class='head'>
                             <td width='12%'><div align='center'>Proses</div></td>
                             <td width='28%'><div align='center'>Status</div></td>
                             <td width='40%'><div align='center'>Keterangan</div></td>
@@ -47,13 +47,13 @@
                                     <td>$baris[0]</td>
                                     <td>$baris[1]</td>
                                     <td align='center'>$baris[2]</td>
-                                    <td align='center'>$baris[3]</td>                                   
+                                    <td align='center'>$baris[3]</td>
                                   </tr>";
                         }
                 echo "</table>";
             } else {
                 echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                        <tr class='head'>					   
+                        <tr class='head'>
                             <td width='12%'><div align='center'>Proses</div></td>
                             <td width='28%'><div align='center'>Status</div></td>
                             <td width='40%'><div align='center'>Keterangan</div></td>
@@ -72,8 +72,8 @@
         <?php
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/statuskerja/LaporanStatusKerja.php?&keyword=$keyword>Laporan</a> | <a target=_blank href=../penggajian/pages/statuskerja/LaporanStatusKerjaExel.php?&keyword=$keyword>Excel</a> |</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/statuskerja/LaporanStatusKerja.php?&keyword=$keyword>Laporan</a> | <a target=_blank href=../penggajian/pages/statuskerja/LaporanStatusKerjaExel.php?&keyword=$keyword>Excel</a> |</div></td>
+                    </tr>
                  </table>");
         ?>
     </div>

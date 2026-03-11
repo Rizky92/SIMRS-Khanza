@@ -14,7 +14,7 @@
         <a href=?act=InputInsentif&action=TAMBAH>| Input Pendapatan |</a>
         <a href=?act=InputIndex&action=TAMBAH>| Input Insentif |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     &nbsp;Pendapatan :
     <div style="width: 100%; height: 65px;overflow: auto;">
     <?php
@@ -29,9 +29,9 @@
                         <td width='34%'><div align='center'>Pendapatan</div></td>
                         <td width='20%'><div align='center'>Prosentase</div></td>
                         <td width='34%'><div align='center'>Total Insentif</div></td>
-                    </tr>";					
+                    </tr>";
                     while($baris = mysqli_fetch_array($hasil)) {
-                        $total_insentif=$baris[2];						
+                        $total_insentif=$baris[2];
                         echo "<tr class='isi'>
                                 <td>
                                  <center>
@@ -42,10 +42,10 @@
                                 </td>
                                 <td>".formatDuit($baris[0])."</td>
                                 <td>$baris[1]%</td>
-                                <td>".formatDuit($baris[2])."</td>                                
+                                <td>".formatDuit($baris[2])."</td>
                              </tr>";
                     }
-            echo "</table>";        
+            echo "</table>";
         } else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -56,7 +56,7 @@
                     </tr>
                   </table>";
         }
-    ?>      
+    ?>
     </div>
     &nbsp;Insentif :
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
@@ -122,7 +122,7 @@
                   </table>";
         }
     ?>
-    
+
     </div>
     <?php
         $aksi = isset($_GET['action']);
@@ -135,8 +135,8 @@
         if(mysqli_num_rows($hasil)!=0) {
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Insentif : ".formatDuit($ttl)." | <a target=_blank href=../penggajian/pages/insentif/LaporanInsentif.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/insentif/LaporanInsentifExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah, Ttl Prosen : ".$prosen."%, Ttl Insentif : ".formatDuit($ttl)." | <a target=_blank href=../penggajian/pages/insentif/LaporanInsentif.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/insentif/LaporanInsentifExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>
+                    </tr>
                  </table>");
         }
     ?>

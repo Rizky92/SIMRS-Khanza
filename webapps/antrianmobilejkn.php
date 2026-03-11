@@ -1,9 +1,9 @@
 <?php
  session_start();
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  date_default_timezone_set("Asia/Makassar");
@@ -60,23 +60,23 @@
                               $tanggal  = date ("j");
                               $a_bulan  = array(1=>"Januari","Februari","Maret", "April", "Mei", "Juni","Juli","Agustus","September","Oktober", "November","Desember");
                               $bulan    = $a_bulan[date("n")];
-                              $tahun    = date("Y"); 
+                              $tahun    = date("Y");
                               echo $hari . ", " . $tanggal ." ". $bulan ." ". $tahun;
                             ?>
                         </a>
-                        <i class="material-icons md-12">query_builder</i>  
+                        <i class="material-icons md-12">query_builder</i>
                         <a href="" class="white-text" id="jam"></a>
                   </li>
                 </ul>
             </div>
         </nav>
     </header>
-    
+
     <main>
         <div class="container-fluid" id="data">
         </div>
     </main>
-    
+
     <script type="text/javascript" src="assets/js/jquery-2.1.1.min.js"></script>
     <script type="text/javascript" src="assets/js/materialize.min.js"></script>
     <script type="text/javascript" src="assets/js/jquery-ui.min.js"></script>
@@ -104,11 +104,11 @@
       }
     </script>
 
-    <script type="text/javascript" src="assets/js/jquery.js"></script> 
-    <script type="text/javascript"> 
-        var auto_refresh = setInterval( 
-            function() { 
-                $('#data').load('data_antrianmobilejkn.php').fadeIn("fast"); 
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript">
+        var auto_refresh = setInterval(
+            function() {
+                $('#data').load('data_antrianmobilejkn.php').fadeIn("fast");
             }, 10000
         );
     </script>

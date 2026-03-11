@@ -6,7 +6,7 @@
     if(file_exists(host()."/webapps/persetujuanumum/pages/upload/".$nosurat.".jpeg")){
         @unlink(host()."/webapps/persetujuanumum/pages/upload/".$nosurat.".jpeg");
     }
-    
+
     $img                    = $_POST["image"];
     $folderPath             = "upload/";
     $image_parts            = explode(";base64,", $img);
@@ -16,7 +16,7 @@
     $fileName               = $nosurat.".jpeg";
     $file                   = $folderPath . $fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("surat_persetujuan_umum_pembuat_pernyataan","'".$nosurat."','pages/upload/$fileName'");
     Ubah2("surat_persetujuan_umum","pengobatan_kepada='$pengobatan_kepada',nilai_kepercayaan='$nilai_kepercayaan' where no_surat='$nosurat'");
 ?>
@@ -30,4 +30,3 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <body><center>Proses Pengambilan Persetujuan Umum Pasien/Keluarga Pasien Sudah Selesai ..!! <br><a href='../login.php?iyem=<?=encrypt_decrypt("{\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e")?>' class='btn btn-secondary' >Kembali</a></center></body>
 </html>
-

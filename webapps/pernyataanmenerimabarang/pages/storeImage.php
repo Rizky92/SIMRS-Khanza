@@ -4,7 +4,7 @@
     if(file_exists(host()."/webapps/pernyataanmenerimabarang/pages/upload/".$nopernyataan.".jpeg")){
         @unlink(host()."/webapps/pernyataanmenerimabarang/pages/upload/".$nopernyataan.".jpeg");
     }
-    
+
     $img                    = $_POST["image"];
     $folderPath             = "upload/";
     $image_parts            = explode(";base64,", $img);
@@ -14,7 +14,7 @@
     $fileName               = $nopernyataan.".jpeg";
     $file                   = $folderPath . $fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("surat_serah_terima_barang_anggota_tubuh_bukti","'".$nopernyataan."','pages/upload/$fileName'");
 ?>
 <head>
@@ -27,4 +27,3 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <body><center>Proses Pengambilan Pernyataan Menerima Anggota Tubuh/Barang Pasien Sudah Selesai ..!! <br><a href='../login.php?iyem=<?=encrypt_decrypt("{\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e")?>' class='btn btn-secondary' >Kembali</a></center></body>
 </html>
-

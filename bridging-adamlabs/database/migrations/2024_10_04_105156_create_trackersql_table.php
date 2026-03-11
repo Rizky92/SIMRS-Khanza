@@ -14,7 +14,7 @@ return new class extends Migration
             $table->string('usere', 20);
             $table->string('ip', 45);
             $table->string('connection', 20);
-            
+
             $table->index('tanggal');
             $table->index('usere');
             $table->index('connection');

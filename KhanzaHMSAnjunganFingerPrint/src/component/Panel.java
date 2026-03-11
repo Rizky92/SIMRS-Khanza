@@ -15,7 +15,7 @@ import javax.swing.border.LineBorder;
  * @author root
  */
 public class Panel extends JPanel{
-    public Panel(){        
+    public Panel(){
         setBackground(new Color(240,255,255));
         setBorder(new LineBorder(new Color(240,205,240)));
     }

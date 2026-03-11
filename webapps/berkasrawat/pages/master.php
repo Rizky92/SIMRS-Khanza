@@ -4,7 +4,7 @@
     }
 ?>
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype="multipart/form-data">
             <?php
                 echo "";
