@@ -312,6 +312,8 @@ public class DlgCekDataBPJS extends widget.Dialog {
                         regist.setVisible(true);
                         flag = -1;
                         dispose();
+                    } else if (Sequel.cariExistsSmc("select * from referensi_mobilejkn_bpjs where nomorkartu = ? and tanggalperiksa = current_date() and status in ('Batal', 'Gagal')", noKartu)) {
+                        Valid.popupPeringatanDialog("Booking MobileJKN Anda telah dibatalkan.\nSilahkan konfirmasi ke bagian Pendaftaran.", 7);
                     } else {
                         Valid.popupGagalDialog("Data booking MobileJKN tidak ditemukan..!!", 5);
                     }
