@@ -2004,4 +2004,6 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
+ALTER TABLE `dpjp_ranap` ADD COLUMN IF NOT EXISTS `status` enum('utama','') DEFAULT '' AFTER `kd_dokter`;
+
 SET FOREIGN_KEY_CHECKS=1;

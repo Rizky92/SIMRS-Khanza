@@ -942,7 +942,8 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                     AlamatPembuatPernyataan.getText(),Valid.SetTgl(TanggalLahir.getSelectedItem()+""),JKPembuatPernyataan.getSelectedItem().toString().substring(0,1),
                     HubunganDenganPasien.getSelectedItem().toString(),SaksiKeluarga.getText()
                 })==true){
-                Sequel.menyimpan2("dpjp_ranap","?,?","Dokter",2,new String[]{TNoRw.getText(),KdDokter.getText()});
+                boolean hasUtama = !Sequel.cariIsi("select count(*) from dpjp_ranap where no_rawat=? and status='utama'",TNoRw.getText()).equals("0");
+                Sequel.menyimpan2("dpjp_ranap","?,?,?","Dokter",3,new String[]{TNoRw.getText(),KdDokter.getText(),hasUtama?"":"utama"});
                 tabMode.addRow(new Object[]{
                     NoPenyataan.getText(),TNoRw.getText(),TNoRM.getText(),TPasien.getText(),TglLahir.getText(),Jk.getText().substring(0,1),
                     Valid.SetTgl(TglPernyataan.getSelectedItem()+""),PembuatPernyataan.getText(),AlamatPembuatPernyataan.getText(),
@@ -1848,7 +1849,8 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                     HubunganDenganPasien.getSelectedItem().toString(),SaksiKeluarga.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()
         })==true){
             Sequel.queryu2("delete from dpjp_ranap where no_rawat=? and kd_dokter=?",2,new String[]{TNoRw.getText(),tbObat.getValueAt(tbObat.getSelectedRow(),13).toString()});
-            Sequel.menyimpan2("dpjp_ranap","?,?","Dokter",2,new String[]{TNoRw.getText(),KdDokter.getText()});
+            Sequel.queryu2("update dpjp_ranap set status='' where no_rawat=? and status='utama'",1,new String[]{TNoRw.getText()});
+            Sequel.menyimpan2("dpjp_ranap","?,?,?","Dokter",3,new String[]{TNoRw.getText(),KdDokter.getText(),"utama"});
             tbObat.setValueAt(NoPenyataan.getText(),tbObat.getSelectedRow(),0);
             tbObat.setValueAt(TNoRw.getText(),tbObat.getSelectedRow(),1);
             tbObat.setValueAt(TNoRM.getText(),tbObat.getSelectedRow(),2);

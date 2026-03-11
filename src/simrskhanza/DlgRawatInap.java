@@ -9503,7 +9503,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                     TNoRM.setText(rs.getString("no_rkm_medis"));
                     TCariPasien.setText(TNoRM.getText());
                     TPasien.setText(rs.getString("pasien"));
-                    KdDok.setText(Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=?",TNoRw.getText()));
+                    KdDok.setText(Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=? order by dpjp_ranap.status='utama' desc limit 1",TNoRw.getText()));
                     if(KdDok.getText().equals("")){
                         KdDok.setText(rs.getString("kd_dokter"));
                     }

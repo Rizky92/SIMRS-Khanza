@@ -34,7 +34,7 @@
         $nm_poli            = $baris["nm_poli"];
         $no_peserta         = $baris["no_peserta"];
         $nm_dokter          = getOne("select dokter.nm_dokter from reg_periksa inner join dokter on reg_periksa.kd_dokter=dokter.kd_dokter where reg_periksa.no_rawat='".$norawat."'");
-        $nm_dokter2         = getOne("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$norawat."'");
+        $nm_dokter2         = getOne("select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='".$norawat."' order by dpjp_ranap.status='utama' desc limit 1");
         if(!empty($nm_dokter2)){
             $nm_dokter=$nm_dokter2;
         }
