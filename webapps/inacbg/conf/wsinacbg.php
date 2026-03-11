@@ -1604,6 +1604,44 @@
         ];
     }
 
+    function updateDataKlaim2Smc($nomor_sep, array $data) {
+        $request = [
+            'metadata' => [
+                'method' => 'set_claim_data',
+                'nomor_sep' => $nomor_sep,
+            ],
+            'data' => $data,
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "set_claim_data": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
+        InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
+
+        return [
+            'success' => true,
+            'data' => 'Data klaim berhasil disimpan!',
+            'error' => null,
+        ];
+    }
+
     function UpdateDataKlaimSmc(
         $nomor_sep, $nomor_kartu, $nomor_rm, $tgl_masuk, $tgl_pulang, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour,
         $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $tarif_poli_eks, $cara_masuk,
