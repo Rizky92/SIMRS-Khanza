@@ -8,6 +8,7 @@ package fungsi;
 import AESsecurity.EnkripsiAES;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -30,125 +31,64 @@ public class koneksiDB {
     private static final Object LOCK=new Object();
     private static volatile long lastCheck =0;
     private static final long CHECK_INTERVAL =30000;
+    private static volatile boolean isShown = false;
 
     private koneksiDB(){}
 
-    static {
-        Runtime.getRuntime().addShutdownHook(new Thread(koneksiDB::closeConnection));
-    }
-
-    public static Connection condb() {
+    public static synchronized Connection condb() {
+        if (!isShown) {
+            System.out.println("\n" +
+                "  Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n" +
+                "  Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
+                "  Puskesmas yang gratis dan boleh digunakan siapa saja tanpa dikenai \n" +
+                "  biaya apapun. Dilarang keras memperjualbelikan/mengambil \n" +
+                "  keuntungan dari Software ini dalam bentuk apapun tanpa seijin pembuat \n" +
+                "  software (Khanza.Soft Media).\n\n" +
+                "  #    ____  ___  __  __  ____   ____    _  __ _                              \n" +
+                "  #   / ___||_ _||  \\/  ||  _ \\ / ___|  | |/ /| |__    __ _  _ __   ____ __ _ \n" +
+                "  #   \\___ \\ | | | |\\/| || |_) |\\___ \\  | ' / | '_ \\  / _` || '_ \\ |_  // _` |\n" +
+                "  #    ___) || | | |  | ||  _ <  ___) | | . \\ | | | || (_| || | | | / /| (_| |\n" +
+                "  #   |____/|___||_|  |_||_| \\_\\|____/  |_|\\_\\|_| |_| \\__,_||_| |_|/___|\\__,_|\n" +
+                "  #                                                                           \n\n" +
+                "  Lisensi yang dianut di software ini https://en.wikipedia.org/wiki/Aladdin_Free_Public_License \n" +
+                "  Informasi dan panduan bisa dicek di halaman https://github.com/mas-elkhanza/SIMRS-Khanza/wiki \n" +
+                "  Bagi yang ingin berdonasi untuk pengembangan aplikasi ini bisa ke BSI 1015369872 atas nama Windiarto");
+            isShown = true;
+        }
         try {
-            if (!initialized.get()) {
-                synchronized (LOCK) {
-                    if (!initialized.get()) {
-                        initDataSource();
-                        reconnect();
-                        initialized.set(true);
-                    }
-                }
-            }
+            try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+                prop.loadFromXML(fis);
+                dataSource.setURL("jdbc:mysql://" + EnkripsiAES.decrypt(prop.getProperty("HOST")) + ":" + EnkripsiAES.decrypt(prop.getProperty("PORT")) + "/" + EnkripsiAES.decrypt(prop.getProperty("DATABASE")) + "?zeroDateTimeBehavior=convertToNull&autoReconnect=true&useCompression=true");
+                dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
+                dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
+                dataSource.setCachePreparedStatements(true);
+                dataSource.setUseCompression(true);
+                // dataSource.setUseLocalSessionState(true);
+                // dataSource.setUseLocalTransactionState(true);
 
-            long now = System.currentTimeMillis();
-            if (now - lastCheck > CHECK_INTERVAL) {
-                lastCheck = now;
-                if (!isConnectionAlive()) {
-                    synchronized (LOCK) {
-                        if (!isConnectionAlive()) {
-                            reconnect();
+                int retries = 3;
+                while (retries > 0) {
+                    try {
+                        Connection connection = dataSource.getConnection();
+                        connection.setAutoCommit(true);
+                        connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+                        return connection;
+                    } catch (SQLException e) {
+                        retries--;
+                        JOptionPane.showMessageDialog(null, "Gagal koneksi ke database. Sisa percobaan : " + retries);
+                        if (retries == 0) {
+                            JOptionPane.showMessageDialog(null, "Koneksi ke database gagal. Silakan periksa koneksi jaringan atau konfigurasi database.");
+                            throw new SQLException("Gagal koneksi ke database setelah beberapa percobaan.", e);
                         }
                     }
                 }
+            } catch (IOException e) {
+                throw new SQLException("Notif : " + e);
             }
+        } catch (SQLException ex) {
+            Logger.getLogger(koneksiDB.class.getName()).log(Level.SEVERE, null, ex);
         }
-        catch (Exception e) {
-            Logger.getLogger(koneksiDB.class.getName()).log(Level.SEVERE, null, e);
-        }
-        return connection;
-    }
-
-    private static void initDataSource() throws Exception {
-        try (FileInputStream fis =new FileInputStream("setting/database.xml")) {
-            prop.loadFromXML(fis);
-        }
-        dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&tcpKeepAlive=true&connectTimeout=10000&socketTimeout=60000&maintainTimeStats=false&autoReconnect=true");
-        dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
-        dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
-        // dataSource.setCachePreparedStatements(true);
-        dataSource.setUseCompression(true);
-    }
-
-    private static boolean isConnectionAlive() {
-        try {
-            if (connection == null) return false;
-            if (connection.isClosed()) return false;
-            if (!connection.isValid(3)) return false;
-            try (Statement st=connection.createStatement()) {
-                st.executeQuery("SELECT 1");
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    private static void reconnect() throws SQLException {
-        closeConnection();
-        int retries = 5;
-        while (retries > 0) {
-            try {
-                connection=dataSource.getConnection();
-                connection.setAutoCommit(true);
-                connection.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
-                System.out.println(
-                    "  Koneksi Berhasil. Sorry bro loading, silahkan baca dulu.... \n\n"+
-                    "  Software ini adalah Software Menejemen Rumah Sakit/Klinik/\n" +
-                    "  Puskesmas yang gratis dan boleh digunakan siapa saja tanpa dikenai \n" +
-                    "  biaya apapun. Dilarang keras memperjualbelikan/mengambil \n" +
-                    "  keuntungan dari Software ini dalam bentuk apapun tanpa seijin pembuat \n" +
-                    "  software (Khanza.Soft Media). Bagi yang sengaja memperjualbelikan/\n"+
-                    "  mengambil keuntangan dari softaware ini tanpa ijin, kami  sumpahi sial\n"+
-                    "  1000 turunan, miskin sampai 500 turunan.\n"+
-                    "                                                                           \n"+
-                    "  #    ____  ___  __  __  ____   ____    _  __ _                              \n" +
-                    "  #   / ___||_ _||  \\/  ||  _ \\ / ___|  | |/ /| |__    __ _  _ __   ____ __ _ \n" +
-                    "  #   \\___ \\ | | | |\\/| || |_) |\\___ \\  | ' / | '_ \\  / _` || '_ \\ |_  // _` |\n" +
-                    "  #    ___) || | | |  | ||  _ <  ___) | | . \\ | | | || (_| || | | | / /| (_| |\n" +
-                    "  #   |____/|___||_|  |_||_| \\_\\|____/  |_|\\_\\|_| |_| \\__,_||_| |_|/___|\\__,_|\n" +
-                    "  #                                                                           \n"+
-                    "                                                                           \n"+
-                    "  Licensi yang dianut di software ini https://en.wikipedia.org/wiki/Aladdin_Free_Public_License \n"+
-                    "  Informasi dan panduan bisa dicek di halaman https://github.com/mas-elkhanza/SIMRS-Khanza/wiki \n"+
-                    "  Bagi yang ingin berdonasi untuk pengembangan aplikasi ini bisa ke BSI 1015369872 atas nama Windiarto\n"+
-                    "                                                                           "
-                );
-                return;
-            } catch (SQLException e) {
-                retries--;
-                JOptionPane.showMessageDialog(null,"Gagal koneksi ke database. Sisa percobaan : " + retries);
-                if (retries == 0) {
-                    JOptionPane.showMessageDialog(null, "Koneksi ke database gagal. Silakan periksa koneksi jaringan atau konfigurasi database.");
-                    throw new SQLException("Gagal koneksi ke database setelah beberapa percobaan.", e);
-                }
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ie) {
-                    Thread.currentThread().interrupt();
-                    throw new SQLException("Thread terinterupsi saat mencoba koneksi."+ie);
-                }
-            }
-        }
-    }
-
-    public static void closeConnection() {
-        try {
-            if (connection != null &&!connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(koneksiDB.class.getName()).log(Level.SEVERE, null, e);
-        }
-        connection = null;
+        return null;
     }
 
     public static String raw(String propertyName) {

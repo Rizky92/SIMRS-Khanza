@@ -1075,6 +1075,11 @@ public class frmPengaduan extends javax.swing.JFrame {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null) {
+                koneksi.close();
+            }
+        } catch (Exception e) {}
         executor.shutdownNow();
         super.dispose();
     }

@@ -484,6 +484,11 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null) {
+                koneksi.close();
+            }
+        } catch (Exception e) {}
         executor.shutdownNow();
         super.dispose();
     }

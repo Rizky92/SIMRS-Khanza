@@ -585,6 +585,11 @@ public final class DlgLhtPembayaranPihakKe3BankMandiri extends javax.swing.JDial
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null) {
+                koneksi.close();
+            }
+        } catch (Exception e) {}
         executor.shutdownNow();
         super.dispose();
     }

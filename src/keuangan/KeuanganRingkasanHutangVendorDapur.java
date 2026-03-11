@@ -567,6 +567,11 @@ public final class KeuanganRingkasanHutangVendorDapur extends javax.swing.JDialo
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null) {
+                koneksi.close();
+            }
+        } catch (Exception e) {}
         executor.shutdownNow();
         super.dispose();
     }

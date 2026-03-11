@@ -463,6 +463,11 @@ public final class RMCari5SOAPTerakhir extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null) {
+                koneksi.close();
+            }
+        } catch (Exception e) {}
         executor.shutdownNow();
         super.dispose();
     }

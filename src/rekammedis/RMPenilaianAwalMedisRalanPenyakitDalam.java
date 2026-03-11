@@ -2514,6 +2514,11 @@ public final class RMPenilaianAwalMedisRalanPenyakitDalam extends javax.swing.JD
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null) {
+                koneksi.close();
+            }
+        } catch (Exception e) {}
         executor.shutdownNow();
         super.dispose();
     }

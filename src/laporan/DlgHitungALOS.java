@@ -882,6 +882,11 @@ public final class DlgHitungALOS extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null) {
+                koneksi.close();
+            }
+        } catch (Exception e) {}
         executor.shutdownNow();
         super.dispose();
     }
