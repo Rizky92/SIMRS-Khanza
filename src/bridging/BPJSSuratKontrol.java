@@ -86,7 +86,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                 "Nyeri Dada 3 Bulan","Sesak Napas Aktivitas","Nyeri Dada Aktivitas","Terkontrol","Gejala 2x Minggu",
                 "Bangun Malam","Keterbatasan Fisik","Fungsi Paru","Skor MMRC","Eksaserbasi 1 Tahun","Mampu Aktivitas",
                 "Epileptik 6 Bulan","Efek Samping OAB","Hamil Menyusui","Remisi","Terapi Rumatan","Usia","Asam Urat",
-                "Remisi SLE","Hamil"
+                "Remisi SLE","Hamil", "Keterangan Tambahan"
             }){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
@@ -96,7 +96,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         tbObat.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbObat.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 53; i++) {
+        for (i = 0; i < 54; i++) {
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
@@ -204,6 +204,8 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                 column.setPreferredWidth(65);
             }else if(i==52){
                 column.setPreferredWidth(90);
+            }else if(i==53){
+                column.setPreferredWidth(300);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -227,6 +229,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         Usia.setDocument(new batasInput((byte)5).getOnlyAngka(Usia));
         AsamUrat.setDocument(new batasInput((byte)5).getOnlyAngka(AsamUrat));
         RemisiSLE.setDocument(new batasInput((byte)5).getOnlyAngka(RemisiSLE));
+        Keterangan.setDocument(new batasInput((byte)150).getKata(Keterangan));
 
         ChkInput.setSelected(false);
         isForm();
@@ -412,6 +415,8 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         jLabel65 = new widget.Label();
         jLabel66 = new widget.Label();
         Hamil = new widget.ComboBox();
+        jLabel67 = new widget.Label();
+        Keterangan = new widget.TextBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
 
@@ -982,7 +987,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         StatusPRB.setName("StatusPRB"); // NOI18N
         StatusPRB.setPreferredSize(new java.awt.Dimension(62, 23));
         FormInput.add(StatusPRB);
-        StatusPRB.setBounds(94, 130, 200, 23);
+        StatusPRB.setBounds(94, 130, 150, 23);
 
         jLabel19.setText("Asesmen PRB :");
         jLabel19.setName("jLabel19"); // NOI18N
@@ -1408,6 +1413,15 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         FormInput.add(Hamil);
         Hamil.setBounds(477, 420, 90, 23);
 
+        jLabel67.setText("Ket. Tambahan :");
+        jLabel67.setName("jLabel67"); // NOI18N
+        FormInput.add(jLabel67);
+        jLabel67.setBounds(247, 130, 87, 23);
+
+        Keterangan.setName("Keterangan"); // NOI18N
+        FormInput.add(Keterangan);
+        Keterangan.setBounds(337, 130, 390, 23);
+
         scrollInput.setViewportView(FormInput);
 
         PanelInput.add(scrollInput, java.awt.BorderLayout.CENTER);
@@ -1513,14 +1527,14 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                 System.out.println("message : "+nameNode.path("message").asText());
                 if(nameNode.path("code").asText().equals("200")){
                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("noSuratKontrol");
-                    if(Sequel.menyimpantf("bridging_surat_kontrol_bpjs","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat",45,new String[]{
+                    if(Sequel.menyimpantf("bridging_surat_kontrol_bpjs","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","No.Surat",46,new String[]{
                             NoSEP.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),response.asText(),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),
                             StatusPRB.getSelectedItem().toString().trim(),HBA1C.getText(),GDP.getText(),GD2JPP.getText(),eGFR.getText(),TDSistolik.getText(),TDDiastolik.getText(),LDL.getText(),RerataTDSistolik.getText(),RerataTDDiastolik.getText(),
                             JantungKoroner.getSelectedItem().toString().trim(),Stroke.getSelectedItem().toString().trim(),VaskularPerifer.getSelectedItem().toString().trim(),Aritmia.getSelectedItem().toString().trim(),AtrialFibrilasi.getSelectedItem().toString().trim(),
                             RRIstirahat.getText(),SesakNapas3Bulan.getSelectedItem().toString().trim(),NyeriDada3Bulan.getSelectedItem().toString().trim(),SesakNapasAktivitas.getSelectedItem().toString().trim(),NyeriDadaAktivitas.getSelectedItem().toString().trim(),
                             Terkontrol.getSelectedItem().toString().trim(),Gejala2xMinggu.getSelectedItem().toString().trim(),BangunMalam.getSelectedItem().toString().trim(),KeterbatasanFisik.getSelectedItem().toString().trim(),FungsiParu.getText(),
                             SkorMMRC.getText(),Eksaserbasi1Tahun.getSelectedItem().toString().trim(),MampuAktivitas.getSelectedItem().toString().trim(),Epileptik6Bulan.getSelectedItem().toString().trim(),EfekSampingOAB.getSelectedItem().toString().trim(),
-                            HamilMenyusui.getSelectedItem().toString().trim(),Remisi.getText(),TerapiRumatan.getSelectedItem().toString().trim(),Usia.getText(),AsamUrat.getText(),RemisiSLE.getText(),Hamil.getSelectedItem().toString().trim()
+                            HamilMenyusui.getSelectedItem().toString().trim(),Remisi.getText(),TerapiRumatan.getSelectedItem().toString().trim(),Usia.getText(),AsamUrat.getText(),RemisiSLE.getText(),Hamil.getSelectedItem().toString().trim(),Keterangan.getText().trim()
                         })==true){
                         emptTeks();
                         runBackground(() ->tampil());
@@ -1853,6 +1867,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
                     System.out.println("code : "+nameNode.path("code").asText());
                     System.out.println("message : "+nameNode.path("message").asText());
                     if(nameNode.path("code").asText().equals("200")){
+                        // TODO: Ganti ke mengupdatetfSmc
                         if(Sequel.mengedittf("bridging_surat_kontrol_bpjs","no_surat=?","tgl_surat=?,tgl_rencana=?,kd_dokter_bpjs=?,nm_dokter_bpjs=?,kd_poli_bpjs=?,nm_poli_bpjs=?,status_prb=?,HBA1C=?,GDP=?,GD2JPP=?,eGFR=?,TD_Sistolik=?,TD_Diastolik=?,LDL=?,"+
                                 "Rata_TD_Sistolik=?,Rata_TD_Diastolik=?,JantungKoroner=?,Stroke=?,VaskularPerifer=?,Aritmia=?,AtrialFibrilasi=?,NadiIstirahat=?,SesakNapas3Bulan=?,NyeriDada3Bulan=?,SesakNapasAktivitas=?,NyeriDadaAktivitas=?,"+
                                 "Terkontrol=?,Gejala2xMinggu=?,BangunMalam=?,KeterbatasanFisik=?,FungsiParu=?,SkorMMRC=?,Eksaserbasi1Tahun=?,MampuAktivitas=?,Epileptik6Bulan=?,EfekSampingOAB=?,HamilMenyusui=?,Remisi=?,TerapiRumatan=?,Usia=?,"+
@@ -2083,6 +2098,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
     private widget.ComboBox JantungKoroner;
     private widget.TextBox KdDokter;
     private widget.TextBox KdPoli;
+    private widget.TextBox Keterangan;
     private widget.ComboBox KeterbatasanFisik;
     private widget.Label LCount;
     private widget.Label LCount1;
@@ -2186,6 +2202,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
     private widget.Label jLabel64;
     private widget.Label jLabel65;
     private widget.Label jLabel66;
+    private widget.Label jLabel67;
     private widget.Label jLabel7;
     private widget.Label jLabel9;
     private javax.swing.JPanel jPanel3;
@@ -2383,6 +2400,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
         AsamUrat.setText("");
         RemisiSLE.setText("");
         Hamil.setSelectedIndex(0);
+        Keterangan.setText("");
         TanggalSurat.requestFocus();
     }
 
@@ -2440,6 +2458,7 @@ public class BPJSSuratKontrol extends javax.swing.JDialog {
             Hamil.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),52).toString().trim());
             Valid.SetTgl(TanggalSurat,tbObat.getValueAt(tbObat.getSelectedRow(),8).toString());
             Valid.SetTgl(TanggalKontrol,tbObat.getValueAt(tbObat.getSelectedRow(),10).toString());
+            Keterangan.setText(tbObat.getValueAt(tbObat.getSelectedRow(),53).toString());
         }
     }
 
