@@ -111,6 +111,8 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF(),
         kategoriUploadBerkas = "", kamar = "", unit = "";
     private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false;
+    private final boolean gunakanJavaEklaim = koneksiDB.GUNAKANJAVAEKLAIM();
+    private support.EKlaimPanel eklaimPanel = null;
     private int flagklaim = -1, flagInacbgTopup = -1, selectedRow = -1;
     private long maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
 
@@ -288,7 +290,16 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             jfxINACBG.setScene(new Scene(layoutKlaim));
             jfxBerkasDigital.setScene(new Scene(layoutBerkasDigital));
         });
-        PanelContentINACBG.add(jfxINACBG, BorderLayout.CENTER);
+        if (gunakanJavaEklaim) {
+            eklaimPanel = new support.EKlaimPanel();
+            eklaimPanel.setOnRefreshCallback(() -> {
+                setFlagKlaim();
+                tampilINACBG();
+            });
+            PanelContentINACBG.add(eklaimPanel, BorderLayout.CENTER);
+        } else {
+            PanelContentINACBG.add(jfxINACBG, BorderLayout.CENTER);
+        }
         PanelBerkasDigital.add(jfxBerkasDigital, BorderLayout.CENTER);
 
         HTMLEditorKit kit = new HTMLEditorKit();
@@ -3369,6 +3380,20 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     }
 
     private void tampilINACBG() {
+        if (gunakanJavaEklaim) {
+            tampilINACBGNative();
+        } else {
+            tampilINACBGWebView();
+        }
+    }
+
+    private void tampilINACBGNative() {
+        if (eklaimPanel != null) {
+            eklaimPanel.tampil(btnSEP.getText(), lblNoRawat.getText(), lblCoderNIK.getText(), flagklaim, flagInacbgTopup);
+        }
+    }
+
+    private void tampilINACBGWebView() {
         String corona = "BukanCorona";
         String aksi = "";
         String grouper = "";

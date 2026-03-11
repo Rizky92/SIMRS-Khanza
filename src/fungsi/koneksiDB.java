@@ -250,6 +250,42 @@ public class koneksiDB {
         }
     }
 
+    public static String EKLAIMWSURL() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("EKLAIMWSURL", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String EKLAIMKEY() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("EKLAIMKEY", EnkripsiAES.encrypt("")));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static boolean GUNAKANJAVAEKLAIM() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("GUNAKANJAVAEKLAIM", "no").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
+    public static String EKLAIMKODETARIF() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("EKLAIMKODETARIF", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static boolean VALIDASIULANGPINDAHKAMAR() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
