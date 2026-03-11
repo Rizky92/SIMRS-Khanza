@@ -48,7 +48,7 @@ public final class TokoStokOpname extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement pstampil;
     private ResultSet rstampil;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -862,6 +862,12 @@ public final class TokoStokOpname extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

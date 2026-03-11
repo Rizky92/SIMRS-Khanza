@@ -72,7 +72,7 @@ public class INACBGHybrid extends javax.swing.JDialog {
     private final JTextField txtURL = new JTextField();
     private final JProgressBar progressBar = new JProgressBar();
     private final validasi Valid=new validasi();
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps;
     private ResultSet rs;
     private String URL="";
@@ -568,6 +568,12 @@ public class INACBGHybrid extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

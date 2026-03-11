@@ -35,7 +35,7 @@ import javax.swing.table.TableColumn;
  */
 public class PanelDiagnosa extends widget.panelisi {
     private final DefaultTableModel TabModeDiagnosaPasien,tabModeDiagnosa,tabModeProsedur,TabModeTindakanPasien;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private PreparedStatement pspenyakit,psdiagnosapasien,psprosedur,pstindakanpasien;

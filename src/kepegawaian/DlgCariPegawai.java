@@ -32,7 +32,7 @@ import javax.swing.table.TableColumn;
  */
 public final class DlgCariPegawai extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
-    private final Connection koneksi = koneksiDB.condb();
+    private final Connection koneksi = koneksiDB.newConnectionSafe();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private final ObjectMapper mapper = new ObjectMapper();
@@ -573,6 +573,12 @@ public final class DlgCariPegawai extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

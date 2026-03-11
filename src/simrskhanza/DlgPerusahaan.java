@@ -26,7 +26,7 @@ import javax.swing.table.TableColumn;
 public class DlgPerusahaan extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final DlgCariCaraBayar penjab = new DlgCariCaraBayar(null, false);
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
     private PreparedStatement ps;
@@ -951,6 +951,12 @@ public class DlgPerusahaan extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

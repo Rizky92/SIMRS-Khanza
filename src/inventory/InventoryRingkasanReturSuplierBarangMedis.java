@@ -33,7 +33,7 @@ public class InventoryRingkasanReturSuplierBarangMedis extends javax.swing.JDial
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private double ttlretur=0;
     private String tanggal,noret="",ptg="",sat="",bar="",nofak="";
     private String order="order by databarang.nama_brng";
@@ -1187,6 +1187,12 @@ public class InventoryRingkasanReturSuplierBarangMedis extends javax.swing.JDial
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

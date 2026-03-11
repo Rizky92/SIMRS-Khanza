@@ -57,7 +57,7 @@ import simrskhanza.DlgPropinsi;
  */
 public class DlgBookingPeriksa extends javax.swing.JFrame {
     private final DefaultTableModel tabMode;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private DlgCariCaraBayar penjab;
@@ -2516,6 +2516,12 @@ public class DlgBookingPeriksa extends javax.swing.JFrame {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -33,7 +33,7 @@ public class UTDPemisahanDarah extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabModeMedis,tabModeNonMedis,tabModeKomponen;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement psdonor,pskomponen,ps,ps2,pspemisahan,pscekmedis,psceknonmedis,pscekkomponen;
     private ResultSet rs,rs2;
     private int i,index=0,row=0,jml=0;
@@ -2312,6 +2312,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

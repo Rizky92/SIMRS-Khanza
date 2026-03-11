@@ -78,7 +78,7 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
     private String halaman="",norawat="";
     private PreparedStatement ps;
     private ResultSet rs;
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     public DlgBerkasRawat(java.awt.Frame parent, boolean modal) {
@@ -355,6 +355,12 @@ public class DlgBerkasRawat extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

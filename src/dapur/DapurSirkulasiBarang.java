@@ -30,7 +30,7 @@ public class DapurSirkulasiBarang extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private double ttltotalbeli=0,totalbeli=0,stok=0,aset=0,ttlaset=0,jumlahbeli=0,ttltotalpesan=0,totalpesan=0,jumlahpesan=0,
                     jumlahkeluar=0,totalkeluar=0,ttltotalkeluar=0,jumlahhibah=0,totalhibah=0,ttltotalhibah=0;
     private PreparedStatement ps,ps2;
@@ -731,6 +731,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

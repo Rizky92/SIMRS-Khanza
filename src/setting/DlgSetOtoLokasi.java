@@ -42,7 +42,7 @@ import simrskhanza.DlgCariPoli;
  */
 public class DlgSetOtoLokasi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabModeRalan,tabModeRanap;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private PreparedStatement ps;
@@ -1317,6 +1317,12 @@ public class DlgSetOtoLokasi extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

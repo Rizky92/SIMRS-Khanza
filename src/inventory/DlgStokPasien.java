@@ -47,7 +47,7 @@ public final class DlgStokPasien extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private riwayatobat Trackobat=new riwayatobat();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement pstampil;
     private ResultSet rstampil;
     private String aktifkanbatch="no";
@@ -2106,6 +2106,12 @@ public final class DlgStokPasien extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

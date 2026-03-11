@@ -42,7 +42,7 @@ import javax.swing.table.TableColumn;
 public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps;
     private ResultSet rs;
     private File file;
@@ -449,6 +449,12 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

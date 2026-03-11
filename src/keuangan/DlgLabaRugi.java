@@ -28,7 +28,7 @@ public class DlgLabaRugi extends javax.swing.JDialog {
     private ResultSet rs,rs2,rs3,rs4,rs5,rs6,rs7,rs8,rs9,rs10,rs11,rs12,rs13;
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
     private double pendapatan=0,biaya=0,modal=0,aktiva=0,pasiva=0,saldoawal,debkret,saldoakhir;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private int no=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -2220,6 +2220,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

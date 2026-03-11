@@ -32,7 +32,7 @@ public class IPSRSNilaiPenerimaanVendorNonMedisPerBulan extends javax.swing.JDia
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps;
     private ResultSet rs;
     private double tagihan=0,totaltagihan=0,januari=0,totaljanuari=0,februari=0,totalfebruari=0,maret=0,totalmaret=0,april=0,totalapril=0,mei=0,totalmei=0,
@@ -803,6 +803,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

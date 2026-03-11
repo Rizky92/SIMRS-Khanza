@@ -39,7 +39,7 @@ import simrskhanza.DlgCariPoli;
  * @author perpustakaan
  */
 public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private final sekuel Sequel=new sekuel();
     private DefaultTableModel tabModeRalanDokter,tabModeRalanParamedis,
             tabModeRalanDokterParamedis,tabModeRanapDokter,tabModeRanapParamedis,
@@ -6072,6 +6072,12 @@ public final class KeuanganRingkasanTindakan extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

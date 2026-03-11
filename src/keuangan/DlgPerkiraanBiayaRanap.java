@@ -56,7 +56,7 @@ import simrskhanza.DlgCariBangsal;
  */
 public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabModeDiagnosa,tabModeNilaiRS,tabModeNilaiINACBG;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private PreparedStatement ps,ps2,pspenyakit;
@@ -1720,6 +1720,12 @@ public final class DlgPerkiraanBiayaRanap extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

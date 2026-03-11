@@ -52,7 +52,7 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
     private final DefaultTableModel tabMode,tabModeAkunBayar;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private Jurnal jur=new Jurnal();
     private PreparedStatement ps;
     private ResultSet rs;
@@ -1346,6 +1346,12 @@ public final class LabKeslingBayarTagihanPengujianSampel extends javax.swing.JDi
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

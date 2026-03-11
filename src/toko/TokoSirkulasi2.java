@@ -30,7 +30,7 @@ public class TokoSirkulasi2 extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private double ttltotalbeli=0,totalbeli=0,stok=0,totalstok=0,jumlahbeli=0,jumlahpiutang=0,totalpiutang=0,ttltotalpiutang=0,ttltotalpesan=0,totalpesan=0,jumlahpesan=0,
             jumlahpenjualan=0,totalpenjualan=0,ttltotalpenjualan=0,jumlahretursup=0,totalretursup=0,ttltotalretursup=0,jumlahreturjual=0,totalreturjual=0,ttltotalreturjual=0,
             jumlahreturpiutang=0,totalreturpiutang=0,ttltotalreturpiutang=0,stokakhir,totalstokakhir=0,ttltotalstokakhir=0,stokawal,totalstokawal=0,ttltotalstokawal=0;
@@ -877,6 +877,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -23,7 +23,7 @@ import javax.swing.text.html.StyleSheet;
 
 public class DlgRiwayatBatch extends javax.swing.JDialog {
     private final validasi Valid=new validasi();
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps;
     private ResultSet rs,rs2;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -1049,6 +1049,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -81,7 +81,7 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private DlgPasien pasien=new DlgPasien(null,false);
     private DlgKabupaten kab;
     private DlgPropinsi prop;
@@ -7766,6 +7766,12 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

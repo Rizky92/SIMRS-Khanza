@@ -75,7 +75,7 @@ public class DlgKegiatanIlmiah extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private final validasi validasi=new validasi();
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private final DlgPilihanCetakDokumen pilihan=new DlgPilihanCetakDokumen(null,false);
 
     public DlgKegiatanIlmiah(java.awt.Frame parent, boolean modal) {
@@ -498,6 +498,12 @@ public class DlgKegiatanIlmiah extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

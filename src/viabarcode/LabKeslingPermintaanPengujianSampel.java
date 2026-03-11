@@ -59,7 +59,7 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps;
     private ResultSet rs;
     private boolean[] pilih;
@@ -1808,6 +1808,12 @@ public final class LabKeslingPermintaanPengujianSampel extends javax.swing.JDial
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

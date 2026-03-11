@@ -44,7 +44,7 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final SimpleDateFormat dtf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private sekuel Sequel=new sekuel();
     private PreparedStatement ps;
     private ResultSet rs;
@@ -741,6 +741,12 @@ public final class BPJSAntreanPerTanggal extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

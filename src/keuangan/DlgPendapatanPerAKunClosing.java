@@ -39,7 +39,7 @@ import javax.swing.text.html.StyleSheet;
  * @author perpustakaan
  */
 public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
     private PreparedStatement ps,psakunbayar,psakunpiutang;
@@ -1363,6 +1363,12 @@ public final class DlgPendapatanPerAKunClosing extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -61,7 +61,7 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private DlgCariPetugas petugas;
     private boolean sukses=false;
     private double total=0,sisahutang=0;
@@ -1830,6 +1830,12 @@ public final class KeuanganBayarPemesananNonMedis extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

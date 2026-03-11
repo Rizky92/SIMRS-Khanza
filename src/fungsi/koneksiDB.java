@@ -67,6 +67,27 @@ public class koneksiDB {
         return connection;
     }
 
+    public static Connection newConnectionSafe() {
+        try {
+            if (!initialized.get()) {
+                synchronized (LOCK) {
+                    if (!initialized.get()) {
+                        initDataSource();
+                        reconnect();
+                        initialized.set(true);
+                    }
+                }
+            }
+            Connection conn = dataSource.getConnection();
+            conn.setAutoCommit(true);
+            conn.setTransactionIsolation(Connection.TRANSACTION_READ_COMMITTED);
+            return conn;
+        } catch (Exception e) {
+            Logger.getLogger(koneksiDB.class.getName()).log(Level.SEVERE, null, e);
+            return condb();
+        }
+    }
+
     private static void initDataSource() throws Exception {
         try (FileInputStream fis =new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);

@@ -32,7 +32,7 @@ public class TokoPiutang extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private riwayattoko Trackbarang=new riwayattoko();
     private Jurnal jur=new Jurnal();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private double ttl=0,y=0,z=0,stokbarang=0,uangmuka=0,total=0,tagihan=0,ongkir=0;
     private int jml=0,i=0,row,kolom=0,reply,index;
     private String Piutang_Toko=Sequel.cariIsi("select Piutang_Toko from set_akun"),
@@ -1415,6 +1415,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

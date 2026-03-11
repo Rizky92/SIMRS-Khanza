@@ -30,7 +30,7 @@ public class DlgFeeVisitDokter extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private int i=0,jmlvisit=0,jmlbyphone=0,ttljmlvisit=0,ttljmlbyphone=0;
     private double visit=0,ttlvisit=0,byphone=0,ttlbyphone=0,bruto=0,ttlbruto=0,
             jasa=0,ttljasa=0,uangrs=0,ttluangrs=0,tarifvisit=0,tarifbyphone;
@@ -654,6 +654,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

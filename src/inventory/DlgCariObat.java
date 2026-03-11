@@ -83,7 +83,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private DlgCariAturanPakai aturanpakai = null;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement psobat,pscarikapasitas,psstok,ps2,psbatch,psrekening,psobatkronis;
     private ResultSet rsobat,carikapasitas,rsstok,rs2,rsbatch,rsrekening,rsobatkronis;
     private double h_belicari=0, hargacari=0, sisacari=0,y=0,embalase=Sequel.cariIsiAngka("select set_embalase.embalase_per_obat from set_embalase"),
@@ -4318,6 +4318,12 @@ public final class DlgCariObat extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

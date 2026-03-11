@@ -61,7 +61,7 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private DlgCariPetugas petugas;
     private double total=0,sisahutang=0;
     private String koderekening="";
@@ -1823,6 +1823,12 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -43,7 +43,7 @@ public class TokoCariPiutang extends javax.swing.JDialog {
     private PreparedStatement ps,ps2,pscarijual,pstoko_detail_piutang;
     private ResultSet rs,rs2;
     private Jurnal jur=new Jurnal();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private riwayattoko Trackbarang=new riwayattoko();
     private int i=0,no=1;
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
@@ -1564,6 +1564,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

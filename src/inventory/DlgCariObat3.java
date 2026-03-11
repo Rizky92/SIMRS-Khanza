@@ -47,7 +47,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private riwayatobat Trackobat=new riwayatobat();
     private int i=0,jml=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -1374,6 +1374,12 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

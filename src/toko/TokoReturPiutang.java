@@ -37,7 +37,7 @@ public class TokoReturPiutang extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private riwayattoko Trackbarang=new riwayattoko();
     private Jurnal jur=new Jurnal();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps;
     private ResultSet rs;
     private double ttl=0,y=0,kolom,stokbarang;
@@ -1015,6 +1015,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -53,7 +53,7 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
     private final DefaultTableModel tabModeResep,tabModeDetailResepRacikan,tabModeResepRacikan;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement psresep;
     private ResultSet rsobat;
     private double jumlahracik=0,persenracik=0,kapasitasracik=0;
@@ -1718,6 +1718,12 @@ public final class InventoryResepLuar extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -57,7 +57,7 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private double cicilan=0,sisapiutang=0,diskon=0,tidakterbayar=0;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -1676,6 +1676,12 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -42,7 +42,7 @@ public class DlgReturJual extends javax.swing.JDialog {
     private double ttlretur=0;
     private PreparedStatement ps;
     private ResultSet rs;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private riwayatobat Trackobat=new riwayatobat();
     private String formvalid="";
     private String aktifkanbatch="no",norawat="";
@@ -1534,6 +1534,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

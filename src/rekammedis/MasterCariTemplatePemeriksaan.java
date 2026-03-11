@@ -44,7 +44,7 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                 TabModeTindakan;
     private validasi Valid=new validasi();
     private sekuel Sequel=new sekuel();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
     private int i=0;
@@ -1559,6 +1559,12 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

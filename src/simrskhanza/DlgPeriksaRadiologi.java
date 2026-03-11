@@ -59,7 +59,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
     private DefaultTableModel tabMode,tabMode2;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private Connection koneksiradiologi;
     private Jurnal jur=new Jurnal();
     private DlgCariPetugas petugas;
@@ -2528,6 +2528,12 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

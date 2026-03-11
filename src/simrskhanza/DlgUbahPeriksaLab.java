@@ -44,7 +44,7 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private boolean sukses=false;
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement pstindakan,pstampil,pstampil2,pstampil3,pstampil4,pscariperawatan,psset_tarif,pscariperiksa,pscaridetailperiksa,psrekening;
     private ResultSet rstindakan,rstampil,rscari,rsset_tarif,rsrekening;
     private boolean[] pilih,pilih2;
@@ -1756,6 +1756,12 @@ public final class DlgUbahPeriksaLab extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

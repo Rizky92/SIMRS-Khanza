@@ -80,7 +80,7 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
     private JsonNode nameNode;
     private Jurnal jur=new Jurnal();
     private riwayatobat Trackobat=new riwayatobat();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
     private boolean sukses=true;
@@ -1625,6 +1625,12 @@ public final class ApotekBPJSDaftarResepObat extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

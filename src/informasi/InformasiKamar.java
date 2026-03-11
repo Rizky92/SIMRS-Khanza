@@ -36,7 +36,7 @@ import javax.swing.table.TableColumn;
  */
 public final class InformasiKamar extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private validasi Valid=new validasi();
     private PreparedStatement ps;
     private ResultSet rs;
@@ -392,6 +392,12 @@ public final class InformasiKamar extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

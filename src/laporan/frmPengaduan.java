@@ -41,7 +41,7 @@ import javax.swing.table.TableColumn;
  */
 public class frmPengaduan extends javax.swing.JFrame {
     private final DefaultTableModel tabMode;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private PreparedStatement ps;
@@ -1075,6 +1075,12 @@ public class frmPengaduan extends javax.swing.JFrame {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

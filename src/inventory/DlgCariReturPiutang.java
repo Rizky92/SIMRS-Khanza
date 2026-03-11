@@ -36,7 +36,7 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
     private Jurnal jur=new Jurnal();
     private riwayatobat Trackobat=new riwayatobat();
     private double ttlretur=0,subtotal=0;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
     private String tanggal="",noret="",ptg="",sat="",bar="",nonot="";
@@ -1078,6 +1078,12 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -38,7 +38,7 @@ public class DlgReturPiutang extends javax.swing.JDialog {
     private Jurnal jur=new Jurnal();
     private DecimalFormat df2 = new DecimalFormat("###,###,###,###,###,###,###");
     private double ttlretur=0;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps;
     private ResultSet rs;
     private String aktifkanbatch="no";
@@ -1437,6 +1437,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

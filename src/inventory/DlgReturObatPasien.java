@@ -44,7 +44,7 @@ import javax.swing.table.TableColumn;
 public final class DlgReturObatPasien extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private sekuel Sequel=new sekuel();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private riwayatobat Trackobat=new riwayatobat();
     private final validasi Valid=new validasi();
     private PreparedStatement pstampil;
@@ -633,6 +633,12 @@ public final class DlgReturObatPasien extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

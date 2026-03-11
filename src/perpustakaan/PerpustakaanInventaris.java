@@ -49,7 +49,7 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private String namaruang="";
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
 
@@ -1555,6 +1555,12 @@ public final class PerpustakaanInventaris extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

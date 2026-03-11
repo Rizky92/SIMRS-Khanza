@@ -42,7 +42,7 @@ public class DlgFrekuensiPenyakitRanap extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private PreparedStatement ps,ps2,ps3,ps4,ps5,ps6,ps7,ps8;
     private ResultSet rs,rs2,rs3,rs4,rs5,rs6,rs7,rs8;
     private String diagnosa="";
@@ -3348,6 +3348,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

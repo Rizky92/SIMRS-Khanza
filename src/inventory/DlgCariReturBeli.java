@@ -40,7 +40,7 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
     private riwayatobat Trackobat=new riwayatobat();
     private PreparedStatement ps,ps2;
     private ResultSet rs,rs2;
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private DlgCariPetugas petugas;
     private DlgBarang barang;
     private DlgCariSatuan satuan;
@@ -1076,6 +1076,12 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

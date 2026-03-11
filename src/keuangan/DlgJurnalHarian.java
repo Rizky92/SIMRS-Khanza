@@ -33,7 +33,7 @@ public class DlgJurnalHarian extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final sekuel Sequel=new sekuel();
     private final validasi Valid=new validasi();
-    private final Connection koneksi=koneksiDB.condb();
+    private final Connection koneksi=koneksiDB.newConnectionSafe();
     private ResultSet rs;
     private PreparedStatement ps;
     private String tanggal1="",tanggal2="";
@@ -841,6 +841,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }

@@ -55,7 +55,7 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
-    private Connection koneksi=koneksiDB.condb();
+    private Connection koneksi=koneksiDB.newConnectionSafe();
     private double total=0,sisapiutang=0;
     private PreparedStatement ps;
     private ResultSet rs;
@@ -1361,6 +1361,12 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
 
     @Override
     public void dispose() {
+        try {
+            if (koneksi != null && !koneksi.isClosed()) {
+                koneksi.close();
+            }
+        } catch (Exception ignored) {
+        }
         executor.shutdownNow();
         super.dispose();
     }
