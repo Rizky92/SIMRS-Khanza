@@ -151,6 +151,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     private void initComponents() {
 
         jPopupMenu1 = new javax.swing.JPopupMenu();
+        MnUpdateStatus = new javax.swing.JMenuItem();
         MnRestore = new javax.swing.JMenuItem();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -194,6 +195,22 @@ public final class DlgKamar extends javax.swing.JDialog {
         Kelas = new widget.ComboBox();
 
         jPopupMenu1.setName("jPopupMenu1"); // NOI18N
+
+        MnUpdateStatus.setBackground(new java.awt.Color(255, 255, 254));
+        MnUpdateStatus.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        MnUpdateStatus.setForeground(new java.awt.Color(50, 50, 50));
+        MnUpdateStatus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png"))); // NOI18N
+        MnUpdateStatus.setText("Update Status Kamar");
+        MnUpdateStatus.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnUpdateStatus.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnUpdateStatus.setName("MnUpdateStatus"); // NOI18N
+        MnUpdateStatus.setPreferredSize(new java.awt.Dimension(200, 28));
+        MnUpdateStatus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MnUpdateStatusActionPerformed(evt);
+            }
+        });
+        jPopupMenu1.add(MnUpdateStatus);
 
         MnRestore.setBackground(new java.awt.Color(255, 255, 254));
         MnRestore.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1030,6 +1047,23 @@ public final class DlgKamar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbKamarKeyReleased
 
+    private void MnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUpdateStatusActionPerformed
+        runBackground(() -> {
+            tampil();
+            if (tabMode.getRowCount() > 0) {
+                for (int i = 0; i < tabMode.getRowCount(); i++) {
+                    if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.kd_kamar = ? and kamar_inap.stts_pulang = '-'", (String) tabMode.getValueAt(i, 1))) {
+                        Sequel.mengupdateSmc("kamar", "status = 'ISI'", "kd_kamar = ?", (String) tabMode.getValueAt(i, 1));
+                        tabMode.setValueAt("ISI", i, 6);
+                    } else {
+                        Sequel.mengupdateSmc("kamar", "status = 'KOSONG'", "kd_kamar = ?", (String) tabMode.getValueAt(i, 1));
+                        tabMode.setValueAt("KOSONG", i, 6);
+                    }
+                }
+            }
+        });
+    }//GEN-LAST:event_MnUpdateStatusActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -1062,6 +1096,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     private widget.ComboBox Kelas;
     private widget.Label LCount;
     private javax.swing.JMenuItem MnRestore;
+    private javax.swing.JMenuItem MnUpdateStatus;
     private javax.swing.JPanel PanelCariUtama;
     private widget.ScrollPane Scroll;
     private widget.TextBox TBangsal;
@@ -1203,13 +1238,16 @@ public final class DlgKamar extends javax.swing.JDialog {
         Kelas.setEnabled(akses.getkamar());
         asalform=akses.getform();
         if(akses.getkode().equals("Admin Utama")){
+            MnUpdateStatus.setEnabled(true);
             MnRestore.setEnabled(true);
             BtnEdit.setEnabled(true);
         }else{
             if(akses.getkamar()==false){
                 if(ubah_status_kamar.equals("No")){
+                    MnUpdateStatus.setEnabled(false);
                     BtnEdit.setEnabled(false);
                 }else{
+                    MnUpdateStatus.setEnabled(true);
                     BtnEdit.setEnabled(true);
                 }
             }
