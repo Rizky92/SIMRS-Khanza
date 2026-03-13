@@ -33,18 +33,22 @@ public class Jurnal {
                     if (rscek.next()) {
                         if (rscek.getInt("jml") > 0) {
                             if (rscek.getInt("selisih") == 0) {
-                                String nojur = "";
-                                int i = 0;
-                                do {
-                                    nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"), max(1, i));
-                                    sukses = Sequel.menyimpantfSmc("jurnal", "", nojur, nobukti, rscek.getString("tanggal"), rscek.getString("jam"), jenis, keterangan);
-                                } while (!sukses && i++ < 3);
+                                if (rscek.getInt("total_debet") >= 0 && rscek.getInt("total_kredit") >= 0) {
+                                    String nojur = "";
+                                    int i = 0;
+                                    do {
+                                        nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"), max(1, i));
+                                        sukses = Sequel.menyimpantfSmc("jurnal", "", nojur, nobukti, rscek.getString("tanggal"), rscek.getString("jam"), jenis, keterangan);
+                                    } while (!sukses && i++ < 3);
 
-                                if (sukses && !nojur.isBlank()) {
-                                    sukses = Sequel.executeRawSmc("insert into detailjurnal select ? as no_jurnal, tampjurnal_smc.kd_rek, tampjurnal_smc.debet, " +
-                                        "tampjurnal_smc.kredit from tampjurnal_smc where user_id = ? and ip = ?", nojur, akses.getkode(), akses.getalamatip()
-                                    );
-                                    Sequel.deleteTampJurnal();
+                                    if (sukses && !nojur.isBlank()) {
+                                        sukses = Sequel.executeRawSmc("insert into detailjurnal select ? as no_jurnal, tampjurnal_smc.kd_rek, tampjurnal_smc.debet, " +
+                                            "tampjurnal_smc.kredit from tampjurnal_smc where user_id = ? and ip = ?", nojur, akses.getkode(), akses.getalamatip()
+                                        );
+                                        Sequel.deleteTampJurnal();
+                                    }
+                                } else {
+                                    sukses = false;
                                 }
                             } else {
                                 System.out.println("Notif : Debet dan Kredit tidak sama!");
@@ -76,17 +80,21 @@ public class Jurnal {
                 if (rscek.next()) {
                     if (rscek.getInt("jml") > 0) {
                         if (rscek.getInt("selisih") == 0) {
-                            String nojur = "";
-                            int i = 0;
-                            do {
-                                nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"), max(1, i));
-                                sukses = Sequel.menyimpantfSmc("jurnal", "", nojur, nobukti, rscek.getString("tanggal"), rscek.getString("jam"), jenis, keterangan);
-                            } while (!sukses && i++ < 3);
+                            if (rscek.getInt("total_debet") >= 0 && rscek.getInt("total_kredit") >= 0) {
+                                String nojur = "";
+                                int i = 0;
+                                do {
+                                    nojur = Sequel.autonomorSmc("JR", "", "jurnal", "no_jurnal", 6, "0", rscek.getString("tanggal"), max(1, i));
+                                    sukses = Sequel.menyimpantfSmc("jurnal", "", nojur, nobukti, rscek.getString("tanggal"), rscek.getString("jam"), jenis, keterangan);
+                                } while (!sukses && i++ < 3);
 
-                            if (sukses && !nojur.isBlank()) {
-                                sukses = Sequel.executeRawSmc("insert into detailjurnal select ? as no_jurnal, tampjurnal_rvpbpjs.kd_rek, " +
-                                    "tampjurnal_rvpbpjs.debet, tampjurnal_rvpbpjs.kredit from tampjurnal_rvpbpjs", nojur);
-                                Sequel.menghapustfSmc("tampjurnal_rvpbpjs");
+                                if (sukses && !nojur.isBlank()) {
+                                    sukses = Sequel.executeRawSmc("insert into detailjurnal select ? as no_jurnal, tampjurnal_rvpbpjs.kd_rek, " +
+                                        "tampjurnal_rvpbpjs.debet, tampjurnal_rvpbpjs.kredit from tampjurnal_rvpbpjs", nojur);
+                                    Sequel.menghapustfSmc("tampjurnal_rvpbpjs");
+                                }
+                            } else {
+                                sukses = false;
                             }
                         } else {
                             System.out.println("Notif : Debet dan Kredit tidak sama!");
@@ -107,7 +115,7 @@ public class Jurnal {
 
         return sukses;
     }
-    
+
     private int max(int a, int b) {
         if (a > b) {
             return a;
