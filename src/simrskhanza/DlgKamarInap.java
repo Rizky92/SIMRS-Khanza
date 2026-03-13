@@ -16095,7 +16095,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 DlgCatatan.setLocationRelativeTo(internalFrame1);
                                 DlgCatatan.setVisible(true);
                             }else{
-                                DlgCatatan.setVisible(false);
+                                DlgCatatan.dispose();
                             }
                             this.setCursor(Cursor.getDefaultCursor());
                         }
