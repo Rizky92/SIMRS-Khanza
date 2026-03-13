@@ -541,6 +541,7 @@ public class DlgPiutang extends javax.swing.JDialog {
         panelisi5.add(label19);
         label19.setBounds(518, 10, 130, 23);
 
+        UangMuka.setEditable(false);
         UangMuka.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         UangMuka.setName("UangMuka"); // NOI18N
         UangMuka.setPreferredSize(new java.awt.Dimension(150, 26));
@@ -1383,8 +1384,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                System.out.println("sisapiutang = " + sisapiutang);
-                System.out.println("Piutang_Obat = " + (ttljual + ongkir - uangmuka));
                 Sequel.AutoComitFalse();
                 sukses=true;
                 if(Sequel.menyimpantf2("piutang","'"+NoNota.getText()+"','"+Valid.SetTgl(TglJual.getSelectedItem()+"")+"','"+kdptg.getText()+"','"+kdpasien.getText()+
@@ -1405,8 +1404,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Piutang_Obat from set_akun"), "PIUTANG OBAT", (ttljual + ongkir - uangmuka), 0);
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Piutang_Obat from set_akun"), "PERSEDIAAN", 0, (ttljual + ongkir - uangmuka));
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Piutang_Obat from set_akun"), "PIUTANG OBAT", (sisapiutang), 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Piutang_Obat from set_akun"), "PERSEDIAAN", 0, (sisapiutang));
                     if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PIUTANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
                 }
                 if(sukses==true){
