@@ -1687,16 +1687,16 @@ public class EKlaimPanel extends widget.PanelBiasa {
             ps.setString(1, coderNik);
             try (ResultSet rs = ps.executeQuery()) {
                 while (rs.next()) {
-                    String code = rs.getString("kode");
-                    String desc = rs.getString("deskripsi");
-                    String type = rs.getString("tipe");
+                    String code = rs.getString("cmg_code");
+                    String desc = rs.getString("cmg_description");
+                    String type = rs.getString("cmg_type");
                     String item = code + " - " + desc;
 
                     switch (type.toLowerCase()) {
-                        case "procedure": cmbSpecialProcedure.addItem(item); break;
-                        case "prosthesis": cmbSpecialProsthesis.addItem(item); break;
-                        case "investigation": cmbSpecialInvestigation.addItem(item); break;
-                        case "drugs": cmbSpecialDrug.addItem(item); break;
+                        case "special procedures": cmbSpecialProcedure.addItem(item); break;
+                        case "special prosthesis": cmbSpecialProsthesis.addItem(item); break;
+                        case "special investigation": cmbSpecialInvestigation.addItem(item); break;
+                        case "special drug": cmbSpecialDrug.addItem(item); break;
                     }
                 }
             }

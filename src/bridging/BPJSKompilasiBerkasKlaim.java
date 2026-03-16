@@ -570,6 +570,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         loadBillingHTML = new widget.editorpane();
         btnInvoice = new widget.Button();
         PanelContentINACBG = new widget.panelisi();
+        PanelBridgingKlaimJava = new widget.panelisi();
         PanelBerkasDigital = new widget.panelisi();
 
         jPopupMenu1.setForeground(new java.awt.Color(50, 50, 50));
@@ -634,6 +635,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.setLayout(null);
 
         BtnCloseIn8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnCloseIn8.setMnemonic('U');
         BtnCloseIn8.setText("Tutup");
         BtnCloseIn8.setToolTipText("Alt+U");
         BtnCloseIn8.setName("BtnCloseIn8"); // NOI18N
@@ -647,6 +649,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnCloseIn8.setBounds(489, 182, 86, 30);
 
         BtnSimpan8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpan8.setMnemonic('S');
         BtnSimpan8.setText("Simpan");
         BtnSimpan8.setToolTipText("Alt+S");
         BtnSimpan8.setName("BtnSimpan8"); // NOI18N
@@ -663,7 +666,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-03-2026 10:14:32" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "05-03-2026 13:32:50" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -781,6 +784,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa4.setLayout(null);
 
         BtnBukaFolderExport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnBukaFolderExport.setMnemonic('S');
         BtnBukaFolderExport.setText("Buka Folder Export");
         BtnBukaFolderExport.setToolTipText("Alt+S");
         BtnBukaFolderExport.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -825,6 +829,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         CmbPilihanTanggalExport.setBounds(140, 40, 180, 23);
 
         BtnPilihAplikasiPDF.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPilihAplikasiPDF.setMnemonic('S');
         BtnPilihAplikasiPDF.setToolTipText("Alt+S");
         BtnPilihAplikasiPDF.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnPilihAplikasiPDF.setName("BtnPilihAplikasiPDF"); // NOI18N
@@ -873,6 +878,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa5.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 30, 5));
 
         BtnSimpanPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanPengaturan.setMnemonic('S');
         BtnSimpanPengaturan.setText("Simpan");
         BtnSimpanPengaturan.setToolTipText("Alt+S");
         BtnSimpanPengaturan.setName("BtnSimpanPengaturan"); // NOI18N
@@ -884,6 +890,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa5.add(BtnSimpanPengaturan);
 
         BtnResetPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnResetPengaturan.setMnemonic('S');
         BtnResetPengaturan.setText("Reset");
         BtnResetPengaturan.setToolTipText("Alt+S");
         BtnResetPengaturan.setName("BtnResetPengaturan"); // NOI18N
@@ -895,6 +902,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa5.add(BtnResetPengaturan);
 
         BtnTutupPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/cross.png"))); // NOI18N
+        BtnTutupPengaturan.setMnemonic('U');
         BtnTutupPengaturan.setText("Tutup");
         BtnTutupPengaturan.setToolTipText("Alt+U");
         BtnTutupPengaturan.setName("BtnTutupPengaturan"); // NOI18N
@@ -954,6 +962,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(namaPJ);
 
         BtnPenjamin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPenjamin.setMnemonic('3');
         BtnPenjamin.setToolTipText("Alt+3");
         BtnPenjamin.setName("BtnPenjamin"); // NOI18N
         BtnPenjamin.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -979,6 +988,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('2');
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
         BtnCari.addActionListener(new java.awt.event.ActionListener() {
@@ -994,6 +1004,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(BtnCari);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setMnemonic('M');
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
         BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1021,6 +1032,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(LCount);
 
         BtnPengaturan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/EDIT2.png"))); // NOI18N
+        BtnPengaturan.setMnemonic('T');
         BtnPengaturan.setText("Pengaturan");
         BtnPengaturan.setToolTipText("Alt+T");
         BtnPengaturan.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1036,6 +1048,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelGlass8.add(BtnPengaturan);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -1239,6 +1252,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel25.setBounds(0, 150, 105, 16);
 
         btnResumeRanap.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnResumeRanap.setMnemonic('1');
         btnResumeRanap.setText("Tidak ada");
         btnResumeRanap.setToolTipText("ALt+1");
         btnResumeRanap.setEnabled(false);
@@ -1261,6 +1275,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel27.setBounds(0, 130, 105, 16);
 
         btnAwalMedisIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnAwalMedisIGD.setMnemonic('1');
         btnAwalMedisIGD.setText("Tidak ada");
         btnAwalMedisIGD.setToolTipText("ALt+1");
         btnAwalMedisIGD.setEnabled(false);
@@ -1283,6 +1298,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel28.setBounds(0, 170, 105, 16);
 
         btnHasilLab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnHasilLab.setMnemonic('1');
         btnHasilLab.setText("Tidak ada");
         btnHasilLab.setToolTipText("ALt+1");
         btnHasilLab.setEnabled(false);
@@ -1305,6 +1321,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel29.setBounds(0, 190, 105, 16);
 
         btnHasilRad.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnHasilRad.setMnemonic('1');
         btnHasilRad.setText("Tidak ada");
         btnHasilRad.setToolTipText("ALt+1");
         btnHasilRad.setEnabled(false);
@@ -1327,6 +1344,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel30.setBounds(0, 250, 105, 16);
 
         btnSurkon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnSurkon.setMnemonic('1');
         btnSurkon.setText("Tidak ada");
         btnSurkon.setToolTipText("ALt+1");
         btnSurkon.setEnabled(false);
@@ -1349,6 +1367,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel31.setBounds(0, 230, 105, 16);
 
         btnSPRI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnSPRI.setMnemonic('1');
         btnSPRI.setText("Tidak ada");
         btnSPRI.setToolTipText("ALt+1");
         btnSPRI.setEnabled(false);
@@ -1377,6 +1396,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         lblStatusRawat.setBounds(116, 50, 240, 16);
 
         BtnSimpanKoding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpanKoding.setMnemonic('S');
         BtnSimpanKoding.setText("Simpan");
         BtnSimpanKoding.setToolTipText("Alt+S");
         BtnSimpanKoding.setAlignmentY(0.0F);
@@ -1399,6 +1419,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         BtnSimpanKoding.setBounds(0, 740, 100, 30);
 
         BtnHapusKoding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapusKoding.setMnemonic('H');
         BtnHapusKoding.setText("Hapus");
         BtnHapusKoding.setToolTipText("Alt+H");
         BtnHapusKoding.setAlignmentY(0.0F);
@@ -1423,6 +1444,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel32.setBounds(0, 210, 105, 16);
 
         btnRiwayatPasien.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnRiwayatPasien.setMnemonic('1');
         btnRiwayatPasien.setText("Lihat");
         btnRiwayatPasien.setToolTipText("ALt+1");
         btnRiwayatPasien.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
@@ -1444,6 +1466,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel33.setBounds(0, 90, 105, 16);
 
         btnHasilKlaim.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnHasilKlaim.setMnemonic('1');
         btnHasilKlaim.setText("Tidak Ada");
         btnHasilKlaim.setToolTipText("ALt+1");
         btnHasilKlaim.setEnabled(false);
@@ -1466,6 +1489,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         jLabel34.setBounds(0, 110, 105, 16);
 
         btnTriaseIGD.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        btnTriaseIGD.setMnemonic('1');
         btnTriaseIGD.setText("Tidak ada");
         btnTriaseIGD.setToolTipText("ALt+1");
         btnTriaseIGD.setEnabled(false);
@@ -1510,6 +1534,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         panelBiasa2.setLayout(new java.awt.BorderLayout());
 
         BtnKompilasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/2.png"))); // NOI18N
+        BtnKompilasi.setMnemonic('T');
         BtnKompilasi.setText("Kompilasi");
         BtnKompilasi.setToolTipText("Alt+T");
         BtnKompilasi.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
@@ -1555,6 +1580,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
         panelInvoices.add(panelBiasa3, java.awt.BorderLayout.CENTER);
 
+        btnInvoice.setMnemonic('1');
         btnInvoice.setText("<html>\n<body>\n<a href=\"#\">Cetak</a>\n</body>\n</html>"); // NOI18N
         btnInvoice.setToolTipText("ALt+1");
         btnInvoice.setEnabled(false);
@@ -1575,6 +1601,11 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         PanelContentINACBG.setPreferredSize(new java.awt.Dimension(55, 55));
         PanelContentINACBG.setLayout(new java.awt.BorderLayout());
         tabKanan.addTab("Bridging Klaim", PanelContentINACBG);
+
+        PanelBridgingKlaimJava.setName("PanelBridgingKlaimJava"); // NOI18N
+        PanelBridgingKlaimJava.setPreferredSize(new java.awt.Dimension(55, 55));
+        PanelBridgingKlaimJava.setLayout(new java.awt.BorderLayout());
+        tabKanan.addTab("Bridging Klaim", PanelBridgingKlaimJava);
 
         PanelBerkasDigital.setName("PanelBerkasDigital"); // NOI18N
         PanelBerkasDigital.setPreferredSize(new java.awt.Dimension(55, 55));
@@ -2955,6 +2986,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
     private widget.TextBox NoLPManual;
     private widget.TextBox NoSuratKematian;
     private widget.panelisi PanelBerkasDigital;
+    private widget.panelisi PanelBridgingKlaimJava;
     private widget.panelisi PanelContentINACBG;
     private widget.ScrollPane Scroll;
     private widget.ComboBox StatusPulang;

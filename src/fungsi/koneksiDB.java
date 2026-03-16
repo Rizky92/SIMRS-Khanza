@@ -250,6 +250,15 @@ public class koneksiDB {
         }
     }
 
+    public static boolean GUNAKANJAVAEKLAIM() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("GUNAKANJAVAEKLAIM", "no").toLowerCase().trim().equals("yes");
+        } catch (Exception e) {
+            return false;
+        }
+    }
+
     public static String EKLAIMWSURL() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
@@ -265,15 +274,6 @@ public class koneksiDB {
             return EnkripsiAES.decrypt(prop.getProperty("EKLAIMKEY", EnkripsiAES.encrypt("")));
         } catch (Exception e) {
             return "";
-        }
-    }
-
-    public static boolean GUNAKANJAVAEKLAIM() {
-        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
-            prop.loadFromXML(fs);
-            return prop.getProperty("GUNAKANJAVAEKLAIM", "no").toLowerCase().trim().equals("yes");
-        } catch (Exception e) {
-            return false;
         }
     }
 

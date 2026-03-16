@@ -138,9 +138,11 @@ public class PanelBiasa extends JPanel{
     }
 
     private void disposeImageCache() {
-        synchronized (gradientImage) {
-            gradientImage.flush();
-            gradientImage = null;
+        if (gradientImage != null) {
+            synchronized (gradientImage) {
+                gradientImage.flush();
+                gradientImage = null;
+            }
         }
     }
 
