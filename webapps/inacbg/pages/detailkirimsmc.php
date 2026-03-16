@@ -572,7 +572,7 @@
                                 <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Appearance</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
-                                    <input name="menit_1a" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    <input name="menit_1ap" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -593,7 +593,7 @@
                                 <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Activity</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
-                                    <input name="menit_1a" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    <input name="menit_1ac" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -610,7 +610,7 @@
                                 <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Appearance</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
-                                    <input name="menit_5a" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    <input name="menit_5ap" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -631,7 +631,7 @@
                                 <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Activity</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
-                                    <input name="menit_5a" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    <input name="menit_5ac" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -643,31 +643,31 @@
                             </tr>
                             <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
-                                <td width="28%">Usia Kehamilan</td>
+                                <td width="28%">Kelahiran?</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="case_kelahiran" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value="0">Tidak</Option>
+                                        <option value="1">Ya</Option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Usia Kehamilan (minggu)</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
                                     <input name="usia_kehamilan" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td width="28%">Gravida</td>
-                                <td width="1%">:</td>
+                                <td width="29%" colspan="2">Riwayat Kehamilan Sebelumnya</td>
                                 <td width="70%">
-                                    <input name="gravida" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Partus</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <input name="partus" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Abortus</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <input name="abortus" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    <span>G :</span>
+                                    <input name="gravida" class="text inputbox" style="font-family: Tahoma" type="text" value="" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    <span>P :</span>
+                                    <input name="partus" class="text inputbox" style="font-family: Tahoma" type="text" value="" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                    <span>A :</span>
+                                    <input name="abortus" class="text inputbox" style="font-family: Tahoma" type="text" value="" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                 </td>
                             </tr>
                             <tr class="head">
@@ -675,13 +675,146 @@
                                 <td width="1%">:</td>
                                 <td width="70%">
                                     <select name="onset_kontraksi" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value="spontan">Spontan</Option>
-                                        <option value="non_spontan">Non-spontan</Option>
-                                        <option value="induksi">Induksi</Option>
-                                        <option value="non_induksi">Non-induksi</Option>
+                                        <option value=""></option>
+                                        <option value="spontan">Spontan</option>
+                                        <option value="non_spontan">Non-spontan</option>
+                                        <option value="induksi">Induksi</option>
+                                        <option value="non_induksi">Non-induksi</option>
                                     </select>
                                 </td>
                             </tr>
+                            <tr class="head">
+                                <td colspan="3">
+                                    <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
+                                    <span style="font-family: Tahoma; font-size: 9pt; font-weight: 700; margin-top: 0.5rem">
+                                        Kelahiran Ke-1
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Cara Kelahiran</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="delivery_method[0]" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="sc">Sectio Caesarean</option>
+                                        <option value="vaginal">Vaginal</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Waktu Lahir</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <?php date_default_timezone_set('Asia/Makassar'); ?>
+                                    <span>Tgl.</span>
+                                    <input name="delivery_year[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="5" maxlength="4" pattern="[0-9]{1,4}" title="0-9 (Maksimal 4 karakter)" autocomplete="off" value="<?= date('Y') ?>">
+                                    <span>-</span>
+                                    <input name="delivery_month[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('m') ?>">
+                                    <span>-</span>
+                                    <input name="delivery_day[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('d') ?>">
+                                    <span>Jam</span>
+                                    <input name="delivery_hour[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('H') ?>">
+                                    <span>:</span>
+                                    <input name="delivery_minute[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('i') ?>">
+                                    <span>:</span>
+                                    <input name="delivery_second[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('s') ?>">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Letak Janin</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="letak_janin[0]" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="kepala">Kepala</Option>
+                                        <option value="sungsang">Sungsang</Option>
+                                        <option value="lintang">Lintang / Oblique</Option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Kondisi</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="kondisi[0]" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="livebirth">Hidup</Option>
+                                        <option value="stillbirth">Meninggal</Option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Bantuan Manual?</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="use_manual[0]" class="text3" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="0">Tidak</option>
+                                        <option value="1">Ya</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Menggunakan Forcep?</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="use_forcep[0]" class="text3" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="0">Tidak</option>
+                                        <option value="1">Ya</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Menggunakan Vacuum?</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="use_vacuum[0]" class="text3" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="0">Tidak</option>
+                                        <option value="1">Ya</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Spesimen SHK</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="shk_spesimen_ambil[0]" class="text3" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="tidak">Tidak Diambil</option>
+                                        <option value="ya">Diambil</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Lokasi Spesimen SHK</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="shk_lokasi[0]" class="text3" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="tumit">Tumit</option>
+                                        <option value="vena">Vena</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Alasan Tidak Mengambil</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="shk_alasan[0]" class="text3" style="font-family: Tahoma; width: 95%">
+                                        <option value=""></option>
+                                        <option value="tidak-dapat">Tidak Dapat Dilakukan</option>
+                                        <option value="akses-sulit">Akses Sulit</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <div id="kelahiran-1"></div>
+                            <tr class="head">
+                                <td colspan="3"><button id="tambah_lahir" type="button" style="font-family: Tahoma; font-size: 0.675rem; font-weight: 500; cursor: pointer" onclick="tambahKelahiran">TAMBAH KELAHIRAN</button></td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <?php if ($corona == 'PasienCorona'): ?>
                                 <?php
                                     $bariscorona = mysqli_fetch_array(bukaquery(<<<SQL
@@ -701,7 +834,6 @@
                                         SQL
                                     ));
                                 ?>
-                                <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                                 <tr class="head">
                                     <td width="28%">Dilakukan Pemulasaran Jenazah?</td>
                                     <td width="1%">:</td>
@@ -851,6 +983,7 @@
                                         </select>
                                     </td>
                                 </tr>
+                                <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <?php endif; ?>
                             <?php
                                 $billing = mysqli_fetch_array(bukaquery(<<<SQL
