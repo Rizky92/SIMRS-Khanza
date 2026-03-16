@@ -410,6 +410,8 @@ ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `harga` double NO
 
 ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `restriksi` varchar(255) NULL DEFAULT NULL AFTER `harga`;
 
+ALTER TABLE `maping_obat_apotek_bpjs` MODIFY COLUMN IF EXISTS `nama_brng_apotek_bpjs` varchar(200) NULL DEFAULT NULL AFTER `kode_brng_apotek_bpjs`;
+
 CREATE TABLE IF NOT EXISTS `mapping_pemeriksaan_labpk`  (
   `id_pemeriksaan` int(10) UNSIGNED NOT NULL,
   `id_template` int(11) NOT NULL,
