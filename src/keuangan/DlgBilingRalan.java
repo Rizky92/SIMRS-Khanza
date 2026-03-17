@@ -3538,7 +3538,6 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                 periksalab.setLocationRelativeTo(internalFrame1);
                 periksalab.emptTeks();
                 periksalab.setNoRm(TNoRw.getText(),"Ralan");
-                periksalab.tampil();
                 periksalab.isCek();
                 periksalab.setAlwaysOnTop(false);
                 periksalab.setVisible(true);

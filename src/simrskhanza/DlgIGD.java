@@ -6234,7 +6234,6 @@ public final class DlgIGD extends javax.swing.JDialog {
                 dlgro.emptTeks();
                 dlgro.isCek();
                 dlgro.setNoRm(TNoRw.getText(),"Ralan");
-                dlgro.tampil();
                 dlgro.setVisible(true);
                 this.setCursor(Cursor.getDefaultCursor());
             }

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.akuntindakanralan;
+import fungsi.akuntindakanranap;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -41,15 +42,12 @@ public class PCareDataPemberianTindakan extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private int i,a;
-    private PreparedStatement ps,psrekening;
+    private PreparedStatement ps;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private ResultSet rs,rsrekening;
+    private ResultSet rs;
     private double ttljmdokter=0,ttljmperawat=0,ttlkso=0,ttljasasarana=0,ttlbhp=0,ttlmenejemen=0,ttlpendapatan=0;
-    private String URL="",link="",otorisasi,Suspen_Piutang_Tindakan_Ranap="",Tindakan_Ranap="",Beban_Jasa_Medik_Dokter_Tindakan_Ranap="",Utang_Jasa_Medik_Dokter_Tindakan_Ranap="",
-            Beban_Jasa_Medik_Paramedis_Tindakan_Ranap="",Utang_Jasa_Medik_Paramedis_Tindakan_Ranap="",Beban_KSO_Tindakan_Ranap="",Utang_KSO_Tindakan_Ranap="",
-            Beban_Jasa_Sarana_Tindakan_Ranap="",Utang_Jasa_Sarana_Tindakan_Ranap="",Beban_Jasa_Menejemen_Tindakan_Ranap="",Utang_Jasa_Menejemen_Tindakan_Ranap="",
-            HPP_BHP_Tindakan_Ranap="",Persediaan_BHP_Tindakan_Ranap="",utc="";
+    private String URL="",link="",otorisasi,utc="";
     private HttpHeaders headers;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
@@ -699,32 +697,32 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 Sequel.deleteTampJurnal();
                 if(ttlpendapatan>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ranap, "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ranap, "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap(), "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getTindakan_Ranap(), "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
                 }
                 if(ttljmdokter>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ranap, "Beban Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ranap, "Utang Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Medik_Dokter_Tindakan_Ranap(), "Beban Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Medik_Dokter_Tindakan_Ranap(), "Utang Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
                 }
                 if(ttljmperawat>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ranap, "Beban Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ranap, "Utang Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Medik_Paramedis_Tindakan_Ranap(), "Beban Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Medik_Paramedis_Tindakan_Ranap(), "Utang Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
                 }
                 if(ttlkso>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ranap, "Beban KSO Tindakan Ranap", 0, ttlkso);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ranap, "Utang KSO Tindakan Ranap", ttlkso, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_KSO_Tindakan_Ranap(), "Beban KSO Tindakan Ranap", 0, ttlkso);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_KSO_Tindakan_Ranap(), "Utang KSO Tindakan Ranap", ttlkso, 0);
                 }
                 if(ttlmenejemen>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ranap, "Beban Jasa Manajemen Tindakan Ranap", 0, ttlmenejemen);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ranap, "Utang Jasa Manajemen Tindakan Ranap", ttlmenejemen, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Menejemen_Tindakan_Ranap(), "Beban Jasa Manajemen Tindakan Ranap", 0, ttlmenejemen);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Menejemen_Tindakan_Ranap(), "Utang Jasa Manajemen Tindakan Ranap", ttlmenejemen, 0);
                 }
                 if(ttljasasarana>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ranap, "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ranap, "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Sarana_Tindakan_Ranap(), "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Sarana_Tindakan_Ranap(), "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
                 }
                 if(ttlbhp>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ranap, "HPP BHP Tindakan Ranap", 0, ttlbhp);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ranap, "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getHPP_BHP_Tindakan_Ranap(), "HPP BHP Tindakan Ranap", 0, ttlbhp);
+                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getPersediaan_BHP_Tindakan_Ranap(), "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
                 }
                 if (sukses) sukses = jur.simpanJurnal(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
 
@@ -820,44 +818,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan().equals("")){
             runBackground(() ->akuntindakanralan.SetAkunTindakanRalan());
         }
-        try {
-            psrekening=koneksi.prepareStatement(
-                "select set_akun_ranap.Suspen_Piutang_Tindakan_Ranap,set_akun_ranap.Tindakan_Ranap,set_akun_ranap.Beban_Jasa_Medik_Dokter_Tindakan_Ranap,"+
-                "set_akun_ranap.Utang_Jasa_Medik_Dokter_Tindakan_Ranap,set_akun_ranap.Beban_Jasa_Medik_Paramedis_Tindakan_Ranap,set_akun_ranap.Utang_Jasa_Medik_Paramedis_Tindakan_Ranap,"+
-                "set_akun_ranap.Beban_KSO_Tindakan_Ranap,set_akun_ranap.Utang_KSO_Tindakan_Ranap,set_akun_ranap.Beban_Jasa_Sarana_Tindakan_Ranap,set_akun_ranap.Utang_Jasa_Sarana_Tindakan_Ranap,"+
-                "set_akun_ranap.Beban_Jasa_Menejemen_Tindakan_Ranap,set_akun_ranap.Utang_Jasa_Menejemen_Tindakan_Ranap,set_akun_ranap.HPP_BHP_Tindakan_Ranap,"+
-                "set_akun_ranap.Persediaan_BHP_Tindakan_Ranap from set_akun_ranap"
-            );
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Tindakan_Ranap=rsrekening.getString("Suspen_Piutang_Tindakan_Ranap");
-                    Tindakan_Ranap=rsrekening.getString("Tindakan_Ranap");
-                    Beban_Jasa_Medik_Dokter_Tindakan_Ranap=rsrekening.getString("Beban_Jasa_Medik_Dokter_Tindakan_Ranap");
-                    Utang_Jasa_Medik_Dokter_Tindakan_Ranap=rsrekening.getString("Utang_Jasa_Medik_Dokter_Tindakan_Ranap");
-                    Beban_Jasa_Medik_Paramedis_Tindakan_Ranap=rsrekening.getString("Beban_Jasa_Medik_Paramedis_Tindakan_Ranap");
-                    Utang_Jasa_Medik_Paramedis_Tindakan_Ranap=rsrekening.getString("Utang_Jasa_Medik_Paramedis_Tindakan_Ranap");
-                    Beban_KSO_Tindakan_Ranap=rsrekening.getString("Beban_KSO_Tindakan_Ranap");
-                    Utang_KSO_Tindakan_Ranap=rsrekening.getString("Utang_KSO_Tindakan_Ranap");
-                    Beban_Jasa_Sarana_Tindakan_Ranap=rsrekening.getString("Beban_Jasa_Sarana_Tindakan_Ranap");
-                    Utang_Jasa_Sarana_Tindakan_Ranap=rsrekening.getString("Utang_Jasa_Sarana_Tindakan_Ranap");
-                    Beban_Jasa_Menejemen_Tindakan_Ranap=rsrekening.getString("Beban_Jasa_Menejemen_Tindakan_Ranap");
-                    Utang_Jasa_Menejemen_Tindakan_Ranap=rsrekening.getString("Utang_Jasa_Menejemen_Tindakan_Ranap");
-                    HPP_BHP_Tindakan_Ranap=rsrekening.getString("HPP_BHP_Tindakan_Ranap");
-                    Persediaan_BHP_Tindakan_Ranap=rsrekening.getString("Persediaan_BHP_Tindakan_Ranap");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+
+        if(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap().equals("")){
+            runBackground(() ->akuntindakanranap.SetAkunTindakanRanap());
         }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){

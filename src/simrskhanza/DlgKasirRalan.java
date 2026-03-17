@@ -7426,7 +7426,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 periksarad.setLocationRelativeTo(internalFrame1);
                 periksarad.emptTeks();
                 periksarad.setNoRm(TNoRw.getText(),"Ralan");
-                periksarad.tampil();
                 periksarad.isCek();
                 periksarad.setVisible(true);
             }
@@ -8809,7 +8808,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),0).toString(),
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),1).toString()
                     );
-                    periksarad.tampil();
                     periksarad.isCek();
                     periksarad.setVisible(true);
                 }

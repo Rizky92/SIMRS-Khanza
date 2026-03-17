@@ -3880,7 +3880,6 @@ public class DlgBilingRanap extends javax.swing.JDialog {
             periksarad.setLocationRelativeTo(internalFrame1);
             periksarad.emptTeks();
             periksarad.setNoRm(TNoRw.getText(),"Ranap");
-            periksarad.tampil();
             periksarad.isCek();
             periksarad.setAlwaysOnTop(false);
             periksarad.setVisible(true);

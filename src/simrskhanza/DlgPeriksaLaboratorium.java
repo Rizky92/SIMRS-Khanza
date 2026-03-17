@@ -18,6 +18,7 @@ import bridging.koneksiDBSysmex;
 import bridging.koneksiDBVANSLAB;
 import fungsi.WarnaTable;
 import fungsi.akses;
+import fungsi.akuntindakanlaborat;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -71,9 +72,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private Jurnal jur=new Jurnal();
     private DlgCariPetugas petugas;
     private DlgCariDokter dokter;
-    private PreparedStatement pstindakan,pstindakan2,pstindakan3,pstindakan4,pstampil,pstampil2,pstampil3,pstampil4,pslica,
-            psset_tarif,pssetpj,psrekening;
-    private ResultSet rstindakan,rstampil,rstampil2,rscari,rsset_tarif,rssetpj,rsrekening,rslica;
+    private PreparedStatement pstindakan,pstindakan2,pstindakan3,pstindakan4,pstampil,pstampil2,pstampil3,pstampil4,pslica,psset_tarif,pssetpj;
+    private ResultSet rstindakan,rstampil,rstampil2,rscari,rsset_tarif,rssetpj,rslica;
     private boolean[] pilih,pilih2;
     private String[] kode,nama,pemeriksaan2,hasil2,satuan2,nilai_rujukan2,keterangan2,idtemplate2;
     private double[] total,bagian_rs,bhp,tarif_perujuk,tarif_tindakan_dokter,tarif_tindakan_petugas,kso,menejemen,
@@ -84,15 +84,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private double ttl=0,item=0;
     private boolean sukses=false, VALIDASIULANGHASILPERMINTAANLABPK = koneksiDB.VALIDASIULANGHASILPERMINTAAN("labpk");
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
-    private String Suspen_Piutang_Laborat_Ranap="",Laborat_Ranap="",Beban_Jasa_Medik_Dokter_Laborat_Ranap="",Utang_Jasa_Medik_Dokter_Laborat_Ranap="",
-            Beban_Jasa_Medik_Petugas_Laborat_Ranap="",Utang_Jasa_Medik_Petugas_Laborat_Ranap="",Beban_KSO_Laborat_Ranap="",Utang_KSO_Laborat_Ranap="",
-            HPP_Persediaan_Laborat_Rawat_Inap="",Persediaan_BHP_Laborat_Rawat_Inap="",Beban_Jasa_Sarana_Laborat_Ranap="",Utang_Jasa_Sarana_Laborat_Ranap="",
-            Beban_Jasa_Perujuk_Laborat_Ranap="",Utang_Jasa_Perujuk_Laborat_Ranap="",Beban_Jasa_Menejemen_Laborat_Ranap="",Utang_Jasa_Menejemen_Laborat_Ranap="",
-            Suspen_Piutang_Laborat_Ralan="",Laborat_Ralan="",Beban_Jasa_Medik_Dokter_Laborat_Ralan="",Utang_Jasa_Medik_Dokter_Laborat_Ralan="",
-            Beban_Jasa_Medik_Petugas_Laborat_Ralan="",Utang_Jasa_Medik_Petugas_Laborat_Ralan="",Beban_KSO_Laborat_Ralan="",Utang_KSO_Laborat_Ralan="",
-            HPP_Persediaan_Laborat_Rawat_Jalan="",Persediaan_BHP_Laborat_Rawat_Jalan="",Beban_Jasa_Sarana_Laborat_Ralan="",Utang_Jasa_Sarana_Laborat_Ralan="",
-            Beban_Jasa_Perujuk_Laborat_Ralan="",Utang_Jasa_Perujuk_Laborat_Ralan="",Beban_Jasa_Menejemen_Laborat_Ralan="",Utang_Jasa_Menejemen_Laborat_Ralan="",
-            norawatibu="",finger="";
+    private String norawatibu="",finger="";
 
 
     /** Creates new form DlgPerawatan
@@ -1361,88 +1353,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     }//GEN-LAST:event_rbDewasaMouseClicked
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            psrekening=koneksi.prepareStatement(
-                "select set_akun_ranap.Suspen_Piutang_Laborat_Ranap,set_akun_ranap.Laborat_Ranap,"+
-                "set_akun_ranap.Beban_Jasa_Medik_Dokter_Laborat_Ranap,set_akun_ranap.Utang_Jasa_Medik_Dokter_Laborat_Ranap,"+
-                "set_akun_ranap.Beban_Jasa_Medik_Petugas_Laborat_Ranap,set_akun_ranap.Utang_Jasa_Medik_Petugas_Laborat_Ranap,"+
-                "set_akun_ranap.Beban_Kso_Laborat_Ranap,set_akun_ranap.Utang_Kso_Laborat_Ranap,"+
-                "set_akun_ranap.HPP_Persediaan_Laborat_Rawat_inap,set_akun_ranap.Persediaan_BHP_Laborat_Rawat_Inap,"+
-                "set_akun_ranap.Beban_Jasa_Sarana_Laborat_Ranap,set_akun_ranap.Utang_Jasa_Sarana_Laborat_Ranap,"+
-                "set_akun_ranap.Beban_Jasa_Perujuk_Laborat_Ranap,set_akun_ranap.Utang_Jasa_Perujuk_Laborat_Ranap,"+
-                "set_akun_ranap.Beban_Jasa_Menejemen_Laborat_Ranap,set_akun_ranap.Utang_Jasa_Menejemen_Laborat_Ranap from set_akun_ranap");
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Laborat_Ranap=rsrekening.getString("Suspen_Piutang_Laborat_Ranap");
-                    Laborat_Ranap=rsrekening.getString("Laborat_Ranap");
-                    Beban_Jasa_Medik_Dokter_Laborat_Ranap=rsrekening.getString("Beban_Jasa_Medik_Dokter_Laborat_Ranap");
-                    Utang_Jasa_Medik_Dokter_Laborat_Ranap=rsrekening.getString("Utang_Jasa_Medik_Dokter_Laborat_Ranap");
-                    Beban_Jasa_Medik_Petugas_Laborat_Ranap=rsrekening.getString("Beban_Jasa_Medik_Petugas_Laborat_Ranap");
-                    Utang_Jasa_Medik_Petugas_Laborat_Ranap=rsrekening.getString("Utang_Jasa_Medik_Petugas_Laborat_Ranap");
-                    Beban_KSO_Laborat_Ranap=rsrekening.getString("Beban_Kso_Laborat_Ranap");
-                    Utang_KSO_Laborat_Ranap=rsrekening.getString("Utang_Kso_Laborat_Ranap");
-                    HPP_Persediaan_Laborat_Rawat_Inap=rsrekening.getString("HPP_Persediaan_Laborat_Rawat_inap");
-                    Persediaan_BHP_Laborat_Rawat_Inap=rsrekening.getString("Persediaan_BHP_Laborat_Rawat_Inap");
-                    Beban_Jasa_Sarana_Laborat_Ranap=rsrekening.getString("Beban_Jasa_Sarana_Laborat_Ranap");
-                    Utang_Jasa_Sarana_Laborat_Ranap=rsrekening.getString("Utang_Jasa_Sarana_Laborat_Ranap");
-                    Beban_Jasa_Perujuk_Laborat_Ranap=rsrekening.getString("Beban_Jasa_Perujuk_Laborat_Ranap");
-                    Utang_Jasa_Perujuk_Laborat_Ranap=rsrekening.getString("Utang_Jasa_Perujuk_Laborat_Ranap");
-                    Beban_Jasa_Menejemen_Laborat_Ranap=rsrekening.getString("Beban_Jasa_Menejemen_Laborat_Ranap");
-                    Utang_Jasa_Menejemen_Laborat_Ranap=rsrekening.getString("Utang_Jasa_Menejemen_Laborat_Ranap");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-
-            psrekening=koneksi.prepareStatement(
-                "select set_akun_ralan.Suspen_Piutang_Laborat_Ralan,set_akun_ralan.Laborat_Ralan,"+
-                "set_akun_ralan.Beban_Jasa_Medik_Dokter_Laborat_Ralan,set_akun_ralan.Utang_Jasa_Medik_Dokter_Laborat_Ralan,"+
-                "set_akun_ralan.Beban_Jasa_Medik_Petugas_Laborat_Ralan,set_akun_ralan.Utang_Jasa_Medik_Petugas_Laborat_Ralan,"+
-                "set_akun_ralan.Beban_Kso_Laborat_Ralan,set_akun_ralan.Utang_Kso_Laborat_Ralan,"+
-                "set_akun_ralan.HPP_Persediaan_Laborat_Rawat_Jalan,set_akun_ralan.Persediaan_BHP_Laborat_Rawat_Jalan,"+
-                "set_akun_ralan.Beban_Jasa_Sarana_Laborat_Ralan,set_akun_ralan.Utang_Jasa_Sarana_Laborat_Ralan,"+
-                "set_akun_ralan.Beban_Jasa_Perujuk_Laborat_Ralan,set_akun_ralan.Utang_Jasa_Perujuk_Laborat_Ralan,"+
-                "set_akun_ralan.Beban_Jasa_Menejemen_Laborat_Ralan,set_akun_ralan.Utang_Jasa_Menejemen_Laborat_Ralan from set_akun_ralan");
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Laborat_Ralan=rsrekening.getString("Suspen_Piutang_Laborat_Ralan");
-                    Laborat_Ralan=rsrekening.getString("Laborat_Ralan");
-                    Beban_Jasa_Medik_Dokter_Laborat_Ralan=rsrekening.getString("Beban_Jasa_Medik_Dokter_Laborat_Ralan");
-                    Utang_Jasa_Medik_Dokter_Laborat_Ralan=rsrekening.getString("Utang_Jasa_Medik_Dokter_Laborat_Ralan");
-                    Beban_Jasa_Medik_Petugas_Laborat_Ralan=rsrekening.getString("Beban_Jasa_Medik_Petugas_Laborat_Ralan");
-                    Utang_Jasa_Medik_Petugas_Laborat_Ralan=rsrekening.getString("Utang_Jasa_Medik_Petugas_Laborat_Ralan");
-                    Beban_KSO_Laborat_Ralan=rsrekening.getString("Beban_Kso_Laborat_Ralan");
-                    Utang_KSO_Laborat_Ralan=rsrekening.getString("Utang_Kso_Laborat_Ralan");
-                    HPP_Persediaan_Laborat_Rawat_Jalan=rsrekening.getString("HPP_Persediaan_Laborat_Rawat_Jalan");
-                    Persediaan_BHP_Laborat_Rawat_Jalan=rsrekening.getString("Persediaan_BHP_Laborat_Rawat_Jalan");
-                    Beban_Jasa_Sarana_Laborat_Ralan=rsrekening.getString("Beban_Jasa_Sarana_Laborat_Ralan");
-                    Utang_Jasa_Sarana_Laborat_Ralan=rsrekening.getString("Utang_Jasa_Sarana_Laborat_Ralan");
-                    Beban_Jasa_Perujuk_Laborat_Ralan=rsrekening.getString("Beban_Jasa_Perujuk_Laborat_Ralan");
-                    Utang_Jasa_Perujuk_Laborat_Ralan=rsrekening.getString("Utang_Jasa_Perujuk_Laborat_Ralan");
-                    Beban_Jasa_Menejemen_Laborat_Ralan=rsrekening.getString("Beban_Jasa_Menejemen_Laborat_Ralan");
-                    Utang_Jasa_Menejemen_Laborat_Ralan=rsrekening.getString("Utang_Jasa_Menejemen_Laborat_Ralan");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        if(akuntindakanlaborat.getSuspen_Piutang_Laborat_Ralan().equals("")||akuntindakanlaborat.getSuspen_Piutang_Laborat_Ranap().equals("")){
+            runBackground(() ->akuntindakanlaborat.SetAkunTindakanLaborat());
         }
 
         try {
@@ -2943,6 +2855,10 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             System.out.println(e);
         }
         isPsien();
+        runBackground(() ->tampilkanOrder(order));
+    }
+
+    public void tampilkanOrder(String order){
         tampiltarif(order);
         tampil(order);
     }
@@ -3313,71 +3229,71 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                 if(status.equals("Ranap")){
                     Sequel.deleteTampJurnal();
                     if(ttlpendapatan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Laborat_Ranap, "Suspen Piutang Laborat Ranap", ttlpendapatan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Laborat_Ranap, "Pendapatan Laborat Rawat Inap", 0, ttlpendapatan);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getSuspen_Piutang_Laborat_Ranap(), "Suspen Piutang Laborat Ranap", ttlpendapatan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getLaborat_Ranap(), "Pendapatan Laborat Rawat Inap", 0, ttlpendapatan);
                     }
                     if(ttljmdokter>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ranap, "Beban Jasa Medik Dokter Laborat Ranap", ttljmdokter, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ranap, "Utang Jasa Medik Dokter Laborat Ranap", 0, ttljmdokter);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Medik_Dokter_Laborat_Ranap(), "Beban Jasa Medik Dokter Laborat Ranap", ttljmdokter, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Medik_Dokter_Laborat_Ranap(), "Utang Jasa Medik Dokter Laborat Ranap", 0, ttljmdokter);
                     }
                     if(ttljmpetugas>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ranap, "Beban Jasa Medik Petugas Laborat Ranap", ttljmpetugas, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ranap, "Utang Jasa Medik Petugas Laborat Ranap", 0, ttljmpetugas);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Medik_Petugas_Laborat_Ranap(), "Beban Jasa Medik Petugas Laborat Ranap", ttljmpetugas, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Medik_Petugas_Laborat_Ranap(), "Utang Jasa Medik Petugas Laborat Ranap", 0, ttljmpetugas);
                     }
                     if(ttlbhp>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Laborat_Rawat_Inap, "HPP Persediaan Laborat Rawat Inap", ttlbhp, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Laborat_Rawat_Inap, "Persediaan BHP Laborat Rawat Inap", 0, ttlbhp);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getHPP_Persediaan_Laborat_Rawat_inap(), "HPP Persediaan Laborat Rawat Inap", ttlbhp, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getPersediaan_BHP_Laborat_Rawat_Inap(), "Persediaan BHP Laborat Rawat Inap", 0, ttlbhp);
                     }
                     if(ttlkso>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Laborat_Ranap, "Beban KSO Laborat Ranap", ttlkso, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Laborat_Ranap, "Utang KSO Laborat Ranap", 0, ttlkso);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Kso_Laborat_Ranap(), "Beban KSO Laborat Ranap", ttlkso, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Kso_Laborat_Ranap(), "Utang KSO Laborat Ranap", 0, ttlkso);
                     }
                     if(ttljasasarana>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ranap, "Beban Jasa Sarana Laborat Ranap", ttljasasarana, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ranap, "Utang Jasa Sarana Laborat Ranap", 0, ttljasasarana);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Sarana_Laborat_Ranap(), "Beban Jasa Sarana Laborat Ranap", ttljasasarana, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Sarana_Laborat_Ranap(), "Utang Jasa Sarana Laborat Ranap", 0, ttljasasarana);
                     }
                     if(ttljmperujuk>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ranap, "Beban Jasa Perujuk Laborat Ranap", ttljmperujuk, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ranap, "Utang Jasa Perujuk Laborat Ranap", 0, ttljmperujuk);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Perujuk_Laborat_Ranap(), "Beban Jasa Perujuk Laborat Ranap", ttljmperujuk, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Perujuk_Laborat_Ranap(), "Utang Jasa Perujuk Laborat Ranap", 0, ttljmperujuk);
                     }
                     if(ttlmenejemen>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ranap, "Beban Jasa Menejemen Laborat Ranap", ttlmenejemen, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ranap, "Utang Jasa Menejemen Laborat Ranap", 0, ttlmenejemen);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Menejemen_Laborat_Ranap(), "Beban Jasa Menejemen Laborat Ranap", ttlmenejemen, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Menejemen_Laborat_Ranap(), "Utang Jasa Menejemen Laborat Ranap", 0, ttlmenejemen);
                     }
                     if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMERIKSAAN LABORAT RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
                 }else if(status.equals("Ralan")){
                     Sequel.deleteTampJurnal();
                     if(ttlpendapatan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Laborat_Ralan, "Suspen Piutang Laborat Ralan", ttlpendapatan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "Pendapatan Laborat Rawat Jalan", 0, ttlpendapatan);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getSuspen_Piutang_Laborat_Ralan(), "Suspen Piutang Laborat Ralan", ttlpendapatan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getLaborat_Ralan(), "Pendapatan Laborat Rawat Jalan", 0, ttlpendapatan);
                     }
                     if(ttljmdokter>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ralan, "Beban Jasa Medik Dokter Laborat Ralan", ttljmdokter, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Jasa Medik Dokter Laborat Ralan", 0, ttljmdokter);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Medik_Dokter_Laborat_Ralan(), "Beban Jasa Medik Dokter Laborat Ralan", ttljmdokter, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Medik_Dokter_Laborat_Ralan(), "Utang Jasa Medik Dokter Laborat Ralan", 0, ttljmdokter);
                     }
                     if(ttljmpetugas>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ralan, "Beban Jasa Medik Petugas Laborat Ralan", ttljmpetugas, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ralan, "Utang Jasa Medik Petugas Laborat Ralan", 0, ttljmpetugas);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Medik_Petugas_Laborat_Ralan(), "Beban Jasa Medik Petugas Laborat Ralan", ttljmpetugas, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Medik_Petugas_Laborat_Ralan(), "Utang Jasa Medik Petugas Laborat Ralan", 0, ttljmpetugas);
                     }
                     if(ttlbhp>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Laborat_Rawat_Jalan, "HPP Persediaan Laborat Rawat Jalan", ttlbhp, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Laborat_Rawat_Jalan, "Persediaan BHP Laborat Rawat Jalan", 0, ttlbhp);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getHPP_Persediaan_Laborat_Rawat_Jalan(), "HPP Persediaan Laborat Rawat Jalan", ttlbhp, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getPersediaan_BHP_Laborat_Rawat_Jalan(), "Persediaan BHP Laborat Rawat Jalan", 0, ttlbhp);
                     }
                     if(ttlkso>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Laborat_Ralan, "Beban KSO Laborat Ralan", ttlkso, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Laborat_Ralan, "Utang KSO Laborat Ralan", 0, ttlkso);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Kso_Laborat_Ralan(), "Beban KSO Laborat Ralan", ttlkso, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Kso_Laborat_Ralan(), "Utang KSO Laborat Ralan", 0, ttlkso);
                     }
                     if(ttljasasarana>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ralan, "Beban Jasa Sarana Laborat Ralan", ttljasasarana, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ralan, "Utang Jasa Sarana Laborat Ralan", 0, ttljasasarana);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Sarana_Laborat_Ralan(), "Beban Jasa Sarana Laborat Ralan", ttljasasarana, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Sarana_Laborat_Ralan(), "Utang Jasa Sarana Laborat Ralan", 0, ttljasasarana);
                     }
                     if(ttljmperujuk>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ralan, "Beban Jasa Perujuk Laborat Ralan", ttljmperujuk, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ralan, "Utang Jasa Perujuk Laborat Ralan", 0, ttljmperujuk);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Perujuk_Laborat_Ralan(), "Beban Jasa Perujuk Laborat Ralan", ttljmperujuk, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Perujuk_Laborat_Ralan(), "Utang Jasa Perujuk Laborat Ralan", 0, ttljmperujuk);
                     }
                     if(ttlmenejemen>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ralan, "Beban Jasa Menejemen Laborat Ralan", ttlmenejemen, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ralan, "Utang Jasa Menejemen Laborat Ralan", 0, ttlmenejemen);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getBeban_Jasa_Menejemen_Laborat_Ralan(), "Beban Jasa Menejemen Laborat Ralan", ttlmenejemen, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanlaborat.getUtang_Jasa_Menejemen_Laborat_Ralan(), "Utang Jasa Menejemen Laborat Ralan", 0, ttlmenejemen);
                     }
                     if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMERIKSAAN LABORAT RAWAT JALAN PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
                 }
