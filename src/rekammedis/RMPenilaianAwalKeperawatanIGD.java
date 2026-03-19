@@ -3641,14 +3641,14 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
         }
         if (masalahkeperawatan == null) return;
         if (!masalahkeperawatan.isVisible()) {
-            masalahkeperawatan.isCek();    
+            masalahkeperawatan.isCek();
         }
-        
+
         if (masalahkeperawatan.isVisible()) {
             masalahkeperawatan.toFront();
             return;
         }
-        masalahkeperawatan.setVisible(true); 
+        masalahkeperawatan.setVisible(true);
     }//GEN-LAST:event_BtnTambahMasalahActionPerformed
 
     private void BtnAllMasalahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllMasalahActionPerformed
@@ -3745,14 +3745,14 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
         }
         if (rencanakeperawatan == null) return;
         if (!rencanakeperawatan.isVisible()) {
-            rencanakeperawatan.isCek();    
+            rencanakeperawatan.isCek();
         }
-        
+
         if (rencanakeperawatan.isVisible()) {
             rencanakeperawatan.toFront();
             return;
         }
-        rencanakeperawatan.setVisible(true); 
+        rencanakeperawatan.setVisible(true);
     }//GEN-LAST:event_BtnTambahRencanaActionPerformed
 
     /**

@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.WarnaTable2;
 import fungsi.akses;
+import fungsi.akunbillingralan;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -68,7 +69,7 @@ import simrskhanza.DlgTagihanOperasi;
 public class DlgBilingRalan extends javax.swing.JDialog {
     private DefaultTableModel tabModeRwJlDr;
     private final DefaultTableModel tabModeTambahan,tabModePotongan,tabModeAkunBayar,tabModeAkunPiutang,tabModeLab,tabModeRad,tabModeApotek;
-    private boolean sukses=false, waktu=true;
+    public boolean sukses=false, waktu=true;
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Jurnal jur=new Jurnal();
@@ -81,9 +82,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                    kekurangan=0,obatlangsung;
     private int i,r,cek,row2,countbayar=0,z=0,jml=0;
     private String nota_jalan="",dokterrujukan="",polirujukan="",status="",biaya="",tambahan="",totals="",kdptg="",nmptg="",kd_pj="",notaralan="",centangdokterralan="",
-            rinciandokterralan="",Tindakan_Ralan="",Laborat_Ralan="",Radiologi_Ralan="",no_rkm_medis, nm_pasien, alamat, jk, umurdaftar, tgl_registrasi, no_nota,
-            Obat_Ralan="",Registrasi_Ralan="",Tambahan_Ralan="",Potongan_Ralan="",Obat_Langsung_Ralan="",tgl_lahir,
-            Operasi_Ralan="",tampilkan_ppnobat_ralan="",rincianoperasi="",centangobatralan="No",
+            rinciandokterralan="",no_rkm_medis, nm_pasien, alamat, jk, umurdaftar, tgl_registrasi, no_nota,tgl_lahir,tampilkan_ppnobat_ralan="",rincianoperasi="",centangobatralan="No",
             sqlpscekbilling = "select count(billing.no_rawat) from billing where billing.no_rawat = ?",
             sqlpsreg = "select reg_periksa.tgl_registrasi, reg_periksa.no_rkm_medis, reg_periksa.kd_poli, reg_periksa.no_rawat, " +
                     "reg_periksa.biaya_reg, reg_periksa.jam_reg, reg_periksa.umurdaftar, reg_periksa.sttsumur " +
@@ -188,11 +187,11 @@ public class DlgBilingRalan extends javax.swing.JDialog {
     private String[] Nama_Akun_Piutang,Kode_Rek_Piutang,Kd_PJ,Besar_Piutang,Jatuh_Tempo,
             Nama_Akun_Bayar,Kode_Rek_Bayar,Bayar,PPN_Persen,PPN_Besar;
 
-    private PreparedStatement pscaripoli2,pscekbilling,pscarirm,pscaripasien,psreg,pscaripoli,pscarialamat,psrekening,
+    private PreparedStatement pscaripoli2,pscekbilling,pscarirm,pscaripasien,psreg,pscaripoli,pscarialamat,pssetnota,psrekening,
             psdokterralan,psdokterralan2,pscariralandokter,pscariralanperawat,pscariralandrpr,pscarilab,pscariobat,psdetaillab,
             psobatlangsung,pstambahan,psbiling,pstemporary,pspotongan,psbilling,pscariradiologi,
             pstamkur,psnota,psoperasi,psobatoperasi,psakunbayar,psakunpiutang;
-    private ResultSet rscekbilling,rscarirm,rscaripasien,rsreg,rscaripoli,rscarialamat,rsrekening,rsobatoperasi,
+    private ResultSet rscekbilling,rscarirm,rscaripasien,rsreg,rscaripoli,rscarialamat,rsobatoperasi,rsrekening,
             rsdokterralan,rsdokterralan2,rscariralandokter,rscariralanperawat,rscariralandrpr,rscarilab,rscariobat,rsdetaillab,
             rsobatlangsung,rstambahan,rspotongan,rsbilling,rscariradiologi,rstamkur,rsoperasi,
             rsakunbayar,rsakunpiutang,rscaripoli2;
@@ -569,40 +568,8 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         }
 
         try {
-            psrekening=koneksi.prepareStatement(
-                    "select set_akun_ralan.Suspen_Piutang_Tindakan_Ralan,set_akun_ralan.Suspen_Piutang_Laborat_Ralan,"+
-                    "set_akun_ralan.Suspen_Piutang_Radiologi_Ralan,set_akun_ralan.Suspen_Piutang_Obat_Ralan,"+
-                    "set_akun_ralan.Obat_Ralan,set_akun_ralan.Registrasi_Ralan,set_akun_ralan.Tambahan_Ralan,"+
-                    "set_akun_ralan.Potongan_Ralan,set_akun_ralan.Suspen_Piutang_Operasi_Ralan from set_akun_ralan");
-            try {
-                rsrekening=psrekening.executeQuery();
-                if(rsrekening.next()){
-                    Tindakan_Ralan=rsrekening.getString("Suspen_Piutang_Tindakan_Ralan");
-                    Laborat_Ralan=rsrekening.getString("Suspen_Piutang_Laborat_Ralan");
-                    Radiologi_Ralan=rsrekening.getString("Suspen_Piutang_Radiologi_Ralan");
-                    Obat_Ralan=rsrekening.getString("Suspen_Piutang_Obat_Ralan");
-                    Obat_Langsung_Ralan=rsrekening.getString("Obat_Ralan");
-                    Registrasi_Ralan=rsrekening.getString("Registrasi_Ralan");
-                    Tambahan_Ralan=rsrekening.getString("Tambahan_Ralan");
-                    Potongan_Ralan=rsrekening.getString("Potongan_Ralan");
-                    Operasi_Ralan=rsrekening.getString("Suspen_Piutang_Operasi_Ralan");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-
             if(tampilkan_ppnobat_ralan.equals("Yes")){
                 PPN_Keluaran=Sequel.cariIsi("select set_akun.PPN_Keluaran from set_akun");
-                if(PPN_Keluaran.equals("")){
-                    PPN_Keluaran=Obat_Langsung_Ralan;
-                }
             }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
@@ -2375,7 +2342,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             WindowPotonganBiaya.dispose();
             dispose();
         }
-
+        sukses=false;
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -2902,30 +2869,30 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
                     Sequel.deleteTampJurnal();
                     if((-1*ttlPotongan)>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Potongan_Ralan, "Potongan Ralan", 0, (-1 * ttlPotongan));
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getPotongan_Ralan(), "Potongan Ralan", 0, (-1 * ttlPotongan));
                     }
 
                     if((ttlRalan_Dokter+ttlRalan_Dokter_Param+ttlRalan_Paramedis)>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Tindakan Ralan", (ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getTindakan_Ralan(), "Tindakan Ralan", (ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis), 0);
                     }
 
                     if(ttlLaborat>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "Laborat Ralan", ttlLaborat, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getLaborat_Ralan(), "Laborat Ralan", ttlLaborat, 0);
                     }
 
                     if(ttlRadiologi>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Radiologi_Ralan, "Radiologi Ralan", ttlRadiologi, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getRadiologi_Ralan(), "Radiologi Ralan", ttlRadiologi, 0);
                     }
 
                     obatlangsung=Sequel.cariIsiAngka("select billing.totalbiaya from billing where billing.nm_perawatan='Obat & BHP ' and billing.status='Obat' and billing.no_rawat=?",TNoRw.getText());
                     ppnobat=Sequel.cariIsiAngka("select billing.totalbiaya from billing where billing.nm_perawatan='PPN Obat' and billing.status='Obat' and billing.no_rawat=?",TNoRw.getText());
 
                     if((ttlObat-obatlangsung-ppnobat)>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Obat_Ralan, "Obat Ralan", (ttlObat - obatlangsung - ppnobat), 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getObat_Ralan(), "Obat Ralan", (ttlObat - obatlangsung - ppnobat), 0);
                     }
 
                     if(obatlangsung>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Obat_Langsung_Ralan, "Obat Langsung Ralan", obatlangsung, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getObat_Langsung_Ralan(), "Obat Langsung Ralan", obatlangsung, 0);
                     }
 
                     if(ppnobat>0){
@@ -2933,21 +2900,21 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     }
 
                     if(ttlRegistrasi>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Registrasi_Ralan, "Registrasi Ralan", ttlRegistrasi, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getRegistrasi_Ralan(), "Registrasi Ralan", ttlRegistrasi, 0);
                     }
 
                     if(ttlTambahan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tambahan_Ralan, "Tambahan Ralan", ttlTambahan, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getTambahan_Ralan(), "Tambahan Ralan", ttlTambahan, 0);
                     }
 
                     if(ttlOperasi>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Operasi_Ralan, "Operasi Ralan", ttlOperasi, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getOperasi_Ralan(), "Operasi Ralan", ttlOperasi, 0);
                     }
 
                     psakunbayar=koneksi.prepareStatement(
                         "select akun_bayar.nama_bayar,akun_bayar.kd_rek,detail_nota_jalan.besar_bayar,"+
                         "akun_bayar.ppn,detail_nota_jalan.besarppn from akun_bayar inner join detail_nota_jalan "+
-                        "on akun_bayar.nama_bayar=detail_nota_jalan.nama_bayar where detail_nota_jalan.no_rawat=? order by nama_bayar");
+                        "on akun_bayar.nama_bayar=detail_nota_jalan.nama_bayar where detail_nota_jalan.no_rawat=?");
                     try{
                         psakunbayar.setString(1,TNoRw.getText());
                         rsakunbayar=psakunbayar.executeQuery();
@@ -2970,7 +2937,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         "select akun_piutang.nama_bayar,akun_piutang.kd_rek,akun_piutang.kd_pj, "+
                         "detail_piutang_pasien.totalpiutang,date_format(detail_piutang_pasien.tgltempo,'%d/%m/%Y') from "+
                         "akun_piutang inner join detail_piutang_pasien on akun_piutang.nama_bayar=detail_piutang_pasien.nama_bayar "+
-                        "where detail_piutang_pasien.no_rawat=? order by nama_bayar");
+                        "where detail_piutang_pasien.no_rawat=?");
                     try{
                         psakunpiutang.setString(1,TNoRw.getText());
                         rsakunpiutang=psakunpiutang.executeQuery();
@@ -3987,6 +3954,10 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                 tampilAkunBankMandiri2();
             }
         } catch (Exception e) {
+        }
+
+        if(akunbillingralan.getTindakan_Ralan().equals("")){
+            akunbillingralan.SetAkunBillingRalan();
         }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -5655,7 +5626,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             Valid.tabelKosong(tabModeAkunBayar);
             File file = new File("./cache/akunbayar.iyem");
             file.createNewFile();
-            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_bayar order by akun_bayar.nama_bayar")) {
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_bayar")) {
                 ArrayNode array = mapper.createArrayNode();
                 Map<String, Object> map;
                 while (rs.next()) {
@@ -5726,7 +5697,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
         try {
             File file = new File("./cache/akunbayar.iyem");
             file.createNewFile();
-            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_bayar order by akun_bayar.nama_bayar")) {
+            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from akun_bayar")) {
                 ArrayNode array = mapper.createArrayNode();
                 Map<String, Object> map;
                 while (rs.next()) {
@@ -5753,10 +5724,14 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             psakunbayar=koneksi.prepareStatement(
                     "select akun_bayar.nama_bayar,akun_bayar.kd_rek,detail_nota_jalan.besar_bayar,"+
                     "akun_bayar.ppn,detail_nota_jalan.besarppn, detail_nota_jalan.keterangan from akun_bayar inner join detail_nota_jalan "+
-                    "on akun_bayar.nama_bayar=detail_nota_jalan.nama_bayar where detail_nota_jalan.no_rawat=? and akun_bayar.nama_bayar like ? order by nama_bayar");
+                    "on akun_bayar.nama_bayar=detail_nota_jalan.nama_bayar where detail_nota_jalan.no_rawat=?"+
+                     (TCari.getText().trim().equals("")?"":"and akun_bayar.nama_bayar like ?")
+             );
             try{
                 psakunbayar.setString(1,TNoRw.getText());
-                psakunbayar.setString(2,"%"+TCari.getText()+"%");
+                 if(!TCari.getText().trim().equals("")){
+                   psakunbayar.setString(2,"%"+TCari.getText()+"%");
+                 }
                 rsakunbayar=psakunbayar.executeQuery();
                 while(rsakunbayar.next()){
                     tabModeAkunBayar.addRow(new Object[] {
@@ -5786,7 +5761,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
             file.createNewFile();
             fileWriter = new FileWriter(file);
             StringBuilder iyembuilder = new StringBuilder();
-            psakunpiutang=koneksi.prepareStatement("select * from akun_piutang order by nama_bayar");
+            psakunpiutang=koneksi.prepareStatement("select * from akun_piutang");
             try{
                 rsakunpiutang=psakunpiutang.executeQuery();
                 while(rsakunpiutang.next()){
@@ -5882,7 +5857,7 @@ public class DlgBilingRalan extends javax.swing.JDialog {
              file.createNewFile();
              fileWriter = new FileWriter(file);
              StringBuilder iyembuilder = new StringBuilder();
-             psakunpiutang=koneksi.prepareStatement("select * from akun_piutang order by nama_bayar");
+             psakunpiutang=koneksi.prepareStatement("select * from akun_piutang");
              try{
                  rsakunpiutang=psakunpiutang.executeQuery();
                  while(rsakunpiutang.next()){
@@ -5918,10 +5893,13 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                     "select akun_piutang.nama_bayar,akun_piutang.kd_rek,akun_piutang.kd_pj, "+
                     "detail_piutang_pasien.totalpiutang,date_format(detail_piutang_pasien.tgltempo,'%d/%m/%Y') from "+
                     "akun_piutang inner join detail_piutang_pasien on akun_piutang.nama_bayar=detail_piutang_pasien.nama_bayar "+
-                    "where detail_piutang_pasien.no_rawat=? and akun_piutang.nama_bayar like ? order by nama_bayar");
+                    "where detail_piutang_pasien.no_rawat=? "+(TCari1.getText().trim().equals("")?"":"and akun_piutang.nama_bayar like ?")
+             );
             try{
                 psakunpiutang.setString(1,TNoRw.getText());
-                psakunpiutang.setString(2,"%"+TCari1.getText()+"%");
+                 if(!TCari1.getText().trim().equals("")){
+                   psakunpiutang.setString(2,"%"+TCari1.getText()+"%");
+                 }
                 rsakunpiutang=psakunpiutang.executeQuery();
                 while(rsakunpiutang.next()){
                     tabModeAkunPiutang.addRow(new Object[]{rsakunpiutang.getString(1),rsakunpiutang.getString(2),rsakunpiutang.getString(3),rsakunpiutang.getString(4),rsakunpiutang.getString(5)});
@@ -6227,27 +6205,27 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
                     if(sukses==true){
                         if((-1 * ttlPotongan) > 0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Potongan_Ralan, "Potongan Ralan", (-1 * ttlPotongan), 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getPotongan_Ralan(), "Potongan Ralan", (-1 * ttlPotongan), 0);
                         }
 
                         if((ttlRalan_Dokter+ttlRalan_Dokter_Param+ttlRalan_Paramedis)>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Tindakan Ralan", 0, (ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis));
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getTindakan_Ralan(), "Tindakan Ralan", 0, (ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis));
                         }
 
                         if(ttlLaborat>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "Laborat Ralan", 0, ttlLaborat);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getLaborat_Ralan(), "Laborat Ralan", 0, ttlLaborat);
                         }
 
                         if(ttlRadiologi>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Radiologi_Ralan, "Radiologi Ralan", 0, ttlRadiologi);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getRadiologi_Ralan(), "Radiologi Ralan", 0, ttlRadiologi);
                         }
 
                         if((ttlObat-obatlangsung-ppnobat)>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Obat_Ralan, "Obat Ralan", 0, (ttlObat - obatlangsung - ppnobat));
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getObat_Ralan(), "Obat Ralan", 0, (ttlObat - obatlangsung - ppnobat));
                         }
 
                         if(obatlangsung>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Obat_Langsung_Ralan, "Obat Langsung Ralan", 0, obatlangsung);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getObat_Langsung_Ralan(), "Obat Langsung Ralan", 0, obatlangsung);
                         }
 
                         if(ppnobat>0){
@@ -6255,15 +6233,15 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         }
 
                         if(ttlRegistrasi>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Registrasi_Ralan, "Registrasi Ralan", 0, ttlRegistrasi);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getRegistrasi_Ralan(), "Registrasi Ralan", 0, ttlRegistrasi);
                         }
 
                         if(ttlTambahan>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tambahan_Ralan, "Tambahan Ralan", 0, ttlTambahan);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getTambahan_Ralan(), "Tambahan Ralan", 0, ttlTambahan);
                         }
 
                         if(ttlOperasi>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Operasi_Ralan, "Operasi Ralan", 0, ttlOperasi);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akunbillingralan.getOperasi_Ralan(), "Operasi Ralan", 0, ttlOperasi);
                         }
 
                         alamat=Sequel.cariIsi("select reg_periksa.almt_pj from reg_periksa where reg_periksa.no_rawat=? ",TNoRw.getText());
