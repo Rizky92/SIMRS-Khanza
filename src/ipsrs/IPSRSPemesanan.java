@@ -729,13 +729,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
                                 });
                                 if(tbDokter.getValueAt(i,4).toString().equals("true")&&(akses.getipsrs_barang()==true)){
-                                    String hargaBaru=tbDokter.getValueAt(i,5).toString();
-                                    String hargaLama=Sequel.cariIsi("SELECT harga FROM ipsrsbarang WHERE kode_brng='"+tbDokter.getValueAt(i,1).toString()+"'");
-                                    if(hargaLama==null) hargaLama="0";
-                                    Sequel.menyimpantfSmc("riwayat_harga_ipsrs","kode_brng,harga_lama,harga_baru,no_faktur,jenis,nip",
-                                        tbDokter.getValueAt(i,1).toString(),hargaLama,hargaBaru,NoFaktur.getText(),"pemesanan",akses.getkode());
                                     Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
-                                        hargaBaru,tbDokter.getValueAt(i,1).toString()
+                                        tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,1).toString()
                                     });
                                 }
                             }else{
