@@ -49,7 +49,7 @@ public class IPSRSPembelian extends javax.swing.JDialog {
     private double[] harga,jumlah,subtotal,diskon,besardiskon,jmltotal;
     private WarnaTable2 warna=new WarnaTable2();
     private boolean sukses=true;
-    private String akunbayar,akunpembelian=Sequel.cariIsi("select set_akun.Pengadaan_Ipsrs from set_akun"),PPN_Masukan=Sequel.cariIsi("select set_akun.PPN_Masukan from set_akun");
+    private String akunbayar,akunpembelian=Sequel.cariIsi("select set_akun.Pengadaan_Ipsrs from set_akun"),PPN_Masukan=Sequel.cariIsi("select set_akun.PPN_Masukan from set_akun"),Diskon_Pengadaan_NonMedis=Sequel.cariIsi("select set_akun.Diskon_Pengadaan_NonMedis from set_akun");
     private File file;
     private FileWriter fileWriter;
     private ObjectMapper mapper = new ObjectMapper();
@@ -682,8 +682,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
                                 });
                                 if(tbDokter.getValueAt(i,4).toString().equals("true")&&(akses.getipsrs_barang()==true)){
+                                    String hargaBaru=tbDokter.getValueAt(i,5).toString();
+                                    String hargaLama=Sequel.cariIsi("SELECT harga FROM ipsrsbarang WHERE kode_brng='"+tbDokter.getValueAt(i,1).toString()+"'");
+                                    if(hargaLama==null) hargaLama="0";
+                                    Sequel.menyimpantfSmc("riwayat_harga_ipsrs","kode_brng,harga_lama,harga_baru,no_faktur,jenis,nip",
+                                        tbDokter.getValueAt(i,1).toString(),hargaLama,hargaBaru,NoFaktur.getText(),"pembelian",akses.getkode());
                                     Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
-                                        (Double.parseDouble(tbDokter.getValueAt(i,5).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(i,5).toString())))+"",tbDokter.getValueAt(i,1).toString()
+                                        hargaBaru,tbDokter.getValueAt(i,1).toString()
                                     });
                                 }
                             }else{
@@ -698,7 +703,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(akunpembelian, "PEMBELIAN", (ttl + meterai), 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(akunpembelian, "PEMBELIAN", (sbttl + meterai), 0);
+                    if(ttldisk>0){
+                        if (sukses) sukses = Sequel.insertTampJurnal(Diskon_Pengadaan_NonMedis, "DISKON PEMBELIAN NON MEDIS", 0, ttldisk);
+                    }
                     if (ppn > 0) {
                         if (sukses) sukses = Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan IPSRS", ppn, 0);
                     }

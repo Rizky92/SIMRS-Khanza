@@ -52,7 +52,7 @@ public class IPSRSPemesanan extends javax.swing.JDialog {
     private boolean sukses=true;
     private File file;
     private FileWriter fileWriter;
-    private String Penerimaan_NonMedis="",PPN_Masukan="",Kontra_Penerimaan_NonMedis="";
+    private String Penerimaan_NonMedis="",PPN_Masukan="",Kontra_Penerimaan_NonMedis="",Diskon_Pengadaan_NonMedis="";
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode response;
@@ -729,8 +729,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,1).toString()
                                 });
                                 if(tbDokter.getValueAt(i,4).toString().equals("true")&&(akses.getipsrs_barang()==true)){
+                                    String hargaBaru=tbDokter.getValueAt(i,5).toString();
+                                    String hargaLama=Sequel.cariIsi("SELECT harga FROM ipsrsbarang WHERE kode_brng='"+tbDokter.getValueAt(i,1).toString()+"'");
+                                    if(hargaLama==null) hargaLama="0";
+                                    Sequel.menyimpantfSmc("riwayat_harga_ipsrs","kode_brng,harga_lama,harga_baru,no_faktur,jenis,nip",
+                                        tbDokter.getValueAt(i,1).toString(),hargaLama,hargaBaru,NoFaktur.getText(),"pemesanan",akses.getkode());
                                     Sequel.mengedit("ipsrsbarang","kode_brng=?","harga=?",2,new String[]{
-                                        (Double.parseDouble(tbDokter.getValueAt(i,5).toString())+((Double.parseDouble(tppn.getText())/100)*Double.parseDouble(tbDokter.getValueAt(i,5).toString())))+"",tbDokter.getValueAt(i,1).toString()
+                                        hargaBaru,tbDokter.getValueAt(i,1).toString()
                                     });
                                 }
                             }else{
@@ -744,7 +749,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Penerimaan_NonMedis, "PERSEDIAAN BARANG NON MEDIS", (ttl + meterai), 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Penerimaan_NonMedis, "PERSEDIAAN BARANG NON MEDIS", (sbttl + meterai), 0);
+                    if(ttldisk>0){
+                        if (sukses) sukses = Sequel.insertTampJurnal(Diskon_Pengadaan_NonMedis, "DISKON PENGADAAN NON MEDIS", 0, ttldisk);
+                    }
                     if(ppn>0){
                         if (sukses) sukses = Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Non Medis", ppn, 0);
                     }
@@ -1419,17 +1427,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void tampilAkun() {
          try{
-             ps=koneksi.prepareStatement("select set_akun.Penerimaan_NonMedis,set_akun.PPN_Masukan,set_akun.Kontra_Penerimaan_NonMedis from set_akun");
+             ps=koneksi.prepareStatement("select set_akun.Penerimaan_NonMedis,set_akun.PPN_Masukan,set_akun.Kontra_Penerimaan_NonMedis,set_akun.Diskon_Pengadaan_NonMedis from set_akun");
              try{
                  rs=ps.executeQuery();
                  if(rs.next()){
                      Penerimaan_NonMedis=rs.getString("Penerimaan_NonMedis");
                      PPN_Masukan=rs.getString("PPN_Masukan");
                      Kontra_Penerimaan_NonMedis=rs.getString("Kontra_Penerimaan_NonMedis");
+                     Diskon_Pengadaan_NonMedis=rs.getString("Diskon_Pengadaan_NonMedis");
+                     if(Diskon_Pengadaan_NonMedis==null) Diskon_Pengadaan_NonMedis="";
                      file=new File("./cache/akunpemesananipsrs.iyem");
                      file.createNewFile();
                      fileWriter = new FileWriter(file);
-                     fileWriter.write("{\"Penerimaan_NonMedis\":\""+Penerimaan_NonMedis+"\",\"PPN_Masukan\":\""+PPN_Masukan+"\",\"Kontra_Penerimaan_NonMedis\":\""+Kontra_Penerimaan_NonMedis+"\"}");
+                     fileWriter.write("{\"Penerimaan_NonMedis\":\""+Penerimaan_NonMedis+"\",\"PPN_Masukan\":\""+PPN_Masukan+"\",\"Kontra_Penerimaan_NonMedis\":\""+Kontra_Penerimaan_NonMedis+"\",\"Diskon_Pengadaan_NonMedis\":\""+Diskon_Pengadaan_NonMedis+"\"}");
                      fileWriter.flush();
                      fileWriter.close();
                  }
@@ -1455,6 +1465,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             Penerimaan_NonMedis=root.path("Penerimaan_NonMedis").asText();
             PPN_Masukan=root.path("PPN_Masukan").asText();
             Kontra_Penerimaan_NonMedis=root.path("Kontra_Penerimaan_NonMedis").asText();
+            Diskon_Pengadaan_NonMedis=root.path("Diskon_Pengadaan_NonMedis").asText();
             myObj.close();
         } catch (Exception ex) {
             if(ex.toString().contains("java.io.FileNotFoundException")){
