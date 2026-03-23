@@ -2017,3 +2017,16 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
 SET FOREIGN_KEY_CHECKS=1;
+CREATE TABLE IF NOT EXISTS `riwayat_harga_ipsrs` (
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    `kode_brng`  VARCHAR(20) NOT NULL,
+    `harga_lama` DOUBLE NOT NULL DEFAULT 0,
+    `harga_baru` DOUBLE NOT NULL DEFAULT 0,
+    `no_faktur`  VARCHAR(20) NOT NULL,
+    `jenis`      ENUM('pemesanan','pembelian') NOT NULL,
+    `tgl`        DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    `nip`        VARCHAR(20) NOT NULL,
+    PRIMARY KEY (`id`),
+    KEY `kode_brng` (`kode_brng`),
+    KEY `no_faktur` (`no_faktur`)
+) ENGINE=InnoDB;
