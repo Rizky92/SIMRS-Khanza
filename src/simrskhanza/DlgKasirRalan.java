@@ -428,8 +428,17 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
             public void windowClosing(WindowEvent e) {}
             @Override
             public void windowClosed(WindowEvent e) {
-                if(akses.getform().equals("DlgKasirRalan")){
-                    tampilkasir();
+                if(billing.sukses==true){
+                    if(tabModekasir.getRowCount()!=0){
+                        if(tbKasirRalan.getSelectedRow()!= -1){
+                            if(cmbStatusBayar.getSelectedItem().toString().equals("Belum Bayar")){
+                                tabModekasir.removeRow(tbKasirRalan.getSelectedRow());
+                                LCount.setText(""+tabModekasir.getRowCount());
+                            }else{
+                                tbKasirRalan.setValueAt("Sudah Bayar", tbKasirRalan.getSelectedRow(), 15);
+                            }
+                        }
+                    }
                 }
             }
             @Override
@@ -7426,7 +7435,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 periksarad.setLocationRelativeTo(internalFrame1);
                 periksarad.emptTeks();
                 periksarad.setNoRm(TNoRw.getText(),"Ralan");
-                periksarad.tampil();
                 periksarad.isCek();
                 periksarad.setVisible(true);
             }
@@ -8809,7 +8817,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),0).toString(),
                         tbKasirRalan2.getValueAt(tbKasirRalan2.getSelectedRow(),1).toString()
                     );
-                    periksarad.tampil();
                     periksarad.isCek();
                     periksarad.setVisible(true);
                 }
