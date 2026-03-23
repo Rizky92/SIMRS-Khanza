@@ -2017,4 +2017,4 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
 SET FOREIGN_KEY_CHECKS=1;
-ALTER TABLE `set_akun` ADD COLUMN IF NOT EXISTS `Diskon_Pengadaan_NonMedis` varchar(15) DEFAULT NULL AFTER `Kontra_Penerimaan_NonMedis`;
+ALTER TABLE `set_akun` ADD COLUMN IF NOT EXISTS `Diskon_Pengadaan_NonMedis` varchar(15) DEFAULT NULL;
