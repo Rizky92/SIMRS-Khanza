@@ -52,7 +52,9 @@
                                     bukaquery2("delete from idrg_grouping_smc where no_sep = '$nosep'");
                                     bukaquery2("delete from idrg_klaim_final_smc where no_sep = '$nosep'");
                                 ?>
-                                <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg">
+                                <meta http-equiv="refresh" content="<?= "1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg" ?>">
+                            <?php elseif ($action === 'kelahiran'): ?>
+                                <meta http-equiv="refresh" content="<?= "1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg" ?>">
                             <?php else: ?>
                                 <tr class="head">
                                     <td colspan="3">
@@ -677,144 +679,41 @@
                                     <select name="onset_kontraksi" class="text2" style="font-family: Tahoma; width: 95%">
                                         <option value=""></option>
                                         <option value="spontan">Spontan</option>
-                                        <option value="non_spontan">Non-spontan</option>
-                                        <option value="induksi">Induksi</option>
-                                        <option value="non_induksi">Non-induksi</option>
+                                        <option value="non_spontan">Non spontan</option>
+                                        <option value="non_spontan_non_induksi">Non Spontan Non Induksi</option>
                                     </select>
                                 </td>
                             </tr>
                             <tr class="head">
-                                <td colspan="3">
-                                    <span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span><span>&nbsp;</span>
-                                    <span style="font-family: Tahoma; font-size: 9pt; font-weight: 700; margin-top: 0.5rem">
-                                        Kelahiran Ke-1
-                                    </span>
-                                </td>
+                                <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=kelahiran&grouper=idrg" ?>">[Input Data Kelahiran]</a></td>
                             </tr>
+                            <?php $querykelahiran = bukaquery("select * from inacbg_data_kelahiran_smc where no_sep = '$nosep' order by delivery_sequence asc"); ?>
+                            <?php while ($bariskelahiran = mysqli_fetch_assoc($querykelahiran)): ?>
+                                <tr class="head">
+                                    <td width="28%">Bayi ke-<?= $bariskelahiran['delivery_sequence'] ?></td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <?= $bariskelahiran['delivery_date'] ?> <?= $bariskelahiran['delivery_time'] ?> &mdash;
+                                        <?= $bariskelahiran['delivery_method'] ?>,
+                                        <?= $bariskelahiran['letak_janin'] ?>,
+                                        <?= $bariskelahiran['kondisi'] ?>
+                                        <?php if ($bariskelahiran['use_manual'] === '1'): ?>, manual<?php endif; ?>
+                                        <?php if ($bariskelahiran['use_forcep'] === '1'): ?>, forcep<?php endif; ?>
+                                        <?php if ($bariskelahiran['use_vacuum'] === '1'): ?>, vacuum<?php endif; ?>
+                                        <br />
+                                        SHK: <?= $bariskelahiran['shk_spesimen_ambil'] ?>
+                                        <?php if ($bariskelahiran['shk_spesimen_ambil'] === 'ya'): ?>
+                                            &mdash; <?= $bariskelahiran['shk_lokasi'] ?>,
+                                            <?= $bariskelahiran['shk_spesimen_date'] ?> <?= $bariskelahiran['shk_spesimen_time'] ?>
+                                        <?php elseif (!empty($bariskelahiran['shk_alasan'])): ?>
+                                            &mdash; <?= $bariskelahiran['shk_alasan'] ?>
+                                        <?php endif; ?>
+                                    </td>
+                                </tr>
+                            <?php endwhile; ?>
                             <tr class="head">
-                                <td width="28%">Cara Kelahiran</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="delivery_method[0]" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="sc">Sectio Caesarean</option>
-                                        <option value="vaginal">Vaginal</option>
-                                    </select>
-                                </td>
+                                <td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td>
                             </tr>
-                            <tr class="head">
-                                <td width="28%">Waktu Lahir</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <?php date_default_timezone_set('Asia/Makassar'); ?>
-                                    <span>Tgl.</span>
-                                    <input name="delivery_year[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="5" maxlength="4" pattern="[0-9]{1,4}" title="0-9 (Maksimal 4 karakter)" autocomplete="off" value="<?= date('Y') ?>">
-                                    <span>-</span>
-                                    <input name="delivery_month[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('m') ?>">
-                                    <span>-</span>
-                                    <input name="delivery_day[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('d') ?>">
-                                    <span>Jam</span>
-                                    <input name="delivery_hour[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('H') ?>">
-                                    <span>:</span>
-                                    <input name="delivery_minute[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('i') ?>">
-                                    <span>:</span>
-                                    <input name="delivery_second[0]" class="text inputbox" style="font-family: Tahoma" type="text" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 2 karakter)" autocomplete="off" value="<?= date('s') ?>">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Letak Janin</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="letak_janin[0]" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="kepala">Kepala</Option>
-                                        <option value="sungsang">Sungsang</Option>
-                                        <option value="lintang">Lintang / Oblique</Option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Kondisi</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="kondisi[0]" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="livebirth">Hidup</Option>
-                                        <option value="stillbirth">Meninggal</Option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Bantuan Manual?</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="use_manual[0]" class="text3" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="0">Tidak</option>
-                                        <option value="1">Ya</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Menggunakan Forcep?</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="use_forcep[0]" class="text3" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="0">Tidak</option>
-                                        <option value="1">Ya</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Menggunakan Vacuum?</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="use_vacuum[0]" class="text3" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="0">Tidak</option>
-                                        <option value="1">Ya</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Spesimen SHK</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="shk_spesimen_ambil[0]" class="text3" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="tidak">Tidak Diambil</option>
-                                        <option value="ya">Diambil</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Lokasi Spesimen SHK</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="shk_lokasi[0]" class="text3" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="tumit">Tumit</option>
-                                        <option value="vena">Vena</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Alasan Tidak Mengambil</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="shk_alasan[0]" class="text3" style="font-family: Tahoma; width: 95%">
-                                        <option value=""></option>
-                                        <option value="tidak-dapat">Tidak Dapat Dilakukan</option>
-                                        <option value="akses-sulit">Akses Sulit</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <div id="kelahiran-1"></div>
-                            <tr class="head">
-                                <td colspan="3"><button id="tambah_lahir" type="button" style="font-family: Tahoma; font-size: 0.675rem; font-weight: 500; cursor: pointer" onclick="tambahKelahiran">TAMBAH KELAHIRAN</button></td>
-                            </tr>
-                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <?php if ($corona == 'PasienCorona'): ?>
                                 <?php
                                     $bariscorona = mysqli_fetch_array(bukaquery(<<<SQL
@@ -2356,6 +2255,48 @@
                         $diskon_tarif_poli_eks     = validTeks(trim($_POST['diskon_tarif_poli_eks']));
                         $dializer_single_use       = validTeks(trim($_POST['dializer_single_use']));
                         $no_sitb                   = validTeks(trim($_POST['no_sitb']));
+                        $usia_kehamilan            = validTeks(trim($_POST['usia_kehamilan']));
+                        $gravida                   = validTeks(trim($_POST['gravida']));
+                        $partus                    = validTeks(trim($_POST['partus']));
+                        $abortus                   = validTeks(trim($_POST['abortus']));
+                        $onset_kontraksi           = validTeks(trim($_POST['onset_kontraksi']));
+                        $apgar                     = [
+                            'menit_1' => [
+                                'appearance'  => validTeks(trim($_POST['menit_1ap'] ?? '')),
+                                'pulse'       => validTeks(trim($_POST['menit_1p'] ?? '')),
+                                'grimace'     => validTeks(trim($_POST['menit_1g'] ?? '')),
+                                'activity'    => validTeks(trim($_POST['menit_1ac'] ?? '')),
+                                'respiration' => validTeks(trim($_POST['menit_1r'] ?? '')),
+                            ],
+                            'menit_5' => [
+                                'appearance'  => validTeks(trim($_POST['menit_5ap'] ?? '')),
+                                'pulse'       => validTeks(trim($_POST['menit_5p'] ?? '')),
+                                'grimace'     => validTeks(trim($_POST['menit_5g'] ?? '')),
+                                'activity'    => validTeks(trim($_POST['menit_5ac'] ?? '')),
+                                'respiration' => validTeks(trim($_POST['menit_5r'] ?? '')),
+                            ],
+                        ];
+                        $diskon                    = [
+                            'prosedur_non_bedah' => $diskon_prosedur_non_bedah,
+                            'prosedur_bedah'     => $diskon_prosedur_bedah,
+                            'konsultasi'         => $diskon_konsultasi,
+                            'tenaga_ahli'        => $diskon_tenaga_ahli,
+                            'keperawatan'        => $diskon_keperawatan,
+                            'penunjang'          => $diskon_penunjang,
+                            'radiologi'          => $diskon_radiologi,
+                            'laboratorium'       => $diskon_laboratorium,
+                            'pelayanan_darah'    => $diskon_pelayanan_darah,
+                            'rehabilitasi'       => $diskon_rehabilitasi,
+                            'kamar'              => $diskon_kamar,
+                            'rawat_intensif'     => $diskon_rawat_intensif,
+                            'obat'               => $diskon_obat,
+                            'obat_kronis'        => $diskon_obat_kronis,
+                            'obat_kemoterapi'    => $diskon_obat_kemoterapi,
+                            'alkes'              => $diskon_alkes,
+                            'bmhp'               => $diskon_bmhp,
+                            'sewa_alat'          => $diskon_sewa_alat,
+                            'tarif_poli_eks'     => $diskon_tarif_poli_eks,
+                        ];
 
                         $totalbillingsementara
                             = ($prosedur_non_bedah - $diskon_prosedur_non_bedah)
@@ -2395,7 +2336,7 @@
                                             $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan, $penunjang, $radiologi,
                                             $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat,
                                             $obat_kronis, $obat_kemoterapi, $alkes, $bmhp, $sewa_alat, $sistole, $diastole,
-                                            $dializer_single_use
+                                            $dializer_single_use, $usia_kehamilan, $gravida, $partus, $abortus, $onset_kontraksi, $apgar, $diskon
                                         );
                                     }
 

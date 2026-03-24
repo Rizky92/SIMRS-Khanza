@@ -159,6 +159,16 @@ public final class validasi {
         return getTglSmc(tgl, "dd-MM-yyyy");
     }
 
+    public void setTglSmc(Tanggal tanggal, String waktu) {
+        tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4));
+    }
+
+    public void setJamSmc(ComboBox jam, ComboBox menit, ComboBox detik, String waktu) {
+        jam.setSelectedItem(waktu.substring(0, 2));
+        menit.setSelectedItem(waktu.substring(3, 5));
+        detik.setSelectedItem(waktu.substring(6, 8));
+    }
+
     public String setTglSmc(String tgl) {
         return tgl.substring(8, 10) + "-" + tgl.substring(5, 7) + "-" + tgl.substring(0, 4);
     }

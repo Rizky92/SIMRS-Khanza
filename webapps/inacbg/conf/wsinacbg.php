@@ -1642,12 +1642,83 @@
         ];
     }
 
+    function saveKlaimDataSmc($nomor_sep, array $params, array $tarifs_net, array $diskon) {
+        $n   = fn($v) => ($v === '' || $v === null) ? 'NULL' : "'".addslashes($v)."'";
+        $ni  = fn($v) => ($v === '' || $v === null) ? 'NULL' : (int) $v;
+        $nd  = fn($v) => ($v === '' || $v === null) ? 'NULL' : (float) $v;
+        $dsk = fn($k)  => (float) ($diskon[$k] ?? 0);
+
+        $apgar1 = $params['apgar']['menit_1'] ?? [];
+        $apgar5 = $params['apgar']['menit_5'] ?? [];
+
+        $cols = [
+            'no_sep'               => "'$nomor_sep'",
+            'nomor_kartu'          => $n($params['nomor_kartu']),
+            'tgl_masuk'            => $n($params['tgl_masuk']),
+            'tgl_pulang'           => $n($params['tgl_pulang']),
+            'cara_masuk'           => $n($params['cara_masuk']),
+            'jenis_rawat'          => $n($params['jenis_rawat']),
+            'kelas_rawat'          => $n($params['kelas_rawat']),
+            'adl_sub_acute'        => $ni($params['adl_sub_acute']),
+            'adl_chronic'          => $ni($params['adl_chronic']),
+            'icu_indikator'        => $ni($params['icu_indikator']),
+            'icu_los'              => $ni($params['icu_los']),
+            'ventilator_hour'      => $ni($params['ventilator_hour']),
+            'upgrade_class_ind'    => $ni($params['upgrade_class_ind']),
+            'upgrade_class_class'  => $n($params['upgrade_class_class']),
+            'upgrade_class_los'    => $ni($params['upgrade_class_los']),
+            'add_payment_pct'      => $nd($params['add_payment_pct']),
+            'birth_weight'         => $ni($params['birth_weight']),
+            'sistole'              => $ni($params['sistole']),
+            'diastole'             => $ni($params['diastole']),
+            'discharge_status'     => $n($params['discharge_status']),
+            'dializer_single_use'  => $ni($params['dializer_single_use']),
+            'nama_dokter'          => $n($params['nama_dokter']),
+            'kode_tarif'           => $n($params['kode_tarif']),
+            'payor_id'             => $n($params['payor_id']),
+            'payor_cd'             => $n($params['payor_cd']),
+            'cob_cd'               => $n($params['cob_cd']),
+            'coder_nik'            => $n($params['coder_nik']),
+            'usia_kehamilan'       => $ni($params['usia_kehamilan']),
+            'gravida'              => $ni($params['gravida']),
+            'partus'               => $ni($params['partus']),
+            'abortus'              => $ni($params['abortus']),
+            'onset_kontraksi'      => $n($params['onset_kontraksi']),
+            'apgar_1_appearance'   => $ni($apgar1['appearance'] ?? ''),
+            'apgar_1_pulse'        => $ni($apgar1['pulse'] ?? ''),
+            'apgar_1_grimace'      => $ni($apgar1['grimace'] ?? ''),
+            'apgar_1_activity'     => $ni($apgar1['activity'] ?? ''),
+            'apgar_1_respiration'  => $ni($apgar1['respiration'] ?? ''),
+            'apgar_5_appearance'   => $ni($apgar5['appearance'] ?? ''),
+            'apgar_5_pulse'        => $ni($apgar5['pulse'] ?? ''),
+            'apgar_5_grimace'      => $ni($apgar5['grimace'] ?? ''),
+            'apgar_5_activity'     => $ni($apgar5['activity'] ?? ''),
+            'apgar_5_respiration'  => $ni($apgar5['respiration'] ?? ''),
+        ];
+
+        $columns = implode(', ', array_keys($cols));
+        $values  = implode(', ', array_values($cols));
+
+        bukaquery("delete from inacbg_set_claim_smc where no_sep = '$nomor_sep'");
+        bukaquery("insert into inacbg_set_claim_smc ($columns) values ($values)");
+
+        $tarif_keys = ['prosedur_non_bedah', 'prosedur_bedah', 'konsultasi', 'tenaga_ahli', 'keperawatan', 'penunjang', 'radiologi', 'laboratorium', 'pelayanan_darah', 'rehabilitasi', 'kamar', 'rawat_intensif', 'obat', 'obat_kronis', 'obat_kemoterapi', 'alkes', 'bmhp', 'sewa_alat', 'tarif_poli_eks'];
+
+        bukaquery("delete from inacbg_tarif_klaim_smc where no_sep = '$nomor_sep'");
+        foreach ($tarif_keys as $k) {
+            $net   = (float) ($tarifs_net[$k] ?? 0);
+            $disc  = $dsk($k);
+            $gross = $nd($net + $disc);
+            bukaquery("insert into inacbg_tarif_klaim_smc (no_sep, nama_tarif, nilai, diskon) values ('$nomor_sep', '$k', $gross, {$nd($disc)})");
+        }
+    }
+
     function UpdateDataKlaimSmc(
         $nomor_sep, $nomor_kartu, $nomor_rm, $tgl_masuk, $tgl_pulang, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour,
         $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $tarif_poli_eks, $cara_masuk,
         $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd, $coder_nik, $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan,
         $penunjang, $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat, $obat_kronis, $obat_kemoterapi, $alkes, $bmhp,
-        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0"
+        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0", $usia_kehamilan = "", $gravida = "", $partus = "", $abortus = "", $onset_kontraksi = "", $apgar = [], $diskon = []
     ) {
         $request = [
             'metadata' => [
@@ -1696,6 +1767,14 @@
                     'bmhp'               => $bmhp,
                     'sewa_alat'          => $sewa_alat,
                 ],
+                'persalinan' => [
+                    'usia_kehamilan'  => $usia_kehamilan,
+                    'gravida'         => $gravida,
+                    'partus'          => $partus,
+                    'abortus'         => $abortus,
+                    'onset_kontraksi' => $onset_kontraksi,
+                ],
+                'apgar'          => $apgar,
                 'tarif_poli_eks' => $tarif_poli_eks,
                 'nama_dokter'    => $nama_dokter,
                 'kode_tarif'     => $kode_tarif,
@@ -1705,6 +1784,45 @@
                 'coder_nik'      => $coder_nik,
             ],
         ];
+
+        $querykelahiran = bukaquery("select * from inacbg_data_kelahiran_smc where no_sep = '$nomor_sep' order by delivery_sequence asc");
+
+        $delivery = [];
+
+        $kondisi_map       = ['Hidup' => 'livebirth', 'Meninggal' => 'stillbirth'];
+        $shk_alasan_map    = ['Tidak dapat dilakukan' => 'tidak-dapat', 'Akses sulit' => 'akses-sulit'];
+        $use_flag_map      = ['0. Tidak' => '0', '1. Ya' => '1'];
+        $shk_ambil_db      = '';
+
+        while ($rowkelahiran = mysqli_fetch_assoc($querykelahiran)) {
+            $shk_ambil_db = $rowkelahiran['shk_spesimen_ambil'] ?? '';
+            $shk_ambil    = strtolower($shk_ambil_db);
+
+            $entry = [
+                'delivery_sequence'  => $rowkelahiran['delivery_sequence'],
+                'delivery_method'    => strtolower($rowkelahiran['delivery_method'] ?? ''),
+                'delivery_dttm'      => ($rowkelahiran['delivery_date']) . ' ' . ($rowkelahiran['delivery_time'] ?? '23:59:59'),
+                'letak_janin'        => strtolower($rowkelahiran['letak_janin'] ?? ''),
+                'kondisi'            => $kondisi_map[$rowkelahiran['kondisi'] ?? ''] ?? '',
+                'use_manual'         => $use_flag_map[$rowkelahiran['use_manual'] ?? ''] ?? '0',
+                'use_forcep'         => $use_flag_map[$rowkelahiran['use_forcep'] ?? ''] ?? '0',
+                'use_vacuum'         => $use_flag_map[$rowkelahiran['use_vacuum'] ?? ''] ?? '0',
+                'shk_spesimen_ambil' => $shk_ambil,
+            ];
+
+            if ($shk_ambil === 'ya') {
+                $entry['shk_lokasi']        = strtolower($rowkelahiran['shk_lokasi'] ?? '');
+                $entry['shk_spesimen_dttm'] = $rowkelahiran['shk_spesimen_date'] . ' ' . $rowkelahiran['shk_spesimen_time'];
+            } else {
+                $entry['shk_alasan'] = $shk_alasan_map[$rowkelahiran['shk_alasan'] ?? ''] ?? '';
+            }
+
+            $delivery[] = $entry;
+        }
+
+        if (!empty($delivery)) {
+            $request['data']['persalinan']['delivery'] = $delivery;
+        }
 
         $msg = Request(json_encode($request));
 
@@ -1727,6 +1845,61 @@
 
         bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
         InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
+
+        saveKlaimDataSmc($nomor_sep, [
+            'nomor_kartu'         => $nomor_kartu,
+            'tgl_masuk'           => $tgl_masuk,
+            'tgl_pulang'          => $tgl_pulang,
+            'cara_masuk'          => $cara_masuk,
+            'jenis_rawat'         => $jenis_rawat,
+            'kelas_rawat'         => $kelas_rawat,
+            'adl_sub_acute'       => $adl_sub_acute,
+            'adl_chronic'         => $adl_chronic,
+            'icu_indikator'       => $icu_indikator,
+            'icu_los'             => $icu_los,
+            'ventilator_hour'     => $ventilator_hour,
+            'upgrade_class_ind'   => $upgrade_class_ind,
+            'upgrade_class_class' => $upgrade_class_class,
+            'upgrade_class_los'   => $upgrade_class_los,
+            'add_payment_pct'     => $add_payment_pct,
+            'birth_weight'        => $birth_weight,
+            'sistole'             => $sistole,
+            'diastole'            => $diastole,
+            'discharge_status'    => $discharge_status,
+            'dializer_single_use' => $dializer_single_use,
+            'nama_dokter'         => $nama_dokter,
+            'kode_tarif'          => $kode_tarif,
+            'payor_id'            => $payor_id,
+            'payor_cd'            => $payor_cd,
+            'cob_cd'              => $cob_cd,
+            'coder_nik'           => $coder_nik,
+            'usia_kehamilan'      => $usia_kehamilan,
+            'gravida'             => $gravida,
+            'partus'              => $partus,
+            'abortus'             => $abortus,
+            'onset_kontraksi'     => $onset_kontraksi,
+            'apgar'               => $apgar,
+        ], [
+            'prosedur_non_bedah' => $prosedur_non_bedah,
+            'prosedur_bedah'     => $prosedur_bedah,
+            'konsultasi'         => $konsultasi,
+            'tenaga_ahli'        => $tenaga_ahli,
+            'keperawatan'        => $keperawatan,
+            'penunjang'          => $penunjang,
+            'radiologi'          => $radiologi,
+            'laboratorium'       => $laboratorium,
+            'pelayanan_darah'    => $pelayanan_darah,
+            'rehabilitasi'       => $rehabilitasi,
+            'kamar'              => $kamar,
+            'rawat_intensif'     => $rawat_intensif,
+            'obat'               => $obat,
+            'obat_kronis'        => $obat_kronis,
+            'obat_kemoterapi'    => $obat_kemoterapi,
+            'alkes'              => $alkes,
+            'bmhp'               => $bmhp,
+            'sewa_alat'          => $sewa_alat,
+            'tarif_poli_eks'     => $tarif_poli_eks,
+        ], $diskon);
 
         return [
             'success' => true,

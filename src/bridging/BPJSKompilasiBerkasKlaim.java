@@ -105,12 +105,13 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         NAMAPJBPJS = Sequel.cariIsiSmc("select penjab.png_jawab from penjab where penjab.kd_pj = ?", KODEPJBPJS),
         KODEPPKBPJS = Sequel.cariIsiSmc("select setting.kode_ppk from setting limit 1") + "%";
     private RMRiwayatPerawatan resume = null;
+    private INACBGDataKelahiranSMC lahir = null;
     private WebEngine engineKlaim, engineBerkasDigital;
     private String finger = "", tanggalExport = "",
         gunakanTanggalExport = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
         aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF(),
         kategoriUploadBerkas = "", kamar = "", unit = "";
-    private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false;
+    private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false, refreshWebpage = false;
     private int flagklaim = -1, flagInacbgTopup = -1, selectedRow = -1;
     private long maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
 
@@ -210,8 +211,28 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
 
             engineKlaim.locationProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null && newValue.toLowerCase().contains("action")) {
+                    if (newValue.toLowerCase().contains("action=kelahiran")) {
+                        if (lahir == null) {
+                            SwingUtilities.invokeLater(() -> {
+                                lahir = new INACBGDataKelahiranSMC(null, false);
+                                lahir.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                                lahir.setLocationRelativeTo(internalFrame1);
+                                lahir.addWindowListener(new WindowAdapter() {
+                                    @Override
+                                    public void windowClosed(WindowEvent e) {
+                                        Platform.runLater(() -> engineKlaim.reload());
+                                    }
+                                });
+                            });
+                        }
+                        SwingUtilities.invokeLater(() -> {
+                            lahir.setData(btnSEP.getText(), lblNoRawat.getText(), lblNoRM.getText(), lblNamaPasien.getText());
+                            lahir.isCek();
+                            lahir.setVisible(true);
+                        });
+                    }
                     SwingUtilities.invokeLater(() -> {
-                        if (selectedRow >= 0) {
+                        if (selectedRow >= 0 && (lahir == null || !lahir.isVisible())) {
                             setFlagKlaim();
                             switch (flagklaim) {
                                 case 1:

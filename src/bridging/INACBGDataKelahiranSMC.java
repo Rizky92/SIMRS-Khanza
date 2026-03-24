@@ -1,35 +1,29 @@
 package bridging;
 
-import ipsrs.*;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import inventory.DlgCariSatuan;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.RejectedExecutionException;
+import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
-import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.event.ChangeEvent;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.TableColumnModelEvent;
+import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import restore.DlgRestoreIPSRSBarang;
+import javax.swing.table.TableColumnModel;
 
 public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
@@ -37,6 +31,7 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
     private volatile boolean ceksukses = false;
+    private SwingWorker<Void, Object[]> worker;
 
     /**
      * Creates new form DlgJnsPerawatan
@@ -48,24 +43,29 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        tabMode = new DefaultTableModel(null, new String[] {"Kode Barang", "Nama Barang", "Satuan", "Jenis", "Stok", "Harga"}) {
+        tabMode = new DefaultTableModel(null, new String[] {
+            "No. Rawat", "No. SEP", "No. RM", "Nama Pasien", "Urutan Lahir", "Cara Lahir", "Tgl. Lahir", "Jam Lahir", "Letak Janin",
+            "Bantuan Manual", "Forcep", "Vacuum", "Kondisi", "Spesimen SHK", "Lokasi", "Tgl. Sampel", "Jam Sampel", "Alasan Tak Diambil"
+        }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
             }
+
             @Override
             public Class getColumnClass(int columnIndex) {
                 return String.class;
             }
         };
-        tbJnsPerawatan.setModel(tabMode);
+        tbKelahiran.setModel(tabMode);
 
         //tbObat.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbObat.getBackground()));
-        tbJnsPerawatan.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbJnsPerawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+        tbKelahiran.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tbKelahiran.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 6; i++) {
-            TableColumn column = tbJnsPerawatan.getColumnModel().getColumn(i);
+        /*
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
+            TableColumn column = tbKelahiran.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(100);
             } else if (i == 1) {
@@ -80,16 +80,45 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
                 column.setPreferredWidth(120);
             }
         }
-        tbJnsPerawatan.setDefaultRenderer(Object.class, new WarnaTable());
+        */
+        tbKelahiran.setDefaultRenderer(Object.class, new WarnaTable());
 
-        // kode_brng.setDocument(new batasInput((byte) 15).getKata(kode_brng));
-        // nama_brng.setDocument(new batasInput((byte) 80).getKata(nama_brng));
-        // kode_sat.setDocument(new batasInput((byte) 4).getKata(kode_sat));
-        // stok.setDocument(new batasInput((byte) 10).getKata(stok));
-        // harga.setDocument(new batasInput((byte) 20).getKata(harga));
+        tbKelahiran.getColumnModel().addColumnModelListener(new TableColumnModelListener() {
+            @Override
+            public void columnAdded(TableColumnModelEvent e) {
+                //
+            }
+
+            @Override
+            public void columnRemoved(TableColumnModelEvent e) {
+                //
+            }
+
+            @Override
+            public void columnMoved(TableColumnModelEvent e) {
+                //
+            }
+
+            @Override
+            public void columnSelectionChanged(ListSelectionEvent e) {
+                //
+            }
+
+            @Override
+            public void columnMarginChanged(ChangeEvent e) {
+                TableColumnModel model = tbKelahiran.getColumnModel();
+                StringBuilder sb = new StringBuilder("Column widths:");
+                for (int i = 0; i < model.getColumnCount(); i++) {
+                    sb.append("\n  [").append(i).append("] ").append(tabMode.getColumnName(i)).append(" = ").append(model.getColumn(i).getWidth());
+                }
+                System.out.println(sb);
+            }
+        });
+
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
         TCari.requestFocus();
 
+        worker = buildWorker();
     }
 
     /**
@@ -101,8 +130,8 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
 
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
-        tbJnsPerawatan = new widget.Table();
-        jPanel3 = new javax.swing.JPanel();
+        tbKelahiran = new widget.Table();
+        jPanel3 = new widget.PanelBiasa();
         panelGlass8 = new widget.panelisi();
         BtnSimpan = new widget.Button();
         BtnBatal = new widget.Button();
@@ -115,14 +144,13 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
         BtnCari = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
-        PanelInput = new javax.swing.JPanel();
+        PanelInput = new widget.PanelBiasa();
         jLabel115 = new widget.Label();
-        urutanKelahiran = new widget.TextBox();
+        urutanLahir = new widget.TextBox();
         jLabel116 = new widget.Label();
         caraLahir = new widget.ComboBox();
         jLabel118 = new widget.Label();
-        waktuKelahiran = new widget.Tanggal();
-        jLabel127 = new widget.Label();
+        tglKelahiran = new widget.Tanggal();
         cmbJamKelahiran = new widget.ComboBox();
         cmbMenitKelahiran = new widget.ComboBox();
         cmbDetikKelahiran = new widget.ComboBox();
@@ -137,17 +165,22 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
         jLabel122 = new widget.Label();
         useVacuum = new widget.ComboBox();
         jLabel123 = new widget.Label();
-        spesimenSHKDiambil = new widget.ComboBox();
+        spesimenDiambil = new widget.ComboBox();
         jLabel125 = new widget.Label();
         lokasiSpesimen = new widget.ComboBox();
         jLabel124 = new widget.Label();
-        waktuPengambilanSHK = new widget.Tanggal();
-        jLabel128 = new widget.Label();
-        cmbJamSpesimen = new widget.ComboBox();
-        cmbMenitSpesimen = new widget.ComboBox();
-        cmbDetikSpesimen = new widget.ComboBox();
+        tglSampel = new widget.Tanggal();
+        cmbJamSampel = new widget.ComboBox();
+        cmbMenitSampel = new widget.ComboBox();
+        cmbDetikSampel = new widget.ComboBox();
         jLabel126 = new widget.Label();
-        alasanSpesimenTidakDiambil = new widget.ComboBox();
+        alasanSpesimenTakDiambil = new widget.ComboBox();
+        jLabel10 = new widget.Label();
+        noRawat = new widget.TextBox();
+        noRM = new widget.TextBox();
+        namaPasien = new widget.TextBox();
+        jLabel4 = new widget.Label();
+        noSEP = new widget.TextBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -158,17 +191,22 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Barang Non Medis & Penunjang ( Lab & RO ) ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Lahiran Pasien Ibu Bridging Eklaim ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbJnsPerawatan.setAutoCreateRowSorter(true);
-        tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
-        tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
-        Scroll.setViewportView(tbJnsPerawatan);
+        tbKelahiran.setAutoCreateRowSorter(true);
+        tbKelahiran.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
+        tbKelahiran.setName("tbKelahiran"); // NOI18N
+        tbKelahiran.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbKelahiranMouseReleased(evt);
+            }
+        });
+        Scroll.setViewportView(tbKelahiran);
 
         internalFrame1.add(Scroll, java.awt.BorderLayout.CENTER);
 
@@ -296,219 +334,237 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
 
         PanelInput.setName("PanelInput"); // NOI18N
         PanelInput.setOpaque(false);
-        PanelInput.setPreferredSize(new java.awt.Dimension(192, 283));
+        PanelInput.setPreferredSize(new java.awt.Dimension(192, 198));
         PanelInput.setLayout(null);
 
-        jLabel115.setText("Urutan Kelahiran :");
+        jLabel115.setText("Urutan Lahir :");
         jLabel115.setName("jLabel115"); // NOI18N
-        jLabel115.setPreferredSize(new java.awt.Dimension(107, 23));
+        jLabel115.setPreferredSize(new java.awt.Dimension(74, 23));
         PanelInput.add(jLabel115);
-        jLabel115.setBounds(0, 70, 107, 23);
+        jLabel115.setBounds(253, 40, 74, 23);
 
-        urutanKelahiran.setName("urutanKelahiran"); // NOI18N
-        urutanKelahiran.setPreferredSize(new java.awt.Dimension(50, 23));
-        PanelInput.add(urutanKelahiran);
-        urutanKelahiran.setBounds(110, 70, 50, 23);
+        urutanLahir.setName("urutanLahir"); // NOI18N
+        urutanLahir.setPreferredSize(new java.awt.Dimension(50, 23));
+        PanelInput.add(urutanLahir);
+        urutanLahir.setBounds(330, 40, 50, 23);
 
-        jLabel116.setText("Cara Kelahiran :");
+        jLabel116.setText("Cara Lahir :");
         jLabel116.setName("jLabel116"); // NOI18N
-        jLabel116.setPreferredSize(new java.awt.Dimension(90, 23));
+        jLabel116.setPreferredSize(new java.awt.Dimension(64, 23));
         PanelInput.add(jLabel116);
-        jLabel116.setBounds(189, 70, 90, 23);
+        jLabel116.setBounds(383, 40, 64, 23);
 
-        caraLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vaginal", "Sectio Caesarean" }));
+        caraLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Vaginal", "SC" }));
         caraLahir.setMinimumSize(new java.awt.Dimension(100, 23));
         caraLahir.setName("caraLahir"); // NOI18N
-        caraLahir.setPreferredSize(new java.awt.Dimension(180, 23));
+        caraLahir.setPreferredSize(new java.awt.Dimension(147, 23));
         PanelInput.add(caraLahir);
-        caraLahir.setBounds(282, 70, 180, 23);
+        caraLahir.setBounds(450, 40, 147, 23);
 
         jLabel118.setText("Waktu Kelahiran :");
         jLabel118.setName("jLabel118"); // NOI18N
-        jLabel118.setPreferredSize(new java.awt.Dimension(107, 23));
+        jLabel118.setPreferredSize(new java.awt.Dimension(97, 23));
         PanelInput.add(jLabel118);
-        jLabel118.setBounds(0, 100, 107, 23);
+        jLabel118.setBounds(0, 70, 97, 23);
 
-        waktuKelahiran.setDisplayFormat("dd-MM-yyyy");
-        waktuKelahiran.setName("waktuKelahiran"); // NOI18N
-        waktuKelahiran.setPreferredSize(new java.awt.Dimension(106, 23));
-        PanelInput.add(waktuKelahiran);
-        waktuKelahiran.setBounds(110, 100, 106, 23);
-
-        jLabel127.setText("Jam :");
-        jLabel127.setName("jLabel127"); // NOI18N
-        jLabel127.setPreferredSize(new java.awt.Dimension(48, 23));
-        PanelInput.add(jLabel127);
-        jLabel127.setBounds(219, 100, 48, 23);
+        tglKelahiran.setDisplayFormat("dd-MM-yyyy");
+        tglKelahiran.setName("tglKelahiran"); // NOI18N
+        tglKelahiran.setPreferredSize(new java.awt.Dimension(90, 23));
+        PanelInput.add(tglKelahiran);
+        tglKelahiran.setBounds(100, 70, 90, 23);
 
         cmbJamKelahiran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
         cmbJamKelahiran.setMinimumSize(new java.awt.Dimension(62, 23));
         cmbJamKelahiran.setName("cmbJamKelahiran"); // NOI18N
         cmbJamKelahiran.setPreferredSize(new java.awt.Dimension(62, 23));
         PanelInput.add(cmbJamKelahiran);
-        cmbJamKelahiran.setBounds(270, 100, 62, 23);
+        cmbJamKelahiran.setBounds(193, 70, 62, 23);
 
         cmbMenitKelahiran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbMenitKelahiran.setMinimumSize(new java.awt.Dimension(62, 23));
         cmbMenitKelahiran.setName("cmbMenitKelahiran"); // NOI18N
         cmbMenitKelahiran.setPreferredSize(new java.awt.Dimension(62, 23));
         PanelInput.add(cmbMenitKelahiran);
-        cmbMenitKelahiran.setBounds(335, 100, 62, 23);
+        cmbMenitKelahiran.setBounds(258, 70, 62, 23);
 
         cmbDetikKelahiran.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
         cmbDetikKelahiran.setMinimumSize(new java.awt.Dimension(62, 23));
         cmbDetikKelahiran.setName("cmbDetikKelahiran"); // NOI18N
         cmbDetikKelahiran.setPreferredSize(new java.awt.Dimension(62, 23));
         PanelInput.add(cmbDetikKelahiran);
-        cmbDetikKelahiran.setBounds(400, 100, 62, 23);
+        cmbDetikKelahiran.setBounds(323, 70, 62, 23);
 
         jLabel117.setText("Letak Janin :");
         jLabel117.setName("jLabel117"); // NOI18N
-        jLabel117.setPreferredSize(new java.awt.Dimension(107, 23));
+        jLabel117.setPreferredSize(new java.awt.Dimension(71, 23));
         PanelInput.add(jLabel117);
-        jLabel117.setBounds(0, 130, 107, 23);
+        jLabel117.setBounds(388, 70, 71, 23);
 
-        letakJanin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Kepala", "Sungsang", "Lintang / Oblique" }));
+        letakJanin.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Kepala", "Sungsang", "Lintang" }));
         letakJanin.setMinimumSize(new java.awt.Dimension(100, 23));
         letakJanin.setName("letakJanin"); // NOI18N
-        letakJanin.setPreferredSize(new java.awt.Dimension(184, 23));
+        letakJanin.setPreferredSize(new java.awt.Dimension(135, 23));
         PanelInput.add(letakJanin);
-        letakJanin.setBounds(110, 130, 184, 23);
+        letakJanin.setBounds(462, 70, 135, 23);
 
         jLabel119.setText("Kondisi :");
         jLabel119.setName("jLabel119"); // NOI18N
-        jLabel119.setPreferredSize(new java.awt.Dimension(52, 23));
+        jLabel119.setPreferredSize(new java.awt.Dimension(49, 23));
         PanelInput.add(jLabel119);
-        jLabel119.setBounds(297, 130, 52, 23);
+        jLabel119.setBounds(455, 100, 49, 23);
 
-        kondisiLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Hidup", "Meninggal" }));
+        kondisiLahir.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Hidup", "Meninggal" }));
         kondisiLahir.setMinimumSize(new java.awt.Dimension(100, 23));
         kondisiLahir.setName("kondisiLahir"); // NOI18N
-        kondisiLahir.setPreferredSize(new java.awt.Dimension(110, 23));
+        kondisiLahir.setPreferredSize(new java.awt.Dimension(90, 23));
         PanelInput.add(kondisiLahir);
-        kondisiLahir.setBounds(352, 130, 110, 23);
+        kondisiLahir.setBounds(507, 100, 90, 23);
 
-        jLabel120.setText("Bantuan Manual :");
+        jLabel120.setText("Use Manual :");
         jLabel120.setName("jLabel120"); // NOI18N
-        jLabel120.setPreferredSize(new java.awt.Dimension(107, 23));
+        jLabel120.setPreferredSize(new java.awt.Dimension(97, 23));
         PanelInput.add(jLabel120);
-        jLabel120.setBounds(0, 160, 107, 23);
+        jLabel120.setBounds(0, 100, 97, 23);
 
-        useManual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "0. Tidak", "1. Ya" }));
+        useManual.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1. Ya" }));
         useManual.setMinimumSize(new java.awt.Dimension(100, 23));
         useManual.setName("useManual"); // NOI18N
         useManual.setPreferredSize(new java.awt.Dimension(80, 23));
         PanelInput.add(useManual);
-        useManual.setBounds(110, 160, 80, 23);
+        useManual.setBounds(100, 100, 80, 23);
 
-        useForcep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "0. Tidak", "1. Ya" }));
+        useForcep.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1. Ya" }));
         useForcep.setMinimumSize(new java.awt.Dimension(100, 23));
         useForcep.setName("useForcep"); // NOI18N
         useForcep.setPreferredSize(new java.awt.Dimension(80, 23));
         PanelInput.add(useForcep);
-        useForcep.setBounds(246, 160, 80, 23);
+        useForcep.setBounds(236, 100, 80, 23);
 
         jLabel121.setText("Forcep :");
         jLabel121.setName("jLabel121"); // NOI18N
         jLabel121.setPreferredSize(new java.awt.Dimension(50, 23));
         PanelInput.add(jLabel121);
-        jLabel121.setBounds(193, 160, 50, 23);
+        jLabel121.setBounds(183, 100, 50, 23);
 
         jLabel122.setText("Vacuum :");
         jLabel122.setName("jLabel122"); // NOI18N
         jLabel122.setPreferredSize(new java.awt.Dimension(50, 23));
         PanelInput.add(jLabel122);
-        jLabel122.setBounds(329, 160, 50, 23);
+        jLabel122.setBounds(319, 100, 50, 23);
 
-        useVacuum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "0. Tidak", "1. Ya" }));
+        useVacuum.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "0. Tidak", "1. Ya" }));
         useVacuum.setMinimumSize(new java.awt.Dimension(100, 23));
         useVacuum.setName("useVacuum"); // NOI18N
         useVacuum.setPreferredSize(new java.awt.Dimension(80, 23));
         PanelInput.add(useVacuum);
-        useVacuum.setBounds(382, 160, 80, 23);
+        useVacuum.setBounds(372, 100, 80, 23);
 
-        jLabel123.setText("Spesimen SHK :");
+        jLabel123.setText("Sps. SHK Diambil :");
         jLabel123.setName("jLabel123"); // NOI18N
-        jLabel123.setPreferredSize(new java.awt.Dimension(107, 23));
+        jLabel123.setPreferredSize(new java.awt.Dimension(97, 23));
         PanelInput.add(jLabel123);
-        jLabel123.setBounds(0, 190, 107, 23);
+        jLabel123.setBounds(0, 130, 97, 23);
 
-        spesimenSHKDiambil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Diambil", "Tidak Diambil" }));
-        spesimenSHKDiambil.setMinimumSize(new java.awt.Dimension(100, 23));
-        spesimenSHKDiambil.setName("spesimenSHKDiambil"); // NOI18N
-        spesimenSHKDiambil.setPreferredSize(new java.awt.Dimension(215, 23));
-        spesimenSHKDiambil.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                spesimenSHKDiambilItemStateChanged(evt);
-            }
-        });
-        PanelInput.add(spesimenSHKDiambil);
-        spesimenSHKDiambil.setBounds(110, 190, 215, 23);
+        spesimenDiambil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Tidak", "Ya" }));
+        spesimenDiambil.setMinimumSize(new java.awt.Dimension(100, 23));
+        spesimenDiambil.setName("spesimenDiambil"); // NOI18N
+        spesimenDiambil.setPreferredSize(new java.awt.Dimension(107, 23));
+        PanelInput.add(spesimenDiambil);
+        spesimenDiambil.setBounds(100, 130, 107, 23);
 
         jLabel125.setText("Lokasi :");
         jLabel125.setName("jLabel125"); // NOI18N
         jLabel125.setPreferredSize(new java.awt.Dimension(47, 23));
         PanelInput.add(jLabel125);
-        jLabel125.setBounds(328, 190, 47, 23);
+        jLabel125.setBounds(210, 130, 47, 23);
 
         lokasiSpesimen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Tumit", "Vena" }));
         lokasiSpesimen.setMinimumSize(new java.awt.Dimension(100, 23));
         lokasiSpesimen.setName("lokasiSpesimen"); // NOI18N
         lokasiSpesimen.setPreferredSize(new java.awt.Dimension(84, 23));
         PanelInput.add(lokasiSpesimen);
-        lokasiSpesimen.setBounds(378, 190, 84, 23);
+        lokasiSpesimen.setBounds(260, 130, 84, 23);
 
-        jLabel124.setText("Waktu Pengambilan :");
+        jLabel124.setText("Ambil Sampel :");
         jLabel124.setName("jLabel124"); // NOI18N
-        jLabel124.setPreferredSize(new java.awt.Dimension(107, 23));
+        jLabel124.setPreferredSize(new java.awt.Dimension(97, 23));
         PanelInput.add(jLabel124);
-        jLabel124.setBounds(0, 220, 107, 23);
+        jLabel124.setBounds(0, 160, 97, 23);
 
-        waktuPengambilanSHK.setDisplayFormat("dd-MM-yyyy");
-        waktuPengambilanSHK.setName("waktuPengambilanSHK"); // NOI18N
-        waktuPengambilanSHK.setPreferredSize(new java.awt.Dimension(106, 23));
-        PanelInput.add(waktuPengambilanSHK);
-        waktuPengambilanSHK.setBounds(110, 220, 106, 23);
+        tglSampel.setDisplayFormat("dd-MM-yyyy");
+        tglSampel.setName("tglSampel"); // NOI18N
+        tglSampel.setPreferredSize(new java.awt.Dimension(90, 23));
+        PanelInput.add(tglSampel);
+        tglSampel.setBounds(100, 160, 90, 23);
 
-        jLabel128.setText("Jam :");
-        jLabel128.setName("jLabel128"); // NOI18N
-        jLabel128.setPreferredSize(new java.awt.Dimension(48, 23));
-        PanelInput.add(jLabel128);
-        jLabel128.setBounds(219, 220, 48, 23);
+        cmbJamSampel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
+        cmbJamSampel.setMinimumSize(new java.awt.Dimension(62, 23));
+        cmbJamSampel.setName("cmbJamSampel"); // NOI18N
+        cmbJamSampel.setPreferredSize(new java.awt.Dimension(62, 23));
+        PanelInput.add(cmbJamSampel);
+        cmbJamSampel.setBounds(193, 160, 62, 23);
 
-        cmbJamSpesimen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23" }));
-        cmbJamSpesimen.setMinimumSize(new java.awt.Dimension(62, 23));
-        cmbJamSpesimen.setName("cmbJamSpesimen"); // NOI18N
-        cmbJamSpesimen.setPreferredSize(new java.awt.Dimension(62, 23));
-        PanelInput.add(cmbJamSpesimen);
-        cmbJamSpesimen.setBounds(270, 220, 62, 23);
+        cmbMenitSampel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbMenitSampel.setMinimumSize(new java.awt.Dimension(62, 23));
+        cmbMenitSampel.setName("cmbMenitSampel"); // NOI18N
+        cmbMenitSampel.setPreferredSize(new java.awt.Dimension(62, 23));
+        PanelInput.add(cmbMenitSampel);
+        cmbMenitSampel.setBounds(258, 160, 62, 23);
 
-        cmbMenitSpesimen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        cmbMenitSpesimen.setMinimumSize(new java.awt.Dimension(62, 23));
-        cmbMenitSpesimen.setName("cmbMenitSpesimen"); // NOI18N
-        cmbMenitSpesimen.setPreferredSize(new java.awt.Dimension(62, 23));
-        PanelInput.add(cmbMenitSpesimen);
-        cmbMenitSpesimen.setBounds(335, 220, 62, 23);
-
-        cmbDetikSpesimen.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
-        cmbDetikSpesimen.setMinimumSize(new java.awt.Dimension(62, 23));
-        cmbDetikSpesimen.setName("cmbDetikSpesimen"); // NOI18N
-        cmbDetikSpesimen.setPreferredSize(new java.awt.Dimension(62, 23));
-        PanelInput.add(cmbDetikSpesimen);
-        cmbDetikSpesimen.setBounds(400, 220, 62, 23);
+        cmbDetikSampel.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31", "32", "33", "34", "35", "36", "37", "38", "39", "40", "41", "42", "43", "44", "45", "46", "47", "48", "49", "50", "51", "52", "53", "54", "55", "56", "57", "58", "59" }));
+        cmbDetikSampel.setMinimumSize(new java.awt.Dimension(62, 23));
+        cmbDetikSampel.setName("cmbDetikSampel"); // NOI18N
+        cmbDetikSampel.setPreferredSize(new java.awt.Dimension(62, 23));
+        PanelInput.add(cmbDetikSampel);
+        cmbDetikSampel.setBounds(323, 160, 62, 23);
 
         jLabel126.setText("Alasan Tak Diambil :");
         jLabel126.setName("jLabel126"); // NOI18N
-        jLabel126.setPreferredSize(new java.awt.Dimension(107, 23));
+        jLabel126.setPreferredSize(new java.awt.Dimension(103, 23));
         PanelInput.add(jLabel126);
-        jLabel126.setBounds(0, 250, 107, 23);
+        jLabel126.setBounds(347, 130, 103, 23);
 
-        alasanSpesimenTidakDiambil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Tidak Dapat Dilakukan", "Akses Sulit" }));
-        alasanSpesimenTidakDiambil.setMinimumSize(new java.awt.Dimension(100, 23));
-        alasanSpesimenTidakDiambil.setName("alasanSpesimenTidakDiambil"); // NOI18N
-        alasanSpesimenTidakDiambil.setPreferredSize(new java.awt.Dimension(157, 23));
-        PanelInput.add(alasanSpesimenTidakDiambil);
-        alasanSpesimenTidakDiambil.setBounds(110, 250, 157, 23);
+        alasanSpesimenTakDiambil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Tidak Dapat Dilakukan", "Akses Sulit" }));
+        alasanSpesimenTakDiambil.setMinimumSize(new java.awt.Dimension(100, 23));
+        alasanSpesimenTakDiambil.setName("alasanSpesimenTakDiambil"); // NOI18N
+        alasanSpesimenTakDiambil.setPreferredSize(new java.awt.Dimension(144, 23));
+        PanelInput.add(alasanSpesimenTakDiambil);
+        alasanSpesimenTakDiambil.setBounds(453, 130, 144, 23);
+
+        jLabel10.setText("No. Rawat :");
+        jLabel10.setName("jLabel10"); // NOI18N
+        jLabel10.setPreferredSize(new java.awt.Dimension(97, 23));
+        PanelInput.add(jLabel10);
+        jLabel10.setBounds(0, 10, 97, 23);
+
+        noRawat.setName("noRawat"); // NOI18N
+        noRawat.setPreferredSize(new java.awt.Dimension(131, 23));
+        PanelInput.add(noRawat);
+        noRawat.setBounds(100, 10, 131, 23);
+
+        noRM.setEditable(false);
+        noRM.setName("noRM"); // NOI18N
+        noRM.setPreferredSize(new java.awt.Dimension(100, 23));
+        PanelInput.add(noRM);
+        noRM.setBounds(234, 10, 100, 23);
+
+        namaPasien.setEditable(false);
+        namaPasien.setName("namaPasien"); // NOI18N
+        namaPasien.setPreferredSize(new java.awt.Dimension(260, 23));
+        PanelInput.add(namaPasien);
+        namaPasien.setBounds(337, 10, 260, 23);
+
+        jLabel4.setText("No. SEP :");
+        jLabel4.setName("jLabel4"); // NOI18N
+        jLabel4.setPreferredSize(new java.awt.Dimension(97, 23));
+        PanelInput.add(jLabel4);
+        jLabel4.setBounds(0, 40, 97, 23);
+
+        noSEP.setEditable(false);
+        noSEP.setName("noSEP"); // NOI18N
+        noSEP.setPreferredSize(new java.awt.Dimension(150, 23));
+        PanelInput.add(noSEP);
+        noSEP.setBounds(100, 40, 150, 23);
 
         internalFrame1.add(PanelInput, java.awt.BorderLayout.PAGE_START);
 
@@ -518,19 +574,94 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
-        //
+        if (noSEP.getText().isBlank()) {
+            Valid.textKosong(noSEP, "No. SEP");
+        } else if (noRawat.getText().isBlank()) {
+            Valid.textKosong(noRawat, "No. Rawat");
+        } else if (noRM.getText().isBlank()) {
+            Valid.textKosong(noRM, "No. RM");
+        } else if (namaPasien.getText().isBlank()) {
+            Valid.textKosong(namaPasien, "Nama Pasien");
+        } else if (urutanLahir.getText().isBlank()) {
+            Valid.textKosong(urutanLahir, "Urutan Kelahiran");
+        } else {
+            if (Sequel.menyimpantfSmc("inacbg_data_kelahiran_smc", "no_sep, delivery_sequence, delivery_method, delivery_date, delivery_time, letak_janin, kondisi, " +
+                "use_manual, use_forcep, use_vacuum, shk_spesimen_ambil, shk_lokasi, shk_spesimen_date, shk_spesimen_time, shk_alasan", noSEP.getText(), urutanLahir.getText(),
+                caraLahir.getSelectedItem().toString(), Valid.getTglSmc(tglKelahiran), Valid.getJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran), letakJanin.getSelectedItem().toString(),
+                kondisiLahir.getSelectedItem().toString(), useManual.getSelectedItem().toString(), useForcep.getSelectedItem().toString(), useVacuum.getSelectedItem().toString(),
+                spesimenDiambil.getSelectedItem().toString(), lokasiSpesimen.getSelectedItem().toString(), (spesimenDiambil.getSelectedIndex() == 0 ? "0000-00-00" : Valid.getTglSmc(tglSampel)),
+                (spesimenDiambil.getSelectedIndex() == 0 ? "00:00:00" : Valid.getJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel)), alasanSpesimenTakDiambil.getSelectedItem().toString()
+            )) {
+                tabMode.addRow(new Object[] {
+                    noRawat.getText(), noSEP.getText(), noRM.getText(), namaPasien.getText(), urutanLahir.getText(), caraLahir.getSelectedItem().toString(), Valid.getTglSmc(tglKelahiran),
+                    Valid.getJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran), letakJanin.getSelectedItem().toString(), useManual.getSelectedItem().toString(),
+                    useForcep.getSelectedItem().toString(), useVacuum.getSelectedItem().toString(), kondisiLahir.getSelectedItem().toString(), spesimenDiambil.getSelectedItem().toString(),
+                    lokasiSpesimen.getSelectedItem().toString(), (spesimenDiambil.getSelectedIndex() == 0 ? "0000-00-00" : Valid.getTglSmc(tglSampel)),
+                    (spesimenDiambil.getSelectedIndex() == 0 ? "00:00:00" : Valid.getJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel)),
+                    alasanSpesimenTakDiambil.getSelectedItem().toString()
+                });
+                emptTeks();
+            }
+        }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
-        //
+        emptTeks();
     }//GEN-LAST:event_BtnBatalActionPerformed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        //
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis..!!");
+        } else {
+            if (tbKelahiran.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau dihapus..!!");
+            } else {
+                if (Sequel.menghapustfSmc("inacbg_data_kelahiran_smc", "no_sep = ? and delivery_sequence = ?", noSEP.getText(), (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4))) {
+                    tabMode.removeRow(tbKelahiran.getSelectedRow());
+                    emptTeks();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menghapus data kelahiran..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
-        //
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis..!!");
+        } else {
+            if (tbKelahiran.getSelectedRow() < 0) {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau diubah..!!");
+            } else {
+                if (Sequel.mengupdatetfSmc("inacbg_data_kelahiran_smc", "delivery_sequence = ?, delivery_method = ?, delivery_date = ?, delivery_time = ?, letak_janin = ?, kondisi = ?, " +
+                    "use_manual = ?, use_forcep = ?, use_vacuum = ?, shk_spesimen_ambil = ?, shk_lokasi = ?, shk_spesimen_date = ?, shk_spesimen_time = ?, shk_alasan = ?",
+                    "no_sep = ? and delivery_sequence = ?", urutanLahir.getText(), caraLahir.getSelectedItem().toString(), Valid.getTglSmc(tglKelahiran),
+                    Valid.getJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran), letakJanin.getSelectedItem().toString(), kondisiLahir.getSelectedItem().toString(),
+                    useManual.getSelectedItem().toString(), useForcep.getSelectedItem().toString(), useVacuum.getSelectedItem().toString(), spesimenDiambil.getSelectedItem().toString(),
+                    lokasiSpesimen.getSelectedItem().toString(), (spesimenDiambil.getSelectedIndex() == 0 ? "0000-00-00" : Valid.getTglSmc(tglSampel)),
+                    (spesimenDiambil.getSelectedIndex() == 0 ? "00:00:00" : Valid.getJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel)),
+                    alasanSpesimenTakDiambil.getSelectedItem().toString(), noSEP.getText(), (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4)
+                )) {
+                    tbKelahiran.setValueAt(urutanLahir.getText(), tbKelahiran.getSelectedRow(), 4);
+                    tbKelahiran.setValueAt(caraLahir.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 5);
+                    tbKelahiran.setValueAt(Valid.getTglSmc(tglKelahiran), tbKelahiran.getSelectedRow(), 6);
+                    tbKelahiran.setValueAt(Valid.getJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran), tbKelahiran.getSelectedRow(), 7);
+                    tbKelahiran.setValueAt(letakJanin.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 8);
+                    tbKelahiran.setValueAt(useManual.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 9);
+                    tbKelahiran.setValueAt(useForcep.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 10);
+                    tbKelahiran.setValueAt(useVacuum.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 11);
+                    tbKelahiran.setValueAt(kondisiLahir.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 12);
+                    tbKelahiran.setValueAt(spesimenDiambil.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 13);
+                    tbKelahiran.setValueAt(lokasiSpesimen.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 14);
+                    tbKelahiran.setValueAt((spesimenDiambil.getSelectedIndex() == 0 ? "0000-00-00" : Valid.getTglSmc(tglSampel)), tbKelahiran.getSelectedRow(), 15);
+                    tbKelahiran.setValueAt((spesimenDiambil.getSelectedIndex() == 0 ? "00:00:00" : Valid.getJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel)), tbKelahiran.getSelectedRow(), 16);
+                    tbKelahiran.setValueAt(alasanSpesimenTakDiambil.getSelectedItem().toString(), tbKelahiran.getSelectedRow(), 17);
+                    emptTeks();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mengubah data kelahiran..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
+                }
+            }
+        }
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -538,63 +669,54 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        //
+        tampil();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        //
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            BtnCariActionPerformed(null);
+        }
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        spesimenSHKDiambil.setSelectedIndex(0);
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-
+                        tampil();
                     }
                 }
 
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-
+                        tampil();
                     }
                 }
 
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-
+                        tampil();
                     }
                 }
             });
         }
     }//GEN-LAST:event_formWindowOpened
 
-    private void spesimenSHKDiambilItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_spesimenSHKDiambilItemStateChanged
-        if (spesimenSHKDiambil.getSelectedIndex() == 1) {
-            lokasiSpesimen.setEnabled(true);
-            waktuPengambilanSHK.setEnabled(true);
-            cmbJamSpesimen.setEnabled(true);
-            cmbMenitSpesimen.setEnabled(true);
-            cmbDetikSpesimen.setEnabled(true);
-            alasanSpesimenTidakDiambil.setEnabled(false);
-        } else {
-            lokasiSpesimen.setSelectedIndex(0);
-            lokasiSpesimen.setEnabled(false);
-            waktuPengambilanSHK.setDate(new Date());
-            waktuPengambilanSHK.setEnabled(false);
-            cmbJamSpesimen.setSelectedIndex(0);
-            cmbJamSpesimen.setEnabled(false);
-            cmbMenitSpesimen.setSelectedIndex(0);
-            cmbMenitSpesimen.setEnabled(false);
-            cmbDetikSpesimen.setSelectedIndex(0);
-            cmbDetikSpesimen.setEnabled(false);
-            alasanSpesimenTidakDiambil.setEnabled(true);
+    private void tbKelahiranMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKelahiranMouseReleased
+        if (tabMode.getRowCount() > 0) {
+            try {
+                int row = tbKelahiran.rowAtPoint(evt.getPoint());
+                int col = tbKelahiran.columnAtPoint(evt.getPoint());
+                tbKelahiran.changeSelection(row, col, false, false);
+                getData();
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
         }
-    }//GEN-LAST:event_spesimenSHKDiambilItemStateChanged
+    }//GEN-LAST:event_tbKelahiranMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnBatal;
@@ -604,18 +726,19 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
     private widget.Button BtnKeluar;
     private widget.Button BtnSimpan;
     private widget.Label LCount;
-    private javax.swing.JPanel PanelInput;
+    private widget.PanelBiasa PanelInput;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
-    private widget.ComboBox alasanSpesimenTidakDiambil;
+    private widget.ComboBox alasanSpesimenTakDiambil;
     private widget.ComboBox caraLahir;
     private widget.ComboBox cmbDetikKelahiran;
-    private widget.ComboBox cmbDetikSpesimen;
+    private widget.ComboBox cmbDetikSampel;
     private widget.ComboBox cmbJamKelahiran;
-    private widget.ComboBox cmbJamSpesimen;
+    private widget.ComboBox cmbJamSampel;
     private widget.ComboBox cmbMenitKelahiran;
-    private widget.ComboBox cmbMenitSpesimen;
+    private widget.ComboBox cmbMenitSampel;
     private widget.InternalFrame internalFrame1;
+    private widget.Label jLabel10;
     private widget.Label jLabel115;
     private widget.Label jLabel116;
     private widget.Label jLabel117;
@@ -628,68 +751,145 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
     private widget.Label jLabel124;
     private widget.Label jLabel125;
     private widget.Label jLabel126;
-    private widget.Label jLabel127;
-    private widget.Label jLabel128;
+    private widget.Label jLabel4;
     private widget.Label jLabel6;
     private widget.Label jLabel7;
-    private javax.swing.JPanel jPanel3;
+    private widget.PanelBiasa jPanel3;
     private widget.ComboBox kondisiLahir;
     private widget.ComboBox letakJanin;
     private widget.ComboBox lokasiSpesimen;
+    private widget.TextBox namaPasien;
+    private widget.TextBox noRM;
+    private widget.TextBox noRawat;
+    private widget.TextBox noSEP;
     private widget.panelisi panelGlass8;
     private widget.panelisi panelGlass9;
-    private widget.ComboBox spesimenSHKDiambil;
-    private widget.Table tbJnsPerawatan;
-    private widget.TextBox urutanKelahiran;
+    private widget.ComboBox spesimenDiambil;
+    private widget.Table tbKelahiran;
+    private widget.Tanggal tglKelahiran;
+    private widget.Tanggal tglSampel;
+    private widget.TextBox urutanLahir;
     private widget.ComboBox useForcep;
     private widget.ComboBox useManual;
     private widget.ComboBox useVacuum;
-    private widget.Tanggal waktuKelahiran;
-    private widget.Tanggal waktuPengambilanSHK;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {
-
-    }
-
-    public void emptTeks() {
-        // kode_brng.setText("");
-        // nama_brng.setText("");
-        // kode_sat.setText("");
-        // harga.setText("0");
-        // nama_sat.setText("");
-        // stok.setText("0");
-        // kdjenis.setText("");
-        // nmjenis.setText("");
-        // Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(ipsrsbarang.kode_brng,4),signed)),0) from ipsrsbarang  ", "B", 5, kode_brng);
-        tbJnsPerawatan.clearSelection();
-    }
-
-    public void onCari() {
-        TCari.requestFocus();
-    }
-
-    private void getData() {
-        if (tbJnsPerawatan.getSelectedRow() != -1) {
-            // kode_brng.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 0).toString());
-            // nama_brng.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 1).toString());
-            // nama_sat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 2).toString());
-            // nmjenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 3).toString());
-            // stok.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 4).toString());
-            // harga.setText(Valid.SetAngka6(Double.parseDouble(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(), 5).toString())));
-            // kode_sat.setText(Sequel.cariIsi("select ipsrsbarang.kode_sat from ipsrsbarang where ipsrsbarang.kode_brng=?", kode_brng.getText()));
-            // kdjenis.setText(Sequel.cariIsi("select ipsrsbarang.jenis from ipsrsbarang where ipsrsbarang.kode_brng=?", kode_brng.getText()));
-        }
-    }
-
-    public JTable getTable() {
-        return tbJnsPerawatan;
+    public void setData(final String noSEP, final String noRawat, final String noRM, final String namaPasien) {
+        this.noSEP.setText(noSEP);
+        this.noRawat.setText(noRawat);
+        this.noRM.setText(noRM);
+        this.namaPasien.setText(namaPasien);
     }
 
     public void isCek() {
-        BtnSimpan.setEnabled(akses.getipsrs_barang());
-        BtnHapus.setEnabled(akses.getipsrs_barang());
-        BtnEdit.setEnabled(akses.getipsrs_barang());
+        BtnSimpan.setEnabled(akses.getbpjs_kompilasi_berkas_klaim());
+        BtnHapus.setEnabled(akses.getbpjs_kompilasi_berkas_klaim());
+        BtnEdit.setEnabled(akses.getbpjs_kompilasi_berkas_klaim());
         TCari.requestFocus();
+    }
+
+    private SwingWorker<Void, Object[]> buildWorker() {
+        return new SwingWorker<Void, Object[]>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                String cari = TCari.getText();
+                try (PreparedStatement ps = koneksi.prepareStatement(
+                    "select s.no_rawat, k.no_sep, p.no_rkm_medis, p.nm_pasien, k.delivery_sequence, k.delivery_method, k.delivery_date, k.delivery_time, k.letak_janin, " +
+                    "k.use_manual, k.use_forcep, k.use_vacuum, k.kondisi, k.shk_spesimen_ambil, k.shk_lokasi, k.shk_spesimen_date, k.shk_spesimen_time, k.shk_alasan " +
+                    "from inacbg_data_kelahiran_smc k join bridging_sep s on k.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat join pasien p on " +
+                    "r.no_rkm_medis = p.no_rkm_medis " + (cari.isBlank() ? "" : "where (s.no_rawat like ? or k.no_sep like ? or p.no_rkm_medis like ? or p.nm_pasien like ?) ") +
+                    "order by s.no_rawat, k.delivery_sequence"
+                )) {
+                    int p = 0;
+                    if (!cari.isBlank()) {
+                        ps.setString(++p, "%" + cari + "%");
+                        ps.setString(++p, "%" + cari + "%");
+                        ps.setString(++p, "%" + cari + "%");
+                        ps.setString(++p, "%" + cari + "%");
+                    }
+                    try (ResultSet rs = ps.executeQuery()) {
+                        while (rs.next()) {
+                            publish(new Object[] {
+                                rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("delivery_sequence"),
+                                rs.getString("delivery_method"), rs.getString("delivery_date"), rs.getString("delivery_time"), rs.getString("letak_janin"), rs.getString("use_manual"),
+                                rs.getString("use_forcep"), rs.getString("use_vacuum"), rs.getString("kondisi"), rs.getString("shk_spesimen_ambil"), rs.getString("shk_lokasi"),
+                                rs.getString("shk_spesimen_date"), rs.getString("shk_spesimen_time"), rs.getString("shk_alasan")
+                            });
+                        }
+                    }
+                }
+
+                return null;
+            }
+
+            @Override
+            protected void process(List<Object[]> chunks) {
+                chunks.forEach(tabMode::addRow);
+            }
+
+            @Override
+            protected void done() {
+                try {
+                    get();
+                } catch (Exception e) {
+                    System.out.println("Notif : " + e);
+                }
+                ceksukses = false;
+            }
+        };
+    }
+
+    private void tampil() {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if (!ceksukses) {
+            Valid.tabelKosongSmc(tabMode);
+            worker = buildWorker();
+            worker.execute();
+            tabMode.fireTableDataChanged();
+        }
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void getData() {
+        if (tbKelahiran.getSelectedRow() >= 0) {
+            try {
+                noRawat.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 0));
+                noSEP.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 1));
+                noRM.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 2));
+                namaPasien.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 3));
+                urutanLahir.setText((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4));
+                caraLahir.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 5));
+                Valid.setTglSmc(tglKelahiran, (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 6));
+                Valid.setJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran, (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 7));
+                letakJanin.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 8));
+                useManual.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 9));
+                useForcep.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 10));
+                useVacuum.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 11));
+                kondisiLahir.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 12));
+                spesimenDiambil.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 13));
+                lokasiSpesimen.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 14));
+                Valid.setTglSmc(tglSampel, (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 15));
+                Valid.setJamSmc(cmbJamSampel, cmbMenitSampel, cmbDetikSampel, (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 16));
+                alasanSpesimenTakDiambil.setSelectedItem((String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 17));
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+        }
+    }
+
+    private void emptTeks() {
+        tbKelahiran.clearSelection();
+        urutanLahir.setText("");
+        caraLahir.setSelectedIndex(0);
+        Valid.setTglJamSmc(new Date(), tglKelahiran, cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran);
+        letakJanin.setSelectedIndex(0);
+        useManual.setSelectedIndex(0);
+        useForcep.setSelectedIndex(0);
+        useVacuum.setSelectedIndex(0);
+        kondisiLahir.setSelectedIndex(0);
+        spesimenDiambil.setSelectedIndex(0);
+        lokasiSpesimen.setSelectedIndex(0);
+        alasanSpesimenTakDiambil.setSelectedIndex(0);
+        Valid.setTglJamSmc(new Date(), tglSampel, cmbJamSampel, cmbMenitSampel, cmbDetikSampel);
     }
 }
