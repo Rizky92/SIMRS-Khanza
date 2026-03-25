@@ -954,7 +954,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                         sukses = true;
                         insertObatRacikan();
                         if (sukses) {
-                            JOptionPane.showMessageDialog(null, "Simpan obat umum berhasil..!!");
+                            JOptionPane.showMessageDialog(null, "Simpan obat racikan berhasil..!!");
                         }
                     }
                 }
@@ -1450,14 +1450,11 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                 response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
                 System.out.println("Response : " + response);
                 nosjp = response.path("noApotik").asText();
-                if (Sequel.menyimpantfSmc("bridging_apotek_bpjs", null,
-                    nosjp, NoSEP.getText(), NoResep.getText(), Valid.getTglJamSmc(TglResep),
-                    Valid.getTglJamSmc(TglPelayanan), JenisObat.getSelectedItem().toString().substring(0, 1),
-                    Iterasi.getSelectedItem().toString().substring(0, 1), KdPoli.getText(),
-                    NmPoli.getText(), KdDPJP.getText(), NmDPJP.getText(), akses.getkode()
+                if (!Sequel.menyimpantfSmc("bridging_apotek_bpjs", null, nosjp, NoSEP.getText(), NoResep.getText(), Valid.getTglJamSmc(TglResep),
+                    Valid.getTglJamSmc(TglPelayanan), JenisObat.getSelectedItem().toString().substring(0, 1), Iterasi.getSelectedItem().toString().substring(0, 1),
+                    KdPoli.getText(), NmPoli.getText(), KdDPJP.getText(), NmDPJP.getText(), akses.getkode()
                 )) {
-                    JOptionPane.showMessageDialog(null, "Resep apotek " + nosjp + " berhasil disimpan..!!");
-                } else {
+                    sukses = false;
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan resep obat..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
@@ -1469,6 +1466,8 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
             System.out.println(ex);
             if (ex.toString().contains("UnknownHostException")) {
                 JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus...!");
+            } else {
+                JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat rumah resep..!!");
             }
         }
     }
@@ -1483,7 +1482,6 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                 headers.add("x-timestamp", utc);
                 headers.add("x-signature", api.getHmac(utc));
                 headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
-                entity = new HttpEntity(headers);
                 URL = URLAPIAPOTEKBPJS + "/obatnonracikan/v3/insert";
                 System.out.println(URL);
                 ObjectNode json;
@@ -1515,15 +1513,17 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                             }
                         } else {
                             sukses = false;
-                            JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
+                            JOptionPane.showMessageDialog(null, "Respon BPJS : " + metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                         }
                     }
                 }
-            } catch (Exception ex) {
+            } catch (Exception e) {
                 sukses = false;
-                System.out.println(ex);
-                if (ex.toString().contains("UnknownHostException")) {
+                System.out.println(e);
+                if (e.toString().contains("UnknownHostException")) {
                     JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus...!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mencoba menyimpan obat umum..!!");
                 }
             }
         }
@@ -1584,16 +1584,18 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                                 }
                             } else {
                                 sukses = false;
-                                JOptionPane.showMessageDialog(null, metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
+                                JOptionPane.showMessageDialog(null, "Respon BPJS : " + metadata.path("message").asText(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                             }
                         }
                     }
                 }
-            } catch (Exception ex) {
+            } catch (Exception e) {
                 sukses = false;
-                System.out.println(ex);
-                if (ex.toString().contains("UnknownHostException")) {
+                System.out.println(e);
+                if (e.toString().contains("UnknownHostException")) {
                     JOptionPane.showMessageDialog(null, "Koneksi ke server BPJS terputus...!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat mencoba menyimpan obat racikan..!!");
                 }
             }
         }
@@ -1604,6 +1606,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
 
         if (baruDibuat) return false;
 
+        /*
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -1641,6 +1644,8 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                 return true;
             }
         }
+        */
+
         return false;
     }
 

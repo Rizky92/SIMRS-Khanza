@@ -2286,6 +2286,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     if (stok < rs.getDouble("jumlah")) {
                                         pesan.add("Stok obat " + rs.getString("nama_brng") + "dengan no. batch (" + rs2.getString("no_batch") + ") dan no. faktur (" + rs2.getString("no_faktur") + ") tidak cukup..!!");
                                     }
+
                                     Sequel.menyimpanSmc("tamppiutang", "kode_brng, nama_brng, satuan, h_jual, h_beli, jumlah, subtotal, dis, bsr_dis, total, no_batch, petugas, no_faktur, aturan_pakai, no_racik",
                                         rs.getString("kode_brng"), rs.getString("nama_brng"), rs.getString("satuan"), rs2.getString(hargaobat), rs2.getString(hppfarmasi), rs.getString("jumlah"),
                                         String.valueOf(rs.getDouble("jumlah") * rs2.getDouble(hargaobat)), "0", "0", String.valueOf(rs.getDouble("jumlah") * rs2.getDouble(hargaobat)), rs2.getString("no_batch"),
@@ -2304,6 +2305,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }
                     }
+
                     if (!pesan.isEmpty()) {
                         JOptionPane.showMessageDialog(null, pesan.toArray(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
@@ -2333,6 +2335,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             String.valueOf(rs.getDouble("jumlah") * rs.getDouble(hargaobat)), "0", "0", String.valueOf(rs.getDouble("jumlah") * rs.getDouble(hargaobat)), "",
                             akses.getkode(), "", rs.getString("aturan_pakai"), rs.getString("no_racik"));
                     }
+
                     if (!pesan.isEmpty()) {
                         JOptionPane.showMessageDialog(null, pesan.toArray(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
