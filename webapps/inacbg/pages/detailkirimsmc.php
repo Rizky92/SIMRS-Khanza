@@ -335,152 +335,6 @@
                                     </select>
                                 </td>
                             </tr>
-                            <?php if ($status_lanjut == 'Ranap'): ?>
-                                <tr class="head">
-                                    <td width="28%">ADL Sub Acute</td>
-                                    <td width="1%">:</td>
-                                    <td width="70%">
-                                        <select name="adl_sub_acute" class="text3" style="font-family: Tahoma; width: 95%">
-                                            <option value="0"></option>
-                                            <?php for ($i = 12; $i <= 60; $i++): ?>
-                                                <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr class="head">
-                                    <td width="28%">ADL Chronic</td>
-                                    <td width="1%">:</td>
-                                    <td width="70%">
-                                        <select name="adl_chronic" class="text3" style="font-family: Tahoma; width: 95%">
-                                            <option value="0"></option>
-                                            <?php for ($i = 12; $i <= 60; $i++): ?>
-                                                <option value="<?= $i ?>"><?= $i ?></option>
-                                            <?php endfor; ?>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <?php
-                                    $icu = 0;
-                                    $adaIcu = mysqli_fetch_assoc(bukaquery2("select sum(lama) as total_icu from kamar_inap where kd_kamar like '%icu%' and no_rawat = '$norawat'"));
-                                    if ($adaIcu) {
-                                        $icu = (int) $adaIcu['total_icu'];
-                                    }
-                                ?>
-                                <tr class="head">
-                                    <td width="28%">ICU Indikator</td>
-                                    <td width="1%">:</td>
-                                    <td width="70%">
-                                        <select name="icu_indikator" class="text3" style="font-family: Tahoma; width: 95%">
-                                            <option value="0" <?= ($icu <= 0) ? 'selected' : '' ?>>0</option>
-                                            <option value="1" <?= ($icu > 0) ? 'selected' : '' ?>>1</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr class="head">
-                                    <td width="28%">ICU Los</td>
-                                    <td width="1%">:</td>
-                                    <td width="70%">
-                                        <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $icu ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                                    </td>
-                                </tr>
-                                <tr class="head">
-                                    <td width="28%">Penggunaan Ventilator</td>
-                                    <td width="1%">:</td>
-                                    <td width="70%">
-                                        <select name="ventilator_use_ind" class="text3" style="font-family: Tahoma; width: 95%">
-                                            <option value="0">Tidak</option>
-                                            <option value="1">Ya</option>
-                                        </select>
-                                    </td>
-                                </tr>
-                                <tr class="head">
-                                    <td width="28%">Waktu Mulai Ventilator</td>
-                                    <td width="1%">:</td>
-                                    <td width="70%">
-                                        <input name="ventilator_start_dttm" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                                    </td>
-                                </tr>
-                                <tr class="head">
-                                    <td width="28%">Waktu Selesai Ventilator</td>
-                                    <td width="1%">:</td>
-                                    <td width="70%">
-                                        <input name="ventilator_stop_dttm" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                                    </td>
-                                </tr>
-                                <tr class="head">
-                                    <td width="28%">Jumlah Jam Penggunaan Ventilator di ICU</td>
-                                    <td width="1%">:</td>
-                                    <td width="70%">
-                                        <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                                    </td>
-                                </tr>
-                            <?php else: ?>
-                                <input type="hidden" name="adl_sub_acute" value="0">
-                                <input type="hidden" name="adl_chronic" value="0">
-                                <input type="hidden" name="icu_indikator" value="0">
-                                <input type="hidden" name="icu_los" value="0">
-                                <input type="hidden" name="ventilator_hour" value="0">
-                                <input type="hidden" name="ventilator_use_ind" value="0">
-                                <input type="hidden" name="ventilator_start_dttm" value="0">
-                                <input type="hidden" name="ventilator_stop_dttm" value="0">
-                            <?php endif; ?>
-                            <tr class="head">
-                                <td width="28%">Indikator Upgrade Kelas</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="upgrade_class_ind" class="text3"style="font-family: Tahoma; width: 95%">
-                                        <option value="<?= $upgrade_class_ind ?>"><?= $upgrade_class_ind ?></option>
-                                        <option value="0">0</option>
-                                        <option value="1">1</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Naik ke Kelas</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="upgrade_class_class" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value="<?= $naikkelas ?>"><?= $naikkelas ?></option>
-                                        <option value="kelas_1">Kelas 1</option>
-                                        <option value="kelas_2">Kelas 2</option>
-                                        <option value="vip">Kelas VIP</option>
-                                        <option value="vvip">Kelas VVIP</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Lama Hari Naik Kelas</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Naik ke Kelas</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="upgrade_class_payor" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value="peserta">Kelas 1</option>
-                                        <option value="pemberi_kerja">Kelas 2</option>
-                                        <option value="asuransi_tambahan">Kelas VIP</option>
-                                    </select>
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Biaya Tambahan</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <input name="add_payment_pct" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Berat Saat Lahir</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <input name="birth_weight" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
-                                </td>
-                            </tr>
                             <tr class="head">
                                 <td width="28%">Sistole</td>
                                 <td width="1%">:</td>
@@ -531,21 +385,136 @@
                                     </select>
                                 </td>
                             </tr>
+                            <?php if ($status_lanjut == 'Ranap'): ?>
+                                <tr class="head">
+                                    <td width="28%">ADL Sub Acute</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <select name="adl_sub_acute" class="text3" style="font-family: Tahoma; width: 95%">
+                                            <option value="0"></option>
+                                            <?php for ($i = 12; $i <= 60; $i++): ?>
+                                                <option value="<?= $i ?>"><?= $i ?></option>
+                                            <?php endfor; ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">ADL Chronic</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <select name="adl_chronic" class="text3" style="font-family: Tahoma; width: 95%">
+                                            <option value="0"></option>
+                                            <?php for ($i = 12; $i <= 60; $i++): ?>
+                                                <option value="<?= $i ?>"><?= $i ?></option>
+                                            <?php endfor; ?>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <?php
+                                    $icu = 0;
+                                    $adaIcu = mysqli_fetch_assoc(bukaquery2("select sum(lama) as total_icu from kamar_inap where kd_kamar like '%icu%' and no_rawat = '$norawat'"));
+                                    if ($adaIcu) {
+                                        $icu = (int) $adaIcu['total_icu'];
+                                    }
+                                ?>
+                                <tr class="head">
+                                    <td width="28%">ICU Indikator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <select name="icu_indikator" class="text3" style="font-family: Tahoma; width: 95%">
+                                            <option value="0" <?= ($icu <= 0) ? 'selected' : '' ?>>0</option>
+                                            <option value="1" <?= ($icu > 0) ? 'selected' : '' ?>>1</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">ICU LOS</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <input name="icu_los" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $icu ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Penggunaan Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <select name="ventilator_use_ind" class="text3" style="font-family: Tahoma; width: 95%">
+                                            <option value="0">Tidak</option>
+                                            <option value="1">Ya</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Total Jam Ventilator</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%">
+                                        <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $icu ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                    </td>
+                                </tr>
+                            <?php else: ?>
+                                <input type="hidden" name="adl_sub_acute" value="0">
+                                <input type="hidden" name="adl_chronic" value="0">
+                                <input type="hidden" name="icu_indikator" value="0">
+                                <input type="hidden" name="icu_los" value="0">
+                                <input type="hidden" name="ventilator_hour" value="0">
+                                <input type="hidden" name="ventilator_use_ind" value="0">
+                            <?php endif; ?>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head">
+                                <td width="28%">Indikator Naik Kelas</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="upgrade_class_ind" class="text3" style="font-family: Tahoma; width: 95%">
+                                        <option value="<?= $upgrade_class_ind ?>"><?= $upgrade_class_ind ?></option>
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Naik ke Kelas</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="upgrade_class_class" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value="<?= $naikkelas ?>"><?= $naikkelas ?></option>
+                                        <option value="kelas_1">Kelas 1</option>
+                                        <option value="kelas_2">Kelas 2</option>
+                                        <option value="vip">Kelas VIP</option>
+                                        <option value="vvip">Kelas VVIP</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Lama Hari Naik Kelas</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Penjamin Naik Kelas</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <select name="upgrade_class_payor" class="text2" style="font-family: Tahoma; width: 95%">
+                                        <option value="peserta">Kelas 1</option>
+                                        <option value="pemberi_kerja">Kelas 2</option>
+                                        <option value="asuransi_tambahan">Kelas VIP</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Biaya Tambahan</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="add_payment_pct" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
 							<tr class="head">
                                 <td width="28%">No. Regist SITB</td>
                                 <td width="1%">:</td>
                                 <td width="70%">
                                     <input name="no_sitb" class="text inputbox" type="text" style="font-family: Tahoma; width: 95%" value="<?= $no_sitb ?>" size="20" maxlength="20">
-                                </td>
-                            </tr>
-                            <tr class="head">
-                                <td width="28%">Status Bayi Lahir CD</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="bayi_lahir_status_cd" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value="1">Ya</Option>
-                                        <option value="0">Tidak</Option>
-                                    </select>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -567,6 +536,20 @@
                                 </td>
                             </tr>
                             <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head">
+                                <td colspan="3">
+                                    <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
+                                        Skor APGAR
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr class="head">
+                                <td width="28%">Berat Saat Lahir</td>
+                                <td width="1%">:</td>
+                                <td width="70%">
+                                    <input name="birth_weight" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                </td>
+                            </tr>
                             <tr class="head">
                                 <td width="99%" colspan="3">MENIT 1</td>
                             </tr>
@@ -645,13 +628,10 @@
                             </tr>
                             <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                             <tr class="head">
-                                <td width="28%">Kelahiran?</td>
-                                <td width="1%">:</td>
-                                <td width="70%">
-                                    <select name="case_kelahiran" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value="0">Tidak</Option>
-                                        <option value="1">Ya</Option>
-                                    </select>
+                                <td colspan="3">
+                                    <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
+                                        Data Persalinan Ibu
+                                    </span>
                                 </td>
                             </tr>
                             <tr class="head">
@@ -690,26 +670,68 @@
                             <?php $querykelahiran = bukaquery("select * from inacbg_data_kelahiran_smc where no_sep = '$nosep' order by delivery_sequence asc"); ?>
                             <?php while ($bariskelahiran = mysqli_fetch_assoc($querykelahiran)): ?>
                                 <tr class="head">
-                                    <td width="28%">Bayi ke-<?= $bariskelahiran['delivery_sequence'] ?></td>
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Kelahiran ke</td>
                                     <td width="1%">:</td>
-                                    <td width="70%">
-                                        <?= $bariskelahiran['delivery_date'] ?> <?= $bariskelahiran['delivery_time'] ?> &mdash;
-                                        <?= $bariskelahiran['delivery_method'] ?>,
-                                        <?= $bariskelahiran['letak_janin'] ?>,
-                                        <?= $bariskelahiran['kondisi'] ?>
-                                        <?php if ($bariskelahiran['use_manual'] === '1'): ?>, manual<?php endif; ?>
-                                        <?php if ($bariskelahiran['use_forcep'] === '1'): ?>, forcep<?php endif; ?>
-                                        <?php if ($bariskelahiran['use_vacuum'] === '1'): ?>, vacuum<?php endif; ?>
-                                        <br />
-                                        SHK: <?= $bariskelahiran['shk_spesimen_ambil'] ?>
-                                        <?php if ($bariskelahiran['shk_spesimen_ambil'] === 'ya'): ?>
-                                            &mdash; <?= $bariskelahiran['shk_lokasi'] ?>,
-                                            <?= $bariskelahiran['shk_spesimen_date'] ?> <?= $bariskelahiran['shk_spesimen_time'] ?>
-                                        <?php elseif (!empty($bariskelahiran['shk_alasan'])): ?>
-                                            &mdash; <?= $bariskelahiran['shk_alasan'] ?>
-                                        <?php endif; ?>
-                                    </td>
+                                    <td width="70%"><?= $bariskelahiran['delivery_sequence'] ?></td>
                                 </tr>
+                                <tr class="head">
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Waktu</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $bariskelahiran['delivery_date'] ?> <?= $bariskelahiran['delivery_time'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Cara / Metode</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $bariskelahiran['delivery_method'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Letak Janin</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $bariskelahiran['letak_janin'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Kondisi</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $bariskelahiran['kondisi'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Use Manual</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $bariskelahiran['use_manual'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Use Forcep</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $bariskelahiran['use_forcep'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Use Vacuum</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $bariskelahiran['use_vacuum'] ?></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Spes. SHK Diambil</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><?= $bariskelahiran['shk_spesimen_ambil'] ?></td>
+                                </tr>
+                                <?php if ($bariskelahiran['shk_spesimen_ambil'] === 'ya'): ?>
+                                    <tr class="head">
+                                        <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Waktu Sampel</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $bariskelahiran['shk_spesimen_date'] ?> <?= $bariskelahiran['shk_spesimen_time'] ?></td>
+                                    </tr>
+                                    <tr class="head">
+                                        <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Lokasi Sampel</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $bariskelahiran['shk_lokasi'] ?></td>
+                                    </tr>
+                                <?php else: ?>
+                                    <tr class="head">
+                                        <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Alasan</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $bariskelahiran['shk_alasan'] ?></td>
+                                    </tr>
+                                <?php endif; ?>
                             <?php endwhile; ?>
                             <tr class="head">
                                 <td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td>

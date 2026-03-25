@@ -105,7 +105,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         NAMAPJBPJS = Sequel.cariIsiSmc("select penjab.png_jawab from penjab where penjab.kd_pj = ?", KODEPJBPJS),
         KODEPPKBPJS = Sequel.cariIsiSmc("select setting.kode_ppk from setting limit 1") + "%";
     private RMRiwayatPerawatan resume = null;
-    private INACBGDataKelahiranSMC lahir = null;
+    private INACBGDataPersalinanIbuSMC lahir = null;
     private WebEngine engineKlaim, engineBerkasDigital;
     private String finger = "", tanggalExport = "",
         gunakanTanggalExport = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
@@ -214,7 +214,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
                     if (newValue.toLowerCase().contains("action=kelahiran")) {
                         if (lahir == null) {
                             SwingUtilities.invokeLater(() -> {
-                                lahir = new INACBGDataKelahiranSMC(null, false);
+                                lahir = new INACBGDataPersalinanIbuSMC(null, false);
                                 lahir.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                                 lahir.setLocationRelativeTo(internalFrame1);
                                 lahir.addWindowListener(new WindowAdapter() {

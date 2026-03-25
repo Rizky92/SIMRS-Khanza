@@ -160,13 +160,45 @@ public final class validasi {
     }
 
     public void setTglSmc(Tanggal tanggal, String waktu) {
-        tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4));
+        if (waktu == null || waktu.isBlank()) {
+            tanggal.setSelectedItem("01-01-0001");
+        } else {
+            tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4));
+        }
     }
 
     public void setJamSmc(ComboBox jam, ComboBox menit, ComboBox detik, String waktu) {
-        jam.setSelectedItem(waktu.substring(0, 2));
-        menit.setSelectedItem(waktu.substring(3, 5));
-        detik.setSelectedItem(waktu.substring(6, 8));
+        if (waktu == null || waktu.isBlank()) {
+            jam.setSelectedItem("00");
+            menit.setSelectedItem("00");
+            detik.setSelectedItem("00");
+        } else {
+            jam.setSelectedItem(waktu.substring(0, 2));
+            menit.setSelectedItem(waktu.substring(3, 5));
+            detik.setSelectedItem(waktu.substring(6, 8));
+        }
+    }
+
+    public void setTglJamSmc(Tanggal tanggal, String waktu) {
+        if (waktu == null || waktu.isBlank()) {
+            tanggal.setSelectedItem("01-01-0001 00:00:00");
+        } else {
+            tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4) + " " + waktu.substring(11, 19));
+        }
+    }
+
+    public void setTglJamSmc(Tanggal tanggal, ComboBox jam, ComboBox menit, ComboBox detik, String waktu) {
+        if (waktu == null || waktu.isBlank()) {
+            tanggal.setSelectedItem("01-01-0001");
+            jam.setSelectedItem("00");
+            menit.setSelectedItem("00");
+            detik.setSelectedItem("00");
+        } else {
+            tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4));
+            jam.setSelectedItem(waktu.substring(11, 13));
+            menit.setSelectedItem(waktu.substring(14, 16));
+            detik.setSelectedItem(waktu.substring(17, 19));
+        }
     }
 
     public String setTglSmc(String tgl) {

@@ -23,9 +23,10 @@ import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.TableColumnModelEvent;
 import javax.swing.event.TableColumnModelListener;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 
-public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
+public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
@@ -39,13 +40,13 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public INACBGDataKelahiranSMC(java.awt.Frame parent, boolean modal) {
+    public INACBGDataPersalinanIbuSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
         tabMode = new DefaultTableModel(null, new String[] {
             "No. Rawat", "No. SEP", "No. RM", "Nama Pasien", "Urutan Lahir", "Cara Lahir", "Tgl. Lahir", "Jam Lahir", "Letak Janin",
-            "Bantuan Manual", "Forcep", "Vacuum", "Kondisi", "Spesimen SHK", "Lokasi", "Tgl. Sampel", "Jam Sampel", "Alasan Tak Diambil"
+            "Use Manual", "Use Forcep", "Use Vacuum", "Kondisi", "Spesimen SHK", "Lokasi", "Tgl. Sampel", "Jam Sampel", "Alasan Tak Diambil"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -63,24 +64,47 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
         tbKelahiran.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKelahiran.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        /*
         for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbKelahiran.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setPreferredWidth(100);
+                column.setPreferredWidth(105);
             } else if (i == 1) {
-                column.setPreferredWidth(220);
+                column.setPreferredWidth(123);
             } else if (i == 2) {
-                column.setPreferredWidth(150);
+                column.setPreferredWidth(70);
             } else if (i == 3) {
-                column.setPreferredWidth(120);
+                column.setPreferredWidth(210);
             } else if (i == 4) {
-                column.setPreferredWidth(60);
+                column.setPreferredWidth(70);
             } else if (i == 5) {
-                column.setPreferredWidth(120);
+                column.setPreferredWidth(75);
+            } else if (i == 6) {
+                column.setPreferredWidth(75);
+            } else if (i == 7) {
+                column.setPreferredWidth(75);
+            } else if (i == 8) {
+                column.setPreferredWidth(75);
+            } else if (i == 9) {
+                column.setPreferredWidth(70);
+            } else if (i == 10) {
+                column.setPreferredWidth(70);
+            } else if (i == 11) {
+                column.setPreferredWidth(70);
+            } else if (i == 12) {
+                column.setPreferredWidth(75);
+            } else if (i == 13) {
+                column.setPreferredWidth(75);
+            } else if (i == 14) {
+                column.setPreferredWidth(75);
+            } else if (i == 15) {
+                column.setPreferredWidth(75);
+            } else if (i == 16) {
+                column.setPreferredWidth(75);
+            } else if (i == 17) {
+                column.setPreferredWidth(150);
             }
         }
-        */
+
         tbKelahiran.setDefaultRenderer(Object.class, new WarnaTable());
 
         tbKelahiran.getColumnModel().addColumnModelListener(new TableColumnModelListener() {
@@ -137,11 +161,13 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
         BtnEdit = new widget.Button();
+        BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
         panelGlass9 = new widget.panelisi();
         jLabel6 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
+        BtnAll = new widget.Button();
         jLabel7 = new widget.Label();
         LCount = new widget.Label();
         PanelInput = new widget.PanelBiasa();
@@ -191,7 +217,7 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Lahiran Pasien Ibu Bridging Eklaim ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Persalinan Ibu Melahirkan Bridging INACBG ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
         internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
 
@@ -271,6 +297,19 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
         });
         panelGlass8.add(BtnEdit);
 
+        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
+        BtnPrint.setText("Cetak");
+        BtnPrint.setToolTipText("Alt+T");
+        BtnPrint.setName("BtnPrint"); // NOI18N
+        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnPrintActionPerformed(evt);
+            }
+        });
+        panelGlass8.add(BtnPrint);
+
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
@@ -316,6 +355,19 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
             }
         });
         panelGlass9.add(BtnCari);
+
+        BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setMnemonic('2');
+        BtnAll.setToolTipText("2Alt+2");
+        BtnAll.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        BtnAll.setName("BtnAll"); // NOI18N
+        BtnAll.setPreferredSize(new java.awt.Dimension(28, 23));
+        BtnAll.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAllActionPerformed(evt);
+            }
+        });
+        panelGlass9.add(BtnAll);
 
         jLabel7.setText("Record :");
         jLabel7.setName("jLabel7"); // NOI18N
@@ -679,6 +731,7 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tampil();
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -718,12 +771,22 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbKelahiranMouseReleased
 
+    private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnAllActionPerformed
+
+    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BtnPrintActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private widget.Button BtnAll;
     private widget.Button BtnBatal;
     private widget.Button BtnCari;
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
+    private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
     private widget.Label LCount;
     private widget.PanelBiasa PanelInput;
@@ -789,65 +852,65 @@ public final class INACBGDataKelahiranSMC extends javax.swing.JDialog {
     }
 
     private SwingWorker<Void, Object[]> buildWorker() {
-        return new SwingWorker<Void, Object[]>() {
-            @Override
-            protected Void doInBackground() throws Exception {
-                String cari = TCari.getText();
-                try (PreparedStatement ps = koneksi.prepareStatement(
-                    "select s.no_rawat, k.no_sep, p.no_rkm_medis, p.nm_pasien, k.delivery_sequence, k.delivery_method, k.delivery_date, k.delivery_time, k.letak_janin, " +
-                    "k.use_manual, k.use_forcep, k.use_vacuum, k.kondisi, k.shk_spesimen_ambil, k.shk_lokasi, k.shk_spesimen_date, k.shk_spesimen_time, k.shk_alasan " +
-                    "from inacbg_data_kelahiran_smc k join bridging_sep s on k.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat join pasien p on " +
-                    "r.no_rkm_medis = p.no_rkm_medis " + (cari.isBlank() ? "" : "where (s.no_rawat like ? or k.no_sep like ? or p.no_rkm_medis like ? or p.nm_pasien like ?) ") +
-                    "order by s.no_rawat, k.delivery_sequence"
-                )) {
-                    int p = 0;
-                    if (!cari.isBlank()) {
-                        ps.setString(++p, "%" + cari + "%");
-                        ps.setString(++p, "%" + cari + "%");
-                        ps.setString(++p, "%" + cari + "%");
-                        ps.setString(++p, "%" + cari + "%");
-                    }
-                    try (ResultSet rs = ps.executeQuery()) {
-                        while (rs.next()) {
-                            publish(new Object[] {
-                                rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("delivery_sequence"),
-                                rs.getString("delivery_method"), rs.getString("delivery_date"), rs.getString("delivery_time"), rs.getString("letak_janin"), rs.getString("use_manual"),
-                                rs.getString("use_forcep"), rs.getString("use_vacuum"), rs.getString("kondisi"), rs.getString("shk_spesimen_ambil"), rs.getString("shk_lokasi"),
-                                rs.getString("shk_spesimen_date"), rs.getString("shk_spesimen_time"), rs.getString("shk_alasan")
-                            });
-                        }
-                    }
-                }
-
-                return null;
-            }
-
-            @Override
-            protected void process(List<Object[]> chunks) {
-                chunks.forEach(tabMode::addRow);
-            }
-
-            @Override
-            protected void done() {
-                try {
-                    get();
-                } catch (Exception e) {
-                    System.out.println("Notif : " + e);
-                }
-                ceksukses = false;
-            }
-        };
+        return ;
     }
 
     private void tampil() {
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if (!ceksukses) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Valid.tabelKosongSmc(tabMode);
-            worker = buildWorker();
-            worker.execute();
-            tabMode.fireTableDataChanged();
+            new SwingWorker<Void, Object[]>() {
+                private final String cari = TCari.getText().trim();
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select s.no_rawat, k.no_sep, p.no_rkm_medis, p.nm_pasien, k.delivery_sequence, k.delivery_method, k.delivery_date, k.delivery_time, k.letak_janin, " +
+                        "k.use_manual, k.use_forcep, k.use_vacuum, k.kondisi, k.shk_spesimen_ambil, k.shk_lokasi, k.shk_spesimen_date, k.shk_spesimen_time, k.shk_alasan " +
+                        "from inacbg_data_kelahiran_smc k join bridging_sep s on k.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat join pasien p on " +
+                        "r.no_rkm_medis = p.no_rkm_medis " + (cari.isBlank() ? "" : "where (s.no_rawat like ? or k.no_sep like ? or p.no_rkm_medis like ? or p.nm_pasien like ?) ") +
+                        "order by s.no_rawat, k.delivery_sequence"
+                    )) {
+                        int p = 0;
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    rs.getString("no_rawat"), rs.getString("no_sep"), rs.getString("no_rkm_medis"), rs.getString("nm_pasien"), rs.getString("delivery_sequence"),
+                                    rs.getString("delivery_method"), rs.getString("delivery_date"), rs.getString("delivery_time"), rs.getString("letak_janin"), rs.getString("use_manual"),
+                                    rs.getString("use_forcep"), rs.getString("use_vacuum"), rs.getString("kondisi"), rs.getString("shk_spesimen_ambil"), rs.getString("shk_lokasi"),
+                                    rs.getString("shk_spesimen_date"), rs.getString("shk_spesimen_time"), rs.getString("shk_alasan")
+                                });
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    INACBGDataPersalinanIbuSMC.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }
 
     private void getData() {
