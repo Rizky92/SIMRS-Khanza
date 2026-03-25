@@ -14,6 +14,7 @@ package inventory;
 
 import fungsi.WarnaTable;
 import fungsi.akses;
+import fungsi.embalasetuslah;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
@@ -56,8 +57,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
     private PreparedStatement pstampilbarang,psstokmasuk,pspemberian,pskeluar,psretur,psimpanretur,pscariharga,
                               pshapusobat,pshapusretur,psobatsimpan,psupdategudang,psupdategudang2,pspasien;
     private double stokmasuk=0,pagi=0,siang=0,sore=0,malam=0,keluar=0,retur=0,harga=0,kapasitas=0,
-                    kenaikan=0,returshs=0,hilang=0,beli=0,embalase=Sequel.cariIsiAngka("select embalase_per_obat from set_embalase"),
-                    tuslah=Sequel.cariIsiAngka("select tuslah_per_obat from set_embalase");
+                    kenaikan=0,returshs=0,hilang=0,beli=0;
     private String aktifkanbatch="no",hppfarmasi="";
     private DlgCariBangsal lokasidepo;
     /** Creates new form DlgPenyakit
@@ -860,6 +860,9 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if(embalasetuslah.getEmbalase() == null){
+            embalasetuslah.SetEmbalaseTuslah();
+        }
         runBackground(() ->tampil());
     }//GEN-LAST:event_formWindowOpened
 
@@ -878,7 +881,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                 if(tbObat.getSelectedColumn()==13){
                     try {
                         if(tbObat.getValueAt(tbObat.getSelectedRow(),13).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),13).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),13).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),13).toString().equals("0,0")) {
-                            tbObat.setValueAt(embalase,tbObat.getSelectedRow(),13);
+                            tbObat.setValueAt(embalasetuslah.getEmbalase(),tbObat.getSelectedRow(),13);
                         }
                     } catch (Exception e) {
                         tbObat.setValueAt(0,tbObat.getSelectedRow(),13);
@@ -886,7 +889,7 @@ public final class DlgCariObat3 extends javax.swing.JDialog {
                 }else if(tbObat.getSelectedColumn()==14){
                     try {
                         if(tbObat.getValueAt(tbObat.getSelectedRow(),14).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),14).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),14).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),14).toString().equals("0,0")) {
-                            tbObat.setValueAt(tuslah,tbObat.getSelectedRow(),14);
+                            tbObat.setValueAt(embalasetuslah.getTuslah(),tbObat.getSelectedRow(),14);
                         }
                     } catch (Exception e) {
                         tbObat.setValueAt(0,tbObat.getSelectedRow(),14);

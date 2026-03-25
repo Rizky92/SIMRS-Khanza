@@ -31,6 +31,7 @@ import fungsi.WarnaTableKamarInap;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
 import fungsi.sekuel;
 import fungsi.validasi;
 import informasi.InformasiAnalisaKamin;
@@ -227,7 +228,7 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private DlgRawatInap formrawatinap;
-    public  DlgBilingRanap billing=new DlgBilingRanap( null,false);
+    private DlgBilingRanap billing;
     private SimpleDateFormat dateformat = new SimpleDateFormat("yyyy/MM/dd");
     private SimpleDateFormat dateformat2 = new SimpleDateFormat("dd-MM-yyyy");
     private DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -6273,6 +6274,137 @@ public class DlgKamarInap extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_TOutKeyPressed
 
+    private void tbKamInMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamInMouseClicked
+        if(tabMode.getRowCount()!=0){
+            try {
+                getData();
+            } catch (java.lang.NullPointerException e) {
+            }
+
+            if(evt.getClickCount()==1){
+                if(gabungkan.equals("gabung")){
+                    if(norawat.getText().equals(norawatgabung)){
+                        JOptionPane.showMessageDialog(null,"Gabungkan ke ranap ibu gagal karena no perawatan ibu dan bayi yang dipilih sama..!!");
+                        gabungkan="";
+                        norawatgabung="";
+                    }else{
+                        int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau digabung..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                        if (reply == JOptionPane.YES_OPTION) {
+                            if(Sequel.menyimpantf("ranap_gabung","?,?","Data Ranap Gabung",2,new String[]{
+                                    norawat.getText(),norawatgabung
+                                })==true){
+                                Sequel.mengedit("kamar_inap","no_rawat='"+norawatgabung+"'","stts_pulang='Pindah Kamar'");
+                                Sequel.mengedit("kamar","kd_kamar='"+kamaryangdigabung+"'","status='KOSONG'");
+                                Sequel.mengedit("kamar_inap","no_rawat='"+norawatgabung+"'","no_rawat='"+norawat.getText()+"'");
+                                Sequel.mengedit("reg_periksa","no_rawat='"+norawatgabung+"'","status_lanjut='Ranap'");
+                                gabungkan="";
+                                norawatgabung="";
+                                tampil();
+                            }
+                        }else{
+                            gabungkan="";
+                            norawatgabung="";
+                        }
+                    }
+                }
+            }
+            if(evt.getClickCount()==2){
+                i=tbKamIn.getSelectedColumn();
+                if(i==0){
+                    if(akses.gettindakan_ranap()==true){
+                        MnRawatInapActionPerformed(null);
+                    }
+                }else if(i==1){
+                     if(akses.getberi_obat()==true){
+                        //MnPemberianObatActionPerformed(null);
+                        if(tabMode.getRowCount()==0){
+                            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+                            TCari.requestFocus();
+                        }else if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
+                            try {
+                                psanak=koneksi.prepareStatement(
+                                    "select ranap_gabung.no_rawat2 from ranap_gabung where ranap_gabung.no_rawat=?");
+                                try {
+                                    psanak.setString(1,tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString());
+                                    rs2=psanak.executeQuery();
+                                    if(rs2.next()){
+                                        if(Sequel.cariRegistrasi(tbKamIn.getValueAt(tbKamIn.getSelectedRow()-1,0).toString())>0){
+                                            JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+                                            TCari.requestFocus();
+                                        }else{
+                                            akses.setform("DlgKamarInap");
+                                            bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
+                                            if(bangsal.equals("")){
+                                                if(lokasidepoutama.getDepoDefault().equals("")){
+                                                    lokasidepoutama.SetLokasiDepoUtama();
+                                                }
+                                                if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
+                                                    akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
+                                                }else{
+                                                    akses.setkdbangsal(lokasidepoutama.getDepoDefault());
+                                                }
+                                            }else{
+                                                akses.setkdbangsal(bangsal);
+                                            }
+                                            panggilobat(rs2.getString("no_rawat2"));
+                                        }
+                                    }else{
+                                        JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+                                        tbKamIn.requestFocus();
+                                    }
+                                } catch(Exception ex){
+                                    System.out.println("Notifikasi : "+ex);
+                                }finally{
+                                      if(rs2 != null){
+                                          rs2.close();
+                                      }
+                                      if(psanak != null){
+                                          psanak.close();
+                                      }
+                                }
+                            } catch (Exception e) {
+                                System.out.println(e);
+                            }
+                        }else{
+                            if(Sequel.cariRegistrasi(norawat.getText())>0){
+                                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+                                TCari.requestFocus();
+                            }else{
+                                akses.setform("DlgKamarInap");
+                                bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
+                                if(bangsal.equals("")){
+                                    if(lokasidepoutama.getDepoDefault().equals("")){
+                                        lokasidepoutama.SetLokasiDepoUtama();
+                                    }
+                                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
+                                        akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
+                                    }else{
+                                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
+                                    }
+                                }else{
+                                    akses.setkdbangsal(bangsal);
+                                }
+                                panggilobat(norawat.getText());
+                            }
+                          }
+                    }
+                }else if(i==2){
+                    if(akses.getbilling_ranap()==true){
+                        MnBillingActionPerformed(null);
+                    }
+                }else if(i==3){
+                    if(akses.getresep_pulang()==true){
+                        MnInputResepActionPerformed(null);
+                    }
+                }else if(i==18){
+                    if(akses.getdpjp_ranap()==true){
+                        MnDPJPActionPerformed(null);
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_tbKamInMouseClicked
+
     private void tbKamInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyPressed
         if(tabMode.getRowCount()!=0){
             if((evt.getKeyCode()==KeyEvent.VK_ENTER)||(evt.getKeyCode()==KeyEvent.VK_UP)||(evt.getKeyCode()==KeyEvent.VK_DOWN)){
@@ -6305,10 +6437,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                         akses.setform("DlgKamarInap");
                                         bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                         if(bangsal.equals("")){
-                                            if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                            if(lokasidepoutama.getDepoDefault().equals("")){
+                                                lokasidepoutama.SetLokasiDepoUtama();
+                                            }
+                                            if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                                 akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                             }else{
-                                                akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                                akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                             }
                                         }else{
                                             akses.setkdbangsal(bangsal);
@@ -6341,10 +6476,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             akses.setform("DlgKamarInap");
                             bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                             if(bangsal.equals("")){
-                                if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                if(lokasidepoutama.getDepoDefault().equals("")){
+                                    lokasidepoutama.SetLokasiDepoUtama();
+                                }
+                                if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                     akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                 }else{
-                                    akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                    akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                 }
                             }else{
                                 akses.setkdbangsal(bangsal);
@@ -6445,10 +6583,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 if(rs2.next()){
                                       bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                       if(bangsal.equals("")){
-                                            if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                            if(lokasidepoutama.getDepoDefault().equals("")){
+                                                lokasidepoutama.SetLokasiDepoUtama();
+                                            }
+                                            if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                                 akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                             }else{
-                                                akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                                akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                             }
                                       }else{
                                             akses.setkdbangsal(bangsal);
@@ -6508,10 +6649,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 }else{
                     bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                     if(bangsal.equals("")){
-                        if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                        if(lokasidepoutama.getDepoDefault().equals("")){
+                            lokasidepoutama.SetLokasiDepoUtama();
+                        }
+                        if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                             akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                         }else{
-                            akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                            akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                         }
                     }else{
                         akses.setkdbangsal(bangsal);
@@ -6572,10 +6716,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 akses.setform("DlgKamarInap");
                                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                 if(bangsal.equals("")){
-                                    if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                    if(lokasidepoutama.getDepoDefault().equals("")){
+                                        lokasidepoutama.SetLokasiDepoUtama();
+                                    }
+                                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                         akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                     }else{
-                                        akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                     }
                                 }else{
                                     akses.setkdbangsal(bangsal);
@@ -6614,10 +6761,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     akses.setform("DlgKamarInap");
                     bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                     if(bangsal.equals("")){
-                        if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                        if(lokasidepoutama.getDepoDefault().equals("")){
+                            lokasidepoutama.SetLokasiDepoUtama();
+                        }
+                        if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                             akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                         }else{
-                            akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                            akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                         }
                     }else{
                         akses.setkdbangsal(bangsal);
@@ -6719,10 +6869,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                               if(rs2.next()){
                                   bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                   if(bangsal.equals("")){
-                                      if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
-                                          akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
+                                      if(lokasidepoutama.getDepoDefault().equals("")){
+                                            lokasidepoutama.SetLokasiDepoUtama();
+                                      }
+                                      if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
+                                            akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                       }else{
-                                          akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                            akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                       }
                                   }else{
                                       akses.setkdbangsal(bangsal);
@@ -6760,13 +6913,16 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 }else{
                       bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                       if(bangsal.equals("")){
-                          if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
-                              akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
-                          }else{
-                              akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
-                          }
+                            if(lokasidepoutama.getDepoDefault().equals("")){
+                                lokasidepoutama.SetLokasiDepoUtama();
+                            }
+                            if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
+                                akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
+                            }else{
+                                akses.setkdbangsal(lokasidepoutama.getDepoDefault());
+                            }
                       }else{
-                          akses.setkdbangsal(bangsal);
+                            akses.setkdbangsal(bangsal);
                       }
 
                       DlgPemberianObat beriobat=new DlgPemberianObat(null,false);
@@ -6794,99 +6950,120 @@ public class DlgKamarInap extends javax.swing.JDialog {
       }else{
           if(tbKamIn.getSelectedRow()>-1){
                 if(tbKamIn.getValueAt(tbKamIn.getSelectedRow(),0).toString().equals("")){
-                             JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
-                             tbKamIn.requestFocus();
+                    JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu pasien...!!!");
+                    tbKamIn.requestFocus();
                 }else{
                     try {
-                        if (akses.getpiutang_pasien()) {
-
-                            pscaripiutang=koneksi.prepareStatement("select tgl_piutang from piutang_pasien where no_rkm_medis=? and status='Belum Lunas' order by tgl_piutang asc limit 1");
-                            try {
-                                pscaripiutang.setString(1,TNoRM.getText());
-                                rs=pscaripiutang.executeQuery();
-                                if(rs.next()){
-                                    i=JOptionPane.showConfirmDialog(null, "Masih ada tunggakan pembayaran, apa mau bayar sekarang ?","Konfirmasi",JOptionPane.YES_NO_OPTION);
-                                    if(i==JOptionPane.YES_OPTION){
-                                         DlgLhtPiutang piutang=new DlgLhtPiutang(null,false);
-                                         piutang.setNoRm(TNoRM.getText(),rs.getDate(1));
-                                         piutang.tampil2();
-                                         piutang.isCek();
-                                         piutang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                                         piutang.setLocationRelativeTo(internalFrame1);
-                                         piutang.setVisible(true);
-                                    }else{
-                                        bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
-                                        if(bangsal.equals("")){
-                                            if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
-                                                akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
-                                            }else{
-                                                akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
-                                            }
-                                        }else{
-                                            akses.setkdbangsal(bangsal);
-                                        }
-
-                                        billing.TNoRw.setText(norawat.getText());
-                                        billing.isCek();
-                                        billing.isRawat();
-                                        billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                                        billing.setLocationRelativeTo(internalFrame1);
-                                        billing.setVisible(true);
-                                    }
+                        pscaripiutang=koneksi.prepareStatement("select tgl_piutang from piutang_pasien where no_rkm_medis=? and status='Belum Lunas' order by tgl_piutang asc limit 1");
+                        try {
+                            pscaripiutang.setString(1,TNoRM.getText());
+                            rs=pscaripiutang.executeQuery();
+                            if(rs.next()){
+                                i=JOptionPane.showConfirmDialog(null, "Masih ada tunggakan pembayaran, apa mau bayar sekarang ?","Konfirmasi",JOptionPane.YES_NO_OPTION);
+                                if(i==JOptionPane.YES_OPTION){
+                                    DlgLhtPiutang piutang=new DlgLhtPiutang(null,false);
+                                    piutang.setNoRm(TNoRM.getText(),rs.getDate(1));
+                                    piutang.tampil2();
+                                    piutang.isCek();
+                                    piutang.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                    piutang.setLocationRelativeTo(internalFrame1);
+                                    piutang.setVisible(true);
                                 }else{
                                     bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                     if(bangsal.equals("")){
-                                        if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                        if(lokasidepoutama.getDepoDefault().equals("")){
+                                            lokasidepoutama.SetLokasiDepoUtama();
+                                        }
+                                        if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                             akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                         }else{
-                                            akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                            akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                         }
                                     }else{
                                         akses.setkdbangsal(bangsal);
                                     }
 
+                                    if (billing == null || !billing.isDisplayable()) {
+                                        billing=new DlgBilingRanap(null,false);
+                                        billing.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                                        billing.addWindowListener(new WindowAdapter() {
+                                            @Override
+                                            public void windowClosed(WindowEvent e) {
+                                                billing=null;
+                                            }
+                                        });
+
+                                        billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                        billing.setLocationRelativeTo(internalFrame1);
+                                    }
+                                    if (billing == null) return;
+                                    if (!billing.isVisible()) {
+                                        billing.TNoRw.setText(norawat.getText());
+                                        billing.isCek();
+                                        billing.isRawat();
+                                    }
+                                    if (billing.isVisible()) {
+                                        billing.toFront();
+                                        return;
+                                    }
+                                    billing.setVisible(true);
+                                }
+                            }else{
+                                bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
+                                if(bangsal.equals("")){
+                                    if(lokasidepoutama.getDepoDefault().equals("")){
+                                        lokasidepoutama.SetLokasiDepoUtama();
+                                    }
+                                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
+                                        akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
+                                    }else{
+                                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
+                                    }
+                                }else{
+                                    akses.setkdbangsal(bangsal);
+                                }
+
+                                if (billing == null || !billing.isDisplayable()) {
+                                    billing=new DlgBilingRanap(null,false);
+                                    billing.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                                    billing.addWindowListener(new WindowAdapter() {
+                                        @Override
+                                        public void windowClosed(WindowEvent e) {
+                                            billing=null;
+                                        }
+                                    });
+
+                                    billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                    billing.setLocationRelativeTo(internalFrame1);
+                                }
+                                if (billing == null) return;
+                                if (!billing.isVisible()) {
                                     billing.TNoRw.setText(norawat.getText());
                                     billing.isCek();
                                     billing.isRawat();
-                                    billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                                    billing.setLocationRelativeTo(internalFrame1);
-                                    billing.setVisible(true);
                                 }
-                            } catch (Exception e) {
-                                System.out.println("Notifikasi : "+e);
-                            } finally{
-                                if(rs != null){
-                                    rs.close();
+                                if (billing.isVisible()) {
+                                    billing.toFront();
+                                    return;
                                 }
-                                if(pscaripiutang != null){
-                                    pscaripiutang.close();
-                                }
+                                billing.setVisible(true);
                             }
-                        } else {
-                            bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
-                            if(bangsal.equals("")){
-                                if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
-                                    akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
-                                }else{
-                                    akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
-                                }
-                            }else{
-                                akses.setkdbangsal(bangsal);
+                        } catch (Exception e) {
+                            System.out.println("Notifikasi : "+e);
+                        } finally{
+                            if(rs != null){
+                                rs.close();
                             }
-
-                            billing.TNoRw.setText(norawat.getText());
-                            billing.isCek();
-                            billing.isRawat();
-                            billing.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-                            billing.setLocationRelativeTo(internalFrame1);
-                            billing.setVisible(true);
+                            if(pscaripiutang != null){
+                                pscaripiutang.close();
+                            }
                         }
                     } catch (Exception e) {
                         System.out.println(e);
                     }
                 }
-          }
-      }
+            }
+        }
     }//GEN-LAST:event_MnBillingActionPerformed
 
     private void MnDietActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDietActionPerformed
@@ -7597,10 +7774,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                             if(rs2.next()){
                                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                 if(bangsal.equals("")){
-                                    if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                    if(lokasidepoutama.getDepoDefault().equals("")){
+                                        lokasidepoutama.SetLokasiDepoUtama();
+                                    }
+                                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                         akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                     }else{
-                                        akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                     }
                                 }else{
                                     akses.setkdbangsal(bangsal);
@@ -7632,10 +7812,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 }else{
                     bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                     if(bangsal.equals("")){
-                        if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                        if(lokasidepoutama.getDepoDefault().equals("")){
+                            lokasidepoutama.SetLokasiDepoUtama();
+                        }
+                        if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                             akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                         }else{
-                            akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                            akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                         }
                     }else{
                         akses.setkdbangsal(bangsal);
@@ -8169,10 +8352,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 if(rs2.next()){
                                     bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                     if(bangsal.equals("")){
-                                        if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                        if(lokasidepoutama.getDepoDefault().equals("")){
+                                            lokasidepoutama.SetLokasiDepoUtama();
+                                        }
+                                        if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                             akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                         }else{
-                                            akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                            akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                         }
                                     }else{
                                         akses.setkdbangsal(bangsal);
@@ -8209,10 +8395,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                     }else{
                         bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                         if(bangsal.equals("")){
-                            if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                            if(lokasidepoutama.getDepoDefault().equals("")){
+                                lokasidepoutama.SetLokasiDepoUtama();
+                            }
+                            if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                 akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                             }else{
-                                akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                             }
                         }else{
                             akses.setkdbangsal(bangsal);
@@ -8862,10 +9051,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                     akses.setform("DlgReturJual");
                                     bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                     if(bangsal.equals("")){
-                                        if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                        if(lokasidepoutama.getDepoDefault().equals("")){
+                                            lokasidepoutama.SetLokasiDepoUtama();
+                                        }
+                                        if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                             akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                         }else{
-                                            akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                            akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                         }
                                     }else{
                                         akses.setkdbangsal(bangsal);
@@ -8903,10 +9095,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                         akses.setform("DlgReturJual");
                         bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                         if(bangsal.equals("")){
-                            if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                            if(lokasidepoutama.getDepoDefault().equals("")){
+                                lokasidepoutama.SetLokasiDepoUtama();
+                            }
+                            if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                 akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                             }else{
-                                akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                             }
                         }else{
                             akses.setkdbangsal(bangsal);
@@ -10708,10 +10903,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                 if(bangsal.equals("")){
-                                    if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                    if(lokasidepoutama.getDepoDefault().equals("")){
+                                        lokasidepoutama.SetLokasiDepoUtama();
+                                    }
+                                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                         akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                     }else{
-                                        akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                     }
                                 }else{
                                     akses.setkdbangsal(bangsal);
@@ -10755,10 +10953,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                 if(bangsal.equals("")){
-                    if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                    if(lokasidepoutama.getDepoDefault().equals("")){
+                        lokasidepoutama.SetLokasiDepoUtama();
+                    }
+                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                         akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                     }else{
-                        akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                     }
                 }else{
                     akses.setkdbangsal(bangsal);
@@ -11569,10 +11770,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                 if(bangsal.equals("")){
-                                    if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                    if(lokasidepoutama.getDepoDefault().equals("")){
+                                        lokasidepoutama.SetLokasiDepoUtama();
+                                    }
+                                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                         akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                     }else{
-                                        akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                     }
                                 }else{
                                     akses.setkdbangsal(bangsal);
@@ -11613,10 +11817,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                 if(bangsal.equals("")){
-                    if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                    if(lokasidepoutama.getDepoDefault().equals("")){
+                        lokasidepoutama.SetLokasiDepoUtama();
+                    }
+                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                         akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                     }else{
-                        akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                     }
                 }else{
                     akses.setkdbangsal(bangsal);
@@ -12482,10 +12689,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                 if(bangsal.equals("")){
-                                    if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                                    if(lokasidepoutama.getDepoDefault().equals("")){
+                                        lokasidepoutama.SetLokasiDepoUtama();
+                                    }
+                                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                                         akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                                     }else{
-                                        akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                                     }
                                 }else{
                                     akses.setkdbangsal(bangsal);
@@ -12525,10 +12735,13 @@ public class DlgKamarInap extends javax.swing.JDialog {
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 bangsal=Sequel.cariIsi("select set_depo_ranap.kd_depo from set_depo_ranap where set_depo_ranap.kd_bangsal=?",Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                 if(bangsal.equals("")){
-                    if(Sequel.cariIsi("select set_lokasi.asal_stok from set_lokasi").equals("Gunakan Stok Bangsal")){
+                    if(lokasidepoutama.getDepoDefault().equals("")){
+                        lokasidepoutama.SetLokasiDepoUtama();
+                    }
+                    if(lokasidepoutama.getAsalStok().equals("Gunakan Stok Bangsal")){
                         akses.setkdbangsal(Sequel.cariIsi("select kamar.kd_bangsal from kamar where kamar.kd_kamar=?",kdkamar.getText()));
                     }else{
-                        akses.setkdbangsal(Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi"));
+                        akses.setkdbangsal(lokasidepoutama.getDepoDefault());
                     }
                 }else{
                     akses.setkdbangsal(bangsal);

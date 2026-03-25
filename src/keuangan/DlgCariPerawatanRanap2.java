@@ -932,7 +932,7 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap().equals("")){
-            runBackground(() ->akuntindakanranap.SetAkunTindakanRanap());
+            akuntindakanranap.SetAkunTindakanRanap();
         }
 
         try {

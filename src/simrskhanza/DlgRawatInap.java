@@ -6398,7 +6398,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {
         if(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap().equals("")){
-            runBackground(() ->akuntindakanranap.SetAkunTindakanRanap());
+            akuntindakanranap.SetAkunTindakanRanap();
         }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){

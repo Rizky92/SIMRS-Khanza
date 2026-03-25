@@ -816,11 +816,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         runBackground(() ->tampil());
         if(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan().equals("")){
-            runBackground(() ->akuntindakanralan.SetAkunTindakanRalan());
+            akuntindakanralan.SetAkunTindakanRalan();
         }
 
         if(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap().equals("")){
-            runBackground(() ->akuntindakanranap.SetAkunTindakanRanap());
+            akuntindakanranap.SetAkunTindakanRanap();
         }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){

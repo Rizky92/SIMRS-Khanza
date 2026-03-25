@@ -343,9 +343,9 @@ public class DlgCekDataPasien extends widget.Dialog {
                     if (!rs.getString("stts").equals("Belum") || rs.getBoolean("ada_pemeriksaan")) {
                         Valid.popupInfoDialog("Anda sudah menerima pelayanan pada hari ini..!!\nSilahkan konfirmasi ke petugas.");
                     } else if (rs.getString("status").equals("Checkin")) {
-                        if (koneksiDB.PRINTJUMLAHBARCODE() > 0) {
+                        if (printJumlahBarcode > 0) {
                             if (Valid.popupKonfirmDialog("Anda sudah melakukan checkin pada hari ini\nApakah mau mencetak barcode?") == validasi.POPUP_YA) {
-                                Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), koneksiDB.PRINTJUMLAHBARCODE());
+                                Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, printerBarcode, printJumlahBarcode);
                                 Valid.popupInfoDialog("Barcode berhasil dicetak..!!", 5);
                             }
                         } else {
@@ -355,7 +355,7 @@ public class DlgCekDataPasien extends widget.Dialog {
                         Sequel.mengupdateSmc("reg_periksa", "jam_reg = current_time()", "no_rawat = ?", rs.getString("no_rawat"));
                         Sequel.mengupdateSmc("booking_registrasi", "waktu_kunjungan = now(), status = 'Checkin'", "no_rawat = ?", rs.getString("no_rawat"));
                         Valid.popupInfoDialog("Check in berhasil..!!", 5);
-                        Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), koneksiDB.PRINTJUMLAHBARCODE());
+                        Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, printerBarcode, printJumlahBarcode);
                     }
                 } else {
                     Valid.popupPeringatanDialog("Maaf, jadwal booking untuk hari ini tidak ditemukan\nSilahkan konfirmasi ke pendaftaran..!!");

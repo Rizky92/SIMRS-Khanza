@@ -1042,7 +1042,7 @@ public final class DlgPeriksaLaboratoriumPA extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(akuntindakanlaborat.getSuspen_Piutang_Laborat_Ralan().equals("")||akuntindakanlaborat.getSuspen_Piutang_Laborat_Ranap().equals("")){
-            runBackground(() ->akuntindakanlaborat.SetAkunTindakanLaborat());
+            akuntindakanlaborat.SetAkunTindakanLaborat();
         }
 
         try {
