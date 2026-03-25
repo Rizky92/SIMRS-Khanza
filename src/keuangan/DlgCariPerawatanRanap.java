@@ -1229,7 +1229,7 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap().equals("")){
-            runBackground(() ->akuntindakanranap.SetAkunTindakanRanap());
+            akuntindakanranap.SetAkunTindakanRanap();
         }
         try {
             pstarif=koneksi.prepareStatement("select set_tarif.ruang_ranap,set_tarif.cara_bayar_ranap,set_tarif.kelas_ranap from set_tarif");

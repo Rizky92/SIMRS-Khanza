@@ -3,6 +3,7 @@ import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
@@ -48,7 +49,7 @@ public class DlgPiutang extends javax.swing.JDialog {
     private double ttljual=0,stok,jumlah,ppnobat=0,besarppnobat=0,tagihanppn=0,ongkir=0,uangmuka=0,sisapiutang=0;
     private PreparedStatement ps;
     private ResultSet rs;
-    private String aktifkanbatch="no",pilihanetiket,hppfarmasi="",tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota");
+    private String aktifkanbatch="no",pilihanetiket,hppfarmasi="",tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota"),DEPOAKTIFOBAT="";
     private boolean sukses=true, piutangBPJS = true;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -222,6 +223,13 @@ public class DlgPiutang extends javax.swing.JDialog {
             PersenppnObat.setText("11");
         }else{
             PersenppnObat.setText("0");
+        }
+
+        try {
+            DEPOAKTIFOBAT = koneksiDB.DEPOAKTIFOBAT();
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+            DEPOAKTIFOBAT = "";
         }
     }
 
@@ -2019,7 +2027,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         autoNomor();
         Ongkir.setText("0");
         UangMuka.setText("0");
-        Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi",kdgudang);
+        if(lokasidepoutama.getDepoDefault().equals("")){
+            lokasidepoutama.SetLokasiDepoUtama();
+        }
+        kdgudang.setText(lokasidepoutama.getDepoDefault());
         nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         if(akses.getjml2()>=1){
             kdptg.setEditable(false);
@@ -2027,6 +2038,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             BtnSimpan.setEnabled(akses.getpiutang_obat());
             kdptg.setText(akses.getkode());
             nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
+            if(!DEPOAKTIFOBAT.equals("")){
+                kdgudang.setText(DEPOAKTIFOBAT);
+                nmgudang.setText(Sequel.CariBangsal(DEPOAKTIFOBAT));
+                BtnGudang.setEnabled(false);
+            }
         }
     }
 

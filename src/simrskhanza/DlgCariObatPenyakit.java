@@ -15,6 +15,7 @@ import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
 import fungsi.sekuel;
 import fungsi.validasi;
 import inventory.DlgObatPenyakit;
@@ -1040,7 +1041,10 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
 
         bangsal=Sequel.cariIsi("select kd_bangsal from set_depo_ralan where kd_poli=?",Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
         if(bangsal.equals("")){
-            bangsal=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1");
+            if(lokasidepoutama.getDepoDefault().equals("")){
+                lokasidepoutama.SetLokasiDepoUtama();
+            }
+            bangsal=lokasidepoutama.getDepoDefault();
         }
     }
 

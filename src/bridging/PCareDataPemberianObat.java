@@ -651,10 +651,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if(akunobatralan.getSuspen_Piutang_Obat_Ralan().equals("")){
-            runBackground(() ->akunobatralan.SetAkunObatRalan());
+            akunobatralan.SetAkunObatRalan();
         }
         if(akunobatranap.getSuspen_Piutang_Obat_Ranap().equals("")){
-            runBackground(() ->akunobatranap.SetAkunObatRanap());
+            akunobatranap.SetAkunObatRanap();
         }
         runBackground(() ->tampil());
         if(koneksiDB.CARICEPAT().equals("aktif")){

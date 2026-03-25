@@ -21,6 +21,7 @@ import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Color;
@@ -79,7 +80,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private DlgCariDokter dokter;
     private DlgCariTemplateResep cariTemplateResep = new DlgCariTemplateResep(null, false);
     private String pilihiterasi="",noracik="",aktifkanbatch="no",STOKKOSONGRESEP="no",qrystokkosong="",tampilkan_ppnobat_ralan="",status="",bangsal="",resep="",DEPOAKTIFOBAT="",
-            kamar="",norawatibu="",kelas,bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),RESEPRAJALKEPLAN="no", kodeunit = "";
+            kamar="",norawatibu="",kelas,RESEPRAJALKEPLAN="no", kodeunit = "";
     private final boolean AKTIFKANFILTERRESEPPERJENISOBAT = koneksiDB.AKTIFKANFILTERRESEPPERJENISOBAT();
     private File file;
     private FileWriter fileWriter;
@@ -2194,7 +2195,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             if(status.equals("ralan")){
                 bangsal=Sequel.cariIsi("select set_depo_ralan.kd_bangsal from set_depo_ralan where set_depo_ralan.kd_poli=?",Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
                 if(bangsal.equals("")){
-                    bangsal=bangsaldefault;
+                    if(lokasidepoutama.getDepoDefault().equals("")){
+                        lokasidepoutama.SetLokasiDepoUtama();
+                    }
+                    bangsal=lokasidepoutama.getDepoDefault();
                 }
             }else if(status.equals("ranap")){
                 bangsal=akses.getkdbangsal();

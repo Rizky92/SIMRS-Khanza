@@ -1081,9 +1081,8 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkJlnActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        runBackground(() ->tampil());
         if(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan().equals("")){
-            runBackground(() ->akuntindakanralan.SetAkunTindakanRalan());
+            akuntindakanralan.SetAkunTindakanRalan();
         }
         try {
             psset_tarif=koneksi.prepareStatement("select * from set_tarif");
@@ -1109,6 +1108,8 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
+
+        runBackground(() ->tampil());
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCariTindakan.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
