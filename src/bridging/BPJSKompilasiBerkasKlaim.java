@@ -3069,7 +3069,6 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
             return;
         }
 
-        System.out.println("onListSelectionModelValueChanged fired");
         try {
             selectedRow = tbKompilasi.getSelectionModel().getLeadSelectionIndex();
             tabKanan.setSelectedIndex(0);

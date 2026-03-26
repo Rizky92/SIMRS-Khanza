@@ -145,15 +145,12 @@
 
                                     $baris = mysqli_fetch_array(bukaquery(<<<SQL
                                         select bridging_sep.no_sep, bridging_sep.tglsep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang) as tglpulang, reg_periksa.*,
-                                        pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, pasien.no_ktp, (select inacbg_pasien_tb_smc.no_sitb from inacbg_pasien_tb_smc
-                                        where inacbg_pasien_tb_smc.no_rkm_medis = reg_periksa.no_rkm_medis limit 1) as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab
-                                        from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs
-                                        join dokter on maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter
-                                        join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat
-                                        join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis
-                                        join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli
-                                        join penjab on reg_periksa.kd_pj = penjab.kd_pj
-                                        where bridging_sep.no_sep = '$nosep'
+                                        pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, pasien.no_ktp, (select inacbg_pasien_tb_smc.no_sitb from inacbg_pasien_tb_smc where
+                                        inacbg_pasien_tb_smc.no_rkm_medis = reg_periksa.no_rkm_medis limit 1) as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab
+                                        from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs join dokter on
+                                        maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join pasien
+                                        on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli join penjab on
+                                        reg_periksa.kd_pj = penjab.kd_pj where bridging_sep.no_sep = '$nosep'
                                         SQL
                                     ));
                                     $norawat        = $baris['no_rawat'];
@@ -496,9 +493,9 @@
                                 <td width="1%">:</td>
                                 <td width="70%">
                                     <select name="upgrade_class_payor" class="text2" style="font-family: Tahoma; width: 95%">
-                                        <option value="peserta">Kelas 1</option>
-                                        <option value="pemberi_kerja">Kelas 2</option>
-                                        <option value="asuransi_tambahan">Kelas VIP</option>
+                                        <option value="peserta">Peserta</option>
+                                        <option value="pemberi_kerja">Pemberi Kerja</option>
+                                        <option value="asuransi_tambahan">Asuransi Tambahan</option>
                                     </select>
                                 </td>
                             </tr>
@@ -2350,6 +2347,7 @@
                                 if ((!empty($norawat)) && (!empty($nosep)) && (!empty($nokartu))) {
                                     ['success' => $success, 'data' => $response, 'error' => $error] = BuatKlaimBaruSmc($nokartu, $nosep, $no_rkm_medis, $nm_pasien, $tgl_lahir." 00:00:00", $gender, $norawat);
                                     if ($success === true) {
+                                        ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaim2Smc();
                                         ['success' => $success, 'data' => $response, 'error' => $error] = UpdateDataKlaimSmc(
                                             $nosep, $nokartu, $no_rkm_medis, $tgl_registrasi, $keluar, $jnsrawat, $kelas_rawat, $adl_sub_acute,
                                             $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class,

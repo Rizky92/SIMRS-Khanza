@@ -141,8 +141,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
 
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
         TCari.requestFocus();
-
-        worker = buildWorker();
     }
 
     /**
@@ -211,7 +209,15 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                formComponentShown(evt);
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosed(java.awt.event.WindowEvent evt) {
+                formWindowClosed(evt);
+            }
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
@@ -576,7 +582,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         PanelInput.add(jLabel126);
         jLabel126.setBounds(347, 130, 103, 23);
 
-        alasanSpesimenTakDiambil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Tidak Dapat Dilakukan", "Akses Sulit" }));
+        alasanSpesimenTakDiambil.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "", "Tidak dapat dilakukan", "Akses sulit" }));
         alasanSpesimenTakDiambil.setMinimumSize(new java.awt.Dimension(100, 23));
         alasanSpesimenTakDiambil.setName("alasanSpesimenTakDiambil"); // NOI18N
         alasanSpesimenTakDiambil.setPreferredSize(new java.awt.Dimension(144, 23));
@@ -731,7 +737,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        tampil();
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -772,12 +777,21 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKelahiranMouseReleased
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-        // TODO add your handling code here:
+        TCari.setText("");
+        tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_BtnPrintActionPerformed
+
+    private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
+        tampil();
+    }//GEN-LAST:event_formComponentShown
+
+    private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
+        emptTeks2();
+    }//GEN-LAST:event_formWindowClosed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
@@ -849,10 +863,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         BtnHapus.setEnabled(akses.getbpjs_kompilasi_berkas_klaim());
         BtnEdit.setEnabled(akses.getbpjs_kompilasi_berkas_klaim());
         TCari.requestFocus();
-    }
-
-    private SwingWorker<Void, Object[]> buildWorker() {
-        return ;
     }
 
     private void tampil() {
@@ -942,7 +952,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
 
     private void emptTeks() {
         tbKelahiran.clearSelection();
-        urutanLahir.setText("");
+        urutanLahir.setText(String.valueOf((Integer) tbKelahiran.getValueAt(tbKelahiran.getRowCount() - 1, 4) + 1));
         caraLahir.setSelectedIndex(0);
         Valid.setTglJamSmc(new Date(), tglKelahiran, cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran);
         letakJanin.setSelectedIndex(0);
@@ -954,5 +964,15 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         lokasiSpesimen.setSelectedIndex(0);
         alasanSpesimenTakDiambil.setSelectedIndex(0);
         Valid.setTglJamSmc(new Date(), tglSampel, cmbJamSampel, cmbMenitSampel, cmbDetikSampel);
+    }
+
+    private void emptTeks2() {
+        emptTeks();
+        urutanLahir.setText("");
+        noRawat.setText("");
+        noRM.setText("");
+        namaPasien.setText("");
+        noSEP.setText("");
+        TCari.setText("");
     }
 }

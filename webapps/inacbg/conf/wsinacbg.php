@@ -1298,8 +1298,8 @@
         $hasilresponse = substr($response, $first, strlen($response) - $first - $last);
         $hasildecrypt = mc_decrypt($hasilresponse, getKey());
 
-        // print_r(['request' => $request, 'response' => $hasildecrypt]);
-        // echo "<br /><br />";
+        print_r(['request' => $request, 'response' => $hasildecrypt]);
+        echo "<br /><br />";
 
         return json_decode($hasildecrypt, true);
     }
@@ -1604,7 +1604,8 @@
         ];
     }
 
-    function updateDataKlaim2Smc($nomor_sep, array $data) {
+    function updateDataKlaim2Smc($nomor_sep, array $data)
+    {
         $request = [
             'metadata' => [
                 'method' => 'set_claim_data',
@@ -1713,6 +1714,11 @@
         }
     }
 
+    function UpdateDataKlaim3Smc($nomor_sep, $nomor_kartu, $tgl_masuk, $tgl_pulang, $cara_masuk, $jenis_rawat, $kelas_rawat, $adl_sub_acute = '', $adl_chronic = '', $icu_indicator = '', $icu_los = '', $ventilator_hour = '', $upgrade_class_ind = '', $upgrade_class_class = '', $upgrade_class_los = '', $upgrade_class_payor = '', $add_payment_pct = null, $birth_weight = '', $sistole, $diastole, $discharge_status, $dializer_single_use = '', $kantong_darah = '', $alteplase_ind = '', $menit_1_appearance = '', $menit_1_pulse = '', $menit_1_grimace = '', $menit_1_activity = '', $menit_1_respiration = '', $menit_1_appearance = '', $menit_1_pulse = '', $menit_1_grimace = '', $menit_1_activity = '', $menit_1_respiration = '', $usia_kehamilan = '', $gravida = '', $partus = '', $abortus = '', $onset_kontraksi = '', $tarif_poli_eks = '', $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd = '#', $coder_nik)
+    {
+
+    }
+
     function UpdateDataKlaimSmc(
         $nomor_sep, $nomor_kartu, $nomor_rm, $tgl_masuk, $tgl_pulang, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour,
         $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $tarif_poli_eks, $cara_masuk,
@@ -1748,24 +1754,24 @@
                 'discharge_status'    => $discharge_status,
                 'dializer_single_use' => $dializer_single_use,
                 'tarif_rs'            => [
-                    'prosedur_non_bedah' => $prosedur_non_bedah,
-                    'prosedur_bedah'     => $prosedur_bedah,
-                    'konsultasi'         => $konsultasi,
-                    'tenaga_ahli'        => $tenaga_ahli,
-                    'keperawatan'        => $keperawatan,
-                    'penunjang'          => $penunjang,
-                    'radiologi'          => $radiologi,
-                    'laboratorium'       => $laboratorium,
-                    'pelayanan_darah'    => $pelayanan_darah,
-                    'rehabilitasi'       => $rehabilitasi,
-                    'kamar'              => $kamar,
-                    'rawat_intensif'     => $rawat_intensif,
-                    'obat'               => $obat,
-                    'obat_kronis'        => $obat_kronis,
-                    'obat_kemoterapi'    => $obat_kemoterapi,
-                    'alkes'              => $alkes,
-                    'bmhp'               => $bmhp,
-                    'sewa_alat'          => $sewa_alat,
+                    'prosedur_non_bedah' => $tarif_rs['prosedur_non_bedah'] - $diskon['prosedur_non_bedah'],
+                    'prosedur_bedah'     => $tarif_rs['prosedur_bedah'] - $diskon['prosedur_bedah'],
+                    'konsultasi'         => $tarif_rs['konsultasi'] - $diskon['konsultasi'],
+                    'tenaga_ahli'        => $tarif_rs['tenaga_ahli'] - $diskon['tenaga_ahli'],
+                    'keperawatan'        => $tarif_rs['keperawatan'] - $diskon['keperawatan'],
+                    'penunjang'          => $tarif_rs['penunjang'] - $diskon['penunjang'],
+                    'radiologi'          => $tarif_rs['radiologi'] - $diskon['radiologi'],
+                    'laboratorium'       => $tarif_rs['laboratorium'] - $diskon['laboratorium'],
+                    'pelayanan_darah'    => $tarif_rs['pelayanan_darah'] - $diskon['pelayanan_darah'],
+                    'rehabilitasi'       => $tarif_rs['rehabilitasi'] - $diskon['rehabilitasi'],
+                    'kamar'              => $tarif_rs['kamar'] - $diskon['kamar'],
+                    'rawat_intensif'     => $tarif_rs['rawat_intensif'] - $diskon['rawat_intensif'],
+                    'obat'               => $tarif_rs['obat'] - $diskon['obat'],
+                    'obat_kronis'        => $tarif_rs['obat_kronis'] - $diskon['obat_kronis'],
+                    'obat_kemoterapi'    => $tarif_rs['obat_kemoterapi'] - $diskon['obat_kemoterapi'],
+                    'alkes'              => $tarif_rs['alkes'] - $diskon['alkes'],
+                    'bmhp'               => $tarif_rs['bmhp'] - $diskon['bmhp'],
+                    'sewa_alat'          => $tarif_rs['sewa_alat'] - $diskon['sewa_alat'],
                 ],
                 'persalinan' => [
                     'usia_kehamilan'  => $usia_kehamilan,
@@ -1774,7 +1780,22 @@
                     'abortus'         => $abortus,
                     'onset_kontraksi' => $onset_kontraksi,
                 ],
-                'apgar'          => $apgar,
+                'apgar' => [
+                    'menit_1' => [
+                        'appearance'  => $apgar_menit_1['appearance'],
+                        'pulse'       => $apgar_menit_1['pulse'],
+                        'grimace'     => $apgar_menit_1['grimace'],
+                        'activity'    => $apgar_menit_1['activity'],
+                        'respiration' => $apgar_menit_1['respiration'],
+                    ],
+                    'menit_5' => [
+                        'appearance'  => $apgar_menit_5['appearance'],
+                        'pulse'       => $apgar_menit_5['pulse'],
+                        'grimace'     => $apgar_menit_5['grimace'],
+                        'activity'    => $apgar_menit_5['activity'],
+                        'respiration' => $apgar_menit_5['respiration'],
+                    ],
+                ],
                 'tarif_poli_eks' => $tarif_poli_eks,
                 'nama_dokter'    => $nama_dokter,
                 'kode_tarif'     => $kode_tarif,
@@ -1785,36 +1806,33 @@
             ],
         ];
 
-        $querykelahiran = bukaquery("select * from inacbg_data_kelahiran_smc where no_sep = '$nomor_sep' order by delivery_sequence asc");
+        $querypersalinan = bukaquery("select * from inacbg_data_kelahiran_smc where no_sep = '$nomor_sep' order by delivery_sequence asc");
 
         $delivery = [];
 
-        $kondisi_map       = ['Hidup' => 'livebirth', 'Meninggal' => 'stillbirth'];
-        $shk_alasan_map    = ['Tidak dapat dilakukan' => 'tidak-dapat', 'Akses sulit' => 'akses-sulit'];
-        $use_flag_map      = ['0. Tidak' => '0', '1. Ya' => '1'];
-        $shk_ambil_db      = '';
+        $kondisi    = ['Hidup' => 'livebirth', 'Meninggal' => 'stillbirth'];
+        $shk_alasan = ['Tidak dapat dilakukan' => 'tidak-dapat', 'Akses sulit' => 'akses-sulit'];
 
-        while ($rowkelahiran = mysqli_fetch_assoc($querykelahiran)) {
-            $shk_ambil_db = $rowkelahiran['shk_spesimen_ambil'] ?? '';
-            $shk_ambil    = strtolower($shk_ambil_db);
+        while ($barispersalinan = mysqli_fetch_assoc($querypersalinan)) {
+            $shk_ambil = strtolower($barispersalinan['shk_spesimen_ambil']);
 
             $entry = [
-                'delivery_sequence'  => $rowkelahiran['delivery_sequence'],
-                'delivery_method'    => strtolower($rowkelahiran['delivery_method'] ?? ''),
-                'delivery_dttm'      => ($rowkelahiran['delivery_date']) . ' ' . ($rowkelahiran['delivery_time'] ?? '23:59:59'),
-                'letak_janin'        => strtolower($rowkelahiran['letak_janin'] ?? ''),
-                'kondisi'            => $kondisi_map[$rowkelahiran['kondisi'] ?? ''] ?? '',
-                'use_manual'         => $use_flag_map[$rowkelahiran['use_manual'] ?? ''] ?? '0',
-                'use_forcep'         => $use_flag_map[$rowkelahiran['use_forcep'] ?? ''] ?? '0',
-                'use_vacuum'         => $use_flag_map[$rowkelahiran['use_vacuum'] ?? ''] ?? '0',
+                'delivery_sequence'  => $barispersalinan['delivery_sequence'],
+                'delivery_method'    => strtolower($barispersalinan['delivery_method']),
+                'delivery_dttm'      => $barispersalinan['delivery_date'] . ' ' . $barispersalinan['delivery_time'],
+                'letak_janin'        => strtolower($barispersalinan['letak_janin']),
+                'kondisi'            => $kondisi[$barispersalinan['kondisi']],
+                'use_manual'         => substr($barispersalinan['use_manual'], 0, 1),
+                'use_forcep'         => substr($barispersalinan['use_forcep'], 0, 1),
+                'use_vacuum'         => substr($barispersalinan['use_vacuum'], 0, 1),
                 'shk_spesimen_ambil' => $shk_ambil,
             ];
 
             if ($shk_ambil === 'ya') {
-                $entry['shk_lokasi']        = strtolower($rowkelahiran['shk_lokasi'] ?? '');
-                $entry['shk_spesimen_dttm'] = $rowkelahiran['shk_spesimen_date'] . ' ' . $rowkelahiran['shk_spesimen_time'];
+                $entry['shk_lokasi']        = strtolower($barispersalinan['shk_lokasi'] ?? '');
+                $entry['shk_spesimen_dttm'] = $barispersalinan['shk_spesimen_date'] . ' ' . $barispersalinan['shk_spesimen_time'];
             } else {
-                $entry['shk_alasan'] = $shk_alasan_map[$rowkelahiran['shk_alasan'] ?? ''] ?? '';
+                $entry['shk_alasan'] = $shk_alasan[$barispersalinan['shk_alasan']];
             }
 
             $delivery[] = $entry;
