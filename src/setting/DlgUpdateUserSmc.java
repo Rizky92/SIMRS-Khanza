@@ -706,6 +706,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("inventaris_ruang", "[G] Ruang Inventaris");
         namaakses.put("sirkulasi_cssd", "[G] Sirkulasi CSSD");
         namaakses.put("inventaris_sirkulasi", "[G] Sirkulasi Inventaris");
+        namaakses.put("surat_pemesanan_inventaris_smc", "[G] Surat Pemesanan Barang Aset Smc");
         namaakses.put("suplier_inventaris", "[G] Suplier Aset/Inventaris");
         namaakses.put("parkir_barcode", "[H] Barcode Parkir");
         namaakses.put("parkir_jenis", "[H] Jenis Parkir");
