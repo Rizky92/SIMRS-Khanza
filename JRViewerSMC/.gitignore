@@ -1,0 +1,37 @@
+# Root level ignore
+/.vscode/
+/*.css
+/*.html
+/*.html_files
+/build/
+/dist/
+/lib/
+/setting/*.ini
+/setting/*.xml
+
+*.DS_Store
+*.*~*
+*.csv
+*.exe
+*.jar
+*.log
+*.pdf
+*.sql
+*.wps
+*.xls
+*.xlsx
+*.py
+*.txt
+
+# Don't ignore these
+!README.TXT
+!sik_bersih.sql
+!sik_bridging_eklaim.sql
+!sik_bridging_lab.sql
+!sik_bridging_radiologi.sql
+!sik_bridging_satusehat.sql
+!sik_modif.sql
+!sik.sql
+/JRViewerSMC/build/
+/JRViewerSMC/dist/
+/JRViewerSMC/nbproject/private/
