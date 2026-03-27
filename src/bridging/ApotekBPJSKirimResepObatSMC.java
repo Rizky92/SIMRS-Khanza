@@ -28,7 +28,6 @@ import java.awt.event.KeyEvent;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.Calendar;
 import java.util.Date;
 import javax.swing.AbstractAction;
 import javax.swing.ActionMap;

@@ -376,6 +376,14 @@ public final class DlgCariAturanPakai extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
+    public void setDicari(String cari) {
+        TCari.setText(cari);
+    }
+
+    public String dicari() {
+        return TCari.getText();
+    }
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{

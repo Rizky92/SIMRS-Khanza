@@ -124,7 +124,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private Map<String, Object> map;
     private boolean autocetak = false, previewLembarObat = false, previewAturanPakai = false;
-    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
+    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -1246,6 +1246,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                             @Override
                             public void windowClosed(WindowEvent e) {
                                 if(aturanpakai.getTable().getSelectedRow()!= -1){
+                                    cariAturanPakai = aturanpakai.dicari().trim();
                                     tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),11);
                                     tbObat.requestFocus();
                                 }
@@ -1256,6 +1257,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
                         aturanpakai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                         aturanpakai.setLocationRelativeTo(internalFrame1);
                     }
+                    aturanpakai.setDicari(cariAturanPakai);
                     if (aturanpakai == null) return;
                     if (aturanpakai.isVisible()) {
                         aturanpakai.toFront();
@@ -4453,41 +4455,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
             tbDetailObatRacikan.getColumnModel().getColumn(21).setMaxWidth(140);
             tbDetailObatRacikan.getColumnModel().getColumn(21).setPreferredWidth(140);
         }
-    }
-
-    private void bukaAturanpakai() {
-        if (aturanpakai == null) {
-            aturanpakai=new DlgCariAturanPakai(null,false);
-            aturanpakai.addWindowListener(new WindowListener() {
-                @Override
-                public void windowOpened(WindowEvent e) {}
-                @Override
-                public void windowClosing(WindowEvent e) {}
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if(aturanpakai.getTable().getSelectedRow()!= -1){
-                        if(TabRawat.getSelectedIndex()==0){
-                            tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),11);
-                            tbObat.requestFocus();
-                        }else if(TabRawat.getSelectedIndex()==1){
-                            tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
-                            tbObatRacikan.requestFocus();
-                        }
-                    }
-                }
-                @Override
-                public void windowIconified(WindowEvent e) {}
-                @Override
-                public void windowDeiconified(WindowEvent e) {}
-                @Override
-                public void windowActivated(WindowEvent e) {}
-                @Override
-                public void windowDeactivated(WindowEvent e) {}
-            });
-        }
-        aturanpakai.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-        aturanpakai.setLocationRelativeTo(internalFrame1);
-        aturanpakai.setVisible(true);
     }
 
     private void cekPengaturanResepRalan() {

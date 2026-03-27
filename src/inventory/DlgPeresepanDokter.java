@@ -20,14 +20,12 @@ import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;
+import fungsi.kodebpjs;
 import fungsi.koneksiDB;
 import fungsi.lokasidepoutama;
+import fungsi.ppnralan;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import fungsi.kodebpjs;
-import fungsi.ppnralan;
-import fungsi.lokasidepoutama;
 import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -98,6 +96,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private Map<String, Object> map;
     private ArrayList<String> arrlist = new ArrayList<>();
+
     /** Creates new form DlgPenyakit
      * @param parent
      * @param modal */
