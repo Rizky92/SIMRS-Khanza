@@ -2016,4 +2016,40 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
+CREATE TABLE IF NOT EXISTS `surat_pemesanan_inventaris_smc` (
+  `no_pemesanan` varchar(20) NOT NULL,
+  `kode_suplier` char(5) DEFAULT NULL,
+  `nip` varchar(20) DEFAULT NULL,
+  `tanggal` date DEFAULT NULL,
+  `subtotal` double NOT NULL,
+  `potongan` double NOT NULL,
+  `total` double NOT NULL,
+  `ppn` double DEFAULT NULL,
+  `meterai` double DEFAULT NULL,
+  `tagihan` double DEFAULT NULL,
+  `status` enum('Proses Pesan','Sudah Datang') DEFAULT NULL,
+  PRIMARY KEY (`no_pemesanan`),
+  KEY `kode_suplier` (`kode_suplier`),
+  KEY `nip` (`nip`),
+  CONSTRAINT `surat_pemesanan_inventaris_smc_ibfk_1` FOREIGN KEY (`kode_suplier`) REFERENCES `inventaris_suplier` (`kode_suplier`) ON UPDATE CASCADE,
+  CONSTRAINT `surat_pemesanan_inventaris_smc_ibfk_2` FOREIGN KEY (`nip`) REFERENCES `petugas` (`nip`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `detail_surat_pemesanan_inventaris_smc` (
+  `no_pemesanan` varchar(20) NOT NULL,
+  `kode_barang` varchar(20) NOT NULL DEFAULT '',
+  `jumlah` double DEFAULT NULL,
+  `h_pesan` double DEFAULT NULL,
+  `subtotal` double DEFAULT NULL,
+  `dis` double NOT NULL,
+  `besardis` double NOT NULL,
+  `total` double NOT NULL,
+  KEY `no_pemesanan` (`no_pemesanan`),
+  KEY `kode_barang` (`kode_barang`),
+  CONSTRAINT `detail_surat_pemesanan_inventaris_smc_ibfk_1` FOREIGN KEY (`kode_barang`) REFERENCES `inventaris_barang` (`kode_barang`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `detail_surat_pemesanan_inventaris_smc_ibfk_2` FOREIGN KEY (`no_pemesanan`) REFERENCES `surat_pemesanan_inventaris_smc` (`no_pemesanan`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `surat_pemesanan_inventaris_smc` enum('true','false') DEFAULT NULL AFTER `penerimaan_aset_inventaris`;
+
 SET FOREIGN_KEY_CHECKS=1;

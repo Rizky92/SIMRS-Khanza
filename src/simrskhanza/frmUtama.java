@@ -371,6 +371,7 @@ import inventaris.KeslingMutuAirLimbah;
 import inventaris.KeslingPemakaiaanAirPDAM;
 import inventaris.KeslingPemakaiaanAirTanah;
 import inventaris.KeslingPestControl;
+import inventaris.InventarisSuratPemesananSmc;
 import inventaris.PengajuanInventaris;
 import inventaris.RekapPengajuanInventarisDepartemen;
 import inventory.Dlg10ObatTerbanyakPoli;
@@ -50370,7 +50371,8 @@ public class frmUtama extends javax.swing.JFrame {
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,
-                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc;
+                             btnBPJSDaftarPelayananObat2Apotek, btnBPJSKirimObatApotek, btnBPJSKirimEditObatApotek, btnBPJSRiwayatPelayananResepApotek, btnPintuPoliSmc, btnBPJSRiwayatSuratKontrolSmc,
+                             btnSuratPemesananInventarisSmc;
 
     private void initSMC() {
         btnBPJSKompilasiBerkasKlaim = new widget.ButtonBig();
@@ -50468,10 +50470,23 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatSuratKontrolSmc.setName("btnBPJSRiwayatSuratKontrolSmc");
         btnBPJSRiwayatSuratKontrolSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatSuratKontrolSmc.addActionListener(this::btnBPJSRiwayatSuratKontrolSmc);
+
+        btnSuratPemesananInventarisSmc = new widget.ButtonBig();
+        btnSuratPemesananInventarisSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Select-Language_49621.png")));
+        btnSuratPemesananInventarisSmc.setText("Surat Pemesanan Barang Aset Smc");
+        btnSuratPemesananInventarisSmc.setIconTextGap(0);
+        btnSuratPemesananInventarisSmc.setName("btnSuratPemesananInventarisSmc");
+        btnSuratPemesananInventarisSmc.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPemesananInventarisSmc.addActionListener(this::btnSuratPemesananInventarisSmcActionPerformed);
     }
 
     private void isComboSMC() {
-        if (cmbMenu.getSelectedIndex() == 0) {
+        if (cmbMenu.getSelectedIndex() == 6) {
+            if (akses.getsurat_pemesanan_inventaris_smc()) {
+                Panelmenu.add(btnSuratPemesananInventarisSmc);
+                jmlmenu++;
+            }
+        } else if (cmbMenu.getSelectedIndex() == 0) {
             if (akses.getset_pintu_poli()) {
                 Panelmenu.add(btnSetPintuPoliSmc);
                 jmlmenu++;
@@ -50589,6 +50604,11 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
             jmlmenu++;
         }
+
+        if (akses.getsurat_pemesanan_inventaris_smc()) {
+            Panelmenu.add(btnSuratPemesananInventarisSmc);
+            jmlmenu++;
+        }
     }
 
     private void isCariIsiSMC() {
@@ -50672,6 +50692,13 @@ public class frmUtama extends javax.swing.JFrame {
         if (akses.getbpjs_riwayat_surat_smc()) {
             if (btnBPJSRiwayatSuratKontrolSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
                 Panelmenu.add(btnBPJSRiwayatSuratKontrolSmc);
+                jmlmenu++;
+            }
+        }
+
+        if (akses.getsurat_pemesanan_inventaris_smc()) {
+            if (btnSuratPemesananInventarisSmc.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())) {
+                Panelmenu.add(btnSuratPemesananInventarisSmc);
                 jmlmenu++;
             }
         }
@@ -50827,6 +50854,18 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         BPJSCekRiwayatSuratKontrolSMC aplikasi = new BPJSCekRiwayatSuratKontrolSMC(this, false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSuratPemesananInventarisSmcActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisSuratPemesananSmc aplikasi = new InventarisSuratPemesananSmc(this, false);
+        aplikasi.isCek();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);

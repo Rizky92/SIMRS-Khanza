@@ -1431,6 +1431,50 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }
 
+    public void tampil2(String noPemesanan) {
+        NoOrder.setText(noPemesanan);
+        kdsup.setText(Sequel.cariIsi("select kode_suplier from surat_pemesanan_inventaris_smc where no_pemesanan=?", noPemesanan));
+        nmsup.setText(Sequel.cariIsi("select inventaris_suplier.nama_suplier from inventaris_suplier where inventaris_suplier.kode_suplier=?", kdsup.getText()));
+        meterai = Sequel.cariIsiAngka("select meterai from surat_pemesanan_inventaris_smc where no_pemesanan=?", noPemesanan);
+        ppn = Sequel.cariIsiAngka("select ppn from surat_pemesanan_inventaris_smc where no_pemesanan=?", noPemesanan);
+        Meterai.setText(Valid.SetAngka2(meterai));
+        try {
+            Valid.tabelKosong(tabMode);
+            ps = koneksi.prepareStatement(
+                "select dspi.kode_barang, ib.nama_barang," +
+                " ifnull(ip.nama_produsen,'') as nama_produsen, ifnull(im.nama_merk,'') as nama_merk," +
+                " ifnull(ik.nama_kategori,'') as nama_kategori, ifnull(ij.nama_jenis,'') as nama_jenis," +
+                " dspi.jumlah, dspi.h_pesan, dspi.subtotal, dspi.dis, dspi.besardis, dspi.total" +
+                " from detail_surat_pemesanan_inventaris_smc dspi" +
+                " inner join inventaris_barang ib on dspi.kode_barang = ib.kode_barang" +
+                " left join inventaris_produsen ip on ib.kode_produsen = ip.kode_produsen" +
+                " left join inventaris_merk im on ib.id_merk = im.id_merk" +
+                " left join inventaris_kategori ik on ib.id_kategori = ik.id_kategori" +
+                " left join inventaris_jenis ij on ib.id_jenis = ij.id_jenis" +
+                " where dspi.no_pemesanan=? order by ib.nama_barang");
+            try {
+                ps.setString(1, noPemesanan);
+                rs = ps.executeQuery();
+                while (rs.next()) {
+                    tabMode.addRow(new Object[]{
+                        rs.getDouble("jumlah"), rs.getString("kode_barang"), rs.getString("nama_barang"),
+                        rs.getString("nama_produsen"), rs.getString("nama_merk"), rs.getString("nama_kategori"),
+                        rs.getString("nama_jenis"), rs.getDouble("h_pesan"), rs.getDouble("subtotal"),
+                        rs.getDouble("dis"), rs.getDouble("besardis"), rs.getDouble("total")
+                    });
+                }
+                getData();
+            } catch (Exception e) {
+                System.out.println("Notifikasi : " + e);
+            } finally {
+                if (rs != null) { rs.close(); }
+                if (ps != null) { ps.close(); }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : " + e);
+        }
+    }
+
     private void tampilAkun() {
         try{
              file=new File("./cache/akunaset.iyem");
