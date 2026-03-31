@@ -127,6 +127,89 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         harga.setDocument(new batasInput((byte)15).getOnlyAngka(harga));
         id_ruang.setDocument(new batasInput((byte)5).getKata(id_ruang));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
+
+        // Add 'Dihapus' to status_barang options
+        status_barang.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Ada","Rusak","Hilang","Perbaikan","Dipinjam","Dihapus","-"}));
+
+        // Asset lifecycle widgets
+        labelNoSeri = new widget.Label();
+        labelNoSeri.setText("No. Seri :");
+        no_seri = new widget.TextBox();
+        no_seri.setDocument(new batasInput((byte)50).getKata(no_seri));
+
+        labelMasaManfaat = new widget.Label();
+        labelMasaManfaat.setText("Masa Manfaat (bln) :");
+        masa_manfaat = new widget.TextBox();
+        masa_manfaat.setDocument(new batasInput((byte)6).getOnlyAngka(masa_manfaat));
+        masa_manfaat.setText("0");
+
+        labelMetodePenyusutan = new widget.Label();
+        labelMetodePenyusutan.setText("Metode Penyusutan :");
+        metode_penyusutan = new widget.ComboBox();
+        metode_penyusutan.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Garis Lurus","Saldo Menurun"}));
+        metode_penyusutan.setLightWeightPopupEnabled(false);
+
+        labelNilaiResidu = new widget.Label();
+        labelNilaiResidu.setText("Nilai Residu (Rp) :");
+        nilai_residu = new widget.TextBox();
+        nilai_residu.setDocument(new batasInput((byte)15).getOnlyAngka(nilai_residu));
+        nilai_residu.setText("0");
+
+        labelNoFakturBeli = new widget.Label();
+        labelNoFakturBeli.setText("No. Faktur Beli :");
+        no_faktur_beli = new widget.TextBox();
+        no_faktur_beli.setDocument(new batasInput((byte)15).getKata(no_faktur_beli));
+        btnCariFakturBeli = new widget.Button();
+        btnCariFakturBeli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png")));
+        btnCariFakturBeli.setPreferredSize(new java.awt.Dimension(25, 23));
+        btnCariFakturBeli.addActionListener(evt -> btnCariFakturBeliActionPerformed(evt));
+
+        labelAkmPenyusutan = new widget.Label();
+        labelAkmPenyusutan.setText("Akm. Penyusutan :");
+        LAkmPenyusutan = new widget.Label();
+        LAkmPenyusutan.setText("0");
+
+        labelNilaiBuku = new widget.Label();
+        labelNilaiBuku.setText("Nilai Buku :");
+        LNilaiBuku = new widget.Label();
+        LNilaiBuku.setText("0");
+
+        // Layout new widgets in FormInput (null layout, rows below y=153)
+        FormInput.add(labelNoSeri);
+        labelNoSeri.setBounds(0, 160, 85, 23);
+        FormInput.add(no_seri);
+        no_seri.setBounds(87, 160, 180, 23);
+        FormInput.add(labelMasaManfaat);
+        labelMasaManfaat.setBounds(275, 160, 140, 23);
+        FormInput.add(masa_manfaat);
+        masa_manfaat.setBounds(418, 160, 70, 23);
+
+        FormInput.add(labelMetodePenyusutan);
+        labelMetodePenyusutan.setBounds(0, 190, 140, 23);
+        FormInput.add(metode_penyusutan);
+        metode_penyusutan.setBounds(143, 190, 140, 23);
+        FormInput.add(labelNilaiResidu);
+        labelNilaiResidu.setBounds(290, 190, 125, 23);
+        FormInput.add(nilai_residu);
+        nilai_residu.setBounds(418, 190, 120, 23);
+
+        FormInput.add(labelNoFakturBeli);
+        labelNoFakturBeli.setBounds(0, 220, 105, 23);
+        FormInput.add(no_faktur_beli);
+        no_faktur_beli.setBounds(108, 220, 120, 23);
+        FormInput.add(btnCariFakturBeli);
+        btnCariFakturBeli.setBounds(230, 220, 25, 23);
+
+        FormInput.add(labelAkmPenyusutan);
+        labelAkmPenyusutan.setBounds(270, 220, 130, 23);
+        FormInput.add(LAkmPenyusutan);
+        LAkmPenyusutan.setBounds(403, 220, 140, 23);
+
+        FormInput.add(labelNilaiBuku);
+        labelNilaiBuku.setBounds(545, 220, 80, 23);
+        FormInput.add(LNilaiBuku);
+        LNilaiBuku.setBounds(628, 220, 140, 23);
+
         TCari.requestFocus();
 
         ChkInput.setSelected(false);
@@ -891,7 +974,7 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         }else {
                 //menyimpan-------------------------------------------------
                 Sequel.menyimpan("inventaris","'"+no_inventaris.getText()+"','"+kode_barang.getText()+"','"+asal_barang.getSelectedItem()+"','"+Valid.SetTgl(tgl_pengadaan.getSelectedItem()+"")+
-                        "','"+harga.getText()+"','"+status_barang.getSelectedItem()+"','"+id_ruang.getText()+"','"+no_rak.getSelectedItem()+"','"+no_box.getSelectedItem()+"'","No.Inventaris");
+                        "','"+harga.getText()+"','"+status_barang.getSelectedItem()+"','"+id_ruang.getText()+"','"+no_rak.getSelectedItem()+"','"+no_box.getSelectedItem()+"','"+no_seri.getText()+"','"+masa_manfaat.getText()+"','"+metode_penyusutan.getSelectedItem()+"','"+nilai_residu.getText()+"','"+(no_faktur_beli.getText().trim().isEmpty()?"":no_faktur_beli.getText().trim())+"'","No.Inventaris");
                 //----------------------------------------------------------
                 no_inventaris.requestFocus();
             runBackground(() ->tampil());
@@ -946,7 +1029,8 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
                 //menyimpan-------------------------------------------------
                 Sequel.mengedit("inventaris","no_inventaris='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0)+"'",
                         "no_inventaris='"+no_inventaris.getText()+"',kode_barang='"+kode_barang.getText()+"',asal_barang='"+asal_barang.getSelectedItem()+"',tgl_pengadaan='"+Valid.SetTgl(tgl_pengadaan.getSelectedItem()+"")+
-                        "',harga='"+harga.getText()+"',status_barang='"+status_barang.getSelectedItem()+"',id_ruang='"+id_ruang.getText()+"',no_rak='"+no_rak.getSelectedItem()+"',no_box='"+no_box.getSelectedItem()+"'");
+                        "',harga='"+harga.getText()+"',status_barang='"+status_barang.getSelectedItem()+"',id_ruang='"+id_ruang.getText()+"',no_rak='"+no_rak.getSelectedItem()+"',no_box='"+no_box.getSelectedItem()+
+                        "',no_seri='"+no_seri.getText()+"',masa_manfaat='"+masa_manfaat.getText()+"',metode_penyusutan='"+metode_penyusutan.getSelectedItem()+"',nilai_residu='"+nilai_residu.getText()+"',no_faktur_beli='"+(no_faktur_beli.getText().trim().isEmpty()?"":no_faktur_beli.getText().trim())+"'");
                 //----------------------------------------------------------
                 no_inventaris.requestFocus();
             runBackground(() ->tampil());
@@ -1462,6 +1546,22 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
     private widget.Table tbJnsPerawatan;
     private widget.Tanggal tgl_pengadaan;
     // End of variables declaration//GEN-END:variables
+    // Asset lifecycle fields (outside GEN block)
+    private widget.Label labelNoSeri;
+    private widget.TextBox no_seri;
+    private widget.Label labelMasaManfaat;
+    private widget.TextBox masa_manfaat;
+    private widget.Label labelMetodePenyusutan;
+    private widget.ComboBox metode_penyusutan;
+    private widget.Label labelNilaiResidu;
+    private widget.TextBox nilai_residu;
+    private widget.Label labelNoFakturBeli;
+    private widget.TextBox no_faktur_beli;
+    private widget.Button btnCariFakturBeli;
+    private widget.Label labelAkmPenyusutan;
+    private widget.Label LAkmPenyusutan;
+    private widget.Label labelNilaiBuku;
+    private widget.Label LNilaiBuku;
 
     private void tampil() {
         try {
@@ -1539,6 +1639,13 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         id_ruang.setText("");
         no_rak.setSelectedIndex(0);
         no_box.setSelectedIndex(0);
+        no_seri.setText("");
+        masa_manfaat.setText("0");
+        metode_penyusutan.setSelectedIndex(0);
+        nilai_residu.setText("0");
+        no_faktur_beli.setText("");
+        LAkmPenyusutan.setText("0");
+        LNilaiBuku.setText("0");
         TCari.setText("");
         no_inventaris.requestFocus();
         //Valid.autoNomer(" jns_perawatan ","JP",6,TKd);
@@ -1563,6 +1670,17 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
                 nm_ruang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
                 no_rak.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),14).toString());
                 no_box.setSelectedItem(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),15).toString());
+                // Load asset lifecycle fields
+                String noInvSel = tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString();
+                Sequel.cariIsi("select inventaris.no_seri from inventaris where inventaris.no_inventaris='"+noInvSel+"'",no_seri);
+                Sequel.cariIsi("select ifnull(inventaris.masa_manfaat,0) from inventaris where inventaris.no_inventaris='"+noInvSel+"'",masa_manfaat);
+                metode_penyusutan.setSelectedItem(Sequel.cariIsi("select inventaris.metode_penyusutan from inventaris where inventaris.no_inventaris='"+noInvSel+"'"));
+                Sequel.cariIsi("select ifnull(inventaris.nilai_residu,0) from inventaris where inventaris.no_inventaris='"+noInvSel+"'",nilai_residu);
+                Sequel.cariIsi("select ifnull(inventaris.no_faktur_beli,'') from inventaris where inventaris.no_inventaris='"+noInvSel+"'",no_faktur_beli);
+                double hargaAset = Valid.SetAngka(Sequel.cariIsi("select ifnull(inventaris.harga,0) from inventaris where inventaris.no_inventaris='"+noInvSel+"'"));
+                double akmVal = Valid.SetAngka(Sequel.cariIsi("select ifnull(sum(beban_penyusutan),0) from penyusutan_inventaris where no_inventaris='"+noInvSel+"'"));
+                LAkmPenyusutan.setText(Valid.SetAngka(akmVal)+"");
+                LNilaiBuku.setText(Valid.SetAngka(hargaAset - akmVal)+"");
           }
     }
 
@@ -1611,6 +1729,40 @@ public final class InventarisKoleksi extends javax.swing.JDialog {
         BtnEdit.setEnabled(akses.getinventaris_inventaris());
         BtnPrint.setEnabled(akses.getinventaris_inventaris());
         TCari.requestFocus();
+    }
+
+    /**
+     * Pre-fill the form for batch registration after a purchase.
+     * Opens the form with input panel visible, ready for the officer to assign no_inventaris.
+     */
+    public void prefill(String kodeBarang, double hargaBeli, String asalBarang, String tglPengadaan, String noFakturBeli) {
+        ChkInput.setSelected(true);
+        isForm();
+        kode_barang.setText(kodeBarang);
+        isBarang();
+        harga.setText(""+(long)hargaBeli);
+        asal_barang.setSelectedItem(asalBarang);
+        Valid.SetTgl(tgl_pengadaan, tglPengadaan);
+        no_faktur_beli.setText(noFakturBeli == null ? "" : noFakturBeli);
+        no_inventaris.requestFocus();
+    }
+
+    private void btnCariFakturBeliActionPerformed(java.awt.event.ActionEvent evt) {
+        InventarisCariPembelian cari = new InventarisCariPembelian(null, false);
+        cari.addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
+            public void windowClosed(java.awt.event.WindowEvent e) {
+                if (cari.getTable().getSelectedRow() != -1) {
+                    no_faktur_beli.setText(cari.getTable().getValueAt(cari.getTable().getSelectedRow(), 1).toString());
+                }
+            }
+        });
+        cari.emptTeks();
+        cari.isCek();
+        cari.setSize(900, 600);
+        cari.setLocationRelativeTo(internalFrame1);
+        cari.setAlwaysOnTop(false);
+        cari.setVisible(true);
     }
 
     private void isBarang(){

@@ -916,6 +916,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Table tbDokter;
     // End of variables declaration//GEN-END:variables
 
+    public javax.swing.JTable getTable() {
+        return tbDokter;
+    }
+
     private void tampil() {
        Valid.tabelKosong(tabMode);
         try{

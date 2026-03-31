@@ -36,7 +36,7 @@ public final class akses {
             retur_ke_suplier=false,retur_dari_pembeli=false,retur_obat_ranap=false,retur_piutang_pasien=false,keuntungan_penjualan=false,keuntungan_beri_obat=false,
             sirkulasi_obat=false,ipsrs_barang=false,ipsrs_jenis_barang=false,ipsrs_pengadaan_barang=false,ipsrs_stok_keluar=false,ipsrs_rekap_pengadaan=false,ipsrs_rekap_stok_keluar=false,
             ipsrs_pengeluaran_harian=false,inventaris_jenis=false,inventaris_kategori=false,inventaris_merk=false,inventaris_ruang=false,inventaris_produsen=false,
-            inventaris_koleksi=false,inventaris_inventaris=false,inventaris_sirkulasi=false,parkir_jenis=false,parkir_in=false,parkir_out=false,
+            inventaris_koleksi=false,inventaris_inventaris=false,inventaris_sirkulasi=false,inventaris_penyusutan=false,inventaris_sensus=false,inventaris_penghapusan=false,parkir_jenis=false,parkir_in=false,parkir_out=false,
             parkir_rekap_harian=false,parkir_rekap_bulanan=false,informasi_kamar=false,harian_tindakan_poli=false,obat_per_poli=false,obat_per_kamar=false,
             obat_per_dokter_ralan=false,obat_per_dokter_ranap=false,harian_dokter=false,bulanan_dokter=false,harian_paramedis=false,bulanan_paramedis=false,
             pembayaran_ralan=false,pembayaran_ranap=false,rekap_pembayaran_ralan=false,rekap_pembayaran_ranap=false,tagihan_masuk=false,tambahan_biaya=false,
@@ -377,6 +377,9 @@ public final class akses {
                         akses.inventaris_koleksi=akses.getBoolean(rs2, "inventaris_koleksi");
                         akses.inventaris_inventaris=akses.getBoolean(rs2, "inventaris_inventaris");
                         akses.inventaris_sirkulasi=akses.getBoolean(rs2, "inventaris_sirkulasi");
+                        akses.inventaris_penyusutan=akses.getBoolean(rs2, "inventaris_penyusutan");
+                        akses.inventaris_sensus=akses.getBoolean(rs2, "inventaris_sensus");
+                        akses.inventaris_penghapusan=akses.getBoolean(rs2, "inventaris_penghapusan");
                         akses.parkir_jenis=akses.getBoolean(rs2, "parkir_jenis");
                         akses.parkir_in=akses.getBoolean(rs2, "parkir_in");
                         akses.parkir_out=akses.getBoolean(rs2, "parkir_out");
@@ -1622,6 +1625,9 @@ public final class akses {
         akses.inventaris_koleksi=isadmin;
         akses.inventaris_inventaris=isadmin;
         akses.inventaris_sirkulasi=isadmin;
+        akses.inventaris_penyusutan=isadmin;
+        akses.inventaris_sensus=isadmin;
+        akses.inventaris_penghapusan=isadmin;
         akses.parkir_jenis=isadmin;
         akses.parkir_in=isadmin;
         akses.parkir_out=isadmin;
@@ -2836,6 +2842,9 @@ public final class akses {
     public static boolean getinventaris_koleksi(){return akses.inventaris_koleksi;}
     public static boolean getinventaris_inventaris(){return akses.inventaris_inventaris;}
     public static boolean getinventaris_sirkulasi(){return akses.inventaris_sirkulasi;}
+    public static boolean getinventaris_penyusutan(){return akses.inventaris_penyusutan;}
+    public static boolean getinventaris_sensus(){return akses.inventaris_sensus;}
+    public static boolean getinventaris_penghapusan(){return akses.inventaris_penghapusan;}
     public static boolean getparkir_jenis(){return akses.parkir_jenis;}
     public static boolean getparkir_in(){return akses.parkir_in;}
     public static boolean getparkir_out(){return akses.parkir_out;}

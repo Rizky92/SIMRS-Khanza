@@ -2016,4 +2016,90 @@ ALTER TABLE `user` MODIFY COLUMN IF EXISTS `satu_sehat_kirim_clinicalimpression`
 
 ALTER TABLE `user` MODIFY COLUMN IF EXISTS `template_persetujuan_penolakan_tindakan` enum('true','false') NULL DEFAULT NULL AFTER `laporan_anestesi`;
 
+-- ============================================================
+-- Fixed Asset Lifecycle Management
+-- ============================================================
+
+-- 1a. Extend inventaris table
+ALTER TABLE `inventaris` ADD COLUMN IF NOT EXISTS `no_seri` VARCHAR(50) NULL DEFAULT NULL AFTER `no_box`;
+ALTER TABLE `inventaris` ADD COLUMN IF NOT EXISTS `masa_manfaat` INT NULL DEFAULT NULL AFTER `no_seri`;
+ALTER TABLE `inventaris` ADD COLUMN IF NOT EXISTS `metode_penyusutan` ENUM('Garis Lurus','Saldo Menurun') DEFAULT 'Garis Lurus' AFTER `masa_manfaat`;
+ALTER TABLE `inventaris` ADD COLUMN IF NOT EXISTS `nilai_residu` DOUBLE DEFAULT 0 AFTER `metode_penyusutan`;
+ALTER TABLE `inventaris` ADD COLUMN IF NOT EXISTS `no_faktur_beli` VARCHAR(15) NULL DEFAULT NULL AFTER `nilai_residu`;
+ALTER TABLE `inventaris` MODIFY COLUMN `status_barang` ENUM('Ada','Rusak','Hilang','Perbaikan','Dipinjam','Dihapus','-') DEFAULT NULL;
+
+-- 1b. Extend akun_aset_inventaris with per-jenis depreciation and disposal accounts
+ALTER TABLE `akun_aset_inventaris` ADD COLUMN IF NOT EXISTS `kd_rek_akm_penyusutan` VARCHAR(15) NULL DEFAULT NULL AFTER `kd_rek`;
+ALTER TABLE `akun_aset_inventaris` ADD COLUMN IF NOT EXISTS `kd_rek_beban_penyusutan` VARCHAR(15) NULL DEFAULT NULL AFTER `kd_rek_akm_penyusutan`;
+ALTER TABLE `akun_aset_inventaris` ADD COLUMN IF NOT EXISTS `kd_rek_keuntungan` VARCHAR(15) NULL DEFAULT NULL AFTER `kd_rek_beban_penyusutan`;
+ALTER TABLE `akun_aset_inventaris` ADD COLUMN IF NOT EXISTS `kd_rek_kerugian` VARCHAR(15) NULL DEFAULT NULL AFTER `kd_rek_keuntungan`;
+
+-- 1c. Extend set_akun with global fallback disposal gain/loss accounts
+ALTER TABLE `set_akun` ADD COLUMN IF NOT EXISTS `Keuntungan_Penghapusan_Aset` VARCHAR(15) NULL DEFAULT NULL;
+ALTER TABLE `set_akun` ADD COLUMN IF NOT EXISTS `Kerugian_Penghapusan_Aset` VARCHAR(15) NULL DEFAULT NULL;
+
+-- 1d. Depreciation records per asset per period
+CREATE TABLE IF NOT EXISTS `penyusutan_inventaris` (
+  `no_penyusutan` VARCHAR(20) NOT NULL,
+  `no_inventaris` VARCHAR(30) NOT NULL,
+  `periode` CHAR(7) NOT NULL,
+  `tanggal` DATE NOT NULL,
+  `beban_penyusutan` DOUBLE NOT NULL DEFAULT 0,
+  `akm_penyusutan_sd_ini` DOUBLE NOT NULL DEFAULT 0,
+  `nilai_buku` DOUBLE NOT NULL DEFAULT 0,
+  `nip` VARCHAR(20) NULL DEFAULT NULL,
+  `keterangan` VARCHAR(200) NULL DEFAULT NULL,
+  `no_jurnal` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_penyusutan`),
+  KEY `no_inventaris` (`no_inventaris`),
+  KEY `periode` (`periode`),
+  CONSTRAINT `penyusutan_inventaris_ibfk_1` FOREIGN KEY (`no_inventaris`) REFERENCES `inventaris` (`no_inventaris`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- 1e. Census event header and per-item detail
+CREATE TABLE IF NOT EXISTS `sensus_inventaris` (
+  `no_sensus` VARCHAR(20) NOT NULL,
+  `tanggal` DATE NOT NULL,
+  `periode` CHAR(7) NOT NULL,
+  `nip_pj` VARCHAR(20) NULL DEFAULT NULL,
+  `keterangan` VARCHAR(200) NULL DEFAULT NULL,
+  `status` ENUM('Draft','Selesai') NOT NULL DEFAULT 'Draft',
+  PRIMARY KEY (`no_sensus`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+CREATE TABLE IF NOT EXISTS `detail_sensus_inventaris` (
+  `no_sensus` VARCHAR(20) NOT NULL,
+  `no_inventaris` VARCHAR(30) NOT NULL,
+  `status_sensus` ENUM('Sesuai','Tidak Ditemukan','Pindah','Rusak') NOT NULL DEFAULT 'Sesuai',
+  `id_ruang_aktual` CHAR(5) NULL DEFAULT NULL,
+  `keterangan` VARCHAR(200) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sensus`,`no_inventaris`),
+  KEY `no_inventaris` (`no_inventaris`),
+  CONSTRAINT `detail_sensus_ibfk_1` FOREIGN KEY (`no_sensus`) REFERENCES `sensus_inventaris` (`no_sensus`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `detail_sensus_ibfk_2` FOREIGN KEY (`no_inventaris`) REFERENCES `inventaris` (`no_inventaris`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- 1f. Asset disposal records
+CREATE TABLE IF NOT EXISTS `penghapusan_inventaris` (
+  `no_penghapusan` VARCHAR(20) NOT NULL,
+  `no_inventaris` VARCHAR(30) NOT NULL,
+  `tanggal` DATE NOT NULL,
+  `alasan` ENUM('Rusak Berat','Hilang','Dijual','Hibah Keluar','Lainnya') NOT NULL,
+  `nilai_jual` DOUBLE NOT NULL DEFAULT 0,
+  `akm_penyusutan` DOUBLE NOT NULL DEFAULT 0,
+  `nilai_buku` DOUBLE NOT NULL DEFAULT 0,
+  `untung_rugi` DOUBLE NOT NULL DEFAULT 0,
+  `nip` VARCHAR(20) NULL DEFAULT NULL,
+  `keterangan` VARCHAR(200) NULL DEFAULT NULL,
+  `no_jurnal` VARCHAR(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`no_penghapusan`),
+  KEY `no_inventaris` (`no_inventaris`),
+  CONSTRAINT `penghapusan_inventaris_ibfk_1` FOREIGN KEY (`no_inventaris`) REFERENCES `inventaris` (`no_inventaris`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+
+-- 1g. User permission columns for new forms
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `inventaris_penyusutan` ENUM('true','false') NULL DEFAULT NULL AFTER `inventaris_sirkulasi`;
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `inventaris_sensus` ENUM('true','false') NULL DEFAULT NULL AFTER `inventaris_penyusutan`;
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `inventaris_penghapusan` ENUM('true','false') NULL DEFAULT NULL AFTER `inventaris_sensus`;
+
 SET FOREIGN_KEY_CHECKS=1;
