@@ -278,9 +278,10 @@ public final class akses {
         bpjs_riwayat_pelayanan_resep_smc = false,
         set_pintu_poli = false,
         pintu_poli = false,
-        bpjs_riwayat_surat_smc = false;
+        bpjs_riwayat_surat_smc = false,
+        surat_pemesanan_inventaris_smc = false;
 
-    private static Set<String> columns = new LinkedHashSet();
+    private static final Set<String> columns = new LinkedHashSet();
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -307,12 +308,14 @@ public final class akses {
                     }else if(rs2.getRow()>=1){
                         rs2.beforeFirst();
                         rs2.next();
-                        ResultSetMetaData md = rs2.getMetaData();
-                        for (int i = 1; i < md.getColumnCount(); i++) {
-                            if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
-                                continue;
+                        if (columns.isEmpty()) {
+                            ResultSetMetaData md = rs2.getMetaData();
+                            for (int i = 1; i < md.getColumnCount(); i++) {
+                                if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
+                                    continue;
+                                }
+                                columns.add(md.getColumnLabel(i));
                             }
-                            columns.add(md.getColumnLabel(i));
                         }
                         akses.kode=user;
                         akses.penyakit=akses.getBoolean(rs2, "penyakit");
@@ -1516,7 +1519,7 @@ public final class akses {
                         akses.daftar_permintaan_resep_iterasi_bpjs=akses.getBoolean(rs2, "daftar_permintaan_resep_iterasi_bpjs");
                         akses.pcra_icra_pengkajian_risiko_prakonstruksi=akses.getBoolean(rs2, "pcra_icra_pengkajian_risiko_prakonstruksi");
                         akses.pcra_icra_persyaratan_harus_dipenuhi=akses.getBoolean(rs2, "pcra_icra_persyaratan_harus_dipenuhi");
-                        akses.getBoolean(rs2, "hello_world");
+                        akses.surat_pemesanan_inventaris_smc=akses.getBoolean(rs2, "surat_pemesanan_inventaris_smc");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2762,6 +2765,7 @@ public final class akses {
         akses.daftar_permintaan_resep_iterasi_bpjs=isadmin;
         akses.pcra_icra_pengkajian_risiko_prakonstruksi=isadmin;
         akses.pcra_icra_persyaratan_harus_dipenuhi=isadmin;
+        akses.surat_pemesanan_inventaris_smc=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4006,6 +4010,7 @@ public final class akses {
     public static boolean getdaftar_permintaan_resep_iterasi_bpjs(){return akses.daftar_permintaan_resep_iterasi_bpjs;}
     public static boolean getpcra_icra_pengkajian_risiko_prakonstruksi(){return akses.pcra_icra_pengkajian_risiko_prakonstruksi;}
     public static boolean getpcra_icra_persyaratan_harus_dipenuhi(){return akses.pcra_icra_persyaratan_harus_dipenuhi;}
+    public static boolean getsurat_pemesanan_inventaris_smc(){return akses.surat_pemesanan_inventaris_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
