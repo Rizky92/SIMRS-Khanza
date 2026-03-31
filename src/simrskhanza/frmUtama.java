@@ -361,6 +361,9 @@ import inventaris.InventarisPerbaikan;
 import inventaris.InventarisPermintaanPerbaikan;
 import inventaris.InventarisProdusen;
 import inventaris.InventarisRuang;
+import inventaris.InventarisPenghapusan;
+import inventaris.InventarisPenyusutan;
+import inventaris.InventarisSensusBarang;
 import inventaris.InventarisSirkulasi;
 import inventaris.InventarisSirkulasiCSSD;
 import inventaris.InventarisSuplier;
@@ -24370,6 +24373,8 @@ public class frmUtama extends javax.swing.JFrame {
             btnPCRAICRAIdentifikasiRisikoKebakaran,btnPCRAICRAIdentifikasiRisikoUtilitas,btnBPJSResepObatApotek,btnObatApolApotekBPJS,btnPermintaanResepIterasiApotekBPJS,btnPCRAICRAPengkajianRisikoPraKonstruksi,
             btnPCRAICRAPersyaratanHarusDipenuhi;
 
+    private widget.ButtonBig btnPenyusutanInventaris,btnSensusInventaris,btnPenghapusanInventaris;
+
     public void isWall(){
         try{
             ps=koneksi.prepareStatement("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.aktifkan,setting.wallpaper,setting.kontak,setting.email,setting.logo,setting.kode_ppk from setting");
@@ -25750,6 +25755,10 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnSirkulasiInventaris);
                 jmlmenu++;
             }
+
+            if(akses.getinventaris_penyusutan()==true){Panelmenu.add(btnPenyusutanInventaris);jmlmenu++;}
+            if(akses.getinventaris_sensus()==true){Panelmenu.add(btnSensusInventaris);jmlmenu++;}
+            if(akses.getinventaris_penghapusan()==true){Panelmenu.add(btnPenghapusanInventaris);jmlmenu++;}
 
             if(akses.getpermintaan_perbaikan_inventaris()==true){
                 Panelmenu.add(btnPermintaanPerbaikanInventaris);
@@ -31673,6 +31682,10 @@ public class frmUtama extends javax.swing.JFrame {
             Panelmenu.add(btnSirkulasiInventaris);
             jmlmenu++;
         }
+
+        if(akses.getinventaris_penyusutan()==true){Panelmenu.add(btnPenyusutanInventaris);jmlmenu++;}
+        if(akses.getinventaris_sensus()==true){Panelmenu.add(btnSensusInventaris);jmlmenu++;}
+        if(akses.getinventaris_penghapusan()==true){Panelmenu.add(btnPenghapusanInventaris);jmlmenu++;}
 
         if(akses.getpermintaan_perbaikan_inventaris()==true){
             Panelmenu.add(btnPermintaanPerbaikanInventaris);
@@ -38066,6 +38079,16 @@ public class frmUtama extends javax.swing.JFrame {
                 Panelmenu.add(btnSirkulasiInventaris);
                 jmlmenu++;
             }
+        }
+
+        if(akses.getinventaris_penyusutan()==true){
+            if(btnPenyusutanInventaris.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){Panelmenu.add(btnPenyusutanInventaris);jmlmenu++;}
+        }
+        if(akses.getinventaris_sensus()==true){
+            if(btnSensusInventaris.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){Panelmenu.add(btnSensusInventaris);jmlmenu++;}
+        }
+        if(akses.getinventaris_penghapusan()==true){
+            if(btnPenghapusanInventaris.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){Panelmenu.add(btnPenghapusanInventaris);jmlmenu++;}
         }
 
         if(akses.getpermintaan_perbaikan_inventaris()==true){
@@ -50468,6 +50491,30 @@ public class frmUtama extends javax.swing.JFrame {
         btnBPJSRiwayatSuratKontrolSmc.setName("btnBPJSRiwayatSuratKontrolSmc");
         btnBPJSRiwayatSuratKontrolSmc.setPreferredSize(new java.awt.Dimension(200, 90));
         btnBPJSRiwayatSuratKontrolSmc.addActionListener(this::btnBPJSRiwayatSuratKontrolSmc);
+
+        btnPenyusutanInventaris = new widget.ButtonBig();
+        btnPenyusutanInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/1360487067_calculator.png")));
+        btnPenyusutanInventaris.setText("Penyusutan Inventaris");
+        btnPenyusutanInventaris.setIconTextGap(0);
+        btnPenyusutanInventaris.setName("btnPenyusutanInventaris");
+        btnPenyusutanInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPenyusutanInventaris.addActionListener(this::btnPenyusutanInventarisActionPerformed);
+
+        btnSensusInventaris = new widget.ButtonBig();
+        btnSensusInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/12565805_analysis_audit_checklist_evaluation_list_icon.png")));
+        btnSensusInventaris.setText("Sensus Barang Inventaris");
+        btnSensusInventaris.setIconTextGap(0);
+        btnSensusInventaris.setName("btnSensusInventaris");
+        btnSensusInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSensusInventaris.addActionListener(this::btnSensusInventarisActionPerformed);
+
+        btnPenghapusanInventaris = new widget.ButtonBig();
+        btnPenghapusanInventaris.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/12565790_control_stock_inventory_checklist_logistic_icon.png")));
+        btnPenghapusanInventaris.setText("Penghapusan Inventaris");
+        btnPenghapusanInventaris.setIconTextGap(0);
+        btnPenghapusanInventaris.setName("btnPenghapusanInventaris");
+        btnPenghapusanInventaris.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPenghapusanInventaris.addActionListener(this::btnPenghapusanInventarisActionPerformed);
     }
 
     private void isComboSMC() {
@@ -50830,6 +50877,39 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPenyusutanInventarisActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisPenyusutan form = new InventarisPenyusutan(this, false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSensusInventarisActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisSensusBarang form = new InventarisSensusBarang(this, false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPenghapusanInventarisActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        InventarisPenghapusan form = new InventarisPenghapusan(this, false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
         DlgHome.dispose();
         this.setCursor(Cursor.getDefaultCursor());
     }

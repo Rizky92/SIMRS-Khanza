@@ -22,6 +22,8 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -717,7 +719,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (sukses) sukses = Sequel.insertTampJurnal(akunbayar, "KAS KELUAR", 0, (ttl + ppn + meterai));
                     if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN ASET/INVETARIS "+", OLEH "+akses.getkode());
                 }
+                List<Object[]> batchData = new ArrayList<>();
+                String noFakturBatch = NoFaktur.getText();
+                String tglBeliBatch = Valid.SetTgl(TglBeli.getSelectedItem()+"");
                 if(sukses){
+                    for(i=0;i<tbDokter.getRowCount();i++){
+                        if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+                            batchData.add(new Object[]{
+                                tbDokter.getValueAt(i,1).toString(),
+                                tbDokter.getValueAt(i,2).toString(),
+                                Valid.SetAngka(tbDokter.getValueAt(i,7).toString()),
+                                (int)Valid.SetAngka(tbDokter.getValueAt(i,0).toString())
+                            });
+                        }
+                    }
                     Sequel.Commit();
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
@@ -736,6 +751,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
                 Sequel.AutoComitTrue();
                 autoNomor();
+                if(!batchData.isEmpty()){
+                    int batchReply=JOptionPane.showConfirmDialog(rootPane,"Pembelian berhasil. Daftarkan unit ke registrasi inventaris sekarang?","Registrasi Unit",JOptionPane.YES_NO_OPTION);
+                    if(batchReply==JOptionPane.YES_OPTION){
+                        InventarisDaftarUnitBatch batch=new InventarisDaftarUnitBatch(null,true);
+                        for(Object[] rowData:batchData){
+                            String kdBar=(String)rowData[0];
+                            String nmBar=(String)rowData[1];
+                            double hargaUnit=(double)rowData[2];
+                            int jumlahUnit=(int)rowData[3];
+                            for(int u=0;u<jumlahUnit;u++){
+                                batch.tambahBaris(kdBar,nmBar,hargaUnit,"Beli",tglBeliBatch,noFakturBatch);
+                            }
+                        }
+                        batch.setSize(980,560);
+                        batch.setLocationRelativeTo(rootPane);
+                        batch.setVisible(true);
+                    }
+                }
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
