@@ -53,6 +53,7 @@ Important root directories are listed below
 - `src/ziscsr`: Modules for managing charities and donations.
 
 Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. Inside the `.java` files, each have `initComponents()`. Changes in this method should be reflected to their `.form` counterpart.
+If you're making plans for new menu, describe the general window layout you're going to design if you can. This should help user understand what you're going for designing the form in case it's broken when previewed in NetBeans.
 
 ### General coding guidelines
 The coding guidelines should cater to users' netbeans configuration, which as follows.
