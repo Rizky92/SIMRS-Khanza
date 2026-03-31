@@ -50473,7 +50473,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         btnSuratPemesananInventarisSmc = new widget.ButtonBig();
         btnSuratPemesananInventarisSmc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/if_Select-Language_49621.png")));
-        btnSuratPemesananInventarisSmc.setText("Surat Pemesanan Barang Aset Smc");
+        btnSuratPemesananInventarisSmc.setText("Surat Pemesanan Barang Aset");
         btnSuratPemesananInventarisSmc.setIconTextGap(0);
         btnSuratPemesananInventarisSmc.setName("btnSuratPemesananInventarisSmc");
         btnSuratPemesananInventarisSmc.setPreferredSize(new java.awt.Dimension(200, 90));

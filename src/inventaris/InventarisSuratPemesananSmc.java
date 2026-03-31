@@ -2,6 +2,8 @@ package inventaris;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -10,8 +12,10 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.io.File;
@@ -20,7 +24,10 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -28,9 +35,10 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPegawai;
 import kepegawaian.DlgCariPetugas;
 
@@ -42,11 +50,10 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
     private PreparedStatement ps;
     private ResultSet rs;
     private WarnaTable2 warna = new WarnaTable2();
-    private double meterai=0, ttl=0, y=0, w=0, ttldisk=0, sbttl=0, ppn=0;
-    private int jml=0, i=0, row=0, index=0;
+    private double meterai = 0, ttl = 0, y = 0, w = 0, ttldisk = 0, sbttl = 0, ppn = 0;
+    private int jml = 0, i = 0, row = 0, index = 0;
     private String[] kodebarang, namabarang, produsen, merk, kategori, jenis;
     private double[] harga, jumlah, subtotal, diskon, besardiskon, jmltotal;
-    public boolean tampilkan = true;
     private boolean sukses = true;
     private File file;
     private FileWriter fileWriter;
@@ -56,31 +63,33 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
     private FileReader myObj;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
+    private DlgCariPetugas petugas;
 
-    /** Creates new form InventarisSuratPemesananSmc
+    /**
+     * Creates new form InventarisSuratPemesananSmc
+     *
      * @param parent
-     * @param modal */
+     * @param modal
+     */
     public InventarisSuratPemesananSmc(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        tabMode = new DefaultTableModel(null, new Object[]{
+        tabMode = new DefaultTableModel(null, new Object[] {
             "Jml", "Kode Barang", "Nama Barang", "Produsen", "Merk", "Kategori", "Jenis",
-            "Harga(Rp)", "Subtotal(Rp)", "Disk(%)", "Diskon(Rp)", "Total"}) {
-            @Override public boolean isCellEditable(int rowIndex, int colIndex) {
-                boolean a = false;
-                if ((colIndex == 0) || (colIndex == 7) || (colIndex == 9) || (colIndex == 10)) {
-                    a = true;
-                }
-                return a;
+            "Harga(Rp)", "Subtotal(Rp)", "Disk(%)", "Diskon(Rp)", "Total"
+        }) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex) {
+                return colIndex == 0 || colIndex == 7 || colIndex == 9 || colIndex == 10;
             }
 
-            Class[] types = new Class[]{
-                java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class,
-                java.lang.String.class, java.lang.String.class, java.lang.String.class,
-                java.lang.Double.class, java.lang.Double.class,
-                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            Class[] types = new Class[] {
+                String.class, String.class, String.class, String.class,
+                String.class, String.class, String.class, Double.class,
+                Double.class, Double.class, Double.class, Double.class
             };
+
             @Override
             public Class getColumnClass(int columnIndex) {
                 return types[columnIndex];
@@ -93,8 +102,7 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
 
         int[] colWidths = {38, 75, 170, 100, 90, 90, 90, 80, 90, 50, 70, 95};
         for (i = 0; i < 12; i++) {
-            TableColumn column = tbDokter.getColumnModel().getColumn(i);
-            column.setPreferredWidth(colWidths[i]);
+            tbDokter.getColumnModel().getColumn(i).setPreferredWidth(colWidths[i]);
         }
         warna.kolom = 0;
         tbDokter.setDefaultRenderer(Object.class, warna);
@@ -743,8 +751,14 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
     private void btnSuplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuplierActionPerformed
         InventarisCariSuplier suplier = new InventarisCariSuplier(null, false);
         suplier.addWindowListener(new WindowListener() {
-            @Override public void windowOpened(WindowEvent e) {}
-            @Override public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            }
+
             @Override
             public void windowClosed(WindowEvent e) {
                 if (suplier.getTable().getSelectedRow() != -1) {
@@ -753,21 +767,39 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
                 }
                 kdsup.requestFocus();
             }
-            @Override public void windowIconified(WindowEvent e) {}
-            @Override public void windowDeiconified(WindowEvent e) {}
-            @Override public void windowActivated(WindowEvent e) {}
-            @Override public void windowDeactivated(WindowEvent e) {}
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
         });
 
         suplier.getTable().addKeyListener(new KeyListener() {
-            @Override public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     suplier.dispose();
                 }
             }
-            @Override public void keyReleased(KeyEvent e) {}
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
         });
         suplier.isCek();
         suplier.emptTeks();
@@ -778,69 +810,68 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
     }//GEN-LAST:event_btnSuplierActionPerformed
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
-        DlgCariPetugas petugas = new DlgCariPetugas(null, false);
-        petugas.addWindowListener(new WindowListener() {
-            @Override public void windowOpened(WindowEvent e) {}
-            @Override public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (petugas.getTable().getSelectedRow() != -1) {
-                    kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 0).toString());
-                    nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 1).toString());
-                    kdptg.requestFocus();
+        if (petugas == null || !petugas.isDisplayable()) {
+            petugas = new DlgCariPetugas(null, false);
+            petugas.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            petugas.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    if (petugas.getTable().getSelectedRow() != -1) {
+                        kdptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 0).toString());
+                        nmptg.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(), 1).toString());
+                        kdptg.requestFocus();
+                    }
+                    petugas = null;
                 }
-            }
-            @Override public void windowIconified(WindowEvent e) {}
-            @Override public void windowDeiconified(WindowEvent e) {}
-            @Override public void windowActivated(WindowEvent e) {}
-            @Override public void windowDeactivated(WindowEvent e) {}
-        });
-
-        petugas.getTable().addKeyListener(new KeyListener() {
-            @Override public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    petugas.dispose();
+            });
+            petugas.getTable().addKeyListener(new KeyAdapter() {
+                @Override
+                public void keyPressed(KeyEvent e) {
+                    if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                        petugas.dispose();
+                    }
                 }
-            }
-            @Override public void keyReleased(KeyEvent e) {}
-        });
-        petugas.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-        petugas.setLocationRelativeTo(internalFrame1);
-        petugas.setAlwaysOnTop(false);
+            });
+            petugas.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+            petugas.setLocationRelativeTo(internalFrame1);
+            petugas.setAlwaysOnTop(false);
+        }
+        if (petugas == null) {
+            return;
+        }
+        if (!petugas.isVisible()) {
+            petugas.isCek();
+            petugas.emptTeks();
+        }
+        if (petugas.isVisible()) {
+            petugas.toFront();
+            return;
+        }
         petugas.setVisible(true);
     }//GEN-LAST:event_btnPetugasActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if (tampilkan == true) {
-            try {
-                if (Valid.daysOld("./cache/suratpemesananinventarissmc.iyem") < 8) {
-                    runBackground(() -> tampil2());
-                } else {
-                    runBackground(() -> tampil());
-                }
-            } catch (Exception e) {
-            }
-        }
+        tampil();
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil2());
+                        tampil2();
                     }
                 }
+
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil2());
+                        tampil2();
                     }
                 }
+
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if (TCari.getText().length() > 2) {
-                        runBackground(() -> tampil2());
+                        tampil2();
                     }
                 }
             });
@@ -849,23 +880,19 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            runBackground(() -> tampil2());
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnCari1.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            kdsup.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            tbDokter.requestFocus();
+            tampil2();
+        } else {
+            Valid.pindahSmc(evt, BtnPrint, BtnCari1);
         }
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-        runBackground(() -> tampil2());
+        tampil2();
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
-            runBackground(() -> tampil2());
+            tampil2();
         } else {
             Valid.pindah(evt, BtnSimpan, BtnKeluar);
         }
@@ -949,7 +976,7 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
                     }
                     getData();
                 }
-            } catch (java.lang.NullPointerException e) {
+            } catch (NullPointerException e) {
             }
         }
     }//GEN-LAST:event_tbDokterMouseClicked
@@ -1055,7 +1082,7 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
             if (reply == JOptionPane.YES_OPTION) {
                 Sequel.AutoComitFalse();
                 sukses = true;
-                if (Sequel.menyimpantf2("surat_pemesanan_inventaris_smc", "?,?,?,?,?,?,?,?,?,?,?", "No.Pemesanan", 11, new String[]{
+                if (Sequel.menyimpantf2("surat_pemesanan_inventaris_smc", "?,?,?,?,?,?,?,?,?,?,?", "No.Pemesanan", 11, new String[] {
                     NoPemesanan.getText(), kdsup.getText(), kdptg.getText(), Valid.SetTgl(Tanggal.getSelectedItem() + ""),
                     "" + sbttl, "" + ttldisk, "" + ttl,
                     "" + ppn, "" + meterai, "" + (ttl + ppn + meterai), "Proses Pesan"
@@ -1063,7 +1090,7 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
                     jml = tbDokter.getRowCount();
                     for (i = 0; i < jml; i++) {
                         if (Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()) > 0) {
-                            if (Sequel.menyimpantf2("detail_surat_pemesanan_inventaris_smc", "?,?,?,?,?,?,?,?", "Transaksi Pemesanan", 8, new String[]{
+                            if (Sequel.menyimpantf2("detail_surat_pemesanan_inventaris_smc", "?,?,?,?,?,?,?,?", "Transaksi Pemesanan", 8, new String[] {
                                 NoPemesanan.getText(),
                                 tbDokter.getValueAt(i, 1).toString(),
                                 tbDokter.getValueAt(i, 0).toString(),
@@ -1193,29 +1220,53 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
     private void BtnSeek5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek5ActionPerformed
         DlgCariPegawai pegawai = new DlgCariPegawai(null, false);
         pegawai.addWindowListener(new WindowListener() {
-            @Override public void windowOpened(WindowEvent e) {}
-            @Override public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            }
+
             @Override
             public void windowClosed(WindowEvent e) {
                 if (pegawai.getTable().getSelectedRow() != -1) {
                     KabidKeu.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(), 1).toString());
                 }
             }
-            @Override public void windowIconified(WindowEvent e) {}
-            @Override public void windowDeiconified(WindowEvent e) {}
-            @Override public void windowActivated(WindowEvent e) {}
-            @Override public void windowDeactivated(WindowEvent e) {}
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
         });
 
         pegawai.getTable().addKeyListener(new KeyListener() {
-            @Override public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     pegawai.dispose();
                 }
             }
-            @Override public void keyReleased(KeyEvent e) {}
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
         });
         pegawai.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         pegawai.setLocationRelativeTo(internalFrame1);
@@ -1226,29 +1277,53 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
     private void BtnSeek6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSeek6ActionPerformed
         DlgCariPegawai pegawai = new DlgCariPegawai(null, false);
         pegawai.addWindowListener(new WindowListener() {
-            @Override public void windowOpened(WindowEvent e) {}
-            @Override public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowOpened(WindowEvent e) {
+            }
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+            }
+
             @Override
             public void windowClosed(WindowEvent e) {
                 if (pegawai.getTable().getSelectedRow() != -1) {
                     Apoteker.setText(pegawai.tbKamar.getValueAt(pegawai.tbKamar.getSelectedRow(), 1).toString());
                 }
             }
-            @Override public void windowIconified(WindowEvent e) {}
-            @Override public void windowDeiconified(WindowEvent e) {}
-            @Override public void windowActivated(WindowEvent e) {}
-            @Override public void windowDeactivated(WindowEvent e) {}
+
+            @Override
+            public void windowIconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeiconified(WindowEvent e) {
+            }
+
+            @Override
+            public void windowActivated(WindowEvent e) {
+            }
+
+            @Override
+            public void windowDeactivated(WindowEvent e) {
+            }
         });
 
         pegawai.getTable().addKeyListener(new KeyListener() {
-            @Override public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyTyped(KeyEvent e) {
+            }
+
             @Override
             public void keyPressed(KeyEvent e) {
                 if (e.getKeyCode() == KeyEvent.VK_SPACE) {
                     pegawai.dispose();
                 }
             }
-            @Override public void keyReleased(KeyEvent e) {}
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+            }
         });
         pegawai.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
         pegawai.setLocationRelativeTo(internalFrame1);
@@ -1258,7 +1333,7 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() -> tampil());
+        tampil();
         LSubtotal.setText("0");
         LPotongan.setText("0");
         LTotal2.setText("0");
@@ -1343,153 +1418,134 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        try {
-            Valid.tabelKosong(tabMode);
-            file = new File("./cache/suratpemesananinventarissmc.iyem");
-            file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-
-            ps = koneksi.prepareStatement(
-                "select b.kode_barang, b.nama_barang, ifnull(p.nama_produsen,'') as nama_produsen, " +
-                "ifnull(m.nama_merk,'') as nama_merk, ifnull(k.nama_kategori,'') as nama_kategori, " +
-                "ifnull(j.nama_jenis,'') as nama_jenis " +
-                "from inventaris_barang b " +
-                "left join inventaris_produsen p on b.kode_produsen=p.kode_produsen " +
-                "left join inventaris_merk m on b.id_merk=m.id_merk " +
-                "left join inventaris_kategori k on b.id_kategori=k.id_kategori " +
-                "left join inventaris_jenis j on b.id_jenis=j.id_jenis " +
-                "order by b.nama_barang");
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
             try {
-                rs = ps.executeQuery();
-                while (rs.next()) {
-                    tabMode.addRow(new Object[]{"", rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), 0, 0, 0, 0, 0});
-                    iyembuilder.append("{\"KodeBarang\":\"").append(rs.getString(1))
-                        .append("\",\"NamaBarang\":\"").append(rs.getString(2).replaceAll("\"", ""))
-                        .append("\",\"Produsen\":\"").append(rs.getString(3).replaceAll("\"", ""))
-                        .append("\",\"Merk\":\"").append(rs.getString(4).replaceAll("\"", ""))
-                        .append("\",\"Kategori\":\"").append(rs.getString(5).replaceAll("\"", ""))
-                        .append("\",\"Jenis\":\"").append(rs.getString(6).replaceAll("\"", ""))
-                        .append("\"},");
-                }
+                File file = new File("./cache/suratpemesananinventarissmc.iyem");
+                file.createNewFile();
+                new SwingWorker<Void, Object[]>() {
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                            "select b.kode_barang, b.nama_barang, ifnull(p.nama_produsen, '') as nama_produsen, ifnull(m.nama_merk, '') as nama_merk, ifnull(k.nama_kategori, '') as nama_kategori, " +
+                            "ifnull(j.nama_jenis, '') as nama_jenis from inventaris_barang b left join inventaris_produsen p on b.kode_produsen = p.kode_produsen left join inventaris_merk m on " +
+                            "b.id_merk = m.id_merk left join inventaris_kategori k on b.id_kategori = k.id_kategori left join inventaris_jenis j on b.id_jenis = j.id_jenis order by b.nama_barang"
+                        )) {
+                            ArrayNode array = mapper.createArrayNode();
+                            while (rs.next()) {
+                                ObjectNode node = mapper.createObjectNode();
+                                node.put("KodeBarang", rs.getString(1));
+                                node.put("NamaBarang", rs.getString(2));
+                                node.put("Produsen", rs.getString(3));
+                                node.put("Merk", rs.getString(4));
+                                node.put("Kategori", rs.getString(5));
+                                node.put("Jenis", rs.getString(6));
+                                array.add(node);
+                                publish(new Object[] {
+                                    "", rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), 0, 0, 0, 0, 0
+                                });
+                            }
+                            ObjectNode root = mapper.createObjectNode();
+                            root.set("suratpemesananinventarissmc", array);
+                            fw.write(mapper.writeValueAsString(root));
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void process(List<Object[]> chunks) {
+                        chunks.forEach(tabMode::addRow);
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                        }
+                        tabMode.fireTableDataChanged();
+                        InventarisSuratPemesananSmc.this.setCursor(Cursor.getDefaultCursor());
+                        ceksukses = false;
+                    }
+                }.execute();
             } catch (Exception e) {
-                System.out.println("Notifikasi : " + e);
-            } finally {
-                if (rs != null) {
-                    rs.close();
-                }
-                if (ps != null) {
-                    ps.close();
-                }
+                System.out.println("Notif : " + e);
             }
-
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"suratpemesananinventarissmc\":[" + iyembuilder + "]}");
-                fileWriter.flush();
-            }
-
-            fileWriter.close();
-            iyembuilder = null;
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
         }
     }
 
     private void tampil2() {
-        try {
-            row = tbDokter.getRowCount();
-            jml = 0;
-            for (i = 0; i < row; i++) {
-                try {
-                    if (Double.parseDouble(tbDokter.getValueAt(i, 0).toString()) > 0) {
-                        jml++;
-                    }
-                } catch (Exception e) {
-                    jml = jml + 0;
+        if (!ceksukses) {
+            ceksukses = true;
+            Map<Object, Object[]> rows = new LinkedHashMap<>();
+            for (int i = 0; i < tabMode.getRowCount(); i++) {
+                if (Valid.SetAngka((String) tabMode.getValueAt(i, 0)) > 0) {
+                    rows.put(tabMode.getValueAt(i, 1), new Object[] {
+                        tabMode.getValueAt(i, 0), tabMode.getValueAt(i, 1), tabMode.getValueAt(i, 2), tabMode.getValueAt(i, 3), tabMode.getValueAt(i, 4),
+                        tabMode.getValueAt(i, 5), tabMode.getValueAt(i, 6), tabMode.getValueAt(i, 7), tabMode.getValueAt(i, 8), tabMode.getValueAt(i, 9),
+                        tabMode.getValueAt(i, 10), tabMode.getValueAt(i, 11)
+                    });
                 }
             }
 
-            kodebarang = new String[jml];
-            namabarang = new String[jml];
-            produsen = new String[jml];
-            merk = new String[jml];
-            kategori = new String[jml];
-            jenis = new String[jml];
-            harga = new double[jml];
-            jumlah = new double[jml];
-            subtotal = new double[jml];
-            diskon = new double[jml];
-            besardiskon = new double[jml];
-            jmltotal = new double[jml];
-            index = 0;
-            for (i = 0; i < row; i++) {
-                try {
-                    if (Double.parseDouble(tbDokter.getValueAt(i, 0).toString()) > 0) {
-                        jumlah[index] = Double.parseDouble(tbDokter.getValueAt(i, 0).toString());
-                        kodebarang[index] = tbDokter.getValueAt(i, 1).toString();
-                        namabarang[index] = tbDokter.getValueAt(i, 2).toString();
-                        produsen[index] = tbDokter.getValueAt(i, 3).toString();
-                        merk[index] = tbDokter.getValueAt(i, 4).toString();
-                        kategori[index] = tbDokter.getValueAt(i, 5).toString();
-                        jenis[index] = tbDokter.getValueAt(i, 6).toString();
-                        harga[index] = Double.parseDouble(tbDokter.getValueAt(i, 7).toString());
-                        subtotal[index] = Double.parseDouble(tbDokter.getValueAt(i, 8).toString());
-                        diskon[index] = Double.parseDouble(tbDokter.getValueAt(i, 9).toString());
-                        besardiskon[index] = Double.parseDouble(tbDokter.getValueAt(i, 10).toString());
-                        jmltotal[index] = Double.parseDouble(tbDokter.getValueAt(i, 11).toString());
-                        index++;
-                    }
-                } catch (Exception e) {
-                }
-            }
-            Valid.tabelKosong(tabMode);
-            for (i = 0; i < jml; i++) {
-                tabMode.addRow(new Object[]{jumlah[i], kodebarang[i], namabarang[i], produsen[i], merk[i], kategori[i], jenis[i], harga[i], subtotal[i], diskon[i], besardiskon[i], jmltotal[i]});
-            }
+            Valid.tabelKosongSmc(tabMode);
 
-            kodebarang = null;
-            namabarang = null;
-            produsen = null;
-            merk = null;
-            kategori = null;
-            jenis = null;
-            harga = null;
-            jumlah = null;
-            subtotal = null;
-            diskon = null;
-            besardiskon = null;
-            jmltotal = null;
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().toLowerCase().trim();
 
-            myObj = new FileReader("./cache/suratpemesananinventarissmc.iyem");
-            root = mapper.readTree(myObj);
-            response = root.path("suratpemesananinventarissmc");
-            if (response.isArray()) {
-                if (TCari.getText().trim().equals("")) {
-                    for (JsonNode list : response) {
-                        tabMode.addRow(new Object[]{
-                            "", list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
-                            list.path("Produsen").asText(), list.path("Merk").asText(),
-                            list.path("Kategori").asText(), list.path("Jenis").asText(),
-                            0, 0, 0, 0, 0
-                        });
+                @Override
+                protected Void doInBackground() throws Exception {
+                    for (Map.Entry<Object, Object[]> entry : rows.entrySet()) {
+                        publish(entry.getValue());
                     }
-                } else {
-                    for (JsonNode list : response) {
-                        if (list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase()) || list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())) {
-                            tabMode.addRow(new Object[]{
-                                "", list.path("KodeBarang").asText(), list.path("NamaBarang").asText(),
-                                list.path("Produsen").asText(), list.path("Merk").asText(),
-                                list.path("Kategori").asText(), list.path("Jenis").asText(),
-                                0, 0, 0, 0, 0
-                            });
+
+                    try (FileReader fr = new FileReader(new File("./cache/suratpemesananinventarissmc.iyem"))) {
+                        ArrayNode array = mapper.readTree(fr).withArray("suratpemesananinventarissmc");
+                        if (cari.isBlank()) {
+                            for (JsonNode node : array) {
+                                if (!rows.containsKey(node.path("KodeBarang").asText(""))) {
+                                    publish(new Object[] {
+                                        "", node.path("KodeBarang").asText(), node.path("NamaBarang").asText(), node.path("Produsen").asText(),
+                                        node.path("Merk").asText(), node.path("Kategori").asText(), node.path("Jenis").asText(), 0, 0, 0, 0, 0
+                                    });
+                                }
+                            }
+                        } else {
+                            for (JsonNode node : array) {
+                                if (!rows.containsKey(node.path("KodeBarang").asText(""))) {
+                                    if (node.toString().toLowerCase().contains(cari)) {
+                                        publish(new Object[] {
+                                            "", node.path("KodeBarang").asText(), node.path("NamaBarang").asText(), node.path("Produsen").asText(),
+                                            node.path("Merk").asText(), node.path("Kategori").asText(), node.path("Jenis").asText(), 0, 0, 0, 0, 0
+                                        });
+                                    }
+                                }
+                            }
                         }
                     }
+
+                    return null;
                 }
-            }
-            myObj.close();
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    ceksukses = false;
+                }
+            }.execute();
         }
     }
 
@@ -1517,8 +1573,12 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
             }
         }
 
-        ttl = 0; sbttl = 0; ppn = 0; ttldisk = 0;
-        y = 0; w = 0;
+        ttl = 0;
+        sbttl = 0;
+        ppn = 0;
+        ttldisk = 0;
+        y = 0;
+        w = 0;
         meterai = 0;
         if (!Meterai.getText().equals("")) {
             meterai = Double.parseDouble(Meterai.getText());
@@ -1568,13 +1628,7 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
     }
 
     private void autoNomor() {
-        Valid.autoNomer3(
-            "select ifnull(MAX(CONVERT(RIGHT(surat_pemesanan_inventaris_smc.no_pemesanan,3),signed)),0) " +
-            "from surat_pemesanan_inventaris_smc where surat_pemesanan_inventaris_smc.tanggal='" + Valid.SetTgl(Tanggal.getSelectedItem() + "") + "'",
-            "SPAIS" + Tanggal.getSelectedItem().toString().substring(6, 10)
-                    + Tanggal.getSelectedItem().toString().substring(3, 5)
-                    + Tanggal.getSelectedItem().toString().substring(0, 2),
-            3, NoPemesanan);
+        Valid.autonomorSmc(NoPemesanan, "SPAI", "", "surat_pemesanan_inventaris_smc", "no_pemesanan", 3, "0", Tanggal);
     }
 
     public DefaultTableModel tabMode() {
@@ -1583,31 +1637,5 @@ public class InventarisSuratPemesananSmc extends javax.swing.JDialog {
 
     public void panggilgetData() {
         getData();
-    }
-
-    private void runBackground(Runnable task) {
-        if (ceksukses) return;
-        if (executor.isShutdown() || executor.isTerminated()) return;
-        if (!isDisplayable()) return;
-
-        ceksukses = true;
-        setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-
-        try {
-            executor.submit(() -> {
-                try {
-                    task.run();
-                } finally {
-                    ceksukses = false;
-                    SwingUtilities.invokeLater(() -> {
-                        if (isDisplayable()) {
-                            setCursor(Cursor.getDefaultCursor());
-                        }
-                    });
-                }
-            });
-        } catch (RejectedExecutionException ex) {
-            ceksukses = false;
-        }
     }
 }

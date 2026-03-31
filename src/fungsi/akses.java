@@ -280,7 +280,7 @@ public final class akses {
         pintu_poli = false,
         bpjs_riwayat_surat_smc = false;
 
-    private static Set<String> columns = new LinkedHashSet();
+    private static final Set<String> columns = new LinkedHashSet();
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -307,12 +307,14 @@ public final class akses {
                     }else if(rs2.getRow()>=1){
                         rs2.beforeFirst();
                         rs2.next();
-                        ResultSetMetaData md = rs2.getMetaData();
-                        for (int i = 1; i < md.getColumnCount(); i++) {
-                            if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
-                                continue;
+                        if (columns.isEmpty()) {
+                            ResultSetMetaData md = rs2.getMetaData();
+                            for (int i = 1; i < md.getColumnCount(); i++) {
+                                if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
+                                    continue;
+                                }
+                                columns.add(md.getColumnLabel(i));
                             }
-                            columns.add(md.getColumnLabel(i));
                         }
                         akses.kode=user;
                         akses.penyakit=akses.getBoolean(rs2, "penyakit");
