@@ -28,11 +28,11 @@ Important root directories are listed below
 - `src/dapur`: Modules for kitchen inventory management.
 - `src/fungsi`: Helper functions
 - `src/grafikanalisa`: Modules to display various graphics.
-- `src/informasi`: Modules to display general information, for example bed status, doctor's practic schedule.
-- `src/inventaris`: Modules used for general tools inventory management.
+- `src/informasi`: Modules to display general public information (e.g. bed status, doctor's practic schedule).
+- `src/inventaris`: Modules used for asset, CSSD, building, and waste management.
 - `src/inventory`: Modules for pharmacy-related general inventory management.
-- `src/ipsrs`: Modules used for non-medical and consumables inventory management.
-- `src/kepegawaian`: Modules for managing human resources, CSSD, and general auditing for various worker-related incidents.
+- `src/ipsrs`: Modules used for non-medical and consumable inventory management.
+- `src/kepegawaian`: Modules for managing human resources and auditing for various worker-related incidents.
 - `src/keuangan`: Modules for accounting management.
 - `src/laporan`: Modules for medical statistic reporting.
 - `src/parkir`: Modules for parking management.
@@ -50,7 +50,7 @@ Important root directories are listed below
 - `src/tranfusidarah`: Modules for blood transfusion management.
 - `src/viabarcode`: Modules for accessing various services quickly using barcode scanner.
 - `src/widget`: Houses various UI components used internally.
-- `src/ziscsr`: Modules for managing charities.
+- `src/ziscsr`: Modules for managing charities and donations.
 
 Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. Inside the `.java` files, each have `initComponents()`. Changes in this method should be reflected to their `.form` counterpart.
 
