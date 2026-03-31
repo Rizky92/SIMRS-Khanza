@@ -96,6 +96,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private Map<String, Object> map;
     private ArrayList<String> arrlist = new ArrayList<>();
+    private String cariAturanPakai = "";
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -1063,6 +1064,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                                 @Override
                                 public void windowClosed(WindowEvent e) {
                                     if(aturanpakai.getTable().getSelectedRow()!= -1){
+                                        cariAturanPakai = aturanpakai.dicari().trim();
                                         tbResep.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbResep.getSelectedRow(),2);
                                         tbResep.requestFocus();
                                     }
@@ -1073,6 +1075,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                             aturanpakai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
                             aturanpakai.setLocationRelativeTo(internalFrame1);
                         }
+                        aturanpakai.setDicari(cariAturanPakai);
                         if (aturanpakai == null) return;
                         if (aturanpakai.isVisible()) {
                             aturanpakai.toFront();
