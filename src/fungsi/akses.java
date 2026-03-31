@@ -165,7 +165,7 @@ public final class akses {
             bpjs_surat_pri=false,ringkasan_tindakan=false,lama_pelayanan_pasien=false,surat_sakit_pihak_2=false,tagihan_hutang_obat=false,
             referensi_mobilejkn_bpjs=false,batal_pendaftaran_mobilejkn_bpjs=false,lama_operasi=false,grafik_inventaris_kategori=false,grafik_inventaris_merk=false,
             grafik_inventaris_produsen=false,pengembalian_deposit_pasien=false,validasi_tagihan_hutang_obat=false,piutang_obat_belum_lunas=false,
-            integrasi_briapi=false,pengadaan_aset_inventaris=false,akun_aset_inventaris=false,suplier_inventaris=false,penerimaan_aset_inventaris=false,surat_pemesanan_inventaris_smc=false,
+            integrasi_briapi=false,pengadaan_aset_inventaris=false,akun_aset_inventaris=false,suplier_inventaris=false,penerimaan_aset_inventaris=false,
             bayar_pemesanan_iventaris=false,hutang_aset_inventaris=false,hibah_aset_inventaris=false,titip_faktur_non_medis=false,validasi_tagihan_non_medis=false,
             titip_faktur_aset=false,validasi_tagihan_aset=false,hibah_non_medis=false,pcare_alasan_tacc=false,resep_luar=false,surat_bebas_tbc=false,
             surat_buta_warna=false,surat_bebas_tato=false,surat_kewaspadaan_kesehatan=false,grafik_porsidiet_pertanggal=false,grafik_porsidiet_perbulan=false,
@@ -278,7 +278,8 @@ public final class akses {
         bpjs_riwayat_pelayanan_resep_smc = false,
         set_pintu_poli = false,
         pintu_poli = false,
-        bpjs_riwayat_surat_smc = false;
+        bpjs_riwayat_surat_smc = false,
+        surat_pemesanan_inventaris_smc = false;
 
     private static final Set<String> columns = new LinkedHashSet();
 
@@ -1048,7 +1049,6 @@ public final class akses {
                         akses.akun_aset_inventaris=akses.getBoolean(rs2, "akun_aset_inventaris");
                         akses.suplier_inventaris=akses.getBoolean(rs2, "suplier_inventaris");
                         akses.penerimaan_aset_inventaris=akses.getBoolean(rs2, "penerimaan_aset_inventaris");
-                        akses.surat_pemesanan_inventaris_smc=akses.getBoolean(rs2, "surat_pemesanan_inventaris_smc");
                         akses.bayar_pemesanan_iventaris=akses.getBoolean(rs2, "bayar_pemesanan_iventaris");
                         akses.hutang_aset_inventaris=akses.getBoolean(rs2, "hutang_aset_inventaris");
                         akses.hibah_aset_inventaris=akses.getBoolean(rs2, "hibah_aset_inventaris");
@@ -1519,7 +1519,7 @@ public final class akses {
                         akses.daftar_permintaan_resep_iterasi_bpjs=akses.getBoolean(rs2, "daftar_permintaan_resep_iterasi_bpjs");
                         akses.pcra_icra_pengkajian_risiko_prakonstruksi=akses.getBoolean(rs2, "pcra_icra_pengkajian_risiko_prakonstruksi");
                         akses.pcra_icra_persyaratan_harus_dipenuhi=akses.getBoolean(rs2, "pcra_icra_persyaratan_harus_dipenuhi");
-                        akses.getBoolean(rs2, "hello_world");
+                        akses.surat_pemesanan_inventaris_smc=akses.getBoolean(rs2, "surat_pemesanan_inventaris_smc");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2294,7 +2294,6 @@ public final class akses {
         akses.akun_aset_inventaris=isadmin;
         akses.suplier_inventaris=isadmin;
         akses.penerimaan_aset_inventaris=isadmin;
-        akses.surat_pemesanan_inventaris_smc=isadmin;
         akses.bayar_pemesanan_iventaris=isadmin;
         akses.hutang_aset_inventaris=isadmin;
         akses.hibah_aset_inventaris=isadmin;
@@ -2766,6 +2765,7 @@ public final class akses {
         akses.daftar_permintaan_resep_iterasi_bpjs=isadmin;
         akses.pcra_icra_pengkajian_risiko_prakonstruksi=isadmin;
         akses.pcra_icra_persyaratan_harus_dipenuhi=isadmin;
+        akses.surat_pemesanan_inventaris_smc=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -3540,7 +3540,6 @@ public final class akses {
     public static boolean getakun_aset_inventaris(){return akses.akun_aset_inventaris;}
     public static boolean getsuplier_inventaris(){return akses.suplier_inventaris;}
     public static boolean getpenerimaan_aset_inventaris(){return akses.penerimaan_aset_inventaris;}
-    public static boolean getsurat_pemesanan_inventaris_smc(){return akses.surat_pemesanan_inventaris_smc;}
     public static boolean getbayar_pemesanan_iventaris(){return akses.bayar_pemesanan_iventaris;}
     public static boolean gethutang_aset_inventaris(){return akses.hutang_aset_inventaris;}
     public static boolean gethibah_aset_inventaris(){return akses.hibah_aset_inventaris;}
@@ -4011,6 +4010,7 @@ public final class akses {
     public static boolean getdaftar_permintaan_resep_iterasi_bpjs(){return akses.daftar_permintaan_resep_iterasi_bpjs;}
     public static boolean getpcra_icra_pengkajian_risiko_prakonstruksi(){return akses.pcra_icra_pengkajian_risiko_prakonstruksi;}
     public static boolean getpcra_icra_persyaratan_harus_dipenuhi(){return akses.pcra_icra_persyaratan_harus_dipenuhi;}
+    public static boolean getsurat_pemesanan_inventaris_smc(){return akses.surat_pemesanan_inventaris_smc;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
