@@ -12,19 +12,23 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import javax.swing.JTable;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -37,15 +41,13 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private validasi Valid = new validasi();
     private Connection koneksi = koneksiDB.condb();
+    private volatile boolean ceksukses = false;
 
     public SatuSehatReferensiRoute(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setLocation(10, 2);
-        setSize(656, 250);
 
-        Object[] row = {"Code", "Display", "Keterangan", "System"};
-        tabMode = new DefaultTableModel(null, row) {
+        tabMode = new DefaultTableModel(null, new Object[] {"Code", "Display", "Keterangan", "System"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -55,7 +57,7 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if (i == 0) {
                 column.setPreferredWidth(70);
@@ -69,31 +71,6 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
-
-        if (koneksiDB.CARICEPAT().equals("aktif")) {
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil2();
-                    }
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil2();
-                    }
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil2();
-                    }
-                }
-            });
-        }
     }
 
     /**
@@ -236,12 +213,8 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
         if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             BtnCariActionPerformed(null);
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
-            BtnCari.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
-            BtnKeluar.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            tbKamar.requestFocus();
+        } else {
+            Valid.pindahSmc(evt, tbKamar, BtnCari);
         }
     }//GEN-LAST:event_TCariKeyPressed
 
@@ -298,13 +271,35 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            if (Valid.daysOld("./cache/satusehatroute.iyem") < 30) {
-                tampil2();
-            } else {
-                tampil();
-            }
-        } catch (Exception e) {
+        if (Valid.umurcacheSmc("./cache/satusehatroute.iyem", 30)) {
+            tampil();
+        } else {
+            tampil2();
+        }
+
+        if (koneksiDB.CARICEPAT().equals("aktif")) {
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil2();
+                    }
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil2();
+                    }
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil2();
+                    }
+                }
+            });
         }
     }//GEN-LAST:event_formWindowOpened
 
@@ -339,63 +334,138 @@ public final class SatuSehatReferensiRoute extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-        Valid.tabelKosong(tabMode);
-        try (PreparedStatement ps = koneksi.prepareStatement("select * from satu_sehat_referensi_route")) {
-            File file = new File("./cache/satusehatroute.iyem");
-            file.createNewFile();
-            String iyem = "";
-            try (FileWriter fw = new FileWriter(file)) {
-                try (ResultSet rs = ps.executeQuery()) {
-                    while (rs.next()) {
-                        tabMode.addRow(new String[] {
-                            rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)
-                        });
-                        iyem = iyem + "{\"code\":\"" + rs.getString(1) + "\",\"display\":\"" + rs.getString(2).replaceAll("\\\"", "\\\\\"") + "\",\"keterangan\":\"" + rs.getString(3).replaceAll("\\\"", "\\\\\"") + "\",\"system\":\"" + rs.getString(4) + "\"},";
-                    }
-                }
-                fw.write("{\"data\":[" + iyem.substring(0, iyem.length() - 1) + "]}");
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-        }
-        LCount.setText("" + tabMode.getRowCount());
-    }
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
 
-    private void tampil2() {
-        Valid.tabelKosong(tabMode);
-        try (FileReader fr = new FileReader("./cache/satusehatroute.iyem")) {
-            JsonNode root = new ObjectMapper().readTree(fr).path("data");
-            if (root.isArray()) {
-                if (TCari.getText().isBlank()) {
-                    for (JsonNode obj : root) {
-                        tabMode.addRow(new String[] {
-                            obj.path("code").asText(),
-                            obj.path("display").asText(),
-                            obj.path("keterangan").asText(),
-                            obj.path("system").asText()
-                        });
+            new SwingWorker<Void, String[]>() {
+                final String cari = TCari.getText().trim().toLowerCase();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    File file = new File("./cache/satusehatroute.iyem");
+                    file.createNewFile();
+
+                    try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from satu_sehat_referensi_route")) {
+                        ObjectMapper mapper = new ObjectMapper();
+                        ArrayNode array = mapper.createArrayNode();
+
+                        while (rs.next()) {
+                            publish(new String[] {rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4)});
+
+                            ObjectNode node = mapper.createObjectNode();
+                            node.put("code", rs.getString(1));
+                            node.put("display", rs.getString(2));
+                            node.put("keterangan", rs.getString(3));
+                            node.put("system", rs.getString(4));
+                            array.add(node);
+                        }
+
+                        fw.write(mapper.writeValueAsString(mapper.createObjectNode().set("satusehatroute", array)));
                     }
-                } else {
-                    for (JsonNode obj : root) {
-                        if (
-                            obj.path("code").asText().contains(TCari.getText().trim())
-                            || obj.path("display").asText().contains(TCari.getText().trim())
-                            || obj.path("keterangan").asText().contains(TCari.getText().trim())
-                        ) {
-                            tabMode.addRow(new String[] {
-                                obj.path("code").asText(),
-                                obj.path("display").asText(),
-                                obj.path("keterangan").asText(),
-                                obj.path("system").asText()
-                            });
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<String[]> chunks) {
+                    if (cari.isBlank()) {
+                        chunks.forEach(tabMode::addRow);
+                    } else {
+                        for (String[] obj : chunks) {
+                            if (obj[0].toLowerCase().contains(cari) || obj[1].toLowerCase().contains(cari) || obj[2].toLowerCase().contains(cari)) {
+                                tabMode.addRow(obj);
+                            }
                         }
                     }
                 }
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+
+                    tabMode.fireTableDataChanged();
+                    LCount.setText("" + tabMode.getRowCount());
+                    SatuSehatReferensiRoute.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
         }
-        LCount.setText("" + tabMode.getRowCount());
+    }
+
+    private void tampil2() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+
+            new SwingWorker<Void, String[]>() {
+                final String cari = TCari.getText().trim().toLowerCase();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    File file = new File("./cache/satusehatroute.iyem");
+                    file.createNewFile();
+
+                    try (FileReader fr = new FileReader("./cache/satusehatroute.iyem")) {
+                        ArrayNode array = new ObjectMapper().readTree(fr).withArray("satusehatroute");
+
+                        if (cari.isBlank()) {
+                            for (JsonNode node : array) {
+                                publish(new String[] {
+                                    node.path("code").asText(""),
+                                    node.path("display").asText(""),
+                                    node.path("keterangan").asText(""),
+                                    node.path("system").asText("")
+                                });
+                            }
+                        } else {
+                            for (JsonNode node : array) {
+                                if (node.path("code").asText("").toLowerCase().contains(cari) ||
+                                    node.path("display").asText("").toLowerCase().contains(cari) ||
+                                    node.path("keterangan").asText("").toLowerCase().contains(cari)
+                                ) {
+                                    publish(new String[] {
+                                        node.path("code").asText(""),
+                                        node.path("display").asText(""),
+                                        node.path("keterangan").asText(""),
+                                        node.path("system").asText("")
+                                    });
+                                }
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<String[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+
+                    tabMode.fireTableDataChanged();
+                    LCount.setText("" + tabMode.getRowCount());
+                    SatuSehatReferensiRoute.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
     }
 
     public void emptTeks() {
