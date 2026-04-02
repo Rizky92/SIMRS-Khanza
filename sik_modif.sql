@@ -1439,7 +1439,7 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_numerator`  (
   `code` varchar(30) NOT NULL,
   `display` varchar(200) NULL DEFAULT NULL,
   `system` varchar(100) NOT NULL,
-  PRIMARY KEY (`code`, `system`) USING BTREE,
+  PRIMARY KEY (`code`, `display`) USING BTREE,
   INDEX `satu_sehat_referensi_numerator_obat_display_ibfk_1`(`display`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
