@@ -3502,13 +3502,48 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     }
 
     public void emptTeks() {
-        DibutuhkanICRA.setSelectedIndex(0);
-        KodeManajer.setText("");
-        DeskripsiLokasiProyek.setText("");
-        PenyebabRisikoLainnya.setText("");
+        NoProyek.setText("");
+        NamaProyek.setText("");
+        LokasiProyek.setText("");
         TanggalMulai.setDate(new Date());
-        TabRawat.setSelectedIndex(0);
-        DibutuhkanICRA.requestFocus();
+        PerkiraanSelesai.setDate(new Date());
+        DeskripsiPekerjaan.setText("");
+        YangBertanggungJawab.setText("");
+        KontraktorPelaksana.setText("");
+        KodeAktivitas.setText("");
+        NamaAktivitas.setText("");
+        DeskripsiLokasiProyek.setText("");
+        TCariKelompokRisikoArea.setText("");
+        tampilKelompokRisiko2();
+        TCariRisikoKebakaran.setText("");
+        tampilIdentifikasiRisikoKebakaran2();
+        TCariRisikoInfeksi.setText("");
+        tampilIdentifikasiRisikoInfeksi2();
+        TCariRisikoKeselamatan.setText("");
+        tampilIdentifikasiRisikoKeselamatan2();
+        TCariRisikoUtilitas.setText("");
+        tampilIdentifikasiRisikoUtilitas2();
+        PenyebabRisikoLainnya.setText("");
+        KodeRisiko.setText("");
+        NamaRisiko.setText("");
+        DibutuhkanICRA.setSelectedIndex(0);
+        TCariTindakanPengendalian.setText("");
+        RekomendasiSelamaPengerjaan.setText("");
+        RekomendasiSetelahPengerjaan.setText("");
+        MonotoringHalKhusus.setText("");
+        TCariPersyaratanDipenuhi.setText("");
+        tampilPersyaratanDipenuhi2();
+        CatatanProyek.setText("");
+        KodeTimK3.setText("");
+        NamaTimK3.setText("");
+        KodePJProyek.setText("");
+        NamaPJProyek.setText("");
+        KodeManajer.setText("");
+        NamaManajer.setText("");
+        KodeDirektur.setText("");
+        NamaDirektur.setText("");
+        TanggalPengkajian.setDate(new Date());
+        NomorPengkajian.setText("");
     }
 
     private void getData() {
@@ -3628,6 +3663,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -3681,6 +3718,10 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -3719,6 +3760,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -3772,6 +3815,10 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -3810,6 +3857,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -3863,6 +3912,10 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -3901,6 +3954,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -3954,6 +4009,10 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -3992,6 +4051,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -4045,6 +4106,10 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -4083,6 +4148,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -4136,6 +4203,10 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -4174,6 +4245,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -4227,6 +4300,10 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

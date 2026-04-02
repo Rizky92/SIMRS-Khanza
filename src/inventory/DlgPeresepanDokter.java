@@ -1985,6 +1985,8 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi Buat Cache : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -2132,6 +2134,7 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                             }
                         }
                     }else{
+                        String cari=TCari.getText().toLowerCase();
                         for(JsonNode list:response){
                             if (arrlist.contains(list.path("kdjns").asText())) {
                                 if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kandungan").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kategori").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
@@ -2154,8 +2157,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                             });
                         }
                     }else{
+                        String cari=TCari.getText().toLowerCase();
                         for(JsonNode list:response){
-                            if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kandungan").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kategori").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            if(list.path("KodeBarang").asText().toLowerCase().contains(cari)||list.path("NamaBarang").asText().toLowerCase().contains(cari)||list.path("Jenis").asText().toLowerCase().contains(cari)||list.path("Kandungan").asText().toLowerCase().contains(cari)||list.path("Kategori").asText().toLowerCase().contains(cari)){
                                 tabModeResep.addRow(new Object[] {
                                     false,"","",list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Satuan").asText(),list.path("Kandungan").asText(),
                                     list.path(hargaobat).asDouble(),list.path("Jenis").asText(),list.path("IndustriFarmasi").asText(),
@@ -2167,8 +2171,12 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                 }
             }
             myObj.close();
-        }catch(Exception e){
+        } catch(Exception e){
             System.out.println("Notifikasi Tampil Cache : "+e);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -2463,9 +2471,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                             }
                         }
                     }else{
+                        String cari=TCari.getText().toLowerCase();
                         for(JsonNode list:response){
                             if (arrlist.contains(list.path("kdjns").asText())) {
-                                if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kandungan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                                if(list.path("KodeBarang").asText().toLowerCase().contains(cari)||list.path("NamaBarang").asText().toLowerCase().contains(cari)||list.path("Jenis").asText().toLowerCase().contains(cari)||list.path("Kandungan").asText().toLowerCase().contains(cari)){
                                     tabModeDetailResepRacikan.addRow(new Object[] {
                                         noRacikan,list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                                         list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
@@ -2487,8 +2496,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
                             });
                         }
                     }else{
+                        String cari=TCari.getText().toLowerCase();
                         for(JsonNode list:response){
-                            if(list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("Kandungan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            if(list.path("KodeBarang").asText().toLowerCase().contains(cari)||list.path("NamaBarang").asText().toLowerCase().contains(cari)||list.path("Jenis").asText().toLowerCase().contains(cari)||list.path("Kandungan").asText().toLowerCase().contains(cari)){
                                 tabModeDetailResepRacikan.addRow(new Object[] {
                                     noRacikan,list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),
                                     list.path("Satuan").asText(),list.path(hargaobat).asDouble(),list.path("HargaBeli").asDouble(),
@@ -2503,6 +2513,10 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
             myObj.close();
         } catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

@@ -788,6 +788,10 @@ public class DlgDeposit extends javax.swing.JDialog {
                         myObj.close();
                     } catch (Exception e) {
                         sukses=false;
+                    } finally {
+                        if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                        response = null;
+                        root = null;
                     }
                 }else{
                     sukses=false;
@@ -1441,6 +1445,8 @@ public class DlgDeposit extends javax.swing.JDialog {
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -1461,6 +1467,10 @@ public class DlgDeposit extends javax.swing.JDialog {
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -1479,6 +1489,10 @@ public class DlgDeposit extends javax.swing.JDialog {
             myObj.close();
         } catch (Exception e) {
             Persenppn.setText("0");
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

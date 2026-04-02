@@ -1242,6 +1242,10 @@ public final class LabKeslingPenugasanPengujianSampel extends javax.swing.JDialo
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
     }

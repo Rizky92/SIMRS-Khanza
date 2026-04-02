@@ -939,7 +939,12 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                 myObj.close();
             } catch (Exception e) {
                 System.out.println("Notif : "+e);
+            } finally {
+                if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                response = null;
+                root = null;
             }
+
             if(koderekening.equals("")){
                 JOptionPane.showMessageDialog(null,"Kode akun bayar tidak ditemukan, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
             }else{
@@ -5317,6 +5322,8 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -5337,6 +5344,10 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

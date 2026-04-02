@@ -843,6 +843,10 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                         myObj.close();
                     } catch (Exception e) {
                         koderekening="";
+                    } finally {
+                        if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                        response = null;
+                        root = null;
                     }
 
                     if(koderekening.equals("")){
@@ -968,6 +972,10 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
+                } finally {
+                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                    response = null;
+                    root = null;
                 }
 
                 if(koderekening.equals("")){
@@ -1713,6 +1721,8 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -1733,6 +1743,10 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -1794,6 +1808,10 @@ public final class KeuanganBayarPesanToko extends javax.swing.JDialog {
              Akun_Biaya_Mandiri="";
              kodemcm="";
              norekening="";
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

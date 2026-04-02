@@ -840,6 +840,10 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
                         myObj.close();
                     } catch (Exception e) {
                         koderekening="";
+                    } finally {
+                        if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                        response = null;
+                        root = null;
                     }
 
                     if(koderekening.equals("")){
@@ -1711,6 +1715,8 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -1731,6 +1737,10 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -1741,16 +1751,22 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
             try {
                 rs=ps.executeQuery();
                 if(rs.next()){
-                    file=new File("./cache/akunbankmandiri.iyem");
-                    file.createNewFile();
-                    fileWriter = new FileWriter(file);
-                    Host_to_Host_Bank_Mandiri=rs.getString("kd_rek");
-                    Akun_Biaya_Mandiri=rs.getString("kd_rek_biaya");
-                    kodemcm=rs.getString("kode_mcm");
-                    norekening=rs.getString("no_rekening");
-                    fileWriter.write("{\"akunbankmandiri\":\""+Host_to_Host_Bank_Mandiri+"\",\"kodemcm\":\""+kodemcm+"\",\"akunbiayabankmandiri\":\""+Akun_Biaya_Mandiri+"\",\"norekening\":\""+norekening+"\"}");
-                    fileWriter.flush();
-                    fileWriter.close();
+                    try{
+                        file=new File("./cache/akunbankmandiri.iyem");
+                        file.createNewFile();
+                        fileWriter = new FileWriter(file);
+                        Host_to_Host_Bank_Mandiri=rs.getString("kd_rek");
+                        Akun_Biaya_Mandiri=rs.getString("kd_rek_biaya");
+                        kodemcm=rs.getString("kode_mcm");
+                        norekening=rs.getString("no_rekening");
+                        fileWriter.write("{\"akunbankmandiri\":\""+Host_to_Host_Bank_Mandiri+"\",\"kodemcm\":\""+kodemcm+"\",\"akunbiayabankmandiri\":\""+Akun_Biaya_Mandiri+"\",\"norekening\":\""+norekening+"\"}");
+                        fileWriter.flush();
+                        fileWriter.close();
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    } finally {
+                        if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
+                    }
                 }
             } catch (Exception e) {
                 Host_to_Host_Bank_Mandiri="";
@@ -1792,6 +1808,10 @@ public final class KeuanganBayarPemesananFarmasi extends javax.swing.JDialog {
              Akun_Biaya_Mandiri="";
              kodemcm="";
              norekening="";
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

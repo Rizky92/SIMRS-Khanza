@@ -2861,7 +2861,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/dokter.iyem");
@@ -2877,6 +2877,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kode);
@@ -2888,7 +2892,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/petugas.iyem");
@@ -2904,6 +2908,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select petugas.nama from petugas where petugas.nip=?",kode);
@@ -2915,7 +2923,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj = null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/pegawai.iyem");
@@ -2931,6 +2939,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select pegawai.nama from pegawai where pegawai.nik=?",kode);
@@ -2942,7 +2954,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/pegawai.iyem");
@@ -2958,6 +2970,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select pegawai.jbtn from pegawai where pegawai.nik=?",kode);
@@ -2969,7 +2985,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/pegawai.iyem");
@@ -2985,6 +3001,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select pegawai.departemen from pegawai where pegawai.nik=?",kode);
@@ -2996,7 +3016,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/bangsal.iyem");
@@ -3012,6 +3032,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",kode);
@@ -3023,7 +3047,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/masterpropinsi.iyem");
@@ -3039,6 +3063,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?",nama);
@@ -3050,7 +3078,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/masterkabupaten.iyem");
@@ -3066,6 +3094,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select kabupaten.kd_kab from kabupaten where kabupaten.nm_kab=?",nama);
@@ -3077,7 +3109,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/masterkecamatan.iyem");
@@ -3093,6 +3125,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?",nama);
@@ -3104,7 +3140,7 @@ public final class sekuel {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode root;
         JsonNode response;
-        FileReader myObj;
+        FileReader myObj=null;
         String iyem="";
         try {
             myObj = new FileReader("./cache/masterkelurahan.iyem");
@@ -3120,6 +3156,10 @@ public final class sekuel {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=cariIsi("select kelurahan.kd_kel from kelurahan where kelurahan.nm_kel=?",nama);

@@ -1285,6 +1285,8 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbTindakan.getRowCount());
     }
@@ -1359,8 +1361,9 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                         });
                     }
                 }else{
+                    String cari=TCariTindakan.getText().toLowerCase();
                     for(JsonNode list:response){
-                        if(list.path("Kode").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())||list.path("NamaPerawatan").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())||list.path("KategoriPerawatan").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())){
+                        if(list.path("Kode").asText().toLowerCase().contains(cari)||list.path("NamaPerawatan").asText().toLowerCase().contains(cari)||list.path("KategoriPerawatan").asText().toLowerCase().contains(cari)){
                             TabModeTindakan.addRow(new Object[]{
                                 false,list.path("Kode").asText(),list.path("NamaPerawatan").asText(),list.path("KategoriPerawatan").asText(),list.path("Tarif").asDouble(),list.path("BagianRS").asDouble(),list.path("BHP").asDouble(),list.path("JMDokter").asDouble(),list.path("JMPerawat").asDouble(),list.path("KSO").asDouble(),list.path("Menejemen").asDouble()
                             });
@@ -1371,6 +1374,10 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tbTindakan.getRowCount());
     }

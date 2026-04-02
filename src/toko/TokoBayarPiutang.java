@@ -673,6 +673,10 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
+                } finally {
+                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                    response = null;
+                    root = null;
                 }
 
                 if(Sequel.menyimpantf("toko_bayar_piutang","?,?,?,?,?,?,?","Pembayaran",7,new String[]{
@@ -1271,6 +1275,8 @@ public final class TokoBayarPiutang extends javax.swing.JDialog {
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 

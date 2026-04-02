@@ -685,6 +685,10 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
+                } finally {
+                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                    response = null;
+                    root = null;
                 }
 
                 if(Sequel.menyimpantf("bayar_piutang_jasa_perusahaan","?,?,?,?,?,?,?","Pembayaran",7,new String[]{
@@ -1267,6 +1271,8 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -1287,6 +1293,10 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
