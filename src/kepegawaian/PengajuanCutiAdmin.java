@@ -30,6 +30,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.concurrent.TimeUnit;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
@@ -1098,11 +1099,11 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
     }//GEN-LAST:event_StatusKeyPressed
 
     private void Tgl1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Tgl1ItemStateChanged
-        Sequel.cariIsi("select to_days('"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"')-to_days('"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"')",Jumlah);
+        hitungHari();
     }//GEN-LAST:event_Tgl1ItemStateChanged
 
     private void Tgl2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_Tgl2ItemStateChanged
-        Sequel.cariIsi("select to_days('"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"')-to_days('"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"')",Jumlah);
+        hitungHari();
     }//GEN-LAST:event_Tgl2ItemStateChanged
 
     /**
@@ -1366,6 +1367,16 @@ public final class PengajuanCutiAdmin extends javax.swing.JDialog {
         } catch (RejectedExecutionException ex) {
             ceksukses = false;
         }
+    }
+
+    public void hitungHari() {
+        long hari = 1;
+        if ((Tgl1.getDate().getTime() / 1000) >= (Tgl2.getDate().getTime() / 1000)) {
+            hari = 1;
+        } else {
+            hari = 1 + TimeUnit.DAYS.convert(Tgl2.getDate().getTime() - Tgl1.getDate().getTime(), TimeUnit.MILLISECONDS);
+        }
+        Jumlah.setText(hari + "");
     }
 
     /*
