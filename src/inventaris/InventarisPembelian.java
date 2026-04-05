@@ -789,26 +789,26 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt(false,i,4);
-                tbDokter.setValueAt(0,i,6);
-                tbDokter.setValueAt(0,i,7);
-                tbDokter.setValueAt(0,i,8);
-                tbDokter.setValueAt(0,i,9);
-            }
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(false,i,4);
+            tbDokter.setValueAt(0,i,6);
+            tbDokter.setValueAt(0,i,7);
+            tbDokter.setValueAt(0,i,8);
+            tbDokter.setValueAt(0,i,9);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseClicked
         if(tbDokter.getRowCount()!=0){
             try {
-                   if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)||(tbDokter.getSelectedColumn()==10)){
-                        getData();
-                   }else if(tbDokter.getSelectedColumn()==9){
-                       tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
-                       getData();
-                   }
+                if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)||(tbDokter.getSelectedColumn()==10)){
+                    getData();
+                }else if(tbDokter.getSelectedColumn()==9){
+                    tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
+                        (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                    getData();
+                }
             } catch (java.lang.NullPointerException e) {
             }
         }
@@ -824,7 +824,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         TCari.requestFocus();
                    }else if(tbDokter.getSelectedColumn()==9){
                        if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())>0){
-                           tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
+                            tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
                                (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
                        }
                        getData();
@@ -840,15 +840,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 TCari.setText("");
                 TCari.requestFocus();
             }else if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
-                   if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)){
-                        getData();
-                   }else if((tbDokter.getSelectedColumn()==9)||(tbDokter.getSelectedColumn()==10)){
-                       if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())>0){
+                if((tbDokter.getSelectedColumn()==1)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==8)){
+                    getData();
+                }else if((tbDokter.getSelectedColumn()==9)||(tbDokter.getSelectedColumn()==10)){
+                    if(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())>0){
                         tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                               (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
-                       }
-                       getData();
-                   }
+                            (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                    }
+                    getData();
+                }
             }
         }
     }//GEN-LAST:event_tbDokterKeyPressed

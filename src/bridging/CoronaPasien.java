@@ -1525,18 +1525,18 @@ public class CoronaPasien extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPasienCorona.jasper","report","::[ Data Bridging Pasien Corona Kemenkes ]::",
-                    "select no_pengenal,no_rkm_medis,inisial,nama_lengkap,tgl_masuk,kode_jk,nama_jk,tgl_lahir,kode_kewarganegaraan,"+
-                    "nama_kewarganegaraan,kode_penularan,sumber_penularan,kd_kelurahan,nm_kelurahan,kd_kecamatan,nm_kecamatan,kd_kabupaten,"+
-                    "nm_kabupaten,kd_propinsi,nm_propinsi,tgl_keluar,kode_statuskeluar,nama_statuskeluar,tgl_lapor,kode_statusrawat,"+
-                    "nama_statusrawat,kode_statusisolasi,nama_statusisolasi,email,notelp,sebab_kematian,kode_jenis_pasien,nama_jenis_pasien from pasien_corona "+
-                    "where tgl_masuk between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
-                    (TCari.getText().trim().equals("")?"":"and (no_pengenal like '"+TCari.getText().trim()+"' or no_rkm_medis like '"+TCari.getText().trim()+"' or "+
-                    "nama_kewarganegaraan like '"+TCari.getText().trim()+"' or sumber_penularan like '"+TCari.getText().trim()+"' or "+
-                    "nm_kelurahan like '"+TCari.getText().trim()+"' or nm_kecamatan like '"+TCari.getText().trim()+"' or nm_kabupaten like '"+TCari.getText().trim()+"' or "+
-                    "nm_propinsi like '"+TCari.getText().trim()+"' or nama_statuskeluar like '"+TCari.getText().trim()+"' or "+
-                    "nama_statusrawat like '"+TCari.getText().trim()+"' or nama_statusisolasi like '"+TCari.getText().trim()+"' or "+
-                    "sebab_kematian like '"+TCari.getText().trim()+"' or nama_jenis_pasien like '"+TCari.getText().trim()+"') ")+
-                    "order by tgl_masuk",param);
+                "select no_pengenal,no_rkm_medis,inisial,nama_lengkap,tgl_masuk,kode_jk,nama_jk,tgl_lahir,kode_kewarganegaraan,"+
+                "nama_kewarganegaraan,kode_penularan,sumber_penularan,kd_kelurahan,nm_kelurahan,kd_kecamatan,nm_kecamatan,kd_kabupaten,"+
+                "nm_kabupaten,kd_propinsi,nm_propinsi,tgl_keluar,kode_statuskeluar,nama_statuskeluar,tgl_lapor,kode_statusrawat,"+
+                "nama_statusrawat,kode_statusisolasi,nama_statusisolasi,email,notelp,sebab_kematian,kode_jenis_pasien,nama_jenis_pasien from pasien_corona "+
+                "where tgl_masuk between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
+                (TCari.getText().trim().equals("")?"":"and (no_pengenal like '"+TCari.getText().trim()+"' or no_rkm_medis like '"+TCari.getText().trim()+"' or "+
+                "nama_kewarganegaraan like '"+TCari.getText().trim()+"' or sumber_penularan like '"+TCari.getText().trim()+"' or "+
+                "nm_kelurahan like '"+TCari.getText().trim()+"' or nm_kecamatan like '"+TCari.getText().trim()+"' or nm_kabupaten like '"+TCari.getText().trim()+"' or "+
+                "nm_propinsi like '"+TCari.getText().trim()+"' or nama_statuskeluar like '"+TCari.getText().trim()+"' or "+
+                "nama_statusrawat like '"+TCari.getText().trim()+"' or nama_statusisolasi like '"+TCari.getText().trim()+"' or "+
+                "sebab_kematian like '"+TCari.getText().trim()+"' or nama_jenis_pasien like '"+TCari.getText().trim()+"') ")+
+                "order by tgl_masuk",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1584,7 +1584,7 @@ public class CoronaPasien extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

@@ -863,16 +863,16 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptPerawatanCorona.jasper","report","::[ Kebutuhan Perawatan Pasien Corona Untuk Penagihan INACBG ]::",
-                    "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,reg_periksa.tgl_registrasi,perawatan_corona.pemulasaraan_jenazah,"+
-                    "perawatan_corona.kantong_jenazah,perawatan_corona.peti_jenazah,perawatan_corona.plastik_erat,perawatan_corona.desinfektan_jenazah,"+
-                    "perawatan_corona.mobil_jenazah,perawatan_corona.desinfektan_mobil_jenazah,perawatan_corona.covid19_status_cd,perawatan_corona.nomor_kartu_t,"+
-                    "perawatan_corona.episodes1,perawatan_corona.episodes2,perawatan_corona.episodes3,perawatan_corona.episodes4,perawatan_corona.episodes5,"+
-                    "perawatan_corona.episodes6,perawatan_corona.covid19_cc_ind from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join perawatan_corona on perawatan_corona.no_rawat=reg_periksa.no_rawat where "+
-                    "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
-                    (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' "+
-                    "or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or perawatan_corona.covid19_status_cd like '%"+TCari.getText().trim()+"%' or "+
-                    "perawatan_corona.nomor_kartu_t like '%"+TCari.getText().trim()+"%') ")+"order by reg_periksa.tgl_registrasi",param);
+                "select reg_periksa.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,reg_periksa.tgl_registrasi,perawatan_corona.pemulasaraan_jenazah,"+
+                "perawatan_corona.kantong_jenazah,perawatan_corona.peti_jenazah,perawatan_corona.plastik_erat,perawatan_corona.desinfektan_jenazah,"+
+                "perawatan_corona.mobil_jenazah,perawatan_corona.desinfektan_mobil_jenazah,perawatan_corona.covid19_status_cd,perawatan_corona.nomor_kartu_t,"+
+                "perawatan_corona.episodes1,perawatan_corona.episodes2,perawatan_corona.episodes3,perawatan_corona.episodes4,perawatan_corona.episodes5,"+
+                "perawatan_corona.episodes6,perawatan_corona.covid19_cc_ind from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                "inner join perawatan_corona on perawatan_corona.no_rawat=reg_periksa.no_rawat where "+
+                "reg_periksa.tgl_registrasi between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
+                (TCari.getText().trim().equals("")?"":"and (reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' "+
+                "or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or perawatan_corona.covid19_status_cd like '%"+TCari.getText().trim()+"%' or "+
+                "perawatan_corona.nomor_kartu_t like '%"+TCari.getText().trim()+"%') ")+"order by reg_periksa.tgl_registrasi",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -920,7 +920,7 @@ public class INACBGPerawatanCorona extends javax.swing.JDialog {
     }//GEN-LAST:event_tbObatKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed

@@ -1132,16 +1132,16 @@ public class DlgDataBatch extends javax.swing.JDialog {
         } else {
             if(tbDokter.getSelectedRow()!= -1){
                 if(Sequel.mengedittf("data_batch","no_batch=? and kode_brng=? and no_faktur=?","no_batch=?,kode_brng=?,tgl_beli=?,tgl_kadaluarsa=?,asal=?,no_faktur=?,dasar=?,h_beli=?,ralan=?,kelas1=?,kelas2=?,kelas3=?,utama=?,vip=?,vvip=?,beliluar=?,jualbebas=?,karyawan=?,jumlahbeli=?,sisa=?",23,new String[]{
-                        NoBatch.getText(),Kd.getText(),Valid.SetTgl(TanggalDatang.getSelectedItem()+ ""),Valid.SetTgl(DTPExpired.getSelectedItem() + ""),
-                        AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(),
-                        kelas3.getText(),utama.getText(),kelasvip.getText(),kelasvvip.getText(),beliluar.getText(),jualbebas.getText(),karyawan.getText(),
-                        JmlBeli.getText(),Sisa.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(),
-                        tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
-                    })==true){
-                        if (tabMode.getRowCount() != 0) {
-                            runBackground(() ->tampil());
-                        }
-                        emptTeks();
+                    NoBatch.getText(),Kd.getText(),Valid.SetTgl(TanggalDatang.getSelectedItem()+ ""),Valid.SetTgl(DTPExpired.getSelectedItem() + ""),
+                    AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(),
+                    kelas3.getText(),utama.getText(),kelasvip.getText(),kelasvvip.getText(),beliluar.getText(),jualbebas.getText(),karyawan.getText(),
+                    JmlBeli.getText(),Sisa.getText(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(), 1).toString(),
+                    tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
+                })==true){
+                    if (tabMode.getRowCount() != 0) {
+                        runBackground(() ->tampil());
+                    }
+                    emptTeks();
                 }
             }
         }
@@ -1268,13 +1268,13 @@ public class DlgDataBatch extends javax.swing.JDialog {
             Valid.textKosong(NoBatch, "Kategori");
         } else {
             if(Sequel.menyimpantf("data_batch", "?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?", "Kode Barang,No.Batch & No.Faktur", 20, new String[]{
-                    NoBatch.getText(),Kd.getText(),Valid.SetTgl(TanggalDatang.getSelectedItem()+ ""),Valid.SetTgl(DTPExpired.getSelectedItem() + ""),
-                    AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(),
-                    kelas3.getText(),utama.getText(),kelasvip.getText(),kelasvvip.getText(),beliluar.getText(),jualbebas.getText(),karyawan.getText(),
-                    JmlBeli.getText(),Sisa.getText()
-                })==true){
-                    runBackground(() ->tampil());
-                    emptTeks();
+                NoBatch.getText(),Kd.getText(),Valid.SetTgl(TanggalDatang.getSelectedItem()+ ""),Valid.SetTgl(DTPExpired.getSelectedItem() + ""),
+                AsalBarang.getSelectedItem().toString(),NoFaktur.getText(),dasar.getText(),beli.getText(),ralan.getText(),kelas1.getText(),kelas2.getText(),
+                kelas3.getText(),utama.getText(),kelasvip.getText(),kelasvvip.getText(),beliluar.getText(),jualbebas.getText(),karyawan.getText(),
+                JmlBeli.getText(),Sisa.getText()
+            })==true){
+                runBackground(() ->tampil());
+                emptTeks();
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1312,11 +1312,11 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_kelas2KeyPressed
 
     private void ralanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_ralanKeyPressed
-    Valid.pindah(evt, beli, kelas1);
+        Valid.pindah(evt, beli, kelas1);
     }//GEN-LAST:event_ralanKeyPressed
 
     private void NoFakturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoFakturKeyPressed
-    Valid.pindah(evt, TanggalDatang, DTPExpired);
+        Valid.pindah(evt, TanggalDatang, DTPExpired);
     }//GEN-LAST:event_NoFakturKeyPressed
 
     private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKeyPressed
@@ -1381,7 +1381,7 @@ public class DlgDataBatch extends javax.swing.JDialog {
     }//GEN-LAST:event_beliKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-    isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

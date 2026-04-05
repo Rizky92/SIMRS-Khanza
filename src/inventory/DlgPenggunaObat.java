@@ -517,16 +517,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             int row=tabMode.getRowCount();
             for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                tabMode.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Obat Perdokter Bangsal");
+                    tabMode.getValueAt(r,0).toString().replaceAll("'","`")+"','"+
+                    tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                    tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                    tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                    tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                    tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                    tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                    tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Obat Perdokter Bangsal");
             }
-
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());

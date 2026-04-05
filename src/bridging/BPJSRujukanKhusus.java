@@ -653,13 +653,12 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
             int row=tabMode.getRowCount();
             for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
-                                tabMode.getValueAt(r,0).toString()+"','"+
-                                tabMode.getValueAt(r,1).toString()+"','"+
-                                tabMode.getValueAt(r,2).toString()+"','"+
-                                tabMode.getValueAt(r,3).toString()+"','"+
-                                tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data");
+                    tabMode.getValueAt(r,0).toString()+"','"+
+                    tabMode.getValueAt(r,1).toString()+"','"+
+                    tabMode.getValueAt(r,2).toString()+"','"+
+                    tabMode.getValueAt(r,3).toString()+"','"+
+                    tabMode.getValueAt(r,4).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Data");
             }
-
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -738,7 +737,7 @@ public final class BPJSRujukanKhusus extends javax.swing.JDialog {
     }//GEN-LAST:event_tbProgramPRBKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed

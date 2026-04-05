@@ -336,7 +336,7 @@ public final class PCareCekReferensiProvider extends javax.swing.JDialog {
 
     public void tampil(String diagnosa) {
         try {
-            URL = link+"/provider/0/10000";	
+            URL = link+"/provider/0/10000";
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

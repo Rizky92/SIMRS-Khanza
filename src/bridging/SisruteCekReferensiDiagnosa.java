@@ -345,7 +345,7 @@ public final class SisruteCekReferensiDiagnosa extends javax.swing.JDialog {
 	   headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
 	   headers.add("X-signature",api.getHmac());
 	   headers.add("Content-type","application/json");
-	   headers.add("Content-length",null);     	
+	   headers.add("Content-length",null);     
             requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("status");

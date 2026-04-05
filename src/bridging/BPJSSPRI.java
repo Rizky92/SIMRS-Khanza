@@ -850,8 +850,8 @@ public class BPJSSPRI extends javax.swing.JDialog {
                     //response = root.path("response").path("noSPRI");
 
                     if(Sequel.menyimpantf("bridging_surat_pri_bpjs","?,?,?,?,?,?,?,?,?,?,?","No.Surat",11,new String[]{
-                            NoRawat.getText(),NoKartu.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),response.asText(),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),Diagnosa.getText(),NoSEP.getText()
-                        })==true){
+                        NoRawat.getText(),NoKartu.getText(),Valid.SetTgl(TanggalSurat.getSelectedItem()+""),response.asText(),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),Diagnosa.getText(),NoSEP.getText()
+                    })==true){
                         emptTeks();
                         runBackground(() ->tampil());
                     }
@@ -964,7 +964,6 @@ public class BPJSSPRI extends javax.swing.JDialog {
                     "bridging_surat_pri_bpjs.nm_poli_bpjs like '%"+TCari.getText().trim()+"%' or bridging_surat_pri_bpjs.nm_dokter_bpjs like '%"+TCari.getText().trim()+"%')")+
                     "order by bridging_surat_pri_bpjs.tgl_rencana",param);
             }
-
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1070,15 +1069,15 @@ public class BPJSSPRI extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnDokterActionPerformed
 
     private void BtnDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnDokterKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_SPACE){
-        BtnDokterActionPerformed(null);
-    }else{
-        Valid.pindah(evt,TanggalKontrol,BtnPoli);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+            BtnDokterActionPerformed(null);
+        }else{
+            Valid.pindah(evt,TanggalKontrol,BtnPoli);
+        }
     }//GEN-LAST:event_BtnDokterKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void DTPTanggalKontrol1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTanggalKontrol1KeyPressed
@@ -1124,8 +1123,8 @@ public class BPJSSPRI extends javax.swing.JDialog {
                     System.out.println("message : "+nameNode.path("message").asText());
                     if(nameNode.path("code").asText().equals("200")){
                         if(Sequel.mengedittf("bridging_surat_pri_bpjs","no_surat=?","tgl_surat=?,tgl_rencana=?,kd_dokter_bpjs=?,nm_dokter_bpjs=?,kd_poli_bpjs=?,nm_poli_bpjs=?,diagnosa=?,no_sep=?",9,new String[]{
-                                Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),Diagnosa.getText(),NoSEP.getText(),NoSurat.getText()
-                            })==true){
+                            Valid.SetTgl(TanggalSurat.getSelectedItem()+""),Valid.SetTgl(TanggalKontrol.getSelectedItem()+""),KdDokter.getText(),NmDokter.getText(),KdPoli.getText(),NmPoli.getText(),Diagnosa.getText(),NoSEP.getText(),NoSurat.getText()
+                        })==true){
                             emptTeks();
                             runBackground(() ->tampil());
                         }
@@ -1231,12 +1230,12 @@ public class BPJSSPRI extends javax.swing.JDialog {
             param.put("parameter",tbObat.getValueAt(tbObat.getSelectedRow(),0).toString());
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+tbObat.getValueAt(tbObat.getSelectedRow(),11).toString()+"\nID "+tbObat.getValueAt(tbObat.getSelectedRow(),10).toString()+"\n"+Valid.SetTgl3(tbObat.getValueAt(tbObat.getSelectedRow(),7).toString()));
             Valid.MyReportqry("rptBridgingSuratPRI2.jasper","report","::[ Data Surat PRI VClaim ]::",
-                    "select bridging_surat_pri_bpjs.no_rawat,bridging_surat_pri_bpjs.no_kartu,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,"+
-                    "pasien.jk,bridging_surat_pri_bpjs.diagnosa,bridging_surat_pri_bpjs.tgl_surat,bridging_surat_pri_bpjs.no_surat,"+
-                    "bridging_surat_pri_bpjs.tgl_rencana,bridging_surat_pri_bpjs.kd_dokter_bpjs,bridging_surat_pri_bpjs.nm_dokter_bpjs,"+
-                    "bridging_surat_pri_bpjs.kd_poli_bpjs,bridging_surat_pri_bpjs.nm_poli_bpjs from reg_periksa inner join bridging_surat_pri_bpjs "+
-                    "on bridging_surat_pri_bpjs.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "where bridging_surat_pri_bpjs.no_surat='"+NoSurat.getText()+"'",param);
+                "select bridging_surat_pri_bpjs.no_rawat,bridging_surat_pri_bpjs.no_kartu,reg_periksa.no_rkm_medis,pasien.nm_pasien,pasien.tgl_lahir,"+
+                "pasien.jk,bridging_surat_pri_bpjs.diagnosa,bridging_surat_pri_bpjs.tgl_surat,bridging_surat_pri_bpjs.no_surat,"+
+                "bridging_surat_pri_bpjs.tgl_rencana,bridging_surat_pri_bpjs.kd_dokter_bpjs,bridging_surat_pri_bpjs.nm_dokter_bpjs,"+
+                "bridging_surat_pri_bpjs.kd_poli_bpjs,bridging_surat_pri_bpjs.nm_poli_bpjs from reg_periksa inner join bridging_surat_pri_bpjs "+
+                "on bridging_surat_pri_bpjs.no_rawat=reg_periksa.no_rawat inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                "where bridging_surat_pri_bpjs.no_surat='"+NoSurat.getText()+"'",param);
             this.setCursor(Cursor.getDefaultCursor());
         }else{
             JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data Surat PRI yang mau dicetak...!!!!");

@@ -225,84 +225,84 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try{
-                File g = new File("file2.css");
-                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-                bg.write(
-                    ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
-                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                    ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
-                    ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
-                    ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
-                    ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
-                    ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
-                );
-                bg.close();
+            File g = new File("file2.css");
+            BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+            bg.write(
+                ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
+                ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
+                ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
+                ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
+                ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
+                ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
+            );
+            bg.close();
 
-                File f;
-                BufferedWriter bw;
+            File f;
+            BufferedWriter bw;
 
-                String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (XLS)"},"Laporan 1 (HTML)");
-                switch (pilihan) {
-                    case "Laporan 1 (HTML)":
-                        f = new File("RekapParkir.html");
-                        bw = new BufferedWriter(new FileWriter(f));
-                        bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                    "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr class='isi2'>"+
-                                            "<td valign='top' align='center'>"+
-                                                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                            "</td>"+
-                                       "</tr>"+
-                                    "</table>")
-                        );
-                        bw.close();
-                        Desktop.getDesktop().browse(f.toURI());
-                        break;
-                    case "Laporan 2 (WPS)":
-                        f = new File("RekapParkir.wps");
-                        bw = new BufferedWriter(new FileWriter(f));
-                        bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                    "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr class='isi2'>"+
-                                            "<td valign='top' align='center'>"+
-                                                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                            "</td>"+
-                                       "</tr>"+
-                                    "</table>")
-                        );
-                        bw.close();
-                        Desktop.getDesktop().browse(f.toURI());
-                        break;
-                    case "Laporan 3 (XLS)":
-                        f = new File("RekapParkir.xls");
-                        bw = new BufferedWriter(new FileWriter(f));
-                        bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                    "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr class='isi2'>"+
-                                            "<td valign='top' align='center'>"+
-                                                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                            "</td>"+
-                                       "</tr>"+
-                                    "</table>")
-                        );
-                        bw.close();
-                        Desktop.getDesktop().browse(f.toURI());
-                        break;
-                }
-            }catch(Exception e){
-                System.out.println("Notifikasi : "+e);
+            String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (XLS)"},"Laporan 1 (HTML)");
+            switch (pilihan) {
+                case "Laporan 1 (HTML)":
+                    f = new File("RekapParkir.html");
+                    bw = new BufferedWriter(new FileWriter(f));
+                    bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                    "<tr class='isi2'>"+
+                                        "<td valign='top' align='center'>"+
+                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                            "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                        "</td>"+
+                                    "</tr>"+
+                                "</table>")
+                    );
+                    bw.close();
+                    Desktop.getDesktop().browse(f.toURI());
+                    break;
+                case "Laporan 2 (WPS)":
+                    f = new File("RekapParkir.wps");
+                    bw = new BufferedWriter(new FileWriter(f));
+                    bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                    "<tr class='isi2'>"+
+                                        "<td valign='top' align='center'>"+
+                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                            "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                        "</td>"+
+                                    "</tr>"+
+                                "</table>")
+                    );
+                    bw.close();
+                    Desktop.getDesktop().browse(f.toURI());
+                    break;
+                case "Laporan 3 (XLS)":
+                    f = new File("RekapParkir.xls");
+                    bw = new BufferedWriter(new FileWriter(f));
+                    bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                "<table width='1500px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                    "<tr class='isi2'>"+
+                                        "<td valign='top' align='center'>"+
+                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                            "<font size='2' face='Tahoma'>DATA REKAP PARKIR DUTA PARKING<br>PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                        "</td>"+
+                                    "</tr>"+
+                                "</table>")
+                    );
+                    bw.close();
+                    Desktop.getDesktop().browse(f.toURI());
+                    break;
             }
+        }catch(Exception e){
+            System.out.println("Notifikasi : "+e);
+        }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 

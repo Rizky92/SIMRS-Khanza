@@ -821,7 +821,6 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
         }else{
             JOptionPane.showMessageDialog(null,"Silahkan pilih dulu data yang mau dihapus..!!");
         }
-
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed
@@ -850,23 +849,23 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptDataSRBBPJS.jasper","report","::[ Data Resep Pulang ]::",
-                    "select bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_srb_bpjs.alamat,"+
-                    "bridging_srb_bpjs.email,bridging_sep.no_kartu,bridging_sep.no_sep,bridging_srb_bpjs.no_srb,bridging_srb_bpjs.tgl_srb,"+
-                    "bridging_srb_bpjs.kodedpjp,bridging_srb_bpjs.nmdpjp,bridging_srb_bpjs.kodeprogram,bridging_srb_bpjs.namaprogram,"+
-                    "bridging_srb_bpjs.keterangan,bridging_srb_bpjs.saran from bridging_sep inner join bridging_srb_bpjs "+
-                    "on bridging_srb_bpjs.no_sep=bridging_sep.no_sep where bridging_srb_bpjs.tgl_srb between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
-                    (TCari.getText().trim().equals("")?"":" and (bridging_sep.no_rawat like '%"+TCari.getText().trim()+"%' or bridging_sep.nomr like '%"+TCari.getText().trim()+"%' or "+
-                    "bridging_sep.nama_pasien like '%"+TCari.getText().trim()+"%' or bridging_sep.no_kartu like '%"+TCari.getText().trim()+"%' or bridging_sep.no_sep like '%"+TCari.getText().trim()+"%' or "+
-                    "bridging_srb_bpjs.no_srb like '%"+TCari.getText().trim()+"%' or bridging_srb_bpjs.kodedpjp like '%"+TCari.getText().trim()+"%' or bridging_srb_bpjs.nmdpjp like '%"+TCari.getText().trim()+"%' or "+
-                    "bridging_srb_bpjs.kodeprogram like '%"+TCari.getText().trim()+"%' or bridging_srb_bpjs.namaprogram like '%"+TCari.getText().trim()+"%')")+"order by bridging_srb_bpjs.tgl_srb",param);
+                "select bridging_sep.no_rawat,bridging_sep.nomr,bridging_sep.nama_pasien,bridging_srb_bpjs.alamat,"+
+                "bridging_srb_bpjs.email,bridging_sep.no_kartu,bridging_sep.no_sep,bridging_srb_bpjs.no_srb,bridging_srb_bpjs.tgl_srb,"+
+                "bridging_srb_bpjs.kodedpjp,bridging_srb_bpjs.nmdpjp,bridging_srb_bpjs.kodeprogram,bridging_srb_bpjs.namaprogram,"+
+                "bridging_srb_bpjs.keterangan,bridging_srb_bpjs.saran from bridging_sep inner join bridging_srb_bpjs "+
+                "on bridging_srb_bpjs.no_sep=bridging_sep.no_sep where bridging_srb_bpjs.tgl_srb between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
+                (TCari.getText().trim().equals("")?"":" and (bridging_sep.no_rawat like '%"+TCari.getText().trim()+"%' or bridging_sep.nomr like '%"+TCari.getText().trim()+"%' or "+
+                "bridging_sep.nama_pasien like '%"+TCari.getText().trim()+"%' or bridging_sep.no_kartu like '%"+TCari.getText().trim()+"%' or bridging_sep.no_sep like '%"+TCari.getText().trim()+"%' or "+
+                "bridging_srb_bpjs.no_srb like '%"+TCari.getText().trim()+"%' or bridging_srb_bpjs.kodedpjp like '%"+TCari.getText().trim()+"%' or bridging_srb_bpjs.nmdpjp like '%"+TCari.getText().trim()+"%' or "+
+                "bridging_srb_bpjs.kodeprogram like '%"+TCari.getText().trim()+"%' or bridging_srb_bpjs.namaprogram like '%"+TCari.getText().trim()+"%')")+"order by bridging_srb_bpjs.tgl_srb",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -936,7 +935,7 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
     }//GEN-LAST:event_tbProgramPRBKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void btnDokterDPJPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDokterDPJPKeyPressed
@@ -1103,8 +1102,8 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                 if(nameNode.path("code").asText().equals("200")){
                     response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("noSRB");
                     if(Sequel.menyimpantf("bridging_srb_bpjs","?,?,?,?,?,?,?,?,?,?,?,?","No.SEP SRB",12,new String[]{
-                            NoSEP.getText(),response.asText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Alamat.getText(),Email.getText(),KdProgram.getText(),NmProgram.getText(),KdDPJP.getText(),NmDPJP.getText(),KdDPJP.getText(),Keterangan.getText(),Saran.getText()
-                        })==true){
+                        NoSEP.getText(),response.asText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Alamat.getText(),Email.getText(),KdProgram.getText(),NmProgram.getText(),KdDPJP.getText(),NmDPJP.getText(),KdDPJP.getText(),Keterangan.getText(),Saran.getText()
+                    })==true){
                         if(z>0){
                             for(i=0;i<tbObat.getRowCount();i++){
                                 if(Valid.SetAngka(tbObat.getValueAt(i,0).toString())>0){
@@ -1212,9 +1211,9 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
                     if(nameNode.path("code").asText().equals("200")){
                         response = mapper.readTree(api.Decrypt(root.path("response").asText(),utc)).path("noSRB");
                         if(Sequel.queryu2tf("update bridging_srb_bpjs set no_sep=?,no_srb=?,tgl_srb=?,alamat=?,email=?,kodeprogram=?,namaprogram=?,kodedpjp=?,nmdpjp=?,user=?,keterangan=?,saran=? where no_sep=? and no_srb=?",14,new String[]{
-                                NoSEP.getText(),response.asText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Alamat.getText(),Email.getText(),KdProgram.getText(),NmProgram.getText(),KdDPJP.getText(),NmDPJP.getText(),KdDPJP.getText(),Keterangan.getText(),Saran.getText(),
-                                tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString(),tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString()
-                            })==true){
+                            NoSEP.getText(),response.asText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),Alamat.getText(),Email.getText(),KdProgram.getText(),NmProgram.getText(),KdDPJP.getText(),NmDPJP.getText(),KdDPJP.getText(),Keterangan.getText(),Saran.getText(),
+                            tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString(),tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString()
+                        })==true){
                             if(z>0){
                                 Sequel.meghapus("bridging_srb_bpjs_obat","no_sep","no_srb",tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),6).toString(),tbProgramPRB.getValueAt(tbProgramPRB.getSelectedRow(),7).toString());
                                 for(i=0;i<tbObat.getRowCount();i++){
@@ -1625,7 +1624,6 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
         runBackground(() ->tampil());
     }
 
-
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
@@ -1690,10 +1688,10 @@ public final class BPJSProgramPRB extends javax.swing.JDialog {
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
-	    utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-Timestamp",utc);
-	    headers.add("X-Signature",api.getHmac(utc));
+            headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
+            utc=String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("X-Timestamp",utc);
+            headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             requestEntity = new HttpEntity(headers);
             URL = link+"/referensi/obatprb/"+ObatPRB.getText();

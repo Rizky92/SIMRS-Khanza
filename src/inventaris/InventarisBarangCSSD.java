@@ -533,7 +533,6 @@ public class InventarisBarangCSSD extends javax.swing.JDialog {
                 TCari.setText("");
                 TCari.requestFocus();
             }
-
         }
     }//GEN-LAST:event_tbSpesialisKeyPressed
 

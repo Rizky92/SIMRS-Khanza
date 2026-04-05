@@ -876,7 +876,6 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                 }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
-                e.printStackTrace();
                 JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih terlebih dulu data yang mau anda hapus...\n Klik data pada table untuk memilih data...!!!!");
             }
         }
@@ -897,31 +896,31 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             TCari.requestFocus();
         }else if(tabModePO.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(!TCariPasien.getText().equals("")){
                pas=" and reg_periksa.no_rkm_medis='"+TCariPasien.getText()+"' ";
             }
             tgl=" detail_pemberian_obat.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
             Valid.MyReportqry("rptBrObt.jasper","report","::[ Rekam Data Pemberian Obat (UMUM) ]::",
-                   "select detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,"+
-                   "detail_pemberian_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                   "detail_pemberian_obat.kode_brng,databarang.nama_brng,detail_pemberian_obat.embalase,detail_pemberian_obat.tuslah,"+
-                   "detail_pemberian_obat.jml,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.total,detail_pemberian_obat.h_beli,"+
-                   "detail_pemberian_obat.kd_bangsal,detail_pemberian_obat.no_batch,detail_pemberian_obat.no_faktur "+
-                   "from detail_pemberian_obat inner join reg_periksa on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat "+
-                   "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                   "inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng "+
-                   "where "+tgl+(TCari.getText().trim().equals("")?"":" and (tgl_perawatan like '%"+TCari.getText().trim()+"%' or "+
-                   "detail_pemberian_obat.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
-                   "pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or detail_pemberian_obat.kode_brng like '%"+TCari.getText().trim()+"%' or "+
-                   "databarang.nama_brng like '%"+TCari.getText().trim()+"%' or detail_pemberian_obat.no_faktur like '%"+TCari.getText().trim()+"%' or "+
-                   "detail_pemberian_obat.no_batch like '%"+TCari.getText().trim()+"%') ")+" order by detail_pemberian_obat.tgl_perawatan",param);
+                "select detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,"+
+                "detail_pemberian_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
+                "detail_pemberian_obat.kode_brng,databarang.nama_brng,detail_pemberian_obat.embalase,detail_pemberian_obat.tuslah,"+
+                "detail_pemberian_obat.jml,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.total,detail_pemberian_obat.h_beli,"+
+                "detail_pemberian_obat.kd_bangsal,detail_pemberian_obat.no_batch,detail_pemberian_obat.no_faktur "+
+                "from detail_pemberian_obat inner join reg_periksa on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat "+
+                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                "inner join databarang on detail_pemberian_obat.kode_brng=databarang.kode_brng "+
+                "where "+tgl+(TCari.getText().trim().equals("")?"":" and (tgl_perawatan like '%"+TCari.getText().trim()+"%' or "+
+                "detail_pemberian_obat.no_rawat like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
+                "pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or detail_pemberian_obat.kode_brng like '%"+TCari.getText().trim()+"%' or "+
+                "databarang.nama_brng like '%"+TCari.getText().trim()+"%' or detail_pemberian_obat.no_faktur like '%"+TCari.getText().trim()+"%' or "+
+                "detail_pemberian_obat.no_batch like '%"+TCari.getText().trim()+"%') ")+" order by detail_pemberian_obat.tgl_perawatan",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1051,7 +1050,7 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemberianObatKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void BtnObat2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnObat2ActionPerformed
@@ -1154,32 +1153,32 @@ public class DlgPemberianObat extends javax.swing.JDialog {
             TCari.requestFocus();
         }else if(tabModePO.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             if(!TCariPasien.getText().equals("")){
                pas=" and reg_periksa.no_rkm_medis='"+TCariPasien.getText()+"' ";
             }
             tgl=" detail_pemberian_obat.tgl_perawatan between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+pas;
             Valid.MyReportqry("rptBrObt2.jasper","report","::[ Rekam Data Pemberian Obat (UMUM) ]::","select detail_pemberian_obat.tgl_perawatan,detail_pemberian_obat.jam,"+
-                   "detail_pemberian_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
-                   "detail_pemberian_obat.kode_brng,databarang.nama_brng,detail_pemberian_obat.embalase,detail_pemberian_obat.tuslah,"+
-                   "detail_pemberian_obat.jml,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.total "+
-                   "from detail_pemberian_obat inner join reg_periksa inner join pasien inner join databarang "+
-                   "on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat "+
-                   "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                   "and detail_pemberian_obat.kode_brng=databarang.kode_brng "+
-                   "where  "+tgl+"and tgl_perawatan like '%"+TCari.getText().trim()+"%' or "+
-                   tgl+"and detail_pemberian_obat.no_rawat like '%"+TCari.getText().trim()+"%' or "+
-                   tgl+"and reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
-                   tgl+"and pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
-                   tgl+"and detail_pemberian_obat.kode_brng like '%"+TCari.getText().trim()+"%' or "+
-                   tgl+"and databarang.nama_brng like '%"+TCari.getText().trim()+"%' "+
-                   "order by detail_pemberian_obat.tgl_perawatan",param);
+                "detail_pemberian_obat.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,"+
+                "detail_pemberian_obat.kode_brng,databarang.nama_brng,detail_pemberian_obat.embalase,detail_pemberian_obat.tuslah,"+
+                "detail_pemberian_obat.jml,detail_pemberian_obat.biaya_obat,detail_pemberian_obat.total "+
+                "from detail_pemberian_obat inner join reg_periksa inner join pasien inner join databarang "+
+                "on detail_pemberian_obat.no_rawat=reg_periksa.no_rawat "+
+                "and reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                "and detail_pemberian_obat.kode_brng=databarang.kode_brng "+
+                "where  "+tgl+"and tgl_perawatan like '%"+TCari.getText().trim()+"%' or "+
+                tgl+"and detail_pemberian_obat.no_rawat like '%"+TCari.getText().trim()+"%' or "+
+                tgl+"and reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or "+
+                tgl+"and pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or "+
+                tgl+"and detail_pemberian_obat.kode_brng like '%"+TCari.getText().trim()+"%' or "+
+                tgl+"and databarang.nama_brng like '%"+TCari.getText().trim()+"%' "+
+                "order by detail_pemberian_obat.tgl_perawatan",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_ppNoRawatActionPerformed
@@ -1721,6 +1720,115 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }
 
     private void hapus() {
+        statusberi=Sequel.cariIsi("select detail_pemberian_obat.status from detail_pemberian_obat where detail_pemberian_obat.no_rawat='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString()+"' "+
+            "and detail_pemberian_obat.kode_brng='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"' "+
+            "and detail_pemberian_obat.tgl_perawatan='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()+"' "+
+            "and detail_pemberian_obat.jam='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString()+"' "+
+            "and detail_pemberian_obat.no_batch='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),14).toString()+"' "+
+            "and detail_pemberian_obat.no_faktur='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),15).toString()+"' ");
+        ttlhpp=Sequel.cariIsiAngka("select sum(detail_pemberian_obat.h_beli*detail_pemberian_obat.jml) from detail_pemberian_obat where detail_pemberian_obat.no_rawat='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString()+"' "+
+            "and detail_pemberian_obat.kode_brng='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"' "+
+            "and detail_pemberian_obat.tgl_perawatan='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()+"' "+
+            "and detail_pemberian_obat.jam='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString()+"' "+
+            "and detail_pemberian_obat.no_batch='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),14).toString()+"' "+
+            "and detail_pemberian_obat.no_faktur='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),15).toString()+"' ");
+        ttljual=Sequel.cariIsiAngka("select sum(detail_pemberian_obat.total) from detail_pemberian_obat where detail_pemberian_obat.no_rawat='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString()+"' "+
+            "and detail_pemberian_obat.kode_brng='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"' "+
+            "and detail_pemberian_obat.tgl_perawatan='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()+"' "+
+            "and detail_pemberian_obat.jam='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString()+"' "+
+            "and detail_pemberian_obat.no_batch='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),14).toString()+"' "+
+            "and detail_pemberian_obat.no_faktur='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),15).toString()+"' ");
+        if(Sequel.queryutf("delete from detail_pemberian_obat where no_rawat='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString()+"' "+
+            "and kode_brng='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"' "+
+            "and tgl_perawatan='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()+"' "+
+            "and jam='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString()+"' "+
+            "and no_batch='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),14).toString()+"' "+
+            "and no_faktur='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),15).toString()+"' ")==true){
+            if(statusberi.equals("Ranap")){
+                Sequel.queryu("delete from tampjurnal");
+                if(ttljual>0){
+                    if(Sequel.menyimpantf2("tampjurnal","'"+akunobatranap.getSuspen_Piutang_Obat_Ranap()+"','Suspen Piutang Obat Ranap','0','"+ttljual+"'","Rekening")==false){
+                        sukses=false;
+                    }
+                    if(Sequel.menyimpantf2("tampjurnal","'"+akunobatranap.getObat_Ranap()+"','Pendapatan Obat Rawat Inap','"+ttljual+"','0'","Rekening")==false){
+                        sukses=false;
+                    }
+                }
+                if(ttlhpp>0){
+                    if(Sequel.menyimpantf2("tampjurnal","'"+akunobatranap.getHPP_Obat_Rawat_Inap()+"','HPP Persediaan Obat Rawat Inap','0','"+ttlhpp+"'","Rekening")==false){
+                        sukses=false;
+                    }
+                    if(Sequel.menyimpantf2("tampjurnal","'"+akunobatranap.getPersediaan_Obat_Rawat_Inap()+"','Persediaan Obat Rawat Inap','"+ttlhpp+"','0'","Rekening")==false){
+                        sukses=false;
+                    }
+                }
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                }
+            }else if(statusberi.equals("Ralan")){
+                Sequel.queryu("delete from tampjurnal");
+                if(ttljual>0){
+                    if(Sequel.menyimpantf2("tampjurnal","'"+akunobatralan.getSuspen_Piutang_Obat_Ralan()+"','Suspen Piutang Obat Ralan','0','"+ttljual+"'","Rekening")==false){
+                        sukses=false;
+                    }
+                    if(Sequel.menyimpantf2("tampjurnal","'"+akunobatralan.getObat_Ralan()+"','Pendapatan Obat Rawat Jalan','"+ttljual+"','0'","Rekening")==false){
+                        sukses=false;
+                    }
+                }
+                if(ttlhpp>0){
+                    if(Sequel.menyimpantf2("tampjurnal","'"+akunobatralan.getHPP_Obat_Rawat_Jalan()+"','HPP Persediaan Obat Rawat Jalan','0','"+ttlhpp+"'","Rekening")==false){
+                        sukses=false;
+                    }
+                    if(Sequel.menyimpantf2("tampjurnal","'"+akunobatralan.getPersediaan_Obat_Rawat_Jalan()+"','Persediaan Obat Rawat Jalan','"+ttlhpp+"','0'","Rekening")==false){
+                        sukses=false;
+                    }
+                }
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                }
+            }
+
+            Sequel.queryu("delete from aturan_pakai where no_rawat='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString()+"' "+
+                "and kode_brng='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"' "+
+                "and tgl_perawatan='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),0).toString()+"' "+
+                "and jam='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),1).toString()+"'");
+            if(btnObat1.isEnabled()==true){
+                if(aktifkanbatch.equals("yes")){
+                    Sequel.mengedit("data_batch","no_batch=? and kode_brng=? and no_faktur=?","sisa=sisa+?",4,new String[]{
+                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),9).toString(),
+                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),14).toString(),
+                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString(),
+                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),15).toString()
+                    });
+                    Trackobat.catatRiwayat(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString(),Valid.SetAngka(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),9).toString()),
+                        0,"Pemberian Obat",akses.getkode(),bangsal,"Hapus",tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),14).toString(),tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),15).toString(),
+                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString()+" "+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),3).toString()+" "+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),4).toString()
+                    );
+                    Sequel.menyimpan("gudangbarang","'"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"','"+bangsal+"',"+
+                        "'"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),9).toString()+"',"+
+                        "'"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),14).toString()+"',"+
+                        "'"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),15).toString()+"'",
+                        "stok=stok+'"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),9).toString()+"'",
+                        "kode_brng='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"' and kd_bangsal='"+bangsal+"'  "+
+                        "and no_batch='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),14).toString()+"' "+
+                        "and no_faktur='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),15).toString()+"'");
+                }else{
+                    Trackobat.catatRiwayat(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString(),Valid.SetAngka(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),9).toString()),0,"Pemberian Obat",akses.getkode(),bangsal,"Hapus","","",
+                        tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),2).toString()+" "+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),3).toString()+" "+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),4).toString()
+                    );
+                    Sequel.menyimpan("gudangbarang","'"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"','"+bangsal+"',"+
+                        "'"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),9).toString()+"','',''",
+                        "stok=stok+'"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),9).toString()+"'",
+                        "kode_brng='"+tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(),5).toString()+"' and kd_bangsal='"+bangsal+"'  "+
+                        "and no_batch='' and no_faktur=''");
+                }
+            }
+        }else{
+            sukses=false;
+        }
+    }
+
+    private void hapusSmc() {
         try (PreparedStatement ps = koneksi.prepareStatement(
             "select detail_pemberian_obat.status as statusberi, ifnull(sum(detail_pemberian_obat.h_beli * detail_pemberian_obat.jml), 0) " +
             "as ttlhpp, sum(detail_pemberian_obat.total) as ttljual from detail_pemberian_obat where detail_pemberian_obat.no_rawat = ? and " +

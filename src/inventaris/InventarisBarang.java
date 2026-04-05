@@ -840,7 +840,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void kode_barangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_barangKeyPressed
@@ -860,21 +860,21 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_isbnKeyPressed
 
     private void thn_produksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thn_produksiKeyPressed
-    Valid.pindah(evt,jml_barang,kode_produsen);
+        Valid.pindah(evt,jml_barang,kode_produsen);
     }//GEN-LAST:event_thn_produksiKeyPressed
 
     private void kode_produsenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_produsenKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
-        thn_produksi.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
-        id_merk.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnProdusenActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
+            thn_produksi.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
+            id_merk.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnProdusenActionPerformed(null);
+        }
     }//GEN-LAST:event_kode_produsenKeyPressed
 
     private void btnProdusenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdusenActionPerformed

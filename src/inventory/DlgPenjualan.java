@@ -1342,19 +1342,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
 
                 if(Sequel.menyimpantf2("penjualan","?,?,?,?,?,?,?,?,?,?,?,?,?","No.Nota",13,new String[]{
-                        NoNota.getText(),Valid.SetTgl(Tgl.getSelectedItem()+""),kdptg.getText(),kdmem.getText(),nmmem.getText(),
-                        catatan.getText(),Jenisjual.getSelectedItem().toString(),Double.toString(ongkir),Double.toString(besarppnobat),
-                        status,kdgudang.getText(),kode_akun_bayar,AkunBayar.getSelectedItem().toString()}
-                   )==true){
-                        simpan();
+                    NoNota.getText(),Valid.SetTgl(Tgl.getSelectedItem()+""),kdptg.getText(),kdmem.getText(),nmmem.getText(),
+                    catatan.getText(),Jenisjual.getSelectedItem().toString(),Double.toString(ongkir),Double.toString(besarppnobat),
+                    status,kdgudang.getText(),kode_akun_bayar,AkunBayar.getSelectedItem().toString()}
+                )==true){
+                    simpan();
                 }else{
                     autoNomor();
                     if(Sequel.menyimpantf2("penjualan","?,?,?,?,?,?,?,?,?,?,?,?,?","No.Nota",13,new String[]{
-                            NoNota.getText(),Valid.SetTgl(Tgl.getSelectedItem()+""),kdptg.getText(),kdmem.getText(),nmmem.getText(),
-                            catatan.getText(),Jenisjual.getSelectedItem().toString(),Double.toString(ongkir),Double.toString(besarppnobat),
-                            status,kdgudang.getText(),kode_akun_bayar,AkunBayar.getSelectedItem().toString()}
-                       )==true){
-                            simpan();
+                        NoNota.getText(),Valid.SetTgl(Tgl.getSelectedItem()+""),kdptg.getText(),kdmem.getText(),nmmem.getText(),
+                        catatan.getText(),Jenisjual.getSelectedItem().toString(),Double.toString(ongkir),Double.toString(besarppnobat),
+                        status,kdgudang.getText(),kode_akun_bayar,AkunBayar.getSelectedItem().toString()}
+                    )==true){
+                        simpan();
                     }else{
                         sukses=false;
                         autoNomor();
@@ -1442,8 +1442,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         switch (pilihanetiket) {
                             case "Cetak Aturan Pakai Model 1":
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                if(Sequel.cariInteger(
-                                        "select count(*) from detailjual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
+                                if(Sequel.cariInteger("select count(*) from detailjual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
                                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                     Valid.MyReportqry("rptItemResepPenjualan.jasper","report","::[ Aturan Pakai Obat ]::",
                                         "select penjualan.nota_jual,penjualan.tgl_jual, "+
@@ -1455,8 +1454,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "where penjualan.nota_jual='"+NoNota.getText()+"' and detailjual.aturan_pakai<>''",param);
                                 }
 
-                                if(Sequel.cariInteger(
-                                        "select count(*) from obat_racikan_jual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
+                                if(Sequel.cariInteger("select count(*) from obat_racikan_jual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
                                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                     Valid.MyReportqry("rptItemResepPenjualan2.jasper","report","::[ Aturan Pakai Obat ]::",
                                         "select penjualan.nota_jual,penjualan.tgl_jual,metode_racik.nm_racik, "+
@@ -1470,8 +1468,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 break;
                             case "Cetak Aturan Pakai Model 2":
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                if(Sequel.cariInteger(
-                                        "select count(*) from detailjual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
+                                if(Sequel.cariInteger("select count(*) from detailjual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
                                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                     Valid.MyReportqry("rptItemResepPenjualan3.jasper","report","::[ Aturan Pakai Obat ]::",
                                         "select penjualan.nota_jual,penjualan.tgl_jual, "+
@@ -1484,8 +1481,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "where penjualan.nota_jual='"+NoNota.getText()+"' and detailjual.aturan_pakai<>''",param);
                                 }
 
-                                if(Sequel.cariInteger(
-                                        "select count(*) from obat_racikan_jual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
+                                if(Sequel.cariInteger("select count(*) from obat_racikan_jual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
                                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                     Valid.MyReportqry("rptItemResepPenjualan2.jasper","report","::[ Aturan Pakai Obat ]::",
                                         "select penjualan.nota_jual,penjualan.tgl_jual,metode_racik.nm_racik, "+
@@ -1499,8 +1495,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 break;
                             case "Cetak Aturan Pakai Model 3":
                                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                                if(Sequel.cariInteger(
-                                        "select count(*) from detailjual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
+                                if(Sequel.cariInteger("select count(*) from detailjual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
                                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                     Valid.MyReportqry("rptItemResepPenjualan5.jasper","report","::[ Aturan Pakai Obat ]::",
                                         "select penjualan.nota_jual,penjualan.tgl_jual, "+
@@ -1512,8 +1507,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         "where penjualan.nota_jual='"+NoNota.getText()+"' and detailjual.aturan_pakai<>''",param);
                                 }
 
-                                if(Sequel.cariInteger(
-                                        "select count(*) from obat_racikan_jual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
+                                if(Sequel.cariInteger("select count(*) from obat_racikan_jual where nota_jual=? and aturan_pakai<>''",NoNota.getText())>0){
                                     param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
                                     Valid.MyReportqry("rptItemResepPenjualan6.jasper","report","::[ Aturan Pakai Obat ]::",
                                         "select penjualan.nota_jual,penjualan.tgl_jual,metode_racik.nm_racik, "+
@@ -1638,29 +1632,29 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-    if(TabRawat.getSelectedIndex()==0){
-        runBackground(() ->tampil());
-    }else if(TabRawat.getSelectedIndex()==1){
-        if(tbObatRacikan.getRowCount()!=0){
-            if(tbObatRacikan.getSelectedRow()!= -1){
-                if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString().equals("")||
-                        tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).toString().equals("")||
-                        tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),2).toString().equals("")||
-                        tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),3).toString().equals("")||
-                        tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).toString().equals("")||
-                        tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),5).toString().equals("")||
-                        tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),6).toString().equals("")){
-                    JOptionPane.showMessageDialog(null,"Silahkan lengkapi data racikan..!!");
+        if(TabRawat.getSelectedIndex()==0){
+            runBackground(() ->tampil());
+        }else if(TabRawat.getSelectedIndex()==1){
+            if(tbObatRacikan.getRowCount()!=0){
+                if(tbObatRacikan.getSelectedRow()!= -1){
+                    if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),0).toString().equals("")||
+                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).toString().equals("")||
+                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),2).toString().equals("")||
+                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),3).toString().equals("")||
+                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),4).toString().equals("")||
+                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),5).toString().equals("")||
+                            tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),6).toString().equals("")){
+                        JOptionPane.showMessageDialog(null,"Silahkan lengkapi data racikan..!!");
+                    }else{
+                        runBackground(() ->tampildetailracikanobat());
+                    }
                 }else{
-                    runBackground(() ->tampildetailracikanobat());
+                    JOptionPane.showMessageDialog(null,"Silahkan pilih racikan..!!");
                 }
             }else{
-                JOptionPane.showMessageDialog(null,"Silahkan pilih racikan..!!");
+                JOptionPane.showMessageDialog(null,"Silahkan masukkan racikan..!!");
             }
-        }else{
-            JOptionPane.showMessageDialog(null,"Silahkan masukkan racikan..!!");
         }
-    }
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
@@ -1809,19 +1803,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TglKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            int row2=tabMode.getRowCount();
-            for(int r=0;r<row2;r++){
-                tabMode.setValueAt("",r,0);
-                tabMode.setValueAt(0,r,6);
-                tabMode.setValueAt(0,r,7);
-                tabMode.setValueAt(0,r,8);
-                tabMode.setValueAt(0,r,9);
-                tabMode.setValueAt(0,r,10);
-                tabMode.setValueAt(0,r,11);
-                tabMode.setValueAt(0,r,12);
-                tabMode.setValueAt(0,r,13);
-                tabMode.setValueAt(0,r,14);
-            }
+        int row2=tabMode.getRowCount();
+        for(int r=0;r<row2;r++){
+            tabMode.setValueAt("",r,0);
+            tabMode.setValueAt(0,r,6);
+            tabMode.setValueAt(0,r,7);
+            tabMode.setValueAt(0,r,8);
+            tabMode.setValueAt(0,r,9);
+            tabMode.setValueAt(0,r,10);
+            tabMode.setValueAt(0,r,11);
+            tabMode.setValueAt(0,r,12);
+            tabMode.setValueAt(0,r,13);
+            tabMode.setValueAt(0,r,14);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
@@ -1841,39 +1835,39 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_kdgudangKeyPressed
 
     private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
-    akses.setform("DlgPenjualan");
-    DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
-    bangsal.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(akses.getform().equals("DlgPenjualan")){
-                if(bangsal.getTable().getSelectedRow()!= -1){
-                    kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
-                    nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                    runBackground(() ->tampil());
+        akses.setform("DlgPenjualan");
+        DlgCariBangsal bangsal=new DlgCariBangsal(null,false);
+        bangsal.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(akses.getform().equals("DlgPenjualan")){
+                    if(bangsal.getTable().getSelectedRow()!= -1){
+                        kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
+                        nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
+                        runBackground(() ->tampil());
+                    }
+                    kdgudang.requestFocus();
                 }
-                kdgudang.requestFocus();
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
-    });
-    bangsal.isCek();
-    bangsal.emptTeks();
-    bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    bangsal.setLocationRelativeTo(internalFrame1);
-    bangsal.setAlwaysOnTop(false);
-    bangsal.setVisible(true);
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
+        bangsal.isCek();
+        bangsal.emptTeks();
+        bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        bangsal.setLocationRelativeTo(internalFrame1);
+        bangsal.setAlwaysOnTop(false);
+        bangsal.setVisible(true);
     }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

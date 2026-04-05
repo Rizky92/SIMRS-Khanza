@@ -464,7 +464,7 @@ public class PCareDataPemberianTindakan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void DTPCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari1KeyPressed
@@ -556,253 +556,252 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-    if(TabRawat.getSelectedIndex()==0){
-        if(tbDokter.getSelectedRow()!= -1){
-            if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
-                TCari.requestFocus();
-            }else{
-                Sequel.AutoComitFalse();
-                sukses=true;
-                ttljasasarana=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString());
-                ttlbhp=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString());
-                ttljmdokter=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString());
-                ttljmperawat=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),12).toString());
-                ttlkso=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),13).toString());
-                ttlmenejemen=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),14).toString());
-                ttlpendapatan=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString());
+        if(TabRawat.getSelectedIndex()==0){
+            if(tbDokter.getSelectedRow()!= -1){
+                if(Sequel.cariRegistrasi(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString())>0){
+                    JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+                    TCari.requestFocus();
+                }else{
+                    Sequel.AutoComitFalse();
+                    sukses=true;
+                    ttljasasarana=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString());
+                    ttlbhp=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),10).toString());
+                    ttljmdokter=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),11).toString());
+                    ttljmperawat=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),12).toString());
+                    ttlkso=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),13).toString());
+                    ttlmenejemen=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),14).toString());
+                    ttlpendapatan=Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),15).toString());
 
-                Sequel.deleteTampJurnal();
-                if(ttlpendapatan>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan(), "Suspen Piutang Tindakan Ralan", 0, ttlpendapatan);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getTindakan_Ralan(), "Pendapatan Tindakan Rawat Jalan", ttlpendapatan, 0);
-                }
-                if(ttljmdokter>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Medik_Dokter_Tindakan_Ralan(), "Beban Jasa Medik Dokter Tindakan Ralan", 0, ttljmdokter);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Medik_Dokter_Tindakan_Ralan(), "Utang Jasa Medik Dokter Tindakan Ralan", ttljmdokter, 0);
-                }
-                if(ttljmperawat>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Medik_Paramedis_Tindakan_Ralan(), "Beban Jasa Medik Paramedis Tindakan Ralan", 0, ttljmperawat);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Medik_Paramedis_Tindakan_Ralan(), "Utang Jasa Medik Paramedis Tindakan Ralan", ttljmperawat, 0);
-                }
-                if(ttlkso>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_KSO_Tindakan_Ralan(), "Beban KSO Tindakan Ralan", 0, ttlkso);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_KSO_Tindakan_Ralan(), "Utang KSO Tindakan Ralan", ttlkso, 0);
-                }
-                if(ttlmenejemen>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Menejemen_Tindakan_Ralan(), "Beban Jasa Manajemen Tindakan Ralan", 0, ttlmenejemen);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Menejemen_Tindakan_Ralan(), "Utang Jasa Manajemen Tindakan Ralan", ttlmenejemen, 0);
-                }
-                if(ttljasasarana>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Sarana_Tindakan_Ralan(), "Beban Jasa Sarana Tindakan Ralan", 0, ttljasasarana);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Sarana_Tindakan_Ralan(), "Utang Jasa Sarana Tindakan Ralan", ttljasasarana, 0);
-                }
-                if(ttlbhp>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getHPP_BHP_Tindakan_Ralan(), "HPP BHP Tindakan Ralan", 0, ttlbhp);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getPersediaan_BHP_Tindakan_Ralan(), "Persediaan BHP Tindakan Ralan", ttlbhp, 0);
-                }
-                if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                    Sequel.deleteTampJurnal();
+                    if(ttlpendapatan>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan(), "Suspen Piutang Tindakan Ralan", 0, ttlpendapatan);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getTindakan_Ralan(), "Pendapatan Tindakan Rawat Jalan", ttlpendapatan, 0);
+                    }
+                    if(ttljmdokter>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Medik_Dokter_Tindakan_Ralan(), "Beban Jasa Medik Dokter Tindakan Ralan", 0, ttljmdokter);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Medik_Dokter_Tindakan_Ralan(), "Utang Jasa Medik Dokter Tindakan Ralan", ttljmdokter, 0);
+                    }
+                    if(ttljmperawat>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Medik_Paramedis_Tindakan_Ralan(), "Beban Jasa Medik Paramedis Tindakan Ralan", 0, ttljmperawat);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Medik_Paramedis_Tindakan_Ralan(), "Utang Jasa Medik Paramedis Tindakan Ralan", ttljmperawat, 0);
+                    }
+                    if(ttlkso>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_KSO_Tindakan_Ralan(), "Beban KSO Tindakan Ralan", 0, ttlkso);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_KSO_Tindakan_Ralan(), "Utang KSO Tindakan Ralan", ttlkso, 0);
+                    }
+                    if(ttlmenejemen>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Menejemen_Tindakan_Ralan(), "Beban Jasa Manajemen Tindakan Ralan", 0, ttlmenejemen);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Menejemen_Tindakan_Ralan(), "Utang Jasa Manajemen Tindakan Ralan", ttlmenejemen, 0);
+                    }
+                    if(ttljasasarana>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Sarana_Tindakan_Ralan(), "Beban Jasa Sarana Tindakan Ralan", 0, ttljasasarana);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Sarana_Tindakan_Ralan(), "Utang Jasa Sarana Tindakan Ralan", ttljasasarana, 0);
+                    }
+                    if(ttlbhp>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getHPP_BHP_Tindakan_Ralan(), "HPP BHP Tindakan Ralan", 0, ttlbhp);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getPersediaan_BHP_Tindakan_Ralan(), "Persediaan BHP Tindakan Ralan", ttlbhp, 0);
+                    }
+                    if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
 
-                if(sukses==true){
-                    Sequel.queryu2("delete from pcare_tindakan_ralan_diberikan where "+
-                        "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
-                        "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
-                        "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
-                        "and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
-                    Sequel.queryu2("delete from rawat_jl_dr where "+
-                        "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
-                        "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
-                        "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
-                        "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
-                    Sequel.queryu2("delete from rawat_jl_pr where "+
-                        "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
-                        "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
-                        "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
-                        "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
-                    Sequel.queryu2("delete from rawat_jl_drpr where "+
-                        "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
-                        "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
-                        "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
-                        "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+                    if(sukses==true){
+                        Sequel.queryu2("delete from pcare_tindakan_ralan_diberikan where "+
+                            "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
+                            "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
+                            "and jam='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+                        Sequel.queryu2("delete from rawat_jl_dr where "+
+                            "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
+                            "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
+                            "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+                        Sequel.queryu2("delete from rawat_jl_pr where "+
+                            "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
+                            "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
+                            "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
+                        Sequel.queryu2("delete from rawat_jl_drpr where "+
+                            "no_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),7).toString()+"' "+
+                            "and tgl_perawatan='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()+"' "+
+                            "and jam_rawat='"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+"'");
 
-                    try {
-                        URL = link+"/tindakan/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString()+"/kunjungan/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString();
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
-                        utc=String.valueOf(api.GetUTCdatetimeAsString());
-                        headers.add("X-timestamp",utc);
-                        headers.add("X-signature",api.getHmac());
-                        headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
-                        headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
-                        requestEntity = new HttpEntity(headers);
-                        root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.DELETE, requestEntity, String.class).getBody());
-                        nameNode = root.path("metaData");
-                        System.out.println("code : "+nameNode.path("code").asText());
-                        System.out.println("message : "+nameNode.path("message").asText());
-                        if(!nameNode.path("code").asText().equals("200")){
+                        try {
+                            URL = link+"/tindakan/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString()+"/kunjungan/"+tbDokter.getValueAt(tbDokter.getSelectedRow(),2).toString();
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
+                            utc=String.valueOf(api.GetUTCdatetimeAsString());
+                            headers.add("X-timestamp",utc);
+                            headers.add("X-signature",api.getHmac());
+                            headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
+                            headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
+                            requestEntity = new HttpEntity(headers);
+                            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.DELETE, requestEntity, String.class).getBody());
+                            nameNode = root.path("metaData");
+                            System.out.println("code : "+nameNode.path("code").asText());
+                            System.out.println("message : "+nameNode.path("message").asText());
+                            if(!nameNode.path("code").asText().equals("200")){
+                                sukses=false;
+                                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+                            }
+                        }catch (Exception ex) {
                             sukses=false;
-                            JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
-                        }
-                    }catch (Exception ex) {
-                        sukses=false;
-                        System.out.println("Notifikasi Bridging : "+ex);
-                        if(ex.toString().contains("UnknownHostException")){
-                            JOptionPane.showMessageDialog(null,"Koneksi ke server PCare terputus...!");
-                        }else if(ex.toString().contains("500")){
-                            JOptionPane.showMessageDialog(null,"Server PCare baru ngambek broooh...!");
-                        }else if(ex.toString().contains("401")){
-                            JOptionPane.showMessageDialog(null,"Username/Password salah. Lupa password? Wani piro...!");
-                        }else if(ex.toString().contains("408")){
-                            JOptionPane.showMessageDialog(null,"Time out, hayati lelah baaaang...!");
-                        }else if(ex.toString().contains("424")){
-                            JOptionPane.showMessageDialog(null,"Ambil data masternya yang bener dong coy...!");
-                        }else if(ex.toString().contains("412")){
-                            JOptionPane.showMessageDialog(null,"Tidak sesuai kondisi. Aku, kamu end...!");
-                        }else if(ex.toString().contains("204")){
-                            JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
+                            System.out.println("Notifikasi Bridging : "+ex);
+                            if(ex.toString().contains("UnknownHostException")){
+                                JOptionPane.showMessageDialog(null,"Koneksi ke server PCare terputus...!");
+                            }else if(ex.toString().contains("500")){
+                                JOptionPane.showMessageDialog(null,"Server PCare baru ngambek broooh...!");
+                            }else if(ex.toString().contains("401")){
+                                JOptionPane.showMessageDialog(null,"Username/Password salah. Lupa password? Wani piro...!");
+                            }else if(ex.toString().contains("408")){
+                                JOptionPane.showMessageDialog(null,"Time out, hayati lelah baaaang...!");
+                            }else if(ex.toString().contains("424")){
+                                JOptionPane.showMessageDialog(null,"Ambil data masternya yang bener dong coy...!");
+                            }else if(ex.toString().contains("412")){
+                                JOptionPane.showMessageDialog(null,"Tidak sesuai kondisi. Aku, kamu end...!");
+                            }else if(ex.toString().contains("204")){
+                                JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
+                            }
                         }
                     }
-                }
 
-                if(sukses==true){
-                    Sequel.Commit();
-                    runBackground(() ->tampil());
-                }else{
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                    Sequel.RollBack();
-                }
+                    if(sukses==true){
+                        Sequel.Commit();
+                        runBackground(() ->tampil());
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                        Sequel.RollBack();
+                    }
 
-                Sequel.AutoComitTrue();
-            }
-        }else{
-            JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data peserta...!!!!");
-            TCari.requestFocus();
-        }
-    }else if(TabRawat.getSelectedIndex()==1){
-        if(tbDokter2.getSelectedRow()!= -1){
-            if(Sequel.cariRegistrasi(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString())>0){
-                JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
-                TCari.requestFocus();
+                    Sequel.AutoComitTrue();
+                }
             }else{
-                Sequel.AutoComitFalse();
-                sukses=true;
-                ttljasasarana=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),9).toString());
-                ttlbhp=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),10).toString());
-                ttljmdokter=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),11).toString());
-                ttljmperawat=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),12).toString());
-                ttlkso=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),13).toString());
-                ttlmenejemen=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),14).toString());
-                ttlpendapatan=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),15).toString());
+                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data peserta...!!!!");
+                TCari.requestFocus();
+            }
+        }else if(TabRawat.getSelectedIndex()==1){
+            if(tbDokter2.getSelectedRow()!= -1){
+                if(Sequel.cariRegistrasi(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString())>0){
+                    JOptionPane.showMessageDialog(rootPane,"Data billing sudah terverifikasi, data tidak boleh dihapus.\nSilahkan hubungi bagian kasir/keuangan ..!!");
+                    TCari.requestFocus();
+                }else{
+                    Sequel.AutoComitFalse();
+                    sukses=true;
+                    ttljasasarana=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),9).toString());
+                    ttlbhp=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),10).toString());
+                    ttljmdokter=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),11).toString());
+                    ttljmperawat=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),12).toString());
+                    ttlkso=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),13).toString());
+                    ttlmenejemen=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),14).toString());
+                    ttlpendapatan=Double.parseDouble(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),15).toString());
 
-                Sequel.deleteTampJurnal();
-                if(ttlpendapatan>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap(), "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getTindakan_Ranap(), "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
-                }
-                if(ttljmdokter>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Medik_Dokter_Tindakan_Ranap(), "Beban Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Medik_Dokter_Tindakan_Ranap(), "Utang Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
-                }
-                if(ttljmperawat>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Medik_Paramedis_Tindakan_Ranap(), "Beban Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Medik_Paramedis_Tindakan_Ranap(), "Utang Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
-                }
-                if(ttlkso>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_KSO_Tindakan_Ranap(), "Beban KSO Tindakan Ranap", 0, ttlkso);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_KSO_Tindakan_Ranap(), "Utang KSO Tindakan Ranap", ttlkso, 0);
-                }
-                if(ttlmenejemen>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Menejemen_Tindakan_Ranap(), "Beban Jasa Manajemen Tindakan Ranap", 0, ttlmenejemen);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Menejemen_Tindakan_Ranap(), "Utang Jasa Manajemen Tindakan Ranap", ttlmenejemen, 0);
-                }
-                if(ttljasasarana>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Sarana_Tindakan_Ranap(), "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Sarana_Tindakan_Ranap(), "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
-                }
-                if(ttlbhp>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getHPP_BHP_Tindakan_Ranap(), "HPP BHP Tindakan Ranap", 0, ttlbhp);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getPersediaan_BHP_Tindakan_Ranap(), "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
-                }
-                if (sukses) sukses = jur.simpanJurnal(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                    Sequel.deleteTampJurnal();
+                    if(ttlpendapatan>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap(), "Suspen Piutang Tindakan Ranap", 0, ttlpendapatan);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getTindakan_Ranap(), "Pendapatan Tindakan Rawat Inap", ttlpendapatan, 0);
+                    }
+                    if(ttljmdokter>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Medik_Dokter_Tindakan_Ranap(), "Beban Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Medik_Dokter_Tindakan_Ranap(), "Utang Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
+                    }
+                    if(ttljmperawat>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Medik_Paramedis_Tindakan_Ranap(), "Beban Jasa Medik Paramedis Tindakan Ranap", 0, ttljmperawat);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Medik_Paramedis_Tindakan_Ranap(), "Utang Jasa Medik Paramedis Tindakan Ranap", ttljmperawat, 0);
+                    }
+                    if(ttlkso>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_KSO_Tindakan_Ranap(), "Beban KSO Tindakan Ranap", 0, ttlkso);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_KSO_Tindakan_Ranap(), "Utang KSO Tindakan Ranap", ttlkso, 0);
+                    }
+                    if(ttlmenejemen>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Menejemen_Tindakan_Ranap(), "Beban Jasa Manajemen Tindakan Ranap", 0, ttlmenejemen);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Menejemen_Tindakan_Ranap(), "Utang Jasa Manajemen Tindakan Ranap", ttlmenejemen, 0);
+                    }
+                    if(ttljasasarana>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Sarana_Tindakan_Ranap(), "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Sarana_Tindakan_Ranap(), "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                    }
+                    if(ttlbhp>0){
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getHPP_BHP_Tindakan_Ranap(), "HPP BHP Tindakan Ranap", 0, ttlbhp);
+                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getPersediaan_BHP_Tindakan_Ranap(), "Persediaan BHP Tindakan Ranap", ttlbhp, 0);
+                    }
+                    if (sukses) sukses = jur.simpanJurnal(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
 
-                if(sukses==true){
-                    Sequel.queryu2("delete from pcare_tindakan_ranap_diberikan where "+
-                        "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
-                        "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
-                        "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
-                        "and jam='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
-                    Sequel.queryu2("delete from rawat_inap_dr where "+
-                        "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
-                        "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
-                        "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
-                        "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
-                    Sequel.queryu2("delete from rawat_inap_pr where "+
-                        "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
-                        "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
-                        "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
-                        "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
-                    Sequel.queryu2("delete from rawat_inap_drpr where "+
-                        "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
-                        "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
-                        "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
-                        "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
-                    try {
-                        URL = link+"/tindakan/"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),6).toString()+"/kunjungan/"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),2).toString();
-                        headers = new HttpHeaders();
-                        headers.setContentType(MediaType.APPLICATION_JSON);
-                        headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
-                        utc=String.valueOf(api.GetUTCdatetimeAsString());
-                        headers.add("X-timestamp",utc);
-                        headers.add("X-signature",api.getHmac());
-                        headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
-                        headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
-                        requestEntity = new HttpEntity(headers);
-                        root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.DELETE, requestEntity, String.class).getBody());
-                        nameNode = root.path("metaData");
-                        System.out.println("code : "+nameNode.path("code").asText());
-                        System.out.println("message : "+nameNode.path("message").asText());
-                        if(!nameNode.path("code").asText().equals("200")){
+                    if(sukses==true){
+                        Sequel.queryu2("delete from pcare_tindakan_ranap_diberikan where "+
+                            "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
+                            "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
+                            "and jam='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
+                        Sequel.queryu2("delete from rawat_inap_dr where "+
+                            "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
+                            "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
+                            "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
+                        Sequel.queryu2("delete from rawat_inap_pr where "+
+                            "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
+                            "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
+                            "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
+                        Sequel.queryu2("delete from rawat_inap_drpr where "+
+                            "no_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString()+"' "+
+                            "and kd_jenis_prw='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),7).toString()+"' "+
+                            "and tgl_perawatan='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),0).toString()+"' "+
+                            "and jam_rawat='"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),1).toString()+"'");
+                        try {
+                            URL = link+"/tindakan/"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),6).toString()+"/kunjungan/"+tbDokter2.getValueAt(tbDokter2.getSelectedRow(),2).toString();
+                            headers = new HttpHeaders();
+                            headers.setContentType(MediaType.APPLICATION_JSON);
+                            headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
+                            utc=String.valueOf(api.GetUTCdatetimeAsString());
+                            headers.add("X-timestamp",utc);
+                            headers.add("X-signature",api.getHmac());
+                            headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
+                            headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
+                            requestEntity = new HttpEntity(headers);
+                            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.DELETE, requestEntity, String.class).getBody());
+                            nameNode = root.path("metaData");
+                            System.out.println("code : "+nameNode.path("code").asText());
+                            System.out.println("message : "+nameNode.path("message").asText());
+                            if(!nameNode.path("code").asText().equals("200")){
+                                sukses=false;
+                                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+                            }
+                        }catch (Exception ex) {
                             sukses=false;
-                            JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
-                        }
-                    }catch (Exception ex) {
-                        sukses=false;
-                        System.out.println("Notifikasi Bridging : "+ex);
-                        if(ex.toString().contains("UnknownHostException")){
-                            JOptionPane.showMessageDialog(null,"Koneksi ke server PCare terputus...!");
-                        }else if(ex.toString().contains("500")){
-                            JOptionPane.showMessageDialog(null,"Server PCare baru ngambek broooh...!");
-                        }else if(ex.toString().contains("401")){
-                            JOptionPane.showMessageDialog(null,"Username/Password salah. Lupa password? Wani piro...!");
-                        }else if(ex.toString().contains("408")){
-                            JOptionPane.showMessageDialog(null,"Time out, hayati lelah baaaang...!");
-                        }else if(ex.toString().contains("424")){
-                            JOptionPane.showMessageDialog(null,"Ambil data masternya yang bener dong coy...!");
-                        }else if(ex.toString().contains("412")){
-                            JOptionPane.showMessageDialog(null,"Tidak sesuai kondisi. Aku, kamu end...!");
-                        }else if(ex.toString().contains("204")){
-                            JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
+                            System.out.println("Notifikasi Bridging : "+ex);
+                            if(ex.toString().contains("UnknownHostException")){
+                                JOptionPane.showMessageDialog(null,"Koneksi ke server PCare terputus...!");
+                            }else if(ex.toString().contains("500")){
+                                JOptionPane.showMessageDialog(null,"Server PCare baru ngambek broooh...!");
+                            }else if(ex.toString().contains("401")){
+                                JOptionPane.showMessageDialog(null,"Username/Password salah. Lupa password? Wani piro...!");
+                            }else if(ex.toString().contains("408")){
+                                JOptionPane.showMessageDialog(null,"Time out, hayati lelah baaaang...!");
+                            }else if(ex.toString().contains("424")){
+                                JOptionPane.showMessageDialog(null,"Ambil data masternya yang bener dong coy...!");
+                            }else if(ex.toString().contains("412")){
+                                JOptionPane.showMessageDialog(null,"Tidak sesuai kondisi. Aku, kamu end...!");
+                            }else if(ex.toString().contains("204")){
+                                JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
+                            }
                         }
                     }
-                }
 
-                if(sukses==true){
-                    Sequel.Commit();
-                    tampil2();
-                }else{
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                    Sequel.RollBack();
-                }
+                    if(sukses==true){
+                        Sequel.Commit();
+                        tampil2();
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                        Sequel.RollBack();
+                    }
 
-                Sequel.AutoComitTrue();
+                    Sequel.AutoComitTrue();
+                }
+            }else{
+                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data peserta...!!!!");
+                TCari.requestFocus();
             }
-        }else{
-            JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data peserta...!!!!");
-            TCari.requestFocus();
         }
-    }
-
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed

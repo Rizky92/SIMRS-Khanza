@@ -887,20 +887,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 int row=tabMode.getRowCount();
                 for(i=0;i<row;i++){
                     Sequel.menyimpan("temporary","'"+i+"','"+
-                                    tabMode.getValueAt(i,0).toString()+"','"+
-                                    tabMode.getValueAt(i,1).toString()+"','"+
-                                    tabMode.getValueAt(i,2).toString()+"','"+
-                                    tabMode.getValueAt(i,3).toString()+"','"+
-                                    tabMode.getValueAt(i,4).toString()+"','"+
-                                    tabMode.getValueAt(i,5).toString()+"','"+
-                                    tabMode.getValueAt(i,6).toString()+"','"+
-                                    tabMode.getValueAt(i,7).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Stok Keluar");
+                        tabMode.getValueAt(i,0).toString()+"','"+
+                        tabMode.getValueAt(i,1).toString()+"','"+
+                        tabMode.getValueAt(i,2).toString()+"','"+
+                        tabMode.getValueAt(i,3).toString()+"','"+
+                        tabMode.getValueAt(i,4).toString()+"','"+
+                        tabMode.getValueAt(i,5).toString()+"','"+
+                        tabMode.getValueAt(i,6).toString()+"','"+
+                        tabMode.getValueAt(i,7).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Stok Keluar");
                 }
                 i++;
                 Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Stok Keluar");
                 i++;
                 Sequel.menyimpan("temporary","'"+i+"','Total','','','','','','','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Stok Keluar");
-
                 Map<String, Object> param = new HashMap<>();
                 param.put("namars",akses.getnamars());
                 param.put("alamatrs",akses.getalamatrs());
@@ -996,7 +995,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             TCari.requestFocus();
         }else if(tbDokter.getSelectedRow()<= -1){
-                JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
             if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
                 Valid.textKosong(TCari,"No.Keluar");

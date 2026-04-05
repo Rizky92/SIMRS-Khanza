@@ -624,21 +624,21 @@ public class InventarisSuplier extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptSuplier.jasper","report","::[ Data Suplier ]::","select inventaris_suplier.kode_suplier, inventaris_suplier.nama_suplier, "+
-                    " inventaris_suplier.alamat,inventaris_suplier.kota, inventaris_suplier.no_telp,inventaris_suplier.nama_bank,inventaris_suplier.rekening from inventaris_suplier "+
-                    " where inventaris_suplier.kode_suplier like '%"+TCari.getText().trim()+"%' or "+
-                    " inventaris_suplier.nama_suplier like '%"+TCari.getText().trim()+"%' or "+
-                    " inventaris_suplier.alamat like '%"+TCari.getText().trim()+"%' or "+
-                    " inventaris_suplier.kota like '%"+TCari.getText().trim()+"%' or "+
-                    " inventaris_suplier.nama_bank like '%"+TCari.getText().trim()+"%' or "+
-                    " inventaris_suplier.no_telp like '%"+TCari.getText().trim()+"%' order by inventaris_suplier.kode_suplier",param);
+                " inventaris_suplier.alamat,inventaris_suplier.kota, inventaris_suplier.no_telp,inventaris_suplier.nama_bank,inventaris_suplier.rekening from inventaris_suplier "+
+                " where inventaris_suplier.kode_suplier like '%"+TCari.getText().trim()+"%' or "+
+                " inventaris_suplier.nama_suplier like '%"+TCari.getText().trim()+"%' or "+
+                " inventaris_suplier.alamat like '%"+TCari.getText().trim()+"%' or "+
+                " inventaris_suplier.kota like '%"+TCari.getText().trim()+"%' or "+
+                " inventaris_suplier.nama_bank like '%"+TCari.getText().trim()+"%' or "+
+                " inventaris_suplier.no_telp like '%"+TCari.getText().trim()+"%' order by inventaris_suplier.kode_suplier",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -665,7 +665,7 @@ public class InventarisSuplier extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -725,7 +725,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

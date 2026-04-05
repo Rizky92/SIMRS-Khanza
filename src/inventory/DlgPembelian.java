@@ -820,12 +820,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }
                         if(sukses==true){
                             Sequel.deleteTampJurnal();
-                            if (sukses) sukses = Sequel.insertTampJurnal(Pengadaan_Obat, "PEMBELIAN", ttl, 0);
-                            if(ppn>0){
-                                if (sukses) sukses = Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Obat", ppn, 0);
+                            if(Sequel.insertTampJurnal(Pengadaan_Obat, "PEMBELIAN", ttl, 0)==false){
+                                sukses=false;
                             }
-                            if (sukses) sukses = Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), 0, (ttl + ppn));
-                            if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                            if(ppn>0){
+                                if(Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Obat", ppn, 0)==false){
+                                    sukses=false;
+                                }
+                            }
+                            if(Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), 0, (ttl + ppn))==false){
+                                sukses=false;
+                            }
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                            }
                         }
                     }else{
                         sukses=false;
@@ -835,7 +843,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(sukses==true){
                         Sequel.Commit();
                     }else{
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                         Sequel.RollBack();
                     }
                     Sequel.AutoComitTrue();
@@ -871,6 +878,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         LTotal2.setText("0");
                         LPpn.setText("0");
                         LTagiha.setText("0");
+                    }else{
+                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     }
                     autoNomor();
                 } catch (Exception ex) {
@@ -921,15 +930,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt(0,i,8);
-                tbDokter.setValueAt(0,i,9);
-                tbDokter.setValueAt(0,i,10);
-                tbDokter.setValueAt(0,i,11);
-                tbDokter.setValueAt(0,i,12);
-                tbDokter.setValueAt("",i,13);
-            }
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt(0,i,8);
+            tbDokter.setValueAt(0,i,9);
+            tbDokter.setValueAt(0,i,10);
+            tbDokter.setValueAt(0,i,11);
+            tbDokter.setValueAt(0,i,12);
+            tbDokter.setValueAt("",i,13);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void NoFakturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoFakturKeyPressed
@@ -1221,7 +1230,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             getData();
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_DELETE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
@@ -1234,7 +1244,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             tbDokter.setValueAt("", tbDokter.getSelectedRow(),10);
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_BACK_SPACE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
@@ -1255,7 +1266,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }
                     } catch (Exception e) {
-                    }   break;
+                    }
+                    break;
                 case KeyEvent.VK_SHIFT:
                     TCari.setText("");
                     TCari.requestFocus();
@@ -1276,7 +1288,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else if((tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==8)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==13)){
                         setKonversi(tbDokter.getSelectedRow());
                         getData();
-                    }break;
+                    }
+                    break;
                 case KeyEvent.VK_SPACE:
                     if(tbDokter.getSelectedColumn()==1){
                         y=0;
@@ -1342,7 +1355,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }else{
                             JOptionPane.showMessageDialog(null,"Silahkan masukkan jumlah pembelian terelebih dahulu..!!");
                         }
-                    }   break;
+                    }
+                    break;
                 default:
                     break;
             }

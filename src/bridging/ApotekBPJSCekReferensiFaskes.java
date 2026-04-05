@@ -376,29 +376,6 @@ public final class ApotekBPJSCekReferensiFaskes extends javax.swing.JDialog {
             }else {
                 System.out.println("Notif Faskes 1 : "+nameNode.path("message").asText());
             }
-
-            // Request data untuk referensi PPK tingkat 2
-            URL = link + "/referensi/ppk/2/" + faskes;
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            nameNode = root.path("metaData");
-
-            if (nameNode.path("code").asText().equals("200")) {
-                tabMode.addRow(new Object[]{"B", "Faskes 2", ""});
-                response = mapper.readTree(api.Decrypt(root.path("response").asText(), utc));
-
-                if (response.path("list").isArray()) {
-                    i = 1;
-                    for (JsonNode list : response.path("list")) {
-                        tabMode.addRow(new Object[]{
-                            i + ".", list.path("kode").asText(),
-                            list.path("nama").asText()
-                        });
-                        i++;
-                    }
-                }
-            } else {
-                System.out.println("Notif Faskes 2: " + nameNode.path("message").asText());
-            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
             if(ex.toString().contains("UnknownHostException")){

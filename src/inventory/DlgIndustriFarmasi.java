@@ -596,13 +596,13 @@ public class DlgIndustriFarmasi extends javax.swing.JDialog {
                     " industrifarmasi.no_telp like '%"+TCari.getText().trim()+"%' order by industrifarmasi.kode_industri";
             }
             Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptIndustriFarmasi.jasper","report","::[ Data Industri Farmasi ]::",sql,param);
         }
         this.setCursor(Cursor.getDefaultCursor());

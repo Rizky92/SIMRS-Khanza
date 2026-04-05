@@ -318,7 +318,7 @@ public final class PCareClubProlanis extends javax.swing.JDialog {
 
     public void tampil(String kode) {
         try {
-            URL = link+"/kelompok/club/"+kode;	
+            URL = link+"/kelompok/club/"+kode;
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

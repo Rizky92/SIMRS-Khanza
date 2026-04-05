@@ -623,30 +623,29 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
             int row=tabMode.getRowCount();
             for(i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,0).toString()+"','"+
-                                tabMode.getValueAt(i,1).toString()+"','"+
-                                tabMode.getValueAt(i,2).toString()+"','"+
-                                tabMode.getValueAt(i,3).toString()+"','"+
-                                tabMode.getValueAt(i,4).toString()+"','"+
-                                tabMode.getValueAt(i,5).toString()+"','"+
-                                tabMode.getValueAt(i,6).toString()+"','"+
-                                tabMode.getValueAt(i,7).toString()+"','"+
-                                tabMode.getValueAt(i,8).toString()+"','"+
-                                tabMode.getValueAt(i,9).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Retur Beli");
+                    tabMode.getValueAt(i,0).toString()+"','"+
+                    tabMode.getValueAt(i,1).toString()+"','"+
+                    tabMode.getValueAt(i,2).toString()+"','"+
+                    tabMode.getValueAt(i,3).toString()+"','"+
+                    tabMode.getValueAt(i,4).toString()+"','"+
+                    tabMode.getValueAt(i,5).toString()+"','"+
+                    tabMode.getValueAt(i,6).toString()+"','"+
+                    tabMode.getValueAt(i,7).toString()+"','"+
+                    tabMode.getValueAt(i,8).toString()+"','"+
+                    tabMode.getValueAt(i,9).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Retur Beli");
             }
             i++;
             Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Retur Beli");
             i++;
             Sequel.menyimpan("temporary","'"+i+"','Jumlah Total :','','','','','','','',' ','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Retur Beli");
-
             Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptReturBeli.jasper","report","::[ Transaksi Retur Beli ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -803,11 +802,11 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
                                     });
                                     Trackobat.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jml_retur2"),0,"Retur Beli",akses.getkode(),rs.getString("kd_bangsal"),"Hapus",rs2.getString("no_batch"),rs2.getString("no_faktur"),rs.getString("no_retur_beli"));
                                     Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','"+rs2.getString("jml_retur2") +"','"+rs2.getString("no_batch")+"','"+rs2.getString("no_faktur")+"'",
-                                                    "stok=stok+'"+rs2.getString("jml_retur2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
+                                        "stok=stok+'"+rs2.getString("jml_retur2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
                                 }else{
                                     Trackobat.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jml_retur2"),0,"Retur Beli",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs.getString("no_retur_beli"));
                                     Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','"+rs2.getString("jml_retur2") +"','',''",
-                                                    "stok=stok+'"+rs2.getString("jml_retur2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and no_batch='' and no_faktur=''");
+                                        "stok=stok+'"+rs2.getString("jml_retur2") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal")+"' and no_batch='' and no_faktur=''");
                                 }
                             }
                         } catch (Exception e) {
@@ -826,9 +825,15 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
                             double totalDetilReturObat = Sequel.cariDoubleSmc("select sum(total) from detreturbeli where no_retur_beli = ?", rs.getString("no_retur_beli"));
 
                             Sequel.deleteTampJurnal();
-                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Ke_Suplayer from set_akun"), "RETUR PEMBELIAN", totalDetilReturObat, 0);
-                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Ke_Suplayer from set_akun"), "KAS DI TANGAN", 0, totalDetilReturObat);
-                            if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL RETUR PEMBELIAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Ke_Suplayer from set_akun"), "RETUR PEMBELIAN", totalDetilReturObat, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Ke_Suplayer from set_akun"), "KAS DI TANGAN", 0, totalDetilReturObat)==false){
+                                sukses=false;
+                            }
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL RETUR PEMBELIAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                            }
                         }
 
                         if(sukses==true){
@@ -836,13 +841,14 @@ public class DlgCariReturBeli extends javax.swing.JDialog {
                             Sequel.Commit();
                         }else{
                             sukses=false;
-                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                             Sequel.RollBack();
                         }
 
                         Sequel.AutoComitTrue();
                         if(sukses==true){
                             runBackground(() ->tampil());
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                         }
                     }
                 } catch (Exception e) {

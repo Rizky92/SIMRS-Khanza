@@ -278,7 +278,6 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
     }//GEN-LAST:event_NoKartuKeyPressed
 
     private void buttonOpenBrowserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonOpenBrowserActionPerformed
-
         String os = System.getProperty("os.name").toLowerCase();
         Runtime rt = Runtime.getRuntime();
 
@@ -358,7 +357,7 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
                         "}";
             System.out.println("JSON : "+requestJson+"\n");
             System.out.println("URL:"+link+"/validate");
-	    requestEntity = new HttpEntity(requestJson,headers);
+    	    requestEntity = new HttpEntity(requestJson,headers);
             requestJson= new String(api.getRest().exchange(link+"/validate", HttpMethod.POST, requestEntity,String.class).getBody().getBytes(StandardCharsets.UTF_16BE), StandardCharsets.UTF_8).replace("\0", "").trim();
             System.out.println("JSON : "+requestJson);
             root = mapper.readTree(requestJson);
@@ -392,7 +391,6 @@ public final class ICareRiwayatPerawatanFKTP extends javax.swing.JDialog {
 
     private void createScene() {
         Platform.runLater(new Runnable() {
-
             public void run() {
                 WebView view = new WebView();
 

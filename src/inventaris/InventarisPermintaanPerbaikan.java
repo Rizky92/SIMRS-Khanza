@@ -663,8 +663,8 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
             Valid.textKosong(deskripsi,"Deskripsi Kerusakan");
         }else {
             if(Sequel.menyimpantf("permintaan_perbaikan_inventaris","?,?,?,?,?","Nomor Permintaan",5,new String[]{
-                    nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText()
-                })==true){
+                nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText()
+            })==true){
                 Sequel.mengedit("inventaris","no_inventaris='"+no_inventaris.getText()+"'","status_barang='Perbaikan'");
                 runBackground(() ->tampil());
                 emptTeks();
@@ -728,20 +728,20 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
                 if(akses.getjml2()>=1){
                     if(akses.getkode().equals(nip.getText())){
                         if(Sequel.mengedittf("permintaan_perbaikan_inventaris","no_permintaan=?","no_permintaan=?,no_inventaris=?,nik=?,tanggal=?,deskripsi_kerusakan=?",6,new String[]{
-                                nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
-                            })==true){
-                                runBackground(() ->tampil());
-                                emptTeks();
+                            nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                        })==true){
+                            runBackground(() ->tampil());
+                            emptTeks();
                         }
                     }else{
                         JOptionPane.showMessageDialog(null,"Harus diubah oleh yang meminta perbaikan...!!");
                     }
                 }else{
                     if(Sequel.mengedittf("permintaan_perbaikan_inventaris","no_permintaan=?","no_permintaan=?,no_inventaris=?,nik=?,tanggal=?,deskripsi_kerusakan=?",6,new String[]{
-                            nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
-                        })==true){
-                            runBackground(() ->tampil());
-                            emptTeks();
+                        nopermintaan.getText(),no_inventaris.getText(),nip.getText(),Valid.SetTgl(tgl_permintaan.getSelectedItem()+"")+" "+tgl_permintaan.getSelectedItem().toString().substring(11,19),deskripsi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                    })==true){
+                        runBackground(() ->tampil());
+                        emptTeks();
                     }
                 }
             }
@@ -772,57 +772,56 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                if(nm_ruangcari.getText().equals("")&&TCari.getText().equals("")){
-                    Valid.MyReportqry("rptPermintaanPerbaikanInventaris.jasper","report","::[ Data Permintaan Perbaikan Inventaris ]::",
-                       "select permintaan_perbaikan_inventaris.no_permintaan,permintaan_perbaikan_inventaris.no_inventaris,"+
-                        "inventaris.kode_barang,inventaris_barang.nama_barang,inventaris_merk.nama_merk,inventaris_barang.thn_produksi,"+
-                        "inventaris_kategori.nama_kategori,inventaris_jenis.nama_jenis,inventaris_ruang.nama_ruang,permintaan_perbaikan_inventaris.nik,"+
-                        "pegawai.nama,pegawai.departemen,permintaan_perbaikan_inventaris.deskripsi_kerusakan,"+
-                        "permintaan_perbaikan_inventaris.tanggal from permintaan_perbaikan_inventaris "+
-                        "inner join inventaris on permintaan_perbaikan_inventaris.no_inventaris=inventaris.no_inventaris "+
-                        "inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang "+
-                        "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
-                        "inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori "+
-                        "inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis "+
-                        "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
-                        "inner join pegawai on permintaan_perbaikan_inventaris.nik=pegawai.nik where "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' order by permintaan_perbaikan_inventaris.no_permintaan",param);
-                }else{
-                    Valid.MyReportqry("rptPermintaanPerbaikanInventaris.jasper","report","::[ Data Permintaan Perbaikan Inventaris ]::",
-                       "select permintaan_perbaikan_inventaris.no_permintaan,permintaan_perbaikan_inventaris.no_inventaris,"+
-                        "inventaris.kode_barang,inventaris_barang.nama_barang,inventaris_merk.nama_merk,inventaris_barang.thn_produksi,"+
-                        "inventaris_kategori.nama_kategori,inventaris_jenis.nama_jenis,inventaris_ruang.nama_ruang,permintaan_perbaikan_inventaris.nik,"+
-                        "pegawai.nama,pegawai.departemen,permintaan_perbaikan_inventaris.deskripsi_kerusakan,"+
-                        "permintaan_perbaikan_inventaris.tanggal from permintaan_perbaikan_inventaris "+
-                        "inner join inventaris on permintaan_perbaikan_inventaris.no_inventaris=inventaris.no_inventaris "+
-                        "inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang "+
-                        "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
-                        "inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori "+
-                        "inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis "+
-                        "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
-                        "inner join pegawai on permintaan_perbaikan_inventaris.nik=pegawai.nik where "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.no_permintaan like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.no_inventaris like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris.kode_barang like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_barang.nama_barang like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_merk.nama_merk like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_barang.thn_produksi like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_kategori.nama_kategori like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_jenis.nama_jenis like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.nik like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and pegawai.nama like '%"+TCari.getText().trim()+"%' or "+
-                        "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.deskripsi_kerusakan like '%"+TCari.getText().trim()+"%' "+
-                        "order by permintaan_perbaikan_inventaris.no_permintaan",param);
-                }
-
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            if(nm_ruangcari.getText().equals("")&&TCari.getText().equals("")){
+                Valid.MyReportqry("rptPermintaanPerbaikanInventaris.jasper","report","::[ Data Permintaan Perbaikan Inventaris ]::",
+                    "select permintaan_perbaikan_inventaris.no_permintaan,permintaan_perbaikan_inventaris.no_inventaris,"+
+                    "inventaris.kode_barang,inventaris_barang.nama_barang,inventaris_merk.nama_merk,inventaris_barang.thn_produksi,"+
+                    "inventaris_kategori.nama_kategori,inventaris_jenis.nama_jenis,inventaris_ruang.nama_ruang,permintaan_perbaikan_inventaris.nik,"+
+                    "pegawai.nama,pegawai.departemen,permintaan_perbaikan_inventaris.deskripsi_kerusakan,"+
+                    "permintaan_perbaikan_inventaris.tanggal from permintaan_perbaikan_inventaris "+
+                    "inner join inventaris on permintaan_perbaikan_inventaris.no_inventaris=inventaris.no_inventaris "+
+                    "inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang "+
+                    "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
+                    "inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori "+
+                    "inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis "+
+                    "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
+                    "inner join pegawai on permintaan_perbaikan_inventaris.nik=pegawai.nik where "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' order by permintaan_perbaikan_inventaris.no_permintaan",param);
+            }else{
+                Valid.MyReportqry("rptPermintaanPerbaikanInventaris.jasper","report","::[ Data Permintaan Perbaikan Inventaris ]::",
+                    "select permintaan_perbaikan_inventaris.no_permintaan,permintaan_perbaikan_inventaris.no_inventaris,"+
+                    "inventaris.kode_barang,inventaris_barang.nama_barang,inventaris_merk.nama_merk,inventaris_barang.thn_produksi,"+
+                    "inventaris_kategori.nama_kategori,inventaris_jenis.nama_jenis,inventaris_ruang.nama_ruang,permintaan_perbaikan_inventaris.nik,"+
+                    "pegawai.nama,pegawai.departemen,permintaan_perbaikan_inventaris.deskripsi_kerusakan,"+
+                    "permintaan_perbaikan_inventaris.tanggal from permintaan_perbaikan_inventaris "+
+                    "inner join inventaris on permintaan_perbaikan_inventaris.no_inventaris=inventaris.no_inventaris "+
+                    "inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang "+
+                    "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
+                    "inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori "+
+                    "inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis "+
+                    "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
+                    "inner join pegawai on permintaan_perbaikan_inventaris.nik=pegawai.nik where "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.no_permintaan like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.no_inventaris like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris.kode_barang like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_barang.nama_barang like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_merk.nama_merk like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_barang.thn_produksi like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_kategori.nama_kategori like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and inventaris_jenis.nama_jenis like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.nik like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and pegawai.nama like '%"+TCari.getText().trim()+"%' or "+
+                    "permintaan_perbaikan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and permintaan_perbaikan_inventaris.deskripsi_kerusakan like '%"+TCari.getText().trim()+"%' "+
+                    "order by permintaan_perbaikan_inventaris.no_permintaan",param);
+            }
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -892,15 +891,15 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void nopermintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nopermintaanKeyPressed
-    Valid.pindah(evt,TCari, tgl_permintaan);
+        Valid.pindah(evt,TCari, tgl_permintaan);
     }//GEN-LAST:event_nopermintaanKeyPressed
 
     private void tgl_permintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tgl_permintaanKeyPressed
-    Valid.pindah(evt,nopermintaan,no_inventaris);
+        Valid.pindah(evt,nopermintaan,no_inventaris);
     }//GEN-LAST:event_tgl_permintaanKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1296,16 +1295,16 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
     private void getData() {
         if(tbJnsPerawatan.getSelectedRow()!= -1){
             Valid.SetTgl2(tgl_permintaan,tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),12).toString());
-             nopermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-             no_inventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-             nama_barang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-             merk.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-             kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-             jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
-             nip.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
-             nama_petugas.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
-             departemen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
-             deskripsi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
+            nopermintaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+            no_inventaris.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+            nama_barang.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()+" "+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+            merk.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
+            kategori.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
+            jenis.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
+            nip.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),9).toString());
+            nama_petugas.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
+            departemen.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),11).toString());
+            deskripsi.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),13).toString());
         }
     }
 
@@ -1344,13 +1343,13 @@ public final class InventarisPermintaanPerbaikan extends javax.swing.JDialog {
     public void isInventaris(){
         try {
             ps=koneksi.prepareStatement(
-               "select inventaris.no_inventaris,inventaris_barang.kode_barang, inventaris_barang.nama_barang, "+
-               "inventaris_merk.nama_merk,inventaris_jenis.nama_jenis,inventaris_kategori.nama_kategori "+
-               "from inventaris inner join inventaris_barang on inventaris_barang.kode_barang=inventaris.kode_barang "+
-               "inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis "+
-               "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
-               "inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori "+
-               "where inventaris.no_inventaris=?");
+                "select inventaris.no_inventaris,inventaris_barang.kode_barang, inventaris_barang.nama_barang, "+
+                "inventaris_merk.nama_merk,inventaris_jenis.nama_jenis,inventaris_kategori.nama_kategori "+
+                "from inventaris inner join inventaris_barang on inventaris_barang.kode_barang=inventaris.kode_barang "+
+                "inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis "+
+                "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
+                "inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori "+
+                "where inventaris.no_inventaris=?");
             try{
                 ps.setString(1,no_inventaris.getText());
                 rs=ps.executeQuery();

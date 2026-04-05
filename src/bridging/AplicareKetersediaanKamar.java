@@ -736,11 +736,11 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                 System.out.println("message : "+nameNode.path("message").asText());
                 if(nameNode.path("message").asText().equals("Data berhasil disimpan.")){
                     if(Sequel.menyimpantf("aplicare_ketersediaan_kamar","?,?,?,?,?,?,?,?","Data",8,new String[]{
-                            KdKelas.getText(),KdKamar.getText(),Kelas.getSelectedItem().toString(),Kapasitas.getText(),
-                            Tersedia.getText(),TersediaPria.getText(),TersediaWanita.getText(),TersediaPW.getText()
-                        })==true){
-                            emptTeks();
-                            runBackground(() ->tampil());
+                        KdKelas.getText(),KdKamar.getText(),Kelas.getSelectedItem().toString(),Kapasitas.getText(),
+                        Tersedia.getText(),TersediaPria.getText(),TersediaWanita.getText(),TersediaPW.getText()
+                    })==true){
+                        emptTeks();
+                        runBackground(() ->tampil());
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
@@ -866,7 +866,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
                         tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString(),
                         tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString(),
                         tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString()
-                      })==true){
+                    })==true){
                         emptTeks();
                         runBackground(() ->tampil());
                     }
@@ -909,16 +909,16 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptKamarAplicare.jasper","report","::[ Data Ketersediaan Kamar Aplicare]::",param);
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("parameter","%"+TCari.getText().trim()+"%");
+            Valid.MyReport("rptKamarAplicare.jasper","report","::[ Data Ketersediaan Kamar Aplicare]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -962,8 +962,6 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             runBackground(() ->tampil());
             TCari.setText("");
-        }else{
-
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
@@ -977,7 +975,7 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void KdKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKamarKeyPressed

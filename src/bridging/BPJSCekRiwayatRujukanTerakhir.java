@@ -236,7 +236,7 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
 	    requestEntity = new HttpEntity(headers);
-            URL = link+"/Rujukan/List/Peserta/"+nomorkartu;	
+            URL = link+"/Rujukan/List/Peserta/"+nomorkartu;
 	    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
@@ -261,7 +261,7 @@ public final class BPJSCekRiwayatRujukanTerakhir extends javax.swing.JDialog {
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
 	    requestEntity = new HttpEntity(headers);
-            URL = link+"/Rujukan/RS/List/Peserta/"+nomorkartu;	
+            URL = link+"/Rujukan/RS/List/Peserta/"+nomorkartu;
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){

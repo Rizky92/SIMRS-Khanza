@@ -799,10 +799,4 @@ public class InhealthReferensiJenpelRuang extends javax.swing.JDialog {
             Tarif.setText(tabMode.getValueAt(row,5).toString());
         }
     }
-
-
-
-
-
-
 }

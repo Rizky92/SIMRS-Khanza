@@ -652,7 +652,6 @@ public final class DlgCariPPNObat extends javax.swing.JDialog {
                     "group by piutang.nota_piutang order by piutang.tgl_piutang,piutang.nota_piutang ",param);
             }
         }
-
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 

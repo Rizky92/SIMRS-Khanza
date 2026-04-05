@@ -106,7 +106,7 @@ public class ApiCareStream {
                                 "}";
                     System.out.println("JSON : "+requestJson);
                     System.out.println("URL : "+URL+"/putOrder/");
-                    requestEntity = new HttpEntity(requestJson,headers);	
+                    requestEntity = new HttpEntity(requestJson,headers);
                     stringbalik=getRest().exchange(URL+"/putOrder/", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
                 }
@@ -187,7 +187,7 @@ public class ApiCareStream {
                                 "}";
                     System.out.println("JSON : "+requestJson);
                     System.out.println("URL : "+URL+"/putOrder/");
-                    requestEntity = new HttpEntity(requestJson,headers);	
+                    requestEntity = new HttpEntity(requestJson,headers);
                     stringbalik=getRest().exchange(URL+"/putOrder/", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
                 }

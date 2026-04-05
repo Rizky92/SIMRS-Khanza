@@ -368,7 +368,6 @@ public class DlgDaftarPermintaanStokPasien extends javax.swing.JDialog {
                     "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
                 });
             }
-
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());

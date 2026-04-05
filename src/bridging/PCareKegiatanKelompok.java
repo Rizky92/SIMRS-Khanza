@@ -1184,18 +1184,18 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));
-                param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptPCareKegiatanKelompok.jasper","report","::[ Data Kegiatan Kelompok PCare ]::",param);
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("tanggal1",Valid.SetTgl(DTPCari1.getSelectedItem()+""));
+            param.put("tanggal2",Valid.SetTgl(DTPCari2.getSelectedItem()+""));
+            param.put("parameter","%"+TCari.getText().trim()+"%");
+            Valid.MyReport("rptPCareKegiatanKelompok.jasper","report","::[ Data Kegiatan Kelompok PCare ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -1375,10 +1375,10 @@ public final class PCareKegiatanKelompok extends javax.swing.JDialog {
                     if(Sequel.menyimpantf("pcare_peserta_kegiatan_kelompok","?,?","Edu ID",2,new String[]{
                         EduId.getText(),NoRM.getText()
                     })==true){
-                       JOptionPane.showMessageDialog(null,"Data peserta berhasil disimpan..!!");
-                       NoKartu.setText("");
-                       NoRM.setText("");
-                       NmPasien.setText("");
+                        JOptionPane.showMessageDialog(null,"Data peserta berhasil disimpan..!!");
+                        NoKartu.setText("");
+                        NoRM.setText("");
+                        NmPasien.setText("");
                     }
                 }else{
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());

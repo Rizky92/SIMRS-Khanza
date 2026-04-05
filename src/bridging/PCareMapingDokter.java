@@ -517,8 +517,8 @@ public final class PCareMapingDokter extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("maping_dokter_pcare","kd_dokter=?","kd_dokter=?,kd_dokter_pcare=?,nm_dokter_pcare=?",4,new String[]{
-                        kdpoli.getText(),KdPoliPCare.getText(),NmPoliPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
-                    })==true){
+                    kdpoli.getText(),KdPoliPCare.getText(),NmPoliPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                })==true){
                     emptTeks();
                     runBackground(() ->tampil());
                 }
@@ -550,16 +550,16 @@ public final class PCareMapingDokter extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                param.put("parameter","%"+TCari.getText().trim()+"%");
-                Valid.MyReport("rptMapingDokterPCare.jasper","report","::[ Mapping Dokter RS & PCare ]::",param);
+            Map<String, Object> param = new HashMap<>();
+            param.put("namars",akses.getnamars());
+            param.put("alamatrs",akses.getalamatrs());
+            param.put("kotars",akses.getkabupatenrs());
+            param.put("propinsirs",akses.getpropinsirs());
+            param.put("kontakrs",akses.getkontakrs());
+            param.put("emailrs",akses.getemailrs());
+            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+            param.put("parameter","%"+TCari.getText().trim()+"%");
+            Valid.MyReport("rptMapingDokterPCare.jasper","report","::[ Mapping Dokter RS & PCare ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -629,45 +629,45 @@ public final class PCareMapingDokter extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliBPJSActionPerformed
-    PCareCekReferensiDokter polipcare=new PCareCekReferensiDokter(null,false);
-    polipcare.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(polipcare.getTable().getSelectedRow()!= -1){
-                KdPoliPCare.setText(polipcare.getTable().getValueAt(polipcare.getTable().getSelectedRow(),1).toString());
-                NmPoliPCare.setText(polipcare.getTable().getValueAt(polipcare.getTable().getSelectedRow(),2).toString());
-                KdPoliPCare.requestFocus();
+        PCareCekReferensiDokter polipcare=new PCareCekReferensiDokter(null,false);
+        polipcare.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(polipcare.getTable().getSelectedRow()!= -1){
+                    KdPoliPCare.setText(polipcare.getTable().getValueAt(polipcare.getTable().getSelectedRow(),1).toString());
+                    NmPoliPCare.setText(polipcare.getTable().getValueAt(polipcare.getTable().getSelectedRow(),2).toString());
+                    KdPoliPCare.requestFocus();
+                }
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
-    });
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
-    polipcare.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                polipcare.dispose();
+        polipcare.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    polipcare.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    polipcare.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    polipcare.setLocationRelativeTo(internalFrame1);
-    polipcare.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        polipcare.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        polipcare.setLocationRelativeTo(internalFrame1);
+        polipcare.setVisible(true);
     }//GEN-LAST:event_btnPoliBPJSActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -746,7 +746,7 @@ public final class PCareMapingDokter extends javax.swing.JDialog {
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
-           ps=koneksi.prepareStatement(
+            ps=koneksi.prepareStatement(
                    "select maping_dokter_pcare.kd_dokter,dokter.nm_dokter,maping_dokter_pcare.kd_dokter_pcare,maping_dokter_pcare.nm_dokter_pcare "+
                    "from maping_dokter_pcare inner join dokter on maping_dokter_pcare.kd_dokter=dokter.kd_dokter where "+
                    "maping_dokter_pcare.kd_dokter like ? or dokter.nm_dokter like ? or maping_dokter_pcare.kd_dokter_pcare like ? or maping_dokter_pcare.nm_dokter_pcare like ? order by dokter.nm_dokter");
@@ -787,10 +787,10 @@ public final class PCareMapingDokter extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-           kdpoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           TPoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KdPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NmPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+            kdpoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+            TPoli.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+            KdPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
+            NmPoliPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
         }
     }
 
@@ -806,10 +806,10 @@ public final class PCareMapingDokter extends javax.swing.JDialog {
         return tbJnsPerawatan;
     }
 
- private void runBackground(Runnable task) {
-    if (ceksukses) return;
-    if (executor.isShutdown() || executor.isTerminated()) return;
-    if (!isDisplayable()) return;
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
 
         ceksukses = true;
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
