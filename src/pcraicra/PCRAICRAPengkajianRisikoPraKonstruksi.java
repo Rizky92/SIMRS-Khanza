@@ -43,7 +43,6 @@ import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import javax.swing.text.html.StyleSheet;
 import kepegawaian.DlgCariPegawai;
-import kepegawaian.DlgCariPetugas;
 
 
 /**
@@ -2568,7 +2567,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     private void KodeManajerKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeManajerKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnPJProyekActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,KodePJProyek,KodeDirektur);
         }
     }//GEN-LAST:event_KodeManajerKeyPressed
@@ -2834,8 +2833,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     if(pegawai.getTable().getSelectedRow()!= -1){
                         KodeTimK3.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                         NamaTimK3.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                    }   
-                    KodeTimK3.requestFocus(); 
+                    }
+                    KodeTimK3.requestFocus();
                     pegawai=null;
                 }
             });
@@ -2843,15 +2842,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             pegawai.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (pegawai == null) return;
         if (!pegawai.isVisible()) {
             pegawai.emptTeks();
-        }  
+        }
         if (pegawai.isVisible()) {
             pegawai.toFront();
             return;
-        }    
+        }
         pegawai.setVisible(true);
     }//GEN-LAST:event_BtnTimK3ActionPerformed
 
@@ -2862,7 +2861,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     private void KodeTimK3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeTimK3KeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnTimK3ActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,CatatanProyek,KodePJProyek);
         }
     }//GEN-LAST:event_KodeTimK3KeyPressed
@@ -3125,7 +3124,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     private void KodeRisikoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeRisikoKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnRisikoActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,PenyebabRisikoLainnya,DibutuhkanICRA);
         }
     }//GEN-LAST:event_KodeRisikoKeyPressed
@@ -3281,7 +3280,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     private void KodePJProyekKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodePJProyekKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnPJProyekActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,KodeTimK3,KodeManajer);
         }
     }//GEN-LAST:event_KodePJProyekKeyPressed
@@ -3296,8 +3295,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     if(pegawai.getTable().getSelectedRow()!= -1){
                         KodePJProyek.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                         NamaPJProyek.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                    }   
-                    KodePJProyek.requestFocus(); 
+                    }
+                    KodePJProyek.requestFocus();
                     pegawai=null;
                 }
             });
@@ -3305,15 +3304,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             pegawai.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (pegawai == null) return;
         if (!pegawai.isVisible()) {
             pegawai.emptTeks();
-        }  
+        }
         if (pegawai.isVisible()) {
             pegawai.toFront();
             return;
-        }    
+        }
         pegawai.setVisible(true);
     }//GEN-LAST:event_BtnPJProyekActionPerformed
 
@@ -3331,8 +3330,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     if(pegawai.getTable().getSelectedRow()!= -1){
                         KodeManajer.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                         NamaManajer.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                    }   
-                    KodeManajer.requestFocus(); 
+                    }
+                    KodeManajer.requestFocus();
                     pegawai=null;
                 }
             });
@@ -3340,15 +3339,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             pegawai.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (pegawai == null) return;
         if (!pegawai.isVisible()) {
             pegawai.emptTeks();
-        }  
+        }
         if (pegawai.isVisible()) {
             pegawai.toFront();
             return;
-        }    
+        }
         pegawai.setVisible(true);
     }//GEN-LAST:event_BtnManajerActionPerformed
 
@@ -3359,7 +3358,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     private void KodeDirekturKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDirekturKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_UP){
             BtnPJProyekActionPerformed(null);
-        }else{            
+        }else{
             Valid.pindah(evt,KodeManajer,TanggalPengkajian);
         }
     }//GEN-LAST:event_KodeDirekturKeyPressed
@@ -3374,8 +3373,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     if(pegawai.getTable().getSelectedRow()!= -1){
                         KodeDirektur.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),0).toString());
                         NamaDirektur.setText(pegawai.getTable().getValueAt(pegawai.getTable().getSelectedRow(),1).toString());
-                    }   
-                    KodeDirektur.requestFocus(); 
+                    }
+                    KodeDirektur.requestFocus();
                     pegawai=null;
                 }
             });
@@ -3383,15 +3382,15 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             pegawai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             pegawai.setLocationRelativeTo(internalFrame1);
         }
-            
+
         if (pegawai == null) return;
         if (!pegawai.isVisible()) {
             pegawai.emptTeks();
-        }  
+        }
         if (pegawai.isVisible()) {
             pegawai.toFront();
             return;
-        }    
+        }
         pegawai.setVisible(true);
     }//GEN-LAST:event_BtnDirekturActionPerformed
 
