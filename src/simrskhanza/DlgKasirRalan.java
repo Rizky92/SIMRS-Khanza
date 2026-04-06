@@ -422,36 +422,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         TotalObat.setDocument(new batasInput((byte)20).getOnlyAngka(TotalObat));
         CrPtg.setDocument(new batasInput((byte)100).getKata(CrPtg));
 
-        billing.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(billing.sukses==true){
-                    if(tabModekasir.getRowCount()!=0){
-                        if(tbKasirRalan.getSelectedRow()!= -1){
-                            if(cmbStatusBayar.getSelectedItem().toString().equals("Belum Bayar")){
-                                tabModekasir.removeRow(tbKasirRalan.getSelectedRow());
-                                LCount.setText(""+tabModekasir.getRowCount());
-                            }else{
-                                tbKasirRalan.setValueAt("Sudah Bayar", tbKasirRalan.getSelectedRow(), 15);
-                            }
-                        }
-                    }
-                }
-            }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
-
         DlgCatatan.setSize(595,34);
 
         try {
