@@ -8583,7 +8583,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
         kasirralan.isCek();
-        kasirralan.setCariKosong();
         kasirralan.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         kasirralan.setLocationRelativeTo(PanelUtama);
         kasirralan.setVisible(true);

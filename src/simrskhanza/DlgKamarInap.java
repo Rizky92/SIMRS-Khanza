@@ -237,8 +237,8 @@ public class DlgKamarInap extends javax.swing.JDialog {
     private String now=dateFormat.format(date),kmr="",key="",tglmasuk,jammasuk,kd_pj,KUNCIDOKTERRANAP="",
             terbitsep="",namadokter="";
     private String tampildiagnosa = "", perJenisAsuransi = "";
-    private PreparedStatement ps,pssetjam,pscaripiutang,psdiagnosa,psibu,psanak,pstarif,psdpjp,pscariumur,pspulang;
-    private ResultSet rs,rs2,rssetjam,rspulang;
+    private PreparedStatement ps,pscaripiutang,psdiagnosa,psibu,psanak,pstarif,psdpjp,pscariumur,pspulang;
+    private ResultSet rs,rs2,rspulang;
     private int i,row=0;
     private boolean ceksukses=false;
     private double hargakamar=0;

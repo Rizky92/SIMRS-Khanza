@@ -2871,6 +2871,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("KodeDokter").asText().equalsIgnoreCase(kode)){
                         iyem=list.path("NamaDokter").asText();
+                        break;
                     }
                 }
             }
@@ -2902,6 +2903,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("NIP").asText().equalsIgnoreCase(kode)){
                         iyem=list.path("NamaPetugas").asText();
+                        break;
                     }
                 }
             }
@@ -2933,6 +2935,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("NIP").asText().equalsIgnoreCase(kode)){
                         iyem=list.path("Nama").asText();
+                        break;
                     }
                 }
             }
@@ -2964,6 +2967,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("NIP").asText().toLowerCase().equals(kode)){
                         iyem=list.path("Jabatan").asText();
+                        break;
                     }
                 }
             }
@@ -2995,6 +2999,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("NIP").asText().toLowerCase().equals(kode)){
                         iyem=list.path("Departemen").asText();
+                        break;
                     }
                 }
             }
@@ -3026,6 +3031,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("KodeKamar").asText().equalsIgnoreCase(kode)){
                         iyem=list.path("NamaKamar").asText();
+                        break;
                     }
                 }
             }
@@ -3057,6 +3063,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("NamaProp").asText().toLowerCase().equals(nama)){
                         iyem=list.path("KodeProp").asText();
+                        break;
                     }
                 }
             }
@@ -3088,6 +3095,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("NamaKab").asText().toLowerCase().equals(nama)){
                         iyem=list.path("KodeKab").asText();
+                        break;
                     }
                 }
             }
@@ -3119,6 +3127,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("NamaKec").asText().toLowerCase().equals(nama)){
                         iyem=list.path("KodeKec").asText();
+                        break;
                     }
                 }
             }
@@ -3150,6 +3159,7 @@ public final class sekuel {
                 for(JsonNode list:response){
                     if(list.path("NamaKel").asText().toLowerCase().equals(nama)){
                         iyem=list.path("KodeKel").asText();
+                        break;
                     }
                 }
             }

@@ -11,6 +11,7 @@ import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import fungsi.kodebpjs;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -960,7 +961,7 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                                 tabMode.getValueAt(i,10).toString(),"diverifikasi oleh "+KdPetugas.getText(),tabMode.getValueAt(i,1).toString(),koderekening,Piutang_BPJS_RVP,"0",Diskon_Piutang,"0",Piutang_Tidak_Terbayar
                             })==true){
                                 Sequel.mengedit("piutang_pasien","no_rawat='"+tabMode.getValueAt(i,1).toString()+"'","status='Lunas'");
-                                Sequel.mengedit("detail_piutang_pasien","no_rawat='"+tabMode.getValueAt(i,1).toString()+"'","sisapiutang=0");
+                                Sequel.queryu2("update detail_piutang_pasien set sisapiutang='0' where no_rawat=? and kd_pj=?",2,new String[]{tabMode.getValueAt(i,1).toString(),kodebpjs.getKodeBPJS()});
 
                                 if(Valid.SetAngka(tabMode.getValueAt(i,11).toString())>=100){
                                     Sequel.queryu("delete from tampjurnal_rvpbpjs");
@@ -2603,6 +2604,10 @@ public final class KeuanganRVPBPJS extends javax.swing.JDialog {
                 tampilAkunBayar();
             }
         } catch (Exception e) {
+        }
+
+        if(kodebpjs.getKodeBPJS().equals("")){
+            kodebpjs.SetKodeBPJS();
         }
 
         try {

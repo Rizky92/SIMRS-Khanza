@@ -1266,14 +1266,6 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
-            if(Valid.daysOld("./cache/akunbayar.iyem")<8){
-                runBackground(() ->tampilAkunBayar2());
-            }else{
-                runBackground(() ->tampilAkunBayar());
-            }
-        } catch (Exception e) {
-        }
-        try {
             ps=koneksi.prepareStatement(
                     "select set_akun.Diskon_Piutang,set_akun.Piutang_Tidak_Terbayar from set_akun");
             try {
@@ -1294,6 +1286,14 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
+        }
+        try {
+            if(Valid.daysOld("./cache/akunbayar.iyem")<8){
+                runBackground(() ->tampilAkunBayar2());
+            }else{
+                runBackground(() ->tampilAkunBayar());
+            }
+        } catch (Exception e) {
         }
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){

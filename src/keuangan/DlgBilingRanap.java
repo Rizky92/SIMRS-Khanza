@@ -6188,7 +6188,7 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                                     }
                                 }
 
-                                if(pengaturanbillingranap.getCentangDokterRanap().equals("Yes")){
+                                if(pengaturanbillingranap.getRincianDokterRanap().equals("Yes")){
                                     detailbhp=detailbhp+rsranapdrpr.getDouble("totalbhp");
                                     detailjs=detailjs+rsranapdrpr.getDouble("totalmaterial")+rsranapdrpr.getDouble("totaltarif_tindakanpr");
                                     tabModeRwJlDr.addRow(new Object[]{
