@@ -115,7 +115,7 @@ public final class PCareCekReferensiKhusus extends javax.swing.JDialog {
         try {
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
-            URL = prop.getProperty("URLAPIPCARE")+"/spesialis/khusus";	
+            URL = prop.getProperty("URLAPIPCARE")+"/spesialis/khusus";
         } catch (Exception e) {
             System.out.println("E : "+e);
         }

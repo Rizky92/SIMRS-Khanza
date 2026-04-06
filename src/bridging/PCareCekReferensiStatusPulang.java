@@ -336,7 +336,7 @@ public final class PCareCekReferensiStatusPulang extends javax.swing.JDialog {
 
     public void tampil(String diagnosa) {
         try {
-            URL = link+"/statuspulang/rawatInap/false";	
+            URL = link+"/statuspulang/rawatInap/false";
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
@@ -390,7 +390,7 @@ public final class PCareCekReferensiStatusPulang extends javax.swing.JDialog {
             }
         }
         try {
-            URL = link+"/statuspulang/rawatInap/true";	
+            URL = link+"/statuspulang/rawatInap/true";
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

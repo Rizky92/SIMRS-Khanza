@@ -53,7 +53,7 @@ public class ApiBPJSLZString {
                     return getBaseValue(keyStrBase64, inputStr.charAt(index));
             }
         });
-    }	
+    }
 
     public static String compressToUTF16(String input) {
         if (input == null) return "";
@@ -331,7 +331,7 @@ public class ApiBPJSLZString {
     protected static class DecData {
         public char val;
         public int position;
-        public int index;		
+        public int index;
     }
 
     public static String f(int i) {

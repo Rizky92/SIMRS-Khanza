@@ -43,7 +43,7 @@ public class BPJSCekNoKartu {
     public BPJSCekNoKartu(){
         super();
         try {
-            URL =koneksiDB.URLAPIBPJS()+"/Peserta/nokartu/";	
+            URL =koneksiDB.URLAPIBPJS()+"/Peserta/nokartu/";
         } catch (Exception e) {
             System.out.println("E : "+e);
         }

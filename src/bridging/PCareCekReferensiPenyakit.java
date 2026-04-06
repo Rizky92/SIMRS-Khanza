@@ -340,7 +340,7 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
 
     public void tampil(String diagnosa) {
         try {
-            URL = link+"/diagnosa/"+diagnosa+"/0/500";	
+            URL = link+"/diagnosa/"+diagnosa+"/0/500";
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

@@ -360,7 +360,7 @@ public final class PCareCekReferensiTindakan extends javax.swing.JDialog {
 
     public void tampil(String jenis,String key) {
         try {
-            URL = link+"/tindakan/kdTkp/"+jenis+"/0/10000";	
+            URL = link+"/tindakan/kdTkp/"+jenis+"/0/10000";
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
