@@ -188,7 +188,7 @@ public class ApiMEDQLAB {
                                 "}";
                     System.out.println("URL : "+URL+"/api/v1/saveOrder");
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);
+                    requestEntity = new HttpEntity(requestJson,headers);	
                     root = mapper.readTree(getRest().exchange(URL+"/api/v1/saveOrder", HttpMethod.POST, requestEntity, String.class).getBody());
                     if(root.path("metaData").path("code").asText().equals("200")){
                         JOptionPane.showMessageDialog(null,"Berhasil terkirim..");
@@ -324,7 +324,7 @@ public class ApiMEDQLAB {
                                 "}";
                     System.out.println("URL : "+URL+"/api/v1/saveOrder");
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);
+                    requestEntity = new HttpEntity(requestJson,headers);	
                     root = mapper.readTree(getRest().exchange(URL+"/api/v1/saveOrder", HttpMethod.POST, requestEntity, String.class).getBody());
                     if(root.path("metaData").path("code").asText().equals("200")){
                         JOptionPane.showMessageDialog(null,root.path("metaData").path("message").asText());

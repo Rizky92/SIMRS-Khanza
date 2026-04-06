@@ -272,23 +272,24 @@ public final class RekapPengajuanInventarisDepartemen extends javax.swing.JDialo
             for(int r=0;r<tabMode.getRowCount();r++){
                 if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                     Sequel.menyimpan("temporary","'"+i+"','"+
-                        tabMode.getValueAt(r,0).toString()+"','"+
-                        tabMode.getValueAt(r,1).toString()+"','"+
-                        tabMode.getValueAt(r,2).toString()+"','"+
-                        tabMode.getValueAt(r,3).toString()+"','"+
-                        tabMode.getValueAt(r,4).toString()+"','"+
-                        tabMode.getValueAt(r,5).toString()+"','"+
-                        tabMode.getValueAt(r,6).toString()+"','"+
-                        tabMode.getValueAt(r,7).toString()+"','"+
-                        tabMode.getValueAt(r,8).toString()+"','"+
-                        tabMode.getValueAt(r,9).toString()+"','"+
-                        tabMode.getValueAt(r,10).toString()+"','"+
-                        tabMode.getValueAt(r,11).toString()+"','"+
-                        tabMode.getValueAt(r,12).toString()+"','"+
-                        tabMode.getValueAt(r,13).toString()+"','"+
-                        tabMode.getValueAt(r,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Jenis Cidera");
+                                    tabMode.getValueAt(r,0).toString()+"','"+
+                                    tabMode.getValueAt(r,1).toString()+"','"+
+                                    tabMode.getValueAt(r,2).toString()+"','"+
+                                    tabMode.getValueAt(r,3).toString()+"','"+
+                                    tabMode.getValueAt(r,4).toString()+"','"+
+                                    tabMode.getValueAt(r,5).toString()+"','"+
+                                    tabMode.getValueAt(r,6).toString()+"','"+
+                                    tabMode.getValueAt(r,7).toString()+"','"+
+                                    tabMode.getValueAt(r,8).toString()+"','"+
+                                    tabMode.getValueAt(r,9).toString()+"','"+
+                                    tabMode.getValueAt(r,10).toString()+"','"+
+                                    tabMode.getValueAt(r,11).toString()+"','"+
+                                    tabMode.getValueAt(r,12).toString()+"','"+
+                                    tabMode.getValueAt(r,13).toString()+"','"+
+                                    tabMode.getValueAt(r,14).toString()+"','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Jenis Cidera");
                 }
             }
+
             Valid.MyReportqry("rptRekapPengajuanInventarisDepartemen.jasper","report","::[ Laporan Rekap Pengajuan Aset/Inventaris Per Departemen ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -344,6 +345,8 @@ public final class RekapPengajuanInventarisDepartemen extends javax.swing.JDialo
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
+        }else{
+
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 

@@ -34,7 +34,7 @@ public class DUKCAPILCekNIK {
     private String URL;
     private HttpHeaders headers;
     private HttpEntity requestEntity;
-    private RestTemplate rest = new RestTemplate();
+    private RestTemplate rest = new RestTemplate();	
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode nameNode;
@@ -60,7 +60,7 @@ public class DUKCAPILCekNIK {
                             "\"IP_USER\":\""+prop.getProperty("IPUSERDUKCAPIL")+"\"" +
                             "}";
             System.out.println("JSON dikirim : "+requestJson);
-	    requestEntity = new HttpEntity(requestJson,headers);
+	    requestEntity = new HttpEntity(requestJson,headers);	
             stringbalik=rest.exchange(URL, HttpMethod.POST, requestEntity, String.class).getBody();
             System.out.println("string balik : "+stringbalik);
             root = mapper.readTree(stringbalik);

@@ -343,7 +343,7 @@ public final class PCareCekReferensiPoli extends javax.swing.JDialog {
 
     public void tampil(String diagnosa) {
         try {
-            URL = link+"/poli/fktp/0/500";
+            URL = link+"/poli/fktp/0/500";	
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

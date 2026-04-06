@@ -361,6 +361,7 @@ public class DlgDaftarPermintaanResepPulang extends javax.swing.JDialog {
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             Sequel.queryu("delete from temporary_resep where temp37='"+akses.getalamatip()+"'");
+
             for(int i=0;i<tabMode.getRowCount();i++){
                 Sequel.menyimpan("temporary_resep","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?",38,new String[]{
                     ""+i,tabMode.getValueAt(i,0).toString(),tabMode.getValueAt(i,1).toString(),tabMode.getValueAt(i,2).toString(),
@@ -368,6 +369,7 @@ public class DlgDaftarPermintaanResepPulang extends javax.swing.JDialog {
                     "","","","","","","","","","","","","","","","","","","","","","","","","","","","","","",akses.getalamatip()
                 });
             }
+
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());

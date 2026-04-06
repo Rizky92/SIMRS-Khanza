@@ -337,7 +337,7 @@ public final class SisruteCekReferensiFaskes extends javax.swing.JDialog {
                 URL = link+"/referensi/faskes";
             }else{
                 URL = link+"/referensi/faskes?query="+faskes;
-            }    
+            }    	
 
             headers = new HttpHeaders();
 	   headers.add("X-cons-id",idrs);

@@ -149,7 +149,7 @@ public class ApiSOFTMEDIX {
                                     "}"+
                                 "}";
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);
+                    requestEntity = new HttpEntity(requestJson,headers);	
                     System.out.println("URL : "+URLAPISOFTMEDIX+"/order");
                     stringbalik=getRest().exchange(URLAPISOFTMEDIX+"/order", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
@@ -266,7 +266,7 @@ public class ApiSOFTMEDIX {
                                     "}"+
                                 "}";
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);
+                    requestEntity = new HttpEntity(requestJson,headers);	
                     System.out.println("URL : "+URLAPISOFTMEDIX+"/order");
                     stringbalik=getRest().exchange(URLAPISOFTMEDIX+"/order", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);

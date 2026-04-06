@@ -517,8 +517,8 @@ public final class PCareMapingTindakanRanap extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("maping_tindakan_ranap_pcare","kd_jenis_prw=?","kd_jenis_prw=?,kd_tindakan_pcare=?,nm_tindakan_pcare=?",4,new String[]{
-                    kdtindakan.getText(),KdTindakanPCare.getText(),NmTindakanPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
-                })==true){
+                        kdtindakan.getText(),KdTindakanPCare.getText(),NmTindakanPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                    })==true){
                     emptTeks();
                     runBackground(() ->tampil());
                 }
@@ -550,16 +550,16 @@ public final class PCareMapingTindakanRanap extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("parameter","%"+TCari.getText().trim()+"%");
-            Valid.MyReport("rptMapingTindakanRanapPCare.jasper","report","::[ Mapping Tindakan Ranap di PCare ]::",param);
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                Valid.MyReport("rptMapingTindakanRanapPCare.jasper","report","::[ Mapping Tindakan Ranap di PCare ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

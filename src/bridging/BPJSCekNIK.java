@@ -58,7 +58,7 @@ public class BPJSCekNIK {
 	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
 	    requestEntity = new HttpEntity(headers);
-            URL = link+"/Peserta/nik/"+nik+"/tglSEP/"+dateFormat.format(date);
+            URL = link+"/Peserta/nik/"+nik+"/tglSEP/"+dateFormat.format(date);	
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             System.out.println("code : "+nameNode.path("code").asText());

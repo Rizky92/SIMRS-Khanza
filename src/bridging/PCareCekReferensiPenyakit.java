@@ -66,7 +66,7 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
 
         this.setLocation(10,2);
         setSize(628,674);
-        tabMode=new DefaultTableModel(null,new String[]{"No.","Kode ICD X","Nama Penyakit","Non Spesialis"}){
+        tabMode=new DefaultTableModel(null,new String[]{"No.","Kode ICD X","Nama Penyakit"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbKamar.setModel(tabMode);
@@ -75,16 +75,14 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 3; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(40);
             }else if(i==1){
                 column.setPreferredWidth(140);
             }else if(i==2){
-                column.setPreferredWidth(400);
-            }else if(i==3){
-                column.setPreferredWidth(80);
+                column.setPreferredWidth(470);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -342,18 +340,19 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
 
     public void tampil(String diagnosa) {
         try {
-            URL = link+"/diagnosa/"+diagnosa+"/0/500";
+            URL = link+"/diagnosa/"+diagnosa+"/0/500";	
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("X-timestamp",utc);
-            headers.add("X-signature",api.getHmac());
+	    headers.add("X-timestamp",utc);
+	    headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
-	        requestEntity = new HttpEntity(headers);
+	    requestEntity = new HttpEntity(headers);
             System.out.println("URL : "+URL);
-	        //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+	    //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             //System.out.println("code : "+nameNode.path("code").asText());
@@ -365,7 +364,7 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
                     i=1;
                     for(JsonNode list:response.path("list")){
                         tabMode.addRow(new Object[]{
-                            i+".",list.path("kdDiag").asText(),list.path("nmDiag").asText(),list.path("nonSpesialis").asText()
+                            i+".",list.path("kdDiag").asText(),list.path("nmDiag").asText()
                         });
                         i++;
                     }

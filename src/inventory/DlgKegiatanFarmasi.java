@@ -356,40 +356,46 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
             param.put("periode",Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem());
             param.put("tanggal",Tgl2.getDate());
             if(TabRawat.getSelectedIndex()==0){
+
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 for(int r=0;r<tabMode.getRowCount();r++){
                     if(!tbBangsal.getValueAt(r,0).toString().contains(">>")){
                         Sequel.menyimpan("temporary","'"+r+"','"+
-                            tabMode.getValueAt(r,0).toString()+"','"+
-                            tabMode.getValueAt(r,1).toString()+"','"+
-                            tabMode.getValueAt(r,2).toString()+"','"+
-                            tabMode.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                    tabMode.getValueAt(r,0).toString()+"','"+
+                                    tabMode.getValueAt(r,1).toString()+"','"+
+                                    tabMode.getValueAt(r,2).toString()+"','"+
+                                    tabMode.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                     }
                 }
+
                 Valid.MyReportqry("rptKegiatanFarmasi1.jasper","report","::[ Laporan Kegiatan Farmasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }else if(TabRawat.getSelectedIndex()==1){
+
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 for(int r=0;r<tabMode2.getRowCount();r++){
                     if(!tbBangsal2.getValueAt(r,0).toString().contains(">>")){
                         Sequel.menyimpan("temporary","'"+r+"','"+
-                            tabMode2.getValueAt(r,0).toString()+"','"+
-                            tabMode2.getValueAt(r,1).toString()+"','"+
-                            tabMode2.getValueAt(r,2).toString()+"','"+
-                            tabMode2.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                    tabMode2.getValueAt(r,0).toString()+"','"+
+                                    tabMode2.getValueAt(r,1).toString()+"','"+
+                                    tabMode2.getValueAt(r,2).toString()+"','"+
+                                    tabMode2.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                     }
                 }
+
                 Valid.MyReportqry("rptKegiatanFarmasi2.jasper","report","::[ Laporan Kegiatan Farmasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }else if(TabRawat.getSelectedIndex()==2){
+
                 Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                 for(int r=0;r<tabMode3.getRowCount();r++){
                     if(!tbBangsal3.getValueAt(r,0).toString().contains(">>")){
                         Sequel.menyimpan("temporary","'"+r+"','"+
-                            tabMode3.getValueAt(r,0).toString()+"','"+
-                            tabMode3.getValueAt(r,1).toString()+"','"+
-                            tabMode3.getValueAt(r,2).toString()+"','"+
-                            tabMode3.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                                    tabMode3.getValueAt(r,0).toString()+"','"+
+                                    tabMode3.getValueAt(r,1).toString()+"','"+
+                                    tabMode3.getValueAt(r,2).toString()+"','"+
+                                    tabMode3.getValueAt(r,3).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
                     }
                 }
+
                 Valid.MyReportqry("rptKegiatanFarmasi3.jasper","report","::[ Laporan Kegiatan Farmasi ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
             }
         }
@@ -496,18 +502,15 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                         case 0:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil());
-                            }
-                            break;
+                            }   break;
                         case 1:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil2());
-                            }
-                            break;
+                            }   break;
                         case 2:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil3());
-                            }
-                            break;
+                            }   break;
                         default:
                             break;
                     }
@@ -518,18 +521,15 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                         case 0:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil());
-                            }
-                            break;
+                            }   break;
                         case 1:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil2());
-                            }
-                            break;
+                            }   break;
                         case 2:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil3());
-                            }
-                            break;
+                            }   break;
                         default:
                             break;
                     }
@@ -540,18 +540,15 @@ public final class DlgKegiatanFarmasi extends javax.swing.JDialog {
                         case 0:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil());
-                            }
-                            break;
+                            }   break;
                         case 1:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil2());
-                            }
-                            break;
+                            }   break;
                         case 2:
                             if(TCari.getText().length()>2){
                                 runBackground(() ->tampil3());
-                            }
-                            break;
+                            }   break;
                         default:
                             break;
                     }

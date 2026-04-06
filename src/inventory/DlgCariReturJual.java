@@ -784,11 +784,11 @@ public class DlgCariReturJual extends javax.swing.JDialog {
                                     });
                                     Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jml_retur"),"Retur Jual",akses.getkode(),rs.getString("kd_bangsal"),"Hapus",rs2.getString("no_batch"),rs2.getString("no_faktur"),rs.getString("no_retur_jual"));
                                     Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jml_retur") +"','"+rs2.getString("no_batch")+"','"+rs2.getString("no_faktur")+"'",
-                                        "stok=stok-'"+rs2.getString("jml_retur") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
+                                                    "stok=stok-'"+rs2.getString("jml_retur") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
                                 }else{
                                     Trackobat.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jml_retur"),"Retur Jual",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs.getString("no_retur_jual"));
                                     Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','-"+rs2.getString("jml_retur") +"','',''",
-                                        "stok=stok-'"+rs2.getString("jml_retur") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
+                                                    "stok=stok-'"+rs2.getString("jml_retur") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
                                 }
                             }
                         } catch (Exception e) {
@@ -808,15 +808,9 @@ public class DlgCariReturJual extends javax.swing.JDialog {
                                 double totalDetilReturJual = Sequel.cariDoubleSmc("select sum(subtotal) from detreturjual where no_retur_jual = ?", rs.getString("no_retur_jual"));
 
                                 Sequel.deleteTampJurnal();
-                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Dari_pembeli from set_akun"), "RETUR PENJUALAN", totalDetilReturJual, 0)==false){
-                                    sukses=false;
-                                }
-                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Dari_pembeli from set_akun"), "KAS DI TANGAN", 0, totalDetilReturJual)==false){
-                                    sukses=false;
-                                }
-                                if(sukses==true){
-                                    sukses=jur.simpanJurnal(rs.getString("no_retur_jual"),"U","BATAL RETUR PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
-                                }
+                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Dari_pembeli from set_akun"), "RETUR PENJUALAN", totalDetilReturJual, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Dari_pembeli from set_akun"), "KAS DI TANGAN", 0, totalDetilReturJual);
+                                if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_jual"),"U","BATAL RETUR PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
                             }
                         }
 
@@ -825,14 +819,13 @@ public class DlgCariReturJual extends javax.swing.JDialog {
                             Sequel.Commit();
                         }else{
                             sukses=false;
+                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                             Sequel.RollBack();
                         }
 
                         Sequel.AutoComitTrue();
                         if(sukses==true){
                             runBackground(() ->tampil());
-                        }else{
-                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                         }
                     }
                 } catch (Exception e) {

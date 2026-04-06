@@ -328,7 +328,7 @@ public final class InhealthCekReferensiFaskes extends javax.swing.JDialog {
 
     public void tampil(String faskes) {
         try {
-            String URL = koneksiDB.URLAPIINHEALTH()+"/api/ProviderRujukan";
+            String URL = koneksiDB.URLAPIINHEALTH()+"/api/ProviderRujukan";	
 	    HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type","application/json");
 	    requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +

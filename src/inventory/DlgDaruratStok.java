@@ -242,17 +242,19 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
+
             Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
             int row=tabMode.getRowCount();
             for(int i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
-                    tabMode.getValueAt(i,0).toString()+"','"+
-                    tabMode.getValueAt(i,1).toString()+"','"+
-                    tabMode.getValueAt(i,2).toString()+"','"+
-                    tabMode.getValueAt(i,3).toString()+"','"+
-                    tabMode.getValueAt(i,4).toString()+"','"+
-                    tabMode.getValueAt(i,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Sirkulasi Barang Keluar Masuk");
+                                tabMode.getValueAt(i,0).toString()+"','"+
+                                tabMode.getValueAt(i,1).toString()+"','"+
+                                tabMode.getValueAt(i,2).toString()+"','"+
+                                tabMode.getValueAt(i,3).toString()+"','"+
+                                tabMode.getValueAt(i,4).toString()+"','"+
+                                tabMode.getValueAt(i,5).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Sirkulasi Barang Keluar Masuk");
             }
+
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());

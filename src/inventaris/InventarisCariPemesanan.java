@@ -931,59 +931,60 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_nmjenisKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-        if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
-            Valid.textKosong(TCari,"No.Faktur");
-        }else{
-            try {
-                pscaripesan=koneksi.prepareStatement(
-                    "select inventaris_pemesanan.no_faktur,inventaris_pemesanan.tagihan,inventaris_pemesanan.tgl_faktur,inventaris_pemesanan.status,"+
-                    "inventaris_pemesanan.kd_rek_aset,inventaris_pemesanan.ppn,(inventaris_pemesanan.meterai+inventaris_pemesanan.total2) as total "+
-                    "from inventaris_pemesanan where inventaris_pemesanan.no_faktur=?");
-                try {
-                    pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                    rs=pscaripesan.executeQuery();
-                    if(rs.next()){
-                        Sequel.AutoComitFalse();
-                        sukses=true;
+  if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+      Valid.textKosong(TCari,"No.Faktur");
+  }else{
+     try {
+         pscaripesan=koneksi.prepareStatement(
+                 "select inventaris_pemesanan.no_faktur,inventaris_pemesanan.tagihan,inventaris_pemesanan.tgl_faktur,inventaris_pemesanan.status,"+
+                 "inventaris_pemesanan.kd_rek_aset,inventaris_pemesanan.ppn,(inventaris_pemesanan.meterai+inventaris_pemesanan.total2) as total "+
+                 "from inventaris_pemesanan where inventaris_pemesanan.no_faktur=?");
+         try {
+            pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+            rs=pscaripesan.executeQuery();
+            if(rs.next()){
+                Sequel.AutoComitFalse();
+                sukses=true;
 
-                        Sequel.deleteTampJurnal();
-                        if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "JENIS ASET/INVENTARIS", 0, rs.getDouble("total"));
+                Sequel.deleteTampJurnal();
+                if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "JENIS ASET/INVENTARIS", 0, rs.getDouble("total"));
 
-                        if(rs.getDouble("ppn")>0){
-                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Barang Aset Inventaris", 0, rs.getDouble("ppn"));
-                        }
-
-                        if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", rs.getDouble("tagihan"), 0);
-                        if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL PENERIMAAN BARANG ASET/INVENTARIS"+", OLEH "+akses.getkode());
-
-                        if(sukses==true){
-                            sukses=Sequel.queryu2tf("delete from inventaris_pemesanan where no_faktur=?",1,new String[]{rs.getString("no_faktur")});
-                        }
-
-                        if(sukses==true){
-                            Sequel.Commit();
-                            runBackground(() ->tampil());
-                        }else{
-                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                            Sequel.RollBack();
-                        }
-
-                        Sequel.AutoComitTrue();
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notif : "+e);
-                } finally{
-                    if(rs!=null){
-                        rs.close();
-                    }
-                    if(pscaripesan!=null){
-                        pscaripesan.close();
-                    }
+                if(rs.getDouble("ppn")>0){
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Barang Aset Inventaris", 0, rs.getDouble("ppn"));
                 }
-            } catch (Exception ex) {
-                System.out.println("Notif : "+ex);
+
+                if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Penerimaan_AsetInventaris, "HUTANG BARANG ASET/INVENTARIS", rs.getDouble("tagihan"), 0);
+                if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL PENERIMAAN BARANG ASET/INVENTARIS"+", OLEH "+akses.getkode());
+
+                if(sukses==true){
+                    sukses=Sequel.queryu2tf("delete from inventaris_pemesanan where no_faktur=?",1,new String[]{rs.getString("no_faktur")});
+                }
+
+                if(sukses==true){
+                   Sequel.Commit();
+                   runBackground(() ->tampil());
+                }else{
+                   JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                   Sequel.RollBack();
+                }
+
+                Sequel.AutoComitTrue();
             }
-        }
+         } catch (Exception e) {
+            System.out.println("Notif : "+e);
+         } finally{
+             if(rs!=null){
+                 rs.close();
+             }
+             if(pscaripesan!=null){
+                 pscaripesan.close();
+             }
+         }
+     } catch (Exception ex) {
+         System.out.println("Notif : "+ex);
+     }
+  }
+
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

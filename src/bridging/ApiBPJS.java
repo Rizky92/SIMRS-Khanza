@@ -56,29 +56,29 @@ public class ApiBPJS {
 
     public String getHmac(String utc) {
         salt = Consid +"&"+utc;
-	    generateHmacSHA256Signature = null;
-	    try {
-	        generateHmacSHA256Signature = generateHmacSHA256Signature(salt,Key);
-	    } catch (GeneralSecurityException e) {
-	        // TODO Auto-generated catch block
+	generateHmacSHA256Signature = null;
+	try {
+	    generateHmacSHA256Signature = generateHmacSHA256Signature(salt,Key);
+	} catch (GeneralSecurityException e) {
+	    // TODO Auto-generated catch block
             System.out.println("Error Signature : "+e);
-	        // e.printStackTrace();
-	    }
-	    return generateHmacSHA256Signature;
+	    e.printStackTrace();
+	}
+	return generateHmacSHA256Signature;
     }
 
     public String generateHmacSHA256Signature(String data, String key)throws GeneralSecurityException {
         hmacData = null;
-	    try {
+	try {
             secretKey = new SecretKeySpec(key.getBytes("UTF-8"),"HmacSHA256");
-            mac = Mac.getInstance("HmacSHA256");
-            mac.init(secretKey);
-            hmacData = mac.doFinal(data.getBytes("UTF-8"));
-            return new String(Base64.encode(hmacData), "UTF-8");
-	    } catch (UnsupportedEncodingException e) {
+	    mac = Mac.getInstance("HmacSHA256");
+	    mac.init(secretKey);
+	    hmacData = mac.doFinal(data.getBytes("UTF-8"));
+	    return new String(Base64.encode(hmacData), "UTF-8");
+	} catch (UnsupportedEncodingException e) {
             System.out.println("Error Generate HMac: e");
-	        throw new GeneralSecurityException(e);
-	    }
+	    throw new GeneralSecurityException(e);
+	}
     }
 
     public long GetUTCdatetimeAsString(){
@@ -128,13 +128,13 @@ public class ApiBPJS {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
-            utc=String.valueOf(GetUTCdatetimeAsString());
-            headers.add("X-Timestamp",utc);
-            headers.add("X-Signature",getHmac(utc));
+	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
+	    utc=String.valueOf(GetUTCdatetimeAsString());
+	    headers.add("X-Timestamp",utc);
+	    headers.add("X-Signature",getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-            requestEntity = new HttpEntity(headers);
-            root = mapper.readTree(getRest().exchange(koneksiDB.URLAPIBPJS()+"/referensi/propinsi", HttpMethod.GET, requestEntity, String.class).getBody());
+	    requestEntity = new HttpEntity(headers);
+	    root = mapper.readTree(getRest().exchange(koneksiDB.URLAPIBPJS()+"/referensi/propinsi", HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
                 response = mapper.readTree(Decrypt(root.path("response").asText(),utc));
@@ -165,12 +165,12 @@ public class ApiBPJS {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
-            utc=String.valueOf(GetUTCdatetimeAsString());
-            headers.add("X-Timestamp",utc);
-            headers.add("X-Signature",getHmac(utc));
+	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
+	    utc=String.valueOf(GetUTCdatetimeAsString());
+	    headers.add("X-Timestamp",utc);
+	    headers.add("X-Signature",getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-	        requestEntity = new HttpEntity(headers);
+	    requestEntity = new HttpEntity(headers);
             root = mapper.readTree(getRest().exchange(koneksiDB.URLAPIBPJS()+"/referensi/kabupaten/propinsi/"+propinsi, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
@@ -202,12 +202,12 @@ public class ApiBPJS {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
-            utc=String.valueOf(GetUTCdatetimeAsString());
-            headers.add("X-Timestamp",utc);
-            headers.add("X-Signature",getHmac(utc));
+	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
+	    utc=String.valueOf(GetUTCdatetimeAsString());
+	    headers.add("X-Timestamp",utc);
+	    headers.add("X-Signature",getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
-	        requestEntity = new HttpEntity(headers);
+	    requestEntity = new HttpEntity(headers);
             root = mapper.readTree(getRest().exchange(koneksiDB.URLAPIBPJS()+"/referensi/kecamatan/kabupaten/"+kabupaten, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){

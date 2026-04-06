@@ -474,13 +474,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-        for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt("",i,0);
-            tbDokter.setValueAt(0,i,7);
-            tbDokter.setValueAt(0,i,8);
-        }
-        sbttl=0;
-        LTotal.setText("0");
+            for(i=0;i<tbDokter.getRowCount();i++){
+                tbDokter.setValueAt("",i,0);
+                tbDokter.setValueAt(0,i,7);
+                tbDokter.setValueAt(0,i,8);
+            }
+            sbttl=0;
+            LTotal.setText("0");
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

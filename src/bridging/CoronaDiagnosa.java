@@ -635,7 +635,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();
+            dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -826,8 +826,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     for(JsonNode list:response){
                         if(list.path("status").asText().equals("200")){
                             if(Sequel.queryu2tf("delete from diagnosa_corona where no_rkm_medis=? and kode_icd=? and status=?",3,new String[]{
-                                tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString()
-                            })==true){
+                                    tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),4).toString(),tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString()
+                                })==true){
                                 tampil2();
                             }
                         }else{
@@ -873,14 +873,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptDiagnosaCorona.jasper","report","::[ Data Bridging Kemenkes Diagnosa Pasien Teridentifikasi Corona ]::",
-                "select pasien_corona.no_pengenal,pasien_corona.no_rkm_medis,pasien_corona.nama_lengkap,"+
-                "pasien_corona.tgl_masuk,diagnosa_corona.kode_icd,diagnosa_corona.nama_penyakit,diagnosa_corona.status "+
-                "from pasien_corona inner join diagnosa_corona on pasien_corona.no_rkm_medis=diagnosa_corona.no_rkm_medis "+
-                "where pasien_corona.tgl_masuk between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
-                (TCari2.getText().trim().equals("")?"":"and (pasien_corona.no_pengenal like '%"+TCari2.getText().trim()+"%' or pasien_corona.no_rkm_medis like '%"+TCari2.getText().trim()+"%' or "+
-                "pasien_corona.nama_lengkap like '%"+TCari2.getText().trim()+"%' or diagnosa_corona.kode_icd like '%"+TCari2.getText().trim()+"%' or diagnosa_corona.nama_penyakit like '%"+TCari2.getText().trim()+"%' or "+
-                "diagnosa_corona.status like '%"+TCari2.getText().trim()+"%') ")+
-                "order by tgl_masuk",param);
+                    "select pasien_corona.no_pengenal,pasien_corona.no_rkm_medis,pasien_corona.nama_lengkap,"+
+                    "pasien_corona.tgl_masuk,diagnosa_corona.kode_icd,diagnosa_corona.nama_penyakit,diagnosa_corona.status "+
+                    "from pasien_corona inner join diagnosa_corona on pasien_corona.no_rkm_medis=diagnosa_corona.no_rkm_medis "+
+                    "where pasien_corona.tgl_masuk between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
+                    (TCari2.getText().trim().equals("")?"":"and (pasien_corona.no_pengenal like '%"+TCari2.getText().trim()+"%' or pasien_corona.no_rkm_medis like '%"+TCari2.getText().trim()+"%' or "+
+                    "pasien_corona.nama_lengkap like '%"+TCari2.getText().trim()+"%' or diagnosa_corona.kode_icd like '%"+TCari2.getText().trim()+"%' or diagnosa_corona.nama_penyakit like '%"+TCari2.getText().trim()+"%' or "+
+                    "diagnosa_corona.status like '%"+TCari2.getText().trim()+"%') ")+
+                    "order by tgl_masuk",param);
 
         }
         this.setCursor(Cursor.getDefaultCursor());
@@ -992,7 +992,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
             headers.add("X-pass",api.getHmac());
             headers.add("icd",TCari.getText());
-	        requestEntity = new HttpEntity(headers);
+	   requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(link+"/Referensi/icd", HttpMethod.POST, requestEntity, String.class).getBody());
             response = root.path("icd - "+TCari.getText());
             if(response.isArray()){
@@ -1075,4 +1075,5 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         DTPCari1.setDate(tglmasuk);
         DTPCari2.setDate(tglkeluar);
     }
+
 }

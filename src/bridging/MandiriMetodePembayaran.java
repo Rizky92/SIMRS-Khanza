@@ -457,8 +457,8 @@ public final class MandiriMetodePembayaran extends javax.swing.JDialog {
         }else{
             if(tbJabatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("metode_pembayaran_bankmandiri","kode_metode=?","kode_metode=?,nama_metode=?,biaya_transaksi=?",4,new String[]{
-                    TKd.getText(),TNm.getText(),Biaya.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
-                })==true){
+                        TKd.getText(),TNm.getText(),Biaya.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
+                    })==true){
                     tabMode.setValueAt(TKd.getText(),tbJabatan.getSelectedRow(),0);
                     tabMode.setValueAt(TNm.getText(),tbJabatan.getSelectedRow(),1);
                     tabMode.setValueAt(Double.parseDouble(Biaya.getText()),tbJabatan.getSelectedRow(),2);

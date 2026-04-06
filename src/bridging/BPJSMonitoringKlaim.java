@@ -962,8 +962,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("X-Timestamp",utc);
-            headers.add("X-Signature",api.getHmac(utc));
+	    headers.add("X-Timestamp",utc);
+	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
@@ -1011,8 +1011,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 rssep=pssep.executeQuery();
                                 while(rssep.next()){
                                     if(rssep.getString("no_sep").contains(TCari.getText().trim())||rssep.getString("no_rawat").contains(TCari.getText().trim())||
-                                        rssep.getString("nomr").contains(TCari.getText().trim())||rssep.getString("nama_pasien").contains(TCari.getText().trim())||
-                                        list.path("Inacbg").path("kode").asText().contains(TCari.getText().trim())||list.path("Inacbg").path("nama").asText().contains(TCari.getText().trim())){
+                                            rssep.getString("nomr").contains(TCari.getText().trim())||rssep.getString("nama_pasien").contains(TCari.getText().trim())||
+                                                list.path("Inacbg").path("kode").asText().contains(TCari.getText().trim())||list.path("Inacbg").path("nama").asText().contains(TCari.getText().trim())){
                                         tabMode.addRow(new Object[]{
                                             rssep.getString("no_sep"),rssep.getString("no_rawat"),rssep.getString("nomr"),rssep.getString("nama_pasien"),rssep.getString("tglsep"),rssep.getString("tglrujukan"),rssep.getString("no_rujukan"),
                                             rssep.getString("kdppkrujukan"),rssep.getString("nmppkrujukan"),rssep.getString("kdppkpelayanan"),rssep.getString("nmppkpelayanan"),rssep.getString("jnspelayanan"),rssep.getString("catatan"),
@@ -1107,8 +1107,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 rssep=pssep.executeQuery();
                                 while(rssep.next()){
                                     if(rssep.getString("no_sep").contains(TCari.getText().trim())||rssep.getString("no_rawat").contains(TCari.getText().trim())||
-                                        rssep.getString("nomr").contains(TCari.getText().trim())||rssep.getString("nama_pasien").contains(TCari.getText().trim())||
-                                        list.path("Inacbg").path("kode").asText().contains(TCari.getText().trim())||list.path("Inacbg").path("nama").asText().contains(TCari.getText().trim())){
+                                            rssep.getString("nomr").contains(TCari.getText().trim())||rssep.getString("nama_pasien").contains(TCari.getText().trim())||
+                                                list.path("Inacbg").path("kode").asText().contains(TCari.getText().trim())||list.path("Inacbg").path("nama").asText().contains(TCari.getText().trim())){
                                         tabMode.addRow(new Object[]{
                                             rssep.getString("no_sep"),rssep.getString("no_rawat"),rssep.getString("nomr"),rssep.getString("nama_pasien"),rssep.getString("tglsep"),rssep.getString("tglrujukan"),rssep.getString("no_rujukan"),
                                             rssep.getString("kdppkrujukan"),rssep.getString("nmppkrujukan"),rssep.getString("kdppkpelayanan"),rssep.getString("nmppkpelayanan"),rssep.getString("jnspelayanan"),rssep.getString("catatan"),

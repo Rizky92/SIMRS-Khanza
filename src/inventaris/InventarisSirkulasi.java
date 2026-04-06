@@ -909,7 +909,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void DTPTglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPTglKeyPressed
-        // Valid.pindah(evt,kdkamar,cmbJam);
+     // Valid.pindah(evt,kdkamar,cmbJam);
     }//GEN-LAST:event_DTPTglKeyPressed
 
     private void BtnCloseInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCloseInActionPerformed
@@ -917,7 +917,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCloseInActionPerformed
 
     private void BtnCloseInKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCloseInKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+       if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             WindowInput.dispose();
         }else{Valid.pindah(evt, BtnBatal, no_inventaris);}
     }//GEN-LAST:event_BtnCloseInKeyPressed
@@ -953,7 +953,9 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
                 emptTeks();
                 WindowInput.dispose();
             }
+
             runBackground(() ->tampil());
+
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
 
@@ -1002,6 +1004,8 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
+
+
         }
     }//GEN-LAST:event_tbKamInMouseClicked
 
@@ -1057,7 +1061,7 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek2ActionPerformed
 
     private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed
-        Valid.pindah(evt,TglPinjam2,TCari);
+   Valid.pindah(evt,TglPinjam2,TCari);
     }//GEN-LAST:event_BtnSeek2KeyPressed
 
     private void InventarisCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InventarisCariKeyPressed
@@ -1067,14 +1071,14 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_InventarisCariKeyPressed
 
     private void no_inventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_no_inventarisKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            BtnCloseIn.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            isInventaris();
-            peminjam.requestFocus();
-        } else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            btnInvActionPerformed(null);
-        }
+    if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+        BtnCloseIn.requestFocus();
+    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        isInventaris();
+        peminjam.requestFocus();
+    } else if(evt.getKeyCode()==KeyEvent.VK_UP){
+        btnInvActionPerformed(null);
+    }
     }//GEN-LAST:event_no_inventarisKeyPressed
 
     private void peminjamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_peminjamKeyPressed
@@ -1082,68 +1086,68 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_peminjamKeyPressed
 
     private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed
-        InventarisCariKoleksi inventaris=new InventarisCariKoleksi(null,false);
-        inventaris.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(inventaris.getTable().getSelectedRow()!= -1){
-                no_inventaris.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),0).toString());
-                nama_barang.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),1).toString()+", "+inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
-                merk.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),4).toString());
-                jenis.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),8).toString());
-                status.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),12).toString());
-                no_inventaris.requestFocus();
-                }
+    InventarisCariKoleksi inventaris=new InventarisCariKoleksi(null,false);
+    inventaris.addWindowListener(new WindowListener() {
+        @Override
+        public void windowOpened(WindowEvent e) {}
+        @Override
+        public void windowClosing(WindowEvent e) {}
+        @Override
+        public void windowClosed(WindowEvent e) {
+            if(inventaris.getTable().getSelectedRow()!= -1){
+               no_inventaris.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),0).toString());
+               nama_barang.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),1).toString()+", "+inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
+               merk.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),4).toString());
+               jenis.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),8).toString());
+               status.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),12).toString());
+               no_inventaris.requestFocus();
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
+        }
+        @Override
+        public void windowIconified(WindowEvent e) {}
+        @Override
+        public void windowDeiconified(WindowEvent e) {}
+        @Override
+        public void windowActivated(WindowEvent e) {}
+        @Override
+        public void windowDeactivated(WindowEvent e) {}
+    });
 
-        inventaris.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    inventaris.dispose();
-                }
+    inventaris.getTable().addKeyListener(new KeyListener() {
+        @Override
+        public void keyTyped(KeyEvent e) {}
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                inventaris.dispose();
             }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-        inventaris.isCek();
-        inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        inventaris.setLocationRelativeTo(internalFrame1);
-        inventaris.setAlwaysOnTop(false);
-        inventaris.setVisible(true);
+        }
+        @Override
+        public void keyReleased(KeyEvent e) {}
+    });
+    inventaris.isCek();
+    inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+    inventaris.setLocationRelativeTo(internalFrame1);
+    inventaris.setAlwaysOnTop(false);
+    inventaris.setVisible(true);
     }//GEN-LAST:event_btnInvActionPerformed
 
     private void nipKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_nipKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
-            tlp.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
-            BtnSimpan.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            btnPtgActionPerformed(null);
-        }
+   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
+    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+        nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
+        tlp.requestFocus();
+    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        nama_petugas.setText(Sequel.CariPetugas(nip.getText()));
+        BtnSimpan.requestFocus();
+    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+        btnPtgActionPerformed(null);
+    }
     }//GEN-LAST:event_nipKeyPressed
 
     private void btnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPtgActionPerformed
-        if (petugas == null || !petugas.isDisplayable()) {
+    if (petugas == null || !petugas.isDisplayable()) {
             petugas=new DlgCariPetugas(null,false);
             petugas.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
             petugas.addWindowListener(new WindowAdapter() {
@@ -1174,11 +1178,11 @@ public class InventarisSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPtgActionPerformed
 
     private void tglKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tglKeyPressed
-        Valid.pindah(evt,InventarisCari,TglPinjam2);
+    Valid.pindah(evt,InventarisCari,TglPinjam2);
     }//GEN-LAST:event_tglKeyPressed
 
     private void tlpKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tlpKeyPressed
-        Valid.pindah(evt,peminjam,nip);
+    Valid.pindah(evt,peminjam,nip);
     }//GEN-LAST:event_tlpKeyPressed
 
     private void tbKamInKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyReleased

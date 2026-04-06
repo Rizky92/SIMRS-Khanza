@@ -426,8 +426,8 @@ public final class MandiriBankTujuanTransfer extends javax.swing.JDialog {
         }else{
             if(tbJabatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("bank_tujuan_transfer_bankmandiri","kode_bank=?","kode_bank=?,nama_bank=?",3,new String[]{
-                    TKd.getText(),TNm.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
-                })==true){
+                        TKd.getText(),TNm.getText(),tbJabatan.getValueAt(tbJabatan.getSelectedRow(), 0).toString()
+                    })==true){
                     tabMode.setValueAt(TKd.getText(),tbJabatan.getSelectedRow(),0);
                     tabMode.setValueAt(TNm.getText(),tbJabatan.getSelectedRow(),1);
                     emptTeks();

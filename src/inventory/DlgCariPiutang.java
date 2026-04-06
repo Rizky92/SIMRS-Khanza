@@ -928,22 +928,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             int row=tabMode.getRowCount();
             for(int i=0;i<row;i++){
                 Sequel.menyimpan("temporary","'"+i+"','"+
-                    tabMode.getValueAt(i,0).toString()+"','"+
-                    tabMode.getValueAt(i,1).toString()+"','"+
-                    tabMode.getValueAt(i,2).toString()+"','"+
-                    tabMode.getValueAt(i,3).toString()+"','"+
-                    tabMode.getValueAt(i,4).toString()+"','"+
-                    tabMode.getValueAt(i,5).toString()+"','"+
-                    tabMode.getValueAt(i,6).toString()+"','"+
-                    tabMode.getValueAt(i,7).toString()+"','"+
-                    tabMode.getValueAt(i,8).toString()+"','"+
-                    tabMode.getValueAt(i,9).toString()+"','"+
-                    tabMode.getValueAt(i,10).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Piutang");
+                                tabMode.getValueAt(i,0).toString()+"','"+
+                                tabMode.getValueAt(i,1).toString()+"','"+
+                                tabMode.getValueAt(i,2).toString()+"','"+
+                                tabMode.getValueAt(i,3).toString()+"','"+
+                                tabMode.getValueAt(i,4).toString()+"','"+
+                                tabMode.getValueAt(i,5).toString()+"','"+
+                                tabMode.getValueAt(i,6).toString()+"','"+
+                                tabMode.getValueAt(i,7).toString()+"','"+
+                                tabMode.getValueAt(i,8).toString()+"','"+
+                                tabMode.getValueAt(i,9).toString()+"','"+
+                                tabMode.getValueAt(i,10).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Piutang");
             }
             i++;
             Sequel.menyimpan("temporary","'"+i+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Piutang");
             i++;
             Sequel.menyimpan("temporary","'"+i+"','Jml.Total :','','','','','','','','','','"+LTotal.getText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Transaksi Piutang");
+
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -1004,11 +1005,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
         }else{
             if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
-                Valid.textKosong(TCari,"No.Faktur");
+                 Valid.textKosong(TCari,"No.Faktur");
             }else{
                 try {
                     ps=koneksi.prepareStatement(
-                        "select piutang.nota_piutang,piutang.kd_bangsal,piutang.sisapiutang from piutang where piutang.nota_piutang=?");
+                          "select piutang.nota_piutang,piutang.kd_bangsal,piutang.sisapiutang from piutang where piutang.nota_piutang=?");
                     try {
                         ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                         rs=ps.executeQuery();
@@ -1027,11 +1028,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         });
                                         Trackobat.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jumlah"),0,"Piutang",akses.getkode(),rs.getString("kd_bangsal"),"Hapus",rs2.getString("no_batch"),rs2.getString("no_faktur"),rs.getString("nota_piutang"));
                                         Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','"+rs2.getString("jumlah") +"','"+rs2.getString("no_batch")+"','"+rs2.getString("no_faktur")+"'",
-                                            "stok=stok+'"+rs2.getString("jumlah") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
+                                                "stok=stok+'"+rs2.getString("jumlah") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='"+rs2.getString("no_batch")+"' and no_faktur='"+rs2.getString("no_faktur")+"'");
                                     }else{
                                         Trackobat.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jumlah"),0,"Piutang",akses.getkode(),rs.getString("kd_bangsal"),"Hapus","","",rs.getString("nota_piutang"));
                                         Sequel.menyimpan("gudangbarang","'"+rs2.getString("kode_brng") +"','"+rs.getString("kd_bangsal") +"','"+rs2.getString("jumlah") +"','',''",
-                                            "stok=stok+'"+rs2.getString("jumlah") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
+                                                "stok=stok+'"+rs2.getString("jumlah") +"'","kode_brng='"+rs2.getString("kode_brng")+"' and kd_bangsal='"+rs.getString("kd_bangsal") +"' and no_batch='' and no_faktur=''");
                                     }
                                 }
                             } catch (Exception e) {
@@ -1048,13 +1049,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                             if(sukses==true){
                                 Sequel.deleteTampJurnal();
-                                if(Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Piutang_Obat from set_akun"), "PIUTANG PASIEN", 0, rs.getDouble("sisapiutang"))==false){
-                                    sukses=false;
+                                if (sukses) {
+                                    sukses = Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Piutang_Obat from set_akun"), "PIUTANG PASIEN", 0, rs.getDouble("sisapiutang"));
                                 }
-                                if(Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", rs.getDouble("sisapiutang"), 0)==false){
-                                    sukses=false;
+                                if (sukses) {
+                                    sukses = Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", rs.getDouble("sisapiutang"), 0);
                                 }
-                                if(sukses==true){
+                                if (sukses) {
                                     sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG OBAT DI "+Sequel.CariBangsal(rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
                                 }
                             }
@@ -1135,7 +1136,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                if(Sequel.cariInteger("select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+
+                if(Sequel.cariInteger(
+                        "select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
                     Valid.MyReportqry("rptItemResepPiutang.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select piutang.nota_piutang,piutang.tgl_piutang, "+
                         "piutang.no_rkm_medis,piutang.nm_pasien,databarang.nama_brng,"+
@@ -1169,7 +1172,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                if(Sequel.cariInteger("select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+
+                if(Sequel.cariInteger(
+                        "select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
                     Valid.MyReportqry("rptItemResepPiutang2.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select piutang.nota_piutang,piutang.tgl_piutang, "+
                         "piutang.no_rkm_medis,piutang.nm_pasien,databarang.nama_brng,"+
@@ -1205,7 +1210,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 param.put("kontakrs",akses.getkontakrs());
                 param.put("emailrs",akses.getemailrs());
                 param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                if(Sequel.cariInteger("select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
+                if(Sequel.cariInteger(
+                        "select count(*) from detailpiutang where nota_piutang=? and aturan_pakai<>''",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim())>0){
                     Valid.MyReportqry("rptItemResepPiutang3.jasper","report","::[ Aturan Pakai Obat ]::",
                         "select piutang.nota_piutang,piutang.tgl_piutang, "+
                         "piutang.no_rkm_medis,piutang.nm_pasien,databarang.nama_brng,"+

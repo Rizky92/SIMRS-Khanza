@@ -1135,6 +1135,8 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
+
+
         }
     }//GEN-LAST:event_tbKamInMouseClicked
 
@@ -1147,8 +1149,8 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamInKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        runBackground(() ->tampil());
-        if(koneksiDB.CARICEPAT().equals("aktif")){
+    runBackground(() ->tampil());
+    if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
@@ -1173,14 +1175,14 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     private void NoInventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoInventarisKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            BtnCloseIn.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            isInventaris();
-            Keterangan.requestFocus();
-        } else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            btnInvActionPerformed(null);
-        }
+    if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+        BtnCloseIn.requestFocus();
+    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        isInventaris();
+        Keterangan.requestFocus();
+    } else if(evt.getKeyCode()==KeyEvent.VK_UP){
+        btnInvActionPerformed(null);
+    }
     }//GEN-LAST:event_NoInventarisKeyPressed
 
     private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
@@ -1188,103 +1190,103 @@ public class InventarisSirkulasiCSSD extends javax.swing.JDialog {
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void btnInvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInvActionPerformed
-        InventarisCariBarangCSSD inventaris=new InventarisCariBarangCSSD(null,false);
-        inventaris.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(inventaris.getTable().getSelectedRow()!= -1){
-                    NoInventaris.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),0).toString());
-                    NamaBarang.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),1).toString()+", "+inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
-                    Merk.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),4).toString());
-                    Jenis.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),8).toString());
-                    Sequel.cariIsi("select inventaris.status_barang from inventaris where inventaris.no_inventaris='"+NoInventaris.getText()+"'",Status);
-                    NoInventaris.requestFocus();
-                }
+    InventarisCariBarangCSSD inventaris=new InventarisCariBarangCSSD(null,false);
+    inventaris.addWindowListener(new WindowListener() {
+        @Override
+        public void windowOpened(WindowEvent e) {}
+        @Override
+        public void windowClosing(WindowEvent e) {}
+        @Override
+        public void windowClosed(WindowEvent e) {
+            if(inventaris.getTable().getSelectedRow()!= -1){
+                NoInventaris.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),0).toString());
+                NamaBarang.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),1).toString()+", "+inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),2).toString());
+                Merk.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),4).toString());
+                Jenis.setText(inventaris.getTable().getValueAt(inventaris.getTable().getSelectedRow(),8).toString());
+                Sequel.cariIsi("select inventaris.status_barang from inventaris where inventaris.no_inventaris='"+NoInventaris.getText()+"'",Status);
+                NoInventaris.requestFocus();
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
+        }
+        @Override
+        public void windowIconified(WindowEvent e) {}
+        @Override
+        public void windowDeiconified(WindowEvent e) {}
+        @Override
+        public void windowActivated(WindowEvent e) {}
+        @Override
+        public void windowDeactivated(WindowEvent e) {}
+    });
 
-        inventaris.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    inventaris.dispose();
-                }
+    inventaris.getTable().addKeyListener(new KeyListener() {
+        @Override
+        public void keyTyped(KeyEvent e) {}
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                inventaris.dispose();
             }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-        inventaris.isCek();
-        inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        inventaris.setLocationRelativeTo(internalFrame1);
-        inventaris.setAlwaysOnTop(false);
-        inventaris.setVisible(true);
+        }
+        @Override
+        public void keyReleased(KeyEvent e) {}
+    });
+    inventaris.isCek();
+    inventaris.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+    inventaris.setLocationRelativeTo(internalFrame1);
+    inventaris.setAlwaysOnTop(false);
+    inventaris.setVisible(true);
     }//GEN-LAST:event_btnInvActionPerformed
 
     private void NIPKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NIPKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-            NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
-        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-            NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
-            NoSirkulasi.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
-            BtnSimpan.requestFocus();
-        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-            btnPtgActionPerformed(null);
-        }
+   if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+        NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
+    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+        NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
+        NoSirkulasi.requestFocus();
+    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        NamaPetugas.setText(Sequel.CariPetugas(NIP.getText()));
+        BtnSimpan.requestFocus();
+    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+        btnPtgActionPerformed(null);
+    }
     }//GEN-LAST:event_NIPKeyPressed
 
     private void btnPtgActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPtgActionPerformed
-        if (petugas == null || !petugas.isDisplayable()) {
-            petugas=new DlgCariPetugas(null,false);
-            petugas.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            petugas.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if(petugas.getTable().getSelectedRow()!= -1){
-                        NIP.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
-                        NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
-                    }
-                    petugas=null;
+    if (petugas == null || !petugas.isDisplayable()) {
+        petugas=new DlgCariPetugas(null,false);
+        petugas.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        petugas.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(petugas.getTable().getSelectedRow()!= -1){
+                    NIP.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),0).toString());
+                    NamaPetugas.setText(petugas.getTable().getValueAt(petugas.getTable().getSelectedRow(),1).toString());
                 }
-            });
+                petugas=null;
+            }
+        });
 
-            petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            petugas.setLocationRelativeTo(internalFrame1);
-        }
+        petugas.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        petugas.setLocationRelativeTo(internalFrame1);
+    }
 
-        if (petugas == null) return;
-        if (!petugas.isVisible()) {
-            petugas.isCek();
-            petugas.emptTeks();
-        }
-        if (petugas.isVisible()) {
-            petugas.toFront();
-            return;
-        }
-        petugas.setVisible(true);
+    if (petugas == null) return;
+    if (!petugas.isVisible()) {
+        petugas.isCek();
+        petugas.emptTeks();
+    }
+    if (petugas.isVisible()) {
+        petugas.toFront();
+        return;
+    }
+    petugas.setVisible(true);
     }//GEN-LAST:event_btnPtgActionPerformed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
-        Valid.pindah(evt,btnInv,NoSirkulasi);
+    Valid.pindah(evt,btnInv,NoSirkulasi);
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void NoSirkulasiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoSirkulasiKeyPressed
-        Valid.pindah(evt,Tanggal,Keterangan);
+    Valid.pindah(evt,Tanggal,Keterangan);
     }//GEN-LAST:event_NoSirkulasiKeyPressed
 
     private void tbKamInKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamInKeyReleased

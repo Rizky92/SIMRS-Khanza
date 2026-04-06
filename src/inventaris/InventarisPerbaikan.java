@@ -749,17 +749,17 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
         }else {
             if(tbJnsPerawatan.getSelectedRow()> -1){
                 if(Sequel.mengedittf("perbaikan_inventaris","no_permintaan=?","no_permintaan=?,tanggal=?,uraian_kegiatan=?,nip=?,pelaksana=?,biaya=?,keterangan=?,status=?",9,new String[]{
-                    NoPermintaan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),
-                    Pelaksana.getSelectedItem().toString(),Biaya.getText(),Keterangan.getText(),Status.getSelectedItem().toString(),
-                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
-                })==true){
-                    if(Status.getSelectedItem().toString().equals("Bisa Diperbaiki")){
-                        Sequel.mengedit("inventaris","no_inventaris='"+NoInventaris.getText()+"'","status_barang='Ada'");
-                    }else{
-                        Sequel.mengedit("inventaris","no_inventaris='"+NoInventaris.getText()+"'","status_barang='Rusak'");
-                    }
-                    runBackground(() ->tampil());
-                    emptTeks();
+                        NoPermintaan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),
+                        Pelaksana.getSelectedItem().toString(),Biaya.getText(),Keterangan.getText(),Status.getSelectedItem().toString(),
+                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                    })==true){
+                        if(Status.getSelectedItem().toString().equals("Bisa Diperbaiki")){
+                            Sequel.mengedit("inventaris","no_inventaris='"+NoInventaris.getText()+"'","status_barang='Ada'");
+                        }else{
+                            Sequel.mengedit("inventaris","no_inventaris='"+NoInventaris.getText()+"'","status_barang='Rusak'");
+                        }
+                        runBackground(() ->tampil());
+                        emptTeks();
                 }
             }
         }
@@ -884,15 +884,15 @@ public final class InventarisPerbaikan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-        isForm();
+  isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void NoPermintaanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoPermintaanKeyPressed
-        Valid.pindah(evt,TCari, Tanggal);
+    Valid.pindah(evt,TCari, Tanggal);
     }//GEN-LAST:event_NoPermintaanKeyPressed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
-        Valid.pindah(evt,NoPermintaan,NoInventaris);
+    Valid.pindah(evt,NoPermintaan,NoInventaris);
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

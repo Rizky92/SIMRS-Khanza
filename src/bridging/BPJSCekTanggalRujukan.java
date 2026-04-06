@@ -669,14 +669,14 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
-            utc=String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("X-Timestamp",utc);
-            headers.add("X-Signature",api.getHmac(utc));
+	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
+	    utc=String.valueOf(api.GetUTCdatetimeAsString());
+	    headers.add("X-Timestamp",utc);
+	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             URL = link+"/Rujukan/List/TglRujukan/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");
             requestEntity = new HttpEntity(headers);
-	        root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+	    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
                 Valid.tabelKosong(tabMode);
@@ -692,8 +692,7 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
                                 statuspasien="Baru";
                                 if(!norm.equals("")){
                                     statuspasien="Lama";
-                                }
-                                tabMode.addRow(new Object[]{
+                                }   tabMode.addRow(new Object[]{
                                     i+".",list.path("diagnosa").path("kode").asText(),list.path("diagnosa").path("nama").asText(),
                                     list.path("keluhan").asText(),list.path("noKunjungan").asText(),
                                     list.path("pelayanan").path("kode").asText(),list.path("pelayanan").path("nama").asText(),
@@ -748,8 +747,7 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
                                         list.path("tglKunjungan").asText(),statuspasien,statussep
                                     });
                                     i++;
-                                }
-                                break;
+                                }   break;
                             case "Belum Terbit":
                                 if(statussep.equals("")){
                                     norm=Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_peserta =?",list.path("peserta").path("noKartu").asText());
@@ -781,8 +779,7 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
                                         list.path("tglKunjungan").asText(),statuspasien,statussep
                                     });
                                     i++;
-                                }
-                                break;
+                                }   break;
                             default:
                                 break;
                         }
@@ -803,14 +800,14 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
-            utc=String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("X-Timestamp",utc);
-            headers.add("X-Signature",api.getHmac(utc));
+	    headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
+	    utc=String.valueOf(api.GetUTCdatetimeAsString());
+	    headers.add("X-Timestamp",utc);
+	    headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             URL = link+"/Rujukan/RS/List/TglRujukan/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");
-            requestEntity = new HttpEntity(headers);
-            root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+	    requestEntity = new HttpEntity(headers);
+	    root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
                 Valid.tabelKosong(tabMode);
@@ -826,8 +823,7 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
                                 statuspasien="Baru";
                                 if(!norm.equals("")){
                                     statuspasien="Lama";
-                                }
-                                tabMode.addRow(new Object[]{
+                                }   tabMode.addRow(new Object[]{
                                     i+".",list.path("diagnosa").path("kode").asText(),list.path("diagnosa").path("nama").asText(),
                                     list.path("keluhan").asText(),list.path("noKunjungan").asText(),
                                     list.path("pelayanan").path("kode").asText(),list.path("pelayanan").path("nama").asText(),
@@ -849,8 +845,7 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
                                     list.path("poliRujukan").path("kode").asText(),list.path("poliRujukan").path("nama").asText(),
                                     list.path("provPerujuk").path("kode").asText(),list.path("provPerujuk").path("nama").asText(),
                                     list.path("tglKunjungan").asText(),statuspasien,statussep
-                                });
-                                i++;
+                                }); i++;
                                 break;
                             case "Sudah Terbit":
                                 if(!statussep.equals("")){
@@ -883,8 +878,7 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
                                         list.path("tglKunjungan").asText(),statuspasien,statussep
                                     });
                                     i++;
-                                }
-                                break;
+                                }   break;
                             case "Belum Terbit":
                                 if(statussep.equals("")){
                                     norm=Sequel.cariIsi("select pasien.no_rkm_medis from pasien where pasien.no_peserta =?",list.path("peserta").path("noKartu").asText());
@@ -916,8 +910,7 @@ public final class BPJSCekTanggalRujukan extends javax.swing.JDialog {
                                         list.path("tglKunjungan").asText(),statuspasien,statussep
                                     });
                                     i++;
-                                }
-                                break;
+                                }   break;
                             default:
                                 break;
                         }

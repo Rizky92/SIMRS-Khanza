@@ -655,35 +655,38 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            sql=" nm_kategori like '%"+KtgCari.getText()+"%' "+
-            " and nm_penyakit like '%"+PenyakitCari.getText()+"%' ";
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                sql=" nm_kategori like '%"+KtgCari.getText()+"%' "+
+                " and nm_penyakit like '%"+PenyakitCari.getText()+"%' ";
 
-            Valid.MyReportqry("rptObtPenyakit.jasper","report","::[ Data Obat Penyakit ]::",
-                "select obat_penyakit.kd_penyakit,nm_penyakit,ciri_ciri,penyakit.keterangan, "+
-                "nm_kategori,ciri_umum,obat_penyakit.kode_brng,nama_brng,jenis.nama,h_beli,referensi "+
-                "from obat_penyakit inner join penyakit inner join kategori_penyakit inner join databarang inner join jenis "+
-                "on penyakit.kd_ktg=kategori_penyakit.kd_ktg and "+
-                "databarang.kdjns=jenis.kdjns and "+
-                "obat_penyakit.kd_penyakit=penyakit.kd_penyakit and "+
-                "obat_penyakit.kode_brng=databarang.kode_brng where "+
-                sql+"and obat_penyakit.kd_penyakit like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and nm_penyakit like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and ciri_ciri like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and penyakit.keterangan like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and nm_kategori like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and ciri_umum like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and obat_penyakit.kode_brng like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and nama_brng like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and jenis.nama like '%"+TCari.getText().trim()+"%' or "+
-                sql+"and referensi like '%"+TCari.getText().trim()+"%' "+
-                "order by obat_penyakit.kd_penyakit ",param);
+                Valid.MyReportqry("rptObtPenyakit.jasper","report","::[ Data Obat Penyakit ]::",
+                        "select obat_penyakit.kd_penyakit,nm_penyakit,ciri_ciri,penyakit.keterangan, "+
+                        "nm_kategori,ciri_umum,obat_penyakit.kode_brng,nama_brng,jenis.nama,h_beli,referensi "+
+                        "from obat_penyakit inner join penyakit inner join kategori_penyakit inner join databarang inner join jenis "+
+                        "on penyakit.kd_ktg=kategori_penyakit.kd_ktg and "+
+                        "databarang.kdjns=jenis.kdjns and "+
+                        "obat_penyakit.kd_penyakit=penyakit.kd_penyakit and "+
+                        "obat_penyakit.kode_brng=databarang.kode_brng where "+
+                         sql+"and obat_penyakit.kd_penyakit like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and nm_penyakit like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and ciri_ciri like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and penyakit.keterangan like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and nm_kategori like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and ciri_umum like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and obat_penyakit.kode_brng like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and jenis.nama like '%"+TCari.getText().trim()+"%' or "+
+                         sql+"and referensi like '%"+TCari.getText().trim()+"%' "+
+                         "order by obat_penyakit.kd_penyakit ",param);
+
+
+
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -923,15 +926,15 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKategoriCariActionPerformed
 
     private void btnKategoriCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnKategoriCariKeyPressed
-        Valid.pindah(evt,btnPenyakitCari,TCari);
+   Valid.pindah(evt,btnPenyakitCari,TCari);
     }//GEN-LAST:event_btnKategoriCariKeyPressed
 
     private void PenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenyakitCariKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_UP){
-            btnPenyakitCariActionPerformed(null);
-        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-            runBackground(() ->tampil());
-        }
+   if(evt.getKeyCode()==KeyEvent.VK_UP){
+       btnPenyakitCariActionPerformed(null);
+   }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+       runBackground(() ->tampil());
+   }
     }//GEN-LAST:event_PenyakitCariKeyPressed
 
     private void btnPenyakitCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPenyakitCariActionPerformed
@@ -966,7 +969,7 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_btnPenyakitCariActionPerformed
 
     private void btnPenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPenyakitCariKeyPressed
-        // TODO add your handling code here:
+// TODO add your handling code here:
     }//GEN-LAST:event_btnPenyakitCariKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

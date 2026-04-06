@@ -61,6 +61,7 @@ import support.kirimwa.DlgKirimWA;
 
 public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabMode2,tabMode3,tabMode4,tabMode5,tabMode6,tabMode7,tabMode8;
+    private final DlgKirimWA kirimWA = new DlgKirimWA(null, false);
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
@@ -81,13 +82,12 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
     private DlgInputResepPulang reseppulang;
     private String bangsal="",aktifkanparsial="no",kamar="",alarm="",DEPOAKTIFOBAT="",rincianobat="",
             formalarm="",nol_detik,detik,NoResep="",TglPeresepan="",JamPeresepan="",finger="",
-            NoRawat="",NoRM="",Pasien="",DokterPeresep="",Status="",KodeDokter="",Ruang="",KodeRuang="";
+            NoRawat="",NoRM="",Pasien="",DokterPeresep="",Status="",KodeDokter="",Ruang="",KodeRuang="",
+            kdDokter = "", kdPoli = "", kdDokter2 = "", kdBangsal = "";
     private int jmlparsial=0,nilai_detik,resepbaru=0,i=0,baris=0;
     private BackgroundMusic music;
-    private boolean aktif=false,semua,ceksukses=false;
+    private boolean semua,ceksukses=false;
     private boolean isopening = false, autoaksi = false, autoValidasiRalan = false, autoValidasiRanap = false;
-    private String kdDokter = "", kdPoli = "", kdDokter2 = "", kdBangsal = "";
-    private final DlgKirimWA kirimWA = new DlgKirimWA(null, false);
 
     /** Creates new form
      * @param parent

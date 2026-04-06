@@ -717,12 +717,12 @@ public final class InventarisPemeliharaan extends javax.swing.JDialog {
         }else {
             if(tbJnsPerawatan.getSelectedRow()> -1){
                 if(Sequel.mengedittf("pemeliharaan_inventaris","no_inventaris=? and tanggal=?","no_inventaris=?,tanggal=?,uraian_kegiatan=?,nip=?,pelaksana=?,biaya=?,jenis_pemeliharaan=?",9,new String[]{
-                    NoInventaris.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),
-                    Pelaksana.getSelectedItem().toString(),Biaya.getText(),Status.getSelectedItem().toString(),
-                    tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString()
-                })==true){
-                    runBackground(() ->tampil());
-                    emptTeks();
+                        NoInventaris.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),
+                        Pelaksana.getSelectedItem().toString(),Biaya.getText(),Status.getSelectedItem().toString(),
+                        tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString()
+                    })==true){
+                        runBackground(() ->tampil());
+                        emptTeks();
                 }
             }
         }
@@ -752,29 +752,29 @@ public final class InventarisPemeliharaan extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            semua=nm_ruangcari.getText().equals("")&&TCari.getText().equals("");
-            Valid.MyReportqry("rptPemeliharaanInventaris.jasper","report","::[ Data Pemeliharaan Inventaris ]::",
-                "select pemeliharaan_inventaris.no_inventaris,inventaris.kode_barang,inventaris_barang.nama_barang,"+
-                "inventaris_ruang.nama_ruang,pemeliharaan_inventaris.nip,petugas.nama,pemeliharaan_inventaris.uraian_kegiatan,"+
-                "pemeliharaan_inventaris.tanggal,pemeliharaan_inventaris.pelaksana,pemeliharaan_inventaris.biaya, "+
-                "pemeliharaan_inventaris.jenis_pemeliharaan from pemeliharaan_inventaris inner join inventaris "+
-                "on pemeliharaan_inventaris.no_inventaris=inventaris.no_inventaris "+
-                "inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang "+
-                "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
-                "inner join petugas on pemeliharaan_inventaris.nip=petugas.nip where "+
-                "pemeliharaan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
-                (semua?"":"and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and (pemeliharaan_inventaris.no_inventaris like '%"+TCari.getText().trim()+"%' "+
-                "or inventaris.kode_barang like '%"+TCari.getText().trim()+"%' or inventaris_barang.nama_barang like '%"+TCari.getText().trim()+"%' "+
-                "or pemeliharaan_inventaris.pelaksana like '%"+TCari.getText().trim()+"%' or pemeliharaan_inventaris.jenis_pemeliharaan like '%"+TCari.getText().trim()+"%' "+
-                "or petugas.nama like '%"+TCari.getText().trim()+"%')")+"order by pemeliharaan_inventaris.no_inventaris",param);
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                semua=nm_ruangcari.getText().equals("")&&TCari.getText().equals("");
+                Valid.MyReportqry("rptPemeliharaanInventaris.jasper","report","::[ Data Pemeliharaan Inventaris ]::",
+                    "select pemeliharaan_inventaris.no_inventaris,inventaris.kode_barang,inventaris_barang.nama_barang,"+
+                    "inventaris_ruang.nama_ruang,pemeliharaan_inventaris.nip,petugas.nama,pemeliharaan_inventaris.uraian_kegiatan,"+
+                    "pemeliharaan_inventaris.tanggal,pemeliharaan_inventaris.pelaksana,pemeliharaan_inventaris.biaya, "+
+                    "pemeliharaan_inventaris.jenis_pemeliharaan from pemeliharaan_inventaris inner join inventaris "+
+                    "on pemeliharaan_inventaris.no_inventaris=inventaris.no_inventaris "+
+                    "inner join inventaris_barang on inventaris.kode_barang=inventaris_barang.kode_barang "+
+                    "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
+                    "inner join petugas on pemeliharaan_inventaris.nip=petugas.nip where "+
+                    "pemeliharaan_inventaris.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+
+                    (semua?"":"and inventaris_ruang.nama_ruang like '%"+nm_ruangcari.getText().trim()+"%' and (pemeliharaan_inventaris.no_inventaris like '%"+TCari.getText().trim()+"%' "+
+                    "or inventaris.kode_barang like '%"+TCari.getText().trim()+"%' or inventaris_barang.nama_barang like '%"+TCari.getText().trim()+"%' "+
+                    "or pemeliharaan_inventaris.pelaksana like '%"+TCari.getText().trim()+"%' or pemeliharaan_inventaris.jenis_pemeliharaan like '%"+TCari.getText().trim()+"%' "+
+                    "or petugas.nama like '%"+TCari.getText().trim()+"%')")+"order by pemeliharaan_inventaris.no_inventaris",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -844,15 +844,15 @@ public final class InventarisPemeliharaan extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-        isForm();
+  isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void NoInventarisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoInventarisKeyPressed
-        Valid.pindah(evt,TCari, Tanggal);
+    Valid.pindah(evt,TCari, Tanggal);
     }//GEN-LAST:event_NoInventarisKeyPressed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
-        Valid.pindah(evt,NoInventaris,KodeBarang);
+    Valid.pindah(evt,NoInventaris,KodeBarang);
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

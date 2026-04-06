@@ -336,7 +336,7 @@ public final class PCareCekReferensiSarana extends javax.swing.JDialog {
 
     public void tampil(String diagnosa) {
         try {
-            URL = link+"/spesialis/sarana";
+            URL = link+"/spesialis/sarana";	
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

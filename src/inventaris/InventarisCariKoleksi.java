@@ -397,7 +397,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil2Smc());
+        runBackground(() ->tampil2());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -430,9 +430,9 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         try {
             if(Valid.daysOld("./cache/inventariskoleksi.iyem")<30){
-                runBackground(() ->tampil2Smc());
+                runBackground(() ->tampil2());
             }else{
-                runBackground(() ->tampilSmc());
+                runBackground(() ->tampil());
             }
         } catch (Exception e) {
         }
@@ -442,19 +442,19 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2Smc());
+                        runBackground(() ->tampil2());
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2Smc());
+                        runBackground(() ->tampil2());
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2Smc());
+                        runBackground(() ->tampil2());
                     }
                 }
             });
@@ -533,7 +533,7 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampilSmc());
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -584,153 +584,20 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
     // End of variables declaration//GEN-END:variables
 
     public void tampil() {
-        try {
-            file=new File("./cache/inventariskoleksi.iyem");
-            file.createNewFile();
-            fileWriter = new FileWriter(file);
-            StringBuilder iyembuilder = new StringBuilder();
-            ps=koneksi.prepareStatement("select inventaris.no_inventaris,inventaris_barang.kode_barang, inventaris_barang.nama_barang, "+
-                        "inventaris_produsen.nama_produsen, inventaris_merk.nama_merk, inventaris_barang.thn_produksi, inventaris_barang.isbn,"+
-                        "inventaris_kategori.nama_kategori, inventaris_jenis.nama_jenis,inventaris.asal_barang,inventaris.tgl_pengadaan,"+
-                        "inventaris.harga,inventaris.status_barang,inventaris_ruang.nama_ruang,inventaris.no_rak,inventaris.no_box "+
-                        "from inventaris inner join inventaris_barang on inventaris_barang.kode_barang=inventaris.kode_barang "+
-                        "inner join inventaris_produsen on inventaris_barang.kode_produsen=inventaris_produsen.kode_produsen "+
-                        "inner join inventaris_ruang on inventaris.id_ruang=inventaris_ruang.id_ruang "+
-                        "inner join inventaris_jenis on inventaris_barang.id_jenis=inventaris_jenis.id_jenis "+
-                        "inner join inventaris_kategori on inventaris_barang.id_kategori=inventaris_kategori.id_kategori "+
-                        "inner join inventaris_merk on inventaris_barang.id_merk=inventaris_merk.id_merk "+
-                        "order by inventaris_barang.kode_barang,inventaris.no_inventaris");
-             Valid.tabelKosong(tabMode);
-             try{
-                rs=ps.executeQuery();
-                while(rs.next()){
-                    tabMode.addRow(new Object[]{
-                        rs.getString("no_inventaris"),rs.getString("kode_barang"),rs.getString("nama_barang"),rs.getString("nama_produsen"),
-                        rs.getString("nama_merk"),rs.getString("thn_produksi").substring(0,4),rs.getString("isbn"),rs.getString("nama_kategori"),
-                        rs.getString("nama_jenis"),rs.getString("asal_barang"),rs.getString("tgl_pengadaan"),Valid.SetAngka(rs.getDouble("harga")),
-                        rs.getString("status_barang"),rs.getString("nama_ruang"),rs.getString("no_rak"),rs.getString("no_box")
-                    });
-                    iyembuilder.append("{\"NoInventaris\":\"").append(rs.getString("no_inventaris")).append("\",\"KodeBarang\":\"").append(rs.getString("kode_barang")).
-                                append("\",\"NamaBarang\":\"").append(rs.getString("nama_barang")).append("\",\"Produsen\":\"").append(rs.getString("nama_produsen")).
-                                append("\",\"Merk\":\"").append(rs.getString("nama_merk")).append("\",\"ThnProduksi\":\"").append(rs.getString("thn_produksi").substring(0,4)).
-                                append("\",\"BarcodeSN\":\"").append(rs.getString("isbn")).append("\",\"Kategori\":\"").append(rs.getString("nama_kategori")).
-                                append("\",\"Jenis\":\"").append(rs.getString("nama_jenis")).append("\",\"AsalBarang\":\"").append(rs.getString("asal_barang")).
-                                append("\",\"TglPengadaan\":\"").append(rs.getString("tgl_pengadaan")).append("\",\"Harga\":\"").append(Valid.SetAngka(rs.getDouble("harga"))).
-                                append("\",\"SttsBarang\":\"").append(rs.getString("status_barang")).append("\",\"Ruang\":\"").append(rs.getString("nama_ruang")).
-                                append("\",\"NoRak\":\"").append(rs.getString("no_rak")).append("\",\"NoBox\":\"").append(rs.getString("no_box")).append("\"},");
-                }
-            }catch(Exception e){
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rs!=null){
-                    rs.close();
-                }
-                if(ps!=null){
-                    ps.close();
-                }
-            }
-            if (iyembuilder.length() > 0) {
-                iyembuilder.setLength(iyembuilder.length() - 1);
-                fileWriter.write("{\"inventariskoleksi\":["+iyembuilder+"]}");
-                fileWriter.flush();
-            }
-
-            fileWriter.close();
-            iyembuilder=null;
-            LCount.setText(tabMode.getRowCount()+"");
-        } catch (Exception e) {
-            System.out.println("Notif : "+e);
-        } finally {
-            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
-        }
-    }
-
-    private void tampil2() {
-        try {
-            myObj = new FileReader("./cache/inventariskoleksi.iyem");
-            root = mapper.readTree(myObj);
-            Valid.tabelKosong(tabMode);
-            response = root.path("inventariskoleksi");
-            if(response.isArray()){
-                if(NmRuangan.getText().trim().equals("")){
-                    if(TCari.getText().trim().equals("")){
-                        for(JsonNode list:response){
-                            tabMode.addRow(new Object[]{
-                                list.path("NoInventaris").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Produsen").asText(),list.path("Merk").asText(),list.path("ThnProduksi").asText(),list.path("BarcodeSN").asText(),list.path("Kategori").asText(),list.path("Jenis").asText(),list.path("AsalBarang").asText(),list.path("TglPengadaan").asText(),list.path("Harga").asText(),list.path("SttsBarang").asText(),list.path("Ruang").asText(),list.path("NoRak").asText(),list.path("NoBox").asText()
-                            });
-                        }
-                    }else{
-                        for(JsonNode list:response){
-                            if(list.path("NoInventaris").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Produsen").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Merk").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("BarcodeSN").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Kategori").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                                tabMode.addRow(new Object[]{
-                                    list.path("NoInventaris").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Produsen").asText(),list.path("Merk").asText(),list.path("ThnProduksi").asText(),list.path("BarcodeSN").asText(),list.path("Kategori").asText(),list.path("Jenis").asText(),list.path("AsalBarang").asText(),list.path("TglPengadaan").asText(),list.path("Harga").asText(),list.path("SttsBarang").asText(),list.path("Ruang").asText(),list.path("NoRak").asText(),list.path("NoBox").asText()
-                                });
-                            }
-                        }
-                    }
-                }else{
-                    if(TCari.getText().trim().equals("")){
-                        for(JsonNode list:response){
-                            if(list.path("Ruang").asText().equals(NmRuangan.getText())){
-                                tabMode.addRow(new Object[]{
-                                    list.path("NoInventaris").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Produsen").asText(),list.path("Merk").asText(),list.path("ThnProduksi").asText(),list.path("BarcodeSN").asText(),list.path("Kategori").asText(),list.path("Jenis").asText(),list.path("AsalBarang").asText(),list.path("TglPengadaan").asText(),list.path("Harga").asText(),list.path("SttsBarang").asText(),list.path("Ruang").asText(),list.path("NoRak").asText(),list.path("NoBox").asText()
-                                });
-                            }
-                        }
-                    }else{
-                        for(JsonNode list:response){
-                            if(list.path("NoInventaris").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("KodeBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("NamaBarang").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Produsen").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Merk").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("BarcodeSN").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Kategori").asText().toLowerCase().contains(TCari.getText().toLowerCase())||
-                                    list.path("Jenis").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
-                                if(list.path("Ruang").asText().equals(NmRuangan.getText())){
-                                    tabMode.addRow(new Object[]{
-                                        list.path("NoInventaris").asText(),list.path("KodeBarang").asText(),list.path("NamaBarang").asText(),list.path("Produsen").asText(),list.path("Merk").asText(),list.path("ThnProduksi").asText(),list.path("BarcodeSN").asText(),list.path("Kategori").asText(),list.path("Jenis").asText(),list.path("AsalBarang").asText(),list.path("TglPengadaan").asText(),list.path("Harga").asText(),list.path("SttsBarang").asText(),list.path("Ruang").asText(),list.path("NoRak").asText(),list.path("NoBox").asText()
-                                    });
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-            myObj.close();
-        } catch (Exception ex) {
-            if(ex.toString().contains("java.io.FileNotFoundException")){
-                tampil();
-            }else{
-                System.out.println("Notifikasi : "+ex);
-            }
-        }finally {
-            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
-            response = null;
-            root = null;
-        }
-        LCount.setText(""+tabMode.getRowCount());
-    }
-
-    private void tampilSmc() {
         Valid.tabelKosong(tabMode);
         try {
             File file = new File("./cache/inventariskoleksi.iyem");
             file.createNewFile();
-            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+            try (
+                FileWriter fw = new FileWriter(file);
+                ResultSet rs = koneksi.createStatement().executeQuery(
                     "select i.no_inventaris, b.kode_barang, b.nama_barang, p.nama_produsen, m.nama_merk, b.thn_produksi, b.isbn, k.nama_kategori, " +
                     "j.nama_jenis, i.asal_barang, i.tgl_pengadaan, i.harga, i.status_barang, r.nama_ruang, i.no_rak, i.no_box from inventaris i " +
                     "join inventaris_barang b on i.kode_barang = b.kode_barang join inventaris_produsen p on b.kode_produsen = p.kode_produsen join " +
                     "inventaris_ruang r on i.id_ruang = r.id_ruang join inventaris_jenis j on b.id_jenis = j.id_jenis join inventaris_kategori k on " +
                     "b.id_kategori = k.id_kategori join inventaris_merk m on b.id_merk = m.id_merk order by b.kode_barang, i.no_inventaris"
-            )) {
+                );
+            ) {
                 ObjectNode root = mapper.createObjectNode();
                 ArrayNode array = mapper.createArrayNode();
                 if (rs.next()) {
@@ -767,11 +634,13 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(tabMode.getRowCount() + "");
     }
 
-    private void tampil2Smc() {
+    private void tampil2() {
         Valid.tabelKosong(tabMode);
         try (FileReader fr = new FileReader("./cache/inventariskoleksi.iyem")) {
             JsonNode response = mapper.readTree(fr).path("inventariskoleksi");

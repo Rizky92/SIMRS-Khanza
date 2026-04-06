@@ -327,7 +327,7 @@ public final class InhealthCekReferensiPoli extends javax.swing.JDialog {
 
     public void tampil(String poli) {
         try {
-            String URL = koneksiDB.URLAPIINHEALTH()+"/api/Poli";
+            String URL = koneksiDB.URLAPIINHEALTH()+"/api/Poli";	
 	    HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type","application/json");
 	    requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +

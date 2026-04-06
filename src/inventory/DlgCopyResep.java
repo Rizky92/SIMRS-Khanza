@@ -26,11 +26,10 @@ public class DlgCopyResep extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps,ps2,ps3;
     private ResultSet rs,rs2,rs3;
-    private String aktifkanparsial="no",norm="",kddokter="",kode_pj="",norawat="",status="",TAMPILKANCOPYRESEPDOKTERLAIN="no";
+    private String aktifkanparsial="no",norm="",kddokter="",kode_pj="",norawat="",status="",TAMPILKANCOPYRESEPDOKTERLAIN="no", kodeunit = "";
     private int jmlparsial=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private String kodeunit = "";
 
     /** Creates new form
      * @param parent
@@ -340,7 +339,7 @@ public class DlgCopyResep extends javax.swing.JDialog {
     }//GEN-LAST:event_tbPemisahanKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();
+            dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed

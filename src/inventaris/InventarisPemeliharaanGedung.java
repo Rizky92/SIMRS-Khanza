@@ -615,9 +615,9 @@ public final class InventarisPemeliharaanGedung extends javax.swing.JDialog {
             Valid.textKosong(Biaya,"Biaya");
         }else {
             if(Sequel.menyimpantf("pemeliharaan_gedung","?,?,?,?,?,?,?,?","Nomor Kegiatan",8,new String[]{
-                NoKegiatan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),
-                Pelaksana.getSelectedItem().toString(),Biaya.getText(),Status.getSelectedItem().toString(),TindakLanjut.getText()
-            })==true){
+                    NoKegiatan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),
+                    Pelaksana.getSelectedItem().toString(),Biaya.getText(),Status.getSelectedItem().toString(),TindakLanjut.getText()
+                })==true){
                 runBackground(() ->tampil());
                 emptTeks();
             }
@@ -667,11 +667,11 @@ public final class InventarisPemeliharaanGedung extends javax.swing.JDialog {
         }else {
             if(tbJnsPerawatan.getSelectedRow()> -1){
                 if(Sequel.mengedittf("pemeliharaan_gedung","no_pemeliharaan=?","no_pemeliharaan=?,tanggal=?,uraian_kegiatan=?,nip=?,pelaksana=?,biaya=?,jenis_pemeliharaan=?,tindak_lanjut=?",9,new String[]{
-                    NoKegiatan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),Pelaksana.getSelectedItem().toString(),Biaya.getText(),Status.getSelectedItem().toString(),
-                    TindakLanjut.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
-                })==true){
-                    runBackground(() ->tampil());
-                    emptTeks();
+                        NoKegiatan.getText(),Valid.SetTgl(Tanggal.getSelectedItem()+""),UraianKegiatan.getText(),NIP.getText(),Pelaksana.getSelectedItem().toString(),Biaya.getText(),Status.getSelectedItem().toString(),
+                        TindakLanjut.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                    })==true){
+                        runBackground(() ->tampil());
+                        emptTeks();
                 }
             }
         }
@@ -701,24 +701,24 @@ public final class InventarisPemeliharaanGedung extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPemeliharaanGedung.jasper","report","::[ Data Pemeliharaan Gedung ]::",
-                "select pemeliharaan_gedung.no_pemeliharaan,pemeliharaan_gedung.nip,petugas.nama,pemeliharaan_gedung.uraian_kegiatan,"+
-                "pemeliharaan_gedung.tanggal,pemeliharaan_gedung.pelaksana,pemeliharaan_gedung.biaya, "+
-                "pemeliharaan_gedung.jenis_pemeliharaan,pemeliharaan_gedung.tindak_lanjut "+
-                "from pemeliharaan_gedung inner join petugas on pemeliharaan_gedung.nip=petugas.nip where "+
-                "pemeliharaan_gedung.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+(TCari.getText().trim().equals("")?"":" and "+
-                "(pemeliharaan_gedung.no_pemeliharaan like '%"+TCari.getText().trim()+"%' or pemeliharaan_gedung.uraian_kegiatan like '%"+TCari.getText().trim()+"%' "+
-                "or pemeliharaan_gedung.pelaksana like '%"+TCari.getText().trim()+"%' or pemeliharaan_gedung.jenis_pemeliharaan like '%"+TCari.getText().trim()+"%' "+
-                "or petugas.nama like '%"+TCari.getText().trim()+"%')")+
-                "order by pemeliharaan_gedung.no_pemeliharaan",param);
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                Valid.MyReportqry("rptPemeliharaanGedung.jasper","report","::[ Data Pemeliharaan Gedung ]::",
+                    "select pemeliharaan_gedung.no_pemeliharaan,pemeliharaan_gedung.nip,petugas.nama,pemeliharaan_gedung.uraian_kegiatan,"+
+                    "pemeliharaan_gedung.tanggal,pemeliharaan_gedung.pelaksana,pemeliharaan_gedung.biaya, "+
+                    "pemeliharaan_gedung.jenis_pemeliharaan,pemeliharaan_gedung.tindak_lanjut "+
+                    "from pemeliharaan_gedung inner join petugas on pemeliharaan_gedung.nip=petugas.nip where "+
+                    "pemeliharaan_gedung.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' "+(TCari.getText().trim().equals("")?"":" and "+
+                    "(pemeliharaan_gedung.no_pemeliharaan like '%"+TCari.getText().trim()+"%' or pemeliharaan_gedung.uraian_kegiatan like '%"+TCari.getText().trim()+"%' "+
+                    "or pemeliharaan_gedung.pelaksana like '%"+TCari.getText().trim()+"%' or pemeliharaan_gedung.jenis_pemeliharaan like '%"+TCari.getText().trim()+"%' "+
+                    "or petugas.nama like '%"+TCari.getText().trim()+"%')")+
+                    "order by pemeliharaan_gedung.no_pemeliharaan",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -787,15 +787,15 @@ public final class InventarisPemeliharaanGedung extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-        isForm();
+    isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void NoKegiatanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoKegiatanKeyPressed
-        Valid.pindah(evt,TCari, Tanggal);
+    Valid.pindah(evt,TCari, Tanggal);
     }//GEN-LAST:event_NoKegiatanKeyPressed
 
     private void TanggalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TanggalKeyPressed
-        Valid.pindah(evt,NoKegiatan,UraianKegiatan);
+    Valid.pindah(evt,NoKegiatan,UraianKegiatan);
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

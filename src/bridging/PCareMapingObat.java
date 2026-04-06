@@ -519,8 +519,8 @@ public final class PCareMapingObat extends javax.swing.JDialog {
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("maping_obat_pcare","kode_brng=?","kode_brng=?,kode_brng_pcare=?,nama_brng_pcare=?",4,new String[]{
-                    kdobat.getText(),KdObatPCare.getText(),NmObatPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
-                })==true){
+                        kdobat.getText(),KdObatPCare.getText(),NmObatPCare.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                    })==true){
                     emptTeks();
                     runBackground(() ->tampil());
                 }
@@ -552,16 +552,16 @@ public final class PCareMapingObat extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("parameter","%"+TCari.getText().trim()+"%");
-            Valid.MyReport("rptMapingObatPCare.jasper","report","::[ Mapping Obat PCare ]::",param);
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                Valid.MyReport("rptMapingObatPCare.jasper","report","::[ Mapping Obat PCare ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -631,45 +631,45 @@ public final class PCareMapingObat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliBPJSActionPerformed
-        PCareCekReferensiObat barangpcare=new PCareCekReferensiObat(null,false);
-        barangpcare.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(barangpcare.getTable().getSelectedRow()!= -1){
-                    KdObatPCare.setText(barangpcare.getTable().getValueAt(barangpcare.getTable().getSelectedRow(),1).toString());
-                    NmObatPCare.setText(barangpcare.getTable().getValueAt(barangpcare.getTable().getSelectedRow(),2).toString());
-                    KdObatPCare.requestFocus();
-                }
+    PCareCekReferensiObat barangpcare=new PCareCekReferensiObat(null,false);
+    barangpcare.addWindowListener(new WindowListener() {
+        @Override
+        public void windowOpened(WindowEvent e) {}
+        @Override
+        public void windowClosing(WindowEvent e) {}
+        @Override
+        public void windowClosed(WindowEvent e) {
+            if(barangpcare.getTable().getSelectedRow()!= -1){
+                KdObatPCare.setText(barangpcare.getTable().getValueAt(barangpcare.getTable().getSelectedRow(),1).toString());
+                NmObatPCare.setText(barangpcare.getTable().getValueAt(barangpcare.getTable().getSelectedRow(),2).toString());
+                KdObatPCare.requestFocus();
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
+        }
+        @Override
+        public void windowIconified(WindowEvent e) {}
+        @Override
+        public void windowDeiconified(WindowEvent e) {}
+        @Override
+        public void windowActivated(WindowEvent e) {}
+        @Override
+        public void windowDeactivated(WindowEvent e) {}
+    });
 
-        barangpcare.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    barangpcare.dispose();
-                }
+    barangpcare.getTable().addKeyListener(new KeyListener() {
+        @Override
+        public void keyTyped(KeyEvent e) {}
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                barangpcare.dispose();
             }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-        barangpcare.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        barangpcare.setLocationRelativeTo(internalFrame1);
-        barangpcare.setVisible(true);
+        }
+        @Override
+        public void keyReleased(KeyEvent e) {}
+    });
+    barangpcare.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+    barangpcare.setLocationRelativeTo(internalFrame1);
+    barangpcare.setVisible(true);
     }//GEN-LAST:event_btnPoliBPJSActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -789,10 +789,10 @@ public final class PCareMapingObat extends javax.swing.JDialog {
 
     private void getData() {
        if(tbJnsPerawatan.getSelectedRow()!= -1){
-            kdobat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-            TObat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-            KdObatPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-            NmObatPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+           kdobat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+           TObat.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+           KdObatPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
+           NmObatPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
         }
     }
 

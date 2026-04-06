@@ -311,6 +311,7 @@ public final class DlgCariMetodeRacik extends javax.swing.JDialog {
         nama.setAlwaysOnTop(false);
         nama.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
+
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

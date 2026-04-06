@@ -871,20 +871,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                     if(sukses==true){
                         Sequel.deleteTampJurnal();
-                        if(Sequel.insertTampJurnal(Sequel.cariIsi("select Pemesanan_Obat from set_akun"), "PERSEDIAAN BARANG", (ttl + meterai), 0)==false){
-                            sukses=false;
-                        }
+                        if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Pemesanan_Obat from set_akun"), "PERSEDIAAN BARANG", (ttl + meterai), 0);
                         if(ppn>0){
-                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Obat", ppn, 0)==false){
-                                sukses=false;
-                            }
+                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select PPN_Masukan from set_akun"), "PPN Masukan Obat", ppn, 0);
                         }
-                        if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pemesanan_Obat from set_akun"), "HUTANG USAHA", 0, (ttl + ppn + meterai))==false){
-                            sukses=false;
-                        }
-                        if(sukses==true){
-                            sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
-                        }
+                        if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pemesanan_Obat from set_akun"), "HUTANG USAHA", 0, (ttl + ppn + meterai));
+                        if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
                     }
                 }else{
                     sukses=false;
@@ -894,6 +886,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(sukses==true){
                     Sequel.Commit();
                 }else{
+                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
@@ -924,8 +917,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                     Meterai.setText("0");
                     getData();
-                }else{
-                    JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
                 }
                 autoNomor();
             }
@@ -973,15 +964,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-        for(i=0;i<tbDokter.getRowCount();i++){
-            tbDokter.setValueAt("",i,0);
-            tbDokter.setValueAt(0,i,8);
-            tbDokter.setValueAt(0,i,9);
-            tbDokter.setValueAt(0,i,10);
-            tbDokter.setValueAt(0,i,11);
-            tbDokter.setValueAt(0,i,12);
-            tbDokter.setValueAt(0,i,13);
-        }
+            for(i=0;i<tbDokter.getRowCount();i++){
+                tbDokter.setValueAt("",i,0);
+                tbDokter.setValueAt(0,i,8);
+                tbDokter.setValueAt(0,i,9);
+                tbDokter.setValueAt(0,i,10);
+                tbDokter.setValueAt(0,i,11);
+                tbDokter.setValueAt(0,i,12);
+                tbDokter.setValueAt(0,i,13);
+            }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyPressed
@@ -998,7 +989,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             setKonversi(tbDokter.getSelectedRow());
                             try {
                                 tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                                    (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                                        (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
                             } catch (Exception e) {
                                 tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
                             }
@@ -1010,15 +1001,14 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             setKonversi(tbDokter.getSelectedRow());
                             try {
                                 tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                                    (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                                        (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
                             } catch (Exception e) {
                                 tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
                             }
                             getData();
                         }
                     } catch (Exception e) {
-                    }
-                    break;
+                    }   break;
                 case KeyEvent.VK_DELETE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
@@ -1031,8 +1021,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             tbDokter.setValueAt("", tbDokter.getSelectedRow(),10);
                         }
                     } catch (Exception e) {
-                    } 
-                    break;
+                    }   break;
                 case KeyEvent.VK_BACK_SPACE:
                     try {
                         if(tbDokter.getSelectedColumn()==0){
@@ -1053,8 +1042,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }
                     } catch (Exception e) {
-                    } 
-                    break;
+                    }   break;
                 case KeyEvent.VK_SHIFT:
                     TCari.setText("");
                     TCari.requestFocus();
@@ -1064,7 +1052,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         setKonversi(tbDokter.getSelectedRow());
                         try {
                             tbDokter.setValueAt(Math.round(Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString())*
-                                (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
+                                    (Double.parseDouble(tbDokter.getValueAt(tbDokter.getSelectedRow(),9).toString())/100)),tbDokter.getSelectedRow(),10);
                         } catch (Exception e) {
                             tbDokter.setValueAt(0,tbDokter.getSelectedRow(),10);
                         }
@@ -1075,8 +1063,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }else if((tbDokter.getSelectedColumn()==5)||(tbDokter.getSelectedColumn()==6)||(tbDokter.getSelectedColumn()==8)||(tbDokter.getSelectedColumn()==7)||(tbDokter.getSelectedColumn()==13)){
                         setKonversi(tbDokter.getSelectedRow());
                         getData();
-                    }
-                    break;
+                    }break;
                 case KeyEvent.VK_SPACE:
                     if(tbDokter.getSelectedColumn()==1){
                         y=0;
@@ -1142,8 +1129,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         }else{
                             JOptionPane.showMessageDialog(null,"Silahkan masukkan jumlah pembelian terelebih dahulu..!!");
                         }
-                    }
-                    break;
+                    }   break;
                 default:
                     break;
             }

@@ -560,7 +560,7 @@ public final class DlgMetodeRacik extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void NmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmKeyPressed
-        Valid.pindah(evt,Kd,BtnSimpan);
+   Valid.pindah(evt,Kd,BtnSimpan);
     }//GEN-LAST:event_NmKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

@@ -368,10 +368,11 @@ public final class PCareCekReferensiSubspesialis extends javax.swing.JDialog {
             int row=tabMode.getRowCount();
             for(int r=0;r<row;r++){
                 Sequel.menyimpan("temporary","'"+r+"','"+
-                    tabMode.getValueAt(r,0).toString()+"','"+
-                    tabMode.getValueAt(r,1).toString()+"','"+
-                    tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
+                                tabMode.getValueAt(r,0).toString()+"','"+
+                                tabMode.getValueAt(r,1).toString()+"','"+
+                                tabMode.getValueAt(r,2).toString()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Harian Pengadaan Ipsrs");
             }
+
             Map<String, Object> param = new HashMap<>();
             param.put("namars",akses.getnamars());
             param.put("alamatrs",akses.getalamatrs());
@@ -422,16 +423,17 @@ public final class PCareCekReferensiSubspesialis extends javax.swing.JDialog {
     public void tampil(String diagnosa) {
         try {
             URL = link+"/spesialis/"+KdSpesialis.getText()+"/subspesialis";
+
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("X-timestamp",utc);
-            headers.add("X-signature",api.getHmac());
+	    headers.add("X-timestamp",utc);
+	    headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
-	        requestEntity = new HttpEntity(headers);
-	        //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
+	    requestEntity = new HttpEntity(headers);
+	    //System.out.println(rest.exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
             //System.out.println("code : "+nameNode.path("code").asText());

@@ -314,13 +314,13 @@ public final class MobileJKNPembatalanPendaftaran extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             Valid.MyReportqry("rptBatalPendaftaranMobileJKN.jasper","report","::[ Data Batal Pendaftaran Mobile JKN ]::",
-                "SELECT referensi_mobilejkn_bpjs_batal.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs_batal.no_rawat_batal,"+
-                "referensi_mobilejkn_bpjs_batal.nomorreferensi,referensi_mobilejkn_bpjs_batal.tanggalbatal,referensi_mobilejkn_bpjs_batal.keterangan "+
-                "FROM referensi_mobilejkn_bpjs_batal INNER JOIN pasien ON referensi_mobilejkn_bpjs_batal.no_rkm_medis=pasien.no_rkm_medis "+
-                "WHERE referensi_mobilejkn_bpjs_batal.tanggalbatal BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+(TCari.getText().equals("")?"":
-                "AND (referensi_mobilejkn_bpjs_batal.no_rkm_medis LIKE '%"+TCari.getText()+"%' OR pasien.nm_pasien LIKE '%"+TCari.getText()+"%' OR referensi_mobilejkn_bpjs_batal.no_rawat_batal LIKE '%"+TCari.getText()+"%' OR "+
-                "referensi_mobilejkn_bpjs_batal.nomorreferensi LIKE '%"+TCari.getText()+"%' OR referensi_mobilejkn_bpjs_batal.keterangan LIKE '%"+TCari.getText()+"%') ")+
-                "ORDER BY referensi_mobilejkn_bpjs_batal.tanggalbatal",param);
+                   "SELECT referensi_mobilejkn_bpjs_batal.no_rkm_medis,pasien.nm_pasien,referensi_mobilejkn_bpjs_batal.no_rawat_batal,"+
+                   "referensi_mobilejkn_bpjs_batal.nomorreferensi,referensi_mobilejkn_bpjs_batal.tanggalbatal,referensi_mobilejkn_bpjs_batal.keterangan "+
+                   "FROM referensi_mobilejkn_bpjs_batal INNER JOIN pasien ON referensi_mobilejkn_bpjs_batal.no_rkm_medis=pasien.no_rkm_medis "+
+                   "WHERE referensi_mobilejkn_bpjs_batal.tanggalbatal BETWEEN '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' AND '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+(TCari.getText().equals("")?"":
+                   "AND (referensi_mobilejkn_bpjs_batal.no_rkm_medis LIKE '%"+TCari.getText()+"%' OR pasien.nm_pasien LIKE '%"+TCari.getText()+"%' OR referensi_mobilejkn_bpjs_batal.no_rawat_batal LIKE '%"+TCari.getText()+"%' OR "+
+                   "referensi_mobilejkn_bpjs_batal.nomorreferensi LIKE '%"+TCari.getText()+"%' OR referensi_mobilejkn_bpjs_batal.keterangan LIKE '%"+TCari.getText()+"%') ")+
+                   "ORDER BY referensi_mobilejkn_bpjs_batal.tanggalbatal",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

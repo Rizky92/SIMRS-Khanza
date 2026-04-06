@@ -553,8 +553,8 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("kodetransaksi_tujuan_transfer_bankmandiri","kode_metode=? and kode_bank=?","kode_metode=?,kode_bank=?,kode_transaksi=?",5,new String[]{
-                    KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
-                })==true){
+                        KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString()
+                    })==true){
                     tabMode.setValueAt(KodeMetode.getText(),tbJnsPerawatan.getSelectedRow(),0);
                     tabMode.setValueAt(MetodePembayaran.getText(),tbJnsPerawatan.getSelectedRow(),1);
                     tabMode.setValueAt(KodeBank.getText(),tbJnsPerawatan.getSelectedRow(),2);
@@ -592,16 +592,16 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            param.put("parameter","%"+TCari.getText().trim()+"%");
-            Valid.MyReport("rptMandiriKodeTransaksiTujuanTransfer.jasper","report","::[ Kode Transaksi Bank Tujuan Transfer Bank Mandiri ]::",param);
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars",akses.getnamars());
+                param.put("alamatrs",akses.getalamatrs());
+                param.put("kotars",akses.getkabupatenrs());
+                param.put("propinsirs",akses.getpropinsirs());
+                param.put("kontakrs",akses.getkontakrs());
+                param.put("emailrs",akses.getemailrs());
+                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                param.put("parameter","%"+TCari.getText().trim()+"%");
+                Valid.MyReport("rptMandiriKodeTransaksiTujuanTransfer.jasper","report","::[ Kode Transaksi Bank Tujuan Transfer Bank Mandiri ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -671,46 +671,46 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void btnBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBankActionPerformed
-        MandiriCariBankTujuanTransfer banktujuan=new MandiriCariBankTujuanTransfer(null,false);
-        banktujuan.addWindowListener(new WindowListener() {
-            @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if(banktujuan.getTable().getSelectedRow()!= -1){
-                    KodeBank.setText(banktujuan.getTable().getValueAt(banktujuan.getTable().getSelectedRow(),0).toString());
-                    BankTujuan.setText(banktujuan.getTable().getValueAt(banktujuan.getTable().getSelectedRow(),1).toString());
-                    btnBank.requestFocus();
-                }
+    MandiriCariBankTujuanTransfer banktujuan=new MandiriCariBankTujuanTransfer(null,false);
+    banktujuan.addWindowListener(new WindowListener() {
+        @Override
+        public void windowOpened(WindowEvent e) {}
+        @Override
+        public void windowClosing(WindowEvent e) {}
+        @Override
+        public void windowClosed(WindowEvent e) {
+            if(banktujuan.getTable().getSelectedRow()!= -1){
+                KodeBank.setText(banktujuan.getTable().getValueAt(banktujuan.getTable().getSelectedRow(),0).toString());
+                BankTujuan.setText(banktujuan.getTable().getValueAt(banktujuan.getTable().getSelectedRow(),1).toString());
+                btnBank.requestFocus();
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
-        });
+        }
+        @Override
+        public void windowIconified(WindowEvent e) {}
+        @Override
+        public void windowDeiconified(WindowEvent e) {}
+        @Override
+        public void windowActivated(WindowEvent e) {}
+        @Override
+        public void windowDeactivated(WindowEvent e) {}
+    });
 
-        banktujuan.getTable().addKeyListener(new KeyListener() {
-            @Override
-            public void keyTyped(KeyEvent e) {}
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                    banktujuan.dispose();
-                }
+    banktujuan.getTable().addKeyListener(new KeyListener() {
+        @Override
+        public void keyTyped(KeyEvent e) {}
+        @Override
+        public void keyPressed(KeyEvent e) {
+            if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                banktujuan.dispose();
             }
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
-        banktujuan.isCek();
-        banktujuan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        banktujuan.setLocationRelativeTo(internalFrame1);
-        banktujuan.setVisible(true);
+        }
+        @Override
+        public void keyReleased(KeyEvent e) {}
+    });
+    banktujuan.isCek();
+    banktujuan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+    banktujuan.setLocationRelativeTo(internalFrame1);
+    banktujuan.setVisible(true);
     }//GEN-LAST:event_btnBankActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

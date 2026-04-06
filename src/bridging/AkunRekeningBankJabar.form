@@ -77,6 +77,7 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbSpesialisMouseClicked"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbSpesialisMouseReleased"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbSpesialisKeyPressed"/>
               </Events>
             </Component>
@@ -113,6 +114,9 @@
             <Component class="widget.TextBox" name="kdrek">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="null"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="kdrek" noResource="true"/>
               </Properties>
               <Constraints>
@@ -124,6 +128,9 @@
             <Component class="widget.TextBox" name="nmrek">
               <Properties>
                 <Property name="editable" type="boolean" value="false"/>
+                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="null"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="nmrek" noResource="true"/>
               </Properties>
               <Events>
@@ -167,6 +174,9 @@
             </Component>
             <Component class="widget.TextBox" name="TKd">
               <Properties>
+                <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="null"/>
+                </Property>
                 <Property name="name" type="java.lang.String" value="TKd" noResource="true"/>
               </Properties>
               <Events>

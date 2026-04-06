@@ -542,22 +542,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(TabRawat.getSelectedIndex()==0){
-            if(tbDokter.getSelectedRow()!= -1){
-                try {
-                    bodyWithDeleteRequest();
-                }catch (Exception ex) {
-                    System.out.println("Notifikasi Bridging : "+ex);
-                }
-            }else{
-                JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data peserta...!!!!");
-                TCari.requestFocus();
+    if(TabRawat.getSelectedIndex()==0){
+        if(tbDokter.getSelectedRow()!= -1){
+            try {
+                bodyWithDeleteRequest();
+            }catch (Exception ex) {
+                System.out.println("Notifikasi Bridging : "+ex);
             }
-        }else if(TabRawat.getSelectedIndex()==1){
-            JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Peserta..!!!");
-            TabRawat.setSelectedIndex(0);
+        }else{
+            JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data peserta...!!!!");
             TCari.requestFocus();
         }
+    }else if(TabRawat.getSelectedIndex()==1){
+        JOptionPane.showMessageDialog(null,"Hanya bisa dilakukan hapus di Data Peserta..!!!");
+        TabRawat.setSelectedIndex(0);
+        TCari.requestFocus();
+    }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
     private void BtnHapusKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnHapusKeyPressed

@@ -86,7 +86,24 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
                 "No.SEP Apotek","No.SEP Asal","No.Resep","No.Kartu","Nama Peserta","Kode","Jenis Obat","Tgl.Pelayanan",
                 "Kode Obat","Nama Obat","Tipe Obat","Signa 1","Signa 2","Hari","Permintaan","Jumlah","Harga"
             }){
-              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 11 || columnIndex == 12 || columnIndex == 15 || columnIndex == 16) {
+                    return Double.class;
+                }
+                if (columnIndex == 13) {
+                    return Integer.class;
+                }
+                if (columnIndex == 14) {
+                    return Object.class;
+                }
+                return String.class;
+            }
         };
         tbKamar.setModel(tabMode);
 
@@ -155,6 +172,7 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        BtnHapus = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
@@ -163,9 +181,24 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
         NomorSEP = new widget.TextBox();
         BtnCari = new widget.Button();
         jLabel17 = new widget.Label();
-        BtnHapus = new widget.Button();
         BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
+
+        BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapus.setText("Hapus");
+        BtnHapus.setToolTipText("Alt+H");
+        BtnHapus.setName("BtnHapus"); // NOI18N
+        BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnHapusActionPerformed(evt);
+            }
+        });
+        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                BtnHapusKeyPressed(evt);
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setIconImage(null);
@@ -228,24 +261,6 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
         jLabel17.setName("jLabel17"); // NOI18N
         jLabel17.setPreferredSize(new java.awt.Dimension(30, 23));
         panelGlass6.add(jLabel17);
-
-        BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
-        BtnHapus.setText("Hapus");
-        BtnHapus.setToolTipText("Alt+H");
-        BtnHapus.setName("BtnHapus"); // NOI18N
-        BtnHapus.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnHapus.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnHapusActionPerformed(evt);
-            }
-        });
-        BtnHapus.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnHapusKeyPressed(evt);
-            }
-        });
-        panelGlass6.add(BtnHapus);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
         BtnPrint.setText("Cetak");
@@ -445,12 +460,12 @@ public final class ApotekBPJSDaftarPelayananObat extends javax.swing.JDialog {
     private void tampil(String keyword) {
         try {
             headers = new HttpHeaders();
-            headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("x-cons-id",koneksiDB.CONSIDAPIAPOTEKBPJS());
-            utc=String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("x-timestamp",utc);
-            headers.add("x-signature",api.getHmac(utc));
-            headers.add("user_key",koneksiDB.USERKEYAPIAPOTEKBPJS());
+            headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
+            headers.add("x-cons-id", koneksiDB.CONSIDAPIAPOTEKBPJS());
+            utc = String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("x-timestamp", utc);
+            headers.add("x-signature", api.getHmac(utc));
+            headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
             requestEntity = new HttpEntity(headers);
             URL = link+"/pelayanan/obat/daftar/"+keyword;
             System.out.println("URL : "+URL);

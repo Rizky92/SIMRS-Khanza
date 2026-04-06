@@ -1818,21 +1818,21 @@ public final class DlgDataTB extends javax.swing.JDialog {
                 }
             }
             if(Sequel.menyimpantf("data_tb","?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?","Data",50,new String[]{
-                TNoRw.getText(),id_tb_03,PeriodeLaporan.getSelectedItem().toString(),Valid.SetTgl(TanggalLaporan.getSelectedItem()+"")+" "+TanggalLaporan.getSelectedItem().toString().substring(11,19),
-                Valid.SetTgl(TanggalLaporan.getSelectedItem()+"").substring(0,4),kdwasor,"0",KdProp.getText(),KdKab.getText(),KdKec.getText(),KdKel.getText(),Rujukan.getSelectedItem().toString(),
-                KeteranganRujukan.getText(),TipeDiagnosis.getSelectedItem().toString().replaceAll("1. Terkonfirmasi bakteriologis","Terkonfirmasi bakteriologis").toString().replaceAll("2. Terdiagnosis klinis","Terdiagnosis klinis"),Lokasi.getSelectedItem().toString().replaceAll("1. Paru","Paru").toString().replaceAll("2. Ekstraparu","Ekstraparu"),Riwayat.getSelectedItem().toString().replaceAll("1. Baru","Baru").toString().replaceAll("2. Kambuh","Kambuh").toString().replaceAll("3. Diobati setelah gagal","Diobati setelah gagal").toString().replaceAll("4. Diobati Setelah Putus Berobat","Diobati Setelah Putus Berobat").toString().replaceAll("5. Lain-lain","Lain-lain").toString().replaceAll("6. Riwayat Pengobatan Sebelumnya Tidak Diketahui","Riwayat Pengobatan Sebelumnya Tidak Diketahui").toString().replaceAll("7. Pindahan","Pindahan"),StatusHIV.getSelectedItem().toString(),
-                SkoringAnak.getSelectedItem().toString(),Skoring5.getSelectedItem().toString(),Skoring6.getSelectedItem().toString(),Valid.SetTgl(MulaiBerobat.getSelectedItem()+""),
-                PaduanOATHasil,SumberObat.getSelectedItem().toString(),KeteranganSO.getText(),SebelumPengobatanMikroskopis.getSelectedItem().toString(),SebelumPengobatanTesCepat.getSelectedItem().toString(),
-                SebelumPengobatanBiakan.getSelectedItem().toString(),PemeriksaanLaboratBulan2NoReg.getText(),PemeriksaanLaboratBulan2Mikroskopis.getSelectedItem().toString(),
-                PemeriksaanLaboratBulan3NoReg.getText(),PemeriksaanLaboratBulan3Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratBulan5NoReg.getText(),
-                PemeriksaanLaboratBulan5Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratAkhirNoReg.getText(),PemeriksaanLaboratAkhirPengobatanMikroskopis.getSelectedItem().toString(),
-                Valid.SetTgl(AkhirBerobat.getSelectedItem()+""),HasilAkhirPengobatan.getSelectedItem().toString(),Valid.SetTgl(DianjurkanTesHIV.getSelectedItem().toString()+""),
-                Valid.SetTgl(TanggalTesHIV.getSelectedItem()+""),HasilTesHIV.getSelectedItem().toString(),PPK.getSelectedItem().toString(),ART.getSelectedItem().toString(),
-                TBDM.getSelectedItem().toString(),TerapiDM.getSelectedItem().toString(),PindahRO.getSelectedItem().toString(),Status.getSelectedItem().toString(),FotoToraks.getSelectedItem().toString(),
-                ToraksTidakDilakukan.getSelectedItem().toString(),Keterangan.getText(),kdpenyakit.getText()
-            })==true){
-                emptTeks();
-                runBackground(() ->tampil());
+                    TNoRw.getText(),id_tb_03,PeriodeLaporan.getSelectedItem().toString(),Valid.SetTgl(TanggalLaporan.getSelectedItem()+"")+" "+TanggalLaporan.getSelectedItem().toString().substring(11,19),
+                    Valid.SetTgl(TanggalLaporan.getSelectedItem()+"").substring(0,4),kdwasor,"0",KdProp.getText(),KdKab.getText(),KdKec.getText(),KdKel.getText(),Rujukan.getSelectedItem().toString(),
+                    KeteranganRujukan.getText(),TipeDiagnosis.getSelectedItem().toString().replaceAll("1. Terkonfirmasi bakteriologis","Terkonfirmasi bakteriologis").toString().replaceAll("2. Terdiagnosis klinis","Terdiagnosis klinis"),Lokasi.getSelectedItem().toString().replaceAll("1. Paru","Paru").toString().replaceAll("2. Ekstraparu","Ekstraparu"),Riwayat.getSelectedItem().toString().replaceAll("1. Baru","Baru").toString().replaceAll("2. Kambuh","Kambuh").toString().replaceAll("3. Diobati setelah gagal","Diobati setelah gagal").toString().replaceAll("4. Diobati Setelah Putus Berobat","Diobati Setelah Putus Berobat").toString().replaceAll("5. Lain-lain","Lain-lain").toString().replaceAll("6. Riwayat Pengobatan Sebelumnya Tidak Diketahui","Riwayat Pengobatan Sebelumnya Tidak Diketahui").toString().replaceAll("7. Pindahan","Pindahan"),StatusHIV.getSelectedItem().toString(),
+                    SkoringAnak.getSelectedItem().toString(),Skoring5.getSelectedItem().toString(),Skoring6.getSelectedItem().toString(),Valid.SetTgl(MulaiBerobat.getSelectedItem()+""),
+                    PaduanOATHasil,SumberObat.getSelectedItem().toString(),KeteranganSO.getText(),SebelumPengobatanMikroskopis.getSelectedItem().toString(),SebelumPengobatanTesCepat.getSelectedItem().toString(),
+                    SebelumPengobatanBiakan.getSelectedItem().toString(),PemeriksaanLaboratBulan2NoReg.getText(),PemeriksaanLaboratBulan2Mikroskopis.getSelectedItem().toString(),
+                    PemeriksaanLaboratBulan3NoReg.getText(),PemeriksaanLaboratBulan3Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratBulan5NoReg.getText(),
+                    PemeriksaanLaboratBulan5Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratAkhirNoReg.getText(),PemeriksaanLaboratAkhirPengobatanMikroskopis.getSelectedItem().toString(),
+                    Valid.SetTgl(AkhirBerobat.getSelectedItem()+""),HasilAkhirPengobatan.getSelectedItem().toString(),Valid.SetTgl(DianjurkanTesHIV.getSelectedItem().toString()+""),
+                    Valid.SetTgl(TanggalTesHIV.getSelectedItem()+""),HasilTesHIV.getSelectedItem().toString(),PPK.getSelectedItem().toString(),ART.getSelectedItem().toString(),
+                    TBDM.getSelectedItem().toString(),TerapiDM.getSelectedItem().toString(),PindahRO.getSelectedItem().toString(),Status.getSelectedItem().toString(),FotoToraks.getSelectedItem().toString(),
+                    ToraksTidakDilakukan.getSelectedItem().toString(),Keterangan.getText(),kdpenyakit.getText()
+                })==true){
+                    emptTeks();
+                    runBackground(() ->tampil());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -1874,9 +1874,9 @@ public final class DlgDataTB extends javax.swing.JDialog {
 
     private void BtnEditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnEditActionPerformed
         if(PaduanOAT.getSelectedItem().equals("Belum")){
-            PaduanOATHasil = "";
+        PaduanOATHasil = "";
         }else{
-            PaduanOATHasil = PaduanOAT.getSelectedItem().toString();
+        PaduanOATHasil = PaduanOAT.getSelectedItem().toString();
         }
         if(TNoRw.getText().trim().equals("")||TNoRM.getText().trim().equals("")){
             Valid.textKosong(TNoRw,"Pasien");
@@ -1995,22 +1995,22 @@ public final class DlgDataTB extends javax.swing.JDialog {
                     }
                 }
                 if(Sequel.mengedittf("data_tb","no_rawat=?","no_rawat=?,id_tb_03=?,id_periode_laporan=?,tanggal_buat_laporan=?,tahun_buat_laporan=?,kd_wasor=?,noregkab=?,id_propinsi=?,kd_kabupaten=?,id_kecamatan=?,id_kelurahan=?,nama_rujukan=?,sebutkan1=?,tipe_diagnosis=?,klasifikasi_lokasi_anatomi=?,klasifikasi_riwayat_pengobatan=?,klasifikasi_status_hiv=?,total_skoring_anak=?,konfirmasiSkoring5=?,konfirmasiSkoring6=?,tanggal_mulai_pengobatan=?,paduan_oat=?,sumber_obat=?,sebutkan=?,sebelum_pengobatan_hasil_mikroskopis=?,sebelum_pengobatan_hasil_tes_cepat=?,sebelum_pengobatan_hasil_biakan=?,noreglab_bulan_2=?,hasil_mikroskopis_bulan_2=?,noreglab_bulan_3=?,hasil_mikroskopis_bulan_3=?,noreglab_bulan_5=?,hasil_mikroskopis_bulan_5=?,akhir_pengobatan_noreglab=?,akhir_pengobatan_hasil_mikroskopis=?,tanggal_hasil_akhir_pengobatan=?,hasil_akhir_pengobatan=?,tanggal_dianjurkan_tes=?,tanggal_tes_hiv=?,hasil_tes_hiv=?,ppk=?,art=?,tb_dm=?,terapi_dm=?,pindah_ro=?,status_pengobatan=?,foto_toraks=?,toraks_tdk_dilakukan=?,keterangan=?,kode_icd_x=?",51,new String[]{
-                    TNoRw.getText(),id_tb_03,PeriodeLaporan.getSelectedItem().toString(),Valid.SetTgl(TanggalLaporan.getSelectedItem()+"")+" "+TanggalLaporan.getSelectedItem().toString().substring(11,19),
-                    Valid.SetTgl(TanggalLaporan.getSelectedItem()+"").substring(0,4),kdwasor,"0",KdProp.getText(),KdKab.getText(),KdKec.getText(),KdKel.getText(),Rujukan.getSelectedItem().toString(),
-                    KeteranganRujukan.getText(),TipeDiagnosis.getSelectedItem().toString().replaceAll("1. Terkonfirmasi bakteriologis","Terkonfirmasi bakteriologis").toString().replaceAll("2. Terdiagnosis klinis","Terdiagnosis klinis"),Lokasi.getSelectedItem().toString().replaceAll("1. Paru","Paru").toString().replaceAll("2. Ekstraparu","Ekstraparu"),Riwayat.getSelectedItem().toString().replaceAll("1. Baru","Baru").toString().replaceAll("2. Kambuh","Kambuh").toString().replaceAll("3. Diobati setelah gagal","Diobati setelah gagal").toString().replaceAll("4. Diobati Setelah Putus Berobat","Diobati Setelah Putus Berobat").toString().replaceAll("5. Lain-lain","Lain-lain").toString().replaceAll("6. Riwayat Pengobatan Sebelumnya Tidak Diketahui","Riwayat Pengobatan Sebelumnya Tidak Diketahui").toString().replaceAll("7. Pindahan","Pindahan"),StatusHIV.getSelectedItem().toString(),
-                    SkoringAnak.getSelectedItem().toString(),Skoring5.getSelectedItem().toString(),Skoring6.getSelectedItem().toString(),Valid.SetTgl(MulaiBerobat.getSelectedItem()+""),
-                    PaduanOATHasil,SumberObat.getSelectedItem().toString(),KeteranganSO.getText(),SebelumPengobatanMikroskopis.getSelectedItem().toString(),SebelumPengobatanTesCepat.getSelectedItem().toString(),
-                    SebelumPengobatanBiakan.getSelectedItem().toString(),PemeriksaanLaboratBulan2NoReg.getText(),PemeriksaanLaboratBulan2Mikroskopis.getSelectedItem().toString(),
-                    PemeriksaanLaboratBulan3NoReg.getText(),PemeriksaanLaboratBulan3Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratBulan5NoReg.getText(),
-                    PemeriksaanLaboratBulan5Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratAkhirNoReg.getText(),PemeriksaanLaboratAkhirPengobatanMikroskopis.getSelectedItem().toString(),
-                    Valid.SetTgl(AkhirBerobat.getSelectedItem()+""),HasilAkhirPengobatan.getSelectedItem().toString(),Valid.SetTgl(DianjurkanTesHIV.getSelectedItem().toString()+""),
-                    Valid.SetTgl(TanggalTesHIV.getSelectedItem()+""),HasilTesHIV.getSelectedItem().toString(),PPK.getSelectedItem().toString(),ART.getSelectedItem().toString(),
-                    TBDM.getSelectedItem().toString(),TerapiDM.getSelectedItem().toString(),PindahRO.getSelectedItem().toString(),Status.getSelectedItem().toString(),FotoToraks.getSelectedItem().toString(),
-                    ToraksTidakDilakukan.getSelectedItem().toString(),Keterangan.getText(),kdpenyakit.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
-                })==true){
-                    emptTeks();
-                    runBackground(() ->tampil());
-                    TabRawat.setSelectedIndex(1);
+                        TNoRw.getText(),id_tb_03,PeriodeLaporan.getSelectedItem().toString(),Valid.SetTgl(TanggalLaporan.getSelectedItem()+"")+" "+TanggalLaporan.getSelectedItem().toString().substring(11,19),
+                        Valid.SetTgl(TanggalLaporan.getSelectedItem()+"").substring(0,4),kdwasor,"0",KdProp.getText(),KdKab.getText(),KdKec.getText(),KdKel.getText(),Rujukan.getSelectedItem().toString(),
+                        KeteranganRujukan.getText(),TipeDiagnosis.getSelectedItem().toString().replaceAll("1. Terkonfirmasi bakteriologis","Terkonfirmasi bakteriologis").toString().replaceAll("2. Terdiagnosis klinis","Terdiagnosis klinis"),Lokasi.getSelectedItem().toString().replaceAll("1. Paru","Paru").toString().replaceAll("2. Ekstraparu","Ekstraparu"),Riwayat.getSelectedItem().toString().replaceAll("1. Baru","Baru").toString().replaceAll("2. Kambuh","Kambuh").toString().replaceAll("3. Diobati setelah gagal","Diobati setelah gagal").toString().replaceAll("4. Diobati Setelah Putus Berobat","Diobati Setelah Putus Berobat").toString().replaceAll("5. Lain-lain","Lain-lain").toString().replaceAll("6. Riwayat Pengobatan Sebelumnya Tidak Diketahui","Riwayat Pengobatan Sebelumnya Tidak Diketahui").toString().replaceAll("7. Pindahan","Pindahan"),StatusHIV.getSelectedItem().toString(),
+                        SkoringAnak.getSelectedItem().toString(),Skoring5.getSelectedItem().toString(),Skoring6.getSelectedItem().toString(),Valid.SetTgl(MulaiBerobat.getSelectedItem()+""),
+                        PaduanOATHasil,SumberObat.getSelectedItem().toString(),KeteranganSO.getText(),SebelumPengobatanMikroskopis.getSelectedItem().toString(),SebelumPengobatanTesCepat.getSelectedItem().toString(),
+                        SebelumPengobatanBiakan.getSelectedItem().toString(),PemeriksaanLaboratBulan2NoReg.getText(),PemeriksaanLaboratBulan2Mikroskopis.getSelectedItem().toString(),
+                        PemeriksaanLaboratBulan3NoReg.getText(),PemeriksaanLaboratBulan3Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratBulan5NoReg.getText(),
+                        PemeriksaanLaboratBulan5Mikroskopis.getSelectedItem().toString(),PemeriksaanLaboratAkhirNoReg.getText(),PemeriksaanLaboratAkhirPengobatanMikroskopis.getSelectedItem().toString(),
+                        Valid.SetTgl(AkhirBerobat.getSelectedItem()+""),HasilAkhirPengobatan.getSelectedItem().toString(),Valid.SetTgl(DianjurkanTesHIV.getSelectedItem().toString()+""),
+                        Valid.SetTgl(TanggalTesHIV.getSelectedItem()+""),HasilTesHIV.getSelectedItem().toString(),PPK.getSelectedItem().toString(),ART.getSelectedItem().toString(),
+                        TBDM.getSelectedItem().toString(),TerapiDM.getSelectedItem().toString(),PindahRO.getSelectedItem().toString(),Status.getSelectedItem().toString(),FotoToraks.getSelectedItem().toString(),
+                        ToraksTidakDilakukan.getSelectedItem().toString(),Keterangan.getText(),kdpenyakit.getText(),tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString()
+                    })==true){
+                        emptTeks();
+                        runBackground(() ->tampil());
+                        TabRawat.setSelectedIndex(1);
                 }
             }
         }

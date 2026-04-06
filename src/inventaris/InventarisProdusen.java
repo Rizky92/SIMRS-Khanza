@@ -505,15 +505,15 @@ public final class InventarisProdusen extends javax.swing.JDialog {
         }else if(TNm.getText().trim().equals("")){
             Valid.textKosong(TNm,"Nama Produsen");
         }else {
-            //menyimpan-------------------------------------------------
-            Sequel.menyimpan("inventaris_produsen","'"+TKd.getText()+"','"+
-                    TNm.getText()+"','"+
-                    TAlamat.getText()+"','"+
-                    TTlp.getText()+"','"+
-                    TEmail.getText()+"','"+
-                    TWeb.getText()+"' ","Kode Produsen");
-            //----------------------------------------------------------
-            TKd.requestFocus();
+                //menyimpan-------------------------------------------------
+                Sequel.menyimpan("inventaris_produsen","'"+TKd.getText()+"','"+
+                        TNm.getText()+"','"+
+                        TAlamat.getText()+"','"+
+                        TTlp.getText()+"','"+
+                        TEmail.getText()+"','"+
+                        TWeb.getText()+"' ","Kode Produsen");
+                //----------------------------------------------------------
+                TKd.requestFocus();
             runBackground(() ->tampil());
             emptTeks();
         }
@@ -559,14 +559,14 @@ public final class InventarisProdusen extends javax.swing.JDialog {
         }else if(TNm.getText().trim().equals("")){
             Valid.textKosong(TNm,"Nama Produsen");
         }else {
-            //menyimpan-------------------------------------------------
-            Sequel.mengedit("inventaris_produsen","kode_produsen='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0) +"'","kode_produsen='"+TKd.getText()+"',nama_produsen='"+TNm.getText()+"',"+
-                    "alamat_produsen='"+TAlamat.getText()+"',"+
-                    "no_telp='"+TTlp.getText()+"',"+
-                    "email='"+TEmail.getText()+"',"+
-                    "website_produsen='"+TWeb.getText()+"'");
-            //----------------------------------------------------------
-            TKd.requestFocus();
+                //menyimpan-------------------------------------------------
+                Sequel.mengedit("inventaris_produsen","kode_produsen='"+tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0) +"'","kode_produsen='"+TKd.getText()+"',nama_produsen='"+TNm.getText()+"',"+
+                        "alamat_produsen='"+TAlamat.getText()+"',"+
+                        "no_telp='"+TTlp.getText()+"',"+
+                        "email='"+TEmail.getText()+"',"+
+                        "website_produsen='"+TWeb.getText()+"'");
+                //----------------------------------------------------------
+                TKd.requestFocus();
             runBackground(() ->tampil());
             emptTeks();
         }
@@ -608,7 +608,7 @@ public final class InventarisProdusen extends javax.swing.JDialog {
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
             param.put("parameter","%"+TCari.getText()+"%");
-            Valid.MyReport("rptProdusen.jasper","report","::[ Data Produsen ]::",param);
+                Valid.MyReport("rptProdusen.jasper","report","::[ Data Produsen ]::",param);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -677,7 +677,7 @@ public final class InventarisProdusen extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-        isForm();
+  isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed

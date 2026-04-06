@@ -131,7 +131,7 @@ public class ApiLICA {
                                     "]" +
                                 "}";
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);
+                    requestEntity = new HttpEntity(requestJson,headers);	
                     stringbalik=getRest().exchange(URL+"/insert", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
                 }
@@ -231,7 +231,7 @@ public class ApiLICA {
                                     "]" +
                                 "}";
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);
+                    requestEntity = new HttpEntity(requestJson,headers);	
                     stringbalik=getRest().exchange(URL+"/insert", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
                 }

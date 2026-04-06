@@ -656,7 +656,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         jml=tbDokter.getRowCount();
                         for(i=0;i<jml;i++){
                             if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
-                                validasiStok(tbDokter.getValueAt(i, 1).toString(), tbDokter.getValueAt(i, 3).toString(), Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()), tbDokter.getValueAt(i, 2).toString(), tbDokter.getValueAt(i, 9).toString());
+                                validasiStok(
+                                    tbDokter.getValueAt(i, 1).toString(),
+                                    tbDokter.getValueAt(i, 3).toString(),
+                                    Valid.SetAngka(tbDokter.getValueAt(i, 0).toString()),
+                                    tbDokter.getValueAt(i, 2).toString(),
+                                    tbDokter.getValueAt(i, 9).toString()
+                                );
                                 if(Sequel.menyimpantf2("detail_pengeluaran_obat_bhp","?,?,?,?,?,?,?,?","Transaksi Pengeluaran",8,new String[]{
                                     NoKeluar.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,2).toString(),
                                     tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,6).toString(),tbDokter.getValueAt(i,7).toString(),tbDokter.getValueAt(i,9).toString()
@@ -681,15 +687,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(sukses==true){
                             if(ttl>0){
                                 Sequel.deleteTampJurnal();
-                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Medis from set_akun"), "PERSEDIAAN BARANG", 0, ttl)==false){
-                                    sukses=false;
-                                }
-                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Medis from set_akun"), "KONTRA PERSEDIAAN BARANG", ttl, 0)==false){
-                                    sukses=false;
-                                }
-                                if(sukses==true){
-                                    sukses=jur.simpanJurnal(NoKeluar.getText(),"U","STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
-                                }
+                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Medis from set_akun"), "PERSEDIAAN BARANG", 0, ttl);
+                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Medis from set_akun"), "KONTRA PERSEDIAAN BARANG", ttl, 0);
+                                if (sukses) sukses = jur.simpanJurnal(NoKeluar.getText(),"U","STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
                             }
                         }
                     } catch (Exception ex) {
@@ -829,11 +829,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TglKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-        int row2=tabMode.getRowCount();
-        for(int r=0;r<row2;r++){
-            tabMode.setValueAt("",r,0);
-            tabMode.setValueAt(0,r,7);
-        }
+            int row2=tabMode.getRowCount();
+            for(int r=0;r<row2;r++){
+                tabMode.setValueAt("",r,0);
+                tabMode.setValueAt(0,r,7);
+            }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
@@ -853,36 +853,36 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_kdgudangKeyPressed
 
     private void BtnGudangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnGudangActionPerformed
-        if (bangsal == null || !bangsal.isDisplayable()) {
-            bangsal=new DlgCariBangsal(null,false);
-            bangsal.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
-            bangsal.addWindowListener(new WindowAdapter() {
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if(bangsal.getTable().getSelectedRow()!= -1){
-                        kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
-                        nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
-                        runBackground(() ->tampil());
-                    }
-                    kdgudang.requestFocus();
-                    bangsal=null;
+    if (bangsal == null || !bangsal.isDisplayable()) {
+        bangsal=new DlgCariBangsal(null,false);
+        bangsal.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+        bangsal.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(bangsal.getTable().getSelectedRow()!= -1){
+                    kdgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),0).toString());
+                    nmgudang.setText(bangsal.getTable().getValueAt(bangsal.getTable().getSelectedRow(),1).toString());
+                    runBackground(() ->tampil());
                 }
-            });
+                kdgudang.requestFocus();
+                bangsal=null;
+            }
+        });
 
-            bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            bangsal.setLocationRelativeTo(internalFrame1);
-        }
-        if (bangsal == null) return;
-        if (!bangsal.isVisible()) {
-            bangsal.isCek();
-            bangsal.emptTeks();
-        }
+        bangsal.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        bangsal.setLocationRelativeTo(internalFrame1);
+    }
+    if (bangsal == null) return;
+    if (!bangsal.isVisible()) {
+        bangsal.isCek();
+        bangsal.emptTeks();
+    }
 
-        if (bangsal.isVisible()) {
-            bangsal.toFront();
-            return;
-        }
-        bangsal.setVisible(true);
+    if (bangsal.isVisible()) {
+        bangsal.toFront();
+        return;
+    }
+    bangsal.setVisible(true);
     }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
