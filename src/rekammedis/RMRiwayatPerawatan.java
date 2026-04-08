@@ -4657,7 +4657,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     kddpjp="";
                     dpjp="";
                     if(rs.getString("status_lanjut").equals("Ranap")){
-                        kddpjp=Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=?",rs.getString("no_rawat"));
+                        kddpjp=Sequel.cariIsi("select dpjp_ranap.kd_dokter from dpjp_ranap where dpjp_ranap.no_rawat=? order by dpjp_ranap.status='utama' desc limit 1",rs.getString("no_rawat"));
                         if(!kddpjp.equals("")){
                             dpjp=Sequel.cariIsi("select dokter.nm_dokter from dokter where dokter.kd_dokter=?",kddpjp);
                         }else{
@@ -4868,7 +4868,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     if(rs.getString("status_lanjut").equals("Ranap")){
                         try{
                             rs3=koneksi.prepareStatement(
-                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
+                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"' order by dpjp_ranap.status='utama' desc limit 1").executeQuery();
                             if(rs3.next()){
                                 htmlContent.append(
                                   "<tr class='isi'>").append(
@@ -6618,7 +6618,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                             }else if(rs.getString("status_lanjut").equals("Ranap")){
                                 try{
                                     rs3=koneksi.prepareStatement(
-                                        "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
+                                        "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"' order by dpjp_ranap.status='utama' desc").executeQuery();
                                     if(rs3.next()){
                                         htmlContent.append(
                                             "<tr class='isi'>").append(
@@ -6685,7 +6685,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                             }else if(rs.getString("status_lanjut").equals("Ranap")){
                                 try{
                                     rs3=koneksi.prepareStatement(
-                                        "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
+                                        "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"' order by dpjp_ranap.status='utama' desc").executeQuery();
                                     if(rs3.next()){
                                         htmlContent.append("<tr class='isi'>").
                                                         append("<td valign='top' width='2%'></td>").
@@ -6759,7 +6759,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                 System.out.println("ESign : "+esign+" Sertisign : "+sertisign);
                                 try{
                                     rs3=koneksi.prepareStatement(
-                                        "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"'").executeQuery();
+                                        "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='"+rs.getString("no_rawat")+"' order by dpjp_ranap.status='utama' desc limit 1").executeQuery();
                                     if(rs3.next()){
                                         htmlContent.append(
                                             "<tr class='isi'>").append(
@@ -7621,7 +7621,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     if (rs.getString("status_lanjut").equals("Ranap")) {
                         try {
                             rs3 = koneksi.prepareStatement(
-                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='" + rs.getString("no_rawat") + "'").executeQuery();
+                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='" + rs.getString("no_rawat") + "' order by dpjp_ranap.status='utama' desc limit 1").executeQuery();
                             if (rs3.next()) {
                                 htmlContent.append(
                                     "<tr class='isi'>"
@@ -8008,7 +8008,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                         } else if (rs.getString("status_lanjut").equals("Ranap")) {
                             try {
                                 rs3 = koneksi.prepareStatement(
-                                    "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='" + rs.getString("no_rawat") + "'").executeQuery();
+                                    "select dpjp_ranap.kd_dokter,dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='" + rs.getString("no_rawat") + "' order by dpjp_ranap.status='utama' desc limit 1").executeQuery();
                                 if (rs3.next()) {
                                     htmlContent.append(
                                         "<tr class='isi'>"
@@ -8226,7 +8226,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                     if (rs.getString("status_lanjut").equals("Ranap")) {
                         try {
                             rs3 = koneksi.prepareStatement(
-                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='" + rs.getString("no_rawat") + "'").executeQuery();
+                                "select dokter.nm_dokter from dpjp_ranap inner join dokter on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat='" + rs.getString("no_rawat") + "' order by dpjp_ranap.status='utama' desc limit 1").executeQuery();
                             if (rs3.next()) {
                                 htmlContent.append(
                                     "<tr class='isi'>"

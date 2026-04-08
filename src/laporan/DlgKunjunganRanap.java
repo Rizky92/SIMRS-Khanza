@@ -1272,7 +1272,7 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                     dokterdpjp=rs.getString("nm_dokter");
                     try{
                         ps2=koneksi.prepareStatement("select dokter.nm_dokter from dpjp_ranap inner join dokter "+
-                            "on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? ");
+                            "on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? order by dpjp_ranap.status='utama' desc");
                         try {
                             ps2.setString(1,rs.getString("no_rawat"));
                             rs2=ps2.executeQuery();
@@ -1400,7 +1400,7 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
                     dokterdpjp=rs.getString("nm_dokter");
                     try{
                         ps2=koneksi.prepareStatement("select dokter.nm_dokter from dpjp_ranap inner join dokter "+
-                            "on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? ");
+                            "on dpjp_ranap.kd_dokter=dokter.kd_dokter where dpjp_ranap.no_rawat=? order by dpjp_ranap.status='utama' desc");
                         try {
                             ps2.setString(1,rs.getString("no_rawat"));
                             rs2=ps2.executeQuery();
