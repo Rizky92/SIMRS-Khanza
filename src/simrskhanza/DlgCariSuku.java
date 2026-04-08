@@ -13,6 +13,8 @@ package simrskhanza;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
@@ -27,11 +29,13 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -250,7 +254,7 @@ public final class DlgCariSuku extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil2());
+        tampil2Smc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -263,7 +267,7 @@ public final class DlgCariSuku extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -296,7 +300,6 @@ public final class DlgCariSuku extends javax.swing.JDialog {
         suku.setAlwaysOnTop(false);
         suku.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
-
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
@@ -315,32 +318,30 @@ public final class DlgCariSuku extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            if(Valid.daysOld("./cache/suku.iyem")<30){
-                runBackground(() ->tampil2());
-            }else{
-                runBackground(() ->tampil());
-            }
-        } catch (Exception e) {
+        if (Valid.umurcacheSmc("./cache/suku.iyem", 30)) {
+            tampilSmc();
+        } else {
+            tampil2Smc();
         }
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
             });
@@ -378,6 +379,7 @@ public final class DlgCariSuku extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
+    /*
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try {
@@ -419,6 +421,7 @@ public final class DlgCariSuku extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     public void emptTeks() {
         TCari.requestFocus();
@@ -432,6 +435,7 @@ public final class DlgCariSuku extends javax.swing.JDialog {
         BtnTambah.setEnabled(akses.getsuku_bangsa());
     }
 
+    /*
     private void tampil2() {
         try {
             myObj = new FileReader("./cache/suku.iyem");
@@ -468,6 +472,115 @@ public final class DlgCariSuku extends javax.swing.JDialog {
             root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
+    }
+    */
+
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, String[]>() {
+                final String cari = TCari.getText().toLowerCase().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    File file = new File("./cache/suku.iyem");
+                    file.createNewFile();
+                    try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from suku_bangsa")) {
+                        ArrayNode array = mapper.createArrayNode();
+                        while (rs.next()) {
+                            ObjectNode node = mapper.createObjectNode();
+                            node.put("ID", rs.getString(1));
+                            node.put("Suku", rs.getString(2));
+                            array.add(node);
+                            if (cari.isBlank()) {
+                                publish(new String[] {rs.getString(1), rs.getString(2)});
+                            } else {
+                                if (rs.getString(1).toLowerCase().contains(cari) || rs.getString(2).toLowerCase().contains(cari)) {
+                                    publish(new String[] {rs.getString(1), rs.getString(2)});
+                                }
+                            }
+                        }
+                        fw.write(mapper.writeValueAsString(mapper.createObjectNode().set("suku", array)));
+                        fw.flush();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<String[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariSuku.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    private void tampil2Smc() {
+        if (new File("./cache/suku.iyem").isFile() && !Valid.umurcacheSmc("./cache/suku.iyem", 7)) {
+            if (!ceksukses) {
+                ceksukses = true;
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Valid.tabelKosongSmc(tabMode);
+                LCount.setText("0");
+                new SwingWorker<Void, String[]>() {
+                    final String cari = TCari.getText().toLowerCase().trim();
+
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        try (FileReader fr = new FileReader("./cache/suku.iyem")) {
+                            ArrayNode array = mapper.readTree(fr).withArray("suku");
+                            if (cari.isBlank()) {
+                                for (JsonNode node : array) {
+                                    publish(new String[] {node.path("ID").asText(), node.path("Suku").asText()});
+                                }
+                            } else {
+                                for (JsonNode node : array) {
+                                    if (node.path("ID").asText().toLowerCase().contains(cari) || node.path("Suku").asText().toLowerCase().contains(cari)) {
+                                        publish(new String[] {node.path("ID").asText(), node.path("Suku").asText()});
+                                    }
+                                }
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void process(List<String[]> chunks) {
+                        chunks.forEach(tabMode::addRow);
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                        }
+                        tabMode.fireTableDataChanged();
+                        LCount.setText(tabMode.getRowCount() + "");
+                        DlgCariSuku.this.setCursor(Cursor.getDefaultCursor());
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
+        } else {
+            tampilSmc();
+        }
     }
 
     private void runBackground(Runnable task) {

@@ -1254,48 +1254,6 @@ public final class validasi {
         }
     }
 
-    public void viewReport(String namaReport, String judul, Map params) {
-        String currentDir = System.getProperties().getProperty("user.dir");
-
-        File dir = new File(currentDir);
-
-        File report = null;
-
-        if (dir.isDirectory()) {
-            for (String file: dir.list()) {
-                report = new File(currentDir + File.separatorChar + file + File.separatorChar + namaReport);
-
-                if (report.isFile()) {
-                    System.out.println("Found report file at: " + report.toString());
-                    break;
-                }
-            }
-        }
-
-        if (report == null) {
-            JOptionPane.showMessageDialog(null, "File tidak ditemukan!");
-            return;
-        }
-
-        try {
-            JasperReport jr = (JasperReport) JRLoader.loadObject(report);
-            JasperPrint jp = JasperFillManager.fillReport(jr, params, connect);
-            JasperViewer jv = new JasperViewer(jp, false);
-
-            Dimension screen = Toolkit.getDefaultToolkit().getScreenSize();
-
-            jv.setTitle(judul);
-            jv.setSize(screen.width - 50, screen.height - 50);
-            jv.setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
-            jv.setLocationRelativeTo(null);
-            jv.setVisible(true);
-        } catch (Exception e) {
-            System.out.println("Report can't view because: " + e);
-
-            JOptionPane.showMessageDialog(null, "Tidak bisa menampilkan hasil cetak!");
-        }
-    }
-
     public void MyReportqrypdf(String reportName,String reportDirName,String judul,String qry,Map parameters){
         Properties systemProp = System.getProperties();
 

@@ -845,7 +845,6 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
         }
 
         poli.isCek();
-        poli.TCari.requestFocus();
         poli.setSize(new Dimension(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20));
         poli.setLocationRelativeTo(internalFrame1);
     }

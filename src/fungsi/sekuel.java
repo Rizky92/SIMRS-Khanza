@@ -654,11 +654,12 @@ public final class sekuel {
         }
 
         try (PreparedStatement ps = connect.prepareStatement(sql.concat("?, ?)"))) {
-            for (int i = 0; i < values.length; i++) {
+            int i = 0;
+            for (; i < values.length; ++i) {
                 ps.setString(i + 1, values[i]);
             }
-            ps.setString(values.length + 1, akses.getkode());
-            ps.setString(values.length + 2, akses.getalamatip());
+            ps.setString(++i, akses.getkode());
+            ps.setString(++i, akses.getalamatip());
             ps.executeUpdate();
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -1801,45 +1802,6 @@ public final class sekuel {
             SimpanTrack(qry);
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }
-    }
-
-    public void queryUpdate(String query, String... values) {
-        String track = query;
-
-        try {
-            ps = connect.prepareStatement(query);
-
-            for (int i = 0; i < values.length; i++) {
-                ps.setString(i + 1, values[i]);
-                track = track.replaceFirst("\\?", "'"+values[i]+"'");
-            }
-
-            ps.executeUpdate();
-
-            ps.close();
-
-            SimpanTrack(track);
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
-
-            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses data...!!!");
-        }
-    }
-
-    public void queryUpdate(String query) {
-        try {
-            ps = connect.prepareStatement(query);
-
-            ps.executeUpdate();
-
-            ps.close();
-
-            SimpanTrack(query);
-        } catch (Exception e) {
-            System.out.println("Notifikasi : " + e);
-
-            JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses data...!!!");
         }
     }
 

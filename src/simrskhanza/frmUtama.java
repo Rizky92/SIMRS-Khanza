@@ -21053,6 +21053,7 @@ public class frmUtama extends javax.swing.JFrame {
         RMPenilaianAwalMedisRalanRehabMedik aplikasi=new RMPenilaianAwalMedisRalanRehabMedik(this,false);
         aplikasi.isCek();
         aplikasi.emptTeks();
+        aplikasi.setTampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -21065,6 +21066,8 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         MasterTemplatePersetujuanPenolakanTindakan aplikasi=new MasterTemplatePersetujuanPenolakanTindakan(this,false);
         aplikasi.isCek();
+        aplikasi.emptTeks();
+        aplikasi.setTampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -23453,7 +23456,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        // ApotekBPJSRiwayatPelayananObat form=new ApotekBPJSRiwayatPelayananObat(this,false);
         ApotekBPJSRiwayatPelayananObatSMC form = new ApotekBPJSRiwayatPelayananObatSMC(this, false);
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);

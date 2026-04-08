@@ -449,7 +449,7 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-public void tampil3() {
+    public void tampil3() {
         runBackground(() ->tampil());
     }
 

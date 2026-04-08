@@ -45,5 +45,4 @@ public class WarnaTableKelengkapanOperasi extends DefaultTableCellRenderer {
         }
         return component;
     }
-
 }
