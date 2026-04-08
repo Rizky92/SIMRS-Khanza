@@ -496,8 +496,17 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         N10 = new widget.TextBox2();
         N5 = new widget.TextBox2();
         N1 = new widget.TextBox2();
+        panelBiasa1 = new widget.PanelBiasa();
         scrollPane1 = new widget.ScrollPane();
         tbDokter = new widget.Table();
+        PanelAccor = new widget.PanelBiasa();
+        ChkAccor = new widget.CekBox();
+        FormPhoto = new widget.PanelBiasa();
+        FormPass3 = new widget.PanelBiasa();
+        btnAmbil = new widget.Button();
+        BtnRefreshPhoto1 = new widget.Button();
+        Scroll5 = new widget.ScrollPane();
+        LoadHTML2 = new widget.editorpane();
 
         Popup.setName("Popup"); // NOI18N
 
@@ -902,6 +911,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelBiasa2.setLayout(null);
 
         BtnKeluar2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar2.setMnemonic('K');
         BtnKeluar2.setText("Keluar");
         BtnKeluar2.setToolTipText("Alt+K");
         BtnKeluar2.setName("BtnKeluar2"); // NOI18N
@@ -931,6 +941,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKIbu.setBounds(93, 10, 148, 23);
 
         BtnCari1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari1.setMnemonic('2');
         BtnCari1.setToolTipText("Alt+2");
         BtnCari1.setName("BtnCari1"); // NOI18N
         BtnCari1.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -958,6 +969,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKAyah.setBounds(93, 100, 148, 23);
 
         BtnCari2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari2.setMnemonic('2');
         BtnCari2.setToolTipText("Alt+2");
         BtnCari2.setName("BtnCari2"); // NOI18N
         BtnCari2.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1037,6 +1049,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         CaraLahir.setBounds(93, 280, 180, 23);
 
         BtnSimpan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpan1.setMnemonic('S');
         BtnSimpan1.setText("Simpan");
         BtnSimpan1.setToolTipText("Alt+S");
         BtnSimpan1.setName("BtnSimpan1"); // NOI18N
@@ -1135,6 +1148,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKPelapor.setBounds(403, 10, 148, 23);
 
         BtnCari3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari3.setMnemonic('2');
         BtnCari3.setToolTipText("Alt+2");
         BtnCari3.setName("BtnCari3"); // NOI18N
         BtnCari3.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1233,6 +1247,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKSaksi1.setBounds(403, 160, 148, 23);
 
         BtnCari4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari4.setMnemonic('2');
         BtnCari4.setToolTipText("Alt+2");
         BtnCari4.setName("BtnCari4"); // NOI18N
         BtnCari4.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1347,6 +1362,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NIKSaksi2.setBounds(760, 10, 148, 23);
 
         BtnCari5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari5.setMnemonic('2');
         BtnCari5.setToolTipText("Alt+2");
         BtnCari5.setName("BtnCari5"); // NOI18N
         BtnCari5.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1521,6 +1537,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi2.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCari.setMnemonic('1');
         BtnCari.setToolTipText("Alt+1");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -1552,6 +1569,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -1569,6 +1587,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnSimpan);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
+        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -1586,6 +1605,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnBatal);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
+        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -1603,6 +1623,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnHapus);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
+        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -1620,6 +1641,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnEdit);
 
         BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
+        BtnPrint.setMnemonic('T');
         BtnPrint.setText("Cetak");
         BtnPrint.setToolTipText("Alt+PT");
         BtnPrint.setName("BtnPrint"); // NOI18N
@@ -1637,6 +1659,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(BtnPrint);
 
         BtnAll.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnAll.setMnemonic('M');
         BtnAll.setText("Semua");
         BtnAll.setToolTipText("Alt+M");
         BtnAll.setName("BtnAll"); // NOI18N
@@ -1665,6 +1688,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         panelisi1.add(LCount);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
+        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -2135,6 +2159,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         NmPenolong.setBounds(232, 272, 201, 23);
 
         BtnPenjab.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
+        BtnPenjab.setMnemonic('1');
         BtnPenjab.setToolTipText("ALt+1");
         BtnPenjab.setName("BtnPenjab"); // NOI18N
         BtnPenjab.addActionListener(new java.awt.event.ActionListener() {
@@ -2151,6 +2176,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         BtnPenjab.setBounds(437, 272, 28, 23);
 
         BtnKelurahan1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/011.png"))); // NOI18N
+        BtnKelurahan1.setMnemonic('2');
         BtnKelurahan1.setToolTipText("ALt+2");
         BtnKelurahan1.setName("BtnKelurahan1"); // NOI18N
         BtnKelurahan1.addActionListener(new java.awt.event.ActionListener() {
@@ -2346,6 +2372,9 @@ public class DlgIKBBayi extends javax.swing.JDialog {
 
         TabRawat.addTab("Input Data Kelahiran Bayi", Scroll1);
 
+        panelBiasa1.setName("panelBiasa1"); // NOI18N
+        panelBiasa1.setLayout(new java.awt.BorderLayout());
+
         scrollPane1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         scrollPane1.setComponentPopupMenu(Popup);
         scrollPane1.setName("scrollPane1"); // NOI18N
@@ -2378,7 +2407,86 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         });
         scrollPane1.setViewportView(tbDokter);
 
-        TabRawat.addTab("Data Kelahiran Bayi", scrollPane1);
+        panelBiasa1.add(scrollPane1, java.awt.BorderLayout.CENTER);
+
+        PanelAccor.setBackground(new java.awt.Color(255, 255, 255));
+        PanelAccor.setName("PanelAccor"); // NOI18N
+        PanelAccor.setPreferredSize(new java.awt.Dimension(430, 43));
+        PanelAccor.setLayout(new java.awt.BorderLayout(1, 1));
+
+        ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
+        ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
+        ChkAccor.setSelected(true);
+        ChkAccor.setFocusable(false);
+        ChkAccor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        ChkAccor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        ChkAccor.setName("ChkAccor"); // NOI18N
+        ChkAccor.setPreferredSize(new java.awt.Dimension(15, 20));
+        ChkAccor.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
+        ChkAccor.setRolloverSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ChkAccor.setSelectedIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kanan.png"))); // NOI18N
+        ChkAccor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ChkAccorActionPerformed(evt);
+            }
+        });
+        PanelAccor.add(ChkAccor, java.awt.BorderLayout.WEST);
+
+        FormPhoto.setBackground(new java.awt.Color(255, 255, 255));
+        FormPhoto.setBorder(null);
+        FormPhoto.setName("FormPhoto"); // NOI18N
+        FormPhoto.setPreferredSize(new java.awt.Dimension(115, 73));
+        FormPhoto.setLayout(new java.awt.BorderLayout());
+
+        FormPass3.setBackground(new java.awt.Color(255, 255, 255));
+        FormPass3.setBorder(null);
+        FormPass3.setName("FormPass3"); // NOI18N
+        FormPass3.setPreferredSize(new java.awt.Dimension(115, 40));
+
+        btnAmbil.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/plus_16.png"))); // NOI18N
+        btnAmbil.setMnemonic('U');
+        btnAmbil.setText("Ambil");
+        btnAmbil.setToolTipText("Alt+U");
+        btnAmbil.setName("btnAmbil"); // NOI18N
+        btnAmbil.setPreferredSize(new java.awt.Dimension(100, 30));
+        btnAmbil.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAmbilActionPerformed(evt);
+            }
+        });
+        FormPass3.add(btnAmbil);
+
+        BtnRefreshPhoto1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/refresh.png"))); // NOI18N
+        BtnRefreshPhoto1.setMnemonic('U');
+        BtnRefreshPhoto1.setText("Refresh");
+        BtnRefreshPhoto1.setToolTipText("Alt+U");
+        BtnRefreshPhoto1.setName("BtnRefreshPhoto1"); // NOI18N
+        BtnRefreshPhoto1.setPreferredSize(new java.awt.Dimension(100, 30));
+        BtnRefreshPhoto1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRefreshPhoto1ActionPerformed(evt);
+            }
+        });
+        FormPass3.add(BtnRefreshPhoto1);
+
+        FormPhoto.add(FormPass3, java.awt.BorderLayout.PAGE_END);
+
+        Scroll5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
+        Scroll5.setName("Scroll5"); // NOI18N
+        Scroll5.setOpaque(true);
+        Scroll5.setPreferredSize(new java.awt.Dimension(200, 200));
+
+        LoadHTML2.setBorder(null);
+        LoadHTML2.setName("LoadHTML2"); // NOI18N
+        Scroll5.setViewportView(LoadHTML2);
+
+        FormPhoto.add(Scroll5, java.awt.BorderLayout.CENTER);
+
+        PanelAccor.add(FormPhoto, java.awt.BorderLayout.CENTER);
+
+        panelBiasa1.add(PanelAccor, java.awt.BorderLayout.EAST);
+
+        TabRawat.addTab("Data Kelahiran Bayi", panelBiasa1);
 
         internalFrame1.add(TabRawat, java.awt.BorderLayout.CENTER);
 
@@ -3872,6 +3980,39 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
+        if(tbDokter.getSelectedRow()!= -1){
+            isPhoto();
+            panggilPhoto();
+        }else{
+            ChkAccor.setSelected(false);
+            JOptionPane.showMessageDialog(null,"Silahkan pilih No.Rawat..!!!");
+        }
+    }//GEN-LAST:event_ChkAccorActionPerformed
+
+    private void btnAmbilActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAmbilActionPerformed
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }else{
+            if(tbDokter.getSelectedRow()>-1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Valid.panggilUrl("fotokelahiranbayismc/login.php?act=login&usere="+koneksiDB.USERHYBRIDWEB()+"&passwordte="+koneksiDB.PASHYBRIDWEB()+"&no_rkm_medis="+tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                this.setCursor(Cursor.getDefaultCursor());
+            }else{
+                JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Rawat terlebih dahulu..!!");
+            }
+        }
+    }//GEN-LAST:event_btnAmbilActionPerformed
+
+    private void BtnRefreshPhoto1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRefreshPhoto1ActionPerformed
+        if(tbDokter.getSelectedRow()>-1){
+            panggilPhoto();
+        }else{
+            JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Rawat terlebih dahulu..!!");
+        }
+    }//GEN-LAST:event_BtnRefreshPhoto1ActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -3914,15 +4055,19 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     private widget.Button BtnKelurahan1;
     private widget.Button BtnPenjab;
     private widget.Button BtnPrint;
+    private widget.Button BtnRefreshPhoto1;
     private widget.Button BtnSimpan;
     private widget.Button BtnSimpan1;
     private widget.ComboBox CaraLahir;
+    private widget.CekBox ChkAccor;
     private widget.Tanggal DTPCari1;
     private widget.Tanggal DTPCari2;
     private widget.Tanggal Daftar;
     private widget.TextBox Diagnosa;
     private javax.swing.JDialog DlgBridgingLahir;
     private widget.PanelBiasa FormInput;
+    private widget.PanelBiasa FormPass3;
+    private widget.PanelBiasa FormPhoto;
     private widget.TextBox G;
     private widget.ComboBox JKel;
     private widget.ComboBox JenisLahir;
@@ -3935,6 +4080,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     private widget.TextBox LingkarDada;
     private widget.TextBox LingkarKepala;
     private widget.TextBox LingkarPerut;
+    private widget.editorpane LoadHTML2;
     private widget.TextBox Mikasi;
     private widget.TextBox Mikonium;
     private javax.swing.JMenuItem MnInformasiBayi;
@@ -3961,6 +4107,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     private widget.TextBox NoSKL;
     private widget.TextArea ObatDiberikan;
     private widget.TextBox P;
+    private widget.PanelBiasa PanelAccor;
     private widget.TextBox Panjang;
     private widget.ComboBox PekerjaanPelapor;
     private widget.ComboBox PekerjaanSaksi1;
@@ -3972,6 +4119,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     private widget.TextBox Resusitas;
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
+    private widget.ScrollPane Scroll5;
     private widget.TextBox TCari;
     private javax.swing.JTabbedPane TabRawat;
     private widget.TextBox TelpOrtu;
@@ -3982,6 +4130,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     private widget.TextBox UmurPelapor;
     private widget.TextBox UmurSaksi1;
     private widget.TextBox UmurSaksi2;
+    private widget.Button btnAmbil;
     private widget.CekBox ckTglCari;
     private widget.ComboBox cmbCrJk;
     private widget.ComboBox cmbHlm;
@@ -4060,6 +4209,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     private widget.Label label71;
     private widget.Label label9;
     private widget.ComboBox menit;
+    private widget.PanelBiasa panelBiasa1;
     private widget.PanelBiasa panelBiasa2;
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi2;
@@ -4413,6 +4563,57 @@ public class DlgIKBBayi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             N10.setText("");
+        }
+    }
+
+    private void isPhoto(){
+        if(ChkAccor.isSelected()==true){
+            ChkAccor.setVisible(false);
+            PanelAccor.setPreferredSize(new Dimension(530,HEIGHT));
+            ChkAccor.setVisible(true);
+        }else if(ChkAccor.isSelected()==false){
+            ChkAccor.setVisible(false);
+            PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
+            ChkAccor.setVisible(true);
+        }
+    }
+
+    private void panggilPhoto() {
+        if(FormPhoto.isVisible()==true){
+            String path = Sequel.cariIsiSmc("select pasien_bayi_gambar_smc.photo from pasien_bayi_gambar_smc where pasien_bayi_gambar_smc.no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+            if (path != null && (!path.isBlank() || path.equals("-"))) {
+                LoadHTML2.setText("<html><body><center><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/hasilpemeriksaanusg/"+rs.getString("photo")+"'><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/hasilpemeriksaanusg/"+rs.getString("photo")+"' alt='photo' width='550' height='550'/></a></center></body></html>");
+            } else {
+                LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
+            }
+
+            try {
+                ps=koneksi.prepareStatement("select hasil_pemeriksaan_usg_gambar.photo from hasil_pemeriksaan_usg_gambar where hasil_pemeriksaan_usg_gambar.no_rawat=?");
+                try {
+                    ps.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    rs=ps.executeQuery();
+                    if(rs.next()){
+                        if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
+                            LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
+                        }else{
+                            LoadHTML2.setText("<html><body><center><a href='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/hasilpemeriksaanusg/"+rs.getString("photo")+"'><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/hasilpemeriksaanusg/"+rs.getString("photo")+"' alt='photo' width='550' height='550'/></a></center></body></html>");
+                        }
+                    }else{
+                        LoadHTML2.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : "+e);
+                } finally{
+                    if(rs!=null){
+                        rs.close();
+                    }
+                    if(ps!=null){
+                        ps.close();
+                    }
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : "+e);
+            }
         }
     }
 
