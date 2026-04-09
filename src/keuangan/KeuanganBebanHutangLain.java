@@ -724,6 +724,10 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
+                } finally {
+                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                    response = null;
+                    root = null;
                 }
                 Sequel.deleteTampJurnal();
                 if (sukses) sukses = Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());

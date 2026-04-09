@@ -28,11 +28,11 @@ Important root directories are listed below
 - `src/dapur`: Modules for kitchen inventory management.
 - `src/fungsi`: Helper functions
 - `src/grafikanalisa`: Modules to display various graphics.
-- `src/informasi`: Modules to display general information, for example bed status, doctor's practic schedule.
-- `src/inventaris`: Modules used for general tools inventory management.
+- `src/informasi`: Modules to display general public information (e.g. bed status, doctor's practic schedule).
+- `src/inventaris`: Modules used for asset, CSSD, building, and waste management.
 - `src/inventory`: Modules for pharmacy-related general inventory management.
-- `src/ipsrs`: Modules used for non-medical and consumables inventory management.
-- `src/kepegawaian`: Modules for managing human resources, CSSD, and general auditing for various worker-related incidents.
+- `src/ipsrs`: Modules used for non-medical and consumable inventory management.
+- `src/kepegawaian`: Modules for managing human resources and auditing for various worker-related incidents.
 - `src/keuangan`: Modules for accounting management.
 - `src/laporan`: Modules for medical statistic reporting.
 - `src/parkir`: Modules for parking management.
@@ -50,9 +50,10 @@ Important root directories are listed below
 - `src/tranfusidarah`: Modules for blood transfusion management.
 - `src/viabarcode`: Modules for accessing various services quickly using barcode scanner.
 - `src/widget`: Houses various UI components used internally.
-- `src/ziscsr`: Modules for managing charities.
+- `src/ziscsr`: Modules for managing charities and donations.
 
 Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. Inside the `.java` files, each have `initComponents()`. Changes in this method should be reflected to their `.form` counterpart.
+If you're making plans for new menu, describe the general window layout you're going to design if you can. This should help user understand what you're going for designing the form in case it's broken when previewed in NetBeans.
 
 ### General coding guidelines
 The coding guidelines should cater to users' netbeans configuration, which as follows.
@@ -65,8 +66,9 @@ The coding guidelines should cater to users' netbeans configuration, which as fo
 - Before starting the changes, ensure current branch is in `custom` branch. Then switch to new branch. Branch format name must begin with `claude/` and styled as `kebab-case` with at-most 4 words in length.
 - Changes related to database migration (e.g. table structure change) MUST BE in `sik_modif.sql`. DO NOT CHANGE other `.sql` files. Their changes follow upstream repository.
 - When modifying codes that touches `sekuel` and `validasi` class methods, usually named `Sequel` and `Valid` respectively (e.g. `Sequel.menyimpantf("dpjp_ranap", "?, ?, ?", 3, new String[]{"a", "b", "c"})`), look for its alternative in those class affixed by `Smc`. Carefully read the parameter requirements.
+- In addition, adding new features must affix the name with SMC, where method name is styled "Smc", permission name is styled "_smc", and file/menu name is styled "SMC".
 - Adding new parameter to `database.xml.example` MUST BE reflected in `src/fungsi/koneksiDB.java` class. By default, parameter values are unecrypted. Sensitive parameters such as secret keys must be encrypted. Therefore, reading the value from java counterpart requires decryption.
-- Whenever you finish the task, ask the user to review your work. If user approves, make a draft PR and assign `rizky92` as assignee. Title PR must be translated into Indonesian language, but the body/description doesn't have to. If the PR is a fix for current issues or supersedes other PR, attach the issue/PR number in PR body. The PR title doesn't need to include standard prefix such as "fix" or "chore". A simple title is enough.
+- Whenever you finish the task, make a draft PR and assign `rizky92` as assignee. Title PR must be translated into Indonesian language, but the body/description doesn't have to. If the PR is a fix for current issues or supersedes other PR, attach the issue/PR number in PR body. The PR title doesn't need to include standard prefix such as "fix" or "chore". A simple title is enough.
 
 #### Building the UI
 When building UI components, use primary components from `src/widget`. Following is the list of used components.

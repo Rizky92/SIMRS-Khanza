@@ -634,6 +634,8 @@ public final class InventarisCariKoleksi extends javax.swing.JDialog {
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(tabMode.getRowCount() + "");
     }

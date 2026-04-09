@@ -151,6 +151,7 @@ import bridging.PCareMapingTindakanRanap;
 import bridging.PCarePesertaKegiatanKelompok;
 import bridging.ReklasifikasiRalan;
 import bridging.ReklasifikasiRanap;
+import bridging.SatuSehatKirimAllergyIntolerance;
 import bridging.SatuSehatKirimCarePlan;
 import bridging.SatuSehatKirimClinicalImpression;
 import bridging.SatuSehatKirimCondition;
@@ -168,6 +169,7 @@ import bridging.SatuSehatKirimObservationLabPK;
 import bridging.SatuSehatKirimObservationRadiologi;
 import bridging.SatuSehatKirimObservationTTV;
 import bridging.SatuSehatKirimProcedure;
+import bridging.SatuSehatKirimQRTelaahFarmasi;
 import bridging.SatuSehatKirimServiceRequestLabMB;
 import bridging.SatuSehatKirimServiceRequestLabPK;
 import bridging.SatuSehatKirimServiceRequestRadiologi;
@@ -828,6 +830,7 @@ import pcraicra.PCRAICRAJenisAktivitasProyek;
 import pcraicra.PCRAICRAKelasRisikoPencegahan;
 import pcraicra.PCRAICRALokasiKelompokRisikoArea;
 import pcraicra.PCRAICRAPengkajianRisikoPraKonstruksi;
+import pcraicra.PCRAICRAPersyaratanHarusDipenuhi;
 import pcraicra.PCRAICRATindakanPengendalian;
 import permintaan.DlgBookingMCUPerusahaan;
 import permintaan.DlgBookingOperasi;
@@ -8580,7 +8583,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         DlgKasirRalan kasirralan=new DlgKasirRalan(this,false);
         kasirralan.isCek();
-        kasirralan.setCariKosong();
         kasirralan.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         kasirralan.setLocationRelativeTo(PanelUtama);
         kasirralan.setVisible(true);
@@ -8592,7 +8594,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         DlgReg reg=new DlgReg(this,false);
-        reg.emptTeks();
+        //reg.emptTeks();
         reg.isCek();
         reg.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         reg.setLocationRelativeTo(PanelUtama);
@@ -10241,7 +10243,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         DlgIGD igd=new DlgIGD(this,false);
-        igd.emptTeks();
+        //igd.emptTeks();
         igd.isCek();
         igd.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         igd.setLocationRelativeTo(PanelUtama);
@@ -21051,6 +21053,7 @@ public class frmUtama extends javax.swing.JFrame {
         RMPenilaianAwalMedisRalanRehabMedik aplikasi=new RMPenilaianAwalMedisRalanRehabMedik(this,false);
         aplikasi.isCek();
         aplikasi.emptTeks();
+        aplikasi.setTampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -21063,6 +21066,8 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         MasterTemplatePersetujuanPenolakanTindakan aplikasi=new MasterTemplatePersetujuanPenolakanTindakan(this,false);
         aplikasi.isCek();
+        aplikasi.emptTeks();
+        aplikasi.setTampil();
         aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
@@ -23451,7 +23456,6 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        // ApotekBPJSRiwayatPelayananObat form=new ApotekBPJSRiwayatPelayananObat(this,false);
         ApotekBPJSRiwayatPelayananObatSMC form = new ApotekBPJSRiwayatPelayananObatSMC(this, false);
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
@@ -23632,6 +23636,42 @@ public class frmUtama extends javax.swing.JFrame {
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
         DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnPCRAICRAPersyaratanHarusDipenuhiActionPerformed(java.awt.event.ActionEvent evt) {
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        isTutup();
+        PCRAICRAPersyaratanHarusDipenuhi form=new PCRAICRAPersyaratanHarusDipenuhi(this,false);
+        form.emptTeks();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnKirimQRTelaahFarmasiSatuSehatActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SatuSehatKirimQRTelaahFarmasi aplikasi=new SatuSehatKirimQRTelaahFarmasi(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        aplikasi.isCek();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnKirimAllergiSatuSehatActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SatuSehatKirimAllergyIntolerance aplikasi=new SatuSehatKirimAllergyIntolerance(this,false);
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        aplikasi.isCek();
         this.setCursor(Cursor.getDefaultCursor());
     }
 
@@ -24354,7 +24394,8 @@ public class frmUtama extends javax.swing.JFrame {
             btnLabKeslingVerifikasiPengujianSampel,btnLabKeslingValidasiPengujianSampel,btnLabKeslingRekapPelayanan,btnLabKeslingPembyaranPengujianSampel,btnLabKeslingRekapPembayaran,
             btnSkriningCURB65,btnBPJSPotensiPRB,btnBPJSRiwayatPelayananObatApotek,btnSkriningGiziKehamilan,btnBPJSRekapPesertaPRBObatApotek,btnSuratSerahTerimaBarangAnggotaTubuh,btnPCRAICRAJenisAktivitasProyek,
             btnPCRAICRALokasiKelompokRisiko,btnPCRAICRAKelasRisikoPencegahan,btnPCRAICRATindakanPengendalian,btnPCRAICRAIdentifikasiRisikoInfeksi,btnPCRAICRAIdentifikasiRisikoKeselamatan,
-            btnPCRAICRAIdentifikasiRisikoKebakaran,btnPCRAICRAIdentifikasiRisikoUtilitas,btnBPJSResepObatApotek,btnObatApolApotekBPJS,btnPermintaanResepIterasiApotekBPJS,btnPCRAICRAPengkajianRisikoPraKonstruksi;
+            btnPCRAICRAIdentifikasiRisikoKebakaran,btnPCRAICRAIdentifikasiRisikoUtilitas,btnBPJSResepObatApotek,btnObatApolApotekBPJS,btnPermintaanResepIterasiApotekBPJS,btnPCRAICRAPengkajianRisikoPraKonstruksi,
+            btnPCRAICRAPersyaratanHarusDipenuhi,btnKirimQRTelaahFarmasiSatuSehat,btnKirimAllergiSatuSehat;
 
     public void isWall(){
         try{
@@ -27814,6 +27855,16 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
+            if(akses.getsatu_sehat_kirim_questionresponse_telaah_farmasi()==true){
+                Panelmenu.add(btnKirimQRTelaahFarmasiSatuSehat);
+                jmlmenu++;
+            }
+
+            if(akses.getsatu_sehat_kirim_allergy_intolerance()==true){
+                Panelmenu.add(btnKirimAllergiSatuSehat);
+                jmlmenu++;
+            }
+
             if(akses.getsatu_sehat_mapping_radiologi()==true){
                 Panelmenu.add(btnMappingRadiologiSatuSehat);
                 jmlmenu++;
@@ -30046,6 +30097,11 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getpcra_icra_identifkasi_risiko_utilitas()==true){
                 Panelmenu.add(btnPCRAICRAIdentifikasiRisikoUtilitas);
+                jmlmenu++;
+            }
+
+            if(akses.getpcra_icra_persyaratan_harus_dipenuhi()==true){
+                Panelmenu.add(btnPCRAICRAPersyaratanHarusDipenuhi);
                 jmlmenu++;
             }
 
@@ -33722,6 +33778,16 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
+        if(akses.getsatu_sehat_kirim_questionresponse_telaah_farmasi()==true){
+            Panelmenu.add(btnKirimQRTelaahFarmasiSatuSehat);
+            jmlmenu++;
+        }
+
+        if(akses.getsatu_sehat_kirim_allergy_intolerance()==true){
+            Panelmenu.add(btnKirimAllergiSatuSehat);
+            jmlmenu++;
+        }
+
         if(akses.getsatu_sehat_mapping_radiologi()==true){
             Panelmenu.add(btnMappingRadiologiSatuSehat);
             jmlmenu++;
@@ -35933,6 +35999,11 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getpcra_icra_identifkasi_risiko_utilitas()==true){
             Panelmenu.add(btnPCRAICRAIdentifikasiRisikoUtilitas);
+            jmlmenu++;
+        }
+
+        if(akses.getpcra_icra_persyaratan_harus_dipenuhi()==true){
+            Panelmenu.add(btnPCRAICRAPersyaratanHarusDipenuhi);
             jmlmenu++;
         }
 
@@ -40938,6 +41009,20 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
+        if(akses.getsatu_sehat_kirim_questionresponse_telaah_farmasi()==true){
+            if(btnKirimQRTelaahFarmasiSatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnKirimQRTelaahFarmasiSatuSehat);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getsatu_sehat_kirim_allergy_intolerance()==true){
+            if(btnKirimAllergiSatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnKirimAllergiSatuSehat);
+                jmlmenu++;
+            }
+        }
+
         if(akses.getsatu_sehat_mapping_radiologi()==true){
             if(btnMappingRadiologiSatuSehat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnMappingRadiologiSatuSehat);
@@ -44030,6 +44115,13 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getpcra_icra_identifkasi_risiko_utilitas()==true){
             if(btnPCRAICRAIdentifikasiRisikoUtilitas.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnPCRAICRAIdentifikasiRisikoUtilitas);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getpcra_icra_persyaratan_harus_dipenuhi()==true){
+            if(btnPCRAICRAPersyaratanHarusDipenuhi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnPCRAICRAPersyaratanHarusDipenuhi);
                 jmlmenu++;
             }
         }
@@ -50328,6 +50420,30 @@ public class frmUtama extends javax.swing.JFrame {
         btnPCRAICRAPengkajianRisikoPraKonstruksi.setName("btnPCRAICRAPengkajianRisikoPraKonstruksi");
         btnPCRAICRAPengkajianRisikoPraKonstruksi.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPCRAICRAPengkajianRisikoPraKonstruksi.addActionListener(this::btnPCRAICRAPengkajianRisikoPraKonstruksiActionPerformed);
+
+        btnPCRAICRAPersyaratanHarusDipenuhi = new widget.ButtonBig();
+        btnPCRAICRAPersyaratanHarusDipenuhi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/hammer_10279817.png")));
+        btnPCRAICRAPersyaratanHarusDipenuhi.setText("Persyaratan Harus Dipenuhi PCRA");
+        btnPCRAICRAPersyaratanHarusDipenuhi.setIconTextGap(0);
+        btnPCRAICRAPersyaratanHarusDipenuhi.setName("btnPCRAICRAPersyaratanHarusDipenuhi");
+        btnPCRAICRAPersyaratanHarusDipenuhi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnPCRAICRAPersyaratanHarusDipenuhi.addActionListener(this::btnPCRAICRAPersyaratanHarusDipenuhiActionPerformed);
+
+        btnKirimQRTelaahFarmasiSatuSehat = new widget.ButtonBig();
+        btnKirimQRTelaahFarmasiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnKirimQRTelaahFarmasiSatuSehat.setText("Kirim Q.R. Telaah Farmasi Satu Sehat");
+        btnKirimQRTelaahFarmasiSatuSehat.setIconTextGap(0);
+        btnKirimQRTelaahFarmasiSatuSehat.setName("btnKirimQRTelaahFarmasiSatuSehat");
+        btnKirimQRTelaahFarmasiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimQRTelaahFarmasiSatuSehat.addActionListener(this::btnKirimQRTelaahFarmasiSatuSehatActionPerformed);
+
+        btnKirimAllergiSatuSehat = new widget.ButtonBig();
+        btnKirimAllergiSatuSehat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/satusehat.png")));
+        btnKirimAllergiSatuSehat.setText("Kirim Allergy Intolerance Satu Sehat");
+        btnKirimAllergiSatuSehat.setIconTextGap(0);
+        btnKirimAllergiSatuSehat.setName("btnKirimAllergiSatuSehat");
+        btnKirimAllergiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimAllergiSatuSehat.addActionListener(this::btnKirimAllergiSatuSehatActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,

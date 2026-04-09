@@ -21,6 +21,7 @@ import fungsi.akuntindakanralan;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.tarifralan;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -65,9 +66,9 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement pstindakan,pstindakan2,pstindakan3,pstindakan4,
-            pssimpandokter,pssimpanperawat,pssimpandokterperawat,psset_tarif;
-    private ResultSet rstindakan,rsset_tarif;
-    private String pilihtable="",kd_pj="",kd_poli="",poli_ralan="Yes",cara_bayar_ralan="Yes",aktifpcare="no",nokunjungan="",sql="",requestJson="",URL="",otorisasi,utc="";
+            pssimpandokter,pssimpanperawat,pssimpandokterperawat;
+    private ResultSet rstindakan;
+    private String pilihtable="",kd_pj="",kd_poli="",aktifpcare="no",nokunjungan="",sql="",requestJson="",URL="",otorisasi,utc="";
     private boolean[] pilih;
     private String[] kode,nama,kategori;
     private double[] totaltnd,bagianrs,bhp,jmdokter,jmperawat,kso,menejemen;
@@ -159,6 +160,10 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         }
         tbTindakan.setDefaultRenderer(Object.class, new WarnaTable());
         TCariTindakan.setDocument(new batasInput((byte)100).getKata(TCariTindakan));
+
+        if(tarifralan.getCaraBayarRalan().equals("")){
+            tarifralan.SetTarifRalan();
+        }
 
         try {
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
@@ -1084,30 +1089,6 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         if(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan().equals("")){
             akuntindakanralan.SetAkunTindakanRalan();
         }
-        try {
-            psset_tarif=koneksi.prepareStatement("select * from set_tarif");
-            try {
-                rsset_tarif=psset_tarif.executeQuery();
-                if(rsset_tarif.next()){
-                    poli_ralan=rsset_tarif.getString("poli_ralan");
-                    cara_bayar_ralan=rsset_tarif.getString("cara_bayar_ralan");
-                }else{
-                    poli_ralan="Yes";
-                    cara_bayar_ralan="Yes";
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            }finally{
-                if(rsset_tarif != null){
-                    rsset_tarif.close();
-                }
-                if(psset_tarif != null){
-                    psset_tarif.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
-        }
 
         runBackground(() ->tampil());
 
@@ -1216,17 +1197,17 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             pstindakan4=koneksi.prepareStatement(sql+
                    "where jns_perawatan.status='1' order by jns_perawatan.nm_perawatan ");
             try {
-                if(poli_ralan.equals("Yes")&&cara_bayar_ralan.equals("Yes")){
+                if(tarifralan.getPoliRalan().equals("Yes")&&tarifralan.getCaraBayarRalan().equals("Yes")){
                     pstindakan.setString(1,kd_pj.trim());
                     pstindakan.setString(2,kd_poli.trim());
                     rstindakan=pstindakan.executeQuery();
-                }else if(poli_ralan.equals("No")&&cara_bayar_ralan.equals("Yes")){
+                }else if(tarifralan.getPoliRalan().equals("No")&&tarifralan.getCaraBayarRalan().equals("Yes")){
                     pstindakan2.setString(1,kd_pj.trim());
                     rstindakan=pstindakan2.executeQuery();
-                }else if(poli_ralan.equals("Yes")&&cara_bayar_ralan.equals("No")){
+                }else if(tarifralan.getPoliRalan().equals("Yes")&&tarifralan.getCaraBayarRalan().equals("No")){
                     pstindakan3.setString(1,kd_poli.trim());
                     rstindakan=pstindakan3.executeQuery();
-                }else if(poli_ralan.equals("No")&&cara_bayar_ralan.equals("No")){
+                }else if(tarifralan.getPoliRalan().equals("No")&&tarifralan.getCaraBayarRalan().equals("No")){
                     rstindakan=pstindakan4.executeQuery();
                 }
 
@@ -1304,6 +1285,8 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbTindakan.getRowCount());
     }
@@ -1378,8 +1361,9 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                         });
                     }
                 }else{
+                    String cari=TCariTindakan.getText().toLowerCase();
                     for(JsonNode list:response){
-                        if(list.path("Kode").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())||list.path("NamaPerawatan").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())||list.path("KategoriPerawatan").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())){
+                        if(list.path("Kode").asText().toLowerCase().contains(cari)||list.path("NamaPerawatan").asText().toLowerCase().contains(cari)||list.path("KategoriPerawatan").asText().toLowerCase().contains(cari)){
                             TabModeTindakan.addRow(new Object[]{
                                 false,list.path("Kode").asText(),list.path("NamaPerawatan").asText(),list.path("KategoriPerawatan").asText(),list.path("Tarif").asDouble(),list.path("BagianRS").asDouble(),list.path("BHP").asDouble(),list.path("JMDokter").asDouble(),list.path("JMPerawat").asDouble(),list.path("KSO").asDouble(),list.path("Menejemen").asDouble()
                             });
@@ -1390,6 +1374,10 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tbTindakan.getRowCount());
     }

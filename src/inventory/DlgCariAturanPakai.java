@@ -376,6 +376,14 @@ public final class DlgCariAturanPakai extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
+    public void setDicari(String cari) {
+        TCari.setText(cari);
+    }
+
+    public String dicari() {
+        return TCari.getText();
+    }
+
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -412,6 +420,8 @@ public final class DlgCariAturanPakai extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tabMode.getRowCount());
     }
@@ -446,6 +456,10 @@ public final class DlgCariAturanPakai extends javax.swing.JDialog {
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
     }

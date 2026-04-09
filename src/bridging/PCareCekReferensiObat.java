@@ -343,7 +343,7 @@ public final class PCareCekReferensiObat extends javax.swing.JDialog {
 
     public void tampil(String diagnosa) {
         try {
-            URL = link+"/obat/dpho/"+diagnosa+"/0/10000";	
+            URL = link+"/obat/dpho/"+diagnosa+"/0/10000";
 
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);

@@ -1546,15 +1546,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
     private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
         switch (evt.getKeyCode()) {
-            case KeyEvent.VK_PAGE_DOWN:
-                Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
-                break;
             case KeyEvent.VK_PAGE_UP:
-                Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
                 TCari.requestFocus();
                 break;
             case KeyEvent.VK_ENTER:
-                Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
                 BtnSimpan.requestFocus();
                 break;
             case KeyEvent.VK_UP:
@@ -2239,6 +2234,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             fileWriter.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -2413,6 +2410,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -3000,6 +3001,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             myObj.close();
         } catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

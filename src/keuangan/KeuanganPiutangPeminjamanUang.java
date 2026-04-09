@@ -703,7 +703,12 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
                 myObj.close();
             } catch (Exception e) {
                 sukses=false;
+            } finally {
+                if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                response = null;
+                root = null;
             }
+
             Sequel.AutoComitFalse();
             sukses=true;
             if(Sequel.menyimpantf("piutang_lainlain","?,?,?,?,?,?,?,?,?,?,'Belum Lunas'","No.Nota",10,new String[]{
@@ -775,6 +780,10 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
+                } finally {
+                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                    response = null;
+                    root = null;
                 }
                 Sequel.deleteTampJurnal();
                 if (sukses) sukses = Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(),6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(),7).toString(), Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString()), 0);
@@ -1294,6 +1303,8 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -1314,6 +1325,10 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

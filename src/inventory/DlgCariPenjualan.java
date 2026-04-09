@@ -1567,6 +1567,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             myObj.close();
                          } catch (Exception e) {
                             sukses=false;
+                         } finally {
+                            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                            response = null;
+                            root = null;
                          }
 
                          Sequel.mengedit("penjualan","nota_jual=?","kd_rek=?,nama_bayar=?",3,new String[]{
@@ -2230,6 +2234,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 

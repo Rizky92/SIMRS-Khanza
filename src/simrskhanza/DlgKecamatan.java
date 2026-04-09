@@ -547,6 +547,8 @@ public class DlgKecamatan extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tabMode.getRowCount());
     }
@@ -596,6 +598,10 @@ public class DlgKecamatan extends javax.swing.JDialog {
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
     }
@@ -620,12 +626,17 @@ public class DlgKecamatan extends javax.swing.JDialog {
                 for(JsonNode list:response){
                     if(list.path("NamaKec").asText().toLowerCase().equals(nama)){
                         iyem=list.path("KodeKec").asText();
+                        break;
                     }
                 }
             }
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=Sequel.cariIsi("select kecamatan.kd_kec from kecamatan where kecamatan.nm_kec=?",nama);

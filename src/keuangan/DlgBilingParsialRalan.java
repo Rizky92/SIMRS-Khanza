@@ -10,6 +10,7 @@ import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.ppnralan;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
@@ -72,7 +73,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                             "where no_rawat=?",
             sqlpsbiling="insert into billing values(?,?,?,?,?,?,?,?,?,?,?)",
             biaya="",tambahan="",totals="",sqlpsrekening="select * from set_akun_ralan",
-            cara_bayar_radiologi="No",kelas_radiologi="No",tampilkan_ppnobat_ralan="",
+            cara_bayar_radiologi="No",kelas_radiologi="No",
             Tindakan_Ralan="",Laborat_Ralan="",Radiologi_Ralan="",
             Registrasi_Ralan="",Beban_Jasa_Medik_Dokter_Tindakan_Ralan="",
             Utang_Jasa_Medik_Dokter_Tindakan_Ralan="",Beban_Jasa_Medik_Paramedis_Tindakan_Ralan="",
@@ -1039,12 +1040,10 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
             notaralan=Sequel.cariIsi("select set_nota.cetaknotasimpanralan from set_nota");
             centangdokterralan=Sequel.cariIsi("select set_nota.centangdokterralan from set_nota");
             rinciandokterralan=Sequel.cariIsi("select set_nota.rinciandokterralan from set_nota");
-            tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota");
         } catch (Exception e) {
             notaralan="No";
             centangdokterralan="No";
             rinciandokterralan="No";
-            tampilkan_ppnobat_ralan="No";
         }
 
         try {
@@ -3255,6 +3254,11 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         tampilAkunBayar();
+
+        if(ppnralan.getTampilPPNRalan().equals("")){
+            ppnralan.SetPPNRalan();
+        }
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -5706,7 +5710,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                     }
 
                     if(subttl>0){
-                        if(tampilkan_ppnobat_ralan.equals("Yes")){
+                        if(ppnralan.getTampilPPNRalan().equals("Yes")){
                             ppnobat=Math.round(subttl*0.11);
                             tabModeBilling.addRow(new Object[]{
                                 "","PPN Obat",":",ppnobat,1,ppnobat,"Obat"
@@ -6513,7 +6517,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
             }
         }
         if(ttlObat>0){
-            if(tampilkan_ppnobat_ralan.equals("Yes")){
+            if(ppnralan.getTampilPPNRalan().equals("Yes")){
                 ppnobat=Math.round(ttlObat*0.11);
                 ttlObat=ttlObat+ppnobat;
                 ttl=ttl+ppnobat;
@@ -7077,7 +7081,7 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                 }
 
                 if(ppnobat>0){
-                    if(tampilkan_ppnobat_ralan.equals("Yes")){
+                    if(ppnralan.getTampilPPNRalan().equals("Yes")){
                         try {
                             psbiling=koneksi.prepareStatement(sqlpsbiling);
                             try {

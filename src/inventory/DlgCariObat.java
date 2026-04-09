@@ -26,6 +26,7 @@ import fungsi.batasInput;
 import fungsi.embalasetuslah;
 import fungsi.koneksiDB;
 import fungsi.lokasidepoutama;
+import fungsi.ppnralan;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
@@ -93,7 +94,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private int i=0,z=0,row=0,row2,r;
     private Jurnal jur=new Jurnal();
     private String signa1="1",signa2="1",nokunjungan="",kdObatSK="",requestJson="",URL="",otorisasi,sql="",aktifpcare="no",no_batchcari="", tgl_kadaluarsacari="", no_fakturcari="", aktifkanbatch="no",kodedokter="",
-            namadokter="",noresep="",bangsal="",tampilkan_ppnobat_ralan="",hppfarmasi="",VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="", kolomHarga = "ralan";
+            namadokter="",noresep="",bangsal="",hppfarmasi="",VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="", kolomHarga = "ralan";
     private WarnaTable2 warna=new WarnaTable2();
     private WarnaTable2 warna2=new WarnaTable2();
     private WarnaTable2 warna3=new WarnaTable2();
@@ -123,7 +124,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private Map<String, Object> map;
     private boolean autocetak = false, previewLembarObat = false, previewAturanPakai = false;
-    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
+    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -440,7 +441,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
             TANGGALMUNDUR="yes";
         }
 
-        tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota");
         jam();
 
         if (! VALIDASIRESEPKRONIS) {
@@ -1239,8 +1239,31 @@ public final class DlgCariObat extends javax.swing.JDialog {
                     }
                     hitungObat();
                 }else if(i==11){
-                    akses.setform("DlgCariObat");
-                    this.bukaAturanpakai();
+                    if (aturanpakai == null || !aturanpakai.isDisplayable()) {
+                        aturanpakai=new DlgCariAturanPakai(null,false);
+                        aturanpakai.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                        aturanpakai.addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosed(WindowEvent e) {
+                                if(aturanpakai.getTable().getSelectedRow()!= -1){
+                                    cariAturanPakai = aturanpakai.dicari().trim();
+                                    tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),11);
+                                    tbObat.requestFocus();
+                                }
+                                aturanpakai=null;
+                            }
+                        });
+
+                        aturanpakai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        aturanpakai.setLocationRelativeTo(internalFrame1);
+                    }
+                    aturanpakai.setDicari(cariAturanPakai);
+                    if (aturanpakai == null) return;
+                    if (aturanpakai.isVisible()) {
+                        aturanpakai.toFront();
+                        return;
+                    }
+                    aturanpakai.setVisible(true);
                 }
             }
         }
@@ -1914,8 +1937,29 @@ public final class DlgCariObat extends javax.swing.JDialog {
             i=tbObatRacikan.getSelectedColumn();
             if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
                 if(i==5){
-                    akses.setform("DlgCariObat");
-                    this.bukaAturanpakai();
+                    if (aturanpakai == null || !aturanpakai.isDisplayable()) {
+                        aturanpakai=new DlgCariAturanPakai(null,false);
+                        aturanpakai.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                        aturanpakai.addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosed(WindowEvent e) {
+                                if(aturanpakai.getTable().getSelectedRow()!= -1){
+                                    tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
+                                    tbObatRacikan.requestFocus();
+                                }
+                                aturanpakai=null;
+                            }
+                        });
+
+                        aturanpakai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        aturanpakai.setLocationRelativeTo(internalFrame1);
+                    }
+                    if (aturanpakai == null) return;
+                    if (aturanpakai.isVisible()) {
+                        aturanpakai.toFront();
+                        return;
+                    }
+                    aturanpakai.setVisible(true);
                 }else if(i==3){
                     if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).toString().equals("")){
                         JOptionPane.showMessageDialog(null,"Silahkan masukkan nama racikan..!!");
@@ -2148,12 +2192,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStok1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if(akunobatralan.getSuspen_Piutang_Obat_Ralan().equals("")){
-            akunobatralan.SetAkunObatRalan();
-        }
-        if(embalasetuslah.getEmbalase() == null){
-            embalasetuslah.SetEmbalaseTuslah();
-        }
+        runBackground(() -> LoadPengaturan());
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -2519,6 +2558,8 @@ public final class DlgCariObat extends javax.swing.JDialog {
             fileWriter.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -2694,6 +2735,10 @@ public final class DlgCariObat extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -3801,6 +3846,10 @@ public final class DlgCariObat extends javax.swing.JDialog {
             myObj.close();
         } catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -3997,7 +4046,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
         }
         LTotal.setText(Valid.SetAngka(ttl));
         ppnobat=0;
-        if(tampilkan_ppnobat_ralan.equals("Yes")){
+        if(ppnralan.getTampilPPNRalan().equals("Yes")){
             ppnobat=Math.round(ttl*0.11);
             ttl=ttl+ppnobat;
             LPpn.setText(Valid.SetAngka(ppnobat));
@@ -4278,6 +4327,20 @@ public final class DlgCariObat extends javax.swing.JDialog {
         }
     }
 
+    private void LoadPengaturan(){
+        if(ppnralan.getTampilPPNRalan().equals("")){
+            ppnralan.SetPPNRalan();
+        }
+
+        if(akunobatralan.getSuspen_Piutang_Obat_Ralan().equals("")){
+            akunobatralan.SetAkunObatRalan();
+        }
+
+        if(embalasetuslah.getEmbalase() == null){
+            embalasetuslah.SetEmbalaseTuslah();
+        }
+    }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -4402,41 +4465,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
             tbDetailObatRacikan.getColumnModel().getColumn(21).setMaxWidth(140);
             tbDetailObatRacikan.getColumnModel().getColumn(21).setPreferredWidth(140);
         }
-    }
-
-    private void bukaAturanpakai() {
-        if (aturanpakai == null) {
-            aturanpakai=new DlgCariAturanPakai(null,false);
-            aturanpakai.addWindowListener(new WindowListener() {
-                @Override
-                public void windowOpened(WindowEvent e) {}
-                @Override
-                public void windowClosing(WindowEvent e) {}
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if(aturanpakai.getTable().getSelectedRow()!= -1){
-                        if(TabRawat.getSelectedIndex()==0){
-                            tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),11);
-                            tbObat.requestFocus();
-                        }else if(TabRawat.getSelectedIndex()==1){
-                            tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
-                            tbObatRacikan.requestFocus();
-                        }
-                    }
-                }
-                @Override
-                public void windowIconified(WindowEvent e) {}
-                @Override
-                public void windowDeiconified(WindowEvent e) {}
-                @Override
-                public void windowActivated(WindowEvent e) {}
-                @Override
-                public void windowDeactivated(WindowEvent e) {}
-            });
-        }
-        aturanpakai.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-        aturanpakai.setLocationRelativeTo(internalFrame1);
-        aturanpakai.setVisible(true);
     }
 
     private void cekPengaturanResepRalan() {

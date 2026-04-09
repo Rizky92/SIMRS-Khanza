@@ -252,6 +252,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         tbListDicom = new widget.Table();
         panelGlass7 = new widget.panelisi();
         btnDicom = new widget.Button();
+        btnDicomRouter = new widget.Button();
         PanelDataDicari = new widget.panelisi();
         label17 = new widget.Label();
         NoRawatDicari = new widget.Label();
@@ -1032,6 +1033,19 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
             }
         });
         panelGlass7.add(btnDicom);
+
+        btnDicomRouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
+        btnDicomRouter.setMnemonic('T');
+        btnDicomRouter.setText("Ke DICOMROUTER");
+        btnDicomRouter.setToolTipText("Alt+T");
+        btnDicomRouter.setName("btnDicomRouter"); // NOI18N
+        btnDicomRouter.setPreferredSize(new java.awt.Dimension(160, 30));
+        btnDicomRouter.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDicomRouterActionPerformed(evt);
+            }
+        });
+        panelGlass7.add(btnDicomRouter);
 
         FormOrthan.add(panelGlass7, java.awt.BorderLayout.PAGE_END);
 
@@ -2000,7 +2014,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(tbListDicom.getSelectedRow()!= -1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                 OrthancDICOM orthan=new OrthancDICOM(null,false);
-                orthan.setJudul("::[ DICOM Orthanc Pasien "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+" ]::",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().replaceAll("/","")+"_"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().replaceAll(" ","_").replaceAll("/","").replaceAll(":","").replaceAll(",",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+                orthan.setJudul("::[ DICOM Orthanc Pasien "+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()+", Series "+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+" ]::",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().replaceAll("/","")+"_"+tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().replaceAll(" ","_").replaceAll("/","").replaceAll(":","").replaceAll(",",""),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString(),tbListDicom.getValueAt(tbListDicom.getSelectedRow(),1).toString(),tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                 try {
                     System.out.println("URL : "+koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
                     orthan.loadURL(koneksiDB.URLORTHANC()+":"+koneksiDB.PORTORTHANC()+"/web-viewer/app/viewer.html?series="+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
@@ -2101,6 +2115,22 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_formWindowOpened
 
+    private void btnDicomRouterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDicomRouterActionPerformed
+        if(tabModeDicom.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }else {
+            if(tbListDicom.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                ApiOrthanc orthanc=new ApiOrthanc();
+                orthanc.kirimKeModality(tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+                this.setCursor(Cursor.getDefaultCursor());
+            }else{
+                JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
+            }
+        }
+    }//GEN-LAST:event_btnDicomRouterActionPerformed
+
     private void tbDokterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseReleased
         if(tabMode.getRowCount()!=0){
             int row = tbDokter.rowAtPoint(evt.getPoint());
@@ -2187,6 +2217,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button btnAmbilPhoto;
     private widget.Button btnAmbilPhoto1;
     private widget.Button btnDicom;
+    private widget.Button btnDicomRouter;
     private widget.Button btnDokter;
     private widget.Button btnDokterPj;
     private widget.Button btnPasien;

@@ -20,6 +20,7 @@ import fungsi.akuntindakanranap;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.tarifranap;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -67,10 +68,9 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private Jurnal jur=new Jurnal();
     private PreparedStatement psinputrawatdr,psinputrawatpr,psinputrawatdrpr,
-            pscari,pscari2,pscari3,pscari4,pstarif,pscari5,pscari6,pscari7,pscari8;
-    private ResultSet rs,rstarif;
-    private String pilihtable="",kd_pj="",kd_bangsal="",ruang_ranap="Yes", cara_bayar_ranap="Yes",
-            kelas_ranap="Yes",kelas="",aktifpcare="no",nokunjungan="",sql="",requestJson="",URL="",otorisasi;
+            pscari,pscari2,pscari3,pscari4,pscari5,pscari6,pscari7,pscari8;
+    private ResultSet rs;
+    private String pilihtable="",kd_pj="",kd_bangsal="",kelas="",aktifpcare="no",nokunjungan="",sql="",requestJson="",URL="",otorisasi;
     private boolean[] pilih;
     private String[] kode,nama,kategori,kelastarif;
     private double[] totaltnd,bagianrs,bhp,jmdokter,jmperawat,kso,menejemen;
@@ -169,6 +169,10 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         KdPtg2.setDocument(new batasInput((byte)20).getKata(KdPtg2));
 
         jam();
+
+        if(tarifranap.getCaraBayarRanap().equals("")){
+           tarifranap.SetTarifRanap();
+        }
 
         try {
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
@@ -1231,32 +1235,6 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
         if(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap().equals("")){
             akuntindakanranap.SetAkunTindakanRanap();
         }
-        try {
-            pstarif=koneksi.prepareStatement("select set_tarif.ruang_ranap,set_tarif.cara_bayar_ranap,set_tarif.kelas_ranap from set_tarif");
-            try {
-                rstarif=pstarif.executeQuery();
-                if(rstarif.next()){
-                    ruang_ranap=rstarif.getString("ruang_ranap");
-                    cara_bayar_ranap=rstarif.getString("cara_bayar_ranap");
-                    kelas_ranap=rstarif.getString("kelas_ranap");
-                }else{
-                    ruang_ranap="Yes";
-                    cara_bayar_ranap="Yes";
-                    kelas_ranap="Yes";
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rstarif != null){
-                    rstarif.close();
-                }
-                if(pstarif != null){
-                    pstarif.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
-        }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -1368,32 +1346,32 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
             pscari7=koneksi.prepareStatement(sql+"where jns_perawatan_inap.status='1' and (jns_perawatan_inap.kd_bangsal=? or jns_perawatan_inap.kd_bangsal='-') and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') order by jns_perawatan_inap.nm_perawatan");
             pscari8=koneksi.prepareStatement(sql+"where jns_perawatan_inap.status='1' and (jns_perawatan_inap.kelas=? or jns_perawatan_inap.kelas='-') order by jns_perawatan_inap.nm_perawatan");
             try {
-                if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("No")){
+                if(tarifranap.getRuangRanap().equals("Yes")&&tarifranap.getCaraBayarRanap().equals("Yes")&&tarifranap.getKelasRanap().equals("No")){
                     pscari.setString(1,kd_pj.trim());
                     pscari.setString(2,kd_bangsal.trim());
                     rs=pscari.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("No")){
+                }else if(tarifranap.getRuangRanap().equals("No")&&tarifranap.getCaraBayarRanap().equals("Yes")&&tarifranap.getKelasRanap().equals("No")){
                     pscari2.setString(1,kd_pj.trim());
                     rs=pscari2.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("No")){
+                }else if(tarifranap.getRuangRanap().equals("Yes")&&tarifranap.getCaraBayarRanap().equals("No")&&tarifranap.getKelasRanap().equals("No")){
                     pscari3.setString(1,kd_bangsal.trim());
                     rs=pscari3.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("No")){
+                }else if(tarifranap.getRuangRanap().equals("No")&&tarifranap.getCaraBayarRanap().equals("No")&&tarifranap.getKelasRanap().equals("No")){
                     rs=pscari4.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("Yes")){
+                }else if(tarifranap.getRuangRanap().equals("Yes")&&tarifranap.getCaraBayarRanap().equals("Yes")&&tarifranap.getKelasRanap().equals("Yes")){
                     pscari5.setString(1,kd_pj.trim());
                     pscari5.setString(2,kd_bangsal.trim());
                     pscari5.setString(3,kelas.trim());
                     rs=pscari5.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("Yes")&&kelas_ranap.equals("Yes")){
+                }else if(tarifranap.getRuangRanap().equals("No")&&tarifranap.getCaraBayarRanap().equals("Yes")&&tarifranap.getKelasRanap().equals("Yes")){
                     pscari6.setString(1,kd_pj.trim());
                     pscari6.setString(2,kelas.trim());
                     rs=pscari6.executeQuery();
-                }else if(ruang_ranap.equals("Yes")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("Yes")){
+                }else if(tarifranap.getRuangRanap().equals("Yes")&&tarifranap.getCaraBayarRanap().equals("No")&&tarifranap.getKelasRanap().equals("Yes")){
                     pscari7.setString(1,kd_bangsal.trim());
                     pscari7.setString(2,kelas.trim());
                     rs=pscari7.executeQuery();
-                }else if(ruang_ranap.equals("No")&&cara_bayar_ranap.equals("No")&&kelas_ranap.equals("Yes")){
+                }else if(tarifranap.getRuangRanap().equals("No")&&tarifranap.getCaraBayarRanap().equals("No")&&tarifranap.getKelasRanap().equals("Yes")){
                     pscari8.setString(1,kelas.trim());
                     rs=pscari8.executeQuery();
                 }
@@ -1484,6 +1462,8 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbKamar.getRowCount());
     }
@@ -1562,8 +1542,9 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                             });
                         }
                     }else{
+                        String cari=TCari.getText().toLowerCase();
                         for(JsonNode list:response){
-                            if(list.path("Kode").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaPerawatan").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("KategoriPerawatan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            if(list.path("Kode").asText().toLowerCase().contains(cari)||list.path("NamaPerawatan").asText().toLowerCase().contains(cari)||list.path("KategoriPerawatan").asText().toLowerCase().contains(cari)){
                                 tabMode.addRow(new Object[]{
                                     false,list.path("Kode").asText(),list.path("NamaPerawatan").asText(),list.path("KategoriPerawatan").asText(),list.path("Tarif").asDouble(),list.path("BagianRS").asDouble(),list.path("BHP").asDouble(),list.path("JMDokter").asDouble(),list.path("JMPerawat").asDouble(),list.path("KSO").asDouble(),list.path("Menejemen").asDouble(),list.path("Kelas").asText()
                                 });
@@ -1580,9 +1561,10 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                             }
                         }
                     }else{
+                        String cari=TCari.getText().toLowerCase();
                         for(JsonNode list:response){
                             if(list.path("KategoriPerawatan").asText().equals(NmKtg.getText())){
-                                if(list.path("Kode").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaPerawatan").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                                if(list.path("Kode").asText().toLowerCase().contains(cari)||list.path("NamaPerawatan").asText().toLowerCase().contains(cari)){
                                     tabMode.addRow(new Object[]{
                                         false,list.path("Kode").asText(),list.path("NamaPerawatan").asText(),list.path("KategoriPerawatan").asText(),list.path("Tarif").asDouble(),list.path("BagianRS").asDouble(),list.path("BHP").asDouble(),list.path("JMDokter").asDouble(),list.path("JMPerawat").asDouble(),list.path("KSO").asDouble(),list.path("Menejemen").asDouble(),list.path("Kelas").asText()
                                     });
@@ -1595,6 +1577,10 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tbKamar.getRowCount());
     }

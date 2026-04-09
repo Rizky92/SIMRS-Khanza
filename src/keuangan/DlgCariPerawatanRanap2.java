@@ -21,6 +21,7 @@ import fungsi.akuntindakanranap;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.tarifranap;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -58,10 +59,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
-    private PreparedStatement psinputrawatdr,psinputrawatpr,psinputrawatdrpr,pstarif,pscari,pscari2,pscari3,pscari4,pscari5,pscari6,pscari7,pscari8,
+    private PreparedStatement psinputrawatdr,psinputrawatpr,psinputrawatdrpr,pscari,pscari2,pscari3,pscari4,pscari5,pscari6,pscari7,pscari8,
                               pstindakan,pstindakan2,pstindakan3,pshapustindakan,pshapustindakan2,pshapustindakan3;
-    private ResultSet rs,rstindakan,rstarif;
-    private String pilihtable="",kd_pj="",kd_bangsal="",ruang_ranap="Yes", cara_bayar_ranap="Yes",kelas="",kelas_ranap="Yes";
+    private ResultSet rs,rstindakan;
+    private String pilihtable="",kd_pj="",kd_bangsal="",kelas="";
     private boolean[] pagi,siang,sore,malam;
     private boolean pg=false,sg=false,sr=false,mlm=false;
     private boolean sukses=false, isLoading = false;
@@ -142,6 +143,10 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
         TCari.requestFocus();
+
+        if(tarifranap.getCaraBayarRanap().equals("")){
+           tarifranap.SetTarifRanap();
+        }
     }
 
 
@@ -935,33 +940,6 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             akuntindakanranap.SetAkunTindakanRanap();
         }
 
-        try {
-            pstarif=koneksi.prepareStatement("select set_tarif.ruang_ranap,set_tarif.cara_bayar_ranap,set_tarif.kelas_ranap from set_tarif");
-            try {
-                rstarif=pstarif.executeQuery();
-                if(rstarif.next()){
-                    ruang_ranap=rstarif.getString("ruang_ranap");
-                    cara_bayar_ranap=rstarif.getString("cara_bayar_ranap");
-                    kelas_ranap=rstarif.getString("kelas_ranap");
-                }else{
-                    ruang_ranap="Yes";
-                    cara_bayar_ranap="Yes";
-                    kelas_ranap="Yes";
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            } finally{
-                if(rstarif != null){
-                    rstarif.close();
-                }
-                if(pstarif != null){
-                    pstarif.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
-        }
-
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -1083,9 +1061,9 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
             }
 
             // cekTindakanTerinput();
-            boolean isRuangRanap = ruang_ranap.equals("Yes"),
-                    isCaraBayarRanap = cara_bayar_ranap.equals("Yes"),
-                    isKelasRanap = kelas_ranap.equals("Yes");
+            boolean isRuangRanap = tarifranap.getRuangRanap().equals("Yes"),
+                    isCaraBayarRanap = tarifranap.getCaraBayarRanap().equals("Yes"),
+                    isKelasRanap = tarifranap.getKelasRanap().equals("Yes");
 
             try (PreparedStatement ps = koneksi.prepareStatement(
                 "select jns_perawatan_inap.*, kategori_perawatan.nm_kategori from jns_perawatan_inap " +
@@ -1167,9 +1145,9 @@ public final class DlgCariPerawatanRanap2 extends javax.swing.JDialog {
                 protected Void doInBackground() throws Exception {
                     cekTindakanTerinput();
 
-                    boolean isRuangRanap = ruang_ranap.equals("Yes"),
-                        isCaraBayarRanap = cara_bayar_ranap.equals("Yes"),
-                        isKelasRanap = kelas_ranap.equals("Yes");
+                    boolean isRuangRanap = tarifranap.getRuangRanap().equals("Yes"),
+                        isCaraBayarRanap = tarifranap.getCaraBayarRanap().equals("Yes"),
+                        isKelasRanap = tarifranap.getKelasRanap().equals("Yes");
 
                     try (PreparedStatement ps = koneksi.prepareStatement(
                         "select jns_perawatan_inap.*, kategori_perawatan.nm_kategori from jns_perawatan_inap join kategori_perawatan " +

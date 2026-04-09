@@ -256,12 +256,18 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
             try {
                 rs=ps.executeQuery();
                 if(rs.next()){
-                    file=new File("./cache/akunbankmandiri.iyem");
-                    file.createNewFile();
-                    fileWriter = new FileWriter(file);
-                    fileWriter.write("{\"akunbankmandiri\":\""+rs.getString("kd_rek")+"\",\"kodemcm\":\""+rs.getString("kode_mcm")+"\",\"akunbiayabankmandiri\":\""+rs.getString("kd_rek_biaya")+"\",\"norekening\":\""+rs.getString("no_rekening")+"\"}");
-                    fileWriter.flush();
-                    fileWriter.close();
+                    try{
+                        file=new File("./cache/akunbankmandiri.iyem");
+                        file.createNewFile();
+                        fileWriter = new FileWriter(file);
+                        fileWriter.write("{\"akunbankmandiri\":\""+rs.getString("kd_rek")+"\",\"kodemcm\":\""+rs.getString("kode_mcm")+"\",\"akunbiayabankmandiri\":\""+rs.getString("kd_rek_biaya")+"\",\"norekening\":\""+rs.getString("no_rekening")+"\"}");
+                        fileWriter.flush();
+                        fileWriter.close();
+                    }catch(Exception e){
+                        System.out.println("Notifikasi : "+e);
+                    }finally {
+                        if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
+                    }
                 }
             } catch (Exception e) {
                 System.out.println("Notif Nota : "+e);
@@ -408,6 +414,8 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tabMode.getRowCount());
     }
@@ -442,6 +450,10 @@ public final class DlgCariKategoriPengeluaran extends javax.swing.JDialog {
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
     }
