@@ -23,6 +23,8 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.InputStream;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -4095,10 +4097,16 @@ public class DlgIKBBayi extends javax.swing.JDialog {
             param.put("emailrs", akses.getemailrs());
             param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
             param.put("logo2", Sequel.cariGambar("select setting.logo from setting"));
-            param.put("gambarbayi", Sequel.cariGambarSmc("select pasien_bayi_gambar_smc.photo from pasien_bayi_gambar_smc where pasien_bayi_gambar_smc.no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString()));
+            String fullpath = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/fotokelahiranbayismc/" + Sequel.cariIsiSmc("select pasien_bayi_gambar_smc.photo from pasien_bayi_gambar_smc where pasien_bayi_gambar_smc.no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+            try {
+                InputStream gambarBayiStream = new URL(fullpath).openStream();
+                param.put("gambarbayi", gambarBayiStream);
+            } catch (Exception ex) {
+                param.put("gambarbayi", null);
+            }
             String finger = Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?", KdPenolong.getText());
             param.put("finger", "Dikeluarkan di " + akses.getnamars() + ", Kabupaten/Kota " + akses.getkabupatenrs() + "\nDitandatangani secara elektronik oleh " + NmPenolong.getText() + "\nID " + (finger.equals("") ? KdPenolong.getText() : finger) + "\n" + Lahir.getSelectedItem().toString());
-            Valid.reportSmc("rptSKL3SMC.jasper", "report", "::[ Surat Kelahiran Bayi ]::", param,
+            Valid.reportSmc("rptSKL3FotoSMC.jasper", "report", "::[ Surat Kelahiran Bayi ]::", param,
                 "select pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, " +
                 "pasien.tgl_lahir, pasien_bayi.jam_lahir, pasien.umur, " +
                 "pasien.tgl_daftar, pasien.nm_ibu, pasien_bayi.umur_ibu, pasien.pekerjaanpj, " +
