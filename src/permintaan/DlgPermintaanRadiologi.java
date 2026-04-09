@@ -1035,6 +1035,8 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi 2 : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -1155,6 +1157,10 @@ public final class DlgPermintaanRadiologi extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

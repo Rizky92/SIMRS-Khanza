@@ -3,6 +3,8 @@ import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
+import fungsi.ppnralan;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
@@ -48,7 +50,7 @@ public class DlgPiutang extends javax.swing.JDialog {
     private double ttljual=0,stok,jumlah,ppnobat=0,besarppnobat=0,tagihanppn=0,ongkir=0,uangmuka=0,sisapiutang=0;
     private PreparedStatement ps;
     private ResultSet rs;
-    private String aktifkanbatch="no",pilihanetiket,hppfarmasi="",tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota");
+    private String aktifkanbatch="no",pilihanetiket,hppfarmasi="",DEPOAKTIFOBAT="";
     private boolean sukses=true, piutangBPJS = true;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -218,10 +220,11 @@ public class DlgPiutang extends javax.swing.JDialog {
             hppfarmasi="dasar";
         }
 
-        if(tampilkan_ppnobat_ralan.equals("Yes")){
-            PersenppnObat.setText("11");
-        }else{
-            PersenppnObat.setText("0");
+        try {
+            DEPOAKTIFOBAT = koneksiDB.DEPOAKTIFOBAT();
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+            DEPOAKTIFOBAT = "";
         }
     }
 
@@ -547,6 +550,7 @@ public class DlgPiutang extends javax.swing.JDialog {
         panelisi5.add(label19);
         label19.setBounds(518, 10, 130, 23);
 
+        UangMuka.setEditable(false);
         UangMuka.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         UangMuka.setName("UangMuka"); // NOI18N
         UangMuka.setPreferredSize(new java.awt.Dimension(150, 26));
@@ -1389,8 +1393,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else{
             int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
             if (reply == JOptionPane.YES_OPTION) {
-                System.out.println("sisapiutang = " + sisapiutang);
-                System.out.println("Piutang_Obat = " + (ttljual + ongkir - uangmuka));
                 Sequel.AutoComitFalse();
                 sukses=true;
                 if(Sequel.menyimpantf2("piutang","'"+NoNota.getText()+"','"+Valid.SetTgl(TglJual.getSelectedItem()+"")+"','"+kdptg.getText()+"','"+kdpasien.getText()+
@@ -1411,8 +1413,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Piutang_Obat from set_akun"), "PIUTANG OBAT", (ttljual + ongkir - uangmuka), 0);
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Piutang_Obat from set_akun"), "PERSEDIAAN", 0, (ttljual + ongkir - uangmuka));
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Piutang_Obat from set_akun"), "PIUTANG OBAT", (sisapiutang), 0);
+                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Piutang_Obat from set_akun"), "PERSEDIAAN", 0, (sisapiutang));
                     if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PIUTANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
                 }
                 if(sukses==true){
@@ -1517,9 +1519,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     private void BtnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatalActionPerformed
         Sequel.queryu("delete from tamppiutang where petugas='"+akses.getkode()+"'");
-        runBackground(() ->tampil());
+        Valid.tabelKosong(tabMode);
         Ongkir.setText("0");
-        if(tampilkan_ppnobat_ralan.equals("Yes")){
+        if(ppnralan.getTampilPPNRalan().equals("Yes")){
             PersenppnObat.setText("11");
         }else{
             PersenppnObat.setText("0");
@@ -1655,6 +1657,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnGudangActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if(ppnralan.getTampilPPNRalan().equals("")){
+            ppnralan.SetPPNRalan();
+        }
+
+        if(ppnralan.getTampilPPNRalan().equals("Yes")){
+            PersenppnObat.setText("11");
+        }else{
+            PersenppnObat.setText("0");
+        }
+
         runBackground(() ->tampil());
     }//GEN-LAST:event_formWindowOpened
 
@@ -2020,7 +2032,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         autoNomor();
         Ongkir.setText("0");
         UangMuka.setText("0");
-        Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi",kdgudang);
+        if(lokasidepoutama.getDepoDefault().equals("")){
+            lokasidepoutama.SetLokasiDepoUtama();
+        }
+        kdgudang.setText(lokasidepoutama.getDepoDefault());
         nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         if(akses.getjml2()>=1){
             kdptg.setEditable(false);
@@ -2028,6 +2043,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             BtnSimpan.setEnabled(akses.getpiutang_obat());
             kdptg.setText(akses.getkode());
             nmptg.setText(Sequel.CariPetugas(kdptg.getText()));
+            if(!DEPOAKTIFOBAT.equals("")){
+                kdgudang.setText(DEPOAKTIFOBAT);
+                nmgudang.setText(Sequel.CariBangsal(DEPOAKTIFOBAT));
+                BtnGudang.setEnabled(false);
+            }
         }
     }
 
@@ -2271,6 +2291,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     if (stok < rs.getDouble("jumlah")) {
                                         pesan.add("Stok obat " + rs.getString("nama_brng") + "dengan no. batch (" + rs2.getString("no_batch") + ") dan no. faktur (" + rs2.getString("no_faktur") + ") tidak cukup..!!");
                                     }
+
                                     Sequel.menyimpanSmc("tamppiutang", "kode_brng, nama_brng, satuan, h_jual, h_beli, jumlah, subtotal, dis, bsr_dis, total, no_batch, petugas, no_faktur, aturan_pakai, no_racik",
                                         rs.getString("kode_brng"), rs.getString("nama_brng"), rs.getString("satuan"), rs2.getString(hargaobat), rs2.getString(hppfarmasi), rs.getString("jumlah"),
                                         String.valueOf(rs.getDouble("jumlah") * rs2.getDouble(hargaobat)), "0", "0", String.valueOf(rs.getDouble("jumlah") * rs2.getDouble(hargaobat)), rs2.getString("no_batch"),
@@ -2289,6 +2310,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             }
                         }
                     }
+
                     if (!pesan.isEmpty()) {
                         JOptionPane.showMessageDialog(null, pesan.toArray(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }
@@ -2318,6 +2340,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             String.valueOf(rs.getDouble("jumlah") * rs.getDouble(hargaobat)), "0", "0", String.valueOf(rs.getDouble("jumlah") * rs.getDouble(hargaobat)), "",
                             akses.getkode(), "", rs.getString("aturan_pakai"), rs.getString("no_racik"));
                     }
+
                     if (!pesan.isEmpty()) {
                         JOptionPane.showMessageDialog(null, pesan.toArray(), "Peringatan", JOptionPane.WARNING_MESSAGE);
                     }

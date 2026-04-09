@@ -443,11 +443,13 @@ public final class DlgCariPoli2 extends javax.swing.JDialog {
             hari=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tabMode.getRowCount());
     }
 
-public void tampil3() {
+    public void tampil3() {
         runBackground(() ->tampil());
     }
 
@@ -494,6 +496,10 @@ public void tampil3() {
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
     }

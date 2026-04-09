@@ -17,9 +17,11 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.akses;
+import fungsi.akuntindakanralan;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
+import fungsi.tarifralan;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -64,13 +66,9 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private PreparedStatement pstindakan,pstindakan2,pstindakan3,pstindakan4,
-            pssimpandokter,pssimpanperawat,pssimpandokterperawat,psset_tarif,psrekening;
-    private ResultSet rstindakan,rsset_tarif,rsrekening;
-    private String pilihtable="",kd_pj="",kd_poli="",poli_ralan="Yes",cara_bayar_ralan="Yes",aktifpcare="no",nokunjungan="",sql="",requestJson="",URL="",otorisasi,
-            Suspen_Piutang_Tindakan_Ralan="",Tindakan_Ralan="",Beban_Jasa_Medik_Dokter_Tindakan_Ralan="",Utang_Jasa_Medik_Dokter_Tindakan_Ralan="",
-            Beban_Jasa_Medik_Paramedis_Tindakan_Ralan="",Utang_Jasa_Medik_Paramedis_Tindakan_Ralan="",Beban_KSO_Tindakan_Ralan="",Utang_KSO_Tindakan_Ralan="",
-            Beban_Jasa_Sarana_Tindakan_Ralan="",Utang_Jasa_Sarana_Tindakan_Ralan="",HPP_BHP_Tindakan_Ralan="",Persediaan_BHP_Tindakan_Ralan="",
-            Beban_Jasa_Menejemen_Tindakan_Ralan="",Utang_Jasa_Menejemen_Tindakan_Ralan="",utc="";
+            pssimpandokter,pssimpanperawat,pssimpandokterperawat;
+    private ResultSet rstindakan;
+    private String pilihtable="",kd_pj="",kd_poli="",aktifpcare="no",nokunjungan="",sql="",requestJson="",URL="",otorisasi,utc="";
     private boolean[] pilih;
     private String[] kode,nama,kategori;
     private double[] totaltnd,bagianrs,bhp,jmdokter,jmperawat,kso,menejemen;
@@ -162,6 +160,10 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
         }
         tbTindakan.setDefaultRenderer(Object.class, new WarnaTable());
         TCariTindakan.setDocument(new batasInput((byte)100).getKata(TCariTindakan));
+
+        if(tarifralan.getCaraBayarRalan().equals("")){
+            tarifralan.SetTarifRalan();
+        }
 
         try {
             otorisasi=koneksiDB.USERPCARE()+":"+koneksiDB.PASSPCARE()+":095";
@@ -814,32 +816,32 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                     if(sukses==true){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", ttlpendapatan, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Pendapatan Tindakan Rawat Jalan", 0, ttlpendapatan);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan(), "Suspen Piutang Tindakan Ralan", ttlpendapatan, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getTindakan_Ralan(), "Pendapatan Tindakan Rawat Jalan", 0, ttlpendapatan);
                         }
                         if(ttljmdokter>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Jasa Medik Dokter Tindakan Ralan", ttljmdokter, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Jasa Medik Dokter Tindakan Ralan", 0, ttljmdokter);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Medik_Dokter_Tindakan_Ralan(), "Beban Jasa Medik Dokter Tindakan Ralan", ttljmdokter, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Medik_Dokter_Tindakan_Ralan(), "Utang Jasa Medik Dokter Tindakan Ralan", 0, ttljmdokter);
                         }
                         if(ttljmperawat>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Jasa Medik Paramedis Tindakan Ralan", ttljmperawat, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Jasa Medik Paramedis Tindakan Ralan", 0, ttljmperawat);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Medik_Paramedis_Tindakan_Ralan(), "Beban Jasa Medik Paramedis Tindakan Ralan", ttljmperawat, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Medik_Paramedis_Tindakan_Ralan(), "Utang Jasa Medik Paramedis Tindakan Ralan", 0, ttljmperawat);
                         }
                         if(ttlkso>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban KSO Tindakan Ralan", ttlkso, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang KSO Tindakan Ralan", 0, ttlkso);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_KSO_Tindakan_Ralan(), "Beban KSO Tindakan Ralan", ttlkso, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_KSO_Tindakan_Ralan(), "Utang KSO Tindakan Ralan", 0, ttlkso);
                         }
                         if(ttljasasarana>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Jasa Sarana Tindakan Ralan", ttljasasarana, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "Utang Jasa Sarana Tindakan Ralan", 0, ttljasasarana);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Sarana_Tindakan_Ralan(), "Beban Jasa Sarana Tindakan Ralan", ttljasasarana, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Sarana_Tindakan_Ralan(), "Utang Jasa Sarana Tindakan Ralan", 0, ttljasasarana);
                         }
                         if(ttlbhp>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "HPP BHP Tindakan Ralan", ttlbhp, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Persediaan BHP Tindakan Ralan", 0, ttlbhp);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getHPP_BHP_Tindakan_Ralan(), "HPP BHP Tindakan Ralan", ttlbhp, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getPersediaan_BHP_Tindakan_Ralan(), "Persediaan BHP Tindakan Ralan", 0, ttlbhp);
                         }
                         if(ttlmenejemen>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Jasa Menejemen Tindakan Ralan", ttlmenejemen, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Jasa Menejemen Tindakan Ralan", 0, ttlmenejemen);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getBeban_Jasa_Menejemen_Tindakan_Ralan(), "Beban Jasa Menejemen Tindakan Ralan", ttlmenejemen, 0);
+                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanralan.getUtang_Jasa_Menejemen_Tindakan_Ralan(), "Utang Jasa Menejemen Tindakan Ralan", 0, ttlmenejemen);
                         }
                         if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
                     }
@@ -1084,70 +1086,11 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
     }//GEN-LAST:event_ChkJlnActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        runBackground(() ->tampil());
-        try {
-            psset_tarif=koneksi.prepareStatement("select * from set_tarif");
-            try {
-                rsset_tarif=psset_tarif.executeQuery();
-                if(rsset_tarif.next()){
-                    poli_ralan=rsset_tarif.getString("poli_ralan");
-                    cara_bayar_ralan=rsset_tarif.getString("cara_bayar_ralan");
-                }else{
-                    poli_ralan="Yes";
-                    cara_bayar_ralan="Yes";
-                }
-            } catch (Exception e) {
-                System.out.println("Notifikasi : "+e);
-            }finally{
-                if(rsset_tarif != null){
-                    rsset_tarif.close();
-                }
-                if(psset_tarif != null){
-                    psset_tarif.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+        if(akuntindakanralan.getSuspen_Piutang_Tindakan_Ralan().equals("")){
+            akuntindakanralan.SetAkunTindakanRalan();
         }
 
-        try {
-            psrekening=koneksi.prepareStatement(
-                "select set_akun_ralan.Suspen_Piutang_Tindakan_Ralan,set_akun_ralan.Tindakan_Ralan,set_akun_ralan.Beban_Jasa_Medik_Dokter_Tindakan_Ralan,"+
-                "set_akun_ralan.Utang_Jasa_Medik_Dokter_Tindakan_Ralan,set_akun_ralan.Beban_Jasa_Medik_Paramedis_Tindakan_Ralan,set_akun_ralan.Utang_Jasa_Medik_Paramedis_Tindakan_Ralan,"+
-                "set_akun_ralan.Beban_KSO_Tindakan_Ralan,set_akun_ralan.Utang_KSO_Tindakan_Ralan,set_akun_ralan.Beban_Jasa_Sarana_Tindakan_Ralan,"+
-                "set_akun_ralan.Utang_Jasa_Sarana_Tindakan_Ralan,set_akun_ralan.Beban_Jasa_Menejemen_Tindakan_Ralan,set_akun_ralan.Utang_Jasa_Menejemen_Tindakan_Ralan,"+
-                "set_akun_ralan.HPP_BHP_Tindakan_Ralan,set_akun_ralan.Persediaan_BHP_Tindakan_Ralan from set_akun_ralan");
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Tindakan_Ralan=rsrekening.getString("Suspen_Piutang_Tindakan_Ralan");
-                    Tindakan_Ralan=rsrekening.getString("Tindakan_Ralan");
-                    Beban_Jasa_Medik_Dokter_Tindakan_Ralan=rsrekening.getString("Beban_Jasa_Medik_Dokter_Tindakan_Ralan");
-                    Utang_Jasa_Medik_Dokter_Tindakan_Ralan=rsrekening.getString("Utang_Jasa_Medik_Dokter_Tindakan_Ralan");
-                    Beban_Jasa_Medik_Paramedis_Tindakan_Ralan=rsrekening.getString("Beban_Jasa_Medik_Paramedis_Tindakan_Ralan");
-                    Utang_Jasa_Medik_Paramedis_Tindakan_Ralan=rsrekening.getString("Utang_Jasa_Medik_Paramedis_Tindakan_Ralan");
-                    Beban_KSO_Tindakan_Ralan=rsrekening.getString("Beban_KSO_Tindakan_Ralan");
-                    Utang_KSO_Tindakan_Ralan=rsrekening.getString("Utang_KSO_Tindakan_Ralan");
-                    Beban_Jasa_Sarana_Tindakan_Ralan=rsrekening.getString("Beban_Jasa_Sarana_Tindakan_Ralan");
-                    Utang_Jasa_Sarana_Tindakan_Ralan=rsrekening.getString("Utang_Jasa_Sarana_Tindakan_Ralan");
-                    Beban_Jasa_Menejemen_Tindakan_Ralan=rsrekening.getString("Beban_Jasa_Menejemen_Tindakan_Ralan");
-                    Utang_Jasa_Menejemen_Tindakan_Ralan=rsrekening.getString("Utang_Jasa_Menejemen_Tindakan_Ralan");
-                    HPP_BHP_Tindakan_Ralan=rsrekening.getString("HPP_BHP_Tindakan_Ralan");
-                    Persediaan_BHP_Tindakan_Ralan=rsrekening.getString("Persediaan_BHP_Tindakan_Ralan");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        runBackground(() ->tampil());
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCariTindakan.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -1254,17 +1197,17 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             pstindakan4=koneksi.prepareStatement(sql+
                    "where jns_perawatan.status='1' order by jns_perawatan.nm_perawatan ");
             try {
-                if(poli_ralan.equals("Yes")&&cara_bayar_ralan.equals("Yes")){
+                if(tarifralan.getPoliRalan().equals("Yes")&&tarifralan.getCaraBayarRalan().equals("Yes")){
                     pstindakan.setString(1,kd_pj.trim());
                     pstindakan.setString(2,kd_poli.trim());
                     rstindakan=pstindakan.executeQuery();
-                }else if(poli_ralan.equals("No")&&cara_bayar_ralan.equals("Yes")){
+                }else if(tarifralan.getPoliRalan().equals("No")&&tarifralan.getCaraBayarRalan().equals("Yes")){
                     pstindakan2.setString(1,kd_pj.trim());
                     rstindakan=pstindakan2.executeQuery();
-                }else if(poli_ralan.equals("Yes")&&cara_bayar_ralan.equals("No")){
+                }else if(tarifralan.getPoliRalan().equals("Yes")&&tarifralan.getCaraBayarRalan().equals("No")){
                     pstindakan3.setString(1,kd_poli.trim());
                     rstindakan=pstindakan3.executeQuery();
-                }else if(poli_ralan.equals("No")&&cara_bayar_ralan.equals("No")){
+                }else if(tarifralan.getPoliRalan().equals("No")&&tarifralan.getCaraBayarRalan().equals("No")){
                     rstindakan=pstindakan4.executeQuery();
                 }
 
@@ -1342,6 +1285,8 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tbTindakan.getRowCount());
     }
@@ -1416,8 +1361,9 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
                         });
                     }
                 }else{
+                    String cari=TCariTindakan.getText().toLowerCase();
                     for(JsonNode list:response){
-                        if(list.path("Kode").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())||list.path("NamaPerawatan").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())||list.path("KategoriPerawatan").asText().toLowerCase().contains(TCariTindakan.getText().toLowerCase())){
+                        if(list.path("Kode").asText().toLowerCase().contains(cari)||list.path("NamaPerawatan").asText().toLowerCase().contains(cari)||list.path("KategoriPerawatan").asText().toLowerCase().contains(cari)){
                             TabModeTindakan.addRow(new Object[]{
                                 false,list.path("Kode").asText(),list.path("NamaPerawatan").asText(),list.path("KategoriPerawatan").asText(),list.path("Tarif").asDouble(),list.path("BagianRS").asDouble(),list.path("BHP").asDouble(),list.path("JMDokter").asDouble(),list.path("JMPerawat").asDouble(),list.path("KSO").asDouble(),list.path("Menejemen").asDouble()
                             });
@@ -1428,6 +1374,10 @@ public final class DlgCariPerawatanRalan extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tbTindakan.getRowCount());
     }

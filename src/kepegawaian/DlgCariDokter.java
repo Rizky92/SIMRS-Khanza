@@ -504,8 +504,8 @@ public final class DlgCariDokter extends javax.swing.JDialog {
                 System.out.println("Notif : " + e);
                 tampil();
             }
-            LCount.setText("" + tabMode.getRowCount());
         }
+        LCount.setText("" + tabMode.getRowCount());
     }
 
     public String tampil3(String kode) {

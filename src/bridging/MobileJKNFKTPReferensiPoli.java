@@ -369,7 +369,7 @@ public final class MobileJKNFKTPReferensiPoli extends javax.swing.JDialog {
 
     public void tampil() {
         try {
-            URL = link+"/ref/poli/tanggal/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");	
+            URL = link+"/ref/poli/tanggal/"+Valid.SetTgl(Tanggal.getSelectedItem()+"");
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
             headers.add("X-cons-id",koneksiDB.CONSIDMOBILEJKNFKTP());

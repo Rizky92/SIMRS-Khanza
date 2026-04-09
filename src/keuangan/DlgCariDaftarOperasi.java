@@ -411,6 +411,7 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
 
     private void tampil() {
         try{
+            Valid.tabelKosong(tabMode);
             file=new File("./cache/paketoperasi.iyem");
             file.createNewFile();
             fileWriter = new FileWriter(file);
@@ -451,6 +452,8 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -542,6 +545,10 @@ public final class DlgCariDaftarOperasi extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
     }

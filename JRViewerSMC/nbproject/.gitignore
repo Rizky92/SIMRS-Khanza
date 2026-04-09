@@ -1,0 +1,6 @@
+*
+!.gitignore
+!project.properties
+!project.xml
+!build-impl.xml
+!build-native.xml

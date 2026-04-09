@@ -3,11 +3,12 @@
  * and open the template in the editor.
  */
 
- /*
+/*
  * DlgPenyakit.java
  *
  * Created on May 23, 2010, 12:57:16 AM
  */
+
 package simrskhanza;
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -28,12 +29,14 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -47,8 +50,8 @@ import javax.swing.text.html.StyleSheet;
  */
 public final class DlgCariCaraBayar extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
-    private validasi Valid = new validasi();
-    private Connection koneksi = koneksiDB.condb();
+    private validasi Valid=new validasi();
+    private Connection koneksi=koneksiDB.condb();
     private PreparedStatement ps;
     private ResultSet rs;
     private File file;
@@ -57,49 +60,42 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
     private JsonNode root;
     private JsonNode response;
     private FileReader myObj;
-    private int i = 0;
-
+    private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    /**
-     * Creates new form DlgPenyakit
-     *
+    /** Creates new form DlgPenyakit
      * @param parent
-     * @param modal
-     */
+     * @param modal */
     public DlgCariCaraBayar(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setLocation(10, 2);
-        setSize(656, 250);
+        this.setLocation(10,2);
+        setSize(656,250);
 
-        Object[] row = {"No.", "Kode Asuransi", "Nama Asuransi", "Perusahaan Asuransi", "Alamat Asuransi", "No.Telp", "Attn"};
-        tabMode = new DefaultTableModel(null, row) {
-            @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
-                return false;
-            }
+        Object[] row={"No.","Kode Asuransi","Nama Asuransi","Perusahaan Asuransi","Alamat Asuransi","No.Telp","Attn"};
+        tabMode=new DefaultTableModel(null,row){
+             @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbKamar.setModel(tabMode);
         //tbPenyakit.setDefaultRenderer(Object.class, new WarnaTable(panelJudul.getBackground(),tbPenyakit.getBackground()));
-        tbKamar.setPreferredScrollableViewportSize(new Dimension(500, 500));
+        tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
         for (i = 0; i < 7; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
-            if (i == 0) {
+            if(i==0){
                 column.setPreferredWidth(30);
-            } else if (i == 1) {
+            }else if(i==1){
                 column.setPreferredWidth(100);
-            } else if (i == 2) {
+            }else if(i==2){
                 column.setPreferredWidth(160);
-            } else if (i == 3) {
+            }else if(i==3){
                 column.setPreferredWidth(160);
-            } else if (i == 4) {
+            }else if(i==4){
                 column.setPreferredWidth(170);
-            } else if (i == 5) {
+            }else if(i==5){
                 column.setPreferredWidth(100);
-            } else if (i == 6) {
+            }else if(i==6){
                 column.setPreferredWidth(150);
             }
         }
@@ -113,23 +109,25 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
         LoadHTML.setEditorKit(kit);
         StyleSheet styleSheet = kit.getStyleSheet();
         styleSheet.addRule(
-            ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}" +
-            ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}" +
-            ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}" +
-            ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}" +
-            ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}" +
-            ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}" +
-            ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}" +
-            ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}" +
-            ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
+                ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}"+
+                ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                ".isi5 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#AA0000;}"+
+                ".isi6 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#FF0000;}"+
+                ".isi7 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#C8C800;}"+
+                ".isi8 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#00AA00;}"+
+                ".isi9 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#969696;}"
         );
 
         Document doc = kit.createDefaultDocument();
         LoadHTML.setDocument(doc);
     }
 
-    /**
-     * This method is called from within the constructor to initialize the form. WARNING: Do NOT modify this code. The content of this method is always regenerated by the Form Editor.
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -356,50 +354,50 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
 
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_DOWN) {
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnCari.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_PAGE_UP) {
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
             BtnKeluar.requestFocus();
-        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
             tbKamar.requestFocus();
         }
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil2());
+        tampil2Smc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnCariActionPerformed(null);
-        } else {
+        }else{
             Valid.pindah(evt, TCari, BtnAll);
         }
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             BtnAllActionPerformed(null);
-        } else {
+        }else{
             Valid.pindah(evt, BtnCari, TCari);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void tbKamarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseClicked
-        if (tabMode.getRowCount() != 0) {
+        if(tabMode.getRowCount()!=0){
             try {
                 isPhoto();
                 panggilPhoto();
             } catch (java.lang.NullPointerException e) {
             }
-            if (evt.getClickCount() == 2) {
+            if(evt.getClickCount()==2){
                 dispose();
             }
         }
@@ -411,10 +409,10 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
 
     private void BtnTambahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahActionPerformed
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        DlgPenanggungJawab penjab = new DlgPenanggungJawab(null, false);
+        DlgPenanggungJawab penjab=new DlgPenanggungJawab(null,false);
         penjab.emptTeks();
         penjab.isCek();
-        penjab.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        penjab.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         penjab.setLocationRelativeTo(internalFrame1);
         penjab.setAlwaysOnTop(false);
         penjab.setVisible(true);
@@ -423,10 +421,10 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void tbKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKamarKeyPressed
-        if (tabMode.getRowCount() != 0) {
-            if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+        if(tabMode.getRowCount()!=0){
+            if(evt.getKeyCode()==KeyEvent.VK_SPACE){
                 dispose();
-            } else if (evt.getKeyCode() == KeyEvent.VK_SHIFT) {
+            }else if(evt.getKeyCode()==KeyEvent.VK_SHIFT){
                 TCari.setText("");
                 TCari.requestFocus();
             }
@@ -438,12 +436,12 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowActivated
 
     private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
-        if (tbKamar.getSelectedRow() != -1) {
+        if(tbKamar.getSelectedRow()!= -1){
             isPhoto();
             panggilPhoto();
-        } else {
+        }else{
             ChkAccor.setSelected(false);
-            JOptionPane.showMessageDialog(null, "Silahkan pilih Perusahaan Penanggung/Askes/Asuransi...!!!");
+            JOptionPane.showMessageDialog(null,"Silahkan pilih Perusahaan Penanggung/Askes/Asuransi...!!!");
         }
     }//GEN-LAST:event_ChkAccorActionPerformed
 
@@ -453,28 +451,29 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         if (Valid.umurcacheSmc("./cache/penjab.iyem", 30)) {
-            runBackground(() ->tampil());
+            tampilSmc();
         } else {
-            runBackground(() ->tampil2());
+            tampil2Smc();
         }
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
             });
@@ -482,8 +481,8 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * @param args the command line arguments
-     */
+    * @param args the command line arguments
+    */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
             DlgCariCaraBayar dialog = new DlgCariCaraBayar(new javax.swing.JFrame(), true);
@@ -520,137 +519,275 @@ public final class DlgCariCaraBayar extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
+    /*
     private void tampil() {
-        Valid.tabelKosongSmc(tabMode);
+        Valid.tabelKosong(tabMode);
         try {
-            File file = new File("./cache/penjab.iyem");
+            file=new File("./cache/penjab.iyem");
             file.createNewFile();
-            try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select * from penjab where penjab.status = '1' order by penjab.png_jawab, penjab.kd_pj")) {
-                if (rs.next()) {
-                    ObjectNode root = mapper.createObjectNode();
-                    ArrayNode array = mapper.createArrayNode();
-                    int i = 0;
-                    do {
-                        ObjectNode penjab = mapper.createObjectNode();
-                        penjab.put("KodeAsuransi", rs.getString("kd_pj"));
-                        penjab.put("NamaAsuransi", rs.getString("png_jawab"));
-                        penjab.put("PerusahaanAsuransi", rs.getString("nama_perusahaan"));
-                        penjab.put("AlamatAsuransi", rs.getString("alamat_asuransi"));
-                        penjab.put("NoTelp", rs.getString("no_telp"));
-                        penjab.put("Attn", rs.getString("attn"));
-                        array.add(penjab);
-                        tabMode.addRow(new Object[] {
-                            ++i, rs.getString("kd_pj"), rs.getString("png_jawab"), rs.getString("nama_perusahaan"),
-                            rs.getString("alamat_asuransi"), rs.getString("no_telp"), rs.getString("attn")
-                        });
-                    } while (rs.next());
-                    root.set("penjab", array);
-                    fw.write(mapper.writeValueAsString(root));
-                    fw.flush();
+            fileWriter = new FileWriter(file);
+            StringBuilder iyembuilder = new StringBuilder();
+            ps=koneksi.prepareStatement("select * from penjab where penjab.status='1'");
+            try{
+                rs=ps.executeQuery();
+                i=1;
+                while(rs.next()){
+                    tabMode.addRow(new Object[]{i,rs.getString(1),rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6)});
+                    iyembuilder.append("{\"KodeAsuransi\":\"").append(rs.getString(1)).append("\",\"NamaAsuransi\":\"").append(rs.getString(2)).append("\",\"PerusahaanAsuransi\":\"").append(rs.getString(3)).append("\",\"AlamatAsuransi\":\"").append(rs.getString(4)).append("\",\"NoTelp\":\"").append(rs.getString(5)).append("\",\"Attn\":\"").append(rs.getString(6)).append("\"},");
+                    i++;
                 }
-                tabMode.fireTableDataChanged();
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rs != null){
+                    rs.close();
+                }
+
+                if(ps != null){
+                    ps.close();
+                }
             }
+
+            if (iyembuilder.length() > 0) {
+                iyembuilder.setLength(iyembuilder.length() - 1);
+                fileWriter.write("{\"penjab\":["+iyembuilder+"]}");
+                fileWriter.flush();
+            }
+
+            fileWriter.close();
+            iyembuilder=null;
         } catch (Exception e) {
-            System.out.println("Notif : " + e);
+            System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
-        LCount.setText("" + tabMode.getRowCount());
+        LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     public void emptTeks() {
-        TCari.setText("");
         TCari.requestFocus();
     }
 
-    public JTable getTable() {
+    public JTable getTable(){
         return tbKamar;
     }
 
-    public void isCek() {
+    public void isCek(){
         BtnTambah.setEnabled(akses.getadmin());
     }
 
-    public void tampil2() {
-        Valid.tabelKosongSmc(tabMode);
-        try (FileReader fr = new FileReader("./cache/penjab.iyem")) {
-            JsonNode response = mapper.readTree(fr).path("penjab");
-            if (response.isArray()) {
-                int i = 0;
-                if (TCari.getText().isBlank()) {
-                    for (JsonNode list : response) {
-                        tabMode.addRow(new Object[] {
-                            ++i, list.path("KodeAsuransi").asText(), list.path("NamaAsuransi").asText(),
-                            list.path("PerusahaanAsuransi").asText(), list.path("AlamatAsuransi").asText(),
-                            list.path("NoTelp").asText(), list.path("Attn").asText()
+    /*
+    private void tampil2() {
+        try {
+            myObj = new FileReader("./cache/penjab.iyem");
+            root = mapper.readTree(myObj);
+            Valid.tabelKosong(tabMode);
+            response = root.path("penjab");
+            if(response.isArray()){
+                if(TCari.getText().trim().equals("")){
+                    i=1;
+                    for(JsonNode list:response){
+                        tabMode.addRow(new Object[]{
+                            i,list.path("KodeAsuransi").asText(),list.path("NamaAsuransi").asText(),list.path("PerusahaanAsuransi").asText(),list.path("AlamatAsuransi").asText(),list.path("NoTelp").asText(),list.path("Attn").asText()
                         });
+                        i++;
                     }
-                } else {
-                    for (JsonNode list : response) {
-                        if (list.path("KodeAsuransi").asText().toLowerCase().contains(TCari.getText().toLowerCase())
-                            || list.path("NamaAsuransi").asText().toLowerCase().contains(TCari.getText().toLowerCase())
-                        ) {
-                            tabMode.addRow(new Object[] {
-                                ++i, list.path("KodeAsuransi").asText(), list.path("NamaAsuransi").asText(),
-                                list.path("PerusahaanAsuransi").asText(), list.path("AlamatAsuransi").asText(),
-                                list.path("NoTelp").asText(), list.path("Attn").asText()
+                }else{
+                    i=1;
+                    for(JsonNode list:response){
+                        if(list.path("KodeAsuransi").asText().toLowerCase().contains(TCari.getText().toLowerCase())||list.path("NamaAsuransi").asText().toLowerCase().contains(TCari.getText().toLowerCase())){
+                            tabMode.addRow(new Object[]{
+                                i,list.path("KodeAsuransi").asText(),list.path("NamaAsuransi").asText(),list.path("PerusahaanAsuransi").asText(),list.path("AlamatAsuransi").asText(),list.path("NoTelp").asText(),list.path("Attn").asText()
                             });
+                            i++;
                         }
                     }
                 }
             }
-            tabMode.fireTableDataChanged();
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
-            tampil();
+            myObj.close();
+        } catch (Exception ex) {
+            System.out.println("Notifikasi : "+ex);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     private void isPhoto(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(500, HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(500,HEIGHT));
             FormPhoto.setVisible(true);
             ChkAccor.setVisible(true);
-        } else if (ChkAccor.isSelected() == false) {
+        }else if(ChkAccor.isSelected()==false){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(15, HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(15,HEIGHT));
             FormPhoto.setVisible(false);
             ChkAccor.setVisible(true);
         }
     }
 
     private void panggilPhoto() {
-        if (FormPhoto.isVisible() == true) {
+        if(FormPhoto.isVisible()==true){
             try {
-                ps = koneksi.prepareStatement("select penjab_dokumen_kerjasama.photo,date_format(penjab_dokumen_kerjasama.kerjasama_berakhir,'%d-%m-%Y') as tanggal from penjab_dokumen_kerjasama where penjab_dokumen_kerjasama.kd_pj=?");
+                ps=koneksi.prepareStatement("select penjab_dokumen_kerjasama.photo,date_format(penjab_dokumen_kerjasama.kerjasama_berakhir,'%d-%m-%Y') as tanggal from penjab_dokumen_kerjasama where penjab_dokumen_kerjasama.kd_pj=?");
                 try {
-                    ps.setString(1, tbKamar.getValueAt(tbKamar.getSelectedRow(), 1).toString());
-                    rs = ps.executeQuery();
-                    if (rs.next()) {
-                        if (rs.getString("photo").equals("") || rs.getString("photo").equals("-")) {
+                    ps.setString(1,tbKamar.getValueAt(tbKamar.getSelectedRow(),1).toString());
+                    rs=ps.executeQuery();
+                    if(rs.next()){
+                        if(rs.getString("photo").equals("")||rs.getString("photo").equals("-")){
                             Berakhir.setText("");
                             LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
-                        } else {
-                            Berakhir.setText("Kerjasama Berakhir Pada : " + rs.getString("tanggal"));
-                            LoadHTML.setText("<html><body><center><img src='http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/dokumenasuransi/" + rs.getString("photo") + "' alt='photo' width='450' height='550'/></center></body></html>");
+                        }else{
+                            Berakhir.setText("Kerjasama Berakhir Pada : "+rs.getString("tanggal"));
+                            LoadHTML.setText("<html><body><center><img src='http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/dokumenasuransi/"+rs.getString("photo")+"' alt='photo' width='450' height='550'/></center></body></html>");
                         }
-                    } else {
+                    }else{
                         Berakhir.setText("");
                         LoadHTML.setText("<html><body><center><br><br><font face='tahoma' size='2' color='#434343'>Kosong</font></center></body></html>");
                     }
                 } catch (Exception e) {
-                    System.out.println("Notif : " + e);
-                } finally {
-                    if (rs != null) {
+                    System.out.println("Notif : "+e);
+                } finally{
+                    if(rs!=null){
                         rs.close();
                     }
-                    if (ps != null) {
+                    if(ps!=null){
                         ps.close();
                     }
                 }
             } catch (Exception e) {
-                System.out.println("Notif : " + e);
+                System.out.println("Notif : "+e);
             }
+        }
+    }
+
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, String[]>() {
+                final String cari = TCari.getText().toLowerCase().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    File file = new File("./cache/penjab.iyem");
+                    file.createNewFile();
+                    try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery(
+                        "select * from penjab where penjab.status = '1' order by penjab.png_jawab"
+                    )) {
+                        ArrayNode array = mapper.createArrayNode();
+                        int i = 0;
+                        while (rs.next()) {
+                            ObjectNode node = mapper.createObjectNode();
+                            node.put("KodeAsuransi", rs.getString(1));
+                            node.put("NamaAsuransi", rs.getString(2));
+                            node.put("PerusahaanAsuransi", rs.getString(3));
+                            node.put("AlamatAsuransi", rs.getString(4));
+                            node.put("NoTelp", rs.getString(5));
+                            node.put("Attn", rs.getString(6));
+                            array.add(node);
+                            if (cari.isBlank()) {
+                                publish(new String[] {String.valueOf(++i), rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+                            } else {
+                                if (rs.getString(1).toLowerCase().contains(cari) || rs.getString(2).toLowerCase().contains(cari) || rs.getString(3).toLowerCase().contains(cari)) {
+                                    publish(new String[] {String.valueOf(++i), rs.getString(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)});
+                                }
+                            }
+                        }
+                        fw.write(mapper.writeValueAsString(mapper.createObjectNode().set("penjab", array)));
+                        fw.flush();
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<String[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariCaraBayar.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    private void tampil2Smc() {
+        if (new File("./cache/penjab.iyem").isFile() && !Valid.umurcacheSmc("./cache/penjab.iyem", 7)) {
+            if (!ceksukses) {
+                ceksukses = true;
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Valid.tabelKosongSmc(tabMode);
+                LCount.setText("0");
+                new SwingWorker<Void, String[]>() {
+                    final String cari = TCari.getText().toLowerCase().trim();
+
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        try (FileReader fr = new FileReader("./cache/penjab.iyem")) {
+                            ArrayNode array = mapper.readTree(fr).withArray("penjab");
+                            int i = 0;
+                            if (cari.isBlank()) {
+                                for (JsonNode node : array) {
+                                    publish(new String[] {
+                                        String.valueOf(++i), node.path("KodeAsuransi").asText(), node.path("NamaAsuransi").asText(), node.path("PerusahaanAsuransi").asText(),
+                                        node.path("AlamatAsuransi").asText(), node.path("NoTelp").asText(), node.path("Attn").asText()
+                                    });
+                                }
+                            } else {
+                                for (JsonNode node : array) {
+                                    if (node.path("KodeAsuransi").asText().toLowerCase().contains(cari)
+                                        || node.path("NamaAsuransi").asText().toLowerCase().contains(cari)
+                                        || node.path("PerusahaanAsuransi").asText().toLowerCase().contains(cari)
+                                    ) {
+                                        publish(new String[] {
+                                            String.valueOf(++i), node.path("KodeAsuransi").asText(), node.path("NamaAsuransi").asText(), node.path("PerusahaanAsuransi").asText(),
+                                            node.path("AlamatAsuransi").asText(), node.path("NoTelp").asText(), node.path("Attn").asText()
+                                        });
+                                    }
+                                }
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void process(List<String[]> chunks) {
+                        chunks.forEach(tabMode::addRow);
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                        }
+                        tabMode.fireTableDataChanged();
+                        LCount.setText(tabMode.getRowCount() + "");
+                        DlgCariCaraBayar.this.setCursor(Cursor.getDefaultCursor());
+                        ceksukses = false;
+                    }
+                }.execute();
+            }
+        } else {
+            tampilSmc();
         }
     }
 

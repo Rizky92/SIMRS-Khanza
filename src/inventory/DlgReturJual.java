@@ -3,6 +3,7 @@ import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
@@ -1382,7 +1383,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
     public void isCek(){
         autonomor();
-        Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi",kdgudang);
+        if(lokasidepoutama.getDepoDefault().equals("")){
+            lokasidepoutama.SetLokasiDepoUtama();
+        }
+        kdgudang.setText(lokasidepoutama.getDepoDefault());
         nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         if(akses.getjml2()>=1){
             Kdptg.setEditable(false);

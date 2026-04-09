@@ -52,6 +52,8 @@
     <entry key="RESEPRAJALKEPLAN">yes</entry>
     <entry key="FORMALARMAPOTEK">ralan + ranap</entry>
     <entry key="STOKKOSONGRESEP">yes</entry>
+    <entry key="NOTIFMAKSIMALNOMINALRESEPRAJAL">no</entry>
+    <entry key="MAKSIMALNOMINALRESEPRAJAL"></entry>
     <entry key="TAMPILKANCOPYRESEPDOKTERLAIN">yes</entry>
     <entry key="HPPFARMASI">dasar</entry>
     <entry key="HPPTOKO">dasar</entry>
@@ -86,6 +88,7 @@
     <entry key="CONSIDAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="USERKEYAPIAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="JADIKANPIUTANGAPOTEKBPJS">yes</entry>
+    <entry key="AKTIFKANRESEPITERDOKTER">yes</entry>
     <entry key="KODEPPKAPOTEKBPJS">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="URLAPIICARE">https://apijkn-dev.bpjs-kesehatan.go.id/ihs_dev/api/rs</entry>
     <entry key="SECRETKEYAPIICARE">l4nh5eVYrLAER/I2A4b3Tw==</entry>

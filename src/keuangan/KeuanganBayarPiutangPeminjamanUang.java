@@ -684,6 +684,10 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
+                } finally {
+                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                    response = null;
+                    root = null;
                 }
 
                 kontraakun="";
@@ -703,6 +707,10 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
+                } finally {
+                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                    response = null;
+                    root = null;
                 }
 
                 if(Sequel.menyimpantf("bayar_piutang_lainlain","?,?,?,?,?,?,?","Pembayaran",7,new String[]{
@@ -780,6 +788,10 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
                     myObj.close();
                 } catch (Exception e) {
                     sukses=false;
+                } finally {
+                    if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+                    response = null;
+                    root = null;
                 }
                 Sequel.mengedit("piutang_lainlain","nota_piutang='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","status='Belum Lunas', sisapiutang=sisapiutang+"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
                 Sequel.deleteTampJurnal();
@@ -1310,6 +1322,8 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
              iyembuilder=null;
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -1330,6 +1344,10 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
             }else{
                 System.out.println("Notifikasi : "+ex);
             }
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

@@ -543,6 +543,8 @@ public class DlgPropinsi extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
         LCount.setText(""+tabMode.getRowCount());
     }
@@ -592,6 +594,10 @@ public class DlgPropinsi extends javax.swing.JDialog {
             }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         LCount.setText(""+tabMode.getRowCount());
     }
@@ -616,12 +622,17 @@ public class DlgPropinsi extends javax.swing.JDialog {
                 for(JsonNode list:response){
                     if(list.path("NamaProp").asText().toLowerCase().equals(nama)){
                         iyem=list.path("KodeProp").asText();
+                        break;
                     }
                 }
             }
             myObj.close();
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
         if(iyem.equals("")){
             iyem=Sequel.cariIsi("select propinsi.kd_prop from propinsi where propinsi.nm_prop=?",nama);

@@ -15,6 +15,7 @@ import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
 import fungsi.sekuel;
 import fungsi.validasi;
 import inventory.DlgObatPenyakit;
@@ -509,7 +510,7 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnTambahActionPerformed
 
     private void PenyakitCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PenyakitCariKeyPressed
-   if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+        if(evt.getKeyCode()==KeyEvent.VK_ENTER){
             BtnCariActionPerformed(null);
         }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
             BtnCari.requestFocus();
@@ -565,7 +566,7 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSeek3ActionPerformed
 
     private void BtnSeek3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek3KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_BtnSeek3KeyPressed
 
     private void TNoRwKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TNoRwKeyPressed
@@ -1040,7 +1041,10 @@ public final class DlgCariObatPenyakit extends javax.swing.JDialog {
 
         bangsal=Sequel.cariIsi("select kd_bangsal from set_depo_ralan where kd_poli=?",Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat=?",TNoRw.getText()));
         if(bangsal.equals("")){
-            bangsal=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1");
+            if(lokasidepoutama.getDepoDefault().equals("")){
+                lokasidepoutama.SetLokasiDepoUtama();
+            }
+            bangsal=lokasidepoutama.getDepoDefault();
         }
     }
 

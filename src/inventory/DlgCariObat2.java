@@ -19,8 +19,11 @@ import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable2;
 import fungsi.akses;
+import fungsi.akunobatranap;
 import fungsi.batasInput;
+import fungsi.embalasetuslah;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
@@ -70,18 +73,15 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private riwayatobat Trackobat=new riwayatobat();
-    private PreparedStatement psobat,pscarikapasitas,psstok,psrekening,ps2,psbatch;
-    private ResultSet rsobat,carikapasitas,rsstok,rsrekening,rs2,rsbatch;
+    private PreparedStatement psobat,pscarikapasitas,psstok,ps2,psbatch;
+    private ResultSet rsobat,carikapasitas,rsstok,rs2,rsbatch;
     private Jurnal jur=new Jurnal();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private double h_belicari=0, hargacari=0, sisacari=0,y=0,embalase=Sequel.cariIsiAngka("select set_embalase.embalase_per_obat from set_embalase"),
-            tuslah=Sequel.cariIsiAngka("select set_embalase.tuslah_per_obat from set_embalase"),kenaikan,stokbarang,ttlhpp,ttljual;
+    private double h_belicari=0, hargacari=0, sisacari=0,y=0,kenaikan,stokbarang,ttlhpp,ttljual;
     private int jml=0,i=0,z=0,row=0;
     private String signa1="1",signa2="1",kdObatSK="",requestJson="",nokunjungan="",URL="",otorisasi,sql="",no_batchcari="", tgl_kadaluarsacari="",
-                   no_fakturcari="",aktifkanbatch="no",aktifpcare="no",noresep="",Suspen_Piutang_Obat_Ranap="",Obat_Ranap="",HPP_Obat_Rawat_Inap="",
-                   Persediaan_Obat_Rawat_Inap="",hppfarmasi="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),
-                   VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="";
+            no_fakturcari="",aktifkanbatch="no",aktifpcare="no",noresep="",hppfarmasi="",VALIDASIULANGBERIOBAT="",DEPOAKTIFOBAT="",utc="";
     private WarnaTable2 warna=new WarnaTable2();
     private DlgCariBangsal lokasidepo;
     private DlgCariAturanPakai aturanpakai = null;
@@ -972,7 +972,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                     if(i==8){
                         try {
                             if(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0,0")) {
-                                tbObat.setValueAt(embalase,tbObat.getSelectedRow(),8);
+                                tbObat.setValueAt(embalasetuslah.getEmbalase(),tbObat.getSelectedRow(),8);
                             }
                         } catch (Exception e) {
                             tbObat.setValueAt(0,tbObat.getSelectedRow(),8);
@@ -980,7 +980,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                     }else if(i==9){
                         try {
                             if(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0,0")) {
-                                tbObat.setValueAt(tuslah,tbObat.getSelectedRow(),9);
+                                tbObat.setValueAt(embalasetuslah.getTuslah(),tbObat.getSelectedRow(),9);
                             }
                         } catch (Exception e) {
                             tbObat.setValueAt(0,tbObat.getSelectedRow(),9);
@@ -1013,7 +1013,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
                         try {
                             if(tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),8).toString().equals("0,0")) {
-                                tbObat.setValueAt(embalase,tbObat.getSelectedRow(),8);
+                                tbObat.setValueAt(embalasetuslah.getEmbalase(),tbObat.getSelectedRow(),8);
                             }
                         } catch (Exception e) {
                             tbObat.setValueAt(0,tbObat.getSelectedRow(),8);
@@ -1021,7 +1021,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
                         try {
                             if(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0.0")||tbObat.getValueAt(tbObat.getSelectedRow(),9).toString().equals("0,0")) {
-                                tbObat.setValueAt(tuslah,tbObat.getSelectedRow(),9);
+                                tbObat.setValueAt(embalasetuslah.getTuslah(),tbObat.getSelectedRow(),9);
                             }
                         } catch (Exception e) {
                             tbObat.setValueAt(0,tbObat.getSelectedRow(),9);
@@ -1380,12 +1380,12 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                     if(sukses){
                         Sequel.deleteTampJurnal();
                         if(ttljual>0){
-                            if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", ttljual, 0);
-                            if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", 0, ttljual);
+                            if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getSuspen_Piutang_Obat_Ranap(), "Suspen Piutang Obat Ranap", ttljual, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getObat_Ranap(), "Pendapatan Obat Rawat Inap", 0, ttljual);
                         }
                         if(ttlhpp>0){
-                            if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
-                            if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", 0, ttlhpp);
+                            if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getHPP_Obat_Rawat_Inap(), "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
+                            if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getPersediaan_Obat_Rawat_Inap(), "Persediaan Obat Rawat Inap", 0, ttlhpp);
                         }
                         if((ttljual>0)||(ttlhpp>0)){
                             if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
@@ -1546,15 +1546,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
     private void kdgudangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kdgudangKeyPressed
         switch (evt.getKeyCode()) {
-            case KeyEvent.VK_PAGE_DOWN:
-                Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
-                break;
             case KeyEvent.VK_PAGE_UP:
-                Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
                 TCari.requestFocus();
                 break;
             case KeyEvent.VK_ENTER:
-                Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal=?",nmgudang,kdgudang.getText());
                 BtnSimpan.requestFocus();
                 break;
             case KeyEvent.VK_UP:
@@ -1700,7 +1695,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                         if(i==11){
                             try {
                                 if(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0.0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0,0")) {
-                                    tbDetailObatRacikan.setValueAt(embalase,tbDetailObatRacikan.getSelectedRow(),11);
+                                    tbDetailObatRacikan.setValueAt(embalasetuslah.getEmbalase(),tbDetailObatRacikan.getSelectedRow(),11);
                                 }
                             } catch (Exception e) {
                                 tbDetailObatRacikan.setValueAt(0,tbDetailObatRacikan.getSelectedRow(),11);
@@ -1708,7 +1703,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                         }else if(i==12){
                             try {
                                 if(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),12).toString().equals("0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),12).toString().equals("")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),12).toString().equals("0.0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),12).toString().equals("0,0")) {
-                                    tbDetailObatRacikan.setValueAt(tuslah,tbDetailObatRacikan.getSelectedRow(),12);
+                                    tbDetailObatRacikan.setValueAt(embalasetuslah.getTuslah(),tbDetailObatRacikan.getSelectedRow(),12);
                                 }
                             } catch (Exception e) {
                                 tbDetailObatRacikan.setValueAt(0,tbDetailObatRacikan.getSelectedRow(),12);
@@ -1781,7 +1776,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
                             try {
                                 if(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0.0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),11).toString().equals("0,0")) {
-                                    tbDetailObatRacikan.setValueAt(embalase,tbDetailObatRacikan.getSelectedRow(),11);
+                                    tbDetailObatRacikan.setValueAt(embalasetuslah.getEmbalase(),tbDetailObatRacikan.getSelectedRow(),11);
                                 }
                             } catch (Exception e) {
                                 tbDetailObatRacikan.setValueAt(0,tbDetailObatRacikan.getSelectedRow(),11);
@@ -1789,7 +1784,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
 
                             try {
                                 if(tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),12).toString().equals("0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),12).toString().equals("")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),12).toString().equals("0.0")||tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(),12).toString().equals("0,0")) {
-                                    tbDetailObatRacikan.setValueAt(tuslah,tbDetailObatRacikan.getSelectedRow(),12);
+                                    tbDetailObatRacikan.setValueAt(embalasetuslah.getTuslah(),tbDetailObatRacikan.getSelectedRow(),12);
                                 }
                             } catch (Exception e) {
                                 tbDetailObatRacikan.setValueAt(0,tbDetailObatRacikan.getSelectedRow(),12);
@@ -1861,30 +1856,12 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStok1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            psrekening=koneksi.prepareStatement(
-               "select set_akun_ranap.Suspen_Piutang_Obat_Ranap,set_akun_ranap.Obat_Ranap,set_akun_ranap.HPP_Obat_Rawat_Inap,set_akun_ranap.Persediaan_Obat_Rawat_Inap from set_akun_ranap"
-            );
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Obat_Ranap=rsrekening.getString("Suspen_Piutang_Obat_Ranap");
-                    Obat_Ranap=rsrekening.getString("Obat_Ranap");
-                    HPP_Obat_Rawat_Inap=rsrekening.getString("HPP_Obat_Rawat_Inap");
-                    Persediaan_Obat_Rawat_Inap=rsrekening.getString("Persediaan_Obat_Rawat_Inap");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        if(akunobatranap.getSuspen_Piutang_Obat_Ranap().equals("")){
+            akunobatranap.SetAkunObatRanap();
+        }
+
+        if(embalasetuslah.getEmbalase() == null){
+            embalasetuslah.SetEmbalaseTuslah();
         }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -2257,6 +2234,8 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             fileWriter.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -2431,6 +2410,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -2649,7 +2632,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
         }else{
             kdgudang.setText(akses.getkdbangsal());
             if(akses.getkdbangsal().equals("")){
-                kdgudang.setText(bangsaldefault);
+                if(lokasidepoutama.getDepoDefault().equals("")){
+                    lokasidepoutama.SetLokasiDepoUtama();
+                }
+                kdgudang.setText(lokasidepoutama.getDepoDefault());
             }
             nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
         }
@@ -3015,6 +3001,10 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             myObj.close();
         } catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        } finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

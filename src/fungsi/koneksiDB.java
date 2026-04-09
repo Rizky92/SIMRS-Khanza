@@ -821,6 +821,16 @@ public class koneksiDB {
         return var;
     }
 
+    public static String AKTIFKANRESEPITERDOKTER(){
+        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fis);
+            var=prop.getProperty("AKTIFKANRESEPITERDOKTER");
+        }catch(Exception e){
+            var="no";
+        }
+        return var;
+    }
+
     public static String URLAPIPCARE(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
@@ -1316,6 +1326,26 @@ public class koneksiDB {
             var="no";
         }
         return var;
+    }
+
+    public static String NOTIFMAKSIMALNOMINALRESEPRAJAL(){
+        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fis);
+            var=prop.getProperty("NOTIFMAKSIMALNOMINALRESEPRAJAL");
+        }catch(Exception e){
+            var="no";
+        }
+        return var;
+    }
+
+    public static Double MAKSIMALNOMINALRESEPRAJAL(){
+        try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fis);
+            var=prop.getProperty("MAKSIMALNOMINALRESEPRAJAL");
+        }catch(Exception e){
+            var="no";
+        }
+        return Double.parseDouble(var);
     }
 
     public static String TAMPILKANCOPYRESEPDOKTERLAIN(){

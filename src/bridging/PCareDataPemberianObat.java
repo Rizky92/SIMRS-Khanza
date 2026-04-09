@@ -3,6 +3,8 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.akses;
+import fungsi.akunobatralan;
+import fungsi.akunobatranap;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -40,10 +42,9 @@ public class PCareDataPemberianObat extends javax.swing.JDialog {
     private Connection koneksi=koneksiDB.condb();
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private PreparedStatement ps,psrekening;
-    private ResultSet rs,rsrekening;
-    private String aktifkanbatch="no",URL="",link="",otorisasi,Suspen_Piutang_Obat_Ranap="",Obat_Ranap="",HPP_Obat_Rawat_Inap="",Persediaan_Obat_Rawat_Inap="",
-            Suspen_Piutang_Obat_Ralan="",Obat_Ralan="",HPP_Obat_Rawat_Jalan="",Persediaan_Obat_Rawat_Jalan="",utc="";
+    private PreparedStatement ps;
+    private ResultSet rs;
+    private String aktifkanbatch="no",URL="",link="",otorisasi,utc="";
     private HttpHeaders headers;
     private HttpEntity requestEntity;
     private ObjectMapper mapper = new ObjectMapper();
@@ -561,23 +562,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ranap")){
                     Sequel.deleteTampJurnal();
                     if(ttljual>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", 0, ttljual);
-                        if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", ttljual, 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getSuspen_Piutang_Obat_Ranap(), "Suspen Piutang Obat Ranap", 0, ttljual);
+                        if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getObat_Ranap(), "Pendapatan Obat Rawat Inap", ttljual, 0);
                     }
                     if(ttlhpp>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", 0, ttlhpp);
-                        if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", ttlhpp, 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getHPP_Obat_Rawat_Inap(), "HPP Persediaan Obat Rawat Inap", 0, ttlhpp);
+                        if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getPersediaan_Obat_Rawat_Inap(), "Persediaan Obat Rawat Inap", ttlhpp, 0);
                     }
                     if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN, OLEH "+akses.getkode());
                 }else if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ralan")){
                     Sequel.deleteTampJurnal();
                     if(ttljual>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", 0, ttljual);
-                        if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", ttljual, 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(akunobatralan.getSuspen_Piutang_Obat_Ralan(), "Suspen Piutang Obat Ralan", 0, ttljual);
+                        if (sukses) sukses = Sequel.insertTampJurnal(akunobatralan.getObat_Ralan(), "Pendapatan Obat Rawat Jalan", ttljual, 0);
                     }
                     if(ttlhpp>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", 0, ttlhpp);
-                        if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", ttlhpp, 0);
+                        if (sukses) sukses = Sequel.insertTampJurnal(akunobatralan.getHPP_Obat_Rawat_Jalan(), "HPP Persediaan Obat Rawat Jalan", 0, ttlhpp);
+                        if (sukses) sukses = Sequel.insertTampJurnal(akunobatralan.getPersediaan_Obat_Rawat_Jalan(), "Persediaan Obat Rawat Jalan", ttlhpp, 0);
                     }
                     if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN, OLEH "+akses.getkode());
                 }
@@ -649,50 +650,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        runBackground(() ->tampil());
-        try {
-            psrekening=koneksi.prepareStatement("select set_akun_ralan.Suspen_Piutang_Obat_Ralan,set_akun_ralan.Obat_Ralan,set_akun_ralan.HPP_Obat_Rawat_Jalan,set_akun_ralan.Persediaan_Obat_Rawat_Jalan from set_akun_ralan");
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Obat_Ralan=rsrekening.getString("Suspen_Piutang_Obat_Ralan");
-                    Obat_Ralan=rsrekening.getString("Obat_Ralan");
-                    HPP_Obat_Rawat_Jalan=rsrekening.getString("HPP_Obat_Rawat_Jalan");
-                    Persediaan_Obat_Rawat_Jalan=rsrekening.getString("Persediaan_Obat_Rawat_Jalan");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-
-            psrekening=koneksi.prepareStatement("select set_akun_ranap.Suspen_Piutang_Obat_Ranap,set_akun_ranap.Obat_Ranap,set_akun_ranap.HPP_Obat_Rawat_Inap,set_akun_ranap.Persediaan_Obat_Rawat_Inap from set_akun_ranap");
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Obat_Ranap=rsrekening.getString("Suspen_Piutang_Obat_Ranap");
-                    Obat_Ranap=rsrekening.getString("Obat_Ranap");
-                    HPP_Obat_Rawat_Inap=rsrekening.getString("HPP_Obat_Rawat_Inap");
-                    Persediaan_Obat_Rawat_Inap=rsrekening.getString("Persediaan_Obat_Rawat_Inap");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        if(akunobatralan.getSuspen_Piutang_Obat_Ralan().equals("")){
+            akunobatralan.SetAkunObatRalan();
         }
+        if(akunobatranap.getSuspen_Piutang_Obat_Ranap().equals("")){
+            akunobatranap.SetAkunObatRanap();
+        }
+        runBackground(() ->tampil());
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override

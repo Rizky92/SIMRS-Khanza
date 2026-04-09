@@ -188,5 +188,4 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
         }
         return component;
     }
-
 }

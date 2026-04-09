@@ -59,25 +59,22 @@ public final class DlgCariReg extends javax.swing.JDialog {
             "Pasien","J.K.","Umur","Poliklinik","Jenis Bayar","Penanggung Jawab","Alamat P.J.","Hubungan P.J.",
             "Biaya Regristrasi","Status","No.Telp","Stts Rawat","Stts Poli","Kode Poli","Kode PJ"
         }){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
-                boolean a = false;
-                if (colIndex==0) {
-                    a=true;
-                }
-                return a;
-             }
-             Class[] types = new Class[] {
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
+            @Override
+            public boolean isCellEditable(int rowIndex, int colIndex){
+                return colIndex==0;
+            }
+            Class[] types = new Class[] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Object.class,java.lang.Object.class,java.lang.Object.class
+            };
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbPetugas.setModel(tabMode);
 
@@ -465,7 +462,6 @@ public final class DlgCariReg extends javax.swing.JDialog {
                 if(rs != null){
                     rs.close();
                 }
-
                 if(ps != null){
                     ps.close();
                 }
@@ -477,7 +473,6 @@ public final class DlgCariReg extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
     }
 
-
     public JTable getTable(){
         return tbPetugas;
     }
@@ -485,7 +480,6 @@ public final class DlgCariReg extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;

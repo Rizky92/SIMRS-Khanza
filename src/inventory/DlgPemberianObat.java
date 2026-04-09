@@ -14,6 +14,8 @@ package inventory;
 
 import fungsi.WarnaTable;
 import fungsi.akses;
+import fungsi.akunobatralan;
+import fungsi.akunobatranap;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -63,16 +65,14 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private riwayatobat Trackobat=new riwayatobat();
     private String bangsal="",lokasi="",tgl="",pas="",sql="",status="";
-    private PreparedStatement ps,psrekening;
+    private PreparedStatement ps;
     private DlgCariObat2 ObatRanap;
     private DlgCariObat ObatRalan;
     private DlgCariObat3 ObatUDD;
     private DlgCariObatPenyakit ObatPenyakit;
-    private ResultSet rs,rsrekening;
+    private ResultSet rs;
     private double ttljual,ttlhpp,jumlahtotal=0;
-    private String aktifkanbatch="no",aktifkanparsial="no",kodedokter="",namadokter="",statusberi="",
-            Suspen_Piutang_Obat_Ranap="",Obat_Ranap="",HPP_Obat_Rawat_Inap="",Persediaan_Obat_Rawat_Inap="",
-            Suspen_Piutang_Obat_Ralan="",Obat_Ralan="",HPP_Obat_Rawat_Jalan="",Persediaan_Obat_Rawat_Jalan="";
+    private String aktifkanbatch="no",aktifkanparsial="no",kodedokter="",namadokter="",statusberi="";
     private Jurnal jur=new Jurnal();
     private final Properties prop = new Properties();
     private int jmlparsial=0;
@@ -1237,52 +1237,12 @@ public class DlgPemberianObat extends javax.swing.JDialog {
     }//GEN-LAST:event_TanggalKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            psrekening=koneksi.prepareStatement(
-                    "select set_akun_ralan.Suspen_Piutang_Obat_Ralan,set_akun_ralan.Obat_Ralan,"+
-                    "set_akun_ralan.HPP_Obat_Rawat_Jalan,set_akun_ralan.Persediaan_Obat_Rawat_Jalan from set_akun_ralan");
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Obat_Ralan=rsrekening.getString("Suspen_Piutang_Obat_Ralan");
-                    Obat_Ralan=rsrekening.getString("Obat_Ralan");
-                    HPP_Obat_Rawat_Jalan=rsrekening.getString("HPP_Obat_Rawat_Jalan");
-                    Persediaan_Obat_Rawat_Jalan=rsrekening.getString("Persediaan_Obat_Rawat_Jalan");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
+        if(akunobatralan.getSuspen_Piutang_Obat_Ralan().equals("")){
+            akunobatralan.SetAkunObatRalan();
+        }
 
-            psrekening=koneksi.prepareStatement(
-                    "select set_akun_ranap.Suspen_Piutang_Obat_Ranap,set_akun_ranap.Obat_Ranap,"+
-                    "set_akun_ranap.HPP_Obat_Rawat_Inap,set_akun_ranap.Persediaan_Obat_Rawat_Inap from set_akun_ranap");
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Obat_Ranap=rsrekening.getString("Suspen_Piutang_Obat_Ranap");
-                    Obat_Ranap=rsrekening.getString("Obat_Ranap");
-                    HPP_Obat_Rawat_Inap=rsrekening.getString("HPP_Obat_Rawat_Inap");
-                    Persediaan_Obat_Rawat_Inap=rsrekening.getString("Persediaan_Obat_Rawat_Inap");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        if(akunobatranap.getSuspen_Piutang_Obat_Ranap().equals("")){
+            akunobatranap.SetAkunObatRanap();
         }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
@@ -1787,23 +1747,23 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                         if (statusberi.equals("Ranap")) {
                             Sequel.deleteTampJurnal();
                             if (ttljual > 0) {
-                                if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", 0, ttljual);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", ttljual, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getSuspen_Piutang_Obat_Ranap(), "Suspen Piutang Obat Ranap", 0, ttljual);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getObat_Ranap(), "Pendapatan Obat Rawat Inap", ttljual, 0);
                             }
                             if (ttlhpp > 0) {
-                                if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", 0, ttlhpp);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", ttlhpp, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getHPP_Obat_Rawat_Inap(), "HPP Persediaan Obat Rawat Inap", 0, ttlhpp);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getPersediaan_Obat_Rawat_Inap(), "Persediaan Obat Rawat Inap", ttlhpp, 0);
                             }
                             if (sukses) sukses = jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
                         } else if (statusberi.equals("Ralan")) {
                             Sequel.deleteTampJurnal();
                             if (ttljual > 0) {
-                                if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", 0, ttljual);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ralan, "Pendapatan Obat Rawat Jalan", ttljual, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatralan.getSuspen_Piutang_Obat_Ralan(), "Suspen Piutang Obat Ralan", 0, ttljual);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatralan.getObat_Ralan(), "Pendapatan Obat Rawat Jalan", ttljual, 0);
                             }
                             if (ttlhpp > 0) {
-                                if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Jalan, "HPP Persediaan Obat Rawat Jalan", 0, ttlhpp);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Jalan, "Persediaan Obat Rawat Jalan", ttlhpp, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatralan.getHPP_Obat_Rawat_Jalan(), "HPP Persediaan Obat Rawat Jalan", 0, ttlhpp);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatralan.getPersediaan_Obat_Rawat_Jalan(), "Persediaan Obat Rawat Jalan", ttlhpp, 0);
                             }
                             if (sukses) sukses = jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
                         } else {

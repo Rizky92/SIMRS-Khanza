@@ -165,5 +165,4 @@ public class WarnaTablePEWSD extends DefaultTableCellRenderer {
         }
         return component;
     }
-
 }

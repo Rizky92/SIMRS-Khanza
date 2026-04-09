@@ -13,6 +13,7 @@
 package inventory;
 import fungsi.WarnaTable2;
 import fungsi.akses;
+import fungsi.akunobatranap;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
@@ -50,14 +51,13 @@ public class DlgInputStokPasien extends javax.swing.JDialog {
     private validasi Valid=new validasi();
     private Connection koneksi=koneksiDB.condb();
     private Jurnal jur=new Jurnal();
-    private PreparedStatement pstampil,psrekening;
-    private ResultSet rstampil,rsrekening;
+    private PreparedStatement pstampil;
+    private ResultSet rstampil;
     private WarnaTable2 warna=new WarnaTable2();
     private riwayatobat Trackobat=new riwayatobat();
     private double ttl=0,y=0,ttlhpp=0,ttljual=0,ppnobat=0,stokobat,kenaikan=0;
     private int jml=0,i=0,index=0;
-    private String Suspen_Piutang_Obat_Ranap="",Obat_Ranap="",HPP_Obat_Rawat_Inap="",Persediaan_Obat_Rawat_Inap="",
-                   tampilkan_ppnobat_ranap=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ranap from set_nota"),
+    private String tampilkan_ppnobat_ranap=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ranap from set_nota"),
                    aktifkanbatch="no",nopermintaan="",pilihanetiket="",hppfarmasi="";
     private String[] keranap,kodebarang,namabarang,kategori,satuan,nobatch,nofaktur,aturanpakai;
     private Double[] kapasitas,stok,harga,hargabeli,subtotal;
@@ -739,12 +739,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(sukses==true){
                             Sequel.deleteTampJurnal();
                             if(ttljual>0){
-                                if (sukses) sukses = Sequel.insertTampJurnal(Suspen_Piutang_Obat_Ranap, "Suspen Piutang Obat Ranap", ttljual, 0);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Obat_Ranap, "Pendapatan Obat Rawat Inap", 0, ttljual);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getSuspen_Piutang_Obat_Ranap(), "Suspen Piutang Obat Ranap", ttljual, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getObat_Ranap(), "Pendapatan Obat Rawat Inap", 0, ttljual);
                             }
                             if(ttlhpp>0){
-                                if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Rawat_Inap, "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Rawat_Inap, "Persediaan Obat Rawat Inap", 0, ttlhpp);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getHPP_Obat_Rawat_Inap(), "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
+                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getPersediaan_Obat_Rawat_Inap(), "Persediaan Obat Rawat Inap", 0, ttlhpp);
                             }
                             if (sukses) sukses = jur.simpanJurnal(norawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());
                         }
@@ -1029,28 +1029,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_ChkJlnActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        try {
-            psrekening=koneksi.prepareStatement("select set_akun_ranap.Suspen_Piutang_Obat_Ranap,set_akun_ranap.Obat_Ranap,set_akun_ranap.HPP_Obat_Rawat_Inap,set_akun_ranap.Persediaan_Obat_Rawat_Inap from set_akun_ranap");
-            try {
-                rsrekening=psrekening.executeQuery();
-                while(rsrekening.next()){
-                    Suspen_Piutang_Obat_Ranap=rsrekening.getString("Suspen_Piutang_Obat_Ranap");
-                    Obat_Ranap=rsrekening.getString("Obat_Ranap");
-                    HPP_Obat_Rawat_Inap=rsrekening.getString("HPP_Obat_Rawat_Inap");
-                    Persediaan_Obat_Rawat_Inap=rsrekening.getString("Persediaan_Obat_Rawat_Inap");
-                }
-            } catch (Exception e) {
-                System.out.println("Notif Rekening : "+e);
-            } finally{
-                if(rsrekening!=null){
-                    rsrekening.close();
-                }
-                if(psrekening!=null){
-                    psrekening.close();
-                }
-            }
-        } catch (Exception e) {
-            System.out.println(e);
+        if(akunobatranap.getSuspen_Piutang_Obat_Ranap().equals("")){
+            akunobatranap.SetAkunObatRanap();
         }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){

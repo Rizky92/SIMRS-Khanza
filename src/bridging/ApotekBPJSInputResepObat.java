@@ -17,6 +17,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable2;
 import fungsi.akses;
 import fungsi.koneksiDB;
+import fungsi.lokasidepoutama;
+import fungsi.ppnralan;
 import fungsi.sekuel;
 import fungsi.validasi;
 import inventory.riwayatobat;
@@ -63,7 +65,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
     private double sisacari=0,y=0,kenaikan=0,ttl=0,ppnobat=0;
     private int i=0,row2,r;
     private Jurnal jur=new Jurnal();
-    private String JADIKANPIUTANGAPOTEKBPJS,signa1="1",utc="",link=koneksiDB.URLAPIAPOTEKBPJS(),signa2="1",requestJson="",URL="",bangsal="",bangsaldefault=Sequel.cariIsi("select set_lokasi.kd_bangsal from set_lokasi limit 1"),tampilkan_ppnobat_ralan="",
+    private String JADIKANPIUTANGAPOTEKBPJS,signa1="1",utc="",link=koneksiDB.URLAPIAPOTEKBPJS(),signa2="1",requestJson="",URL="",bangsal="",
                    hppfarmasi="",DEPOAKTIFOBAT="",nopiutang="";
     private DlgCariBangsal lokasidepo;
     private WarnaTable2 warna=new WarnaTable2();
@@ -382,8 +384,6 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
             }
         }
 
-        tampilkan_ppnobat_ralan=Sequel.cariIsi("select set_nota.tampilkan_ppnobat_ralan from set_nota");
-
         jam();
     }
 
@@ -476,6 +476,11 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Data Obat Apotek BPJS ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Dialog", 0, 11)); // NOI18N
@@ -594,7 +599,7 @@ public final class ApotekBPJSInputResepObat extends javax.swing.JDialog {
         TglResep.setBounds(84, 70, 135, 23);
 
         DTPTgl.setForeground(new java.awt.Color(50, 70, 50));
-        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "03-03-2026" }));
+        DTPTgl.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14-03-2026" }));
         DTPTgl.setDisplayFormat("dd-MM-yyyy");
         DTPTgl.setName("DTPTgl"); // NOI18N
         DTPTgl.setOpaque(false);
@@ -1128,6 +1133,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                         }
                                     }
                                 }
+                                Sequel.meghapus2("antrianiterasi","no_resep",NoResep.getText());
                             }else{
                                 sukses=false;
                                 JOptionPane.showMessageDialog(rootPane,"Gagal menyimpan data resep apotek BPJS ke server lokal..!!!!!");
@@ -1358,6 +1364,8 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                             iyembuilder=null;
                         } catch (Exception e) {
                             System.out.println("Notifikasi : "+e);
+                        } finally {
+                            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
                         }
 
                         if (resepiter == null || !resepiter.isDisplayable()) {
@@ -1600,6 +1608,12 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         lokasidepo.setVisible(true);
     }//GEN-LAST:event_BtnGudangActionPerformed
 
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if(ppnralan.getTampilPPNRalan().equals("")){
+            ppnralan.SetPPNRalan();
+        }
+    }//GEN-LAST:event_formWindowOpened
+
     /**
     * @param args the command line arguments
     */
@@ -1700,13 +1714,39 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             }else{
                 bangsal=Sequel.cariIsi("select set_depo_ralan.kd_bangsal from set_depo_ralan where set_depo_ralan.kd_poli=?",Sequel.cariIsi("select reg_periksa.kd_poli from reg_periksa where reg_periksa.no_rawat=?",norwt));
                 if(bangsal.equals("")){
-                    bangsal=bangsaldefault;
+                    if(lokasidepoutama.getDepoDefault().equals("")){
+                        lokasidepoutama.SetLokasiDepoUtama();
+                    }
+                    bangsal=lokasidepoutama.getDepoDefault();
                 }
                 kdgudang.setText(bangsal);
                 nmgudang.setText(Sequel.CariBangsal(kdgudang.getText()));
             }
         }
 
+        try {
+            psstok=koneksi.prepareStatement(
+                "select antrianiterasi.status from antrianiterasi where antrianiterasi.no_resep=?"
+            );
+            try{
+                psstok.setString(1,resep);
+                rsstok=psstok.executeQuery();
+                if(rsstok.next()){
+                    Iterasi.setSelectedItem(rsstok.getString("status"));
+                }
+            }catch(Exception e){
+                System.out.println("Notifikasi : "+e);
+            }finally{
+                if(rsstok != null){
+                    rsstok.close();
+                }
+                if(psstok != null){
+                    psstok.close();
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Notifikasi : "+e);
+        }
 
         try {
             Valid.tabelKosong(tabModeobat);
@@ -2088,7 +2128,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         }
         LTotal.setText(Valid.SetAngka(ttl));
         ppnobat=0;
-        if(tampilkan_ppnobat_ralan.equals("Yes")){
+        if(ppnralan.getTampilPPNRalan().equals("Yes")){
             ppnobat=Math.round(ttl*0.11);
             ttl=ttl+ppnobat;
             LPpn.setText(Valid.SetAngka(ppnobat));

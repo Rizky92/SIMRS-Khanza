@@ -58,6 +58,8 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
     private ResultSet rs,rs2;
     private int i=0,jml=0,index=0;
     private DlgCariPetugas petugas;
+    private MasterMasalahKeperawatanIGD masalahkeperawatan;
+    private MasterRencanaKeperawatanIGD rencanakeperawatan;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
     private boolean[] pilih;
@@ -3624,13 +3626,29 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_tbMasalahKeperawatanKeyReleased
 
     private void BtnTambahMasalahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahMasalahActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        MasterMasalahKeperawatanIGD form=new MasterMasalahKeperawatanIGD(null,false);
-        form.isCek();
-        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        form.setLocationRelativeTo(internalFrame1);
-        form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());
+        if (masalahkeperawatan == null || !masalahkeperawatan.isDisplayable()) {
+            masalahkeperawatan=new MasterMasalahKeperawatanIGD(null,false);
+            masalahkeperawatan.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            masalahkeperawatan.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    masalahkeperawatan=null;
+                }
+            });
+
+            masalahkeperawatan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            masalahkeperawatan.setLocationRelativeTo(internalFrame1);
+        }
+        if (masalahkeperawatan == null) return;
+        if (!masalahkeperawatan.isVisible()) {
+            masalahkeperawatan.isCek();
+        }
+
+        if (masalahkeperawatan.isVisible()) {
+            masalahkeperawatan.toFront();
+            return;
+        }
+        masalahkeperawatan.setVisible(true);
     }//GEN-LAST:event_BtnTambahMasalahActionPerformed
 
     private void BtnAllMasalahActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllMasalahActionPerformed
@@ -3712,13 +3730,29 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllRencanaKeyPressed
 
     private void BtnTambahRencanaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTambahRencanaActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        MasterRencanaKeperawatanIGD form=new MasterRencanaKeperawatanIGD(null,false);
-        form.isCek();
-        form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-        form.setLocationRelativeTo(internalFrame1);
-        form.setVisible(true);
-        this.setCursor(Cursor.getDefaultCursor());
+        if (rencanakeperawatan == null || !rencanakeperawatan.isDisplayable()) {
+            rencanakeperawatan=new MasterRencanaKeperawatanIGD(null,false);
+            rencanakeperawatan.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+            rencanakeperawatan.addWindowListener(new WindowAdapter() {
+                @Override
+                public void windowClosed(WindowEvent e) {
+                    rencanakeperawatan=null;
+                }
+            });
+
+            rencanakeperawatan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+            rencanakeperawatan.setLocationRelativeTo(internalFrame1);
+        }
+        if (rencanakeperawatan == null) return;
+        if (!rencanakeperawatan.isVisible()) {
+            rencanakeperawatan.isCek();
+        }
+
+        if (rencanakeperawatan.isVisible()) {
+            rencanakeperawatan.toFront();
+            return;
+        }
+        rencanakeperawatan.setVisible(true);
     }//GEN-LAST:event_BtnTambahRencanaActionPerformed
 
     /**
@@ -4355,6 +4389,8 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -4408,6 +4444,10 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 
@@ -4444,6 +4484,8 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
             iyembuilder=null;
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (fileWriter != null) try { fileWriter.close(); } catch (Exception e) {}
         }
     }
 
@@ -4502,6 +4544,10 @@ public final class RMPenilaianAwalKeperawatanIGD extends javax.swing.JDialog {
             myObj.close();
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
+        }finally {
+            if (myObj != null) try { myObj.close(); } catch (Exception e) {}
+            response = null;
+            root = null;
         }
     }
 

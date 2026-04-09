@@ -106,7 +106,7 @@ CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs`  (
 CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs_obat`  (
   `no_sjp` varchar(40) NOT NULL,
   `kode_brng_apotek_bpjs` varchar(15) NOT NULL,
-  `nama_brng_apotek_bpjs` varchar(80) NULL DEFAULT NULL,
+  `nama_brng_apotek_bpjs` varchar(200) NULL DEFAULT NULL,
   `jumlah` double NOT NULL,
   `signa1` double NOT NULL,
   `signa2` double NOT NULL,
@@ -133,6 +133,14 @@ CREATE TABLE IF NOT EXISTS `bridging_apotek_bpjs_racikan`  (
   CONSTRAINT `bridging_apotek_bpjs_racikan_ibfk_1` FOREIGN KEY (`no_sjp`) REFERENCES `bridging_apotek_bpjs` (`no_sjp`) ON DELETE CASCADE ON UPDATE CASCADE,
   CONSTRAINT `bridging_apotek_bpjs_racikan_ibfk_2` FOREIGN KEY (`kd_racik`) REFERENCES `metode_racik` (`kd_racik`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+ALTER TABLE `bridging_resep_apotek_bpjs_nonracikan` DROP FOREIGN KEY IF EXISTS `bridging_resep_apotek_bpjs_nonracikan_ibfk_2`;
+
+ALTER TABLE `bridging_resep_apotek_bpjs_nonracikan` DROP FOREIGN KEY IF EXISTS `bridging_resep_apotek_bpjs_nonracikan_ibfk_3`;
+
+ALTER TABLE `bridging_resep_apotek_bpjs_racikan` DROP FOREIGN KEY IF EXISTS `bridging_resep_apotek_bpjs_racikan_ibfk_2`;
+
+ALTER TABLE `bridging_resep_apotek_bpjs_racikan` DROP FOREIGN KEY IF EXISTS `bridging_resep_apotek_bpjs_racikan_ibfk_3`;
 
 ALTER TABLE `bridging_sep` ADD INDEX IF NOT EXISTS `bridging_sep_ibfk_2`(`tglsep`) USING BTREE;
 
@@ -394,11 +402,15 @@ ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(
 
 ALTER TABLE `jurnal` DROP INDEX IF EXISTS `no_jurnal`;
 
+ALTER TABLE `maping_dokter_dpjpvclaim` MODIFY COLUMN IF EXISTS `nm_dokter_bpjs` varchar(100) NULL DEFAULT NULL AFTER `kd_dokter_bpjs`;
+
 ALTER TABLE `maping_dokter_dpjpvclaim` ADD UNIQUE INDEX IF NOT EXISTS `maping_dokter_dpjpvclaim_unique`(`kd_dokter_bpjs`) USING BTREE;
 
 ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `harga` double NOT NULL DEFAULT 0 AFTER `nama_brng_apotek_bpjs`;
 
 ALTER TABLE `maping_obat_apotek_bpjs` ADD COLUMN IF NOT EXISTS `restriksi` varchar(255) NULL DEFAULT NULL AFTER `harga`;
+
+ALTER TABLE `maping_obat_apotek_bpjs` MODIFY COLUMN IF EXISTS `nama_brng_apotek_bpjs` varchar(200) NULL DEFAULT NULL AFTER `kode_brng_apotek_bpjs`;
 
 CREATE TABLE IF NOT EXISTS `mapping_pemeriksaan_labpk`  (
   `id_pemeriksaan` int(10) UNSIGNED NOT NULL,
@@ -1427,7 +1439,7 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_numerator`  (
   `code` varchar(30) NOT NULL,
   `display` varchar(200) NULL DEFAULT NULL,
   `system` varchar(100) NOT NULL,
-  PRIMARY KEY (`code`, `system`) USING BTREE,
+  PRIMARY KEY (`code`, `display`) USING BTREE,
   INDEX `satu_sehat_referensi_numerator_obat_display_ibfk_1`(`display`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 

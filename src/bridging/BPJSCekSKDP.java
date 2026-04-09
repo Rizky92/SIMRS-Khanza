@@ -17,6 +17,7 @@ import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
+import fungsi.pengaturankamarinap;
 import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
@@ -103,7 +104,7 @@ public final class BPJSCekSKDP extends javax.swing.JDialog {
             no_ktp="",tmp_lahir="",nm_ibu="",alamat="",pekerjaan="",no_tlp="",tglkkl="0000-00-00",jammulai="",
             umur="",umurdaftar="0",namakeluarga="",no_peserta="",kelurahan="",kecamatan="",sttsumur="",norawat="",
             kabupaten="",pekerjaanpj="",alamatpj="",kelurahanpj="",kecamatanpj="",prb="",peserta="",jamselesai="",
-            kabupatenpj="",hariawal="",requestJson,URL="",nosep="",user="",link="",datajam="",jeniskunjungan="",
+            kabupatenpj="",requestJson,URL="",nosep="",user="",link="",datajam="",jeniskunjungan="",
             status="Baru",propinsi="",propinsipj="",hari="",utc="",DIAGNOSARUJUKANMASUKAPIBPJS="no",respon="200",
             tampilkantni=Sequel.cariIsi("select set_tni_polri.tampilkan_tni_polri from set_tni_polri");
     private final boolean BOOKINGLANGSUNGREGISTRASI = koneksiDB.BOOKINGLANGSUNGREGISTRASI();
@@ -274,7 +275,10 @@ public final class BPJSCekSKDP extends javax.swing.JDialog {
             System.out.println(e);
         }
 
-        hariawal=Sequel.cariIsi("select set_jam_minimal.hariawal from set_jam_minimal");
+        if(pengaturankamarinap.getAktifkanDiagnosaAkhir().equals("")){
+            pengaturankamarinap.SetKamarInap();
+        }
+
         pengurutan=Sequel.cariIsi("select set_urut_no_rkm_medis.urutan from set_urut_no_rkm_medis");
         tahun=Sequel.cariIsi("select set_urut_no_rkm_medis.tahun from set_urut_no_rkm_medis");
         bulan=Sequel.cariIsi("select set_urut_no_rkm_medis.bulan from set_urut_no_rkm_medis");
@@ -6720,7 +6724,7 @@ public final class BPJSCekSKDP extends javax.swing.JDialog {
 
                     jmlhari=0;
                     biaya=0;
-                    if(hariawal.equals("Yes")){
+                    if(pengaturankamarinap.getHitungHariAwal().equals("Yes")){
                         jmlhari=1;
                         biaya=Double.parseDouble(TBiaya.getText());
                     }
