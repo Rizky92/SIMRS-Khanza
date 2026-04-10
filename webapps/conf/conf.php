@@ -1127,4 +1127,38 @@
             return $needle === '' || strpos($haystack, $needle) !== false;
         }
     }
+
+    if (!function_exists('querySmc')) {
+        function querySmc(string $sql, ...$bindings) {
+            foreach ($bindings as $value) {
+                if (!is_null($value) && !is_scalar($value)) {
+                    throw new InvalidArgumentException(
+                        "Binding must be a primitive, got: " . gettype($value)
+                    );
+                }
+            }
+
+            $stmt = $db->prepare($sql);
+
+            if (!empty($bindings)) {
+                $types = implode('', array_map(function($v) {
+                    switch (true) {
+                        case is_int($v):
+                            return 'i';
+                        case is_float($v):
+                            return 'd';
+                        case is_null($v):
+                            return 's';
+                        default:
+                            return 's';
+                    }
+                }, $bindings));
+
+                $stmt->bind_param($types, ...$bindings);
+            }
+
+            $stmt->execute();
+            return $stmt->get_result();
+        }
+    }
 ?>

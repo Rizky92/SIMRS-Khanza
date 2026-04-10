@@ -643,7 +643,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         } else if (urutanLahir.getText().isBlank()) {
             Valid.textKosong(urutanLahir, "Urutan Kelahiran");
         } else {
-            if (Sequel.menyimpantfSmc("inacbg_data_kelahiran_smc", "no_sep, delivery_sequence, delivery_method, delivery_date, delivery_time, letak_janin, kondisi, " +
+            if (Sequel.menyimpantfSmc("inacbg_data_klaim_persalinan_smc", "no_sep, delivery_sequence, delivery_method, delivery_date, delivery_time, letak_janin, kondisi, " +
                 "use_manual, use_forcep, use_vacuum, shk_spesimen_ambil, shk_lokasi, shk_spesimen_date, shk_spesimen_time, shk_alasan", noSEP.getText(), urutanLahir.getText(),
                 caraLahir.getSelectedItem().toString(), Valid.getTglSmc(tglKelahiran), Valid.getJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran), letakJanin.getSelectedItem().toString(),
                 kondisiLahir.getSelectedItem().toString(), useManual.getSelectedItem().toString(), useForcep.getSelectedItem().toString(), useVacuum.getSelectedItem().toString(),
@@ -674,7 +674,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
             if (tbKelahiran.getSelectedRow() < 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau dihapus..!!");
             } else {
-                if (Sequel.menghapustfSmc("inacbg_data_kelahiran_smc", "no_sep = ? and delivery_sequence = ?", noSEP.getText(), (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4))) {
+                if (Sequel.menghapustfSmc("inacbg_data_klaim_persalinan_smc", "no_sep = ? and delivery_sequence = ?", noSEP.getText(), (String) tbKelahiran.getValueAt(tbKelahiran.getSelectedRow(), 4))) {
                     tabMode.removeRow(tbKelahiran.getSelectedRow());
                     emptTeks();
                 } else {
@@ -691,7 +691,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
             if (tbKelahiran.getSelectedRow() < 0) {
                 JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau diubah..!!");
             } else {
-                if (Sequel.mengupdatetfSmc("inacbg_data_kelahiran_smc", "delivery_sequence = ?, delivery_method = ?, delivery_date = ?, delivery_time = ?, letak_janin = ?, kondisi = ?, " +
+                if (Sequel.mengupdatetfSmc("inacbg_data_klaim_persalinan_smc", "delivery_sequence = ?, delivery_method = ?, delivery_date = ?, delivery_time = ?, letak_janin = ?, kondisi = ?, " +
                     "use_manual = ?, use_forcep = ?, use_vacuum = ?, shk_spesimen_ambil = ?, shk_lokasi = ?, shk_spesimen_date = ?, shk_spesimen_time = ?, shk_alasan = ?",
                     "no_sep = ? and delivery_sequence = ?", urutanLahir.getText(), caraLahir.getSelectedItem().toString(), Valid.getTglSmc(tglKelahiran),
                     Valid.getJamSmc(cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran), letakJanin.getSelectedItem().toString(), kondisiLahir.getSelectedItem().toString(),
@@ -876,7 +876,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
                     try (PreparedStatement ps = koneksi.prepareStatement(
                         "select s.no_rawat, k.no_sep, p.no_rkm_medis, p.nm_pasien, k.delivery_sequence, k.delivery_method, k.delivery_date, k.delivery_time, k.letak_janin, " +
                         "k.use_manual, k.use_forcep, k.use_vacuum, k.kondisi, k.shk_spesimen_ambil, k.shk_lokasi, k.shk_spesimen_date, k.shk_spesimen_time, k.shk_alasan " +
-                        "from inacbg_data_kelahiran_smc k join bridging_sep s on k.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat join pasien p on " +
+                        "from inacbg_data_klaim_persalinan_smc k join bridging_sep s on k.no_sep = s.no_sep join reg_periksa r on s.no_rawat = r.no_rawat join pasien p on " +
                         "r.no_rkm_medis = p.no_rkm_medis " + (cari.isBlank() ? "" : "where (s.no_rawat like ? or k.no_sep like ? or p.no_rkm_medis like ? or p.nm_pasien like ?) ") +
                         "order by s.no_rawat, k.delivery_sequence"
                     )) {
@@ -952,7 +952,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
 
     private void emptTeks() {
         tbKelahiran.clearSelection();
-        urutanLahir.setText(String.valueOf((Integer) tbKelahiran.getValueAt(tbKelahiran.getRowCount() - 1, 4) + 1));
+        urutanLahir.setText(String.valueOf(tbKelahiran.getRowCount() + 1));
         caraLahir.setSelectedIndex(0);
         Valid.setTglJamSmc(new Date(), tglKelahiran, cmbJamKelahiran, cmbMenitKelahiran, cmbDetikKelahiran);
         letakJanin.setSelectedIndex(0);

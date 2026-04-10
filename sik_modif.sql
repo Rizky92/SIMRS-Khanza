@@ -259,15 +259,21 @@ CREATE TABLE IF NOT EXISTS `idrg_grouping_smc`  (
   `mdc_description` varchar(150) NULL DEFAULT NULL,
   `drg_code` varchar(10) NOT NULL,
   `drg_description` varchar(250) NULL DEFAULT NULL,
+  `kelas_rs` varchar(3) DEFAULT NULL,
+  `cost_weight` double DEFAULT NULL,
+  `sub_acute_weight` double DEFAULT NULL,
+  `chronic_weight` double DEFAULT NULL,
+  `total_cost_weight` double DEFAULT NULL,
+  `nbr` double DEFAULT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `idrg_grouping_smc_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `idrg_grouping_smc_bridging_sep_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_klaim_baru2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `idrg_klaim_final_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `nik` varchar(30) NOT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `idrg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `idrg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `idrg_grouping_smc` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `idrg_prosedur_pasien_smc`  (
@@ -309,7 +315,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (
   `path` varchar(100) NULL DEFAULT NULL,
   `kirim_ke_dc` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `inacbg_cetak_klaim_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `inacbg_cetak_klaim_bridging_sep_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_data_terkirim2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_smc`  (
@@ -360,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_smc`  (
   `cob_cd` varchar(10) NOT NULL DEFAULT '',
   `coder_nik` varchar(17) NOT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `inacbg_data_klaim_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE,
+  CONSTRAINT `inacbg_data_klaim_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_klaim_baru2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE,
   INDEX `tgl_masuk`(`tgl_masuk`) USING BTREE,
   INDEX `tgl_pulang`(`tgl_pulang`) USING BTREE,
   INDEX `nama_dokter`(`nama_dokter`) USING BTREE
@@ -383,7 +389,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_persalinan_smc`  (
   `shk_spesimen_time` time NULL DEFAULT NULL,
   `shk_alasan` enum('','Tidak dapat dilakukan','Akses sulit') NULL DEFAULT NULL,
   PRIMARY KEY (`no_sep`, `delivery_sequence`) USING BTREE,
-  CONSTRAINT `inacbg_data_klaim_persalinan_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_data_klaim_smc` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `inacbg_data_klaim_persalinan_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_tarif_smc` (
@@ -414,7 +420,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_grouping_stage2_smc`  (
   `cmg_type` varchar(50) NULL DEFAULT NULL,
   `tariff` double NOT NULL DEFAULT 0,
   PRIMARY KEY (`no_sep`, `cmg_code`) USING BTREE,
-  CONSTRAINT `inacbg_grouping_stage2_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `inacbg_grouping_stage2_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_grouping_stage12` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `inacbg_grouping_stage12` ADD COLUMN IF NOT EXISTS `top_up` enum('Tidak Ada','Belum','Sudah') NOT NULL DEFAULT 'Tidak Ada' AFTER `tarif`;
@@ -423,7 +429,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_klaim_final_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `nik` varchar(30) NOT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `inacbg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `inacbg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_grouping_stage12` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `inacbg_pasien_tb_smc`  (

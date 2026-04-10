@@ -111,7 +111,7 @@ public class BPJSKompilasiBerkasKlaim extends javax.swing.JDialog {
         gunakanTanggalExport = koneksiDB.KOMPILASIBERKASGUNAKANTANGGALEXPORT(),
         aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF(),
         kategoriUploadBerkas = "", kamar = "", unit = "";
-    private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false, refreshWebpage = false;
+    private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false;
     private int flagklaim = -1, flagInacbgTopup = -1, selectedRow = -1;
     private long maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
 
