@@ -94,7 +94,7 @@
                                     <tr class="head">
                                         <td width="28%">NBR**</td>
                                         <td width="1%">:</td>
-                                        <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['nbr'] ?></span></td>
+                                        <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc($hasilgroupingidrg['nbr']) ?></span></td>
                                     </tr>
                                     <tr class="head">
                                         <td width="28%">DRG Cost Weight</td>
@@ -119,10 +119,13 @@
                                     <tr class="head">
                                         <td width="28%">Adjusted NBR**</td>
                                         <td width="1%">:</td>
-                                        <td width="70%"><span style="<?= $style ?>"><?= round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr'])) ?></span></td>
+                                        <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                     </tr>
                                     <tr class="head">
                                         <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
+                                    </tr>
+                                    <tr class="head">
+                                        <td colspan="3" style="color: blue">**) Nilai klaim masih menggunakan total tarif INACBG</td>
                                     </tr>
                                 <?php endif; ?>
                                 <?php
@@ -177,13 +180,13 @@
                                     }
 
                                     $baris = mysqli_fetch_array(bukaquery(<<<SQL
-                                        select bridging_sep.no_sep, bridging_sep.tglsep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang) as tglpulang, reg_periksa.*,
+                                        select bridging_sep.no_sep, bridging_sep.tglsep, bridging_sep.asal_rujukan, bridging_sep.no_kartu, date(bridging_sep.tglpulang) as tglpulang,
                                         pasien.nm_pasien, pasien.jk, pasien.umur, pasien.tgl_lahir, pasien.no_ktp, (select inacbg_pasien_tb_smc.no_sitb from inacbg_pasien_tb_smc where
-                                        inacbg_pasien_tb_smc.no_rkm_medis = reg_periksa.no_rkm_medis limit 1) as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab
-                                        from bridging_sep join maping_dokter_dpjpvclaim on bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs join dokter on
-                                        maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join pasien
-                                        on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli join penjab on
-                                        reg_periksa.kd_pj = penjab.kd_pj where bridging_sep.no_sep = '$nosep'
+                                        inacbg_pasien_tb_smc.no_rkm_medis = reg_periksa.no_rkm_medis limit 1) as no_sitb, dokter.nm_dokter, poliklinik.nm_poli, penjab.png_jawab,
+                                        reg_periksa.*, if(reg_periksa.status_lanjut = 'Ranap', '1', '2') as jnsrawat from bridging_sep join maping_dokter_dpjpvclaim on
+                                        bridging_sep.kddpjp = maping_dokter_dpjpvclaim.kd_dokter_bpjs join dokter on maping_dokter_dpjpvclaim.kd_dokter = dokter.kd_dokter
+                                        join reg_periksa on bridging_sep.no_rawat = reg_periksa.no_rawat join pasien on reg_periksa.no_rkm_medis = pasien.no_rkm_medis join
+                                        poliklinik on reg_periksa.kd_poli = poliklinik.kd_poli join penjab on reg_periksa.kd_pj = penjab.kd_pj where bridging_sep.no_sep = '$nosep'
                                         SQL
                                     ));
                                     $norawat        = $baris['no_rawat'];
@@ -199,20 +202,20 @@
                                     $almt_pj        = $baris['almt_pj'];
                                     $norawat        = $baris['no_rawat'];
                                     $tgl_registrasi = $baris['tglsep'];
-                                    $tgl_keluar     = $baris['tgl_registrasi'];
+                                    $tgl_keluar     = $baris['tglsep'];
                                     $jam_reg        = $baris['jam_reg'];
                                     $nm_poli        = $baris['nm_poli'];
                                     $asalrujukan    = mb_substr($baris['asal_rujukan'], 0, 1);
                                     $nm_dokter      = $baris['nm_dokter'];
                                     $status_lanjut  = $baris['status_lanjut'];
                                     $png_jawab      = $baris['png_jawab'];
+                                    $jnsrawat       = $baris['jnsrawat'];
+                                    $saved_klaim    = mysqli_fetch_assoc(bukaquery("select * from inacbg_data_klaim_smc where no_sep = '$nosep' limit 1"));
                                     $sistole        = '120';
                                     $diastole       = '90';
-                                    $jnsrawat       = '1';
 
                                     if ($status_lanjut == 'Ranap') {
-                                        $jnsrawat = '1';
-                                        $tensi = explode('/', getOne("(select tensi from pemeriksaan_ranap where no_rawat = '$norawat' order by tgl_perawatan desc, jam_rawat desc) union all (select '120/90' as tensi)"));
+                                        $tensi = explode('/', getOne("(select pemeriksaan_ranap.tensi from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat = '$norawat' order by pemeriksaan_ranap.tgl_perawatan desc, pemeriksaan_ranap.jam_rawat desc) union all (select '120/90' as tensi)"));
                                         if (! empty($tensi[0])) {
                                             $sistole = trim($tensi[0]);
                                         }
@@ -221,8 +224,7 @@
                                         }
                                         $tgl_keluar = getOne("select tgl_keluar from kamar_inap where no_rawat = '$norawat' order by tgl_keluar desc limit 1");
                                     } else {
-                                        $jnsrawat = '2';
-                                        $tensi = explode('/', getOne("(select tensi from pemeriksaan_ralan where no_rawat = '$norawat' order by tgl_perawatan desc, jam_rawat desc) union all (select '120/90' as tensi)"));
+                                        $tensi = explode('/', getOne("(select pemeriksaan_ralan.tensi from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat = '$norawat' order by pemeriksaan_ralan.tgl_perawatan desc, pemeriksaan_ralan.jam_rawat desc) union all (select '120/90' as tensi)"));
                                         if (! empty($tensi[0])) {
                                             $sistole = trim($tensi[0]);
                                         }
@@ -261,6 +263,209 @@
                                     } else {
                                         $naikkelas = '';
                                     }
+
+                                    $discharge_status = '1';
+                                    if ($jnsrawat === '1') {
+                                        if ((getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'Sembuh')") == '1') ||
+                                            (getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'Sehat')") == '1') ||
+                                            (getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'Atas Persetujuan Dokter')") == '1')
+                                        ) {
+                                            $discharge_status = '1';
+                                        } else if (getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'Rujuk')") == '1') {
+                                            $discharge_status = '2';
+                                        } else if ((getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'APS')") == '1') ||
+                                            (getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'Pulang Paksa')") == '1') ||
+                                            (getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'Atas Permintaan Sendiri')") == '1')
+                                        ) {
+                                            $discharge_status = '3';
+                                        } else if ((getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'Meninggal')") == '1') ||
+                                            (getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = '+')") == '1')
+                                        ) {
+                                            $discharge_status = '4';
+                                        } else if (getOne("select exists(select * from kamar_inap where kamar_inap.no_rawat = '$norawat' and kamar_inap.stts_pulang = 'Lain-lain')") == '1') {
+                                            $discharge_status = '5';
+                                        } else {
+                                            $discharge_status = '1';
+                                        }
+                                    }
+
+                                    $dializer_single_use = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')");
+
+                                    $bayi_berat = '';
+                                    $bayi_apgar = null;
+                                    $bayi_row = mysqli_fetch_array(bukaquery("select berat_badan, f1, u1, t1, r1, w1, f5, u5, t5, r5, w5 from pasien_bayi where no_rkm_medis = '$no_rkm_medis' limit 1"));
+                                    if ($bayi_row) {
+                                        $first_norawat = getOne("select no_rawat from reg_periksa where no_rkm_medis = '$no_rkm_medis' order by tgl_registrasi asc, jam_reg asc limit 1");
+                                        if ($first_norawat === $norawat) {
+                                            $bayi_berat = $bayi_row['berat_badan'];
+                                            $bayi_apgar = $bayi_row;
+                                        }
+                                    }
+
+                                    // Default values for fields not pre-computed above
+                                    $adl_sub_acute       = '0';
+                                    $adl_chronic         = '0';
+                                    $ventilator_use_ind  = '0';
+                                    $ventilator_hour     = '';
+                                    $upgrade_class_los   = '0';
+                                    $upgrade_class_payor = '';
+                                    $add_payment_pct     = '0';
+                                    $kantong_darah       = '';
+                                    $alteplase_ind       = '';
+                                    $usia_kehamilan      = '';
+                                    $gravida             = '';
+                                    $partus              = '';
+                                    $abortus             = '';
+                                    $onset_kontraksi     = '';
+
+                                    $cara_masuk_val = 'other';
+                                    switch ($asalrujukan) {
+                                        case '1':
+                                            $cara_masuk_val = 'gp';
+                                            break;
+                                        case '2':
+                                            $cara_masuk_val = 'hosp-trans';
+                                            break;
+                                        default:
+                                            $cara_masuk_val = 'other';
+                                            break;
+                                    }
+
+                                    if ($saved_klaim) {
+                                        $cara_masuk_val      = $saved_klaim['cara_masuk'];
+                                        $sistole             = $saved_klaim['sistole'];
+                                        $diastole            = $saved_klaim['diastole'];
+                                        $discharge_status    = $saved_klaim['discharge_status'];
+                                        $adl_sub_acute       = $saved_klaim['adl_sub_acute'];
+                                        $adl_chronic         = $saved_klaim['adl_chronic'];
+                                        $ventilator_hour     = $saved_klaim['ventilator_hour'];
+                                        $ventilator_use_ind  = $saved_klaim['ventilator_hour'] > 0 ? '1' : '0';
+                                        $upgrade_class_ind   = $saved_klaim['upgrade_class_ind'];
+                                        $naikkelas           = $saved_klaim['upgrade_class_class'];
+                                        $upgrade_class_los   = $saved_klaim['upgrade_class_los'];
+                                        $upgrade_class_payor = $saved_klaim['upgrade_class_payor'];
+                                        $add_payment_pct     = $saved_klaim['add_payment_pct'];
+                                        $dializer_single_use = $saved_klaim['dializer_single_use'];
+                                        $kantong_darah       = $saved_klaim['kantong_darah'];
+                                        $alteplase_ind       = $saved_klaim['alteplase_ind'];
+                                        $bayi_berat          = $saved_klaim['birth_weight'];
+                                        $bayi_apgar          = [
+                                            'w1' => $saved_klaim['menit_1_appearance'],
+                                            'f1' => $saved_klaim['menit_1_pulse'],
+                                            'r1' => $saved_klaim['menit_1_grimace'],
+                                            't1' => $saved_klaim['menit_1_activity'],
+                                            'u1' => $saved_klaim['menit_1_respiration'],
+                                            'w5' => $saved_klaim['menit_5_appearance'],
+                                            'f5' => $saved_klaim['menit_5_pulse'],
+                                            'r5' => $saved_klaim['menit_5_grimace'],
+                                            't5' => $saved_klaim['menit_5_activity'],
+                                            'u5' => $saved_klaim['menit_5_respiration'],
+                                        ];
+                                        $usia_kehamilan     = $saved_klaim['usia_kehamilan'];
+                                        $gravida            = $saved_klaim['gravida'];
+                                        $partus             = $saved_klaim['partus'];
+                                        $abortus            = $saved_klaim['abortus'];
+                                        $onset_kontraksi    = $saved_klaim['onset_kontraksi'];
+                                    }
+
+                                    // Kelas rawat
+                                    $kelas = ($status_lanjut !== 'Ralan') ? getOne("select klsrawat from bridging_sep where no_sep = '$nosep'") : '';
+
+                                    // ICU (only meaningful for Ranap)
+                                    $icu = 0;
+                                    if ($status_lanjut === 'Ranap') {
+                                        $adaIcu = mysqli_fetch_assoc(bukaquery2("select sum(lama) as total_icu from kamar_inap where kd_kamar like '%icu%' and no_rawat = '$norawat'"));
+                                        if ($adaIcu) {
+                                            $icu = (int) $adaIcu['total_icu'];
+                                        }
+                                        if ($saved_klaim) {
+                                            $icu = $saved_klaim['icu_los'];
+                                        }
+                                    }
+
+                                    // Delivery (persalinan) — build payload array and display rows together
+                                    $delivery       = [];
+                                    $kelahiran_rows = [];
+                                    $querykelahiran = bukaquery("select * from inacbg_data_klaim_persalinan_smc where no_sep = '$nosep' order by delivery_sequence asc");
+                                    while ($bariskelahiran = mysqli_fetch_assoc($querykelahiran)) {
+                                        $arrkelahiran                       = [];
+                                        $arrkelahiran['delivery_sequence']  = $bariskelahiran['delivery_sequence'];
+                                        $arrkelahiran['delivery_dttm']      = $bariskelahiran['delivery_date'].' '.$bariskelahiran['delivery_time'];
+                                        $arrkelahiran['delivery_method']    = mb_strtolower($bariskelahiran['delivery_method']);
+                                        $arrkelahiran['letak_janin']        = mb_strtolower($bariskelahiran['letak_janin']);
+                                        $arrkelahiran['kondisi']            = ['Hidup' => 'livebirth', 'Meninggal' => 'stillbirth'][$bariskelahiran['kondisi']];
+                                        $arrkelahiran['use_manual']         = mb_substr($bariskelahiran['use_manual'], 0, 1);
+                                        $arrkelahiran['use_forcep']         = mb_substr($bariskelahiran['use_forcep'], 0, 1);
+                                        $arrkelahiran['use_vacuum']         = mb_substr($bariskelahiran['use_vacuum'], 0, 1);
+                                        $arrkelahiran['shk_spesimen_ambil'] = mb_strtolower($bariskelahiran['shk_spesimen_ambil']);
+                                        if ($bariskelahiran['shk_spesimen_ambil'] === 'Ya') {
+                                            $arrkelahiran['shk_spesimen_dttm'] = $bariskelahiran['shk_spesimen_date'].' '.$bariskelahiran['shk_spesimen_time'];
+                                        } else {
+                                            $arrkelahiran['shk_alasan']        = ['Tidak dapat dilakukan' => 'tidak-dapat', 'Akses sulit' => 'akses-sulit'][$bariskelahiran['shk_alasan']];
+                                        }
+                                        $delivery[]       = $arrkelahiran;
+                                        $kelahiran_rows[] = $bariskelahiran;
+                                    }
+
+                                    // Corona data
+                                    $bariscorona = null;
+                                    if ($corona === 'PasienCorona') {
+                                        $bariscorona = mysqli_fetch_array(bukaquery(<<<SQL
+                                            select
+                                                pemulasaraan_jenazah, if (pemulasaraan_jenazah = 'Ya', 1, 0) as ytpemulasaraan_jenazah,
+                                                kantong_jenazah, if (kantong_jenazah = 'Ya', 1, 0) as ytkantong_jenazah,
+                                                peti_jenazah, if (peti_jenazah = 'Ya', 1, 0) as ytpeti_jenazah,
+                                                plastik_erat, if (plastik_erat = 'Ya', 1, 0) as ytplastik_erat,
+                                                desinfektan_jenazah, if (desinfektan_jenazah = 'Ya', 1, 0) as ytdesinfektan_jenazah,
+                                                mobil_jenazah, if (mobil_jenazah = 'Ya', 1, 0) as ytmobil_jenazah,
+                                                desinfektan_mobil_jenazah, if (desinfektan_mobil_jenazah = 'Ya', 1, 0) as ytdesinfektan_mobil_jenazah,
+                                                covid19_status_cd, if (covid19_status_cd = 'ODP', 1, if (covid19_status_cd = 'PDP',2 ,3)) as ytcovid19_status_cd,
+                                                covid19_cc_ind, if (covid19_cc_ind = 'Ya', 1, 0) as ytcovid19_cc_ind,
+                                                nomor_kartu_t, episodes1, episodes2, episodes3, episodes4, episodes5, episodes6
+                                            from perawatan_corona
+                                            where no_rawat = '$norawat'
+                                            SQL
+                                        ));
+                                    }
+
+                                    // Billing
+                                    $billing = mysqli_fetch_array(bukaquery(<<<SQL
+                                        select
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan not like '%terapi%') as prosedur_non_bedah,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Operasi') as prosedur_bedah,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter', 'Ranap Dokter')) as konsultasi,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Paramedis', 'Ranap Paramedis')) as keperawatan,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Radiologi') as radiologi,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Laborat') as laboratorium,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Registrasi', 'Kamar')) as kamar,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kronis%') as obat_kronis,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kemo%') as obat_kemoterapi,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Obat', 'Retur Obat', 'Resep Pulang')) as obat,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Tambahan') as bmhp,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Harian', 'Service')) as sewa_alat,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan like '%terapi%') as rehabilitasi,
+                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat) as totalbilling
+                                        from reg_periksa where reg_periksa.no_rawat = '$norawat'
+                                        SQL
+                                    ));
+                                    $prosedur_non_bedah    = $billing['prosedur_non_bedah'];
+                                    $prosedur_bedah        = $billing['prosedur_bedah'];
+                                    $konsultasi            = $billing['konsultasi'];
+                                    $tenaga_ahli           = 0;
+                                    $keperawatan           = $billing['keperawatan'];
+                                    $radiologi             = $billing['radiologi'];
+                                    $laboratorium          = $billing['laboratorium'];
+                                    $kamar                 = $billing['kamar'];
+                                    $obat_kronis           = $billing['obat_kronis'];
+                                    $obat_kemoterapi       = $billing['obat_kemoterapi'];
+                                    $obat                  = $billing['obat'] - $obat_kronis - $obat_kemoterapi;
+                                    $bmhp                  = $billing['bmhp'];
+                                    $sewa_alat             = $billing['sewa_alat'];
+                                    $rehabilitasi          = $billing['rehabilitasi'];
+                                    $totalbilling          = $billing['totalbilling'];
+                                    $totalbillingsementara = $prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli
+                                                           + $keperawatan + $radiologi + $laboratorium + $kamar + $obat_kronis
+                                                           + $obat_kemoterapi + $obat + $bmhp + $sewa_alat + $rehabilitasi;
                                 ?>
                                 <tr class="head">
                                     <td width="28%">No. Rawat</td>
@@ -338,7 +543,6 @@
                                                 <option value="3">Kelas Reguler</option>
                                                 <option value="1">Kelas Eksekutif</option>
                                             <?php else: ?>
-                                                <?php $kelas = getOne("select klsrawat from bridging_sep where no_sep = '$nosep'"); ?>
                                                 <option <?= $kelas == '1' ? 'selected' : '' ?> value="1">Kelas 1</option>
                                                 <option <?= $kelas == '2' ? 'selected' : '' ?> value="2">Kelas 2</option>
                                                 <option <?= $kelas == '3' ? 'selected' : '' ?> value="3">Kelas 3</option>
@@ -351,17 +555,17 @@
                                     <td width="1%">:</td>
                                     <td width="70%">
                                         <select name="cara_masuk" class="text" style="font-family: Tahoma; width: 95%">
-                                            <option <?= $asalrujukan == '1' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
-                                            <option <?= $asalrujukan == '2' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
-                                            <option value="mp">Rujukan Spesialis</option>
-                                            <option value="outp">Dari Rawat Jalan</option>
-                                            <option value="inp">Dari Rawat Inap</option>
-                                            <option value="emd">Dari Rawat Darurat</option>
-                                            <option value="born">Lahir di RS</option>
-                                            <option value="nursing">Rujukan Panti Jompo</option>
-                                            <option value="psych">Rujukan dari RS Jiwa</option>
-                                            <option value="rehab">Rujukan Fasilitas Rehab</option>
-                                            <option <?= $asalrujukan > '2' ? 'selected' : '' ?> value="other">Lain-lain</option>
+                                            <option <?= $cara_masuk_val === 'gp' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
+                                            <option <?= $cara_masuk_val === 'hosp-trans' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
+                                            <option <?= $cara_masuk_val === 'mp' ? 'selected' : '' ?> value="mp">Rujukan Spesialis</option>
+                                            <option <?= $cara_masuk_val === 'outp' ? 'selected' : '' ?> value="outp">Dari Rawat Jalan</option>
+                                            <option <?= $cara_masuk_val === 'inp' ? 'selected' : '' ?> value="inp">Dari Rawat Inap</option>
+                                            <option <?= $cara_masuk_val === 'emd' ? 'selected' : '' ?> value="emd">Dari Rawat Darurat</option>
+                                            <option <?= $cara_masuk_val === 'born' ? 'selected' : '' ?> value="born">Lahir di RS</option>
+                                            <option <?= $cara_masuk_val === 'nursing' ? 'selected' : '' ?> value="nursing">Rujukan Panti Jompo</option>
+                                            <option <?= $cara_masuk_val === 'psych' ? 'selected' : '' ?> value="psych">Rujukan dari RS Jiwa</option>
+                                            <option <?= $cara_masuk_val === 'rehab' ? 'selected' : '' ?> value="rehab">Rujukan Fasilitas Rehab</option>
+                                            <option <?= $cara_masuk_val === 'other' ? 'selected' : '' ?> value="other">Lain-lain</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -384,34 +588,11 @@
                                     <td width="1%">:</td>
                                     <td width="70%">
                                         <select name="discharge_status" class="text2" style="font-family: Tahoma; width: 95%">
-                                            <?php if (getOne("select count(*) from kamar_inap where stts_pulang = 'Sembuh' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="1">Atas persetujuan dokter</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Sehat' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="1">Atas persetujuan dokter</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Rujuk' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="2">Dirujuk</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'APS' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="3">Atas permintaan sendiri</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Pulang Paksa' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="3">Atas permintaan sendiri</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Meninggal' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="4">Meninggal</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = '+' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="4">Meninggal</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Atas Persetujuan Dokter' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="1">Atas persetujuan dokter</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Atas Permintaan Sendiri' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="3">Atas permintaan sendiri</option>
-                                            <?php elseif (getOne("select count(*) from kamar_inap where stts_pulang = 'Lain-lain' and no_rawat = '$norawat'") > 0): ?>
-                                                <option value="5">Lain-lain</option>
-                                            <?php else: ?>
-                                                <option value="1">Atas persetujuan dokter</option>
-                                            <?php endif; ?>
-                                            <option value="1">Atas persetujuan dokter</option>
-                                            <option value="2">Dirujuk</option>
-                                            <option value="3">Atas permintaan sendiri</option>
-                                            <option value="4">Meninggal</option>
-                                            <option value="5">Lain-lain</option>
+                                            <option <?= $discharge_status == '1' ? 'selected ' : '' ?>value="1">Atas persetujuan dokter</option>
+                                            <option <?= $discharge_status == '2' ? 'selected ' : '' ?>value="2">Dirujuk</option>
+                                            <option <?= $discharge_status == '3' ? 'selected ' : '' ?>value="3">Atas permintaan sendiri</option>
+                                            <option <?= $discharge_status == '4' ? 'selected ' : '' ?>value="4">Meninggal</option>
+                                            <option <?= $discharge_status == '5' ? 'selected ' : '' ?>value="5">Lain-lain</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -421,9 +602,9 @@
                                         <td width="1%">:</td>
                                         <td width="70%">
                                             <select name="adl_sub_acute" class="text3" style="font-family: Tahoma; width: 95%">
-                                                <option value="0"></option>
+                                                <option <?= $adl_sub_acute == '0' ? 'selected ' : '' ?>value="0"></option>
                                                 <?php for ($i = 12; $i <= 60; $i++): ?>
-                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <option <?= $adl_sub_acute == $i ? 'selected ' : '' ?>value="<?= $i ?>"><?= $i ?></option>
                                                 <?php endfor; ?>
                                             </select>
                                         </td>
@@ -433,27 +614,20 @@
                                         <td width="1%">:</td>
                                         <td width="70%">
                                             <select name="adl_chronic" class="text3" style="font-family: Tahoma; width: 95%">
-                                                <option value="0"></option>
+                                                <option <?= $adl_chronic == '0' ? 'selected ' : '' ?>value="0"></option>
                                                 <?php for ($i = 12; $i <= 60; $i++): ?>
-                                                    <option value="<?= $i ?>"><?= $i ?></option>
+                                                    <option <?= $adl_chronic == $i ? 'selected ' : '' ?>value="<?= $i ?>"><?= $i ?></option>
                                                 <?php endfor; ?>
                                             </select>
                                         </td>
                                     </tr>
-                                    <?php
-                                        $icu = 0;
-                                        $adaIcu = mysqli_fetch_assoc(bukaquery2("select sum(lama) as total_icu from kamar_inap where kd_kamar like '%icu%' and no_rawat = '$norawat'"));
-                                        if ($adaIcu) {
-                                            $icu = (int) $adaIcu['total_icu'];
-                                        }
-                                    ?>
                                     <tr class="head">
                                         <td width="28%">ICU Indikator</td>
                                         <td width="1%">:</td>
                                         <td width="70%">
                                             <select name="icu_indikator" class="text3" style="font-family: Tahoma; width: 95%">
-                                                <option value="0" <?= ($icu <= 0) ? 'selected' : '' ?>>0</option>
-                                                <option value="1" <?= ($icu > 0) ? 'selected' : '' ?>>1</option>
+                                                <option <?= ($icu < 1) ? 'selected ' : '' ?>value="0">0</option>
+                                                <option <?= ($icu > 0) ? 'selected ' : '' ?>value="1">1</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -469,8 +643,8 @@
                                         <td width="1%">:</td>
                                         <td width="70%">
                                             <select name="ventilator_use_ind" class="text3" style="font-family: Tahoma; width: 95%">
-                                                <option value="0">Tidak</option>
-                                                <option value="1">Ya</option>
+                                                <option <?= $ventilator_use_ind === '0' ? 'selected ' : '' ?>value="0">Tidak</option>
+                                                <option <?= $ventilator_use_ind === '1' ? 'selected ' : '' ?>value="1">Ya</option>
                                             </select>
                                         </td>
                                     </tr>
@@ -478,7 +652,7 @@
                                         <td width="28%">Total Jam Ventilator</td>
                                         <td width="1%">:</td>
                                         <td width="70%">
-                                            <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $icu ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                            <input name="ventilator_hour" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $ventilator_hour ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                                         </td>
                                     </tr>
                                 <?php else: ?>
@@ -486,8 +660,8 @@
                                     <input type="hidden" name="adl_chronic" value="0">
                                     <input type="hidden" name="icu_indikator" value="0">
                                     <input type="hidden" name="icu_los" value="0">
-                                    <input type="hidden" name="ventilator_hour" value="0">
                                     <input type="hidden" name="ventilator_use_ind" value="0">
+                                    <input type="hidden" name="ventilator_hour" value="0">
                                 <?php endif; ?>
                                 <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                                 <tr class="head">
@@ -518,7 +692,7 @@
                                     <td width="28%">Lama Hari Naik Kelas</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                        <input name="upgrade_class_los" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $upgrade_class_los ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
@@ -526,9 +700,10 @@
                                     <td width="1%">:</td>
                                     <td width="70%">
                                         <select name="upgrade_class_payor" class="text2" style="font-family: Tahoma; width: 95%">
-                                            <option value="peserta">Peserta</option>
-                                            <option value="pemberi_kerja">Pemberi Kerja</option>
-                                            <option value="asuransi_tambahan">Asuransi Tambahan</option>
+                                            <option <?= $upgrade_class_payor === '' ? 'selected ' : '' ?>value=""></option>
+                                            <option <?= $upgrade_class_payor === 'peserta' ? 'selected ' : '' ?>value="peserta">Peserta</option>
+                                            <option <?= $upgrade_class_payor === 'pemberi_kerja' ? 'selected ' : '' ?>value="pemberi_kerja">Pemberi Kerja</option>
+                                            <option <?= $upgrade_class_payor === 'asuransi_tambahan' ? 'selected ' : '' ?>value="asuransi_tambahan">Asuransi Tambahan</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -536,7 +711,7 @@
                                     <td width="28%">Biaya Tambahan</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="add_payment_pct" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="0" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
+                                        <input name="add_payment_pct" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $add_payment_pct ?>" size="20" maxlength="15" pattern="[0-9]{1,15}" title="0-9 (Maksimal 15 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
@@ -551,10 +726,10 @@
                                     <td width="28%">Dializer Single Use</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <?php $dializer_single_use = getOne("select exists(select * from bridging_sep where no_sep = '$nosep' and nmpolitujuan like 'hemodial%')"); ?>
                                         <select name="dializer_single_use" class="text2" style="font-family: Tahoma; width: 95%">
-                                            <option <?= $dializer_single_use == '1' ? 'selected ' : '' ?>value="1">Ya</Option>
+                                            <option value=""></Option>
                                             <option <?= $dializer_single_use == '0' ? 'selected ' : '' ?>value="0">Tidak</Option>
+                                            <option <?= $dializer_single_use == '1' ? 'selected ' : '' ?>value="1">Ya</Option>
                                         </select>
                                     </td>
                                 </tr>
@@ -562,7 +737,7 @@
                                     <td width="28%">Kantong darah</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="kantong_darah" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="kantong_darah" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $kantong_darah ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
@@ -570,9 +745,9 @@
                                     <td width="1%">:</td>
                                     <td width="70%">
                                         <select name="alteplase_ind" class="text3" style="font-family: Tahoma; width: 95%">
-                                            <option value=""></option>
-                                            <option value="0">Tidak</option>
-                                            <option value="1">Ya</option>
+                                            <option <?= $alteplase_ind === '' ? 'selected ' : '' ?>value=""></option>
+                                            <option <?= $alteplase_ind === '0' ? 'selected ' : '' ?>value="0">Tidak</option>
+                                            <option <?= $alteplase_ind === '1' ? 'selected ' : '' ?>value="1">Ya</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -585,10 +760,10 @@
                                     </td>
                                 </tr>
                                 <tr class="head">
-                                    <td width="28%">Berat Saat Lahir</td>
+                                    <td width="28%">Berat Lahir (gram)</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="birth_weight" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
+                                        <input name="birth_weight" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_berat ?>" size="5" maxlength="5" pattern="[0-9]{1,5}" title="0-9 (Maksimal 5 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
@@ -598,35 +773,35 @@
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Appearance</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_1ap" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_1ap" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['w1'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Pulse</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_1p" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_1p" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['f1'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Grimace</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_1g" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_1g" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['r1'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Activity</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_1ac" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_1ac" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['t1'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Respiration</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_1r" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_1r" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['u1'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
@@ -636,35 +811,35 @@
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Appearance</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_5ap" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_5ap" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['w5'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Pulse</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_5p" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_5p" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['f5'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Grimace</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_5g" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_5g" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['r5'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Activity</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_5ac" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_5ac" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['t5'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">&nbsp;&nbsp;&nbsp;&nbsp;Respiration</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="menit_5r" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="menit_5r" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $bayi_apgar ? $bayi_apgar['u5'] : '' ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
@@ -679,18 +854,18 @@
                                     <td width="28%">Usia Kehamilan (minggu)</td>
                                     <td width="1%">:</td>
                                     <td width="70%">
-                                        <input name="usia_kehamilan" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="usia_kehamilan" class="text inputbox" style="font-family: Tahoma; width: 95%" type="text" value="<?= $usia_kehamilan ?>" size="5" maxlength="3" pattern="[0-9]{1,3}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td width="29%" colspan="2">Riwayat Kehamilan Sebelumnya</td>
                                     <td width="70%">
                                         <span>G :</span>
-                                        <input name="gravida" class="text inputbox" style="font-family: Tahoma" type="text" value="" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="gravida" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $gravida ?>" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                         <span>P :</span>
-                                        <input name="partus" class="text inputbox" style="font-family: Tahoma" type="text" value="" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="partus" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $partus ?>" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                         <span>A :</span>
-                                        <input name="abortus" class="text inputbox" style="font-family: Tahoma" type="text" value="" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
+                                        <input name="abortus" class="text inputbox" style="font-family: Tahoma" type="text" value="<?= $abortus ?>" size="3" maxlength="2" pattern="[0-9]{1,2}" title="0-9 (Maksimal 3 karakter)" autocomplete="off">
                                     </td>
                                 </tr>
                                 <tr class="head">
@@ -698,36 +873,17 @@
                                     <td width="1%">:</td>
                                     <td width="70%">
                                         <select name="onset_kontraksi" class="text2" style="font-family: Tahoma; width: 95%">
-                                            <option value=""></option>
-                                            <option value="spontan">Spontan</option>
-                                            <option value="non_spontan">Non spontan</option>
-                                            <option value="non_spontan_non_induksi">Non Spontan Non Induksi</option>
+                                            <option <?= $onset_kontraksi === '' ? 'selected ' : '' ?>value=""></option>
+                                            <option <?= $onset_kontraksi === 'spontan' ? 'selected ' : '' ?>value="spontan">Spontan</option>
+                                            <option <?= $onset_kontraksi === 'non_spontan' ? 'selected ' : '' ?>value="non_spontan">Non spontan</option>
+                                            <option <?= $onset_kontraksi === 'non_spontan_non_induksi' ? 'selected ' : '' ?>value="non_spontan_non_induksi">Non Spontan Non Induksi</option>
                                         </select>
                                     </td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=kelahiran&grouper=idrg" ?>">[Input Data Kelahiran]</a></td>
                                 </tr>
-                                <?php $delivery = []; ?>
-                                <?php $querykelahiran = bukaquery("select * from inacbg_data_klaim_persalinan_smc where no_sep = '$nosep' order by delivery_sequence asc"); ?>
-                                <?php while ($bariskelahiran = mysqli_fetch_assoc($querykelahiran)): ?>
-                                    <?php
-                                        $arrkelahiran['delivery_sequence']  = $bariskelahiran['delivery_sequence'];
-                                        $arrkelahiran['delivery_dttm']      = $bariskelahiran['delivery_date'].' '.$bariskelahiran['delivery_time'];
-                                        $arrkelahiran['delivery_method']    = mb_strtolower($bariskelahiran['delivery_method']);
-                                        $arrkelahiran['letak_janin']        = mb_strtolower($bariskelahiran['letak_janin']);
-                                        $arrkelahiran['kondisi']            = ['Hidup' => 'livebirth', 'Meninggal' => 'stillbirth'][$bariskelahiran['kondisi']];
-                                        $arrkelahiran['use_manual']         = mb_substr($bariskelahiran['use_manual'], 0, 1);
-                                        $arrkelahiran['use_forcep']         = mb_substr($bariskelahiran['use_forcep'], 0, 1);
-                                        $arrkelahiran['use_vacuum']         = mb_substr($bariskelahiran['use_vacuum'], 0, 1);
-                                        $arrkelahiran['shk_spesimen_ambil'] = mb_strtolower($bariskelahiran['shk_spesimen_ambil']);
-                                        if ($bariskelahiran['shk_spesimen_ambil'] === 'Ya') {
-                                            $arrkelahiran['shk_spesimen_dttm'] = $bariskelahiran['shk_spesimen_date'].' '.$bariskelahiran['shk_spesimen_time'];
-                                        } else {
-                                            $arrkelahiran['shk_alasan'] = ['Tidak dapat dilakukan' => 'tidak-dapat', 'Akses sulit' => 'akses-sulit'][$bariskelahiran['shk_alasan']];
-                                        }
-                                        $delivery[] = $arrkelahiran;
-                                    ?>
+                                <?php foreach ($kelahiran_rows as $bariskelahiran): ?>
                                     <tr class="head">
                                         <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Kelahiran ke</td>
                                         <td width="1%">:</td>
@@ -791,27 +947,9 @@
                                             <td width="70%"><?= $bariskelahiran['shk_alasan'] ?></td>
                                         </tr>
                                     <?php endif; ?>
-                                <?php endwhile; ?>
+                                <?php endforeach; ?>
                                 <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                                 <?php if ($corona == 'PasienCorona'): ?>
-                                    <?php
-                                        $bariscorona = mysqli_fetch_array(bukaquery(<<<SQL
-                                            select
-                                                pemulasaraan_jenazah, if (pemulasaraan_jenazah = 'Ya', 1, 0) as ytpemulasaraan_jenazah,
-                                                kantong_jenazah, if (kantong_jenazah = 'Ya', 1, 0) as ytkantong_jenazah,
-                                                peti_jenazah, if (peti_jenazah = 'Ya', 1, 0) as ytpeti_jenazah,
-                                                plastik_erat, if (plastik_erat = 'Ya', 1, 0) as ytplastik_erat,
-                                                desinfektan_jenazah, if (desinfektan_jenazah = 'Ya', 1, 0) as ytdesinfektan_jenazah,
-                                                mobil_jenazah, if (mobil_jenazah = 'Ya', 1, 0) as ytmobil_jenazah,
-                                                desinfektan_mobil_jenazah, if (desinfektan_mobil_jenazah = 'Ya', 1, 0) as ytdesinfektan_mobil_jenazah,
-                                                covid19_status_cd, if (covid19_status_cd = 'ODP', 1, if (covid19_status_cd = 'PDP',2 ,3)) as ytcovid19_status_cd,
-                                                covid19_cc_ind, if (covid19_cc_ind = 'Ya', 1, 0) as ytcovid19_cc_ind,
-                                                nomor_kartu_t, episodes1, episodes2, episodes3, episodes4, episodes5, episodes6
-                                            from perawatan_corona
-                                            where no_rawat = '$norawat'
-                                            SQL
-                                        ));
-                                    ?>
                                     <tr class="head">
                                         <td width="28%">Dilakukan Pemulasaran Jenazah?</td>
                                         <td width="1%">:</td>
@@ -963,45 +1101,6 @@
                                     </tr>
                                     <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
                                 <?php endif; ?>
-                                <?php
-                                    $billing = mysqli_fetch_array(bukaquery(<<<SQL
-                                        select
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan not like '%terapi%') as prosedur_non_bedah,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Operasi') as prosedur_bedah,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter', 'Ranap Dokter')) as konsultasi,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Paramedis', 'Ranap Paramedis')) as keperawatan,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Radiologi') as radiologi,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Laborat') as laboratorium,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Registrasi', 'Kamar')) as kamar,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kronis%') as obat_kronis,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Obat' and billing.nm_perawatan like '%kemo%') as obat_kemoterapi,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Obat', 'Retur Obat', 'Resep Pulang')) as obat,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status = 'Tambahan') as bmhp,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Harian', 'Service')) as sewa_alat,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat and billing.status in ('Ralan Dokter Paramedis', 'Ranap Dokter Paramedis') and billing.nm_perawatan like '%terapi%') as rehabilitasi,
-                                            (select ifnull(round(sum(billing.totalbiaya)), 0) from billing where billing.no_rawat = reg_periksa.no_rawat) as totalbilling
-                                        from reg_periksa where reg_periksa.no_rawat = '$norawat'
-                                        SQL
-                                    ));
-                                    $prosedur_non_bedah    = $billing['prosedur_non_bedah'];
-                                    $prosedur_bedah        = $billing['prosedur_bedah'];
-                                    $konsultasi            = $billing['konsultasi'];
-                                    $tenaga_ahli           = 0;
-                                    $keperawatan           = $billing['keperawatan'];
-                                    $radiologi             = $billing['radiologi'];
-                                    $laboratorium          = $billing['laboratorium'];
-                                    $kamar                 = $billing['kamar'];
-                                    $obat_kronis           = $billing['obat_kronis'];
-                                    $obat_kemoterapi       = $billing['obat_kemoterapi'];
-                                    $obat                  = $billing['obat'] - $obat_kronis - $obat_kemoterapi;
-                                    $bmhp                  = $billing['bmhp'];
-                                    $sewa_alat             = $billing['sewa_alat'];
-                                    $rehabilitasi          = $billing['rehabilitasi'];
-                                    $totalbilling          = $billing['totalbilling'];
-                                    $totalbillingsementara = $prosedur_non_bedah + $prosedur_bedah + $konsultasi + $tenaga_ahli
-                                                            + $keperawatan + $radiologi + $laboratorium + $kamar + $obat_kronis
-                                                            + $obat_kemoterapi + $obat + $bmhp + $sewa_alat + $rehabilitasi;
-                                ?>
                                 <tr class="head">
                                     <td width="28%">Biaya Prosedur Non Bedah</td>
                                     <td width="1%">:</td>
@@ -1462,7 +1561,7 @@
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['nbr'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc($hasilgroupingidrg['nbr']) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">DRG Cost Weight</td>
@@ -1487,10 +1586,13 @@
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr'])) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
+                                </tr>
+                                <tr class="head">
+                                    <td colspan="3" style="color: blue">**) Nilai klaim masih menggunakan total tarif INACBG</td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=edit&grouper=idrg" ?>">[Batal]</a></td>
@@ -1589,7 +1691,7 @@
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['nbr'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc($hasilgroupingidrg['nbr']) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">DRG Cost Weight</td>
@@ -1614,10 +1716,13 @@
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr'])) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
+                                </tr>
+                                <tr class="head">
+                                    <td colspan="3" style="color: blue">**) Nilai klaim masih menggunakan total tarif INACBG</td>
                                 </tr>
                             <?php endif; ?>
                             <tr class="head">
@@ -1774,7 +1879,7 @@
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['nbr'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc($hasilgroupingidrg['nbr']) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">DRG Cost Weight</td>
@@ -1799,10 +1904,13 @@
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr'])) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
+                                </tr>
+                                <tr class="head">
+                                    <td colspan="3" style="color: blue">**) Nilai klaim masih menggunakan total tarif INACBG</td>
                                 </tr>
                             <?php endif; ?>
                             <tr class="head">
@@ -2021,7 +2129,7 @@
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['nbr'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc($hasilgroupingidrg['nbr']) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">DRG Cost Weight</td>
@@ -2046,10 +2154,13 @@
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr'])) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
+                                </tr>
+                                <tr class="head">
+                                    <td colspan="3" style="color: blue">**) Nilai klaim masih menggunakan total tarif INACBG</td>
                                 </tr>
                             <?php endif; ?>
                             <tr class="head">
@@ -2269,7 +2380,7 @@
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['nbr'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc($hasilgroupingidrg['nbr']) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">DRG Cost Weight</td>
@@ -2294,10 +2405,13 @@
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr'])) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
+                                </tr>
+                                <tr class="head">
+                                    <td colspan="3" style="color: blue">**) Nilai klaim masih menggunakan total tarif INACBG</td>
                                 </tr>
                             <?php endif; ?>
                             <tr class="head">

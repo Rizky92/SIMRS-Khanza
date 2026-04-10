@@ -1701,6 +1701,7 @@
         }
 
         bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_data_klaim_smc where no_sep = '$nomor_sep'");
         InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
         InsertData2('inacbg_data_klaim_smc', sprintf("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'",
             $nomor_sep, $nomor_kartu, $tgl_masuk.' 00:00:01', $tgl_pulang.' 23:59:59', $cara_masuk, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los,
