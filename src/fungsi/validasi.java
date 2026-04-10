@@ -2003,6 +2003,13 @@ public final class validasi {
         return milliToDay(Calendar.getInstance().getTimeInMillis() - file.lastModified());
     }
 
+    public long minutesOld(String path) {
+        file = new File(path);
+        if (file.lastModified() < 1) return 0;
+        long diffMillis = Calendar.getInstance().getTimeInMillis() - file.lastModified();
+        return TimeUnit.MILLISECONDS.toMinutes(diffMillis);
+    }
+
     /**
      * Converts milliseconds to days
      */
