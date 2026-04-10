@@ -1419,6 +1419,8 @@
 
         UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
 
+        SaveClaimDataFromGetSmc($nomor_sep, $msg['response']['data']);
+
         if ($msg['response']['data']['klaim_status_cd'] == 'final') {
             ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nomor_sep, $norawat);
             if ($success === true) {
@@ -1431,6 +1433,74 @@
             'data' => 'Klaim berhasil disimpan',
             'error' => null,
         ];
+    }
+
+    function SaveClaimDataFromGetSmc($nomor_sep, $data)
+    {
+        $convertDate = fn($d) => implode('-', array_reverse(explode('/', $d)));
+
+        $tgl_masuk  = $convertDate($data['tgl_masuk']);
+        $tgl_pulang = $convertDate($data['tgl_pulang']);
+
+        $apgar_m1   = $data['apgar_score']['menit_1'] ?? [];
+        $apgar_m5   = $data['apgar_score']['menit_5'] ?? [];
+        $persalinan = $data['persalinan'] ?? [];
+
+        // inacbg_data_klaim_tarif_smc cascades on delete, so clearing parent is enough
+        bukaquery2("delete from inacbg_data_klaim_smc where no_sep = '$nomor_sep'");
+
+        InsertData2('inacbg_data_klaim_smc', sprintf(
+            "'%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s','%s'",
+            $nomor_sep,
+            $data['nomor_kartu'],
+            $tgl_masuk.' 00:00:01',
+            $tgl_pulang.' 23:59:59',
+            $data['cara_masuk'],
+            $data['jenis_rawat'],
+            $data['kelas_rawat'],
+            $data['adl_sub_acute'],
+            $data['adl_chronic'],
+            $data['icu_indikator'],
+            $data['icu_los'],
+            $data['ventilator_hour'],
+            $data['upgrade_class_ind'],
+            $data['upgrade_class_class'] ?? '',
+            $data['upgrade_class_los'],
+            $data['upgrade_class_payor'] ?? '',
+            (int) $data['add_payment_pct'],
+            $data['berat_lahir'],
+            $data['sistole'],
+            $data['diastole'],
+            $data['discharge_status'],
+            $data['dializer_single_use'],
+            $data['kantong_darah'],
+            $data['alteplase_ind'],
+            $apgar_m1['appearance']  ?? '',
+            $apgar_m1['pulse']       ?? '',
+            $apgar_m1['grimace']     ?? '',
+            $apgar_m1['activity']    ?? '',
+            $apgar_m1['respiration'] ?? '',
+            $apgar_m5['appearance']  ?? '',
+            $apgar_m5['pulse']       ?? '',
+            $apgar_m5['grimace']     ?? '',
+            $apgar_m5['activity']    ?? '',
+            $apgar_m5['respiration'] ?? '',
+            $persalinan['usia_kehamilan']  ?? '',
+            $persalinan['gravida']         ?? '',
+            $persalinan['partus']          ?? '',
+            $persalinan['abortus']         ?? '',
+            $persalinan['onset_kontraksi'] ?? '',
+            $data['tarif_poli_eks'],
+            $data['nama_dokter'],
+            $data['kode_tarif'],
+            $data['payor_id'],
+            $data['payor_nm'],
+            '#'
+        ));
+
+        foreach (($data['tarif_rs'] ?? []) as $tarif => $nilai) {
+            InsertData2('inacbg_data_klaim_tarif_smc', sprintf("'%s','%s','%s'", $nomor_sep, $tarif, $nilai));
+        }
     }
 
     function UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender)
