@@ -106,39 +106,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         }
 
         tbKelahiran.setDefaultRenderer(Object.class, new WarnaTable());
-
-        tbKelahiran.getColumnModel().addColumnModelListener(new TableColumnModelListener() {
-            @Override
-            public void columnAdded(TableColumnModelEvent e) {
-                //
-            }
-
-            @Override
-            public void columnRemoved(TableColumnModelEvent e) {
-                //
-            }
-
-            @Override
-            public void columnMoved(TableColumnModelEvent e) {
-                //
-            }
-
-            @Override
-            public void columnSelectionChanged(ListSelectionEvent e) {
-                //
-            }
-
-            @Override
-            public void columnMarginChanged(ChangeEvent e) {
-                TableColumnModel model = tbKelahiran.getColumnModel();
-                StringBuilder sb = new StringBuilder("Column widths:");
-                for (int i = 0; i < model.getColumnCount(); i++) {
-                    sb.append("\n  [").append(i).append("] ").append(tabMode.getColumnName(i)).append(" = ").append(model.getColumn(i).getWidth());
-                }
-                System.out.println(sb);
-            }
-        });
-
         TCari.setDocument(new batasInput((byte) 100).getKata(TCari));
         TCari.requestFocus();
     }
