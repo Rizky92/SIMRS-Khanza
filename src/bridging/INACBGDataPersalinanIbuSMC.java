@@ -758,6 +758,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
             cmbDetikSampel.setEnabled(false);
         } else if (spesimenDiambil.getSelectedIndex() == 1) {
             alasanSpesimenTakDiambil.setEnabled(false);
+            alasanSpesimenTakDiambil.setSelectedIndex(0);
             lokasiSpesimen.setEnabled(true);
             tglSampel.setEnabled(true);
             cmbJamSampel.setEnabled(true);
