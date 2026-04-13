@@ -209,6 +209,16 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 }
             });
 
+            engineKlaim.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == Worker.State.RUNNING) {
+                    progressBarKlaim.setManaged(true);
+                    progressBarKlaim.setVisible(true);
+                } else if (newValue == Worker.State.SUCCEEDED || newValue == Worker.State.FAILED || newValue == Worker.State.CANCELLED) {
+                    progressBarKlaim.setManaged(false);
+                    progressBarKlaim.setVisible(false);
+                }
+            });
+
             engineKlaim.locationProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null && newValue.toLowerCase().contains("action")) {
                     if (newValue.toLowerCase().contains("action=kelahiran")) {
@@ -283,7 +293,12 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             });
 
             engineBerkasDigital.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue == Worker.State.SUCCEEDED) {
+                if (newValue == Worker.State.RUNNING) {
+                    progressBarBerkasDigital.setManaged(true);
+                    progressBarBerkasDigital.setVisible(true);
+                } else if (newValue == Worker.State.SUCCEEDED) {
+                    progressBarBerkasDigital.setManaged(false);
+                    progressBarBerkasDigital.setVisible(false);
                     try {
                         if (engineBerkasDigital.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "").contains("berkasrawat/pages")) {
                             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

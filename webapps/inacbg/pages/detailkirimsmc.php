@@ -700,7 +700,7 @@
                                     <td width="1%">:</td>
                                     <td width="70%">
                                         <select name="upgrade_class_payor" class="text2" style="font-family: Tahoma; width: 95%">
-                                            <option <?= $upgrade_class_payor === '' ? 'selected ' : '' ?>value=""></option>
+                                            <option <?= empty($upgrade_class_payor) ? 'selected ' : '' ?>value=""></option>
                                             <option <?= $upgrade_class_payor === 'peserta' ? 'selected ' : '' ?>value="peserta">Peserta</option>
                                             <option <?= $upgrade_class_payor === 'pemberi_kerja' ? 'selected ' : '' ?>value="pemberi_kerja">Pemberi Kerja</option>
                                             <option <?= $upgrade_class_payor === 'asuransi_tambahan' ? 'selected ' : '' ?>value="asuransi_tambahan">Asuransi Tambahan</option>
@@ -884,8 +884,9 @@
                                     <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=kelahiran&grouper=idrg" ?>">[Input Data Kelahiran]</a></td>
                                 </tr>
                                 <?php foreach ($kelahiran_rows as $bariskelahiran): ?>
+                                    <tr class="head"><td colspan="3" width="98%"><div style="height: 1px; background-color: #cccccc"></div></td></tr>
                                     <tr class="head">
-                                        <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Kelahiran ke</td>
+                                        <td width="28%">Kelahiran ke</td>
                                         <td width="1%">:</td>
                                         <td width="70%"><?= $bariskelahiran['delivery_sequence'] ?></td>
                                     </tr>

@@ -126,7 +126,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         BtnBatal = new widget.Button();
         BtnHapus = new widget.Button();
         BtnEdit = new widget.Button();
-        BtnPrint = new widget.Button();
         BtnKeluar = new widget.Button();
         panelGlass9 = new widget.panelisi();
         jLabel6 = new widget.Label();
@@ -269,19 +268,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
             }
         });
         panelGlass8.add(BtnEdit);
-
-        BtnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/b_print.png"))); // NOI18N
-        BtnPrint.setMnemonic('T');
-        BtnPrint.setText("Cetak");
-        BtnPrint.setToolTipText("Alt+T");
-        BtnPrint.setName("BtnPrint"); // NOI18N
-        BtnPrint.setPreferredSize(new java.awt.Dimension(100, 30));
-        BtnPrint.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnPrintActionPerformed(evt);
-            }
-        });
-        panelGlass8.add(BtnPrint);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar.setMnemonic('K');
@@ -494,6 +480,11 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         spesimenDiambil.setMinimumSize(new java.awt.Dimension(100, 23));
         spesimenDiambil.setName("spesimenDiambil"); // NOI18N
         spesimenDiambil.setPreferredSize(new java.awt.Dimension(107, 23));
+        spesimenDiambil.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                spesimenDiambilItemStateChanged(evt);
+            }
+        });
         PanelInput.add(spesimenDiambil);
         spesimenDiambil.setBounds(100, 130, 107, 23);
 
@@ -510,7 +501,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         PanelInput.add(lokasiSpesimen);
         lokasiSpesimen.setBounds(260, 130, 84, 23);
 
-        jLabel124.setText("Ambil Sampel :");
+        jLabel124.setText("Waktu Sampel :");
         jLabel124.setName("jLabel124"); // NOI18N
         jLabel124.setPreferredSize(new java.awt.Dimension(97, 23));
         PanelInput.add(jLabel124);
@@ -748,10 +739,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
 
-    private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnPrintActionPerformed
-
     private void formComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentShown
         tampil();
     }//GEN-LAST:event_formComponentShown
@@ -760,6 +747,25 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         emptTeks2();
     }//GEN-LAST:event_formWindowClosed
 
+    private void spesimenDiambilItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_spesimenDiambilItemStateChanged
+        if (spesimenDiambil.getSelectedIndex() == 0) {
+            alasanSpesimenTakDiambil.setEnabled(true);
+            lokasiSpesimen.setEnabled(false);
+            lokasiSpesimen.setSelectedIndex(0);
+            tglSampel.setEnabled(false);
+            cmbJamSampel.setEnabled(false);
+            cmbMenitSampel.setEnabled(false);
+            cmbDetikSampel.setEnabled(false);
+        } else if (spesimenDiambil.getSelectedIndex() == 1) {
+            alasanSpesimenTakDiambil.setEnabled(false);
+            lokasiSpesimen.setEnabled(true);
+            tglSampel.setEnabled(true);
+            cmbJamSampel.setEnabled(true);
+            cmbMenitSampel.setEnabled(true);
+            cmbDetikSampel.setEnabled(true);
+        }
+    }//GEN-LAST:event_spesimenDiambilItemStateChanged
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
     private widget.Button BtnBatal;
@@ -767,7 +773,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
     private widget.Button BtnEdit;
     private widget.Button BtnHapus;
     private widget.Button BtnKeluar;
-    private widget.Button BtnPrint;
     private widget.Button BtnSimpan;
     private widget.Label LCount;
     private widget.PanelBiasa PanelInput;
@@ -823,6 +828,7 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         this.noRawat.setText(noRawat);
         this.noRM.setText(noRM);
         this.namaPasien.setText(namaPasien);
+        this.TCari.setText(noSEP);
     }
 
     public void isCek() {
