@@ -1358,6 +1358,7 @@
             return GetDataKlaimSmc($nomor_sep, $norawat, $nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender, $error);
         }
 
+        bukaquery2("delete from inacbg_klaim_baru2 where no_rawat = '$norawat'");
         InsertData2('inacbg_klaim_baru2', sprintf("'%s', '%s', '%s', '%s', '%s'",
             $norawat,
             $nomor_sep,
@@ -1395,10 +1396,16 @@
             );
 
             if ($msg['metadata']['error_no'] == 'E2004' && str_contains($error_klaim_baru, 'E2043')) {
-                echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">Tidak dapat mengambil status data klaim, kemungkinan no. SEP dihapus dari eklaim! Lakukan pembuatan klaim baru dari menggunakan no. SEP di eklaim!</span><br /><br />';
+                echo <<<'HTML'
+                    <span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">
+                        Tidak dapat mengambil status data klaim, kemungkinan no. SEP dihapus dari eklaim! Lakukan pembuatan klaim baru dari menggunakan no. SEP di eklaim!
+                    </span><br /><br />
+                    HTML;
             }
-            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error_klaim_baru.'</span><br /><br />';
-            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+            echo <<<'HTML'
+                <span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error_klaim_baru.'</span><br /><br />
+                <span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />
+                HTML;
 
             return [
                 'success' => false,
@@ -1418,6 +1425,8 @@
 
         UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
 
+        SimpanGetDataKlaimSmc($nomor_sep, $msg['response']['data']);
+
         if ($msg['response']['data']['klaim_status_cd'] == 'final') {
             ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nomor_sep, $norawat);
             if ($success === true) {
@@ -1430,6 +1439,35 @@
             'data' => 'Klaim berhasil disimpan',
             'error' => null,
         ];
+    }
+
+    function SimpanGetDataKlaimSmc($nomor_sep, $data)
+    {
+        $konversiTanggal = fn ($d) => implode('-', array_reverse(explode('/', $d)));
+
+        $tgl_masuk  = $konversiTanggal($data['tgl_masuk']);
+        $tgl_pulang = $konversiTanggal($data['tgl_pulang']);
+
+        $apgar_m1   = $data['apgar_score']['menit_1'] ?? [];
+        $apgar_m5   = $data['apgar_score']['menit_5'] ?? [];
+        $persalinan = $data['persalinan'] ?? [];
+
+        bukaquery2("delete from inacbg_data_klaim_smc where no_sep = '$nomor_sep'");
+        InsertData2('inacbg_data_klaim_smc', sprintf(
+            "'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'",
+            $nomor_sep, $data['nomor_kartu'], $tgl_masuk.' 00:00:01', $tgl_pulang.' 23:59:59', $data['cara_masuk'], $data['jenis_rawat'], $data['kelas_rawat'],
+            $data['adl_sub_acute'], $data['adl_chronic'], $data['icu_indikator'], $data['icu_los'], $data['ventilator_hour'], $data['upgrade_class_ind'],
+            $data['upgrade_class_class'] ?? '', $data['upgrade_class_los'], $data['upgrade_class_payor'] ?? '', (int) $data['add_payment_pct'], $data['berat_lahir'],
+            $data['sistole'], $data['diastole'], $data['discharge_status'], $data['dializer_single_use'], $data['kantong_darah'], $data['alteplase_ind'],
+            $apgar_m1['appearance'] ?? '', $apgar_m1['pulse'] ?? '', $apgar_m1['grimace'] ?? '', $apgar_m1['activity'] ?? '', $apgar_m1['respiration'] ?? '',
+            $apgar_m5['appearance'] ?? '', $apgar_m5['pulse'] ?? '', $apgar_m5['grimace'] ?? '', $apgar_m5['activity'] ?? '', $apgar_m5['respiration'] ?? '',
+            $persalinan['usia_kehamilan'] ?? '', $persalinan['gravida'] ?? '', $persalinan['partus'] ?? '', $persalinan['abortus'] ?? '', $persalinan['onset_kontraksi'] ?? '',
+            $data['tarif_poli_eks'], $data['nama_dokter'], $data['kode_tarif'], $data['payor_id'], $data['payor_nm'], '#'
+        ));
+
+        foreach (($data['tarif_rs'] ?? []) as $tarif => $nilai) {
+            InsertData2('inacbg_data_klaim_tarif_smc', sprintf("'%s', '%s', '%s'", $nomor_sep, $tarif, $nilai));
+        }
     }
 
     function UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender)
@@ -1605,11 +1643,11 @@
     }
 
     function UpdateDataKlaimSmc(
-        $nomor_sep, $nomor_kartu, $nomor_rm, $tgl_masuk, $tgl_pulang, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los, $ventilator_hour,
-        $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $add_payment_pct, $birth_weight, $discharge_status, $tarif_poli_eks, $cara_masuk,
-        $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd, $coder_nik, $prosedur_non_bedah, $prosedur_bedah, $konsultasi, $tenaga_ahli, $keperawatan,
-        $penunjang, $radiologi, $laboratorium, $pelayanan_darah, $rehabilitasi, $kamar, $rawat_intensif, $obat, $obat_kronis, $obat_kemoterapi, $alkes, $bmhp,
-        $sewa_alat, $sistole, $diastole, $dializer_single_use = "0"
+        $nomor_sep, $nomor_kartu, $nomor_rm, $tgl_masuk, $tgl_pulang, $cara_masuk, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic,
+        $icu_indikator, $icu_los, $ventilator_hour, $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $upgrade_class_payor,
+        $add_payment_pct, $birth_weight, $sistole, $diastole, $discharge_status, $tarif_rs, $dializer_single_use, $kantong_darah,
+        $alteplase_ind, $apgar, $usia_kehamilan, $gravida, $partus, $abortus, $onset_kontraksi, $delivery, $tarif_poli_eks,
+        $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd, $coder_nik
     ) {
         $request = [
             'metadata' => [
@@ -1632,31 +1670,43 @@
                 'upgrade_class_ind'   => $upgrade_class_ind,
                 'upgrade_class_class' => $upgrade_class_class,
                 'upgrade_class_los'   => $upgrade_class_los,
+                'upgrade_class_payor' => $upgrade_class_payor,
                 'add_payment_pct'     => $add_payment_pct,
                 'birth_weight'        => $birth_weight,
                 'sistole'             => $sistole,
                 'diastole'            => $diastole,
                 'discharge_status'    => $discharge_status,
-                'dializer_single_use' => $dializer_single_use,
                 'tarif_rs'            => [
-                    'prosedur_non_bedah' => $prosedur_non_bedah,
-                    'prosedur_bedah'     => $prosedur_bedah,
-                    'konsultasi'         => $konsultasi,
-                    'tenaga_ahli'        => $tenaga_ahli,
-                    'keperawatan'        => $keperawatan,
-                    'penunjang'          => $penunjang,
-                    'radiologi'          => $radiologi,
-                    'laboratorium'       => $laboratorium,
-                    'pelayanan_darah'    => $pelayanan_darah,
-                    'rehabilitasi'       => $rehabilitasi,
-                    'kamar'              => $kamar,
-                    'rawat_intensif'     => $rawat_intensif,
-                    'obat'               => $obat,
-                    'obat_kronis'        => $obat_kronis,
-                    'obat_kemoterapi'    => $obat_kemoterapi,
-                    'alkes'              => $alkes,
-                    'bmhp'               => $bmhp,
-                    'sewa_alat'          => $sewa_alat,
+                    'prosedur_non_bedah' => $tarif_rs['prosedur_non_bedah'],
+                    'prosedur_bedah'     => $tarif_rs['prosedur_bedah'],
+                    'konsultasi'         => $tarif_rs['konsultasi'],
+                    'tenaga_ahli'        => $tarif_rs['tenaga_ahli'],
+                    'keperawatan'        => $tarif_rs['keperawatan'],
+                    'penunjang'          => $tarif_rs['penunjang'],
+                    'radiologi'          => $tarif_rs['radiologi'],
+                    'laboratorium'       => $tarif_rs['laboratorium'],
+                    'pelayanan_darah'    => $tarif_rs['pelayanan_darah'],
+                    'rehabilitasi'       => $tarif_rs['rehabilitasi'],
+                    'kamar'              => $tarif_rs['kamar'],
+                    'rawat_intensif'     => $tarif_rs['rawat_intensif'],
+                    'obat'               => $tarif_rs['obat'],
+                    'obat_kronis'        => $tarif_rs['obat_kronis'],
+                    'obat_kemoterapi'    => $tarif_rs['obat_kemoterapi'],
+                    'alkes'              => $tarif_rs['alkes'],
+                    'bmhp'               => $tarif_rs['bmhp'],
+                    'sewa_alat'          => $tarif_rs['sewa_alat'],
+                ],
+                'dializer_single_use' => $dializer_single_use,
+                'kantong_darah'       => $kantong_darah,
+                'alteplase_ind'       => $alteplase_ind,
+                'apgar'               => $apgar,
+                'persalinan'          => [
+                    'usia_kehamilan'  => $usia_kehamilan,
+                    'gravida'         => $gravida,
+                    'partus'          => $partus,
+                    'abortus'         => $abortus,
+                    'onset_kontraksi' => $onset_kontraksi,
+                    'delivery'        => $delivery,
                 ],
                 'tarif_poli_eks' => $tarif_poli_eks,
                 'nama_dokter'    => $nama_dokter,
@@ -1688,7 +1738,19 @@
         }
 
         bukaquery2("delete from inacbg_data_terkirim2 where no_sep = '$nomor_sep'");
+        bukaquery2("delete from inacbg_data_klaim_smc where no_sep = '$nomor_sep'");
         InsertData2('inacbg_data_terkirim2', "'$nomor_sep', '$coder_nik'");
+        InsertData2('inacbg_data_klaim_smc', sprintf("'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'",
+            $nomor_sep, $nomor_kartu, $tgl_masuk.' 00:00:01', $tgl_pulang.' 23:59:59', $cara_masuk, $jenis_rawat, $kelas_rawat, $adl_sub_acute, $adl_chronic, $icu_indikator, $icu_los,
+            $ventilator_hour, $upgrade_class_ind, $upgrade_class_class, $upgrade_class_los, $upgrade_class_payor, $add_payment_pct, $birth_weight, $sistole, $diastole,$discharge_status,
+            $dializer_single_use, $kantong_darah, $alteplase_ind, $apgar['menit_1']['appearance'], $apgar['menit_1']['pulse'], $apgar['menit_1']['grimace'], $apgar['menit_1']['activity'],
+            $apgar['menit_1']['respiration'], $apgar['menit_5']['appearance'], $apgar['menit_5']['pulse'], $apgar['menit_5']['grimace'], $apgar['menit_5']['activity'],
+            $apgar['menit_5']['respiration'], $usia_kehamilan, $gravida, $partus, $abortus, $onset_kontraksi, $tarif_poli_eks, $nama_dokter, $kode_tarif, $payor_id, $payor_cd, $cob_cd
+        ));
+
+        foreach ($tarif_rs as $tarif => $nilai) {
+            InsertData2('inacbg_data_klaim_tarif_smc', sprintf("'%s', '%s', '%s'", $nomor_sep, $tarif, $nilai));
+        }
 
         return [
             'success' => true,
@@ -1851,13 +1913,14 @@
         }
 
         try {
-            bukaquery2(sprintf(
-                "insert into idrg_grouping_smc values ('%s', '%s', '%s', '%s', '%s') on duplicate key update mdc_number = values(mdc_number), mdc_description = values(mdc_description), drg_code = values(drg_code), drg_description = values(drg_description)",
-                $nomor_sep,
-                $msg['response_idrg']['mdc_number'],
-                $msg['response_idrg']['mdc_description'],
-                $msg['response_idrg']['drg_code'],
-                $msg['response_idrg']['drg_description']
+            bukaquery2(sprintf(<<<'SQL'
+                insert into idrg_grouping_smc values ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') on duplicate key update
+                mdc_number = values(mdc_number), mdc_description = values(mdc_description), drg_code = values(drg_code), drg_description = values(drg_description),
+                kelas_rs = values(kelas_rs), cost_weight = values(cost_weight), sub_acute_weight = values(sub_acute_weight), chronic_weight = values(chronic_weight),
+                total_cost_weight = values(total_cost_weight), nbr = values(nbr)
+                SQL,
+                $nomor_sep, $msg['response_idrg']['mdc_number'], $msg['response_idrg']['mdc_description'], $msg['response_idrg']['drg_code'], $msg['response_idrg']['drg_description'], getKelasRS(),
+                $msg['response_idrg']['cost_weight'], $msg['response_idrg']['sub_acute_weight'], $msg['response_idrg']['chronic_weight'], $msg['response_idrg']['total_cost_weight'], $msg['response_idrg']['nbr'],
             ));
         } catch (\Exception $e) {
             return [

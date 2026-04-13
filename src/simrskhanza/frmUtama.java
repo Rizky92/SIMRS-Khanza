@@ -77,7 +77,7 @@ import bridging.BPJSCekTanggalRujukan;
 import bridging.BPJSDataFingerPrintPasien;
 import bridging.BPJSDataSEP;
 import bridging.BPJSHistoriPelayanan;
-import bridging.BPJSKompilasiBerkasKlaim;
+import bridging.BPJSKompilasiBerkasKlaimSMC;
 import bridging.BPJSMapingDokterDPJP;
 import bridging.BPJSMapingPoli;
 import bridging.BPJSMonitoringKlaim;
@@ -11337,7 +11337,7 @@ public class frmUtama extends javax.swing.JFrame {
                         isTutup();
                         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         if (akses.getform().equals("BPJSKompilasiBerkasKlaim")) {
-                            BPJSKompilasiBerkasKlaim aplikasi=new BPJSKompilasiBerkasKlaim(null, false);
+                            BPJSKompilasiBerkasKlaimSMC aplikasi=new BPJSKompilasiBerkasKlaimSMC(null, false);
                             aplikasi.isCek(coder_nik);
                             aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
                             aplikasi.setLocationRelativeTo(PanelUtama);
@@ -50768,7 +50768,7 @@ public class frmUtama extends javax.swing.JFrame {
                 isTutup();
                 akses.setform("BPJSKompilasiBerkasKlaim");
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                BPJSKompilasiBerkasKlaim aplikasi = new BPJSKompilasiBerkasKlaim(this, false);
+                BPJSKompilasiBerkasKlaimSMC aplikasi = new BPJSKompilasiBerkasKlaimSMC(this, false);
                 aplikasi.isCek();
                 aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
                 aplikasi.setLocationRelativeTo(PanelUtama);
