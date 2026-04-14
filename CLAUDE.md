@@ -1,7 +1,7 @@
 # SIMRS Khanza Claude Instructions
 
 ## Project Overview
-This is a home repository for modified SIMRS Khanza, a fork of original [SIMRS Khanza](https://github.com/mas-elkhanza/SIMRS-Khanza) developed by YASKI. This fork is designed to cater the needs for RS Samarinda Medika Citra should the origin doesn't have the features it needed. The project uses Java 17 as programming langauge but targets Java 11 for building, NetBeans as primary IDE, and Java Swing as its main UI.
+This is a home repository for modified SIMRS Khanza, a fork of original [SIMRS Khanza](https://github.com/mas-elkhanza/SIMRS-Khanza) developed by YASKI. This fork is designed to cater the needs for RS Samarinda Medika Citra should the origin doesn't have the feature it needed. The project mainly uses Java 17 as programming langauge but targets Java 11 for build and compiling, Jasper Report as reporting framework, NetBeans as primary IDE, and Java Swing as its main UI. It also uses PHP ^8.2 for specific web/API services.
 
 ### Important directories
 Important root directories are listed below
@@ -39,7 +39,7 @@ Important root directories are listed below
 - `src/pcraicra`: Modules for general construction related management.
 - `src/permintaan`: Modules for managing medical service requests.
 - `src/perpustakaan`: Modules for library/book management.
-- `src/picture`: Used to place image resources for various UI resources.
+- `src/picture`: Used to place image resources for various UI components.
 - `src/rekammedis`: Modules for managing and record general patient medical history.
 - `src/restore`: Modules for restoring deleted records from various menu.
 - `src/setting`: Modules for administrator to control the settings for application uses.
@@ -60,7 +60,7 @@ The coding guidelines should cater to users' netbeans configuration, which as fo
 - Use 4 spaces as indentation.
 - No hard line wrap. Soft line wrap is around 200-300 characters.
 - Trim trailing whitespaces.
-- Package imports are sorted alphabetically.
+- Package imports are sorted alphabetically, case sensitive.
 
 #### Workflow guideline
 - Before starting the changes, ensure current branch is in `custom` branch. Then switch to new branch. Branch format name must begin with `claude/` and styled as `kebab-case` with at-most 4 words in length.
