@@ -119,6 +119,10 @@ $output = implode("\n", $ddl);
 if (count($statements) <= 2) {
     // Only FK_CHECKS toggle, no actual changes
     fwrite(STDERR, "No differences found.\n");
+    if (!empty($opts['output'])) {
+        file_put_contents($opts['output'], '');
+        fwrite(STDERR, "Cleared {$opts['output']}\n");
+    }
     exit(0);
 }
 
@@ -177,6 +181,7 @@ if (!$skipConfirm) {
 
 // Execute statements one by one, tracking reverse for each applied
 $pdo->exec("USE `{$current}`");
+$pdo->exec("SET FOREIGN_KEY_CHECKS = 0");
 $appliedReverse = [];
 $failed = false;
 $appliedCount = 0;
@@ -343,8 +348,8 @@ function getAllForeignKeys(PDO $pdo, string $db): array
                 'columns' => [],
                 'ref_table' => $row['REFERENCED_TABLE_NAME'],
                 'ref_columns' => [],
-                'update_rule' => $row['UPDATE_RULE'],
-                'delete_rule' => $row['DELETE_RULE'],
+                'update_rule' => normalizeFkRule($row['UPDATE_RULE']),
+                'delete_rule' => normalizeFkRule($row['DELETE_RULE']),
             ];
         }
         $fks[$table][$name]['columns'][] = $row['COLUMN_NAME'];
@@ -353,11 +358,38 @@ function getAllForeignKeys(PDO $pdo, string $db): array
     return $fks;
 }
 
-function getCreateTable(PDO $pdo, string $db, string $table): string
+/**
+ * Returns [createDdl, fkStatements[]] where createDdl has FK constraints
+ * stripped out, and fkStatements are separate ALTER TABLE ADD CONSTRAINT lines.
+ */
+function getCreateTable(PDO $pdo, string $db, string $table): array
 {
     $stmt = $pdo->query("SHOW CREATE TABLE `{$db}`.`{$table}`");
     $row = $stmt->fetch(PDO::FETCH_NUM);
-    return $row[1];
+    $ddl = $row[1];
+
+    // Strip database qualifier from REFERENCES `db`.`table` → REFERENCES `table`
+    $ddl = preg_replace('/REFERENCES\s+`' . preg_quote($db, '/') . '`\.`/', 'REFERENCES `', $ddl);
+
+    // Extract and remove CONSTRAINT ... FOREIGN KEY lines from CREATE TABLE
+    $fkStatements = [];
+    $lines = explode("\n", $ddl);
+    $cleaned = [];
+    foreach ($lines as $line) {
+        if (preg_match('/^\s*CONSTRAINT\s+`([^`]+)`\s+FOREIGN\s+KEY/i', $line)) {
+            // Remove trailing comma from the previous cleaned line if needed
+            $fkLine = rtrim($line, ", \r\n");
+            $fkStatements[] = "ALTER TABLE `{$table}` ADD {$fkLine};";
+        } else {
+            $cleaned[] = $line;
+        }
+    }
+
+    // Fix trailing comma on the last column/index line before closing paren
+    $createDdl = implode("\n", $cleaned);
+    $createDdl = preg_replace('/,(\s*\n\s*\)\s*(ENGINE|DEFAULT|ROW_FORMAT|COLLATE|AUTO_INCREMENT|CHARSET))/i', '$1', $createDdl);
+
+    return [$createDdl, $fkStatements];
 }
 
 function compareTableOptions(array $src, array $tgt): ?string
@@ -633,6 +665,7 @@ function buildDdl(
     bool $noDrop
 ): array {
     $ddl = [];
+    $deferredFks = [];
     $ddl[] = "SET FOREIGN_KEY_CHECKS = 0;";
     $ddl[] = "";
 
@@ -640,10 +673,15 @@ function buildDdl(
     $droppedTables = array_diff(array_keys($srcTables), array_keys($tgtTables));
     $commonTables = array_intersect(array_keys($srcTables), array_keys($tgtTables));
 
+    // New tables: strip FKs from CREATE TABLE, defer them to the end
     foreach ($newTables as $table) {
+        [$createDdl, $fkStmts] = getCreateTable($pdo, $tgtDb, $table);
         $ddl[] = "-- New table: {$table}";
-        $ddl[] = getCreateTable($pdo, $tgtDb, $table) . ";";
+        $ddl[] = $createDdl . ";";
         $ddl[] = "";
+        if ($fkStmts) {
+            $deferredFks = array_merge($deferredFks, $fkStmts);
+        }
     }
 
     if (!$noDrop) {
@@ -713,6 +751,7 @@ function buildDdl(
             $tableDdl[] = "ALTER TABLE `{$table}` ADD " . indexDef($idx, $tgtIdx[$idx]) . ";";
         }
 
+        // FK drops and changes go inline (table already exists)
         $srcFks = $srcAllFks[$table] ?? [];
         $tgtFks = $tgtAllFks[$table] ?? [];
         $newFks = array_diff(array_keys($tgtFks), array_keys($srcFks));
@@ -722,7 +761,8 @@ function buildDdl(
         foreach ($commonFks as $fk) {
             if (normalizeFk($srcFks[$fk]) !== normalizeFk($tgtFks[$fk])) {
                 $tableDdl[] = "ALTER TABLE `{$table}` DROP FOREIGN KEY `{$fk}`;";
-                $tableDdl[] = "ALTER TABLE `{$table}` ADD " . foreignKeyDef($fk, $tgtFks[$fk]) . ";";
+                // Defer the ADD to the end so referenced columns/tables exist
+                $deferredFks[] = "ALTER TABLE `{$table}` ADD " . foreignKeyDef($fk, $tgtFks[$fk]) . ";";
             }
         }
         if (!$noDrop) {
@@ -730,8 +770,9 @@ function buildDdl(
                 $tableDdl[] = "ALTER TABLE `{$table}` DROP FOREIGN KEY `{$fk}`;";
             }
         }
+        // Defer new FK additions to the end
         foreach ($newFks as $fk) {
-            $tableDdl[] = "ALTER TABLE `{$table}` ADD " . foreignKeyDef($fk, $tgtFks[$fk]) . ";";
+            $deferredFks[] = "ALTER TABLE `{$table}` ADD " . foreignKeyDef($fk, $tgtFks[$fk]) . ";";
         }
 
         if ($tableDdl) {
@@ -741,12 +782,20 @@ function buildDdl(
         }
     }
 
+    // Add all deferred FK constraints at the end
+    if ($deferredFks) {
+        $ddl[] = "-- Deferred foreign key constraints";
+        $ddl = array_merge($ddl, $deferredFks);
+        $ddl[] = "";
+    }
+
     $ddl[] = "SET FOREIGN_KEY_CHECKS = 1;";
     return $ddl;
 }
 
 function foreignKeyDef(string $name, array $fk): string
 {
+    $fk = normalizeFk($fk);
     $cols = implode('`, `', $fk['columns']);
     $refCols = implode('`, `', $fk['ref_columns']);
     $def = "CONSTRAINT `{$name}` FOREIGN KEY (`{$cols}`) REFERENCES `{$fk['ref_table']}` (`{$refCols}`)";
