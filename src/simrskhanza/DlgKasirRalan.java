@@ -15776,7 +15776,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {                                                       
+    private void MnSkriningGiziKehamilanActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             //TNoReg.requestFocus();

@@ -647,11 +647,11 @@
                                                     if($nilaitunjangan<0){
                                                         $nilaitunjangan=0;
                                                     }
-												 
+
                                                 $tnjtnj=$tnjtnj+$nilaitunjangan;
                                                 echo "<tr class='isi3'><td width='150px'>$baris16[0]</td><td>: ".formatDuit($nilaitunjangan)."</td></tr>";
                                             }
-                                            
+
                                             $_sql50="select master_tunjangan_bulanan.nama,
 				             master_tunjangan_bulanan.tnj
 					     from pnm_tnj_bulanan,master_tunjangan_bulanan
@@ -710,9 +710,9 @@
                                                     set_insentif.tahun='$tahun' and set_insentif.bulan='$bulanindex' and
                                                     indextotal.kdindex=indexins.dep_id and
                                                     indextotal.kdindex='".$baris["indexins"]."'";
-                                            
-                                            
-                                            $hasil23=bukaquery($_sql23);                                            
+
+
+                                            $hasil23=bukaquery($_sql23);
                                             $baris23 = mysqli_fetch_array($hasil23);
                                             $ttlinsentif=$baris23[0];
                                             $ttlttlinsentif=$ttlttlinsentif+$ttlinsentif;
