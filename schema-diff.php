@@ -137,12 +137,21 @@ if (!$doMigrate) {
 
 // === Migrate mode ===
 
-// Generate rollback script (reverse direction: latest → current)
+// Generate full rollback script (reverse direction: latest → current) and save for reference
 fwrite(STDERR, "Generating rollback script...\n");
 $rollbackDdl = buildDdl($pdo, $latest, $current, $tgtTables, $srcTables, $tgtAllCols, $srcAllCols, $tgtAllIdx, $srcAllIdx, $tgtAllFks, $srcAllFks, $noDrop);
 $rollbackFile = 'rollback_' . date('Ymd_His') . '.sql';
 file_put_contents($rollbackFile, implode("\n", $rollbackDdl));
 fwrite(STDERR, "Rollback script saved to: {$rollbackFile}\n");
+
+// Build a forward→reverse mapping so we can revert only what was applied
+$rollbackStatements = [];
+foreach ($rollbackDdl as $line) {
+    if ($line !== '' && !str_starts_with($line, '--')) {
+        $rollbackStatements[] = $line;
+    }
+}
+$reverseMap = buildReverseMap($statements, $rollbackStatements);
 
 // Warning
 fwrite(STDERR, "\n");
@@ -166,15 +175,22 @@ if (!$skipConfirm) {
     }
 }
 
-// Execute statements one by one
+// Execute statements one by one, tracking reverse for each applied
 $pdo->exec("USE `{$current}`");
-$applied = [];
+$appliedReverse = [];
 $failed = false;
+$appliedCount = 0;
 
 foreach ($statements as $i => $stmt) {
     try {
         $pdo->exec($stmt);
-        $applied[] = $stmt;
+        $appliedCount++;
+        // Track the reverse statement(s) for this forward statement
+        if (isset($reverseMap[$i])) {
+            foreach ($reverseMap[$i] as $rev) {
+                array_unshift($appliedReverse, $rev);
+            }
+        }
         fwrite(STDERR, "  [OK] " . mb_strimwidth($stmt, 0, 100, '...') . "\n");
     } catch (PDOException $e) {
         $failed = true;
@@ -185,32 +201,27 @@ foreach ($statements as $i => $stmt) {
 }
 
 if ($failed) {
-    $appliedCount = count($applied);
-    fwrite(STDERR, "\nMigration failed after {$appliedCount} statement(s). Reverting...\n");
+    fwrite(STDERR, "\nMigration failed after {$appliedCount} statement(s). Reverting applied changes...\n");
 
-    // Execute rollback for applied statements
-    $rollbackStatements = [];
-    foreach ($rollbackDdl as $line) {
-        if ($line !== '' && !str_starts_with($line, '--')) {
-            $rollbackStatements[] = $line;
-        }
-    }
+    // Always ensure FK checks are off during revert
+    try { $pdo->exec("SET FOREIGN_KEY_CHECKS = 0;"); } catch (PDOException $e) {}
 
-    $revertFailed = false;
-    foreach ($rollbackStatements as $stmt) {
+    foreach ($appliedReverse as $stmt) {
         try {
             $pdo->exec($stmt);
             fwrite(STDERR, "  [REVERTED] " . mb_strimwidth($stmt, 0, 100, '...') . "\n");
         } catch (PDOException $e) {
-            // Rollback statements may fail for things not yet applied — that's expected
-            fwrite(STDERR, "  [SKIP] " . mb_strimwidth($stmt, 0, 100, '...') . "\n");
+            fwrite(STDERR, "  [REVERT FAIL] " . mb_strimwidth($stmt, 0, 100, '...') . "\n");
+            fwrite(STDERR, "  Error: " . $e->getMessage() . "\n");
         }
     }
 
-    fwrite(STDERR, "Revert completed. Review rollback script at: {$rollbackFile}\n");
+    try { $pdo->exec("SET FOREIGN_KEY_CHECKS = 1;"); } catch (PDOException $e) {}
+
+    fwrite(STDERR, "Revert completed. Full rollback script at: {$rollbackFile}\n");
     exit(1);
 } else {
-    fwrite(STDERR, "\nMigration completed. " . (count($applied) - 2) . " DDL statement(s) applied.\n");
+    fwrite(STDERR, "\nMigration completed. " . ($appliedCount - 2) . " DDL statement(s) applied.\n");
     fwrite(STDERR, "Rollback script kept at: {$rollbackFile}\n");
 }
 
@@ -419,6 +430,192 @@ function normalizeFk(array $fk): array
     $fk['update_rule'] = normalizeFkRule($fk['update_rule']);
     $fk['delete_rule'] = normalizeFkRule($fk['delete_rule']);
     return $fk;
+}
+
+/**
+ * Maps each forward statement index to its corresponding reverse statement(s).
+ *
+ * Matching logic:
+ * - SET FOREIGN_KEY_CHECKS: maps to opposite toggle
+ * - CREATE TABLE `x`: reverse is DROP TABLE IF EXISTS `x`
+ * - DROP TABLE IF EXISTS `x`: reverse is CREATE TABLE from rollback
+ * - ALTER TABLE `x` ...: matched to ALTER TABLE `x` ... in rollback
+ */
+function buildReverseMap(array $forward, array $reverse): array
+{
+    $map = [];
+
+    // Group reverse statements by table name for lookup
+    $reverseByTable = [];
+    foreach ($reverse as $ri => $rstmt) {
+        $table = extractTableName($rstmt);
+        if ($table !== null) {
+            $reverseByTable[$table][] = $rstmt;
+        }
+    }
+
+    foreach ($forward as $fi => $fstmt) {
+        $upper = strtoupper(trim($fstmt));
+
+        // FK check toggles: reverse is the opposite
+        if (str_starts_with($upper, 'SET FOREIGN_KEY_CHECKS')) {
+            // Don't map these — handled explicitly during revert
+            continue;
+        }
+
+        $table = extractTableName($fstmt);
+        if ($table === null) {
+            continue;
+        }
+
+        // CREATE TABLE → DROP TABLE
+        if (preg_match('/^CREATE\s+TABLE/i', $fstmt)) {
+            $map[$fi] = ["DROP TABLE IF EXISTS `{$table}`;"];
+            continue;
+        }
+
+        // DROP TABLE → find CREATE TABLE in reverse
+        if (preg_match('/^DROP\s+TABLE/i', $fstmt)) {
+            foreach ($reverse as $rstmt) {
+                if (preg_match('/^CREATE\s+TABLE/i', $rstmt) && extractTableName($rstmt) === $table) {
+                    $map[$fi] = [$rstmt];
+                    break;
+                }
+            }
+            continue;
+        }
+
+        // ALTER TABLE: find matching reverse ALTER for same table
+        if (preg_match('/^ALTER\s+TABLE/i', $fstmt) && isset($reverseByTable[$table])) {
+            $matched = matchAlterReverse($fstmt, $reverseByTable[$table]);
+            if ($matched) {
+                $map[$fi] = $matched;
+            }
+        }
+    }
+
+    return $map;
+}
+
+function extractTableName(string $stmt): ?string
+{
+    // Match CREATE TABLE `name`, DROP TABLE ... `name`, ALTER TABLE `name`
+    if (preg_match('/(?:CREATE|DROP|ALTER)\s+TABLE\s+(?:IF\s+(?:NOT\s+)?EXISTS\s+)?`([^`]+)`/i', $stmt, $m)) {
+        return $m[1];
+    }
+    return null;
+}
+
+function matchAlterReverse(string $forward, array $reverseStmts): ?array
+{
+    // ADD COLUMN `x` → DROP COLUMN `x`
+    if (preg_match('/ADD\s+COLUMN\s+`([^`]+)`/i', $forward, $m)) {
+        $col = $m[1];
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/DROP\s+COLUMN\s+`' . preg_quote($col, '/') . '`/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // DROP COLUMN `x` → ADD COLUMN `x`
+    if (preg_match('/DROP\s+COLUMN\s+`([^`]+)`/i', $forward, $m)) {
+        $col = $m[1];
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/ADD\s+COLUMN\s+`' . preg_quote($col, '/') . '`/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // MODIFY COLUMN `x` → MODIFY COLUMN `x` (reverse has the old definition)
+    if (preg_match('/MODIFY\s+COLUMN\s+`([^`]+)`/i', $forward, $m)) {
+        $col = $m[1];
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/MODIFY\s+COLUMN\s+`' . preg_quote($col, '/') . '`/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // ADD PRIMARY KEY → DROP PRIMARY KEY
+    if (preg_match('/ADD\s+PRIMARY\s+KEY/i', $forward)) {
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/DROP\s+PRIMARY\s+KEY/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // DROP PRIMARY KEY → ADD PRIMARY KEY
+    if (preg_match('/DROP\s+PRIMARY\s+KEY/i', $forward)) {
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/ADD\s+PRIMARY\s+KEY/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // ADD [UNIQUE] INDEX `x` → DROP INDEX `x`
+    if (preg_match('/ADD\s+(?:UNIQUE\s+)?INDEX\s+`([^`]+)`/i', $forward, $m)) {
+        $idx = $m[1];
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/DROP\s+INDEX\s+`' . preg_quote($idx, '/') . '`/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // DROP INDEX `x` → ADD INDEX `x`
+    if (preg_match('/DROP\s+INDEX\s+`([^`]+)`/i', $forward, $m)) {
+        $idx = $m[1];
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/ADD\s+(?:UNIQUE\s+)?INDEX\s+`' . preg_quote($idx, '/') . '`/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // ADD CONSTRAINT `x` FOREIGN KEY → DROP FOREIGN KEY `x`
+    if (preg_match('/ADD\s+CONSTRAINT\s+`([^`]+)`\s+FOREIGN\s+KEY/i', $forward, $m)) {
+        $fk = $m[1];
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/DROP\s+FOREIGN\s+KEY\s+`' . preg_quote($fk, '/') . '`/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // DROP FOREIGN KEY `x` → ADD CONSTRAINT `x` FOREIGN KEY
+    if (preg_match('/DROP\s+FOREIGN\s+KEY\s+`([^`]+)`/i', $forward, $m)) {
+        $fk = $m[1];
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/ADD\s+CONSTRAINT\s+`' . preg_quote($fk, '/') . '`\s+FOREIGN\s+KEY/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    // ENGINE/COLLATE changes → reverse ENGINE/COLLATE
+    if (preg_match('/^\s*ALTER\s+TABLE\s+`[^`]+`\s+(ENGINE|COLLATE)/i', $forward)) {
+        foreach ($reverseStmts as $r) {
+            if (preg_match('/^\s*ALTER\s+TABLE\s+`[^`]+`\s+(ENGINE|COLLATE)/i', $r)) {
+                return [$r];
+            }
+        }
+        return null;
+    }
+
+    return null;
 }
 
 function buildDdl(
