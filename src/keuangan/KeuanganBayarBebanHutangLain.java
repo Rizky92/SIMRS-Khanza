@@ -871,9 +871,15 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                                     }
                                     Sequel.mengedit("beban_hutang_lain","no_hutang='"+NoHutang.getText()+"'","sisahutang=sisahutang-"+Cicilan.getText());
                                     Sequel.deleteTampJurnal();
-                                    if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, Cicilan.getText(), "0");
-                                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText());
-                                    if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                                    if(Sequel.insertTampJurnal(kontraakun, namakontraakun, Cicilan.getText(), "0")==false){
+                                        sukses=false;
+                                    }
+                                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText())==false){
+                                        sukses=false;
+                                    }
+                                    if(sukses==true){
+                                        sukses=jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                                    }
                             }else{
                                 sukses=false;
                             }
@@ -949,9 +955,15 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                 }
                 Sequel.mengedit("beban_hutang_lain","no_hutang='"+tbKamar.getValueAt(tbKamar.getSelectedRow(),5).toString()+"'","status='Belum Lunas', sisahutang=sisahutang+"+tbKamar.getValueAt(tbKamar.getSelectedRow(),3).toString());
                 Sequel.deleteTampJurnal();
-                if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString());
-                if (sukses) sukses = Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString(), "0");
-                if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(),"U","PEMBATALAN BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                if(Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString())==false){
+                    sukses=false;
+                }
+                if(Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString(), "0")==false){
+                    sukses=false;
+                }
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(NoBukti.getText(),"U","PEMBATALAN BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                }
             }else{
                 sukses=false;
             }
@@ -1299,9 +1311,15 @@ public final class KeuanganBayarBebanHutangLain extends javax.swing.JDialog {
                     }
                     Sequel.mengedit("beban_hutang_lain","no_hutang='"+NoHutang.getText()+"'","sisahutang=sisahutang-"+Cicilan.getText());
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, Cicilan.getText(), "0");
-                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText());
-                    if (sukses) sukses = jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                    if(Sequel.insertTampJurnal(kontraakun, namakontraakun, Cicilan.getText(), "0")==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), "0", Cicilan.getText())==false){
+                        sukses=false;
+                    }
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoBukti.getText(),"U","BAYAR BEBAN HUTANG LAIN NO.HUTANG "+NoHutang.getText()+", OLEH "+akses.getkode());
+                    }
                     if(sukses==true){
                         if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
                             NoBukti.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),Cicilan.getText(),NoHutang.getText(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Bayar Beban Hutang Lain","Baru"

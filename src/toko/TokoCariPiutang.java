@@ -1025,9 +1025,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                   if(sukses==true){
                         ttlpiutang=rs.getDouble("sisapiutang");
                         Sequel.deleteTampJurnal();
-                        if (sukses) sukses = Sequel.insertTampJurnal(Piutang_Toko, "PIUTANG", 0, ttlpiutang);
-                        if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Piutang_Toko, "Persediaan Barang Toko", ttlpiutang, 0);
-                        if (sukses) sukses = jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG BARANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
+                        if(Sequel.insertTampJurnal(Piutang_Toko, "PIUTANG", 0, ttlpiutang)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertTampJurnal(Kontra_Piutang_Toko, "Persediaan Barang Toko", ttlpiutang, 0)==false){
+                            sukses=false;
+                        }
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG BARANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
+                        }
                   }
 
                   if(sukses==true){

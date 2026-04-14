@@ -687,9 +687,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(sukses==true){
                             if(ttl>0){
                                 Sequel.deleteTampJurnal();
-                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Medis from set_akun"), "PERSEDIAAN BARANG", 0, ttl);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Medis from set_akun"), "KONTRA PERSEDIAAN BARANG", ttl, 0);
-                                if (sukses) sukses = jur.simpanJurnal(NoKeluar.getText(),"U","STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
+                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Medis from set_akun"), "PERSEDIAAN BARANG", 0, ttl)==false){
+                                    sukses=false;
+                                }
+                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Medis from set_akun"), "KONTRA PERSEDIAAN BARANG", ttl, 0)==false){
+                                    sukses=false;
+                                }
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(NoKeluar.getText(),"U","STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
+                                }
                             }
                         }
                     } catch (Exception ex) {

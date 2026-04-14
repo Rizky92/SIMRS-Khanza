@@ -943,17 +943,27 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
                             }
                             Sequel.mengedit("detail_piutang_pasien","no_rawat='"+tabMode.getValueAt(i,1).toString()+"' and nama_bayar='"+nmpenjab.getText()+"'","sisapiutang=sisapiutang-"+(Double.parseDouble(tabMode.getValueAt(i,11).toString())+Double.parseDouble(tabMode.getValueAt(i,12).toString())+Double.parseDouble(tabMode.getValueAt(i,13).toString())));
                             Sequel.deleteTampJurnal();
-                            if (sukses) sukses = Sequel.insertTampJurnal(kdpenjab.getText(), "BAYAR PIUTANG", 0, Double.parseDouble(tabMode.getValueAt(i, 11).toString()) + Double.parseDouble(tabMode.getValueAt(i, 12).toString()) + Double.parseDouble(tabMode.getValueAt(i, 13).toString()));
+                            if(Sequel.insertTampJurnal(kdpenjab.getText(), "BAYAR PIUTANG", 0, Double.parseDouble(tabMode.getValueAt(i, 11).toString()) + Double.parseDouble(tabMode.getValueAt(i, 12).toString()) + Double.parseDouble(tabMode.getValueAt(i, 13).toString()))==false){
+                                sukses=false;
+                            }
                             if(Double.parseDouble(tabMode.getValueAt(i,11).toString())>0){
-                                if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tabMode.getValueAt(i, 11).toString(), "0");
+                                if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tabMode.getValueAt(i, 11).toString(), "0")==false){
+                                    sukses=false;
+                                }
                             }
                             if(Double.parseDouble(tabMode.getValueAt(i,12).toString())>0){
-                                if (sukses) sukses = Sequel.insertTampJurnal(Diskon_Piutang, "DISKON BAYAR", tabMode.getValueAt(i, 12).toString(), "0");
+                                if(Sequel.insertTampJurnal(Diskon_Piutang, "DISKON BAYAR", tabMode.getValueAt(i, 12).toString(), "0")==false){
+                                    sukses=false;
+                                }
                             }
                             if(Double.parseDouble(tabMode.getValueAt(i,13).toString())>0){
-                                if (sukses) sukses = Sequel.insertTampJurnal(Piutang_Tidak_Terbayar, "PIUTANG TIDAK TERBAYAR", tabMode.getValueAt(i, 13).toString(), "0");
+                                if(Sequel.insertTampJurnal(Piutang_Tidak_Terbayar, "PIUTANG TIDAK TERBAYAR", tabMode.getValueAt(i, 13).toString(), "0")==false){
+                                    sukses=false;
+                                }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                            }
                         }else{
                             sukses=false;
                         }
@@ -970,9 +980,15 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
                             nomorpemasukan,Valid.SetTgl(Tanggal.getSelectedItem()+"")+" "+Tanggal.getSelectedItem().toString().substring(11,19),status,Double.toString(lebihbayar),akses.getkode().replaceAll("Admin Utama","-"),carabayar,"Pendapatan Lebih Bayar Piutang Pasien"
                         })==true){
                             Sequel.deleteTampJurnal();
-                            if (sukses) sukses = Sequel.insertTampJurnal(Lebih_Bayar_Piutang, "Lebih Bayar Piutang", 0, lebihbayar);
-                            if (sukses) sukses = Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), lebihbayar, 0);
-                            if (sukses) sukses = jur.simpanJurnal(nomorpemasukan,"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
+                            if(Sequel.insertTampJurnal(Lebih_Bayar_Piutang, "Lebih Bayar Piutang", 0, lebihbayar)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), lebihbayar, 0)==false){
+                                sukses=false;
+                            }
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(nomorpemasukan,"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
+                            }
                             if(sukses==true){
                                 lebihbayar=0;
                                 carabayar="";

@@ -733,12 +733,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", ttl + meterai, 0);
-                    if (ppn > 0) {
-                        if (sukses) sukses = Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Dapur", ppn, 0);
+                    if(Sequel.insertTampJurnal(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", ttl + meterai, 0)==false){
+                        sukses=false;
                     }
-                    if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Penerimaan_Dapur, "HUTANG BARANG NON MEDIS", 0, ttl + ppn + meterai);
-                    if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG DAPUR"+", OLEH "+akses.getkode());
+                    if (ppn > 0) {
+                        if(Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Dapur", ppn, 0)==false){
+                            sukses=false;
+                        }
+                    }
+                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_Dapur, "HUTANG BARANG NON MEDIS", 0, ttl + ppn + meterai)==false){
+                        sukses=false;
+                    }
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG DAPUR"+", OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

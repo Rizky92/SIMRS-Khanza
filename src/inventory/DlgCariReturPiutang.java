@@ -821,9 +821,15 @@ public class DlgCariReturPiutang extends javax.swing.JDialog {
                         if(sukses==true){
                             double totalDetilReturPiutang = Sequel.cariDoubleSmc("select sum(subtotal) from detreturpiutang where no_retur_piutang = ?", rs.getString("no_retur_piutang"));
                             Sequel.deleteTampJurnal();
-                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Piutang_Obat from set_akun"), "RETUR PIUTANG", 0, totalDetilReturPiutang);
-                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Piutang_Obat from set_akun"), "KAS DI TANGAN", totalDetilReturPiutang, 0);
-                            if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_piutang"),"U","BATAL RETUR PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Piutang_Obat from set_akun"), "RETUR PIUTANG", 0, totalDetilReturPiutang)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Piutang_Obat from set_akun"), "KAS DI TANGAN", totalDetilReturPiutang, 0)==false){
+                                sukses=false;
+                            }
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(rs.getString("no_retur_piutang"),"U","BATAL RETUR PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                            }
                         }
 
                         if(sukses==true){
