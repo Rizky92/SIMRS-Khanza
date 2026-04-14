@@ -807,11 +807,11 @@ public class DapurCariPengeluaran extends javax.swing.JDialog {
                         total=total+rs2.getDouble("total");
                     }
                     Sequel.deleteTampJurnal();
-                    if (sukses) {
-                        sukses = Sequel.insertTampJurnal(Sequel.cariIsiSmc("select Stok_Keluar_Dapur from set_akun"), "PERSEDIAAN BARANG", 0, total);
+                    if(Sequel.insertTampJurnal(Sequel.cariIsiSmc("select Stok_Keluar_Dapur from set_akun"), "PERSEDIAAN BARANG", 0, total)==false){
+                        sukses=false;
                     }
-                    if (sukses) {
-                        sukses = Sequel.insertTampJurnal(Sequel.cariIsiSmc("select Kontra_Stok_Keluar_Dapur from set_akun"), "KAS DI TANGAN", total, 0);
+                    if(Sequel.insertTampJurnal(Sequel.cariIsiSmc("select Kontra_Stok_Keluar_Dapur from set_akun"), "KAS DI TANGAN", total, 0)==false){
+                        sukses=false;
                     }
                     if(sukses==true){
                         sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN PENGGUNAAN BARANG DAPUR KERING DAN BASAH"+", OLEH "+akses.getkode());

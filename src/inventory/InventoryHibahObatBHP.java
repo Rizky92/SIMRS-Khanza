@@ -680,8 +680,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(sukses==true){
                             if(ttl2>0){
                                 Sequel.deleteTampJurnal();
-                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Obat from set_akun"), "PERSEDIAAN HIBAH OBAT & BHP", ttl2, 0);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Obat from set_akun"), "PENDAPATAN HIBAH", 0, ttl2);
+                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Obat from set_akun"), "PERSEDIAAN HIBAH OBAT & BHP", ttl2, 0)==false){
+                                    sukses=false;
+                                }
+                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Obat from set_akun"), "PENDAPATAN HIBAH", 0, ttl2)==false){
+                                    sukses=false;
+                                }
                                 if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","HIBAH OBAT & BHP DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
                             }
                         }

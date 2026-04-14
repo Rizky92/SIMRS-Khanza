@@ -4336,13 +4336,23 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(verifikasi_penjualan_di_kasir.equals("No")){
             if(sukses==true){
                 Sequel.deleteTampJurnal();
-                if (sukses) sukses = Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttl + ongkir);
-                if(besarppnobat>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat);
+                if(Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttl + ongkir)==false){
+                    sukses=false;
                 }
-                if (sukses) sukses = Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), ttl + ongkir + besarppnobat, 0);
-                if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0);
-                if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp);
+                if(besarppnobat>0){
+                    if(Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat)==false){
+                        sukses=false;
+                    }
+                }
+                if(Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), ttl + ongkir + besarppnobat, 0)==false){
+                    sukses=false;
+                }
+                if(Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0)==false){
+                    sukses=false;
+                }
+                if(Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp)==false){
+                    sukses=false;
+                }
                 if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PENJUALAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
                 if(sukses==true){
                     sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+NoNota.getText()+"','"+kdmem.getText()+"','"+nmmem.getText().replaceAll("'","")+"','-',concat('"+Valid.SetTgl(Tgl.getSelectedItem()+"")+

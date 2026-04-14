@@ -661,8 +661,12 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                     Keterangan.getText(),Valid.SetTgl(Tempo.getSelectedItem()+""),NilaiHutang.getText(),NilaiHutang.getText()
                 })==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", NilaiHutang.getText());
-                    if (sukses) sukses = Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", NilaiHutang.getText(), "0");
+                    if(Sequel.insertTampJurnal(kontraakun, namakontraakun, "0", NilaiHutang.getText())==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", NilaiHutang.getText(), "0")==false){
+                        sukses=false;
+                    }
                     if (sukses) sukses = jur.simpanJurnal(NoHutang.getText(),"U","BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
             }else{
                 sukses=false;
@@ -730,8 +734,12 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                     root = null;
                 }
                 Sequel.deleteTampJurnal();
-                if (sukses) sukses = Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString());
-                if (sukses) sukses = Sequel.insertTampJurnal(kontraakun, namakontraakun, tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString(), "0");
+                if(Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString())==false){
+                    sukses=false;
+                }
+                if(Sequel.insertTampJurnal(kontraakun, namakontraakun, tbKamar.getValueAt(tbKamar.getSelectedRow(), 8).toString(), "0")==false){
+                    sukses=false;
+                }
                 if(sukses==true){
                     if (sukses) sukses = jur.simpanJurnal(NoHutang.getText(),"U","PEMBATALAN BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
                 }

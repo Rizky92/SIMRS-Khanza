@@ -6106,26 +6106,34 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
 
                             if(countbayar>1){
                                 if (Sequel.menyimpantfSmc("detail_nota_jalan", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString())) {
-                                    if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
+                                    if(Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0)==false){
+                                        sukses=false;
+                                    }
                                 } else {
                                     if (Sequel.mengupdatetfSmc("detail_nota_jalan", "besarppn = besarppn + ?, besar_bayar = besar_bayar + ?, keterangan = ?",
                                         "no_rawat = ? and nama_bayar = ?", Double.toString(besarppn), Double.toString(itembayar), tbAkunBayar.getValueAt(r, 5).toString(),
                                         TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString()
                                     )) {
-                                        if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0);
+                                        if(Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), itembayar, 0)==false){
+                                            sukses=false;
+                                        }
                                     } else {
                                         sukses = false;
                                     }
                                 }
                             }else if(countbayar==1){
                                 if (Sequel.menyimpantfSmc("detail_nota_jalan", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(besarppn), Double.toString(total), tbAkunBayar.getValueAt(r, 5).toString())) {
-                                    if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), total, 0);
+                                    if(Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), total, 0)==false){
+                                        sukses=false;
+                                    }
                                 } else {
                                     if (Sequel.mengupdatetfSmc("detail_nota_jalan", "besarppn = besarppn + ?, besar_bayar = besar_bayar + ?, keterangan = ?",
                                         "no_rawat = ? and nama_bayar = ?", Double.toString(besarppn), Double.toString(total), tbAkunBayar.getValueAt(r, 5).toString(),
                                         TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString()
                                     )) {
-                                        if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), total, 0);
+                                        if(Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), total, 0)==false){
+                                            sukses=false;
+                                        }
                                     } else {
                                         sukses = false;
                                     }
@@ -7145,26 +7153,34 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
 
                             if(countbayar>1){
                                 if (Sequel.menyimpantfSmc("detail_nota_jalan", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(-besarppn), Double.toString(-itembayar), tbAkunBayar.getValueAt(r, 5).toString())) {
-                                    if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, itembayar);
+                                    if(Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, itembayar)==false){
+                                        sukses=false;
+                                    }
                                 } else {
                                     if (Sequel.mengupdatetfSmc("detail_nota_jalan", "besarppn = besarppn - ?, besar_bayar = besar_bayar = ?, keterangan = ?",
                                         "no_rawat = ? and nama_bayar = ?", Double.toString(-besarppn), Double.toString(-itembayar), tbAkunBayar.getValueAt(r, 5).toString(),
                                         TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString()
                                     )) {
-                                        if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, itembayar);
+                                        if(Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, itembayar)==false){
+                                            sukses=false;
+                                        }
                                     } else {
                                         sukses = false;
                                     }
                                 }
                             }else if(countbayar==1){
                                 if (Sequel.menyimpantfSmc("detail_nota_jalan", null, TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString(), Double.toString(-besarppn), Double.toString(-total), tbAkunBayar.getValueAt(r, 5).toString())) {
-                                    if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, total);
+                                    if(Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, total)==false){
+                                        sukses=false;
+                                    }
                                 } else {
                                     if (Sequel.mengupdatetfSmc("detail_nota_jalan", "besarppn = besarppn - ?, besar_bayar = besar_bayar = ?, keterangan = ?",
                                         "no_rawat = ? and nama_bayar = ?", Double.toString(-besarppn), Double.toString(-total), tbAkunBayar.getValueAt(r, 5).toString(),
                                         TNoRw.getText(), tbAkunBayar.getValueAt(r, 0).toString()
                                     )) {
-                                        if (sukses) sukses = Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, total);
+                                        if(Sequel.insertTampJurnal(tbAkunBayar.getValueAt(r, 1).toString(), tbAkunBayar.getValueAt(r, 0).toString(), 0, total)==false){
+                                            sukses=false;
+                                        }
                                     } else {
                                         sukses = false;
                                     }

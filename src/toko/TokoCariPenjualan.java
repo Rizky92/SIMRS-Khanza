@@ -1010,10 +1010,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         ttlhpp=Sequel.cariIsiAngka("select sum(h_beli*jumlah) from toko_detail_jual where nota_jual=?",rs.getString("nota_jual"));
 
                         Sequel.deleteTampJurnal();
-                        if (sukses) sukses = Sequel.insertTampJurnal(Penjualan_Toko, "PENJUALAN", ttljual, 0);
-                        if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", 0, ttljual);
-                        if (sukses) sukses = Sequel.insertTampJurnal(HPP_Barang_Toko, "HPP Barang Toko", 0, ttlhpp);
-                        if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Barang_Toko, "Persediaan Barang Toko", ttlhpp, 0);
+                        if(Sequel.insertTampJurnal(Penjualan_Toko, "PENJUALAN", ttljual, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", 0, ttljual)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertTampJurnal(HPP_Barang_Toko, "HPP Barang Toko", 0, ttlhpp)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertTampJurnal(Persediaan_Barang_Toko, "Persediaan Barang Toko", ttlhpp, 0)==false){
+                            sukses=false;
+                        }
                         if (sukses) sukses = jur.simpanJurnal(rs.getString("nota_jual"),"U","BATAL PENJUALAN BARANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
                   }
 

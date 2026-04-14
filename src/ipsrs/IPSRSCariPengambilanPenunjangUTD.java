@@ -357,8 +357,12 @@ public final class IPSRSCariPengambilanPenunjangUTD extends javax.swing.JDialog 
 
             if(sukses==true){
                 Sequel.deleteTampJurnal();
-                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Pengambilan_Penunjang_Utd from set_akun"), "PENGAMBILAN BARANG NON MEDIS UTD", 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()));
-                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Penunjang_Utd from set_akun"), "PERSEDIAAN BARANG NON MEDIS", Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()), 0);
+                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Pengambilan_Penunjang_Utd from set_akun"), "PENGAMBILAN BARANG NON MEDIS UTD", 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()))==false){
+                    sukses=false;
+                }
+                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Penunjang_Utd from set_akun"), "PERSEDIAAN BARANG NON MEDIS", Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()), 0)==false){
+                    sukses=false;
+                }
                 if (sukses) sukses = jur.simpanJurnal(DTPCari1.getSelectedItem().toString().replaceAll("-","/"),"U","PEMBATALAN PENGAMBILAN BARANG NON MEDIS UTD"+", OLEH "+akses.getkode());
             }
 

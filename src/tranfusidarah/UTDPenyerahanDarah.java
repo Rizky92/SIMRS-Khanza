@@ -1247,8 +1247,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(sukses==true){
                         if(verifikasi_penyerahan_darah_di_kasir.equals("No")){
                             Sequel.deleteTampJurnal();
-                            if (sukses) sukses = Sequel.insertTampJurnal(Penyerahan_Darah, "PENJUALAN DARAH UTD", 0, ttl);
-                            if (sukses) sukses = Sequel.insertTampJurnal(akunbayar, "CARA BAYAR", ttl, 0);
+                            if(Sequel.insertTampJurnal(Penyerahan_Darah, "PENJUALAN DARAH UTD", 0, ttl)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(akunbayar, "CARA BAYAR", ttl, 0)==false){
+                                sukses=false;
+                            }
                             if (sukses) sukses = jur.simpanJurnal(nopenyerahan.getText(),"U","PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
                             if(sukses==true){
                                 Sequel.menyimpan("tagihan_sadewa","'"+nopenyerahan.getText()+"','-','"+nmpengambil.getText().replaceAll("'","")+"','-',concat('"+Valid.SetTgl(tanggal.getSelectedItem()+"")+

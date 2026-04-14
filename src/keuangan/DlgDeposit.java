@@ -776,8 +776,12 @@ public class DlgDeposit extends javax.swing.JDialog {
                            for(JsonNode list:response){
                                if(list.path("NamaAkun").asText().equals(AkunBayar.getSelectedItem().toString())){
                                     Sequel.deleteTampJurnal();
-                                    if (sukses) sukses = Sequel.insertTampJurnal(list.path("KodeRek").asText(), AkunBayar.getSelectedItem().toString(), Double.parseDouble(BesarDeposit.getText()), 0);
-                                    if (sukses) sukses = Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", 0, Double.parseDouble(BesarDeposit.getText()));
+                                    if(Sequel.insertTampJurnal(list.path("KodeRek").asText(), AkunBayar.getSelectedItem().toString(), Double.parseDouble(BesarDeposit.getText()), 0)==false){
+                                        sukses=false;
+                                    }
+                                    if(Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", 0, Double.parseDouble(BesarDeposit.getText()))==false){
+                                        sukses=false;
+                                    }
                                     if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","DEPOSIT PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", OLEH "+akses.getkode());
                                     if(sukses==true){
                                         sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+Nomor.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','-','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+cmbJam.getSelectedItem()+":"+cmbMnt.getSelectedItem()+":"+cmbDtk.getSelectedItem()+"','Uang Muka','"+BesarDeposit.getText()+"','"+BesarDeposit.getText()+"','Belum','"+akses.getkode()+"'","No.Deposit");
@@ -863,8 +867,12 @@ public class DlgDeposit extends javax.swing.JDialog {
 
                     if (Sequel.menghapustfSmc("deposit", "no_deposit = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString())) {
                         Sequel.deleteTampJurnal();
-                        if (sukses) sukses = Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()), 0);
-                        if (sukses) sukses = Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString(), 0, Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()));
+                        if(Sequel.insertTampJurnal(Uang_Muka_Ranap, "UANG MUKA RANAP", Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()), 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertTampJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 12).toString(), tbObat.getValueAt(tbObat.getSelectedRow(), 5).toString(), 0, Valid.setAngkaSmc(tabMode.getValueAt(tbObat.getSelectedRow(), 6).toString()))==false){
+                            sukses=false;
+                        }
                         if (sukses) sukses = jur.simpanJurnal(tbObat.getValueAt(tbObat.getSelectedRow(), 0).toString(), "U", "PEMBATALAN DEPOSIT PASIEN " + TNoRw.getText() + " " + TNoRM.getText() + " " + TPasien.getText() + ", OLEH " + akses.getkode());
                         if (sukses) sukses = Sequel.menghapustfSmc("tagihan_sadewa", "no_nota = ?", tabMode.getValueAt(tbObat.getSelectedRow(), 0).toString());
                     } else {

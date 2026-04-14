@@ -639,8 +639,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Non_Medis from set_akun"), "PERSEDIAAN BARANG NON MEDIS", sbttl, 0);
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", 0, sbttl);
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Non_Medis from set_akun"), "PERSEDIAAN BARANG NON MEDIS", sbttl, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", 0, sbttl)==false){
+                        sukses=false;
+                    }
                     if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());
                 }
 

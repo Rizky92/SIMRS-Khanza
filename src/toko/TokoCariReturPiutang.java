@@ -753,8 +753,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
 
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Piutang_Toko from set_akun"),"RETUR JUAL TOKO",0,rs.getDouble("total"));
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Piutang_Toko from set_akun"),"KONTRA RETUR JUAL TOKO",rs.getDouble("total"),0);
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Piutang_Toko from set_akun"),"RETUR JUAL TOKO",0,rs.getDouble("total"))==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Piutang_Toko from set_akun"),"KONTRA RETUR JUAL TOKO",rs.getDouble("total"),0)==false){
+                        sukses=false;
+                    }
                     if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_piutang"),"U","BATAL TRANSAKSI RETUR JUAL TOKO"+", OLEH "+akses.getkode());
 
                     if(sukses==true){

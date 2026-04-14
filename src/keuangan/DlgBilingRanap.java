@@ -3098,7 +3098,9 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 Sequel.deleteTampJurnal();
 
                 if((-1*ttlPotongan)>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getPotongan_Ranap(), "Potongan Ranap", 0, (-1 * ttlPotongan));
+                    if(Sequel.insertTampJurnal(akunbillingranap.getPotongan_Ranap(), "Potongan Ranap", 0, (-1 * ttlPotongan))==false){
+                        sukses=false;
+                    }
                 }
 
                 if((-1*ttlRetur_Obat)>0){
@@ -3108,23 +3110,33 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 }
 
                 if(ttlRegistrasi>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getRegistrasi_Ranap(), "Registrasi Ranap", ttlRegistrasi, 0);
+                    if(Sequel.insertTampJurnal(akunbillingranap.getRegistrasi_Ranap(), "Registrasi Ranap", ttlRegistrasi, 0)==false){
+                        sukses=false;
+                    }
                 }
 
                 if(ttlTambahan>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getTambahan_Ranap(), "Tambahan Ranap", ttlTambahan, 0);
+                    if(Sequel.insertTampJurnal(akunbillingranap.getTambahan_Ranap(), "Tambahan Ranap", ttlTambahan, 0)==false){
+                        sukses=false;
+                    }
                 }
 
                 if(ttlResep_Pulang>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getResep_Pulang_Ranap(), "Resep Pulang Ranap", ttlResep_Pulang, 0);
+                    if(Sequel.insertTampJurnal(akunbillingranap.getResep_Pulang_Ranap(), "Resep Pulang Ranap", ttlResep_Pulang, 0)==false){
+                        sukses=false;
+                    }
                 }
 
                 if(ttlKamar>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getKamar_Inap(), "Kamar Inap", ttlKamar, 0);
+                    if(Sequel.insertTampJurnal(akunbillingranap.getKamar_Inap(), "Kamar Inap", ttlKamar, 0)==false){
+                        sukses=false;
+                    }
                 }
 
                 if(ttlHarian>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getHarian_Ranap(), "Harian Ranap", ttlHarian, 0);
+                    if(Sequel.insertTampJurnal(akunbillingranap.getHarian_Ranap(), "Harian Ranap", ttlHarian, 0)==false){
+                        sukses=false;
+                    }
                 }
 
                 if((ttlRanap_Dokter+ttlRanap_Paramedis+ttlRalan_Dokter+ttlRalan_Paramedis)>0){
@@ -3168,7 +3180,9 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                 }
 
                 if(ttlService>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getService_Ranap(), "Biaya Service Ranap", ttlService, 0);
+                    if(Sequel.insertTampJurnal(akunbillingranap.getService_Ranap(), "Biaya Service Ranap", ttlService, 0)==false){
+                        sukses=false;
+                    }
                 }
 
                 psakunbayar=koneksi.prepareStatement(
@@ -7545,7 +7559,9 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     }
 
                     if((-1*ttlPotongan)>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getPotongan_Ranap(), "Potongan Ranap", (-1 * ttlPotongan), 0);
+                        if(Sequel.insertTampJurnal(akunbillingranap.getPotongan_Ranap(), "Potongan Ranap", (-1 * ttlPotongan), 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if((-1*ttlRetur_Obat)>0){
@@ -7555,23 +7571,33 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     }
 
                     if(ttlRegistrasi>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getRegistrasi_Ranap(), "Registrasi Ranap", 0, ttlRegistrasi);
+                        if(Sequel.insertTampJurnal(akunbillingranap.getRegistrasi_Ranap(), "Registrasi Ranap", 0, ttlRegistrasi)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlTambahan>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getTambahan_Ranap(), "Tambahan Ranap", 0, ttlTambahan);
+                        if(Sequel.insertTampJurnal(akunbillingranap.getTambahan_Ranap(), "Tambahan Ranap", 0, ttlTambahan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlResep_Pulang>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getResep_Pulang_Ranap(), "Resep Pulang Ranap", 0, ttlResep_Pulang);
+                        if(Sequel.insertTampJurnal(akunbillingranap.getResep_Pulang_Ranap(), "Resep Pulang Ranap", 0, ttlResep_Pulang)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlKamar>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getKamar_Inap(), "Kamar Inap", 0, ttlKamar);
+                        if(Sequel.insertTampJurnal(akunbillingranap.getKamar_Inap(), "Kamar Inap", 0, ttlKamar)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlHarian>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getHarian_Ranap(), "Harian Ranap", 0, ttlHarian);
+                        if(Sequel.insertTampJurnal(akunbillingranap.getHarian_Ranap(), "Harian Ranap", 0, ttlHarian)==false){
+                            sukses=false;
+                        }
                     }
 
                     if((ttlRanap_Dokter+ttlRanap_Paramedis+ttlRalan_Dokter+ttlRalan_Paramedis)>0){
@@ -7603,7 +7629,9 @@ public class DlgBilingRanap extends javax.swing.JDialog {
                     }
 
                     if(ttlService>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(akunbillingranap.getService_Ranap(), "Biaya Service Ranap", 0, ttlService);
+                        if(Sequel.insertTampJurnal(akunbillingranap.getService_Ranap(), "Biaya Service Ranap", 0, ttlService)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(sisadeposit>0){

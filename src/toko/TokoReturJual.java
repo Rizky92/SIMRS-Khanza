@@ -696,8 +696,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Retur_Jual_Toko,"RETUR PENJUALAN",ttl,0);
-                    if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Retur_Jual_Toko,"KONTRA RETUR PENJUALAN",0,ttl);
+                    if(Sequel.insertTampJurnal(Retur_Jual_Toko,"RETUR PENJUALAN",ttl,0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertTampJurnal(Kontra_Retur_Jual_Toko,"KONTRA RETUR PENJUALAN",0,ttl)==false){
+                        sukses=false;
+                    }
                     if (sukses) sukses = jur.simpanJurnal(NoRetur.getText(),"U","RETUR PENJUALAN TOKO"+", OLEH "+akses.getkode());
                 }
 

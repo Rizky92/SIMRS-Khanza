@@ -1049,11 +1049,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                             if(sukses==true){
                                 Sequel.deleteTampJurnal();
-                                if (sukses) {
-                                    sukses = Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Piutang_Obat from set_akun"), "PIUTANG PASIEN", 0, rs.getDouble("sisapiutang"));
+                                if(Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Piutang_Obat from set_akun"), "PIUTANG PASIEN", 0, rs.getDouble("sisapiutang"))==false){
+                                    sukses=false;
                                 }
-                                if (sukses) {
-                                    sukses = Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", rs.getDouble("sisapiutang"), 0);
+                                if(Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", rs.getDouble("sisapiutang"), 0)==false){
+                                    sukses=false;
                                 }
                                 if (sukses) {
                                     sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG OBAT DI "+Sequel.CariBangsal(rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());

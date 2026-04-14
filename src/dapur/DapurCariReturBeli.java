@@ -667,8 +667,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
 
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Beli_Dapur from set_akun2"), "RETUR BELI DAPUR", rs.getDouble("total"), 0);
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Beli_Dapur from set_akun2"), "KONTRA RETUR BELI DAPUR", 0, rs.getDouble("total"));
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Beli_Dapur from set_akun2"), "RETUR BELI DAPUR", rs.getDouble("total"), 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Beli_Dapur from set_akun2"), "KONTRA RETUR BELI DAPUR", 0, rs.getDouble("total"))==false){
+                        sukses=false;
+                    }
                     if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL TRANSAKSI RETUR BELI BARANG DAPUR"+", OLEH "+akses.getkode());
 
                     if(sukses==true){

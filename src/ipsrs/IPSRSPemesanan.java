@@ -745,11 +745,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Penerimaan_NonMedis, "PERSEDIAAN BARANG NON MEDIS", (ttl + meterai), 0);
-                    if(ppn>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Non Medis", ppn, 0);
+                    if(Sequel.insertTampJurnal(Penerimaan_NonMedis, "PERSEDIAAN BARANG NON MEDIS", (ttl + meterai), 0)==false){
+                        sukses=false;
                     }
-                    if (sukses) sukses = Sequel.insertTampJurnal(Kontra_Penerimaan_NonMedis, "HUTANG BARANG NON MEDIS", 0, (ttl + ppn + meterai));
+                    if(ppn>0){
+                        if(Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Non Medis", ppn, 0)==false){
+                            sukses=false;
+                        }
+                    }
+                    if(Sequel.insertTampJurnal(Kontra_Penerimaan_NonMedis, "HUTANG BARANG NON MEDIS", 0, (ttl + ppn + meterai))==false){
+                        sukses=false;
+                    }
                     if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG NON MEDIS/PENUNJANG"+", OLEH "+akses.getkode());
                 }
 

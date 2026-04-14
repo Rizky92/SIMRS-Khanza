@@ -700,7 +700,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Operasi_Ranap, "Utang Jasa Medik Dokter Operasi Ranap", 0, rs.getDouble("operasiranap"));
                                 }
                                 if(totaltagihan>0){
-                                    if (sukses) sukses = Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, totaltagihan);
+                                    if(Sequel.insertTampJurnal(Akun_Biaya_Mandiri, "BIAYA TRANSAKSI", 0, totaltagihan)==false){
+                                        sukses=false;
+                                    }
                                 }
                                 if(rs.getDouble("besar_bayar")>0){
                                     if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(koderekening, rs.getString("nama_bayar"), totaltagihan + rs.getDouble("besar_bayar"), 0);
