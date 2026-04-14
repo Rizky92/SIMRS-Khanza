@@ -560,28 +560,52 @@ public final class DlgBarcodeRanap extends javax.swing.JDialog {
             if(sukses==true){
                 Sequel.deleteTampJurnal();
                 if(ttlpendapatan>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap(), "Suspen Piutang Tindakan Ranap", ttlpendapatan, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getTindakan_Ranap(), "Pendapatan Tindakan Rawat Inap", 0, ttlpendapatan);
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getSuspen_Piutang_Tindakan_Ranap(), "Suspen Piutang Tindakan Ranap", ttlpendapatan, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getTindakan_Ranap(), "Pendapatan Tindakan Rawat Inap", 0, ttlpendapatan)==false){
+                        sukses=false;
+                    }
                 }
                 if(ttljmdokter>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Medik_Dokter_Tindakan_Ranap(), "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Medik_Dokter_Tindakan_Ranap(), "Utang Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter);
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Medik_Dokter_Tindakan_Ranap(), "Beban Jasa Medik Dokter Tindakan Ranap", ttljmdokter, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Medik_Dokter_Tindakan_Ranap(), "Utang Jasa Medik Dokter Tindakan Ranap", 0, ttljmdokter)==false){
+                        sukses=false;
+                    }
                 }
                 if(ttlkso>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_KSO_Tindakan_Ranap(), "Beban KSO Tindakan Ranap", ttlkso, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_KSO_Tindakan_Ranap(), "Utang KSO Tindakan Ranap", 0, ttlkso);
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_KSO_Tindakan_Ranap(), "Beban KSO Tindakan Ranap", ttlkso, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_KSO_Tindakan_Ranap(), "Utang KSO Tindakan Ranap", 0, ttlkso)==false){
+                        sukses=false;
+                    }
                 }
                 if(ttljasasarana>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Sarana_Tindakan_Ranap(), "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Sarana_Tindakan_Ranap(), "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana);
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Sarana_Tindakan_Ranap(), "Beban Jasa Sarana Tindakan Ranap", ttljasasarana, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Sarana_Tindakan_Ranap(), "Utang Jasa Sarana Tindakan Ranap", 0, ttljasasarana)==false){
+                        sukses=false;
+                    }
                 }
                 if(ttlbhp>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getHPP_BHP_Tindakan_Ranap(), "HPP BHP Tindakan Ranap", ttlbhp, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getPersediaan_BHP_Tindakan_Ranap(), "Persediaan BHP Tindakan Ranap", 0, ttlbhp);
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getHPP_BHP_Tindakan_Ranap(), "HPP BHP Tindakan Ranap", ttlbhp, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getPersediaan_BHP_Tindakan_Ranap(), "Persediaan BHP Tindakan Ranap", 0, ttlbhp)==false){
+                        sukses=false;
+                    }
                 }
                 if(ttlmenejemen>0){
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Menejemen_Tindakan_Ranap(), "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Menejemen_Tindakan_Ranap(), "Utang Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen);
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getBeban_Jasa_Menejemen_Tindakan_Ranap(), "Beban Jasa Menejemen Tindakan Ranap", ttlmenejemen, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertOrUpdateTampJurnal(akuntindakanranap.getUtang_Jasa_Menejemen_Tindakan_Ranap(), "Utang Jasa Menejemen Tindakan Ranap", 0, ttlmenejemen)==false){
+                        sukses=false;
+                    }
                 }
                 if (sukses) sukses = jur.simpanJurnal(NoRawat.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+NoRawat.getText()+" DIPOSTING OLEH "+akses.getkode());
             }

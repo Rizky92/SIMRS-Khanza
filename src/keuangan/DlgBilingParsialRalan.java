@@ -6148,132 +6148,228 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
 
                 if(sukses==true){
                     if((ttlRalan_Dokter+ttlRalan_Dokter_Param+ttlRalan_Paramedis-Suspen_Tindakan_Ralan)>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Tindakan Ralan", 0, ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis - Suspen_Tindakan_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Tindakan Ralan", 0, ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis - Suspen_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if((ttlLaborat)>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "Laborat Ralan", 0, ttlLaborat);
+                        if(Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "Laborat Ralan", 0, ttlLaborat)==false){
+                            sukses=false;
+                        }
                     }
 
                     if((ttlRadiologi)>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Radiologi_Ralan, "Radiologi Ralan", 0, ttlRadiologi);
+                        if(Sequel.insertOrUpdateTampJurnal(Radiologi_Ralan, "Radiologi Ralan", 0, ttlRadiologi)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlObat>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", 0, ttlObat);
+                        if(Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Obat_Ralan, "Suspen Piutang Obat Ralan", 0, ttlObat)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Suspen_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", 0, Suspen_Tindakan_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Suspen Piutang Tindakan Ralan", 0, Suspen_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlRegistrasi>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Registrasi_Ralan, "Registrasi Ralan", 0, ttlRegistrasi);
+                        if(Sequel.insertOrUpdateTampJurnal(Registrasi_Ralan, "Registrasi Ralan", 0, ttlRegistrasi)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Dokter_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Operasi Ralan", Jasa_Medik_Dokter_Tindakan_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Dokter_Tindakan_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Operasi Ralan", Jasa_Medik_Dokter_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Dokter_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Paramedis_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Operasi Ralan", Jasa_Medik_Paramedis_Tindakan_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Paramedis_Tindakan_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Operasi Ralan", Jasa_Medik_Paramedis_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Paramedis_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(KSO_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban Operasi Ralan", KSO_Tindakan_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang Operasi Ralan", 0, KSO_Tindakan_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban Operasi Ralan", KSO_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang Operasi Ralan", 0, KSO_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Sarana_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Operasi Ralan", Jasa_Sarana_Tindakan_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Utang Operasi Ralan", 0, Jasa_Sarana_Tindakan_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Operasi Ralan", Jasa_Sarana_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Utang Operasi Ralan", 0, Jasa_Sarana_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(BHP_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "Beban Operasi Ralan", BHP_Tindakan_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Utang Operasi Ralan", 0, BHP_Tindakan_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "Beban Operasi Ralan", BHP_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Utang Operasi Ralan", 0, BHP_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Menejemen_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Operasi Ralan", Jasa_Menejemen_Tindakan_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Operasi Ralan", 0, Jasa_Menejemen_Tindakan_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Operasi Ralan", Jasa_Menejemen_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Operasi Ralan", 0, Jasa_Menejemen_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Dokter_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Medik_Dokter_Laborat_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Dokter_Laborat_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Medik_Dokter_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Dokter_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Petugas_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Medik_Petugas_Laborat_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Petugas_Laborat_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Medik_Petugas_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Petugas_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Kso_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Kso_Laborat_Ralan, "Beban Operasi Ralan", Kso_Laborat_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Kso_Laborat_Ralan, "Utang Operasi Ralan", 0, Kso_Laborat_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Kso_Laborat_Ralan, "Beban Operasi Ralan", Kso_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Kso_Laborat_Ralan, "Utang Operasi Ralan", 0, Kso_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Persediaan_Laborat_Rawat_Jalan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Laborat_Rawat_Jalan, "Beban Operasi Ralan", Persediaan_Laborat_Rawat_Jalan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Laborat_Rawat_Jalan, "Utang Operasi Ralan", 0, Persediaan_Laborat_Rawat_Jalan);
+                        if(Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Laborat_Rawat_Jalan, "Beban Operasi Ralan", Persediaan_Laborat_Rawat_Jalan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Laborat_Rawat_Jalan, "Utang Operasi Ralan", 0, Persediaan_Laborat_Rawat_Jalan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Sarana_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Sarana_Laborat_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Sarana_Laborat_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Sarana_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Sarana_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Perujuk_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Perujuk_Laborat_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Perujuk_Laborat_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Perujuk_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Perujuk_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Menejemen_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Menejemen_Laborat_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Menejemen_Laborat_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ralan, "Beban Operasi Ralan", Jasa_Menejemen_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ralan, "Utang Operasi Ralan", 0, Jasa_Menejemen_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Dokter_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Medik_Dokter_Radiologi_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Dokter_Radiologi_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Medik_Dokter_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Dokter_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Petugas_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Medik_Petugas_Radiologi_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Petugas_Radiologi_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Medik_Petugas_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Medik_Petugas_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Kso_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Kso_Radiologi_Ralan, "Beban Operasi Ralan", Kso_Radiologi_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Kso_Radiologi_Ralan, "Utang Operasi Ralan", 0, Kso_Radiologi_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Kso_Radiologi_Ralan, "Beban Operasi Ralan", Kso_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Kso_Radiologi_Ralan, "Utang Operasi Ralan", 0, Kso_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Persediaan_Radiologi_Rawat_Jalan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Radiologi_Rawat_Jalan, "Beban Operasi Ralan", Persediaan_Radiologi_Rawat_Jalan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Radiologi_Rawat_Jalan, "Utang Operasi Ralan", 0, Persediaan_Radiologi_Rawat_Jalan);
+                        if(Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Radiologi_Rawat_Jalan, "Beban Operasi Ralan", Persediaan_Radiologi_Rawat_Jalan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Radiologi_Rawat_Jalan, "Utang Operasi Ralan", 0, Persediaan_Radiologi_Rawat_Jalan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Sarana_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Sarana_Radiologi_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Sarana_Radiologi_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Sarana_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Sarana_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Perujuk_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Perujuk_Radiologi_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Perujuk_Radiologi_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Perujuk_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Perujuk_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Menejemen_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Menejemen_Radiologi_Ralan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Menejemen_Radiologi_Ralan);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Radiologi_Ralan, "Beban Operasi Ralan", Jasa_Menejemen_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Radiologi_Ralan, "Utang Operasi Ralan", 0, Jasa_Menejemen_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Obat_Rawat_Jalan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_Obat_Rawat_Jalan, "Beban Operasi Ralan", Obat_Rawat_Jalan, 0);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_Obat_Rawat_Jalan, "Utang Operasi Ralan", 0, Obat_Rawat_Jalan);
+                        if(Sequel.insertOrUpdateTampJurnal(HPP_Obat_Rawat_Jalan, "Beban Operasi Ralan", Obat_Rawat_Jalan, 0)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Persediaan_Obat_Rawat_Jalan, "Utang Operasi Ralan", 0, Obat_Rawat_Jalan)==false){
+                            sukses=false;
+                        }
                     }
 
                     if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBAYARAN PASIEN RAWAT JALAN, DIPOSTING OLEH "+akses.getkode());
@@ -7190,132 +7286,228 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                     }
 
                     if((ttlRalan_Dokter+ttlRalan_Dokter_Param+ttlRalan_Paramedis-Suspen_Tindakan_Ralan)>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Tindakan Ralan", (ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis) - Suspen_Tindakan_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Tindakan_Ralan, "Tindakan Ralan", (ttlRalan_Dokter + ttlRalan_Dokter_Param + ttlRalan_Paramedis) - Suspen_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Suspen_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Tindakan Ralan", Suspen_Tindakan_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Tindakan_Ralan, "Tindakan Ralan", Suspen_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlLaborat>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "Laborat Ralan", ttlLaborat, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Laborat_Ralan, "Laborat Ralan", ttlLaborat, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlRadiologi>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Radiologi_Ralan, "Radiologi Ralan", ttlRadiologi, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Radiologi_Ralan, "Radiologi Ralan", ttlRadiologi, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlObat>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Obat_Ralan, "Obat Ralan", ttlObat, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Suspen_Piutang_Obat_Ralan, "Obat Ralan", ttlObat, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(ttlRegistrasi>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Registrasi_Ralan, "Registrasi Ralan", ttlRegistrasi, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Registrasi_Ralan, "Registrasi Ralan", ttlRegistrasi, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Dokter_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Dokter_Tindakan_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Operasi Ralan", Jasa_Medik_Dokter_Tindakan_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Tindakan_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Dokter_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Tindakan_Ralan, "Utang Operasi Ralan", Jasa_Medik_Dokter_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Paramedis_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Paramedis_Tindakan_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Operasi Ralan", Jasa_Medik_Paramedis_Tindakan_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Paramedis_Tindakan_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Paramedis_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Paramedis_Tindakan_Ralan, "Utang Operasi Ralan", Jasa_Medik_Paramedis_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(KSO_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban Operasi Ralan", 0, KSO_Tindakan_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang Operasi Ralan", KSO_Tindakan_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_KSO_Tindakan_Ralan, "Beban Operasi Ralan", 0, KSO_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_KSO_Tindakan_Ralan, "Utang Operasi Ralan", KSO_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Sarana_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Operasi Ralan", 0, Jasa_Sarana_Tindakan_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "Utang Operasi Ralan", Jasa_Sarana_Tindakan_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Tindakan_Ralan, "Beban Operasi Ralan", 0, Jasa_Sarana_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Tindakan_Ralan, "Utang Operasi Ralan", Jasa_Sarana_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(BHP_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "Beban Operasi Ralan", 0, BHP_Tindakan_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Utang Operasi Ralan", BHP_Tindakan_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(HPP_BHP_Tindakan_Ralan, "Beban Operasi Ralan", 0, BHP_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Tindakan_Ralan, "Utang Operasi Ralan", BHP_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Menejemen_Tindakan_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Operasi Ralan", 0, Jasa_Menejemen_Tindakan_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Operasi Ralan", Jasa_Menejemen_Tindakan_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Tindakan_Ralan, "Beban Operasi Ralan", 0, Jasa_Menejemen_Tindakan_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Tindakan_Ralan, "Utang Operasi Ralan", Jasa_Menejemen_Tindakan_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Dokter_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Dokter_Laborat_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Medik_Dokter_Laborat_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Dokter_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Medik_Dokter_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Petugas_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Petugas_Laborat_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Medik_Petugas_Laborat_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Petugas_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Medik_Petugas_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Kso_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Kso_Laborat_Ralan, "Beban Operasi Ralan", 0, Kso_Laborat_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Kso_Laborat_Ralan, "Utang Operasi Ralan", Kso_Laborat_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Kso_Laborat_Ralan, "Beban Operasi Ralan", 0, Kso_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Kso_Laborat_Ralan, "Utang Operasi Ralan", Kso_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Persediaan_Laborat_Rawat_Jalan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Laborat_Rawat_Jalan, "Beban Operasi Ralan", 0, Persediaan_Laborat_Rawat_Jalan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Laborat_Rawat_Jalan, "Utang Operasi Ralan", Persediaan_Laborat_Rawat_Jalan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Laborat_Rawat_Jalan, "Beban Operasi Ralan", 0, Persediaan_Laborat_Rawat_Jalan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Laborat_Rawat_Jalan, "Utang Operasi Ralan", Persediaan_Laborat_Rawat_Jalan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Sarana_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Sarana_Laborat_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Sarana_Laborat_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Sarana_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Sarana_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Perujuk_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Perujuk_Laborat_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Perujuk_Laborat_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Perujuk_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Perujuk_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Menejemen_Laborat_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Menejemen_Laborat_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Menejemen_Laborat_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Laborat_Ralan, "Beban Operasi Ralan", 0, Jasa_Menejemen_Laborat_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Laborat_Ralan, "Utang Operasi Ralan", Jasa_Menejemen_Laborat_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Dokter_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Dokter_Radiologi_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Medik_Dokter_Radiologi_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Dokter_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Dokter_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Dokter_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Medik_Dokter_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Medik_Petugas_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Petugas_Radiologi_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Medik_Petugas_Radiologi_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Medik_Petugas_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Medik_Petugas_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Medik_Petugas_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Medik_Petugas_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Kso_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Kso_Radiologi_Ralan, "Beban Operasi Ralan", 0, Kso_Radiologi_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Kso_Radiologi_Ralan, "Utang Operasi Ralan", Kso_Radiologi_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Kso_Radiologi_Ralan, "Beban Operasi Ralan", 0, Kso_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Kso_Radiologi_Ralan, "Utang Operasi Ralan", Kso_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Persediaan_Radiologi_Rawat_Jalan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Radiologi_Rawat_Jalan, "Beban Operasi Ralan", 0, Persediaan_Radiologi_Rawat_Jalan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Radiologi_Rawat_Jalan, "Utang Operasi Ralan", Persediaan_Radiologi_Rawat_Jalan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(HPP_Persediaan_Radiologi_Rawat_Jalan, "Beban Operasi Ralan", 0, Persediaan_Radiologi_Rawat_Jalan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Persediaan_BHP_Radiologi_Rawat_Jalan, "Utang Operasi Ralan", Persediaan_Radiologi_Rawat_Jalan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Sarana_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Sarana_Radiologi_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Sarana_Radiologi_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Sarana_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Sarana_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Sarana_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Sarana_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Perujuk_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Perujuk_Radiologi_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Perujuk_Radiologi_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Perujuk_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Perujuk_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Perujuk_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Perujuk_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Jasa_Menejemen_Radiologi_Ralan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Menejemen_Radiologi_Ralan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Menejemen_Radiologi_Ralan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(Beban_Jasa_Menejemen_Radiologi_Ralan, "Beban Operasi Ralan", 0, Jasa_Menejemen_Radiologi_Ralan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Utang_Jasa_Menejemen_Radiologi_Ralan, "Utang Operasi Ralan", Jasa_Menejemen_Radiologi_Ralan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if(Obat_Rawat_Jalan>0){
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(HPP_Obat_Rawat_Jalan, "Beban Operasi Ralan", 0, Obat_Rawat_Jalan);
-                        if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Persediaan_Obat_Rawat_Jalan, "Utang Operasi Ralan", Obat_Rawat_Jalan, 0);
+                        if(Sequel.insertOrUpdateTampJurnal(HPP_Obat_Rawat_Jalan, "Beban Operasi Ralan", 0, Obat_Rawat_Jalan)==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertOrUpdateTampJurnal(Persediaan_Obat_Rawat_Jalan, "Utang Operasi Ralan", Obat_Rawat_Jalan, 0)==false){
+                            sukses=false;
+                        }
                     }
 
                     if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN PEMBAYARAN PASIEN RAWAT JALAN, DIPOSTING OLEH "+akses.getkode());

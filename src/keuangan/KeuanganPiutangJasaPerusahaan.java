@@ -1054,8 +1054,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", totaltagihan, 0);
-                    if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan);
+                    if(Sequel.insertOrUpdateTampJurnal(Piutang_Jasa_Perusahaan, "PIUTANG JASA PERUSAHAAN", totaltagihan, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan)==false){
+                        sukses=false;
+                    }
                     if (sukses) sukses = jur.simpanJurnal(NoPiutang.getText(),"U","PIUTANG JASA PERUSAHAAN "+NmPerusahaan.getText().toUpperCase()+", OLEH "+akses.getkode());
                 }
                 if(sukses==true){

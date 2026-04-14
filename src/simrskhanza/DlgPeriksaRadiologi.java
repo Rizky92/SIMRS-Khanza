@@ -2326,71 +2326,135 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
                     if(status.equals("Ranap")){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getSuspen_Piutang_Radiologi_Ranap(), "Suspen Piutang Radiologi Ranap", ttlpendapatan, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getRadiologi_Ranap(), "Pendapatan Radiologi Rawat Inap", 0, ttlpendapatan);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getSuspen_Piutang_Radiologi_Ranap(), "Suspen Piutang Radiologi Ranap", ttlpendapatan, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getRadiologi_Ranap(), "Pendapatan Radiologi Rawat Inap", 0, ttlpendapatan)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttljmdokter>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Medik_Dokter_Radiologi_Ranap(), "Beban Jasa Medik Dokter Radiologi Ranap", ttljmdokter, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Medik_Dokter_Radiologi_Ranap(), "Utang Jasa Medik Dokter Radiologi Ranap", 0, ttljmdokter);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Medik_Dokter_Radiologi_Ranap(), "Beban Jasa Medik Dokter Radiologi Ranap", ttljmdokter, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Medik_Dokter_Radiologi_Ranap(), "Utang Jasa Medik Dokter Radiologi Ranap", 0, ttljmdokter)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttljmpetugas>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Medik_Petugas_Radiologi_Ranap(), "Beban Jasa Medik Petugas Radiologi Ranap", ttljmpetugas, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Medik_Petugas_Radiologi_Ranap(), "Utang Jasa Medik Petugas Radiologi Ranap", 0, ttljmpetugas);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Medik_Petugas_Radiologi_Ranap(), "Beban Jasa Medik Petugas Radiologi Ranap", ttljmpetugas, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Medik_Petugas_Radiologi_Ranap(), "Utang Jasa Medik Petugas Radiologi Ranap", 0, ttljmpetugas)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttlbhp>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getHPP_Persediaan_Radiologi_Rawat_Inap(), "HPP Persediaan Radiologi Rawat Inap", ttlbhp, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getPersediaan_BHP_Radiologi_Rawat_Inap(), "Persediaan BHP Radiologi Rawat Inap", 0, ttlbhp);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getHPP_Persediaan_Radiologi_Rawat_Inap(), "HPP Persediaan Radiologi Rawat Inap", ttlbhp, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getPersediaan_BHP_Radiologi_Rawat_Inap(), "Persediaan BHP Radiologi Rawat Inap", 0, ttlbhp)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttlkso>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Kso_Radiologi_Ranap(), "Beban KSO Radiologi Ranap", ttlkso, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Kso_Radiologi_Ranap(), "Utang KSO Radiologi Ranap", 0, ttlkso);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Kso_Radiologi_Ranap(), "Beban KSO Radiologi Ranap", ttlkso, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Kso_Radiologi_Ranap(), "Utang KSO Radiologi Ranap", 0, ttlkso)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttljasasarana>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Sarana_Radiologi_Ranap(), "Beban Jasa Sarana Radiologi Ranap", ttljasasarana, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Sarana_Radiologi_Ranap(), "Utang Jasa Sarana Radiologi Ranap", 0, ttljasasarana);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Sarana_Radiologi_Ranap(), "Beban Jasa Sarana Radiologi Ranap", ttljasasarana, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Sarana_Radiologi_Ranap(), "Utang Jasa Sarana Radiologi Ranap", 0, ttljasasarana)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttljmperujuk>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Perujuk_Radiologi_Ranap(), "Beban Jasa Perujuk Radiologi Ranap", ttljmperujuk, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Perujuk_Radiologi_Ranap(), "Utang Jasa Perujuk Radiologi Ranap", 0, ttljmperujuk);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Perujuk_Radiologi_Ranap(), "Beban Jasa Perujuk Radiologi Ranap", ttljmperujuk, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Perujuk_Radiologi_Ranap(), "Utang Jasa Perujuk Radiologi Ranap", 0, ttljmperujuk)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttlmenejemen>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Menejemen_Radiologi_Ranap(), "Beban Jasa Menejemen Radiologi Ranap", ttlmenejemen, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Menejemen_Radiologi_Ranap(), "Utang Jasa Menejemen Radiologi Ranap", 0, ttlmenejemen);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Menejemen_Radiologi_Ranap(), "Beban Jasa Menejemen Radiologi Ranap", ttlmenejemen, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Menejemen_Radiologi_Ranap(), "Utang Jasa Menejemen Radiologi Ranap", 0, ttlmenejemen)==false){
+                                sukses=false;
+                            }
                         }
                         if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMERIKSAAN RADIOLOGI RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
                     }else if(status.equals("Ralan")){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getSuspen_Piutang_Radiologi_Ralan(), "Suspen Piutang Radiologi Ralan", ttlpendapatan, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getRadiologi_Ralan(), "Pendapatan Radiologi Rawat Jalan", 0, ttlpendapatan);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getSuspen_Piutang_Radiologi_Ralan(), "Suspen Piutang Radiologi Ralan", ttlpendapatan, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getRadiologi_Ralan(), "Pendapatan Radiologi Rawat Jalan", 0, ttlpendapatan)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttljmdokter>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Medik_Dokter_Radiologi_Ralan(), "Beban Jasa Medik Dokter Radiologi Ralan", ttljmdokter, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Medik_Dokter_Radiologi_Ralan(), "Utang Jasa Medik Dokter Radiologi Ralan", 0, ttljmdokter);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Medik_Dokter_Radiologi_Ralan(), "Beban Jasa Medik Dokter Radiologi Ralan", ttljmdokter, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Medik_Dokter_Radiologi_Ralan(), "Utang Jasa Medik Dokter Radiologi Ralan", 0, ttljmdokter)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttljmpetugas>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Medik_Petugas_Radiologi_Ralan(), "Beban Jasa Medik Petugas Radiologi Ralan", ttljmpetugas, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Medik_Petugas_Radiologi_Ralan(), "Utang Jasa Medik Petugas Radiologi Ralan", 0, ttljmpetugas);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Medik_Petugas_Radiologi_Ralan(), "Beban Jasa Medik Petugas Radiologi Ralan", ttljmpetugas, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Medik_Petugas_Radiologi_Ralan(), "Utang Jasa Medik Petugas Radiologi Ralan", 0, ttljmpetugas)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttlbhp>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getHPP_Persediaan_Radiologi_Rawat_Jalan(), "HPP Persediaan Radiologi Rawat Jalan", ttlbhp, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getPersediaan_BHP_Radiologi_Rawat_Jalan(), "Persediaan BHP Radiologi Rawat Jalan", 0, ttlbhp);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getHPP_Persediaan_Radiologi_Rawat_Jalan(), "HPP Persediaan Radiologi Rawat Jalan", ttlbhp, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getPersediaan_BHP_Radiologi_Rawat_Jalan(), "Persediaan BHP Radiologi Rawat Jalan", 0, ttlbhp)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttlkso>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Kso_Radiologi_Ralan(), "Beban KSO Radiologi Ralan", ttlkso, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Kso_Radiologi_Ralan(), "Utang KSO Radiologi Ralan", 0, ttlkso);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Kso_Radiologi_Ralan(), "Beban KSO Radiologi Ralan", ttlkso, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Kso_Radiologi_Ralan(), "Utang KSO Radiologi Ralan", 0, ttlkso)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttljasasarana>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Sarana_Radiologi_Ralan(), "Beban Jasa Sarana Radiologi Ralan", ttljasasarana, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Sarana_Radiologi_Ralan(), "Utang Jasa Sarana Radiologi Ralan", 0, ttljasasarana);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Sarana_Radiologi_Ralan(), "Beban Jasa Sarana Radiologi Ralan", ttljasasarana, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Sarana_Radiologi_Ralan(), "Utang Jasa Sarana Radiologi Ralan", 0, ttljasasarana)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttljmperujuk>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Perujuk_Radiologi_Ralan(), "Beban Jasa Perujuk Radiologi Ralan", ttljmperujuk, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Perujuk_Radiologi_Ralan(), "Utang Jasa Perujuk Radiologi Ralan", 0, ttljmperujuk);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Perujuk_Radiologi_Ralan(), "Beban Jasa Perujuk Radiologi Ralan", ttljmperujuk, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Perujuk_Radiologi_Ralan(), "Utang Jasa Perujuk Radiologi Ralan", 0, ttljmperujuk)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttlmenejemen>0){
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Menejemen_Radiologi_Ralan(), "Beban Jasa Menejemen Radiologi Ralan", ttlmenejemen, 0);
-                            if (sukses) sukses = Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Menejemen_Radiologi_Ralan(), "Utang Jasa Menejemen Radiologi Ralan", 0, ttlmenejemen);
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getBeban_Jasa_Menejemen_Radiologi_Ralan(), "Beban Jasa Menejemen Radiologi Ralan", ttlmenejemen, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertOrUpdateTampJurnal(akuntindakanradiologi.getUtang_Jasa_Menejemen_Radiologi_Ralan(), "Utang Jasa Menejemen Radiologi Ralan", 0, ttlmenejemen)==false){
+                                sukses=false;
+                            }
                         }
                         if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMERIKSAAN RADIOLOGI RAWAT JALAN PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
                     }
