@@ -23,10 +23,10 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
-                           $queryperpustakaan = bukaquery("select perpustakaan_ebook.kode_ebook, perpustakaan_ebook.judul_ebook, perpustakaan_ebook.jml_halaman, 
-                                perpustakaan_penerbit.nama_penerbit, perpustakaan_pengarang.nama_pengarang, perpustakaan_ebook.thn_terbit,perpustakaan_ebook.berkas 
-                                from perpustakaan_ebook inner join perpustakaan_penerbit inner join perpustakaan_pengarang on perpustakaan_ebook.kode_penerbit=perpustakaan_penerbit.kode_penerbit 
+                        <?php
+                           $queryperpustakaan = bukaquery("select perpustakaan_ebook.kode_ebook, perpustakaan_ebook.judul_ebook, perpustakaan_ebook.jml_halaman,
+                                perpustakaan_penerbit.nama_penerbit, perpustakaan_pengarang.nama_pengarang, perpustakaan_ebook.thn_terbit,perpustakaan_ebook.berkas
+                                from perpustakaan_ebook inner join perpustakaan_penerbit inner join perpustakaan_pengarang on perpustakaan_ebook.kode_penerbit=perpustakaan_penerbit.kode_penerbit
                                 and perpustakaan_ebook.kode_pengarang=perpustakaan_pengarang.kode_pengarang order by perpustakaan_ebook.kode_ebook ");
                            while($rsqueryperpustakaan = mysqli_fetch_array($queryperpustakaan)) {
                                echo "<tr>

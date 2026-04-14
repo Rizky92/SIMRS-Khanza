@@ -11,7 +11,6 @@
 
 package informasi;
 
-import simrskhanza.DlgCariBangsal;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;

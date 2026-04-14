@@ -1,11 +1,11 @@
 package inventory;
 import fungsi.WarnaTable;
+import fungsi.akses;
+import static fungsi.akses.getringkasan_penerimaan_obat;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
-import static fungsi.akses.getringkasan_penerimaan_obat;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;

@@ -15,19 +15,19 @@
 <div class="y">
 
 <div id="post">
-    <div class="entry">   
+    <div class="entry">
 
     <div align="center" class="link">
         <a href=?act=InputFungsional&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListFungsional>| List Data |</a>
-    </div>   
+    </div>
 	<br/>
     <div style="width: 598px; height: 500px; overflow: auto;">
     <?php
         $_sql = "SELECT fungsional.kode,fungsional.nama FROM fungsional ORDER BY fungsional.kode ASC ";
         $hasil=bukaquery($_sql);
         $jumlah=mysqli_num_rows($hasil);
-        
+
         if(mysqli_num_rows($hasil)!=0) {
             echo "<table width='600px' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -48,7 +48,7 @@
                                </td>
                              </tr>";
                     }
-            echo "</table>";            
+            echo "</table>";
         } else {
             echo "<table width='600px' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
@@ -56,9 +56,9 @@
                         <td width='57%'><div align='center'><font size='2' face='Verdana'><strong>Jabatan Fungsional</strong></font></div></td>
                         <td width='23%'><div align='center'><font size='2' face='Verdana'><strong>Proses</strong></font></div></td>
                     </tr>
-                  </table>";   
+                  </table>";
         }
-        
+
         if ($action=="HAPUS") {
             Hapus(" fungsional "," kode ='".validTeks($_GET['kode'])."' ","?act=ListFungsional");
         }

@@ -14,13 +14,13 @@ import java.sql.ResultSet;
  * @author khanzamedia
  */
 public class riwayatobat {
-    private final Connection koneksi=koneksiDB.condb(); 
+    private final Connection koneksi=koneksiDB.condb();
     private ResultSet rs,rsawal;
     private PreparedStatement ps,psawal;
     private double stokawal=0,stokakhir=0;
-    public synchronized void catatRiwayat(String kodebarang,double masuk,double keluar,String posisi,String petugas,String kdbangsal,String status,String nobatch,String nofaktur,String keterangan){        
+    public synchronized void catatRiwayat(String kodebarang,double masuk,double keluar,String posisi,String petugas,String kdbangsal,String status,String nobatch,String nofaktur,String keterangan){
         try {
-            stokakhir=0;stokawal=0;            
+            stokakhir=0;stokawal=0;
             psawal=koneksi.prepareStatement("select stok from gudangbarang where kode_brng=? and kd_bangsal=? and no_batch=? and no_faktur=?");
             try {
                 psawal.setString(1,kodebarang);
@@ -45,7 +45,7 @@ public class riwayatobat {
                     psawal.close();
                 }
             }
-                     
+
             ps=koneksi.prepareStatement("insert into riwayat_barang_medis values(?,?,?,?,?,?,current_date(),current_time(),?,?,?,?,?,?)");
             try {
                 if(posisi.equals("Opname")){
@@ -76,18 +76,16 @@ public class riwayatobat {
                     ps.setString(11,nofaktur);
                     ps.setString(12,keterangan);
                     ps.executeUpdate();
-                }                    
+                }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
             } finally{
                 if(ps!=null){
                     ps.close();
                 }
-            }          
+            }
         } catch (Exception ex) {
-            System.out.println("Notifikasi : "+ex);  
-        }            
+            System.out.println("Notifikasi : "+ex);
+        }
    }
 }
-    
-

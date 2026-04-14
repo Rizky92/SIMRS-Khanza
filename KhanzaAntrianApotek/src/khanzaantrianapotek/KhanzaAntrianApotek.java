@@ -19,5 +19,5 @@ public class KhanzaAntrianApotek {
           DlgAntrian antrian=new DlgAntrian(null,false);
           antrian.setVisible(true);
     }
-    
+
 }

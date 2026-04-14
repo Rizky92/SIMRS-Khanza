@@ -23,7 +23,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                            $querysuratsakit = bukaquery("select skdp_bpjs.no_rkm_medis,skdp_bpjs.diagnosa,skdp_bpjs.rtl1,skdp_bpjs.tanggal_datang,skdp_bpjs.no_antrian,dokter.nm_dokter,skdp_bpjs.tahun,(TO_DAYS(skdp_bpjs.tanggal_datang)-TO_DAYS(current_date())) as kadaluarsa from skdp_bpjs inner join dokter on skdp_bpjs.kd_dokter=dokter.kd_dokter where skdp_bpjs.no_rkm_medis='".cleankar(encrypt_decrypt($_SESSION["ses_pasien"],"d"))."'");
                            while($rsquerysuratsakit = mysqli_fetch_array($querysuratsakit)) {
                                if($rsquerysuratsakit["kadaluarsa"]>=0){
@@ -45,7 +45,7 @@
                                              <td align='center' valign='middle'><p class='col-pink'>Kadaluarsa</p></td>
                                           </tr>";
                                }
-                                    
+
                            }
                         ?>
                         </tbody>

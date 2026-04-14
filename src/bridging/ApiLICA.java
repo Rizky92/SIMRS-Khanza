@@ -46,7 +46,7 @@ public class ApiLICA {
     private JsonNode response;
     private ObjectMapper mapper = new ObjectMapper();
     private int i=0;
-    
+
     public ApiLICA(){
         super();
         try {
@@ -56,7 +56,7 @@ public class ApiLICA {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public void kirimRalan(String nopermintaan) {
         try {
              ps=koneksi.prepareStatement(
@@ -107,7 +107,7 @@ public class ApiLICA {
                             ps2.close();
                         }
                     }
-                    
+
                     requestJson="{" +
                                     "\"demografi\": {" +
                                         "\"no_rkm_medis\": \""+rs.getString("no_rkm_medis")+"\"," +
@@ -129,9 +129,9 @@ public class ApiLICA {
                                     "\"test\": ["+
                                         requestJson2+
                                     "]" +
-                                "}"; 
+                                "}";
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);	    
+                    requestEntity = new HttpEntity(requestJson,headers);
                     stringbalik=getRest().exchange(URL+"/insert", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
                 }
@@ -155,7 +155,7 @@ public class ApiLICA {
             }
         }
     }
-    
+
     public void kirimRanap(String nopermintaan) {
         try {
              ps=koneksi.prepareStatement(
@@ -207,7 +207,7 @@ public class ApiLICA {
                             ps2.close();
                         }
                     }
-                    
+
                     requestJson="{" +
                                     "\"demografi\": {" +
                                         "\"no_rkm_medis\": \""+rs.getString("no_rkm_medis")+"\"," +
@@ -229,9 +229,9 @@ public class ApiLICA {
                                     "\"test\": ["+
                                         requestJson2+
                                     "]" +
-                                "}"; 
+                                "}";
                     System.out.println("JSON : "+requestJson);
-                    requestEntity = new HttpEntity(requestJson,headers);	    
+                    requestEntity = new HttpEntity(requestJson,headers);
                     stringbalik=getRest().exchange(URL+"/insert", HttpMethod.POST, requestEntity, String.class).getBody();
                     JOptionPane.showMessageDialog(null,stringbalik);
                 }
@@ -255,7 +255,7 @@ public class ApiLICA {
             }
         }
     }
-    
+
     public void ambil(String nopermintaan) {
         try{
             headers = new HttpHeaders();
@@ -277,7 +277,7 @@ public class ApiLICA {
                             list.path("nn").asText()+"','"+
                             list.path("satuan").asText()+"','"+
                             list.path("keterangan").asText()+"','"+
-                            list.path("tindakan_id").asText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Periksa Lab"); 
+                            list.path("tindakan_id").asText()+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Periksa Lab");
                     i++;
                 }
             }
@@ -288,7 +288,7 @@ public class ApiLICA {
             }
         }
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         SSLContext sslContext = SSLContext.getInstance("SSL");
         javax.net.ssl.TrustManager[] trustManagers= {
@@ -305,5 +305,5 @@ public class ApiLICA {
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         return new RestTemplate(factory);
     }
-    
+
 }

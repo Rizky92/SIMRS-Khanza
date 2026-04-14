@@ -1,9 +1,9 @@
 <?php
  session_start();
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  date_default_timezone_set("Asia/Makassar");
@@ -60,18 +60,18 @@
                               $tanggal  = date ("j");
                               $a_bulan  = array(1=>"Januari","Februari","Maret", "April", "Mei", "Juni","Juli","Agustus","September","Oktober", "November","Desember");
                               $bulan    = $a_bulan[date("n")];
-                              $tahun    = date("Y"); 
+                              $tahun    = date("Y");
                               echo $hari . ", " . $tanggal ." ". $bulan ." ". $tahun;
                             ?>
                         </a>
-                        <i class="material-icons md-12">query_builder</i>  
+                        <i class="material-icons md-12">query_builder</i>
                         <a href="" class="white-text" id="jam"></a>
                   </li>
                 </ul>
             </div>
         </nav>
     </header>
-    
+
     <main>
         <div class="container-fluid" id="judul">
         </div>
@@ -79,7 +79,7 @@
         </div>
 
     </main>
-    
+
     <footer class="page-footer">
         <div class="footer-copyright deep-orange accent-3 white-text">
             <div class="container simple-marquee-container" id="footer">
@@ -87,7 +87,7 @@
                   Tarif Laborat
                 </div>
                 <marquee class="marquee" scrollamount="4">
-                      <?php 
+                      <?php
                         $sql ="select jns_perawatan_lab.kd_jenis_prw,jns_perawatan_lab.nm_perawatan,jns_perawatan_lab.total_byr,jns_perawatan_lab.kelas from jns_perawatan_lab inner join penjab on penjab.kd_pj=jns_perawatan_lab.kd_pj where jns_perawatan_lab.status='1' and jns_perawatan_lab.kategori='PK' and penjab.png_jawab like '%umum%'";
                         $hasil=bukaquery($sql);
                         while ($data = mysqli_fetch_array ($hasil)){
@@ -125,18 +125,18 @@
       }
     </script>
 
-    <script type="text/javascript" src="assets/js/jquery.js"></script> 
-    <script type="text/javascript"> 
-        var auto_refresh = setInterval( 
-            function() { 
-                $('#data').load('data_antrianlaborat.php').fadeIn("fast"); 
+    <script type="text/javascript" src="assets/js/jquery.js"></script>
+    <script type="text/javascript">
+        var auto_refresh = setInterval(
+            function() {
+                $('#data').load('data_antrianlaborat.php').fadeIn("fast");
             }, 9000
         );
-        var auto_refresh = setInterval( 
-            function() { 
-                $('#judul').load('data_antrianlaboratjudul.php').fadeIn("fast"); 
+        var auto_refresh = setInterval(
+            function() {
+                $('#judul').load('data_antrianlaboratjudul.php').fadeIn("fast");
             }, 9000
-        ); 
+        );
     </script>
 </body>
 </html>

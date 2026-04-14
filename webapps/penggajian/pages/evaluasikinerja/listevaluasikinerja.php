@@ -5,12 +5,12 @@
 ?>
 
 <div id="post">
-    <div class="entry"> 
+    <div class="entry">
     <div align="center" class="link">
         <a href=?act=InputEvaluasiKinerja&action=TAMBAH>| Input Data |</a>
         <a href=?act=ListEvaluasiKinerja>| List Data |</a>
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div>   
+    </div>
     <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
         <?php
             $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -33,10 +33,10 @@
         $_sql   = "SELECT evaluasi_kinerja.kode_evaluasi,evaluasi_kinerja.nama_evaluasi,evaluasi_kinerja.indek FROM evaluasi_kinerja where evaluasi_kinerja.kode_evaluasi like '%".$keyword."%' or evaluasi_kinerja.nama_evaluasi like '%".$keyword."%' ORDER BY evaluasi_kinerja.indek desc ";
         $hasil  = bukaquery($_sql);
         $jumlah = mysqli_num_rows($hasil);
-        
+
         if(mysqli_num_rows($hasil)!=0) {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                    <tr class='head'>					   
+                    <tr class='head'>
                         <td width='12%'><div align='center'>Proses</div></td>
                         <td width='20%'><div align='center'>Kode</div></td>
                         <td width='48%'><div align='center'>Evaluasi Kinerja</div></td>
@@ -53,13 +53,13 @@
                                 </td>
                                 <td>$baris[0]</td>
                                 <td>$baris[1]</td>
-                                <td>$baris[2]</td>                                
+                                <td>$baris[2]</td>
                              </tr>";
                     }
             echo "</table>";
         } else {
             echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
-                    <tr class='head'>					   
+                    <tr class='head'>
                         <td width='12%'><div align='center'>Proses</div></td>
                         <td width='20%'><div align='center'>Kode</div></td>
                         <td width='48%'><div align='center'>Evaluasi Kinerja</div></td>
@@ -67,7 +67,7 @@
                     </tr>
                  </table>";
         }
-        
+
         $aksi=isset($_GET['action'])?$_GET['action']:NULL;
         if ($aksi=="HAPUS") {
             Hapus(" evaluasi_kinerja "," kode_evaluasi ='".validTeks($_GET['kode_evaluasi'])."' ","?act=ListEvaluasiKinerja");
@@ -78,8 +78,8 @@
         if(mysqli_num_rows($hasil)!=0) {
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/evaluasikinerja/LaporanEvaluasiKinerja.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/evaluasikinerja/LaporanEvaluasiKinerjaExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/evaluasikinerja/LaporanEvaluasiKinerja.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Laporan</a> | <a target=_blank href=../penggajian/pages/evaluasikinerja/LaporanEvaluasiKinerjaExel.php?iyem=".encrypt_decrypt("{\"keyword\":\"".$keyword."\",\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e").">Excel</a> |</div></td>
+                    </tr>
                  </table>");
         }
     ?>

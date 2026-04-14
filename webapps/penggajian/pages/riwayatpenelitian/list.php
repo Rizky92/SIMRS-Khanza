@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $action   = isset($_GET['action'])?$_GET['action']:NULL;
     $keyword  = str_replace("_"," ",isset($_GET['keyword']))?str_replace("_"," ",$_GET['keyword']):NULL;
     $keyword  = validTeks($keyword);
@@ -44,8 +44,8 @@
                                   </tr>";
                     }
                     $no=1;
-                    while($baris2 = mysqli_fetch_array($hasil2)) { 
-                        echo "   <tr> 
+                    while($baris2 = mysqli_fetch_array($hasil2)) {
+                        echo "   <tr>
                                     <td>$no</td>
                                     <td>$baris2[0]</td>
                                     <td>$baris2[1]</td>
@@ -58,7 +58,7 @@
                             </td>
                          </tr>";
                 }
-        echo "</table>";           
+        echo "</table>";
     } else {
         echo "<table width='99.8%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head2'>

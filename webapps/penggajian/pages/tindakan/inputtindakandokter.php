@@ -32,7 +32,7 @@
                 echo "<input type=hidden name=id  value=$id><input type=hidden name=tgl value=$tgl><input type=hidden name=action value=$action>";
 		$_sql               = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
                 $hasil              = bukaquery($_sql);
-                $baris              = mysqli_fetch_row($hasil);  
+                $baris              = mysqli_fetch_row($hasil);
                 $_sqlnext           = "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' and pegawai.jbtn like '%dokter umum%' order by pegawai.id asc limit 1";
                 $hasilnext          = bukaquery($_sqlnext);
                 $barisnext          = mysqli_fetch_row($hasilnext);
@@ -62,7 +62,7 @@
 		<tr class="head">
                     <td width="31%">Nama</td><td width="">:</td>
                     <td width="67%"><?php echo @$baris[1];?></td>
-                </tr>                
+                </tr>
 		<tr class="head">
                     <td width="25%" >Tindakan</td><td width="">:</td>
                     <td width="75%">
@@ -77,7 +77,7 @@
                         </select>
                         <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                     </td>
-                </tr>                
+                </tr>
                 <tr class="head">
                     <td width="31%" >Jumlah Tindakan</td><td width="">:</td>
                     <td width="67%">
@@ -169,10 +169,9 @@
             }
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljm)." <a target=_blank href=../penggajian/pages/tindakan/laporandetailtindakan.php?&id=$id>| Laporan |</a></div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah, Ttl.JM : ".formatDuit($ttljm)." <a target=_blank href=../penggajian/pages/tindakan/laporandetailtindakan.php?&id=$id>| Laporan |</a></div></td>
+                    </tr>
                  </table>");
         ?>
     </div>
 </div>
-

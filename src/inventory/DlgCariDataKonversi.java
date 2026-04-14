@@ -12,11 +12,11 @@
 package inventory;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import fungsi.validasi;
-import fungsi.akses;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -40,7 +40,7 @@ public final class DlgCariDataKonversi extends javax.swing.JDialog {
     private sekuel Sequel=new sekuel();
     private PreparedStatement ps;
     private ResultSet rs;
-    /** Creates new form DlgPenyakit 
+    /** Creates new form DlgPenyakit
      *@param parent
      *@param modal */
     public DlgCariDataKonversi(java.awt.Frame parent, boolean modal) {
@@ -100,7 +100,7 @@ public final class DlgCariDataKonversi extends javax.swing.JDialog {
                 }
             });
         }
-        
+
     }
 
 
@@ -392,7 +392,7 @@ public final class DlgCariDataKonversi extends javax.swing.JDialog {
                     ps.close();
                 }
             }
-                
+
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
@@ -406,12 +406,12 @@ public final class DlgCariDataKonversi extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-    
+
     public void setSatuanKecil(String kodesatuan){
         KodeSatuanKecil.setText(kodesatuan);
         NamaSatuanKecil.setText(Sequel.cariIsi("select kodesatuan.satuan from kodesatuan where kodesatuan.kode_sat=?",kodesatuan));
     }
-    
+
     public void isCek(){
         BtnTambah.setEnabled(akses.getkonversi_satuan());
     }

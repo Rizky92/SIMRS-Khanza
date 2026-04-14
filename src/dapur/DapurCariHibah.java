@@ -1,11 +1,11 @@
 package dapur;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventaris.InventarisAsalHibah;
 import java.awt.Cursor;
 import java.awt.Dimension;
@@ -23,8 +23,8 @@ import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
-import keuangan.Jurnal;
 import kepegawaian.DlgCariPetugas;
+import keuangan.Jurnal;
 
 public class DapurCariHibah extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;

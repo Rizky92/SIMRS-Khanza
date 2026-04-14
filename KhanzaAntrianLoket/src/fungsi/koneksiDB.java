@@ -23,12 +23,12 @@ import javax.swing.JOptionPane;
  * @author khanzasoft
  */
 public final class koneksiDB {
-    public koneksiDB(){}    
+    public koneksiDB(){}
     private static Connection connection=null;
-    private static final Properties prop = new Properties();  
+    private static final Properties prop = new Properties();
     private static final MysqlDataSource dataSource=new MysqlDataSource();
     private static String caricepat="",var="";
-    public static Connection condb(){      
+    public static Connection condb(){
         try {
             if (connection == null || connection.isClosed()) {
                 try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
@@ -87,7 +87,7 @@ public final class koneksiDB {
         }
         return connection;
     }
-    
+
     public static boolean ANTRIANPREFIXHURUF() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
@@ -96,7 +96,7 @@ public final class koneksiDB {
             return false;
         }
     }
-    
+
     public static String[] PREFIXHURUFAKTIF() {
         if (!ANTRIANPREFIXHURUF()) {
             return null;
@@ -108,7 +108,7 @@ public final class koneksiDB {
             return null;
         }
     }
-    
+
     public static String ANTRIAN() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
@@ -117,46 +117,46 @@ public final class koneksiDB {
             return "";
         }
     }
-    
+
     public static String cariCepat(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             caricepat=prop.getProperty("CARICEPAT");
         }catch(Exception e){
-            caricepat="tidak aktif"; 
+            caricepat="tidak aktif";
         }
         return caricepat;
     }
-    
+
     public static String HOST(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=EnkripsiAES.decrypt(prop.getProperty("HOSTHYBRIDWEB", EnkripsiAES.encrypt("localhost")));
         }catch(Exception e){
-            var="localhost"; 
+            var="localhost";
         }
         return var;
     }
-    
+
     public static String PORT(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=EnkripsiAES.decrypt(prop.getProperty("PORT", EnkripsiAES.encrypt("3306")));
         }catch(Exception e){
-            var="3306"; 
+            var="3306";
         }
         return var;
     }
-    
+
     public static String DATABASE(){
         try{
             prop.loadFromXML(new FileInputStream("setting/database.xml"));
             var=EnkripsiAES.decrypt(prop.getProperty("DATABASE", EnkripsiAES.encrypt("sik")));
         }catch(Exception e){
-            var="sik"; 
+            var="sik";
         }
         return var;
     }
-    
-    
+
+
 }

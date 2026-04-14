@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["noresep"])) {
         $noresep    = validTeks3($iyem["noresep"],20);
         $norawat    = validTeks3($iyem["norawat"],20);
@@ -106,7 +106,7 @@
             echo "                  </table>
                                     <br/>
                                     <br/>
-                                    <h7><center>Pasien/Yang Mewakili<br/></h7>  
+                                    <h7><center>Pasien/Yang Mewakili<br/></h7>
                                     <br/>
                                     <div class='row'>
                                         <div class='col-md-12 text-center'>

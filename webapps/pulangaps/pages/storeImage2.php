@@ -13,7 +13,7 @@
     $fileName               = $nopernyataan."SK.jpeg";
     $file                   = $folderPath . $fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("surat_pulang_atas_permintaan_sendiri_saksi_keluarga","'".$nopernyataan."','pages/upload/$fileName'");
 ?>
 <head>

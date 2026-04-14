@@ -11,15 +11,12 @@
 
 package simrskhanza;
 
-import kepegawaian.DlgCariDokter;
-import kepegawaian.DlgCariPetugas;
-import keuangan.DlgJnsPerawatanLab;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -41,6 +38,9 @@ import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariDokter;
+import kepegawaian.DlgCariPetugas;
+import keuangan.DlgJnsPerawatanLab;
 import keuangan.Jurnal;
 
 /**
@@ -236,8 +236,8 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
             });
         }
         ChkJln.setSelected(true);
-        jam();   
-        
+        jam();
+
         try {
             psrekening=koneksi.prepareStatement(
                 "select set_akun_ranap.Suspen_Piutang_Laborat_Ranap,set_akun_ranap.Laborat_Ranap,"+

@@ -50,13 +50,11 @@ import javafx.stage.StageStyle;
 import javafx.util.Callback;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JTextField;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import simrskhanza.DlgPilihanCetakDokumen;
-import widget.panelisi;
 
 /**
  *

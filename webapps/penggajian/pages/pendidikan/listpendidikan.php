@@ -1,10 +1,10 @@
 <div id="post">
-    <div class="entry"> 
+    <div class="entry">
         <div align="center" class="link">
             <a href=?act=InputPendidikan&action=TAMBAH>| Input Data |</a>
             <a href=?act=ListPendidikan>| List Data |</a>
             <a href=?act=HomeAdmin>| Menu Utama |</a>
-        </div>   
+        </div>
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                     $action  = isset($_GET['action'])?$_GET['action']:NULL;
@@ -26,8 +26,8 @@
         <?php
             $_sql   = "SELECT pendidikan.tingkat,pendidikan.indek,pendidikan.gapok1,pendidikan.kenaikan,pendidikan.maksimal FROM pendidikan where pendidikan.tingkat like '%".$keyword."%' ORDER BY pendidikan.indek DESC,pendidikan.tingkat";
             $hasil  = bukaquery($_sql);
-            $jumlah = mysqli_num_rows($hasil);       
-            if(mysqli_num_rows($hasil)!=0) {            
+            $jumlah = mysqli_num_rows($hasil);
+            if(mysqli_num_rows($hasil)!=0) {
                 echo "<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                         <tr class='head'>
                             <td width='12%'><div align='center'>Proses</div></td>
@@ -76,10 +76,9 @@
         <?php
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                      <tr class='head'>
-                        <td width='12%'><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/pendidikan/LaporanPendidikan.php?&keyword=$keyword>Laporan</a> | <a target=_blank href=../penggajian/pages/pendidikan/LaporanPendidikanExel.php?&keyword=$keyword>Excel</a> |</div></td>                        
-                     </tr>     
+                        <td width='12%'><div align='left'>Data : $jumlah | <a target=_blank href=../penggajian/pages/pendidikan/LaporanPendidikan.php?&keyword=$keyword>Laporan</a> | <a target=_blank href=../penggajian/pages/pendidikan/LaporanPendidikanExel.php?&keyword=$keyword>Excel</a> |</div></td>
+                     </tr>
                   </table>");
         ?>
     </div>
 </div>
-

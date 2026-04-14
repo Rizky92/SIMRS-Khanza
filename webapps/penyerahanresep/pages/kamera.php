@@ -1,13 +1,13 @@
 <?php
     $noresep  = "";
     $norawat  = "";
-    $_sql     = "select * from antriapotek3" ;  
+    $_sql     = "select * from antriapotek3" ;
     $hasil    = bukaquery2($_sql);
     while ($data = mysqli_fetch_array ($hasil)){
         $noresep  = $data['no_resep'];
         $norawat  = $data['no_rawat'];
     }
-    
+
     $no_rkm_medis = "";
     $nm_pasien    = "";
     $jk           = "";
@@ -16,12 +16,12 @@
     $alamat       = "";
     $no_tlp       = "";
     $_sql2  = "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','LAKI-LAKI','PEREMPUAN') as jk,
-               pasien.umur,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, 
-               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+               pasien.umur,pasien.tgl_lahir,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat,
+               pasien.no_tlp from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel
-               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec 
+               inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec
                inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab
-               where reg_periksa.no_rawat='".$norawat."'" ;  
+               where reg_periksa.no_rawat='".$norawat."'" ;
     $hasil2 = bukaquery2($_sql2);
     while ($data2  = mysqli_fetch_array ($hasil2)){
         $no_rkm_medis = $data2['no_rkm_medis'];
@@ -85,10 +85,10 @@
             <?php
                 $i=1;
                 $resepnonracikan=bukaquery("select databarang.nama_brng,aturan_pakai.aturan,detail_pemberian_obat.jml,kodesatuan.satuan
-                        from resep_obat inner join reg_periksa inner join aturan_pakai inner join databarang inner join detail_pemberian_obat 
-                        inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat and databarang.kode_brng=aturan_pakai.kode_brng and 
-                        detail_pemberian_obat.kode_brng=databarang.kode_brng and resep_obat.no_rawat=aturan_pakai.no_rawat and 
-                        resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and resep_obat.jam=aturan_pakai.jam and 
+                        from resep_obat inner join reg_periksa inner join aturan_pakai inner join databarang inner join detail_pemberian_obat
+                        inner join kodesatuan on resep_obat.no_rawat=reg_periksa.no_rawat and databarang.kode_brng=aturan_pakai.kode_brng and
+                        detail_pemberian_obat.kode_brng=databarang.kode_brng and resep_obat.no_rawat=aturan_pakai.no_rawat and
+                        resep_obat.tgl_perawatan=aturan_pakai.tgl_perawatan and resep_obat.jam=aturan_pakai.jam and
                         resep_obat.no_rawat=detail_pemberian_obat.no_rawat and resep_obat.tgl_perawatan=detail_pemberian_obat.tgl_perawatan and
                         resep_obat.jam=detail_pemberian_obat.jam and kodesatuan.kode_sat=databarang.kode_sat where resep_obat.no_resep='$noresep'");
                 while($barisresepnonracikan = mysqli_fetch_array($resepnonracikan)) {
@@ -101,25 +101,25 @@
                     $i++;
                 }
                 $resepracikan=bukaquery("select obat_racikan.no_racik,obat_racikan.nama_racik,obat_racikan.tgl_perawatan,obat_racikan.jam,
-                        obat_racikan.no_rawat,obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik from resep_obat inner join 
-                        reg_periksa inner join obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat 
-                        and obat_racikan.kd_racik=metode_racik.kd_racik and resep_obat.no_rawat=obat_racikan.no_rawat and 
-                        resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and resep_obat.jam=obat_racikan.jam and 
+                        obat_racikan.no_rawat,obat_racikan.aturan_pakai,obat_racikan.jml_dr,metode_racik.nm_racik from resep_obat inner join
+                        reg_periksa inner join obat_racikan inner join metode_racik on resep_obat.no_rawat=reg_periksa.no_rawat
+                        and obat_racikan.kd_racik=metode_racik.kd_racik and resep_obat.no_rawat=obat_racikan.no_rawat and
+                        resep_obat.tgl_perawatan=obat_racikan.tgl_perawatan and resep_obat.jam=obat_racikan.jam and
                         resep_obat.no_rawat=obat_racikan.no_rawat where resep_obat.no_resep='$noresep'");
                 while($barisresepracikan = mysqli_fetch_array($resepracikan)) {
                     echo "<tr class='text-dark'>
                             <td align='center'>$i</td>
                             <td align='center'>$barisresepracikan[no_racik] $barisresepracikan[nama_racik] (";
                         $resepdetailracikan=bukaquery("select databarang.nama_brng,detail_pemberian_obat.jml from
-                            detail_pemberian_obat inner join databarang inner join detail_obat_racikan 
-                            on detail_pemberian_obat.kode_brng=databarang.kode_brng and 
-                            detail_pemberian_obat.kode_brng=detail_obat_racikan.kode_brng and 
-                            detail_pemberian_obat.tgl_perawatan=detail_obat_racikan.tgl_perawatan and 
-                            detail_pemberian_obat.jam=detail_obat_racikan.jam and 
-                            detail_pemberian_obat.no_rawat=detail_obat_racikan.no_rawat 
-                            where detail_pemberian_obat.tgl_perawatan='$barisresepracikan[tgl_perawatan]' 
-                            and detail_pemberian_obat.jam='$barisresepracikan[jam]' and 
-                            detail_pemberian_obat.no_rawat='$barisresepracikan[no_rawat]' and 
+                            detail_pemberian_obat inner join databarang inner join detail_obat_racikan
+                            on detail_pemberian_obat.kode_brng=databarang.kode_brng and
+                            detail_pemberian_obat.kode_brng=detail_obat_racikan.kode_brng and
+                            detail_pemberian_obat.tgl_perawatan=detail_obat_racikan.tgl_perawatan and
+                            detail_pemberian_obat.jam=detail_obat_racikan.jam and
+                            detail_pemberian_obat.no_rawat=detail_obat_racikan.no_rawat
+                            where detail_pemberian_obat.tgl_perawatan='$barisresepracikan[tgl_perawatan]'
+                            and detail_pemberian_obat.jam='$barisresepracikan[jam]' and
+                            detail_pemberian_obat.no_rawat='$barisresepracikan[no_rawat]' and
                             detail_obat_racikan.no_racik='$barisresepracikan[no_racik]' order by databarang.kode_brng");
                         while($barisresepdetailracikan = mysqli_fetch_array($resepdetailracikan)) {
                             echo "$barisresepdetailracikan[nama_brng] $barisresepdetailracikan[jml], ";

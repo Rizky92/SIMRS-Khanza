@@ -20,9 +20,9 @@ public final class KoneksiDBWA {
     private static Connection koneksi = null;
     private static final Properties prop = new Properties();
     private static final MysqlDataSource ds = new MysqlDataSource();
-    
+
     private KoneksiDBWA() {}
-    
+
     public static Connection condb() {
         if (koneksi == null) {
             try {
@@ -39,7 +39,7 @@ public final class KoneksiDBWA {
                         ds.setURL("jdbc:mysql://" + EnkripsiAES.decrypt(prop.getProperty("WAHOST")) + ":" + EnkripsiAES.decrypt(prop.getProperty("WAPORT")) + "/" + EnkripsiAES.decrypt(prop.getProperty("WANAME")) + "?autoReconnect=true&zeroDateTimeBehavior=convertToNull&useCompression=true");
                         ds.setUser(EnkripsiAES.decrypt(prop.getProperty("WAUSER")));
                         ds.setPassword(EnkripsiAES.decrypt(prop.getProperty("WAPASS")));
-                        
+
                         koneksi = ds.getConnection();
                     }
                 } catch (Exception ex) {
@@ -49,7 +49,7 @@ public final class KoneksiDBWA {
         }
         return koneksi;
     }
-    
+
     public static boolean kirimPesanWA(String nomor, String pesan, String tanggal, String asal) {
         try (PreparedStatement ps = condb().prepareStatement(
             "insert into wa_outbox (NOWA, PESAN, TANGGAL_JAM, STATUS, SOURCE, SENDER, TYPE) values " +

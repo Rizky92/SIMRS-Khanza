@@ -68,6 +68,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -213,11 +214,6 @@ import surat.SuratPersetujuanUmum;
 import surat.SuratPulangAtasPermintaanSendiri;
 import surat.SuratSakit;
 import surat.SuratSakitPihak2;
-import java.util.List;
-import javax.swing.WindowConstants;
-import kepegawaian.DlgCariDokter;
-import keuangan.DlgDeposit;
-import rekammedis.RMDataSkriningGiziKehamilan;
 
 /**
  *

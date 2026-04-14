@@ -4,7 +4,7 @@
     // if(file_exists(host()."webapps/penyerahanresep/pages/upload/".$noresep.".jpeg")){
     //     @unlink(host()."webapps/penyerahanresep/pages/upload/".$noresep.".jpeg");
     // }
-    
+
     // $img            = $_POST["image"];
     // $folderPath     = "upload/";
     // $image_parts    = explode(";base64,", $img);
@@ -14,7 +14,7 @@
     // $fileName       = $noresep.".jpeg";
     // $file           = $folderPath . $fileName;
     // file_put_contents($file, $image_base64);
-    
+
     // Tambah3("bukti_penyerahan_resep_obat","'".$noresep."','pages/upload/$fileName'");
     Ubah2("resep_obat","tgl_penyerahan=current_date(),jam_penyerahan=current_time() where no_resep='$noresep'");
 ?>

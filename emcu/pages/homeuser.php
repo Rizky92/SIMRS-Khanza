@@ -1,4 +1,4 @@
-<?php 
+<?php
     if(isset($_SESSION["ses_emcu"])){
         $halaman = isset($_GET["act"])?$_GET["act"]:NULL;
         if(!isset($_SESSION["nama_perusahaan"])){
@@ -160,4 +160,3 @@
     <script src="conf/validator.js" type="text/javascript"></script>
 </body>
 </html>
-

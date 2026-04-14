@@ -31,7 +31,7 @@ import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
 
-public class ApiBPJS {        
+public class ApiBPJS {
     private String Key,Consid;
     private String salt;
     private String generateHmacSHA256Signature;
@@ -44,7 +44,7 @@ public class ApiBPJS {
     private Scheme scheme;
     private HttpComponentsClientHttpRequestFactory factory;
     private ApiBPJSAesKeySpec mykey;
-    
+
     public ApiBPJS(){
         try {
             Key = koneksiDB.SECRETKEYAPIBPJS();
@@ -54,7 +54,7 @@ public class ApiBPJS {
         }
     }
 
-    public String getHmac(String utc) {               
+    public String getHmac(String utc) {
         salt = Consid +"&"+utc;
 	generateHmacSHA256Signature = null;
 	try {
@@ -66,7 +66,7 @@ public class ApiBPJS {
 	}
 	return generateHmacSHA256Signature;
     }
-    
+
     public String generateHmacSHA256Signature(String data, String key)throws GeneralSecurityException {
         hmacData = null;
 	try {
@@ -80,17 +80,17 @@ public class ApiBPJS {
 	    throw new GeneralSecurityException(e);
 	}
     }
-        
-    public long GetUTCdatetimeAsString(){    
-        millis = System.currentTimeMillis();   
+
+    public long GetUTCdatetimeAsString(){
+        millis = System.currentTimeMillis();
         return millis/1000;
     }
-    
+
     public String getCurrentTimestampAsString() {
         millis = System.currentTimeMillis();
         return String.valueOf(millis / 1000);
     }
-    
+
     public String Decrypt(String data,String utc)throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
         System.out.println(data);
         mykey = ApiBPJSEnc.generateKey(Consid+Key+utc);
@@ -99,7 +99,7 @@ public class ApiBPJS {
         System.out.println(data);
         return data;
     }
-    
+
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
         TrustManager[] trustManagers= {
@@ -116,7 +116,7 @@ public class ApiBPJS {
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
         return new RestTemplate(factory);
     }
-    
+
     public String tampilPropinsi(String poli) {
         String utc;
         HttpHeaders headers ;
@@ -146,14 +146,14 @@ public class ApiBPJS {
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
         return poli;
-    } 
-    
+    }
+
     public String tampilKabupaten(String poli,String propinsi) {
         String utc;
         HttpHeaders headers ;
@@ -183,14 +183,14 @@ public class ApiBPJS {
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
         return poli;
-    }  
-    
+    }
+
     public String tampilKecamatan(String poli,String kabupaten) {
         String utc;
         HttpHeaders headers ;
@@ -220,11 +220,11 @@ public class ApiBPJS {
                     }
                 }
             }else {
-                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());                
-            }   
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
+            }
         } catch (Exception ex) {
             System.out.println("Notifikasi : "+ex);
         }
         return poli;
-    } 
+    }
 }

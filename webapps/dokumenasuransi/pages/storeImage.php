@@ -1,11 +1,11 @@
 <?php
     require_once('../../conf/conf.php');
     session_start();
-    
+
     if(file_exists(host()."/webapps/dokumenasuransi/pages/upload/".validTeks4($_SESSION["kdpj"],3).".jpeg")){
         @unlink(host()."/webapps/dokumenasuransi/pages/upload/".validTeks4($_SESSION["kdpj"],3).".jpeg");
     }
-    
+
     $TglBerakhir    = validTeks4($_POST["TglBerakhir"],2);
     $BlnBerakhir    = validTeks4($_POST["BlnBerakhir"],2);
     $ThnBerakhir    = validTeks4($_POST["ThnBerakhir"],4);

@@ -24,8 +24,8 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
         }else{
             component.setBackground(new Color(255,255,255));
             component.setForeground(new Color(50,50,50));
-        } 
-        
+        }
+
         if ((column == 6)||(column == 7)){
             if(Integer.parseInt(table.getValueAt(row,7).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -38,7 +38,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 8)||(column == 9)){
             if(Integer.parseInt(table.getValueAt(row,9).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -51,7 +51,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 10)||(column == 11)){
             if(Integer.parseInt(table.getValueAt(row,11).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -64,7 +64,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 12)||(column == 13)){
             if(Integer.parseInt(table.getValueAt(row,13).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -77,7 +77,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 14)||(column == 15)){
             if(Integer.parseInt(table.getValueAt(row,15).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -90,7 +90,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 16)||(column == 17)){
             if(Integer.parseInt(table.getValueAt(row,17).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -103,7 +103,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 18)||(column == 19)){
             if(Integer.parseInt(table.getValueAt(row,19).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -116,7 +116,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 20)||(column == 21)){
             if(Integer.parseInt(table.getValueAt(row,21).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -129,7 +129,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 22)||(column == 23)){
             if(Integer.parseInt(table.getValueAt(row,23).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -142,7 +142,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 24)||(column == 25)){
             if(Integer.parseInt(table.getValueAt(row,25).toString())==0){
                 component.setBackground(Color.WHITE);
@@ -155,7 +155,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(Color.WHITE);
             }
         }
-        
+
         if ((column == 26)||(column == 27)){
             if(Integer.parseInt(table.getValueAt(row,26).toString())>=7){
                 component.setBackground(Color.RED);
@@ -171,7 +171,7 @@ public class WarnaTableMEOWS extends DefaultTableCellRenderer {
                 component.setForeground(new Color(50,50,50));
             }
         }
-        
+
         if (column == 28){
             if(table.getValueAt(row,28).toString().equals("Tidak")){
                 component.setBackground(Color.WHITE);

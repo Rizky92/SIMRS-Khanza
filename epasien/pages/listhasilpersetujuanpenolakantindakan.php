@@ -2,9 +2,9 @@
     if(strpos($_SERVER['REQUEST_URI'],"pages")){
         exit(header("Location:../index.php"));
     }
-    
+
     $iyem = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true); 
+    $iyem = json_decode(encrypt_decrypt($iyem,"d"),true);
     if (isset($iyem["nopersetujuan"])) {
         $nopersetujuan    = validTeks3($iyem["nopersetujuan"],20);
         $photo            = validTeks3($iyem["photo"],50);
@@ -34,8 +34,8 @@
                             </div>
                             <div class='body'>
                                 <h7>
-                                    Apabila pasien berusia dibawah 18 tahun atau tidak dapat memberikan persetujuan karena alasan lain (**) tidak dapat menandatangani surat pernyataan ini, 
-                                    Pihak rumah sakit dapat mengambil kebijakan dengan memperoleh tanda tangan dari orang tua, pasangan, anggota keluarga terdekat atau wali pasien.<br/> 
+                                    Apabila pasien berusia dibawah 18 tahun atau tidak dapat memberikan persetujuan karena alasan lain (**) tidak dapat menandatangani surat pernyataan ini,
+                                    Pihak rumah sakit dapat mengambil kebijakan dengan memperoleh tanda tangan dari orang tua, pasangan, anggota keluarga terdekat atau wali pasien.<br/>
                                     (**) Sebutkan alasan lainnya : ".$rsquerypersetujuan["alasan_diwakilkan_penerima_informasi"]."<br/><br/>
                                     Yang bertanda tangan di bawah ini saya :
                                 </h7>
@@ -59,7 +59,7 @@
                                 </table>
                                 <br/>
                                 <h7>
-                                    Dengan ini menyatakan ".$rsquerypersetujuan["pernyataan"]." untuk dapat dilakukan tindakan kedokteran berupa : 
+                                    Dengan ini menyatakan ".$rsquerypersetujuan["pernyataan"]." untuk dapat dilakukan tindakan kedokteran berupa :
                                 </h7>
                                 <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                     <tr>
@@ -81,7 +81,7 @@
                                         <td width='30%'>Tata Cara</td>
                                         <td width='60%'>: ".$rsquerypersetujuan["tata_cara"]."</td>
                                         <td width='10%'><input type='checkbox' disabled ".($rsquerypersetujuan["tata_cara_konfirmasi"]=="true"?"checked":"")."></td>
-                                    </tr> 
+                                    </tr>
                                     <tr>
                                         <td width='30%'>Tujuan</td>
                                         <td width='60%'>: ".$rsquerypersetujuan["tujuan"]."</td>
@@ -120,7 +120,7 @@
                                 </table>
                                 <br/>
                                 <h7>
-                                    Terhadap Pasien : 
+                                    Terhadap Pasien :
                                 </h7>
                                 <table width='100%' align='center' class='table table-hover js-basic-example dataTable'>
                                     <tr>

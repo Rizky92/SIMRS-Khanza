@@ -2,9 +2,9 @@
  //fitur update kamar aplicare ini adalah penyempurnaan dari kontribusi Mas Tirta dari RSUK Ciracas Jakarta Timur
  session_start();
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  date_default_timezone_set("Asia/Makassar");
@@ -30,7 +30,7 @@
     <link rel="stylesheet" href="assets/marquee.css" />
     <link rel="stylesheet" href="assets/example.css" />
 
-    
+
 </head>
 <body>
 
@@ -40,7 +40,7 @@
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
-        <div class="pull-right"> 
+        <div class="pull-right">
           <a href="" class="navbar-brand">
             <?php $date = Date("d-m-Y H:i:s"); echo $date; ?>
           </a>
@@ -49,7 +49,7 @@
   </nav>
 
   <div class="wrapper">
-    <div class="baner" style="padding-top: 6px;"> 
+    <div class="baner" style="padding-top: 6px;">
         <marquee scrollamount="3" direction="left" behavior="alternate">
           <img src="assets/images/galery.jpg" alt="Swimming fish">
           <img src="assets/images/galery.jpg" alt="Swimming fish">
@@ -63,7 +63,7 @@
               <div class="text-center">
                 <h2><img src="assets/spesialis.png" alt="Swimming fish" style="width: 30px; height: 28px;">&nbsp;Jadwal Dokter Spesialis</h2>
               </div>
-              <div class="table-responsive">          
+              <div class="table-responsive">
                 <table class="table">
                   <thead>
                     <tr style="border-top: solid 3px; border-bottom: solid 3px;">
@@ -74,7 +74,7 @@
                      </tr>
                   </thead>
                   <tbody>
-                    <?php  
+                    <?php
                       $hari=getOne("select DAYNAME(current_date())");
                         $namahari="";
                         if($hari=="Sunday"){
@@ -92,9 +92,9 @@
                       }else if($hari=="Saturday"){
                         $namahari="SABTU";
                       }
-                      $_sql="Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai 
-                          from jadwal inner join dokter inner join poliklinik on dokter.kd_dokter=jadwal.kd_dokter 
-                          and jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja='$namahari'" ;  
+                      $_sql="Select dokter.nm_dokter,poliklinik.nm_poli,jadwal.jam_mulai,jadwal.jam_selesai
+                          from jadwal inner join dokter inner join poliklinik on dokter.kd_dokter=jadwal.kd_dokter
+                          and jadwal.kd_poli=poliklinik.kd_poli where jadwal.hari_kerja='$namahari'" ;
                       $hasil=bukaquery($_sql);
 
                       while ($data = mysqli_fetch_array ($hasil)){
@@ -114,7 +114,7 @@
               <div class="text-center">
                 <h2><img src="assets/ranap.png" alt="Swimming fish" style="width: 30px; height: 28px;">&nbsp;Informasi Ruang Rawat Inap</h2>
               </div>
-             <div class="table-responsive">          
+             <div class="table-responsive">
               <table class="table">
                 <thead>
                   <tr style="border-top: solid 3px; border-bottom: solid 3px;">
@@ -124,8 +124,8 @@
                         <td align='center'><b>Bed Kosong</b></td>
                    </tr>
                 </thead>
-                <?php  
-                  $_sql="Select kelas from kamar where statusdata='1' group by kelas" ;  
+                <?php
+                  $_sql="Select kelas from kamar where statusdata='1' group by kelas" ;
                   $hasil=bukaquery($_sql);
 
                   while ($data = mysqli_fetch_array ($hasil)){
@@ -173,7 +173,7 @@
               Tarif Kamar Umum
             </div>
             <marquee class="marquee" scrollamount="4">
-                  <?php 
+                  <?php
                     $sql ="SELECT kelas, trf_kamar FROM kamar WHERE statusdata='1' GROUP BY kelas";
                     $hasil=bukaquery($sql);
                     while ($data = mysqli_fetch_array ($hasil)){
@@ -185,11 +185,11 @@
       </div>
     </footer>
 
-    
 
 
 
-  
+
+
 <script type="text/javascript" src="conf/validator.js"></script>
 <meta http-equiv="refresh" content="32"/>
 <script src="Scripts/AC_RunActiveContent.js" type="text/javascript"></script>

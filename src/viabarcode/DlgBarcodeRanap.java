@@ -14,11 +14,11 @@ package viabarcode;
 
 import fungsi.WarnaTable;
 import fungsi.WarnaTable2;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.akses;
 import inventory.riwayatobat;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -960,7 +960,7 @@ public final class DlgBarcodeRanap extends javax.swing.JDialog {
             rawatinap.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
             rawatinap.setLocationRelativeTo(internalFrame1);
             rawatinap.isCek();
-            rawatinap.setNoRm(NoRawat.getText(),new Date(),new Date()); 
+            rawatinap.setNoRm(NoRawat.getText(),new Date(),new Date());
             rawatinap.setVisible(true);
         }
     }//GEN-LAST:event_BtnCariActionPerformed

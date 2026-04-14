@@ -2,9 +2,9 @@
  //fitur update kamar aplicare ini adalah penyempurnaan dari kontribusi Mas Tirta dari RSUK Ciracas Jakarta Timur
  session_start();
  require_once('conf/conf.php');
- header("Expires: Mon, 26 Jul 1997 05:00:00 GMT"); 
- header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT"); 
- header("Cache-Control: no-store, no-cache, must-revalidate"); 
+ header("Expires: Mon, 26 Jul 1997 05:00:00 GMT");
+ header("Last-Modified: ".gmdate("D, d M Y H:i:s")." GMT");
+ header("Cache-Control: no-store, no-cache, must-revalidate");
  header("Cache-Control: post-check=0, pre-check=0", false);
  header("Pragma: no-cache"); // HTTP/1.0
  date_default_timezone_set("Asia/Makassar");
@@ -79,14 +79,14 @@
                       $bulan = $a_bulan[date("n")];
 
                       //menentukan tahun
-                      $tahun = date("Y"); 
+                      $tahun = date("Y");
 
                       //dan untuk menampilkan nya dengan format contoh Jumat, 22 Februari 2013
                       echo $hari . ", " . $tanggal ." ". $bulan ." ". $tahun;
 
                     ?>
                 </a>
-                <i class="material-icons md-12">query_builder</i>  
+                <i class="material-icons md-12">query_builder</i>
                 <a href="" class="white-text" id="jam"></a>
           </li>
         </ul>
@@ -109,7 +109,7 @@
             <!-- Fungsi Setting Instansi -->
             <?php $setting=  mysqli_fetch_array(bukaquery("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.kontak,setting.email,setting.logo from setting"));
             ?>
-            
+
             <div class="col s12" id="header-instansi">
                 <div class="card deep-orange accent-3 white-text">
                     <div class="card-content">
@@ -118,7 +118,7 @@
                         </div>
                         <h5 class="ins"><?php echo $setting["nama_instansi"] ?></h5>
                         <p class="almt"><?php echo $setting["alamat_instansi"] ?>, <?php echo $setting["kabupaten"] ?>, <?php echo $setting["propinsi"] ?>, <?php echo $setting["kontak"] ?>, <?php echo $setting["email"] ?>
-                            
+
                         </p>
                     </div>
                 </div>
@@ -129,7 +129,7 @@
     </div>
     <!-- container END -->
     <div class="container-fluid" id="data">
-        
+
     </div>
 
 </main>
@@ -145,7 +145,7 @@
               Tarif Kamar Umum
             </div>
             <marquee class="marquee" scrollamount="4">
-                  <?php 
+                  <?php
                     $sql ="SELECT kelas, trf_kamar FROM kamar WHERE statusdata='1' GROUP BY kelas";
                     $hasil=bukaquery($sql);
                     while ($data = mysqli_fetch_array ($hasil)){
@@ -186,10 +186,10 @@
   }
 </script>
 
-<script type="text/javascript" src="assets/js/jquery.js"></script> 
-<script type="text/javascript"> 
-    var auto_refresh = setInterval( function() { 
-        $('#data').load('data_operasi.php').fadeIn("slow"); }, 5000); 
+<script type="text/javascript" src="assets/js/jquery.js"></script>
+<script type="text/javascript">
+    var auto_refresh = setInterval( function() {
+        $('#data').load('data_operasi.php').fadeIn("slow"); }, 5000);
 </script>
 
 </body>

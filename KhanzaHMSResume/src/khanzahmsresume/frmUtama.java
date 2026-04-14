@@ -35,14 +35,14 @@ public class frmUtama extends javax.swing.JFrame {
     private ResultSet rs,rs2,rs3,rs4;
     private String sql;
     int y=0,w=0,urut;
-    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize(); 
+    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     /**
      * Creates new form frmUtama
      */
     public frmUtama() {
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        
+
         this.setSize(screen.width-40,screen.height-40);
         this.setLocationRelativeTo(null);
         LoadHTML.setEditable(true);
@@ -213,7 +213,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -254,87 +254,87 @@ public class frmUtama extends javax.swing.JFrame {
     private widget.panelisi panelGlass5;
     private widget.panelisi panelisi4;
     // End of variables declaration//GEN-END:variables
-    public void tampil(){     
+    public void tampil(){
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         sql="select pasien.no_rkm_medis, pasien.nm_pasien, pasien.jk, concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab) as alamat, pasien.umur, "+
                    "tmp_lahir,tgl_lahir,nm_ibu,gol_darah,stts_nikah,agama,pnd,tgl_daftar from pasien inner join kelurahan inner join kecamatan inner join kabupaten "+
                    "on pasien.kd_kel=kelurahan.kd_kel and pasien.kd_kec=kecamatan.kd_kec and "+
                    "pasien.kd_kab=kabupaten.kd_kab where pasien.no_rkm_medis='"+KdRw.getText()+"' order by pasien.no_rkm_medis desc ";
-        
+
         try{
             StringBuilder htmlContent = new StringBuilder();
             try {
                 rs=koneksi.prepareStatement(sql).executeQuery();
                 y=1;
-                while(rs.next()){   
+                while(rs.next()){
                     htmlContent.append(
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'>"+y+".</td>"+
                           "<td valign='top' width='20%'>No.RM</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("no_rkm_medis")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Nama Pasien</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("nm_pasien")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Alamat</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("alamat")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Umur</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("umur")+" ("+rs.getString("jk").replaceAll("L","Laki-Laki").replaceAll("P","Perempuan")+")</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Tempat & Tanggal Lahir</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("tmp_lahir")+" "+rs.getString("tgl_lahir")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Ibu Kandung</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("nm_ibu")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Golongan Darah</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("gol_darah")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Status Nikah</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("stts_nikah")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Agama</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("agama")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Pendidikan Terakhir</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("pnd")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Pertama Daftar</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
                           "<td valign='top' width='75%'>"+rs.getString("tgl_daftar")+"</td>"+
                         "</tr>"+
-                        "<tr class='isi'>"+ 
+                        "<tr class='isi'>"+
                           "<td valign='top' width='4%'></td>"+
                           "<td valign='top' width='20%'>Riwayat Perawatan</td>"+
                           "<td valign='top' width='1%' align='center'>:</td>"+
@@ -349,72 +349,72 @@ public class frmUtama extends javax.swing.JFrame {
                                "from reg_periksa inner join dokter inner join poliklinik inner join penjab on reg_periksa.kd_dokter=dokter.kd_dokter "+
                                "and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where stts<>'Batal' and reg_periksa.no_rkm_medis='"+rs.getString("no_rkm_medis")+"'").executeQuery();
                         urut=1;
-                        while(rs2.next()){      
+                        while(rs2.next()){
                             htmlContent.append(
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;"+urut+". No.Rawat</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("no_rawat")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;No.Registrasi</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("no_reg")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Tanggal Registrasi</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("tgl_registrasi")+" "+rs2.getString("jam_reg")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Unit/Poliklinik</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("nm_poli")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Dokter</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("nm_dokter")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Cara Bayar</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("png_jawab")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Penanggung Jawab</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("p_jawab")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Alamat P.J.</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("almt_pj")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Hubungan P.J.</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("hubunganpj")+"</td>"+
                               "</tr>"+
-                              "<tr class='isi'>"+ 
+                              "<tr class='isi'>"+
                                 "<td valign='top' width='4%'></td>"+
                                 "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Status</td>"+
                                 "<td valign='top' width='1%' align='center'>:</td>"+
                                 "<td valign='top' width='75%'>"+rs2.getString("status_lanjut")+"</td>"+
                               "</tr>"
-                            );                            
+                            );
                             urut++;
-                            
-                            //menampilkan diagnosa penyakit                            
+
+                            //menampilkan diagnosa penyakit
                             try {
                                 rs3=koneksi.prepareStatement(
                                         "select diagnosa_pasien.kd_penyakit,penyakit.nm_penyakit, diagnosa_pasien.status "+
@@ -423,7 +423,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         "where diagnosa_pasien.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
                                 if(rs3.next()){
                                     htmlContent.append(
-                                      "<tr class='isi'>"+ 
+                                      "<tr class='isi'>"+
                                         "<td valign='top' width='4%'></td>"+
                                         "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Diagnosa/Penyakit/ICD 10</td>"+
                                         "<td valign='top' width='1%' align='center'>:</td>"+
@@ -434,14 +434,14 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.beforeFirst();
                                     w=1;
                                     while(rs3.next()){
-                                        htmlContent.append("<tr><td valign='top' align='center'>"+w+"</td><td valign='top'>"+rs3.getString("kd_penyakit")+"</td><td valign='top'>"+rs3.getString("nm_penyakit")+"</td><td valign='top'>"+rs3.getString("status")+"</td></tr>");                                        
+                                        htmlContent.append("<tr><td valign='top' align='center'>"+w+"</td><td valign='top'>"+rs3.getString("kd_penyakit")+"</td><td valign='top'>"+rs3.getString("nm_penyakit")+"</td><td valign='top'>"+rs3.getString("status")+"</td></tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                           "</table>"+
                                         "</td>"+
                                       "</tr>");
-                                }                                    
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -449,7 +449,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //menampilkan prosedur tindakan
                             try {
                                 rs3=koneksi.prepareStatement(
@@ -459,7 +459,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         "where prosedur_pasien.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
                                 if(rs3.next()){
                                     htmlContent.append(
-                                      "<tr class='isi'>"+ 
+                                      "<tr class='isi'>"+
                                         "<td valign='top' width='4%'></td>"+
                                         "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Prosedur Tindakan/ICD 9</td>"+
                                         "<td valign='top' width='1%' align='center'>:</td>"+
@@ -470,7 +470,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.beforeFirst();
                                     w=1;
                                     while(rs3.next()){
-                                        htmlContent.append("<tr><td valign='top' align='center'>"+w+"</td><td valign='top'>"+rs3.getString("kode")+"</td><td valign='top'>"+rs3.getString("deskripsi_panjang")+"</td><td valign='top'>"+rs3.getString("status")+"</td></tr>");                                        
+                                        htmlContent.append("<tr><td valign='top' align='center'>"+w+"</td><td valign='top'>"+rs3.getString("kode")+"</td><td valign='top'>"+rs3.getString("deskripsi_panjang")+"</td><td valign='top'>"+rs3.getString("status")+"</td></tr>");
                                         w++;
                                     }
                                     htmlContent.append(
@@ -485,7 +485,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //menampilkan riwayat pemeriksaan ralan
                             try {
                                 rs3=koneksi.prepareStatement(
@@ -493,7 +493,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         "from pemeriksaan_ralan where pemeriksaan_ralan.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
                                 if(rs3.next()){
                                     htmlContent.append(
-                                      "<tr class='isi'>"+ 
+                                      "<tr class='isi'>"+
                                         "<td valign='top' width='4%'></td>"+
                                         "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pemeriksaan Rawat Jalan</td>"+
                                         "<td valign='top' width='1%' align='center'>:</td>"+
@@ -519,14 +519,14 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("tensi")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("hasil")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("perkembangan")+"</td>"+
-                                             "</tr>");                                        
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                           "</table>"+
                                         "</td>"+
                                       "</tr>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -534,7 +534,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //menampilkan riwayat pemeriksaan ranap
                             try {
                                 rs3=koneksi.prepareStatement(
@@ -542,7 +542,7 @@ public class frmUtama extends javax.swing.JFrame {
                                         "pemeriksaan_ranap.tgl_perawatan,pemeriksaan_ranap.jam_rawat from pemeriksaan_ranap where pemeriksaan_ranap.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
                                 if(rs3.next()){
                                     htmlContent.append(
-                                      "<tr class='isi'>"+ 
+                                      "<tr class='isi'>"+
                                         "<td valign='top' width='4%'></td>"+
                                         "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Pemeriksaan Rawat Inap</td>"+
                                         "<td valign='top' width='1%' align='center'>:</td>"+
@@ -568,7 +568,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("tensi")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("hasil")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("perkembangan")+"</td>"+
-                                             "</tr>");                                        
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
@@ -583,10 +583,10 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //biaya administrasi
                             htmlContent.append(
-                               "<tr class='isi'>"+ 
+                               "<tr class='isi'>"+
                                  "<td valign='top' width='4%'></td>"+
                                  "<td valign='top' width='20%'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Biaya & Perawatan</td>"+
                                  "<td valign='top' width='1%' align='center'>:</td>"+
@@ -599,7 +599,7 @@ public class frmUtama extends javax.swing.JFrame {
                                        "</tr>"+
                                      "</table>"
                             );
-                            
+
                             //tindakan dokter ralan
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -607,8 +607,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         "from rawat_jl_dr inner join jns_perawatan inner join dokter "+
                                         "on rawat_jl_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                                         "and rawat_jl_dr.kd_dokter=dokter.kd_dokter where rawat_jl_dr.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                         "<tr><td valign='top' colspan='4'>Tindakan Rawat Jalan Dokter</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
@@ -630,12 +630,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nm_perawatan")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("nm_dokter")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_rawat"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -643,7 +643,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //tindakan paramedis ralan
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -651,10 +651,10 @@ public class frmUtama extends javax.swing.JFrame {
                                         "from rawat_jl_pr inner join jns_perawatan inner join petugas "+
                                         "on rawat_jl_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                                         "and rawat_jl_pr.nip=petugas.nip where rawat_jl_pr.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
-                                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+                                        
-                                        "<tr><td valign='top' colspan='4'>Tindakan Rawat Jalan Paramedis</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+      
+                                if(rs3.next()){
+                                    htmlContent.append(
+                                      "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                        "<tr><td valign='top' colspan='4'>Tindakan Rawat Jalan Paramedis</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='10%' bgcolor='#FFFAFA'>Tanggal</td>"+
@@ -674,12 +674,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nm_perawatan")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("nama")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_rawat"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -687,7 +687,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //tindakan ralan dokter dan paramedis
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -695,10 +695,10 @@ public class frmUtama extends javax.swing.JFrame {
                                         "from rawat_jl_drpr inner join jns_perawatan inner join dokter inner join petugas "+
                                         "on rawat_jl_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw and rawat_jl_drpr.nip=petugas.nip "+
                                         "and rawat_jl_drpr.kd_dokter=dokter.kd_dokter where rawat_jl_drpr.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='5'>Tindakan Rawat Jalan Dokter & Paramedis</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+            
+                                        "<tr><td valign='top' colspan='5'>Tindakan Rawat Jalan Dokter & Paramedis</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='10%' bgcolor='#FFFAFA'>Tanggal</td>"+
@@ -720,12 +720,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nm_dokter")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("nama")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_rawat"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -733,7 +733,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //tindakan dokter ranap
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -741,8 +741,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         "from rawat_inap_dr inner join jns_perawatan inner join dokter "+
                                         "on rawat_inap_dr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                                         "and rawat_inap_dr.kd_dokter=dokter.kd_dokter where rawat_inap_dr.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                         "<tr><td valign='top' colspan='4'>Tindakan Rawat Inap Dokter</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
@@ -764,12 +764,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nm_perawatan")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("nm_dokter")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_rawat"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -777,7 +777,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //tindakan paramedis ranap
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -785,8 +785,8 @@ public class frmUtama extends javax.swing.JFrame {
                                         "from rawat_inap_pr inner join jns_perawatan inner join petugas "+
                                         "on rawat_inap_pr.kd_jenis_prw=jns_perawatan.kd_jenis_prw "+
                                         "and rawat_inap_pr.nip=petugas.nip where rawat_inap_pr.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
                                         "<tr><td valign='top' colspan='4'>Tindakan Rawat Inap Paramedis</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
@@ -808,12 +808,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nm_perawatan")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("nama")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_rawat"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }      
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -821,7 +821,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //tindakan paramedis dan dokter ranap
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -829,10 +829,10 @@ public class frmUtama extends javax.swing.JFrame {
                                         "from rawat_inap_drpr inner join jns_perawatan inner join dokter inner join petugas "+
                                         "on rawat_inap_drpr.kd_jenis_prw=jns_perawatan.kd_jenis_prw and rawat_inap_drpr.nip=petugas.nip "+
                                         "and rawat_inap_drpr.kd_dokter=dokter.kd_dokter where rawat_inap_drpr.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='5'>Tindakan Rawat Inap Dokter & Paramedis</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+            
+                                        "<tr><td valign='top' colspan='5'>Tindakan Rawat Inap Dokter & Paramedis</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='15%' bgcolor='#FFFAFA'>Tanggal</td>"+
@@ -854,12 +854,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nm_dokter")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("nama")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya_rawat"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -867,7 +867,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //kamar inap
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -876,10 +876,10 @@ public class frmUtama extends javax.swing.JFrame {
                                         "kamar_inap.ttl_biaya from kamar_inap inner join bangsal inner join kamar "+
                                         "on kamar_inap.kd_kamar=kamar.kd_kamar and kamar.kd_bangsal=bangsal.kd_bangsal  "+
                                         "where kamar_inap.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='5'>Penggunaan Kamar</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+            
+                                        "<tr><td valign='top' colspan='5'>Penggunaan Kamar</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='15%' bgcolor='#FFFAFA'>Tanggal Masuk</td>"+
@@ -901,12 +901,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("kd_kamar")+", "+rs3.getString("nm_bangsal")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("stts_pulang")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("ttl_biaya"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -914,7 +914,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //operasi
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -932,10 +932,10 @@ public class frmUtama extends javax.swing.JFrame {
 										"operasi.biayaasisten_anestesi+operasi.biayabidan+operasi.biayabidan2+operasi.biayabidan3+operasi.biayaperawat_luar+operasi.biayaalat+"+
 										"operasi.biayasewaok+operasi.akomodasi+operasi.bagian_rs+operasi.biaya_omloop+operasi.biaya_omloop2+operasi.biaya_omloop3+sarpras) as total from operasi inner join paket_operasi "+
 										"on operasi.kode_paket=paket_operasi.kode_paket where operasi.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='4'>Operasi/VK</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+            
+                                        "<tr><td valign='top' colspan='4'>Operasi/VK</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='15%' bgcolor='#FFFAFA'>Tanggal</td>"+
@@ -1008,12 +1008,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 ")</td>"+
                                                 "<td valign='top'>"+rs3.getString("jenis_anasthesi")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("total"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1021,7 +1021,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //tindakan pemeriksaan radiologi
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -1030,10 +1030,10 @@ public class frmUtama extends javax.swing.JFrame {
                                      "from periksa_radiologi inner join jns_perawatan_radiologi inner join petugas inner join dokter "+
                                      "on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw and periksa_radiologi.kd_dokter=dokter.kd_dokter "+
                                      "and periksa_radiologi.nip=petugas.nip  where periksa_radiologi.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='5'>Pemeriksaan Radiologi</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+            
+                                        "<tr><td valign='top' colspan='5'>Pemeriksaan Radiologi</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='15%' bgcolor='#FFFAFA'>Tanggal</td>"+
@@ -1055,12 +1055,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nm_dokter")+"</td>"+
                                                 "<td valign='top'>"+rs3.getString("nama")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1068,7 +1068,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //tindakan pemeriksaan laborat
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -1077,10 +1077,10 @@ public class frmUtama extends javax.swing.JFrame {
                                      "from periksa_lab inner join jns_perawatan_lab inner join petugas inner join dokter "+
                                      "on periksa_lab.kd_jenis_prw=jns_perawatan_lab.kd_jenis_prw and periksa_lab.kd_dokter=dokter.kd_dokter "+
                                      "and periksa_lab.nip=petugas.nip  where periksa_lab.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='5'>Pemeriksaan Laboratorium</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+            
+                                        "<tr><td valign='top' colspan='5'>Pemeriksaan Laboratorium</td><td valign='top' colspan='1' align='right'>:</td><td valign='top'></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='15%' bgcolor='#FFFAFA'>Tanggal</td>"+
@@ -1103,7 +1103,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nama")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("biaya"))+"</td>"+
                                              "</tr>"
-                                        ); 
+                                        );
                                         try {
                                             rs4=koneksi.prepareStatement(
                                                 "select template_laboratorium.Pemeriksaan, detail_periksa_lab.nilai,"+
@@ -1114,7 +1114,7 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "detail_periksa_lab.kd_jenis_prw='"+rs3.getString("kd_jenis_prw")+"' and "+
                                                 "detail_periksa_lab.tgl_periksa='"+rs3.getString("tgl_periksa")+"' and "+
                                                 "detail_periksa_lab.jam='"+rs3.getString("jam")+"'").executeQuery();
-                                            if(rs4.next()){ 
+                                            if(rs4.next()){
                                                 htmlContent.append(
                                                     "<tr>"+
                                                        "<td valign='top' align='center'></td>"+
@@ -1136,8 +1136,8 @@ public class frmUtama extends javax.swing.JFrame {
                                                            "<td valign='top'>"+rs4.getString("nilai")+" "+rs4.getString("satuan")+"</td>"+
                                                            "<td valign='top'>"+rs4.getString("nilai_rujukan")+"</td>"+
                                                            "<td valign='top' align='right'>"+Valid.SetAngka(rs4.getDouble("biaya_item"))+"</td>"+
-                                                        "</tr>"); 
-                                                }                                               
+                                                        "</tr>");
+                                                }
                                             }
                                         } catch (Exception e) {
                                             System.out.println("Notifikasi : "+e);
@@ -1150,7 +1150,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1158,7 +1158,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //pemberian obat
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -1167,10 +1167,10 @@ public class frmUtama extends javax.swing.JFrame {
                                     "databarang.nama_brng from detail_pemberian_obat inner join databarang "+
                                     "on detail_pemberian_obat.kode_brng=databarang.kode_brng  "+
                                     "where detail_pemberian_obat.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='4'>Pemberian Obat/BHP/Alkes</td><td valign='top' colspan='1' align='right'>:</td><td></td></tr>"+            
+                                        "<tr><td valign='top' colspan='4'>Pemberian Obat/BHP/Alkes</td><td valign='top' colspan='1' align='right'>:</td><td></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='15%' bgcolor='#FFFAFA'>Tanggal</td>"+
@@ -1190,12 +1190,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nama_brng")+"</td>"+
                                                 "<td valign='top'>"+rs3.getDouble("jml")+" "+rs3.getString("kode_sat")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("total"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1203,7 +1203,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //pemberian obat Operasi
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -1211,10 +1211,10 @@ public class frmUtama extends javax.swing.JFrame {
                                     "beri_obat_operasi.jumlah, obatbhp_ok.nm_obat,(beri_obat_operasi.hargasatuan*beri_obat_operasi.jumlah) as total "+
                                     "from beri_obat_operasi inner join obatbhp_ok  on  beri_obat_operasi.kd_obat=obatbhp_ok.kd_obat  "+
                                     "where beri_obat_operasi.no_rawat='"+rs2.getString("no_rawat")+"'").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='4'>Penggunaan Obat/BHP Operasi</td><td valign='top' colspan='1' align='right'>:</td><td></td></tr>"+            
+                                        "<tr><td valign='top' colspan='4'>Penggunaan Obat/BHP Operasi</td><td valign='top' colspan='1' align='right'>:</td><td></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='15%' bgcolor='#FFFAFA'>Tanggal</td>"+
@@ -1234,12 +1234,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nm_obat")+"</td>"+
                                                 "<td valign='top'>"+rs3.getDouble("jumlah")+" "+rs3.getString("kode_sat")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("total"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1247,7 +1247,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //Resep Pulang
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -1255,10 +1255,10 @@ public class frmUtama extends javax.swing.JFrame {
                                     "databarang.kode_sat,resep_pulang.dosis,resep_pulang.total from resep_pulang inner join databarang "+
                                     "on resep_pulang.kode_brng=databarang.kode_brng where "+
                                     "resep_pulang.no_rawat='"+rs2.getString("no_rawat")+"' order by databarang.nama_brng").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='4'>Resep Pulang</td><td valign='top' colspan='1' align='right'>:</td><td></td></tr>"+            
+                                        "<tr><td valign='top' colspan='4'>Resep Pulang</td><td valign='top' colspan='1' align='right'>:</td><td></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='10%' bgcolor='#FFFAFA'>Kode</td>"+
@@ -1278,12 +1278,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("dosis")+"</td>"+
                                                 "<td valign='top'>"+rs3.getDouble("jml_barang")+" "+rs3.getString("kode_sat")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("total"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1291,7 +1291,7 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //Retur Obat
                             try{
                                 rs3=koneksi.prepareStatement(
@@ -1299,10 +1299,10 @@ public class frmUtama extends javax.swing.JFrame {
 				    "(detreturjual.jml_retur * -1) as jumlah,(detreturjual.subtotal * -1) as total from detreturjual "+
 				    "inner join databarang inner join returjual on detreturjual.kode_brng=databarang.kode_brng "+
 				    "and returjual.no_retur_jual=detreturjual.no_retur_jual where returjual.no_retur_jual='"+rs2.getString("no_rawat")+"' order by databarang.nama_brng").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='3'>Retur Obat</td><td valign='top' colspan='1' align='right'>:</td><td></td></tr>"+            
+                                        "<tr><td valign='top' colspan='3'>Retur Obat</td><td valign='top' colspan='1' align='right'>:</td><td></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='10%' bgcolor='#FFFAFA'>Kode</td>"+
@@ -1320,12 +1320,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nama_brng")+"</td>"+
                                                 "<td valign='top'>"+rs3.getDouble("jumlah")+" "+rs3.getString("kode_sat")+"</td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("total"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1333,15 +1333,15 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //Tambahan Biaya
                             try{
                                 rs3=koneksi.prepareStatement(
                                     "select nama_biaya, besar_biaya from tambahan_biaya where no_rawat='"+rs2.getString("no_rawat")+"' order by nama_biaya").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='2'>Tambahan Biaya</td><td valign='top' align='right'>:</td><td></td></tr>"+            
+                                        "<tr><td valign='top' colspan='2'>Tambahan Biaya</td><td valign='top' align='right'>:</td><td></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='84%' bgcolor='#FFFAFA'>Nama Tambahan</td>"+
@@ -1357,12 +1357,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nama_biaya")+"</td>"+
                                                 "<td valign='top'></td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("besar_biaya"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1370,15 +1370,15 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
+
                             //Pengurangan Biaya
                             try{
                                 rs3=koneksi.prepareStatement(
                                     "select nama_pengurangan, (-1*besar_pengurangan) as besar_pengurangan from pengurangan_biaya where no_rawat='"+rs2.getString("no_rawat")+"' order by nama_pengurangan").executeQuery();
-                                if(rs3.next()){                                    
-                                    htmlContent.append(  
+                                if(rs3.next()){
+                                    htmlContent.append(
                                       "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr><td valign='top' colspan='2'>Potongan Biaya</td><td valign='top' align='right'>:</td><td></td></tr>"+            
+                                        "<tr><td valign='top' colspan='2'>Potongan Biaya</td><td valign='top' align='right'>:</td><td></td></tr>"+
                                         "<tr align='center'>"+
                                           "<td valign='top' width='5%' bgcolor='#FFFAFA'>No.</td>"+
                                           "<td valign='top' width='84%' bgcolor='#FFFAFA'>Nama Potongan</td>"+
@@ -1394,12 +1394,12 @@ public class frmUtama extends javax.swing.JFrame {
                                                 "<td valign='top'>"+rs3.getString("nama_pengurangan")+"</td>"+
                                                 "<td valign='top'></td>"+
                                                 "<td valign='top' align='right'>"+Valid.SetAngka(rs3.getDouble("besar_pengurangan"))+"</td>"+
-                                             "</tr>"); 
+                                             "</tr>");
                                         w++;
                                     }
                                     htmlContent.append(
                                       "</table>");
-                                }                                
+                                }
                             } catch (Exception e) {
                                 System.out.println("Notifikasi : "+e);
                             } finally{
@@ -1407,12 +1407,12 @@ public class frmUtama extends javax.swing.JFrame {
                                     rs3.close();
                                 }
                             }
-                            
-                            htmlContent.append(                                    
+
+                            htmlContent.append(
                                  "</td>"+
-                               "</tr>"                               
+                               "</tr>"
                             );
-                        }                           
+                        }
                     } catch (Exception e) {
                         System.out.println("Notifikasi : "+e);
                     } finally{
@@ -1436,16 +1436,16 @@ public class frmUtama extends javax.swing.JFrame {
                     rs.close();
                 }
             }
-                
-            
+
+
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
         this.setCursor(Cursor.getDefaultCursor());
     }
 
-   
-    
+
+
     public void isPasien(){
         Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=? ",TPasien,KdRw.getText());
     }

@@ -18,11 +18,11 @@ public class DlgKirimWA extends javax.swing.JDialog {
     private final validasi Valid = new validasi();
     private final SimpleDateFormat df = new SimpleDateFormat("HH:mm:ss");
     private String asal = "";
-    
+
     public DlgKirimWA(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        
+
         TNoWA.setDocument(new batasInput((byte) 15).getOnlyAngka(TNoWA));
         TIsiPesan.setDocument(new batasInput((int) 3000).getKata(TIsiPesan));
         jam();
@@ -202,7 +202,7 @@ public class DlgKirimWA extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -265,15 +265,15 @@ public class DlgKirimWA extends javax.swing.JDialog {
         this.asal = asal;
         ChkJln.setSelected(true);
     }
-    
+
     public void setRM(String norm, String namapasien, String nohp, String asal) {
         setRM(norm, namapasien, nohp, "", asal);
     }
-    
+
     public void setRM(String norm, String namapasien, String asal) {
         setRM(norm, namapasien, Sequel.cariIsiSmc("select pasien.no_tlp from pasien where pasien.no_rkm_medis = ?", norm), asal);
     }
-    
+
     private void jam() {
         ActionListener taskPerformer = (ActionEvent e) -> {
             Date now = Calendar.getInstance().getTime();
@@ -285,10 +285,10 @@ public class DlgKirimWA extends javax.swing.JDialog {
                 Detik.setSelectedItem(jam.substring(6, 8));
             }
         };
-        
+
         new Timer(1000, taskPerformer).start();
     }
-    
+
     private void emptTeks() {
         TNoRM.setText("");
         TNm.setText("");

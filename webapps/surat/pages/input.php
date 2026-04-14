@@ -6,7 +6,7 @@
     }
 ?>
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 $action =isset($_GET['action'])?$_GET['action']:NULL;
@@ -126,7 +126,7 @@
                         <td width="35%">
                             :&nbsp;<input name="perihal" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi6'));" type=text id="TxtIsi6" class="inputbox" value="" size="35" maxlength="300" pattern="[a-zA-Z 0-9-]{1,300}" title=" a-zA-Z 0-9- (Maksimal 300 karakter)" autocomplete="off" required>
                             <span id="MsgIsi6" style="color:#CC0000; font-size:10px;"></span>
-                        </td>                        
+                        </td>
                         <td width="15%" >Status Balas</td>
                         <td width="35%">
                             :&nbsp;<select name="kd_balas" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi16'));" id="TxtIsi16">
@@ -139,7 +139,7 @@
                                 ?>
                             </select>
                             <span id="MsgIsi16" style="color:#CC0000; font-size:10px;"></span>
-                        </td>                 
+                        </td>
                     </tr>
                     <tr class="isi2">
                         <td width="15%" >Tanggal Terima</td>
@@ -243,7 +243,7 @@
                             <span id="MsgIsi20" style="color:#CC0000; font-size:10px;"></span>
                         </td>
                     </tr>
-                </table>                
+                </table>
                 <div align="center"><input name=BtnSimpan type=submit class="button" value="&nbsp;&nbsp;Simpan&nbsp;&nbsp;">&nbsp<input name=BtnKosong type=reset class="button" value="&nbsp;&nbsp;Kosong&nbsp;&nbsp;"></div><br>
                 </div>
             </div>
@@ -297,6 +297,6 @@
                     }
                 }
             ?>
-        </form>        
+        </form>
     </div>
 </div>

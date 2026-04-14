@@ -24,8 +24,8 @@ public class WarnaTableKelengkapanOperasi extends DefaultTableCellRenderer {
         }else{
             component.setBackground(new Color(255,255,255));
             component.setForeground(new Color(50,50,50));
-        } 
-        
+        }
+
         if (column == 12){
             if(table.getValueAt(row,12).toString().equals("Lengkap")){
                 component.setBackground(Color.GREEN);

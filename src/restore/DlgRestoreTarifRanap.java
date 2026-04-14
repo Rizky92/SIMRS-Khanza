@@ -11,7 +11,6 @@
 
 package restore;
 import fungsi.WarnaTable;
-import keuangan.*;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;

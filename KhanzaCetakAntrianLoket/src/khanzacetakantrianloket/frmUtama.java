@@ -148,7 +148,7 @@ public class frmUtama extends javax.swing.JFrame {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         autonomer();
-        try{            
+        try{
             ps=koneksi.prepareStatement("select nama_instansi, alamat_instansi, kabupaten, propinsi, aktifkan, wallpaper,kontak,email,logo from setting");
             try {
                 rs=ps.executeQuery();
@@ -159,7 +159,7 @@ public class frmUtama extends javax.swing.JFrame {
                     akses.setpropinsirs(rs.getString("propinsi"));
                     akses.setkontakrs(rs.getString("kontak"));
                     akses.setemailrs(rs.getString("email"));
-                }  
+                }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
@@ -169,7 +169,7 @@ public class frmUtama extends javax.swing.JFrame {
                 if(ps!=null){
                     ps.close();
                 }
-            }                 
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : Silahkan Set Aplikasi "+e);
         }
@@ -182,7 +182,7 @@ public class frmUtama extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -230,7 +230,7 @@ public class frmUtama extends javax.swing.JFrame {
         };
         new Timer(1000, taskPerformer).start();
     }
-    
+
     private void autonomer(){
         LabelNomor.setText(Sequel.cariIsiSmc("select lpad(ifnull(max(convert(nomor, signed)), 0) + 1, greatest(length(ifnull(max(nomor), 0) + 1), 3), '0') from antriloketcetak_smc where tanggal = current_date()"));
     }

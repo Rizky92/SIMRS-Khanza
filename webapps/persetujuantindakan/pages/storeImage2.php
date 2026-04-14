@@ -13,7 +13,7 @@
     $fileName               = $nopernyataan."SK.jpeg";
     $file                   = $folderPath . $fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("bukti_persetujuan_penolakan_tindakan_saksikeluarga","'".$nopernyataan."','pages/upload/$fileName'");
 ?>
 <head>

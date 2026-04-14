@@ -4,7 +4,7 @@
     if(file_exists(host()."/webapps/pulangaps/pages/upload/".$nopernyataan."PP.jpeg")){
         @unlink(host()."/webapps/pulangaps/pages/upload/".$nopernyataan."PP.jpeg");
     }
-    
+
     $img                    = $_POST["image"];
     $folderPath             = "upload/";
     $image_parts            = explode(";base64,", $img);
@@ -14,7 +14,7 @@
     $fileName               = $nopernyataan."PP.jpeg";
     $file                   = $folderPath . $fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("surat_pulang_atas_permintaan_sendiri_pembuat_pernyataan","'".$nopernyataan."','pages/upload/$fileName'");
 ?>
 <head>

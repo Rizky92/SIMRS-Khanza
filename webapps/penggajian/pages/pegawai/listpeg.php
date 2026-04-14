@@ -4,7 +4,7 @@
             exit(header("Location:../index.php"));
         }
     }
-    
+
    $_sql         = "SELECT * FROM set_tahun";
    $hasil        = bukaquery($_sql);
    $baris        = mysqli_fetch_row($hasil);
@@ -123,10 +123,10 @@
 			 }else if(!($baris["wajibmasuk"]==0)){
 			     $jmlmsk=$baris2[0];
 			 }
-                         
+
                          $gb="-";
                          if($baris["photo"]=="pages/pegawai/photo/"){
-                            $gb="-";                            
+                            $gb="-";
                          }else{
                             $gb="<img src='".$baris["photo"]."' width='120px' height='120px'>";
                          }

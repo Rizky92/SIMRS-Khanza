@@ -1,6 +1,6 @@
 package laporan;
-import fungsi.koneksiDB;
 import fungsi.akses;
+import fungsi.koneksiDB;
 import fungsi.sekuel;
 import java.awt.Cursor;
 import java.awt.Desktop;

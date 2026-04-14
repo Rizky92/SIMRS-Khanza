@@ -64,7 +64,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         }
         tbAdmin.setDefaultRenderer(Object.class, new WarnaTable());
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-        
+
         try {
             aktifjadwal=koneksiDB.JADWALDOKTERDIREGISTRASI();
         } catch (Exception e) {
@@ -321,14 +321,14 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                             pilih.setLocationRelativeTo(this);
                             pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
                             pilih.setVisible(true);
-                        }                    
+                        }
                     }else{
                         DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                         pilih.setSize(this.getWidth(),this.getHeight());
                         pilih.setLocationRelativeTo(this);
                         pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
                         pilih.setVisible(true);
-                    } 
+                    }
                 } catch (java.lang.NullPointerException e) {
                 }
             }
@@ -348,14 +348,14 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                         pilih.setLocationRelativeTo(this);
                         pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
                         pilih.setVisible(true);
-                    }                    
+                    }
                 }else{
                     DlgRegistrasi pilih=new DlgRegistrasi(null,true);
                     pilih.setSize(this.getWidth(),this.getHeight());
                     pilih.setLocationRelativeTo(this);
                     pilih.setPasien(LblNoRm.getText(),LblKdPoli.getText(),tbAdmin.getValueAt(tbAdmin.getSelectedRow(),0).toString());
                     pilih.setVisible(true);
-                } 
+                }
             } catch (java.lang.NullPointerException e) {
             }
         }
@@ -413,7 +413,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
         java.awt.EventQueue.invokeLater(() -> {
             DlgPilihDokter dialog = new DlgPilihDokter(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                
+
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
                     System.exit(0);
@@ -452,7 +452,7 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                     "select dokter.kd_dokter,dokter.nm_dokter,jadwal.kuota "+
                     "from dokter inner join jadwal on dokter.kd_dokter=jadwal.kd_dokter "+
                     "where jadwal.hari_kerja=? and jadwal.kd_poli=? and dokter.kd_dokter like ? or "+
-                    "jadwal.hari_kerja=? and jadwal.kd_poli=? and dokter.nm_dokter like ? group by dokter.kd_dokter order by dokter.nm_dokter "); 
+                    "jadwal.hari_kerja=? and jadwal.kd_poli=? and dokter.nm_dokter like ? group by dokter.kd_dokter order by dokter.nm_dokter ");
             try{
                 if(day==1){
                     hari="AKHAD";
@@ -475,10 +475,10 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                 ps.setString(4,hari);
                 ps.setString(5,LblKdPoli.getText());
                 ps.setString(6,"%"+TCari.getText().trim()+"%");
-                rs=ps.executeQuery(); 
+                rs=ps.executeQuery();
                 while(rs.next()){
                     tabmode.addRow(new Object[]{rs.getString(1),"  "+rs.getString(2),rs.getString(3)});
-                }   
+                }
             }catch(Exception ex){
                 System.out.println(ex);
             }finally{
@@ -488,12 +488,12 @@ public class DlgPilihDokter extends javax.swing.JDialog {
                 if(ps!=null){
                     ps.close();
                 }
-            }                  
+            }
         }catch(Exception ex){
             System.out.println(ex);
         }
     }
-    
+
     public void setPasien(String norm,String kodepoli){
         LblNoRm.setText(norm);
         LblNama.setText(Sequel.cariIsi("select pasien.nm_pasien from pasien where pasien.no_rkm_medis=?", norm));

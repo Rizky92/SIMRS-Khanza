@@ -1,7 +1,7 @@
 <div id="post">
     <div align="center" class="link">
         <a href=?act=HomeAdmin>| Menu Utama |</a>
-    </div> 
+    </div>
     <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
@@ -33,12 +33,12 @@
                         </select>
                         <span id="MsgIsi2" style="color:#CC0000; font-size:10px;"></span>
                     </td>
-                </tr>       
+                </tr>
             </table>
             <div align="center"><input name=BtnSimpan type=submit class="button" value="SIMPAN">&nbsp<input name=BtnKosong type=reset class="button" value="KOSONG"></div><br>
             <?php
                 $BtnSimpan = isset($_POST['BtnSimpan'])? $_POST['BtnSimpan']:NULL;
-                if (isset($BtnSimpan)) {                    
+                if (isset($BtnSimpan)) {
                     $bulan     = validTeks(trim(isset($_POST['bulan'])) ? trim($_POST['bulan']):"01");
                     $bln_leng  = validTeks(strlen(trim($_POST['bulan'])));
                     if ($bln_leng==1){
@@ -68,7 +68,7 @@
                             case "TAMBAH":
                                     Tambah(" set_tahun "," '$tahun','$bulan','$jumHari','$sum','$selisihhari'", " Seting Tahun & Bulan gaji " );
                                     echo"<meta http-equiv='refresh' content='1;URL=?act=InputTahun&action=TAMBAH&bulan=$bulan&tahun=$tahun'>";
-                                    break;                                
+                                    break;
                         }
                     }else {
                         echo 'Semua field harus isi..!!!';
@@ -132,7 +132,7 @@
                 </tr>
             </table>
             <div align="center"><input name=BtnSimpan2 type=submit class="button" value="SIMPAN">&nbsp<input name=BtnKosong type=reset class="button" value="KOSONG"></div><br>
-            <div style="width: 100%; height: 200px; overflow: auto;">                
+            <div style="width: 100%; height: 200px; overflow: auto;">
             <?php
                 $BtnSimpan2 = isset($_POST['BtnSimpan2'])?$_POST['BtnSimpan2']:NULL;
                 $_sql2      = "SELECT * FROM set_tahun";
@@ -147,7 +147,7 @@
                     $bulan2=$baris2[1];
                 }
 
-                if (isset($BtnSimpan2)) {                   
+                if (isset($BtnSimpan2)) {
                     $tanggal2    = validTeks(trim($_POST['tanggal2']));
                     $tgl         = $tahun2."-".$bulan2."-".$tanggal2;
                     $ktg         = ValidTeks(trim($_POST['ktg']));
@@ -165,7 +165,7 @@
                 }
 
                 $_sql3   = "select `tanggal`, `ktg`
-                           from set_hari_libur 
+                           from set_hari_libur
                            where tanggal like '%".$tahun2."-".$bulan2."%' ORDER BY tanggal";
                 $hasil3  = bukaquery($_sql3);
                 $jumlah3 = mysqli_num_rows($hasil3);
@@ -212,13 +212,13 @@
                                 <td width='15%'><div align='center'>Proses</div></td>
                             </tr>
                         </table>";
-                    
+
             }
         ?>
         </div>
         </form>
         <?php
-            $hapus=isset($_GET['action'])? $_GET['action']:NULL;                
+            $hapus=isset($_GET['action'])? $_GET['action']:NULL;
             if ($hapus=="HAPUS") {
                     Hapus(" set_tahun "," tahun ='".$tahun."' and bulan ='".$bulan."' ","?act=InputTahun&action=TAMBAH&bulan=$bulan&tahun=$tahun");
             }

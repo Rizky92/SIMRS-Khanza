@@ -12,5 +12,5 @@ public class KhanzaHMSServiceSatuSehat {
     public static void main(String[] args) {
         new frmUtama().setVisible(true);
     }
-    
+
 }

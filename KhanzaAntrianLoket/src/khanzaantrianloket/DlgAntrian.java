@@ -58,11 +58,11 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         if (!UIManager.getLookAndFeelDefaults().containsKey("Button.hoverForeground")) {
             UIManager.put("Button.hoverForeground", new Color(50, 50, 50));
         }
-        
+
         panelBiasa1.setVisible(ANTRIANPREFIXHURUF);
         label3.setVisible(ANTRIANPREFIXHURUF);
         cmbhuruf.setVisible(ANTRIANPREFIXHURUF);
-        
+
         if (ANTRIANPREFIXHURUF) {
             panelBiasa1.remove(AntrianA);
             panelBiasa1.remove(AntrianB);
@@ -79,7 +79,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                 gbc.ipady = 10;
                 gbc.weightx = 1.0;
                 gbc.weighty = 1.0;
-                
+
                 switch (col) {
                     case 0: gbc.gridx = 0; gbc.gridy = 0; break;
                     case 1: gbc.gridx = 1; gbc.gridy = 0; break;
@@ -88,7 +88,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                     case 4: gbc.gridx = 1; gbc.gridy = 1; break;
                     case 5: gbc.gridx = 2; gbc.gridy = 1; break;
                 }
-                
+
                 switch (huruf) {
                     case "A": panelBiasa1.add(AntrianA, gbc); cmbhuruf.addItem(huruf); ++col; break;
                     case "B": panelBiasa1.add(AntrianB, gbc); cmbhuruf.addItem(huruf); ++col; break;
@@ -614,7 +614,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-    
+
     private void isTampil() {
         try (ResultSet rs = koneksi.createStatement().executeQuery("select aktifkan, gambar, teks from runtext")) {
             if (rs.next()) {
@@ -628,7 +628,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             System.out.println("Notif : " + e);
         }
     }
-    
+
     private void isTampilSmc() {
         try (ResultSet rs = koneksi.createStatement().executeQuery("select aktifkan, gambar from runtext")) {
             if (rs.next()) {
@@ -729,28 +729,28 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
             }
         }
     }
-    
+
     public String padleftSmc(String value, int panjang, char pad) {
         value = value.trim();
         StringBuilder sb = new StringBuilder();
         sb.append(trimStartSmc(value, pad));
-        
+
         while ((panjang - value.length()) > 0) {
             sb.insert(0, pad);
             --panjang;
         }
-        
+
         return sb.toString();
     }
-    
+
     public String trimStartSmc(String value, char trim) {
         StringBuilder sb = new StringBuilder();
         sb.append(value.trim());
-        
+
         while (sb.charAt(0) == trim && sb.length() > 1) {
             sb.deleteCharAt(0);
         }
-        
+
         return sb.toString();
     }
 
@@ -758,7 +758,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
         ActionListener taskPerformer = (ActionEvent event) -> {
             Date now = Calendar.getInstance().getTime();
             int s = Integer.parseInt(df.format(now));
-            
+
             if (s % 5 == 0) {
                 antri = ""; loket = "";
                 try (ResultSet rs = koneksi.createStatement().executeQuery("select antrian, loket from antriloketsmc")) {
@@ -814,7 +814,7 @@ public class DlgAntrian extends javax.swing.JFrame implements ActionListener {
                     }
                 }
             }
-            
+
             if (!antri.isBlank() && !loket.isBlank() && s % 5 == 1 && ANTRIAN.equals("player")) {
                 try {
                     music = new BackgroundMusic("./suarasmc/nomor-urut.mp3");

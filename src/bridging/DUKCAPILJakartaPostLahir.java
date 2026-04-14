@@ -40,16 +40,16 @@ public class DUKCAPILJakartaPostLahir {
     private ObjectMapper mapper = new ObjectMapper();
     private JsonNode root;
     private JsonNode nameNode;
-    
+
     public DUKCAPILJakartaPostLahir(){
         super();
         try {
-            prop.loadFromXML(new FileInputStream("setting/database.xml"));            
+            prop.loadFromXML(new FileInputStream("setting/database.xml"));
         } catch (Exception e) {
             System.out.println("Notif : "+e);
         }
     }
-    
+
     public boolean post(String nokk,String nmbayi,String tgllhr,String jamlhr,String jk,String jnslhr,String lahirke,
                        String brt,String pjg,String pnlglhr,String nikibu,String nmibu,String alamatibu,String kerjaibu,
                        String nikayah,String nmayah,String alamatayah,String kerjaayah,String noskl,String pnlgnama,
@@ -59,7 +59,7 @@ public class DUKCAPILJakartaPostLahir {
                        String umrs2) {
         status=false;
         try {
-            URL = prop.getProperty("URLDUKCAPILJAKARTA")+"?usernm="+koneksiDB.USERDUKCAPILJAKARTA()+"&pass="+koneksiDB.PASSDUKCAPILJAKARTA()+"&app=SILaporLahir&pget=Kelahiran&pusr=admin&proc=POSTLAHIR&nokk="+nokk+"&nmbayi="+nmbayi+"&tgllhr="+tgllhr+"&jamlhr="+jamlhr+"&jk="+jk+"&jnslhr="+jnslhr+"&lahirke="+lahirke+"&brt="+brt+"&pjg="+pjg+"&pnlglhr="+pnlglhr+"&nikibu="+nikibu+"&nmibu="+nmibu+"&alamatibu="+alamatibu+"&kerjaibu="+kerjaibu+"&nikayah="+nikayah+"&nmayah="+nmayah+"&alamatayah="+alamatayah+"&kerjaayah="+kerjaayah+"&noskl="+noskl+"&pnlgnama="+pnlgnama+"&tindaklhr="+tindaklhr+"&bpjsibu="+bpjsibu+"&bpjsayah="+bpjsayah+"&notlp="+notlp+"&bpjsby="+bpjsby+"&nikplpr="+nikplpr+"&nmplpr="+nmplpr+"&almtplpr="+almtplpr+"&krjplpr="+krjplpr+"&niks1="+niks1+"&nms1="+nms1+"&almts1="+almts1+"&krjs1="+krjs1+"&niks2="+niks2+"&nms2="+nms2+"&almts2="+almts2+"&krjs2="+krjs2+"&umribu="+umribu+"&umrayah="+umrayah+"&umrplpr="+umrplpr+"&umrs1="+umrs1+"&umrs2="+umrs2+"&pkey="+Sequel.cariIsi("select md5(concat('"+prop.getProperty("VAR1DUKCAPILJAKARTA")+"',md5(date_format(current_date(),'%d%m%Y')),'"+prop.getProperty("VAR2DUKCAPILJAKARTA")+"'))");	
+            URL = prop.getProperty("URLDUKCAPILJAKARTA")+"?usernm="+koneksiDB.USERDUKCAPILJAKARTA()+"&pass="+koneksiDB.PASSDUKCAPILJAKARTA()+"&app=SILaporLahir&pget=Kelahiran&pusr=admin&proc=POSTLAHIR&nokk="+nokk+"&nmbayi="+nmbayi+"&tgllhr="+tgllhr+"&jamlhr="+jamlhr+"&jk="+jk+"&jnslhr="+jnslhr+"&lahirke="+lahirke+"&brt="+brt+"&pjg="+pjg+"&pnlglhr="+pnlglhr+"&nikibu="+nikibu+"&nmibu="+nmibu+"&alamatibu="+alamatibu+"&kerjaibu="+kerjaibu+"&nikayah="+nikayah+"&nmayah="+nmayah+"&alamatayah="+alamatayah+"&kerjaayah="+kerjaayah+"&noskl="+noskl+"&pnlgnama="+pnlgnama+"&tindaklhr="+tindaklhr+"&bpjsibu="+bpjsibu+"&bpjsayah="+bpjsayah+"&notlp="+notlp+"&bpjsby="+bpjsby+"&nikplpr="+nikplpr+"&nmplpr="+nmplpr+"&almtplpr="+almtplpr+"&krjplpr="+krjplpr+"&niks1="+niks1+"&nms1="+nms1+"&almts1="+almts1+"&krjs1="+krjs1+"&niks2="+niks2+"&nms2="+nms2+"&almts2="+almts2+"&krjs2="+krjs2+"&umribu="+umribu+"&umrayah="+umrayah+"&umrplpr="+umrplpr+"&umrs1="+umrs1+"&umrs2="+umrs2+"&pkey="+Sequel.cariIsi("select md5(concat('"+prop.getProperty("VAR1DUKCAPILJAKARTA")+"',md5(date_format(current_date(),'%d%m%Y')),'"+prop.getProperty("VAR2DUKCAPILJAKARTA")+"'))");
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_XML);
 	    requestEntity = new HttpEntity(headers);
@@ -78,7 +78,7 @@ public class DUKCAPILJakartaPostLahir {
             }else{
                 status=false;
                 JOptionPane.showMessageDialog(null,nameNode.path("STATUS").asText());
-            }                     
+            }
         } catch (Exception ex) {
             status=false;
             System.out.println("Notifikasi Peserta : "+ex);
@@ -86,8 +86,8 @@ public class DUKCAPILJakartaPostLahir {
                 JOptionPane.showMessageDialog(null,"Koneksi ke server Dukcapil terputus...!");
             }
         }
-        
+
         return status;
     }
-    
+
 }

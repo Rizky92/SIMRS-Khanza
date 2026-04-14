@@ -1,7 +1,7 @@
 <?php
     include_once "conf/command.php";
     require_once('../conf/conf.php');
-    
+
     $usere      = trim(isset($_GET['usere']))?trim($_GET['usere']):NULL;
     $passwordte = trim(isset($_GET['passwordte']))?trim($_GET['passwordte']):NULL;
     $url        = "index.php?act=HomeAdmin";
@@ -9,7 +9,7 @@
         if((USERHYBRIDWEB==$usere)&&(PASHYBRIDWEB==$passwordte)){
             session_start();
             $_SESSION['ses_admin_suratsurat']="admin";
-            $url = "index.php?act=Input2&action=TAMBAH";			
+            $url = "index.php?act=Input2&action=TAMBAH";
         }else{
             session_start();
             session_destroy();
@@ -17,8 +17,8 @@
                 session_unregister("ses_admin_suratsurat");
             }
             $url = "index.php?act=HomeAdmin";
-        }           
+        }
     }
-    header("Location:".$url); 
-    
+    header("Location:".$url);
+
 ?>

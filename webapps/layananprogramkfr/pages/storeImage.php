@@ -4,7 +4,7 @@
     if(file_exists(host()."/webapps/layananprogramkfr/pages/upload/".str_replace("/","",$norawat).".jpeg")){
         @unlink(host()."/webapps/layananprogramkfr/pages/upload/".str_replace("/","",$norawat).".jpeg");
     }
-    
+
     $img                    = $_POST["image"];
     $folderPath             = "upload/";
     $image_parts            = explode(";base64,", $img);
@@ -14,7 +14,7 @@
     $fileName               = str_replace("/","",$norawat).".jpeg";
     $file                   = $folderPath.$fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("bukti_layanan_program_kfr","'".$norawat."','pages/upload/$fileName'");
 ?>
 <head>
@@ -27,4 +27,3 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <body><center>Proses Pengambilan Bukti Pelayanan Program Kedokteran Fisik & Rehabilitasi Sudah Selesai ..!! <br><a href='../login.php?iyem=<?=encrypt_decrypt("{\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e")?>' class='btn btn-secondary' >Kembali</a></center></body>
 </html>
-

@@ -1,6 +1,6 @@
 /*
-  Kontribusi dari Mas Abdul Wahid RSUD Cipayung & Mas Fanji dari RSUD Kramatjati 
-  
+  Kontribusi dari Mas Abdul Wahid RSUD Cipayung & Mas Fanji dari RSUD Kramatjati
+
  */
 package bridging;
 
@@ -9,19 +9,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
-import java.awt.Dimension;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import fungsi.validasi;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumn;
 
 /**
  *
@@ -316,7 +316,7 @@ public final class SatuSehatReferensiRadiologiSNOMED extends javax.swing.JDialog
             tampil2();
         }
         Valid.tabelKosong(tabMode);
-        
+
         try (FileReader fr = new FileReader("./cache/satusehatreferensiradiologisnomed.iyem")) {
             JsonNode arr = new ObjectMapper().readTree(fr).path("data");
             if (arr.isArray()) {
@@ -350,16 +350,16 @@ public final class SatuSehatReferensiRadiologiSNOMED extends javax.swing.JDialog
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        
+
         LCount.setText(String.valueOf(tabMode.getRowCount()));
     }
-    
+
     public void tampil2() {
         try (ResultSet rs = koneksi.createStatement().executeQuery("select * from satu_sehat_referensi_radiologi_snomed")) {
             File file = new File("./cache/satusehatreferensiradiologisnomed.iyem");
             file.createNewFile();
             String iyem = "";
-            
+
             while (rs.next()) {
                 iyem = iyem + "{\"code\":\"" + rs.getString("code") + "\",\"system\":\"" + rs.getString("system") + "\",\"display\":\"" + rs.getString("display") + "\",\"display_ind\":\"" + rs.getString("display_ind") + "\"},";
                 tabMode.addRow(new Object[] {

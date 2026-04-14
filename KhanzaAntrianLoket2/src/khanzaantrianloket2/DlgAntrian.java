@@ -30,9 +30,9 @@ import java.util.Properties;
  *
  * @author perpustakaan
  */
-public class DlgAntrian extends javax.swing.JDialog{    
+public class DlgAntrian extends javax.swing.JDialog{
     private final Connection koneksi=koneksiDB.condb();
-    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();   
+    private final Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     private static final Properties prop = new Properties();
     private String antri="0",nol_detik,detik,saatini="";
     private PreparedStatement pshapus,pssimpan,psupdate,pscari;
@@ -42,7 +42,7 @@ public class DlgAntrian extends javax.swing.JDialog{
     private String[] urut={"","./suara/satu.mp3","./suara/dua.mp3","./suara/tiga.mp3","./suara/empat.mp3",
                        "./suara/lima.mp3","./suara/enam.mp3","./suara/tujuh.mp3","./suara/delapan.mp3",
                        "./suara/sembilan.mp3","./suara/sepuluh.mp3","./suara/sebelas.mp3"};
-        
+
     /** Creates new form DlgBiling
      * @param parent
      * @param modal */
@@ -50,7 +50,7 @@ public class DlgAntrian extends javax.swing.JDialog{
         super(parent, modal);
         initComponents();
         setIconImage(new ImageIcon(super.getClass().getResource("/picture/addressbook-edit24.png")).getImage());
-        
+
         Loket.setDocument(new batasInput((byte)3).getOnlyAngka(Loket));
         Antrian.setDocument(new batasInput((byte)3).getOnlyAngka(Antrian));
         this.setSize(350,400);
@@ -63,11 +63,11 @@ public class DlgAntrian extends javax.swing.JDialog{
             Loket.setText("1");
             form1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255,255)), " Antrian Loket "+Loket.getText(), javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 55), new java.awt.Color(255, 255, 51)));
         }
-        
+
         jam();
     }
     int i;
-    
+
 
 
     /** This method is called from within the constructor to
@@ -288,7 +288,7 @@ public class DlgAntrian extends javax.swing.JDialog{
                     pshapus.close();
                 }
             }
-            
+
             pssimpan=koneksi.prepareStatement("insert into antriloket values(?,?)");
             try{
                 pssimpan.setString(1,Loket.getText());
@@ -301,7 +301,7 @@ public class DlgAntrian extends javax.swing.JDialog{
                     pssimpan.close();
                 }
             }
-            
+
             psupdate = koneksi.prepareStatement("update antriloketcetak_smc set jam_panggil = current_time() where nomor = ? and tanggal = current_date()");
             try {
                 psupdate.setInt(1, Integer.parseInt(Antrian.getText().trim()));
@@ -317,7 +317,7 @@ public class DlgAntrian extends javax.swing.JDialog{
             saatini=Antrian.getText();
         } catch (Exception e) {
             System.out.println(e);
-        }                          
+        }
     }//GEN-LAST:event_BtnAntri1ActionPerformed
 
     private void BtnBatal1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal1ActionPerformed
@@ -342,7 +342,7 @@ public class DlgAntrian extends javax.swing.JDialog{
     }//GEN-LAST:event_formWindowClosed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        
+
     }//GEN-LAST:event_formWindowActivated
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -364,7 +364,7 @@ public class DlgAntrian extends javax.swing.JDialog{
             }
         } catch (Exception e) {
             System.out.println(e);
-        }  
+        }
     }//GEN-LAST:event_BtnBatal2ActionPerformed
 
     private void BtnBatal3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnBatal3ActionPerformed
@@ -407,10 +407,10 @@ public class DlgAntrian extends javax.swing.JDialog{
                 }
                 System.out.println("Loket : "+Loket.getText()+" Antrian : "+saatini);
             }
-                    
+
         } catch (Exception e) {
             System.out.println(e);
-        }  
+        }
     }//GEN-LAST:event_BtnBatal3ActionPerformed
 
 
@@ -452,30 +452,30 @@ public class DlgAntrian extends javax.swing.JDialog{
     private widget.panelisi panelisi1;
     private widget.panelisi panelisi5;
     // End of variables declaration//GEN-END:variables
-    
-    
-    private void panggil(int antrian){        
+
+
+    private void panggil(int antrian){
         if (antrian < 12){
             try {
                 music = new BackgroundMusic(urut[antrian]);
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
-            }            
+            }
         }else if (antrian < 20){
             try {
                 music = new BackgroundMusic(urut[antrian-10]);
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             try {
                 music = new BackgroundMusic("./suara/belas.mp3");
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
@@ -483,57 +483,57 @@ public class DlgAntrian extends javax.swing.JDialog{
             try {
                 music = new BackgroundMusic(urut[antrian/10]);
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             try {
                 music = new BackgroundMusic("./suara/puluh.mp3");
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             panggil(antrian%10);
         }else if (antrian < 200){
             try {
                 music = new BackgroundMusic("./suara/seratus.mp3");
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             panggil(antrian-100);
         }else if (antrian < 1000){
             panggil(antrian/100);
-            
+
             try {
                 music = new BackgroundMusic("./suara/ratus.mp3");
                 music.start();
-                Thread.sleep(1000);                
+                Thread.sleep(1000);
             } catch (InterruptedException ex) {
                 System.out.println(ex);
             }
-            
+
             panggil(antrian%100);
         }
     }
-    
+
     private void jam(){
         ActionListener taskPerformer = new ActionListener(){
             public void actionPerformed(ActionEvent e) {
-                nol_detik = "";                
+                nol_detik = "";
                 Date now = Calendar.getInstance().getTime();
                 nilai_detik = now.getSeconds();
                 if (nilai_detik <= 9) {
                     nol_detik = "0";
                 }
-                
+
                 detik = nol_detik + Integer.toString(nilai_detik);
-                if(detik.equals("05")||detik.equals("10")||detik.equals("15")||detik.equals("20")||detik.equals("25")||detik.equals("30")||detik.equals("35")||detik.equals("40")||detik.equals("45")||detik.equals("50")||detik.equals("55")||detik.equals("00")){                    
+                if(detik.equals("05")||detik.equals("10")||detik.equals("15")||detik.equals("20")||detik.equals("25")||detik.equals("30")||detik.equals("35")||detik.equals("40")||detik.equals("45")||detik.equals("50")||detik.equals("55")||detik.equals("00")){
                     try {
                         pscari=koneksi.prepareStatement("select (antriloket.antrian+1) as antrian from antriloket order by antriloket.antrian desc limit 1");
                         try {
@@ -550,7 +550,7 @@ public class DlgAntrian extends javax.swing.JDialog{
                             if(pscari!=null){
                                 pscari.close();
                             }
-                        }  
+                        }
                     } catch (Exception ez) {
                         System.out.println(ez);
                     }
@@ -572,12 +572,12 @@ public class DlgAntrian extends javax.swing.JDialog{
                             if(pscari!=null){
                                 pscari.close();
                             }
-                        }  
+                        }
                     } catch (Exception ez) {
                         System.out.println(ez);
                     }
-                    
-                    if(!antri.equals("")){   
+
+                    if(!antri.equals("")){
                         labelantri1.setText(antri);
                         if(prop.getProperty("ANTRIAN").equals("player")){
                             try {
@@ -593,8 +593,8 @@ public class DlgAntrian extends javax.swing.JDialog{
                                System.out.println(e);
                             }
                             BtnBatal2ActionPerformed(null);
-                        }                      
-                    }                          
+                        }
+                    }
                 }
             }
         };

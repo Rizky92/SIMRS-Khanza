@@ -11,10 +11,10 @@
 
 package setting;
 
+import fungsi.WarnaTable;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
-import fungsi.WarnaTable;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.sql.Connection;

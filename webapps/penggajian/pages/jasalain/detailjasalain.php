@@ -23,7 +23,7 @@
                 echo "<input type=hidden name=id  value=$id><input type=hidden name=action value=$action>";
 	        $_sql  = "SELECT nik,nama FROM pegawai where id='$id'";
                 $hasil = bukaquery($_sql);
-                $baris = mysqli_fetch_row($hasil);   
+                $baris = mysqli_fetch_row($hasil);
 
                 $_sqlnext    = "SELECT pegawai.id FROM pegawai WHERE pegawai.id>'$id' order by pegawai.id asc limit 1";
                 $hasilnext   = bukaquery($_sqlnext);
@@ -108,7 +108,7 @@
                                 <td width='30%'><div align='center'>Besar Jasa</div></td>
                                 <td width='60%'><div align='center'>Keterangan</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                         echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>"; ?>
@@ -131,15 +131,15 @@
                             </tr>
                         </table>";
             }
-            
+
             if ($action=="HAPUS") {
                 Hapus(" jasa_lain "," id ='". validTeks($_GET['id'])."' and thn ='".validTeks($_GET['thn'])."' and bln ='".validTeks($_GET['bln'])."' and bsr_jasa ='".validTeks($_GET['bsr_jasa'])."'","?act=InputJasLa&action=TAMBAH&id=$id");
             }
 
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                 <tr class='head'>
-                    <td><div align='left'>Data : $jumlah</div></td>                        
-                </tr>     
+                    <td><div align='left'>Data : $jumlah</div></td>
+                </tr>
              </table>");
         ?>
         </div>

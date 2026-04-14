@@ -1,7 +1,7 @@
 package laporan;
-import fungsi.validasi;
 import fungsi.akses;
 import fungsi.sekuel;
+import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.event.KeyEvent;

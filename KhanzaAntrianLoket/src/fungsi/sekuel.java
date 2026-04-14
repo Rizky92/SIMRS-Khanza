@@ -1,11 +1,11 @@
 /*
-  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile 
+  Dilarang keras menggandakan/mengcopy/menyebarkan/membajak/mendecompile
   Software ini dalam bentuk apapun tanpa seijin pembuat software
   (Khanza.Soft Media). Bagi yang sengaja membajak softaware ini ta
   npa ijin, kami sumpahi sial 1000 turunan, miskin sampai 500 turu
   nan. Selalu mendapat kecelakaan sampai 400 turunan. Anak pertama
   nya cacat tidak punya kaki sampai 300 turunan. Susah cari jodoh
-  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami 
+  sampai umur 50 tahun sampai 200 turunan. Ya Alloh maafkan kami
   karena telah berdoa buruk, semua ini kami lakukan karena kami ti
   dak pernah rela karya kami dibajak tanpa ijin.
  */
@@ -65,13 +65,13 @@ public final class sekuel {
     private SimpleDateFormat formattanggal = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private Date waktumulai,kegiatan;
     private long bedawaktu=0;
-    
+
     private String track = "";
-    
+
     public sekuel(){
         super();
     }
-    
+
     public static void nyalakanBatasEdit() {
         try (ResultSet rs = koneksiDB.condb().prepareStatement("select setting.pemberlakuan_2x24_jam from setting").executeQuery()) {
             if (rs.next()) {
@@ -135,7 +135,7 @@ public final class sekuel {
             return 0;
         }
     }
-    
+
     public String autonomorSmc(String prefix, String table, int panjang, String pad) {
         try (PreparedStatement ps = connect.prepareStatement("select concat(?, lpad(count(*), ?, ?)) from " + table)) {
             ps.setString(1, prefix);
@@ -162,9 +162,9 @@ public final class sekuel {
         }
         return prefix + output + "1";
     }
-    
+
     public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal, int next) {
-        String sql = 
+        String sql =
             "select concat(if(? is null or ? = '', '', concat(?, ?)), date_format(" +
             "?, concat_ws(?, '%Y', '%m', '%d')), ?, lpad(ifnull(max(convert(right(" +
             table + "." + kolom + ", ?), unsigned)), 0) + ?, ?, ?)) from " + table +
@@ -198,7 +198,7 @@ public final class sekuel {
         }
         return "";
     }
-    
+
     public String autonomorSmc(String prefix, String separator, String table, String kolom, int panjang, String pad, String tanggal) {
         return autonomorSmc(prefix, separator, table, kolom, panjang, pad, tanggal, 1);
     }
@@ -250,7 +250,7 @@ public final class sekuel {
         }
         return defaultValue;
     }
-    
+
     public int cariIntegerSmc(String sql, String... values) {
         return cariIntegerSmc(sql, 0, values);
     }
@@ -270,7 +270,7 @@ public final class sekuel {
         }
         return defaultValue;
     }
-    
+
     public double cariDoubleSmc(String sql, String... values) {
         return cariDoubleSmc(sql, 0, values);
     }
@@ -322,7 +322,7 @@ public final class sekuel {
         }
         return null;
     }
-    
+
     public ArrayList<String> cariArraySmc(String sql, String... values) {
         ArrayList<String> list = new ArrayList<>();
         try (PreparedStatement ps = connect.prepareStatement(sql)) {
@@ -523,87 +523,87 @@ public final class sekuel {
     public void menyimpan(String table,String value,String sama){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
-            try{                  
+            try{
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);            
+                System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada "+sama+" yang sama dimasukkan sebelumnya...!");
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
             SimpanTrack("insert into "+table+" values("+value+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e); 
-        }            
+            System.out.println("Notifikasi : "+e);
+        }
     }
-    
+
     public void menyimpan2(String table,String value,String sama){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
-            try{                  
+            try{
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);    
+                System.out.println("Notifikasi : "+e);
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
-            
+
             SimpanTrack("insert into "+table+" values("+value+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e); 
-        }            
+            System.out.println("Notifikasi : "+e);
+        }
     }
-    
+
     public boolean menyimpantf(String table,String value,String sama){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             ps.executeUpdate();
             if(ps != null){
                 ps.close();
-            }  
-            
+            }
+
             SimpanTrack("insert into "+table+" values("+value+")");
-            return true;           
+            return true;
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e); 
+            System.out.println("Notifikasi : "+e);
             JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada "+sama+" yang sama dimasukkan sebelumnya...!");
             return false;
-        }            
+        }
     }
-    
+
     public boolean menyimpantf2(String table,String value,String sama){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             ps.executeUpdate();
             if(ps != null){
                 ps.close();
-            }  
-            
+            }
+
             SimpanTrack("insert into "+table+" values("+value+")");
-            return true;           
+            return true;
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e); 
+            System.out.println("Notifikasi : "+e);
             return false;
-        }            
+        }
     }
-    
+
     public boolean menyimpantf(String table,String value,int i,String[] a,String acuan_field,String update,int j,String[] b){
         bool=false;
-        try{ 
+        try{
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             for(angka=1;angka<=i;angka++){
                 ps.setString(angka,a[angka-1]);
-            }            
+            }
             ps.executeUpdate();
-            
+
             if(ps != null){
                 ps.close();
-            } 
-            
+            }
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -617,13 +617,13 @@ public final class sekuel {
                 ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
                 for(angka=1;angka<=j;angka++){
                     ps.setString(angka,b[angka-1]);
-                } 
-                ps.executeUpdate();   
-                
+                }
+                ps.executeUpdate();
+
                 if(ps != null){
                     ps.close();
-                } 
-                
+                }
+
                 if(AKTIFKANTRACKSQL.equals("yes")){
                     dicari="";
                     for(angka=1;angka<=i;angka++){
@@ -635,29 +635,29 @@ public final class sekuel {
             } catch (Exception e2) {
                 bool=false;
                 System.out.println("Notifikasi : "+e2);
-            }                         
+            }
         }
         return bool;
     }
-    
+
     public void menyimpan(String table,String value,String sama,int i,String[] a){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                }            
+                }
                 ps.executeUpdate();
-                
+
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);            
+                System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada "+sama+" yang sama dimasukkan sebelumnya...!");
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
-            
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -666,26 +666,26 @@ public final class sekuel {
             }
             SimpanTrack("insert into "+table+" values("+dicari+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+table+" "+e); 
-        }            
+            System.out.println("Notifikasi : "+table+" "+e);
+        }
     }
-    
+
     public void menyimpan2(String table,String value,String sama,int i,String[] a){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                }            
+                }
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);            
+                System.out.println("Notifikasi : "+e);
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
-            
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -694,26 +694,26 @@ public final class sekuel {
             }
             SimpanTrack("insert into "+table+" values("+dicari+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);            
-        }    
+            System.out.println("Notifikasi : "+e);
+        }
     }
-    
+
     public void menyimpan3(String table,String value,String sama,int i,String[] a){
         try {
             ps=connect.prepareStatement("insert ignore into "+table+" values("+value+")");
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                }            
+                }
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);            
+                System.out.println("Notifikasi : "+e);
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
-            
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -722,22 +722,22 @@ public final class sekuel {
             }
             SimpanTrack("insert into "+table+" values("+dicari+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);            
-        }    
+            System.out.println("Notifikasi : "+e);
+        }
     }
-    
-    public boolean menyimpantf(String table,String value,String sama,int i,String[] a){        
-        try{             
+
+    public boolean menyimpantf(String table,String value,String sama,int i,String[] a){
+        try{
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             for(angka=1;angka<=i;angka++){
                 ps.setString(angka,a[angka-1]);
-            }            
+            }
             ps.executeUpdate();
-            
+
             if(ps != null){
                 ps.close();
             }
-            
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -747,7 +747,7 @@ public final class sekuel {
             SimpanTrack("insert into "+table+" values("+dicari+")");
             return true;
         }catch(Exception e){
-            System.out.println("Notifikasi : "+e);  
+            System.out.println("Notifikasi : "+e);
             if(e.toString().contains("Duplicate")){
                 JOptionPane.showMessageDialog(null,"Maaf, gagal menyimpan data. Kemungkinan ada "+sama+" yang sama dimasukkan sebelumnya...!");
             }else{
@@ -756,20 +756,20 @@ public final class sekuel {
             return false;
         }
     }
-    
+
     public boolean menyimpantf2(String table,String value,String sama,int i,String[] a){
         bool=true;
-        try{ 
+        try{
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             try {
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                }            
+                }
                 ps.executeUpdate();
                 bool=true;
             } catch (Exception e) {
                 bool=false;
-                System.out.println("Notifikasi : "+e);  
+                System.out.println("Notifikasi : "+e);
             } finally{
                 if(ps != null){
                     ps.close();
@@ -784,24 +784,24 @@ public final class sekuel {
             SimpanTrack("insert into "+table+" values("+dicari+")");
         }catch(Exception e){
             bool=false;
-            System.out.println("Notifikasi : "+e);  
+            System.out.println("Notifikasi : "+e);
         }
         return bool;
     }
-    
+
     public boolean menyimpantf2(String table,String value,int i,String[] a){
         bool=true;
-        try{ 
+        try{
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             try {
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                }            
+                }
                 ps.executeUpdate();
                 bool=true;
             } catch (Exception e) {
                 bool=false;
-                System.out.println("Notifikasi : "+e);  
+                System.out.println("Notifikasi : "+e);
             } finally{
                 if(ps != null){
                     ps.close();
@@ -816,25 +816,25 @@ public final class sekuel {
             SimpanTrack("insert into "+table+" values("+dicari+")");
         }catch(Exception e){
             bool=false;
-            System.out.println("Notifikasi : "+e);  
+            System.out.println("Notifikasi : "+e);
         }
         return bool;
     }
-    
+
     public void menyimpan(String table,String value,int i,String[] a){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
-            try{                 
+            try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                }            
+                }
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);            
+                System.out.println("Notifikasi : "+e);
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
@@ -844,24 +844,24 @@ public final class sekuel {
             }
             SimpanTrack("insert into "+table+" values("+dicari+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);   
-        }            
+            System.out.println("Notifikasi : "+e);
+        }
     }
-    
+
     public void menyimpanignore(String table,String value,int i,String[] a){
         try {
             ps=connect.prepareStatement("insert ignore into "+table+" values("+value+")");
-            try{                 
+            try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                }            
+                }
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e); ;            
+                System.out.println("Notifikasi : "+e); ;
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
@@ -871,24 +871,24 @@ public final class sekuel {
             }
             SimpanTrack("insert into "+table+" values("+dicari+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);   
-        }            
+            System.out.println("Notifikasi : "+e);
+        }
     }
-    
+
     public void menyimpan2(String table,String value,int i,String[] a){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
-            try{                 
+            try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                }            
+                }
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi "+table+" : "+e);            
+                System.out.println("Notifikasi "+table+" : "+e);
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
@@ -897,22 +897,22 @@ public final class sekuel {
                 }
             }
             SimpanTrack("insert into "+table+" values("+dicari+")");
-        } catch (Exception e) { 
-        }            
+        } catch (Exception e) {
+        }
     }
-    
+
     public void menyimpan(String table,String value,int i,String[] a,String acuan_field,String update,int j,String[] b){
-        try{ 
+        try{
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             for(angka=1;angka<=i;angka++){
                 ps.setString(angka,a[angka-1]);
-            }            
+            }
             ps.executeUpdate();
-            
+
             if(ps != null){
                 ps.close();
-            } 
-            
+            }
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -925,13 +925,13 @@ public final class sekuel {
                 ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
                 for(angka=1;angka<=j;angka++){
                     ps.setString(angka,b[angka-1]);
-                } 
-                ps.executeUpdate();   
-                
+                }
+                ps.executeUpdate();
+
                 if(ps != null){
                     ps.close();
-                } 
-                
+                }
+
                 if(AKTIFKANTRACKSQL.equals("yes")){
                     dicari="";
                     for(angka=1;angka<=i;angka++){
@@ -941,24 +941,24 @@ public final class sekuel {
                 SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
             } catch (Exception e2) {
                 System.out.println("Notifikasi : "+e2);
-            }                         
+            }
         }
     }
-    
+
     public void menyimpan2(String table,String value,int i,String[] a,String acuan_field,String update,int j,String[] b){
-        try{ 
+        try{
             dicari="";
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             for(angka=1;angka<=i;angka++){
                 dicari=dicari+", "+a[angka-1];
                 ps.setString(angka,a[angka-1]);
-            }            
+            }
             ps.executeUpdate();
-            
+
             if(ps != null){
                   ps.close();
-            } 
-            
+            }
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -971,58 +971,13 @@ public final class sekuel {
                 ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
                 for(angka=1;angka<=j;angka++){
                     ps.setString(angka,b[angka-1]);
-                } 
-                ps.executeUpdate(); 
-                
+                }
+                ps.executeUpdate();
+
                 if(ps != null){
                     ps.close();
-                } 
-                
-                if(AKTIFKANTRACKSQL.equals("yes")){
-                    dicari="";
-                    for(angka=1;angka<=i;angka++){
-                        dicari=dicari+"|"+b[angka-1];
-                    }
                 }
-                SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
-            } catch (Exception e2) {                
-                System.out.println("Notifikasi : "+e2);
-            }            
-        }
-    }
-    
-    public void menyimpan3(String table,String value,int i,String[] a,String acuan_field,String update,int j,String[] b){
-        try{ 
-            ps=connect.prepareStatement("insert into "+table+" values("+value+")");
-            for(angka=1;angka<=i;angka++){
-                ps.setString(angka,a[angka-1]);
-            }            
-            ps.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null,"Proses simpan berhasil..!!");
-            if(ps != null){
-                ps.close();
-            } 
-            
-            if(AKTIFKANTRACKSQL.equals("yes")){
-                dicari="";
-                for(angka=1;angka<=i;angka++){
-                    dicari=dicari+"|"+a[angka-1];
-                }
-            }
-            SimpanTrack("insert into "+table+" values("+dicari+")");
-        }catch(Exception e){
-            try {
-                ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
-                for(angka=1;angka<=j;angka++){
-                    ps.setString(angka,b[angka-1]);
-                } 
-                ps.executeUpdate();   
-                
-                JOptionPane.showMessageDialog(null,"Proses simpan berhasil..!!");
-                if(ps != null){
-                    ps.close();
-                } 
+
                 if(AKTIFKANTRACKSQL.equals("yes")){
                     dicari="";
                     for(angka=1;angka<=i;angka++){
@@ -1032,53 +987,98 @@ public final class sekuel {
                 SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
             } catch (Exception e2) {
                 System.out.println("Notifikasi : "+e2);
-            }                         
+            }
         }
     }
-    
+
+    public void menyimpan3(String table,String value,int i,String[] a,String acuan_field,String update,int j,String[] b){
+        try{
+            ps=connect.prepareStatement("insert into "+table+" values("+value+")");
+            for(angka=1;angka<=i;angka++){
+                ps.setString(angka,a[angka-1]);
+            }
+            ps.executeUpdate();
+
+            JOptionPane.showMessageDialog(null,"Proses simpan berhasil..!!");
+            if(ps != null){
+                ps.close();
+            }
+
+            if(AKTIFKANTRACKSQL.equals("yes")){
+                dicari="";
+                for(angka=1;angka<=i;angka++){
+                    dicari=dicari+"|"+a[angka-1];
+                }
+            }
+            SimpanTrack("insert into "+table+" values("+dicari+")");
+        }catch(Exception e){
+            try {
+                ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
+                for(angka=1;angka<=j;angka++){
+                    ps.setString(angka,b[angka-1]);
+                }
+                ps.executeUpdate();
+
+                JOptionPane.showMessageDialog(null,"Proses simpan berhasil..!!");
+                if(ps != null){
+                    ps.close();
+                }
+                if(AKTIFKANTRACKSQL.equals("yes")){
+                    dicari="";
+                    for(angka=1;angka<=i;angka++){
+                        dicari=dicari+"|"+b[angka-1];
+                    }
+                }
+                SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
+            } catch (Exception e2) {
+                System.out.println("Notifikasi : "+e2);
+            }
+        }
+    }
+
     public void menyimpan(String table,String value){
         try {
             ps=connect.prepareStatement("insert into "+table+" values("+value+")");
             try{
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);         
+                System.out.println("Notifikasi : "+e);
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
             SimpanTrack("insert into "+table+" values("+value+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);  
+            System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void menyimpanignore(String table,String value){
         try {
             ps=connect.prepareStatement("insert ignore into "+table+" values("+value+")");
             try{
                 ps.executeUpdate();
             }catch(Exception e){
-                System.out.println("Notifikasi : "+e);         
+                System.out.println("Notifikasi : "+e);
             }finally{
                 if(ps != null){
                     ps.close();
-                }                
+                }
             }
             SimpanTrack("insert into "+table+" values("+value+")");
         } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);  
+            System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void menyimpan(String table,String isisimpan,String isiedit,String acuan_field){
-        try{            
+        try{
             ps=connect.prepareStatement("insert into "+table+" values("+isisimpan+")");
-            ps.executeUpdate();   
+            ps.executeUpdate();
             if(ps != null){
                 ps.close();
-            }  
+            }
             SimpanTrack("insert into "+table+" values("+isisimpan+")");
         }catch(Exception e){
             try {
@@ -1086,22 +1086,22 @@ public final class sekuel {
                 ps.executeUpdate();
                 if(ps != null){
                     ps.close();
-                }  
+                }
                 SimpanTrack("update "+table+" set "+isiedit+" where "+acuan_field);
             } catch (Exception ex) {
                 System.out.println("Notifikasi Edit : "+ex);
             }
         }
     }
-    
+
     public boolean menyimpantf(String table,String isisimpan,String isiedit,String acuan_field){
         bool=true;
-        try{            
+        try{
             ps=connect.prepareStatement("insert into "+table+" values("+isisimpan+")");
-            ps.executeUpdate();   
+            ps.executeUpdate();
             if(ps != null){
                 ps.close();
-            }  
+            }
             SimpanTrack("insert into "+table+" values("+isisimpan+")");
             bool=true;
         }catch(Exception e){
@@ -1111,7 +1111,7 @@ public final class sekuel {
                     ps.executeUpdate();
                     if(ps != null){
                         ps.close();
-                    }  
+                    }
                     SimpanTrack("update "+table+" set "+isiedit+" where "+acuan_field);
                     bool=true;
                 } catch (Exception ex) {
@@ -1119,7 +1119,7 @@ public final class sekuel {
                     System.out.println("Notifikasi Edit : "+ex);
                 }
             }else{
-               bool=false; 
+               bool=false;
             }
         }
         return bool;
@@ -1128,7 +1128,7 @@ public final class sekuel {
     public void menyimpan(String table,String value,String sama,JTextField AlmGb){
         try {
             ps = connect.prepareStatement("insert into "+table+" values("+value+",?)");
-            try{                        
+            try{
                 ps.setBinaryStream(1, new FileInputStream(AlmGb.getText()), new File(AlmGb.getText()).length());
                 ps.executeUpdate();
             }catch(Exception e){
@@ -1142,13 +1142,13 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
     }
-    
+
     public void menyimpan(String table,String value,String sama,JTextField AlmGb,JTextField AlmPhoto){
         try {
             ps = connect.prepareStatement("insert into "+table+" values("+value+",?,?)");
-            try{                        
+            try{
                 ps.setBinaryStream(1, new FileInputStream(AlmGb.getText()), new File(AlmGb.getText()).length());
                 ps.setBinaryStream(2, new FileInputStream(AlmPhoto.getText()), new File(AlmPhoto.getText()).length());
                 ps.executeUpdate();
@@ -1164,14 +1164,14 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
 
     public void meghapus(String table,String field,String nilai_field) {
         try {
             ps=connect.prepareStatement("delete from "+table+" where "+field+"=?");
-            try{       
+            try{
                 ps.setString(1,nilai_field);
-                ps.executeUpdate(); 
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, data gagal dihapus. Kemungkinan data tersebut masih dipakai di table lain...!!!!");
@@ -1185,12 +1185,12 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public boolean meghapustf(String table,String field,String nilai_field) {
         bool=true;
         try {
             ps=connect.prepareStatement("delete from "+table+" where "+field+"=?");
-            try{       
+            try{
                 ps.setString(1,nilai_field);
                 ps.executeUpdate();
                 bool=true;
@@ -1210,14 +1210,14 @@ public final class sekuel {
         }
         return bool;
     }
-    
+
     public void meghapus(String table,String field,String field2,String nilai_field,String nilai_field2) {
         try {
             ps=connect.prepareStatement("delete from "+table+" where "+field+"=? and "+field2+"=?");
-            try{       
+            try{
                 ps.setString(1,nilai_field);
                 ps.setString(2,nilai_field2);
-                ps.executeUpdate(); 
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, data gagal dihapus. Kemungkinan data tersebut masih dipakai di table lain...!!!!");
@@ -1231,13 +1231,13 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void meghapus2(String table,String field,String nilai_field) {
         try {
             ps=connect.prepareStatement("delete from "+table+" where "+field+"=?");
-            try{       
+            try{
                 ps.setString(1,nilai_field);
-                ps.executeUpdate(); 
+                ps.executeUpdate();
                 JOptionPane.showMessageDialog(null,"Proses hapus berhasil...!!!!");
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -1252,13 +1252,13 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void meghapus3(String table,String field,String nilai_field) {
         try {
             ps=connect.prepareStatement("delete from "+table+" where "+field+"=?");
-            try{       
+            try{
                 ps.setString(1,nilai_field);
-                ps.executeUpdate(); 
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
              }finally{
@@ -1271,12 +1271,12 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void mengedit(String table,String acuan_field,String update){
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
-            try{                        
-                ps.executeUpdate();       
+            try{
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Mungkin kode sudah digunakan sebelumnya...!!!!");
@@ -1290,13 +1290,13 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public boolean mengedittf(String table,String acuan_field,String update){
         bool=true;
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
-            try{                        
-                ps.executeUpdate();  
+            try{
+                ps.executeUpdate();
                 bool=true;
              }catch(Exception e){
                 bool=false;
@@ -1314,15 +1314,15 @@ public final class sekuel {
         }
         return bool;
     }
-    
+
     public void mengedit(String table,String acuan_field,String update,int i,String[] a){
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate();       
+                }
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, Gagal Mengedit. Periksa kembali data...!!!!");
@@ -1331,7 +1331,7 @@ public final class sekuel {
                     ps.close();
                 }
             }
-            
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -1341,17 +1341,17 @@ public final class sekuel {
             SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }    
+        }
     }
-    
+
     public void mengedit2(String table,String acuan_field,String update,int i,String[] a){
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate();   
+                }
+                ps.executeUpdate();
                 JOptionPane.showMessageDialog(null,"Proses edit berhasil...!!!!");
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
@@ -1361,7 +1361,7 @@ public final class sekuel {
                     ps.close();
                 }
             }
-            
+
             if(AKTIFKANTRACKSQL.equals("yes")){
                 dicari="";
                 for(angka=1;angka<=i;angka++){
@@ -1371,17 +1371,17 @@ public final class sekuel {
             SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }    
+        }
     }
-    
+
     public void mengedit3(String table,String acuan_field,String update,int i,String[] a){
         try {
             ps=connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate();       
+                }
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
              }finally{
@@ -1398,9 +1398,9 @@ public final class sekuel {
             SimpanTrack("update "+table+" set "+update+" "+dicari+" where "+acuan_field);
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }    
+        }
     }
-    
+
     public boolean mengedittf(String table,String acuan_field,String update,int i,String[] a){
         bool=true;
         try {
@@ -1408,8 +1408,8 @@ public final class sekuel {
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate();       
+                }
+                ps.executeUpdate();
                 bool=true;
              }catch(Exception e){
                 bool=false;
@@ -1430,10 +1430,10 @@ public final class sekuel {
         } catch (Exception e) {
             bool=false;
             System.out.println("Notifikasi : "+e);
-        }   
+        }
         return bool;
     }
-    
+
     public boolean mengedittf2(String table,String acuan_field,String update,int i,String[] a){
         bool=true;
         try {
@@ -1441,8 +1441,8 @@ public final class sekuel {
             try{
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate();       
+                }
+                ps.executeUpdate();
                 bool=true;
              }catch(Exception e){
                 bool=false;
@@ -1462,14 +1462,14 @@ public final class sekuel {
         } catch (Exception e) {
             bool=false;
             System.out.println("Notifikasi : "+e);
-        }   
+        }
         return bool;
     }
-    
+
     public void mengedit(String table,String acuan_field,String update,JTextField AlmGb){
         try {
             ps = connect.prepareStatement("update "+table+" set "+update+" where "+acuan_field);
-            try{            
+            try{
                 ps.setBinaryStream(1, new FileInputStream(AlmGb.getText()), new File(AlmGb.getText()).length());
                 ps.executeUpdate();
              }catch(Exception e){
@@ -1501,44 +1501,44 @@ public final class sekuel {
             SimpanTrack(qry);
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
-    
+
     public void queryUpdate(String query, String... values) {
         String track = query;
-        
+
         try {
             ps = connect.prepareStatement(query);
-            
+
             for (int i = 0; i < values.length; i++) {
                 ps.setString(i + 1, values[i]);
                 track = track.replaceFirst("\\?", "'"+values[i]+"'");
             }
-            
+
             ps.executeUpdate();
-            
+
             ps.close();
-            
+
             SimpanTrack(track);
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-            
+
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses data...!!!");
         }
     }
-    
+
     public void queryUpdate(String query) {
         try {
             ps = connect.prepareStatement(query);
-            
+
             ps.executeUpdate();
-            
+
             ps.close();
-            
+
             SimpanTrack(query);
         } catch (Exception e) {
             System.out.println("Notifikasi : " + e);
-            
+
             JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat memproses data...!!!");
         }
     }
@@ -1546,8 +1546,8 @@ public final class sekuel {
     public void queryu(String qry){
         try {
             ps=connect.prepareStatement(qry);
-            try{                            
-                ps.executeUpdate(); 
+            try{
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
                 JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
@@ -1556,24 +1556,24 @@ public final class sekuel {
                     ps.close();
                 }
             }
-            
+
             SimpanTrack(qry);
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public boolean queryutf(String qry){
         bool=false;
         try {
             ps=connect.prepareStatement(qry);
-            try{                            
-                ps.executeUpdate(); 
+            try{
+                ps.executeUpdate();
                 bool=true;
              }catch(Exception e){
                 bool=false;
                 System.out.println("Notifikasi : "+e);
-                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");                
+                JOptionPane.showMessageDialog(null,"Maaf, Query tidak bisa dijalankan...!!!!");
              }finally{
                 if(ps != null){
                     ps.close();
@@ -1586,17 +1586,17 @@ public final class sekuel {
         }
         return bool;
     }
-    
+
     public boolean queryutf2(String qry){
         bool=false;
         try {
             ps=connect.prepareStatement(qry);
-            try{                            
-                ps.executeUpdate(); 
+            try{
+                ps.executeUpdate();
                 bool=true;
              }catch(Exception e){
                 bool=false;
-                System.out.println("Notifikasi : "+e);           
+                System.out.println("Notifikasi : "+e);
              }finally{
                 if(ps != null){
                     ps.close();
@@ -1609,7 +1609,7 @@ public final class sekuel {
         }
         return bool;
     }
-    
+
     public void queryu(String qry,String parameter){
         String track = qry;
         track = track.replaceFirst("\\?", parameter);
@@ -1629,15 +1629,15 @@ public final class sekuel {
             SimpanTrack(track);
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }    
+        }
     }
-    
-    
+
+
     public void queryu2(String qry){
         try {
             ps=connect.prepareStatement(qry);
-            try{                            
-                ps.executeUpdate(); 
+            try{
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
              }finally{
@@ -1650,15 +1650,15 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void queryu2(String qry,int i,String[] a){
         try {
-            try{            
+            try{
                 ps=connect.prepareStatement(qry);
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate(); 
+                }
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
              }finally{
@@ -1677,16 +1677,16 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public boolean queryu2tf(String qry,int i,String[] a){
         bool=false;
         try {
-            try{            
+            try{
                 ps=connect.prepareStatement(qry);
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate(); 
+                }
+                ps.executeUpdate();
                 bool=true;
              }catch(Exception e){
                 bool=false;
@@ -1708,15 +1708,15 @@ public final class sekuel {
         }
         return bool;
     }
-    
+
     public void queryu3(String qry,int i,String[] a){
         try {
-            try{            
+            try{
                 ps=connect.prepareStatement(qry);
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate(); 
+                }
+                ps.executeUpdate();
              }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
              }finally{
@@ -1735,15 +1735,15 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public void queryu4(String qry,int i,String[] a){
         try {
-            try{            
+            try{
                 ps=connect.prepareStatement(qry);
                 for(angka=1;angka<=i;angka++){
                     ps.setString(angka,a[angka-1]);
-                } 
-                ps.executeUpdate(); 
+                }
+                ps.executeUpdate();
              }catch(Exception e){
              }finally{
                 if(ps != null){
@@ -1760,28 +1760,28 @@ public final class sekuel {
         } catch (Exception e) {
         }
     }
-    
+
     public void AutoComitFalse(){
         try {
             connect.setAutoCommit(false);
         } catch (Exception e) {
         }
     }
-    
+
     public void AutoComitTrue(){
         try {
             connect.setAutoCommit(true);
         } catch (Exception e) {
         }
     }
-    
+
     public void Commit(){
         try {
             connect.commit();
         } catch (Exception e) {
         }
     }
-     
+
     public void RollBack(){
         try {
             connect.rollback();
@@ -1790,38 +1790,38 @@ public final class sekuel {
             JOptionPane.showMessageDialog(null,"Gagal melakukan rollback..!");
         }
     }
-    
+
     public void cariIsi(String sql,JComboBox cmb){
         try {
             ps=connect.prepareStatement(sql);
-            try{  
+            try{
                 rs=ps.executeQuery();
                 if(rs.next()){
                     String dicari=rs.getString(1);
                     cmb.setSelectedItem(dicari);
                 }else{
                     cmb.setSelectedItem("");
-                }    
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }   
+        }
     }
 
     public void cariIsi(String sql,JDateTimePicker dtp){
         try {
             ps=connect.prepareStatement(sql);
-            try{            
+            try{
                 rs=ps.executeQuery();
                 if(rs.next()){
                     try {
@@ -1831,14 +1831,14 @@ public final class sekuel {
                     } catch (Exception ex) {
                         System.out.println(ex);
                     }
-                }       
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -1851,20 +1851,20 @@ public final class sekuel {
     public void cariIsi(String sql,JTextField txt){
         try {
             ps=connect.prepareStatement(sql);
-            try{            
+            try{
                 rs=ps.executeQuery();
                 if(rs.next()){
                     txt.setText(rs.getString(1));
                 }else{
                     txt.setText("");
-                }  
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -1873,14 +1873,14 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public int cariRegistrasi(String norawat){
         angka=0;
         angka=cariInteger("select count(billing.no_rawat) from billing where billing.no_rawat=?",norawat)+
               cariInteger("select count(reg_periksa.no_rawat) from reg_periksa where reg_periksa.no_rawat=? and reg_periksa.stts='Batal'",norawat);
         return angka;
     }
-    
+
     public boolean cekTanggalRegistrasi(String tanggalregistrasi,String tanggalinputdata){
         if (! sekuel.pemberlakuanBatasEdit) {
             return true;
@@ -1902,11 +1902,11 @@ public final class sekuel {
         }
         return bool;
     }
-    
+
     public String ambiltanggalsekarang(){
         return formattanggal.format(new Date());
     }
-    
+
     public void cariIsi(String sql,JTextField txt,String kunci){
         try {
             ps=connect.prepareStatement(sql);
@@ -1917,14 +1917,14 @@ public final class sekuel {
                     txt.setText(rs.getString(1));
                 }else{
                     txt.setText("");
-                }   
+                }
             }catch(SQLException e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -1932,8 +1932,8 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-    } 
-    
+    }
+
     public void cariIsi(String sql,JTextArea txt,String kunci){
         try {
             ps=connect.prepareStatement(sql);
@@ -1944,14 +1944,14 @@ public final class sekuel {
                     txt.setText(rs.getString(1));
                 }else{
                     txt.setText("");
-                }   
+                }
             }catch(SQLException e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -1960,7 +1960,7 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
 
     public void cariIsi(String sql,JLabel txt){
         try {
@@ -1978,7 +1978,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -1987,18 +1987,18 @@ public final class sekuel {
             System.out.println("Notifikasi : "+e);
         }
     }
-    
+
     public String cariIsi(String sql){
         dicari="";
         try {
             ps=connect.prepareStatement(sql);
-            try{            
-                rs=ps.executeQuery();            
+            try{
+                rs=ps.executeQuery();
                 if(rs.next()){
                     dicari=rs.getString(1);
                 }else{
                     dicari="";
-                }   
+                }
             }catch(Exception e){
                 dicari="";
                 System.out.println("Notifikasi : "+e);
@@ -2006,7 +2006,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2014,17 +2014,17 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-        
+
         return dicari;
     }
-    
+
     public ByteArrayInputStream cariGambar(String sql){
         ByteArrayInputStream inputStream=null;
         try {
             ps=connect.prepareStatement(sql);
-            try{            
-                rs=ps.executeQuery();            
-                if(rs.next()){                
+            try{
+                rs=ps.executeQuery();
+                if(rs.next()){
                     inputStream = new ByteArrayInputStream(rs.getBytes(1));
                 }
             }catch(Exception e){
@@ -2033,7 +2033,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2041,22 +2041,22 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return inputStream;
     }
-    
+
     public String cariIsi(String sql,String data){
         dicari="";
         try {
             ps=connect.prepareStatement(sql);
-            try{                            
+            try{
                 ps.setString(1,data);
-                rs=ps.executeQuery();            
+                rs=ps.executeQuery();
                 if(rs.next()){
                     dicari=rs.getString(1);
                 }else{
                     dicari="";
-                }   
+                }
             }catch(Exception e){
                 dicari="";
                 System.out.println("Notifikasi : "+e);
@@ -2072,27 +2072,27 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return dicari;
     }
-    
+
     public Date cariIsi2(String sql){
         try {
             ps=connect.prepareStatement(sql);
-            try{            
-                rs=ps.executeQuery();            
+            try{
+                rs=ps.executeQuery();
                 if(rs.next()){
                     tanggal=rs.getDate(1);
                 }else{
                     tanggal=new Date();
-                }   
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2107,20 +2107,20 @@ public final class sekuel {
         angka=0;
         try {
             ps=connect.prepareStatement(sql);
-            try{            
-                rs=ps.executeQuery();            
+            try{
+                rs=ps.executeQuery();
                 if(rs.next()){
                     angka=rs.getInt(1);
                 }else{
                     angka=0;
-                } 
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2128,16 +2128,16 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka;
     }
-    
+
     public Integer cariIntegerCount(String sql){
         angka=0;
         try {
             ps=connect.prepareStatement(sql);
-            try{            
-                rs=ps.executeQuery();            
+            try{
+                rs=ps.executeQuery();
                 while(rs.next()){
                     angka=angka+rs.getInt(1);
                 }
@@ -2147,7 +2147,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2155,22 +2155,22 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka;
     }
-    
+
     public Integer cariInteger(String sql,String data){
         angka=0;
         try {
             ps=connect.prepareStatement(sql);
             try{
                 ps.setString(1,data);
-                rs=ps.executeQuery();            
+                rs=ps.executeQuery();
                 if(rs.next()){
                     angka=rs.getInt(1);
                 }else{
                     angka=0;
-                }  
+                }
             }catch(Exception e){
                 angka=0;
                 System.out.println("Notifikasi : "+e);
@@ -2178,7 +2178,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2186,10 +2186,10 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka;
     }
-    
+
     public Integer cariInteger(String sql,String data,String data2){
         angka=0;
         try {
@@ -2197,12 +2197,12 @@ public final class sekuel {
             try{
                 ps.setString(1,data);
                 ps.setString(2,data2);
-                rs=ps.executeQuery();            
+                rs=ps.executeQuery();
                 if(rs.next()){
                     angka=rs.getInt(1);
                 }else{
                     angka=0;
-                }  
+                }
             }catch(Exception e){
                 angka=0;
                 System.out.println("Notifikasi : "+e);
@@ -2210,7 +2210,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2218,10 +2218,10 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka;
     }
-    
+
     public Integer cariInteger(String sql,String data,String data2,String data3){
         angka=0;
         try {
@@ -2230,12 +2230,12 @@ public final class sekuel {
                 ps.setString(1,data);
                 ps.setString(2,data2);
                 ps.setString(3,data3);
-                rs=ps.executeQuery();            
+                rs=ps.executeQuery();
                 if(rs.next()){
                     angka=rs.getInt(1);
                 }else{
                     angka=0;
-                }  
+                }
             }catch(Exception e){
                 angka=0;
                 System.out.println("Notifikasi : "+e);
@@ -2243,7 +2243,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2251,28 +2251,28 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka;
     }
-    
+
     public Integer cariInteger2(String sql){
         angka=0;
         try {
             ps=connect.prepareStatement(sql);
             try{
-                rs=ps.executeQuery();            
+                rs=ps.executeQuery();
                 rs.last();
                 angka=rs.getRow();
                 if(angka<1){
                     angka=0;
-                }   
+                }
             }catch(Exception e){
                 System.out.println("Notifikasi : "+e);
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2280,7 +2280,7 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka;
     }
 
@@ -2300,7 +2300,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2326,21 +2326,21 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
-        }            
+        }
     }
-    
+
     public double cariIsiAngka(String sql) {
         angka2=0;
         try {
             ps=connect.prepareStatement(sql);
-            try{            
+            try{
                 rs=ps.executeQuery();
                 if(rs.next()){
                     angka2=rs.getDouble(1);
@@ -2353,7 +2353,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2361,15 +2361,15 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka2;
     }
-    
+
     public double cariIsiAngka(String sql,String data) {
         angka2=0;
         try {
             ps=connect.prepareStatement(sql);
-            try{            
+            try{
                 ps.setString(1,data);
                 rs=ps.executeQuery();
                 if(rs.next()){
@@ -2384,7 +2384,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2392,15 +2392,15 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka2;
     }
-    
+
     public double cariIsiAngka2(String sql,String data,String data2) {
         angka2=0;
         try {
             ps=connect.prepareStatement(sql);
-            try{            
+            try{
                 ps.setString(1,data);
                 ps.setString(2,data2);
                 rs=ps.executeQuery();
@@ -2414,7 +2414,7 @@ public final class sekuel {
             }finally{
                 if(rs != null){
                     rs.close();
-                }                
+                }
                 if(ps != null){
                     ps.close();
                 }
@@ -2422,11 +2422,11 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return angka2;
     }
 
-    public void cariGambar(String sql,JLabel txt){        
+    public void cariGambar(String sql,JLabel txt){
         try {
             ps=connect.prepareStatement(sql);
             try{
@@ -2444,7 +2444,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2464,14 +2464,14 @@ public final class sekuel {
                     Blob blob = rs.getBlob(5);
                     ((Painter) txt).setImageIcon(new javax.swing.ImageIcon(
                         blob.getBytes(1, (int) (blob.length()))));
-                }  
+                }
             } catch (Exception ex) {
                 cetak(ex.toString());
             }finally{
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2479,19 +2479,19 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
     }
-    
+
     private void SimpanTrack(String sql) {
-        
+
     }
-    
+
     public String cariString(String sql){
         dicari="";
         try {
             ps=connect.prepareStatement(sql);
             try{
-                rs=ps.executeQuery();            
+                rs=ps.executeQuery();
                 if(rs.next()){
                     dicari=rs.getString(1);
                 }else{
@@ -2503,7 +2503,7 @@ public final class sekuel {
                 if(rs != null){
                     rs.close();
                 }
-                
+
                 if(ps != null){
                     ps.close();
                 }
@@ -2511,14 +2511,14 @@ public final class sekuel {
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-            
+
         return dicari;
     }
 
     private String gambar(String id) {
         return folder + File.separator + id.trim() + ".jpg";
     }
-    
+
     public void Tabel(javax.swing.JTable tb,int lebar[]){
       tb.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
       angka=tb.getColumnCount();

@@ -2,7 +2,7 @@
     if(strpos($_SERVER['REQUEST_URI'],"conf")){
         exit(header("Location:../index.php"));
     }
-    
+
     // fungsi untuk merubah format tanggal
     function saiki($hr,$tgl,$bln,$thn) {
             switch($hr) {

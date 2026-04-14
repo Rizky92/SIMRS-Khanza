@@ -10,6 +10,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JTextArea;
 import org.smslib.AGateway;
 import org.smslib.AGateway.GatewayStatuses;
@@ -23,9 +26,6 @@ import org.smslib.Service;
 import org.smslib.modem.ModemGateway.IPProtocols;
 import org.smslib.modem.SerialModemGateway;
 import smsobj.Status;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author perpustakaan
@@ -52,11 +52,11 @@ public class SMSReadService {
         } catch (IOException ex) {
             Logger.getLogger(SMSReadService.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
         PesanMasukHandler pesanMasuk =new PesanMasukHandler();
         PanggilanMasukHandler panggilanMasuk =new PanggilanMasukHandler();
         GatewayStatusHandler statusGateway =new GatewayStatusHandler();
-        
+
         this.service = new Service();
         SerialModemGateway gateway = new SerialModemGateway (
                 prop.getProperty("GATEWAYNAME"), //nama GAteway
@@ -64,7 +64,7 @@ public class SMSReadService {
                 Integer.parseInt(prop.getProperty("BAUDRATE")), //baudrate
                 prop.getProperty("MERKHP"), //merk HP
                 prop.getProperty("TIPEHP"));//Tipe HP
-        
+
         gateway.setIpProtocol(IPProtocols.BINARY);
         gateway.setProtocol(Protocols.PDU);
         gateway.setInbound(true);
@@ -116,11 +116,11 @@ public class SMSReadService {
     }
 
     class PanggilanMasukHandler implements ICallNotification{
-        public void process(AGateway ag, String noHp) {            
+        public void process(AGateway ag, String noHp) {
         }
 
         public void process(String string, String string1) {
-           
+
         }
     }
 

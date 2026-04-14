@@ -3,7 +3,7 @@
    $_sql         = "SELECT * FROM set_tahun";
    $hasil        = bukaquery($_sql);
    $baris        = mysqli_fetch_row($hasil);
-   
+
    $tahun     = empty($baris[0])?date("Y"):$baris[0];
    $blnini    = empty($baris[1])?date("m"):$baris[1];
    $hari      = empty($baris[2])?date("d"):$baris[2];
@@ -40,11 +40,11 @@
                     $hasilprev        	= bukaquery($_sqlprev);
                     $barisprev        	= mysqli_fetch_row($hasilprev);
                     @$prev               = $barisprev[0];
-                    
+
                     if(empty($prev)){
                         $prev=$next;
                     }
-                    
+
                     if(empty($next)){
                         $next=$prev;
                     }
@@ -106,7 +106,7 @@
                                 <td width='10%'><div align='center'>Proses</div></td>
                                 <td width='90%'><div align='center'>Jml.Tambahan Jaga</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td width='70'>
                                     <center>"; ?>
@@ -128,10 +128,10 @@
             }
                 echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah <a target=_blank href=http://".host()."/webapps/penggajian/pages/lampiran/LaporanTambahJaga.php?id=$id&tahun=$tahun&bulan=$bulan>| Laporan |</a></div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah <a target=_blank href=http://".host()."/webapps/penggajian/pages/lampiran/LaporanTambahJaga.php?id=$id&tahun=$tahun&bulan=$bulan>| Laporan |</a></div></td>
+                    </tr>
                  </table>");
-        
+
         ?>
     </div>
 

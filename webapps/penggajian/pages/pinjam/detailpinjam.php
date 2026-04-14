@@ -10,10 +10,10 @@
                 $pokok          = validangka(isset($_GET['pokok'])?$_GET['pokok']:NULL);
                 $jasa           = validangka(isset($_GET['jasa'])?$_GET['jasa']:NULL);
                 $status         = validTeks(isset($_GET['status'])?$_GET['status']:NULL);
-                
+
                 echo "<input type=hidden name=id  value=$id>
                       <input type=hidden name=action value=$action>";
-                
+
 		$_sql           = "SELECT pegawai.nik,pegawai.nama FROM pegawai where pegawai.id='$id'";
                 $hasil          = bukaquery($_sql);
                 $baris          = mysqli_fetch_row($hasil);
@@ -176,7 +176,7 @@
             </div>
         </form>
         <?php
-            if ($action=="HAPUS") {	
+            if ($action=="HAPUS") {
                 $_sql  = "select angsuran_koperasi.id,angsuran_koperasi.tanggal_pinjam,angsuran_koperasi.tanggal_angsur,angsuran_koperasi.pokok,angsuran_koperasi.jasa from angsuran_koperasi where angsuran_koperasi.id='".validTeks($_GET['id'])."' and angsuran_koperasi.tanggal_pinjam='".validTeks($_GET['tanggal'])."'";
                 $hasil = bukaquery($_sql);
                 while($baris = mysqli_fetch_array($hasil)) {
@@ -189,8 +189,8 @@
             if(mysqli_num_rows($hasil)!=0) {
                 echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                         <tr class='head'>
-                            <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/pinjam/LaporanDetailPinjam.php?&id=$id>| Laporan |</a></div></td>                        
-                        </tr>     
+                            <td><div align='left'>Data : $jumlah <a target=_blank href=../penggajian/pages/pinjam/LaporanDetailPinjam.php?&id=$id>| Laporan |</a></div></td>
+                        </tr>
                      </table>");
             }
         ?>

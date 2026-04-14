@@ -1,20 +1,19 @@
 package simrskhanza;
-import kepegawaian.DlgCariPegawai;
 import bridging.DUKCAPILJakartaCekNik;
 import bridging.DUKCAPILJakartaPostLahir;
 import fungsi.WarnaTable;
 import fungsi.WarnaTable5;
+import fungsi.akses;
 import fungsi.batasInput;
+import fungsi.koneksiDB;
+import fungsi.sekuel;
+import fungsi.validasi;
 import grafikanalisa.grafikberat;
 import grafikanalisa.grafikjkelbayi;
 import grafikanalisa.grafiklahirbulan;
 import grafikanalisa.grafiklahirtahun;
 import grafikanalisa.grafikpanjang;
 import grafikanalisa.grafikproses;
-import fungsi.koneksiDB;
-import fungsi.sekuel;
-import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -42,6 +41,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import kepegawaian.DlgCariPegawai;
 
 public class DlgIKBBayi extends javax.swing.JDialog {
     private final DefaultTableModel tabMode,tabModeAPGAR;

@@ -6,13 +6,13 @@
     }
 ?>
 <div id="post">
-    <div class="entry">        
+    <div class="entry">
         <form name="frm_aturadmin" onsubmit="return validasiIsi();" method="post" action="" enctype=multipart/form-data>
             <?php
                 echo "";
                 $action       = isset($_GET['action'])?$_GET['action']:NULL;
                 $norawat      = trim(isset($_GET['iyem']))?trim($_GET['iyem']):NULL;
-                $norawat      = json_decode(encrypt_decrypt($norawat,"d"),true); 
+                $norawat      = json_decode(encrypt_decrypt($norawat,"d"),true);
                 $noexit = '0';
                 $kodeberkas = '';
                 if (isset($norawat["no_rawat"])) {
@@ -22,13 +22,13 @@
                 }else{
                     exit(header("Location:../index.php"));
                 }
-                
+
                 $_sql         = "select reg_periksa.no_reg,reg_periksa.no_rawat,reg_periksa.tgl_registrasi,reg_periksa.jam_reg,
                                 reg_periksa.kd_dokter,dokter.nm_dokter,reg_periksa.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,
                                 pasien.umur,poliklinik.nm_poli,reg_periksa.status_lanjut,reg_periksa.umurdaftar,reg_periksa.sttsumur,
-                                reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab 
-                                from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab 
-                                on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis 
+                                reg_periksa.p_jawab,reg_periksa.almt_pj,reg_periksa.hubunganpj,reg_periksa.biaya_reg,reg_periksa.stts_daftar,penjab.png_jawab
+                                from reg_periksa inner join dokter inner join pasien inner join poliklinik inner join penjab
+                                on reg_periksa.kd_dokter=dokter.kd_dokter and reg_periksa.no_rkm_medis=pasien.no_rkm_medis
                                 and reg_periksa.kd_pj=penjab.kd_pj and reg_periksa.kd_poli=poliklinik.kd_poli where reg_periksa.no_rawat='$no_rawat' ";
                 @$hasil        = bukaquery($_sql);
                 @$baris        = mysqli_fetch_array($hasil);
@@ -60,7 +60,7 @@
 		<tr class="isi2">
                     <td width="25%" valign="top">Nama Pasien</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top"><?php echo $nm_pasien.", ".$umurdaftar." ".$sttsumur;?></td>
-                </tr>                
+                </tr>
                 <tr class="isi2">
                     <td width="25%" valign="top">Berkas Digital</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top">
@@ -77,7 +77,7 @@
                     <td width="25%" valign="top">File Berkas(PDF/JPG)</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top"><input name="dokumen" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" type=file id="TxtIsi2" value="<?php echo $dokumen;?>" size="30" maxlength="255" accept="application/pdf,image/jpeg,image/jpg"/>
                     </td>
-                </tr>        
+                </tr>
             </table>
             </div>
             <div align="center">
@@ -123,10 +123,10 @@
             ?>
             <div style="width: 100%; height: 56%; overflow: auto;">
             <?php
-                $_sql = "SELECT berkas_digital_perawatan.no_rawat,berkas_digital_perawatan.kode, 
-                        master_berkas_digital.nama,berkas_digital_perawatan.lokasi_file 
-                        from berkas_digital_perawatan inner join master_berkas_digital 
-                        on berkas_digital_perawatan.kode=master_berkas_digital.kode 
+                $_sql = "SELECT berkas_digital_perawatan.no_rawat,berkas_digital_perawatan.kode,
+                        master_berkas_digital.nama,berkas_digital_perawatan.lokasi_file
+                        from berkas_digital_perawatan inner join master_berkas_digital
+                        on berkas_digital_perawatan.kode=master_berkas_digital.kode
                         where berkas_digital_perawatan.no_rawat='$no_rawat' ORDER BY master_berkas_digital.nama ASC ";
                 $hasil=bukaquery($_sql);
                 $jumlah=mysqli_num_rows($hasil);
@@ -139,7 +139,7 @@
                                 <td width='35%'><div align='center'>Berkas Digital</div></td>
                                 <td width='65%'><div align='center'>File</div></td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td>".$baris["nama"]."</td>
                                 <td><a target=_blank href=../berkasrawat/pages/upload/".$baris["lokasi_file"].">".str_replace("pages/upload/","",$baris["lokasi_file"])."</a></td>
@@ -164,11 +164,11 @@
                             <td>
                                 <a href="?act=List&action=Keluar" class="button">&nbsp;&nbsp;&nbsp;Keluar&nbsp;&nbsp;&nbsp;</a>
                             </td>
-                        </tr>     
+                        </tr>
                     </table>
-                HTML;     
+                HTML;
             }
-        ?>       
+        ?>
         </form>
     </div>
 

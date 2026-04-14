@@ -22,7 +22,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                        <?php 
+                        <?php
                             $queryjadwal = bukaquery("select dokter.nm_dokter,jadwal.hari_kerja,jadwal.jam_mulai,jadwal.jam_selesai,poliklinik.nm_poli from jadwal inner join poliklinik inner join dokter on jadwal.kd_dokter=dokter.kd_dokter and jadwal.kd_poli=poliklinik.kd_poli where dokter.status='1' order by jadwal.hari_kerja,jadwal.kd_dokter");
                             while($rsqueryjadwal = mysqli_fetch_array($queryjadwal)) {
                                 echo "<tr>

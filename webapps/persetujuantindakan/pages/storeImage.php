@@ -4,7 +4,7 @@
     if(file_exists(host()."/webapps/persetujuantindakan/pages/upload/".$nopernyataan."PP.jpeg")){
         @unlink(host()."/webapps/persetujuantindakan/pages/upload/".$nopernyataan."PP.jpeg");
     }
-    
+
     $tindakan_konfirmasi    = "false";
     $diagnosa_konfirmasi    = "false";
     $indikasi_tindakan_konfirmasi ="false";
@@ -16,7 +16,7 @@
     $alternatif_konfirmasi  = "false";
     $lain_lain_konfirmasi   = "false";
     $biaya_konfirmasi       = "false";
-    
+
     if(isset($_POST["tindakan_konfirmasi"])) {
         $tindakan_konfirmasi = "true";
     }
@@ -50,7 +50,7 @@
     if(isset($_POST["biaya_konfirmasi"])) {
         $biaya_konfirmasi = "true";
     }
-    
+
     $pilihansetuju          = validTeks4($_POST["pilihansetuju"],20);
     $img                    = $_POST["image"];
     $folderPath             = "upload/";
@@ -61,7 +61,7 @@
     $fileName               = $nopernyataan."PP.jpeg";
     $file                   = $folderPath . $fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("bukti_persetujuan_penolakan_tindakan_penerimainformasi","'".$nopernyataan."','pages/upload/$fileName'");
     Ubah2("persetujuan_penolakan_tindakan","diagnosa_konfirmasi='$diagnosa_konfirmasi',tindakan_konfirmasi='$tindakan_konfirmasi',indikasi_tindakan_konfirmasi='$indikasi_tindakan_konfirmasi',
            tata_cara_konfirmasi='$tata_cara_konfirmasi',tujuan_konfirmasi='$tujuan_konfirmasi',risiko_konfirmasi='$risiko_konfirmasi',komplikasi_konfirmasi='$komplikasi_konfirmasi',

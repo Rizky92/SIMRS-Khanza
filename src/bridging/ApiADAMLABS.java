@@ -48,7 +48,7 @@ public class ApiADAMLABS
     private final sekuel Sequel = new sekuel();
     private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     private final ObjectMapper mapper = new ObjectMapper();
-    
+
     private HttpHeaders headers;
     private HttpEntity entity;
     private ObjectNode root;
@@ -58,7 +58,7 @@ public class ApiADAMLABS
     private Scheme scheme;
     private HttpComponentsClientHttpRequestFactory factory;
     private String url;
-    
+
     public void registrasi(String kodeRegistrasi) {
         try {
             try (PreparedStatement ps = koneksi.prepareStatement(
@@ -80,14 +80,14 @@ public class ApiADAMLABS
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         root = mapper.createObjectNode();
-                        
+
                         ObjectNode registrasi = mapper.createObjectNode();
                         registrasi.put("no_registrasi", rs.getString("noorder"));
                         registrasi.put("diagnosa_awal", "-");
                         registrasi.put("keterangan_klinis", rs.getString("diagnosa_klinis").trim());
                         registrasi.put("kode_rs", APIKODERS);
                         root.set("registrasi", registrasi);
-                        
+
                         ObjectNode pasien = mapper.createObjectNode();
                         pasien.put("nama", rs.getString("nm_pasien").trim());
                         pasien.put("no_rm", rs.getString("no_rkm_medis"));
@@ -103,7 +103,7 @@ public class ApiADAMLABS
                         pasien.put("m_kabupaten_id", KABUPATENID);
                         pasien.put("m_kecamatan_id", KECAMATANID);
                         root.set("pasien", pasien);
-                        
+
                         root.put("kode_dokter_pengirim", rs.getString("kd_dokter_perujuk"));
                         root.put("nama_dokter_pengirim", rs.getString("nm_dokter_perujuk"));
                         root.put("kode_unit_asal", rs.getString("asal_unit").substring(0, rs.getString("asal_unit").indexOf("|")));
@@ -112,7 +112,7 @@ public class ApiADAMLABS
                         root.put("nama_penjamin", rs.getString("png_jawab"));
                         root.put("kode_icdt", rs.getString("icdt").substring(0, rs.getString("icdt").indexOf("|")));
                         root.put("nama_icdt", rs.getString("icdt").substring(rs.getString("icdt").indexOf("|") + 1));
-                        
+
                         ArrayNode tindakanArray = mapper.createArrayNode();
                         try (PreparedStatement ps2 = koneksi.prepareStatement(
                             "select permintaan_pemeriksaan_lab.kd_jenis_prw, jns_perawatan_lab.nm_perawatan from permintaan_pemeriksaan_lab " +
@@ -180,10 +180,10 @@ public class ApiADAMLABS
             }
         }
     }
-    
+
     private RestTemplate http() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
-        
+
         TrustManager[] trustManagers = {
             new X509TrustManager() {
                 @Override
@@ -199,7 +199,7 @@ public class ApiADAMLABS
         scheme = new Scheme("https", 443, sslFactory);
         factory = new HttpComponentsClientHttpRequestFactory();
         factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
-        
+
         return new RestTemplate(factory);
     }
 }

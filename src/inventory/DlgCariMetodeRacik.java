@@ -14,10 +14,10 @@ package inventory;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.validasi;
-import fungsi.akses;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
@@ -471,7 +471,7 @@ public final class DlgCariMetodeRacik extends javax.swing.JDialog {
     public boolean hasSelection() {
         return tbKamar.getSelectedRow() >= 0;
     }
-    
+
     public Object getSelectedValue(int column) {
         return tbKamar.getValueAt(tbKamar.getSelectedRow(), column);
     }

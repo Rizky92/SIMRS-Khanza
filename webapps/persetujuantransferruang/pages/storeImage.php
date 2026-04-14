@@ -5,7 +5,7 @@
     if(file_exists(host()."/webapps/persetujuantransferruang/pages/upload/".str_replace("/","",$norawat).str_replace(":","",str_replace("-","",str_replace(" ","",$tanggal_masuk))).".jpeg")){
         @unlink(host()."/webapps/persetujuantransferruang/pages/upload/".str_replace("/","",$norawat).str_replace(":","",str_replace("-","",str_replace(" ","",$tanggal_masuk))).".jpeg");
     }
-    
+
     $img                    = $_POST["image"];
     $folderPath             = "upload/";
     $image_parts            = explode(";base64,", $img);
@@ -15,7 +15,7 @@
     $fileName               = str_replace("/","",$norawat).str_replace(":","",str_replace("-","",str_replace(" ","",$tanggal_masuk))).".jpeg";
     $file                   = $folderPath.$fileName;
     file_put_contents($file, $image_base64);
-    
+
     Tambah3("bukti_persetujuan_transfer_pasien_antar_ruang","'".$norawat."','".$tanggal_masuk."','pages/upload/$fileName'");
 ?>
 <head>
@@ -28,4 +28,3 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
     <body><center>Proses Pengambilan Persetujuan Transfer Antar Ruang Pasien Sudah Selesai ..!! <br><a href='../login.php?iyem=<?=encrypt_decrypt("{\"usere\":\"".USERHYBRIDWEB."\",\"passwordte\":\"".PASHYBRIDWEB."\"}","e")?>' class='btn btn-secondary' >Kembali</a></center></body>
 </html>
-

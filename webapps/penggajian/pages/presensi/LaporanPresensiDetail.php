@@ -51,8 +51,8 @@
             echo "</table>
                   <table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Ttl.Lembur HB : ".$ttllembur." , Ttl.Lembur HR : ".$ttlhr."</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Ttl.Lembur HB : ".$ttllembur." , Ttl.Lembur HR : ".$ttlhr."</div></td>
+                    </tr>
                   </table>";
         }else{
             echo "<table width='100%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
@@ -63,7 +63,7 @@
                         <td width='110px'><div align='center'><strong>Lembur</div></td>
                     </tr>
                   </table>";
-        } 
+        }
     ?>
     </body>
 </html>

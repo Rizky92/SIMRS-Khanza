@@ -110,10 +110,10 @@
             ?>
             <div style="width: 100%; height: 61%; overflow: auto;">
             <?php
-                $_sql       = "Select pencapaian_kinerja_pegawai.tahun,pencapaian_kinerja_pegawai.bulan,pencapaian_kinerja_pegawai.id,pencapaian_kinerja_pegawai.kode_pencapaian, 
+                $_sql       = "Select pencapaian_kinerja_pegawai.tahun,pencapaian_kinerja_pegawai.bulan,pencapaian_kinerja_pegawai.id,pencapaian_kinerja_pegawai.kode_pencapaian,
                                 pencapaian_kinerja.nama_pencapaian,pencapaian_kinerja_pegawai.keterangan from pencapaian_kinerja_pegawai inner join pencapaian_kinerja on
-                                pencapaian_kinerja_pegawai.kode_pencapaian=pencapaian_kinerja.kode_pencapaian where pencapaian_kinerja_pegawai.id='$id' and 
-                                pencapaian_kinerja_pegawai.tahun='$tahun' and pencapaian_kinerja_pegawai.bulan='$bulan' order by 
+                                pencapaian_kinerja_pegawai.kode_pencapaian=pencapaian_kinerja.kode_pencapaian where pencapaian_kinerja_pegawai.id='$id' and
+                                pencapaian_kinerja_pegawai.tahun='$tahun' and pencapaian_kinerja_pegawai.bulan='$bulan' order by
                                 pencapaian_kinerja_pegawai.tahun,pencapaian_kinerja_pegawai.bulan ASC ";
                 $hasil      = bukaquery($_sql);
                 $jumlah     = mysqli_num_rows($hasil);
@@ -129,7 +129,7 @@
                                 <td width='50%' align='center'>Hasil Pencapaian</td>
                                 <td width='35%' align='center'>Keterangan</td>
                             </tr>";
-                    while($baris = mysqli_fetch_array($hasil)) {                        
+                    while($baris = mysqli_fetch_array($hasil)) {
                       echo "<tr class='isi'>
                                 <td>
                                     <center>"; ?>
@@ -165,8 +165,8 @@
 
             echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
                     <tr class='head'>
-                        <td><div align='left'>Data : $jumlah</div></td>                        
-                    </tr>     
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
                  </table>");
         ?>
     </div>
