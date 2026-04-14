@@ -577,7 +577,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             sukses=false;
                         }
                     }
-                    if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                    }
                 }else if(tbDokter.getValueAt(tbDokter.getSelectedRow(),17).toString().equals("Ralan")){
                     Sequel.deleteTampJurnal();
                     if(ttljual>0){
@@ -596,7 +598,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             sukses=false;
                         }
                     }
-                    if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN, OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN, OLEH "+akses.getkode());
+                    }
                 }
             }
 

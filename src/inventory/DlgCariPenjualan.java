@@ -1231,7 +1231,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     if(Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", ttlhpp, 0)==false){
                                         sukses=false;
                                     }
-                                    if (sukses) sukses = jur.simpanJurnal(rs.getString("nota_jual"),"U","BATAL PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                                    if(sukses==true){
+                                        sukses=jur.simpanJurnal(rs.getString("nota_jual"),"U","BATAL PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                                    }
                                 }
 
                                 if(sukses==true){
@@ -1634,7 +1636,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             if(Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp)==false){
                                 sukses=false;
                             }
-                            if (sukses) sukses = jur.simpanJurnal(rs.getString("nota_jual"),"U","PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(rs.getString("nota_jual"),"U","PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                            }
                          }
 
                          if(sukses==true){

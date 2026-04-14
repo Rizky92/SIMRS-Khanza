@@ -1419,7 +1419,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Piutang_Obat from set_akun"), "PERSEDIAAN", 0, (sisapiutang))==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PIUTANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoNota.getText(),"U","PIUTANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    }
                 }
                 if(sukses==true){
                     Sequel.Commit();

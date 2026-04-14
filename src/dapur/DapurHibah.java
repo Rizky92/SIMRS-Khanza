@@ -650,7 +650,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Dapur from set_akun2"), "PENDAPATAN HIBAH", 0, sbttl)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","HIBAH BARANG DAPUR, OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","HIBAH BARANG DAPUR, OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

@@ -731,7 +731,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Kontra_Penerimaan_Toko,"HUTANG BARANG TOKO",0,ttl+ppn+meterai)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG TOKO"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG TOKO"+", OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

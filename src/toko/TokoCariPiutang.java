@@ -1031,7 +1031,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(Sequel.insertTampJurnal(Kontra_Piutang_Toko, "Persediaan Barang Toko", ttlpiutang, 0)==false){
                             sukses=false;
                         }
-                        if (sukses) sukses = jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG BARANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG BARANG TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
+                        }
                   }
 
                   if(sukses==true){

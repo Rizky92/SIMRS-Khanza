@@ -869,7 +869,9 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
                             sukses=false;
                         }
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoRawat.getText(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoRawat.getText(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                    }
             }else{
                 sukses=false;
             }
@@ -941,7 +943,9 @@ public final class DlgBayarPiutang extends javax.swing.JDialog {
                             sukses=false;
                         }
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoRawat.getText(),"U","PEMBATALAN BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoRawat.getText(),"U","PEMBATALAN BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                    }
                 }else{
                     sukses=false;
                 }

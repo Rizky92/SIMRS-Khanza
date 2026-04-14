@@ -831,7 +831,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             if(Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), 0, (ttl + ppn))==false){
                                 sukses=false;
                             }
-                            if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                            }
                         }
                     }else{
                         sukses=false;

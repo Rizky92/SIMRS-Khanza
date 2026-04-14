@@ -1060,7 +1060,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertOrUpdateTampJurnal(Pendapatan_Piutang_Jasa_Perusahaan, "PENDAPATAN PIUTANG JASA PERUSAHAAN", 0, totaltagihan)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoPiutang.getText(),"U","PIUTANG JASA PERUSAHAAN "+NmPerusahaan.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoPiutang.getText(),"U","PIUTANG JASA PERUSAHAAN "+NmPerusahaan.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    }
                 }
                 if(sukses==true){
                     Sequel.Commit();

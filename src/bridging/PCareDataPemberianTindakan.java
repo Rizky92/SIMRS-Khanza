@@ -629,7 +629,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                }
 
                 if(sukses==true){
                     Sequel.queryu2("delete from pcare_tindakan_ralan_diberikan where "+
@@ -780,7 +782,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(tbDokter2.getValueAt(tbDokter2.getSelectedRow(),3).toString(),"U","PEMBATALAN PEMBERIAN TINDAKAN RAWAT INAP PASIEN, OLEH "+akses.getkode());
+                }
 
                 if(sukses==true){
                     Sequel.queryu2("delete from pcare_tindakan_ranap_diberikan where "+

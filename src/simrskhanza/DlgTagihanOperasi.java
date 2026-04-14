@@ -3027,7 +3027,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","OPERASI RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","OPERASI RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        }
                     }else if(status.equals("Ralan")){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
@@ -3062,7 +3064,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","OPERASI RAWAT JALAN PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","OPERASI RAWAT JALAN PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        }
                     }
                 }
 

@@ -1762,7 +1762,9 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                                     sukses=false;
                                 }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT INAP PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
+                            }
                         } else if (statusberi.equals("Ralan")) {
                             Sequel.deleteTampJurnal();
                             if (ttljual > 0) {
@@ -1781,7 +1783,9 @@ public class DlgPemberianObat extends javax.swing.JDialog {
                                     sukses=false;
                                 }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(tbPemberianObat.getValueAt(tbPemberianObat.getSelectedRow(), 2).toString(), "U", "PEMBATALAN PEMBERIAN OBAT RAWAT JALAN PASIEN " + TNoRM.getText() + " " + TPasien.getText() + " OLEH " + akses.getkode());
+                            }
                         } else {
                             sukses = false;
                         }

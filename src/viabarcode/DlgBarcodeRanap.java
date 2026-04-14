@@ -607,7 +607,9 @@ public final class DlgBarcodeRanap extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(NoRawat.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+NoRawat.getText()+" DIPOSTING OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(NoRawat.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+NoRawat.getText()+" DIPOSTING OLEH "+akses.getkode());
+                }
             }
 
             if(sukses==true){
@@ -737,7 +739,9 @@ public final class DlgBarcodeRanap extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(NoRawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(NoRawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());
+                }
             }
 
             if(sukses==true){

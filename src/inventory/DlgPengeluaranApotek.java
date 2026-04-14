@@ -693,7 +693,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Medis from set_akun"), "KONTRA PERSEDIAAN BARANG", ttl, 0)==false){
                                     sukses=false;
                                 }
-                                if (sukses) sukses = jur.simpanJurnal(NoKeluar.getText(),"U","STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(NoKeluar.getText(),"U","STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
+                                }
                             }
                         }
                     } catch (Exception ex) {

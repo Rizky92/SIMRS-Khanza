@@ -961,7 +961,9 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
                                     sukses=false;
                                 }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                            }
                         }else{
                             sukses=false;
                         }
@@ -984,7 +986,9 @@ public final class KeuanganPiutangBelumLunas extends javax.swing.JDialog {
                             if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), lebihbayar, 0)==false){
                                 sukses=false;
                             }
-                            if (sukses) sukses = jur.simpanJurnal(nomorpemasukan,"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(nomorpemasukan,"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
+                            }
                             if(sukses==true){
                                 lebihbayar=0;
                                 carabayar="";

@@ -648,7 +648,9 @@ public final class KeuanganPiutangPeminjamanUangBelumLunas extends javax.swing.J
                             if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), tbBangsal.getValueAt(i, 10).toString(), "0")==false){
                                 sukses=false;
                             }
-                            if (sukses) sukses = jur.simpanJurnal(tbBangsal.getValueAt(i,1).toString(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(tbBangsal.getValueAt(i,1).toString(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                            }
                         }else{
                             sukses=false;
                         }

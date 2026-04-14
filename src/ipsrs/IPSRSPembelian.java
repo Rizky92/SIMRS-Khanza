@@ -714,7 +714,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(akunbayar, "KAS KELUAR", 0, (ttl + ppn + meterai))==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN BARANG NON MEDIS DAN PENUNJANG(LAB & RAD) "+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBELIAN BARANG NON MEDIS DAN PENUNJANG(LAB & RAD) "+", OLEH "+akses.getkode());
+                    }
                 }
                 if(sukses==true){
                     Sequel.Commit();

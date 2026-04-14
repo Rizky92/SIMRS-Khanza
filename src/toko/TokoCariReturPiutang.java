@@ -759,7 +759,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Piutang_Toko from set_akun"),"KONTRA RETUR JUAL TOKO",rs.getDouble("total"),0)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_piutang"),"U","BATAL TRANSAKSI RETUR JUAL TOKO"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(rs.getString("no_retur_piutang"),"U","BATAL TRANSAKSI RETUR JUAL TOKO"+", OLEH "+akses.getkode());
+                    }
 
                     if(sukses==true){
                         Sequel.queryu2("delete from tokoreturpiutang where no_retur_piutang=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});

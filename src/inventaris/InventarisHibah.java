@@ -648,7 +648,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Kontra_Hibah_Aset, "PENDAPATAN HIBAH", 0, sbttl)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN HIBAH ASET/INVENTARIS"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN HIBAH ASET/INVENTARIS"+", OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

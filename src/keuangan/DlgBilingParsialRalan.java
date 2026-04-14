@@ -6372,7 +6372,11 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                         }
                     }
 
-                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBAYARAN PASIEN RAWAT JALAN, DIPOSTING OLEH "+akses.getkode());
+                    if(sukses==true){
+
+                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBAYARAN PASIEN RAWAT JALAN, DIPOSTING OLEH "+akses.getkode());
+
+                    }
                 }
 
                 if(sukses==true){
@@ -7510,7 +7514,11 @@ public class DlgBilingParsialRalan extends javax.swing.JDialog {
                         }
                     }
 
-                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN PEMBAYARAN PASIEN RAWAT JALAN, DIPOSTING OLEH "+akses.getkode());
+                    if(sukses==true){
+
+                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN PEMBAYARAN PASIEN RAWAT JALAN, DIPOSTING OLEH "+akses.getkode());
+
+                    }
                 }
 
                 if(sukses==true){

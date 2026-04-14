@@ -729,7 +729,9 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
                         if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), Double.parseDouble(Cicilan.getText()), 0)==false){
                             sukses=false;
                         }
-                        if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","BAYAR PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(NoNota.getText(),"U","BAYAR PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());
+                        }
                 }else{
                     sukses=false;
                 }
@@ -805,7 +807,9 @@ public final class KeuanganBayarPiutangPeminjamanUang extends javax.swing.JDialo
                 if(Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString()))==false){
                     sukses=false;
                 }
-                if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PEMBATALAN BAYAR PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(NoNota.getText(),"U","PEMBATALAN BAYAR PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());
+                }
             }else{
                 sukses=false;
             }

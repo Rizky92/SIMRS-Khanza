@@ -649,7 +649,9 @@ public final class DlgPemasukanLain extends javax.swing.JDialog {
                             if(Sequel.insertTampJurnal(rs.getString(2), "Kontra Akun", Double.parseDouble(pemasukan.getText()), 0)==false){
                                 sukses=false;
                             }
-                            if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(Nomor.getText(),"U","PEMASUKAN LAIN-LAIN OLEH "+akses.getkode());
+                            }
                         }
                     } catch (Exception e) {
                         sukses=false;

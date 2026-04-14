@@ -17094,7 +17094,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                             sukses=false;
                         }
                     }
-                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){
@@ -17348,7 +17350,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRw.getText()+" DIPOSTING OLEH "+akses.getkode());
+                }
             }
 
             if(sukses==true){

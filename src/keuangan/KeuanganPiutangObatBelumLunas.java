@@ -664,7 +664,9 @@ public final class KeuanganPiutangObatBelumLunas extends javax.swing.JDialog {
                                     sukses=false;
                                 }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(tabMode.getValueAt(i,1).toString(),"U","BAYAR PIUTANG"+", OLEH "+akses.getkode());
+                            }
                         }else{
                             sukses=false;
                         }

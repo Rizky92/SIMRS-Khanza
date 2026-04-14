@@ -2930,9 +2930,13 @@ public class DlgBilingRalan extends javax.swing.JDialog {
 
                     if(sukses==true){
                         if(piutang>0){
-                            if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN PIUTANG PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIBATALKAN OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN PIUTANG PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIBATALKAN OLEH "+akses.getkode());
+                            }
                         }else if(piutang<=0){
-                            if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN PEMBAYARAN PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIBATALKAN OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN PEMBAYARAN PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIBATALKAN OLEH "+akses.getkode());
+                            }
                         }
                     }
 
@@ -6303,7 +6307,9 @@ public class DlgBilingRalan extends javax.swing.JDialog {
                         alamat=Sequel.cariIsi("select reg_periksa.almt_pj from reg_periksa where reg_periksa.no_rawat=? ",TNoRw.getText());
 
                         if(piutang>0){
-                            if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PIUTANG PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PIUTANG PASIEN RAWAT JALAN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                            }
                             if(bayar>0){
                                 if(Sequel.menyimpantf2("tagihan_sadewa","'"+TNoRw.getText()+"','"+TNoRM.getText()+"','"+TPasien.getText().replaceAll("'","")+"','"+alamat.replaceAll("'","")+"','"+Valid.SetTgl(DTPTgl.getSelectedItem()+"")+" "+DTPTgl.getSelectedItem().toString().substring(11,19)+"','Uang Muka','"+total+"','"+bayar+"','Belum','"+akses.getkode()+"'","No.Rawat")==false){
                                     sukses=false;

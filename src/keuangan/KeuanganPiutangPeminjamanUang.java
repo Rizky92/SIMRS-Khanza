@@ -723,7 +723,9 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
                     if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), 0, Double.parseDouble(NominalPinjam.getText()))==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoNota.getText(),"U","PIUTANG PERUSAHAAN/LAIN-LAIN"+", OLEH "+akses.getkode());
+                    }
             }else{
                 sukses=false;
             }
@@ -796,7 +798,9 @@ public final class KeuanganPiutangPeminjamanUang extends javax.swing.JDialog {
                 if(Sequel.insertTampJurnal(kontraakun, namakontraakun, 0, Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(),10).toString()))==false){
                     sukses=false;
                 }
-                if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PEMBATALAN PIUTANG LAIN-LAIN"+", OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(NoNota.getText(),"U","PEMBATALAN PIUTANG LAIN-LAIN"+", OLEH "+akses.getkode());
+                }
             }else{
                 sukses=false;
             }

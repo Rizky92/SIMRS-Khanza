@@ -819,7 +819,9 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                         if(Sequel.insertTampJurnal(kontrakun, "Kontra", "0", Pengeluaran.getText())==false){
                             sukses=false;
                         }
-                        if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN, OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN, OLEH "+akses.getkode());
+                        }
                     } else {
                         sukses = false;
                     }
@@ -1203,7 +1205,9 @@ public final class DlgPengeluaranHarian extends javax.swing.JDialog {
                 if(Sequel.insertTampJurnal(kontrakun, "Kontra", 0, (Valid.SetAngka(BiayaTransaksi.getText()) + Valid.SetAngka(Pengeluaran.getText())))==false){
                     sukses=false;
                 }
-                if (sukses) sukses = jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(Nomor.getText(),"U","PENGELUARAN HARIAN"+", OLEH "+akses.getkode());
+                }
                 if(sukses==true){
                     if(Sequel.menyimpantf("pembayaran_pihak_ke3_bankmandiri","?,now(),?,?,?,?,?,?,?,?,?,?,?","No.Bukti", 12,new String[]{
                             Nomor.getText(),norekening,NoRekening.getText(),RekeningAtasNama.getText(),KotaAtasNamaRekening.getText(),Pengeluaran.getText(),Nomor.getText(),KodeMetode.getText(),KodeBank.getText(),KodeTransaksi.getText(),"Pengeluaran Harian","Baru"

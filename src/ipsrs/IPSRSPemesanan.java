@@ -756,7 +756,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Kontra_Penerimaan_NonMedis, "HUTANG BARANG NON MEDIS", 0, (ttl + ppn + meterai))==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG NON MEDIS/PENUNJANG"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG NON MEDIS/PENUNJANG"+", OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

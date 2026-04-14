@@ -1572,7 +1572,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(Sequel.insertTampJurnal(Persediaan_Barang_Toko, "Persediaan Barang Toko", 0, ttlhpp)==false){
                 sukses=false;
             }
-            if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PENJUALAN TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
+            if(sukses==true){
+                sukses=jur.simpanJurnal(NoNota.getText(),"U","PENJUALAN TOKO / MINIMARKET / KOPERASI, OLEH "+akses.getkode());
+            }
         }
     }
 

@@ -1302,7 +1302,9 @@ public final class MasterCariTemplatePemeriksaan extends javax.swing.JDialog {
                                     sukses=false;
                                 }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(noperawatan,"U","TINDAKAN RAWAT JALAN PASIEN "+noperawatan+" DIPOSTING OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(noperawatan,"U","TINDAKAN RAWAT JALAN PASIEN "+noperawatan+" DIPOSTING OLEH "+akses.getkode());
+                            }
                         }
                     }
                 }else{

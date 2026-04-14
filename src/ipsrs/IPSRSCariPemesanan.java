@@ -871,7 +871,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Penerimaan_NonMedis from set_akun"), "HUTANG BARANG NON MEDIS", rs.getDouble("tagihan"), 0)==false){
                     sukses=false;
                 }
-                if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG NON MEDIS"+", OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG NON MEDIS"+", OLEH "+akses.getkode());
+                }
 
                 if(sukses==true){
                     sukses=Sequel.queryu2tf("delete from ipsrspemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});

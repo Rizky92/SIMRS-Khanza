@@ -1396,7 +1396,9 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                             }
                         }
                         if((ttljual>0)||(ttlhpp>0)){
-                            if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                            }
                         }
                     }
 

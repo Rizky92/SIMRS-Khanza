@@ -495,7 +495,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Ipsrs from set_akun"), "KAS DI TANGAN", 0, ttl)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoKeluar.getText(),"U","PENGGUNAAN BARANG NON MEDIS DAN PENUNJANG (LAB & RAD)"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoKeluar.getText(),"U","PENGGUNAAN BARANG NON MEDIS DAN PENUNJANG (LAB & RAD)"+", OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

@@ -814,7 +814,9 @@ public class DlgCariReturJual extends javax.swing.JDialog {
                                 if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Dari_pembeli from set_akun"), "KAS DI TANGAN", 0, totalDetilReturJual)==false){
                                     sukses=false;
                                 }
-                                if (sukses) sukses = jur.simpanJurnal(rs.getString("no_retur_jual"),"U","BATAL RETUR PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(rs.getString("no_retur_jual"),"U","BATAL RETUR PENJUALAN DI "+Sequel.cariIsi("select bangsal.nm_bangsal from bangsal where bangsal.kd_bangsal='"+rs.getString("kd_bangsal")+"'").toUpperCase()+", OLEH "+akses.getkode());
+                                }
                             }
                         }
 

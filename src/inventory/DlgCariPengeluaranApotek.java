@@ -1360,7 +1360,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         sukses=false;
                     }
 
-                     if (sukses) sukses = jur.simpanJurnal(rs.getString("no_keluar"),"U","PEMBATALAN STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
+                     if(sukses==true){
+
+                         sukses=jur.simpanJurnal(rs.getString("no_keluar"),"U","PEMBATALAN STOK KELUAR BARANG MEDIS/OBAT/ALKES/BHP"+", OLEH "+akses.getkode());
+
+                     }
                   }
               }
               if(sukses==true){

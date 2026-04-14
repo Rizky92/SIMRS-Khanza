@@ -768,7 +768,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                       if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Non_Medis from set_akun"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0)==false){
                           sukses=false;
                       }
-                      if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());
+                      if(sukses==true){
+                          sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG NON MEDIS, OLEH "+akses.getkode());
+                      }
 
                       if(sukses==true){
                           Sequel.queryu2("delete from ipsrs_hibah where no_hibah=?",1,new String[]{rs.getString("no_hibah")});

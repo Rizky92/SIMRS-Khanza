@@ -725,7 +725,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                         sukses=false;
                                     }
                                 }
-                                if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMBAYARAN JASA MEDIS DOKTER "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+" "+tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()+", OLEH "+akses.getkode());
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),"U","PEMBATALAN PEMBAYARAN JASA MEDIS DOKTER "+tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString()+" "+tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString()+", OLEH "+akses.getkode());
+                                }
                             }
 
                             if(sukses==true){

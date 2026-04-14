@@ -882,7 +882,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pemesanan_Obat from set_akun"), "HUTANG USAHA", 0, (ttl + ppn + meterai))==false){
                             sukses=false;
                         }
-                        if (sukses) sukses = jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PENERIMAAN BARANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                        }
                     }
                 }else{
                     sukses=false;

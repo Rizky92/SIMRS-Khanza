@@ -667,7 +667,9 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                     if(Sequel.insertTampJurnal(koderekening, "BEBAN HUTANG LAIN", NilaiHutang.getText(), "0")==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoHutang.getText(),"U","BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoHutang.getText(),"U","BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
+                    }
             }else{
                 sukses=false;
             }
@@ -741,7 +743,9 @@ public final class KeuanganBebanHutangLain extends javax.swing.JDialog {
                     sukses=false;
                 }
                 if(sukses==true){
-                    if (sukses) sukses = jur.simpanJurnal(NoHutang.getText(),"U","PEMBATALAN BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoHutang.getText(),"U","PEMBATALAN BEBAN HUTANG LAIN"+", OLEH "+akses.getkode());
+                    }
                 }
             }else{
                 sukses=false;

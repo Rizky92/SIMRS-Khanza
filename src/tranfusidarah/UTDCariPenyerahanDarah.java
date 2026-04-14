@@ -957,7 +957,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if(Sequel.insertTampJurnal(Sequel.cariIsi("select kd_rek from utd_penyerahan_darah where no_penyerahan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()), "CARA BAYAR", 0,subtotalpendapatan)==false){
                                     sukses=false;
                                 }
-                                if (sukses) sukses = jur.simpanJurnal(nopenyerahan.getText(),"U","PEMBATALAN PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(nopenyerahan.getText(),"U","PEMBATALAN PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                                }
                             }
                         }
                     } catch (Exception e) {
@@ -1085,7 +1087,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             if(Sequel.insertTampJurnal(Sequel.cariIsi("select kd_rek from utd_penyerahan_darah where no_penyerahan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()), "CARA BAYAR", subtotalpendapatan, 0)==false){
                                 sukses=false;
                             }
-                            if (sukses) sukses = jur.simpanJurnal(nopenyerahan.getText(),"U","PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(nopenyerahan.getText(),"U","PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                            }
                         }
 
                         if(sukses==true){

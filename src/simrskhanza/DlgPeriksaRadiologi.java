@@ -2389,7 +2389,9 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMERIKSAAN RADIOLOGI RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMERIKSAAN RADIOLOGI RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        }
                     }else if(status.equals("Ralan")){
                         Sequel.deleteTampJurnal();
                         if(ttlpendapatan>0){
@@ -2456,7 +2458,9 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMERIKSAAN RADIOLOGI RAWAT JALAN PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMERIKSAAN RADIOLOGI RAWAT JALAN PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        }
                     }
                 }
 

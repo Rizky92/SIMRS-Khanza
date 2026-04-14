@@ -400,7 +400,9 @@ public final class DlgCariPengambilanUTD extends javax.swing.JDialog {
                 if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Utd from set_akun"), "PERSEDIAAN BARANG/OBAT/ALKES/BHP", Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()), 0)==false){
                     sukses=false;
                 }
-                if (sukses) sukses = jur.simpanJurnal(DTPCari1.getSelectedItem().toString(),"U","PEMBATALAN PENGAMBILAN BHP MEDIS UTD DARI "+tbKamar.getValueAt(tbKamar.getSelectedRow(),5)+", OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(DTPCari1.getSelectedItem().toString(),"U","PEMBATALAN PENGAMBILAN BHP MEDIS UTD DARI "+tbKamar.getValueAt(tbKamar.getSelectedRow(),5)+", OLEH "+akses.getkode());
+                }
             }
 
             if(sukses==true){

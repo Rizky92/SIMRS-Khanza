@@ -779,7 +779,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Kontra_Retur_Piutang_Toko,"KONTRA RETUR PIUTANG",0,ttl)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoRetur.getText(),"U","RETUR PIUTANG TOKO"+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoRetur.getText(),"U","RETUR PIUTANG TOKO"+", OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

@@ -4545,7 +4545,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        }
                     }
 
                     if(sukses==true){
@@ -4671,7 +4673,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        }
                     }
 
                     if(sukses==true){
@@ -4807,7 +4811,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        }
                     }
 
                     if(sukses==true){
@@ -11765,7 +11771,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PERUBAHAN TINDAKAN RAWAT INAP PASIEN OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","PERUBAHAN TINDAKAN RAWAT INAP PASIEN OLEH "+akses.getkode());
+                }
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
@@ -11817,7 +11825,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             sukses=false;
                         }
                     }
-                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PERUBAHAN TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","PERUBAHAN TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    }
                 }
             }else{
                 sukses=false;
@@ -11921,7 +11931,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                }
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
@@ -11973,7 +11985,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             sukses=false;
                         }
                     }
-                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    }
                 }
             }else{
                 sukses=false;
@@ -12088,7 +12102,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT INAP PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                }
 
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
@@ -12148,7 +12164,9 @@ public final class DlgRawatInap extends javax.swing.JDialog {
                             sukses=false;
                         }
                     }
-                    if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText());
+                    }
                 }
             }else{
                 sukses=false;

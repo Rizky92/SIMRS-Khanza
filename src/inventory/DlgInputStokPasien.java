@@ -754,7 +754,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     sukses=false;
                                 }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(norawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(norawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());
+                            }
                         }
 
                         if(sukses==true){

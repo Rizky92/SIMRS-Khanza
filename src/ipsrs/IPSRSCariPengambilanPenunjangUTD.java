@@ -363,7 +363,9 @@ public final class IPSRSCariPengambilanPenunjangUTD extends javax.swing.JDialog 
                 if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Penunjang_Utd from set_akun"), "PERSEDIAAN BARANG NON MEDIS", Double.parseDouble(tbKamar.getValueAt(tbKamar.getSelectedRow(), 4).toString()), 0)==false){
                     sukses=false;
                 }
-                if (sukses) sukses = jur.simpanJurnal(DTPCari1.getSelectedItem().toString().replaceAll("-","/"),"U","PEMBATALAN PENGAMBILAN BARANG NON MEDIS UTD"+", OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(DTPCari1.getSelectedItem().toString().replaceAll("-","/"),"U","PEMBATALAN PENGAMBILAN BARANG NON MEDIS UTD"+", OLEH "+akses.getkode());
+                }
             }
 
             if(sukses==true){

@@ -706,7 +706,9 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                         if(Sequel.insertTampJurnal(koderekening, AkunBayar.getSelectedItem().toString(), Cicilan.getText(), "0")==false){
                             sukses=false;
                         }
-                        if (sukses) sukses = jur.simpanJurnal(NoPiutang.getText(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(NoPiutang.getText(),"U","BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                        }
                 }else{
                     sukses=false;
                 }
@@ -760,7 +762,9 @@ public final class KeuanganBayarPiutangJasaPerusahaan extends javax.swing.JDialo
                 if(Sequel.insertTampJurnal(tbKamar.getValueAt(tbKamar.getSelectedRow(), 6).toString(), tbKamar.getValueAt(tbKamar.getSelectedRow(), 7).toString(), "0", tbKamar.getValueAt(tbKamar.getSelectedRow(), 3).toString())==false){
                     sukses=false;
                 }
-                if (sukses) sukses = jur.simpanJurnal(NoPiutang.getText(),"U","PEMBATALAN BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(NoPiutang.getText(),"U","PEMBATALAN BAYAR PIUTANG JASA PERUSAHAAN"+", OLEH "+akses.getkode());
+                }
             }else{
                 sukses=false;
             }

@@ -1900,7 +1900,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     sukses=false;
                                 }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OPERASI RAWAT INAP PASIEN OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OPERASI RAWAT INAP PASIEN OLEH "+akses.getkode());
+                            }
                         }else if(status.equals("Ralan")){
                             Sequel.deleteTampJurnal();
                             if(ttlpendapatan>0){
@@ -1935,7 +1937,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     sukses=false;
                                 }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OPERASI RAWAT JALAN PASIEN OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OPERASI RAWAT JALAN PASIEN OLEH "+akses.getkode());
+                            }
                         }
                     }
 
@@ -1985,7 +1989,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if(Sequel.insertOrUpdateTampJurnal(akuntindakanoperasi.getOperasi_Ranap(), "Pendapatan Operasi Rawat Inap", ttlbhp, 0)==false){
                                     sukses=false;
                                 }
-                                if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OBAT OPERASI RAWAT INAP OLEH "+akses.getkode());
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OBAT OPERASI RAWAT INAP OLEH "+akses.getkode());
+                                }
                             }
                         }else if(status.equals("Ralan")){
                             if(ttlbhp>0){
@@ -2001,7 +2007,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if(Sequel.insertOrUpdateTampJurnal(akuntindakanoperasi.getOperasi_Ralan(), "Pendapatan Operasi Rawat Jalan", ttlbhp, 0)==false){
                                     sukses=false;
                                 }
-                                if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OBAT OPERASI RAWAT JALAN OLEH "+akses.getkode());
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN OBAT OPERASI RAWAT JALAN OLEH "+akses.getkode());
+                                }
                             }
                         }
                     }else{

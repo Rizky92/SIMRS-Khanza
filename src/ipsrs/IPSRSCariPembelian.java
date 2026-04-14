@@ -705,7 +705,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                       }
 
-                      if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PEMBELIAN BARANG NON MEDIS DAN PENUNJANG (LAB & RAD)"+", OLEH "+akses.getkode());
+                      if(sukses==true){
+
+                          sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PEMBELIAN BARANG NON MEDIS DAN PENUNJANG (LAB & RAD)"+", OLEH "+akses.getkode());
+
+                      }
                       if(sukses==true){
                           sukses=Sequel.queryu2tf("delete from ipsrspembelian where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});
                       }

@@ -839,7 +839,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Stok_Keluar_Ipsrs from set_akun"), "KAS DI TANGAN", total, 0)==false){
                 sukses=false;
             }
-            if (sukses) sukses = jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN PENGGUNAAN BARANG NON MEDIS"+", OLEH "+akses.getkode());
+            if(sukses==true){
+                sukses=jur.simpanJurnal(tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString(),"U","PEMBATALAN PENGGUNAAN BARANG NON MEDIS"+", OLEH "+akses.getkode());
+            }
 
             if(sukses==true){
                 Sequel.queryu2("delete from ipsrspengeluaran where no_keluar=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString()});

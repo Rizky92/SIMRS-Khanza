@@ -525,7 +525,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Pengambilan_Utd from set_akun"), "PERSEDIAAN BARANG/OBAT/ALKES/BHP", 0, subtotal)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-","/"),"U","PENGAMBILAN BHP MEDIS UTD DARI "+nmdari.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-","/"),"U","PENGAMBILAN BHP MEDIS UTD DARI "+nmdari.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    }
                 }
 
                 if(sukses==true){

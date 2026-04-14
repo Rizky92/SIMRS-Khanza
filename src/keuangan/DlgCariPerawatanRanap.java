@@ -927,7 +927,9 @@ public final class DlgCariPerawatanRanap extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT INAP PASIEN "+TPasien.getText()+" DIPOSTING OLEH "+akses.getkode());
+                        }
                     }
 
                     if(sukses==true){

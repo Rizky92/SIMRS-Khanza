@@ -935,7 +935,9 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Ke_Suplayer from set_akun"), "KAS DI TANGAN", ttlretur, 0)==false){
                         sukses=false;
                     }
-                    if (sukses) sukses = jur.simpanJurnal(NoRetur.getText(),"U","RETUR PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoRetur.getText(),"U","RETUR PEMBELIAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    }
                 }
                 if(sukses==true){
                     Sequel.Commit();

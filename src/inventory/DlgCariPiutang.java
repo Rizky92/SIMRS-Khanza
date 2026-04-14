@@ -1055,7 +1055,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 if(Sequel.insertTampJurnal(Sequel.cariIsiSmc("select set_akun.Kontra_Piutang_Obat from set_akun"), "KAS DI TANGAN", rs.getDouble("sisapiutang"), 0)==false){
                                     sukses=false;
                                 }
-                                if (sukses) {
+                                if(sukses==true){
                                     sukses=jur.simpanJurnal(rs.getString("nota_piutang"),"U","BATAL PIUTANG OBAT DI "+Sequel.CariBangsal(rs.getString("kd_bangsal")).toUpperCase()+", OLEH "+akses.getkode());
                                 }
                             }

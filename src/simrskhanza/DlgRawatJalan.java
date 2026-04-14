@@ -5393,7 +5393,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        }
                     }
 
                     if(sukses==true){
@@ -5520,7 +5522,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        }
                     }
 
                     if(sukses==true){
@@ -5657,7 +5661,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                                 sukses=false;
                             }
                         }
-                        if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBATALAN TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+" OLEH "+akses.getkode());
+                        }
                     }
 
                     if(sukses==true){
@@ -12899,7 +12905,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                }
             }
 
             if(sukses==true){
@@ -12996,7 +13004,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                }
             }
 
             if(sukses==true){
@@ -13102,7 +13112,9 @@ public final class DlgRawatJalan extends javax.swing.JDialog {
                         sukses=false;
                     }
                 }
-                if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(TNoRw.getText(),"U","TINDAKAN RAWAT JALAN PASIEN "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                }
             }
 
             if(sukses==true){
