@@ -336,7 +336,7 @@ public final class akses {
                         akses.kelahiran_bayi=akses.getBoolean(rs2, "kelahiran_bayi");
                         akses.periksa_lab=akses.getBoolean(rs2, "periksa_lab");
                         akses.periksa_radiologi=akses.getBoolean(rs2, "periksa_radiologi");
-                        akses.kasir_ralan=akses.getBoolean(rs2, "kasir_ralanasda");
+                        akses.kasir_ralan=akses.getBoolean(rs2, "kasir_ralan");
                         akses.deposit_pasien=akses.getBoolean(rs2, "deposit_pasien");
                         akses.piutang_pasien=akses.getBoolean(rs2, "piutang_pasien");
                         akses.peminjaman_berkas=akses.getBoolean(rs2, "peminjaman_berkas");

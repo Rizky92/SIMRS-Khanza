@@ -6,7 +6,7 @@
 
     function getKey()
     {
-       $keyRS = "";
+       $keyRS = "b5695f833187f277e420adb25298c31027f24ef2300ca1915f9be549b649ab28";
 
        if (empty($keyRS)) {
             throw new \Exception("Key belum ada!");
@@ -23,7 +23,7 @@
 
     function getKelasRS()
     {
-        $kelasRS = "";
+        $kelasRS = "CS";
 
         if (empty($kelasRS)) {
             throw new Exception("Kelas RS belum ada!");

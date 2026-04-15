@@ -364,7 +364,6 @@ CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_smc`  (
   `payor_id` varchar(3) NOT NULL DEFAULT '',
   `payor_cd` varchar(10) NOT NULL DEFAULT '',
   `cob_cd` varchar(10) NOT NULL DEFAULT '',
-  `coder_nik` varchar(17) NOT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
   CONSTRAINT `inacbg_data_klaim_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_klaim_baru2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE,
   INDEX `tgl_masuk`(`tgl_masuk`) USING BTREE,
@@ -396,7 +395,6 @@ CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_tarif_smc` (
   `no_sep` varchar(40) NOT NULL,
   `tarif_rs` varchar(30) NOT NULL,
   `nilai` double NOT NULL DEFAULT 0,
-  `diskon` double NOT NULL DEFAULT 0,
   PRIMARY KEY (`no_sep`, `tarif_rs`) USING BTREE,
   CONSTRAINT `inacbg_data_klaim_tarif_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_data_klaim_smc` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;

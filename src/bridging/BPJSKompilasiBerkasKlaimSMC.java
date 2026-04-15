@@ -68,6 +68,7 @@ import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
+import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
@@ -2402,13 +2403,27 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data pasien terlebih dahulu..!!");
         } else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            if (resume == null) {
+            if (resume == null || !resume.isDisplayable()) {
                 resume = new RMRiwayatPerawatan(null, false);
+                resume.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                resume.addWindowListener(new WindowAdapter() {
+                    @Override
+                    public void windowClosed(WindowEvent e) {
+                        resume = null;
+                    }
+                });
+                resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                resume.setLocationRelativeTo(internalFrame1);
             }
-            resume.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-            resume.setLocationRelativeTo(internalFrame1);
+            if (resume == null) return;
+            if (!resume.isVisible()) {
+                resume.setNoRMKompilasi(lblNoRawat.getText(), lblNoRM.getText());
+            }
+            if (resume.isVisible()) {
+                resume.toFront();
+                return;
+            }
             resume.setVisible(true);
-            resume.setNoRMKompilasi(lblNoRawat.getText(), lblNoRM.getText());
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_btnRiwayatPasienActionPerformed
