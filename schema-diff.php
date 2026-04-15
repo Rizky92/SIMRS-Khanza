@@ -132,12 +132,13 @@ if (count($statements) <= 2) {
 
 fwrite(STDERR, "Generated " . (count($statements) - 2) . " DDL statement(s).\n");
 
+if (!empty($opts['output'])) {
+    file_put_contents($opts['output'], $output);
+    fwrite(STDERR, "Written to {$opts['output']}\n");
+}
+
 if (!$doMigrate) {
-    // Output mode: print or write to file
-    if (!empty($opts['output'])) {
-        file_put_contents($opts['output'], $output);
-        fwrite(STDERR, "Written to {$opts['output']}\n");
-    } else {
+    if (empty($opts['output'])) {
         echo $output;
     }
     exit(0);
@@ -194,10 +195,19 @@ foreach ($statements as $i => $stmt) {
     try {
         $pdo->exec($stmt);
         $appliedCount++;
-        // Track the reverse statement(s) for this forward statement
+        // Track the reverse statement(s) for this forward statement.
+        // ADD COLUMN reverses are appended (preserving ordinal order) because their
+        // AFTER clauses create dependencies: a column referenced in AFTER must be
+        // restored before the column that depends on it. array_unshift would invert
+        // the drop order and break those references. All other reverses are prepended
+        // for standard last-in-first-out rollback ordering.
         if (isset($reverseMap[$i])) {
             foreach ($reverseMap[$i] as $rev) {
-                array_unshift($appliedReverse, $rev);
+                if (preg_match('/ALTER TABLE .* ADD COLUMN /i', $rev)) {
+                    $appliedReverse[] = $rev;
+                } else {
+                    array_unshift($appliedReverse, $rev);
+                }
             }
         }
         fwrite(STDERR, "  [OK] " . mb_strimwidth($stmt, 0, 100, '...') . "\n");
@@ -705,6 +715,25 @@ function buildDdl(
             $tableDdl[] = "ALTER TABLE `{$table}` {$optionsDiff};";
         }
 
+        // Drop FKs first so column drops below don't violate FK constraints
+        $srcFks = $srcAllFks[$table] ?? [];
+        $tgtFks = $tgtAllFks[$table] ?? [];
+        $newFks = array_diff(array_keys($tgtFks), array_keys($srcFks));
+        $dropFks = array_diff(array_keys($srcFks), array_keys($tgtFks));
+        $commonFks = array_intersect(array_keys($srcFks), array_keys($tgtFks));
+
+        foreach ($commonFks as $fk) {
+            if (normalizeFk($srcFks[$fk]) !== normalizeFk($tgtFks[$fk])) {
+                $tableDdl[] = "ALTER TABLE `{$table}` DROP FOREIGN KEY `{$fk}`;";
+                $deferredFks[] = "ALTER TABLE `{$table}` ADD " . foreignKeyDef($fk, $tgtFks[$fk]) . ";";
+            }
+        }
+        if (!$noDropColumn) {
+            foreach ($dropFks as $fk) {
+                $tableDdl[] = "ALTER TABLE `{$table}` DROP FOREIGN KEY `{$fk}`;";
+            }
+        }
+
         $srcCols = $srcAllCols[$table] ?? [];
         $tgtCols = $tgtAllCols[$table] ?? [];
         $newCols = array_diff(array_keys($tgtCols), array_keys($srcCols));
@@ -712,14 +741,14 @@ function buildDdl(
         $commonCols = array_intersect(array_keys($srcCols), array_keys($tgtCols));
         $tgtColOrder = array_keys($tgtCols);
 
-        foreach ($newCols as $col) {
-            $after = getAfterClause($col, $tgtColOrder);
-            $tableDdl[] = "ALTER TABLE `{$table}` ADD COLUMN " . columnDef($tgtCols[$col]) . " {$after};";
-        }
         if (!$noDropColumn) {
             foreach ($dropCols as $col) {
                 $tableDdl[] = "ALTER TABLE `{$table}` DROP COLUMN `{$col}`;";
             }
+        }
+        foreach ($newCols as $col) {
+            $after = getAfterClause($col, $tgtColOrder);
+            $tableDdl[] = "ALTER TABLE `{$table}` ADD COLUMN " . columnDef($tgtCols[$col]) . " {$after};";
         }
         foreach ($commonCols as $col) {
             if (columnChanged($srcCols[$col], $tgtCols[$col])) {
@@ -756,25 +785,6 @@ function buildDdl(
             $tableDdl[] = "ALTER TABLE `{$table}` ADD " . indexDef($idx, $tgtIdx[$idx]) . ";";
         }
 
-        // FK drops and changes go inline (table already exists)
-        $srcFks = $srcAllFks[$table] ?? [];
-        $tgtFks = $tgtAllFks[$table] ?? [];
-        $newFks = array_diff(array_keys($tgtFks), array_keys($srcFks));
-        $dropFks = array_diff(array_keys($srcFks), array_keys($tgtFks));
-        $commonFks = array_intersect(array_keys($srcFks), array_keys($tgtFks));
-
-        foreach ($commonFks as $fk) {
-            if (normalizeFk($srcFks[$fk]) !== normalizeFk($tgtFks[$fk])) {
-                $tableDdl[] = "ALTER TABLE `{$table}` DROP FOREIGN KEY `{$fk}`;";
-                // Defer the ADD to the end so referenced columns/tables exist
-                $deferredFks[] = "ALTER TABLE `{$table}` ADD " . foreignKeyDef($fk, $tgtFks[$fk]) . ";";
-            }
-        }
-        if (!$noDropColumn) {
-            foreach ($dropFks as $fk) {
-                $tableDdl[] = "ALTER TABLE `{$table}` DROP FOREIGN KEY `{$fk}`;";
-            }
-        }
         // Defer new FK additions to the end
         foreach ($newFks as $fk) {
             $deferredFks[] = "ALTER TABLE `{$table}` ADD " . foreignKeyDef($fk, $tgtFks[$fk]) . ";";
