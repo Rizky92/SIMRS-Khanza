@@ -14,7 +14,9 @@
  *   --user=<user>       Database user (default: root)
  *   --pass=<pass>       Database password (default: empty)
  *   --output=<file>     Write output to file instead of stdout
- *   --no-drop           Skip DROP TABLE and DROP COLUMN statements
+ *   --no-drop           Skip all DROP statements (tables and columns)
+ *   --no-drop-table     Skip DROP TABLE statements only
+ *   --no-drop-column    Skip DROP COLUMN/INDEX/FK statements on existing tables only
  *   --tables=<list>     Compare only these tables (comma-separated)
  *   --exclude=<list>    Exclude these tables (comma-separated)
  *   --migrate           Execute DDL directly against the current database
@@ -32,7 +34,7 @@ if (php_sapi_name() !== 'cli') {
 $opts = parseArgs($argv);
 
 if (empty($opts['latest']) || empty($opts['current'])) {
-    fwrite(STDERR, "Usage: php schema-diff.php <latest_db> <current_db> [--host=localhost] [--port=3306] [--user=root] [--pass=] [--output=file] [--no-drop] [--tables=t1,t2] [--exclude=t1,t2]\n");
+    fwrite(STDERR, "Usage: php schema-diff.php <latest_db> <current_db> [--host=localhost] [--port=3306] [--user=root] [--pass=] [--output=file] [--no-drop] [--no-drop-table] [--no-drop-column] [--tables=t1,t2] [--exclude=t1,t2]\n");
     exit(1);
 }
 
@@ -40,7 +42,9 @@ $host = $opts['host'] ?? 'localhost';
 $port = $opts['port'] ?? '3306';
 $user = $opts['user'] ?? 'root';
 $pass = $opts['pass'] ?? '';
-$noDrop = isset($opts['no-drop']);
+$noDropAll = isset($opts['no-drop']);
+$noDropTable = $noDropAll || isset($opts['no-drop-table']);
+$noDropColumn = $noDropAll || isset($opts['no-drop-column']);
 $doMigrate = isset($opts['migrate']);
 $skipConfirm = isset($opts['yes']);
 $onlyTables = !empty($opts['tables']) ? array_map('trim', explode(',', $opts['tables'])) : [];
@@ -104,7 +108,7 @@ fwrite(STDERR, "Latest tables: {$latestCount}, Current tables: {$currentCount}\n
 fwrite(STDERR, "New: " . count($newTables) . ", Dropped: " . count($droppedTables) . ", Common: " . count($commonTables) . "\n");
 
 // Build forward DDL (current → latest)
-$ddl = buildDdl($pdo, $current, $latest, $srcTables, $tgtTables, $srcAllCols, $tgtAllCols, $srcAllIdx, $tgtAllIdx, $srcAllFks, $tgtAllFks, $noDrop);
+$ddl = buildDdl($pdo, $current, $latest, $srcTables, $tgtTables, $srcAllCols, $tgtAllCols, $srcAllIdx, $tgtAllIdx, $srcAllFks, $tgtAllFks, $noDropTable, $noDropColumn);
 
 // Extract executable statements (skip comments and blank lines)
 $statements = [];
@@ -143,7 +147,7 @@ if (!$doMigrate) {
 
 // Generate full rollback script (reverse direction: latest → current) and save for reference
 fwrite(STDERR, "Generating rollback script...\n");
-$rollbackDdl = buildDdl($pdo, $latest, $current, $tgtTables, $srcTables, $tgtAllCols, $srcAllCols, $tgtAllIdx, $srcAllIdx, $tgtAllFks, $srcAllFks, $noDrop);
+$rollbackDdl = buildDdl($pdo, $latest, $current, $tgtTables, $srcTables, $tgtAllCols, $srcAllCols, $tgtAllIdx, $srcAllIdx, $tgtAllFks, $srcAllFks, $noDropTable, $noDropColumn);
 $rollbackFile = 'rollback_' . date('Ymd_His') . '.sql';
 file_put_contents($rollbackFile, implode("\n", $rollbackDdl));
 fwrite(STDERR, "Rollback script saved to: {$rollbackFile}\n");
@@ -662,7 +666,8 @@ function buildDdl(
     array $tgtAllIdx,
     array $srcAllFks,
     array $tgtAllFks,
-    bool $noDrop
+    bool $noDropTable,
+    bool $noDropColumn
 ): array {
     $ddl = [];
     $deferredFks = [];
@@ -684,7 +689,7 @@ function buildDdl(
         }
     }
 
-    if (!$noDrop) {
+    if (!$noDropTable) {
         foreach ($droppedTables as $table) {
             $ddl[] = "-- Dropped table: {$table}";
             $ddl[] = "DROP TABLE IF EXISTS `{$table}`;";
@@ -711,7 +716,7 @@ function buildDdl(
             $after = getAfterClause($col, $tgtColOrder);
             $tableDdl[] = "ALTER TABLE `{$table}` ADD COLUMN " . columnDef($tgtCols[$col]) . " {$after};";
         }
-        if (!$noDrop) {
+        if (!$noDropColumn) {
             foreach ($dropCols as $col) {
                 $tableDdl[] = "ALTER TABLE `{$table}` DROP COLUMN `{$col}`;";
             }
@@ -738,7 +743,7 @@ function buildDdl(
                 $tableDdl[] = "ALTER TABLE `{$table}` ADD " . indexDef($idx, $tgtIdx[$idx]) . ";";
             }
         }
-        if (!$noDrop) {
+        if (!$noDropColumn) {
             foreach ($dropIdx as $idx) {
                 if ($idx === 'PRIMARY') {
                     $tableDdl[] = "ALTER TABLE `{$table}` DROP PRIMARY KEY;";
@@ -765,7 +770,7 @@ function buildDdl(
                 $deferredFks[] = "ALTER TABLE `{$table}` ADD " . foreignKeyDef($fk, $tgtFks[$fk]) . ";";
             }
         }
-        if (!$noDrop) {
+        if (!$noDropColumn) {
             foreach ($dropFks as $fk) {
                 $tableDdl[] = "ALTER TABLE `{$table}` DROP FOREIGN KEY `{$fk}`;";
             }
