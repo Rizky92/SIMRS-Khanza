@@ -399,6 +399,7 @@
                                         $arrkelahiran['use_vacuum']         = mb_substr($bariskelahiran['use_vacuum'], 0, 1);
                                         $arrkelahiran['shk_spesimen_ambil'] = mb_strtolower($bariskelahiran['shk_spesimen_ambil']);
                                         if ($bariskelahiran['shk_spesimen_ambil'] === 'Ya') {
+                                            $arrkelahiran['shk_lokasi']        = ['Tumit' => 'tumit', 'Vena' => 'vena'][$bariskelahiran['shk_lokasi']];
                                             $arrkelahiran['shk_spesimen_dttm'] = $bariskelahiran['shk_spesimen_date'].' '.$bariskelahiran['shk_spesimen_time'];
                                         } else {
                                             $arrkelahiran['shk_alasan']        = ['Tidak dapat dilakukan' => 'tidak-dapat', 'Akses sulit' => 'akses-sulit'][$bariskelahiran['shk_alasan']];
