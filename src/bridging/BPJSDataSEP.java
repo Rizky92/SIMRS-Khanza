@@ -4376,11 +4376,11 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     }else if(response.path("kelasRawat").asText().toLowerCase().equals("3")){
                         Kelas.setSelectedIndex(2);
                     }
-                    KdPenyakit.setText(Sequel.cariIsi("select kd_penyakit from penyakit where nm_penyakit=?",response.path("diagnosa").asText()));
-                    NmPenyakit.setText(response.path("diagnosa").asText());
-                    NoRujukan.setText(response.path("noRujukan").asText());
-                    KdPoli.setText(Sequel.cariIsi("select kd_poli_bpjs from maping_poli_bpjs where nm_poli_bpjs=?",response.path("poli").asText()));
-                    NmPoli.setText(response.path("poli").asText());
+                    KdPenyakit.setText(Sequel.cariIsi("select kd_penyakit from penyakit where nm_penyakit=?",response.path("diagnosa").asText("")));
+                    NmPenyakit.setText(response.path("diagnosa").asText(""));
+                    NoRujukan.setText(response.path("noRujukan").asText(""));
+                    KdPoli.setText(Sequel.cariIsi("select kd_poli_bpjs from maping_poli_bpjs where nm_poli_bpjs=?",response.path("poli").asText("")));
+                    NmPoli.setText(response.path("poli").asText(""));
                     if(response.path("poliEksekutif").asText().equals("0")){
                         Eksekutif.setSelectedIndex(0);
                     }else{
@@ -4388,24 +4388,24 @@ public final class BPJSDataSEP extends javax.swing.JDialog {
                     }
                     Catatan.setText(response.path("catatan").asText());
                     if(!response.path("kdStatusKecelakaan").asText().equals("")){
-                        LakaLantas.setSelectedIndex(1);
-                        KdKecamatan.setText(response.path("lokasiKejadian").path("kdKec").asText());
-                        NmKecamatan.setText(api.tampilKecamatan(response.path("lokasiKejadian").path("kdKec").asText(),KdKabupaten.getText()));
-                        KdKabupaten.setText(response.path("lokasiKejadian").path("kdKab").asText());
-                        NmKabupaten.setText(api.tampilKabupaten(response.path("lokasiKejadian").path("kdKab").asText(),KdPropinsi.getText()));
-                        KdPropinsi.setText(response.path("lokasiKejadian").path("kdProp").asText());
-                        NmPropinsi.setText(api.tampilPropinsi(response.path("lokasiKejadian").path("kdProp").asText()));
-                        Keterangan.setText(response.path("lokasiKejadian").path("ketKejadian").asText());
-                        Valid.SetTgl(TanggalKKL,response.path("lokasiKejadian").path("tglKejadian").asText());
+                        LakaLantas.setSelectedIndex(response.path("kdStatusKecelakaan").asInt());
+                        KdKecamatan.setText(response.path("lokasiKejadian").path("kdKec").asText(""));
+                        NmKecamatan.setText(api.tampilKecamatan(response.path("lokasiKejadian").path("kdKec").asText(""),KdKabupaten.getText()));
+                        KdKabupaten.setText(response.path("lokasiKejadian").path("kdKab").asText(""));
+                        NmKabupaten.setText(api.tampilKabupaten(response.path("lokasiKejadian").path("kdKab").asText(""),KdPropinsi.getText()));
+                        KdPropinsi.setText(response.path("lokasiKejadian").path("kdProp").asText(""));
+                        NmPropinsi.setText(api.tampilPropinsi(response.path("lokasiKejadian").path("kdProp").asText("")));
+                        Keterangan.setText(response.path("lokasiKejadian").path("ketKejadian").asText(""));
+                        Valid.SetTgl(TanggalKKL,response.path("lokasiKejadian").path("tglKejadian").asText(""));
                     }
                     KdDPJPLayanan.setText((response.path("dpjp").path("kdDPJP").asText().equals("0")?"":response.path("dpjp").path("kdDPJP").asText()));
-                    NmDPJPLayanan.setText(response.path("dpjp").path("nmDPJP").asText());
-                    JenisPeserta.setText(response.path("peserta").path("jnsPeserta").asText());
-                    KdDPJP.setText(response.path("kontrol").path("kdDokter").asText());
-                    NmDPJP.setText(response.path("kontrol").path("nmDokter").asText());
-                    NoSKDP.setText(response.path("kontrol").path("noSurat").asText());
+                    NmDPJPLayanan.setText(response.path("dpjp").path("nmDPJP").asText(""));
+                    JenisPeserta.setText(response.path("peserta").path("jnsPeserta").asText(""));
+                    KdDPJP.setText(response.path("kontrol").path("kdDokter").asText(""));
+                    NmDPJP.setText(response.path("kontrol").path("nmDokter").asText(""));
+                    NoSKDP.setText(response.path("kontrol").path("noSurat").asText(""));
 
-                    Valid.SetTgl(TanggalSEP,response.path("tglSep").asText());
+                    Valid.SetTgl(TanggalSEP,response.path("tglSep").asText(""));
                 }else {
                     NoSEP.setText("");
                     JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
