@@ -290,35 +290,6 @@ public class DlgPenjualan extends javax.swing.JDialog {
         Ongkir.setDocument(new batasInput((byte)14).getOnlyAngka(Ongkir));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
-        PersenppnObat.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-            @Override
-            public void insertUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void removeUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void changedUpdate(DocumentEvent e) {isKembali();}
-        });
-
-        Ongkir.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-            @Override
-            public void insertUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void removeUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void changedUpdate(DocumentEvent e) {isKembali();}
-        });
-
-        Bayar.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-            @Override
-            public void insertUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void removeUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void changedUpdate(DocumentEvent e) {isKembali();}
-        });
-
-        TCari.requestFocus();
-
         try {
             hppfarmasi=koneksiDB.HPPFARMASI();
         } catch (Exception e) {
@@ -330,25 +301,6 @@ public class DlgPenjualan extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("E : "+e);
             DEPOAKTIFOBAT = "";
-        }
-
-        try {
-            aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
-            if(aktifkanbatch.equals("no")){
-                ppStok.setVisible(true);
-            }else{
-                ppStok.setVisible(false);
-            }
-        } catch (Exception e) {
-            System.out.println("E : "+e);
-            aktifkanbatch = "no";
-            ppStok.setVisible(true);
-        }
-
-        if(tampilkan_ppnobat_ralan.equals("Yes")){
-            PersenppnObat.setText("11");
-        }else{
-            PersenppnObat.setText("0");
         }
     }
 
@@ -1942,6 +1894,54 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
+        }
+
+        try {
+            aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
+            if(aktifkanbatch.equals("no")){
+                ppStok.setVisible(true);
+            }else{
+                ppStok.setVisible(false);
+            }
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+            aktifkanbatch = "no";
+            ppStok.setVisible(true);
+        }
+
+        PersenppnObat.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void removeUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void changedUpdate(DocumentEvent e) {isKembali();}
+        });
+
+        Ongkir.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void removeUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void changedUpdate(DocumentEvent e) {isKembali();}
+        });
+
+        Bayar.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void removeUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void changedUpdate(DocumentEvent e) {isKembali();}
+        });
+
+        TCari.requestFocus();
+
+        if(tampilkan_ppnobat_ralan.equals("Yes")){
+            PersenppnObat.setText("11");
+        }else{
+            PersenppnObat.setText("0");
         }
 
         runBackground(() ->tampil());

@@ -2202,7 +2202,7 @@ public final class DlgCariObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStok1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        runBackground(() -> LoadPengaturan());
+        LoadPengaturan();
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){

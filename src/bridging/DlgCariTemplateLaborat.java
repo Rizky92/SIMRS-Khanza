@@ -13,6 +13,8 @@ package bridging;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -26,11 +28,16 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.Spliterator;
+import java.util.Spliterators;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import java.util.stream.StreamSupport;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -238,7 +245,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() ->tampil2());
+        tampil2Smc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -251,7 +258,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(() ->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -286,28 +293,30 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tampilSmc();
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                        runBackground(() ->tampil2());
+                        tampil2Smc();
                     }
                 }
             });
         }
+        TCari.requestFocus();
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -340,6 +349,132 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().toLowerCase().trim();
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (FileWriter fw = new FileWriter(new File("./cache/templatelaborat.iyem")); ResultSet rs = koneksi.createStatement().executeQuery(
+                        "select t.kd_jenis_prw, j.nm_perawatan, t.id_template, t.Pemeriksaan, t.satuan from template_laboratorium t inner join " +
+                        "jns_perawatan_lab j on j.kd_jenis_prw = t.kd_jenis_prw where j.status = '1' order by t.kd_jenis_prw, t.id_template, t.urut"
+                    )) {
+                        ArrayNode array = mapper.createArrayNode();
+                        while (rs.next()) {
+                            ObjectNode node = mapper.createObjectNode();
+                            node.put("IDPeriksa", rs.getString("kd_jenis_prw"));
+                            node.put("NamaPemeriksaan", rs.getString("nm_perawatan"));
+                            node.put("IDTemplate", rs.getString("id_template"));
+                            node.put("DetailPemeriksaan", rs.getString("Pemeriksaan"));
+                            node.put("Satuan", rs.getString("satuan"));
+                            array.add(node);
+
+                            if (cari.isBlank()) {
+                                publish(new Object[] {
+                                    rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getString("id_template"),
+                                    rs.getString("Pemeriksaan"), rs.getString("satuan")
+                                });
+                            } else {
+                                if (rs.getString("kd_jenis_prw").toLowerCase().contains(cari)
+                                    || rs.getString("nm_perawatan").toLowerCase().contains(cari)
+                                    || rs.getString("id_template").toLowerCase().contains(cari)
+                                    || rs.getString("Pemeriksaan").toLowerCase().contains(cari)
+                                    || rs.getString("satuan").toLowerCase().contains(cari)
+                                ) {
+                                    publish(new Object[] {
+                                        rs.getString("kd_jenis_prw"), rs.getString("nm_perawatan"), rs.getString("id_template"),
+                                        rs.getString("Pemeriksaan"), rs.getString("satuan")
+                                    });
+                                }
+                            }
+                        }
+                        fw.write(mapper.writeValueAsString(mapper.createObjectNode().set("template", array)));
+                    }
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    DlgCariTemplateLaborat.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
+        }
+    }
+
+    private void tampil2Smc() {
+        if (!ceksukses) {
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            if (new File("./cache/templatelaborat.iyem").isFile()) {
+                new SwingWorker<Void, Object[]>() {
+                    final String cari = TCari.getText().toLowerCase().trim();
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        try (FileReader fr = new FileReader("./cache/templatelaborat.iyem")) {
+                            ArrayNode array = mapper.readTree(fr).withArray("template");
+                            if (cari.isBlank()) {
+                                for (JsonNode node : array) {
+                                    publish(StreamSupport
+                                        .stream(Spliterators.spliteratorUnknownSize(node.elements(), Spliterator.ORDERED), false)
+                                        .map(JsonNode::asText)
+                                        .toArray());
+                                }
+                            } else {
+                                for (JsonNode node : array) {
+                                    if (node.toString().toLowerCase().contains(cari)) {
+                                        publish(StreamSupport
+                                            .stream(Spliterators.spliteratorUnknownSize(node.elements(), Spliterator.ORDERED), false)
+                                            .map(JsonNode::asText)
+                                            .toArray());
+                                    }
+                                }
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void process(List<Object[]> chunks) {
+                        chunks.forEach(tabMode::addRow);
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                        }
+                        tabMode.fireTableDataChanged();
+                        LCount.setText(tabMode.getRowCount() + "");
+                        DlgCariTemplateLaborat.this.setCursor(Cursor.getDefaultCursor());
+                        ceksukses = false;
+                    }
+                }.execute();
+            } else {
+                tampilSmc();
+            }
+        }
+    }
+
+    /*
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try {
@@ -384,6 +519,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     public void emptTeks() {
         TCari.requestFocus();
@@ -393,6 +529,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
         return tbKamar;
     }
 
+    /*
     public void tampil2() {
         try {
             myObj = new FileReader("./cache/templatelaborat.iyem");
@@ -426,6 +563,7 @@ public final class DlgCariTemplateLaborat extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     private void runBackground(Runnable task) {
         if (ceksukses) return;
