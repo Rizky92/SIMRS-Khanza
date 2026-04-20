@@ -12,6 +12,7 @@
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="nomor" class="java.lang.String"/>
 	<parameter name="gambarbayi" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="dokteranak" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select pasien.no_rkm_medis,pasien.nm_pasien, pasien.jk,
 pasien.no_ktp, pasien.pekerjaanpj, pasien.no_tlp,
@@ -433,7 +434,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{keterangan}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$P{dokteranak}]]></textFieldExpression>
 			</textField>
 			<textField isStretchWithOverflow="true" pattern="">
 				<reportElement x="395" y="502" width="67" height="16" uuid="a2450a31-d916-46cf-9979-f5f569afd684"/>
@@ -577,7 +578,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 					<font fontName="Arial" size="10" isBold="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Keterangan Lain]]></text>
+				<text><![CDATA[Dokter Anak]]></text>
 			</staticText>
 			<staticText>
 				<reportElement mode="Transparent" x="110" y="505" width="10" height="16" forecolor="#000000" backcolor="#F0F0DC" uuid="4b61c5f9-dab3-4e82-8ebf-ea9b5798a310"/>

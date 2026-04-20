@@ -23,6 +23,11 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE `antrifotokelahiranbayismc`  (
+  `no_rkm_medis` varchar(15) NOT NULL,
+  PRIMARY KEY (`no_rkm_medis`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` varchar(6) NOT NULL,
   `tanggal` date NOT NULL,
