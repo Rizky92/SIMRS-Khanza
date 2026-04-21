@@ -452,17 +452,6 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         if(catatanpasien.getTampilkanCatatan().equals("")){
             catatanpasien.SetCatatanPasien();
         }
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowActivated(WindowEvent e) {
-                if (TabRawat.getSelectedIndex() == 0) {
-                    tampilkasirSmc();
-                } else if (TabRawat.getSelectedIndex() == 1) {
-                    tampilkasir2Smc();
-                }
-            }
-        });
     }
 
     /** This method is called from within the constructor to
@@ -9327,6 +9316,12 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                 }
             });
         }
+
+        if (TabRawat.getSelectedIndex() == 0) {
+            tampilkasirSmc();
+        } else if (TabRawat.getSelectedIndex() == 1) {
+            tampilkasir2Smc();
+        }
     }
 
     private void tbKasirRalan2MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKasirRalan2MousePressed
@@ -15843,7 +15838,7 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
         }
     }
 
-    private void MnPermintaanKonsultasiPerawatActionPerformed(java.awt.event.ActionEvent evt) {                                                          
+    private void MnPermintaanKonsultasiPerawatActionPerformed(java.awt.event.ActionEvent evt) {
         if(tabModekasir.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
             TCari.requestFocus();

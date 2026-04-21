@@ -511,13 +511,6 @@ public final class DlgIGD extends javax.swing.JDialog {
         if(catatanpasien.getTampilkanCatatan().equals("")){
             catatanpasien.SetCatatanPasien();
         }
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowActivated(WindowEvent e) {
-                tampilSmc();
-            }
-        });
     }
 
     /** This method is called from within the constructor to
@@ -6320,11 +6313,11 @@ public final class DlgIGD extends javax.swing.JDialog {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     if(dokter.getTable().getSelectedRow()!= -1){
-                            KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                            isNumber();
-                            KdDokter.requestFocus();
-                        }
+                        KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
+                        TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        isNumber();
+                        KdDokter.requestFocus();
+                    }
                     dokter=null;
                 }
             });
