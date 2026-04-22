@@ -3135,19 +3135,19 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 }
 
                 if (decrypted.hasNonNull("printerRegist")) {
-                    printerRegistrasi = decrypted.path("printerRegist").asText(koneksiDB.PRINTER_REGISTRASI());
+                    printerRegistrasi = decrypted.path("printerRegist").asText();
                 }
 
                 if (decrypted.hasNonNull("printerBarcode")) {
-                    printerBarcode = decrypted.path("printerBarcode").asText(koneksiDB.PRINTER_BARCODE());
+                    printerBarcode = decrypted.path("printerBarcode").asText();
                 }
 
                 if (decrypted.hasNonNull("printJumlahBarcode")) {
-                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(koneksiDB.PRINTJUMLAHBARCODE());
+                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(0);
                 }
 
                 if (decrypted.hasNonNull("batasRegistrasiSatuJam")) {
-                    batasRegistrasiSatuJam = decrypted.path("batasRegistrasiSatuJam").asBoolean(koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK());
+                    batasRegistrasiSatuJam = decrypted.path("batasRegistrasiSatuJam").asBoolean(false);
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
