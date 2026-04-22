@@ -394,7 +394,7 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
                 param.put("kotars", instansiKota);
                 param.put("kontakrs", instansiKontak);
                 param.put("norawat", noRawat);
-                Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), koneksiDB.PRINTJUMLAHBARCODE());
+                Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, printerBarcode, printJumlahBarcode);
                 Valid.popupInfoDialog("Berhasil!");
             } else {
                 Valid.popupInfoDialog("Pendaftaran gagal..!!\nSilahkan coba kembali.");

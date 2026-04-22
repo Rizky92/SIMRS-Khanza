@@ -201,10 +201,12 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
                 final ObjectMapper mapper = new ObjectMapper();
                 final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
 
-                batasRegistrasiSatuJam = mapper.readTree(EnkripsiAES.decrypt(root.asText())).path("batasRegistrasiSatuJam").asBoolean(koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK());
+                batasRegistrasiSatuJam = mapper.readTree(EnkripsiAES.decrypt(root.asText())).path("batasRegistrasiSatuJam").asBoolean();
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+        } else {
+            batasRegistrasiSatuJam = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
         }
     }
 }

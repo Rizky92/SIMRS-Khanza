@@ -356,16 +356,10 @@ public class HalamanUtama extends javax.swing.JFrame {
                             panelTengah.add(btnSatusehat);
                             break;
                     }
-
-                    if (panelTengah.getComponentCount() <= 1) {
-                        panelTengah.setLayout(new java.awt.GridLayout(0, 1));
-                    } else {
-                        panelTengah.setLayout(new java.awt.GridLayout(0, 2));
-                    }
-
-                    panelTengah.revalidate();
-                    panelTengah.repaint();
                 });
+                panelTengah.setLayout(new java.awt.GridLayout(0, panelTengah.getComponentCount() <= 1 ? 1 : 2));
+                panelTengah.revalidate();
+                panelTengah.repaint();
             } catch (Exception e) {
                 System.out.println("Notif b : " + e);
             }

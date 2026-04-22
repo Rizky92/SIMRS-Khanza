@@ -19,6 +19,7 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 import javax.print.PrintService;
 import javax.print.PrintServiceLookup;
+import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
 
 public class DlgPengaturanAPM extends widget.Dialog {
@@ -85,6 +86,8 @@ public class DlgPengaturanAPM extends widget.Dialog {
         enableVBFingerprint = new widget.CekBox();
         label12 = new widget.Label();
         batasRegistrasiSatuJam = new widget.CekBox();
+        peekUserFP = new widget.Button();
+        peekPasswordFP = new widget.Button();
         panel2 = new widget.Panel();
         btnSimpan = new widget.Button();
         btnBatal = new widget.Button();
@@ -356,6 +359,34 @@ public class DlgPengaturanAPM extends widget.Dialog {
         panel1.add(batasRegistrasiSatuJam);
         batasRegistrasiSatuJam.setBounds(247, 434, 410, 30);
 
+        peekUserFP.setBackground(new java.awt.Color(240, 249, 255));
+        peekUserFP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/eye2.png"))); // NOI18N
+        peekUserFP.setPreferredSize(new java.awt.Dimension(45, 35));
+        peekUserFP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                peekUserFPMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                peekUserFPMouseReleased(evt);
+            }
+        });
+        panel1.add(peekUserFP);
+        peekUserFP.setBounds(552, 250, 45, 35);
+
+        peekPasswordFP.setBackground(new java.awt.Color(240, 249, 255));
+        peekPasswordFP.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/eye2.png"))); // NOI18N
+        peekPasswordFP.setPreferredSize(new java.awt.Dimension(45, 35));
+        peekPasswordFP.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                peekPasswordFPMousePressed(evt);
+            }
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                peekPasswordFPMouseReleased(evt);
+            }
+        });
+        panel1.add(peekPasswordFP);
+        peekPasswordFP.setBounds(552, 290, 45, 35);
+
         gridBagConstraints = new java.awt.GridBagConstraints();
         gridBagConstraints.gridx = 0;
         gridBagConstraints.gridy = 0;
@@ -493,13 +524,46 @@ public class DlgPengaturanAPM extends widget.Dialog {
     }//GEN-LAST:event_cariLokasiFristaActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        simpan();
-        dispose();
+        if (simpan()) {
+            dispose();
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
         dispose();
     }//GEN-LAST:event_btnBatalActionPerformed
+
+    private void peekUserFPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peekUserFPMousePressed
+        peekUserFP.setIcon(new ImageIcon(getClass().getResource("/48x48/eye.png")));
+        if (new String(userFP.getPassword()).equals("************")) {
+            userFP.setText(EnkripsiAES.decrypt(userLoginFP));
+        }
+        userFP.setEchoChar((char) 0);
+    }//GEN-LAST:event_peekUserFPMousePressed
+
+    private void peekUserFPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peekUserFPMouseReleased
+        peekUserFP.setIcon(new ImageIcon(getClass().getResource("/48x48/eye2.png")));
+        if (new String(userFP.getPassword()).equals(EnkripsiAES.decrypt(userLoginFP))) {
+            userFP.setText("************");
+        }
+        userFP.setEchoChar('\u2022');
+    }//GEN-LAST:event_peekUserFPMouseReleased
+
+    private void peekPasswordFPMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peekPasswordFPMousePressed
+        peekPasswordFP.setIcon(new ImageIcon(getClass().getResource("/48x48/eye.png")));
+        if (new String(passFP.getPassword()).equals("************")) {
+            passFP.setText(EnkripsiAES.decrypt(passLoginFP));
+        }
+        passFP.setEchoChar((char) 0);
+    }//GEN-LAST:event_peekPasswordFPMousePressed
+
+    private void peekPasswordFPMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_peekPasswordFPMouseReleased
+        peekPasswordFP.setIcon(new ImageIcon(getClass().getResource("/48x48/eye2.png")));
+        if (new String(passFP.getPassword()).equals(EnkripsiAES.decrypt(passLoginFP))) {
+            passFP.setText("************");
+        }
+        passFP.setEchoChar('\u2022');
+    }//GEN-LAST:event_peekPasswordFPMouseReleased
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.CekBox batasRegistrasiSatuJam;
@@ -540,6 +604,8 @@ public class DlgPengaturanAPM extends widget.Dialog {
     private widget.PasswordField passFP;
     private widget.TextField pathFingerprint;
     private widget.TextField pathFrista;
+    private widget.Button peekPasswordFP;
+    private widget.Button peekUserFP;
     private widget.Button pilihPoliEksekutif;
     private widget.ComboBox printerAntrian;
     private widget.ComboBox printerBarcode;
@@ -606,7 +672,7 @@ public class DlgPengaturanAPM extends widget.Dialog {
         }
     }
 
-    private void simpan() {
+    private boolean simpan() {
         try {
             File iyem = new File("./cache/pengaturanapmsmc.iyem");
             iyem.createNewFile();
@@ -684,10 +750,13 @@ public class DlgPengaturanAPM extends widget.Dialog {
                 String encrypted = EnkripsiAES.encrypt(mapper.writeValueAsString(root));
                 fw.write(mapper.writeValueAsString(mapper.createObjectNode().put("pengaturanapmsmc", encrypted)));
                 fw.flush();
-                Valid.popupInfoDialog("Pengaturan berhasil disimpan..!!", 3);
             }
+            Valid.popupInfoDialog("Pengaturan berhasil disimpan..!!", 3);
+            return true;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+            Valid.popupGagalDialog("Gagal menyimpan pengaturan: " + e.getMessage(), 3);
+            return false;
         }
     }
 }
