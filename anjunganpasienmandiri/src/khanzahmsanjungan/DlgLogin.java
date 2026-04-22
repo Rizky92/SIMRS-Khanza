@@ -63,35 +63,39 @@ public class DlgLogin extends widget.Dialog {
         panelTengahAksi.setOpaque(false);
         panelTengahAksi.setLayout(null);
 
-        userAksi.setPreferredSize(new java.awt.Dimension(270, 35));
+        userAksi.setForeground(new java.awt.Color(40, 40, 40));
+        userAksi.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        userAksi.setPreferredSize(new java.awt.Dimension(270, 30));
         userAksi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 userAksiKeyPressed(evt);
             }
         });
         panelTengahAksi.add(userAksi);
-        userAksi.setBounds(120, 30, 270, 35);
+        userAksi.setBounds(120, 30, 270, 30);
 
-        passAksi.setPreferredSize(new java.awt.Dimension(270, 35));
+        passAksi.setForeground(new java.awt.Color(40, 40, 40));
+        passAksi.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        passAksi.setPreferredSize(new java.awt.Dimension(270, 30));
         passAksi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 passAksiKeyPressed(evt);
             }
         });
         panelTengahAksi.add(passAksi);
-        passAksi.setBounds(120, 75, 270, 35);
+        passAksi.setBounds(120, 70, 270, 30);
 
         label1.setText("User ID :");
         label1.setFocusable(false);
-        label1.setPreferredSize(new java.awt.Dimension(60, 35));
+        label1.setPreferredSize(new java.awt.Dimension(60, 30));
         panelTengahAksi.add(label1);
-        label1.setBounds(0, 30, 110, 35);
+        label1.setBounds(0, 30, 110, 30);
 
         label2.setText("Password :");
         label2.setFocusable(false);
-        label2.setPreferredSize(new java.awt.Dimension(60, 35));
+        label2.setPreferredSize(new java.awt.Dimension(60, 30));
         panelTengahAksi.add(label2);
-        label2.setBounds(0, 75, 110, 35);
+        label2.setBounds(0, 70, 110, 30);
 
         getContentPane().add(panelTengahAksi, java.awt.BorderLayout.CENTER);
 
