@@ -18,7 +18,7 @@ public final class DlgCariPoliBPJS extends widget.Dialog {
     private final DefaultTableModel tabMode;
     private final validasi Valid = new validasi();
     private final Connection koneksi = koneksiDB.condb();
-    private boolean batasRegistrasiSatuJam = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
+    private boolean batasRegistrasiSatuJam = false;
     private String hari = "";
     private String kodeDokter = "";
 

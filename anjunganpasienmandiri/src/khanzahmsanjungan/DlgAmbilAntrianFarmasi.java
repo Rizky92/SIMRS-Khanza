@@ -209,6 +209,9 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+        } else {
+            printerAntrian = koneksiDB.PRINTER_ANTRIAN();
+            printJumlahAntrianFarmasi = koneksiDB.PRINTJUMLAHANTRIANFARMASI();
         }
     }
 }

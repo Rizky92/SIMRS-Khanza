@@ -3153,7 +3153,31 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 System.out.println("Notif : " + e);
             }
         } else {
-
+            String[] valbiom = koneksiDB.VALIDASIBIOMETRIKAKTIF();
+            pathFrista = koneksiDB.URLAPLIKASIFRISTABPJS();
+            if (Arrays.asList(valbiom).contains("frista")) {
+                panelValidasi.add(btnFrista);
+                panelTambahanValidasi.remove(btnFrista);
+            } else {
+                panelValidasi.remove(btnFrista);
+                panelTambahanValidasi.add(btnFrista);
+            }
+            pathFingerprint = koneksiDB.URLAPLIKASIFINGERPRINTBPJS();
+            if (Arrays.asList(valbiom).contains("fingerprint")) {
+                panelValidasi.add(btnFingerprint);
+                panelTambahanValidasi.remove(btnFingerprint);
+            } else {
+                panelValidasi.remove(btnFingerprint);
+                panelTambahanValidasi.add(btnFingerprint);
+            }
+            panelValidasi.repaint();
+            panelTambahanValidasi.repaint();
+            userLoginValidasi = EnkripsiAES.encrypt(koneksiDB.USERFINGERPRINTBPJS());
+            passLoginValidasi = EnkripsiAES.encrypt(koneksiDB.PASSWORDFINGERPRINTBPJS());
+            printerRegistrasi = koneksiDB.PRINTER_REGISTRASI();
+            printerBarcode = koneksiDB.PRINTER_BARCODE();
+            printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
+            batasRegistrasiSatuJam = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
         }
     }
 }
