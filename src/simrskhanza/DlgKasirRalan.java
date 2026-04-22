@@ -7940,6 +7940,9 @@ public final class DlgKasirRalan extends javax.swing.JDialog {
                         formrawatjalan.addWindowListener(new WindowAdapter() {
                             @Override
                             public void windowClosed(WindowEvent e) {
+                                int selectedRow = tbKasirRalan.convertRowIndexToModel(tbKasirRalan.getSelectedRow());
+                                tabModekasir.setValueAt(Sequel.cariIsiSmc("select reg_periksa.stts from reg_periksa where reg_periksa.no_rawat = ?", tabModekasir.getValueAt(selectedRow, 11).toString()), selectedRow, 10);
+                                tabModekasir.fireTableRowsUpdated(selectedRow, selectedRow);
                                 formrawatjalan=null;
                             }
                         });
