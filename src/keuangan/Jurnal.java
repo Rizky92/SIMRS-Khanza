@@ -33,7 +33,7 @@ public class Jurnal {
                     if (rscek.next()) {
                         if (rscek.getInt("jml") > 0) {
                             if (rscek.getInt("selisih") == 0) {
-                                if (rscek.getInt("total_debet") >= 0 && rscek.getInt("total_kredit") >= 0) {
+                                if (rscek.getLong("total_debet") >= 0 && rscek.getLong("total_kredit") >= 0) {
                                     String nojur = "";
                                     int i = 0;
                                     do {
@@ -80,7 +80,7 @@ public class Jurnal {
                 if (rscek.next()) {
                     if (rscek.getInt("jml") > 0) {
                         if (rscek.getInt("selisih") == 0) {
-                            if (rscek.getInt("total_debet") >= 0 && rscek.getInt("total_kredit") >= 0) {
+                            if (rscek.getLong("total_debet") >= 0 && rscek.getLong("total_kredit") >= 0) {
                                 String nojur = "";
                                 int i = 0;
                                 do {
