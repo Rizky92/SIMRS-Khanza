@@ -524,8 +524,9 @@ public class DlgPengaturanAPM extends widget.Dialog {
     }//GEN-LAST:event_cariLokasiFristaActionPerformed
 
     private void btnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSimpanActionPerformed
-        simpan();
-        dispose();
+        if (simpan()) {
+            dispose();
+        }
     }//GEN-LAST:event_btnSimpanActionPerformed
 
     private void btnBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBatalActionPerformed
@@ -671,7 +672,7 @@ public class DlgPengaturanAPM extends widget.Dialog {
         }
     }
 
-    private void simpan() {
+    private boolean simpan() {
         try {
             File iyem = new File("./cache/pengaturanapmsmc.iyem");
             iyem.createNewFile();
@@ -749,10 +750,13 @@ public class DlgPengaturanAPM extends widget.Dialog {
                 String encrypted = EnkripsiAES.encrypt(mapper.writeValueAsString(root));
                 fw.write(mapper.writeValueAsString(mapper.createObjectNode().put("pengaturanapmsmc", encrypted)));
                 fw.flush();
-                Valid.popupInfoDialog("Pengaturan berhasil disimpan..!!", 3);
             }
+            Valid.popupInfoDialog("Pengaturan berhasil disimpan..!!", 3);
+            return true;
         } catch (Exception e) {
             System.out.println("Notif : " + e);
+            Valid.popupGagalDialog("Gagal menyimpan pengaturan: " + e.getMessage(), 3);
+            return false;
         }
     }
 }
