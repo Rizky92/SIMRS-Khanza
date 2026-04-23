@@ -11,7 +11,8 @@
 	<parameter name="kontakrs" class="java.lang.String"/>
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="nomor" class="java.lang.String"/>
-	<parameter name="gambarbayi" class="java.io.InputStream" isForPrompting="false"/>
+	<parameter name="gambarbayi" class="java.awt.image.BufferedImage
+" isForPrompting="false"/>
 	<parameter name="dokteranak" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select pasien.no_rkm_medis,pasien.nm_pasien, pasien.jk,
@@ -117,7 +118,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[Nama Bayi]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="131" y="187" width="253" height="17" uuid="bf37688c-cde2-4860-86d8-8bada008afff"/>
+				<reportElement x="131" y="187" width="420" height="17" uuid="bf37688c-cde2-4860-86d8-8bada008afff"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -133,7 +134,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[Dengan Jenis Kelamin]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="131" y="208" width="253" height="17" uuid="930511f5-2569-4a22-a173-96a9929da4c3"/>
+				<reportElement x="131" y="208" width="420" height="17" uuid="930511f5-2569-4a22-a173-96a9929da4c3"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -149,7 +150,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[Pada Tanggal]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="EEEE, dd MMMMM yyyy">
-				<reportElement x="131" y="334" width="253" height="17" uuid="eae8f1cc-7597-4619-bc47-7f1cc4064314"/>
+				<reportElement x="131" y="334" width="192" height="17" uuid="eae8f1cc-7597-4619-bc47-7f1cc4064314"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -173,7 +174,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[Dari Ibu]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="250" width="253" height="17" uuid="6b27e4f9-9c3f-4268-809e-7a428d89d0c9"/>
+				<reportElement x="131" y="250" width="192" height="17" uuid="6b27e4f9-9c3f-4268-809e-7a428d89d0c9"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -285,7 +286,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[Nama Ayah]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="292" width="253" height="17" uuid="b380301f-78ca-43f7-9f6c-3078bbf414fb"/>
+				<reportElement x="131" y="292" width="192" height="17" uuid="b380301f-78ca-43f7-9f6c-3078bbf414fb"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -509,7 +510,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="229" width="253" height="17" uuid="76a2f7e8-a51d-4fc8-a505-71157f136ca4"/>
+				<reportElement x="131" y="229" width="192" height="17" uuid="76a2f7e8-a51d-4fc8-a505-71157f136ca4"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -605,7 +606,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[Pekerjaan]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="313" width="253" height="17" uuid="9bfd27b4-2486-4dc7-bfad-28bd2847a7e6"/>
+				<reportElement x="131" y="313" width="192" height="17" uuid="9bfd27b4-2486-4dc7-bfad-28bd2847a7e6"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -661,7 +662,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[:]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true" pattern="">
-				<reportElement x="131" y="271" width="253" height="17" uuid="71d21e84-cde6-4417-8eaf-69880dc9b849"/>
+				<reportElement x="131" y="271" width="192" height="17" uuid="71d21e84-cde6-4417-8eaf-69880dc9b849"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true"/>
 					<paragraph lineSpacing="Single"/>
@@ -818,7 +819,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[]]></text>
 			</staticText>
 			<image scaleImage="FillFrame">
-				<reportElement x="339" y="184" width="192" height="188" uuid="c69391d2-b154-4a8d-8950-64b0822154e1"/>
+				<reportElement x="324" y="225" width="227" height="125" uuid="c69391d2-b154-4a8d-8950-64b0822154e1"/>
 				<imageExpression><![CDATA[$P{gambarbayi}]]></imageExpression>
 			</image>
 		</band>

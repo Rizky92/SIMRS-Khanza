@@ -20,10 +20,15 @@ import grafikanalisa.grafikproses;
 import java.awt.Cursor;
 import java.awt.Desktop;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
 import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
@@ -40,6 +45,7 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.imageio.ImageIO;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -4246,8 +4252,17 @@ public class DlgIKBBayi extends javax.swing.JDialog {
             param.put("dokteranak", NmDPJPAnak.getText());
             String fullpath = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/fotokelahiranbayismc/" + Sequel.cariIsiSmc("select pasien_bayi_gambar_smc.photo from pasien_bayi_gambar_smc where pasien_bayi_gambar_smc.no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
             try {
-                InputStream gambarBayiStream = new URL(fullpath).openStream();
-                param.put("gambarbayi", gambarBayiStream);
+                BufferedImage src = ImageIO.read(new URL(fullpath).openStream());
+                BufferedImage result = new BufferedImage(1024, 576, BufferedImage.TYPE_INT_ARGB);
+                Graphics2D g2 = result.createGraphics();
+                g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+                // Ellipsis
+                g2.setClip(new Ellipse2D.Float(0, 0, 1024, 576));
+                // Pill-shaped
+                // g2.setClip(new RoundRectangle2D.Float(0, 0, 1024, 576, 576, 576));
+                g2.drawImage(src, 0, 0, 1024, 576, null);
+                g2.dispose();
+                param.put("gambarbayi", result);
             } catch (Exception ex) {
                 param.put("gambarbayi", null);
             }

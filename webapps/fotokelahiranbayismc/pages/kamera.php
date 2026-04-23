@@ -46,8 +46,8 @@ $alamat       = $data2['alamat'];
         #results {
             padding: 0px;
             background: #EEFFEE;
-            width: 490;
-            height: 390
+            width: 480;
+            height: 270
         }
     </style>
     <title>SIMKES Khanza</title>
@@ -89,22 +89,22 @@ $alamat       = $data2['alamat'];
             </table>
             <br/>
             <h7 class="text-dark">
-                Silahkan lakukan pengambilan foto apabila sudah siap
+                Silahkan lakukan pengambilan gambar apabila sudah siap
             </h7>
             <br/>
             <br/>
             <div class="row">
                 <div class="col-md-6">
-                    <div id="my_camera"></div>
+                    <div style="margin-left: auto; margin-right: auto" id="my_camera"></div>
                     <input type="hidden" name="image" class="image-tag" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" id="TxtIsi1">
                 </div>
                 <div class="col-md-6">
-                    <div id="results"><h7 class="text-success"><center>Gambar akan diambil jika anda sudah mengeklik ya</center></h7></div>
+                    <div id="results"><h7 class="text-success"><center>Gambar akan diambil jika anda sudah mengeklik "Ambil"</center></h7></div>
                     <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                 </div>
                 <br/>
-                <div class="col-md-12 text-center">
-                    <input type="button" class="btn btn-warning" value="Ya, Saya sebagai pembuat persetujuan" onClick="take_snapshot()">
+                <div class="col-md-12 text-center mt-3">
+                    <input type="button" class="btn btn-warning" value="Ambil" onClick="take_snapshot()">
                     <button class="btn btn-danger">Simpan</button>
                 </div>
             </div>
@@ -113,8 +113,10 @@ $alamat       = $data2['alamat'];
 
     <script language="JavaScript">
         Webcam.set({
-            width: 490,
-            height: 390,
+            width: 480,
+            height: 270,
+            dest_width: 1280,
+            dest_height: 720,
             image_format: 'jpeg',
             jpeg_quality: 90
         });
@@ -124,7 +126,7 @@ $alamat       = $data2['alamat'];
         function take_snapshot() {
             Webcam.snap(function(data_uri) {
                 $(".image-tag").val(data_uri);
-                document.getElementById('results').innerHTML = '<img src="'+data_uri+'"/>';
+                document.getElementById('results').innerHTML = '<img style="display: block; margin-left: auto; margin-right: auto" src="'+data_uri+'" width="480" height="270"/>';
             });
         }
     </script>

@@ -18,7 +18,7 @@ $file           = $folderPath.$fileName;
 
 file_put_contents($file, $image_base64);
 
-Tambah3('pasien_bayi_gambar_smc', sprintf("'%s', 'pages/upload/%s'", $no_rkm_medis, $fileName));
+bukainput(sprintf("insert ignore into pasien_bayi_gambar_smc values ('%s', 'pages/upload/%s')", $no_rkm_medis, $fileName));
 
 ?>
 <!DOCTYPE html>
