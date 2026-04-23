@@ -7,14 +7,14 @@ body  {
 	padding: 0;
 	color: #323232;
 }
-h1 {    
+h1 {
 	color:#54684A;
 }
-#container { 
+#container {
 	width: 100%;  /* using 20px less than a full 800px width allows for browser chrome and avoids a horizontal scroll bar */
 	background: #ffffff;
-} 
-#header { 
+}
+#header {
 	background: #ffffff;
 	width: 900px;
 	height: 168px;
@@ -23,7 +23,7 @@ h1 {
 	width:900px;
 	height:121px;
 	background:url(images/main_bg.gif) no-repeat left top;
-} 
+}
 #header h1 {
 	margin: 0; /* zeroing the margin of the last element in the #header div will avoid margin collapse - an unexplainable space between divs. If the div has a border around it, this is not necessary as that also avoids the margin collapse */
 	padding: 100px 40px 0 0; /* using padding instead of margin will allow you to keep the element away from the edges of the div */
@@ -87,18 +87,18 @@ h1 {
 	text-align:center;
         color:#323232;;
         font-style: italic;
-} 
+}
 .footerLink  {
 	color:#323232;
 	text-decoration:underline;
 }
-.clearfloat { 
+.clearfloat {
 	clear:both;
     height:0;
     font-size: 1px;
     line-height: 0px;
 }
-#navcontainer {        
+#navcontainer {
 	margin:auto 0;
 	width:100%;
 	text-align:center;
@@ -120,7 +120,7 @@ h1 {
 	border-right-color: #f1f6ec;
         border-left-width: 1px;
 	border-left-style: solid;
-	border-left-color: #f1f6ec;        
+	border-left-color: #f1f6ec;
 }
 
 #navcontainer table tr td {
@@ -163,7 +163,7 @@ h1 {
 	border-right-color: #f1f6ec;
         border-left-width: 1px;
 	border-left-style: solid;
-	border-left-color: #f1f6ec; 
+	border-left-color: #f1f6ec;
 }
 
 
@@ -400,7 +400,7 @@ color: #323232;
         font-size: 11px;
 }
 
-.link {        
+.link {
         text-decoration:none;
         color:#323232;
         padding:0 0 0 0px;
