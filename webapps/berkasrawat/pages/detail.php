@@ -102,7 +102,7 @@
                 </tr>
                 <tr class="isi2">
                     <td width="25%" >File Berkas(PDF/JPG/JPEG)</td><td width="">:</td>
-                    <td width="75%"><input name="dokumen" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" type=file id="TxtIsi2" value="<?php echo $dokumen;?>" size="30" maxlength="255" accept="application/pdf,image/jpeg,image/jpg"/>
+                    <td width="75%"><input name="dokumen" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" type=file id="TxtIsi2" value="<?php echo $dokumen;?>" size="30" maxlength="255" />
                     <span id="MsgIsi2" style="color:#CC0000; font-size:10px;"></span>
                     </td>
                 </tr>

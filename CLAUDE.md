@@ -1,7 +1,7 @@
 # SIMRS Khanza Claude Instructions
 
 ## Project Overview
-This is a home repository for modified SIMRS Khanza, a fork of original [SIMRS Khanza](https://github.com/mas-elkhanza/SIMRS-Khanza) developed by YASKI. This fork is designed to cater the needs for RS Samarinda Medika Citra should the origin doesn't have the features it needed. The project uses Java 17 as programming langauge but targets Java 11 for building, NetBeans as primary IDE, and Java Swing as its main UI.
+This is a home repository for modified SIMRS Khanza, a fork of original [SIMRS Khanza](https://github.com/mas-elkhanza/SIMRS-Khanza) developed by YASKI. This fork is designed to cater the needs for RS Samarinda Medika Citra should the origin doesn't have the feature it needed. The project mainly uses Java 17 as programming langauge but targets Java 11 for build and compiling, Jasper Report as reporting framework, NetBeans as primary IDE, and Java Swing as its main UI. It also uses PHP ^8.2 for specific web/API services.
 
 ### Important directories
 Important root directories are listed below
@@ -39,7 +39,7 @@ Important root directories are listed below
 - `src/pcraicra`: Modules for general construction related management.
 - `src/permintaan`: Modules for managing medical service requests.
 - `src/perpustakaan`: Modules for library/book management.
-- `src/picture`: Used to place image resources for various UI resources.
+- `src/picture`: Used to place image resources for various UI components.
 - `src/rekammedis`: Modules for managing and record general patient medical history.
 - `src/restore`: Modules for restoring deleted records from various menu.
 - `src/setting`: Modules for administrator to control the settings for application uses.
@@ -52,6 +52,11 @@ Important root directories are listed below
 - `src/widget`: Houses various UI components used internally.
 - `src/ziscsr`: Modules for managing charities and donations.
 
+The following files are SENSITIVE, but they are still needed in order to run.
+- `setting/database.xml`: An origin copy of `setting/database.xml.example`. Not needed in the repo.
+- `webapps/conf/conf.php`: Contains database connection configuration and security login for non-user interaction. Needed for reference in repo but highly sensitive.
+- `webapps/inacbg/conf/wsinacbg(2).php`: Contains API Key for bridging claim. Although the connection to eklaim server is within local environment, this is still sensitive information. Needed for reference in repo.
+
 Unless specified otherwise, these modules follow Netbeans' regular swing forms. So each files in the modules have their `.form` counterpart. Inside the `.java` files, each have `initComponents()`. Changes in this method should be reflected to their `.form` counterpart.
 If you're making plans for new menu, describe the general window layout you're going to design if you can. This should help user understand what you're going for designing the form in case it's broken when previewed in NetBeans.
 
@@ -60,13 +65,13 @@ The coding guidelines should cater to users' netbeans configuration, which as fo
 - Use 4 spaces as indentation.
 - No hard line wrap. Soft line wrap is around 200-300 characters.
 - Trim trailing whitespaces.
-- Package imports are sorted alphabetically.
+- Package imports are sorted alphabetically, case sensitive.
 
 #### Workflow guideline
 - Before starting the changes, ensure current branch is in `custom` branch. Then switch to new branch. Branch format name must begin with `claude/` and styled as `kebab-case` with at-most 4 words in length.
-- Changes related to database migration (e.g. table structure change) MUST BE in `sik_modif.sql`. DO NOT CHANGE other `.sql` files. Their changes follow upstream repository.
+- Changes related to database structure change MUST BE in `sik_modif.sql`. DO NOT CHANGE other `.sql` files. Their changes are either follow upstream repository or contains referenced data dump.
 - When modifying codes that touches `sekuel` and `validasi` class methods, usually named `Sequel` and `Valid` respectively (e.g. `Sequel.menyimpantf("dpjp_ranap", "?, ?, ?", 3, new String[]{"a", "b", "c"})`), look for its alternative in those class affixed by `Smc`. Carefully read the parameter requirements.
-- In addition, adding new features must affix the name with SMC, where method name is styled "Smc", permission name is styled "_smc", and file/menu name is styled "SMC".
+- In addition, adding new features must affix the name with SMC, where method name is styled "Smc", permission name is styled "_smc", and file/menu title is styled "SMC". Main menu name does not require affixes.
 - Adding new parameter to `database.xml.example` MUST BE reflected in `src/fungsi/koneksiDB.java` class. By default, parameter values are unecrypted. Sensitive parameters such as secret keys must be encrypted. Therefore, reading the value from java counterpart requires decryption.
 - Whenever you finish the task, make a draft PR and assign `rizky92` as assignee. Title PR must be translated into Indonesian language, but the body/description doesn't have to. If the PR is a fix for current issues or supersedes other PR, attach the issue/PR number in PR body. The PR title doesn't need to include standard prefix such as "fix" or "chore". A simple title is enough.
 

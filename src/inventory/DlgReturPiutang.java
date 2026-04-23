@@ -889,9 +889,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 }
                 if(sukses==true){
                     Sequel.deleteTampJurnal();
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Piutang_Obat from set_akun"), "RETUR PIUTANG", ttlretur, 0);
-                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Piutang_Obat from set_akun"), "KAS DI TANGAN", 0, ttlretur);
-                    if (sukses) sukses = jur.simpanJurnal(NoRetur.getText(),"U","RETUR PIUTANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Piutang_Obat from set_akun"), "RETUR PIUTANG", ttlretur, 0)==false){
+                        sukses=false;
+                    }
+                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Piutang_Obat from set_akun"), "KAS DI TANGAN", 0, ttlretur)==false){
+                        sukses=false;
+                    }
+                    if(sukses==true){
+                        sukses=jur.simpanJurnal(NoRetur.getText(),"U","RETUR PIUTANG DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                    }
                 }
                 if(sukses==true){
                     Sequel.Commit();

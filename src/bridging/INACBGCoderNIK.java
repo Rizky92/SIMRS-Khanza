@@ -646,10 +646,11 @@ public class INACBGCoderNIK extends javax.swing.JDialog {
             ps=koneksi.prepareStatement(
                     "select inacbg_coder_nik.nik,pegawai.nama,inacbg_coder_nik.no_ik "+
                     "from inacbg_coder_nik inner join pegawai on inacbg_coder_nik.nik=pegawai.nik where "+
-                    "pegawai.nama like ? or inacbg_coder_nik.no_ik like ? order by pegawai.nama");
+                    "pegawai.nama like ? or inacbg_coder_nik.no_ik like ? or inacbg_coder_nik.nik like ? order by pegawai.nama");
             try {
                 ps.setString(1, "%"+TCari.getText().trim()+"%");
                 ps.setString(2, "%"+TCari.getText().trim()+"%");
+                ps.setString(3, "%"+TCari.getText().trim()+"%");
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{rs.getString(1),rs.getString(2),rs.getString(3)});

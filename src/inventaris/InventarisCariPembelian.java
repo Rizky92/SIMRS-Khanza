@@ -629,13 +629,21 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                       sukses=true;
 
                       Sequel.deleteTampJurnal();
-                      if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "PEMBELIAN", 0, rs.getDouble("total"));
+                      if(Sequel.insertTampJurnal(rs.getString("kd_rek_aset"), "PEMBELIAN", 0, rs.getDouble("total"))==false){
+                          sukses=false;
+                      }
 
                       if(rs.getDouble("ppn")>0){
-                        if (sukses) sukses = Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Inventaris", 0, rs.getDouble("ppn"));
+                        if(Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Inventaris", 0, rs.getDouble("ppn"))==false){
+                            sukses=false;
+                        }
                       }
-                      if (sukses) sukses = Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", rs.getDouble("tagihan"), 0);
-                      if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PENGADAAN BARANG NON MEDIS DAN PENUNJANG (LAB & RAD)"+", OLEH "+akses.getkode());
+                      if(Sequel.insertTampJurnal(rs.getString("kd_rek"), "KAS DI TANGAN", rs.getDouble("tagihan"), 0)==false){
+                          sukses=false;
+                      }
+                      if(sukses==true){
+                          sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","PEMBATALAN PENGADAAN BARANG NON MEDIS DAN PENUNJANG (LAB & RAD)"+", OLEH "+akses.getkode());
+                      }
                       if(sukses==true){
                           Sequel.queryu2("delete from inventaris_pembelian where no_faktur=?",1,new String[]{rs.getString("no_faktur")});
                           Sequel.Commit();

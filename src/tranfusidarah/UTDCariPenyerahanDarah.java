@@ -951,9 +951,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                             if(sukses==true){
                                 subtotalpendapatan=Sequel.cariIsiAngka("select sum(total) from utd_penyerahan_darah_detail where no_penyerahan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                                 Sequel.deleteTampJurnal();
-                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Penyerahan_Darah from set_akun"), "PENJUALAN DARAH UTD", subtotalpendapatan, 0);
-                                if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select kd_rek from utd_penyerahan_darah where no_penyerahan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()), "CARA BAYAR", 0,subtotalpendapatan);
-                                if (sukses) sukses = jur.simpanJurnal(nopenyerahan.getText(),"U","PEMBATALAN PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select Penyerahan_Darah from set_akun"), "PENJUALAN DARAH UTD", subtotalpendapatan, 0)==false){
+                                    sukses=false;
+                                }
+                                if(Sequel.insertTampJurnal(Sequel.cariIsi("select kd_rek from utd_penyerahan_darah where no_penyerahan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()), "CARA BAYAR", 0,subtotalpendapatan)==false){
+                                    sukses=false;
+                                }
+                                if(sukses==true){
+                                    sukses=jur.simpanJurnal(nopenyerahan.getText(),"U","PEMBATALAN PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                                }
                             }
                         }
                     } catch (Exception e) {
@@ -1075,9 +1081,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(sukses==true){
                             subtotalpendapatan=Sequel.cariIsiAngka("select sum(total) from utd_penyerahan_darah_detail where no_penyerahan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
                             Sequel.deleteTampJurnal();
-                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Penyerahan_Darah from set_akun"), "PENJUALAN DARAH UTD", 0, subtotalpendapatan);
-                            if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select kd_rek from utd_penyerahan_darah where no_penyerahan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()), "CARA BAYAR", subtotalpendapatan, 0);
-                            if (sukses) sukses = jur.simpanJurnal(nopenyerahan.getText(),"U","PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Penyerahan_Darah from set_akun"), "PENJUALAN DARAH UTD", 0, subtotalpendapatan)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select kd_rek from utd_penyerahan_darah where no_penyerahan = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()), "CARA BAYAR", subtotalpendapatan, 0)==false){
+                                sukses=false;
+                            }
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(nopenyerahan.getText(),"U","PENJUALAN DARAH DI UTD"+", OLEH "+akses.getkode());
+                            }
                         }
 
                         if(sukses==true){

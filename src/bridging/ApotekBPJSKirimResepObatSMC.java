@@ -883,6 +883,8 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                         piutang.isCek();
                         piutang.tampilResepApotekBPJSSmc(nosjp, NoResep.getText());
                         piutang.setVisible(true);
+                        emptTeks();
+                        dispose();
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "Terjadi kesalahan pada saat menyimpan resep obat,\nPeriksa kembali data obat yang mau disimpan..!!", "Gagal", JOptionPane.ERROR_MESSAGE);
@@ -1181,7 +1183,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                 "select rx.no_rawat, rx.tgl_perawatan, rx.jam, concat(rx.tgl_perawatan, ' ', rx.jam) as tgl_pelayanan, concat(rx.tgl_peresepan, ' ', rx.jam_peresepan) as tgl_peresepan, r.no_rkm_medis, " +
                 "px.nm_pasien, px.tgl_lahir, s.no_kartu, s.no_sep, s.kddpjp, s.nmdpdjp, s.kdpolitujuan, s.nmpolitujuan from resep_obat rx join reg_periksa r on rx.no_rawat = r.no_rawat " +
                 "join bridging_sep s on r.no_rawat = s.no_rawat and r.status_lanjut = (if(s.jnspelayanan = '1', 'Ranap', 'Ralan')) join pasien px on r.no_rkm_medis = px.no_rkm_medis " +
-                "where rx.no_resep = ?"
+                "where rx.no_resep = ? and r.status_lanjut = 'Ralan'"
             )) {
                 ps.setString(1, noresep);
                 try (ResultSet rs = ps.executeQuery()) {
@@ -1301,6 +1303,10 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
                                 }
                             }
                         }
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Maaf, no. SEP tidak ditemukan atau registrasi sudah masuk ranap..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                        emptTeks();
+                        dispose();
                     }
                 }
             }
@@ -1415,6 +1421,30 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         BtnInsertObat.setEnabled(akses.getbpjs_kirim_obat_smc());
         BtnInsertObatRacikan.setEnabled(akses.getbpjs_kirim_obat_smc());
         BtnCari.setEnabled(akses.getbpjs_riwayat_pelayanan_obat_smc());
+    }
+
+    public void emptTeks() {
+        TNoRw.setText("");
+        TNoRM.setText("");
+        TPasien.setText("");
+        NoKartu.setText("");
+        NoSEP.setText("");
+        KdDPJP.setText("");
+        NmDPJP.setText("");
+        KdPoli.setText("");
+        NmPoli.setText("");
+        NoResep.setText("");
+        Iterasi.setSelectedIndex(0);
+        JenisObat.setSelectedIndex(1);
+        TglResep.setDate(new Date());
+        TglPelayanan.setDate(new Date());
+        JadikanPiutang.setSelected(false);
+        Valid.tabelKosong(tabModeObat);
+        Valid.tabelKosong(tabModeRacikan);
+        Valid.tabelKosong(tabModeDetailRacikanObat);
+        tbObat.clearSelection();
+        tbRacikan.clearSelection();
+        tbDetailRacikanObat.clearSelection();
     }
 
     private void simpanResep() {

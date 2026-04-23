@@ -375,19 +375,23 @@ public class DlgCekDataPasien extends widget.Dialog {
                 final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
 
                 if (decrypted.hasNonNull("kodePoliEksekutif")) {
-                    kodePoliEksekutif = decrypted.path("kodePoliEksekutif").asText(koneksiDB.KODEPOLIEKSEKUTIF());
+                    kodePoliEksekutif = decrypted.path("kodePoliEksekutif").asText();
                 }
 
                 if (decrypted.hasNonNull("printerBarcode")) {
-                    printerBarcode = decrypted.path("printerBarcode").asText(koneksiDB.PRINTER_BARCODE());
+                    printerBarcode = decrypted.path("printerBarcode").asText();
                 }
 
                 if (decrypted.hasNonNull("printJumlahBarcode")) {
-                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(koneksiDB.PRINTJUMLAHBARCODE());
+                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt();
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+        } else {
+            kodePoliEksekutif = koneksiDB.KODEPOLIEKSEKUTIF();
+            printerBarcode = koneksiDB.PRINTER_BARCODE();
+            printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
         }
     }
 }

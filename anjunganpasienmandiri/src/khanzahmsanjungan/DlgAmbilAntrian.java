@@ -329,10 +329,15 @@ public class DlgAmbilAntrian extends widget.Dialog {
                 final ObjectMapper mapper = new ObjectMapper();
                 final JsonNode root = mapper.readTree(fr).path("pengaturanapmsmc");
 
-                printerAntrian = mapper.readTree(EnkripsiAES.decrypt(root.asText())).path("printerAntrian").asText(koneksiDB.PRINTER_ANTRIAN());
+                final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
+                if (decrypted.hasNonNull("printerAntrian")) {
+                    printerAntrian = decrypted.path("printerAntrian").asText();
+                }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+        } else {
+            printerAntrian = koneksiDB.PRINTER_ANTRIAN();
         }
     }
 }

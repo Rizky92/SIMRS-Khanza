@@ -739,14 +739,24 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         if(sukses==true){
                             Sequel.deleteTampJurnal();
                             if(ttljual>0){
-                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getSuspen_Piutang_Obat_Ranap(), "Suspen Piutang Obat Ranap", ttljual, 0);
-                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getObat_Ranap(), "Pendapatan Obat Rawat Inap", 0, ttljual);
+                                if(Sequel.insertTampJurnal(akunobatranap.getSuspen_Piutang_Obat_Ranap(), "Suspen Piutang Obat Ranap", ttljual, 0)==false){
+                                    sukses=false;
+                                }
+                                if(Sequel.insertTampJurnal(akunobatranap.getObat_Ranap(), "Pendapatan Obat Rawat Inap", 0, ttljual)==false){
+                                    sukses=false;
+                                }
                             }
                             if(ttlhpp>0){
-                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getHPP_Obat_Rawat_Inap(), "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
-                                if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getPersediaan_Obat_Rawat_Inap(), "Persediaan Obat Rawat Inap", 0, ttlhpp);
+                                if(Sequel.insertTampJurnal(akunobatranap.getHPP_Obat_Rawat_Inap(), "HPP Persediaan Obat Rawat Inap", ttlhpp, 0)==false){
+                                    sukses=false;
+                                }
+                                if(Sequel.insertTampJurnal(akunobatranap.getPersediaan_Obat_Rawat_Inap(), "Persediaan Obat Rawat Inap", 0, ttlhpp)==false){
+                                    sukses=false;
+                                }
                             }
-                            if (sukses) sukses = jur.simpanJurnal(norawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(norawat.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN, DIPOSTING OLEH "+akses.getkode());
+                            }
                         }
 
                         if(sukses==true){

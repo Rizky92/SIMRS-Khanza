@@ -103,7 +103,7 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
     private DlgResepObat ResepObat;
     private Map<String, Object> map;
     private boolean autoCetak = false, previewLembarObat = false, previewAturanPakai = false;
-    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "";
+    private String modelLembarObat = "", printerLembarObat = "", modelAturanPakai = "", cariAturanPakai = "";
 
     /** Creates new form DlgPenyakit
      * @param parent
@@ -1031,7 +1031,31 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                         tbObat.setValueAt(0,tbObat.getSelectedRow(),10);
                     }
                 }else if(i==13){
-                    this.bukaAturanpakai();
+                    if (aturanpakai == null || !aturanpakai.isDisplayable()) {
+                        aturanpakai=new DlgCariAturanPakai(null,false);
+                        aturanpakai.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                        aturanpakai.addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosed(WindowEvent e) {
+                                if(aturanpakai.getTable().getSelectedRow()!= -1){
+                                    cariAturanPakai = aturanpakai.dicari().trim();
+                                    tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),13);
+                                    tbObat.requestFocus();
+                                }
+                                aturanpakai=null;
+                            }
+                        });
+
+                        aturanpakai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        aturanpakai.setLocationRelativeTo(internalFrame1);
+                    }
+                    aturanpakai.setDicari(cariAturanPakai);
+                    if (aturanpakai == null) return;
+                    if (aturanpakai.isVisible()) {
+                        aturanpakai.toFront();
+                        return;
+                    }
+                    aturanpakai.setVisible(true);
                 }
             }
         }
@@ -1380,15 +1404,25 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                     if(sukses){
                         Sequel.deleteTampJurnal();
                         if(ttljual>0){
-                            if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getSuspen_Piutang_Obat_Ranap(), "Suspen Piutang Obat Ranap", ttljual, 0);
-                            if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getObat_Ranap(), "Pendapatan Obat Rawat Inap", 0, ttljual);
+                            if(Sequel.insertTampJurnal(akunobatranap.getSuspen_Piutang_Obat_Ranap(), "Suspen Piutang Obat Ranap", ttljual, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(akunobatranap.getObat_Ranap(), "Pendapatan Obat Rawat Inap", 0, ttljual)==false){
+                                sukses=false;
+                            }
                         }
                         if(ttlhpp>0){
-                            if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getHPP_Obat_Rawat_Inap(), "HPP Persediaan Obat Rawat Inap", ttlhpp, 0);
-                            if (sukses) sukses = Sequel.insertTampJurnal(akunobatranap.getPersediaan_Obat_Rawat_Inap(), "Persediaan Obat Rawat Inap", 0, ttlhpp);
+                            if(Sequel.insertTampJurnal(akunobatranap.getHPP_Obat_Rawat_Inap(), "HPP Persediaan Obat Rawat Inap", ttlhpp, 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(akunobatranap.getPersediaan_Obat_Rawat_Inap(), "Persediaan Obat Rawat Inap", 0, ttlhpp)==false){
+                                sukses=false;
+                            }
                         }
                         if((ttljual>0)||(ttlhpp>0)){
-                            if (sukses) sukses = jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(TNoRw.getText(),"U","PEMBERIAN OBAT RAWAT INAP PASIEN "+TNoRw.getText()+" "+TNoRM.getText()+" "+TPasien.getText()+", DIPOSTING OLEH "+akses.getkode());
+                            }
                         }
                     }
 
@@ -1597,8 +1631,31 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
             i=tbObatRacikan.getSelectedColumn();
             if(evt.getKeyCode()==KeyEvent.VK_RIGHT){
                 if(i==5){
-                    akses.setform("DlgCariObat");
-                    this.bukaAturanpakai();
+                    if (aturanpakai == null || !aturanpakai.isDisplayable()) {
+                        aturanpakai=new DlgCariAturanPakai(null,false);
+                        aturanpakai.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
+                        aturanpakai.addWindowListener(new WindowAdapter() {
+                            @Override
+                            public void windowClosed(WindowEvent e) {
+                                if(aturanpakai.getTable().getSelectedRow()!= -1){
+                                    cariAturanPakai = aturanpakai.dicari().trim();
+                                    tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
+                                    tbObatRacikan.requestFocus();
+                                }
+                                aturanpakai=null;
+                            }
+                        });
+
+                        aturanpakai.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                        aturanpakai.setLocationRelativeTo(internalFrame1);
+                    }
+                    aturanpakai.setDicari(cariAturanPakai);
+                    if (aturanpakai == null) return;
+                    if (aturanpakai.isVisible()) {
+                        aturanpakai.toFront();
+                        return;
+                    }
+                    aturanpakai.setVisible(true);
                 }else if(i==3){
                     if(tbObatRacikan.getValueAt(tbObatRacikan.getSelectedRow(),1).equals("")){
                         JOptionPane.showMessageDialog(null,"Silahkan masukkan nama racikan..!!");
@@ -4147,41 +4204,6 @@ public final class DlgCariObat2 extends javax.swing.JDialog {
                 });
             }
         });
-    }
-
-    private void bukaAturanpakai() {
-        if (aturanpakai == null) {
-            aturanpakai=new DlgCariAturanPakai(null,false);
-            aturanpakai.addWindowListener(new WindowListener() {
-                @Override
-                public void windowOpened(WindowEvent e) {}
-                @Override
-                public void windowClosing(WindowEvent e) {}
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if(aturanpakai.getTable().getSelectedRow()!= -1){
-                        if(TabRawat.getSelectedIndex()==0){
-                            tbObat.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObat.getSelectedRow(),13);
-                        }else if(TabRawat.getSelectedIndex()==1){
-                            tbObatRacikan.setValueAt(aturanpakai.getTable().getValueAt(aturanpakai.getTable().getSelectedRow(),0).toString(),tbObatRacikan.getSelectedRow(),5);
-                            tbObatRacikan.requestFocus();
-                        }
-                    }
-                    tbObat.requestFocus();
-                }
-                @Override
-                public void windowIconified(WindowEvent e) {}
-                @Override
-                public void windowDeiconified(WindowEvent e) {}
-                @Override
-                public void windowActivated(WindowEvent e) {}
-                @Override
-                public void windowDeactivated(WindowEvent e) {}
-            });
-        }
-        aturanpakai.setSize(internalFrame1.getWidth(),internalFrame1.getHeight());
-        aturanpakai.setLocationRelativeTo(internalFrame1);
-        aturanpakai.setVisible(true);
     }
 
     private void cekPengaturanResepRanap() {

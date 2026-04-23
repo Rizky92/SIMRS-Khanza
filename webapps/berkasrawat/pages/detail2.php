@@ -75,7 +75,7 @@
                 </tr>
                 <tr class="isi2">
                     <td width="25%" valign="top">File Berkas(PDF/JPG)</td><td width="" valign="top">:</td>
-                    <td width="75%" valign="top"><input name="dokumen" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" type=file id="TxtIsi2" value="<?php echo $dokumen;?>" size="30" maxlength="255" accept="application/pdf,image/jpeg,image/jpg"/>
+                    <td width="75%" valign="top"><input name="dokumen" class="text" onkeydown="setDefault(this, document.getElementById('MsgIsi2'));" type=file id="TxtIsi2" value="<?php echo $dokumen;?>" size="30" maxlength="255" />
                     </td>
                 </tr>
             </table>

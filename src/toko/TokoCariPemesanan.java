@@ -745,12 +745,20 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
                           if(sukses==true){
                               Sequel.deleteTampJurnal();
-                              if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Penerimaan_Toko from set_akun"),"PERSEDIAAN BARANG TOKO",0,rs.getDouble("total"));
-                              if(rs.getDouble("ppn")>0){
-                                    if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select set_akun.PPN_Masukan from set_akun"),"PPN Masukan Toko",0,rs.getDouble("ppn"));
+                              if(Sequel.insertTampJurnal(Sequel.cariIsi("select Penerimaan_Toko from set_akun"),"PERSEDIAAN BARANG TOKO",0,rs.getDouble("total"))==false){
+                                  sukses=false;
                               }
-                              if (sukses) sukses = Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Penerimaan_Toko from set_akun"),"HUTANG BARANG TOKO",rs.getDouble("tagihan"),0);
-                              if (sukses) sukses = jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN TOKO"+", OLEH "+akses.getkode());
+                              if(rs.getDouble("ppn")>0){
+                                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select set_akun.PPN_Masukan from set_akun"),"PPN Masukan Toko",0,rs.getDouble("ppn"))==false){
+                                        sukses=false;
+                                    }
+                              }
+                              if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Penerimaan_Toko from set_akun"),"HUTANG BARANG TOKO",rs.getDouble("tagihan"),0)==false){
+                                  sukses=false;
+                              }
+                              if(sukses==true){
+                                  sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN TOKO"+", OLEH "+akses.getkode());
+                              }
                           }
 
                           if(sukses==true){

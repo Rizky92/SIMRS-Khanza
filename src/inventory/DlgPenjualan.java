@@ -290,35 +290,6 @@ public class DlgPenjualan extends javax.swing.JDialog {
         Ongkir.setDocument(new batasInput((byte)14).getOnlyAngka(Ongkir));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
 
-        PersenppnObat.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-            @Override
-            public void insertUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void removeUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void changedUpdate(DocumentEvent e) {isKembali();}
-        });
-
-        Ongkir.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-            @Override
-            public void insertUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void removeUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void changedUpdate(DocumentEvent e) {isKembali();}
-        });
-
-        Bayar.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
-            @Override
-            public void insertUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void removeUpdate(DocumentEvent e) {isKembali();}
-            @Override
-            public void changedUpdate(DocumentEvent e) {isKembali();}
-        });
-
-        TCari.requestFocus();
-
         try {
             hppfarmasi=koneksiDB.HPPFARMASI();
         } catch (Exception e) {
@@ -330,25 +301,6 @@ public class DlgPenjualan extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("E : "+e);
             DEPOAKTIFOBAT = "";
-        }
-
-        try {
-            aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
-            if(aktifkanbatch.equals("no")){
-                ppStok.setVisible(true);
-            }else{
-                ppStok.setVisible(false);
-            }
-        } catch (Exception e) {
-            System.out.println("E : "+e);
-            aktifkanbatch = "no";
-            ppStok.setVisible(true);
-        }
-
-        if(tampilkan_ppnobat_ralan.equals("Yes")){
-            PersenppnObat.setText("11");
-        }else{
-            PersenppnObat.setText("0");
         }
     }
 
@@ -1942,6 +1894,54 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
         } catch (Exception e) {
             System.out.println("Notif : "+e);
+        }
+
+        try {
+            aktifkanbatch = koneksiDB.AKTIFKANBATCHOBAT();
+            if(aktifkanbatch.equals("no")){
+                ppStok.setVisible(true);
+            }else{
+                ppStok.setVisible(false);
+            }
+        } catch (Exception e) {
+            System.out.println("E : "+e);
+            aktifkanbatch = "no";
+            ppStok.setVisible(true);
+        }
+
+        PersenppnObat.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void removeUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void changedUpdate(DocumentEvent e) {isKembali();}
+        });
+
+        Ongkir.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void removeUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void changedUpdate(DocumentEvent e) {isKembali();}
+        });
+
+        Bayar.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
+            @Override
+            public void insertUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void removeUpdate(DocumentEvent e) {isKembali();}
+            @Override
+            public void changedUpdate(DocumentEvent e) {isKembali();}
+        });
+
+        TCari.requestFocus();
+
+        if(tampilkan_ppnobat_ralan.equals("Yes")){
+            PersenppnObat.setText("11");
+        }else{
+            PersenppnObat.setText("0");
         }
 
         runBackground(() ->tampil());
@@ -4336,14 +4336,26 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         if(verifikasi_penjualan_di_kasir.equals("No")){
             if(sukses==true){
                 Sequel.deleteTampJurnal();
-                if (sukses) sukses = Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttl + ongkir);
-                if(besarppnobat>0){
-                    if (sukses) sukses = Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat);
+                if(Sequel.insertTampJurnal(Penjualan_Obat, "PENJUALAN OBAT BEBAS", 0, ttl + ongkir)==false){
+                    sukses=false;
                 }
-                if (sukses) sukses = Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), ttl + ongkir + besarppnobat, 0);
-                if (sukses) sukses = Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0);
-                if (sukses) sukses = Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp);
-                if (sukses) sukses = jur.simpanJurnal(NoNota.getText(),"U","PENJUALAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                if(besarppnobat>0){
+                    if(Sequel.insertTampJurnal(PPN_Keluaran, "PPN KELUARAN", 0, besarppnobat)==false){
+                        sukses=false;
+                    }
+                }
+                if(Sequel.insertTampJurnal(kode_akun_bayar, AkunBayar.getSelectedItem().toString(), ttl + ongkir + besarppnobat, 0)==false){
+                    sukses=false;
+                }
+                if(Sequel.insertTampJurnal(HPP_Obat_Jual_Bebas, "HPP Obat Jual Bebas", ttlhpp, 0)==false){
+                    sukses=false;
+                }
+                if(Sequel.insertTampJurnal(Persediaan_Obat_Jual_Bebas, "Persediaan Obat Jual Bebas", 0, ttlhpp)==false){
+                    sukses=false;
+                }
+                if(sukses==true){
+                    sukses=jur.simpanJurnal(NoNota.getText(),"U","PENJUALAN DI "+nmgudang.getText().toUpperCase()+", OLEH "+akses.getkode());
+                }
                 if(sukses==true){
                     sukses=Sequel.menyimpantf2("tagihan_sadewa","'"+NoNota.getText()+"','"+kdmem.getText()+"','"+nmmem.getText().replaceAll("'","")+"','-',concat('"+Valid.SetTgl(Tgl.getSelectedItem()+"")+
                             "',' ',CURTIME()),'Pelunasan','"+Double.toString(ttl+ongkir+besarppnobat)+"','"+Double.toString(ttl+ongkir+besarppnobat)+"','Sudah','"+akses.getkode()+"'","No.Nota");

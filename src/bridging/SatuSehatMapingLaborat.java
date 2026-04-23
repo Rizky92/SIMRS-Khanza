@@ -45,8 +45,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private final SatuSehatReferensiLabLOINC refPeriksa = new SatuSehatReferensiLabLOINC(null, false);
-    private final SatuSehatReferensiLabSNOMED refSampel = new SatuSehatReferensiLabSNOMED(null, false);
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -99,48 +97,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         SampelSystem.setDocument(new batasInput((byte)100).getKata(SampelSystem));
         SampelDisplay.setDocument(new batasInput((byte)80).getKata(SampelDisplay));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-
-        refPeriksa.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (refPeriksa.getTable().getSelectedRow() != -1) {
-                    PeriksaCode.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 0).toString());
-                    PeriksaSystem.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 1).toString());
-                    PeriksaDisplay.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 2).toString());
-                }
-                BtnCariReferensiMapping.requestFocus();
-            }
-        });
-
-        refPeriksa.getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    refPeriksa.dispose();
-                }
-            }
-        });
-
-        refSampel.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (refSampel.getTable().getSelectedRow() != -1) {
-                    SampelCode.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 0).toString());
-                    SampelSystem.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 1).toString());
-                    SampelDisplay.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 2).toString());
-                }
-                BtnCariReferensiSampel.requestFocus();
-            }
-        });
-
-        refSampel.getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    refSampel.dispose();
-                }
-            }
-        });
 
         ChkInput.setSelected(false);
         isForm();
@@ -642,7 +598,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         pemeriksaan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         pemeriksaan.setLocationRelativeTo(internalFrame1);
         pemeriksaan.emptTeks();
-        pemeriksaan.tampil2();
         pemeriksaan.setVisible(true);
     }//GEN-LAST:event_BtnCariTemplateLabActionPerformed
 
@@ -883,10 +838,30 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_NamaPemeriksaanKeyPressed
 
     private void BtnCariReferensiMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiMappingActionPerformed
+        SatuSehatReferensiLabLOINC refPeriksa = new SatuSehatReferensiLabLOINC(null, false);
+        refPeriksa.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (refPeriksa.getTable().getSelectedRow() != -1) {
+                    PeriksaCode.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 0).toString());
+                    PeriksaSystem.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 1).toString());
+                    PeriksaDisplay.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 2).toString());
+                }
+                BtnCariReferensiMapping.requestFocus();
+            }
+        });
+
+        refPeriksa.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    refPeriksa.dispose();
+                }
+            }
+        });
         refPeriksa.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         refPeriksa.setLocationRelativeTo(internalFrame1);
         refPeriksa.emptTeks();
-        refPeriksa.tampil();
         refPeriksa.setVisible(true);
     }//GEN-LAST:event_BtnCariReferensiMappingActionPerformed
 
@@ -897,6 +872,27 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariReferensiMappingKeyPressed
 
     private void BtnCariReferensiSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiSampelActionPerformed
+        SatuSehatReferensiLabSNOMED refSampel = new SatuSehatReferensiLabSNOMED(null, false);
+        refSampel.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (refSampel.getTable().getSelectedRow() != -1) {
+                    SampelCode.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 0).toString());
+                    SampelSystem.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 1).toString());
+                    SampelDisplay.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 2).toString());
+                }
+                BtnCariReferensiSampel.requestFocus();
+            }
+        });
+
+        refSampel.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    refSampel.dispose();
+                }
+            }
+        });
         refSampel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         refSampel.setLocationRelativeTo(internalFrame1);
         refSampel.emptTeks();

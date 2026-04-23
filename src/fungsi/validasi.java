@@ -157,6 +157,48 @@ public final class validasi {
         return getTglSmc(tgl, "dd-MM-yyyy");
     }
 
+    public void setTglSmc(Tanggal tanggal, String waktu) {
+        if (waktu == null || waktu.isBlank()) {
+            tanggal.setSelectedItem("01-01-0001");
+        } else {
+            tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4));
+        }
+    }
+
+    public void setJamSmc(ComboBox jam, ComboBox menit, ComboBox detik, String waktu) {
+        if (waktu == null || waktu.isBlank()) {
+            jam.setSelectedItem("00");
+            menit.setSelectedItem("00");
+            detik.setSelectedItem("00");
+        } else {
+            jam.setSelectedItem(waktu.substring(0, 2));
+            menit.setSelectedItem(waktu.substring(3, 5));
+            detik.setSelectedItem(waktu.substring(6, 8));
+        }
+    }
+
+    public void setTglJamSmc(Tanggal tanggal, String waktu) {
+        if (waktu == null || waktu.isBlank()) {
+            tanggal.setSelectedItem("01-01-0001 00:00:00");
+        } else {
+            tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4) + " " + waktu.substring(11, 19));
+        }
+    }
+
+    public void setTglJamSmc(Tanggal tanggal, ComboBox jam, ComboBox menit, ComboBox detik, String waktu) {
+        if (waktu == null || waktu.isBlank()) {
+            tanggal.setSelectedItem("01-01-0001");
+            jam.setSelectedItem("00");
+            menit.setSelectedItem("00");
+            detik.setSelectedItem("00");
+        } else {
+            tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4));
+            jam.setSelectedItem(waktu.substring(11, 13));
+            menit.setSelectedItem(waktu.substring(14, 16));
+            detik.setSelectedItem(waktu.substring(17, 19));
+        }
+    }
+
     public String setTglSmc(String tgl) {
         return tgl.substring(8, 10) + "-" + tgl.substring(5, 7) + "-" + tgl.substring(0, 4);
     }
@@ -470,6 +512,19 @@ public final class validasi {
         } catch (Exception e) {}
 
         return 0;
+    }
+
+    public String setAngkaSmc(Double value) {
+        if (value == null || value.isNaN()) {
+            return "0";
+        }
+
+        try {
+            BigDecimal bd = new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
+            return bd.toPlainString();
+        } catch (Exception e) {
+            return "0";
+        }
     }
 
     public boolean umurcacheSmc(String path, int hari) {
@@ -1959,6 +2014,13 @@ public final class validasi {
         file=new File(path);
         if (file.lastModified() < 1) return 0;
         return milliToDay(Calendar.getInstance().getTimeInMillis() - file.lastModified());
+    }
+
+    public long minutesOld(String path) {
+        file = new File(path);
+        if (file.lastModified() < 1) return 0;
+        long diffMillis = Calendar.getInstance().getTimeInMillis() - file.lastModified();
+        return TimeUnit.MILLISECONDS.toMinutes(diffMillis);
     }
 
     /**

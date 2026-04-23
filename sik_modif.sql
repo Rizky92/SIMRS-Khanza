@@ -264,15 +264,21 @@ CREATE TABLE IF NOT EXISTS `idrg_grouping_smc`  (
   `mdc_description` varchar(150) NULL DEFAULT NULL,
   `drg_code` varchar(10) NOT NULL,
   `drg_description` varchar(250) NULL DEFAULT NULL,
+  `kelas_rs` varchar(3) DEFAULT NULL,
+  `cost_weight` double DEFAULT NULL,
+  `sub_acute_weight` double DEFAULT NULL,
+  `chronic_weight` double DEFAULT NULL,
+  `total_cost_weight` double DEFAULT NULL,
+  `nbr` double DEFAULT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `idrg_grouping_smc_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `idrg_grouping_smc_bridging_sep_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_klaim_baru2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `idrg_klaim_final_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `nik` varchar(30) NOT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `idrg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `idrg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `idrg_grouping_smc` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `idrg_prosedur_pasien_smc`  (
@@ -314,7 +320,88 @@ CREATE TABLE IF NOT EXISTS `inacbg_cetak_klaim`  (
   `path` varchar(100) NULL DEFAULT NULL,
   `kirim_ke_dc` datetime NULL DEFAULT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `inacbg_cetak_klaim_bridging_sep_FK` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `inacbg_cetak_klaim_bridging_sep_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_data_terkirim2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `nomor_kartu` varchar(20) NOT NULL,
+  `tgl_masuk` datetime NOT NULL,
+  `tgl_pulang` datetime NOT NULL,
+  `cara_masuk` enum('gp','hosp-trans','mp','outp','inp','emd','born','nursing','psych','rehab','other') NOT NULL,
+  `jenis_rawat` enum('1','2','3') NOT NULL,
+  `kelas_rawat` enum('1','2','3') NOT NULL,
+  `adl_sub_acute` varchar(2) NOT NULL DEFAULT '',
+  `adl_chronic` varchar(2) NOT NULL DEFAULT '',
+  `icu_indicator` enum('','0','1') NOT NULL DEFAULT '',
+  `icu_los` varchar(2) NOT NULL DEFAULT '',
+  `ventilator_hour` varchar(2) NOT NULL DEFAULT '',
+  `upgrade_class_ind` enum('','0','1') NOT NULL DEFAULT '',
+  `upgrade_class_class` enum('','kelas_2','kelas_1','vip','vvip') NOT NULL DEFAULT '',
+  `upgrade_class_los` varchar(2) NOT NULL DEFAULT '',
+  `upgrade_class_payor` enum('','peserta','pemberi_kerja','asuransi_tambahan') NOT NULL DEFAULT '',
+  `add_payment_pct` int(10) unsigned DEFAULT NULL,
+  `birth_weight` varchar(10) NOT NULL DEFAULT '',
+  `sistole` varchar(4) NOT NULL,
+  `diastole` varchar(4) NOT NULL,
+  `discharge_status` enum('1','2','3','4','5') NOT NULL,
+  `dializer_single_use` enum('','0','1') NOT NULL DEFAULT '',
+  `kantong_darah` varchar(5) NOT NULL DEFAULT '',
+  `alteplase_ind` enum('','0','1') NOT NULL DEFAULT '',
+  `menit_1_appearance` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_1_pulse` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_1_grimace` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_1_activity` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_1_respiration` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_5_appearance` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_5_pulse` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_5_grimace` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_5_activity` enum('','0','1','2') NOT NULL DEFAULT '',
+  `menit_5_respiration` enum('','0','1','2') NOT NULL DEFAULT '',
+  `usia_kehamilan` varchar(3) NOT NULL DEFAULT '',
+  `gravida` varchar(3) NOT NULL DEFAULT '',
+  `partus` varchar(3) NOT NULL DEFAULT '',
+  `abortus` varchar(3) NOT NULL DEFAULT '',
+  `onset_kontraksi` enum('','spontan','induksi','non_spontan_non_induksi') NOT NULL DEFAULT '',
+  `tarif_poli_eks` varchar(10) NOT NULL DEFAULT '',
+  `nama_dokter` varchar(150) NOT NULL,
+  `kode_tarif` varchar(3) NOT NULL,
+  `payor_id` varchar(3) NOT NULL DEFAULT '',
+  `payor_cd` varchar(10) NOT NULL DEFAULT '',
+  `cob_cd` varchar(10) NOT NULL DEFAULT '',
+  PRIMARY KEY (`no_sep`) USING BTREE,
+  CONSTRAINT `inacbg_data_klaim_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_klaim_baru2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE,
+  INDEX `tgl_masuk`(`tgl_masuk`) USING BTREE,
+  INDEX `tgl_pulang`(`tgl_pulang`) USING BTREE,
+  INDEX `nama_dokter`(`nama_dokter`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_persalinan_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `delivery_sequence` tinyint(3) UNSIGNED NOT NULL,
+  `delivery_method` enum('Vaginal','SC') NULL DEFAULT NULL,
+  `delivery_date` date NULL DEFAULT NULL,
+  `delivery_time` time NULL DEFAULT NULL,
+  `letak_janin` enum('Kepala','Sungsang','Lintang') NULL DEFAULT NULL,
+  `kondisi` enum('Hidup','Meninggal') NULL DEFAULT NULL,
+  `use_manual` enum('0. Tidak','1. Ya') NULL DEFAULT NULL,
+  `use_forcep` enum('0. Tidak','1. Ya') NULL DEFAULT NULL,
+  `use_vacuum` enum('0. Tidak','1. Ya') NULL DEFAULT NULL,
+  `shk_spesimen_ambil` enum('Tidak','Ya') NULL DEFAULT NULL,
+  `shk_lokasi` enum('','Tumit','Vena') NULL DEFAULT NULL,
+  `shk_spesimen_date` date NULL DEFAULT NULL,
+  `shk_spesimen_time` time NULL DEFAULT NULL,
+  `shk_alasan` enum('','Tidak dapat dilakukan','Akses sulit') NULL DEFAULT NULL,
+  PRIMARY KEY (`no_sep`, `delivery_sequence`) USING BTREE,
+  CONSTRAINT `inacbg_data_klaim_persalinan_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_tarif_smc` (
+  `no_sep` varchar(40) NOT NULL,
+  `tarif_rs` varchar(30) NOT NULL,
+  `nilai` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_sep`, `tarif_rs`) USING BTREE,
+  CONSTRAINT `inacbg_data_klaim_tarif_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_data_klaim_smc` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `inacbg_diagnosa_pasien_smc`  (
@@ -336,7 +423,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_grouping_stage2_smc`  (
   `cmg_type` varchar(50) NULL DEFAULT NULL,
   `tariff` double NOT NULL DEFAULT 0,
   PRIMARY KEY (`no_sep`, `cmg_code`) USING BTREE,
-  CONSTRAINT `inacbg_grouping_stage2_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `inacbg_grouping_stage2_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_grouping_stage12` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `inacbg_grouping_stage12` ADD COLUMN IF NOT EXISTS `top_up` enum('Tidak Ada','Belum','Sudah') NOT NULL DEFAULT 'Tidak Ada' AFTER `tarif`;
@@ -345,7 +432,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_klaim_final_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `nik` varchar(30) NOT NULL,
   PRIMARY KEY (`no_sep`) USING BTREE,
-  CONSTRAINT `inacbg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `inacbg_klaim_final_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_grouping_stage12` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `inacbg_pasien_tb_smc`  (

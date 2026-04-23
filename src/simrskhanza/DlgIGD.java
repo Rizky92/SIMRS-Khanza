@@ -90,6 +90,8 @@ import laporan.DlgDataInsidenKeselamatan;
 import laporan.DlgDiagnosaPenyakit;
 import laporan.DlgFrekuensiPenyakitRalan;
 import permintaan.DlgBookingOperasi;
+import permintaan.DlgPermintaanKonsultasiMedik;
+import permintaan.DlgPermintaanKonsultasiPerawat;
 import permintaan.DlgPermintaanLaboratorium;
 import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRadiologi;
@@ -509,13 +511,6 @@ public final class DlgIGD extends javax.swing.JDialog {
         if(catatanpasien.getTampilkanCatatan().equals("")){
             catatanpasien.SetCatatanPasien();
         }
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowActivated(WindowEvent e) {
-                tampilSmc();
-            }
-        });
     }
 
     /** This method is called from within the constructor to
@@ -6318,11 +6313,11 @@ public final class DlgIGD extends javax.swing.JDialog {
                 @Override
                 public void windowClosed(WindowEvent e) {
                     if(dokter.getTable().getSelectedRow()!= -1){
-                            KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
-                            TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
-                            isNumber();
-                            KdDokter.requestFocus();
-                        }
+                        KdDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),0).toString());
+                        TDokter.setText(dokter.getTable().getValueAt(dokter.getTable().getSelectedRow(),1).toString());
+                        isNumber();
+                        KdDokter.requestFocus();
+                    }
                     dokter=null;
                 }
             });
@@ -12264,6 +12259,52 @@ public final class DlgIGD extends javax.swing.JDialog {
         }
     }
 
+    private void MnPermintaanKonsultasiMedikActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgPermintaanKonsultasiMedik form=new DlgPermintaanKonsultasiMedik(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
+                form.tampil2();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
+    private void MnPermintaanKonsultasiPerawatActionPerformed(java.awt.event.ActionEvent evt) {
+        if(tabMode.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, table masih kosong...!!!!");
+            TNoReg.requestFocus();
+        }else if(TPasien.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(null,"Maaf, Silahkan anda pilih dulu dengan menklik data pada table...!!!");
+            tbPetugas.requestFocus();
+        }else{
+            if(tbPetugas.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                DlgPermintaanKonsultasiPerawat form=new DlgPermintaanKonsultasiPerawat(null,false);
+                form.isCek();
+                form.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                form.setLocationRelativeTo(internalFrame1);
+                form.setVisible(true);
+                form.emptTeks();
+                form.setNoRm(TNoRw.getText(),TNoRM.getText(),TPasien.getText());
+                form.tampil2();
+                this.setCursor(Cursor.getDefaultCursor());
+            }
+        }
+    }
+
     /**
     * @data args the command line arguments
     */
@@ -12598,7 +12639,8 @@ public final class DlgIGD extends javax.swing.JDialog {
                                   MnSkriningKesehatanGigiMulutBalita,MnSkriningRisikoKankerServiks,MnCatatanCairanHemodialisa,MnSkriningKesehatanGigiMulutLansia,MnSkriningIndraPendengaran,MnCatatanPengkajianPaskaOperasi,
                                   MnSkriningFrailtySyndrome,MnCatatanObservasiBayi,MnCheckListKesiapanAnestesi,MnHasilPemeriksaanSlitLamp,MnHasilPemeriksaanOCT,MnCetakSuratKeteranganLayakTerbang,MnPersetujuanPemeriksaanHIV,
                                   MnSkriningInstrumenACRS,MnPernyataanMemilihDPJP,MnSkriningInstrumenMentalEmosional,MnCheckListKriteriaMasukNICU,MnCheckListKriteriaMasukPICU,MnSkriningInstrumenAMT,MnSkriningPneumoniaSeverityIndex,
-                                  MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT,MnSkriningCURB65,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh;
+                                  MnHasilPemeriksaanTreadmill,MnHasilPemeriksaanECHOPediatrik,MnSkriningInstrumenESAT,MnSkriningCURB65,MnSkriningGiziKehamilan,MnSerahTerimaBarangAnggotaTubuh,MnPermintaanKonsultasiMedik,
+                                  MnPermintaanKonsultasiPerawat;
     private javax.swing.JMenu MnRMSkrining,MnEdukasi,MnRMSkriningRisikoKanker,MnRMSkriningKesehatanGigiMulut,MnSuratPersetujuan,MnSkriningInstrumen,MnSkriningParu;
 
     /*
@@ -13134,6 +13176,8 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnCheckListKriteriaMasukPICU.setEnabled(akses.getkriteria_masuk_picu());
         MnSkriningCURB65.setEnabled(akses.getskrining_curb65());
         MnSkriningGiziKehamilan.setEnabled(akses.getskrining_gizi_kehamilan());
+        MnPermintaanKonsultasiMedik.setEnabled(akses.getkonsultasi_medik());
+        MnPermintaanKonsultasiPerawat.setEnabled(akses.getkonsultasi_perawat());
     }
 
     private void isNumber(){
@@ -14056,6 +14100,30 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnSkriningGiziKehamilan.setPreferredSize(new java.awt.Dimension(260, 26));
         MnSkriningGiziKehamilan.addActionListener(this::MnSkriningGiziKehamilanActionPerformed);
 
+        MnPermintaanKonsultasiMedik = new javax.swing.JMenuItem();
+        MnPermintaanKonsultasiMedik.setBackground(new java.awt.Color(255, 255, 254));
+        MnPermintaanKonsultasiMedik.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPermintaanKonsultasiMedik.setForeground(new java.awt.Color(50, 50, 50));
+        MnPermintaanKonsultasiMedik.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPermintaanKonsultasiMedik.setText("Konsultasi Medik");
+        MnPermintaanKonsultasiMedik.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPermintaanKonsultasiMedik.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPermintaanKonsultasiMedik.setName("MnPermintaanKonsultasiMedik");
+        MnPermintaanKonsultasiMedik.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnPermintaanKonsultasiMedik.addActionListener(this::MnPermintaanKonsultasiMedikActionPerformed);
+
+        MnPermintaanKonsultasiPerawat = new javax.swing.JMenuItem();
+        MnPermintaanKonsultasiPerawat.setBackground(new java.awt.Color(255, 255, 254));
+        MnPermintaanKonsultasiPerawat.setFont(new java.awt.Font("Tahoma", 0, 11));
+        MnPermintaanKonsultasiPerawat.setForeground(new java.awt.Color(50, 50, 50));
+        MnPermintaanKonsultasiPerawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/category.png")));
+        MnPermintaanKonsultasiPerawat.setText("Konsultasi Perawat");
+        MnPermintaanKonsultasiPerawat.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        MnPermintaanKonsultasiPerawat.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        MnPermintaanKonsultasiPerawat.setName("MnPermintaanKonsultasiPerawat");
+        MnPermintaanKonsultasiPerawat.setPreferredSize(new java.awt.Dimension(210, 26));
+        MnPermintaanKonsultasiPerawat.addActionListener(this::MnPermintaanKonsultasiPerawatActionPerformed);
+
         MnRMSkriningRisikoKanker = new javax.swing.JMenu();
         MnRMSkriningRisikoKanker.setBackground(new java.awt.Color(255, 255, 254));
         MnRMSkriningRisikoKanker.setForeground(new java.awt.Color(50, 50, 50));
@@ -14247,6 +14315,9 @@ public final class DlgIGD extends javax.swing.JDialog {
         MnEdukasi.add(MnPelaksanaanInformasiEdukasi);
 
         MnTindakan.add(MnDataOperasi);
+
+        MnPermintaan.add(MnPermintaanKonsultasiMedik);
+        MnPermintaan.add(MnPermintaanKonsultasiPerawat);
 
         MnDataRM.add(MnRMSkrining);
         MnDataRM.add(MnRMIGD);
