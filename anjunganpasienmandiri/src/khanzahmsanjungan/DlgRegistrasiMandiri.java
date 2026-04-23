@@ -30,7 +30,7 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
     private final DlgCariPoli poli;
     private final DlgCariDokter dokter;
     private final String URUTNOREG = koneksiDB.URUTNOREG();
-    private int printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
+    private int printJumlahBarcode = 0;
     private String hari = "",
         noRawat = "",
         noReg = "",
@@ -51,8 +51,8 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
         poliBiaya = "",
         poliBiayaLama = "",
         umurPasien = "",
-        printerBarcode = koneksiDB.PRINTER_BARCODE(),
-        kodePoliEksekutif = koneksiDB.KODEPOLIEKSEKUTIF();
+        printerBarcode = "",
+        kodePoliEksekutif = "";
 
     public DlgRegistrasiMandiri(java.awt.Frame parent, boolean model) {
         super(parent, model);
@@ -394,7 +394,7 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
                 param.put("kotars", instansiKota);
                 param.put("kontakrs", instansiKontak);
                 param.put("norawat", noRawat);
-                Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, koneksiDB.PRINTER_BARCODE(), koneksiDB.PRINTJUMLAHBARCODE());
+                Valid.printReportSmc("rptBarcodeRawatAPM.jasper", "report", "::[ Barcode Perawatan ]::", param, printerBarcode, printJumlahBarcode);
                 Valid.popupInfoDialog("Berhasil!");
             } else {
                 Valid.popupInfoDialog("Pendaftaran gagal..!!\nSilahkan coba kembali.");
@@ -579,19 +579,23 @@ public class DlgRegistrasiMandiri extends widget.Dialog {
                 final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
 
                 if (decrypted.hasNonNull("kodePoliEksekutif")) {
-                    kodePoliEksekutif = decrypted.path("kodePoliEksekutif").asText(koneksiDB.KODEPOLIEKSEKUTIF());
+                    kodePoliEksekutif = decrypted.path("kodePoliEksekutif").asText();
                 }
 
                 if (decrypted.hasNonNull("printerBarcode")) {
-                    printerBarcode = decrypted.path("printerBarcode").asText(koneksiDB.PRINTER_BARCODE());
+                    printerBarcode = decrypted.path("printerBarcode").asText();
                 }
 
                 if (decrypted.hasNonNull("printJumlahBarcode")) {
-                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(koneksiDB.PRINTJUMLAHBARCODE());
+                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(0);
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+        } else {
+            kodePoliEksekutif = koneksiDB.KODEPOLIEKSEKUTIF();
+            printerBarcode = koneksiDB.PRINTER_BARCODE();
+            printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
         }
     }
 }

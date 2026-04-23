@@ -23,6 +23,11 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
+CREATE TABLE `antrifotokelahiranbayismc`  (
+  `no_rkm_medis` varchar(15) NOT NULL,
+  PRIMARY KEY (`no_rkm_medis`) USING BTREE
+) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 CREATE TABLE IF NOT EXISTS `antriloketcetak_smc`  (
   `nomor` varchar(6) NOT NULL,
   `tanggal` date NOT NULL,
@@ -527,6 +532,13 @@ ALTER TABLE `pasien` MODIFY COLUMN IF EXISTS `nm_ibu` varchar(60) NOT NULL AFTER
 ALTER TABLE `pasien` ADD INDEX IF NOT EXISTS `tgl_daftar`(`tgl_daftar`) USING BTREE;
 
 ALTER TABLE `pasien` ADD INDEX IF NOT EXISTS `tgl_lahir`(`tgl_lahir`) USING BTREE;
+
+CREATE TABLE `pasien_bayi_gambar_smc`  (
+  `no_rkm_medis` varchar(15) NOT NULL,
+  `photo` varchar(500) NOT NULL,
+  PRIMARY KEY (`no_rkm_medis`) USING BTREE,
+  CONSTRAINT `pasien_bayi_gambar_smc_ibfk_1` FOREIGN KEY (`no_rkm_medis`) REFERENCES `pasien_bayi` (`no_rkm_medis`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `pegawai` MODIFY COLUMN IF EXISTS `nama` varchar(100) NOT NULL AFTER `nik`;
 

@@ -200,15 +200,18 @@ public class DlgAmbilAntrianFarmasi extends widget.Dialog {
                 final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
 
                 if (decrypted.hasNonNull("printerAntrian")) {
-                    printerAntrian = decrypted.path("printerAntrian").asText(koneksiDB.PRINTER_ANTRIAN());
+                    printerAntrian = decrypted.path("printerAntrian").asText();
                 }
 
                 if (decrypted.hasNonNull("printJumlahAntrianFarmasi")) {
-                    printJumlahAntrianFarmasi = decrypted.path("printJumlahAntrianFarmasi").asInt(koneksiDB.PRINTJUMLAHANTRIANFARMASI());
+                    printJumlahAntrianFarmasi = decrypted.path("printJumlahAntrianFarmasi").asInt(0);
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+        } else {
+            printerAntrian = koneksiDB.PRINTER_ANTRIAN();
+            printJumlahAntrianFarmasi = koneksiDB.PRINTJUMLAHANTRIANFARMASI();
         }
     }
 }

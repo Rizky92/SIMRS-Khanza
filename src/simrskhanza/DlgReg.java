@@ -688,17 +688,6 @@ public final class DlgReg extends javax.swing.JDialog {
 
         ChkInput.setSelected(false);
         isForm();
-
-        addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowActivated(WindowEvent e) {
-                if (TabRawat.getSelectedIndex() == 0) {
-                    tampilSmc();
-                } else if (TabRawat.getSelectedIndex() == 1) {
-                    tampil2Smc();
-                }
-            }
-        });
     }
 
     /** This method is called from within the constructor to
@@ -9211,6 +9200,11 @@ public final class DlgReg extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluar3KeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        if (TabRawat.getSelectedIndex() == 0) {
+            tampilSmc();
+        } else if (TabRawat.getSelectedIndex() == 1) {
+            tampil2Smc();
+        }
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override

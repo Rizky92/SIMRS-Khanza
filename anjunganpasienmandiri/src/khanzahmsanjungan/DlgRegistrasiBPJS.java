@@ -96,13 +96,13 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         statusUmur = "Th",
         umurPasien = "",
         noTelpBPJS = "",
-        printerRegistrasi = koneksiDB.PRINTER_REGISTRASI(),
-        printerBarcode = koneksiDB.PRINTER_BARCODE(),
-        pathFingerprint = koneksiDB.URLAPLIKASIFINGERPRINTBPJS(),
-        pathFrista = koneksiDB.URLAPLIKASIFRISTABPJS(),
+        printerRegistrasi = "",
+        printerBarcode = "",
+        pathFingerprint = "",
+        pathFrista = "",
         userLoginValidasi = "",
         passLoginValidasi = "";
-    private int kuota = 0, sisaKuota = 0, printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
+    private int kuota = 0, sisaKuota = 0, printJumlahBarcode = 0;
     private final ObjectMapper mapper = new ObjectMapper();
     private JsonNode root, response, metadata;
     private HttpHeaders headers;
@@ -112,7 +112,7 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
         fristaAktif = false,
         isMobileJKN = false,
         bisaTampilkanNumpad = false,
-        batasRegistrasiSatuJam = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
+        batasRegistrasiSatuJam = false;
     private Date parsedDate;
 
     public DlgRegistrasiBPJS(java.awt.Frame parent, boolean modal) {
@@ -3103,8 +3103,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 final JsonNode decrypted = mapper.readTree(EnkripsiAES.decrypt(root.asText()));
 
                 if (decrypted.hasNonNull("frista")) {
-                    pathFrista = decrypted.path("frista").path("path").asText(koneksiDB.URLAPLIKASIFRISTABPJS());
-                    if (decrypted.path("frista").path("aktifkan").asBoolean(Arrays.asList(koneksiDB.VALIDASIBIOMETRIKAKTIF()).contains("frista"))) {
+                    pathFrista = decrypted.path("frista").path("path").asText();
+                    if (decrypted.path("frista").path("aktifkan").asBoolean()) {
                         panelValidasi.add(btnFrista);
                         panelTambahanValidasi.remove(btnFrista);
                     } else {
@@ -3114,8 +3114,8 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 }
 
                 if (decrypted.hasNonNull("fingerprint")) {
-                    pathFingerprint = decrypted.path("fingerprint").path("path").asText(koneksiDB.URLAPLIKASIFINGERPRINTBPJS());
-                    if (decrypted.path("fingerprint").path("aktifkan").asBoolean(Arrays.asList(koneksiDB.VALIDASIBIOMETRIKAKTIF()).contains("fingerprint"))) {
+                    pathFingerprint = decrypted.path("fingerprint").path("path").asText();
+                    if (decrypted.path("fingerprint").path("aktifkan").asBoolean()) {
                         panelValidasi.add(btnFingerprint);
                         panelTambahanValidasi.remove(btnFingerprint);
                     } else {
@@ -3135,23 +3135,49 @@ public class DlgRegistrasiBPJS extends widget.Dialog {
                 }
 
                 if (decrypted.hasNonNull("printerRegist")) {
-                    printerRegistrasi = decrypted.path("printerRegist").asText(koneksiDB.PRINTER_REGISTRASI());
+                    printerRegistrasi = decrypted.path("printerRegist").asText();
                 }
 
                 if (decrypted.hasNonNull("printerBarcode")) {
-                    printerBarcode = decrypted.path("printerBarcode").asText(koneksiDB.PRINTER_BARCODE());
+                    printerBarcode = decrypted.path("printerBarcode").asText();
                 }
 
                 if (decrypted.hasNonNull("printJumlahBarcode")) {
-                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(koneksiDB.PRINTJUMLAHBARCODE());
+                    printJumlahBarcode = decrypted.path("printJumlahBarcode").asInt(0);
                 }
 
                 if (decrypted.hasNonNull("batasRegistrasiSatuJam")) {
-                    batasRegistrasiSatuJam = decrypted.path("batasRegistrasiSatuJam").asBoolean(koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK());
+                    batasRegistrasiSatuJam = decrypted.path("batasRegistrasiSatuJam").asBoolean(false);
                 }
             } catch (Exception e) {
                 System.out.println("Notif : " + e);
             }
+        } else {
+            String[] valbiom = koneksiDB.VALIDASIBIOMETRIKAKTIF();
+            pathFrista = koneksiDB.URLAPLIKASIFRISTABPJS();
+            if (Arrays.asList(valbiom).contains("frista")) {
+                panelValidasi.add(btnFrista);
+                panelTambahanValidasi.remove(btnFrista);
+            } else {
+                panelValidasi.remove(btnFrista);
+                panelTambahanValidasi.add(btnFrista);
+            }
+            pathFingerprint = koneksiDB.URLAPLIKASIFINGERPRINTBPJS();
+            if (Arrays.asList(valbiom).contains("fingerprint")) {
+                panelValidasi.add(btnFingerprint);
+                panelTambahanValidasi.remove(btnFingerprint);
+            } else {
+                panelValidasi.remove(btnFingerprint);
+                panelTambahanValidasi.add(btnFingerprint);
+            }
+            panelValidasi.repaint();
+            panelTambahanValidasi.repaint();
+            userLoginValidasi = EnkripsiAES.encrypt(koneksiDB.USERFINGERPRINTBPJS());
+            passLoginValidasi = EnkripsiAES.encrypt(koneksiDB.PASSWORDFINGERPRINTBPJS());
+            printerRegistrasi = koneksiDB.PRINTER_REGISTRASI();
+            printerBarcode = koneksiDB.PRINTER_BARCODE();
+            printJumlahBarcode = koneksiDB.PRINTJUMLAHBARCODE();
+            batasRegistrasiSatuJam = koneksiDB.REGISTRASISATUJAMSEBELUMJAMPRAKTEK();
         }
     }
 }

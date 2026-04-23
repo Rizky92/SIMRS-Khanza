@@ -514,6 +514,19 @@ public final class validasi {
         return 0;
     }
 
+    public String setAngkaSmc(Double value) {
+        if (value == null || value.isNaN()) {
+            return "0";
+        }
+
+        try {
+            BigDecimal bd = new BigDecimal(value).setScale(2, RoundingMode.HALF_UP);
+            return bd.toPlainString();
+        } catch (Exception e) {
+            return "0";
+        }
+    }
+
     public boolean umurcacheSmc(String path, int hari) {
         try {
             File file = new File(path);

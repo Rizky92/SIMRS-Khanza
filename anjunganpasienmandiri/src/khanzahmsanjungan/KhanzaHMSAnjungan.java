@@ -81,6 +81,12 @@ public class KhanzaHMSAnjungan {
             UIManager.put("TextField.selectionForeground", Color.WHITE);
             UIManager.put("TextField.inactiveBackground", disableEditBackground);
             UIManager.put("TextField.font", main);
+            UIManager.put("PasswordField.font", main);
+            UIManager.put("PasswordField.foreground", foreground);
+            UIManager.put("PasswordField.background", Color.WHITE);
+            UIManager.put("PasswordField.selectionBackground", foreground);
+            UIManager.put("PasswordField.selectionForeground", Color.WHITE);
+            UIManager.put("PasswordField.inactiveBackground", disableEditBackground);
             UIManager.put("TableHeader.background", Color.WHITE);
             UIManager.put("TableHeader.foreground", foreground);
             UIManager.put("TableHeader.font", new Font("Inter", Font.BOLD, 14));
@@ -88,10 +94,10 @@ public class KhanzaHMSAnjungan {
             UIManager.put("ScrollBar.width", 16);
             UIManager.put("ScrollPane.smoothScrolling", true);
             UIManager.put("Button.arc", 16);
-            UIManager.put("Component.arc", 8);
+            UIManager.put("Component.arc", 16);
             UIManager.put("CheckBox.arc", 8);
             UIManager.put("ProgressBar.arc", 16);
-            UIManager.put("TextComponent.arc", 8);
+            UIManager.put("TextComponent.arc", 16);
         } catch (Exception e) {
             System.err.println("Failed to initialize LaF");
         }
@@ -110,15 +116,15 @@ public class KhanzaHMSAnjungan {
                     for (PrintService ps : PrintServiceLookup.lookupPrintServices(null, null)) {
                         System.out.println("Printer ditemukan: " + ps.getName());
 
-                        if (ps.getName().equals(decrypted.path("printerRegist").asText(koneksiDB.PRINTER_REGISTRASI()))) {
+                        if (ps.getName().equals(decrypted.path("printerRegist").asText())) {
                             printerRegistrasi = ps.getName();
                         }
 
-                        if (ps.getName().equals(decrypted.path("printerBarcode").asText(koneksiDB.PRINTER_BARCODE()))) {
+                        if (ps.getName().equals(decrypted.path("printerBarcode").asText())) {
                             printerBarcode = ps.getName();
                         }
 
-                        if (ps.getName().equals(decrypted.path("printerAntrian").asText(koneksiDB.PRINTER_ANTRIAN()))) {
+                        if (ps.getName().equals(decrypted.path("printerAntrian").asText())) {
                             printerAntrian = ps.getName();
                         }
                     }
