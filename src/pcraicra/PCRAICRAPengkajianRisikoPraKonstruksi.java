@@ -55,8 +55,8 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     private Connection koneksi=koneksiDB.condb();
     private sekuel Sequel=new sekuel();
     private validasi Valid=new validasi();
-    private PreparedStatement ps;
-    private ResultSet rs;
+    private PreparedStatement ps,pscari;
+    private ResultSet rs,rscari;
     private int i=0,jml=0,index=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
@@ -89,10 +89,10 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
         initComponents();
 
         tabMode=new DefaultTableModel(null,new Object[]{
-            "No.Pengkajian","No.Proyek","Nama Proyek","Lokasi Proyek","Mulai Proyek","Perkiraan Selesai","Deskripsi Pekerjaan","Penangung Jawab Proyek(Pelaksana)",
+            "No.Pengkajian","No.Proyek","Nama Proyek","Lokasi Proyek","Mulai","Selesai","Deskripsi Pekerjaan","Penangung Jawab Proyek(Pelaksana)",
             "Pelaksana/Kontraktor","Kode Aktivitas","Jenis Aktivitas Proyek","Deskripsi Lokasi Proyek","Kelompok Area Yang Terdampak","Identifikasi Risiko Kebakaran",
             "Identifikasi Risiko Infeksi","Identifikasi Risiko Keselamatan","Identifikasi Risiko Utilitas","Penyebab Risiko Lainnya","Kode Risiko",
-            "Kelas Risiko/Pencegahan","Kebutuhan ICRA","Tindakan Pengendalian Yang Bisa Dilakukan","Rekomendasi Selama Pengerjaan","Rekomendasi Setelah Pengerjaan",
+            "Kelas Risiko/Pencegahan","ICRA","Tindakan Pengendalian Yang Bisa Dilakukan","Rekomendasi Selama Pengerjaan","Rekomendasi Setelah Pengerjaan",
             "Hal-hal Yang Perlu Dimonitor Secara Khusus","Persyaratan Yang Harus Dipenuhi Sebelum Pengerjaan","Catatan Tim PPI/K3/Lainnya","NIP Tim K3","Nama Tim K3",
             "NIP P.J. Proyek","P.J. Proyek","NIP Manajer","Nama Manajer","NIP Direktur","Nama Direktur","Tanggal Pengkajian"
         }){
@@ -107,6 +107,48 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
             TableColumn column = tbObat.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(105);
+            }else if(i==1){
+                column.setPreferredWidth(105);
+            }else if(i==2){
+                column.setPreferredWidth(220);
+            }else if(i==3){
+                column.setPreferredWidth(220);
+            }else if(i==4){
+                column.setPreferredWidth(65);
+            }else if(i==5){
+                column.setPreferredWidth(65);
+            }else if(i==6){
+                column.setPreferredWidth(220);
+            }else if(i==7){
+                column.setPreferredWidth(170);
+            }else if(i==8){
+                column.setPreferredWidth(150);
+            }else if(i==9){
+                column.setPreferredWidth(78);
+            }else if(i==10){
+                column.setPreferredWidth(220);
+            }else if(i==11){
+                column.setPreferredWidth(220);
+            }else if(i==12){
+                column.setPreferredWidth(250);
+            }else if(i==13){
+                column.setPreferredWidth(250);
+            }else if(i==14){
+                column.setPreferredWidth(250);
+            }else if(i==15){
+                column.setPreferredWidth(250);
+            }else if(i==16){
+                column.setPreferredWidth(250);
+            }else if(i==17){
+                column.setPreferredWidth(250);
+            }else if(i==18){
+                column.setPreferredWidth(67);
+            }else if(i==19){
+                column.setPreferredWidth(150);
+            }else if(i==20){
+                column.setPreferredWidth(50);
+            }else if(i==21){
+                column.setPreferredWidth(250);
             }
         }
         tbObat.setDefaultRenderer(Object.class, new WarnaTable());
@@ -2203,7 +2245,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     }
                 }
                 if (kelompokarea.length() > 0) {
-                    kelompokarea.setLength(kelompokarea.length() - 1);
+                    kelompokarea.setLength(kelompokarea.length() - 2);
                 }
 
                 StringBuilder risikokebakaran = new StringBuilder();
@@ -2216,7 +2258,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     }
                 }
                 if (risikokebakaran.length() > 0) {
-                    risikokebakaran.setLength(risikokebakaran.length() - 1);
+                    risikokebakaran.setLength(risikokebakaran.length() - 2);
                 }
 
                 StringBuilder risikoinfeksi = new StringBuilder();
@@ -2229,7 +2271,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     }
                 }
                 if (risikoinfeksi.length() > 0) {
-                    risikoinfeksi.setLength(risikoinfeksi.length() - 1);
+                    risikoinfeksi.setLength(risikoinfeksi.length() - 2);
                 }
 
                 StringBuilder risikokeselamatan = new StringBuilder();
@@ -2242,7 +2284,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     }
                 }
                 if (risikokeselamatan.length() > 0) {
-                    risikokeselamatan.setLength(risikokeselamatan.length() - 1);
+                    risikokeselamatan.setLength(risikokeselamatan.length() - 2);
                 }
 
                 StringBuilder risikoutilitas = new StringBuilder();
@@ -2255,7 +2297,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     }
                 }
                 if (risikoutilitas.length() > 0) {
-                    risikoutilitas.setLength(risikoutilitas.length() - 1);
+                    risikoutilitas.setLength(risikoutilitas.length() - 2);
                 }
 
                 StringBuilder pengendalian = new StringBuilder();
@@ -2268,7 +2310,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     }
                 }
                 if (pengendalian.length() > 0) {
-                    pengendalian.setLength(pengendalian.length() - 1);
+                    pengendalian.setLength(pengendalian.length() - 2);
                 }
 
                 StringBuilder persyaratan = new StringBuilder();
@@ -2281,7 +2323,7 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     }
                 }
                 if (persyaratan.length() > 0) {
-                    persyaratan.setLength(persyaratan.length() - 1);
+                    persyaratan.setLength(persyaratan.length() - 2);
                 }
 
                 tabMode.addRow(new Object[]{
@@ -3699,37 +3741,31 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
-            /*
-            "No.Pengkajian","No.Proyek","Nama Proyek","Lokasi Proyek","Mulai Proyek","Perkiraan Selesai","Deskripsi Pekerjaan","Penangung Jawab Proyek(Pelaksana)",
-            "Pelaksana/Kontraktor","Kode Aktivitas","Jenis Aktivitas Proyek","Deskripsi Lokasi Proyek","Kelompok Area Yang Terdampak","Identifikasi Risiko Kebakaran",
-            "Identifikasi Risiko Infeksi","Identifikasi Risiko Keselamatan","Identifikasi Risiko Utilitas","Penyebab Risiko Lainnya","Kode Risiko",
-            "Kelas Risiko/Pencegahan","Kebutuhan ICRA","Tindakan Pengendalian Yang Bisa Dilakukan","Rekomendasi Selama Pengerjaan","Rekomendasi Setelah Pengerjaan",
-            "Hal-hal Yang Perlu Dimonitor Secara Khusus","Persyaratan Yang Harus Dipenuhi Sebelum Pengerjaan","Catatan Tim PPI/K3/Lainnya","NIP Tim K3","Nama Tim K3",
-            "NIP P.J. Proyek","P.J. Proyek","NIP Manajer","Nama Manajer","NIP Direktur","Nama Direktur","Tanggal Pengkajian"
-            */
             if(TCari.getText().trim().equals("")){
                 ps=koneksi.prepareStatement(
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ralan.tanggal,"+
-                        "penilaian_medis_ralan.nip,penilaian_medis_ralan.anamnesis,penilaian_medis_ralan.hubungan,penilaian_medis_ralan.keluhan_utama,penilaian_medis_ralan.rps,penilaian_medis_ralan.rpk,penilaian_medis_ralan.rpd,penilaian_medis_ralan.rpo,penilaian_medis_ralan.alergi,"+
-                        "penilaian_medis_ralan.keadaan,penilaian_medis_ralan.gcs,penilaian_medis_ralan.kesadaran,penilaian_medis_ralan.td,penilaian_medis_ralan.nadi,penilaian_medis_ralan.rr,penilaian_medis_ralan.suhu,penilaian_medis_ralan.spo,penilaian_medis_ralan.bb,penilaian_medis_ralan.tb,"+
-                        "penilaian_medis_ralan.kepala,penilaian_medis_ralan.gigi,penilaian_medis_ralan.tht,penilaian_medis_ralan.thoraks,penilaian_medis_ralan.abdomen,penilaian_medis_ralan.ekstremitas,penilaian_medis_ralan.genital,penilaian_medis_ralan.kulit,"+
-                        "penilaian_medis_ralan.ket_fisik,penilaian_medis_ralan.ket_lokalis,penilaian_medis_ralan.penunjang,penilaian_medis_ralan.diagnosis,penilaian_medis_ralan.tata,penilaian_medis_ralan.konsulrujuk,dokter.nm_dokter "+
-                        "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join penilaian_medis_ralan on reg_periksa.no_rawat=penilaian_medis_ralan.no_rawat "+
-                        "inner join dokter on penilaian_medis_ralan.nip=dokter.nip where "+
-                        "penilaian_medis_ralan.tanggal between ? and ? order by penilaian_medis_ralan.tanggal");
+                        "select pcra_icra_pengkajian_risiko_prakonstruksi.no_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.nama_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.lokasi_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.mulai_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.perkiraan_selesai,"+
+                        "pcra_icra_pengkajian_risiko_prakonstruksi.deskripsi_pekerjaan,pcra_icra_pengkajian_risiko_prakonstruksi.penangung_jawab_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.pelaksana_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.kode_aktivitas,pcra_icra_jenis_aktivitas_proyek.nama_aktivitas,"+
+                        "pcra_icra_pengkajian_risiko_prakonstruksi.deskripsi_lokasi_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.penyebab_risiko_lainnya,pcra_icra_pengkajian_risiko_prakonstruksi.kode_kelas_risiko,pcra_icra_kelas_risiko_pencegahan.nama_kelas,pcra_icra_pengkajian_risiko_prakonstruksi.dibutuhkan_icra,"+
+                        "pcra_icra_pengkajian_risiko_prakonstruksi.rekomendasi_selama_pengerjaan,pcra_icra_pengkajian_risiko_prakonstruksi.rekomendasi_setelah_pengerjaan,pcra_icra_pengkajian_risiko_prakonstruksi.hal_yang_perlu_dimonitor,pcra_icra_pengkajian_risiko_prakonstruksi.catatan_tim_ppi_k3_lainnya,"+
+                        "pcra_icra_pengkajian_risiko_prakonstruksi.nik_timk3,timk3.nama as nama_timk3,pcra_icra_pengkajian_risiko_prakonstruksi.nik_pjproyek,pjproyek.nama as nama_pjproyek,pcra_icra_pengkajian_risiko_prakonstruksi.nik_manajer,manager.nama as nama_manajer,pcra_icra_pengkajian_risiko_prakonstruksi.nik_direktur,"+
+                        "direktur.nama as nama_direktur,pcra_icra_pengkajian_risiko_prakonstruksi.tanggal_pengkajian,pcra_icra_pengkajian_risiko_prakonstruksi.no_pcra "+
+                        "from pcra_icra_pengkajian_risiko_prakonstruksi inner join pegawai as timk3 on timk3.nik=pcra_icra_pengkajian_risiko_prakonstruksi.nik_timk3 inner join pegawai as pjproyek on pjproyek.nik=pcra_icra_pengkajian_risiko_prakonstruksi.nik_pjproyek "+
+                        "inner join pegawai as manager on manager.nik=pcra_icra_pengkajian_risiko_prakonstruksi.nik_manajer inner join pegawai as direktur on direktur.nik=pcra_icra_pengkajian_risiko_prakonstruksi.nik_direktur "+
+                        "inner join pcra_icra_jenis_aktivitas_proyek on pcra_icra_jenis_aktivitas_proyek.kode_aktivitas=pcra_icra_pengkajian_risiko_prakonstruksi.kode_aktivitas inner join pcra_icra_kelas_risiko_pencegahan on pcra_icra_kelas_risiko_pencegahan.kode_kelas=pcra_icra_pengkajian_risiko_prakonstruksi.kode_kelas_risiko "+
+                        "where pcra_icra_pengkajian_risiko_prakonstruksi.tanggal_pengkajian between ? and ?");
             }else{
                 ps=koneksi.prepareStatement(
-                        "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,if(pasien.jk='L','Laki-Laki','Perempuan') as jk,pasien.tgl_lahir,penilaian_medis_ralan.tanggal,"+
-                        "penilaian_medis_ralan.nip,penilaian_medis_ralan.anamnesis,penilaian_medis_ralan.hubungan,penilaian_medis_ralan.keluhan_utama,penilaian_medis_ralan.rps,penilaian_medis_ralan.rpk,penilaian_medis_ralan.rpd,penilaian_medis_ralan.rpo,penilaian_medis_ralan.alergi,"+
-                        "penilaian_medis_ralan.keadaan,penilaian_medis_ralan.gcs,penilaian_medis_ralan.kesadaran,penilaian_medis_ralan.td,penilaian_medis_ralan.nadi,penilaian_medis_ralan.rr,penilaian_medis_ralan.suhu,penilaian_medis_ralan.spo,penilaian_medis_ralan.bb,penilaian_medis_ralan.tb,"+
-                        "penilaian_medis_ralan.kepala,penilaian_medis_ralan.gigi,penilaian_medis_ralan.tht,penilaian_medis_ralan.thoraks,penilaian_medis_ralan.abdomen,penilaian_medis_ralan.ekstremitas,penilaian_medis_ralan.genital,penilaian_medis_ralan.kulit,"+
-                        "penilaian_medis_ralan.ket_fisik,penilaian_medis_ralan.ket_lokalis,penilaian_medis_ralan.penunjang,penilaian_medis_ralan.diagnosis,penilaian_medis_ralan.tata,penilaian_medis_ralan.konsulrujuk,dokter.nm_dokter "+
-                        "from reg_periksa inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                        "inner join penilaian_medis_ralan on reg_periksa.no_rawat=penilaian_medis_ralan.no_rawat "+
-                        "inner join dokter on penilaian_medis_ralan.nip=dokter.nip where "+
-                        "penilaian_medis_ralan.tanggal between ? and ? and (reg_periksa.no_rawat like ? or pasien.no_rkm_medis like ? or pasien.nm_pasien like ? or "+
-                        "penilaian_medis_ralan.nip like ? or dokter.nm_dokter like ?) order by penilaian_medis_ralan.tanggal");
+                        "select pcra_icra_pengkajian_risiko_prakonstruksi.no_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.nama_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.lokasi_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.mulai_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.perkiraan_selesai,"+
+                        "pcra_icra_pengkajian_risiko_prakonstruksi.deskripsi_pekerjaan,pcra_icra_pengkajian_risiko_prakonstruksi.penangung_jawab_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.pelaksana_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.kode_aktivitas,pcra_icra_jenis_aktivitas_proyek.nama_aktivitas,"+
+                        "pcra_icra_pengkajian_risiko_prakonstruksi.deskripsi_lokasi_proyek,pcra_icra_pengkajian_risiko_prakonstruksi.penyebab_risiko_lainnya,pcra_icra_pengkajian_risiko_prakonstruksi.kode_kelas_risiko,pcra_icra_kelas_risiko_pencegahan.nama_kelas,pcra_icra_pengkajian_risiko_prakonstruksi.dibutuhkan_icra,"+
+                        "pcra_icra_pengkajian_risiko_prakonstruksi.rekomendasi_selama_pengerjaan,pcra_icra_pengkajian_risiko_prakonstruksi.rekomendasi_setelah_pengerjaan,pcra_icra_pengkajian_risiko_prakonstruksi.hal_yang_perlu_dimonitor,pcra_icra_pengkajian_risiko_prakonstruksi.catatan_tim_ppi_k3_lainnya,"+
+                        "pcra_icra_pengkajian_risiko_prakonstruksi.nik_timk3,timk3.nama as nama_timk3,pcra_icra_pengkajian_risiko_prakonstruksi.nik_pjproyek,pjproyek.nama as nama_pjproyek,pcra_icra_pengkajian_risiko_prakonstruksi.nik_manajer,manager.nama as nama_manajer,pcra_icra_pengkajian_risiko_prakonstruksi.nik_direktur,"+
+                        "direktur.nama as nama_direktur,pcra_icra_pengkajian_risiko_prakonstruksi.tanggal_pengkajian,pcra_icra_pengkajian_risiko_prakonstruksi.no_pcra "+
+                        "from pcra_icra_pengkajian_risiko_prakonstruksi inner join pegawai as timk3 on timk3.nik=pcra_icra_pengkajian_risiko_prakonstruksi.nik_timk3 inner join pegawai as pjproyek on pjproyek.nik=pcra_icra_pengkajian_risiko_prakonstruksi.nik_pjproyek "+
+                        "inner join pegawai as manager on manager.nik=pcra_icra_pengkajian_risiko_prakonstruksi.nik_manajer inner join pegawai as direktur on direktur.nik=pcra_icra_pengkajian_risiko_prakonstruksi.nik_direktur "+
+                        "inner join pcra_icra_jenis_aktivitas_proyek on pcra_icra_jenis_aktivitas_proyek.kode_aktivitas=pcra_icra_pengkajian_risiko_prakonstruksi.kode_aktivitas inner join pcra_icra_kelas_risiko_pencegahan on pcra_icra_kelas_risiko_pencegahan.kode_kelas=pcra_icra_pengkajian_risiko_prakonstruksi.kode_kelas_risiko "+
+                        "where pcra_icra_pengkajian_risiko_prakonstruksi.tanggal_pengkajian between ? and ? and (pcra_icra_pengkajian_risiko_prakonstruksi.no_pcra like ? or pcra_icra_pengkajian_risiko_prakonstruksi.no_proyek like ? or pcra_icra_pengkajian_risiko_prakonstruksi.nama_proyek like ? or "+
+                        "pcra_icra_jenis_aktivitas_proyek.nama_aktivitas like ? or pcra_icra_kelas_risiko_pencegahan.nama_kelas like ?)");
             }
 
             try {
@@ -3747,12 +3783,196 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                 }
                 rs=ps.executeQuery();
                 while(rs.next()){
+                    StringBuilder kelompokarea = new StringBuilder();
+                    pscari=koneksi.prepareStatement(
+                        "select pcra_icra_lokasi_kelompok_risiko_area.nama_area from pcra_icra_lokasi_kelompok_risiko_area inner join pcra_icra_pengkajian_risiko_prakonstruksi_kelompok_area "+
+                        "on pcra_icra_pengkajian_risiko_prakonstruksi_kelompok_area.kode_area=pcra_icra_lokasi_kelompok_risiko_area.kode_area where pcra_icra_pengkajian_risiko_prakonstruksi_kelompok_area.no_pcra=?"
+                    );
+                    try {
+                        pscari.setString(1,rs.getString("no_pcra"));
+                        rscari=pscari.executeQuery();
+                        while(rscari.next()){
+                            kelompokarea.append(rscari.getString("nama_area")).append(", ");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rscari!=null){
+                            rscari.close();
+                        }
+                        if(pscari!=null){
+                            pscari.close();
+                        }
+                    }
+
+                    if (kelompokarea.length() > 0) {
+                        kelompokarea.setLength(kelompokarea.length() - 2);
+                    }
+
+                    StringBuilder risikokebakaran = new StringBuilder();
+                    pscari=koneksi.prepareStatement(
+                        "select pcra_icra_identifkasi_risiko_kebakaran.nama_risiko from pcra_icra_identifkasi_risiko_kebakaran inner join pcra_icra_pengkajian_risiko_prakonstruksi_kebakaran "+
+                        "on pcra_icra_pengkajian_risiko_prakonstruksi_kebakaran.kode_risiko=pcra_icra_identifkasi_risiko_kebakaran.kode_risiko where pcra_icra_pengkajian_risiko_prakonstruksi_kebakaran.no_pcra=?"
+                    );
+                    try {
+                        pscari.setString(1,rs.getString("no_pcra"));
+                        rscari=pscari.executeQuery();
+                        while(rscari.next()){
+                            risikokebakaran.append(rscari.getString("nama_risiko")).append(", ");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rscari!=null){
+                            rscari.close();
+                        }
+                        if(pscari!=null){
+                            pscari.close();
+                        }
+                    }
+
+                    if (risikokebakaran.length() > 0) {
+                        risikokebakaran.setLength(risikokebakaran.length() - 2);
+                    }
+
+                    StringBuilder risikoinfeksi = new StringBuilder();
+                    pscari=koneksi.prepareStatement(
+                        "select pcra_icra_identifkasi_risiko_infeksi.nama_risiko from pcra_icra_identifkasi_risiko_infeksi inner join pcra_icra_pengkajian_risiko_prakonstruksi_infeksi "+
+                        "on pcra_icra_pengkajian_risiko_prakonstruksi_infeksi.kode_risiko=pcra_icra_identifkasi_risiko_infeksi.kode_risiko where pcra_icra_pengkajian_risiko_prakonstruksi_infeksi.no_pcra=?"
+                    );
+                    try {
+                        pscari.setString(1,rs.getString("no_pcra"));
+                        rscari=pscari.executeQuery();
+                        while(rscari.next()){
+                            risikoinfeksi.append(rscari.getString("nama_risiko")).append(", ");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rscari!=null){
+                            rscari.close();
+                        }
+                        if(pscari!=null){
+                            pscari.close();
+                        }
+                    }
+
+                    if (risikoinfeksi.length() > 0) {
+                        risikoinfeksi.setLength(risikoinfeksi.length() - 2);
+                    }
+
+                    StringBuilder risikokeselamatan = new StringBuilder();
+                    pscari=koneksi.prepareStatement(
+                        "select pcra_icra_identifkasi_risiko_keselamatan.nama_risiko from pcra_icra_identifkasi_risiko_keselamatan inner join pcra_icra_pengkajian_risiko_prakonstruksi_keselamatan "+
+                        "on pcra_icra_pengkajian_risiko_prakonstruksi_keselamatan.kode_risiko=pcra_icra_identifkasi_risiko_keselamatan.kode_risiko where pcra_icra_pengkajian_risiko_prakonstruksi_keselamatan.no_pcra=?"
+                    );
+                    try {
+                        pscari.setString(1,rs.getString("no_pcra"));
+                        rscari=pscari.executeQuery();
+                        while(rscari.next()){
+                            risikokeselamatan.append(rscari.getString("nama_risiko")).append(", ");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rscari!=null){
+                            rscari.close();
+                        }
+                        if(pscari!=null){
+                            pscari.close();
+                        }
+                    }
+
+                    if (risikokeselamatan.length() > 0) {
+                        risikokeselamatan.setLength(risikokeselamatan.length() - 2);
+                    }
+
+                    StringBuilder risikoutilitas = new StringBuilder();
+                    pscari=koneksi.prepareStatement(
+                        "select pcra_icra_identifkasi_risiko_utilitas.nama_risiko from pcra_icra_identifkasi_risiko_utilitas inner join pcra_icra_pengkajian_risiko_prakonstruksi_utilitas "+
+                        "on pcra_icra_pengkajian_risiko_prakonstruksi_utilitas.kode_risiko=pcra_icra_identifkasi_risiko_utilitas.kode_risiko where pcra_icra_pengkajian_risiko_prakonstruksi_utilitas.no_pcra=?"
+                    );
+                    try {
+                        pscari.setString(1,rs.getString("no_pcra"));
+                        rscari=pscari.executeQuery();
+                        while(rscari.next()){
+                            risikoutilitas.append(rscari.getString("nama_risiko")).append(", ");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rscari!=null){
+                            rscari.close();
+                        }
+                        if(pscari!=null){
+                            pscari.close();
+                        }
+                    }
+
+                    if (risikoutilitas.length() > 0) {
+                        risikoutilitas.setLength(risikoutilitas.length() - 2);
+                    }
+
+                    StringBuilder pengendalian = new StringBuilder();
+                    pscari=koneksi.prepareStatement(
+                        "select pcra_icra_tindakan_pengendalian.nama_pengendalian from pcra_icra_tindakan_pengendalian inner join pcra_icra_pengkajian_risiko_prakonstruksi_pengendalian "+
+                        "on pcra_icra_pengkajian_risiko_prakonstruksi_pengendalian.kode_pengendalian=pcra_icra_tindakan_pengendalian.kode_pengendalian where pcra_icra_pengkajian_risiko_prakonstruksi_pengendalian.no_pcra=?"
+                    );
+                    try {
+                        pscari.setString(1,rs.getString("no_pcra"));
+                        rscari=pscari.executeQuery();
+                        while(rscari.next()){
+                            pengendalian.append(rscari.getString("nama_pengendalian")).append(", ");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rscari!=null){
+                            rscari.close();
+                        }
+                        if(pscari!=null){
+                            pscari.close();
+                        }
+                    }
+
+                    if (pengendalian.length() > 0) {
+                        pengendalian.setLength(pengendalian.length() - 2);
+                    }
+
+                    StringBuilder persyaratan = new StringBuilder();
+                    pscari=koneksi.prepareStatement(
+                        "select pcra_icra_persyaratan_harus_dipenuhi.nama_persyaratan from pcra_icra_persyaratan_harus_dipenuhi inner join pcra_icra_pengkajian_risiko_prakonstruksi_persyaratan "+
+                        "on pcra_icra_pengkajian_risiko_prakonstruksi_persyaratan.kode_persyaratan=pcra_icra_persyaratan_harus_dipenuhi.kode_persyaratan where pcra_icra_pengkajian_risiko_prakonstruksi_persyaratan.no_pcra=?"
+                    );
+                    try {
+                        pscari.setString(1,rs.getString("no_pcra"));
+                        rscari=pscari.executeQuery();
+                        while(rscari.next()){
+                            persyaratan.append(rscari.getString("nama_persyaratan")).append(", ");
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : "+e);
+                    } finally{
+                        if(rscari!=null){
+                            rscari.close();
+                        }
+                        if(pscari!=null){
+                            pscari.close();
+                        }
+                    }
+
+                    if (persyaratan.length() > 0) {
+                        persyaratan.setLength(persyaratan.length() - 2);
+                    }
+
                     tabMode.addRow(new Object[]{
-                        rs.getString("no_rawat"),rs.getString("no_rkm_medis"),rs.getString("nm_pasien"),rs.getDate("tgl_lahir"),rs.getString("jk"),rs.getString("nip"),rs.getString("nm_dokter"),rs.getString("tanggal"),
-                        rs.getString("anamnesis"),rs.getString("hubungan"),rs.getString("keluhan_utama"),rs.getString("rps"),rs.getString("rpd"),rs.getString("rpk"),rs.getString("rpo"),rs.getString("alergi"),
-                        rs.getString("keadaan"),rs.getString("gcs"),rs.getString("kesadaran"),rs.getString("td"),rs.getString("nadi"),rs.getString("rr"),rs.getString("suhu"),rs.getString("spo"),rs.getString("bb"),
-                        rs.getString("tb"),rs.getString("kepala"),rs.getString("gigi"),rs.getString("tht"),rs.getString("thoraks"),rs.getString("abdomen"),rs.getString("genital"),rs.getString("ekstremitas"),
-                        rs.getString("kulit"),rs.getString("ket_fisik"),rs.getString("ket_lokalis"),rs.getString("penunjang"),rs.getString("diagnosis"),rs.getString("tata"),rs.getString("konsulrujuk")
+                        rs.getString("no_pcra"),rs.getString("no_proyek"),rs.getString("nama_proyek"),rs.getString("lokasi_proyek"),rs.getString("mulai_proyek"),rs.getString("perkiraan_selesai"),
+                        rs.getString("deskripsi_pekerjaan"),rs.getString("penangung_jawab_proyek"),rs.getString("pelaksana_proyek"),rs.getString("kode_aktivitas"),rs.getString("nama_aktivitas"),
+                        rs.getString("deskripsi_lokasi_proyek"),kelompokarea,risikokebakaran,risikoinfeksi,risikokeselamatan,risikoutilitas,rs.getString("penyebab_risiko_lainnya"),
+                        rs.getString("kode_kelas_risiko"),rs.getString("nama_kelas"),rs.getString("dibutuhkan_icra"),pengendalian,rs.getString("rekomendasi_selama_pengerjaan"),
+                        rs.getString("rekomendasi_setelah_pengerjaan"),rs.getString("hal_yang_perlu_dimonitor"),persyaratan,rs.getString("catatan_tim_ppi_k3_lainnya"),rs.getString("nik_timk3"),
+                        rs.getString("nama_timk3"),rs.getString("nik_pjproyek"),rs.getString("nama_pjproyek"),rs.getString("nik_manajer"),rs.getString("nama_manajer"),rs.getString("nik_direktur"),
+                        rs.getString("nama_direktur"),rs.getString("tanggal_pengkajian")
                     });
                 }
             } catch (Exception e) {
@@ -3765,7 +3985,6 @@ public final class PCRAICRAPengkajianRisikoPraKonstruksi extends javax.swing.JDi
                     ps.close();
                 }
             }
-
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

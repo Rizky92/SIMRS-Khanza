@@ -2202,7 +2202,17 @@ public final class DlgCariObat extends javax.swing.JDialog {
     }//GEN-LAST:event_ppStok1ActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        LoadPengaturan();
+        if(ppnralan.getTampilPPNRalan().equals("")){
+            ppnralan.SetPPNRalan();
+        }
+
+        if(akunobatralan.getSuspen_Piutang_Obat_Ralan().equals("")){
+            akunobatralan.SetAkunObatRalan();
+        }
+
+        if(embalasetuslah.getEmbalase() == null){
+            embalasetuslah.SetEmbalaseTuslah();
+        }
 
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
@@ -4334,20 +4344,6 @@ public final class DlgCariObat extends javax.swing.JDialog {
             }else if(ex.toString().contains("204")){
                 JOptionPane.showMessageDialog(null,"Data tidak ditemukan...!");
             }
-        }
-    }
-
-    private void LoadPengaturan(){
-        if(ppnralan.getTampilPPNRalan().equals("")){
-            ppnralan.SetPPNRalan();
-        }
-
-        if(akunobatralan.getSuspen_Piutang_Obat_Ralan().equals("")){
-            akunobatralan.SetAkunObatRalan();
-        }
-
-        if(embalasetuslah.getEmbalase() == null){
-            embalasetuslah.SetEmbalaseTuslah();
         }
     }
 
