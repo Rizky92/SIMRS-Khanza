@@ -145,6 +145,12 @@ public final class validasi {
         autonomorSmc(component, prefix, "", table, kolom, panjang, pad, validasi.this.getTglSmc(tanggal));
     }
 
+    public void renomorSmc(JTextComponent component, int panjang, String pad) {
+        String nomor = component.getText();
+        int no = Integer.parseInt(nomor.substring(nomor.length() - panjang)) + 1;
+        component.setText(nomor.substring(0, nomor.length() - panjang) + this.padleftSmc(String.valueOf(no), panjang, pad.charAt(0)));
+    }
+
     public String getTglSmc(Date tgl, String format) {
         return new SimpleDateFormat(format).format(tgl);
     }

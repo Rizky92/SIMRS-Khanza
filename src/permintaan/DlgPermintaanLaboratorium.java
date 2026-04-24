@@ -2668,7 +2668,6 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
-
                 if (sukses) {
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                 } else {
