@@ -440,64 +440,63 @@ public final class DlgRekapBiayaRegistrasi extends javax.swing.JDialog {
             pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (XLS)"},"Laporan 1 (HTML)");
             switch (pilihan) {
                 case "Laporan 1 (HTML)":
-                        File f = new File("RekapBiayaPendaftaran.html");
-                        BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-                        bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"fileakunbayar.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr class='isi2'>"+
-                                            "<td valign='top' align='center'>"+
-                                                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>REKAP BIAYA PENDAFTARAN<br>TANGGAL "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                            "</td>"+
-                                       "</tr>"+
-                                    "</table>")
-                        );
-                        bw.close();
-                        Desktop.getDesktop().browse(f.toURI());
+                    File f = new File("RekapBiayaPendaftaran.html");
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                    bw.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"fileakunbayar.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                    "<tr class='isi2'>"+
+                                        "<td valign='top' align='center'>"+
+                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                            "<font size='2' face='Tahoma'>REKAP BIAYA PENDAFTARAN<br>TANGGAL "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                        "</td>"+
+                                   "</tr>"+
+                                "</table>")
+                    );
+                    bw.close();
+                    Desktop.getDesktop().browse(f.toURI());
                     break;
                 case "Laporan 2 (WPS)":
-                        File h = new File("RekapBiayaPendaftaran.wps");
-                        BufferedWriter bh = new BufferedWriter(new FileWriter(h));
-                        bh.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"fileakunbayar.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr class='isi2'>"+
-                                            "<td valign='top' align='center'>"+
-                                                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>REKAP BIAYA PENDAFTARAN<br>TANGGAL "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                            "</td>"+
-                                       "</tr>"+
-                                    "</table>")
-                        );
-                        bh.close();
-                        Desktop.getDesktop().browse(h.toURI());
+                    File h = new File("RekapBiayaPendaftaran.wps");
+                    BufferedWriter bh = new BufferedWriter(new FileWriter(h));
+                    bh.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"fileakunbayar.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                    "<tr class='isi2'>"+
+                                        "<td valign='top' align='center'>"+
+                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                            "<font size='2' face='Tahoma'>REKAP BIAYA PENDAFTARAN<br>TANGGAL "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                        "</td>"+
+                                   "</tr>"+
+                                "</table>")
+                    );
+                    bh.close();
+                    Desktop.getDesktop().browse(h.toURI());
                     break;
                 case "Laporan 3 (XLS)":
-                        File z = new File("RekapBiayaPendaftaran.xls");
-                        BufferedWriter bz = new BufferedWriter(new FileWriter(z));
-                        bz.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"fileakunbayar.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                        "<tr class='isi2'>"+
-                                            "<td valign='top' align='center'>"+
-                                                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                "<font size='2' face='Tahoma'>REKAP BIAYA PENDAFTARAN<br>TANGGAL "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                            "</td>"+
-                                       "</tr>"+
-                                    "</table>")
-                        );
-                        bz.close();
-                        Desktop.getDesktop().browse(z.toURI());
+                    File z = new File("RekapBiayaPendaftaran.xls");
+                    BufferedWriter bz = new BufferedWriter(new FileWriter(z));
+                    bz.write(LoadHTML.getText().replaceAll("<head>","<head><link href=\"fileakunbayar.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                    "<tr class='isi2'>"+
+                                        "<td valign='top' align='center'>"+
+                                            "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                            akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                            akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                            "<font size='2' face='Tahoma'>REKAP BIAYA PENDAFTARAN<br>TANGGAL "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                        "</td>"+
+                                   "</tr>"+
+                                "</table>")
+                    );
+                    bz.close();
+                    Desktop.getDesktop().browse(z.toURI());
                     break;
             }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }
-
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 

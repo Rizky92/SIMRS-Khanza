@@ -22,6 +22,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +72,14 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
+            }
+
+            @Override
+            public Class<?> getColumnClass(int columnIndex) {
+                if (columnIndex == 8 || columnIndex == 9) {
+                    return Double.class;
+                }
+                return String.class;
             }
         };
         tbKamar.setModel(tabMode);
@@ -282,24 +293,49 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
             //TCari.requestFocus();
         } else if (tabMode.getRowCount() != 0) {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Sequel.deleteTemporary();
-            for (int i = 0; i < tabMode.getRowCount(); i++) {
-                Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
-                    (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6),
-                    (String) tabMode.getValueAt(i, 7), (String) tabMode.getValueAt(i, 8), (String) tabMode.getValueAt(i, 9), (String) tabMode.getValueAt(i, 10),
-                    (String) tabMode.getValueAt(i, 11));
-            }
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RiwayatPelayananResepApotekBPJSSMC.html", "Data Riwayat Pelayanan Resep Apotek BPJS", tbKamar);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RiwayatPelayananResepApotekBPJSSMC.wps", "Data Riwayat Pelayanan Resep Apotek BPJS", tbKamar);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RiwayatPelayananResepApotekBPJSSMC.csv", tbKamar);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RiwayatPelayananResepApotekBPJSSMC.xlsx", tbKamar);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        for (int i = 0; i < tabMode.getRowCount(); i++) {
+                            Sequel.temporary(String.valueOf(i + 1), (String) tabMode.getValueAt(i, 0), (String) tabMode.getValueAt(i, 1), (String) tabMode.getValueAt(i, 2),
+                                (String) tabMode.getValueAt(i, 3), (String) tabMode.getValueAt(i, 4), (String) tabMode.getValueAt(i, 5), (String) tabMode.getValueAt(i, 6),
+                                (String) tabMode.getValueAt(i, 7), Valid.SetAngka((Double) tabMode.getValueAt(i, 8)), Valid.SetAngka((Double) tabMode.getValueAt(i, 9)),
+                                (String) tabMode.getValueAt(i, 10), (String) tabMode.getValueAt(i, 11));
+                        }
 
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars", akses.getnamars());
-            param.put("alamatrs", akses.getalamatrs());
-            param.put("kotars", akses.getkabupatenrs());
-            param.put("propinsirs", akses.getpropinsirs());
-            //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
-            param.put("kontakrs", akses.getkontakrs());
-            param.put("emailrs", akses.getemailrs());
-            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-            Valid.reportTempSmc("rptRiwayatPelayananResepApotekBPJSSMC.jasper", "report", "::[ Data Riwayat Pelayanan Resep Apotek BPJS ]::", param);
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptRiwayatPelayananResepApotekBPJSSMC.jasper", "report", "::[ Data Riwayat Pelayanan Resep Apotek BPJS ]::", param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
@@ -386,16 +422,8 @@ public final class ApotekBPJSRiwayatPelayananResepSMC extends javax.swing.JDialo
                 if (response.isArray()) {
                     for (JsonNode list : response) {
                         tabMode.addRow(new Object[] {
-                            list.path("NORESEP").asText(),
-                            list.path("NOAPOTIK").asText(),
-                            list.path("NOSEP_KUNJUNGAN").asText(),
-                            list.path("NOKARTU").asText(),
-                            list.path("NAMA").asText(),
-                            list.path("TGLENTRY").asText(),
-                            list.path("TGLRESEP").asText(),
-                            list.path("TGLPELRSP").asText(),
-                            Valid.SetAngka(list.path("BYTAGRSP").asDouble()),
-                            Valid.SetAngka(list.path("BYVERRSP").asDouble()),
+                            list.path("NORESEP").asText(), list.path("NOAPOTIK").asText(), list.path("NOSEP_KUNJUNGAN").asText(), list.path("NOKARTU").asText(), list.path("NAMA").asText(),
+                            list.path("TGLENTRY").asText(), list.path("TGLRESEP").asText(), list.path("TGLPELRSP").asText(), list.path("BYTAGRSP").asDouble(), list.path("BYVERRSP").asDouble(),
                             list.path("KDJNSOBAT").asText().replace("0", "0. Semua").replace("1", "1. Obat PRB").replace("2", "2. Obat Kronis Belum Stabil").replace("3", "3. Obat Kemoterapi"),
                             list.path("FASKESASAL").asText()
                         });

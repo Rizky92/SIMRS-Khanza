@@ -4723,6 +4723,10 @@ public final class RMLaporanPemantauanAnastesi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
@@ -4821,7 +4825,7 @@ public final class RMLaporanPemantauanAnastesi extends javax.swing.JDialog {
                         ps.setString(9,"%"+TCari.getText()+"%");
                     }
                     rs=ps.executeQuery();
-                    pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+                    pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                                 htmlContent = new StringBuilder();
@@ -5593,6 +5597,9 @@ public final class RMLaporanPemantauanAnastesi extends javax.swing.JDialog {
 
                                 bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
+                            break;
+                        case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("RMPenilaianAwalKeperawatanKebidananRanap.xlsx",tbObat);
                             break;
                     }
                 } catch (Exception e) {

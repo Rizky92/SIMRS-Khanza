@@ -30,9 +30,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 import java.util.Set;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
@@ -589,6 +587,8 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        JOptionPane.showMessageDialog(null, "Maaf, fitur ini masih belum didukung..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+        /*
         if (tabMode.getRowCount() == 0) {
             JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
@@ -613,20 +613,21 @@ public final class ApotekBPJSDaftarPelayananObat2SMC extends javax.swing.JDialog
                     tabMode.getValueAt(i, 14).toString() + "','" +
                     tabMode.getValueAt(i, 15).toString() + "','" +
                     tabMode.getValueAt(i, 16).toString() + "','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Daftar Pelayanan Obat Apotek BPJS");
+                }
+                Map<String, Object> param = new HashMap<>();
+                param.put("namars", akses.getnamars());
+                param.put("alamatrs", akses.getalamatrs());
+                param.put("kotars", akses.getkabupatenrs());
+                param.put("propinsirs", akses.getpropinsirs());
+                //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
+                param.put("kontakrs", akses.getkontakrs());
+                param.put("emailrs", akses.getemailrs());
+                param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                Valid.MyReportqry("rptApotekBPJSDaftarPelayananKlaim.jasper", "report", "[ Daftar Pelayanan Apotek BPJS ]", "select * from temporary where temporary.temp37='" + akses.getalamatip() + "' order by temporary.no", param);
+                this.setCursor(Cursor.getDefaultCursor());
             }
-
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars", akses.getnamars());
-            param.put("alamatrs", akses.getalamatrs());
-            param.put("kotars", akses.getkabupatenrs());
-            param.put("propinsirs", akses.getpropinsirs());
-            //param.put("peserta","No.Peserta : "+NoKartu.getText()+" Nama Peserta : "+NamaPasien.getText());
-            param.put("kontakrs", akses.getkontakrs());
-            param.put("emailrs", akses.getemailrs());
-            param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptApotekBPJSDaftarPelayananKlaim.jasper", "report", "[ Daftar Pelayanan Apotek BPJS ]", "select * from temporary where temporary.temp37='" + akses.getalamatip() + "' order by temporary.no", param);
-            this.setCursor(Cursor.getDefaultCursor());
         }
+        */
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void TCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TCariKeyPressed

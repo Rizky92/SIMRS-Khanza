@@ -20,6 +20,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -436,36 +439,58 @@ public final class IPSRSCariPengambilanPenunjangUTD extends javax.swing.JDialog 
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnCetakActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCetakActionPerformed
-       this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
             BtnKeluar.requestFocus();
         }else {
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptPengambilanPenunjangUTD.jasper","report","::[ Transaksi Pengambilan BHP Non Medis UTD ]::",
-                    "select utd_pengambilan_penunjang.kode_brng,ipsrsbarang.nama_brng,utd_pengambilan_penunjang.jml,utd_pengambilan_penunjang.harga,"+
-                    "utd_pengambilan_penunjang.total,utd_pengambilan_penunjang.nip,petugas.nama,utd_pengambilan_penunjang.tanggal,"+
-                    "utd_pengambilan_penunjang.keterangan,ipsrsbarang.kode_sat from utd_pengambilan_penunjang inner join ipsrsbarang inner join petugas "+
-                    "on utd_pengambilan_penunjang.kode_brng=ipsrsbarang.kode_brng and utd_pengambilan_penunjang.nip=petugas.nip "+
-                    "where utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_penunjang.kode_brng like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and ipsrsbarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_penunjang.nip like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and petugas.nama like '%"+TCari.getText().trim()+"%' or "+
-                    "utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_penunjang.keterangan like '%"+TCari.getText().trim()+"%' order by utd_pengambilan_penunjang.tanggal",param);
-
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("PengambilanPenunjangUTD.html", "Transaksi Pengambilan BHP Non Medis UTD", tbKamar);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("PengambilanPenunjangUTD.wps", "Transaksi Pengambilan BHP Non Medis UTD", tbKamar);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("PengambilanPenunjangUTD.csv", tbKamar);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("PengambilanPenunjangUTD.xlsx", tbKamar);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengambilanPenunjangUTD.jasper","report","::[ Transaksi Pengambilan BHP Non Medis UTD ]::",
+                                "select utd_pengambilan_penunjang.kode_brng,ipsrsbarang.nama_brng,utd_pengambilan_penunjang.jml,utd_pengambilan_penunjang.harga,"+
+                                "utd_pengambilan_penunjang.total,utd_pengambilan_penunjang.nip,petugas.nama,utd_pengambilan_penunjang.tanggal,"+
+                                "utd_pengambilan_penunjang.keterangan,ipsrsbarang.kode_sat from utd_pengambilan_penunjang inner join ipsrsbarang inner join petugas "+
+                                "on utd_pengambilan_penunjang.kode_brng=ipsrsbarang.kode_brng and utd_pengambilan_penunjang.nip=petugas.nip "+
+                                "where utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_penunjang.kode_brng like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and ipsrsbarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_penunjang.nip like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and petugas.nama like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_pengambilan_penunjang.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_penunjang.keterangan like '%"+TCari.getText().trim()+"%' order by utd_pengambilan_penunjang.tanggal",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCetakActionPerformed
 
     private void BtnCetakKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCetakKeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_BtnCetakKeyPressed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated

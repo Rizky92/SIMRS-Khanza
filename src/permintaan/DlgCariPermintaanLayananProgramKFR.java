@@ -1011,141 +1011,144 @@ public class DlgCariPermintaanLayananProgramKFR extends javax.swing.JDialog {
                 File f;
                 BufferedWriter bw;
 
-                pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+                pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "<tr class='isi'>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Permintaan</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Bayar</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Permintaan</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Diagnosa Medis</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Permintaan & Evaluasi/Tata Laksana KFR</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ke</b></td>"+
+                            "</tr>"
+                        );
+                        for (i = 0; i < tabMode.getRowCount(); i++) {
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Permintaan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Bayar</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Permintaan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Diagnosa Medis</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Permintaan & Evaluasi/Tata Laksana KFR</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ke</b></td>"+
-                                "</tr>"
-                            );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                                    "</tr>");
-                            }
-                            LoadHTML.setText(
-                                "<html>"+
-                                  "<table width='100%' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                                   htmlContent.toString()+
-                                  "</table>"+
-                                "</html>"
-                            );
+                                    "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
+                                "</tr>");
+                        }
+                        LoadHTML.setText(
+                            "<html>"+
+                              "<table width='100%' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
+                               htmlContent.toString()+
+                              "</table>"+
+                            "</html>"
+                        );
 
-                            f = new File("DataPermintaanLayananProgramKFR.html");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td valign='top' align='center'>"+
-                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA PERMINTAAN LAYANAN PROGRAM KFR<br><br></font>"+
-                                                "</td>"+
-                                           "</tr>"+
-                                        "</table>")
-                            );
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        f = new File("DataPermintaanLayananProgramKFR.html");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
+                                    "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                        "<tr class='isi2'>"+
+                                            "<td valign='top' align='center'>"+
+                                                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                "<font size='2' face='Tahoma'>DATA PERMINTAAN LAYANAN PROGRAM KFR<br><br></font>"+
+                                            "</td>"+
+                                       "</tr>"+
+                                    "</table>")
+                        );
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "<tr class='isi'>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Permintaan</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Bayar</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Permintaan</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Diagnosa Medis</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Permintaan & Evaluasi/Tata Laksana KFR</b></td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ke</b></td>"+
+                            "</tr>"
+                        );
+                        for (i = 0; i < tabMode.getRowCount(); i++) {
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Permintaan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.Rawat</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.RM</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>J.K.</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Lahir</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Cara Bayar</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Tgl.Permintaan</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Diagnosa Medis</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Permintaan & Evaluasi/Tata Laksana KFR</b></td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Ke</b></td>"+
-                                "</tr>"
-                            );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
-                                        "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
-                                    "</tr>");
-                            }
-                            LoadHTML.setText(
-                                "<html>"+
-                                  "<table width='100%' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
-                                   htmlContent.toString()+
-                                  "</table>"+
-                                "</html>"
-                            );
+                                    "<td valign='top'>"+tbObat.getValueAt(i,0).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,1).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,2).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,3).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,4).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,5).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,6).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,7).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,8).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,9).toString()+"</td>"+
+                                    "<td valign='top'>"+tbObat.getValueAt(i,10).toString()+"</td>"+
+                                "</tr>");
+                        }
+                        LoadHTML.setText(
+                            "<html>"+
+                              "<table width='100%' border='0' align='center' cellpadding='1px' cellspacing='0' class='tbl_form'>"+
+                               htmlContent.toString()+
+                              "</table>"+
+                            "</html>"
+                        );
 
-                            f = new File("DataPermintaanLayananProgramKFR.wps");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                                        "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td valign='top' align='center'>"+
-                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>DATA PERMINTAAN LAYANAN PROGRAM KFR<br><br></font>"+
-                                                "</td>"+
-                                           "</tr>"+
-                                        "</table>")
-                            );
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        f = new File("DataPermintaanLayananProgramKFR.wps");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
+                                    "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                        "<tr class='isi2'>"+
+                                            "<td valign='top' align='center'>"+
+                                                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                "<font size='2' face='Tahoma'>DATA PERMINTAAN LAYANAN PROGRAM KFR<br><br></font>"+
+                                            "</td>"+
+                                       "</tr>"+
+                                    "</table>")
+                        );
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "\"No.Permintaan\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"J.K.\";\"Tgl.Lahir\";\"Cara Bayar\";\"Tgl.Permintaan\";\"Diagnosa Medis\";\"Permintaan & Evaluasi/Tata Laksana KFR\";\"Ke\"\n"
+                        );
+                        for (i = 0; i < tabMode.getRowCount(); i++) {
                             htmlContent.append(
-                                "\"No.Permintaan\";\"No.Rawat\";\"No.RM\";\"Nama Pasien\";\"J.K.\";\"Tgl.Lahir\";\"Cara Bayar\";\"Tgl.Permintaan\";\"Diagnosa Medis\";\"Permintaan & Evaluasi/Tata Laksana KFR\";\"Ke\"\n"
+                                "\""+tbObat.getValueAt(i,0).toString()+"\";\""+tbObat.getValueAt(i,1).toString()+"\";\""+tbObat.getValueAt(i,2).toString()+"\";\""+tbObat.getValueAt(i,3).toString()+"\";\""+tbObat.getValueAt(i,4).toString()+"\";\""+tbObat.getValueAt(i,5).toString()+"\";\""+tbObat.getValueAt(i,6).toString()+"\";\""+tbObat.getValueAt(i,7).toString()+"\";\""+tbObat.getValueAt(i,8).toString()+"\";\""+tbObat.getValueAt(i,9).toString()+"\";\""+tbObat.getValueAt(i,10).toString()+"\"\n"
                             );
-                            for (i = 0; i < tabMode.getRowCount(); i++) {
-                                htmlContent.append(
-                                    "\""+tbObat.getValueAt(i,0).toString()+"\";\""+tbObat.getValueAt(i,1).toString()+"\";\""+tbObat.getValueAt(i,2).toString()+"\";\""+tbObat.getValueAt(i,3).toString()+"\";\""+tbObat.getValueAt(i,4).toString()+"\";\""+tbObat.getValueAt(i,5).toString()+"\";\""+tbObat.getValueAt(i,6).toString()+"\";\""+tbObat.getValueAt(i,7).toString()+"\";\""+tbObat.getValueAt(i,8).toString()+"\";\""+tbObat.getValueAt(i,9).toString()+"\";\""+tbObat.getValueAt(i,10).toString()+"\"\n"
-                                );
-                            }
-                            f = new File("DataPermintaanLayananProgramKFR.csv");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(htmlContent.toString());
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        }
+                        f = new File("DataPermintaanLayananProgramKFR.csv");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write(htmlContent.toString());
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DataPermintaanLayananProgramKFR.xlsx",tbObat);
                         break;
                 }
             }catch(Exception e){

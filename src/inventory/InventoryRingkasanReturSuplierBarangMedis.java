@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -769,70 +772,97 @@ public class InventoryRingkasanReturSuplierBarangMedis extends javax.swing.JDial
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("tanggal1",Valid.SetTgl(TglRetur1.getSelectedItem()+""));
-            param.put("tanggal2",Valid.SetTgl(TglRetur2.getSelectedItem()+""));
-            param.put("parameter","%"+TCari.getText().trim()+"%");
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            sat="";bar="";nofak="";ptg="";
-            tanggal=" returbeli.tgl_retur between '"+Valid.SetTgl(TglRetur1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglRetur2.getSelectedItem()+"")+"' ";
-            if(!NoRetur.getText().equals("")){
-                noret=" and returbeli.no_retur_beli='"+NoFaktur.getText()+"' ";
-            }
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RingkasanReturSuplierObat.html", "Laporan Ringkasan Retur Ke Suplier Obat/Alkes/BHP Medis", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RingkasanReturSuplierObat.wps", "Laporan Ringkasan Retur Ke Suplier Obat/Alkes/BHP Medis", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RingkasanReturSuplierObat.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RingkasanReturSuplierObat.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("tanggal1",Valid.SetTgl(TglRetur1.getSelectedItem()+""));
+                        param.put("tanggal2",Valid.SetTgl(TglRetur2.getSelectedItem()+""));
+                        param.put("parameter","%"+TCari.getText().trim()+"%");
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        sat="";bar="";nofak="";ptg="";
+                        tanggal=" returbeli.tgl_retur between '"+Valid.SetTgl(TglRetur1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglRetur2.getSelectedItem()+"")+"' ";
+                        if(!NoRetur.getText().equals("")){
+                            noret=" and returbeli.no_retur_beli='"+NoFaktur.getText()+"' ";
+                        }
 
-            if(!Nmptg.getText().equals("")){
-                ptg=" and petugas.nama='"+Nmptg.getText()+"' ";
-            }
+                        if(!Nmptg.getText().equals("")){
+                            ptg=" and petugas.nama='"+Nmptg.getText()+"' ";
+                        }
 
-            if(!nmjenis.getText().equals("")){
-                sat=" and jenis.nama='"+nmjenis.getText()+"' ";
-            }
+                        if(!nmjenis.getText().equals("")){
+                            sat=" and jenis.nama='"+nmjenis.getText()+"' ";
+                        }
 
-            if(!nmbar.getText().equals("")){
-                bar=" and databarang.nama_brng='"+nmbar.getText()+"' ";
-            }
+                        if(!nmbar.getText().equals("")){
+                            bar=" and databarang.nama_brng='"+nmbar.getText()+"' ";
+                        }
 
-            if(!NoFaktur.getText().equals("")){
-                nofak=" and detreturbeli.no_faktur ='"+NoFaktur.getText()+"' ";
+                        if(!NoFaktur.getText().equals("")){
+                            nofak=" and detreturbeli.no_faktur ='"+NoFaktur.getText()+"' ";
+                        }
+                        Valid.MyReportqry("rptRingkasanReturSuplierObat.jasper","report","::[ Laporan Ringkasan Retur Ke Suplier Obat/Alkes/BHP Medis ]::",
+                                "select detreturbeli.kode_brng,databarang.nama_brng, "+
+                                "detreturbeli.kode_sat,kodesatuan.satuan,jenis.nama as namajenis, "+
+                                "sum(detreturbeli.jml_retur2) as jumlah,sum(detreturbeli.total) as total "+
+                                " from returbeli inner join petugas inner join bangsal inner join jenis  "+
+                                " inner join detreturbeli inner join databarang inner join kodesatuan inner join datasuplier "+
+                                " on detreturbeli.kode_brng=databarang.kode_brng "+
+                                " and databarang.kode_sat=kodesatuan.kode_sat "+
+                                " and returbeli.kd_bangsal=bangsal.kd_bangsal "+
+                                " and returbeli.kode_suplier=datasuplier.kode_suplier "+
+                                " and returbeli.no_retur_beli=detreturbeli.no_retur_beli "+
+                                " and returbeli.nip=petugas.nip and databarang.kdjns=jenis.kdjns "+
+                                " where "+tanggal+noret+ptg+sat+bar+nofak+" and returbeli.no_retur_beli like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and returbeli.nip like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and petugas.nama like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and detreturbeli.kode_brng like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and databarang.nama_brng like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and returbeli.kode_suplier like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and bangsal.nm_bangsal like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and datasuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and detreturbeli.no_faktur like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and detreturbeli.no_batch like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and jenis.nama like '%"+TCari.getText()+"%' or "+
+                                tanggal+noret+ptg+sat+bar+nofak+" and detreturbeli.kode_sat like '%"+TCari.getText()+"%' "+
+                                " group by detreturbeli.kode_brng "+order,param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
-            Valid.MyReportqry("rptRingkasanReturSuplierObat.jasper","report","::[ Laporan Ringkasan Retur Ke Suplier Obat/Alkes/BHP Medis ]::",
-                    "select detreturbeli.kode_brng,databarang.nama_brng, "+
-                    "detreturbeli.kode_sat,kodesatuan.satuan,jenis.nama as namajenis, "+
-                    "sum(detreturbeli.jml_retur2) as jumlah,sum(detreturbeli.total) as total "+
-                    " from returbeli inner join petugas inner join bangsal inner join jenis  "+
-                    " inner join detreturbeli inner join databarang inner join kodesatuan inner join datasuplier "+
-                    " on detreturbeli.kode_brng=databarang.kode_brng "+
-                    " and databarang.kode_sat=kodesatuan.kode_sat "+
-                    " and returbeli.kd_bangsal=bangsal.kd_bangsal "+
-                    " and returbeli.kode_suplier=datasuplier.kode_suplier "+
-                    " and returbeli.no_retur_beli=detreturbeli.no_retur_beli "+
-                    " and returbeli.nip=petugas.nip and databarang.kdjns=jenis.kdjns "+
-                    " where "+tanggal+noret+ptg+sat+bar+nofak+" and returbeli.no_retur_beli like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and returbeli.nip like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and petugas.nama like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and detreturbeli.kode_brng like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and databarang.nama_brng like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and returbeli.kode_suplier like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and bangsal.nm_bangsal like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and datasuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and detreturbeli.no_faktur like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and detreturbeli.no_batch like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and jenis.nama like '%"+TCari.getText()+"%' or "+
-                    tanggal+noret+ptg+sat+bar+nofak+" and detreturbeli.kode_sat like '%"+TCari.getText()+"%' "+
-                    " group by detreturbeli.kode_brng "+order,param);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

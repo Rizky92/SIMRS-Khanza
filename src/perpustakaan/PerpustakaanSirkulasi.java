@@ -14,6 +14,9 @@ import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -895,56 +898,79 @@ public class PerpustakaanSirkulasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-                inventariscari="";
-                tglcari="";
-
-                if(ChkTanggal.isSelected()==true){
-                    tglcari=" perpustakaan_peminjaman.tgl_pinjam between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and ";
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("PeminjamanPerpustakaan.html", "Data Peminjaman Koleksi Perpustakaan", tbKamIn);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("PeminjamanPerpustakaan.wps", "Data Peminjaman Koleksi Perpustakaan", tbKamIn);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("PeminjamanPerpustakaan.csv", tbKamIn);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("PeminjamanPerpustakaan.xlsx", tbKamIn);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        inventariscari="";
+                        tglcari="";
+                        if(ChkTanggal.isSelected()==true){
+                            tglcari=" perpustakaan_peminjaman.tgl_pinjam between '"+Valid.SetTgl(TglPinjam1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglPinjam2.getSelectedItem()+"")+"' and ";
+                        }
+                        if(!InventarisCari.getText().equals("")){
+                            inventariscari="perpustakaan_buku.judul_buku='"+InventarisCari.getText()+"' and ";
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPeminjamanPerpustakaan.jasper","report","::[ Data Peminjaman Koleksi Perpustakaan ]::","select perpustakaan_peminjaman.no_inventaris,perpustakaan_inventaris.kode_buku,perpustakaan_buku.judul_buku,perpustakaan_penerbit.nama_penerbit,"+
+                            "perpustakaan_pengarang.nama_pengarang,perpustakaan_buku.thn_terbit,perpustakaan_buku.isbn,perpustakaan_kategori.nama_kategori,"+
+                            "perpustakaan_jenis_buku.nama_jenis,perpustakaan_peminjaman.no_anggota,perpustakaan_anggota.nama_anggota,perpustakaan_peminjaman.tgl_pinjam,"+
+                            "perpustakaan_peminjaman.tgl_kembali,petugas.nama from perpustakaan_peminjaman inner join perpustakaan_inventaris inner join perpustakaan_buku "+
+                            "inner join perpustakaan_penerbit inner join perpustakaan_pengarang inner join perpustakaan_kategori inner join perpustakaan_jenis_buku "+
+                            "inner join petugas inner join perpustakaan_anggota on perpustakaan_peminjaman.no_inventaris=perpustakaan_inventaris.no_inventaris "+
+                            "and perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_peminjaman.no_anggota=perpustakaan_anggota.no_anggota "+
+                            "and perpustakaan_buku.kode_penerbit=perpustakaan_penerbit.kode_penerbit and perpustakaan_buku.kode_pengarang=perpustakaan_pengarang.kode_pengarang "+
+                            "and perpustakaan_buku.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_buku.id_jenis=perpustakaan_jenis_buku.id_jenis "+
+                            "and petugas.nip=perpustakaan_peminjaman.nip where "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_peminjaman.no_inventaris like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_buku.kode_buku like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_buku.judul_buku like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_penerbit.nama_penerbit like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_pengarang.nama_pengarang like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_buku.thn_terbit like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_buku.isbn like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_kategori.nama_kategori like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_jenis_buku.nama_jenis like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_anggota.nama_anggota like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" petugas.nama like '%"+TCari.getText().trim()+"%' or "+
+                            inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_peminjaman.no_anggota like '%"+TCari.getText().trim()+"%' "+
+                            " order by perpustakaan_peminjaman.tgl_pinjam",param);
+                        break;
                 }
-
-                if(!InventarisCari.getText().equals("")){
-                    inventariscari="perpustakaan_buku.judul_buku='"+InventarisCari.getText()+"' and ";
-                }
-
-                Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                Valid.MyReportqry("rptPeminjamanPerpustakaan.jasper","report","::[ Data Peminjaman Koleksi Perpustakaan ]::","select perpustakaan_peminjaman.no_inventaris,perpustakaan_inventaris.kode_buku,perpustakaan_buku.judul_buku,perpustakaan_penerbit.nama_penerbit,"+
-                       "perpustakaan_pengarang.nama_pengarang,perpustakaan_buku.thn_terbit,perpustakaan_buku.isbn,perpustakaan_kategori.nama_kategori,"+
-                       "perpustakaan_jenis_buku.nama_jenis,perpustakaan_peminjaman.no_anggota,perpustakaan_anggota.nama_anggota,perpustakaan_peminjaman.tgl_pinjam,"+
-                       "perpustakaan_peminjaman.tgl_kembali,petugas.nama from perpustakaan_peminjaman inner join perpustakaan_inventaris inner join perpustakaan_buku "+
-                       "inner join perpustakaan_penerbit inner join perpustakaan_pengarang inner join perpustakaan_kategori inner join perpustakaan_jenis_buku "+
-                       "inner join petugas inner join perpustakaan_anggota on perpustakaan_peminjaman.no_inventaris=perpustakaan_inventaris.no_inventaris "+
-                       "and perpustakaan_buku.kode_buku=perpustakaan_inventaris.kode_buku and perpustakaan_peminjaman.no_anggota=perpustakaan_anggota.no_anggota "+
-                       "and perpustakaan_buku.kode_penerbit=perpustakaan_penerbit.kode_penerbit and perpustakaan_buku.kode_pengarang=perpustakaan_pengarang.kode_pengarang "+
-                       "and perpustakaan_buku.id_kategori=perpustakaan_kategori.id_kategori and perpustakaan_buku.id_jenis=perpustakaan_jenis_buku.id_jenis "+
-                       "and petugas.nip=perpustakaan_peminjaman.nip where "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_peminjaman.no_inventaris like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_buku.kode_buku like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_buku.judul_buku like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_penerbit.nama_penerbit like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_pengarang.nama_pengarang like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_buku.thn_terbit like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_buku.isbn like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_kategori.nama_kategori like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_jenis_buku.nama_jenis like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_anggota.nama_anggota like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" petugas.nama like '%"+TCari.getText().trim()+"%' or "+
-                       inventariscari+" perpustakaan_peminjaman.status_pinjam like '%"+StatusCari.getSelectedItem().toString().replaceAll("Semua","")+"%' and "+tglcari+" perpustakaan_peminjaman.no_anggota like '%"+TCari.getText().trim()+"%' "+
-                       " order by perpustakaan_peminjaman.tgl_pinjam",param);
-
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

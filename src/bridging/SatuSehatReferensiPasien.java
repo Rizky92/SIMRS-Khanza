@@ -237,7 +237,7 @@ public final class SatuSehatReferensiPasien extends javax.swing.JDialog {
             param.put("kontakrs",akses.getkontakrs());
             param.put("emailrs",akses.getemailrs());
             param.put("logo",Sequel.cariGambar("select logo from setting"));
-            Valid.MyReport("rptCariSatuSehatPasien.jasper","report","[ Pencarian Referensi Pasien Satu Sehat ]",param);
+            Valid.MyReport("rptCariSatuSehatPasien.jasper","report","::[ Pencarian Referensi Pasien Satu Sehat ]",param);
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

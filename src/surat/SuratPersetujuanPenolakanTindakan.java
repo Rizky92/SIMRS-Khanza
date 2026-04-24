@@ -1551,7 +1551,7 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
                         ps.setString(10,"%"+TCari.getText()+"%");
                     }
                     rs=ps.executeQuery();
-                    pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+                    pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
                     switch (pilihan) {
                         case "Laporan 1 (HTML)":
                                 htmlContent = new StringBuilder();
@@ -1795,6 +1795,9 @@ public final class SuratPersetujuanPenolakanTindakan extends javax.swing.JDialog
 
                                 bw.close();
                                 Desktop.getDesktop().browse(f.toURI());
+                            break;
+                        case "Laporan 4 (XLSX)":
+                                Valid.exportXlsxSmc("PersetujuanPenolakanTindakan.xlsx",tbObat);
                             break;
                     }
                 } catch (Exception e) {

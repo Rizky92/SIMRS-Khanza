@@ -11,18 +11,26 @@
 package simrskhanza;
 
 import fungsi.WarnaTable;
+import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;
 import fungsi.validasi;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
@@ -38,6 +46,7 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final validasi Valid = new validasi();
+    private volatile boolean ceksukses = false;
     private DlgCariPintuSMC pintu = null;
     private DlgCariDokter dokter = null;
     private DlgCariPoli poli = null;
@@ -560,7 +569,61 @@ public class DlgSetPintuSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditActionPerformed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        // TODO add your handling code here:
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
+        if (tabMode.getRowCount() == 0) {
+            JOptionPane.showMessageDialog(null, "Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
+            BtnBatal.requestFocus();
+        } else if (tabMode.getRowCount() != 0) {
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("SetPintu.html", "Data Set Pintu", tbJadwal);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("SetPintu.wps", "Data Set Pintu", tbJadwal);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("SetPintu.csv", tbJadwal);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("SetPintu.xlsx", tbJadwal);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars", akses.getnamars());
+                        param.put("alamatrs", akses.getalamatrs());
+                        param.put("kotars", akses.getkabupatenrs());
+                        param.put("propinsirs", akses.getpropinsirs());
+                        param.put("kontakrs", akses.getkontakrs());
+                        param.put("emailrs", akses.getemailrs());
+                        param.put("logo", Sequel.cariGambar("select setting.logo from setting"));
+                        String sql = "select set_pintu_smc.kd_pintu, pintu_smc.nm_pintu, set_pintu_smc.kd_dokter, dokter.nm_dokter, set_pintu_smc.kd_poli, poliklinik.nm_poli " +
+                            "from set_pintu_smc join pintu_smc on set_pintu_smc.kd_pintu = pintu_smc.kd_pintu " +
+                            "join dokter on set_pintu_smc.kd_dokter = dokter.kd_dokter " +
+                            "join poliklinik on set_pintu_smc.kd_poli = poliklinik.kd_poli " +
+                            (TCari.getText().isBlank() ? "" :
+                            "where (set_pintu_smc.kd_pintu like '%" + TCari.getText().trim() + "%' or " +
+                            "set_pintu_smc.kd_dokter like '%" + TCari.getText().trim() + "%' or " +
+                            "set_pintu_smc.kd_poli like '%" + TCari.getText().trim() + "%' or " +
+                            "pintu_smc.nm_pintu like '%" + TCari.getText().trim() + "%' or " +
+                            "dokter.nm_dokter like '%" + TCari.getText().trim() + "%' or " +
+                            "poliklinik.nm_poli like '%" + TCari.getText().trim() + "%') ") +
+                            "order by set_pintu_smc.kd_pintu, dokter.nm_dokter, poliklinik.nm_poli";
+                        Valid.MyReportqry("rptSetPintu.jasper", "report", "::[ Data Set Pintu ]::", sql, param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
+        }
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed

@@ -179,7 +179,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         panelGlass8.setLayout(null);
 
         BtnSimpan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
-        BtnSimpan.setMnemonic('S');
         BtnSimpan.setText("Simpan");
         BtnSimpan.setToolTipText("Alt+S");
         BtnSimpan.setName("BtnSimpan"); // NOI18N
@@ -197,7 +196,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         BtnSimpan.setBounds(6, 10, 100, 30);
 
         BtnBatal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Cancel-2-16x16.png"))); // NOI18N
-        BtnBatal.setMnemonic('B');
         BtnBatal.setText("Baru");
         BtnBatal.setToolTipText("Alt+B");
         BtnBatal.setName("BtnBatal"); // NOI18N
@@ -215,7 +213,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         BtnBatal.setBounds(108, 10, 100, 30);
 
         BtnHapus.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
-        BtnHapus.setMnemonic('H');
         BtnHapus.setText("Hapus");
         BtnHapus.setToolTipText("Alt+H");
         BtnHapus.setName("BtnHapus"); // NOI18N
@@ -233,7 +230,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         BtnHapus.setBounds(210, 10, 100, 30);
 
         BtnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/inventaris.png"))); // NOI18N
-        BtnEdit.setMnemonic('G');
         BtnEdit.setText("Ganti");
         BtnEdit.setToolTipText("Alt+G");
         BtnEdit.setName("BtnEdit"); // NOI18N
@@ -251,7 +247,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         BtnEdit.setBounds(312, 10, 100, 30);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
-        BtnKeluar.setMnemonic('K');
         BtnKeluar.setText("Keluar");
         BtnKeluar.setToolTipText("Alt+K");
         BtnKeluar.setName("BtnKeluar"); // NOI18N
@@ -269,7 +264,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         BtnKeluar.setBounds(516, 10, 100, 30);
 
         BtnSemua.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnSemua.setMnemonic('4');
         BtnSemua.setText("Semua");
         BtnSemua.setToolTipText("Alt+4");
         BtnSemua.setName("BtnSemua"); // NOI18N
@@ -308,7 +302,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         panelGlass9.add(TCari);
 
         BtnCari.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
-        BtnCari.setMnemonic('3');
         BtnCari.setToolTipText("Alt+3");
         BtnCari.setName("BtnCari"); // NOI18N
         BtnCari.setPreferredSize(new java.awt.Dimension(28, 23));
@@ -369,7 +362,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         kdrek.setBounds(129, 42, 100, 23);
 
         BtnPoli.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnPoli.setMnemonic('2');
         BtnPoli.setToolTipText("ALt+2");
         BtnPoli.setName("BtnPoli"); // NOI18N
         BtnPoli.addActionListener(new java.awt.event.ActionListener() {
@@ -402,7 +394,6 @@ public class DlgAkunAsetInventaris extends javax.swing.JDialog {
         nmjenis.setBounds(232, 12, 342, 23);
 
         BtnJenis.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/190.png"))); // NOI18N
-        BtnJenis.setMnemonic('2');
         BtnJenis.setToolTipText("ALt+2");
         BtnJenis.setName("BtnJenis"); // NOI18N
         BtnJenis.addActionListener(new java.awt.event.ActionListener() {

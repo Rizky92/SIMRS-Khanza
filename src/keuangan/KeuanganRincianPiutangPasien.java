@@ -387,203 +387,206 @@ public final class KeuanganRincianPiutangPasien extends javax.swing.JDialog {
                 File f;
                 BufferedWriter bw;
 
-                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (Jasper)"},"Laporan 1 (HTML)");
+                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "<tr class='isi'>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat/Tagihan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Piutang</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>No. RM</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pasien</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Status</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jatuh Tempo</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Cara Bayar</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Registrasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tindakan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Obt+Emb+Tsl</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Retur Obat</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Resep Pulang</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Laborat</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Radiologi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Potongan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tambahan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kamar+Service</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Harian</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total Piutang</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Uang Muka</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Cicilan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Diskon Bayar</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tidak Terbayar</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sisa Piutang</td>"+
+                            "</tr>"
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat/Tagihan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Piutang</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No. RM</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pasien</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Status</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jatuh Tempo</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Cara Bayar</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Registrasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tindakan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Obt+Emb+Tsl</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Retur Obat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Resep Pulang</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Laborat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Radiologi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Potongan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tambahan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kamar+Service</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Harian</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total Piutang</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Uang Muka</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Cicilan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Diskon Bayar</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tidak Terbayar</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sisa Piutang</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,6)+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,15).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,16).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,17).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,18).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,19).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,20).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,21).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,22).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,23).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,24).toString()))+"</td>"+
                                 "</tr>"
                             );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,15).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,16).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,17).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,18).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,19).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,20).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,21).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,22).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,23).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,24).toString()))+"</td>"+
-                                    "</tr>"
-                                );
-                            }
+                        }
 
-                            f = new File("PiutangRalan.html");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write("<html>"+
-                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                        "<body>"+
-                                            "<table width='1950px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                "<tr class='isi2'>"+
-                                                    "<td valign='top' align='center'>"+
-                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>REKAP PEMBAYARAN RAWAT JALAN PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                                    "</td>"+
-                                               "</tr>"+
-                                            "</table>"+
-                                            "<table width='1950px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                htmlContent.toString()+
-                                            "</table>"+
-                                        "</body>"+
-                                     "</html>"
-                            );
+                        f = new File("PiutangRalan.html");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write("<html>"+
+                                    "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
+                                    "<body>"+
+                                        "<table width='1950px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            "<tr class='isi2'>"+
+                                                "<td valign='top' align='center'>"+
+                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                    "<font size='2' face='Tahoma'>REKAP PEMBAYARAN RAWAT JALAN PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                                "</td>"+
+                                           "</tr>"+
+                                        "</table>"+
+                                        "<table width='1950px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            htmlContent.toString()+
+                                        "</table>"+
+                                    "</body>"+
+                                 "</html>"
+                        );
 
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "<tr class='isi'>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat/Tagihan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Piutang</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.RM</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pasien</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Status</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jatuh Tempo</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Cara Bayar</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Registrasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tindakan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Obt+Emb+Tsl</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Retur Obat</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Resep Pulang</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Laborat</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Radiologi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Potongan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tambahan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kamar+Service</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Harian</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total Piutang</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Uang Muka</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Cicilan</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Diskon Bayar</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tidak Terbayar</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sisa Piutang</td>"+
+                            "</tr>"
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat/Tagihan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tgl.Piutang</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.RM</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pasien</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Status</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Jatuh Tempo</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Cara Bayar</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Registrasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tindakan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Obt+Emb+Tsl</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Retur Obat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Resep Pulang</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Laborat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Radiologi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Potongan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tambahan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kamar+Service</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Harian</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Total Piutang</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Uang Muka</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Cicilan</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Diskon Bayar</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tidak Terbayar</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sisa Piutang</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,6)+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,15).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,16).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,17).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,18).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,19).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,20).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,21).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,22).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,23).toString()))+"</td>"+
+                                    "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,24).toString()))+"</td>"+
                                 "</tr>"
                             );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,9).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,10).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,11).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,12).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,13).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,14).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,15).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,16).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,17).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,18).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,19).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,20).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,21).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,22).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,23).toString()))+"</td>"+
-                                        "<td valign='top' align='right'>"+Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,24).toString()))+"</td>"+
-                                    "</tr>"
-                                );
-                            }
+                        }
 
-                            f = new File("PiutangRalan.wps");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write("<html>"+
-                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                        "<body>"+
-                                            "<table width='1950px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                "<tr class='isi2'>"+
-                                                    "<td valign='top' align='center'>"+
-                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                                    "</td>"+
-                                               "</tr>"+
-                                            "</table>"+
-                                            "<table width='1950px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                htmlContent.toString()+
-                                            "</table>"+
-                                        "</body>"+
-                                     "</html>"
-                            );
+                        f = new File("PiutangRalan.wps");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write("<html>"+
+                                    "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
+                                    "<body>"+
+                                        "<table width='1950px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            "<tr class='isi2'>"+
+                                                "<td valign='top' align='center'>"+
+                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                    "<font size='2' face='Tahoma'>DETAIL JM DOKTER PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                                "</td>"+
+                                           "</tr>"+
+                                        "</table>"+
+                                        "<table width='1950px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            htmlContent.toString()+
+                                        "</table>"+
+                                    "</body>"+
+                                 "</html>"
+                        );
 
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "\"No.Rawat/Tagihan\";\"Tgl.Piutang\";\"No.RM\";\"Pasien\";\"Status\";\"Jatuh Tempo\";\"Cara Bayar\";\"Registrasi\";\"Tindakan\";\"Obt+Emb+Tsl\";\"Retur Obat\";\"Resep Pulang\";\"Laborat\";\"Radiologi\";\"Potongan\";\"Tambahan\";\"Kamar+Service\";\"Operasi\";\"Harian\";\"Total Piutang\";\"Uang Muka\";\"Cicilan\";\"Diskon Bayar\";\"Tidak Terbayar\";\"Sisa Piutang\"\n"
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             htmlContent.append(
-                                "\"No.Rawat/Tagihan\";\"Tgl.Piutang\";\"No.RM\";\"Pasien\";\"Status\";\"Jatuh Tempo\";\"Cara Bayar\";\"Registrasi\";\"Tindakan\";\"Obt+Emb+Tsl\";\"Retur Obat\";\"Resep Pulang\";\"Laborat\";\"Radiologi\";\"Potongan\";\"Tambahan\";\"Kamar+Service\";\"Operasi\";\"Harian\";\"Total Piutang\";\"Uang Muka\";\"Cicilan\";\"Diskon Bayar\";\"Tidak Terbayar\";\"Sisa Piutang\"\n"
+                                "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\";\""+tabMode.getValueAt(i,19)+"\";\""+tabMode.getValueAt(i,20)+"\";\""+tabMode.getValueAt(i,21)+"\";\""+tabMode.getValueAt(i,22)+"\";\""+tabMode.getValueAt(i,23)+"\";\""+tabMode.getValueAt(i,24)+"\"\n"
                             );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\";\""+tabMode.getValueAt(i,13)+"\";\""+tabMode.getValueAt(i,14)+"\";\""+tabMode.getValueAt(i,15)+"\";\""+tabMode.getValueAt(i,16)+"\";\""+tabMode.getValueAt(i,17)+"\";\""+tabMode.getValueAt(i,18)+"\";\""+tabMode.getValueAt(i,19)+"\";\""+tabMode.getValueAt(i,20)+"\";\""+tabMode.getValueAt(i,21)+"\";\""+tabMode.getValueAt(i,22)+"\";\""+tabMode.getValueAt(i,23)+"\";\""+tabMode.getValueAt(i,24)+"\"\n"
-                                );
-                            }
+                        }
 
-                            f = new File("PiutangRalan.csv");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(htmlContent.toString());
+                        f = new File("PiutangRalan.csv");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write(htmlContent.toString());
 
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
-                    case "Laporan 4 (Jasper)":
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("PiutangRalan.xlsx",tbBangsal);
+                        break;
+                    case "Laporan 5 (Jasper)":
                         Sequel.deleteTemporary();
                         int row = tabMode.getRowCount();
                         for (int i = 0; i < row; i++) {

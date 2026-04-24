@@ -23,6 +23,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -646,49 +649,69 @@ public final class DlgObatPenyakit extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        if((! TCari.getText().trim().equals(""))&&(KtgCari.getText().equals(""))&&(PenyakitCari.getText().equals(""))){
-            BtnCariActionPerformed(evt);
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
         }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                sql=" nm_kategori like '%"+KtgCari.getText()+"%' "+
-                " and nm_penyakit like '%"+PenyakitCari.getText()+"%' ";
-
-                Valid.MyReportqry("rptObtPenyakit.jasper","report","::[ Data Obat Penyakit ]::",
-                        "select obat_penyakit.kd_penyakit,nm_penyakit,ciri_ciri,penyakit.keterangan, "+
-                        "nm_kategori,ciri_umum,obat_penyakit.kode_brng,nama_brng,jenis.nama,h_beli,referensi "+
-                        "from obat_penyakit inner join penyakit inner join kategori_penyakit inner join databarang inner join jenis "+
-                        "on penyakit.kd_ktg=kategori_penyakit.kd_ktg and "+
-                        "databarang.kdjns=jenis.kdjns and "+
-                        "obat_penyakit.kd_penyakit=penyakit.kd_penyakit and "+
-                        "obat_penyakit.kode_brng=databarang.kode_brng where "+
-                         sql+"and obat_penyakit.kd_penyakit like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and nm_penyakit like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and ciri_ciri like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and penyakit.keterangan like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and nm_kategori like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and ciri_umum like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and obat_penyakit.kode_brng like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and nama_brng like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and jenis.nama like '%"+TCari.getText().trim()+"%' or "+
-                         sql+"and referensi like '%"+TCari.getText().trim()+"%' "+
-                         "order by obat_penyakit.kd_penyakit ",param);
-
-
-
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("ObtPenyakit.html", "Data Obat Penyakit", tbObatPenyakit);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("ObtPenyakit.wps", "Data Obat Penyakit", tbObatPenyakit);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("ObtPenyakit.csv", tbObatPenyakit);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("ObtPenyakit.xlsx", tbObatPenyakit);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        sql=" nm_kategori like '%"+KtgCari.getText()+"%' "+
+                        " and nm_penyakit like '%"+PenyakitCari.getText()+"%' ";
+                        Valid.MyReportqry("rptObtPenyakit.jasper","report","::[ Data Obat Penyakit ]::",
+                                "select obat_penyakit.kd_penyakit,nm_penyakit,ciri_ciri,penyakit.keterangan, "+
+                                "nm_kategori,ciri_umum,obat_penyakit.kode_brng,nama_brng,jenis.nama,h_beli,referensi "+
+                                "from obat_penyakit inner join penyakit inner join kategori_penyakit inner join databarang inner join jenis "+
+                                "on penyakit.kd_ktg=kategori_penyakit.kd_ktg and "+
+                                "databarang.kdjns=jenis.kdjns and "+
+                                "obat_penyakit.kd_penyakit=penyakit.kd_penyakit and "+
+                                "obat_penyakit.kode_brng=databarang.kode_brng where "+
+                                 sql+"and obat_penyakit.kd_penyakit like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and nm_penyakit like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and ciri_ciri like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and penyakit.keterangan like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and nm_kategori like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and ciri_umum like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and obat_penyakit.kode_brng like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and jenis.nama like '%"+TCari.getText().trim()+"%' or "+
+                                 sql+"and referensi like '%"+TCari.getText().trim()+"%' "+
+                                 "order by obat_penyakit.kd_penyakit ",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

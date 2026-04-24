@@ -19,6 +19,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -350,7 +353,10 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         Map<String, Object> param = new HashMap<>();
         param.put("namars",akses.getnamars());
         param.put("alamatrs",akses.getalamatrs());
@@ -363,29 +369,80 @@ public final class TokoPendapatanHarian extends javax.swing.JDialog {
             if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             }else if(tabMode.getRowCount()!=0){
-                Valid.MyReportqry("rptPendapatanHarian1Toko.jasper","report","::[ Penjualan Harian Toko ]::",
-                    "select tokopenjualan.tgl_jual,tokopenjualan.nip,petugas.nama,sum(tokopenjualan.ongkir)as ongkir,sum(tokopenjualan.total)as total,sum(tokopenjualan.ppn) as ppn "+
-                    "from tokopenjualan inner join petugas on tokopenjualan.nip=petugas.nip where tokopenjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
-                    (TCari.getText().equals("")?"":"and (tokopenjualan.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%')")+
-                    "group by tokopenjualan.tgl_jual,tokopenjualan.nip order by tokopenjualan.tgl_jual,tokopenjualan.nip",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("PendapatanHarian1Toko.html", "Penjualan Harian Toko", tbPenjualan);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("PendapatanHarian1Toko.wps", "Penjualan Harian Toko", tbPenjualan);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("PendapatanHarian1Toko.csv", tbPenjualan);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("PendapatanHarian1Toko.xlsx", tbPenjualan);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Valid.MyReportqry("rptPendapatanHarian1Toko.jasper","report","::[ Penjualan Harian Toko ]::",
+                                "select tokopenjualan.tgl_jual,tokopenjualan.nip,petugas.nama,sum(tokopenjualan.ongkir)as ongkir,sum(tokopenjualan.total)as total,sum(tokopenjualan.ppn) as ppn "+
+                                "from tokopenjualan inner join petugas on tokopenjualan.nip=petugas.nip where tokopenjualan.tgl_jual between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                                (TCari.getText().equals("")?"":"and (tokopenjualan.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%')")+
+                                "group by tokopenjualan.tgl_jual,tokopenjualan.nip order by tokopenjualan.tgl_jual,tokopenjualan.nip",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-
         }else if(TabRawat.getSelectedIndex()==1){
             if(tabMode2.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             }else if(tabMode2.getRowCount()!=0){
-                Valid.MyReportqry("rptPendapatanHarian2Toko.jasper","report","::[ Piutang Harian Toko ]::",
-                    "select tokopiutang.tgl_piutang,tokopiutang.nip,petugas.nama,sum(tokopiutang.ongkir) as ongkir,"+
-                    "sum(tokopiutang.ongkir+tokopiutang.uangmuka+tokopiutang.sisapiutang) as total, "+
-                    "sum(tokopiutang.uangmuka) as uangmuka,sum(tokopiutang.sisapiutang) as sisapiutang "+
-                    "from tokopiutang inner join petugas on tokopiutang.nip=petugas.nip "+
-                    "where tokopiutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
-                    (TCari.getText().equals("")?"":"and (tokopiutang.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%')")+
-                    "group by tokopiutang.tgl_piutang,tokopiutang.nip order by tokopiutang.tgl_piutang,tokopiutang.nip",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("PendapatanHarian2Toko.html", "Piutang Harian Toko", tbPiutang);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("PendapatanHarian2Toko.wps", "Piutang Harian Toko", tbPiutang);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("PendapatanHarian2Toko.csv", tbPiutang);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("PendapatanHarian2Toko.xlsx", tbPiutang);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Valid.MyReportqry("rptPendapatanHarian2Toko.jasper","report","::[ Piutang Harian Toko ]::",
+                                "select tokopiutang.tgl_piutang,tokopiutang.nip,petugas.nama,sum(tokopiutang.ongkir) as ongkir,"+
+                                "sum(tokopiutang.ongkir+tokopiutang.uangmuka+tokopiutang.sisapiutang) as total, "+
+                                "sum(tokopiutang.uangmuka) as uangmuka,sum(tokopiutang.sisapiutang) as sisapiutang "+
+                                "from tokopiutang inner join petugas on tokopiutang.nip=petugas.nip "+
+                                "where tokopiutang.tgl_piutang between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' "+
+                                (TCari.getText().equals("")?"":"and (tokopiutang.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%')")+
+                                "group by tokopiutang.tgl_piutang,tokopiutang.nip order by tokopiutang.tgl_piutang,tokopiutang.nip",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
         }
-
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

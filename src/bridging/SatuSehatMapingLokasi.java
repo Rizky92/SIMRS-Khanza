@@ -18,6 +18,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -4729,145 +4732,349 @@ public final class SatuSehatMapingLokasi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(TabRawat.getSelectedIndex()==0){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabMode.getRowCount()!=0){
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    param.put("parameter","%"+TCari.getText().trim()+"%");
-                    Valid.MyReport("rptMapingLokasiSatuSehat.jasper","report","::[ Mapping Poli/Lokasi Satu Sehat Kemenkes ]::",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("MapingLokasiSatuSehat.html", "Mapping Poli/Lokasi Satu Sehat Kemenkes", tbJnsPerawatan);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("MapingLokasiSatuSehat.wps", "Mapping Poli/Lokasi Satu Sehat Kemenkes", tbJnsPerawatan);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("MapingLokasiSatuSehat.csv", tbJnsPerawatan);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("MapingLokasiSatuSehat.xlsx", tbJnsPerawatan);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            param.put("parameter","%"+TCari.getText().trim()+"%");
+                            Valid.MyReport("rptMapingLokasiSatuSehat.jasper","report","::[ Mapping Poli/Lokasi Satu Sehat Kemenkes ]::",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-            this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==1){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabModeKamar.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabModeKamar.getRowCount()!=0){
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    param.put("parameter","%"+TCari.getText().trim()+"%");
-                    Valid.MyReport("rptMapingLokasiSatuSehat2.jasper","report","::[ Mapping Kamar Inap/Ruang Inap Satu Sehat Kemenkes ]::",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("MapingLokasiSatuSehat2.html", "Mapping Kamar Inap/Ruang Inap Satu Sehat Kemenkes", tbLokasiKamar);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("MapingLokasiSatuSehat2.wps", "Mapping Kamar Inap/Ruang Inap Satu Sehat Kemenkes", tbLokasiKamar);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("MapingLokasiSatuSehat2.csv", tbLokasiKamar);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("MapingLokasiSatuSehat2.xlsx", tbLokasiKamar);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            param.put("parameter","%"+TCari.getText().trim()+"%");
+                            Valid.MyReport("rptMapingLokasiSatuSehat2.jasper","report","::[ Mapping Kamar Inap/Ruang Inap Satu Sehat Kemenkes ]::",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-            this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==2){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabModeRuangOK.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabModeRuangOK.getRowCount()!=0){
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptMapingLokasiSatuSehat3.jasper","report","::[ Mapping Lokasi Ruang Operasi Satu Sehat Kemenkes ]::",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("MapingLokasiSatuSehat3.html", "Mapping Lokasi Ruang Operasi Satu Sehat Kemenkes", tbLokasiRuangOK);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("MapingLokasiSatuSehat3.wps", "Mapping Lokasi Ruang Operasi Satu Sehat Kemenkes", tbLokasiRuangOK);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("MapingLokasiSatuSehat3.csv", tbLokasiRuangOK);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("MapingLokasiSatuSehat3.xlsx", tbLokasiRuangOK);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReport("rptMapingLokasiSatuSehat3.jasper","report","::[ Mapping Lokasi Ruang Operasi Satu Sehat Kemenkes ]::",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-            this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==3){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabModeRuangLabPK.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabModeRuangLabPK.getRowCount()!=0){
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptMapingLokasiSatuSehat4.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Patologi Klinis Satu Sehat Kemenkes ]::",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("MapingLokasiSatuSehat4.html", "Mapping Lokasi Ruang Laboratorium Patologi Klinis Satu Sehat Kemenkes", tbLokasiRuangLabPK);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("MapingLokasiSatuSehat4.wps", "Mapping Lokasi Ruang Laboratorium Patologi Klinis Satu Sehat Kemenkes", tbLokasiRuangLabPK);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("MapingLokasiSatuSehat4.csv", tbLokasiRuangLabPK);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("MapingLokasiSatuSehat4.xlsx", tbLokasiRuangLabPK);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReport("rptMapingLokasiSatuSehat4.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Patologi Klinis Satu Sehat Kemenkes ]::",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-            this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==4){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabModeRuangLabPA.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabModeRuangLabPA.getRowCount()!=0){
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptMapingLokasiSatuSehat5.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Patologi Anatomi Satu Sehat Kemenkes ]::",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("MapingLokasiSatuSehat5.html", "Mapping Lokasi Ruang Laboratorium Patologi Anatomi Satu Sehat Kemenkes", tbLokasiRuangLabPA);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("MapingLokasiSatuSehat5.wps", "Mapping Lokasi Ruang Laboratorium Patologi Anatomi Satu Sehat Kemenkes", tbLokasiRuangLabPA);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("MapingLokasiSatuSehat5.csv", tbLokasiRuangLabPA);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("MapingLokasiSatuSehat5.xlsx", tbLokasiRuangLabPA);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReport("rptMapingLokasiSatuSehat5.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Patologi Anatomi Satu Sehat Kemenkes ]::",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-            this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==5){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabModeRuangLabMB.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabModeRuangLabMB.getRowCount()!=0){
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptMapingLokasiSatuSehat6.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Mikrobiologi & Bio Molekuler Satu Sehat Kemenkes ]::",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("MapingLokasiSatuSehat6.html", "Mapping Lokasi Ruang Laboratorium Mikrobiologi & Bio Molekuler Satu Sehat Kemenkes", tbLokasiRuangLabMB);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("MapingLokasiSatuSehat6.wps", "Mapping Lokasi Ruang Laboratorium Mikrobiologi & Bio Molekuler Satu Sehat Kemenkes", tbLokasiRuangLabMB);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("MapingLokasiSatuSehat6.csv", tbLokasiRuangLabMB);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("MapingLokasiSatuSehat6.xlsx", tbLokasiRuangLabMB);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReport("rptMapingLokasiSatuSehat6.jasper","report","::[ Mapping Lokasi Ruang Laboratorium Mikrobiologi & Bio Molekuler Satu Sehat Kemenkes ]::",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-            this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==6){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabModeRuangRadiologi.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabModeRuangRadiologi.getRowCount()!=0){
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    Valid.MyReport("rptMapingLokasiSatuSehat7.jasper","report","::[ Mapping Lokasi Ruang Radiologi Satu Sehat Kemenkes ]::",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("MapingLokasiSatuSehat7.html", "Mapping Lokasi Ruang Radiologi Satu Sehat Kemenkes", tbLokasiRuangRadiologi);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("MapingLokasiSatuSehat7.wps", "Mapping Lokasi Ruang Radiologi Satu Sehat Kemenkes", tbLokasiRuangRadiologi);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("MapingLokasiSatuSehat7.csv", tbLokasiRuangRadiologi);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("MapingLokasiSatuSehat7.xlsx", tbLokasiRuangRadiologi);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            Valid.MyReport("rptMapingLokasiSatuSehat7.jasper","report","::[ Mapping Lokasi Ruang Radiologi Satu Sehat Kemenkes ]::",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-            this.setCursor(Cursor.getDefaultCursor());
         }else if(TabRawat.getSelectedIndex()==7){
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             if(tabModeRuangFarmasi.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 BtnBatal.requestFocus();
             }else if(tabModeRuangFarmasi.getRowCount()!=0){
-                    Map<String, Object> param = new HashMap<>();
-                    param.put("namars",akses.getnamars());
-                    param.put("alamatrs",akses.getalamatrs());
-                    param.put("kotars",akses.getkabupatenrs());
-                    param.put("propinsirs",akses.getpropinsirs());
-                    param.put("kontakrs",akses.getkontakrs());
-                    param.put("emailrs",akses.getemailrs());
-                    param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                    param.put("parameter","%"+TCari.getText().trim()+"%");
-                    Valid.MyReport("rptMapingLokasiSatuSehat8.jasper","report","::[ Mapping Lokasi Depo/Farmasi Satu Sehat Kemenkes ]::",param);
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("MapingLokasiSatuSehat8.html", "Mapping Lokasi Depo/Farmasi Satu Sehat Kemenkes", tbLokasiFarmasi);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("MapingLokasiSatuSehat8.wps", "Mapping Lokasi Depo/Farmasi Satu Sehat Kemenkes", tbLokasiFarmasi);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("MapingLokasiSatuSehat8.csv", tbLokasiFarmasi);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("MapingLokasiSatuSehat8.xlsx", tbLokasiFarmasi);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            param.put("kontakrs",akses.getkontakrs());
+                            param.put("emailrs",akses.getemailrs());
+                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                            param.put("parameter","%"+TCari.getText().trim()+"%");
+                            Valid.MyReport("rptMapingLokasiSatuSehat8.jasper","report","::[ Mapping Lokasi Depo/Farmasi Satu Sehat Kemenkes ]::",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
             }
-            this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed
 

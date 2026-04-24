@@ -1075,7 +1075,7 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                 BufferedWriter bw;
                 StringBuilder htmlContent;
 
-                String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+                String pilihan =(String) JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                             htmlContent = new StringBuilder();
@@ -1227,6 +1227,9 @@ public final class SuratPernyataanMemilihDPJP extends javax.swing.JDialog {
                             bw.write(htmlContent.toString());
                             bw.close();
                             Desktop.getDesktop().browse(f.toURI());
+                        break;
+                    case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("DataSuratPernyataanMemilihDPJP.xlsx",tbObat);
                         break;
                 }
                 htmlContent=null;

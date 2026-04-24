@@ -339,7 +339,6 @@ public final class ApotekBPJSRiwayatPelayananObatSMC extends javax.swing.JDialog
                     tabMode.getValueAt(i, 15).toString() + "','" +
                     tabMode.getValueAt(i, 16).toString() + "','','','','','','','','','','','','','','','','','','','','','" + akses.getalamatip() + "'", "Daftar Pelayanan Obat Apotek BPJS");
             }
-
             Map<String, Object> param = new HashMap<>();
             param.put("namars", akses.getnamars());
             param.put("alamatrs", akses.getalamatrs());

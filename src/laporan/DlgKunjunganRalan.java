@@ -636,6 +636,10 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         try {
             File g = new File("file2.css");
@@ -651,7 +655,7 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
             File f;
             BufferedWriter bw;
 
-            pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (Jasper)"},"Laporan 1 (HTML)");
+            pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
             switch (pilihan) {
                 case "Laporan 1 (HTML)":
                         htmlContent = new StringBuilder();
@@ -832,7 +836,10 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
                         bw.close();
                         Desktop.getDesktop().browse(f.toURI());
                     break;
-                case "Laporan 4 (Jasper)":
+                case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("KunjunganRalan.xlsx",table1);
+                    break;
+                case "Laporan 5 (Jasper)":
                         Map<String, Object> param = new HashMap<>();
                         param.put("namars",akses.getnamars());
                         param.put("alamatrs",akses.getalamatrs());

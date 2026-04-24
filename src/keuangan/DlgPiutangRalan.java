@@ -440,7 +440,7 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                 BufferedWriter bw;
 
                 StringBuilder htmlContent;
-                String pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (Jasper)"},"Laporan 1 (HTML)");
+                String pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                             htmlContent = new StringBuilder();
@@ -620,7 +620,10 @@ public final class DlgPiutangRalan extends javax.swing.JDialog {
                             bw.close();
                             Desktop.getDesktop().browse(f.toURI());
                         break;
-                    case "Laporan 4 (Jasper)":
+                    case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("PiutangRalan.xlsx",tbBangsal);
+                        break;
+                    case "Laporan 5 (Jasper)":
                         Sequel.deleteTemporary();
                         for (int i = 0; i < tabMode.getRowCount(); i++) {
                             Sequel.temporary(String.valueOf(i),

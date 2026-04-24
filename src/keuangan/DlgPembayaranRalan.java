@@ -544,7 +544,7 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
                 File f;
                 BufferedWriter bw;
 
-                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (Jasper)"},"Laporan 1 (HTML)");
+                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                         htmlContent = new StringBuilder();
@@ -706,7 +706,10 @@ public final class DlgPembayaranRalan extends javax.swing.JDialog {
                         bw.close();
                         Desktop.getDesktop().browse(f.toURI());
                         break;
-                    case "Laporan 4 (Jasper)":
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("PembayaranRalan.xlsx",tbBangsal);
+                        break;
+                    case "Laporan 5 (Jasper)":
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         for(int r=0;r<tabMode.getRowCount();r++){
                             Sequel.menyimpan("temporary","'"+r+"','"+

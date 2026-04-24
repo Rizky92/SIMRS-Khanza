@@ -424,6 +424,10 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnPrint.requestFocus();
@@ -443,155 +447,158 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
                 File f;
                 BufferedWriter bw;
 
-                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)"},"Laporan 1 (HTML)");
+                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "<tr class='isi'>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tanggal</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operator</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nomer RM</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pasien</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tindakan/Operasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Status</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Check List Pre Operasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sign-In Sebelum Anestesi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Time-Out Sebelum Insisi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sign-Out Sebelum Menutup Luka</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Check List Post Operasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kelengkapan</td>"+
+                            "</tr>"
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tanggal</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operator</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nomer RM</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pasien</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tindakan/Operasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Status</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Check List Pre Operasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sign-In Sebelum Anestesi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Time-Out Sebelum Insisi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sign-Out Sebelum Menutup Luka</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Check List Post Operasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kelengkapan</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,1)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,6)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,8)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,9)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,10)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,11)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,12)+"</td>"+
                                 "</tr>"
                             );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,8)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,9)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,10)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,11)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,12)+"</td>"+
-                                    "</tr>"
-                                );
-                            }
+                        }
 
-                            f = new File("KepatuhanKelengkapanKeselamatanBedah.html");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write("<html>"+
-                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                        "<body>"+
-                                            "<table width='1600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                "<tr class='isi2'>"+
-                                                    "<td valign='top' align='center'>"+
-                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                                "<font size='2' face='Tahoma'>REKAP KEPATUHAN KELENGKAPAN KESELAMATAN BEDAH PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                                    "</td>"+
-                                               "</tr>"+
-                                            "</table>"+
-                                            "<table width='1600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                htmlContent.toString()+
-                                            "</table>"+
-                                        "</body>"+
-                                     "</html>"
-                            );
+                        f = new File("KepatuhanKelengkapanKeselamatanBedah.html");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write("<html>"+
+                                    "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
+                                    "<body>"+
+                                        "<table width='1600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            "<tr class='isi2'>"+
+                                                "<td valign='top' align='center'>"+
+                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                            "<font size='2' face='Tahoma'>REKAP KEPATUHAN KELENGKAPAN KESELAMATAN BEDAH PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                                "</td>"+
+                                           "</tr>"+
+                                        "</table>"+
+                                        "<table width='1600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            htmlContent.toString()+
+                                        "</table>"+
+                                    "</body>"+
+                                 "</html>"
+                        );
 
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 2 (WPS)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "<tr class='isi'>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tanggal</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operator</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nomer RM</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pasien</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tindakan/Operasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Status</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Check List Pre Operasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sign-In Sebelum Anestesi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Time-Out Sebelum Insisi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sign-Out Sebelum Menutup Luka</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Check List Post Operasi</td>"+
+                                "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kelengkapan</td>"+
+                            "</tr>"
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             htmlContent.append(
                                 "<tr class='isi'>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>No.Rawat</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tanggal</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Operator</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Nomer RM</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Pasien</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Tindakan/Operasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Status</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Check List Pre Operasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sign-In Sebelum Anestesi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Time-Out Sebelum Insisi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Sign-Out Sebelum Menutup Luka</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Check List Post Operasi</td>"+
-                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'>Kelengkapan</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,1)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
+                                    "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,6)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,8)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,9)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,10)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,11)+"</td>"+
+                                    "<td valign='top' align='center'>"+tabMode.getValueAt(i,12)+"</td>"+
                                 "</tr>"
                             );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,8)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,9)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,10)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,11)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,12)+"</td>"+
-                                    "</tr>"
-                                );
-                            }
+                        }
 
-                            f = new File("KepatuhanKelengkapanKeselamatanBedah.wps");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write("<html>"+
-                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                        "<body>"+
-                                            "<table width='1600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                "<tr class='isi2'>"+
-                                                    "<td valign='top' align='center'>"+
-                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                        "<font size='2' face='Tahoma'>REKAP KEPATUHAN KELENGKAPAN KESELAMATAN BEDAH PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                                    "</td>"+
-                                               "</tr>"+
-                                            "</table>"+
-                                            "<table width='1600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                                htmlContent.toString()+
-                                            "</table>"+
-                                        "</body>"+
-                                     "</html>"
-                            );
+                        f = new File("KepatuhanKelengkapanKeselamatanBedah.wps");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write("<html>"+
+                                    "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
+                                    "<body>"+
+                                        "<table width='1600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            "<tr class='isi2'>"+
+                                                "<td valign='top' align='center'>"+
+                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                    "<font size='2' face='Tahoma'>REKAP KEPATUHAN KELENGKAPAN KESELAMATAN BEDAH PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                                "</td>"+
+                                           "</tr>"+
+                                        "</table>"+
+                                        "<table width='1600px' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                            htmlContent.toString()+
+                                        "</table>"+
+                                    "</body>"+
+                                 "</html>"
+                        );
 
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
                         break;
                     case "Laporan 3 (CSV)":
-                            htmlContent = new StringBuilder();
+                        htmlContent = new StringBuilder();
+                        htmlContent.append(
+                            "\"No.Rawat\";\"Tanggal\";\"Operator\";\"Nomer RM\";\"Pasien\";\"Tindakan/Operasi\";\"Status\";\"Check List Pre Operasi\";\"Sign-In Sebelum Anestesi\";\"Time-Out Sebelum Insisi\";\"Sign-Out Sebelum Menutup Luka\";\"Check List Post Operasi\";\"Kelengkapan\"\n"
+                        );
+                        for(i=0;i<tabMode.getRowCount();i++){
                             htmlContent.append(
-                                "\"No.Rawat\";\"Tanggal\";\"Operator\";\"Nomer RM\";\"Pasien\";\"Tindakan/Operasi\";\"Status\";\"Check List Pre Operasi\";\"Sign-In Sebelum Anestesi\";\"Time-Out Sebelum Insisi\";\"Sign-Out Sebelum Menutup Luka\";\"Check List Post Operasi\";\"Kelengkapan\"\n"
+                                "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";"+
+                                "\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";"+
+                                "\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\"\n"
                             );
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";"+
-                                    "\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\";"+
-                                    "\""+tabMode.getValueAt(i,10)+"\";\""+tabMode.getValueAt(i,11)+"\";\""+tabMode.getValueAt(i,12)+"\"\n"
-                                );
-                            }
+                        }
 
-                            f = new File("KepatuhanKelengkapanKeselamatanBedah.csv");
-                            bw = new BufferedWriter(new FileWriter(f));
-                            bw.write(htmlContent.toString());
+                        f = new File("KepatuhanKelengkapanKeselamatanBedah.csv");
+                        bw = new BufferedWriter(new FileWriter(f));
+                        bw.write(htmlContent.toString());
 
-                            bw.close();
-                            Desktop.getDesktop().browse(f.toURI());
+                        bw.close();
+                        Desktop.getDesktop().browse(f.toURI());
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("KepatuhanKelengkapanKeselamatanBedah.xlsx",tbBangsal);
                         break;
                 }
             } catch (Exception e) {

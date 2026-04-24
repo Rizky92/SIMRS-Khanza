@@ -11,6 +11,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -828,53 +831,81 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("tanggal1",Valid.SetTgl(TglBeli1.getSelectedItem()+""));
-            param.put("tanggal2",Valid.SetTgl(TglBeli2.getSelectedItem()+""));
-            param.put("parameter","%"+TCari.getText().trim()+"%");
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            carifaktur="";carisuplier="";caripetugas="";carijenis="";caribarang="";
-            if(!NoFaktur.getText().equals("")){
-                carifaktur=" and dapurreturbeli.no_retur_beli like '%"+NoFaktur.getText()+"%' ";
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
+                }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("RingkasanReturSuplierDapur.html", "Laporan Ringkasan Retur Ke Suplier Barang Dapur", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("RingkasanReturSuplierDapur.wps", "Laporan Ringkasan Retur Ke Suplier Barang Dapur", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("RingkasanReturSuplierDapur.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("RingkasanReturSuplierDapur.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("tanggal1",Valid.SetTgl(TglBeli1.getSelectedItem()+""));
+                        param.put("tanggal2",Valid.SetTgl(TglBeli2.getSelectedItem()+""));
+                        param.put("parameter","%"+TCari.getText().trim()+"%");
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        carifaktur="";carisuplier="";caripetugas="";carijenis="";caribarang="";
+                        if(!NoFaktur.getText().equals("")){
+                            carifaktur=" and dapurreturbeli.no_retur_beli like '%"+NoFaktur.getText()+"%' ";
+                        }
+                        if(!nmsup.getText().equals("")){
+                            carisuplier=" and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' ";
+                        }
+                        if(!nmptg.getText().equals("")){
+                            caripetugas=" and petugas.nama like '%"+nmptg.getText()+"%' ";
+                        }
+                        if(!Jenis.getSelectedItem().toString().equals("Semua")){
+                            carijenis=" and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString()+"%' ";
+                        }
+                        if(!nmbar.getText().equals("")){
+                            caribarang= " and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' ";
+                        }
+                        Valid.MyReportqry("rptRingkasanReturSuplierDapur.jasper","report","::[ Laporan Ringkasan Retur Ke Suplier Barang Dapur ]::",
+                                "select dapur_detail_returbeli.kode_brng,dapurbarang.nama_brng,dapurbarang.jenis as namajenis, "+
+                                "dapur_detail_returbeli.kode_sat,kodesatuan.satuan,sum(dapur_detail_returbeli.jml_retur) as jumlah, "+
+                                "sum(dapur_detail_returbeli.total) as total "+
+                                "from dapurreturbeli inner join dapursuplier on dapurreturbeli.kode_suplier=dapursuplier.kode_suplier "+
+                                "inner join petugas on dapurreturbeli.nip=petugas.nip "+
+                                "inner join dapur_detail_returbeli on dapurreturbeli.no_retur_beli=dapur_detail_returbeli.no_retur_beli "+
+                                "inner join dapurbarang on dapur_detail_returbeli.kode_brng=dapurbarang.kode_brng "+
+                                "inner join kodesatuan on dapur_detail_returbeli.kode_sat=kodesatuan.kode_sat "+
+                                "where dapurreturbeli.tgl_retur between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' "+carifaktur+carisuplier+caripetugas+carijenis+caribarang+
+                                (TCari.getText().trim().equals("")?"":" and (dapurreturbeli.no_retur_beli like '%"+TCari.getText()+"%' or dapurreturbeli.kode_suplier like '%"+TCari.getText()+"%' or dapursuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
+                                " dapurreturbeli.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%' or dapur_detail_returbeli.kode_brng like '%"+TCari.getText()+"%' or "+
+                                " dapurbarang.nama_brng like '%"+TCari.getText()+"%' or dapur_detail_returbeli.kode_sat like '%"+TCari.getText()+"%' or dapurbarang.jenis like '%"+TCari.getText()+"%') ")+
+                                " group by dapur_detail_returbeli.kode_brng "+order,param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-            if(!nmsup.getText().equals("")){
-                carisuplier=" and dapursuplier.nama_suplier like '%"+nmsup.getText()+"%' ";
-            }
-            if(!nmptg.getText().equals("")){
-                caripetugas=" and petugas.nama like '%"+nmptg.getText()+"%' ";
-            }
-            if(!Jenis.getSelectedItem().toString().equals("Semua")){
-                carijenis=" and dapurbarang.jenis like '%"+Jenis.getSelectedItem().toString()+"%' ";
-            }
-            if(!nmbar.getText().equals("")){
-                caribarang= " and dapurbarang.nama_brng like '%"+nmbar.getText()+"%' ";
-            }
-            Valid.MyReportqry("rptRingkasanReturSuplierDapur.jasper","report","::[ Laporan Ringkasan Retur Ke Suplier Barang Dapur ]::",
-                    "select dapur_detail_returbeli.kode_brng,dapurbarang.nama_brng,dapurbarang.jenis as namajenis, "+
-                    "dapur_detail_returbeli.kode_sat,kodesatuan.satuan,sum(dapur_detail_returbeli.jml_retur) as jumlah, "+
-                    "sum(dapur_detail_returbeli.total) as total "+
-                    "from dapurreturbeli inner join dapursuplier on dapurreturbeli.kode_suplier=dapursuplier.kode_suplier "+
-                    "inner join petugas on dapurreturbeli.nip=petugas.nip "+
-                    "inner join dapur_detail_returbeli on dapurreturbeli.no_retur_beli=dapur_detail_returbeli.no_retur_beli "+
-                    "inner join dapurbarang on dapur_detail_returbeli.kode_brng=dapurbarang.kode_brng "+
-                    "inner join kodesatuan on dapur_detail_returbeli.kode_sat=kodesatuan.kode_sat "+
-                    "where dapurreturbeli.tgl_retur between '"+Valid.SetTgl(TglBeli1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(TglBeli2.getSelectedItem()+"")+"' "+carifaktur+carisuplier+caripetugas+carijenis+caribarang+
-                    (TCari.getText().trim().equals("")?"":" and (dapurreturbeli.no_retur_beli like '%"+TCari.getText()+"%' or dapurreturbeli.kode_suplier like '%"+TCari.getText()+"%' or dapursuplier.nama_suplier like '%"+TCari.getText()+"%' or "+
-                    " dapurreturbeli.nip like '%"+TCari.getText()+"%' or petugas.nama like '%"+TCari.getText()+"%' or dapur_detail_returbeli.kode_brng like '%"+TCari.getText()+"%' or "+
-                    " dapurbarang.nama_brng like '%"+TCari.getText()+"%' or dapur_detail_returbeli.kode_sat like '%"+TCari.getText()+"%' or dapurbarang.jenis like '%"+TCari.getText()+"%') ")+
-                    " group by dapur_detail_returbeli.kode_brng "+order,param);
-
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnPrintActionPerformed

@@ -10,6 +10,9 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -327,57 +330,75 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-
-            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-            for(i=0;i<tabMode.getRowCount();i++){
-                try {
-                    sjmlbacaan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
-                } catch (Exception e) {
-                    sjmlbacaan="";
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-bottom:1px solid #e2e7dd;background:#ffffff;color:#323232} .isi2 td{font:11px tahoma;height:12px;background:#ffffff;color:#323232} .isi3 td{border-right:1px solid #e2e7dd;font:11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background:#ffffff;color:#323232} .isi4 td{font:11px tahoma;height:12px;border-top:1px solid #e2e7dd;background:#ffffff;color:#323232}");
+                    bw.flush();
                 }
-
-                try {
-                    sfeebacaan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
-                } catch (Exception e) {
-                    sfeebacaan="";
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("FeeBacaanEKG.html", "Rekap Fee Bacaan EKG", tbDokter);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("FeeBacaanEKG.wps", "Rekap Fee Bacaan EKG", tbDokter);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("FeeBacaanEKG.csv", tbDokter);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("FeeBacaanEKG.xlsx", tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Sequel.deleteTemporary();
+                        int i = 0;
+                        for (; i < tabMode.getRowCount(); i++) {
+                            try {
+                                sjmlbacaan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,6).toString()));
+                            } catch (Exception e) {
+                                sjmlbacaan="";
+                            }
+                            try {
+                                sfeebacaan=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,7).toString()));
+                            } catch (Exception e) {
+                                sfeebacaan="";
+                            }
+                            try {
+                                sjasa=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
+                            } catch (Exception e) {
+                                sjasa="";
+                            }
+                            Sequel.temporary(String.valueOf(i + 1),
+                                tabMode.getValueAt(i,0).toString(),
+                                tabMode.getValueAt(i,1).toString(),
+                                tabMode.getValueAt(i,2).toString(),
+                                tabMode.getValueAt(i,3).toString(),
+                                tabMode.getValueAt(i,4).toString(),
+                                tabMode.getValueAt(i,5).toString(),
+                                sjmlbacaan, sfeebacaan, sjasa
+                            );
+                        }
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.reportTempSmc("rptFeeBacaanEkg.jasper", "report", "[ Rekap Fee Bacaan EKG ]", param);
+                        break;
                 }
-
-                try {
-                    sjasa=Valid.SetAngka(Double.parseDouble(tabMode.getValueAt(i,8).toString()));
-                } catch (Exception e) {
-                    sjasa="";
-                }
-
-                Sequel.menyimpan("temporary","'"+i+"','"+
-                                tabMode.getValueAt(i,0).toString().replaceAll("'","`") +"','"+
-                                tabMode.getValueAt(i,1).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(i,2).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(i,3).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(i,4).toString().replaceAll("'","`")+"','"+
-                                tabMode.getValueAt(i,5).toString().replaceAll("'","`")+"','"+
-                                sjmlbacaan+"','"+
-                                sfeebacaan+"','"+
-                                sjasa+"','','','','','','','','','','','','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","JM Dokter");
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
             }
-
-            Map<String, Object> param = new HashMap<>();
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                param.put("kontakrs",akses.getkontakrs());
-                param.put("emailrs",akses.getemailrs());
-                param.put("dokter",nmdokter.getText());
-                param.put("periode",Tgl1.getSelectedItem()+" s/d "+Tgl2.getSelectedItem());
-                param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            Valid.MyReportqry("rptFeeBacaanEkg.jasper","report","[ Rekap Fee Bacaan EKG ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

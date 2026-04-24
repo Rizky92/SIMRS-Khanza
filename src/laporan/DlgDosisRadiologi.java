@@ -23,6 +23,9 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -520,40 +523,66 @@ public final class DlgDosisRadiologi extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             //TCari.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            Valid.MyReportqry("rptDosisRadiologi.jasper","report","::[ Laporan Dosis Radiologi ]::",
-                    "select reg_periksa.no_rawat,periksa_radiologi.tgl_periksa,periksa_radiologi.jam,periksa_radiologi.dokter_perujuk,dokter.nm_dokter,"+
-                    "reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab)as almt_pj,"+
-                    "pasien.jk,concat(reg_periksa.umurdaftar,reg_periksa.sttsumur) as umur,periksa_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,"+
-                    "periksa_radiologi.status,periksa_radiologi.proyeksi,periksa_radiologi.kV,periksa_radiologi.mAS,"+
-                    "periksa_radiologi.FFD,periksa_radiologi.BSF,periksa_radiologi.inak,periksa_radiologi.jml_penyinaran,periksa_radiologi.dosis " +
-                    "from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
-                    "inner join dokter on periksa_radiologi.dokter_perujuk=dokter.kd_dokter "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj " +
-                    "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
-                    "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
-                    "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
-                    "inner join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
-                    "where periksa_radiologi.tgl_periksa between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and "+
-                    "periksa_radiologi.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua Status","").replaceAll("Pemeriksaan Radiologi Rawat Jalan","Ralan").replaceAll("Pemeriksaan Radiologi Rawat Inap","Ranap")+"%' and "+
-                    "dokter.nm_dokter like '%"+nmdokter.getText().trim()+"%' and penjab.png_jawab like '%"+nmpenjab.getText().trim()+"%' and kabupaten.nm_kab like '%"+nmkabupaten.getText().trim()+"%' and kecamatan.nm_kec like '%"+nmkecamatan.getText().trim()+"%' and kelurahan.nm_kel like '%"+nmkelurahan.getText().trim()+"%' "+
-                    "and (jns_perawatan_radiologi.nm_perawatan like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%') "+
-                    "order by periksa_radiologi.tgl_periksa,reg_periksa.jam_reg",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("DosisRadiologi.html", "Laporan Dosis Radiologi", tbBangsal);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("DosisRadiologi.wps", "Laporan Dosis Radiologi", tbBangsal);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("DosisRadiologi.csv", tbBangsal);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("DosisRadiologi.xlsx", tbBangsal);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        Valid.MyReportqry("rptDosisRadiologi.jasper","report","::[ Laporan Dosis Radiologi ]::",
+                                "select reg_periksa.no_rawat,periksa_radiologi.tgl_periksa,periksa_radiologi.jam,periksa_radiologi.dokter_perujuk,dokter.nm_dokter,"+
+                                "reg_periksa.no_rkm_medis,pasien.nm_pasien,concat(pasien.alamat,', ',kelurahan.nm_kel,', ',kecamatan.nm_kec,', ',kabupaten.nm_kab)as almt_pj,"+
+                                "pasien.jk,concat(reg_periksa.umurdaftar,reg_periksa.sttsumur) as umur,periksa_radiologi.kd_jenis_prw,jns_perawatan_radiologi.nm_perawatan,"+
+                                "periksa_radiologi.status,periksa_radiologi.proyeksi,periksa_radiologi.kV,periksa_radiologi.mAS,"+
+                                "periksa_radiologi.FFD,periksa_radiologi.BSF,periksa_radiologi.inak,periksa_radiologi.jml_penyinaran,periksa_radiologi.dosis " +
+                                "from periksa_radiologi inner join reg_periksa on periksa_radiologi.no_rawat=reg_periksa.no_rawat "+
+                                "inner join dokter on periksa_radiologi.dokter_perujuk=dokter.kd_dokter "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj " +
+                                "inner join kabupaten on pasien.kd_kab=kabupaten.kd_kab "+
+                                "inner join kecamatan on pasien.kd_kec=kecamatan.kd_kec "+
+                                "inner join kelurahan on pasien.kd_kel=kelurahan.kd_kel "+
+                                "inner join jns_perawatan_radiologi on periksa_radiologi.kd_jenis_prw=jns_perawatan_radiologi.kd_jenis_prw "+
+                                "where periksa_radiologi.tgl_periksa between '"+Valid.SetTgl(Tgl1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(Tgl2.getSelectedItem()+"")+"' and "+
+                                "periksa_radiologi.status like '%"+Status.getSelectedItem().toString().replaceAll("Semua Status","").replaceAll("Pemeriksaan Radiologi Rawat Jalan","Ralan").replaceAll("Pemeriksaan Radiologi Rawat Inap","Ranap")+"%' and "+
+                                "dokter.nm_dokter like '%"+nmdokter.getText().trim()+"%' and penjab.png_jawab like '%"+nmpenjab.getText().trim()+"%' and kabupaten.nm_kab like '%"+nmkabupaten.getText().trim()+"%' and kecamatan.nm_kec like '%"+nmkecamatan.getText().trim()+"%' and kelurahan.nm_kel like '%"+nmkelurahan.getText().trim()+"%' "+
+                                "and (jns_perawatan_radiologi.nm_perawatan like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' or reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%') "+
+                                "order by periksa_radiologi.tgl_periksa,reg_periksa.jam_reg",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

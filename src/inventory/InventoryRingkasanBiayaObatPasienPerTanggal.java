@@ -805,7 +805,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 File f;
                 BufferedWriter bw;
 
-                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (Jasper)"},"Laporan 1 (HTML)");
+                pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
                 switch (pilihan) {
                     case "Laporan 1 (HTML)":
                         htmlContent = new StringBuilder();
@@ -939,7 +939,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         bw.close();
                         Desktop.getDesktop().browse(f.toURI());
                         break;
-                    case "Laporan 4 (Jasper)":
+                    case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("RingkasanBiayaObat.xlsx",tbDokter);
+                        break;
+                    case "Laporan 5 (Jasper)":
                         System.out.println("tesss");
                         Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
                         int row=tabMode.getRowCount();
@@ -965,7 +968,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         param.put("kontakrs",akses.getkontakrs());
                         param.put("emailrs",akses.getemailrs());
                         param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                        Valid.MyReportqry("rptRingkasanBiayaObatPasienPertanggal.jasper","report","[ Ringkasan Biaya Obat Pasien Per Tanggal ]","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                        Valid.MyReportqry("rptRingkasanBiayaObatPasienPertanggal.jasper","report","::[ Ringkasan Biaya Obat Pasien Per Tanggal ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
                         break;
                 }
             } catch (Exception e) {

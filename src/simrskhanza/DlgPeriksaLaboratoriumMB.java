@@ -872,7 +872,11 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-       this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         jml=0;
         for(i=0;i<tbTarif.getRowCount();i++){
             if(tbTarif.getValueAt(i,0).toString().equals("true")){
@@ -946,16 +950,15 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
             param.put("finger","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmDokterPj.getText()+"\nID "+(finger.equals("")?KodePj.getText():finger)+"\n"+Tanggal.getSelectedItem());
             finger=Sequel.cariIsi("select sha1(sidikjari.sidikjari) from sidikjari inner join pegawai on pegawai.id=sidikjari.id where pegawai.nik=?",KdPtg.getText());
             param.put("finger2","Dikeluarkan di "+akses.getnamars()+", Kabupaten/Kota "+akses.getkabupatenrs()+"\nDitandatangani secara elektronik oleh "+NmPtg.getText()+"\nID "+(finger.equals("")?KdPtg.getText():finger)+"\n"+Tanggal.getSelectedItem());
-
             if(noorder.equals("")){
                 pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih hasil pemeriksaan..!","Hasil Pemeriksaan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Model 1","Model 2"},"Model 1");
                 switch (pilihan) {
                     case "Model 1":
-                          Valid.MyReport("rptPeriksaLabMB.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);
-                          break;
+                        Valid.MyReport("rptPeriksaLabMB.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);
+                        break;
                     case "Model 2":
-                          Valid.MyReport("rptPeriksaLab2MB.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);
-                          break;
+                        Valid.MyReport("rptPeriksaLab2MB.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);
+                        break;
                 }
             }else{
                 param.put("nopermintaan",noorder);
@@ -964,14 +967,13 @@ public final class DlgPeriksaLaboratoriumMB extends javax.swing.JDialog {
                 pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih hasil pemeriksaan..!","Hasil Pemeriksaan",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Model 1","Model 2"},"Model 1");
                 switch (pilihan) {
                     case "Model 1":
-                          Valid.MyReport("rptPeriksaLabPermintaanMB.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);
-                          break;
+                        Valid.MyReport("rptPeriksaLabPermintaanMB.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);
+                        break;
                     case "Model 2":
-                          Valid.MyReport("rptPeriksaLab2PermintaanMB.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);
-                          break;
+                        Valid.MyReport("rptPeriksaLab2PermintaanMB.jasper","report","::[ Pemeriksaan Laboratorium ]::",param);
+                        break;
                 }
             }
-
         }
         this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed

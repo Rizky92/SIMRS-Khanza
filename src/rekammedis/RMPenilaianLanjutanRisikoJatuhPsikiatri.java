@@ -18,6 +18,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -1129,56 +1132,83 @@ public final class RMPenilaianLanjutanRisikoJatuhPsikiatri extends javax.swing.J
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             BtnBatal.requestFocus();
         }else if(tabMode.getRowCount()!=0){
-            Map<String, Object> param = new HashMap<>();
-            param.put("namars",akses.getnamars());
-            param.put("alamatrs",akses.getalamatrs());
-            param.put("kotars",akses.getkabupatenrs());
-            param.put("propinsirs",akses.getpropinsirs());
-            param.put("kontakrs",akses.getkontakrs());
-            param.put("emailrs",akses.getemailrs());
-            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-            if(TCari.getText().trim().equals("")){
-                Valid.MyReportqry("rptLanjutanRisikoJatuhPsikiatri.jasper","report","::[ Data Pengkajian Lanjutan Risiko Jatuh Psikiatri ]::",
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala1,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai1,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala2,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai2,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala3,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai3,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala4,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai4,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala5,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai5,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala6,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai6,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_totalnilai,penilaian_lanjutan_resiko_jatuh_psikiatri.hasil_skrining,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.saran,penilaian_lanjutan_resiko_jatuh_psikiatri.nip,petugas.nama "+
-                    "from penilaian_lanjutan_resiko_jatuh_psikiatri inner join reg_periksa on penilaian_lanjutan_resiko_jatuh_psikiatri.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on penilaian_lanjutan_resiko_jatuh_psikiatri.nip=petugas.nip where "+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
-                    "order by penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal",param);
-            }else{
-                Valid.MyReportqry("rptLanjutanRisikoJatuhPsikiatri.jasper","report","::[ Data Pengkajian Lanjutan Risiko Jatuh Psikiatri ]::",
-                    "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala1,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai1,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala2,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai2,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala3,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai3,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala4,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai4,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala5,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai5,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala6,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai6,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_totalnilai,penilaian_lanjutan_resiko_jatuh_psikiatri.hasil_skrining,"+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.saran,penilaian_lanjutan_resiko_jatuh_psikiatri.nip,petugas.nama "+
-                    "from penilaian_lanjutan_resiko_jatuh_psikiatri inner join reg_periksa on penilaian_lanjutan_resiko_jatuh_psikiatri.no_rawat=reg_periksa.no_rawat "+
-                    "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
-                    "inner join petugas on penilaian_lanjutan_resiko_jatuh_psikiatri.nip=petugas.nip where "+
-                    "penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
-                    "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' "+
-                    "or penilaian_lanjutan_resiko_jatuh_psikiatri.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
-                    "order by penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal ",param);
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi2 td{font: 8.5px tahoma;border:none;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
+                }                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("LanjutanRisikoJatuhPsikiatri.html", "Data Pengkajian Lanjutan Risiko Jatuh Psikiatri", tbObat);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("LanjutanRisikoJatuhPsikiatri.wps", "Data Pengkajian Lanjutan Risiko Jatuh Psikiatri", tbObat);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("LanjutanRisikoJatuhPsikiatri.csv", tbObat);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("LanjutanRisikoJatuhPsikiatri.xlsx", tbObat);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        if(TCari.getText().trim().equals("")){
+                            Valid.MyReportqry("rptLanjutanRisikoJatuhPsikiatri.jasper","report","::[ Data Pengkajian Lanjutan Risiko Jatuh Psikiatri ]::",
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala1,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai1,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala2,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai2,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala3,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai3,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala4,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai4,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala5,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai5,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala6,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai6,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_totalnilai,penilaian_lanjutan_resiko_jatuh_psikiatri.hasil_skrining,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.saran,penilaian_lanjutan_resiko_jatuh_psikiatri.nip,petugas.nama "+
+                                "from penilaian_lanjutan_resiko_jatuh_psikiatri inner join reg_periksa on penilaian_lanjutan_resiko_jatuh_psikiatri.no_rawat=reg_periksa.no_rawat "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join petugas on penilaian_lanjutan_resiko_jatuh_psikiatri.nip=petugas.nip where "+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' "+
+                                "order by penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal",param);
+                        }else{
+                            Valid.MyReportqry("rptLanjutanRisikoJatuhPsikiatri.jasper","report","::[ Data Pengkajian Lanjutan Risiko Jatuh Psikiatri ]::",
+                                "select reg_periksa.no_rawat,pasien.no_rkm_medis,pasien.nm_pasien,pasien.jk,pasien.tgl_lahir,penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala1,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai1,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala2,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai2,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala3,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai3,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala4,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai4,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala5,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai5,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_skala6,penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_nilai6,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.penilaian_jatuhedmonson_totalnilai,penilaian_lanjutan_resiko_jatuh_psikiatri.hasil_skrining,"+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.saran,penilaian_lanjutan_resiko_jatuh_psikiatri.nip,petugas.nama "+
+                                "from penilaian_lanjutan_resiko_jatuh_psikiatri inner join reg_periksa on penilaian_lanjutan_resiko_jatuh_psikiatri.no_rawat=reg_periksa.no_rawat "+
+                                "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
+                                "inner join petugas on penilaian_lanjutan_resiko_jatuh_psikiatri.nip=petugas.nip where "+
+                                "penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and "+
+                                "(reg_periksa.no_rawat like '%"+TCari.getText().trim()+"%' or pasien.no_rkm_medis like '%"+TCari.getText().trim()+"%' or pasien.nm_pasien like '%"+TCari.getText().trim()+"%' "+
+                                "or penilaian_lanjutan_resiko_jatuh_psikiatri.nip like '%"+TCari.getText().trim()+"%' or petugas.nama like '%"+TCari.getText().trim()+"%') "+
+                                "order by penilaian_lanjutan_resiko_jatuh_psikiatri.tanggal ",param);
+                        }
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
             }
+            this.setCursor(Cursor.getDefaultCursor());
         }
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed

@@ -20,6 +20,9 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -343,94 +346,141 @@ public final class DlgDkkSurveilansRanap extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        if(ceksukses){
+            JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
+            return;
+        }
         if(TabRawat.getSelectedIndex()==0){
             if(tabMode.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 //TCari.requestFocus();
             }else if(tabMode.getRowCount()!=0){
-
-                Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                Map<String, Object> param = new HashMap<>();
-                param.put("tanggal",Tgl2.getDate());
-                param.put("jmltotal",jmltotal+"");
-
-                for(int r=0;r<tabMode.getRowCount();r++){
-                    Sequel.menyimpan("temporary","'"+r+"','"+
-                                    tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                    tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
-                                    tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("SurveilansRanap.html", "Surveilans PD3I", tbBangsal);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("SurveilansRanap.wps", "Surveilans PD3I", tbBangsal);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("SurveilansRanap.csv", tbBangsal);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("SurveilansRanap.xlsx", tbBangsal);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("tanggal",Tgl2.getDate());
+                            param.put("jmltotal",jmltotal+"");
+                            for(int r=0;r<tabMode.getRowCount();r++){
+                                Sequel.menyimpan("temporary","'"+r+"','"+
+                                                tabMode.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                                tabMode.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
+                                                tabMode.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                            }
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            Valid.MyReportqry("rptSurveilansRanap.jasper","report","::[ Surveilans PD3I ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
                 }
-
-
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                Valid.MyReportqry("rptSurveilansRanap.jasper","report","::[ Surveilans PD3I ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                this.setCursor(Cursor.getDefaultCursor());
             }
         }else if(TabRawat.getSelectedIndex()==1){
             if(tabMode2.getRowCount()==0){
                 JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
                 //TCari.requestFocus();
             }else if(tabMode2.getRowCount()!=0){
-
-                Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
-                Map<String, Object> param = new HashMap<>();
-                param.put("tanggal",Tgl2.getDate());
-                param.put("jmltotal",jmltotal+"");
-
-                for(int r=0;r<tabMode2.getRowCount();r++){
-                    Sequel.menyimpan("temporary","'"+r+"','"+
-                                    tabMode2.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
-                                    tabMode2.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
-                                    tabMode2.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                try {
+                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                        bw.flush();
+                    }
+                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                    switch (pilihan) {
+                        case "Laporan 1 (HTML)":
+                            Valid.exportHtmlSmc("SurveilansRanap.html", "Surveilans PD3I", tbBangsal2);
+                            break;
+                        case "Laporan 2 (WPS)":
+                            Valid.exportWPSSmc("SurveilansRanap.wps", "Surveilans PD3I", tbBangsal2);
+                            break;
+                        case "Laporan 3 (CSV)":
+                            Valid.exportCSVSmc("SurveilansRanap.csv", tbBangsal2);
+                            break;
+                        case "Laporan 4 (XLSX)":
+                            Valid.exportXlsxSmc("SurveilansRanap.xlsx", tbBangsal2);
+                            break;
+                        case "Laporan 5 (Jasper)":
+                            Sequel.queryu("delete from temporary where temp37='"+akses.getalamatip()+"'");
+                            Map<String, Object> param = new HashMap<>();
+                            param.put("tanggal",Tgl2.getDate());
+                            param.put("jmltotal",jmltotal+"");
+                            for(int r=0;r<tabMode2.getRowCount();r++){
+                                Sequel.menyimpan("temporary","'"+r+"','"+
+                                                tabMode2.getValueAt(r,0).toString().replaceAll("'","`") +"','"+
+                                                tabMode2.getValueAt(r,1).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,2).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,3).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,4).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,5).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,6).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,7).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,8).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,9).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,10).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,11).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,12).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,13).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,14).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,15).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,16).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,17).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,18).toString().replaceAll("'","`")+"','"+
+                                                tabMode2.getValueAt(r,19).toString().replaceAll("'","`")+"','','','','','','','','','','','','','','','','','"+akses.getalamatip()+"'","Rekap Nota Pembayaran");
+                            }
+                            param.put("namars",akses.getnamars());
+                            param.put("alamatrs",akses.getalamatrs());
+                            param.put("kotars",akses.getkabupatenrs());
+                            param.put("propinsirs",akses.getpropinsirs());
+                            Valid.MyReportqry("rptSurveilansRanap.jasper","report","::[ Surveilans PD3I ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                            break;
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : "+e);
                 }
-
-
-                param.put("namars",akses.getnamars());
-                param.put("alamatrs",akses.getalamatrs());
-                param.put("kotars",akses.getkabupatenrs());
-                param.put("propinsirs",akses.getpropinsirs());
-                Valid.MyReportqry("rptSurveilansRanap.jasper","report","::[ Surveilans PD3I ]::","select * from temporary where temporary.temp37='"+akses.getalamatip()+"' order by temporary.no",param);
+                this.setCursor(Cursor.getDefaultCursor());
             }
         }
-
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
