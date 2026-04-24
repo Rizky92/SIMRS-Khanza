@@ -128,7 +128,7 @@ img.aligncenter {
 }
 
 #logo p {
-	
+
 	text-align: center;
 	font-family: 'Abel', sans-serif;
 	font-size: 20px;
@@ -210,7 +210,7 @@ img.aligncenter {
 	text-decoration: none;
 	text-transform: lowercase;
 	text-shadow: 2px 2px 2px #2E7C0E;
-	font-family: 'Abel', sans-serif;	
+	font-family: 'Abel', sans-serif;
 	font-size: 24px;
 	font-weight: normal;
 	color: #FFFFFF;
@@ -567,7 +567,7 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	padding: 6px 1px 6px 1px;
         background: #555555;
 	color:#DDDDDD;
-	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;	
+	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;
         height:100%
 }
 
@@ -718,13 +718,13 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	padding-left:8px;
 	padding-right:8px;
 	color:#CC6699;
-	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;	
+	font: 12px  "Tahoma", Arial, Helvetica, sans-serif;
         height:100%
 }
 
 
 .isi12 td{
-	
+
 	/*border-bottom: 1px solid #FFFFFF;*/
 	background: #ffffff;
 	padding-top:0px;
@@ -736,7 +736,7 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 }
 
 .isi13 td{
-	
+
 	border-bottom: 0px;
 	background: #ffffff;
 	padding-top:0px;
@@ -764,7 +764,7 @@ background:url(images/checked.png) no-repeat left #7bbcc7; color:#FFFFFF;backgro
 	border: none;
 	background: #915555;
 	font-size: 12px;
-	color: #FFFFFF;        
+	color: #FFFFFF;
         font-family: "Tahoma", Times, serif;
          width:60px;
 }
@@ -930,4 +930,3 @@ input.register{
         font-family:Arial, Georgia,Verdana, "Tahoma";
         font-size: 12px;
 }
-
