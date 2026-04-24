@@ -969,6 +969,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pcare_club_prolanis", "[L] Club Prolanis PCare");
         namaakses.put("inacbg_coder_nik", "[L] Coder NIK INACBG");
         namaakses.put("bpjs_daftar_pelayanan_obat_apotek", "[L] Daftar Pelayanan Obat Apotek BPJS");
+        namaakses.put("bpjs_daftar_resep_apotek", "[L] Daftar Resep Apotek BPJS");
         namaakses.put("bpjs_sep", "[L] Data Bridging SEP VClaim");
         namaakses.put("inhealth_sjp", "[L] Data Bridging SJP Inhealth");
         namaakses.put("bpjs_data_induk_kecelakaan", "[L] Data Induk Kecelakaan VClaim");
@@ -989,6 +990,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pcare_kegiatan_kelompok", "[L] Kegiatan Kelompok PCare");
         namaakses.put("aplicare_ketersediaan_kamar", "[L] Ketersediaan Kamar Aplicare");
         namaakses.put("siranap_ketersediaan_kamar", "[L] Ketersediaan Kamar SIRANAP");
+        namaakses.put("satu_sehat_kirim_allergy_intolerance", "[L] Kirim Allergy Intolerance Satu Sehat");
         namaakses.put("satu_sehat_kirim_careplan", "[L] Kirim Care Plan Satu Sehat");
         namaakses.put("satu_sehat_kirim_clinicalimpression", "[L] Kirim Clinical Impression Satu Sehat");
         namaakses.put("satu_sehat_kirim_condition", "[L] Kirim Condition Satu Sehat");
@@ -1006,6 +1008,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("satu_sehat_kirim_observation_radiologi", "[L] Kirim Observation Radiologi Satu Sehat");
         namaakses.put("satu_sehat_kirim_observationttv", "[L] Kirim Observation-TTV Satu Sehat");
         namaakses.put("satu_sehat_kirim_procedure", "[L] Kirim Procedure Satu Sehat");
+        namaakses.put("satu_sehat_kirim_questionresponse_telaah_farmasi", "[L] Kirim Q.R. Telaah Farmasi Satu Sehat");
         namaakses.put("bpjs_kirim_obat_smc", "[L] Kirim Resep Apotek BPJS SMC");
         namaakses.put("satu_sehat_kirim_servicerequest_labmb", "[L] Kirim Service Request Lab MB Satu Sehat");
         namaakses.put("satu_sehat_kirim_servicerequest_lab", "[L] Kirim Service Request Lab PK Satu Sehat");
@@ -1045,6 +1048,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("bpjs_rujukan_keluar", "[L] Pembuatan Rujukan VClaim");
         namaakses.put("bpjs_kunjungan_sep_apotek", "[L] Pencarian SEP Apotek BPJS");
         namaakses.put("perawatan_pasien_corona", "[L] Perawatan Pasien Corona");
+        namaakses.put("daftar_permintaan_resep_iterasi_bpjs", "[L] Permintaan Resep Iterasi Apotek BPJS");
         namaakses.put("pcare_peserta_kegiatan_kelompok", "[L] Peserta Keg Kelompok PCare");
         namaakses.put("bpjs_potensi_prb", "[L] Potensi PRB di VClaim");
         namaakses.put("bpjs_program_prb", "[L] Program PRB di VClaim");
@@ -1199,6 +1203,7 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("konfirmasi_rekonsiliasi_obat", "[M] Konfirmasi Rekonsiliasi Obat");
         namaakses.put("konseling_farmasi", "[M] Konseling Farmasi");
         namaakses.put("konsultasi_medik", "[M] Konsultasi Medik");
+        namaakses.put("konsultasi_perawat", "[M] Konsultasi Perawat");
         namaakses.put("laporan_anestesi", "[M] Laporan Anestesi");
         namaakses.put("laporan_tindakan", "[M] Laporan Tindakan");
         namaakses.put("layanan_kedokteran_fisik_rehabilitasi", "[M] Layanan Kedokteran Fisik & Rehabilitasi");
@@ -1547,9 +1552,15 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("pengarang_perpustakaan", "[Q] Pengarang/Penulis");
         namaakses.put("set_peminjaman_perpustakaan", "[Q] Pengaturan Peminjaman");
         namaakses.put("ruang_perpustakaan", "[Q] Ruang Perpustakaan");
+        namaakses.put("pcra_icra_identifkasi_risiko_infeksi", "[R] Identifikasi Risiko Infeksi PCRA");
+        namaakses.put("pcra_icra_identifkasi_risiko_kebakaran", "[R] Identifikasi Risiko Kebakaran PCRA");
+        namaakses.put("pcra_icra_identifkasi_risiko_keselamatan", "[R] Identifikasi Risiko Keselamatan PCRA");
+        namaakses.put("pcra_icra_identifkasi_risiko_utilitas", "[R] Identifikasi Risiko Utilitas PCRA");
         namaakses.put("pcra_icra_jenis_aktivitas_proyek", "[R] Jenis Aktivitas Proyek PCRA");
         namaakses.put("pcra_icra_kelas_risiko_pencegahan", "[R] Kelas Risiko/Kelas Pencegahan PCRA");
         namaakses.put("pcra_icra_lokasi_kelompok_risiko_area", "[R] Lokasi & Kelompok Risiko Area PCRA");
+        namaakses.put("pcra_icra_pengkajian_risiko_prakonstruksi", "[R] Pengkajian Risiko Pra Konstruksi/PCRA");
+        namaakses.put("pcra_icra_persyaratan_harus_dipenuhi", "[R] Persyaratan Harus Dipenuhi PCRA");
         namaakses.put("pcra_icra_tindakan_pengendalian", "[R] Tindakan Pengendalian PCRA");
         namaakses.put("toko_barang", "[S] Barang Toko");
         namaakses.put("toko_bayar_pemesanan", "[S] Bayar Pesan Toko");
@@ -1570,8 +1581,8 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("toko_retur_jual", "[S] Retur Jual Toko");
         namaakses.put("toko_retur_beli", "[S] Retur Ke Suplier Toko");
         namaakses.put("toko_riwayat_barang", "[S] Riwayat Barang Toko");
-        namaakses.put("toko_sirkulasi2", "[S] Sirkulasi Barang Toko 2");
         namaakses.put("toko_sirkulasi", "[S] Sirkulasi Barang Toko");
+        namaakses.put("toko_sirkulasi2", "[S] Sirkulasi Barang Toko 2");
         namaakses.put("stok_opname_toko", "[S] Stok Opname Toko");
         namaakses.put("toko_suplier", "[S] Suplier Toko");
         namaakses.put("toko_surat_pemesanan", "[S] Surat Pemesanan Toko");
