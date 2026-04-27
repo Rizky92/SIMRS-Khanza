@@ -222,9 +222,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
             engineKlaim.locationProperty().addListener((observable, oldValue, newValue) -> {
                 if (newValue != null && newValue.toLowerCase().contains("action")) {
-                    if (newValue.toLowerCase().contains("action=kelahiran")) {
-                        if (lahir == null) {
-                            SwingUtilities.invokeLater(() -> {
+                    final boolean kelahiran = newValue.toLowerCase().contains("action=kelahiran");
+                    SwingUtilities.invokeLater(() -> {
+                        if (kelahiran) {
+                            if (lahir == null) {
                                 lahir = new INACBGDataPersalinanIbuSMC(null, false);
                                 lahir.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                                 lahir.setLocationRelativeTo(internalFrame1);
@@ -234,15 +235,11 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                                         Platform.runLater(() -> engineKlaim.reload());
                                     }
                                 });
-                            });
-                        }
-                        SwingUtilities.invokeLater(() -> {
+                            }
                             lahir.setData(btnSEP.getText(), lblNoRawat.getText(), lblNoRM.getText(), lblNamaPasien.getText());
                             lahir.isCek();
                             lahir.setVisible(true);
-                        });
-                    }
-                    SwingUtilities.invokeLater(() -> {
+                        }
                         if (selectedRow >= 0 && (lahir == null || !lahir.isVisible())) {
                             setFlagKlaim();
                             switch (flagklaim) {
