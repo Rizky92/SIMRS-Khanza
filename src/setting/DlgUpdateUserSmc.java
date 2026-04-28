@@ -1110,7 +1110,6 @@ public class DlgUpdateUserSmc extends javax.swing.JDialog {
         namaakses.put("reklasifikasi_ranap", "[L] Reklasifikasi Ranap");
         namaakses.put("bpjs_riwayat_obat_smc", "[L] Riwayat Obat Apotek BPJS SMC");
         namaakses.put("bpjs_riwayat_pelayanan_obat", "[L] Riwayat Pelayanan Obat Apotek BPJS");
-        namaakses.put("bpjs_riwayat_pelayanan_obat_smc", "[L] Riwayat Pelayanan Obat Apotek BPJS SMC");
         namaakses.put("bpjs_riwayat_pelayanan_resep_smc", "[L] Riwayat Pelayanan Resep Apotek BPJS SMC");
         namaakses.put("bpjs_riwayat_surat_smc", "[L] Riwayat Penerbitan SKDP/SPRI VClaim SMC");
         namaakses.put("riwayat_perawatan_icare_bpjs", "[L] Riwayat Perawatan ICare BPJS");

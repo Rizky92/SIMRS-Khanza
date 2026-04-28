@@ -1420,7 +1420,7 @@ public final class ApotekBPJSKirimResepObatSMC extends javax.swing.JDialog {
         BtnSimpanResepKosong.setEnabled(akses.getbpjs_kirim_obat_smc());
         BtnInsertObat.setEnabled(akses.getbpjs_kirim_obat_smc());
         BtnInsertObatRacikan.setEnabled(akses.getbpjs_kirim_obat_smc());
-        BtnCari.setEnabled(akses.getbpjs_riwayat_pelayanan_obat_smc());
+        BtnCari.setEnabled(akses.getbpjs_daftar_pelayanan_obat_apotek());
     }
 
     public void emptTeks() {
