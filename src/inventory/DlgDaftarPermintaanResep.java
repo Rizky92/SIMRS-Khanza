@@ -5042,6 +5042,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         BtnKirimWASelesai.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
         BtnKirimResepApotekBPJS.setEnabled(akses.getbpjs_kirim_obat_smc());
         BtnDaftarPelayananApotekBPJS.setEnabled(akses.getbpjs_daftar_pelayanan_obat_apotek());
+        BtnRiwayatPelayananApotekBPJS.setEnabled(akses.getbpjs_riwayat_pelayanan_obat());
     }
 
     public void setCari(String cari){
