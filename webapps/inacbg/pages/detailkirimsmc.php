@@ -332,7 +332,7 @@
                                     }
 
                                     if ($saved_klaim) {
-                                        $cara_masuk_val      = $saved_klaim['cara_masuk'];
+                                        $cara_masuk_val      = !empty($saved_klaim['cara_masuk']) ? $saved_klaim['cara_masuk'] : $cara_masuk_val;
                                         $sistole             = $saved_klaim['sistole'];
                                         $diastole            = $saved_klaim['diastole'];
                                         $discharge_status    = $saved_klaim['discharge_status'];
@@ -383,7 +383,6 @@
                                         }
                                     }
 
-                                    // Delivery (persalinan) — build payload array and display rows together
                                     $delivery       = [];
                                     $kelahiran_rows = [];
                                     $querykelahiran = bukaquery("select * from inacbg_data_klaim_persalinan_smc where no_sep = '$nosep' order by delivery_sequence asc");
@@ -556,17 +555,17 @@
                                     <td width="1%">:</td>
                                     <td width="70%">
                                         <select name="cara_masuk" class="text" style="font-family: Tahoma; width: 95%">
-                                            <option <?= $cara_masuk_val === 'gp' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
-                                            <option <?= $cara_masuk_val === 'hosp-trans' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
-                                            <option <?= $cara_masuk_val === 'mp' ? 'selected' : '' ?> value="mp">Rujukan Spesialis</option>
-                                            <option <?= $cara_masuk_val === 'outp' ? 'selected' : '' ?> value="outp">Dari Rawat Jalan</option>
-                                            <option <?= $cara_masuk_val === 'inp' ? 'selected' : '' ?> value="inp">Dari Rawat Inap</option>
-                                            <option <?= $cara_masuk_val === 'emd' ? 'selected' : '' ?> value="emd">Dari Rawat Darurat</option>
-                                            <option <?= $cara_masuk_val === 'born' ? 'selected' : '' ?> value="born">Lahir di RS</option>
-                                            <option <?= $cara_masuk_val === 'nursing' ? 'selected' : '' ?> value="nursing">Rujukan Panti Jompo</option>
-                                            <option <?= $cara_masuk_val === 'psych' ? 'selected' : '' ?> value="psych">Rujukan dari RS Jiwa</option>
-                                            <option <?= $cara_masuk_val === 'rehab' ? 'selected' : '' ?> value="rehab">Rujukan Fasilitas Rehab</option>
-                                            <option <?= $cara_masuk_val === 'other' ? 'selected' : '' ?> value="other">Lain-lain</option>
+                                            <option <?= $cara_masuk_val == 'gp' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
+                                            <option <?= $cara_masuk_val == 'hosp-trans' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
+                                            <option <?= $cara_masuk_val == 'mp' ? 'selected' : '' ?> value="mp">Rujukan Spesialis</option>
+                                            <option <?= $cara_masuk_val == 'outp' ? 'selected' : '' ?> value="outp">Dari Rawat Jalan</option>
+                                            <option <?= $cara_masuk_val == 'inp' ? 'selected' : '' ?> value="inp">Dari Rawat Inap</option>
+                                            <option <?= $cara_masuk_val == 'emd' ? 'selected' : '' ?> value="emd">Dari Rawat Darurat</option>
+                                            <option <?= $cara_masuk_val == 'born' ? 'selected' : '' ?> value="born">Lahir di RS</option>
+                                            <option <?= $cara_masuk_val == 'nursing' ? 'selected' : '' ?> value="nursing">Rujukan Panti Jompo</option>
+                                            <option <?= $cara_masuk_val == 'psych' ? 'selected' : '' ?> value="psych">Rujukan dari RS Jiwa</option>
+                                            <option <?= $cara_masuk_val == 'rehab' ? 'selected' : '' ?> value="rehab">Rujukan Fasilitas Rehab</option>
+                                            <option <?= $cara_masuk_val == 'other' ? 'selected' : '' ?> value="other">Lain-lain</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -875,9 +874,9 @@
                                     <td width="70%">
                                         <select name="onset_kontraksi" class="text2" style="font-family: Tahoma; width: 95%">
                                             <option <?= $onset_kontraksi === '' ? 'selected ' : '' ?>value=""></option>
-                                            <option <?= $onset_kontraksi === 'spontan' ? 'selected ' : '' ?>value="spontan">Spontan</option>
-                                            <option <?= $onset_kontraksi === 'non_spontan' ? 'selected ' : '' ?>value="non_spontan">Non spontan</option>
-                                            <option <?= $onset_kontraksi === 'non_spontan_non_induksi' ? 'selected ' : '' ?>value="non_spontan_non_induksi">Non Spontan Non Induksi</option>
+                                            <option <?= $onset_kontraksi === 'spontan' ? 'selected ' : '' ?>value="spontan">Timbul Spontan</option>
+                                            <option <?= $onset_kontraksi === 'non_spontan' ? 'selected ' : '' ?>value="non_spontan">Dengan Induksi</option>
+                                            <option <?= $onset_kontraksi === 'non_spontan_non_induksi' ? 'selected ' : '' ?>value="non_spontan_non_induksi">SC Tanpa Kontraksi/Induksi</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -931,7 +930,7 @@
                                         <td width="1%">:</td>
                                         <td width="70%"><?= $bariskelahiran['shk_spesimen_ambil'] ?></td>
                                     </tr>
-                                    <?php if ($bariskelahiran['shk_spesimen_ambil'] === 'ya'): ?>
+                                    <?php if ($bariskelahiran['shk_spesimen_ambil'] === 'Ya'): ?>
                                         <tr class="head">
                                             <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Waktu Sampel</td>
                                             <td width="1%">:</td>
