@@ -1,9 +1,6 @@
 package simrskhanza;
-import AESsecurity.EnkripsiAES;
 import bridging.DUKCAPILJakartaCekNik;
 import bridging.DUKCAPILJakartaPostLahir;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.WarnaTable5;
 import fungsi.akses;
