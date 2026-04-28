@@ -2,6 +2,7 @@ package inventory;
 import bridging.ApotekBPJSDaftarPelayananObat2SMC;
 import bridging.ApotekBPJSInputResepObat;
 import bridging.ApotekBPJSKirimResepObatSMC;
+import bridging.ApotekBPJSRiwayatPelayananObatSMC;
 import bridging.BPJSDataSEP;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +29,8 @@ import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -544,6 +547,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         BtnSEPBPJS = new widget.Button();
         BtnKirimResepApotekBPJS = new widget.Button();
         BtnDaftarPelayananApotekBPJS = new widget.Button();
+        BtnRiwayatPelayananApotekBPJS = new widget.Button();
         BtnKirimWAPengerjaan = new widget.Button();
         BtnKirimWASelesai = new widget.Button();
 
@@ -592,7 +596,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2026 04:52:22" }));
+        TglSelesai.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026 17:02:37" }));
         TglSelesai.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TglSelesai.setName("TglSelesai"); // NOI18N
         TglSelesai.setOpaque(false);
@@ -836,7 +840,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel20);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -850,7 +854,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         panelisi2.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "19-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1430,7 +1434,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
 
         PanelAccor.setBackground(new java.awt.Color(255, 255, 255));
         PanelAccor.setName("PanelAccor"); // NOI18N
-        PanelAccor.setPreferredSize(new java.awt.Dimension(200, 43));
+        PanelAccor.setPreferredSize(new java.awt.Dimension(230, 43));
         PanelAccor.setLayout(new java.awt.BorderLayout());
 
         ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
@@ -1651,7 +1655,7 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
         FormMenu.add(BtnKirimResepApotekBPJS);
 
         BtnDaftarPelayananApotekBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
-        BtnDaftarPelayananApotekBPJS.setText("Daftar Pelayanan Apotek BPJS");
+        BtnDaftarPelayananApotekBPJS.setText("Daftar Resep Apotek BPJS");
         BtnDaftarPelayananApotekBPJS.setFocusPainted(false);
         BtnDaftarPelayananApotekBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         BtnDaftarPelayananApotekBPJS.setGlassColor(new java.awt.Color(255, 255, 255));
@@ -1667,6 +1671,24 @@ public class DlgDaftarPermintaanResep extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnDaftarPelayananApotekBPJS);
+
+        BtnRiwayatPelayananApotekBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnRiwayatPelayananApotekBPJS.setText("Riwayat Pelayanan Obat Apotek BPJS");
+        BtnRiwayatPelayananApotekBPJS.setFocusPainted(false);
+        BtnRiwayatPelayananApotekBPJS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnRiwayatPelayananApotekBPJS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnRiwayatPelayananApotekBPJS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnRiwayatPelayananApotekBPJS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnRiwayatPelayananApotekBPJS.setMinimumSize(new java.awt.Dimension(158, 23));
+        BtnRiwayatPelayananApotekBPJS.setName("BtnRiwayatPelayananApotekBPJS"); // NOI18N
+        BtnRiwayatPelayananApotekBPJS.setPreferredSize(new java.awt.Dimension(158, 23));
+        BtnRiwayatPelayananApotekBPJS.setRoundRect(false);
+        BtnRiwayatPelayananApotekBPJS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnRiwayatPelayananApotekBPJSActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnRiwayatPelayananApotekBPJS);
 
         BtnKirimWAPengerjaan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         BtnKirimWAPengerjaan.setText("Kirim WA Pengerjaan");
@@ -4437,13 +4459,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 JOptionPane.showMessageDialog(null, "Maaf, silahkan buka Daftar Resep...!!!!");
                 TCari.requestFocus();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, hanya diperuntukkan resep rawat jalan..!!");
+            TCari.requestFocus();
         }
     }//GEN-LAST:event_BtnKirimResepApotekBPJSActionPerformed
 
     private void BtnDaftarPelayananApotekBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnDaftarPelayananApotekBPJSActionPerformed
         if (TabPilihRawat.getSelectedIndex() == 0) {
             if (TabRawatJalan.getSelectedIndex() == 0) {
-                if (akses.getbpjs_kirim_obat_smc()) {
+                if (akses.getbpjs_daftar_pelayanan_obat_apotek()) {
                     if (tabMode.getRowCount() == 0) {
                         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
@@ -4465,12 +4490,43 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 JOptionPane.showMessageDialog(null, "Maaf, silahkan buka Daftar Resep...!!!!");
                 TCari.requestFocus();
             }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, hanya diperuntukkan resep rawat jalan..!!");
+            TCari.requestFocus();
         }
     }//GEN-LAST:event_BtnDaftarPelayananApotekBPJSActionPerformed
 
     private void CmbStatusResepDefaultActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CmbStatusResepDefaultActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_CmbStatusResepDefaultActionPerformed
+
+    private void BtnRiwayatPelayananApotekBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRiwayatPelayananApotekBPJSActionPerformed
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (akses.getbpjs_riwayat_pelayanan_obat()) {
+                    if (tabMode.getRowCount() == 0) {
+                        JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
+                        TCari.requestFocus();
+                    } else if (NoRM.equals("")) {
+                        JOptionPane.showMessageDialog(null, "Maaf, Silahkan pilih data resep pasien untuk melihat riwayat pelayanan obat Apotek Online BPJS..!!");
+                    } else {
+                        ApotekBPJSRiwayatPelayananObatSMC riwayat = new ApotekBPJSRiwayatPelayananObatSMC(null, false);
+                        riwayat.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                        riwayat.setLocationRelativeTo(internalFrame1);
+                        riwayat.setNoKartu(Sequel.cariIsiSmc("select pasien.no_peserta from pasien where pasien.no_rkm_medis = ?", NoRM),
+                            LocalDate.now().plus(-1, ChronoUnit.YEARS).toString(), LocalDate.now().toString());
+                        riwayat.setVisible(true);
+                    }
+                }
+            } else if (TabRawatJalan.getSelectedIndex() == 1) {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan buka Daftar Resep...!!!!");
+                TCari.requestFocus();
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, hanya diperuntukkan resep rawat jalan..!!");
+            TCari.requestFocus();
+        }
+    }//GEN-LAST:event_BtnRiwayatPelayananApotekBPJSActionPerformed
 
     /**
     * @param args the command line arguments
@@ -4514,6 +4570,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button BtnResepLuar;
     private widget.Button BtnResetPengaturan;
     private widget.Button BtnRiwayat;
+    private widget.Button BtnRiwayatPelayananApotekBPJS;
     private widget.Button BtnSEPBPJS;
     private widget.Button BtnSeek3;
     private widget.Button BtnSeek4;
@@ -4985,6 +5042,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         BtnKirimWASelesai.setVisible(koneksiDB.NOTIFWAFARMASIKEPASIEN());
         BtnKirimResepApotekBPJS.setEnabled(akses.getbpjs_kirim_obat_smc());
         BtnDaftarPelayananApotekBPJS.setEnabled(akses.getbpjs_daftar_pelayanan_obat_apotek());
+        BtnRiwayatPelayananApotekBPJS.setEnabled(akses.getbpjs_riwayat_pelayanan_obat());
     }
 
     public void setCari(String cari){
@@ -6524,7 +6582,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private void isMenu(){
         if(ChkAccor.isSelected()==true){
             ChkAccor.setVisible(false);
-            PanelAccor.setPreferredSize(new Dimension(200,HEIGHT));
+            PanelAccor.setPreferredSize(new Dimension(230,HEIGHT));
             FormMenu.setVisible(true);
             ChkAccor.setVisible(true);
         }else if(ChkAccor.isSelected()==false){
