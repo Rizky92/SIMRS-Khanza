@@ -4150,13 +4150,10 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         }else{
             if(tbDokter.getSelectedRow()>-1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Sequel.menghapusSmc("antrifotokelahiranbayismc");
-                Sequel.menyimpanSmc("antrifotokelahiranbayismc", "", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
-                Sequel.menghapusSmc("pasien_bayi_gambar_smc", "no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
-                ObjectNode node = new ObjectMapper().createObjectNode();
-                node.put("usere", koneksiDB.USERHYBRIDWEB());
-                node.put("passwordte", koneksiDB.PASHYBRIDWEB());
-                Valid.panggilUrl("fotokelahiranbayismc/login.php?iyem=" + EnkripsiAES.encrypt(node.toString()));
+                Sequel.menghapustfSmc("antrifotokelahiranbayismc");
+                Sequel.menyimpantfSmc("antrifotokelahiranbayismc", "", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+                Sequel.menghapustfSmc("pasien_bayi_gambar_smc", "no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+                Valid.panggilUrl("fotokelahiranbayismc/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB());
                 this.setCursor(Cursor.getDefaultCursor());
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Rawat terlebih dahulu..!!");
