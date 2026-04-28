@@ -2007,9 +2007,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         revalidate();
-        JScrollBar vbar = scrollPane1.getVerticalScrollBar();
-        int vbarw = vbar.getPreferredSize().width;
-        Dimension newD = new Dimension(jPanel2.getWidth() - vbarw, panelBiasa1.getPreferredSize().height);
+        Dimension newD = new Dimension(jPanel2.getWidth() - 32, panelBiasa1.getPreferredSize().height);
         panelIdrg.setPreferredSize(new Dimension(newD.width - 4, panelIdrg.getPreferredSize().height));
         panelIdrg.setSize(new Dimension(newD.width - 4, panelIdrg.getPreferredSize().height));
         panelIdrg.revalidate(newD.width - 4);
