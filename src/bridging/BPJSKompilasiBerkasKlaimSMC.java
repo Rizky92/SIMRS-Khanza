@@ -64,13 +64,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
@@ -416,7 +416,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2026 13:41:44" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026 13:13:46" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -456,7 +456,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2026" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -827,7 +827,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -841,7 +841,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -904,6 +904,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         tbKompilasi.setName("tbKompilasi"); // NOI18N
         tbKompilasi.setPreferredScrollableViewportSize(null);
         tbKompilasi.setPreferredSize(null);
+        tbKompilasi.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbKompilasi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tbKompilasiMouseReleased(evt);
@@ -938,10 +939,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         scrollPane1.setName("scrollPane1"); // NOI18N
-        scrollPane1.setPreferredSize(new java.awt.Dimension(800, 820));
+        scrollPane1.setPreferredSize(new java.awt.Dimension(800, 718));
 
         panelBiasa1.setName("panelBiasa1"); // NOI18N
-        panelBiasa1.setPreferredSize(new java.awt.Dimension(800, 780));
+        panelBiasa1.setPreferredSize(new java.awt.Dimension(800, 713));
         panelBiasa1.setLayout(null);
 
         jLabel14.setText("Data Pasien :");
@@ -1166,7 +1167,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(BtnSimpanKoding);
-        BtnSimpanKoding.setBounds(0, 740, 100, 30);
+        BtnSimpanKoding.setBounds(0, 678, 100, 30);
 
         BtnHapusKoding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
         BtnHapusKoding.setMnemonic('H');
@@ -1185,7 +1186,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(BtnHapusKoding);
-        BtnHapusKoding.setBounds(530, 740, 100, 30);
+        BtnHapusKoding.setBounds(530, 678, 100, 30);
 
         jLabel32.setText("Riwayat :");
         jLabel32.setName("jLabel32"); // NOI18N
@@ -1264,7 +1265,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
         tabPaneKoding.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tabPaneKoding.setName("tabPaneKoding"); // NOI18N
-        tabPaneKoding.setPreferredSize(new java.awt.Dimension(800, 462));
+        tabPaneKoding.setPreferredSize(new java.awt.Dimension(800, 404));
 
         panelIdrg.setName("panelIdrg"); // NOI18N
         panelIdrg.setPreferredSize(new java.awt.Dimension(800, 432));
@@ -1274,7 +1275,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         tabPaneKoding.addTab("INACBG", panelInacbg);
 
         panelBiasa1.add(tabPaneKoding);
-        tabPaneKoding.setBounds(0, 270, 800, 462);
+        tabPaneKoding.setBounds(0, 270, 800, 404);
 
         scrollPane1.setViewportView(panelBiasa1);
 
@@ -2006,7 +2007,9 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         revalidate();
-        Dimension newD = new Dimension(jPanel2.getWidth() - 32, panelBiasa1.getPreferredSize().height);
+        JScrollBar vbar = scrollPane1.getVerticalScrollBar();
+        int vbarw = vbar.getPreferredSize().width;
+        Dimension newD = new Dimension(jPanel2.getWidth() - vbarw, panelBiasa1.getPreferredSize().height);
         panelIdrg.setPreferredSize(new Dimension(newD.width - 4, panelIdrg.getPreferredSize().height));
         panelIdrg.setSize(new Dimension(newD.width - 4, panelIdrg.getPreferredSize().height));
         panelIdrg.revalidate(newD.width - 4);
@@ -2077,37 +2080,38 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                             lahir.setVisible(true);
                         }
                         if (selectedRow >= 0 && (lahir == null || !lahir.isVisible())) {
+                            int selectedTableModelRow = tbKompilasi.convertRowIndexToModel(selectedRow);
                             setFlagKlaim();
                             switch (flagklaim) {
                                 case 1:
-                                    tabMode.setValueAt("Selesai", selectedRow, 11);
-                                    tabMode.setValueAt(1, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    tabMode.setValueAt("Selesai", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(1, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 case 2:
-                                    tabMode.setValueAt("INACBG Final", selectedRow, 11);
-                                    tabMode.setValueAt(2, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    tabMode.setValueAt("INACBG Final", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(2, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 case 3:
-                                    tabMode.setValueAt("INACBG Grouping", selectedRow, 11);
-                                    tabMode.setValueAt(3, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    tabMode.setValueAt("INACBG Grouping", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(3, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 case 4:
-                                    tabMode.setValueAt("IDRG Final", selectedRow, 11);
-                                    tabMode.setValueAt(4, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    tabMode.setValueAt("IDRG Final", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(4, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 case 5:
-                                    tabMode.setValueAt("IDRG Grouping", selectedRow, 11);
-                                    tabMode.setValueAt(5, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    tabMode.setValueAt("IDRG Grouping", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(5, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 default:
-                                    tabMode.setValueAt("Belum", selectedRow, 11);
-                                    tabMode.setValueAt(6, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
+                                    tabMode.setValueAt("Belum", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(6, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                             }
                         }
@@ -2890,7 +2894,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 hapusOtomatisDiagnosaProsedur = hapusotomatis;
                 kategoriUploadBerkas = kategoriUpload;
                 if (selectedRow >= 0) {
-                    updateSelection(null);
+                    updateSelection();
                 }
                 JOptionPane.showMessageDialog(null, "Pengaturan kompilasi berhasil disimpan..!!");
                 WindowPengaturan.dispose();
@@ -2938,7 +2942,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private void tbKompilasiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKompilasiKeyReleased
         if (tabMode.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
-                updateSelection(null);
+                SwingUtilities.invokeLater(() -> updateSelection());
             }
         }
     }//GEN-LAST:event_tbKompilasiKeyReleased
@@ -2950,21 +2954,19 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKodingKeyPressed
 
     private void WindowPengaturanWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowPengaturanWindowActivated
+        CmbPilihanKategoriBerkas.removeAllItems();
+        CmbPilihanKategoriBerkas.addItem("");
+        int selectedIndex = 0;
         try (ResultSet rs = koneksi.createStatement().executeQuery("select * from master_berkas_digital order by master_berkas_digital.kode")) {
-            if (rs.next()) {
-                int selectedIndex = -1;
-                CmbPilihanKategoriBerkas.removeAllItems();
-                CmbPilihanKategoriBerkas.addItem("");
-                do {
-                    if (kategoriUploadBerkas.equals(rs.getString("kode"))) {
-                        selectedIndex = CmbPilihanKategoriBerkas.getItemCount();
-                    }
-                    CmbPilihanKategoriBerkas.addItem((rs.getString("kode") + " - " + rs.getString("nama")));
-                } while (rs.next());
-
-                if (selectedIndex >= 0) {
-                    CmbPilihanKategoriBerkas.setSelectedIndex(selectedIndex);
+            while (rs.next()) {
+                if (kategoriUploadBerkas.equals(rs.getString("kode"))) {
+                    selectedIndex = CmbPilihanKategoriBerkas.getItemCount();
                 }
+                CmbPilihanKategoriBerkas.addItem((rs.getString("kode") + " - " + rs.getString("nama")));
+            }
+
+            if (selectedIndex > 0) {
+                CmbPilihanKategoriBerkas.setSelectedIndex(selectedIndex);
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -2984,10 +2986,13 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbKompilasiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKompilasiMouseReleased
-        int row = tbKompilasi.rowAtPoint(evt.getPoint());
+        final int row = tbKompilasi.rowAtPoint(evt.getPoint());
+        final int col = tbKompilasi.columnAtPoint(evt.getPoint());
         if (row >= 0) {
-            tbKompilasi.setRowSelectionInterval(row, row);
-            updateSelection(null);
+            SwingUtilities.invokeLater(() -> {
+                tbKompilasi.changeSelection(row, col, false, false);
+                updateSelection();
+            });
         }
     }//GEN-LAST:event_tbKompilasiMouseReleased
 
@@ -3118,13 +3123,9 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private widget.Table tbKompilasi;
     // End of variables declaration//GEN-END:variables
 
-    private void updateSelection(ListSelectionEvent evt) {
-        if (evt != null && evt.getValueIsAdjusting()) {
-            return;
-        }
-
+    private void updateSelection() {
         try {
-            selectedRow = tbKompilasi.getSelectionModel().getLeadSelectionIndex();
+            selectedRow = tbKompilasi.getSelectedRow();
             tabKanan.setSelectedIndex(0);
             tabPaneKoding.setSelectedIndex(0);
             panelIdrg.getTabbedPane().setSelectedIndex(0);

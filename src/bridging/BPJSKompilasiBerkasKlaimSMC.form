@@ -189,7 +189,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="27-04-2026 16:30:17"/>
+                    <StringItem index="0" value="28-04-2026 15:21:42"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy HH:mm:ss"/>
@@ -280,7 +280,7 @@
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="1">
-                    <StringItem index="0" value="27-04-2026"/>
+                    <StringItem index="0" value="28-04-2026"/>
                   </StringArray>
                 </Property>
                 <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1025,7 +1025,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="27-04-2026"/>
+                        <StringItem index="0" value="28-04-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1053,7 +1053,7 @@
                     </Property>
                     <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                       <StringArray count="1">
-                        <StringItem index="0" value="27-04-2026"/>
+                        <StringItem index="0" value="28-04-2026"/>
                       </StringArray>
                     </Property>
                     <Property name="displayFormat" type="java.lang.String" value="dd-MM-yyyy"/>
@@ -1232,6 +1232,7 @@
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                               <Dimension value="null"/>
                             </Property>
+                            <Property name="selectionMode" type="int" value="0"/>
                           </Properties>
                           <Events>
                             <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbKompilasiMouseReleased"/>
@@ -1272,7 +1273,7 @@
                   <Properties>
                     <Property name="name" type="java.lang.String" value="scrollPane1" noResource="true"/>
                     <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                      <Dimension value="[800, 820]"/>
+                      <Dimension value="[800, 718]"/>
                     </Property>
                   </Properties>
                   <Constraints>
@@ -1287,7 +1288,7 @@
                       <Properties>
                         <Property name="name" type="java.lang.String" value="panelBiasa1" noResource="true"/>
                         <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                          <Dimension value="[800, 780]"/>
+                          <Dimension value="[800, 713]"/>
                         </Property>
                       </Properties>
 
@@ -1705,7 +1706,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="0" y="740" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="0" y="678" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1736,7 +1737,7 @@
                           </Events>
                           <Constraints>
                             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                              <AbsoluteConstraints x="530" y="740" width="-1" height="-1"/>
+                              <AbsoluteConstraints x="530" y="678" width="-1" height="-1"/>
                             </Constraint>
                           </Constraints>
                         </Component>
@@ -1887,7 +1888,7 @@
                             </Property>
                             <Property name="name" type="java.lang.String" value="tabPaneKoding" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[800, 462]"/>
+                              <Dimension value="[800, 404]"/>
                             </Property>
                           </Properties>
                           <Constraints>

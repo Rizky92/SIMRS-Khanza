@@ -92,7 +92,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         tbICD10.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabModeICD9CM = new DefaultTableModel(null, new Object[] {
-            "P", "Mtpx", "Kode", "Deskripsi", "VALIDCODE", "IM", "urut"
+            "P", "Jml.", "Kode", "Deskripsi", "VALIDCODE", "IM", "urut"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -178,7 +178,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         tbDiagnosaPasien.setDefaultRenderer(Object.class, new WarnaTable());
 
         tabModeProsedurPasien = new DefaultTableModel(null, new Object[] {
-            "P", "Kode", "Mtpx", "Deskripsi", "Status", "urut"
+            "P", "Kode", "Jml.", "Deskripsi", "Status", "urut"
         }) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
@@ -226,7 +226,6 @@ public class PanelIdrgSmc extends widget.panelisi {
         jPopupMenu2 = new javax.swing.JPopupMenu();
         ppJadikanProsedurUtama = new javax.swing.JMenuItem();
         TabRawat = new javax.swing.JTabbedPane();
-        ScrollInput = new widget.ScrollPane();
         FormData = new widget.PanelBiasa();
         jLabel13 = new widget.Label();
         Diagnosa = new widget.TextBox();
@@ -238,10 +237,8 @@ public class PanelIdrgSmc extends widget.panelisi {
         BtnCariProsedur = new widget.Button();
         Scroll2 = new widget.ScrollPane();
         tbICD9CM = new widget.Table();
-        internalFrame2 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
         tbDiagnosaPasien = new widget.Table();
-        internalFrame3 = new widget.InternalFrame();
         Scroll3 = new widget.ScrollPane();
         tbProsedurPasien = new widget.Table();
 
@@ -272,25 +269,21 @@ public class PanelIdrgSmc extends widget.panelisi {
         });
         jPopupMenu2.add(ppJadikanProsedurUtama);
 
-        setPreferredSize(new java.awt.Dimension(800, 410));
+        setPreferredSize(new java.awt.Dimension(800, 401));
         setLayout(new java.awt.BorderLayout(1, 1));
 
         TabRawat.setBackground(new java.awt.Color(255, 255, 253));
         TabRawat.setForeground(new java.awt.Color(50, 50, 50));
         TabRawat.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
-        TabRawat.setPreferredSize(new java.awt.Dimension(800, 410));
+        TabRawat.setPreferredSize(new java.awt.Dimension(800, 401));
         TabRawat.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 TabRawatMouseClicked(evt);
             }
         });
 
-        ScrollInput.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        ScrollInput.setOpaque(true);
-        ScrollInput.setPreferredSize(new java.awt.Dimension(800, 410));
-
         FormData.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
-        FormData.setPreferredSize(new java.awt.Dimension(790, 410));
+        FormData.setPreferredSize(new java.awt.Dimension(800, 401));
         FormData.setLayout(null);
 
         jLabel13.setText("Diagnosa :");
@@ -307,6 +300,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         Diagnosa.setBounds(71, 10, 687, 23);
 
         BtnCariPenyakit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCariPenyakit.setMnemonic('1');
         BtnCariPenyakit.setToolTipText("Alt+1");
         BtnCariPenyakit.setPreferredSize(new java.awt.Dimension(28, 23));
         BtnCariPenyakit.addActionListener(new java.awt.event.ActionListener() {
@@ -328,11 +322,11 @@ public class PanelIdrgSmc extends widget.panelisi {
         Scroll1.setViewportView(tbICD10);
 
         FormData.add(Scroll1);
-        Scroll1.setBounds(0, 36, 790, 165);
+        Scroll1.setBounds(0, 36, 790, 140);
 
         jLabel15.setText("Prosedur :");
         FormData.add(jLabel15);
-        jLabel15.setBounds(0, 211, 68, 23);
+        jLabel15.setBounds(0, 180, 68, 23);
 
         Prosedur.setNextFocusableComponent(this.nextFocusableComponent);
         Prosedur.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -341,9 +335,10 @@ public class PanelIdrgSmc extends widget.panelisi {
             }
         });
         FormData.add(Prosedur);
-        Prosedur.setBounds(71, 211, 687, 23);
+        Prosedur.setBounds(71, 180, 687, 23);
 
         BtnCariProsedur.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/accept.png"))); // NOI18N
+        BtnCariProsedur.setMnemonic('1');
         BtnCariProsedur.setToolTipText("Alt+1");
         BtnCariProsedur.setPreferredSize(new java.awt.Dimension(28, 23));
         BtnCariProsedur.addActionListener(new java.awt.event.ActionListener() {
@@ -352,7 +347,7 @@ public class PanelIdrgSmc extends widget.panelisi {
             }
         });
         FormData.add(BtnCariProsedur);
-        BtnCariProsedur.setBounds(761, 211, 28, 23);
+        BtnCariProsedur.setBounds(761, 180, 28, 23);
 
         Scroll2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)));
         Scroll2.setOpaque(true);
@@ -366,19 +361,13 @@ public class PanelIdrgSmc extends widget.panelisi {
         Scroll2.setViewportView(tbICD9CM);
 
         FormData.add(Scroll2);
-        Scroll2.setBounds(0, 237, 790, 165);
+        Scroll2.setBounds(0, 207, 790, 140);
 
-        ScrollInput.setViewportView(FormData);
-
-        TabRawat.addTab("Input Data", ScrollInput);
-
-        internalFrame2.setBorder(null);
-        internalFrame2.setPreferredSize(new java.awt.Dimension(800, 410));
-        internalFrame2.setLayout(new java.awt.BorderLayout(1, 1));
+        TabRawat.addTab("Input Data", FormData);
 
         Scroll.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll.setOpaque(true);
-        Scroll.setPreferredSize(new java.awt.Dimension(800, 410));
+        Scroll.setPreferredSize(new java.awt.Dimension(800, 401));
 
         tbDiagnosaPasien.setComponentPopupMenu(jPopupMenu1);
         tbDiagnosaPasien.setPreferredScrollableViewportSize(new java.awt.Dimension(800, 455));
@@ -389,17 +378,11 @@ public class PanelIdrgSmc extends widget.panelisi {
         });
         Scroll.setViewportView(tbDiagnosaPasien);
 
-        internalFrame2.add(Scroll, java.awt.BorderLayout.CENTER);
-
-        TabRawat.addTab("Data Diagnosa", internalFrame2);
-
-        internalFrame3.setBorder(null);
-        internalFrame3.setPreferredSize(new java.awt.Dimension(800, 410));
-        internalFrame3.setLayout(new java.awt.BorderLayout(1, 1));
+        TabRawat.addTab("Data Diagnosa", Scroll);
 
         Scroll3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(255, 255, 255)));
         Scroll3.setOpaque(true);
-        Scroll3.setPreferredSize(new java.awt.Dimension(800, 455));
+        Scroll3.setPreferredSize(new java.awt.Dimension(800, 401));
 
         tbProsedurPasien.setAutoCreateRowSorter(true);
         tbProsedurPasien.setComponentPopupMenu(jPopupMenu2);
@@ -411,9 +394,7 @@ public class PanelIdrgSmc extends widget.panelisi {
         });
         Scroll3.setViewportView(tbProsedurPasien);
 
-        internalFrame3.add(Scroll3, java.awt.BorderLayout.CENTER);
-
-        TabRawat.addTab("Data Prosedur", internalFrame3);
+        TabRawat.addTab("Data Prosedur", Scroll3);
 
         add(TabRawat, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
@@ -599,10 +580,7 @@ public class PanelIdrgSmc extends widget.panelisi {
     private widget.ScrollPane Scroll1;
     private widget.ScrollPane Scroll2;
     private widget.ScrollPane Scroll3;
-    private widget.ScrollPane ScrollInput;
     private javax.swing.JTabbedPane TabRawat;
-    private widget.InternalFrame internalFrame2;
-    private widget.InternalFrame internalFrame3;
     private widget.Label jLabel13;
     private widget.Label jLabel15;
     private javax.swing.JPopupMenu jPopupMenu1;
@@ -773,7 +751,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 }
             }
 
-            try (PreparedStatement ps = koneksi.prepareStatement(sb.append("order by code1 limit 100").toString())) {
+            try (PreparedStatement ps = koneksi.prepareStatement(sb.append("order by code1 limit 50").toString())) {
                 int p = 0;
                 if (lists != null) {
                     for (String q : lists) {
@@ -784,12 +762,6 @@ public class PanelIdrgSmc extends widget.panelisi {
                 }
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        SwingUtilities.invokeLater(() -> {
-                            if (!Diagnosa.getText().isBlank()) {
-                                Diagnosa.requestFocusInWindow();
-                                Diagnosa.selectAll();
-                            }
-                        });
                         do {
                             if (icd.contains(rs.getString("code1"))) {
                                 continue;
@@ -810,6 +782,12 @@ public class PanelIdrgSmc extends widget.panelisi {
                             JOptionPane.showMessageDialog(null, "Hasil pencarian kosong..!!");
                         }
                     }
+                    SwingUtilities.invokeLater(() -> {
+                        if (!Diagnosa.getText().isBlank()) {
+                            Diagnosa.requestFocusInWindow();
+                            Diagnosa.selectAll();
+                        }
+                    });
                 }
             }
         } catch (Exception e) {
@@ -869,7 +847,7 @@ public class PanelIdrgSmc extends widget.panelisi {
                 }
             }
 
-            try (PreparedStatement ps = koneksi.prepareStatement(sb.append("order by code1 limit 100").toString())) {
+            try (PreparedStatement ps = koneksi.prepareStatement(sb.append("order by code1 limit 50").toString())) {
                 int p = 0;
                 if (lists != null) {
                     for (String q : lists) {
@@ -880,12 +858,6 @@ public class PanelIdrgSmc extends widget.panelisi {
                 }
                 try (ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
-                        SwingUtilities.invokeLater(() -> {
-                            if (!Prosedur.getText().isBlank()) {
-                                Prosedur.requestFocusInWindow();
-                                Prosedur.selectAll();
-                            }
-                        });
                         do {
                             tabModeICD9CM.addRow(new Object[] {
                                 pilihPertama, (pilihPertama ? 1 : 0), rs.getString("code1"),
@@ -906,6 +878,12 @@ public class PanelIdrgSmc extends widget.panelisi {
                             JOptionPane.showMessageDialog(null, "Hasil pencarian kosong..!!");
                         }
                     }
+                    SwingUtilities.invokeLater(() -> {
+                        if (!Prosedur.getText().isBlank()) {
+                            Prosedur.requestFocusInWindow();
+                            Prosedur.selectAll();
+                        }
+                    });
                 }
             }
         } catch (Exception e) {
