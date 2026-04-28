@@ -1003,7 +1003,7 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_btnKamarCariActionPerformed
 
     private void btnKamarCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnKamarCariKeyPressed
-   Valid.pindah(evt,kdbangsalcari,CmbCrIsi);
+        Valid.pindah(evt,kdbangsalcari,CmbCrIsi);
     }//GEN-LAST:event_btnKamarCariKeyPressed
 
     private void CmbCrIsiItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_CmbCrIsiItemStateChanged
@@ -1059,16 +1059,16 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyReleased
 
     private void MnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUpdateStatusActionPerformed
-        runBackground(() -> {
-            tampil();
-            if (tabMode.getRowCount() > 0) {
-                for (int i = 0; i < tabMode.getRowCount(); i++) {
-                    if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.kd_kamar = ? and kamar_inap.stts_pulang = '-'", (String) tabMode.getValueAt(i, 1))) {
-                        Sequel.mengupdateSmc("kamar", "status = 'ISI'", "kd_kamar = ?", (String) tabMode.getValueAt(i, 1));
-                        tabMode.setValueAt("ISI", i, 6);
+        tampilSmc();
+        SwingUtilities.invokeLater(() -> {
+            if (tbKamar.getRowCount() > 0) {
+                for (int i = 0; i < tbKamar.getRowCount(); i++) {
+                    if (Sequel.cariExistsSmc("select * from kamar_inap where kamar_inap.kd_kamar = ? and kamar_inap.stts_pulang = '-'", (String) tbKamar.getValueAt(i, 1))) {
+                        Sequel.mengupdateSmc("kamar", "status = 'ISI'", "kd_kamar = ?", (String) tbKamar.getValueAt(i, 1));
+                        tbKamar.setValueAt("ISI", i, 6);
                     } else {
-                        Sequel.mengupdateSmc("kamar", "status = 'KOSONG'", "kd_kamar = ?", (String) tabMode.getValueAt(i, 1));
-                        tabMode.setValueAt("KOSONG", i, 6);
+                        Sequel.mengupdateSmc("kamar", "status = 'KOSONG'", "kd_kamar = ?", (String) tbKamar.getValueAt(i, 1));
+                        tbKamar.setValueAt("KOSONG", i, 6);
                     }
                 }
             }
