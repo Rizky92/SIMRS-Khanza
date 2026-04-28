@@ -4472,15 +4472,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if (tabMode.getRowCount() == 0) {
                         JOptionPane.showMessageDialog(null, "Maaf, data sudah habis...!!!!");
                         TCari.requestFocus();
-                    } else if (NoRawat.equals("")) {
-                        JOptionPane.showMessageDialog(null, "Maaf, Silahkan pilih data resep dokter yang mau dikirim ke Apotek Online BPJS..!!");
                     } else {
                         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                        ApotekBPJSKirimResepObatSMC apol = new ApotekBPJSKirimResepObatSMC(null, false);
-                        apol.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                        apol.setLocationRelativeTo(internalFrame1);
-                        apol.tampilSmc(NoResep);
-                        apol.setVisible(true);
+                        ApotekBPJSDaftarPelayananObat2SMC pelayanan = new ApotekBPJSDaftarPelayananObat2SMC(null, false);
+                        pelayanan.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                        pelayanan.setLocationRelativeTo(internalFrame1);
+                        if (!NoRawat.isBlank()) {
+                            String nosep = Sequel.cariIsiSmc("select bridging_sep.no_sep from bridging_sep where bridging_sep.no_rawat = ? and bridging_sep.jnspelayanan = '2'", NoRawat);
+                            pelayanan.setTgl(Sequel.cariIsiSmc("select bridging_sep.tglsep from bridging_sep where bridging_sep.no_sep = ?", nosep));
+                            pelayanan.setCari(nosep);
+                        }
+                        pelayanan.setVisible(true);
                         this.setCursor(Cursor.getDefaultCursor());
                     }
                 }
@@ -4508,14 +4510,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     } else if (NoRM.equals("")) {
                         JOptionPane.showMessageDialog(null, "Maaf, Silahkan pilih data resep pasien untuk melihat riwayat pelayanan obat Apotek Online BPJS..!!");
                     } else {
-                        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                         ApotekBPJSRiwayatPelayananObatSMC riwayat = new ApotekBPJSRiwayatPelayananObatSMC(null, false);
                         riwayat.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                         riwayat.setLocationRelativeTo(internalFrame1);
                         riwayat.setNoKartu(Sequel.cariIsiSmc("select pasien.no_peserta from pasien where pasien.no_rkm_medis = ?", NoRM),
                             LocalDate.now().plus(-1, ChronoUnit.YEARS).toString(), LocalDate.now().toString());
                         riwayat.setVisible(true);
-                        this.setCursor(Cursor.getDefaultCursor());
                     }
                 }
             } else if (TabRawatJalan.getSelectedIndex() == 1) {
