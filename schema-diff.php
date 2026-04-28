@@ -14,12 +14,12 @@
  *   --user=<user>       Database user (default: root)
  *   --pass=<pass>       Database password (default: empty)
  *   --output=<file>     Write output to file instead of stdout
- *   --no-drop           Skip all DROP statements (tables and columns)
- *   --no-drop-table     Skip DROP TABLE statements only
- *   --no-drop-column    Skip DROP COLUMN/INDEX/FK statements on existing tables only
  *   --tables=<list>     Compare only these tables (comma-separated)
  *   --exclude=<list>    Exclude these tables (comma-separated)
  *   --migrate           Execute DDL directly against the current database
+ *   --with-drop         Allow all DROP statements when using --migrate
+ *   --with-drop-table   Allow DROP TABLE statements only when using --migrate
+ *   --with-drop-column  Allow DROP COLUMN/INDEX/FK statements only when using --migrate
  *   --yes               Skip confirmation prompt when using --migrate
  *
  * First positional arg  = latest/updated database
@@ -34,7 +34,7 @@ if (php_sapi_name() !== 'cli') {
 $opts = parseArgs($argv);
 
 if (empty($opts['latest']) || empty($opts['current'])) {
-    fwrite(STDERR, "Usage: php schema-diff.php <latest_db> <current_db> [--host=localhost] [--port=3306] [--user=root] [--pass=] [--output=file] [--no-drop] [--no-drop-table] [--no-drop-column] [--tables=t1,t2] [--exclude=t1,t2]\n");
+    fwrite(STDERR, "Usage: php schema-diff.php <latest_db> <current_db> [--host=localhost] [--port=3306] [--user=root] [--pass=] [--output=file] [--tables=t1,t2] [--exclude=t1,t2] [--migrate] [--with-drop] [--with-drop-table] [--with-drop-column] [--yes]\n");
     exit(1);
 }
 
@@ -42,10 +42,10 @@ $host = $opts['host'] ?? 'localhost';
 $port = $opts['port'] ?? '3306';
 $user = $opts['user'] ?? 'root';
 $pass = $opts['pass'] ?? '';
-$noDropAll = isset($opts['no-drop']);
-$noDropTable = $noDropAll || isset($opts['no-drop-table']);
-$noDropColumn = $noDropAll || isset($opts['no-drop-column']);
 $doMigrate = isset($opts['migrate']);
+$withDropAll = isset($opts['with-drop']);
+$noDropTable = $doMigrate && !$withDropAll && !isset($opts['with-drop-table']);
+$noDropColumn = $doMigrate && !$withDropAll && !isset($opts['with-drop-column']);
 $skipConfirm = isset($opts['yes']);
 $onlyTables = !empty($opts['tables']) ? array_map('trim', explode(',', $opts['tables'])) : [];
 $excludeTables = !empty($opts['exclude']) ? array_map('trim', explode(',', $opts['exclude'])) : [];
@@ -427,7 +427,7 @@ function columnDef(array $col): string
         if (is_numeric($default) || in_array(strtoupper($default), ['CURRENT_TIMESTAMP', 'NULL'])) {
             $def .= " DEFAULT {$default}";
         } else {
-            $def .= " DEFAULT '{$default}'";
+            $def .= " DEFAULT '" . str_replace("'", "''", $default) . "'";
         }
     } elseif ($col['IS_NULLABLE'] === 'YES') {
         $def .= " DEFAULT NULL";

@@ -1,14 +1,20 @@
 <?php
     include_once "conf/command.php";
     require_once('../conf/conf.php');
-    $cari = trim(isset($_GET['iyem'])) ? trim($_GET['iyem']) : null;
-    $cari = json_decode(decrypt($cari), true);
-    $url  = "index.php?act=Home";
-    if (isset($cari["usere"])) {
-        if(($cari["usere"]==USERHYBRIDWEB)&&($cari["passwordte"]==PASHYBRIDWEB)){
+    $usere      = isset($_GET['usere']) ? trim($_GET['usere']) : null;
+    $passwordte = isset($_GET['passwordte']) ? trim($_GET['passwordte']) : null;
+    $url        = "index.php?act=Home";
+    if ($_GET['act'] == "login") {
+        if ($usere == USERHYBRIDWEB && $passwordte == PASHYBRIDWEB) {
             session_start();
-            $_SESSION['ses_admin_fotokelahiranbayismc']="admin";
+            $_SESSION['ses_admin_fotokelahiranbayismc'] = "admin";
             $url = "index.php?act=Kamera";
+        } else {
+            session_start();
+            session_destroy();
+            if (cekSessiAdmin()){
+                session_unregister("ses_admin_fotokelahiranbayismc");
+            }
         }
     }
     header("Location:".$url);

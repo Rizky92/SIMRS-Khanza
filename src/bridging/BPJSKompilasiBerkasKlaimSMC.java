@@ -64,13 +64,13 @@ import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
+import javax.swing.JScrollBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
-import javax.swing.event.ListSelectionEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
@@ -185,283 +185,8 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             }
         });
 
-        // selection is handled via mouseReleased and keyReleased
-
-        Platform.runLater(() -> {
-            WebView viewKlaim = new WebView(),
-                viewBerkasDigital = new WebView();
-
-            ProgressBar progressBarKlaim = new ProgressBar(0),
-                progressBarBerkasDigital = new ProgressBar(0);
-
-            progressBarKlaim.setMaxWidth(Double.MAX_VALUE);
-            progressBarKlaim.setPrefHeight(10);
-            progressBarBerkasDigital.setMaxWidth(Double.MAX_VALUE);
-            progressBarBerkasDigital.setPrefHeight(10);
-
-            engineKlaim = viewKlaim.getEngine();
-            engineKlaim.setJavaScriptEnabled(true);
-            engineKlaim.setCreatePopupHandler(popup -> viewKlaim.getEngine());
-            engineKlaim.getLoadWorker().exceptionProperty().addListener((observable, oldValue, newValue) -> {
-                if (engineKlaim.getLoadWorker().getState() == FAILED) {
-                    SwingUtilities.invokeLater(() -> {
-                        JOptionPane.showMessageDialog(null, engineKlaim.getLocation() + "\n" + (newValue != null ? newValue.getMessage() : "Unexpected error!"), "Error", JOptionPane.ERROR_MESSAGE);
-                    });
-                }
-            });
-
-            engineKlaim.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue == Worker.State.RUNNING) {
-                    progressBarKlaim.setManaged(true);
-                    progressBarKlaim.setVisible(true);
-                } else if (newValue == Worker.State.SUCCEEDED || newValue == Worker.State.FAILED || newValue == Worker.State.CANCELLED) {
-                    progressBarKlaim.setManaged(false);
-                    progressBarKlaim.setVisible(false);
-                }
-            });
-
-            engineKlaim.locationProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue != null && newValue.toLowerCase().contains("action")) {
-                    if (newValue.toLowerCase().contains("action=kelahiran")) {
-                        if (lahir == null) {
-                            SwingUtilities.invokeLater(() -> {
-                                lahir = new INACBGDataPersalinanIbuSMC(null, false);
-                                lahir.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
-                                lahir.setLocationRelativeTo(internalFrame1);
-                                lahir.addWindowListener(new WindowAdapter() {
-                                    @Override
-                                    public void windowClosed(WindowEvent e) {
-                                        Platform.runLater(() -> engineKlaim.reload());
-                                    }
-                                });
-                            });
-                        }
-                        SwingUtilities.invokeLater(() -> {
-                            lahir.setData(btnSEP.getText(), lblNoRawat.getText(), lblNoRM.getText(), lblNamaPasien.getText());
-                            lahir.isCek();
-                            lahir.setVisible(true);
-                        });
-                    }
-                    SwingUtilities.invokeLater(() -> {
-                        if (selectedRow >= 0 && (lahir == null || !lahir.isVisible())) {
-                            setFlagKlaim();
-                            switch (flagklaim) {
-                                case 1:
-                                    tabMode.setValueAt("Selesai", selectedRow, 11);
-                                    tabMode.setValueAt(1, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
-                                    break;
-                                case 2:
-                                    tabMode.setValueAt("INACBG Final", selectedRow, 11);
-                                    tabMode.setValueAt(2, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
-                                    break;
-                                case 3:
-                                    tabMode.setValueAt("INACBG Grouping", selectedRow, 11);
-                                    tabMode.setValueAt(3, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
-                                    break;
-                                case 4:
-                                    tabMode.setValueAt("IDRG Final", selectedRow, 11);
-                                    tabMode.setValueAt(4, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
-                                    break;
-                                case 5:
-                                    tabMode.setValueAt("IDRG Grouping", selectedRow, 11);
-                                    tabMode.setValueAt(5, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
-                                    break;
-                                default:
-                                    tabMode.setValueAt("Belum", selectedRow, 11);
-                                    tabMode.setValueAt(6, selectedRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedRow, selectedRow);
-                                    break;
-                            }
-                        }
-                    });
-                }
-            });
-
-            engineBerkasDigital = viewBerkasDigital.getEngine();
-            engineBerkasDigital.setJavaScriptEnabled(true);
-            engineBerkasDigital.setCreatePopupHandler(popup -> viewBerkasDigital.getEngine());
-            engineBerkasDigital.getLoadWorker().exceptionProperty().addListener((observable, oldValue, newValue) -> {
-                if (engineBerkasDigital.getLoadWorker().getState() == FAILED) {
-                    SwingUtilities.invokeLater(() -> {
-                        JOptionPane.showMessageDialog(null, engineBerkasDigital.getLocation() + "\n" + (newValue != null ? newValue.getMessage() : "Unexpected error!"), "Error", JOptionPane.ERROR_MESSAGE);
-                    });
-                }
-            });
-
-            engineBerkasDigital.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
-                if (newValue == Worker.State.RUNNING) {
-                    progressBarBerkasDigital.setManaged(true);
-                    progressBarBerkasDigital.setVisible(true);
-                } else if (newValue == Worker.State.SUCCEEDED) {
-                    progressBarBerkasDigital.setManaged(false);
-                    progressBarBerkasDigital.setVisible(false);
-                    try {
-                        if (engineBerkasDigital.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "").contains("berkasrawat/pages")) {
-                            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                            Valid.panggilUrl(engineBerkasDigital.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/pages/upload/", "berkasrawat/").replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/pages/upload/", "berkasrawat/"));
-                            engineBerkasDigital.executeScript("history.back()");
-                            setCursor(Cursor.getDefaultCursor());
-                        }
-                    } catch (Exception e) {
-                        System.out.println("Notif : " + e);
-                    }
-                }
-            });
-
-            progressBarKlaim.progressProperty().bind(engineKlaim.getLoadWorker().progressProperty());
-            progressBarBerkasDigital.progressProperty().bind(engineBerkasDigital.getLoadWorker().progressProperty());
-
-            BorderPane layoutKlaim = new BorderPane(viewKlaim),
-                layoutBerkasDigital = new BorderPane(viewBerkasDigital);
-
-            layoutKlaim.setTop(progressBarKlaim);
-            layoutBerkasDigital.setTop(progressBarBerkasDigital);
-
-            jfxINACBG.setScene(new Scene(layoutKlaim));
-            jfxBerkasDigital.setScene(new Scene(layoutBerkasDigital));
-        });
         PanelContentINACBG.add(jfxINACBG, BorderLayout.CENTER);
         PanelBerkasDigital.add(jfxBerkasDigital, BorderLayout.CENTER);
-
-        HTMLEditorKit kit = new HTMLEditorKit();
-        kit.getStyleSheet().addRule("body{width:100vw}table{width:100%;border:0px;margin:0px;padding:0px}tr,td{margin:2px 0px 2px 0px;padding:0px}td{font-family:Tahoma;font-size:10px;color:#111111}");
-        Document doc = kit.createDefaultDocument();
-        loadBillingHTML.setEditorKit(kit);
-        loadBillingHTML.setDocument(doc);
-
-        if (koneksiDB.CARICEPAT().equals("aktif")) {
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil();
-                    }
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil();
-                    }
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil();
-                    }
-                }
-            });
-        }
-
-        tabPaneKoding.addChangeListener(e -> {
-            if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
-                if (flagklaim <= 4) {
-                    BtnSimpanKoding.setEnabled(false);
-                    BtnHapusKoding.setEnabled(false);
-                } else {
-                    if (panelIdrg.getTabbedPane().getSelectedIndex() == 0) {
-                        BtnSimpanKoding.setEnabled(true);
-                        BtnHapusKoding.setEnabled(false);
-                    } else {
-                        BtnSimpanKoding.setEnabled(false);
-                        BtnHapusKoding.setEnabled(true);
-                    }
-                }
-            } else if (((JTabbedPane) e.getSource()).getSelectedIndex() == 1) {
-                if (flagklaim <= 2) {
-                    BtnSimpanKoding.setEnabled(false);
-                    BtnHapusKoding.setEnabled(false);
-                } else {
-                    if (panelInacbg.getTabbedPane().getSelectedIndex() == 0) {
-                        BtnSimpanKoding.setEnabled(true);
-                        BtnHapusKoding.setEnabled(false);
-                    } else {
-                        BtnSimpanKoding.setEnabled(false);
-                        BtnHapusKoding.setEnabled(true);
-                    }
-                }
-            }
-        });
-
-        panelIdrg.setNextFocusableComponent(BtnSimpanKoding);
-        panelIdrg.addDiagnosaBerubahListener(() -> {
-            setFlagKlaim();
-            tampilINACBG();
-        });
-        panelIdrg.addProsedurBerubahListener(() -> {
-            setFlagKlaim();
-            tampilINACBG();
-        });
-        panelIdrg.getTabbedPane().addChangeListener(e -> {
-            if (flagklaim <= 4) {
-                BtnSimpanKoding.setEnabled(false);
-                BtnHapusKoding.setEnabled(false);
-            } else {
-                if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
-                    BtnSimpanKoding.setEnabled(true);
-                    BtnHapusKoding.setEnabled(false);
-                } else {
-                    BtnSimpanKoding.setEnabled(false);
-                    BtnHapusKoding.setEnabled(true);
-                }
-            }
-        });
-
-        panelInacbg.setNextFocusableComponent(BtnSimpanKoding);
-        panelInacbg.addDiagnosaBerubahListener(() -> {
-            setFlagKlaim();
-            tampilINACBG();
-        });
-        panelInacbg.addProsedurBerubahListener(() -> {
-            setFlagKlaim();
-            tampilINACBG();
-        });
-
-        panelInacbg.getTabbedPane().addChangeListener(e -> {
-            if (flagklaim <= 2) {
-                BtnSimpanKoding.setEnabled(false);
-                BtnHapusKoding.setEnabled(false);
-            } else {
-                if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
-                    BtnSimpanKoding.setEnabled(true);
-                    BtnHapusKoding.setEnabled(false);
-                } else {
-                    BtnSimpanKoding.setEnabled(false);
-                    BtnHapusKoding.setEnabled(true);
-                }
-            }
-        });
-
-        penjab.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (penjab.getTable().getSelectedRow() != -1) {
-                    kodePJ.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 1).toString());
-                    namaPJ.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 2).toString());
-                    tampil();
-                }
-                kodePJ.requestFocus();
-            }
-        });
-
-        penjab.getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    penjab.dispose();
-                }
-            }
-        });
-
-        TMaxMemory.setDocument(new batasInput(4).getOnlyAngka(TMaxMemory));
-
-        cekPengaturanKompilasi();
 
         emptTeks();
     }
@@ -520,6 +245,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         BtnResetPengaturan = new widget.Button();
         BtnTutupPengaturan = new widget.Button();
         fc = new javax.swing.JFileChooser();
+        lblCoderNIK = new widget.Label();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -544,7 +270,6 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         CmbStatusRawat = new widget.ComboBox();
         jLabel11 = new widget.Label();
         CmbStatusKirim = new widget.ComboBox();
-        lblCoderNIK = new widget.Label();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         panelGlass11 = new widget.panelisi();
@@ -691,7 +416,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2026 13:41:44" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026 15:21:42" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -731,7 +456,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         internalFrame11.add(jLabel48);
         jLabel48.setBounds(300, 122, 100, 23);
 
-        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2026" }));
+        TanggalKematian.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
         TanggalKematian.setDisplayFormat("dd-MM-yyyy");
         TanggalKematian.setEnabled(false);
         TanggalKematian.setName("TanggalKematian"); // NOI18N
@@ -948,6 +673,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         fc.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
         fc.setName("fc"); // NOI18N
 
+        lblCoderNIK.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblCoderNIK.setName("lblCoderNIK"); // NOI18N
+        lblCoderNIK.setPreferredSize(new java.awt.Dimension(105, 23));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -1102,7 +831,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         panelGlass10.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -1116,7 +845,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         panelGlass10.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "10-04-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -1147,11 +876,6 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         CmbStatusKirim.setPreferredSize(new java.awt.Dimension(113, 23));
         panelGlass10.add(CmbStatusKirim);
 
-        lblCoderNIK.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lblCoderNIK.setName("lblCoderNIK"); // NOI18N
-        lblCoderNIK.setPreferredSize(new java.awt.Dimension(105, 23));
-        panelGlass10.add(lblCoderNIK);
-
         jPanel3.add(panelGlass10, java.awt.BorderLayout.CENTER);
 
         internalFrame1.add(jPanel3, java.awt.BorderLayout.PAGE_END);
@@ -1179,6 +903,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         tbKompilasi.setName("tbKompilasi"); // NOI18N
         tbKompilasi.setPreferredScrollableViewportSize(null);
         tbKompilasi.setPreferredSize(null);
+        tbKompilasi.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tbKompilasi.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tbKompilasiMouseReleased(evt);
@@ -1213,10 +938,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         jPanel2.setLayout(new java.awt.BorderLayout());
 
         scrollPane1.setName("scrollPane1"); // NOI18N
-        scrollPane1.setPreferredSize(new java.awt.Dimension(800, 820));
+        scrollPane1.setPreferredSize(new java.awt.Dimension(800, 718));
 
         panelBiasa1.setName("panelBiasa1"); // NOI18N
-        panelBiasa1.setPreferredSize(new java.awt.Dimension(800, 780));
+        panelBiasa1.setPreferredSize(new java.awt.Dimension(800, 713));
         panelBiasa1.setLayout(null);
 
         jLabel14.setText("Data Pasien :");
@@ -1441,7 +1166,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(BtnSimpanKoding);
-        BtnSimpanKoding.setBounds(0, 740, 100, 30);
+        BtnSimpanKoding.setBounds(0, 678, 100, 30);
 
         BtnHapusKoding.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/stop_f2.png"))); // NOI18N
         BtnHapusKoding.setMnemonic('H');
@@ -1460,7 +1185,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
             }
         });
         panelBiasa1.add(BtnHapusKoding);
-        BtnHapusKoding.setBounds(530, 740, 100, 30);
+        BtnHapusKoding.setBounds(530, 678, 100, 30);
 
         jLabel32.setText("Riwayat :");
         jLabel32.setName("jLabel32"); // NOI18N
@@ -1539,7 +1264,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
         tabPaneKoding.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         tabPaneKoding.setName("tabPaneKoding"); // NOI18N
-        tabPaneKoding.setPreferredSize(new java.awt.Dimension(800, 462));
+        tabPaneKoding.setPreferredSize(new java.awt.Dimension(800, 404));
 
         panelIdrg.setName("panelIdrg"); // NOI18N
         panelIdrg.setPreferredSize(new java.awt.Dimension(800, 432));
@@ -1549,7 +1274,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         tabPaneKoding.addTab("INACBG", panelInacbg);
 
         panelBiasa1.add(tabPaneKoding);
-        tabPaneKoding.setBounds(0, 270, 800, 462);
+        tabPaneKoding.setBounds(0, 270, 800, 404);
 
         scrollPane1.setViewportView(panelBiasa1);
 
@@ -2281,7 +2006,11 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         revalidate();
-        Dimension newD = new Dimension(jPanel2.getWidth() - 32, panelBiasa1.getPreferredSize().height);
+        int offset = 12;
+        if (scrollPane1.getVerticalScrollBar().isVisible()) {
+            offset = 32;
+        }
+        Dimension newD = new Dimension(jPanel2.getWidth() - offset, panelBiasa1.getPreferredSize().height);
         panelIdrg.setPreferredSize(new Dimension(newD.width - 4, panelIdrg.getPreferredSize().height));
         panelIdrg.setSize(new Dimension(newD.width - 4, panelIdrg.getPreferredSize().height));
         panelIdrg.revalidate(newD.width - 4);
@@ -2297,6 +2026,281 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         scrollPane1.setSize(newD);
         BtnHapusKoding.setLocation(panelBiasa1.getWidth() - BtnHapusKoding.getWidth() - 4, BtnHapusKoding.getY());
         revalidate();
+
+        Platform.runLater(() -> {
+            WebView viewKlaim = new WebView(),
+                viewBerkasDigital = new WebView();
+
+            ProgressBar progressBarKlaim = new ProgressBar(0),
+                progressBarBerkasDigital = new ProgressBar(0);
+
+            progressBarKlaim.setMaxWidth(Double.MAX_VALUE);
+            progressBarKlaim.setPrefHeight(10);
+            progressBarBerkasDigital.setMaxWidth(Double.MAX_VALUE);
+            progressBarBerkasDigital.setPrefHeight(10);
+
+            engineKlaim = viewKlaim.getEngine();
+            engineKlaim.setJavaScriptEnabled(true);
+            engineKlaim.setCreatePopupHandler(popup -> viewKlaim.getEngine());
+            engineKlaim.getLoadWorker().exceptionProperty().addListener((observable, oldValue, newValue) -> {
+                if (engineKlaim.getLoadWorker().getState() == FAILED) {
+                    SwingUtilities.invokeLater(() -> {
+                        JOptionPane.showMessageDialog(null, engineKlaim.getLocation() + "\n" + (newValue != null ? newValue.getMessage() : "Unexpected error!"), "Error", JOptionPane.ERROR_MESSAGE);
+                    });
+                }
+            });
+
+            engineKlaim.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == Worker.State.RUNNING) {
+                    progressBarKlaim.setManaged(true);
+                    progressBarKlaim.setVisible(true);
+                } else if (newValue == Worker.State.SUCCEEDED || newValue == Worker.State.FAILED || newValue == Worker.State.CANCELLED) {
+                    progressBarKlaim.setManaged(false);
+                    progressBarKlaim.setVisible(false);
+                }
+            });
+
+            engineKlaim.locationProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue != null && newValue.toLowerCase().contains("action")) {
+                    final boolean kelahiran = newValue.toLowerCase().contains("action=kelahiran");
+                    SwingUtilities.invokeLater(() -> {
+                        if (kelahiran) {
+                            if (lahir == null) {
+                                lahir = new INACBGDataPersalinanIbuSMC(null, false);
+                                lahir.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                                lahir.setLocationRelativeTo(internalFrame1);
+                                lahir.addWindowListener(new WindowAdapter() {
+                                    @Override
+                                    public void windowClosed(WindowEvent e) {
+                                        Platform.runLater(() -> engineKlaim.reload());
+                                    }
+                                });
+                            }
+                            lahir.setData(btnSEP.getText(), lblNoRawat.getText(), lblNoRM.getText(), lblNamaPasien.getText());
+                            lahir.isCek();
+                            lahir.setVisible(true);
+                        }
+                        if (selectedRow >= 0 && (lahir == null || !lahir.isVisible())) {
+                            int selectedTableModelRow = tbKompilasi.convertRowIndexToModel(selectedRow);
+                            setFlagKlaim();
+                            switch (flagklaim) {
+                                case 1:
+                                    tabMode.setValueAt("Selesai", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(1, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
+                                    break;
+                                case 2:
+                                    tabMode.setValueAt("INACBG Final", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(2, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
+                                    break;
+                                case 3:
+                                    tabMode.setValueAt("INACBG Grouping", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(3, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
+                                    break;
+                                case 4:
+                                    tabMode.setValueAt("IDRG Final", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(4, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
+                                    break;
+                                case 5:
+                                    tabMode.setValueAt("IDRG Grouping", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(5, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
+                                    break;
+                                default:
+                                    tabMode.setValueAt("Belum", selectedTableModelRow, 11);
+                                    tabMode.setValueAt(6, selectedTableModelRow, 12);
+                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
+                                    break;
+                            }
+                        }
+                    });
+                }
+            });
+
+            engineBerkasDigital = viewBerkasDigital.getEngine();
+            engineBerkasDigital.setJavaScriptEnabled(true);
+            engineBerkasDigital.setCreatePopupHandler(popup -> viewBerkasDigital.getEngine());
+            engineBerkasDigital.getLoadWorker().exceptionProperty().addListener((observable, oldValue, newValue) -> {
+                if (engineBerkasDigital.getLoadWorker().getState() == FAILED) {
+                    SwingUtilities.invokeLater(() -> {
+                        JOptionPane.showMessageDialog(null, engineBerkasDigital.getLocation() + "\n" + (newValue != null ? newValue.getMessage() : "Unexpected error!"), "Error", JOptionPane.ERROR_MESSAGE);
+                    });
+                }
+            });
+
+            engineBerkasDigital.getLoadWorker().stateProperty().addListener((observable, oldValue, newValue) -> {
+                if (newValue == Worker.State.RUNNING) {
+                    progressBarBerkasDigital.setManaged(true);
+                    progressBarBerkasDigital.setVisible(true);
+                } else if (newValue == Worker.State.SUCCEEDED) {
+                    progressBarBerkasDigital.setManaged(false);
+                    progressBarBerkasDigital.setVisible(false);
+                    try {
+                        if (engineBerkasDigital.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/", "").contains("berkasrawat/pages")) {
+                            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                            Valid.panggilUrl(engineBerkasDigital.getLocation().replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/pages/upload/", "berkasrawat/").replaceAll("http://" + koneksiDB.HOSTHYBRIDWEB() + "/" + koneksiDB.HYBRIDWEB() + "/berkasrawat/pages/upload/", "berkasrawat/"));
+                            engineBerkasDigital.executeScript("history.back()");
+                            setCursor(Cursor.getDefaultCursor());
+                        }
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                }
+            });
+
+            progressBarKlaim.progressProperty().bind(engineKlaim.getLoadWorker().progressProperty());
+            progressBarBerkasDigital.progressProperty().bind(engineBerkasDigital.getLoadWorker().progressProperty());
+
+            BorderPane layoutKlaim = new BorderPane(viewKlaim),
+                layoutBerkasDigital = new BorderPane(viewBerkasDigital);
+
+            layoutKlaim.setTop(progressBarKlaim);
+            layoutBerkasDigital.setTop(progressBarBerkasDigital);
+
+            jfxINACBG.setScene(new Scene(layoutKlaim));
+            jfxBerkasDigital.setScene(new Scene(layoutBerkasDigital));
+        });
+
+        HTMLEditorKit kit = new HTMLEditorKit();
+        kit.getStyleSheet().addRule("body{width:100vw}table{width:100%;border:0px;margin:0px;padding:0px}tr,td{margin:2px 0px 2px 0px;padding:0px}td{font-family:Tahoma;font-size:10px;color:#111111}");
+        Document doc = kit.createDefaultDocument();
+        loadBillingHTML.setEditorKit(kit);
+        loadBillingHTML.setDocument(doc);
+
+        if (koneksiDB.CARICEPAT().equals("aktif")) {
+            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
+                @Override
+                public void insertUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil();
+                    }
+                }
+
+                @Override
+                public void removeUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil();
+                    }
+                }
+
+                @Override
+                public void changedUpdate(DocumentEvent e) {
+                    if (TCari.getText().length() > 2) {
+                        tampil();
+                    }
+                }
+            });
+        }
+
+        tabPaneKoding.addChangeListener(e -> {
+            if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
+                if (flagklaim <= 4) {
+                    BtnSimpanKoding.setEnabled(false);
+                    BtnHapusKoding.setEnabled(false);
+                } else {
+                    if (panelIdrg.getTabbedPane().getSelectedIndex() == 0) {
+                        BtnSimpanKoding.setEnabled(true);
+                        BtnHapusKoding.setEnabled(false);
+                    } else {
+                        BtnSimpanKoding.setEnabled(false);
+                        BtnHapusKoding.setEnabled(true);
+                    }
+                }
+            } else if (((JTabbedPane) e.getSource()).getSelectedIndex() == 1) {
+                if (flagklaim <= 2) {
+                    BtnSimpanKoding.setEnabled(false);
+                    BtnHapusKoding.setEnabled(false);
+                } else {
+                    if (panelInacbg.getTabbedPane().getSelectedIndex() == 0) {
+                        BtnSimpanKoding.setEnabled(true);
+                        BtnHapusKoding.setEnabled(false);
+                    } else {
+                        BtnSimpanKoding.setEnabled(false);
+                        BtnHapusKoding.setEnabled(true);
+                    }
+                }
+            }
+        });
+
+        panelIdrg.setNextFocusableComponent(BtnSimpanKoding);
+        panelIdrg.addDiagnosaBerubahListener(() -> {
+            setFlagKlaim();
+            tampilINACBG();
+        });
+
+        panelIdrg.addProsedurBerubahListener(() -> {
+            setFlagKlaim();
+            tampilINACBG();
+        });
+
+        panelIdrg.getTabbedPane().addChangeListener(e -> {
+            if (flagklaim <= 4) {
+                BtnSimpanKoding.setEnabled(false);
+                BtnHapusKoding.setEnabled(false);
+            } else {
+                if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
+                    BtnSimpanKoding.setEnabled(true);
+                    BtnHapusKoding.setEnabled(false);
+                } else {
+                    BtnSimpanKoding.setEnabled(false);
+                    BtnHapusKoding.setEnabled(true);
+                }
+            }
+        });
+
+        panelInacbg.setNextFocusableComponent(BtnSimpanKoding);
+        panelInacbg.addDiagnosaBerubahListener(() -> {
+            setFlagKlaim();
+            tampilINACBG();
+        });
+
+        panelInacbg.addProsedurBerubahListener(() -> {
+            setFlagKlaim();
+            tampilINACBG();
+        });
+
+        panelInacbg.getTabbedPane().addChangeListener(e -> {
+            if (flagklaim <= 2) {
+                BtnSimpanKoding.setEnabled(false);
+                BtnHapusKoding.setEnabled(false);
+            } else {
+                if (((JTabbedPane) e.getSource()).getSelectedIndex() == 0) {
+                    BtnSimpanKoding.setEnabled(true);
+                    BtnHapusKoding.setEnabled(false);
+                } else {
+                    BtnSimpanKoding.setEnabled(false);
+                    BtnHapusKoding.setEnabled(true);
+                }
+            }
+        });
+
+        penjab.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (penjab.getTable().getSelectedRow() != -1) {
+                    kodePJ.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 1).toString());
+                    namaPJ.setText(penjab.getTable().getValueAt(penjab.getTable().getSelectedRow(), 2).toString());
+                    tampil();
+                }
+                kodePJ.requestFocus();
+            }
+        });
+
+        penjab.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    penjab.dispose();
+                }
+            }
+        });
+
+        TMaxMemory.setDocument(new batasInput(4).getOnlyAngka(TMaxMemory));
+
+        cekPengaturanKompilasi();
     }//GEN-LAST:event_formWindowOpened
 
     private void ppUpdateTanggalPulangSEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppUpdateTanggalPulangSEPActionPerformed
@@ -2891,7 +2895,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 hapusOtomatisDiagnosaProsedur = hapusotomatis;
                 kategoriUploadBerkas = kategoriUpload;
                 if (selectedRow >= 0) {
-                    onListSelectionModelValueChanged(null);
+                    updateSelection();
                 }
                 JOptionPane.showMessageDialog(null, "Pengaturan kompilasi berhasil disimpan..!!");
                 WindowPengaturan.dispose();
@@ -2939,7 +2943,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private void tbKompilasiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbKompilasiKeyReleased
         if (tabMode.getRowCount() != 0) {
             if ((evt.getKeyCode() == KeyEvent.VK_ENTER) || (evt.getKeyCode() == KeyEvent.VK_UP) || (evt.getKeyCode() == KeyEvent.VK_DOWN)) {
-                onListSelectionModelValueChanged(null);
+                SwingUtilities.invokeLater(() -> updateSelection());
             }
         }
     }//GEN-LAST:event_tbKompilasiKeyReleased
@@ -2951,21 +2955,19 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnSimpanKodingKeyPressed
 
     private void WindowPengaturanWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_WindowPengaturanWindowActivated
+        CmbPilihanKategoriBerkas.removeAllItems();
+        CmbPilihanKategoriBerkas.addItem("");
+        int selectedIndex = 0;
         try (ResultSet rs = koneksi.createStatement().executeQuery("select * from master_berkas_digital order by master_berkas_digital.kode")) {
-            if (rs.next()) {
-                int selectedIndex = -1;
-                CmbPilihanKategoriBerkas.removeAllItems();
-                CmbPilihanKategoriBerkas.addItem("");
-                do {
-                    if (kategoriUploadBerkas.equals(rs.getString("kode"))) {
-                        selectedIndex = CmbPilihanKategoriBerkas.getItemCount();
-                    }
-                    CmbPilihanKategoriBerkas.addItem((rs.getString("kode") + " - " + rs.getString("nama")));
-                } while (rs.next());
-
-                if (selectedIndex >= 0) {
-                    CmbPilihanKategoriBerkas.setSelectedIndex(selectedIndex);
+            while (rs.next()) {
+                if (kategoriUploadBerkas.equals(rs.getString("kode"))) {
+                    selectedIndex = CmbPilihanKategoriBerkas.getItemCount();
                 }
+                CmbPilihanKategoriBerkas.addItem((rs.getString("kode") + " - " + rs.getString("nama")));
+            }
+
+            if (selectedIndex > 0) {
+                CmbPilihanKategoriBerkas.setSelectedIndex(selectedIndex);
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -2985,10 +2987,13 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbKompilasiMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKompilasiMouseReleased
-        int row = tbKompilasi.rowAtPoint(evt.getPoint());
+        final int row = tbKompilasi.rowAtPoint(evt.getPoint());
+        final int col = tbKompilasi.columnAtPoint(evt.getPoint());
         if (row >= 0) {
-            tbKompilasi.setRowSelectionInterval(row, row);
-            onListSelectionModelValueChanged(null);
+            SwingUtilities.invokeLater(() -> {
+                tbKompilasi.changeSelection(row, col, false, false);
+                updateSelection();
+            });
         }
     }//GEN-LAST:event_tbKompilasiMouseReleased
 
@@ -3119,13 +3124,9 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private widget.Table tbKompilasi;
     // End of variables declaration//GEN-END:variables
 
-    private void onListSelectionModelValueChanged(ListSelectionEvent evt) {
-        if (evt != null && evt.getValueIsAdjusting()) {
-            return;
-        }
-
+    private void updateSelection() {
         try {
-            selectedRow = tbKompilasi.getSelectionModel().getLeadSelectionIndex();
+            selectedRow = tbKompilasi.getSelectedRow();
             tabKanan.setSelectedIndex(0);
             tabPaneKoding.setSelectedIndex(0);
             panelIdrg.getTabbedPane().setSelectedIndex(0);
@@ -3192,8 +3193,8 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                         "left join idrg_grouping_smc idg on s.no_sep = idg.no_sep left join idrg_klaim_final_smc idf on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 " +
                         "ing on s.no_sep = ing.no_sep left join inacbg_klaim_final_smc inf on s.no_sep = inf.no_sep left join inacbg_cetak_klaim inc on s.no_sep = inc.no_sep " +
                         "where s.no_sep like ? and s.tglsep between ? and ? and length(s.no_sep) = 19 " + statusrawat + "and (if(s.jnspelayanan = '1', 'Ranap', 'Ralan')) = r.status_lanjut " +
-                        "and r.status_bayar = 'Sudah Bayar' " + (kodePJ.getText().isBlank() ? "" : "and r.kd_pj = ? ") + statusklaim + (TCari.getText().isBlank() ? ""
-                        : "and (s.no_sep like ? or s.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or p.nm_poli like ? or concat(ki.kd_kamar, ' ', " +
+                        "and r.status_bayar = 'Sudah Bayar' " + (kodePJ.getText().isBlank() ? "" : "and r.kd_pj = ? ") + statusklaim + (TCari.getText().isBlank() ? "" :
+                        "and (s.no_sep like ? or s.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or p.nm_poli like ? or concat(ki.kd_kamar, ' ', " +
                         "b.nm_bangsal) like ? or d.nm_dokter like ?) ") + "group by s.no_sep, s.no_rawat, r.no_rkm_medis order by s.no_sep, s.jnspelayanan desc"
                     )) {
                         int p = 0;
@@ -3387,12 +3388,14 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         }
         if (flagklaim <= 4) {
             tabPaneKoding.setEnabledAt(1, true);
+
             if (flagklaim == 1) {
                 flipStatus(btnHasilKlaim, true);
             } else {
                 flipStatus(btnHasilKlaim, false);
             }
-            if (flagklaim == 2) {
+
+            if (flagklaim >= 2) {
                 BtnSimpanKoding.setEnabled(false);
                 BtnHapusKoding.setEnabled(false);
             } else {
@@ -3400,15 +3403,6 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                     tabPaneKoding.setSelectedIndex(1);
                 } else {
                     tabPaneKoding.setSelectedIndex(0);
-                }
-                if (tabPaneKoding.getSelectedIndex() == 1) {
-                    if (panelInacbg.getTabbedPane().getSelectedIndex() > 0) {
-                        BtnSimpanKoding.setEnabled(false);
-                        BtnHapusKoding.setEnabled(true);
-                    } else {
-                        BtnSimpanKoding.setEnabled(true);
-                        BtnHapusKoding.setEnabled(false);
-                    }
                 }
             }
         } else {

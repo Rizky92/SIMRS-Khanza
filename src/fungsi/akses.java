@@ -275,13 +275,12 @@ public final class akses {
         bpjs_kirim_obat_smc = false,
         bpjs_edit_kirim_obat_smc = false,
         bpjs_riwayat_obat_smc = false,
-        bpjs_riwayat_pelayanan_obat_smc = false,
         bpjs_riwayat_pelayanan_resep_smc = false,
         set_pintu_poli = false,
         pintu_poli = false,
         bpjs_riwayat_surat_smc = false;
 
-    private static Set<String> columns = new LinkedHashSet();
+    private static final Set<String> columns = new LinkedHashSet();
 
     public static void setData(String user, String pass){
         int retries=2;
@@ -308,12 +307,14 @@ public final class akses {
                     }else if(rs2.getRow()>=1){
                         rs2.beforeFirst();
                         rs2.next();
-                        ResultSetMetaData md = rs2.getMetaData();
-                        for (int i = 1; i < md.getColumnCount(); i++) {
-                            if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
-                                continue;
+                        if (columns.isEmpty()) {
+                            ResultSetMetaData md = rs2.getMetaData();
+                            for (int i = 1; i < md.getColumnCount(); i++) {
+                                if (md.getColumnLabel(i).equalsIgnoreCase("id_user") || md.getColumnLabel(i).equalsIgnoreCase("password")) {
+                                    continue;
+                                }
+                                columns.add(md.getColumnLabel(i));
                             }
-                            columns.add(md.getColumnLabel(i));
                         }
                         akses.kode=user;
                         akses.penyakit=akses.getBoolean(rs2, "penyakit");
@@ -1478,7 +1479,6 @@ public final class akses {
                         akses.bpjs_kirim_obat_smc=akses.getBoolean(rs2, "bpjs_kirim_obat_smc");
                         akses.bpjs_edit_kirim_obat_smc=akses.getBoolean(rs2, "bpjs_edit_kirim_obat_smc");
                         akses.bpjs_riwayat_obat_smc=akses.getBoolean(rs2, "bpjs_riwayat_obat_smc");
-                        akses.bpjs_riwayat_pelayanan_obat_smc=akses.getBoolean(rs2, "bpjs_riwayat_pelayanan_obat_smc");
                         akses.bpjs_riwayat_pelayanan_resep_smc=akses.getBoolean(rs2, "bpjs_riwayat_pelayanan_resep_smc");
                         akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan=akses.getBoolean(rs2, "nilai_normal_baku_mutu_lab_kesehatan_lingkungan");
                         akses.skrining_pneumonia_severity_index=akses.getBoolean(rs2, "skrining_pneumonia_severity_index");
@@ -2726,7 +2726,6 @@ public final class akses {
         akses.bpjs_kirim_obat_smc=isadmin;
         akses.bpjs_edit_kirim_obat_smc=isadmin;
         akses.bpjs_riwayat_obat_smc=isadmin;
-        akses.bpjs_riwayat_pelayanan_obat_smc=isadmin;
         akses.bpjs_riwayat_pelayanan_resep_smc=isadmin;
         akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan=isadmin;
         akses.skrining_pneumonia_severity_index=isadmin;
@@ -3975,7 +3974,7 @@ public final class akses {
     public static boolean getbpjs_kirim_obat_smc() {return akses.bpjs_kirim_obat_smc;}
     public static boolean getbpjs_edit_kirim_obat_smc() {return akses.bpjs_edit_kirim_obat_smc;}
     public static boolean getbpjs_riwayat_obat_smc() {return akses.bpjs_riwayat_obat_smc;}
-    public static boolean getbpjs_riwayat_pelayanan_obat_smc() {return akses.bpjs_riwayat_pelayanan_obat_smc;}
+    public static boolean getbpjs_riwayat_pelayanan_obat_smc() {return false;}
     public static boolean getbpjs_riwayat_pelayanan_resep_smc() {return akses.bpjs_riwayat_pelayanan_resep_smc;}
     public static boolean getnilai_normal_baku_mutu_lab_kesehatan_lingkungan(){return akses.nilai_normal_baku_mutu_lab_kesehatan_lingkungan;}
     public static boolean getskrining_pneumonia_severity_index(){return akses.skrining_pneumonia_severity_index;}
