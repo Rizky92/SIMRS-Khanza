@@ -29,7 +29,7 @@
     </script>
 </head>
 <body>
-    <div id="mainContent">
+    <div id="mainContent" style="max-width: calc(100% - 1px)">
         <?php
             actionPages();
         ?>
