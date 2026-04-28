@@ -245,6 +245,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         BtnResetPengaturan = new widget.Button();
         BtnTutupPengaturan = new widget.Button();
         fc = new javax.swing.JFileChooser();
+        lblCoderNIK = new widget.Label();
         internalFrame1 = new widget.InternalFrame();
         jPanel3 = new javax.swing.JPanel();
         panelGlass8 = new widget.panelisi();
@@ -269,7 +270,6 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         CmbStatusRawat = new widget.ComboBox();
         jLabel11 = new widget.Label();
         CmbStatusKirim = new widget.ComboBox();
-        lblCoderNIK = new widget.Label();
         jPanel1 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         panelGlass11 = new widget.panelisi();
@@ -416,7 +416,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         internalFrame11.add(jLabel44);
         jLabel44.setBounds(0, 92, 78, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026 13:13:46" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-04-2026 15:21:42" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -673,6 +673,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         fc.setFileSelectionMode(javax.swing.JFileChooser.FILES_AND_DIRECTORIES);
         fc.setName("fc"); // NOI18N
 
+        lblCoderNIK.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
+        lblCoderNIK.setName("lblCoderNIK"); // NOI18N
+        lblCoderNIK.setPreferredSize(new java.awt.Dimension(105, 23));
+
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
         setResizable(false);
@@ -871,11 +875,6 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         CmbStatusKirim.setName("CmbStatusKirim"); // NOI18N
         CmbStatusKirim.setPreferredSize(new java.awt.Dimension(113, 23));
         panelGlass10.add(CmbStatusKirim);
-
-        lblCoderNIK.setHorizontalAlignment(javax.swing.SwingConstants.TRAILING);
-        lblCoderNIK.setName("lblCoderNIK"); // NOI18N
-        lblCoderNIK.setPreferredSize(new java.awt.Dimension(105, 23));
-        panelGlass10.add(lblCoderNIK);
 
         jPanel3.add(panelGlass10, java.awt.BorderLayout.CENTER);
 
@@ -2007,7 +2006,11 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         revalidate();
-        Dimension newD = new Dimension(jPanel2.getWidth() - 32, panelBiasa1.getPreferredSize().height);
+        int offset = 12;
+        if (scrollPane1.getVerticalScrollBar().isVisible()) {
+            offset = 32;
+        }
+        Dimension newD = new Dimension(jPanel2.getWidth() - offset, panelBiasa1.getPreferredSize().height);
         panelIdrg.setPreferredSize(new Dimension(newD.width - 4, panelIdrg.getPreferredSize().height));
         panelIdrg.setSize(new Dimension(newD.width - 4, panelIdrg.getPreferredSize().height));
         panelIdrg.revalidate(newD.width - 4);
@@ -3392,7 +3395,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 flipStatus(btnHasilKlaim, false);
             }
 
-            if (flagklaim == 2) {
+            if (flagklaim >= 2) {
                 BtnSimpanKoding.setEnabled(false);
                 BtnHapusKoding.setEnabled(false);
             } else {
@@ -3400,16 +3403,6 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                     tabPaneKoding.setSelectedIndex(1);
                 } else {
                     tabPaneKoding.setSelectedIndex(0);
-                }
-
-                if (tabPaneKoding.getSelectedIndex() == 1) {
-                    if (panelInacbg.getTabbedPane().getSelectedIndex() > 0) {
-                        BtnSimpanKoding.setEnabled(false);
-                        BtnHapusKoding.setEnabled(true);
-                    } else {
-                        BtnSimpanKoding.setEnabled(true);
-                        BtnHapusKoding.setEnabled(false);
-                    }
                 }
             }
         } else {
