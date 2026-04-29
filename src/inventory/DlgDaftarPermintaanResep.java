@@ -4511,10 +4511,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         JOptionPane.showMessageDialog(null, "Maaf, Silahkan pilih data resep pasien untuk melihat riwayat pelayanan obat Apotek Online BPJS..!!");
                     } else {
                         ApotekBPJSRiwayatPelayananObatSMC riwayat = new ApotekBPJSRiwayatPelayananObatSMC(null, false);
+                        riwayat.setNoKartu(Sequel.cariIsiSmc("select pasien.no_peserta from pasien where pasien.no_rkm_medis = ?", NoRM),
+                                LocalDate.now().plus(-1, ChronoUnit.YEARS).toString(), LocalDate.now().toString());
                         riwayat.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
                         riwayat.setLocationRelativeTo(internalFrame1);
-                        riwayat.setNoKartu(Sequel.cariIsiSmc("select pasien.no_peserta from pasien where pasien.no_rkm_medis = ?", NoRM),
-                            LocalDate.now().plus(-1, ChronoUnit.YEARS).toString(), LocalDate.now().toString());
                         riwayat.setVisible(true);
                     }
                 }

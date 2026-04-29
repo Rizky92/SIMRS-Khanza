@@ -445,7 +445,6 @@ public final class ApotekBPJSRiwayatPelayananObatSMC extends javax.swing.JDialog
         NoKaBPJS.setText(nokartu);
         Valid.setTglSmc(TanggalAwal, tglawal);
         Valid.setTglSmc(TanggalAkhir, tglakhir);
-        System.out.println("Nokartu: " + nokartu + ", tglawal: " + tglawal + ", tglakhir: " + tglakhir);
     }
 
     private void tampilSmc() {
@@ -453,11 +452,12 @@ public final class ApotekBPJSRiwayatPelayananObatSMC extends javax.swing.JDialog
             if (!ceksukses) {
                 ceksukses = true;
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                tbKamar.clearSelection();
                 Valid.tabelKosongSmc(tabMode);
+                final String tglawal = Valid.getTglSmc(TanggalAwal);
+                final String tglakhir = Valid.getTglSmc(TanggalAkhir);
+                final String nopeserta = NoKaBPJS.getText().trim();
                 new SwingWorker<String, Object[]>() {
-                    final String tglawal = Valid.getTglSmc(TanggalAwal);
-                    final String tglakhir = Valid.getTglSmc(TanggalAkhir);
-                    final String nopeserta = NoKaBPJS.getText().trim();
                     final ObjectMapper mapper = new ObjectMapper();
                     String namapeserta = "";
                     String tgllahir = "";

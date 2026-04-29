@@ -3395,7 +3395,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 flipStatus(btnHasilKlaim, false);
             }
 
-            if (flagklaim >= 2) {
+            if (flagklaim == 2) {
                 BtnSimpanKoding.setEnabled(false);
                 BtnHapusKoding.setEnabled(false);
             } else {
@@ -3403,6 +3403,15 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                     tabPaneKoding.setSelectedIndex(1);
                 } else {
                     tabPaneKoding.setSelectedIndex(0);
+                }
+                if (tabPaneKoding.getSelectedIndex() == 1) {
+                    if (panelInacbg.getTabbedPane().getSelectedIndex() > 0) {
+                        BtnSimpanKoding.setEnabled(false);
+                        BtnHapusKoding.setEnabled(true);
+                    } else {
+                        BtnSimpanKoding.setEnabled(true);
+                        BtnHapusKoding.setEnabled(false);
+                    }
                 }
             }
         } else {
