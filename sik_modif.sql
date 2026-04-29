@@ -23,7 +23,7 @@ CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
   INDEX `pengirim`(`pengirim`) USING BTREE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE `antrifotokelahiranbayismc`  (
+CREATE TABLE IF NOT EXISTS `antrifotokelahiranbayismc`  (
   `no_rkm_medis` varchar(15) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`) USING BTREE
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -533,7 +533,7 @@ ALTER TABLE `pasien` ADD INDEX IF NOT EXISTS `tgl_daftar`(`tgl_daftar`) USING BT
 
 ALTER TABLE `pasien` ADD INDEX IF NOT EXISTS `tgl_lahir`(`tgl_lahir`) USING BTREE;
 
-CREATE TABLE `pasien_bayi_gambar_smc`  (
+CREATE TABLE IF NOT EXISTS `pasien_bayi_gambar_smc`  (
   `no_rkm_medis` varchar(15) NOT NULL,
   `photo` varchar(500) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`) USING BTREE,
@@ -1805,7 +1805,7 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_edit_kirim_obat_smc` enum('tru
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_edit_kirim_obat_smc`;
 
-ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_resep_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_riwayat_pelayanan_obat_smc`;
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_resep_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_riwayat_obat_smc`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pintu_poli` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_potensi_prb`;
 
