@@ -227,7 +227,7 @@ ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double 
 
 ALTER TABLE `detail_periksa_lab` DROP INDEX IF EXISTS `nilai`;
 
-ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` text NOT NULL DEFAULT '' AFTER `id_template`;
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(700) NOT NULL AFTER `id_template`;
 
 ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(700) NOT NULL AFTER `nilai`;
 
@@ -1518,20 +1518,16 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_lab_loinc`  (
   `code` varchar(30) NOT NULL,
   `system` varchar(100) NOT NULL,
   `display` varchar(300) NULL DEFAULT NULL,
-  `display_ind` varchar(300) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
-  INDEX `display`(`display`) USING BTREE,
-  INDEX `display_ind`(`display_ind`) USING BTREE
+  INDEX `display`(`display`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_lab_snomed`  (
   `code` varchar(40) NOT NULL,
   `system` varchar(100) NOT NULL,
   `display` varchar(600) NULL DEFAULT NULL,
-  `display_ind` varchar(600) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
-  INDEX `display`(`display`) USING BTREE,
-  INDEX `display_ind`(`display_ind`) USING BTREE
+  INDEX `display`(`display`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_numerator`  (
@@ -1558,20 +1554,16 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_radiologi_loinc`  (
   `code` varchar(30) NOT NULL,
   `system` varchar(100) NOT NULL,
   `display` varchar(300) NULL DEFAULT NULL,
-  `display_ind` varchar(300) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
-  INDEX `display`(`display`) USING BTREE,
-  INDEX `display_ind`(`display_ind`) USING BTREE
+  INDEX `display`(`display`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_radiologi_snomed`  (
   `code` varchar(30) NOT NULL,
   `system` varchar(100) NOT NULL,
   `display` varchar(300) NULL DEFAULT NULL,
-  `display_ind` varchar(300) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
-  INDEX `display`(`display`) USING BTREE,
-  INDEX `display_ind`(`display_ind`) USING BTREE
+  INDEX `display`(`display`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_route`  (
