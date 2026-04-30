@@ -1059,7 +1059,6 @@ public final class DlgKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbKamarKeyReleased
 
     private void MnUpdateStatusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnUpdateStatusActionPerformed
-        tampilSmc();
         SwingUtilities.invokeLater(() -> {
             if (tbKamar.getRowCount() > 0) {
                 for (int i = 0; i < tbKamar.getRowCount(); i++) {
