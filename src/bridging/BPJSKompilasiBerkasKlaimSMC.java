@@ -66,11 +66,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
 import javax.swing.JTabbedPane;
 import javax.swing.JTable;
+import javax.swing.RowSorter;
 import javax.swing.SwingUtilities;
 import javax.swing.SwingWorker;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import javax.swing.text.Document;
 import javax.swing.text.html.HTMLEditorKit;
 import net.sf.jasperreports.engine.JRResultSetDataSource;
@@ -2086,34 +2088,29 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                                 case 1:
                                     tabMode.setValueAt("Selesai", selectedTableModelRow, 11);
                                     tabMode.setValueAt(1, selectedTableModelRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 case 2:
                                     tabMode.setValueAt("INACBG Final", selectedTableModelRow, 11);
                                     tabMode.setValueAt(2, selectedTableModelRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 case 3:
                                     tabMode.setValueAt("INACBG Grouping", selectedTableModelRow, 11);
                                     tabMode.setValueAt(3, selectedTableModelRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 case 4:
                                     tabMode.setValueAt("IDRG Final", selectedTableModelRow, 11);
                                     tabMode.setValueAt(4, selectedTableModelRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 case 5:
                                     tabMode.setValueAt("IDRG Grouping", selectedTableModelRow, 11);
                                     tabMode.setValueAt(5, selectedTableModelRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                                 default:
                                     tabMode.setValueAt("Belum", selectedTableModelRow, 11);
                                     tabMode.setValueAt(6, selectedTableModelRow, 12);
-                                    tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                                     break;
                             }
+                            tabMode.fireTableRowsUpdated(selectedTableModelRow, selectedTableModelRow);
                         }
                     });
                 }
@@ -3140,6 +3137,8 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private void tampil() {
         if (!isLoading) {
             isLoading = true;
+            final List<? extends RowSorter.SortKey> sortKeys = tbKompilasi.getRowSorter().getSortKeys();
+            tbKompilasi.setRowSorter(null);
             Valid.tabelKosongSmc(tabMode);
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             new SwingWorker<Void, Object[]>() {
@@ -3269,6 +3268,9 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                     }
                     tabMode.fireTableDataChanged();
                     LCount.setText(String.valueOf(tabMode.getRowCount()));
+                    TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(tabMode);
+                    tbKompilasi.setRowSorter(sorter);
+                    sorter.setSortKeys(sortKeys);
                     BPJSKompilasiBerkasKlaimSMC.this.setCursor(Cursor.getDefaultCursor());
                     isLoading = false;
                 }
