@@ -7141,7 +7141,9 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                         TNo.getText(),Valid.SetTgl(TanggalSEP.getSelectedItem()+"")
                     });
                     if (!BOOKINGLANGSUNGREGISTRASI) {
-                        Sequel.mengupdateSmc("booking_registrasi", "status = 'Terdaftar'", "no_rkm_medis = ? and tanggal_periksa = ?", TNo.getText(), Valid.getTglSmc(TanggalSEP));
+                        Sequel.queryu2("update booking_registrasi set status='Terdaftar' where no_rkm_medis=? and tanggal_periksa=?",2,new String[]{
+                            TNo.getText(),Valid.SetTgl(TanggalSEP.getSelectedItem()+"")
+                        });
                     }
                     if(!prb.equals("")){
                         if(Sequel.menyimpantf("bpjs_prb","?,?","PRB",2,new String[]{response.asText(),prb})==true){
@@ -7191,7 +7193,9 @@ public final class BPJSCekKartu extends javax.swing.JDialog {
                             TNo.getText(),Valid.SetTgl(TanggalSEP.getSelectedItem()+"")
                         });
                         if (!BOOKINGLANGSUNGREGISTRASI) {
-                            Sequel.mengupdateSmc("booking_registrasi", "status = 'Terdaftar'", "no_rkm_medis = ? and tanggal_periksa = ?", TNo.getText(), Valid.getTglSmc(TanggalSEP));
+                            Sequel.queryu2("update booking_registrasi set status='Terdaftar' where no_rkm_medis=? and tanggal_periksa=?",2,new String[]{
+                                TNo.getText(),Valid.SetTgl(TanggalSEP.getSelectedItem()+"")
+                            });
                         }
                         if(!prb.equals("")){
                             if(Sequel.menyimpantf("bpjs_prb","?,?","PRB",2,new String[]{response.asText(),prb})==true){

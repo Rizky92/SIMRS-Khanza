@@ -756,11 +756,4 @@ public final class InhealthTindakanOperasi extends javax.swing.JDialog {
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-
-
-
-
-
-
-
 }

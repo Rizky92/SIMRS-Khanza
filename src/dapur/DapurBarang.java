@@ -743,7 +743,7 @@ public final class DapurBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void KodeBarangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeBarangKeyPressed
@@ -767,34 +767,34 @@ public final class DapurBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_KodeSatuanKeyPressed
 
     private void btnSatuanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSatuanActionPerformed
-    DlgCariSatuan satuan=new DlgCariSatuan(null,false);
-    satuan.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(satuan.getTable().getSelectedRow()!= -1){
-                KodeSatuan.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());
-                nama_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),1).toString());
+        DlgCariSatuan satuan=new DlgCariSatuan(null,false);
+        satuan.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(satuan.getTable().getSelectedRow()!= -1){
+                    KodeSatuan.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),0).toString());
+                    nama_sat.setText(satuan.getTable().getValueAt(satuan.getTable().getSelectedRow(),1).toString());
+                }
+                KodeSatuan.requestFocus();
             }
-            KodeSatuan.requestFocus();
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
 
-    });
-    satuan.isCek();
-    satuan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    satuan.setLocationRelativeTo(internalFrame1);
-    satuan.setVisible(true);
+        });
+        satuan.isCek();
+        satuan.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        satuan.setLocationRelativeTo(internalFrame1);
+        satuan.setVisible(true);
     }//GEN-LAST:event_btnSatuanActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

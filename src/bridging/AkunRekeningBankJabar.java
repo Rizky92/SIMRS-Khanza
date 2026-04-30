@@ -139,9 +139,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         tbSpesialis.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbSpesialis.setName("tbSpesialis"); // NOI18N
         tbSpesialis.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbSpesialisMouseClicked(evt);
-            }
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tbSpesialisMouseReleased(evt);
             }
@@ -165,13 +162,11 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         jLabel3.setBounds(1, 10, 65, 23);
 
         kdrek.setEditable(false);
-        kdrek.setHighlighter(null);
         kdrek.setName("kdrek"); // NOI18N
         panelGlass7.add(kdrek);
         kdrek.setBounds(70, 10, 93, 23);
 
         nmrek.setEditable(false);
-        nmrek.setHighlighter(null);
         nmrek.setName("nmrek"); // NOI18N
         nmrek.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -202,7 +197,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         panelGlass7.add(jLabel4);
         jLabel4.setBounds(431, 10, 45, 23);
 
-        TKd.setHighlighter(null);
         TKd.setName("TKd"); // NOI18N
         TKd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
@@ -462,18 +456,6 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_tbSpesialisKeyPressed
 
-    private void tbSpesialisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseClicked
-
-    }//GEN-LAST:event_tbSpesialisMouseClicked
-
-    private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
-        Valid.pindah(evt,BtnPenjab,BtnSimpan);
-    }//GEN-LAST:event_TKdKeyPressed
-
-    private void BtnPenjabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPenjabKeyPressed
-        Valid.pindah(evt,BtnKeluar,TKd);
-    }//GEN-LAST:event_BtnPenjabKeyPressed
-
     private void tbSpesialisMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbSpesialisMouseReleased
         if(tabMode.getRowCount()!=0){
             try {
@@ -482,6 +464,14 @@ public class AkunRekeningBankJabar extends javax.swing.JDialog {
             }
         }
     }//GEN-LAST:event_tbSpesialisMouseReleased
+
+    private void TKdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
+        Valid.pindah(evt,BtnPenjab,BtnSimpan);
+    }//GEN-LAST:event_TKdKeyPressed
+
+    private void BtnPenjabKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPenjabKeyPressed
+        Valid.pindah(evt,BtnKeluar,TKd);
+    }//GEN-LAST:event_BtnPenjabKeyPressed
 
     /**
     * @param args the command line arguments

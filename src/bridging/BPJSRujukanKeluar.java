@@ -1186,8 +1186,6 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
         Catatan1.setText("");
     }
 
-
-
     private void getData() {
         if(tbObat.getSelectedRow()!= -1){
             TipeRujukan.setSelectedItem(tbObat.getValueAt(tbObat.getSelectedRow(),9).toString());
@@ -1203,8 +1201,6 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
             Valid.SetTgl(TanggalKunjungRujukan,tbObat.getValueAt(tbObat.getSelectedRow(),15).toString());
         }
     }
-
-
 
     public void isCek(){
         BtnHapus.setEnabled(akses.getbpjs_rujukan_keluar());
@@ -1258,8 +1254,8 @@ public final class BPJSRujukanKeluar extends javax.swing.JDialog {
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-Timestamp",utc);
-	    headers.add("X-Signature",api.getHmac(utc));
+            headers.add("X-Timestamp",utc);
+            headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             requestJson ="{" +
                             "\"request\": {" +

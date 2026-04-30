@@ -5173,8 +5173,8 @@ public final class PCareCekKartu extends javax.swing.JDialog {
             headers.setContentType(MediaType.TEXT_PLAIN);
             headers.add("X-cons-id",koneksiDB.CONSIDAPIPCARE());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-timestamp",utc);
-	    headers.add("X-signature",api.getHmac());
+    	    headers.add("X-timestamp",utc);
+    	    headers.add("X-signature",api.getHmac());
             headers.add("X-authorization","Basic "+Base64.encodeBase64String(otorisasi.getBytes()));
             headers.add("user_key",koneksiDB.USERKEYAPIPCARE());
             kunjungansakit="true";

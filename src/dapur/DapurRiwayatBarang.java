@@ -308,7 +308,7 @@ public class DapurRiwayatBarang extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -537,8 +537,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void prosesCari() {
-       Valid.tabelKosong(tabMode);
-       try{
+        Valid.tabelKosong(tabMode);
+        try{
             if(nmbar.getText().trim().equals("")&&TCari.getText().trim().equals("")){
                 ps=koneksi.prepareStatement(
                     "select dapur_riwayat_barang.kode_brng,dapurbarang.nama_brng,"+
@@ -600,11 +600,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-
     }
 
     public void isCek(){
-         BtnPrint.setEnabled(akses.getdapur_riwayat_barang());
+        BtnPrint.setEnabled(akses.getdapur_riwayat_barang());
     }
 
     private void runBackground(Runnable task) {

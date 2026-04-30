@@ -1060,6 +1060,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         BtnSimpan.setEnabled(akses.getsatu_sehat_mapping_lab());
         BtnHapus.setEnabled(akses.getsatu_sehat_mapping_lab());
         BtnEdit.setEnabled(akses.getsatu_sehat_mapping_lab());
+        BtnPrint.setEnabled(akses.getsatu_sehat_mapping_lab());
     }
 
     public JTable getTable(){

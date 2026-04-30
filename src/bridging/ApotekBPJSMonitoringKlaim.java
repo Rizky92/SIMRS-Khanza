@@ -376,7 +376,7 @@ public final class ApotekBPJSMonitoringKlaim extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(() -> tampil());
+        runBackground(() ->tampil());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -461,27 +461,27 @@ public final class ApotekBPJSMonitoringKlaim extends javax.swing.JDialog {
             LCount.setText("0");
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-            headers.add("x-cons-id", koneksiDB.CONSIDAPIAPOTEKBPJS());
-            utc = String.valueOf(api.GetUTCdatetimeAsString());
-            headers.add("x-timestamp", utc);
-            headers.add("x-signature", api.getHmac(utc));
-            headers.add("user_key", koneksiDB.USERKEYAPIAPOTEKBPJS());
+            headers.add("x-cons-id",koneksiDB.CONSIDAPIAPOTEKBPJS());
+            utc=String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("x-timestamp",utc);
+            headers.add("x-signature",api.getHmac(utc));
+            headers.add("user_key",koneksiDB.USERKEYAPIAPOTEKBPJS());
             requestEntity = new HttpEntity(headers);
-            URL = link + "/monitoring/klaim/" + Bulan.getSelectedItem().toString() + "/" + Tahun.getSelectedItem().toString() + "/" + Jenis.getSelectedItem().toString().substring(0, 1) + "/" + Status.getSelectedItem().toString().substring(0, 1);
+            URL = link+"/monitoring/klaim/"+Bulan.getSelectedItem().toString()+"/"+Tahun.getSelectedItem().toString()+"/"+Jenis.getSelectedItem().toString().substring(0,1)+"/"+Status.getSelectedItem().toString().substring(0,1);
             System.out.println("URL : "+URL);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("metaData");
-            if (nameNode.path("code").asText().equals("200")) {
+            if(nameNode.path("code").asText().equals("200")){
                 Valid.tabelKosong(tabMode);
-                requestJson=api.Decrypt(root.path("response").asText(), utc);
+                requestJson=api.Decrypt(root.path("response").asText(),utc);
                 System.out.println("Respon JSON : "+requestJson);
                 response = mapper.readTree(requestJson);
                 LCountPengajuan.setText(Valid.SetAngka(response.path("totalbiayapengajuan").asDouble()));
                 LCountDisetujui.setText(Valid.SetAngka(response.path("totalbiayasetuju").asDouble()));
                 LCount.setText(response.path("jumlahdata").asText());
-                if (response.path("listsep").isArray()) {
-                    if (TCari.getText().trim().equals("")) {
-                        for (JsonNode list : response.path("listsep")) {
+                if(response.path("listsep").isArray()){
+                    if(TCari.getText().trim().equals("")){
+                        for(JsonNode list:response.path("listsep")){
                             tabMode.addRow(new Object[]{
                                 list.path("nosepapotek").asText(),list.path("nosepaasal").asText(),list.path("nokapst").asText(),
                                 list.path("nmpst").asText(),list.path("noresep").asText(),list.path("nmjnsobat").asText(),
@@ -489,11 +489,11 @@ public final class ApotekBPJSMonitoringKlaim extends javax.swing.JDialog {
                                 Valid.SetAngka(list.path("biayasetujui").asDouble())
                             });
                         }
-                    } else {
-                        for (JsonNode list : response.path("listsep")) {
-                            if (list.path("nosepapotek").asText().contains(TCari.getText()) || list.path("nosepaasal").asText().contains(TCari.getText())
-                                    || list.path("nokapst").asText().contains(TCari.getText()) || list.path("nmpst").asText().contains(TCari.getText())
-                                    || list.path("tglpelayanan").asText().contains(TCari.getText())) {
+                    }else{
+                        for(JsonNode list:response.path("listsep")){
+                            if(list.path("nosepapotek").asText().contains(TCari.getText())||list.path("nosepaasal").asText().contains(TCari.getText())||
+                                    list.path("nokapst").asText().contains(TCari.getText())||list.path("nmpst").asText().contains(TCari.getText())||
+                                    list.path("tglpelayanan").asText().contains(TCari.getText())){
                                 tabMode.addRow(new Object[]{
                                     list.path("nosepapotek").asText(),list.path("nosepaasal").asText(),list.path("nokapst").asText(),
                                     list.path("nmpst").asText(),list.path("noresep").asText(),list.path("nmjnsobat").asText(),
@@ -504,13 +504,13 @@ public final class ApotekBPJSMonitoringKlaim extends javax.swing.JDialog {
                         }
                     }
                 }
-            } else {
-                JOptionPane.showMessageDialog(null, nameNode.path("message").asText());
+            }else {
+                JOptionPane.showMessageDialog(null,nameNode.path("message").asText());
             }
         } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
-            if (ex.toString().contains("UnknownHostException")) {
-                JOptionPane.showMessageDialog(rootPane, "Koneksi ke server BPJS terputus...!");
+            System.out.println("Notifikasi : "+ex);
+            if(ex.toString().contains("UnknownHostException")){
+                JOptionPane.showMessageDialog(rootPane,"Koneksi ke server BPJS terputus...!");
             }
         }
     }

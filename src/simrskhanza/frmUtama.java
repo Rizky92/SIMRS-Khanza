@@ -31,7 +31,7 @@ import bridging.ApotekBPJSDaftarResepObat;
 import bridging.ApotekBPJSEditResepObatSMC;
 import bridging.ApotekBPJSKirimResepObatSMC;
 import bridging.ApotekBPJSKunjunganSEP;
-import bridging.ApotekBPJSMapingObat;
+import bridging.ApotekBPJSMapingObatSMC;
 import bridging.ApotekBPJSMonitoringKlaim;
 import bridging.ApotekBPJSRekapPesertaPRB;
 import bridging.ApotekBPJSResepObat;
@@ -21129,7 +21129,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        ApotekBPJSMapingObat form=new ApotekBPJSMapingObat(this,false);
+        ApotekBPJSMapingObatSMC form=new ApotekBPJSMapingObatSMC(this,false);
         form.isCek();
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);

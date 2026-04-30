@@ -727,7 +727,6 @@ public final class InhealthTindakanRadiologi extends javax.swing.JDialog {
         }
     }
 
-
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_tindakan_radiologi());
         BtnHapus.setEnabled(akses.getinhealth_mapping_tindakan_radiologi());

@@ -946,7 +946,7 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void KdKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKamarKeyPressed
@@ -1193,8 +1193,6 @@ public final class SiranapKetersediaanKamar extends javax.swing.JDialog {
            TersediaWanita.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),10).toString());
        }
     }
-
-
 
     private void isForm(){
         if(ChkInput.isSelected()==true){

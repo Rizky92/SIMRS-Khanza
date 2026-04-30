@@ -504,7 +504,7 @@ public class DapurCariPengajuan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void btnPetugasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPetugasActionPerformed
@@ -703,12 +703,12 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(Sequel.cariInteger("select count(pengajuan_barang_dapur.no_pengajuan) from pengajuan_barang_dapur where pengajuan_barang_dapur.no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
-            Valid.textKosong(TCari,"pilihan data");
-    }else{
-        Sequel.queryu("delete from pengajuan_barang_dapur where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
-        runBackground(() ->tampil());
-    }
+        if(Sequel.cariInteger("select count(pengajuan_barang_dapur.no_pengajuan) from pengajuan_barang_dapur where pengajuan_barang_dapur.no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim())==0){
+                Valid.textKosong(TCari,"pilihan data");
+        }else{
+            Sequel.queryu("delete from pengajuan_barang_dapur where no_pengajuan=?",tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString().trim());
+            runBackground(() ->tampil());
+        }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -834,7 +834,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-       Valid.tabelKosong(tabMode);
+        Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
                     "select pengajuan_barang_dapur.tanggal,pengajuan_barang_dapur.no_pengajuan,pengajuan_barang_dapur.keterangan,pengajuan_barang_dapur.nip,pegawai.nama,pengajuan_barang_dapur.status from pengajuan_barang_dapur inner join pegawai on pengajuan_barang_dapur.nip=pegawai.nik "+

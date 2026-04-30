@@ -674,7 +674,7 @@ public class DapurPemesanan extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -736,7 +736,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     if(Sequel.insertTampJurnal(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", ttl + meterai, 0)==false){
                         sukses=false;
                     }
-                    if (ppn > 0) {
+                    if(ppn>0){
                         if(Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Dapur", ppn, 0)==false){
                             sukses=false;
                         }
@@ -1401,31 +1401,31 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
 
     private void tampilAkun() {
-         try{
-             PPN_Masukan=Sequel.cariIsi("select set_akun.PPN_Masukan from set_akun");
-             ps=koneksi.prepareStatement("select set_akun2.Penerimaan_Dapur,set_akun2.Kontra_Penerimaan_Dapur from set_akun2");
-             try{
-                 rs=ps.executeQuery();
-                 if(rs.next()){
-                     Penerimaan_Dapur=rs.getString("Penerimaan_Dapur");
-                     Kontra_Penerimaan_Dapur=rs.getString("Kontra_Penerimaan_Dapur");
-                     file=new File("./cache/akunpemesanandapur.iyem");
-                     file.createNewFile();
-                     fileWriter = new FileWriter(file);
-                     fileWriter.write("{\"Penerimaan_Dapur\":\""+Penerimaan_Dapur+"\",\"PPN_Masukan\":\""+PPN_Masukan+"\",\"Kontra_Penerimaan_Dapur\":\""+Kontra_Penerimaan_Dapur+"\"}");
-                     fileWriter.flush();
-                     fileWriter.close();
-                 }
-             }catch (Exception e) {
-                 System.out.println("Notifikasi : "+e);
-             } finally{
-                 if(rs != null){
-                     rs.close();
-                 }
-                 if(ps != null){
-                     ps.close();
-                 }
-             }
+        try{
+            PPN_Masukan=Sequel.cariIsi("select set_akun.PPN_Masukan from set_akun");
+            ps=koneksi.prepareStatement("select set_akun2.Penerimaan_Dapur,set_akun2.Kontra_Penerimaan_Dapur from set_akun2");
+            try{
+                rs=ps.executeQuery();
+                if(rs.next()){
+                    Penerimaan_Dapur=rs.getString("Penerimaan_Dapur");
+                    Kontra_Penerimaan_Dapur=rs.getString("Kontra_Penerimaan_Dapur");
+                    file=new File("./cache/akunpemesanandapur.iyem");
+                    file.createNewFile();
+                    fileWriter = new FileWriter(file);
+                    fileWriter.write("{\"Penerimaan_Dapur\":\""+Penerimaan_Dapur+"\",\"PPN_Masukan\":\""+PPN_Masukan+"\",\"Kontra_Penerimaan_Dapur\":\""+Kontra_Penerimaan_Dapur+"\"}");
+                    fileWriter.flush();
+                    fileWriter.close();
+                }
+            }catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            } finally{
+                if(rs != null){
+                    rs.close();
+                }
+                if(ps != null){
+                    ps.close();
+                }
+            }
         } catch (Exception e) {
             System.out.println("Notifikasi : "+e);
         }

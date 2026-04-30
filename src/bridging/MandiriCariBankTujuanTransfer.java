@@ -445,7 +445,6 @@ public final class MandiriCariBankTujuanTransfer extends javax.swing.JDialog {
         TCari.requestFocus();
     }
 
-
     public JTable getTable(){
         return tbKamar;
     }

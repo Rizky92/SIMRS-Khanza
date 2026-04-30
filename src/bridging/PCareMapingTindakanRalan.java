@@ -794,10 +794,6 @@ public final class PCareMapingTindakanRalan extends javax.swing.JDialog {
         }
     }
 
-
-
-
-
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpcare_mapping_tindakan());
         BtnHapus.setEnabled(akses.getpcare_mapping_tindakan());

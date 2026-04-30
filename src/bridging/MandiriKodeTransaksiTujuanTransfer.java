@@ -851,7 +851,6 @@ public final class MandiriKodeTransaksiTujuanTransfer extends javax.swing.JDialo
         }
     }
 
-
     public void isCek(){
         BtnSimpan.setEnabled(akses.getkodetransaksi_tujuan_transfer_bankmandiri());
         BtnHapus.setEnabled(akses.getkodetransaksi_tujuan_transfer_bankmandiri());

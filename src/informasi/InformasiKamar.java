@@ -287,7 +287,7 @@ public final class InformasiKamar extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-       TCari.requestFocus();
+        TCari.requestFocus();
     }//GEN-LAST:event_formWindowActivated
 
     /**

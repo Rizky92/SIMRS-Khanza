@@ -553,7 +553,7 @@ public class InformasiKamarInap extends javax.swing.JDialog {
     }//GEN-LAST:event_btnBangsalCariActionPerformed
 
     private void btnBangsalCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalCariKeyPressed
-   Valid.pindah(evt,DTPCari2,TCari);
+        Valid.pindah(evt,DTPCari2,TCari);
     }//GEN-LAST:event_btnBangsalCariKeyPressed
 
     private void BangsalCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BangsalCariKeyPressed
@@ -565,17 +565,17 @@ public class InformasiKamarInap extends javax.swing.JDialog {
     }//GEN-LAST:event_BangsalCariKeyPressed
 
     private void DTPCari3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPCari3ItemStateChanged
-   R3.setSelected(true);
-   runBackground(() ->tampil());
+        R3.setSelected(true);
+        runBackground(() ->tampil());
     }//GEN-LAST:event_DTPCari3ItemStateChanged
 
     private void DTPCari3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari3KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_DTPCari3KeyPressed
 
     private void cmbJam1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbJam1ItemStateChanged
-   R3.setSelected(true);
-   runBackground(() ->tampil());
+        R3.setSelected(true);
+        runBackground(() ->tampil());
     }//GEN-LAST:event_cmbJam1ItemStateChanged
 
     private void cmbJam1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam1KeyPressed
@@ -595,48 +595,48 @@ public class InformasiKamarInap extends javax.swing.JDialog {
     }//GEN-LAST:event_cmbDtk2KeyPressed
 
     private void cmbMnt2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbMnt2KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_cmbMnt2KeyPressed
 
     private void cmbJam2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbJam2ItemStateChanged
-   R3.setSelected(true);
-   runBackground(() ->tampil());
+        R3.setSelected(true);
+        runBackground(() ->tampil());
     }//GEN-LAST:event_cmbJam2ItemStateChanged
 
     private void cmbJam2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbJam2KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_cmbJam2KeyPressed
 
     private void cmbMnt1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMnt1ItemStateChanged
-   R3.setSelected(true);
-   runBackground(() ->tampil());
+        R3.setSelected(true);
+        runBackground(() ->tampil());
     }//GEN-LAST:event_cmbMnt1ItemStateChanged
 
     private void cmbDtk1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDtk1ItemStateChanged
-   R3.setSelected(true);
-   runBackground(() ->tampil());
+        R3.setSelected(true);
+        runBackground(() ->tampil());
     }//GEN-LAST:event_cmbDtk1ItemStateChanged
 
     private void cmbMnt2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbMnt2ItemStateChanged
-   R3.setSelected(true);
-   runBackground(() ->tampil());
+        R3.setSelected(true);
+        runBackground(() ->tampil());
     }//GEN-LAST:event_cmbMnt2ItemStateChanged
 
     private void cmbDtk2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cmbDtk2ItemStateChanged
-   R3.setSelected(true);
-   runBackground(() ->tampil());
+        R3.setSelected(true);
+        runBackground(() ->tampil());
     }//GEN-LAST:event_cmbDtk2ItemStateChanged
 
     private void R1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R1ItemStateChanged
-   runBackground(() ->tampil());
+        runBackground(() ->tampil());
     }//GEN-LAST:event_R1ItemStateChanged
 
     private void R2ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R2ItemStateChanged
-   runBackground(() ->tampil());
+        runBackground(() ->tampil());
     }//GEN-LAST:event_R2ItemStateChanged
 
     private void R3ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_R3ItemStateChanged
-   runBackground(() ->tampil());
+        runBackground(() ->tampil());
     }//GEN-LAST:event_R3ItemStateChanged
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened

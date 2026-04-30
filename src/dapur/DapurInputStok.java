@@ -658,7 +658,7 @@ public class DapurInputStok extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -669,7 +669,7 @@ public class DapurInputStok extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -772,15 +772,15 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TglKeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            int row2=tbDokter.getRowCount();
-            for(int r=0;r<row2;r++){
-                tbDokter.setValueAt("",r,0);
-                tbDokter.setValueAt(0,r,6);
-                tbDokter.setValueAt(0,r,7);
-                tbDokter.setValueAt(0,r,8);
-                tbDokter.setValueAt(0,r,9);
-                tbDokter.setValueAt(0,r,10);
-            }
+        int row2=tbDokter.getRowCount();
+        for(int r=0;r<row2;r++){
+            tbDokter.setValueAt("",r,0);
+            tbDokter.setValueAt(0,r,6);
+            tbDokter.setValueAt(0,r,7);
+            tbDokter.setValueAt(0,r,8);
+            tbDokter.setValueAt(0,r,9);
+            tbDokter.setValueAt(0,r,10);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void tbDokterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_tbDokterKeyReleased
@@ -1132,9 +1132,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }catch(SQLException e){
             System.out.println("Notifikasi : "+e);
         }
-
     }
-
 
     private void getData(){
         i=tbDokter.getSelectedRow();
@@ -1207,7 +1205,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }
 
     public void isCek(){
-         BtnSimpan.setEnabled(akses.getdapur_opname());
+        BtnSimpan.setEnabled(akses.getdapur_opname());
     }
 
     private void runBackground(Runnable task) {

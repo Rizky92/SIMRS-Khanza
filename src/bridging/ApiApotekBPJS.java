@@ -29,7 +29,7 @@ import org.springframework.security.crypto.codec.Base64;
 import org.springframework.web.client.RestTemplate;
 
 public class ApiApotekBPJS {
-    private String Key, Consid;
+    private String Key,Consid;
     private String salt;
     private String generateHmacSHA256Signature;
     private byte[] hmacData;
@@ -42,44 +42,45 @@ public class ApiApotekBPJS {
     private HttpComponentsClientHttpRequestFactory factory;
     private ApiBPJSAesKeySpec mykey;
 
-    public ApiApotekBPJS() {
+    public ApiApotekBPJS(){
         try {
             Key = koneksiDB.SECRETKEYAPIAPOTEKBPJS();
             Consid = koneksiDB.CONSIDAPIAPOTEKBPJS();
         } catch (Exception ex) {
-            System.out.println("Notifikasi : " + ex);
+            System.out.println("Notifikasi : "+ex);
         }
     }
 
     public String getHmac(String utc) {
-        salt = Consid + "&" + utc;
-        generateHmacSHA256Signature = null;
-        try {
-            generateHmacSHA256Signature = generateHmacSHA256Signature(salt, Key);
-        } catch (GeneralSecurityException e) {
-            // TODO Auto-generated catch block
-            System.out.println("Error Signature : " + e);
-        }
-        return generateHmacSHA256Signature;
+        salt = Consid +"&"+utc;
+	generateHmacSHA256Signature = null;
+	try {
+	    generateHmacSHA256Signature = generateHmacSHA256Signature(salt,Key);
+	} catch (GeneralSecurityException e) {
+	    // TODO Auto-generated catch block
+            System.out.println("Error Signature : "+e);
+	    e.printStackTrace();
+	}
+	return generateHmacSHA256Signature;
     }
 
-    public String generateHmacSHA256Signature(String data, String key) throws GeneralSecurityException {
+    public String generateHmacSHA256Signature(String data, String key)throws GeneralSecurityException {
         hmacData = null;
-        try {
-            secretKey = new SecretKeySpec(key.getBytes("UTF-8"), "HmacSHA256");
-            mac = Mac.getInstance("HmacSHA256");
-            mac.init(secretKey);
-            hmacData = mac.doFinal(data.getBytes("UTF-8"));
-            return new String(Base64.encode(hmacData), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
+	try {
+            secretKey = new SecretKeySpec(key.getBytes("UTF-8"),"HmacSHA256");
+	    mac = Mac.getInstance("HmacSHA256");
+	    mac.init(secretKey);
+	    hmacData = mac.doFinal(data.getBytes("UTF-8"));
+	    return new String(Base64.encode(hmacData), "UTF-8");
+	} catch (UnsupportedEncodingException e) {
             System.out.println("Error Generate HMac: e");
-            throw new GeneralSecurityException(e);
-        }
+	    throw new GeneralSecurityException(e);
+	}
     }
 
-    public long GetUTCdatetimeAsString() {
+    public long GetUTCdatetimeAsString(){
         millis = System.currentTimeMillis();
-        return millis / 1000;
+        return millis/1000;
     }
 
     public String getUTCDateTime() {
@@ -87,36 +88,27 @@ public class ApiApotekBPJS {
         return String.valueOf(millis / 1000);
     }
 
-    public String Decrypt(String data, String utc) throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
-        // System.out.println(data);
-        mykey = ApiBPJSEnc.generateKey(Consid + Key + utc);
-        data = ApiBPJSEnc.decrypt(data, mykey.getKey(), mykey.getIv());
-        data = ApiBPJSLZString.decompressFromEncodedURIComponent(data);
+    public String Decrypt(String data,String utc)throws NoSuchPaddingException, NoSuchAlgorithmException, InvalidAlgorithmParameterException, InvalidKeyException, BadPaddingException, IllegalBlockSizeException {
+        //System.out.println(data);
+        mykey = ApiBPJSEnc.generateKey(Consid+Key+utc);
+        data=ApiBPJSEnc.decrypt(data, mykey.getKey(), mykey.getIv());
+        data=ApiBPJSLZString.decompressFromEncodedURIComponent(data);
         return data;
     }
 
     public RestTemplate getRest() throws NoSuchAlgorithmException, KeyManagementException {
         sslContext = SSLContext.getInstance("SSL");
-        TrustManager[] trustManagers = {
+        TrustManager[] trustManagers= {
             new X509TrustManager() {
-                @Override
-                public X509Certificate[] getAcceptedIssuers() {
-                    return null;
-                }
-
-                @Override
-                public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-                }
-
-                @Override
-                public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
-                }
+                public X509Certificate[] getAcceptedIssuers() {return null;}
+                public void checkServerTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
+                public void checkClientTrusted(X509Certificate[] arg0, String arg1)throws CertificateException {}
             }
         };
-        sslContext.init(null, trustManagers, new SecureRandom());
-        sslFactory = new SSLSocketFactory(sslContext, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
-        scheme = new Scheme("https", 443, sslFactory);
-        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory() {
+        sslContext.init(null,trustManagers , new SecureRandom());
+        sslFactory=new SSLSocketFactory(sslContext,SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        scheme=new Scheme("https",443,sslFactory);
+        factory=new HttpComponentsClientHttpRequestFactory() {
             @Override
             protected HttpUriRequest createHttpUriRequest(HttpMethod httpMethod, URI uri) {
                 if (HttpMethod.DELETE == httpMethod) {

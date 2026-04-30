@@ -9781,5 +9781,4 @@ public final class PCareDataPendaftaran extends javax.swing.JDialog {
         executor.shutdownNow();
         super.dispose();
     }
-
 }

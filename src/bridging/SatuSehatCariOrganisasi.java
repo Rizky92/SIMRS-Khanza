@@ -416,7 +416,6 @@ public final class SatuSehatCariOrganisasi extends javax.swing.JDialog {
         TCari.requestFocus();
     }
 
-
     public JTable getTable(){
         return tbKamar;
     }

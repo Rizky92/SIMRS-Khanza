@@ -213,6 +213,11 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
 
         KodePoliUpdate.setEditable(false);
         KodePoliUpdate.setName("KodePoliUpdate"); // NOI18N
+        KodePoliUpdate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KodePoliUpdateKeyPressed(evt);
+            }
+        });
         internalFrame6.add(KodePoliUpdate);
         KodePoliUpdate.setBounds(79, 30, 65, 23);
 
@@ -245,6 +250,11 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
 
         KodeDokterUpdate.setEditable(false);
         KodeDokterUpdate.setName("KodeDokterUpdate"); // NOI18N
+        KodeDokterUpdate.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KodeDokterUpdateKeyPressed(evt);
+            }
+        });
         internalFrame6.add(KodeDokterUpdate);
         KodeDokterUpdate.setBounds(416, 30, 72, 23);
 
@@ -338,6 +348,11 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
 
         KodeSubspesialis.setEditable(false);
         KodeSubspesialis.setName("KodeSubspesialis"); // NOI18N
+        KodeSubspesialis.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                KodeSubspesialisKeyPressed(evt);
+            }
+        });
         internalFrame6.add(KodeSubspesialis);
         KodeSubspesialis.setBounds(79, 60, 65, 23);
 
@@ -663,6 +678,10 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnSimpanUpdateActionPerformed
 
+    private void KodePoliUpdateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodePoliUpdateKeyPressed
+
+    }//GEN-LAST:event_KodePoliUpdateKeyPressed
+
     private void btnPoliklinikUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliklinikUpdateActionPerformed
         BPJSCekReferensiPoliHFIS poli=new BPJSCekReferensiPoliHFIS(null,false);
         poli.addWindowListener(new WindowListener() {
@@ -706,6 +725,10 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
         poli.setLocationRelativeTo(internalFrame1);
         poli.setVisible(true);
     }//GEN-LAST:event_btnPoliklinikUpdateActionPerformed
+
+    private void KodeDokterUpdateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeDokterUpdateKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KodeDokterUpdateKeyPressed
 
     private void btnDokterUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDokterUpdateActionPerformed
         BPJSCekReferensiDokterHFIS dokter=new BPJSCekReferensiDokterHFIS(null,false);
@@ -776,6 +799,10 @@ public final class BPJSCekReferensiJadwalHFIS extends javax.swing.JDialog {
     private void btnDokterUpdateKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnDokterUpdateKeyPressed
         Valid.pindah(evt, btnPoliklinikUpdate, cmbHari);
     }//GEN-LAST:event_btnDokterUpdateKeyPressed
+
+    private void KodeSubspesialisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KodeSubspesialisKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_KodeSubspesialisKeyPressed
 
     /**
     * @param args the command line arguments

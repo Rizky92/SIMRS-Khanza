@@ -898,83 +898,82 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-  if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
-      Valid.textKosong(TCari,"No.Faktur");
-  }else{
-     try {
-         pscaripesan=koneksi.prepareStatement(
-                 "select dapurpemesanan.no_faktur,dapurpemesanan.tagihan,dapurpemesanan.tgl_faktur,dapurpemesanan.status,dapurpemesanan.ppn,(dapurpemesanan.meterai+dapurpemesanan.total2) as total from dapurpemesanan where dapurpemesanan.no_faktur=?");
-         try {
-            pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-            rs=pscaripesan.executeQuery();
-            if(rs.next()){
-                Sequel.AutoComitFalse();
-                sukses=true;
-                psdapurdetailpesan=koneksi.prepareStatement("select dapurdetailpesan.kode_brng,dapurdetailpesan.jumlah from dapurdetailpesan where dapurdetailpesan.no_faktur=? ");
+        if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),8).toString().trim().equals("")){
+            Valid.textKosong(TCari,"No.Faktur");
+        }else{
+            try {
+                pscaripesan=koneksi.prepareStatement(
+                        "select dapurpemesanan.no_faktur,dapurpemesanan.tagihan,dapurpemesanan.tgl_faktur,dapurpemesanan.status,dapurpemesanan.ppn,(dapurpemesanan.meterai+dapurpemesanan.total2) as total from dapurpemesanan where dapurpemesanan.no_faktur=?");
                 try {
-                    psdapurdetailpesan.setString(1,rs.getString("no_faktur"));
-                    rs2=psdapurdetailpesan.executeQuery();
-                    while(rs2.next()){
-                        Trackbarang.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah"),"Penerimaan", akses.getkode(),"Hapus");
-                        Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok-?",2,new String[]{
-                               rs2.getString("jumlah"),rs2.getString("kode_brng")
-                        });
+                    pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                    rs=pscaripesan.executeQuery();
+                    if(rs.next()){
+                        Sequel.AutoComitFalse();
+                        sukses=true;
+                        psdapurdetailpesan=koneksi.prepareStatement("select dapurdetailpesan.kode_brng,dapurdetailpesan.jumlah from dapurdetailpesan where dapurdetailpesan.no_faktur=? ");
+                        try {
+                            psdapurdetailpesan.setString(1,rs.getString("no_faktur"));
+                            rs2=psdapurdetailpesan.executeQuery();
+                            while(rs2.next()){
+                                Trackbarang.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah"),"Penerimaan", akses.getkode(),"Hapus");
+                                Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok-?",2,new String[]{
+                                    rs2.getString("jumlah"),rs2.getString("kode_brng")
+                                });
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Notif 2 : "+e);
+                        } finally{
+                            if(rs2!=null){
+                                rs2.close();
+                            }
+                            if(psdapurdetailpesan!=null){
+                                psdapurdetailpesan.close();
+                            }
+                        }
+
+                        Sequel.deleteTampJurnal();
+                        if(Sequel.insertTampJurnal(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("total"))==false){
+                            sukses=false;
+                        }
+                        if(rs.getDouble("ppn")>0){
+                            if(Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Dapur", 0, rs.getDouble("ppn"))==false){
+                                sukses=false;
+                            }
+                        }
+                        if(Sequel.insertTampJurnal(Kontra_Penerimaan_Dapur, "HUTANG BARANG DAPUR", rs.getDouble("tagihan"), 0)==false){
+                            sukses=false;
+                        }
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG DAPUR"+", OLEH "+akses.getkode());
+                        }
+
+                        if(sukses==true){
+                            sukses=Sequel.queryu2tf("delete from dapurpemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                        }
+
+                        if(sukses==true){
+                            Sequel.Commit();
+                            runBackground(() ->tampil());
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                            Sequel.RollBack();
+                        }
+                        Sequel.AutoComitTrue();
                     }
                 } catch (Exception e) {
-                    System.out.println("Notif 2 : "+e);
+                    System.out.println("Notif 3 : "+e);
                 } finally{
-                    if(rs2!=null){
-                        rs2.close();
+                    if(rs!=null){
+                        rs.close();
                     }
-                    if(psdapurdetailpesan!=null){
-                        psdapurdetailpesan.close();
-                    }
-                }
-
-                Sequel.deleteTampJurnal();
-                if(Sequel.insertTampJurnal(Penerimaan_Dapur, "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("total"))==false){
-                    sukses=false;
-                }
-                if (rs.getDouble("ppn") > 0) {
-                    if(Sequel.insertTampJurnal(PPN_Masukan, "PPN Masukan Barang Dapur", 0, rs.getDouble("ppn"))==false){
-                        sukses=false;
+                    if(pscaripesan!=null){
+                        pscaripesan.close();
                     }
                 }
-                if(Sequel.insertTampJurnal(Kontra_Penerimaan_Dapur, "HUTANG BARANG DAPUR", rs.getDouble("tagihan"), 0)==false){
-                    sukses=false;
-                }
-                if(sukses==true){
-                    sukses=jur.simpanJurnal(rs.getString("no_faktur"),"U","BATAL TRANSAKSI PENERIMAAN BARANG DAPUR"+", OLEH "+akses.getkode());
-                }
-
-                if(sukses==true){
-                    sukses=Sequel.queryu2tf("delete from dapurpemesanan where no_faktur=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
-                }
-
-                if(sukses==true){
-                   Sequel.Commit();
-                   runBackground(() ->tampil());
-                }else{
-                   JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                   Sequel.RollBack();
-                }
-                Sequel.AutoComitTrue();
+            } catch (Exception ex) {
+                System.out.println("Notif : "+ex);
             }
-         } catch (Exception e) {
-             System.out.println("Notif 3 : "+e);
-         } finally{
-             if(rs!=null){
-                 rs.close();
-             }
-             if(pscaripesan!=null){
-                 pscaripesan.close();
-             }
-         }
-     } catch (Exception ex) {
-         System.out.println("Notif : "+ex);
-     }
-  }
-
+        }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -1128,7 +1127,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-       Valid.tabelKosong(tabMode);
+        Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement(
                     "select dapurpemesanan.tgl_pesan,dapurpemesanan.no_faktur, "+

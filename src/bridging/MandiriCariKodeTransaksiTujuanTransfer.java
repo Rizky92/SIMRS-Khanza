@@ -453,7 +453,6 @@ public final class MandiriCariKodeTransaksiTujuanTransfer extends javax.swing.JD
         TCari.requestFocus();
     }
 
-
     public JTable getTable(){
         return tbKamar;
     }

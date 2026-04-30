@@ -607,45 +607,45 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void btnPoliBPJSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliBPJSActionPerformed
-    BPJSCekReferensiPoli polibpjs=new BPJSCekReferensiPoli(null,false);
-    polibpjs.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(polibpjs.getTable().getSelectedRow()!= -1){
-                KdPoliBPJS.setText(polibpjs.getTable().getValueAt(polibpjs.getTable().getSelectedRow(),1).toString());
-                NmPoliBPJS.setText(polibpjs.getTable().getValueAt(polibpjs.getTable().getSelectedRow(),2).toString());
-                KdPoliBPJS.requestFocus();
+        BPJSCekReferensiPoli polibpjs=new BPJSCekReferensiPoli(null,false);
+        polibpjs.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(polibpjs.getTable().getSelectedRow()!= -1){
+                    KdPoliBPJS.setText(polibpjs.getTable().getValueAt(polibpjs.getTable().getSelectedRow(),1).toString());
+                    NmPoliBPJS.setText(polibpjs.getTable().getValueAt(polibpjs.getTable().getSelectedRow(),2).toString());
+                    KdPoliBPJS.requestFocus();
+                }
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
-    });
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
-    polibpjs.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                polibpjs.dispose();
+        polibpjs.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    polibpjs.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    polibpjs.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    polibpjs.setLocationRelativeTo(internalFrame1);
-    polibpjs.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        polibpjs.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        polibpjs.setLocationRelativeTo(internalFrame1);
+        polibpjs.setVisible(true);
     }//GEN-LAST:event_btnPoliBPJSActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -798,10 +798,10 @@ public final class BPJSMapingPoli extends javax.swing.JDialog {
         return tbJnsPerawatan;
     }
 
- private void runBackground(Runnable task) {
-    if (ceksukses) return;
-    if (executor.isShutdown() || executor.isTerminated()) return;
-    if (!isDisplayable()) return;
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
 
         ceksukses = true;
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
