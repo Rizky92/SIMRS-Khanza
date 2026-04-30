@@ -1340,7 +1340,11 @@ public class DlgPermintaanKonsultasiMedik extends javax.swing.JDialog {
                     if(!tbObat.getValueAt(tbObat.getSelectedRow(),18).toString().equals("")){
                         JOptionPane.showMessageDialog(null,"Sudah ada jawaban dokter yang dikonsuli, data tidak bisa diubah ..!!");
                     }else{
-                        ganti();
+                        if(tbObat.getValueAt(tbObat.getSelectedRow(),10).toString().equals(akses.getkode())){
+                            ganti();
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Hanya bisa diganti oleh dokter yang bersangkutan..!!");
+                        }
                     }
                 }
             }else{
