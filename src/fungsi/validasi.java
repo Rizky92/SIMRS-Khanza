@@ -164,10 +164,15 @@ public final class validasi {
     }
 
     public void setTglSmc(Tanggal tanggal, String waktu) {
-        if (waktu == null || waktu.isBlank()) {
-            tanggal.setSelectedItem("01-01-0001");
-        } else {
-            tanggal.setSelectedItem(waktu.substring(8, 10) + "-" + waktu.substring(5, 7) + "-" + waktu.substring(0, 4));
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            if (waktu == null || waktu.isBlank()) {
+                tanggal.setDate(sdf.parse("0001-01-01"));
+            } else {
+                tanggal.setDate(sdf.parse(waktu));
+            }
+        } catch (Exception e) {
+            System.out.println("Notif : " + e);
         }
     }
 

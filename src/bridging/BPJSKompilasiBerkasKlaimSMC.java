@@ -3140,13 +3140,19 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
     private void tampil() {
         if (!isLoading) {
             isLoading = true;
-            Valid.tabelKosong(tabMode);
+            Valid.tabelKosongSmc(tabMode);
             setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             new SwingWorker<Void, Object[]>() {
+                final int idstatusklaim = CmbStatusKirim.getSelectedIndex();
+                final int idstatusrawat = CmbStatusRawat.getSelectedIndex();
+                final String cari = TCari.getText().trim();
+                final String tglawal = Valid.getTglSmc(DTPCari1);
+                final String tglakhir = Valid.getTglSmc(DTPCari2);
+
                 @Override
                 protected Void doInBackground() throws Exception {
                     String statusklaim = "";
-                    switch (CmbStatusKirim.getSelectedIndex()) {
+                    switch (idstatusklaim) {
                         case 1:
                             statusklaim = "and inc.no_sep is not null ";
                             break;
@@ -3171,9 +3177,9 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                     }
 
                     String statusrawat = "";
-                    if (CmbStatusRawat.getSelectedIndex() == 1) {
+                    if (idstatusrawat == 1) {
                         statusrawat = "and s.jnspelayanan = '2' ";
-                    } else if (CmbStatusRawat.getSelectedIndex() == 2) {
+                    } else if (idstatusrawat == 2) {
                         statusrawat = "and s.jnspelayanan = '1' ";
                     }
 
@@ -3192,27 +3198,27 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                         "left join idrg_grouping_smc idg on s.no_sep = idg.no_sep left join idrg_klaim_final_smc idf on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 " +
                         "ing on s.no_sep = ing.no_sep left join inacbg_klaim_final_smc inf on s.no_sep = inf.no_sep left join inacbg_cetak_klaim inc on s.no_sep = inc.no_sep " +
                         "where s.no_sep like ? and s.tglsep between ? and ? and length(s.no_sep) = 19 " + statusrawat + "and (if(s.jnspelayanan = '1', 'Ranap', 'Ralan')) = r.status_lanjut " +
-                        "and r.status_bayar = 'Sudah Bayar' " + (kodePJ.getText().isBlank() ? "" : "and r.kd_pj = ? ") + statusklaim + (TCari.getText().isBlank() ? "" :
-                        "and (s.no_sep like ? or s.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or p.nm_poli like ? or concat(ki.kd_kamar, ' ', " +
-                        "b.nm_bangsal) like ? or d.nm_dokter like ?) ") + "group by s.no_sep, s.no_rawat, r.no_rkm_medis order by s.no_sep, s.jnspelayanan desc"
+                        "and r.status_bayar = 'Sudah Bayar' " + (kodePJ.getText().isBlank() ? "" : "and r.kd_pj = ? ") + statusklaim + (cari.isBlank() ? "" : "and (s.no_sep like ? or " +
+                        "s.no_rawat like ? or r.no_rkm_medis like ? or px.nm_pasien like ? or p.nm_poli like ? or concat(ki.kd_kamar, ' ', b.nm_bangsal) like ? or d.nm_dokter like ?) ") +
+                        "group by s.no_sep, s.no_rawat, r.no_rkm_medis order by s.no_sep, s.jnspelayanan desc"
                     )) {
                         int p = 0;
                         ps.setString(++p, KODEPPKBPJS);
-                        ps.setString(++p, Valid.getTglSmc(DTPCari1));
-                        ps.setString(++p, Valid.getTglSmc(DTPCari2));
+                        ps.setString(++p, tglawal);
+                        ps.setString(++p, tglakhir);
                         if (!kodePJ.getText().isBlank()) {
                             ps.setString(++p, kodePJ.getText());
                         } else {
                             ps.setString(++p, "%");
                         }
-                        if (!TCari.getText().isBlank()) {
-                            ps.setString(++p, "%" + TCari.getText() + "%");
-                            ps.setString(++p, "%" + TCari.getText() + "%");
-                            ps.setString(++p, "%" + TCari.getText() + "%");
-                            ps.setString(++p, "%" + TCari.getText() + "%");
-                            ps.setString(++p, "%" + TCari.getText() + "%");
-                            ps.setString(++p, "%" + TCari.getText() + "%");
-                            ps.setString(++p, "%" + TCari.getText() + "%");
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
                         }
                         try (ResultSet rs = ps.executeQuery()) {
                             String keterangan = "Belum";
@@ -3261,9 +3267,10 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
-                    isLoading = false;
+                    tabMode.fireTableDataChanged();
                     LCount.setText(String.valueOf(tabMode.getRowCount()));
                     BPJSKompilasiBerkasKlaimSMC.this.setCursor(Cursor.getDefaultCursor());
+                    isLoading = false;
                 }
             }.execute();
         }
@@ -3394,7 +3401,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 flipStatus(btnHasilKlaim, false);
             }
 
-            if (flagklaim >= 2) {
+            if (flagklaim == 2) {
                 BtnSimpanKoding.setEnabled(false);
                 BtnHapusKoding.setEnabled(false);
             } else {
@@ -3402,6 +3409,15 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                     tabPaneKoding.setSelectedIndex(1);
                 } else {
                     tabPaneKoding.setSelectedIndex(0);
+                }
+                if (tabPaneKoding.getSelectedIndex() == 1) {
+                    if (panelInacbg.getTabbedPane().getSelectedIndex() > 0) {
+                        BtnSimpanKoding.setEnabled(false);
+                        BtnHapusKoding.setEnabled(true);
+                    } else {
+                        BtnSimpanKoding.setEnabled(true);
+                        BtnHapusKoding.setEnabled(false);
+                    }
                 }
             }
         } else {
