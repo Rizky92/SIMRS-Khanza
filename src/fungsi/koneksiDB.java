@@ -8,6 +8,8 @@ package fungsi;
 import AESsecurity.EnkripsiAES;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,7 +36,7 @@ public class koneksiDB {
     private koneksiDB(){}
 
     static {
-        Runtime.getRuntime().addShutdownHook(new Thread(koneksiDB::closeConnection));
+        Runtime.getRuntime().addShutdownHook(new Thread(koneksiDB::releaseConnection));
     }
 
     public static Connection condb() {
@@ -67,18 +69,18 @@ public class koneksiDB {
         return connection;
     }
 
-    private static void initDataSource() throws Exception {
+    private static void initDataSource() throws FileNotFoundException, IOException {
         try (FileInputStream fis =new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
+            dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&tcpKeepAlive=true&connectTimeout=10000&socketTimeout=60000&maintainTimeStats=false&autoReconnect=true");
+            dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
+            dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
+            // dataSource.setCachePreparedStatements(true);
+            dataSource.setUseCompression(true);
         }
-        dataSource.setURL("jdbc:mysql://"+EnkripsiAES.decrypt(prop.getProperty("HOST"))+":"+EnkripsiAES.decrypt(prop.getProperty("PORT"))+"/"+EnkripsiAES.decrypt(prop.getProperty("DATABASE"))+"?zeroDateTimeBehavior=convertToNull&tcpKeepAlive=true&connectTimeout=10000&socketTimeout=60000&maintainTimeStats=false&autoReconnect=true");
-        dataSource.setUser(EnkripsiAES.decrypt(prop.getProperty("USER")));
-        dataSource.setPassword(EnkripsiAES.decrypt(prop.getProperty("PAS")));
-        // dataSource.setCachePreparedStatements(true);
-        dataSource.setUseCompression(true);
     }
 
-    private static boolean isConnectionAlive() {
+    private static boolean isConnectionAlive() throws SQLException {
         try {
             if (connection == null) return false;
             if (connection.isClosed()) return false;
@@ -87,8 +89,11 @@ public class koneksiDB {
                 st.executeQuery("SELECT 1");
             }
             return true;
-        } catch (Exception e) {
-            return false;
+        } catch (SQLException e) {
+            if (e.getMessage().toLowerCase().contains("communications link failure")) {
+                return false;
+            }
+            throw e;
         }
     }
 
@@ -140,15 +145,19 @@ public class koneksiDB {
         }
     }
 
-    public static void closeConnection() {
-        try {
-            if (connection != null &&!connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            Logger.getLogger(koneksiDB.class.getName()).log(Level.SEVERE, null, e);
+    private static void closeConnection() throws SQLException {
+        if (connection != null &&!connection.isClosed()) {
+            connection.close();
         }
         connection = null;
+    }
+
+    public static void releaseConnection() {
+        try {
+            closeConnection();
+        } catch (SQLException ex) {
+            System.getLogger(koneksiDB.class.getName()).log(System.Logger.Level.ERROR, (String) null, ex);
+        }
     }
 
     public static String raw(String propertyName) {

@@ -1540,7 +1540,7 @@ public final class akses {
                 }
             } catch (Exception e) {
                 System.out.println("Notifikasi : "+e);
-                if (e.getMessage().contains("The last packet successfully received from the server")) {
+                if (e.getMessage().contains("The last packet successfully received from the server") || e.getMessage().contains("Communications link failure")) {
                     --retries;
                 } else {
                     retries = 0;
