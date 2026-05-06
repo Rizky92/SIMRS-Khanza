@@ -155,6 +155,10 @@ public final class validasi {
         return new SimpleDateFormat(format).format(tgl);
     }
 
+    public String getTglSmc(ComboBox tahun, ComboBox bulan, ComboBox hari) {
+        return tahun.getSelectedItem().toString() + "-" + bulan.getSelectedItem().toString() + "-" + hari.getSelectedItem().toString();
+    }
+
     public String getTglSmc(Tanggal tgl) {
         return getTglSmc(tgl.getDate(), "yyyy-MM-dd");
     }
@@ -224,6 +228,10 @@ public final class validasi {
 
     public String getTglJamSmc(Tanggal tgl, ComboBox jam, ComboBox menit, ComboBox detik) {
         return getTglSmc(tgl) + " " + getJamSmc(jam, menit, detik);
+    }
+
+    public String getTglJamSmc(ComboBox tahun, ComboBox bulan, ComboBox hari, ComboBox jam, ComboBox menit, ComboBox detik) {
+        return getTglSmc(tahun, bulan, hari) + " " + getJamSmc(jam, menit, detik);
     }
 
     public String getTglJamSmc(Tanggal tgljam) {

@@ -1453,7 +1453,7 @@
         $persalinan = $data['persalinan'] ?? [];
 
         bukaquery2("delete from inacbg_data_klaim_smc where no_sep = '$nomor_sep'");
-        InsertData2('inacbg_data_klaim_smc', sprintf(
+        $insert = sprintf(
             "'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'",
             $nomor_sep, $data['nomor_kartu'], $tgl_masuk.' 00:00:01', $tgl_pulang.' 23:59:59', $data['cara_masuk'], $data['jenis_rawat'], $data['kelas_rawat'],
             $data['adl_sub_acute'], $data['adl_chronic'], $data['icu_indikator'], $data['icu_los'], $data['ventilator_hour'], $data['upgrade_class_ind'],
@@ -1463,7 +1463,9 @@
             $apgar_m5['appearance'] ?? '', $apgar_m5['pulse'] ?? '', $apgar_m5['grimace'] ?? '', $apgar_m5['activity'] ?? '', $apgar_m5['respiration'] ?? '',
             $persalinan['usia_kehamilan'] ?? '', $persalinan['gravida'] ?? '', $persalinan['partus'] ?? '', $persalinan['abortus'] ?? '', $persalinan['onset_kontraksi'] ?? '',
             $data['tarif_poli_eks'], $data['nama_dokter'], $data['kode_tarif'], $data['payor_id'], $data['payor_nm'], '#'
-        ));
+        );
+		// echo $insert;
+        InsertData2('inacbg_data_klaim_smc', $insert);
 
         foreach (($data['tarif_rs'] ?? []) as $tarif => $nilai) {
             InsertData2('inacbg_data_klaim_tarif_smc', sprintf("'%s', '%s', '%s'", $nomor_sep, $tarif, $nilai));
