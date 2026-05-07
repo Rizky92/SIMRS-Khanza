@@ -775,6 +775,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
 
             for (; i < tabMode.getColumnCount(); i++) {
                 TableColumn column = tbDokter.getColumnModel().getColumn(i);
+                column.setHeaderValue("");
                 column.setMinWidth(0);
                 column.setMaxWidth(0);
                 column.setPreferredWidth(0);
@@ -818,11 +819,16 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                             tanggal.put(d++, akhir);
 
                                             while (rs2.next()) {
-                                                while (d < rs2.getInt("d")) tanggal.put(d++, akhir);
+                                                while (d < rs2.getInt("d")) {
+                                                    tanggal.put(d++, akhir);
+                                                }
+
                                                 akhir = rs2.getDouble("stok_akhir");
                                             }
 
-                                            while (d <= ym.lengthOfMonth()) tanggal.put(d++, akhir);
+                                            while (d <= ym.lengthOfMonth()) {
+                                                tanggal.put(d++, akhir);
+                                            }
                                         }
                                     }
                                 }
