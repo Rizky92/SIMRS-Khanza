@@ -1425,7 +1425,7 @@
 
         UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
 
-        SimpanGetDataKlaimSmc($nomor_sep, $msg['response']['data']);
+        // SimpanGetDataKlaimSmc($nomor_sep, $msg['response']['data']);
 
         if ($msg['response']['data']['klaim_status_cd'] == 'final') {
             ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nomor_sep, $norawat);
