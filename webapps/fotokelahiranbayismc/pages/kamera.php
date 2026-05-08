@@ -115,10 +115,10 @@ $alamat       = $data2['alamat'];
         Webcam.set({
             width: 480,
             height: 270,
-            dest_width: 1280,
-            dest_height: 720,
+            dest_width: 1600,
+            dest_height: 900,
             image_format: 'jpeg',
-            jpeg_quality: 90
+            jpeg_quality: 97
         });
 
         Webcam.attach( '#my_camera' );

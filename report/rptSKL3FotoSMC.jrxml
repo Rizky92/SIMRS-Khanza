@@ -11,8 +11,7 @@
 	<parameter name="kontakrs" class="java.lang.String"/>
 	<parameter name="emailrs" class="java.lang.String"/>
 	<parameter name="nomor" class="java.lang.String"/>
-	<parameter name="gambarbayi" class="java.awt.image.BufferedImage
-" isForPrompting="false"/>
+	<parameter name="gambarbayi" class="java.awt.image.BufferedImage " isForPrompting="false"/>
 	<parameter name="dokteranak" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[select pasien.no_rkm_medis,pasien.nm_pasien, pasien.jk,
@@ -134,7 +133,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[Dengan Jenis Kelamin]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="131" y="208" width="420" height="17" uuid="930511f5-2569-4a22-a173-96a9929da4c3"/>
+				<reportElement x="131" y="208" width="193" height="17" uuid="930511f5-2569-4a22-a173-96a9929da4c3"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Arial" size="10" isBold="true" isItalic="false"/>
 					<paragraph lineSpacing="Single"/>
@@ -819,7 +818,7 @@ on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis and pasien_bayi.penolong=pegawai
 				<text><![CDATA[]]></text>
 			</staticText>
 			<image scaleImage="FillFrame">
-				<reportElement x="324" y="225" width="227" height="125" uuid="c69391d2-b154-4a8d-8950-64b0822154e1"/>
+				<reportElement x="324" y="215" width="240" height="135" uuid="c69391d2-b154-4a8d-8950-64b0822154e1"/>
 				<imageExpression><![CDATA[$P{gambarbayi}]]></imageExpression>
 			</image>
 		</band>
