@@ -27,6 +27,9 @@
     <entry key="BOOKINGLANGSUNGREGISTRASI">yes</entry>
     <entry key="ANTRIANPOLIPERPINTU">yes</entry>
     <entry key="VALIDASIPULANGRANAPSEBELUMCLOSEBILLING">yes</entry>
+    <entry key="URLAPILOINCMSC">https://loinc.regenstrief.org/searchapi</entry>
+    <entry key="USERAPILOINCMSC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="PASSAPILOINCMSC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 
     <entry key="WAHOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="WAPORT">nioxtijcpDaKSUiUiP5FAg==</entry>
