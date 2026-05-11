@@ -896,7 +896,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         refSampel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         refSampel.setLocationRelativeTo(internalFrame1);
         refSampel.emptTeks();
-        refSampel.tampil();
         refSampel.setVisible(true);
     }//GEN-LAST:event_BtnCariReferensiSampelActionPerformed
 
@@ -1044,15 +1043,15 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }
 
     private void getData() {
-       if(tbJnsPerawatan.getSelectedRow()!= -1){
-           PeriksaCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           PeriksaSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           IDTemplate.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NamaPemeriksaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-           PeriksaDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-           SampelCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-           SampelSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-           SampelDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
+        if(tbJnsPerawatan.getSelectedRow()!= -1){
+            PeriksaCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+            PeriksaSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+            IDTemplate.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
+            NamaPemeriksaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+            PeriksaDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
+            SampelCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
+            SampelSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
+            SampelDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
         }
     }
 

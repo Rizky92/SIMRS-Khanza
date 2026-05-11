@@ -863,7 +863,6 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
         refPeriksa.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         refPeriksa.setLocationRelativeTo(internalFrame1);
         refPeriksa.emptTeks();
-        refPeriksa.tampil();
         refPeriksa.setVisible(true);
     }//GEN-LAST:event_BtnCariReferensiMappingActionPerformed
 
@@ -877,7 +876,6 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
         refSampel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         refSampel.setLocationRelativeTo(internalFrame1);
         refSampel.emptTeks();
-        refSampel.tampil();
         refSampel.setVisible(true);
     }//GEN-LAST:event_BtnCariReferensiSampelActionPerformed
 

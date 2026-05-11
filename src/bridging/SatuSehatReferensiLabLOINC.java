@@ -4,7 +4,6 @@
  */
 package bridging;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -46,8 +45,6 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
     public SatuSehatReferensiLabLOINC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        this.setLocation(10, 2);
-        setSize(628, 674);
 
         tabMode = new DefaultTableModel(null, new String[] {"Code", "System", "Display"}) {
             @Override
@@ -321,12 +318,13 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
     private void tampil() {
         if (!ceksukses) {
             ceksukses = true;
-            Valid.tabelKosongSmc(tabMode);
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
             LCount.setText("0");
             new SwingWorker<Void, Object[]>() {
                 final String cari = TCari.getText().toLowerCase().trim();
                 final ObjectMapper mapper = new ObjectMapper();
+
                 @Override
                 protected Void doInBackground() throws Exception {
                     File file = new File("./cache/satusehatreferensilabloinc.iyem");
@@ -374,28 +372,54 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
     }
 
     private void tampil2() {
-        try (ResultSet rs = koneksi.createStatement().executeQuery("select * from satu_sehat_referensi_lab_loinc")) {
-            File file = new File("./cache/satusehatreferensilabloinc.iyem");
-            file.createNewFile();
-            String iyem = "";
+        if (new File("./cache/satusehatreferensilabloinc.iyem").isFile()) {
+            if (!ceksukses) {
+                ceksukses = true;
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Valid.tabelKosongSmc(tabMode);
+                LCount.setText("0");
+                new SwingWorker<Void, Object[]>() {
+                    final String cari = TCari.getText().toLowerCase().trim();
+                    final ObjectMapper mapper = new ObjectMapper();
 
-            while (rs.next()) {
-                iyem = iyem + "{\"code\":\"" + rs.getString("code") + "\",\"system\":\"" + rs.getString("system") + "\",\"display\":\"" + rs.getString("display") + "\",\"display_ind\":\"" + rs.getString("display_ind") + "\"},";
-                tabMode.addRow(new Object[] {
-                    rs.getString("code"),
-                    rs.getString("system"),
-                    rs.getString("display"),
-                    rs.getString("display_ind")
-                });
+                    @Override
+                    protected Void doInBackground() throws Exception {
+                        try (FileReader fr = new FileReader("./cache/satusehatreferensilabloinc.iyem")) {
+                            if (cari.isBlank()) {
+                                mapper.readTree(fr).withArray("data").forEach(node -> publish(new Object[] {node.path("code").asText(), node.path("system").asText(), node.path("display").asText()}));
+                            } else {
+                                mapper.readTree(fr).withArray("data").forEach(node -> {
+                                    if (node.path("code").asText().contains(cari) || node.path("display").asText().contains(cari)) {
+                                        publish(new Object[] {node.path("code").asText(), node.path("system").asText(), node.path("display").asText()});
+                                    }
+                                });
+                            }
+                        }
+                        return null;
+                    }
+
+                    @Override
+                    protected void process(List<Object[]> chunks) {
+                        chunks.forEach(tabMode::addRow);
+                    }
+
+                    @Override
+                    protected void done() {
+                        try {
+                            get();
+                        } catch (Exception e) {
+                            System.out.println("Notif : " + e);
+                        }
+                        tabMode.fireTableDataChanged();
+                        LCount.setText(tabMode.getRowCount() + "");
+                        SatuSehatReferensiLabLOINC.this.setCursor(Cursor.getDefaultCursor());
+                        ceksukses = false;
+                    }
+                }.execute();
             }
-            try (FileWriter fw = new FileWriter(file)) {
-                fw.write("{\"data\": [" + iyem.substring(0, iyem.length() - 1) + "]}");
-                fw.flush();
-            }
-        } catch (Exception e) {
-            System.out.println("Notif : " + e);
+        } else {
+            tampil();
         }
-        tampil();
     }
 
     public JTable getTable() {
