@@ -838,14 +838,14 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_NamaPemeriksaanKeyPressed
 
     private void BtnCariReferensiMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiMappingActionPerformed
-        SatuSehatReferensiLabLOINC refPeriksa = new SatuSehatReferensiLabLOINC(null, false);
+        DlgPencarianLOINCSMC refPeriksa = new DlgPencarianLOINCSMC(null, false);
         refPeriksa.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (refPeriksa.getTable().getSelectedRow() != -1) {
                     PeriksaCode.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 0).toString());
-                    PeriksaSystem.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 1).toString());
-                    PeriksaDisplay.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 2).toString());
+                    PeriksaSystem.setText("http://loinc.org");
+                    PeriksaDisplay.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 1).toString());
                 }
                 BtnCariReferensiMapping.requestFocus();
             }

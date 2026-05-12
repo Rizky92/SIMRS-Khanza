@@ -434,7 +434,7 @@ public class koneksiDB {
     public static String URLAPILOINCSMC() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
-            return prop.getProperty("URLAPILOINCSMC", "no").trim();
+            return prop.getProperty("URLAPILOINCSMC", "").trim();
         } catch (Exception e) {
             return "";
         }
