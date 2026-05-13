@@ -458,6 +458,15 @@ public class koneksiDB {
         }
     }
 
+    public static String URLAPISNOWSTORMSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("URLAPISNOWSTORMSMC", "").trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);

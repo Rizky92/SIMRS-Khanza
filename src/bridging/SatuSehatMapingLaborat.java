@@ -872,7 +872,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariReferensiMappingKeyPressed
 
     private void BtnCariReferensiSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiSampelActionPerformed
-        SatuSehatReferensiLabSNOMED refSampel = new SatuSehatReferensiLabSNOMED(null, false);
+        DlgPencarianSnomedSMC refSampel = new DlgPencarianSnomedSMC(null, false);
         refSampel.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {

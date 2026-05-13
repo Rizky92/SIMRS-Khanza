@@ -30,6 +30,7 @@
     <entry key="URLAPILOINCSMC">https://loinc.regenstrief.org/searchapi</entry>
     <entry key="USERAPILOINCSMC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSAPILOINCSMC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="URLAPISNOWSTORMSMC">https://localhost:8080/fhir</entry>
 
     <entry key="WAHOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="WAPORT">nioxtijcpDaKSUiUiP5FAg==</entry>
