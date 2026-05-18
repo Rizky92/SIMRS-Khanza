@@ -361,12 +361,11 @@ public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-            fetchNext = true;
-            final int pageRow = Integer.parseInt(LimitData.getSelectedItem().toString());
+            final String pageRow = LimitData.getSelectedItem().toString();
             final String keyword = TCari.getText().trim();
+            fetchNext = keyword.equals(lastKeyword);
 
-            if (!keyword.equals(lastKeyword)) {
-                fetchNext = false;
+            if (!fetchNext) {
                 Valid.tabelKosongSmc(tabMode);
                 LCount.setText("0 / 0");
             }
@@ -383,21 +382,21 @@ public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
                     headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
                     headers.set("Authorization", "Basic " + Base64.encodeBase64String((USERAPILOINCSMC + ":" + PASSAPILOINCSMC).getBytes()));
 
-                    StringJoiner sj = new StringJoiner("&");
-                    sj.add("rows=" + pageRow);
-                    if (!keyword.isBlank()) {
-                        sj.add("query=" + keyword);
-                    }
-                    if (fetchNext) {
-                        sj.add("offset=" + offset);
-                    }
-                    String url = URLAPILOINCSMC + "/loincs?" + sj.toString();
+                    URIBuilder builder = new URIBuilder(URLAPILOINCSMC + "/loincs");
+                    builder.addParameter("rows", pageRow);
 
-                    System.out.println(url);
-                    JsonNode root = mapper.readTree(http().exchange(url, HttpMethod.GET, new HttpEntity(headers), String.class).getBody());
+                    if (!keyword.isBlank()) {
+                        builder.addParameter("query", keyword + "*");
+                    }
+
+                    if (fetchNext) {
+                        builder.addParameter("offset", String.valueOf(offset));
+                    }
+
+                    System.out.println(builder.toString());
+                    JsonNode root = mapper.readTree(http().exchange(builder.build(), HttpMethod.GET, new HttpEntity(headers), String.class).getBody());
                     totalRecords = root.path("ResponseSummary").path("RecordsFound").asInt(0);
                     lastKeyword = keyword;
-                    lastPageRow = pageRow;
                     System.out.println(root.toString());
 
                     root.withArray("Results").forEach(node -> publish(new Object[] {
