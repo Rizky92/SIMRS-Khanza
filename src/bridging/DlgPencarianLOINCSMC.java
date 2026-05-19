@@ -21,7 +21,6 @@ import java.security.cert.X509Certificate;
 import java.sql.Connection;
 import java.util.Collections;
 import java.util.List;
-import java.util.StringJoiner;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;

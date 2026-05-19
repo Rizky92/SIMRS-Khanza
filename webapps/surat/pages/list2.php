@@ -118,8 +118,12 @@
         }
 
         if ($action=="HAPUS") {
-            unlink($_GET['file_url']);
-            Hapus(" surat_keluar "," no_urut ='".validTeks($_GET['no_urut'])."' ","?act=List2&tgl1=".validTeks($_GET['tgl1'])."&tgl2=".validTeks($_GET['tgl2'])."&ruang=".validTeks($_GET['ruang'])."&sttssurat=".validTeks($_GET['sttssurat'])."&sttsbalas=".validTeks($_GET['sttsbalas'])."&keyword=".($_GET['keyword']));
+            try {
+                unlink($_GET['file_url']);
+                Hapus(" surat_keluar "," no_urut ='".validTeks($_GET['no_urut'])."' ","?act=List2&tgl1=".validTeks($_GET['tgl1'])."&tgl2=".validTeks($_GET['tgl2'])."&ruang=".validTeks($_GET['ruang'])."&sttssurat=".validTeks($_GET['sttssurat'])."&sttsbalas=".validTeks($_GET['sttsbalas'])."&keyword=".($_GET['keyword']));
+            } catch(mysqli_sql_exception $e) {
+                echo "<b style='color:red'>Gagal menghapus: ".$e->getMessage()."</b>";
+            }
         }
     ?>
     </div>

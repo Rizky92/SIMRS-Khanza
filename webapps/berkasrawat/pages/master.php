@@ -16,23 +16,20 @@
                 $hasil = null;
                 $includeKompilasi = true;
                 if (isset($kode["kode"])) {
-                    $kode = validTeks4($kode["kode"], 10);
-                    $_sql2 = "select * from master_berkas_digital where kode = '$kode'";
-                    $hasil = bukaquery2($_sql2);
-                    if ($row = mysqli_fetch_assoc($hasil)) {
-                        $kode = $row['kode'];
-                        $nama = $row['nama'];
-                        $includeKompilasi = filter_var($row['include_kompilasi_berkas'], FILTER_VALIDATE_BOOLEAN);
-                    }
-                } else {
-                    $kode = '';
+                    $kode = validTeks4($kode["kode"],10);
+                }else{
+                    $kode = "";
                 }
+
+                $kode = validTeks4($kode,10);
+
+                $urlDetail = "?act=MasterBerkas&action=TAMBAH";
+
+                echo "<input type=hidden name=kode  value=$kode><input type=hidden name=action value=$action>";
+                echo "<div align='center' class='link'>
+                          <a href=?act=List>| List Berkas |</a>
+                      </div>";
             ?>
-            <input type="hidden" name="kodelama" value="<?= $kode ?>">
-            <input type="hidden" name="action" value="<?= $action ?>">
-            <div align="center" class="link">
-                <span>|</span> <a href="?act=List">List Berkas</a> <span>|</span>
-            </div>
             <div style="width: 100%; height: 13%; overflow: auto;">
                 <table width="100%" align="center">
                     <tr class="head">
@@ -76,19 +73,23 @@
             <?php
                 $BtnSimpan = isset($_POST['BtnSimpan']) ? $_POST['BtnSimpan'] : null;
                 if (isset($BtnSimpan)) {
-                    $kode             = trim($_POST['kode']);
-                    $nama             = trim($_POST['nama']);
-                    $includeKompilasi = trim($_POST['include_kompilasi_berkas']);
-                    $kode             = validTeks4($kode, 10);
-                    $nama             = validTeks4($nama, 100);
-                    $includeKompilasi = validTeks4($includeKompilasi, 1);
-                    $includeKompilasi = (int) filter_var($includeKompilasi, FILTER_VALIDATE_BOOLEAN);
-                    if ($action == 'TAMBAH') {
-                        if (!empty($kode) && !empty($nama)) {
-                            Tambah("master_berkas_digital", "'$kode', '$nama', $includeKompilasi", "Master Berkas Digital");
-                            echo "<meta http-equiv='refresh' content='1;URL=?act=MasterBerkas&action=TAMBAH'>";
-                        } else {
-                            echo 'Semua field harus isi..!!!';
+                    $kode   = trim($_POST['kode']);
+                    $nama   = trim($_POST['nama']);
+                    $kode   = validTeks4($kode,10);
+                    $nama   = validTeks4($nama,100);
+                    if ((!empty($kode))&&(!empty($nama))) {
+                        switch($action) {
+                            case "TAMBAH":
+                                try {
+                                    Tambah3(" master_berkas_digital "," '$kode','$nama' "," Master Berkas Digital ");
+                                    echo "<meta http-equiv='refresh' content='1;URL=$urlDetail'>";
+                                } catch(mysqli_sql_exception $e) {
+                                    if($e->getCode()==1062)
+                                        echo "<b style='color:red'>Kode berkas digital sudah ada..!!!</b>";
+                                    else
+                                        echo "<b style='color:red'>Gagal menyimpan</b>";
+                                }
+                                break;
                         }
                     } else if ($action == 'EDIT') {
                         $kodelama = trim($_POST['kodelama']);
@@ -162,12 +163,21 @@
                 <?php endif; ?>
             </div>
         </form>
-        <table width="99.6%" border="0" align="center" cellpadding="0" cellspacing="0" class="tbl_form">
-            <tr class="head">
-                <td>
-                    <div align="left">Data: <?= $jumlah ?></div>
-                </td>
-            </tr>
-        </table>
+        <?php
+            if ($action=="HAPUS") {
+                try {
+                    Hapus(" master_berkas_digital "," kode ='$kode' ",$urlDetail);
+                } catch(mysqli_sql_exception $e) {
+                    echo "<b style='color:red'>Gagal menghapus</b>";
+                }
+            }
+
+            echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
+                    <tr class='head'>
+                        <td><div align='left'>Data : $jumlah</div></td>
+                    </tr>
+                 </table>");
+
+        ?>
     </div>
 </div>

@@ -35,6 +35,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import kepegawaian.DlgCariPetugas;
@@ -420,7 +421,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         panelGlass9.add(jLabel19);
 
         DTPCari1.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
+        DTPCari1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPCari1.setDisplayFormat("dd-MM-yyyy");
         DTPCari1.setName("DTPCari1"); // NOI18N
         DTPCari1.setOpaque(false);
@@ -434,7 +435,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         panelGlass9.add(jLabel21);
 
         DTPCari2.setForeground(new java.awt.Color(50, 70, 50));
-        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
+        DTPCari2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         DTPCari2.setDisplayFormat("dd-MM-yyyy");
         DTPCari2.setName("DTPCari2"); // NOI18N
         DTPCari2.setOpaque(false);
@@ -528,7 +529,7 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         TPasien.setBounds(326, 10, 295, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "06-02-2026" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "18-05-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -648,9 +649,6 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 InfusKeyPressed(evt);
             }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                InfusKeyReleased(evt);
-            }
         });
         FormInput.add(Infus);
         Infus.setBounds(71, 90, 50, 23);
@@ -660,9 +658,6 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         Minum.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 MinumKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                MinumKeyReleased(evt);
             }
         });
         FormInput.add(Minum);
@@ -683,9 +678,6 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         Tranfusi.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TranfusiKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                TranfusiKeyReleased(evt);
             }
         });
         FormInput.add(Tranfusi);
@@ -709,9 +701,6 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 NGTKeyPressed(evt);
             }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                NGTKeyReleased(evt);
-            }
         });
         FormInput.add(NGT);
         NGT.setBounds(790, 90, 50, 23);
@@ -721,9 +710,6 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         Drain.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 DrainKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                DrainKeyReleased(evt);
             }
         });
         FormInput.add(Drain);
@@ -739,9 +725,6 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         Urine.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 UrineKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                UrineKeyReleased(evt);
             }
         });
         FormInput.add(Urine);
@@ -775,9 +758,6 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         IWL.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 IWLKeyPressed(evt);
-            }
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                IWLKeyReleased(evt);
             }
         });
         FormInput.add(IWL);
@@ -1237,35 +1217,21 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         Valid.pindah(evt,Keseimbangan,BtnSimpan);
     }//GEN-LAST:event_KeteranganKeyPressed
 
-    private void InfusKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_InfusKeyReleased
-        isHitungKeseimbangan();
-    }//GEN-LAST:event_InfusKeyReleased
-
-    private void TranfusiKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TranfusiKeyReleased
-        isHitungKeseimbangan();
-    }//GEN-LAST:event_TranfusiKeyReleased
-
-    private void MinumKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_MinumKeyReleased
-        isHitungKeseimbangan();
-    }//GEN-LAST:event_MinumKeyReleased
-
-    private void UrineKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UrineKeyReleased
-        isHitungKeseimbangan();
-    }//GEN-LAST:event_UrineKeyReleased
-
-    private void DrainKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DrainKeyReleased
-        isHitungKeseimbangan();
-    }//GEN-LAST:event_DrainKeyReleased
-
-    private void NGTKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NGTKeyReleased
-        isHitungKeseimbangan();
-    }//GEN-LAST:event_NGTKeyReleased
-
-    private void IWLKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_IWLKeyReleased
-        isHitungKeseimbangan();
-    }//GEN-LAST:event_IWLKeyReleased
-
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        DocumentListener keseimbangan = new DocumentListener() {
+            @Override public void insertUpdate(DocumentEvent e)  { hitungKeseimbangan(); }
+            @Override public void removeUpdate(DocumentEvent e)  { hitungKeseimbangan(); }
+            @Override public void changedUpdate(DocumentEvent e) { hitungKeseimbangan(); }
+        };
+
+        Infus.getDocument().addDocumentListener(keseimbangan);
+        Tranfusi.getDocument().addDocumentListener(keseimbangan);
+        Minum.getDocument().addDocumentListener(keseimbangan);
+        Urine.getDocument().addDocumentListener(keseimbangan);
+        Drain.getDocument().addDocumentListener(keseimbangan);
+        NGT.getDocument().addDocumentListener(keseimbangan);
+        IWL.getDocument().addDocumentListener(keseimbangan);
+
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
@@ -1679,23 +1645,26 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         }
     }
 
-    private void isHitungKeseimbangan(){
+    private void hitungKeseimbangan() {
         try {
-            double infus = Infus.getText().isBlank() ? 0 : Valid.SetAngka(Infus.getText()),
-                   tranfusi = Tranfusi.getText().isBlank() ? 0 : Valid.SetAngka(Tranfusi.getText()),
-                   minum = Minum.getText().isBlank() ? 0 : Valid.SetAngka(Minum.getText()),
-                   urine = Urine.getText().isBlank() ? 0 : Valid.SetAngka(Urine.getText()),
-                   drain = Drain.getText().isBlank() ? 0 : Valid.SetAngka(Drain.getText()),
-                   ngt = NGT.getText().isBlank() ? 0 : Valid.SetAngka(NGT.getText()),
-                   iwl = IWL.getText().isBlank() ? 0 : Valid.SetAngka(IWL.getText());
+            double infus = Infus.getText().isEmpty()?0:Double.parseDouble(Infus.getText());
+            double tranfusi =Tranfusi.getText().isEmpty()?0:Double.parseDouble(Tranfusi.getText());
+            double minum = Minum.getText().isEmpty()?0:Double.parseDouble(Minum.getText());
+            double urine = Urine.getText().isEmpty()?0:Double.parseDouble(Urine.getText());
+            double drain = Drain.getText().isEmpty()?0:Double.parseDouble(Drain.getText());
+            double ngt = NGT.getText().isEmpty()?0:Double.parseDouble(NGT.getText());
+            double iwl = IWL.getText().isEmpty()?0:Double.parseDouble(IWL.getText());
 
-            Keseimbangan.setText(Valid.SetAngka5(
-                (infus + tranfusi + minum) - (urine + drain + ngt + iwl)
-            ));
-        } catch (Exception e) {
+            double totalInput = infus + tranfusi + minum;
+            double totalOutput = urine + drain + ngt + iwl;
+            double hasil = totalInput - totalOutput;
+
+            Keseimbangan.setText(String.valueOf(hasil));
+        } catch (NumberFormatException e) {
             Keseimbangan.setText("0");
         }
     }
+
     private void runBackground(Runnable task) {
         if (ceksukses) return;
         if (executor.isShutdown() || executor.isTerminated()) return;
@@ -1727,5 +1696,4 @@ public final class RMDataCatatanKeseimbanganCairan extends javax.swing.JDialog {
         executor.shutdownNow();
         super.dispose();
     }
-
 }
