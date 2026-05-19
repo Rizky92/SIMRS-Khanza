@@ -4,9 +4,8 @@
  */
 package bridging;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
@@ -14,26 +13,49 @@ import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
-import java.io.File;
-import java.io.FileWriter;
+import java.security.KeyManagementException;
+import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.cert.CertificateException;
+import java.security.cert.X509Certificate;
 import java.sql.Connection;
-import java.sql.ResultSet;
+import java.util.Collections;
 import java.util.List;
+import java.util.StringJoiner;
+import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
+import javax.net.ssl.X509TrustManager;
 import javax.swing.JTable;
 import javax.swing.SwingWorker;
-import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import org.apache.commons.codec.binary.Base64;
+import org.apache.http.client.utils.URIBuilder;
+import org.apache.http.conn.scheme.Scheme;
+import org.apache.http.conn.ssl.SSLSocketFactory;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 /**
  *
  * @author dosen
  */
-public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
+public final class DlgPencarianLOINCSMC extends javax.swing.JDialog {
     private final DefaultTableModel tabMode;
     private final Connection koneksi = koneksiDB.condb();
     private final validasi Valid = new validasi();
+    private final String URLAPILOINCSMC = koneksiDB.URLAPILOINCSMC(),
+                         USERAPILOINCSMC = koneksiDB.USERAPILOINCSMC(),
+                         PASSAPILOINCSMC = koneksiDB.PASSAPILOINCSMC();
     private volatile boolean ceksukses = false;
+    private boolean fetchNext = true;
+    private String lastKeyword = "";
+    private int lastPageRow = 0;
+    private int page = 1;
 
     /**
      * Creates new form DlgKamar
@@ -41,11 +63,11 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
      * @param parent
      * @param modal
      */
-    public SatuSehatReferensiLabLOINC(java.awt.Frame parent, boolean modal) {
+    public DlgPencarianLOINCSMC(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
 
-        tabMode = new DefaultTableModel(null, new String[] {"Code", "System", "Display"}) {
+        tabMode = new DefaultTableModel(null, new String[] {"Code", "Display", "Component", "Property", "Timing", "System", "Scale", "Method"}) {
             @Override
             public boolean isCellEditable(int rowIndex, int colIndex) {
                 return false;
@@ -63,9 +85,19 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
             if (i == 0) {
                 column.setPreferredWidth(50);
             } else if (i == 1) {
-                column.setPreferredWidth(170);
+                column.setPreferredWidth(400);
             } else if (i == 2) {
-                column.setPreferredWidth(500);
+                column.setPreferredWidth(200);
+            } else if (i == 3) {
+                column.setPreferredWidth(70);
+            } else if (i == 4) {
+                column.setPreferredWidth(60);
+            } else if (i == 5) {
+                column.setPreferredWidth(150);
+            } else if (i == 6) {
+                column.setPreferredWidth(60);
+            } else if (i == 7) {
+                column.setPreferredWidth(100);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -83,6 +115,8 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
         Scroll = new widget.ScrollPane();
         tbKamar = new widget.Table();
         panelGlass6 = new widget.panelisi();
+        jLabel6 = new widget.Label();
+        LimitData = new widget.ComboBox();
         jLabel16 = new widget.Label();
         TCari = new widget.TextBox();
         BtnCari = new widget.Button();
@@ -105,10 +139,10 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
             }
         });
 
-        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Satu Sehat Referensi Laboratorium LOINC ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Referensi LOINC via API ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame1.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
         internalFrame1.setName("internalFrame1"); // NOI18N
-        internalFrame1.setLayout(new java.awt.BorderLayout(1, 1));
+        internalFrame1.setLayout(new java.awt.BorderLayout());
 
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
@@ -122,13 +156,23 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
         panelGlass6.setPreferredSize(new java.awt.Dimension(44, 54));
         panelGlass6.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        jLabel16.setText("Keyword :");
+        jLabel6.setText("Limit Data :");
+        jLabel6.setName("jLabel6"); // NOI18N
+        jLabel6.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass6.add(jLabel6);
+
+        LimitData.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "50", "100", "200", "300" }));
+        LimitData.setName("LimitData"); // NOI18N
+        LimitData.setPreferredSize(new java.awt.Dimension(70, 23));
+        panelGlass6.add(LimitData);
+
+        jLabel16.setText("Key word :");
         jLabel16.setName("jLabel16"); // NOI18N
         jLabel16.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass6.add(jLabel16);
 
         TCari.setName("TCari"); // NOI18N
-        TCari.setPreferredSize(new java.awt.Dimension(330, 23));
+        TCari.setPreferredSize(new java.awt.Dimension(250, 23));
         TCari.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 TCariKeyPressed(evt);
@@ -176,9 +220,9 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
         panelGlass6.add(jLabel8);
 
         LCount.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        LCount.setText("0");
+        LCount.setText("0 / 0");
         LCount.setName("LCount"); // NOI18N
-        LCount.setPreferredSize(new java.awt.Dimension(40, 23));
+        LCount.setPreferredSize(new java.awt.Dimension(70, 23));
         panelGlass6.add(LCount);
 
         BtnKeluar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
@@ -225,7 +269,7 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        tampil2();
+        tampilAPI();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -240,7 +284,7 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        tampil();
+        tampilAPI();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
@@ -252,12 +296,7 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        if (Valid.umurcacheSmc("./cache/satusehatreferensilabloinc.iyem", 30)) {
-            tampil();
-        } else {
-            tampil2();
-        }
-
+        /*
         if (koneksiDB.CARICEPAT().equals("aktif")) {
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
                 @Override
@@ -282,6 +321,7 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
                 }
             });
         }
+        */
     }//GEN-LAST:event_formWindowOpened
 
     /**
@@ -289,7 +329,7 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
      */
     public static void main(String args[]) {
         java.awt.EventQueue.invokeLater(() -> {
-            SatuSehatReferensiLabLOINC dialog = new SatuSehatReferensiLabLOINC(new javax.swing.JFrame(), true);
+            DlgPencarianLOINCSMC dialog = new DlgPencarianLOINCSMC(new javax.swing.JFrame(), true);
             dialog.addWindowListener(new java.awt.event.WindowAdapter() {
                 @Override
                 public void windowClosing(java.awt.event.WindowEvent e) {
@@ -305,48 +345,67 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
     private widget.Button BtnCari;
     private widget.Button BtnKeluar;
     private widget.Label LCount;
+    private widget.ComboBox LimitData;
     private widget.ScrollPane Scroll;
     private widget.TextBox TCari;
     private widget.InternalFrame internalFrame1;
     private widget.Label jLabel16;
+    private widget.Label jLabel6;
     private widget.Label jLabel8;
     private widget.panelisi panelGlass6;
     private widget.Table tbKamar;
     // End of variables declaration//GEN-END:variables
 
-    private void tampil() {
+    private void tampilAPI() {
         if (!ceksukses) {
             ceksukses = true;
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-            Valid.tabelKosongSmc(tabMode);
-            LCount.setText("0");
+
+            final String pageRow = LimitData.getSelectedItem().toString();
+            final String keyword = TCari.getText().trim();
+            fetchNext = keyword.equals(lastKeyword);
+
+            if (!fetchNext) {
+                Valid.tabelKosongSmc(tabMode);
+                LCount.setText("0 / 0");
+            }
+
+            final int offset = tabMode.getRowCount();
+
             new SwingWorker<Void, Object[]>() {
-                final String cari = TCari.getText().toLowerCase().trim();
-                final ObjectMapper mapper = new ObjectMapper();
+                private int totalRecords = 0;
+                private final ObjectMapper mapper = new ObjectMapper();
 
                 @Override
                 protected Void doInBackground() throws Exception {
-                    File file = new File("./cache/satusehatreferensilabloinc.iyem");
-                    file.createNewFile();
-                    try (FileWriter fw = new FileWriter(file); ResultSet rs = koneksi.createStatement().executeQuery("select s.code, s.system, s.display from satu_sehat_referensi_lab_loinc s")) {
-                        ArrayNode array = mapper.createArrayNode();
-                        while (rs.next()) {
-                            ObjectNode node = mapper.createObjectNode();
-                            node.put("code", rs.getString("code"));
-                            node.put("system", rs.getString("system"));
-                            node.put("display", rs.getString("display"));
-                            array.add(node);
-                            if (cari.isBlank()) {
-                                publish(new Object[] {rs.getString("code"), rs.getString("system"), rs.getString("display")});
-                            } else {
-                                if (rs.getString("code").toLowerCase().contains(cari) || rs.getString("display").toLowerCase().contains(cari)) {
-                                    publish(new Object[] {rs.getString("code"), rs.getString("system"), rs.getString("display")});
-                                }
-                            }
-                        }
-                        fw.write(mapper.writeValueAsString(mapper.createObjectNode().set("data", array)));
-                        return null;
+                    HttpHeaders headers = new HttpHeaders();
+                    headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+                    headers.set("Authorization", "Basic " + Base64.encodeBase64String((USERAPILOINCSMC + ":" + PASSAPILOINCSMC).getBytes()));
+
+                    URIBuilder builder = new URIBuilder(URLAPILOINCSMC + "/loincs");
+                    builder.addParameter("rows", pageRow);
+
+                    if (!keyword.isBlank()) {
+                        builder.addParameter("query", keyword + "*");
                     }
+
+                    if (fetchNext) {
+                        builder.addParameter("offset", String.valueOf(offset));
+                    }
+
+                    System.out.println(builder.toString());
+                    JsonNode root = mapper.readTree(http().exchange(builder.build(), HttpMethod.GET, new HttpEntity(headers), String.class).getBody());
+                    totalRecords = root.path("ResponseSummary").path("RecordsFound").asInt(0);
+                    lastKeyword = keyword;
+                    System.out.println(root.toString());
+
+                    root.withArray("Results").forEach(node -> publish(new Object[] {
+                        node.path("LOINC_NUM").asText(""), node.path("LONG_COMMON_NAME").asText(""), node.path("COMPONENT").asText(""),
+                        node.path("PROPERTY").asText(""), node.path("TIME_ASPCT").asText(""), node.path("SYSTEM").asText(""),
+                        node.path("SCALE_TYP").asText(""), node.path("METHOD_TYP").asText(""),
+                    }));
+
+                    return null;
                 }
 
                 @Override
@@ -362,62 +421,11 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
                         System.out.println("Notif : " + e);
                     }
                     tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + "");
-                    SatuSehatReferensiLabLOINC.this.setCursor(Cursor.getDefaultCursor());
+                    LCount.setText(tabMode.getRowCount() + " / " + totalRecords);
+                    DlgPencarianLOINCSMC.this.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
             }.execute();
-        }
-    }
-
-    private void tampil2() {
-        if (new File("./cache/satusehatreferensilabloinc.iyem").isFile()) {
-            if (!ceksukses) {
-                ceksukses = true;
-                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Valid.tabelKosongSmc(tabMode);
-                LCount.setText("0");
-                new SwingWorker<Void, Object[]>() {
-                    final String cari = TCari.getText().toLowerCase().trim();
-                    final ObjectMapper mapper = new ObjectMapper();
-
-                    @Override
-                    protected Void doInBackground() throws Exception {
-                        try (FileReader fr = new FileReader("./cache/satusehatreferensilabloinc.iyem")) {
-                            if (cari.isBlank()) {
-                                mapper.readTree(fr).withArray("data").forEach(node -> publish(new Object[] {node.path("code").asText(), node.path("system").asText(), node.path("display").asText()}));
-                            } else {
-                                mapper.readTree(fr).withArray("data").forEach(node -> {
-                                    if (node.path("code").asText().contains(cari) || node.path("display").asText().contains(cari)) {
-                                        publish(new Object[] {node.path("code").asText(), node.path("system").asText(), node.path("display").asText()});
-                                    }
-                                });
-                            }
-                        }
-                        return null;
-                    }
-
-                    @Override
-                    protected void process(List<Object[]> chunks) {
-                        chunks.forEach(tabMode::addRow);
-                    }
-
-                    @Override
-                    protected void done() {
-                        try {
-                            get();
-                        } catch (Exception e) {
-                            System.out.println("Notif : " + e);
-                        }
-                        tabMode.fireTableDataChanged();
-                        LCount.setText(tabMode.getRowCount() + "");
-                        SatuSehatReferensiLabLOINC.this.setCursor(Cursor.getDefaultCursor());
-                        ceksukses = false;
-                    }
-                }.execute();
-            }
-        } else {
-            tampil();
         }
     }
 
@@ -427,5 +435,30 @@ public final class SatuSehatReferensiLabLOINC extends javax.swing.JDialog {
 
     public void emptTeks() {
         TCari.setText("");
+    }
+
+    private RestTemplate http() throws NoSuchAlgorithmException, KeyManagementException {
+        SSLContext sslContext = SSLContext.getInstance("TLSv1.2");
+        TrustManager[] trustManagers = {
+            new X509TrustManager() {
+                public X509Certificate[] getAcceptedIssuers() {
+                    return null;
+                }
+
+                public void checkServerTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                }
+
+                public void checkClientTrusted(X509Certificate[] arg0, String arg1) throws CertificateException {
+                }
+            }
+        };
+
+        sslContext.init(null, trustManagers, new SecureRandom());
+        SSLSocketFactory sslFactory = new SSLSocketFactory(sslContext, SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER);
+        Scheme scheme = new Scheme("https", 443, sslFactory);
+        HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
+
+        factory.getHttpClient().getConnectionManager().getSchemeRegistry().register(scheme);
+        return new RestTemplate(factory);
     }
 }

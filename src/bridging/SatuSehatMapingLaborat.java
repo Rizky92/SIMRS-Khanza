@@ -20,6 +20,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -27,6 +28,7 @@ import java.util.concurrent.RejectedExecutionException;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingUtilities;
+import javax.swing.SwingWorker;
 import javax.swing.event.DocumentEvent;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
@@ -57,7 +59,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         setSize(628,674);
 
         tabMode=new DefaultTableModel(null,new Object[]{
-                "Periksa Code","Pemeriksaan System","ID Detail","Detail Pemeriksaan","Pemeriksaan Display",
+                "Periksa Code","Pemeriksaan System","ID Detail","Detail Pemeriksaan","Nama Tindakan","Pemeriksaan Display",
                 "Sampel Code","Sampel System","Sampel Display"
             }){
              @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
@@ -67,7 +69,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         tbJnsPerawatan.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbJnsPerawatan.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (i = 0; i < 8; i++) {
+        for (i = 0; i < tabMode.getColumnCount(); i++) {
             TableColumn column = tbJnsPerawatan.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(80);
@@ -80,10 +82,12 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             }else if(i==4){
                 column.setPreferredWidth(200);
             }else if(i==5){
-                column.setPreferredWidth(85);
-            }else if(i==6){
                 column.setPreferredWidth(200);
+            }else if(i==6){
+                column.setPreferredWidth(85);
             }else if(i==7){
+                column.setPreferredWidth(200);
+            }else if(i==8){
                 column.setPreferredWidth(200);
             }
         }
@@ -621,14 +625,15 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }else if(SampelDisplay.getText().trim().equals("")){
             Valid.textKosong(SampelDisplay,"Sampel Display");
         }else{
-            if(Sequel.menyimpantf("satu_sehat_mapping_lab","?,?,?,?,?,?,?","Mapping Tindakan Radiologi",7,new String[]{
-                IDTemplate.getText(),PeriksaCode.getText(),PeriksaSystem.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText()
-            })==true){
-                tabMode.addRow(new Object[]{
-                    PeriksaCode.getText(),PeriksaSystem.getText(),IDTemplate.getText(),NamaPemeriksaan.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText()
+            if (Sequel.menyimpantfSmc("satu_sehat_mapping_lab", "", IDTemplate.getText(), PeriksaCode.getText(), PeriksaSystem.getText(),
+                PeriksaDisplay.getText(), SampelCode.getText(), SampelSystem.getText(), SampelDisplay.getText()
+            )) {
+                tabMode.addRow(new Object[] {
+                    PeriksaCode.getText(), PeriksaSystem.getText(), IDTemplate.getText(), NamaPemeriksaan.getText(), NamaTindakan.getText(),
+                    PeriksaDisplay.getText(), SampelCode.getText(), SampelSystem.getText(), SampelDisplay.getText()
                 });
                 emptTeks();
-                LCount.setText(""+tabMode.getRowCount());
+                LCount.setText("" + tabMode.getRowCount());
             }
         }
     }//GEN-LAST:event_BtnSimpanActionPerformed
@@ -650,10 +655,18 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnBatalKeyPressed
 
     private void BtnHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnHapusActionPerformed
-        if(Valid.hapusTabletf(tabMode,IDTemplate,"satu_sehat_mapping_lab","id_template")==true){
-            tabMode.removeRow(tbJnsPerawatan.getSelectedRow());
-            emptTeks();
-            LCount.setText(""+tabMode.getRowCount());
+        if (tabMode.getRowCount() > 0) {
+            if (tbJnsPerawatan.getSelectedRow() >= 0) {
+                if (Sequel.menghapustfSmc("satu_sehat_mapping_lab", "id_template = ?", tabMode.getValueAt(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()), 0).toString())) {
+                    tabMode.removeRow(tbJnsPerawatan.convertRowIndexToModel(tbJnsPerawatan.getSelectedRow()));
+                    emptTeks();
+                    LCount.setText("" + tabMode.getRowCount());
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data yang mau dihapus..!!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Maaf, tabel masih kosong..!!");
         }
     }//GEN-LAST:event_BtnHapusActionPerformed
 
@@ -689,10 +702,11 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
                     tabMode.setValueAt(PeriksaSystem.getText(),tbJnsPerawatan.getSelectedRow(),1);
                     tabMode.setValueAt(IDTemplate.getText(),tbJnsPerawatan.getSelectedRow(),2);
                     tabMode.setValueAt(NamaPemeriksaan.getText(),tbJnsPerawatan.getSelectedRow(),3);
-                    tabMode.setValueAt(PeriksaDisplay.getText(),tbJnsPerawatan.getSelectedRow(),4);
-                    tabMode.setValueAt(SampelCode.getText(),tbJnsPerawatan.getSelectedRow(),5);
-                    tabMode.setValueAt(SampelSystem.getText(),tbJnsPerawatan.getSelectedRow(),6);
-                    tabMode.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.getSelectedRow(),7);
+                    tabMode.setValueAt(NamaTindakan.getText(), tbJnsPerawatan.getSelectedRow(), 4);
+                    tabMode.setValueAt(PeriksaDisplay.getText(),tbJnsPerawatan.getSelectedRow(),5);
+                    tabMode.setValueAt(SampelCode.getText(),tbJnsPerawatan.getSelectedRow(),6);
+                    tabMode.setValueAt(SampelSystem.getText(),tbJnsPerawatan.getSelectedRow(),7);
+                    tabMode.setValueAt(SampelDisplay.getText(),tbJnsPerawatan.getSelectedRow(),8);
                     emptTeks();
                 }
             }
@@ -756,7 +770,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-        runBackground(()->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -769,13 +783,13 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
         TCari.setText("");
-        runBackground(()->tampil());
+        tampilSmc();
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
             TCari.setText("");
-            runBackground(()->tampil());
+            tampilSmc();
         }else{
             Valid.pindah(evt, BtnPrint, BtnKeluar);
         }
@@ -838,14 +852,14 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_NamaPemeriksaanKeyPressed
 
     private void BtnCariReferensiMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiMappingActionPerformed
-        SatuSehatReferensiLabLOINC refPeriksa = new SatuSehatReferensiLabLOINC(null, false);
+        DlgPencarianLOINCSMC refPeriksa = new DlgPencarianLOINCSMC(null, false);
         refPeriksa.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
                 if (refPeriksa.getTable().getSelectedRow() != -1) {
                     PeriksaCode.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 0).toString());
-                    PeriksaSystem.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 1).toString());
-                    PeriksaDisplay.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 2).toString());
+                    PeriksaSystem.setText("http://loinc.org");
+                    PeriksaDisplay.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 1).toString());
                 }
                 BtnCariReferensiMapping.requestFocus();
             }
@@ -872,7 +886,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariReferensiMappingKeyPressed
 
     private void BtnCariReferensiSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiSampelActionPerformed
-        SatuSehatReferensiLabSNOMED refSampel = new SatuSehatReferensiLabSNOMED(null, false);
+        DlgPencarianSnomedSMC refSampel = new DlgPencarianSnomedSMC(null, false);
         refSampel.addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosed(WindowEvent e) {
@@ -896,7 +910,6 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         refSampel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         refSampel.setLocationRelativeTo(internalFrame1);
         refSampel.emptTeks();
-        refSampel.tampil();
         refSampel.setVisible(true);
     }//GEN-LAST:event_BtnCariReferensiSampelActionPerformed
 
@@ -907,24 +920,25 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariReferensiSampelKeyPressed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        tampilSmc();
         if(koneksiDB.CARICEPAT().equals("aktif")){
             TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener(){
                 @Override
                 public void insertUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                       runBackground(()->tampil());
+                       tampilSmc();
                     }
                 }
                 @Override
                 public void removeUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                       runBackground(()->tampil());
+                       tampilSmc();
                     }
                 }
                 @Override
                 public void changedUpdate(DocumentEvent e) {
                     if(TCari.getText().length()>2){
-                       runBackground(()->tampil());
+                       tampilSmc();
                     }
                 }
             });
@@ -990,6 +1004,7 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
     private widget.Table tbJnsPerawatan;
     // End of variables declaration//GEN-END:variables
 
+    /*
     private void tampil() {
         Valid.tabelKosong(tabMode);
         try{
@@ -1028,31 +1043,35 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
         }
         LCount.setText(""+tabMode.getRowCount());
     }
+    */
 
     public void emptTeks() {
         PeriksaCode.setText("");
         PeriksaSystem.setText("");
         IDTemplate.setText("");
         NamaPemeriksaan.setText("");
+        NamaTindakan.setText("");
         PeriksaDisplay.setText("");
         SampelCode.setText("");
         SampelSystem.setText("");
         SampelDisplay.setText("");
         ChkInput.setSelected(true);
         isForm();
+        tbJnsPerawatan.clearSelection();
         PeriksaCode.requestFocus();
     }
 
     private void getData() {
-       if(tbJnsPerawatan.getSelectedRow()!= -1){
-           PeriksaCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           PeriksaSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           IDTemplate.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NamaPemeriksaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
-           PeriksaDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
-           SampelCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
-           SampelSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
-           SampelDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
+        if(tbJnsPerawatan.getSelectedRow()!= -1){
+            PeriksaCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+            PeriksaSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+            IDTemplate.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
+            NamaPemeriksaan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+            NamaTindakan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),4).toString());
+            PeriksaDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),5).toString());
+            SampelCode.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),6).toString());
+            SampelSystem.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),7).toString());
+            SampelDisplay.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),8).toString());
         }
     }
 
@@ -1078,6 +1097,69 @@ public final class SatuSehatMapingLaborat extends javax.swing.JDialog {
             PanelInput.setPreferredSize(new Dimension(WIDTH, 20));
             FormInput.setVisible(false);
             ChkInput.setVisible(true);
+        }
+    }
+
+    private void tampilSmc() {
+        if (!ceksukses) {
+            ceksukses = true;
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            Valid.tabelKosongSmc(tabMode);
+            LCount.setText("0");
+            new SwingWorker<Void, Object[]>() {
+                final String cari = TCari.getText().trim();
+
+                @Override
+                protected Void doInBackground() throws Exception {
+                    try (PreparedStatement ps = koneksi.prepareStatement(
+                        "select satu_sehat_mapping_lab.id_template, template_laboratorium.Pemeriksaan, jns_perawatan_lab.nm_perawatan, satu_sehat_mapping_lab.code, satu_sehat_mapping_lab.system, " +
+                        "satu_sehat_mapping_lab.display, satu_sehat_mapping_lab.sampel_code, satu_sehat_mapping_lab.sampel_system, satu_sehat_mapping_lab.sampel_display from satu_sehat_mapping_lab " +
+                        "inner join template_laboratorium on satu_sehat_mapping_lab.id_template = template_laboratorium.id_template inner join jns_perawatan_lab on " +
+                        "template_laboratorium.kd_jenis_prw = jns_perawatan_lab.kd_jenis_prw " + (cari.isBlank() ? "" : "where satu_sehat_mapping_lab.id_template like ? " +
+                        "or satu_sehat_mapping_lab.code like ? or satu_sehat_mapping_lab.display like ? or satu_sehat_mapping_lab.sampel_code like ? or satu_sehat_mapping_lab.sampel_display like ? or " +
+                        "template_laboratorium.Pemeriksaan like ? or jns_perawatan_lab.nm_perawatan like ? ") + "order by satu_sehat_mapping_lab.code, satu_sehat_mapping_lab.id_template"
+                    )) {
+                        int p = 0;
+                        if (!cari.isBlank()) {
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                            ps.setString(++p, "%" + cari + "%");
+                        }
+                        try (ResultSet rs = ps.executeQuery()) {
+                            while (rs.next()) {
+                                publish(new Object[] {
+                                    rs.getString("code"), rs.getString("system"), rs.getString("id_template"), rs.getString("Pemeriksaan"), rs.getString("nm_perawatan"),
+                                    rs.getString("display"), rs.getString("sampel_code"), rs.getString("sampel_system"), rs.getString("sampel_display")
+                                });
+                            }
+                        }
+                    }
+
+                    return null;
+                }
+
+                @Override
+                protected void process(List<Object[]> chunks) {
+                    chunks.forEach(tabMode::addRow);
+                }
+
+                @Override
+                protected void done() {
+                    try {
+                        get();
+                    } catch (Exception e) {
+                        System.out.println("Notif : " + e);
+                    }
+                    tabMode.fireTableDataChanged();
+                    LCount.setText(tabMode.getRowCount() + "");
+                    SatuSehatMapingLaborat.this.setCursor(Cursor.getDefaultCursor());
+                    ceksukses = false;
+                }
+            }.execute();
         }
     }
 

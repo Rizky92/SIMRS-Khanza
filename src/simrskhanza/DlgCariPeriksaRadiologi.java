@@ -373,11 +373,9 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         Jk.setName("Jk"); // NOI18N
 
         Umur.setEditable(false);
-        Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
 
         Alamat.setEditable(false);
-        Alamat.setHighlighter(null);
         Alamat.setName("Alamat"); // NOI18N
 
         NoRM.setName("NoRM"); // NOI18N
@@ -433,7 +431,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         KodePj.setBounds(95, 12, 113, 23);
 
         NmDokterPj.setEditable(false);
-        NmDokterPj.setHighlighter(null);
         NmDokterPj.setName("NmDokterPj"); // NOI18N
         FormInput.add(NmDokterPj);
         NmDokterPj.setBounds(210, 12, 208, 23);
@@ -463,7 +460,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         btnDokter.setBounds(420, 42, 28, 23);
 
         NmPerujuk.setEditable(false);
-        NmPerujuk.setHighlighter(null);
         NmPerujuk.setName("NmPerujuk"); // NOI18N
         FormInput.add(NmPerujuk);
         NmPerujuk.setBounds(210, 42, 208, 23);
@@ -518,7 +514,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         WindowGantiDokterParamedis.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
         Petugas.setEditable(false);
-        Petugas.setHighlighter(null);
         Petugas.setName("Petugas"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -967,7 +962,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         panelisi8.setLayout(null);
 
         InformasiTambahan.setEditable(false);
-        InformasiTambahan.setHighlighter(null);
         InformasiTambahan.setName("InformasiTambahan"); // NOI18N
         panelisi8.add(InformasiTambahan);
         InformasiTambahan.setBounds(124, 10, 220, 23);
@@ -983,7 +977,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         jLabel6.setBounds(0, 40, 120, 23);
 
         DiagnosisKlinis.setEditable(false);
-        DiagnosisKlinis.setHighlighter(null);
         DiagnosisKlinis.setName("DiagnosisKlinis"); // NOI18N
         panelisi8.add(DiagnosisKlinis);
         DiagnosisKlinis.setBounds(124, 40, 220, 23);
@@ -1784,11 +1777,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(Kd2.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu...!!!!");
             }else{
-                if (akses.getpermintaan_radiologi() && !Sequel.CariPetugas(akses.getkode()).isBlank()) {
-                    Sequel.mengupdateSmc("permintaan_radiologi", "diagnosa_klinis = ?", "no_rawat = ? and tgl_hasil = ? and jam_hasil = ?",
+                if (akses.getpermintaan_radiologi() && !Sequel.CariPetugas(akses.getkode()).isBlank() && !DiagnosisKlinis.getText().isBlank()) {
+                    if (!Sequel.mengupdatetfSmc("permintaan_radiologi", "diagnosa_klinis = ?", "no_rawat = ? and tgl_hasil = ? and jam_hasil = ?",
                         DiagnosisKlinis.getText().trim(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString(),
                         tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
-                    );
+                    )) {
+                        JOptionPane.showMessageDialog(null, "Tidak dapat mengubah diagnosa klinis,\nKemungkinan permintaan radiologi tidak ada..!!");
+                    }
                 }
                 if(HasilPeriksa.getText().equals("")){
                     Sequel.queryu2("delete from hasil_radiologi where no_rawat=? and tgl_periksa=? and jam=?",3,new String[]{
@@ -2209,6 +2204,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     isPhoto();
                     panggilPhoto();
                     tampilOrthanc();
+                    DiagnosisKlinis.setEditable(Sequel.cariExistsSmc(
+                        "select * from permintaan_radiologi where permintaan_radiologi.no_rawat = ? and permintaan_radiologi.tgl_hasil = ? and permintaan_radiologi.jam_hasil = ?",
+                        tbDokter.getValueAt(row, 0).toString(), tbDokter.getValueAt(row, 3).toString(), tbDokter.getValueAt(row, 4).toString()
+                    ));
                 } catch (java.lang.NullPointerException e) {
                 }
             }

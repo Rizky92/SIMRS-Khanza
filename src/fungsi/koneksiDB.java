@@ -439,6 +439,42 @@ public class koneksiDB {
         }
     }
 
+    public static String URLAPILOINCSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("URLAPILOINCSMC", "").trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String USERAPILOINCSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("USERAPILOINCSMC", EnkripsiAES.encrypt(""))).trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String PASSAPILOINCSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("PASSAPILOINCSMC", EnkripsiAES.encrypt(""))).trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String URLAPISNOWSTORMSMC() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("URLAPISNOWSTORMSMC", "").trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static String HOST(){
         try (FileInputStream fis = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fis);
