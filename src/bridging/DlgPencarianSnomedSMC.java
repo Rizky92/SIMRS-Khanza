@@ -20,6 +20,7 @@ import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
@@ -92,13 +93,13 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
 
         tbKamar1.setModel(tabModeDetail);
         tbKamar1.setPreferredScrollableViewportSize(new Dimension(500, 500));
-        tbKamar1.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
+        tbKamar1.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
         for (int i = 0; i < tabModeDetail.getColumnCount(); i++) {
-            TableColumn column = tbKamar.getColumnModel().getColumn(i);
+            TableColumn column = tbKamar1.getColumnModel().getColumn(i);
             if (i == 0) {
-                column.setPreferredWidth(90);
+                column.setPreferredWidth(250);
             } else if (i == 1) {
-                column.setPreferredWidth(400);
+                column.setPreferredWidth(600);
             }
         }
         tbKamar1.setDefaultRenderer(Object.class, new WarnaTable());
@@ -122,7 +123,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         Scroll1 = new widget.ScrollPane();
         tbKamar1 = new widget.Table();
         panelGlass7 = new widget.panelisi();
-        BtnTurunan = new widget.Button();
+        BtnLihatTurunan = new widget.Button();
         BtnKeluar1 = new widget.Button();
         internalFrame1 = new widget.InternalFrame();
         Scroll = new widget.ScrollPane();
@@ -193,18 +194,18 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         Popup.add(ppCariMemberRefset);
         ppCariMemberRefset.getAccessibleContext().setAccessibleName("Cari Berdasarkan Member Refset");
 
-        WindowDetailKode.setModal(true);
+        WindowDetailKode.setAlwaysOnTop(true);
         WindowDetailKode.setName("WindowDetailKode"); // NOI18N
         WindowDetailKode.setUndecorated(true);
+        WindowDetailKode.setResizable(false);
 
-        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "Detail Kode Snomed", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
+        internalFrame2.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Detail Kode Snomed ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
         internalFrame2.setName("internalFrame2"); // NOI18N
         internalFrame2.setLayout(new java.awt.BorderLayout());
 
         Scroll1.setName("Scroll1"); // NOI18N
         Scroll1.setOpaque(true);
 
-        tbKamar1.setComponentPopupMenu(Popup);
         tbKamar1.setName("tbKamar1"); // NOI18N
         Scroll1.setViewportView(tbKamar1);
 
@@ -214,23 +215,19 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         panelGlass7.setPreferredSize(new java.awt.Dimension(44, 54));
         panelGlass7.setLayout(new java.awt.FlowLayout(java.awt.FlowLayout.LEFT, 5, 9));
 
-        BtnTurunan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
-        BtnTurunan.setMnemonic('K');
-        BtnTurunan.setText("Lookup Kode Turunan");
-        BtnTurunan.setToolTipText("Alt+K");
-        BtnTurunan.setName("BtnTurunan"); // NOI18N
-        BtnTurunan.setPreferredSize(new java.awt.Dimension(180, 30));
-        BtnTurunan.addActionListener(new java.awt.event.ActionListener() {
+        BtnLihatTurunan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/Search-16x16.png"))); // NOI18N
+        BtnLihatTurunan.setMnemonic('K');
+        BtnLihatTurunan.setText("Lihat Turunan");
+        BtnLihatTurunan.setToolTipText("Alt+K");
+        BtnLihatTurunan.setEnabled(false);
+        BtnLihatTurunan.setName("BtnLihatTurunan"); // NOI18N
+        BtnLihatTurunan.setPreferredSize(new java.awt.Dimension(130, 30));
+        BtnLihatTurunan.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BtnTurunanActionPerformed(evt);
+                BtnLihatTurunanActionPerformed(evt);
             }
         });
-        BtnTurunan.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnTurunanKeyPressed(evt);
-            }
-        });
-        panelGlass7.add(BtnTurunan);
+        panelGlass7.add(BtnLihatTurunan);
 
         BtnKeluar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/exit.png"))); // NOI18N
         BtnKeluar1.setMnemonic('K');
@@ -241,11 +238,6 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         BtnKeluar1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 BtnKeluar1ActionPerformed(evt);
-            }
-        });
-        BtnKeluar1.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                BtnKeluar1KeyPressed(evt);
             }
         });
         panelGlass7.add(BtnKeluar1);
@@ -263,9 +255,6 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
             public void windowActivated(java.awt.event.WindowEvent evt) {
                 formWindowActivated(evt);
             }
-            public void windowOpened(java.awt.event.WindowEvent evt) {
-                formWindowOpened(evt);
-            }
         });
 
         internalFrame1.setBorder(javax.swing.BorderFactory.createTitledBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(240, 245, 235)), "::[ Pencarian Referensi Snomed CT via API ]::", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 11), new java.awt.Color(50, 50, 50))); // NOI18N
@@ -279,8 +268,8 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
         tbKamar.setComponentPopupMenu(Popup);
         tbKamar.setName("tbKamar"); // NOI18N
         tbKamar.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseReleased(java.awt.event.MouseEvent evt) {
-                tbKamarMouseReleased(evt);
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                tbKamarMousePressed(evt);
             }
         });
         Scroll.setViewportView(tbKamar);
@@ -437,41 +426,10 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnAllActionPerformed
 
     private void BtnAllKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnAllKeyPressed
-        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
             BtnAllActionPerformed(null);
-        }else{
-            Valid.pindah(evt, BtnCari, TCari);
         }
     }//GEN-LAST:event_BtnAllKeyPressed
-
-    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
-        /*
-        if (koneksiDB.CARICEPAT().equals("aktif")) {
-            TCari.getDocument().addDocumentListener(new javax.swing.event.DocumentListener() {
-                @Override
-                public void insertUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil2();
-                    }
-                }
-
-                @Override
-                public void removeUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil2();
-                    }
-                }
-
-                @Override
-                public void changedUpdate(DocumentEvent e) {
-                    if (TCari.getText().length() > 2) {
-                        tampil2();
-                    }
-                }
-            });
-        }
-        */
-    }//GEN-LAST:event_formWindowOpened
 
     private void ppCariTurunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppCariTurunanActionPerformed
         TParameter.setText("ecl/<<" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString() + " |" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString() + "|");
@@ -486,39 +444,36 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     }//GEN-LAST:event_ppCariMemberRefsetActionPerformed
 
     private void MnDetailKodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnDetailKodeActionPerformed
+        WindowDetailKode.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+        WindowDetailKode.setLocationRelativeTo(internalFrame1);
         WindowDetailKode.setVisible(true);
+        tampilLookupSmc();
     }//GEN-LAST:event_MnDetailKodeActionPerformed
 
     private void TParameterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TParameterKeyPressed
-        // TODO add your handling code here:
+        if (evt.getKeyCode() == KeyEvent.VK_SPACE) {
+            BtnCariActionPerformed(null);
+        }
     }//GEN-LAST:event_TParameterKeyPressed
 
-    private void tbKamarMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMouseReleased
+    private void tbKamarMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbKamarMousePressed
         int row = tbKamar.rowAtPoint(evt.getPoint());
         int column = tbKamar.columnAtPoint(evt.getPoint());
         tbKamar.changeSelection(row, column, false, false);
-    }//GEN-LAST:event_tbKamarMouseReleased
+    }//GEN-LAST:event_tbKamarMousePressed
 
     private void BtnKeluar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluar1ActionPerformed
         Valid.tabelKosong(tabModeDetail);
         WindowDetailKode.setVisible(false);
     }//GEN-LAST:event_BtnKeluar1ActionPerformed
 
-    private void BtnKeluar1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluar1KeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnKeluar1KeyPressed
-
-    private void BtnTurunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnTurunanActionPerformed
+    private void BtnLihatTurunanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLihatTurunanActionPerformed
         TParameter.setText("ecl/<!" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString() + " |" + tbKamar.getValueAt(tbKamar.getSelectedRow(), 2).toString() + "|");
         TCari.setText("");
         tampilSmc();
         Valid.tabelKosong(tabModeDetail);
         WindowDetailKode.setVisible(false);
-    }//GEN-LAST:event_BtnTurunanActionPerformed
-
-    private void BtnTurunanKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnTurunanKeyPressed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_BtnTurunanKeyPressed
+    }//GEN-LAST:event_BtnLihatTurunanActionPerformed
 
     /**
      * @param args the command line arguments
@@ -541,7 +496,7 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     private widget.Button BtnCari;
     private widget.Button BtnKeluar;
     private widget.Button BtnKeluar1;
-    private widget.Button BtnTurunan;
+    private widget.Button BtnLihatTurunan;
     private widget.Label LCount;
     private widget.ComboBox LimitData;
     private javax.swing.JMenuItem MnDetailKode;
@@ -642,15 +597,15 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
     }
 
     private void tampilLookupSmc() {
-        /*
         if (!ceksukses) {
             ceksukses = true;
-            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            WindowDetailKode.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
 
-            final String code = TParameter.getText().trim(); // SNOMED code input
+            final String code = tbKamar.getValueAt(tbKamar.getSelectedRow(), 0).toString();
 
             new SwingWorker<Void, Object[]>() {
                 private final ObjectMapper mapper = new ObjectMapper();
+                private boolean hasChildren = false;
 
                 @Override
                 protected Void doInBackground() throws Exception {
@@ -663,11 +618,10 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
                     uri.addParameter("property", "*");
 
                     System.out.println(uri.toString());
-                    JsonNode root = mapper.readTree(
-                        http().exchange(uri.build(), HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody()
-                    );
+                    JsonNode root = mapper.readTree(http().exchange(uri.build(), HttpMethod.GET, new HttpEntity<>(headers), String.class).getBody());
 
-                    // Top-level simple fields
+                    System.out.println(root.toString());
+
                     Map<String, String> simpleNames = Map.of(
                         "code", "Code",
                         "display", "Display",
@@ -675,20 +629,21 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
                         "system", "System URI",
                         "version", "Version"
                     );
+
                     for (JsonNode param : root.path("parameter")) {
                         String name = param.path("name").asText();
                         if (simpleNames.containsKey(name)) {
-                            publish(new Object[]{simpleNames.get(name), param.path("value" + capitalize(name)).asText(
-                                param.path("valueString").asText(
-                                param.path("valueCode").asText(
-                                param.path("valueUri").asText(""))))});
+                            publish(new Object[] {
+                                simpleNames.get(name),
+                                param.path("value" + capitalize(name)).asText(param.path("valueString").asText(param.path("valueCode").asText(param.path("valueUri").asText(""))))
+                            });
                         }
                     }
 
-                    // Property entries
-                    StringJoiner children = new StringJoiner(", ");
                     for (JsonNode param : root.path("parameter")) {
-                        if (!"property".equals(param.path("name").asText())) continue;
+                        if (!"property".equals(param.path("name").asText())) {
+                            continue;
+                        }
 
                         String propCode = "";
                         String propValue = "";
@@ -697,41 +652,59 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
                             if ("code".equals(partName)) {
                                 propCode = part.path("valueCode").asText();
                             } else if ("value".equals(partName)) {
-                                propValue = part.path("valueCode").asText(
-                                            part.path("valueString").asText(
-                                            part.path("valueBoolean").asText("")));
+                                propValue = part.path("valueCode").asText(part.path("valueString").asText(part.path("valueBoolean").asText("")));
                             }
                         }
 
                         switch (propCode) {
-                            case "parent"           -> publish(new Object[]{"Parent Code", propValue});
-                            case "moduleId"         -> publish(new Object[]{"Module ID", propValue});
-                            case "inactive"         -> publish(new Object[]{"Inactive", propValue});
-                            case "sufficientlyDefined" -> publish(new Object[]{"Sufficiently Defined", propValue});
-                            case "effectiveTime"    -> publish(new Object[]{"Effective Time", propValue});
-                            case "normalForm"       -> publish(new Object[]{"Normal Form", propValue});
-                            case "normalFormTerse"  -> publish(new Object[]{"Normal Form (Terse)", propValue});
-                            case "child"            -> children.add(propValue);
+                            case "parent":
+                                publish(new Object[] {"Parent Code", propValue});
+                                break;
+                            case "moduleId":
+                                publish(new Object[] {"Module ID", propValue});
+                                break;
+                            case "inactive":
+                                publish(new Object[] {"Inactive", propValue});
+                                break;
+                            case "sufficientlyDefined":
+                                publish(new Object[] {"Sufficiently Defined", propValue});
+                                break;
+                            case "effectiveTime":
+                                publish(new Object[] {"Effective Time", propValue});
+                                break;
+                            case "normalForm":
+                                publish(new Object[] {"Normal Form", propValue});
+                                break;
+                            case "normalFormTerse":
+                                publish(new Object[] {"Normal Form (Terse)", propValue});
+                                break;
+                            case "child":
+                                hasChildren = true;
+                                break;
                         }
-                    }
-                    if (children.length() > 0) {
-                        publish(new Object[]{"Children", children.toString()});
                     }
 
                     // Designations
                     for (JsonNode param : root.path("parameter")) {
-                        if (!"designation".equals(param.path("name").asText())) continue;
+                        if (!"designation".equals(param.path("name").asText())) {
+                            continue;
+                        }
 
                         String lang = "", use = "", value = "";
                         for (JsonNode part : param.path("part")) {
                             switch (part.path("name").asText()) {
-                                case "language" -> lang = part.path("valueCode").asText();
-                                case "use"      -> use = part.path("valueCoding").path("display").asText(
-                                                       part.path("valueCoding").path("code").asText(""));
-                                case "value"    -> value = part.path("valueString").asText();
+                                case "language":
+                                    lang = part.path("valueCode").asText();
+                                    break;
+                                case "use":
+                                    use = part.path("valueCoding").path("display").asText(part.path("valueCoding").path("code").asText(""));
+                                    break;
+                                case "value":
+                                    value = part.path("valueString").asText();
+                                    break;
                             }
                         }
-                        publish(new Object[]{"Designation [" + lang + "] " + use, value});
+                        publish(new Object[] {"Designation [" + lang + "] " + use, value});
                     }
 
                     return null;
@@ -739,7 +712,8 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
 
                 @Override
                 protected void process(List<Object[]> chunks) {
-                    chunks.forEach(tabMode::addRow);
+                    chunks.forEach(tabModeDetail::addRow);
+                    BtnLihatTurunan.setEnabled(hasChildren);
                 }
 
                 @Override
@@ -749,20 +723,19 @@ public final class DlgPencarianSnomedSMC extends javax.swing.JDialog {
                     } catch (Exception e) {
                         System.out.println("Notif : " + e);
                     }
-                    tabMode.fireTableDataChanged();
-                    LCount.setText(tabMode.getRowCount() + " / " + tabMode.getRowCount());
-                    DlgPencarianSnomedSMC.this.setCursor(Cursor.getDefaultCursor());
+                    // tabModeDetail.fireTableDataChanged();
+                    WindowDetailKode.setCursor(Cursor.getDefaultCursor());
                     ceksukses = false;
                 }
             }.execute();
         }
+    }
 
-        // Helper
-        private String capitalize(String s) {
-            if (s == null || s.isEmpty()) return s;
-            return Character.toUpperCase(s.charAt(0)) + s.substring(1);
+    private String capitalize(String s) {
+        if (s == null || s.isEmpty()) {
+            return s;
         }
-        */
+        return Character.toUpperCase(s.charAt(0)) + s.substring(1);
     }
 
     public JTable getTable() {
