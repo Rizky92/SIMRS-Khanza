@@ -46,8 +46,6 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
     private int i=0;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private volatile boolean ceksukses = false;
-    private final SatuSehatReferensiRadiologiLOINC refPeriksa = new SatuSehatReferensiRadiologiLOINC(null, false);
-    private final SatuSehatReferensiRadiologiSNOMED refSampel = new SatuSehatReferensiRadiologiSNOMED(null, false);
 
     /** Creates new form DlgJnsPerawatanRalan
      * @param parent
@@ -100,48 +98,6 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
         SampelSystem.setDocument(new batasInput((byte)100).getKata(SampelSystem));
         SampelDisplay.setDocument(new batasInput((byte)80).getKata(SampelDisplay));
         TCari.setDocument(new batasInput((byte)100).getKata(TCari));
-
-        refPeriksa.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (refPeriksa.getTable().getSelectedRow() != -1) {
-                    PeriksaCode.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 0).toString());
-                    PeriksaSystem.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 1).toString());
-                    PeriksaDisplay.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 2).toString());
-                }
-                BtnCariReferensiMapping.requestFocus();
-            }
-        });
-
-        refPeriksa.getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    refPeriksa.dispose();
-                }
-            }
-        });
-
-        refSampel.addWindowListener(new WindowAdapter() {
-            @Override
-            public void windowClosed(WindowEvent e) {
-                if (refSampel.getTable().getSelectedRow() != -1) {
-                    SampelCode.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 0).toString());
-                    SampelSystem.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 1).toString());
-                    SampelDisplay.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 2).toString());
-                }
-                BtnCariReferensiSampel.requestFocus();
-            }
-        });
-
-        refSampel.getTable().addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyPressed(KeyEvent e) {
-                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
-                    refSampel.dispose();
-                }
-            }
-        });
 
         ChkInput.setSelected(false);
         isForm();
@@ -644,12 +600,14 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
             Valid.textKosong(NamaPemeriksaan,"Nama Pemeriksaan");
         }else if(PeriksaDisplay.getText().trim().equals("")){
             Valid.textKosong(PeriksaDisplay,"Pemeriksaan Display");
+        /*
         }else if(SampelCode.getText().trim().equals("")){
             Valid.textKosong(SampelCode,"Sampel Code");
         }else if(SampelSystem.getText().trim().equals("")){
             Valid.textKosong(SampelSystem,"Sampel System");
         }else if(SampelDisplay.getText().trim().equals("")){
             Valid.textKosong(SampelDisplay,"Sampel Display");
+        */
         }else{
             if(Sequel.menyimpantf("satu_sehat_mapping_radiologi","?,?,?,?,?,?,?","Mapping Tindakan Radiologi",7,new String[]{
                 KodePemeriksaan.getText(),PeriksaCode.getText(),PeriksaSystem.getText(),PeriksaDisplay.getText(),SampelCode.getText(),SampelSystem.getText(),SampelDisplay.getText()
@@ -704,12 +662,14 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
             Valid.textKosong(NamaPemeriksaan,"Nama Pemeriksaan");
         }else if(PeriksaDisplay.getText().trim().equals("")){
             Valid.textKosong(PeriksaDisplay,"Pemeriksaan Display");
+        /*
         }else if(SampelCode.getText().trim().equals("")){
             Valid.textKosong(SampelCode,"Sampel Code");
         }else if(SampelSystem.getText().trim().equals("")){
             Valid.textKosong(SampelSystem,"Sampel System");
         }else if(SampelDisplay.getText().trim().equals("")){
             Valid.textKosong(SampelDisplay,"Sampel Display");
+        */
         }else{
             if(tbJnsPerawatan.getSelectedRow()>-1){
                 if(Sequel.mengedittf("satu_sehat_mapping_radiologi","kd_jenis_prw=?","kd_jenis_prw=?,code=?,system=?,display=?,sampel_code=?,sampel_system=?,sampel_display=?",8,new String[]{
@@ -860,6 +820,27 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_SampelSystemKeyPressed
 
     private void BtnCariReferensiMappingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiMappingActionPerformed
+        DlgPencarianLOINCSMC refPeriksa = new DlgPencarianLOINCSMC(null, false);
+        refPeriksa.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (refPeriksa.getTable().getSelectedRow() != -1) {
+                    PeriksaCode.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 0).toString());
+                    PeriksaSystem.setText("http://loinc.org");
+                    PeriksaDisplay.setText(refPeriksa.getTable().getValueAt(refPeriksa.getTable().getSelectedRow(), 1).toString());
+                }
+                BtnCariReferensiMapping.requestFocus();
+            }
+        });
+
+        refPeriksa.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    refPeriksa.dispose();
+                }
+            }
+        });
         refPeriksa.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         refPeriksa.setLocationRelativeTo(internalFrame1);
         refPeriksa.emptTeks();
@@ -873,6 +854,27 @@ public final class SatuSehatMapingRadiologi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariReferensiMappingKeyPressed
 
     private void BtnCariReferensiSampelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariReferensiSampelActionPerformed
+        DlgPencarianSnomedSMC refSampel = new DlgPencarianSnomedSMC(null, false);
+        refSampel.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if (refSampel.getTable().getSelectedRow() != -1) {
+                    SampelCode.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 0).toString());
+                    SampelSystem.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 1).toString());
+                    SampelDisplay.setText(refSampel.getTable().getValueAt(refSampel.getTable().getSelectedRow(), 2).toString());
+                }
+                BtnCariReferensiSampel.requestFocus();
+            }
+        });
+
+        refSampel.getTable().addKeyListener(new KeyAdapter() {
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_SPACE) {
+                    refSampel.dispose();
+                }
+            }
+        });
         refSampel.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
         refSampel.setLocationRelativeTo(internalFrame1);
         refSampel.emptTeks();
