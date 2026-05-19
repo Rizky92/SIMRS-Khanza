@@ -875,7 +875,7 @@
                                         <select name="onset_kontraksi" class="text2" style="font-family: Tahoma; width: 95%">
                                             <option <?= $onset_kontraksi === '' ? 'selected ' : '' ?>value=""></option>
                                             <option <?= $onset_kontraksi === 'spontan' ? 'selected ' : '' ?>value="spontan">Timbul Spontan</option>
-                                            <option <?= $onset_kontraksi === 'non_spontan' ? 'selected ' : '' ?>value="non_spontan">Dengan Induksi</option>
+                                            <option <?= $onset_kontraksi === 'induksi' ? 'selected ' : '' ?>value="non_spontan">Dengan Induksi</option>
                                             <option <?= $onset_kontraksi === 'non_spontan_non_induksi' ? 'selected ' : '' ?>value="non_spontan_non_induksi">SC Tanpa Kontraksi/Induksi</option>
                                         </select>
                                     </td>
