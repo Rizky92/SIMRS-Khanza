@@ -267,7 +267,8 @@ public final class akses {
             pcra_icra_identifkasi_risiko_keselamatan=false,pcra_icra_identifkasi_risiko_kebakaran=false,pcra_icra_identifkasi_risiko_utilitas=false,bpjs_daftar_resep_apotek=false,
             daftar_permintaan_resep_iterasi_bpjs=false,pcra_icra_pengkajian_risiko_prakonstruksi=false,pcra_icra_persyaratan_harus_dipenuhi=false,satu_sehat_kirim_questionresponse_telaah_farmasi=false,
             satu_sehat_kirim_allergy_intolerance=false,konsultasi_perawat=false,jawaban_konsultasi_perawat=false,bridging_smart_klaim_bpjs=false,mapping_prosedur_smart_klaim_bpjs=false,
-            mapping_penyakit_smart_klaim_bpjs=false,permintaan_binrohtal=false,surat_permintaan_perlindungan_dari_kekerasan=false,surat_permohonan_privasi=false,surat_permintaan_second_opinion=false;
+            mapping_penyakit_smart_klaim_bpjs=false,permintaan_binrohtal=false,surat_permintaan_perlindungan_dari_kekerasan=false,surat_permohonan_privasi=false,surat_permintaan_second_opinion=false,
+            surat_keterangan_berobat=false;
 
     private static boolean edit_hapus_spo_medis = false,
         edit_hapus_spo_nonmedis = false,
@@ -1529,6 +1530,7 @@ public final class akses {
                         akses.surat_permintaan_perlindungan_dari_kekerasan=akses.getBoolean(rs2, "surat_permintaan_perlindungan_dari_kekerasan");
                         akses.surat_permohonan_privasi=akses.getBoolean(rs2, "surat_permohonan_privasi");
                         akses.surat_permintaan_second_opinion=akses.getBoolean(rs2, "surat_permintaan_second_opinion");
+                        akses.surat_keterangan_berobat=akses.getBoolean(rs2, "surat_keterangan_berobat");
                         try (PreparedStatement psx = koneksi.prepareStatement("select * from set_akses_edit_sementara where id_user = ? and now() < tgl_selesai")) {
                             psx.setString(1, user);
                             try (ResultSet rsx = psx.executeQuery()) {
@@ -2784,6 +2786,7 @@ public final class akses {
         akses.surat_permintaan_perlindungan_dari_kekerasan=isadmin;
         akses.surat_permohonan_privasi=isadmin;
         akses.surat_permintaan_second_opinion=isadmin;
+        akses.surat_keterangan_berobat=isadmin;
         akses.edit=isadmin;
         akses.tglSelesai=-1;
     }
@@ -4041,6 +4044,7 @@ public final class akses {
     public static boolean getsurat_permintaan_perlindungan_dari_kekerasan(){return akses.surat_permintaan_perlindungan_dari_kekerasan;}
     public static boolean getsurat_permohonan_privasi(){return akses.surat_permohonan_privasi;}
     public static boolean getsurat_permintaan_second_opinion(){return akses.surat_permintaan_second_opinion;}
+    public static boolean getsurat_keterangan_berobat(){return akses.surat_keterangan_berobat;}
     public static boolean getakses_edit_sementara() {akses.setEdit();return akses.edit;}
     public static void resetEdit() {akses.edit = false; akses.tglSelesai = -1;}
     private static void setEdit() {
