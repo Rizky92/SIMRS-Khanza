@@ -2715,7 +2715,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                     Valid.autonomor1Smc(TNoPermintaanPA, "PA", "permintaan_labpa", "noorder", 4, "0", Tanggal);
                     do {
                         sukses = Sequel.menyimpantfSmc("permintaan_labpa", "", TNoPermintaanPA.getText(), TNoRw.getText(), Valid.getTglSmc(Tanggal),
-                            Valid.getTglSmc(CmbJam, CmbMenit, CmbDetik), "0000-00-00", "00:00:00", "0000-00-00", "00:00:00", KodePerujuk.getText(),
+                            Valid.getJamSmc(CmbJam, CmbMenit, CmbDetik), "0000-00-00", "00:00:00", "0000-00-00", "00:00:00", KodePerujuk.getText(),
                             status.replaceAll("R", "r"), InformasiTambahan.getText(), DiagnosisKlinis.getText(), Valid.getTglSmc(TanggalBahan),
                             DiperolehDengan.getText(), LokasiPengambilan.getText(), Diawetkan.getText(), DilakukanPA.getText(),
                             (DilakukanPA.getText().isBlank() ? "0000-00-00" : Valid.getTglSmc(TanggalPA)), NomorPA.getText(), DiagnosaPA.getText());
@@ -2774,12 +2774,12 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                 Sequel.AutoComitTrue();
 
                 if (sukses) {
-                    JOptionPane.showMessageDialog(null, "Proses simpan selesai...!");
+                    JOptionPane.showMessageDialog(null, "Proses simpan selesai!");
                 } else {
-                    JOptionPane.showMessageDialog(null, "Proses simpan gagal...!", "Gagal", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Proses simpan gagal...!!!", "Gagal", JOptionPane.WARNING_MESSAGE);
                 }
             } catch (Exception e) {
-                System.out.println(e);
+                System.out.println("Notif : " + e);
             }
             ChkJln.setSelected(true);
         }
