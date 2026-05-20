@@ -160,7 +160,13 @@ public final class validasi {
     }
 
     public String getTglSmc(Tanggal tgl) {
-        return getTglSmc(tgl.getDate(), "yyyy-MM-dd");
+        try {
+            Date date = new SimpleDateFormat(tgl.getDisplayFormat()).parse(tgl.getSelectedItem().toString());
+
+            return getTglSmc(date, "yyyy-MM-dd");
+        } catch (Exception e) {
+            return getTglSmc(tgl.getDate(), "yyyy-MM-dd");
+        }
     }
 
     public String getTglSmc(Date tgl) {
