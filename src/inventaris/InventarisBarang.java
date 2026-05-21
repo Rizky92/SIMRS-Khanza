@@ -840,7 +840,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanKeyPressed
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void kode_barangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_barangKeyPressed
@@ -864,237 +864,237 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_thn_produksiKeyPressed
 
     private void kode_produsenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_produsenKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
-        thn_produksi.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
-        id_merk.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnProdusenActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
+            thn_produksi.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            Sequel.cariIsi("select inventaris_produsen.nama_produsen from inventaris_produsen where inventaris_produsen.kode_produsen=?",nama_produsen,kode_produsen.getText());
+            id_merk.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnProdusenActionPerformed(null);
+        }
     }//GEN-LAST:event_kode_produsenKeyPressed
 
     private void btnProdusenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnProdusenActionPerformed
-    InventarisProdusen produsen=new InventarisProdusen(null,false);
-    produsen.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(produsen.getTable().getSelectedRow()!= -1){
-                kode_produsen.setText(produsen.getTable().getValueAt(produsen.getTable().getSelectedRow(),0).toString());
-                nama_produsen.setText(produsen.getTable().getValueAt(produsen.getTable().getSelectedRow(),1).toString());
+        InventarisProdusen produsen=new InventarisProdusen(null,false);
+        produsen.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(produsen.getTable().getSelectedRow()!= -1){
+                    kode_produsen.setText(produsen.getTable().getValueAt(produsen.getTable().getSelectedRow(),0).toString());
+                    nama_produsen.setText(produsen.getTable().getValueAt(produsen.getTable().getSelectedRow(),1).toString());
+                }
+                kode_produsen.requestFocus();
             }
-            kode_produsen.requestFocus();
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
 
-    });
+        });
 
-    produsen.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                produsen.dispose();
+        produsen.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    produsen.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    produsen.isCek();
-    produsen.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    produsen.setLocationRelativeTo(internalFrame1);
-    produsen.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        produsen.isCek();
+        produsen.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        produsen.setLocationRelativeTo(internalFrame1);
+        produsen.setVisible(true);
     }//GEN-LAST:event_btnProdusenActionPerformed
 
     private void id_merkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_merkKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk=?",nm_merk,id_merk.getText());
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk=?",nm_merk,id_merk.getText());
-        kode_produsen.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk=?",nm_merk,id_merk.getText());
-        isbn.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnMerkActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk=?",nm_merk,id_merk.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk=?",nm_merk,id_merk.getText());
+            kode_produsen.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            Sequel.cariIsi("select inventaris_merk.nama_merk from inventaris_merk where inventaris_merk.id_merk=?",nm_merk,id_merk.getText());
+            isbn.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnMerkActionPerformed(null);
+        }
     }//GEN-LAST:event_id_merkKeyPressed
 
     private void btnMerkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMerkActionPerformed
-    InventarisMerk merk=new InventarisMerk(null,false);
-    merk.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(merk.getTable().getSelectedRow()!= -1){
-                id_merk.setText(merk.getTable().getValueAt(merk.getTable().getSelectedRow(),0).toString());
-                nm_merk.setText(merk.getTable().getValueAt(merk.getTable().getSelectedRow(),1).toString());
+        InventarisMerk merk=new InventarisMerk(null,false);
+        merk.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(merk.getTable().getSelectedRow()!= -1){
+                    id_merk.setText(merk.getTable().getValueAt(merk.getTable().getSelectedRow(),0).toString());
+                    nm_merk.setText(merk.getTable().getValueAt(merk.getTable().getSelectedRow(),1).toString());
+                }
+                id_merk.requestFocus();
             }
-            id_merk.requestFocus();
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
 
-    });
+        });
 
-    merk.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                merk.dispose();
+        merk.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    merk.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    merk.isCek();
-    merk.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    merk.setLocationRelativeTo(internalFrame1);
-    merk.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        merk.isCek();
+        merk.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        merk.setLocationRelativeTo(internalFrame1);
+        merk.setVisible(true);
     }//GEN-LAST:event_btnMerkActionPerformed
 
     private void id_kategoriKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_kategoriKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
-        isbn.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
-        id_jenis.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnKategoriActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
+            isbn.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            Sequel.cariIsi("select inventaris_kategori.nama_kategori from inventaris_kategori where inventaris_kategori.id_kategori='"+id_kategori.getText()+"'",nm_kategori);
+            id_jenis.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnKategoriActionPerformed(null);
+        }
     }//GEN-LAST:event_id_kategoriKeyPressed
 
     private void btnKategoriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnKategoriActionPerformed
-    InventarisKategori kategori=new InventarisKategori(null,false);
-    kategori.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(kategori.getTable().getSelectedRow()!= -1){
-                id_kategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),0).toString());
-                nm_kategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),1).toString());
+        InventarisKategori kategori=new InventarisKategori(null,false);
+        kategori.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(kategori.getTable().getSelectedRow()!= -1){
+                    id_kategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),0).toString());
+                    nm_kategori.setText(kategori.getTable().getValueAt(kategori.getTable().getSelectedRow(),1).toString());
+                }
+                id_kategori.requestFocus();
             }
-            id_kategori.requestFocus();
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
 
-    });
+        });
 
-    kategori.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                kategori.dispose();
+        kategori.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    kategori.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    kategori.isCek();
-    kategori.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    kategori.setLocationRelativeTo(internalFrame1);
-    kategori.setAlwaysOnTop(false);
-    kategori.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        kategori.isCek();
+        kategori.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        kategori.setLocationRelativeTo(internalFrame1);
+        kategori.setAlwaysOnTop(false);
+        kategori.setVisible(true);
     }//GEN-LAST:event_btnKategoriActionPerformed
 
     private void id_jenisKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_id_jenisKeyPressed
-    if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
-        Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis=?",nm_jenis,id_jenis.getText());
-    }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
-        Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis=?",nm_jenis,id_jenis.getText());
-        id_kategori.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
-        Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis=?",nm_jenis,id_jenis.getText());
-        BtnSimpan.requestFocus();
-    }else if(evt.getKeyCode()==KeyEvent.VK_UP){
-        btnJenisActionPerformed(null);
-    }
+        if(evt.getKeyCode()==KeyEvent.VK_PAGE_DOWN){
+            Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis=?",nm_jenis,id_jenis.getText());
+        }else if(evt.getKeyCode()==KeyEvent.VK_PAGE_UP){
+            Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis=?",nm_jenis,id_jenis.getText());
+            id_kategori.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_ENTER){
+            Sequel.cariIsi("select inventaris_jenis.nama_jenis from inventaris_jenis where inventaris_jenis.id_jenis=?",nm_jenis,id_jenis.getText());
+            BtnSimpan.requestFocus();
+        }else if(evt.getKeyCode()==KeyEvent.VK_UP){
+            btnJenisActionPerformed(null);
+        }
     }//GEN-LAST:event_id_jenisKeyPressed
 
     private void btnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJenisActionPerformed
-    InventarisJenis jenis=new InventarisJenis(null,false);
-    jenis.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(jenis.getTable().getSelectedRow()!= -1){
-                id_jenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
-                nm_jenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
+        InventarisJenis jenis=new InventarisJenis(null,false);
+        jenis.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(jenis.getTable().getSelectedRow()!= -1){
+                    id_jenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),0).toString());
+                    nm_jenis.setText(jenis.getTable().getValueAt(jenis.getTable().getSelectedRow(),1).toString());
+                }
+                id_jenis.requestFocus();
             }
-            id_jenis.requestFocus();
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
 
-    });
+        });
 
-    jenis.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                jenis.dispose();
+        jenis.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    jenis.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    jenis.isCek();
-    jenis.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    jenis.setLocationRelativeTo(internalFrame1);
-    jenis.setAlwaysOnTop(false);
-    jenis.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        jenis.isCek();
+        jenis.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        jenis.setLocationRelativeTo(internalFrame1);
+        jenis.setAlwaysOnTop(false);
+        jenis.setVisible(true);
     }//GEN-LAST:event_btnJenisActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
