@@ -13,6 +13,8 @@
     <entry key="ADAMLABSKECAMATANID"></entry>
     <entry key="ADAMLABSKABUPATENID"></entry>
     <entry key="ADAMLABSPROVINSIID"></entry>
+    <entry key="BIOSYSAPIURL">https://biosys.softwarelaboratorium.com</entry>
+    <entry key="BIOSYSAPIKEY">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="LABORATORIUMKIRIMHASIL">adamlabs</entry>
     <entry key="RESTRIKSIRMKELAHIRANBAYI">yes</entry>
     <entry key="URLKFAV2SATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/kfa-v2</entry>

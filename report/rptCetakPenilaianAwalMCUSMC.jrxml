@@ -1027,7 +1027,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Tanggal MCU]]></text>
+				<text><![CDATA[Informasi]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="454" y="0" width="5" height="16" uuid="bd197a29-5fda-4300-920e-81fa33f48986">
@@ -1048,24 +1048,6 @@
 				</textElement>
 				<text><![CDATA[:]]></text>
 			</staticText>
-			<textField pattern="dd/MM/yyyy HH:mm:ss">
-				<reportElement x="459" y="0" width="80" height="16" uuid="d50ed745-c279-4f52-b1fb-7c350da58218">
-					<property name="com.jaspersoft.studio.unit.width" value="px"/>
-					<property name="com.jaspersoft.layout.grid.x" value="8"/>
-					<property name="com.jaspersoft.layout.grid.y" value="0"/>
-					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
-					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
-				</reportElement>
-				<box topPadding="4"/>
-				<textElement verticalAlignment="Top">
-					<font fontName="Tahoma" size="8" isBold="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<textFieldExpression><![CDATA[DATEFORMAT($F{tanggal},"dd-MM-yyyy")]]></textFieldExpression>
-			</textField>
 			<staticText>
 				<reportElement x="402" y="16" width="52" height="48" uuid="c57f503e-7508-4a02-941a-092d3a6582a8">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
@@ -1084,7 +1066,7 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[Informasi]]></text>
+				<text><![CDATA[]]></text>
 			</staticText>
 			<staticText>
 				<reportElement x="454" y="16" width="5" height="48" uuid="f556c57f-9c3a-4014-b901-763cf825753c">
@@ -1103,20 +1085,20 @@
 					<font fontName="Tahoma" size="8"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<text><![CDATA[:]]></text>
+				<text><![CDATA[]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement x="459" y="16" width="80" height="48" uuid="680881e3-ca9e-4da1-b640-3ad00e6a54d6">
+				<reportElement x="459" y="0" width="80" height="64" uuid="680881e3-ca9e-4da1-b640-3ad00e6a54d6">
 					<property name="com.jaspersoft.studio.unit.width" value="px"/>
 					<property name="com.jaspersoft.layout.grid.x" value="8"/>
-					<property name="com.jaspersoft.layout.grid.y" value="1"/>
+					<property name="com.jaspersoft.layout.grid.y" value="0"/>
 					<property name="com.jaspersoft.layout.grid.weight.x" value="1.0"/>
 					<property name="com.jaspersoft.layout.grid.weight.y" value="1.0"/>
-					<property name="com.jaspersoft.layout.grid.rowspan" value="3"/>
+					<property name="com.jaspersoft.layout.grid.rowspan" value="4"/>
 					<property name="com.jaspersoft.layout.grid.colspan" value="1"/>
 					<property name="com.jaspersoft.layout.grid.weight.fixed" value="false"/>
 				</reportElement>
-				<box bottomPadding="0">
+				<box topPadding="4" bottomPadding="0">
 					<bottomPen lineWidth="1.0"/>
 				</box>
 				<textElement verticalAlignment="Top">
@@ -5986,7 +5968,7 @@
 				<text><![CDATA[N. ANJURAN]]></text>
 			</staticText>
 		</band>
-		<band height="112">
+		<band height="92">
 			<textField pattern="MMM, dd/MM/yyyy hh:mm:ss z">
 				<reportElement mode="Transparent" x="340" y="13" width="199" height="10" uuid="f2456642-100c-41a8-b7ed-73dc8e8b1e66">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -5998,7 +5980,7 @@
 				<textFieldExpression><![CDATA[$P{kotars}+", "+new java.text.SimpleDateFormat("dd MMMM yyyy", new java.util.Locale("id")).format($F{tanggal})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="340" y="101" width="199" height="11" uuid="15269d1e-5458-46d8-b993-8560eba888ef">
+				<reportElement mode="Transparent" x="340" y="80" width="199" height="11" uuid="15269d1e-5458-46d8-b993-8560eba888ef">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">

@@ -1,5 +1,6 @@
 package permintaan;
 import bridging.ApiADAMLABS;
+import bridging.ApiBIOSYS;
 import bridging.ApiLICA;
 import bridging.ApiMEDQLAB;
 import bridging.ApiSOFTMEDIX;
@@ -82,6 +83,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private ObjectMapper mapper = new ObjectMapper();
     private ApiMEDQLAB medqlab=new ApiMEDQLAB();
     private final ApiADAMLABS apiAdamlabs = new ApiADAMLABS();
+    private final ApiBIOSYS apiBioSysSmc = new ApiBIOSYS();
     private WebEngine engine;
     private JsonNode root;
     private JsonNode response;
@@ -1825,6 +1827,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                             }else{
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
+                                if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
+                                    try {
+                                        apiBioSysSmc.hapusOrder(NoPermintaan);
+                                    } catch (ApiBIOSYS.BiosysException e) {
+                                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                }
                                 TeksKosong();
                                 runBackground(() -> tampil());
                             }
@@ -1853,6 +1862,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                             }else{
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
+                                if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
+                                    try {
+                                        apiBioSysSmc.hapusOrder(NoPermintaan);
+                                    } catch (ApiBIOSYS.BiosysException e) {
+                                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                }
                                 TeksKosong();
                                 runBackground(() -> tampil3());
                             }
@@ -5360,6 +5376,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         switch (LABORATORIUMKIRIMHASIL) {
             case "adamlabs":
                 apiAdamlabs.registrasi(noorder);
+                break;
+            case "biosys":
+                try {
+                    int status = apiBioSysSmc.kirimOrder(noorder);
+                    if (status == 200) {
+                        JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS..!!");
+                    } else if (status == 406) {
+                        JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS,\nSilahkan cek mapping tindakan/pemeriksaan sebelum dlakukan pengambilan hasil..!!");
+                    }
+                } catch (ApiBIOSYS.BiosysException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             default:
                 return;
