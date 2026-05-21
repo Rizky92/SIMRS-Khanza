@@ -1886,7 +1886,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                             rstampil=pstampil.executeQuery();
                             while(rstampil.next()){
                                 tabMode.addRow(new Object[]{
-                                    true,"   "+rstampil.getString("Pemeriksaan"),"",rstampil.getString("satuan"),rstampil.getString("nilai_rujukan_ld"),"",
+                                    false,"   "+rstampil.getString("Pemeriksaan"),"",rstampil.getString("satuan"),rstampil.getString("nilai_rujukan_ld"),"",
                                     rstampil.getString("id_template"),rstampil.getDouble("biaya_item"),rstampil.getDouble("bagian_rs"),rstampil.getDouble("bhp"),
                                     rstampil.getDouble("bagian_perujuk"),rstampil.getDouble("bagian_dokter"),rstampil.getDouble("bagian_laborat"),
                                     rstampil.getDouble("kso"),rstampil.getDouble("menejemen"),tbTarif.getValueAt(i2,1).toString()
@@ -1924,7 +1924,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                             rstampil=pstampil2.executeQuery();
                             while(rstampil.next()){
                                 tabMode.addRow(new Object[]{
-                                    true,"   "+rstampil.getString("Pemeriksaan"),"",rstampil.getString("satuan"),rstampil.getString("nilai_rujukan_la"),"",
+                                    false,"   "+rstampil.getString("Pemeriksaan"),"",rstampil.getString("satuan"),rstampil.getString("nilai_rujukan_la"),"",
                                     rstampil.getString("id_template"),rstampil.getDouble("biaya_item"),rstampil.getDouble("bagian_rs"),rstampil.getDouble("bhp"),
                                     rstampil.getDouble("bagian_perujuk"),rstampil.getDouble("bagian_dokter"),rstampil.getDouble("bagian_laborat"),
                                     rstampil.getDouble("kso"),rstampil.getDouble("menejemen"),tbTarif.getValueAt(i2,1).toString()
@@ -1962,7 +1962,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                             rstampil=pstampil3.executeQuery();
                             while(rstampil.next()){
                                 tabMode.addRow(new Object[]{
-                                    true,"   "+rstampil.getString("Pemeriksaan"),"",rstampil.getString("satuan"),rstampil.getString("nilai_rujukan_pd"),"",
+                                    false,"   "+rstampil.getString("Pemeriksaan"),"",rstampil.getString("satuan"),rstampil.getString("nilai_rujukan_pd"),"",
                                     rstampil.getString("id_template"),rstampil.getDouble("biaya_item"),rstampil.getDouble("bagian_rs"),rstampil.getDouble("bhp"),
                                     rstampil.getDouble("bagian_perujuk"),rstampil.getDouble("bagian_dokter"),rstampil.getDouble("bagian_laborat"),
                                     rstampil.getDouble("kso"),rstampil.getDouble("menejemen"),tbTarif.getValueAt(i2,1).toString()
@@ -2000,7 +2000,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                             rstampil=pstampil4.executeQuery();
                             while(rstampil.next()){
                                 tabMode.addRow(new Object[]{
-                                    true,"   "+rstampil.getString("Pemeriksaan"),"",rstampil.getString("satuan"),rstampil.getString("nilai_rujukan_pa"),"",
+                                    false,"   "+rstampil.getString("Pemeriksaan"),"",rstampil.getString("satuan"),rstampil.getString("nilai_rujukan_pa"),"",
                                     rstampil.getString("id_template"),rstampil.getDouble("biaya_item"),rstampil.getDouble("bagian_rs"),rstampil.getDouble("bhp"),
                                     rstampil.getDouble("bagian_perujuk"),rstampil.getDouble("bagian_dokter"),rstampil.getDouble("bagian_laborat"),
                                     rstampil.getDouble("kso"),rstampil.getDouble("menejemen"),tbTarif.getValueAt(i2,1).toString()
@@ -3596,6 +3596,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                         Object cell = tabMode.getValueAt(row, 6);
 
                         if (idtemplate.equals(cell.toString())) {
+                            tabMode.setValueAt(true, row, 0);
                             tabMode.setValueAt(resultValue, row, 2);
                             tabMode.setValueAt(result.path("NormalRange").asText(""), row, 4);
                             tabMode.setValueAt(result.path("Flag").asText(""), row, 5);
