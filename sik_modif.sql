@@ -1,28 +1,5 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-CREATE TABLE IF NOT EXISTS `adamlabs_orderlab`  (
-  `noorder` varchar(20) NOT NULL,
-  `no_laboratorium` varchar(30) NOT NULL,
-  PRIMARY KEY (`noorder`, `no_laboratorium`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
-CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `noorder` varchar(20) NULL DEFAULT NULL,
-  `url` varchar(255) NULL DEFAULT NULL,
-  `method` varchar(5) NULL DEFAULT NULL,
-  `request` text NULL DEFAULT NULL,
-  `code` varchar(5) NULL DEFAULT NULL,
-  `response` text NULL DEFAULT NULL,
-  `pengirim` varchar(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `noorder`(`noorder`) USING BTREE,
-  INDEX `url`(`url`) USING BTREE,
-  INDEX `method`(`method`) USING BTREE,
-  INDEX `code`(`code`) USING BTREE,
-  INDEX `pengirim`(`pengirim`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
 CREATE TABLE IF NOT EXISTS `antrifotokelahiranbayismc`  (
   `no_rkm_medis` varchar(15) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`) USING BTREE
@@ -396,7 +373,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_persalinan_smc`  (
   CONSTRAINT `inacbg_data_klaim_persalinan_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_tarif_smc` (
+CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_tarif_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `tarif_rs` varchar(30) NOT NULL,
   `nilai` double NOT NULL DEFAULT 0,
@@ -493,6 +470,27 @@ ALTER TABLE `ipsrssuplier` MODIFY COLUMN IF EXISTS `nama_bank` varchar(50) NULL 
 ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(200) NULL DEFAULT NULL AFTER `kd_jenis_prw`;
 
 ALTER TABLE `jurnal` DROP INDEX IF EXISTS `no_jurnal`;
+
+CREATE TABLE IF NOT EXISTS `lis_orderlab`  (
+  `vendor` varchar(20) NOT NULL,
+  `noorder` varchar(20) NOT NULL,
+  `nolab` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`vendor`, `noorder`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `lis_request_response`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `vendor` varchar(20) NOT NULL DEFAULT '',
+  `noorder` varchar(20) NULL DEFAULT NULL,
+  `url` varchar(255) NULL DEFAULT NULL,
+  `method` varchar(15) NULL DEFAULT NULL,
+  `request` text NULL DEFAULT NULL,
+  `code` varchar(5) NULL DEFAULT NULL,
+  `response` text NULL DEFAULT NULL,
+  `pengirim` varchar(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `vendor_noorder`(`vendor`, `noorder`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 ALTER TABLE `maping_dokter_dpjpvclaim` MODIFY COLUMN IF EXISTS `nm_dokter_bpjs` varchar(100) NULL DEFAULT NULL AFTER `kd_dokter_bpjs`;
 

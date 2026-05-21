@@ -232,6 +232,24 @@ public class koneksiDB {
         }
     }
 
+    public static String BIOSYSAPIURL() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("BIOSYSAPIURL", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String BIOSYSAPIKEY() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("BIOSYSAPIKEY", EnkripsiAES.encrypt("")));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
     public static String LABORATORIUMKIRIMHASIL() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
