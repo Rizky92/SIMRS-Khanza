@@ -5968,7 +5968,7 @@
 				<text><![CDATA[N. ANJURAN]]></text>
 			</staticText>
 		</band>
-		<band height="112">
+		<band height="92">
 			<textField pattern="MMM, dd/MM/yyyy hh:mm:ss z">
 				<reportElement mode="Transparent" x="340" y="13" width="199" height="10" uuid="f2456642-100c-41a8-b7ed-73dc8e8b1e66">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
@@ -5980,7 +5980,7 @@
 				<textFieldExpression><![CDATA[$P{kotars}+", "+new java.text.SimpleDateFormat("dd MMMM yyyy", new java.util.Locale("id")).format($F{tanggal})]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="340" y="101" width="199" height="11" uuid="15269d1e-5458-46d8-b993-8560eba888ef">
+				<reportElement mode="Transparent" x="340" y="80" width="199" height="11" uuid="15269d1e-5458-46d8-b993-8560eba888ef">
 					<property name="com.jaspersoft.studio.unit.height" value="px"/>
 				</reportElement>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
