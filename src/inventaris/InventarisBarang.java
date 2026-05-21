@@ -860,7 +860,7 @@ public final class InventarisBarang extends javax.swing.JDialog {
     }//GEN-LAST:event_isbnKeyPressed
 
     private void thn_produksiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_thn_produksiKeyPressed
-    Valid.pindah(evt,jml_barang,kode_produsen);
+        Valid.pindah(evt,jml_barang,kode_produsen);
     }//GEN-LAST:event_thn_produksiKeyPressed
 
     private void kode_produsenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_kode_produsenKeyPressed
