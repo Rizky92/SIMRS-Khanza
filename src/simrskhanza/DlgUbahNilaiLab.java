@@ -33,7 +33,9 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
@@ -660,15 +662,21 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
 
                     belumFinal = false;
 
+                    Map<String, Integer> map = new HashMap<>();
+                    for (int row = 0; row < tabMode.getRowCount(); row++) {
+                        map.put(tabMode.getValueAt(row, 5).toString(), row);
+                    }
+
                     for (JsonNode result : sortedResults) {
                         String testHis = result.path("TestHis").asText("");
 
                         if (testHis.isEmpty()) continue;
 
                         String idtemplate = Arrays.stream(StringUtils.split(testHis, ','))
-                            .filter(p -> p.matches("\\d+"))
+                            .filter(map::containsKey)
                             .findFirst()
                             .orElse("");
+
                         if (idtemplate.isEmpty()) continue;
 
                         boolean isFinal = "Final".equalsIgnoreCase(result.path("ResultStatus").asText(""));
@@ -679,17 +687,12 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
 
                         String resultValue = isFinal ? result.path("ResultValue").asText("") : "";
 
-                        // Object[] row={"Pemeriksaan","Hasil","Satuan","Nilai Rujukan","Keterangan","ID Detail","Kode Periksa"};
+                        Integer row = map.get(idtemplate);
 
-                        for (int row = 0; row < tabMode.getRowCount(); row++) {
-                            Object referensi = tabMode.getValueAt(row, 5);
-
-                            if (idtemplate.equals(referensi.toString())) {
-                                tabMode.setValueAt(resultValue, row, 1);
-                                tabMode.setValueAt(result.path("NormalRange").asText(""), row, 3);
-                                tabMode.setValueAt(result.path("Flag").asText(""), row, 4);
-                                break;
-                            }
+                        if (row != null) {
+                            tabMode.setValueAt(resultValue, row, 1);
+                            tabMode.setValueAt(result.path("NormalRange").asText(""), row, 3);
+                            tabMode.setValueAt(result.path("Flag").asText(""), row, 4);
                         }
                     }
 
