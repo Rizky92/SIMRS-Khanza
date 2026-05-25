@@ -232,24 +232,6 @@ public class koneksiDB {
         }
     }
 
-    public static String BIOSYSAPIURL() {
-        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
-            prop.loadFromXML(fs);
-            return prop.getProperty("BIOSYSAPIURL", "");
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
-    public static String BIOSYSAPIKEY() {
-        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
-            prop.loadFromXML(fs);
-            return EnkripsiAES.decrypt(prop.getProperty("BIOSYSAPIKEY", EnkripsiAES.encrypt("")));
-        } catch (Exception e) {
-            return "";
-        }
-    }
-
     public static String LABORATORIUMKIRIMHASIL() {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
@@ -480,6 +462,33 @@ public class koneksiDB {
         try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
             prop.loadFromXML(fs);
             return prop.getProperty("URLAPISNOWSTORMSMC", "").trim();
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String BIOSYSAPIURL() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return prop.getProperty("BIOSYSAPIURL", "");
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String BIOSYSAPIKEY() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("BIOSYSAPIKEY", EnkripsiAES.encrypt("")));
+        } catch (Exception e) {
+            return "";
+        }
+    }
+
+    public static String LABORATORIUMSUBHEADERPREFIX() {
+        try (FileInputStream fs = new FileInputStream("setting/database.xml")) {
+            prop.loadFromXML(fs);
+            return EnkripsiAES.decrypt(prop.getProperty("LABORATORIUMSUBHEADERPREFIX", EnkripsiAES.encrypt("")));
         } catch (Exception e) {
             return "";
         }

@@ -38,6 +38,7 @@ import org.springframework.web.client.RestTemplate;
 public class ApiBIOSYS {
     private final String APIURL = koneksiDB.BIOSYSAPIURL();
     private final String APIKEY = koneksiDB.BIOSYSAPIKEY();
+    private final String SUBHEADERPREFIX = koneksiDB.LABORATORIUMSUBHEADERPREFIX();
     private final Connection koneksi = koneksiDB.condb();
     private final sekuel Sequel = new sekuel();
     private final SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -117,9 +118,10 @@ public class ApiBIOSYS {
                                 ArrayNode items = mapper.createArrayNode();
                                 try (PreparedStatement ps3 = koneksi.prepareStatement(
                                     "select template_laboratorium.id_template, trim(template_laboratorium.Pemeriksaan) from template_laboratorium " +
-                                    "where template_laboratorium.kd_jenis_prw = ? order by template_laboratorium.urut asc"
+                                    "where template_laboratorium.kd_jenis_prw = ? and template_laboratorium.Pemeriksaan not like concat(?, '%') order by template_laboratorium.urut asc"
                                 )) {
                                     ps3.setString(1, rs2.getString("kd_jenis_prw"));
+                                    ps3.setString(2, SUBHEADERPREFIX);
                                     try (ResultSet rs3 = ps3.executeQuery()) {
                                         while (rs3.next()) {
                                             if (rs3.getString(2) != null && !rs3.getString(2).isBlank()) {
