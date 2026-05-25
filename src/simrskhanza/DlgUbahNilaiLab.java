@@ -689,9 +689,14 @@ public final class DlgUbahNilaiLab extends javax.swing.JDialog {
 
                         Integer row = map.get(idtemplate);
 
+                        String nilaiRujukan = result.path("ReferencedRange").asText("");
+                        if (nilaiRujukan.isBlank()) {
+                            nilaiRujukan = result.path("NormalRange").asText("");
+                        }
+
                         if (row != null) {
                             tabMode.setValueAt(resultValue, row, 1);
-                            tabMode.setValueAt(result.path("NormalRange").asText(""), row, 3);
+                            tabMode.setValueAt(nilaiRujukan, row, 3);
                             tabMode.setValueAt(result.path("Flag").asText(""), row, 4);
                         }
                     }

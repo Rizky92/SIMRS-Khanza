@@ -102,7 +102,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String norawatibu="",finger="";
     private ApiBIOSYS biosys = new ApiBIOSYS();
-    private String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL();
+    private final String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL();
     private boolean belumFinal = false;
     private final JTextField jt = new JTextField();
 
@@ -692,7 +692,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
         NmPtg.setBounds(546, 42, 249, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "21-05-2026" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "25-05-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -1660,7 +1660,6 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private widget.Label jLabel6;
     private widget.Label jLabel7;
     private widget.Label jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
     private widget.PanelBiasa panelBiasa1;
     private widget.panelisi panelGlass11;
     private widget.panelisi panelGlass8;
@@ -3600,10 +3599,15 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
                     Integer row = map.get(idtemplate);
 
+                    String nilaiRujukan = result.path("ReferencedRange").asText("");
+                    if (nilaiRujukan.isBlank()) {
+                        nilaiRujukan = result.path("NormalRange").asText("");
+                    }
+
                     if (row != null) {
                         tabMode.setValueAt(true, row, 0);
                         tabMode.setValueAt(resultValue, row, 2);
-                        tabMode.setValueAt(result.path("NormalRange").asText(""), row, 4);
+                        tabMode.setValueAt(nilaiRujukan, row, 4);
                         tabMode.setValueAt(result.path("Flag").asText(""), row, 5);
                     }
                 }
