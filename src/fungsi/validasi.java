@@ -396,8 +396,8 @@ public final class validasi {
         }
     }
 
-    public String capitalizeSmc(String judul) {
-        return judul.substring(0, 1).toUpperCase() + judul.substring(1);
+    public String capitalizeSmc(String str) {
+        return str.substring(0, 1).toUpperCase() + str.substring(1);
     }
 
     public String terbilangSmc(double nilai) {

@@ -963,7 +963,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else{
             if (belumFinal) {
-                if (JOptionPane.showConfirmDialog(null, "Masih ada pemeriksaan yang belum difinalisasikan dari LIS, tetap lanjut??", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(null, "Masih ada pemeriksaan yang belum divalidasi dari LIS " + Valid.capitalizeSmc(LABORATORIUMKIRIMHASIL) + ", tetap lanjut??", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     jmlparsial=0;
                     if(aktifkanparsial.equals("yes")){
                         jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",Penjab.getText());
@@ -3609,8 +3609,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
                 }
 
                 if (belumFinal) {
-                    BtnSimpan.setEnabled(false);
-                    JOptionPane.showMessageDialog(this, "Beberapa hasil pemeriksaan belum selesai divalidasi,\nProses simpan tidak diizinkan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Beberapa hasil pemeriksaan belum selesai divalidasi,\nHasil pemeriksaan belum selesai tidak akan ditampilkan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
                 }
             } else {
                 JOptionPane.showMessageDialog(this, "Hasil pemeriksaan tidak ditemukan untuk order " + noorder + ".");
