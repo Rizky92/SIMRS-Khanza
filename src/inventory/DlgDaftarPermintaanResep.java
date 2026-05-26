@@ -5034,7 +5034,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         BtnKonselingFarmasi.setEnabled(akses.getkonseling_farmasi());
         BtnInformasiObat.setEnabled(akses.getpelayanan_informasi_obat());
         BtnRiwayat.setEnabled(akses.getresume_pasien());
-        BtnSEPBPJS.setEnabled(akses.getbpjs_sep());
+        // BtnSEPBPJS.setEnabled(akses.getbpjs_sep());
         BtnResepLuar.setEnabled(akses.getresep_luar());
         BtnObat23HariBPJS.setEnabled(akses.getbpjs_obat_23hari_apotek());
         BtnTelaahResep.setEnabled(akses.gettelaah_resep());
