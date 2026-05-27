@@ -13,9 +13,6 @@
     <entry key="ADAMLABSKECAMATANID"></entry>
     <entry key="ADAMLABSKABUPATENID"></entry>
     <entry key="ADAMLABSPROVINSIID"></entry>
-    <entry key="BIOSYSAPIURL">https://biosys.softwarelaboratorium.com</entry>
-    <entry key="BIOSYSAPIKEY">l4nh5eVYrLAER/I2A4b3Tw==</entry>
-    <entry key="LABORATORIUMKIRIMHASIL">adamlabs</entry>
     <entry key="RESTRIKSIRMKELAHIRANBAYI">yes</entry>
     <entry key="URLKFAV2SATUSEHAT">https://api-satusehat-stg.dto.kemkes.go.id/kfa-v2</entry>
     <entry key="KOMPILASIBERKASGUNAKANRIWAYATPASIEN">ralan+ranap</entry>
@@ -33,6 +30,9 @@
     <entry key="USERAPILOINCSMC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="PASSAPILOINCSMC">l4nh5eVYrLAER/I2A4b3Tw==</entry>
     <entry key="URLAPISNOWSTORMSMC">https://localhost:8080/fhir</entry>
+    <entry key="BIOSYSAPIURL">https://biosys.softwarelaboratorium.com</entry>
+    <entry key="BIOSYSAPIKEY">l4nh5eVYrLAER/I2A4b3Tw==</entry>
+    <entry key="LABORATORIUMSUBHEADERPREFIX">l4nh5eVYrLAER/I2A4b3Tw==</entry>
 
     <entry key="WAHOST">5k7+C7EnUw9nUv2Nix+DBA==</entry>
     <entry key="WAPORT">nioxtijcpDaKSUiUiP5FAg==</entry>
