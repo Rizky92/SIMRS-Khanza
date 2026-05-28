@@ -103,6 +103,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private String norawatibu="",finger="";
     private ApiBIOSYS biosys = new ApiBIOSYS();
     private final String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL();
+    private final String LABORATORIUMSUBHEADERPREFIX = koneksiDB.LABORATORIUMSUBHEADERPREFIX();
     private boolean belumFinal = false;
     private final JTextField jt = new JTextField();
 
@@ -3573,7 +3574,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
                 Map<String, Integer> map = new HashMap<>();
                 for (int row = 0; row < tabMode.getRowCount(); row++) {
-                    tabMode.setValueAt(false, row, 0);
+                    tabMode.setValueAt(tabMode.getValueAt(row, 1).toString().startsWith(LABORATORIUMSUBHEADERPREFIX), row, 0);
                     map.put(tabMode.getValueAt(row, 6).toString(), row);
                 }
 
