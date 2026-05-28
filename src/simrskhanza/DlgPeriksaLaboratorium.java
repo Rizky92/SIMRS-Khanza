@@ -3574,7 +3574,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
                 Map<String, Integer> map = new HashMap<>();
                 for (int row = 0; row < tabMode.getRowCount(); row++) {
-                    tabMode.setValueAt(tabMode.getValueAt(row, 1).toString().startsWith(LABORATORIUMSUBHEADERPREFIX), row, 0);
+                    tabMode.setValueAt(tabMode.getValueAt(row, 1).toString().startsWith("   " + LABORATORIUMSUBHEADERPREFIX), row, 0);
                     map.put(tabMode.getValueAt(row, 6).toString(), row);
                 }
 
@@ -3596,6 +3596,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
                     if (!isFinal) {
                         belumFinal = true;
+                        resultValue = "";
                     }
 
                     Integer row = map.get(idtemplate);
