@@ -247,8 +247,20 @@ CREATE TABLE IF NOT EXISTS `idrg_grouping_smc`  (
   `chronic_weight` double DEFAULT NULL,
   `total_cost_weight` double DEFAULT NULL,
   `nbr` double DEFAULT NULL,
+  `topup_weight` double DEFAULT NULL,
+  `top_up` enum('Tidak Ada','Belum','Sudah') NOT NULL DEFAULT 'Tidak Ada',
   PRIMARY KEY (`no_sep`) USING BTREE,
   CONSTRAINT `idrg_grouping_smc_bridging_sep_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_klaim_baru2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `idrg_grouping_topup_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `description` varchar(100) NULL DEFAULT NULL,
+  `type` varchar(50) NULL DEFAULT NULL,
+  `weight` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_sep`, `code`) USING BTREE,
+  CONSTRAINT `idrg_grouping_topup_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `idrg_grouping_smc` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `idrg_klaim_final_smc`  (
