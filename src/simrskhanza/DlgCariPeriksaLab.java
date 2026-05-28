@@ -60,6 +60,7 @@ public class DlgCariPeriksaLab extends javax.swing.JDialog {
     private volatile boolean ceksukses = false;
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String diagnosa="",saran="",kesan="",status="";
+    private final String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL();
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -5533,9 +5534,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }else if(!(Kd2.getText().trim().equals(""))){
             DlgUbahNilaiLab ubah=new DlgUbahNilaiLab(null,false);
             ubah.isCek();
-            ubah.setNoRm(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),
+            ubah.setNoRMBridgingSmc(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString(),
                     tbDokter.getValueAt(tbDokter.getSelectedRow(),3).toString(),
-                    tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString());
+                    tbDokter.getValueAt(tbDokter.getSelectedRow(),4).toString(),
+                    LABORATORIUMKIRIMHASIL);
             ubah.setSize(this.getWidth()-20,this.getHeight()-20);
             ubah.setLocationRelativeTo(this);
             ubah.setVisible(true);

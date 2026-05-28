@@ -102,7 +102,8 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;
     private String norawatibu="",finger="";
     private ApiBIOSYS biosys = new ApiBIOSYS();
-    private final String LABORATORIUMKIRIMHASIL = koneksiDB.LABORATORIUMKIRIMHASIL();
+    private final String LABORATORIUMSUBHEADERPREFIX = koneksiDB.LABORATORIUMSUBHEADERPREFIX();
+    private String vendorlis = "";
     private boolean belumFinal = false;
     private final JTextField jt = new JTextField();
 
@@ -963,7 +964,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             Valid.textKosong(Pemeriksaan,"Data Pemeriksaan");
         }else{
             if (belumFinal) {
-                if (JOptionPane.showConfirmDialog(null, "Masih ada pemeriksaan yang belum divalidasi dari LIS " + Valid.capitalizeSmc(LABORATORIUMKIRIMHASIL) + ", tetap lanjut??", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                if (JOptionPane.showConfirmDialog(null, "Masih ada pemeriksaan yang belum divalidasi dari LIS " + Valid.capitalizeSmc(vendorlis) + ", tetap lanjut..??", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     jmlparsial=0;
                     if(aktifkanparsial.equals("yes")){
                         jmlparsial=Sequel.cariInteger("select count(set_input_parsial.kd_pj) from set_input_parsial where set_input_parsial.kd_pj=?",Penjab.getText());
@@ -1561,8 +1562,10 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
     private void BtnRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnRefreshActionPerformed
         runBackground(() ->{
             tampilkanOrder(noorder);
-            if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
-                ambilHasilBIOSYS(noorder);
+            switch (vendorlis) {
+                case "biosys":
+                    ambilHasilBIOSYS(noorder);
+                    break;
             }
         });
     }//GEN-LAST:event_BtnRefreshActionPerformed
@@ -3010,12 +3013,19 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
             System.out.println(e);
         }
         isPsien();
-        runBackground(() ->{
-            tampilkanOrder(order);
-            if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
-                ambilHasilBIOSYS(noorder);
-            }
-        });
+    }
+
+    public void setOrderBridgingSmc(String order, String norawat, String posisi, String lis) {
+        setOrder(order, norawat, posisi);
+        this.vendorlis = lis;
+        switch (lis) {
+            case "biosys":
+                runBackground(() -> {
+                    tampilkanOrder(order);
+                    ambilHasilBIOSYS(order);
+                });
+                break;
+        }
     }
 
     public void tampilkanOrder(String order){
@@ -3536,14 +3546,15 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
             Sequel.AutoComitTrue();
 
-            if (sukses && LABORATORIUMKIRIMHASIL.equals("biosys")) {
-                biosys.konfirmasiHasil(noorder, TNoRM.getText());
-            }
-
             if (sukses) {
+                switch (vendorlis) {
+                    case "biosys":
+                        biosys.konfirmasiHasil(noorder, TNoRM.getText());
+                        break;
+                }
                 JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
             } else {
-                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
             }
         } catch (Exception e) {
             System.out.println("Notif : " + e);
@@ -3573,7 +3584,7 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
                 Map<String, Integer> map = new HashMap<>();
                 for (int row = 0; row < tabMode.getRowCount(); row++) {
-                    tabMode.setValueAt(false, row, 0);
+                    tabMode.setValueAt(tabMode.getValueAt(row, 1).toString().startsWith("   " + LABORATORIUMSUBHEADERPREFIX), row, 0);
                     map.put(tabMode.getValueAt(row, 6).toString(), row);
                 }
 
@@ -3595,11 +3606,12 @@ public final class DlgPeriksaLaboratorium extends javax.swing.JDialog {
 
                     if (!isFinal) {
                         belumFinal = true;
+                        resultValue = "";
                     }
 
                     Integer row = map.get(idtemplate);
 
-                    String nilaiRujukan = result.path("ReferencedRange").asText("");
+                    String nilaiRujukan = result.path("ReferenceRange").asText("");
                     if (nilaiRujukan.isBlank()) {
                         nilaiRujukan = result.path("NormalRange").asText("");
                     }
