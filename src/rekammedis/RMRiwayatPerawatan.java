@@ -5894,6 +5894,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                     do{
                                                         switch (rs3.getString("keterangan").toLowerCase()) {
                                                             case "l":
+                                                            case "cl":
                                                             case "kl":
                                                                 htmlContent.append(
                                                                     "<tr>").append(
@@ -5907,6 +5908,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                                     "</tr>");
                                                                 break;
                                                             case "h":
+                                                            case "ch":
                                                             case "kh":
                                                             case "tn":
                                                                 htmlContent.append(
@@ -7786,6 +7788,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                 while (rs3.next()) {
                                                     switch (rs3.getString("keterangan").toLowerCase()) {
                                                         case "l":
+                                                        case "cl":
                                                         case "kl":
                                                             htmlContent.append(
                                                                 "<tr>"
@@ -7799,6 +7802,7 @@ public final class RMRiwayatPerawatan extends javax.swing.JDialog {
                                                                 + "</tr>");
                                                             break;
                                                         case "h":
+                                                        case "ch":
                                                         case "kh":
                                                         case "tn":
                                                             htmlContent.append(
