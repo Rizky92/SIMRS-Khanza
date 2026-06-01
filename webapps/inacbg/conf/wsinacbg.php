@@ -1941,6 +1941,9 @@
             ];
         }
 
+        /*
+         * Sudah submit bukti pengembangan top up iDRG ke pusbikes,
+         * Namunn belum ada konfirmasi apakah sudah bisa digunkaan atau belum
         if (isset($msg['response_idrg']['topup_options']) && count($msg['response_idrg']['topup_options']) > 0) {
             Hapus2('tempinacbg', "coder_nik = '$coder_nik'");
             foreach ($msg['response_idrg']['topup_options'] as ['code' => $code, 'description' => $desc, 'type' => $type]) {
@@ -1955,6 +1958,7 @@
                 'error' => null,
             ];
         }
+        */
 
         return [
             'success' => true,
