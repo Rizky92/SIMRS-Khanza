@@ -147,7 +147,7 @@ public class ApiOrthanc {
         }
         return root;
     }
-    
+
     public JsonNode AmbilJpg2(String Series){
         System.out.println("Percobaan Mengambil Gambar JPG : "+Series+", Series : "+Series);
         try{

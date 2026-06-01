@@ -5,7 +5,7 @@
     header("Content-Type: application/json");
     header("Access-Control-Allow-Methods: POST, GET");
     header("Access-Control-Allow-Headers: Content-Type, Access-Control-Allow-Headers, Authorization, X-Requested-With");
-    
+
     $url     = isset($_GET['url']) ? $_GET['url'] : '/';
     $url     = explode("/", $url);
     $header  = apache_request_headers();
@@ -63,7 +63,7 @@
                             )
                         );
                         http_response_code(201);
-                    } else if(empty($decode['tanggal'])) { 
+                    } else if(empty($decode['tanggal'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Tanggal tidak boleh kosong',
@@ -77,9 +77,9 @@
                                 'message' => 'Format Tanggal tidak sesuai, format yang benar adalah yyyy-mm-dd',
                                 'code' => 201
                             )
-                        );  
+                        );
                         http_response_code(201);
-                    } else if(empty($decode['jam'])) { 
+                    } else if(empty($decode['jam'])) {
                         $response = array(
                             'metadata' => array(
                                 'message' => 'Jam tidak boleh kosong',

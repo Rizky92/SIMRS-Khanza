@@ -34,7 +34,7 @@
         if (!cekSessiAdmin()) {
             $form = array (
                 'HomeUser','Pasien','KonsultasiDokter','KonsultasiPerawat','BalasKonsultasiDokter','BalasKonsultasiPerawat',
-                'HasilRadiologi','BacaanRadiologi'            
+                'HasilRadiologi','BacaanRadiologi'
             );
             foreach ($form as $page) {
                 if ($aksi==$page) {

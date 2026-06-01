@@ -1,12 +1,12 @@
 <?php
-    if(!defined('ABSPATH')){ 
+    if(!defined('ABSPATH')){
         require_once(__DIR__.'/../conf/conf.php');
     }
-    
+
     if(session_status() == PHP_SESSION_NONE){
         session_start();
     }
-    
+
     $halaman    = isset($_GET["act"])?$_GET["act"]:NULL;
     $kdDokter   = validTeks4(encrypt_decrypt($_SESSION["ses_dokter"], "d"), 20);
     $activeMenuDokter  = ($halaman == "KonsultasiDokter") ? "class='active'" : "";
@@ -22,7 +22,7 @@
               </li>";
         $datakonsul++;
     }
-    
+
     if (getOne("SELECT count(konsultasi_perawat.no_permintaan) FROM konsultasi_perawat WHERE NOT EXISTS (SELECT 1 FROM jawaban_konsultasi_perawat WHERE jawaban_konsultasi_perawat.no_permintaan = konsultasi_perawat.no_permintaan) AND konsultasi_perawat.kd_dokter_dikonsuli='".$kdDokter."'")>0){
         echo "<li $activeMenuPerawat>
                 <a href=\"index.php?act=KonsultasiPerawat\">
@@ -42,7 +42,7 @@
               </li>";
         $datakonsul++;
     }
-    
+
     if($datakonsul>0){
         echo "<audio autoplay='true' src='pages/bell.wav'></audio>";
     }

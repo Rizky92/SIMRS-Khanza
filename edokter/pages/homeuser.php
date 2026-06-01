@@ -127,12 +127,12 @@
     <script src="js/pages/index.js"></script>
     <script src="js/demo.js"></script>
     <script src="conf/validator.js" type="text/javascript"></script>
-    <script type="text/javascript"> 
+    <script type="text/javascript">
         function loadKonsul(){
             fetch('pages/listdatakonsul.php')
                 .then(function(response){ return response.text(); })
-                .then(function(html){ 
-                    document.getElementById('datakonsul').innerHTML = html; 
+                .then(function(html){
+                    document.getElementById('datakonsul').innerHTML = html;
                 });
         }
 
