@@ -114,7 +114,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
         aplikasiPDF = koneksiDB.KOMPILASIBERKASAPLIKASIPDF(),
         kategoriUploadBerkas = "", kamar = "", unit = "";
     private boolean isLoading = false, hapusOtomatisDiagnosaProsedur = false;
-    private int flagklaim = -1, flagInacbgTopup = -1, selectedRow = -1;
+    private int flagklaim = -1, flagIdrgTopup = -1, flagInacbgTopup = -1, selectedRow = -1;
     private long maxMemory = koneksiDB.KOMPILASIBERKASMAXMEMORY();
 
     public BPJSKompilasiBerkasKlaimSMC(java.awt.Frame parent, boolean modal) {
@@ -1469,46 +1469,40 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 return;
             }
 
+            setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             switch (pilihan) {
                 case "Model 1 (Lembar SEP)":
-                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     if (lblStatusRawat.getText().contains("Ranap")) {
                         Valid.MyReport("rptBridgingSEP.jasper", "report", "::[ Cetak SEP ]::", param);
                     } else {
                         Valid.MyReport("rptBridgingSEP2.jasper", "report", "::[ Cetak SEP ]::", param);
                     }
-                    setCursor(Cursor.getDefaultCursor());
                     break;
                 case "Model 2 (IGDTL)":
-                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     if (lblStatusRawat.getText().contains("Ranap")) {
                         Valid.MyReport("rptBridgingSEP3.jasper", "report", "::[ Cetak SEP ]::", param);
                     } else {
                         Valid.MyReport("rptBridgingSEP4.jasper", "report", "::[ Cetak SEP ]::", param);
                     }
-                    setCursor(Cursor.getDefaultCursor());
                     break;
                 case "Model 3 (Lembar SEP Alternatif)":
-                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     if (lblStatusRawat.getText().contains("Ranap")) {
                         Valid.MyReport("rptBridgingSEP5.jasper", "report", "::[ Cetak SEP ]::", param);
                     } else {
                         Valid.MyReport("rptBridgingSEP6.jasper", "report", "::[ Cetak SEP ]::", param);
                     }
-                    setCursor(Cursor.getDefaultCursor());
                     break;
                 case "Model 4 (RJTL)":
-                    setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
                     if (lblStatusRawat.getText().contains("Ranap")) {
                         Valid.MyReport("rptBridgingSEP7.jasper", "report", "::[ Cetak SEP ]::", param);
                     } else {
                         Valid.MyReport("rptBridgingSEP8.jasper", "report", "::[ Cetak SEP ]::", param);
                     }
-                    setCursor(Cursor.getDefaultCursor());
                     break;
                 default:
                     break;
             }
+            setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_btnSEPActionPerformed
 
@@ -3373,24 +3367,26 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
 
     private void setFlagKlaim() {
         try (PreparedStatement ps = koneksi.prepareStatement(
-            "select case when inc.no_sep is not null then 1 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is " +
-            "not null and inc.no_sep is null then 2 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') " +
-            "and inf.no_sep is null then 3 when idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null and " +
-            "(left(ing.code_cbg, 1) = 'X'))) then 4 when idg.no_sep is not null and idg.mdc_number != '36' and idf.no_sep is null then 5 when (idg.no_sep is null " +
-            "or (idg.no_sep is not null and idg.mdc_number = '36')) then 6 end as statusklaim, (ing.no_sep is not null and ing.top_up = 'Belum') as inacbg_stage2 " +
-            "from bridging_sep s left join inacbg_data_terkirim2 ind on s.no_sep = ind.no_sep left join idrg_grouping_smc idg on s.no_sep = idg.no_sep left join " +
-            "idrg_klaim_final_smc idf on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 ing on s.no_sep = ing.no_sep left join inacbg_klaim_final_smc inf " +
-            "on s.no_sep = inf.no_sep left join inacbg_cetak_klaim inc on s.no_sep = inc.no_sep where s.no_sep = ?"
+            "select case when inc.no_sep is not null then 1 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and inf.no_sep is not null and " +
+            "inc.no_sep is null then 2 when idg.no_sep is not null and idf.no_sep is not null and ing.no_sep is not null and (left(ing.code_cbg, 1) != 'X') and inf.no_sep is " +
+            "null then 3 when idg.no_sep is not null and idf.no_sep is not null and (ing.no_sep is null or (ing.no_sep is not null and (left(ing.code_cbg, 1) = 'X'))) then 4 " +
+            "when idg.no_sep is not null and idg.mdc_number != '36' and idf.no_sep is null then 5 when (idg.no_sep is null or (idg.no_sep is not null and idg.mdc_number = '36')) " +
+            "then 6 end as statusklaim, (idg.no_sep is not null and idg.top_up = 'Belum') as idrg_stage2, (ing.no_sep is not null and ing.top_up = 'Belum') as inacbg_stage2 from " +
+            "bridging_sep s left join inacbg_data_terkirim2 ind on s.no_sep = ind.no_sep left join idrg_grouping_smc idg on s.no_sep = idg.no_sep left join idrg_klaim_final_smc idf " +
+            "on s.no_sep = idf.no_sep left join inacbg_grouping_stage12 ing on s.no_sep = ing.no_sep left join inacbg_klaim_final_smc inf on s.no_sep = inf.no_sep left join " +
+            "inacbg_cetak_klaim inc on s.no_sep = inc.no_sep where s.no_sep = ?"
         )) {
             ps.setString(1, btnSEP.getText());
             try (ResultSet rs = ps.executeQuery()) {
                 if (rs.next()) {
                     flagklaim = rs.getInt("statusklaim");
+                    flagIdrgTopup = rs.getInt("idrg_stage2");
                     flagInacbgTopup = rs.getInt("inacbg_stage2");
                 }
             }
         } catch (Exception e) {
             flagklaim = -1;
+            flagIdrgTopup = -1;
             flagInacbgTopup = -1;
             System.out.println("Notif : " + e);
         }
@@ -3486,7 +3482,11 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                 break;
             case 5:
                 aksi = "&action=grouper";
-                grouper = "&grouper=idrg_final";
+                if (flagIdrgTopup == 1) {
+                    grouper = "&grouper=idrg_stage2";
+                } else {
+                    grouper = "&grouper=idrg_final";
+                }
                 break;
             default:
                 aksi = "&action=grouper";
@@ -3570,6 +3570,7 @@ public class BPJSKompilasiBerkasKlaimSMC extends javax.swing.JDialog {
                     }
                 }
             }
+            loadBillingHTML.setCaretPosition(0);
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
