@@ -463,6 +463,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnKirimBIOSYS = new widget.Button();
         BtnUpdatePasienBIOSYS = new widget.Button();
         BtnAmbilBIOSYS = new widget.Button();
+        BtnUpdateOrderBIOSYS = new widget.Button();
 
         WindowAmbilSampel.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowAmbilSampel.setName("WindowAmbilSampel"); // NOI18N
@@ -504,7 +505,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-04-2026 13:20:23" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "28-05-2026 16:13:55" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -1562,6 +1563,24 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
             }
         });
         FormMenu.add(BtnAmbilBIOSYS);
+
+        BtnUpdateOrderBIOSYS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnUpdateOrderBIOSYS.setText("Update Permintaan Lab BIOSYS");
+        BtnUpdateOrderBIOSYS.setToolTipText("");
+        BtnUpdateOrderBIOSYS.setFocusPainted(false);
+        BtnUpdateOrderBIOSYS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnUpdateOrderBIOSYS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnUpdateOrderBIOSYS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnUpdateOrderBIOSYS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnUpdateOrderBIOSYS.setName("BtnUpdateOrderBIOSYS"); // NOI18N
+        BtnUpdateOrderBIOSYS.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnUpdateOrderBIOSYS.setRoundRect(false);
+        BtnUpdateOrderBIOSYS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUpdateOrderBIOSYSActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnUpdateOrderBIOSYS);
 
         ScrollMenu.setViewportView(FormMenu);
 
@@ -4707,7 +4726,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if (tbLabRalan.getSelectedRow() != -1) {
                     if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0) != null && !tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString().isBlank()) {
                         try {
-                            int status = apiBioSysSmc.updateOrder(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
+                            int status = apiBioSysSmc.updateDataPasien(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
                             if (status == 200) {
                                 JOptionPane.showMessageDialog(null, "Update data pasien selesai LIS BIOSYS..!!");
                             } else if (status == 204) {
@@ -4724,7 +4743,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if (tbLabRanap.getSelectedRow() != -1) {
                     if (tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0) != null || !tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString().isBlank()) {
                         try {
-                            int status = apiBioSysSmc.updateOrder(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString());
+                            int status = apiBioSysSmc.updateDataPasien(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString());
                             if (status == 200) {
                                 JOptionPane.showMessageDialog(null, "Update data pasien selesai LIS BIOSYS..!!");
                             } else if (status == 204) {
@@ -4738,6 +4757,52 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             }
         }
     }//GEN-LAST:event_BtnUpdatePasienBIOSYSActionPerformed
+
+    private void BtnUpdateOrderBIOSYSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdateOrderBIOSYSActionPerformed
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (tbLabRalan.getSelectedRow() != -1) {
+                    if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0) != null && !tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString().isBlank()) {
+                        if (JOptionPane.showConfirmDialog(null, "Proses ini akan dilakukan 2x (hapus lalu re-add item), tetap lanjut?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            /*
+                            try {
+                                int status = apiBioSysSmc.updateDataPasien(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
+                                if (status == 200) {
+                                    JOptionPane.showMessageDialog(null, "Update data pasien selesai LIS BIOSYS..!!");
+                                } else if (status == 204) {
+                                    JOptionPane.showMessageDialog(null, "Order lab tidak ditemukan di LIS BIOSYS..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                                }
+                            } catch (ApiBIOSYS.BiosysException e) {
+                                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                            */
+                        }
+                    }
+                }
+            }
+        } else if (TabPilihRawat.getSelectedIndex() == 1) {
+            if (TabRawatInap.getSelectedIndex() == 0) {
+                if (tbLabRanap.getSelectedRow() != -1) {
+                    if (tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0) != null || !tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString().isBlank()) {
+                        if (JOptionPane.showConfirmDialog(null, "Proses ini akan dilakukan 2x (hapus lalu re-add item), tetap lanjut?", "Konfirmasi", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
+                            /*
+                            try {
+                                int status = apiBioSysSmc.updateDataPasien(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString());
+                                if (status == 200) {
+                                    JOptionPane.showMessageDialog(null, "Update data pasien selesai LIS BIOSYS..!!");
+                                } else if (status == 204) {
+                                    JOptionPane.showMessageDialog(null, "Order lab tidak ditemukan di LIS BIOSYS..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                                }
+                            } catch (ApiBIOSYS.BiosysException e) {
+                                JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                            }
+                            */
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnUpdateOrderBIOSYSActionPerformed
 
     /**
     * @param args the command line arguments
@@ -4796,6 +4861,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button BtnSeek5;
     private widget.Button BtnSeek6;
     private widget.Button BtnSimpan4;
+    private widget.Button BtnUpdateOrderBIOSYS;
     private widget.Button BtnUpdatePasienBIOSYS;
     private widget.CekBox ChkAccor;
     private widget.TextBox CrDokter;
