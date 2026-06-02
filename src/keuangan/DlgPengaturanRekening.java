@@ -6,6 +6,8 @@ import fungsi.sekuel;
 import fungsi.validasi;
 import java.awt.Cursor;
 import java.awt.Dimension;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.WindowEvent;
@@ -321,13 +323,9 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
 
         tbPengaturanRanap.setDefaultRenderer(Object.class, new WarnaTable());
 
-        rekening.addWindowListener(new WindowListener() {
+        rekening.addComponentListener(new ComponentAdapter() {
             @Override
-            public void windowOpened(WindowEvent e) {}
-            @Override
-            public void windowClosing(WindowEvent e) {}
-            @Override
-            public void windowClosed(WindowEvent e) {
+            public void componentHidden(ComponentEvent e) {
                 if(akses.getform().equals("DlgPengaturanRekening")){
                     if(rekening.getTabel().getSelectedRow()!= -1){
                         if(tbPengaturan.getSelectedColumn()==1){
@@ -428,14 +426,6 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
                     tbPengaturanRanap.requestFocus();
                 }
             }
-            @Override
-            public void windowIconified(WindowEvent e) {}
-            @Override
-            public void windowDeiconified(WindowEvent e) {}
-            @Override
-            public void windowActivated(WindowEvent e) {}
-            @Override
-            public void windowDeactivated(WindowEvent e) {}
         });
 
         rekening.getTabel().addKeyListener(new KeyListener() {
@@ -445,15 +435,15 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
             public void keyPressed(KeyEvent e) {
                 if(akses.getform().equals("DlgPengaturanRekening")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        rekening.dispose();
+                        rekening.setVisible(false);
                     }
                 }else if(akses.getform().equals("DlgPengaturanRekeningRalan")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        rekening.dispose();
+                        rekening.setVisible(false);
                     }
                 }else if(akses.getform().equals("DlgPengaturanRekeningRanap")){
                     if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        rekening.dispose();
+                        rekening.setVisible(false);
                     }
                 }
 
@@ -461,8 +451,6 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-
-
     }
 
 
@@ -3141,6 +3129,7 @@ public class DlgPengaturanRekening extends javax.swing.JDialog {
 
     @Override
     public void dispose() {
+        rekening.dispose();
         executor.shutdownNow();
         super.dispose();
     }
