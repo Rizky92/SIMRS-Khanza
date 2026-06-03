@@ -545,10 +545,10 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
-    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-    akses.setAktif(false);
-    tampil();
-    this.setCursor(Cursor.getDefaultCursor());
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        akses.setAktif(false);
+        tampil();
+        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnCariKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCariKeyPressed
@@ -861,9 +861,9 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             URL = link+"/rujukan/jawab/"+NoRujuk;
             headers = new HttpHeaders();
             headers.add("X-cons-id",idrs);
-	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
-	    headers.add("X-signature",api.getHmac());
-	    headers.add("Content-type","application/json");
+    	    headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+    	    headers.add("X-signature",api.getHmac());
+    	    headers.add("Content-type","application/json");
             requestJson ="{" +
                             "\"DITERIMA\":"+CmbTerima.getSelectedItem().toString().substring(0,1)+"," +
                             "\"KETERANGAN\":\""+AlasanBalasan.getText()+"\"," +
@@ -1012,11 +1012,11 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             Valid.tabelKosong(tabMode);
             URL = link+"/rujukan?tanggal="+Valid.SetTgl(Tanggal.getSelectedItem()+"");
             headers = new HttpHeaders();
-	   headers.add("X-cons-id",idrs);
-	   headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
-	   headers.add("X-signature",api.getHmac());
-	   headers.add("Content-type","application/json");
-	   headers.add("Content-length",null);
+            headers.add("X-cons-id",idrs);
+            headers.add("X-Timestamp",String.valueOf(api.GetUTCdatetimeAsString()));
+            headers.add("X-signature",api.getHmac());
+            headers.add("Content-type","application/json");
+            headers.add("Content-length",null);
             requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
             nameNode = root.path("status");
@@ -1177,5 +1177,4 @@ public final class SisruteRujukanMasukan extends javax.swing.JDialog {
             NoRmRS=tbBangsal.getValueAt(tbBangsal.getSelectedRow(),35).toString();
         }
     }
-
 }

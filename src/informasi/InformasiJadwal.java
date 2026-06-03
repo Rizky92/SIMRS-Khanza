@@ -234,7 +234,7 @@ public class InformasiJadwal extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariKeyPressed
 
     private void BtnAllActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAllActionPerformed
-        runBackground(() ->tampil());
+        // runBackground(() ->tampil());
         TCari.setText("");
         tampil();
     }//GEN-LAST:event_BtnAllActionPerformed
@@ -376,7 +376,7 @@ public class InformasiJadwal extends javax.swing.JDialog {
         } catch (Exception e) {
             System.out.println("Notif : " + e);
         }
-        LCount.setText(tabMode.getRowCount() + "");
+        LCount.setText(""+tabMode.getRowCount());
     }
 
     private void runBackground(Runnable task) {

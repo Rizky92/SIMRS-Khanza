@@ -9,30 +9,30 @@
 
 @font-face {
   font-family: Poppins-Regular;
-  src: url('../fonts/poppins/Poppins-Regular.ttf'); 
+  src: url('../fonts/poppins/Poppins-Regular.ttf');
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('../fonts/poppins/Poppins-Medium.ttf'); 
+  src: url('../fonts/poppins/Poppins-Medium.ttf');
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('../fonts/poppins/Poppins-Bold.ttf'); 
+  src: url('../fonts/poppins/Poppins-Bold.ttf');
 }
 
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url('../fonts/poppins/Poppins-SemiBold.ttf'); 
+  src: url('../fonts/poppins/Poppins-SemiBold.ttf');
 }
 
 /*//////////////////////////////////////////////////////////////////
 [ RESTYLE TAG ]*/
 
 * {
-	margin: 0px; 
-	padding: 0px; 
+	margin: 0px;
+	padding: 0px;
 	box-sizing: border-box;
 }
 
@@ -167,7 +167,7 @@ iframe {
 }
 
 .container-login100 {
-  width: 100%;  
+  width: 100%;
   min-height: 100vh;
   display: -webkit-box;
   display: -webkit-flex;
@@ -512,5 +512,3 @@ input.input100 {
     opacity: 1;
   }
 }
-
-

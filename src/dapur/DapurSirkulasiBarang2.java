@@ -329,7 +329,7 @@ public class DapurSirkulasiBarang2 extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
@@ -574,8 +574,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void prosesCari() {
-       Valid.tabelKosong(tabMode);
-       try{
+        Valid.tabelKosong(tabMode);
+        try{
             ps=koneksi.prepareStatement("select dapurbarang.kode_brng,dapurbarang.nama_brng, "+
                         "kodesatuan.satuan,dapurbarang.stok,(dapurbarang.stok*dapurbarang.harga) as aset "+
                         "from dapurbarang inner join kodesatuan on dapurbarang.kode_sat=kodesatuan.kode_sat "+
@@ -772,11 +772,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }
-
     }
 
     public void isCek(){
-         BtnPrint.setEnabled(akses.getsirkulasi_dapur());
+        BtnPrint.setEnabled(akses.getsirkulasi_dapur());
     }
 
     private void runBackground(Runnable task) {

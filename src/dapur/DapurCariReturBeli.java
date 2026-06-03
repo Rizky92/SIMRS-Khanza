@@ -492,7 +492,7 @@ public class DapurCariReturBeli extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void TglBeli1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TglBeli1KeyPressed
@@ -664,76 +664,76 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tbDokter.getSelectedRow()> -1){
-        if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString().trim().equals("")){
-            Valid.textKosong(TCari,"No.Faktur");
-        }else{
-          try {
-             pscaripesan=koneksi.prepareStatement("select no_retur_beli, total from dapurreturbeli where no_retur_beli=?");
-             try {
-                pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
-                rs=pscaripesan.executeQuery();
-                if(rs.next()){
-                    Sequel.AutoComitFalse();
-                    sukses=true;
-                    psdapur_detail_returbeli=koneksi.prepareStatement("select kode_brng,jml_retur from dapur_detail_returbeli where no_retur_beli=? ");
+        if(tbDokter.getSelectedRow()> -1){
+            if(!tbDokter.getValueAt(tbDokter.getSelectedRow(),6).toString().trim().equals("")){
+                Valid.textKosong(TCari,"No.Faktur");
+            }else{
+                try {
+                    pscaripesan=koneksi.prepareStatement("select no_retur_beli, total from dapurreturbeli where no_retur_beli=?");
                     try {
-                        psdapur_detail_returbeli.setString(1,rs.getString(1));
-                        rs2=psdapur_detail_returbeli.executeQuery();
-                        while(rs2.next()){
-                            Trackbarang.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jml_retur"),0,"Retur Beli", akses.getkode(),"Hapus");
-                            Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok+?",2,new String[]{
-                                   rs2.getString("jml_retur"),rs2.getString("kode_brng")
-                            });
+                        pscaripesan.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString());
+                        rs=pscaripesan.executeQuery();
+                        if(rs.next()){
+                            Sequel.AutoComitFalse();
+                            sukses=true;
+                            psdapur_detail_returbeli=koneksi.prepareStatement("select kode_brng,jml_retur from dapur_detail_returbeli where no_retur_beli=? ");
+                            try {
+                                psdapur_detail_returbeli.setString(1,rs.getString(1));
+                                rs2=psdapur_detail_returbeli.executeQuery();
+                                while(rs2.next()){
+                                    Trackbarang.catatRiwayat(rs2.getString("kode_brng"),rs2.getDouble("jml_retur"),0,"Retur Beli", akses.getkode(),"Hapus");
+                                    Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok+?",2,new String[]{
+                                        rs2.getString("jml_retur"),rs2.getString("kode_brng")
+                                    });
+                                }
+                            } catch (Exception e) {
+                                System.out.println("Notif : "+e);
+                            } finally{
+                                if(rs2!=null){
+                                    rs2.close();
+                                }
+                                if(psdapur_detail_returbeli!=null){
+                                    psdapur_detail_returbeli.close();
+                                }
+                            }
+
+                            Sequel.deleteTampJurnal();
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Beli_Dapur from set_akun2"), "RETUR BELI DAPUR", rs.getDouble("total"), 0)==false){
+                                sukses=false;
+                            }
+                            if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Beli_Dapur from set_akun2"), "KONTRA RETUR BELI DAPUR", 0, rs.getDouble("total"))==false){
+                                sukses=false;
+                            }
+                            if(sukses==true){
+                                sukses=jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL TRANSAKSI RETUR BELI BARANG DAPUR"+", OLEH "+akses.getkode());
+                            }
+
+                            if(sukses==true){
+                                Sequel.queryu2("delete from dapurreturbeli where no_retur_beli=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
+                                Sequel.Commit();
+                                runBackground(() ->tampil());
+                            }else{
+                                JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                                Sequel.RollBack();
+                            }
+
+                            Sequel.AutoComitTrue();
                         }
                     } catch (Exception e) {
-                        System.out.println("Notif : "+e);
+                        System.out.println(e);
                     } finally{
-                        if(rs2!=null){
-                            rs2.close();
+                        if(rs!=null){
+                            rs.close();
                         }
-                        if(psdapur_detail_returbeli!=null){
-                            psdapur_detail_returbeli.close();
+                        if(pscaripesan!=null){
+                            pscaripesan.close();
                         }
                     }
-
-                    Sequel.deleteTampJurnal();
-                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Retur_Beli_Dapur from set_akun2"), "RETUR BELI DAPUR", rs.getDouble("total"), 0)==false){
-                        sukses=false;
-                    }
-                    if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Retur_Beli_Dapur from set_akun2"), "KONTRA RETUR BELI DAPUR", 0, rs.getDouble("total"))==false){
-                        sukses=false;
-                    }
-                    if(sukses==true){
-                        sukses=jur.simpanJurnal(rs.getString("no_retur_beli"),"U","BATAL TRANSAKSI RETUR BELI BARANG DAPUR"+", OLEH "+akses.getkode());
-                    }
-
-                    if(sukses==true){
-                        Sequel.queryu2("delete from dapurreturbeli where no_retur_beli=?",1,new String[]{tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString()});
-                        Sequel.Commit();
-                        runBackground(() ->tampil());
-                    }else{
-                        JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                        Sequel.RollBack();
-                    }
-
-                    Sequel.AutoComitTrue();
+                } catch (Exception ex) {
+                    System.out.println(ex);
                 }
-             } catch (Exception e) {
-                System.out.println(e);
-             } finally{
-                 if(rs!=null){
-                     rs.close();
-                 }
-                 if(pscaripesan!=null){
-                     pscaripesan.close();
-                 }
-             }
-          } catch (Exception ex) {
-             System.out.println(ex);
-          }
+            }
         }
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -940,7 +940,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-       Valid.tabelKosong(tabMode);
+        Valid.tabelKosong(tabMode);
         try{
             carifaktur="";carisuplier="";caripetugas="";carijenis="";caribarang="";
             if(!NoFaktur.getText().equals("")){

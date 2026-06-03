@@ -1690,45 +1690,45 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
     }//GEN-LAST:event_JenisPelayananKeyPressed
 
     private void btnPoliActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliActionPerformed
-            InhealthCekReferensiPoli poli=new InhealthCekReferensiPoli(null,false);
-            poli.addWindowListener(new WindowListener() {
-                @Override
-                public void windowOpened(WindowEvent e) {}
-                @Override
-                public void windowClosing(WindowEvent e) {}
-                @Override
-                public void windowClosed(WindowEvent e) {
-                    if(poli.getTable().getSelectedRow()!= -1){
-                        KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
-                        NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
-                        KdPoli.requestFocus();
-                    }
+        InhealthCekReferensiPoli poli=new InhealthCekReferensiPoli(null,false);
+        poli.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(poli.getTable().getSelectedRow()!= -1){
+                    KdPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),1).toString());
+                    NmPoli.setText(poli.getTable().getValueAt(poli.getTable().getSelectedRow(),2).toString());
+                    KdPoli.requestFocus();
                 }
-                @Override
-                public void windowIconified(WindowEvent e) {}
-                @Override
-                public void windowDeiconified(WindowEvent e) {}
-                @Override
-                public void windowActivated(WindowEvent e) {}
-                @Override
-                public void windowDeactivated(WindowEvent e) {}
-            });
+            }
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
-            poli.getTable().addKeyListener(new KeyListener() {
-                @Override
-                public void keyTyped(KeyEvent e) {}
-                @Override
-                public void keyPressed(KeyEvent e) {
-                    if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                        poli.dispose();
-                    }
+        poli.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    poli.dispose();
                 }
-                @Override
-                public void keyReleased(KeyEvent e) {}
-            });
-            poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-            poli.setLocationRelativeTo(internalFrame1);
-            poli.setVisible(true);
+            }
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        poli.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        poli.setLocationRelativeTo(internalFrame1);
+        poli.setVisible(true);
     }//GEN-LAST:event_btnPoliActionPerformed
 
     private void btnPoliKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnPoliKeyPressed
@@ -2050,8 +2050,6 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
         }
     }
 
-
-
     private void isForm(){
         if(ChkInput.isSelected()==true){
             ChkInput.setVisible(false);
@@ -2069,9 +2067,9 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
     private void insertSEP(){
         try{
             String URL = koneksiDB.URLAPIINHEALTH()+"/api/SimpanSJP";
-	    HttpHeaders headers = new HttpHeaders();
+	        HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type","application/json");
-	    requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
+	        requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
                             "\"kodeprovider\": \""+KdPPK.getText()+"\"," +
                             "\"tanggalpelayanan\": \""+Valid.SetTgl(TanggalSEP.getSelectedItem()+"")+"\","+
                             "\"jenispelayanan\": \""+JenisPelayanan.getSelectedItem().toString().substring(0,1)+"\","+
@@ -2129,9 +2127,9 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
     private void UpdateSEP(){
         try{
             String URL = koneksiDB.URLAPIINHEALTH()+"/api/UpdateSJP";
-	    HttpHeaders headers = new HttpHeaders();
+	        HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type","application/json");
-	    requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
+	        requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
                             "\"kodeprovider\": \""+KdPPK.getText()+"\"," +
                             "\"nosjp\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"\"," +
                             "\"nomormedicalreport\": \""+TNoRM.getText()+"\","+
@@ -2172,9 +2170,9 @@ public final class InhealthDataSJP extends javax.swing.JDialog {
     private void deleteSJP(){
         try{
             String URL = koneksiDB.URLAPIINHEALTH()+"/api/HapusSJP";
-	    HttpHeaders headers = new HttpHeaders();
+	        HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type","application/json");
-	    requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
+    	    requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
                             "\"kodeprovider\": \""+KdPPK.getText()+"\"," +
                             "\"nosjp\": \""+tbObat.getValueAt(tbObat.getSelectedRow(),0).toString()+"\"," +
                             "\"alasanhapus\": \""+"kesalahan-input"+"\"," +

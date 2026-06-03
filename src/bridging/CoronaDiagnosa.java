@@ -635,7 +635,7 @@ public class CoronaDiagnosa extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -721,11 +721,11 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_TCariKeyPressed
 
     private void BtnCari1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCari1ActionPerformed
-    if(TCari.getText().trim().equals("")){
-        JOptionPane.showMessageDialog(rootPane,"Silahkan masukkan kode ICD");
-    }else{
-        tampil();
-    }
+        if(TCari.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(rootPane,"Silahkan masukkan kode ICD");
+        }else{
+            tampil();
+        }
     }//GEN-LAST:event_BtnCari1ActionPerformed
 
     private void BtnCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnCari1KeyPressed
@@ -737,10 +737,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnCari1KeyPressed
 
     private void ppBersihkanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppBersihkanActionPerformed
-            for(i=0;i<tbDokter.getRowCount();i++){
-                tbDokter.setValueAt("",i,0);
-                tbDokter.setValueAt("0",i,4);
-            }
+        for(i=0;i<tbDokter.getRowCount();i++){
+            tbDokter.setValueAt("",i,0);
+            tbDokter.setValueAt("0",i,4);
+        }
     }//GEN-LAST:event_ppBersihkanActionPerformed
 
     private void normKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_normKeyPressed

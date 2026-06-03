@@ -451,7 +451,7 @@ public class DapurPengeluaran extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnCariActionPerformed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -462,7 +462,7 @@ public class DapurPengeluaran extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -486,7 +486,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(Sequel.menyimpantf2("dapurpengeluaran","?,?,?,?","No.Keluar",4,new String[]{NoKeluar.getText(),Valid.SetTgl(TglKeluar.getSelectedItem()+""),kdptg.getText(),Keterangan.getText()})==true){
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){
-                         if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
+                        if(Valid.SetAngka(tbDokter.getValueAt(i,0).toString())>0){
                             if(Sequel.menyimpantf2("dapurdetailpengeluaran","?,?,?,?,?,?","Transaksi Pengeluaran",6,new String[]{
                                 NoKeluar.getText(),tbDokter.getValueAt(i,1).toString(),tbDokter.getValueAt(i,3).toString(),
                                 tbDokter.getValueAt(i,0).toString(),tbDokter.getValueAt(i,5).toString(),tbDokter.getValueAt(i,6).toString()
@@ -504,7 +504,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     sukses=false;
                 }
 
-                if(sukses){
+                if(sukses==true){
                     Sequel.deleteTampJurnal();
                     if(Sequel.insertTampJurnal(Sequel.cariIsi("select Stok_Keluar_Dapur from set_akun"), "PERSEDIAAN BARANG", ttl, 0)==false){
                         sukses=false;
@@ -517,7 +517,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     }
                 }
 
-                if(sukses){
+                if(sukses==true){
                     Sequel.Commit();
                     jml=tbDokter.getRowCount();
                     for(i=0;i<jml;i++){

@@ -816,17 +816,13 @@ public final class PCareMapingTindakanRanap extends javax.swing.JDialog {
     }
 
     private void getData() {
-       if(tbJnsPerawatan.getSelectedRow()!= -1){
-           kdtindakan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
-           TTindakan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
-           KdTindakanPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
-           NmTindakanPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
+        if(tbJnsPerawatan.getSelectedRow()!= -1){
+            kdtindakan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),0).toString());
+            TTindakan.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),1).toString());
+            KdTindakanPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),2).toString());
+            NmTindakanPCare.setText(tbJnsPerawatan.getValueAt(tbJnsPerawatan.getSelectedRow(),3).toString());
         }
     }
-
-
-
-
 
     public void isCek(){
         BtnSimpan.setEnabled(akses.getpcare_mapping_tindakan());

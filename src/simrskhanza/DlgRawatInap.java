@@ -10283,7 +10283,7 @@ public final class DlgRawatInap extends javax.swing.JDialog {
             tinggi=tinggi+24;
         }
         BtnPermintaanKonsultasiPerawat.setVisible(akses.getkonsultasi_perawat());
-        if(akses.getkonsultasi_medik()==true){
+        if(akses.getkonsultasi_perawat()==true){
             tinggi=tinggi+24;
         }
         BtnAwalKeperawatanBayiAnak.setVisible(akses.getpenilaian_awal_keperawatan_ranap_bayi());

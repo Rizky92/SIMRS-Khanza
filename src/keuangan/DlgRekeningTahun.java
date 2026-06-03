@@ -584,7 +584,11 @@ public final class DlgRekeningTahun extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditKeyPressed
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-        dispose();
+        if (akses.getform().equals("DlgPengaturanRekening") || akses.getform().equals("DlgPengaturanRekeningRalan") || akses.getform().equals("DlgPengaturanRekeningRanap")) {
+            this.setVisible(false);
+        } else {
+            dispose();
+        }
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed

@@ -1425,7 +1425,7 @@
 
         UpdateDataPasienSmc($nomor_kartu, $nomor_rm, $nama_pasien, $tgl_lahir, $gender);
 
-        SimpanGetDataKlaimSmc($nomor_sep, $msg['response']['data']);
+        // SimpanGetDataKlaimSmc($nomor_sep, $msg['response']['data']);
 
         if ($msg['response']['data']['klaim_status_cd'] == 'final') {
             ['success' => $success, 'data' => $response, 'error' => $_error] = ReeditKlaimSmc($nomor_sep, $norawat);
@@ -1453,7 +1453,7 @@
         $persalinan = $data['persalinan'] ?? [];
 
         bukaquery2("delete from inacbg_data_klaim_smc where no_sep = '$nomor_sep'");
-        InsertData2('inacbg_data_klaim_smc', sprintf(
+        $insert = sprintf(
             "'%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s'",
             $nomor_sep, $data['nomor_kartu'], $tgl_masuk.' 00:00:01', $tgl_pulang.' 23:59:59', $data['cara_masuk'], $data['jenis_rawat'], $data['kelas_rawat'],
             $data['adl_sub_acute'], $data['adl_chronic'], $data['icu_indikator'], $data['icu_los'], $data['ventilator_hour'], $data['upgrade_class_ind'],
@@ -1463,7 +1463,9 @@
             $apgar_m5['appearance'] ?? '', $apgar_m5['pulse'] ?? '', $apgar_m5['grimace'] ?? '', $apgar_m5['activity'] ?? '', $apgar_m5['respiration'] ?? '',
             $persalinan['usia_kehamilan'] ?? '', $persalinan['gravida'] ?? '', $persalinan['partus'] ?? '', $persalinan['abortus'] ?? '', $persalinan['onset_kontraksi'] ?? '',
             $data['tarif_poli_eks'], $data['nama_dokter'], $data['kode_tarif'], $data['payor_id'], $data['payor_nm'], '#'
-        ));
+        );
+		// echo $insert;
+        InsertData2('inacbg_data_klaim_smc', $insert);
 
         foreach (($data['tarif_rs'] ?? []) as $tarif => $nilai) {
             InsertData2('inacbg_data_klaim_tarif_smc', sprintf("'%s', '%s', '%s'", $nomor_sep, $tarif, $nilai));
@@ -1914,13 +1916,14 @@
 
         try {
             bukaquery2(sprintf(<<<'SQL'
-                insert into idrg_grouping_smc values ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s') on duplicate key update
+                insert into idrg_grouping_smc values ('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', 'Tidak Ada') on duplicate key update
                 mdc_number = values(mdc_number), mdc_description = values(mdc_description), drg_code = values(drg_code), drg_description = values(drg_description),
                 kelas_rs = values(kelas_rs), cost_weight = values(cost_weight), sub_acute_weight = values(sub_acute_weight), chronic_weight = values(chronic_weight),
-                total_cost_weight = values(total_cost_weight), nbr = values(nbr)
+                total_cost_weight = values(total_cost_weight), nbr = values(nbr), topup_weight = values(topup_weight), top_up = 'Tidak Ada'
                 SQL,
-                $nomor_sep, $msg['response_idrg']['mdc_number'], $msg['response_idrg']['mdc_description'], $msg['response_idrg']['drg_code'], $msg['response_idrg']['drg_description'], getKelasRS(),
-                $msg['response_idrg']['cost_weight'], $msg['response_idrg']['sub_acute_weight'], $msg['response_idrg']['chronic_weight'], $msg['response_idrg']['total_cost_weight'], $msg['response_idrg']['nbr'],
+                $nomor_sep, $msg['response_idrg']['mdc_number'], $msg['response_idrg']['mdc_description'], $msg['response_idrg']['drg_code'], $msg['response_idrg']['drg_description'],
+                getKelasRS(), $msg['response_idrg']['cost_weight'], $msg['response_idrg']['sub_acute_weight'], $msg['response_idrg']['chronic_weight'],
+                $msg['response_idrg']['total_cost_weight'], $msg['response_idrg']['nbr'], '0'
             ));
         } catch (\Exception $e) {
             return [
@@ -1938,10 +1941,97 @@
             ];
         }
 
+        /*
+         * Sudah submit bukti pengembangan top up iDRG ke pusbikes,
+         * Namunn belum ada konfirmasi apakah sudah bisa digunkaan atau belum
+        if (isset($msg['response_idrg']['topup_options']) && count($msg['response_idrg']['topup_options']) > 0) {
+            Hapus2('tempinacbg', "coder_nik = '$coder_nik'");
+            foreach ($msg['response_idrg']['topup_options'] as ['code' => $code, 'description' => $desc, 'type' => $type]) {
+                InsertData2('tempinacbg', "'$coder_nik', '$code', '$desc', '$type'");
+            }
+
+            ubahSmc('idrg_grouping_smc', "top_up = 'Belum'", "no_sep = '$nomor_sep'");
+
+            return [
+                'success' => true,
+                'data' => 'idrg_stage2',
+                'error' => null,
+            ];
+        }
+        */
+
         return [
             'success' => true,
             'data' => 'Grouping IDRG berhasil disimpan!',
             'error' => null,
+        ];
+    }
+
+    function GroupingStage2IdrgSmc($nomor_sep, $coder_nik, $topup_options)
+    {
+        $request = [
+            'metadata' => [
+                'method' => 'grouper',
+                'stage' => '2',
+                'grouper' => 'idrg',
+            ],
+            'data' => [
+                'nomor_sep' => $nomor_sep,
+                'topup_codes' => $topup_options,
+            ]
+        ];
+
+        $msg = Request(json_encode($request));
+
+        if ($msg['metadata']['code'] != '200') {
+            $error = sprintf(
+                '[%s] method "grouper stage 2 IDRG": %s - %s',
+                $msg['metadata']['code'],
+                $msg['metadata']['error_no'],
+                $msg['metadata']['message']
+            );
+
+            echo '<span style="font-weight: bold; font-size: 16; color: rgb(255, 0, 0)">'.$error.'</span><br /><br />';
+
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $error,
+            ];
+        }
+
+        Hapus2("tempinacbg", "coder_nik = '$coder_nik'");
+
+        $topup = 'Tidak Ada';
+        $topup_weight = 0;
+
+        if (!empty($msg['response_idrg']['topup'])) {
+            $topup = 'Sudah';
+            foreach ($msg['response_idrg']['topup'] as ['code' => $code, 'description' => $description, 'type' => $type, 'cost_weight' => $weight]) {
+                InsertData2('idrg_grouping_topup_smc', sprintf("'%s', '%s', '%s', '%s', %s", $nomor_sep, $code, $description, $type, $weight));
+                $topup_weight += $weight;
+            }
+        }
+
+        ubahSmc('idrg_grouping_smc', sprintf("drg_code = '%s', drg_description = '%s', topup_weight = %s, top_up = %f",
+            $msg['response_idrg']['drg_code'],
+            $msg['response_idrg']['drg_description'],
+            $topup_weight,
+            $topup
+        ), "no_sep = '$nomor_sep'");
+
+        if ($msg['response_idrg']['mdc_number'] == '36') {
+            return [
+                'success' => false,
+                'data' => null,
+                'error' => $msg['response_idrg']['drg_description'],
+            ];
+        }
+
+        return [
+            'success' => true,
+            'data' => 'Grouping IDRG berhasil disimpan!',
+            'error' => null
         ];
     }
 

@@ -411,16 +411,15 @@ public final class ApotekBPJSCekReferensiSettingPPK extends javax.swing.JDialog 
         try {
             headers = new HttpHeaders();
             headers.setContentType(MediaType.APPLICATION_JSON);
-	    headers.add("x-cons-id",koneksiDB.CONSIDAPIAPOTEKBPJS());
-	    utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("x-timestamp",utc);
-	    headers.add("x-signature",api.getHmac(utc));
-	    headers.add("user_key",koneksiDB.USERKEYAPIAPOTEKBPJS());
+            headers.add("x-cons-id",koneksiDB.CONSIDAPIAPOTEKBPJS());
+            utc=String.valueOf(api.GetUTCdatetimeAsString());
+            headers.add("x-timestamp",utc);
+            headers.add("x-signature",api.getHmac(utc));
+            headers.add("user_key",koneksiDB.USERKEYAPIAPOTEKBPJS());
             requestEntity = new HttpEntity(headers);
             URL = link+"/referensi/settingppk/read/"+keyword;
             System.out.println(URL);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
-            System.out.println(root);
             nameNode = root.path("metaData");
             if(nameNode.path("code").asText().equals("200")){
                 Valid.tabelKosong(tabMode);

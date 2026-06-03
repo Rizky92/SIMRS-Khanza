@@ -846,11 +846,11 @@ public final class DapurStokOpname extends javax.swing.JDialog {
                     total=total+rstampil.getDouble(11);
                     totallebih=totallebih+rstampil.getDouble(12);
                     tabMode.addRow(new Object[]{rstampil.getString(1),
-                       rstampil.getString(2),df2.format(rstampil.getDouble(3)),
-                       rstampil.getString(4),rstampil.getString(5),rstampil.getString(6),
-                       rstampil.getString(7),rstampil.getString(8),rstampil.getString(9),
-                       df2.format(rstampil.getDouble(10)),df2.format(rstampil.getDouble(11)),
-                       df2.format(rstampil.getDouble(12)),rstampil.getString(13)
+                        rstampil.getString(2),df2.format(rstampil.getDouble(3)),
+                        rstampil.getString(4),rstampil.getString(5),rstampil.getString(6),
+                        rstampil.getString(7),rstampil.getString(8),rstampil.getString(9),
+                        df2.format(rstampil.getDouble(10)),df2.format(rstampil.getDouble(11)),
+                        df2.format(rstampil.getDouble(12)),rstampil.getString(13)
                     });
                 }
             } catch (Exception e) {
@@ -907,7 +907,6 @@ public final class DapurStokOpname extends javax.swing.JDialog {
     public JButton getButton(){
         return BtnKeluar;
     }
-
 
     public void isCek(){
         BtnHapus.setEnabled(akses.getdapur_opname());

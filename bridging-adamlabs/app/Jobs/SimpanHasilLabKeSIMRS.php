@@ -18,6 +18,7 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Throwable;
 
 class SimpanHasilLabKeSIMRS implements ShouldQueue
@@ -67,7 +68,7 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
     /**
      * Create a new job instance.
      *
-     * @param  array{no_laboratorium: string, no_registrasi: string, username: string}  $options
+     * @param  array{no_laboratorium: string, no_registrasi: string, username: string}  $params
      */
     public function __construct(array $params)
     {
@@ -97,188 +98,196 @@ class SimpanHasilLabKeSIMRS implements ShouldQueue
 
     private function simpanHasilLab(): void
     {
-        try {
-            $permintaanLab = PermintaanLabPK::query()
-                ->where('noorder', $this->noRegistrasi)
-                ->firstOrFail();
+        for ($i = 1; $i <= 5; $i++) {
+            try {
+                $permintaanLab = PermintaanLabPK::query()
+                    ->where('noorder', $this->noRegistrasi)
+                    ->firstOrFail();
 
-            $registrasi = Registrasi::query()
-                ->with('pemeriksaan')
-                ->where('no_laboratorium', $this->noLaboratorium)
-                ->where('no_registrasi', $this->noRegistrasi)
-                ->firstOrFail();
+                $registrasi = Registrasi::query()
+                    ->with('pemeriksaan')
+                    ->where('no_laboratorium', $this->noLaboratorium)
+                    ->where('no_registrasi', $this->noRegistrasi)
+                    ->firstOrFail();
 
-            $this->noRawat = $permintaanLab->no_rawat;
-            $this->statusRawat = $permintaanLab->status;
+                $this->noRawat = $permintaanLab->no_rawat;
+                $this->statusRawat = $permintaanLab->status;
 
-            $this->tglSebelumnya = $permintaanLab->tgl_hasil ?? '0000-00-00';
-            $this->jamSebelumnya = $permintaanLab->jam_hasil;
+                $this->tglSebelumnya = $permintaanLab->tgl_hasil ?? '0000-00-00';
+                $this->jamSebelumnya = $permintaanLab->jam_hasil;
 
-            $waktuRegistrasi = carbon_immutable($registrasi->pemeriksaan->max('waktu_pemeriksaan'));
+                $waktuRegistrasi = carbon_immutable($registrasi->pemeriksaan->max('waktu_pemeriksaan'));
 
-            $this->tgl = $waktuRegistrasi->toDateString();
-            $this->jam = $waktuRegistrasi->format('H:i:s');
+                $this->tgl = $waktuRegistrasi->toDateString();
+                $this->jam = $waktuRegistrasi->format('H:i:s');
 
-            $kategori = $registrasi->pemeriksaan->pluck('kategori_pemeriksaan_nama')->filter()->unique()->values();
-            $tindakan = $registrasi->pemeriksaan->pluck('kode_tindakan_simrs')->filter()->unique()->values();
-            $tindakanSudahAda = $registrasi->pemeriksaan->filter(fn ($p) => $p->status_bridging === true)->pluck('kode_tindakan_simrs')->filter()->unique()->values();
-            $compound = $registrasi->pemeriksaan->pluck('compound')->filter()->unique()->values();
+                $kategori = $registrasi->pemeriksaan->pluck('kategori_pemeriksaan_nama')->filter()->unique()->values();
+                $tindakan = $registrasi->pemeriksaan->pluck('kode_tindakan_simrs')->filter()->unique()->values();
+                $tindakanSudahAda = $registrasi->pemeriksaan->filter(fn ($p) => $p->status_bridging === true)->pluck('kode_tindakan_simrs')->filter()->unique()->values();
+                $compound = $registrasi->pemeriksaan->pluck('compound')->filter()->unique()->values();
 
-            $this->dokterPj = DB::connection('mysql_sik')->table('set_pjlab')->value('kd_dokterlab');
+                $this->dokterPj = DB::connection('mysql_sik')->table('set_pjlab')->value('kd_dokterlab');
 
-            DB::connection('mysql_sik')
-                ->transaction(function () use ($registrasi, $kategori, $tindakan, $tindakanSudahAda, $compound) {
-                    if ($this->registrasiDitutup()) {
-                        throw new RegistrationClosedException('Registrasi sudah ditutup!');
-                    }
+                DB::connection('mysql_sik')
+                    ->transaction(function () use ($registrasi, $kategori, $tindakan, $tindakanSudahAda, $compound) {
+                        if ($this->registrasiDitutup()) {
+                            throw new RegistrationClosedException('Registrasi sudah ditutup!');
+                        }
 
-                    tracker_start('mysql_sik');
-                    PermintaanLabPK::query()
-                        ->where('noorder', $this->noRegistrasi)
-                        ->update([
-                            'tgl_hasil' => $this->tgl,
-                            'jam_hasil' => $this->jam,
-                        ]);
-                    tracker_end('mysql_sik', $this->username);
-
-                    TindakanLab::query()
-                        ->whereIn('kd_jenis_prw', $tindakan->diff($tindakanSudahAda))
-                        ->get()
-                        ->each(function (TindakanLab $t) use ($registrasi) {
-                            tracker_start('mysql_sik');
-                            PeriksaLab::create([
-                                'no_rawat'               => $this->noRawat,
-                                'nip'                    => $this->nip,
-                                'kd_jenis_prw'           => $t->kd_jenis_prw,
-                                'tgl_periksa'            => $this->tgl,
-                                'jam'                    => $this->jam,
-                                'dokter_perujuk'         => $registrasi->dokter_pengirim_kode,
-                                'bagian_rs'              => $t->bagian_rs,
-                                'bhp'                    => $t->bhp,
-                                'tarif_perujuk'          => $t->tarif_perujuk,
-                                'tarif_tindakan_dokter'  => $t->tarif_tindakan_dokter,
-                                'tarif_tindakan_petugas' => $t->tarif_tindakan_petugas,
-                                'kso'                    => $t->kso,
-                                'menejemen'              => $t->menejemen,
-                                'biaya'                  => $t->total_byr,
-                                'kd_dokter'              => $this->dokterPj,
-                                'status'                 => str($this->statusRawat)->title()->value(),
-                                'kategori'               => 'PK'
+                        tracker_start('mysql_sik');
+                        PermintaanLabPK::query()
+                            ->where('noorder', $this->noRegistrasi)
+                            ->update([
+                                'tgl_hasil' => $this->tgl,
+                                'jam_hasil' => $this->jam,
                             ]);
-                            tracker_end('mysql_sik', $this->username);
+                        tracker_end('mysql_sik', $this->username);
 
-                            $this->totalJasaSarana       += $t->bagian_rs;
-                            $this->totalBHP              += $t->bhp;
-                            $this->totalJasaPerujuk      += $t->tarif_perujuk;
-                            $this->totalJasaMedisDokter  += $t->tarif_tindakan_dokter;
-                            $this->totalJasaMedisPetugas += $t->tarif_tindakan_petugas;
-                            $this->totalKSO              += $t->kso;
-                            $this->totalManajemen        += $t->menejemen;
-                            $this->totalPendapatan       += $t->total_byr;
-                        });
-
-                    TindakanLab::query()
-                        ->whereIn('kd_jenis_prw', $tindakanSudahAda)
-                        ->get()
-                        ->each(function (TindakanLab $t) {
-                            tracker_start('mysql_sik');
-                            PeriksaLab::query()
-                                ->where('no_rawat', $this->noRawat)
-                                ->where('kd_jenis_prw', $t->kd_jenis_prw)
-                                ->where('tgl_periksa', $this->tglSebelumnya)
-                                ->where('jam', $this->jamSebelumnya)
-                                ->update([
-                                    'tgl_periksa' => $this->tgl,
-                                    'jam'         => $this->jam,
-                                ]);
-                            tracker_end('mysql_sik', $this->username);
-                        });
-
-                    PemeriksaanLab::query()
-                        ->untukHasilPemeriksaan($kategori, $tindakan, $compound)
-                        ->get()
-                        ->each(function (PemeriksaanLab $p) use ($registrasi) {
-                            $pemeriksaan = $registrasi->pemeriksaan
-                                ->whereStrict('kategori_pemeriksaan_nama', $p->kategori)
-                                ->whereStrict('kode_tindakan_simrs', $p->kd_jenis_prw)
-                                ->whereStrict('compound', $p->kode_compound)
-                                ->first();
-
-                            if ($pemeriksaan->status_bridging) {
+                        TindakanLab::query()
+                            ->whereIn('kd_jenis_prw', $tindakan->diff($tindakanSudahAda))
+                            ->get()
+                            ->each(function (TindakanLab $t) use ($registrasi) {
                                 tracker_start('mysql_sik');
-                                PeriksaLabDetail::query()
+                                PeriksaLab::create([
+                                    'no_rawat'               => $this->noRawat,
+                                    'nip'                    => $this->nip,
+                                    'kd_jenis_prw'           => $t->kd_jenis_prw,
+                                    'tgl_periksa'            => $this->tgl,
+                                    'jam'                    => $this->jam,
+                                    'dokter_perujuk'         => $registrasi->dokter_pengirim_kode,
+                                    'bagian_rs'              => $t->bagian_rs,
+                                    'bhp'                    => $t->bhp,
+                                    'tarif_perujuk'          => $t->tarif_perujuk,
+                                    'tarif_tindakan_dokter'  => $t->tarif_tindakan_dokter,
+                                    'tarif_tindakan_petugas' => $t->tarif_tindakan_petugas,
+                                    'kso'                    => $t->kso,
+                                    'menejemen'              => $t->menejemen,
+                                    'biaya'                  => $t->total_byr,
+                                    'kd_dokter'              => $this->dokterPj,
+                                    'status'                 => str($this->statusRawat)->title()->value(),
+                                    'kategori'               => 'PK'
+                                ]);
+                                tracker_end('mysql_sik', $this->username);
+
+                                $this->totalJasaSarana       += $t->bagian_rs;
+                                $this->totalBHP              += $t->bhp;
+                                $this->totalJasaPerujuk      += $t->tarif_perujuk;
+                                $this->totalJasaMedisDokter  += $t->tarif_tindakan_dokter;
+                                $this->totalJasaMedisPetugas += $t->tarif_tindakan_petugas;
+                                $this->totalKSO              += $t->kso;
+                                $this->totalManajemen        += $t->menejemen;
+                                $this->totalPendapatan       += $t->total_byr;
+                            });
+
+                        TindakanLab::query()
+                            ->whereIn('kd_jenis_prw', $tindakanSudahAda)
+                            ->get()
+                            ->each(function (TindakanLab $t) {
+                                tracker_start('mysql_sik');
+                                PeriksaLab::query()
                                     ->where('no_rawat', $this->noRawat)
-                                    ->where('kd_jenis_prw', $p->kd_jenis_prw)
+                                    ->where('kd_jenis_prw', $t->kd_jenis_prw)
                                     ->where('tgl_periksa', $this->tglSebelumnya)
                                     ->where('jam', $this->jamSebelumnya)
-                                    ->where('id_template', $p->id_template)
                                     ->update([
                                         'tgl_periksa' => $this->tgl,
                                         'jam'         => $this->jam,
-                                        'nilai'       => $pemeriksaan->hasil_nilai_hasil,
-                                        'keterangan'  => $pemeriksaan->hasil_flag_kode ?? '',
                                     ]);
                                 tracker_end('mysql_sik', $this->username);
-                            } else {
-                                tracker_start('mysql_sik');
-                                PeriksaLabDetail::create([
-                                    'no_rawat'       => $this->noRawat,
-                                    'kd_jenis_prw'   => $p->kd_jenis_prw,
-                                    'tgl_periksa'    => $this->tgl,
-                                    'jam'            => $this->jam,
-                                    'id_template'    => $p->id_template,
-                                    'nilai'          => $pemeriksaan->hasil_nilai_hasil,
-                                    'nilai_rujukan'  => $pemeriksaan->hasil_nilai_rujukan ?? '',
-                                    'keterangan'     => $pemeriksaan->hasil_flag_kode ?? '',
-                                    'bagian_rs'      => $p->pemeriksaan_jasa_sarana,
-                                    'bhp'            => $p->pemeriksaan_bhp,
-                                    'bagian_perujuk' => $p->pemeriksaan_jasa_perujuk,
-                                    'bagian_dokter'  => $p->pemeriksaan_jasa_medis_dokter,
-                                    'bagian_laborat' => $p->pemeriksaan_jasa_medis_petugas,
-                                    'kso'            => $p->pemeriksaan_kso,
-                                    'menejemen'      => $p->pemeriksaan_manajemen,
-                                    'biaya_item'     => $p->pemeriksaan_pendapatan,
-                                ]);
-                                tracker_end('mysql_sik', $this->username);
+                            });
 
-                                $this->totalJasaSarana       += $p->pemeriksaan_jasa_sarana;
-                                $this->totalBHP              += $p->pemeriksaan_bhp;
-                                $this->totalJasaPerujuk      += $p->pemeriksaan_jasa_perujuk;
-                                $this->totalJasaMedisDokter  += $p->pemeriksaan_jasa_medis_dokter;
-                                $this->totalJasaMedisPetugas += $p->pemeriksaan_jasa_medis_petugas;
-                                $this->totalKSO              += $p->pemeriksaan_kso;
-                                $this->totalManajemen        += $p->pemeriksaan_manajemen;
-                                $this->totalPendapatan       += $p->pemeriksaan_pendapatan;
-                            }
-                        });
+                        PemeriksaanLab::query()
+                            ->untukHasilPemeriksaan($kategori, $tindakan, $compound)
+                            ->get()
+                            ->each(function (PemeriksaanLab $p) use ($registrasi) {
+                                $pemeriksaan = $registrasi->pemeriksaan
+                                    ->whereStrict('kategori_pemeriksaan_nama', $p->kategori)
+                                    ->whereStrict('kode_tindakan_simrs', $p->kd_jenis_prw)
+                                    ->whereStrict('compound', $p->kode_compound)
+                                    ->first();
 
-                    $this->isiCatatanPemeriksaan($registrasi);
+                                if ($pemeriksaan->status_bridging) {
+                                    tracker_start('mysql_sik');
+                                    PeriksaLabDetail::query()
+                                        ->where('no_rawat', $this->noRawat)
+                                        ->where('kd_jenis_prw', $p->kd_jenis_prw)
+                                        ->where('tgl_periksa', $this->tglSebelumnya)
+                                        ->where('jam', $this->jamSebelumnya)
+                                        ->where('id_template', $p->id_template)
+                                        ->update([
+                                            'tgl_periksa' => $this->tgl,
+                                            'jam'         => $this->jam,
+                                            'nilai'       => $pemeriksaan->hasil_nilai_hasil,
+                                            'keterangan'  => $pemeriksaan->hasil_flag_kode ?? '',
+                                        ]);
+                                    tracker_end('mysql_sik', $this->username);
+                                } else {
+                                    tracker_start('mysql_sik');
+                                    PeriksaLabDetail::create([
+                                        'no_rawat'       => $this->noRawat,
+                                        'kd_jenis_prw'   => $p->kd_jenis_prw,
+                                        'tgl_periksa'    => $this->tgl,
+                                        'jam'            => $this->jam,
+                                        'id_template'    => $p->id_template,
+                                        'nilai'          => $pemeriksaan->hasil_nilai_hasil,
+                                        'nilai_rujukan'  => $pemeriksaan->hasil_nilai_rujukan ?? '',
+                                        'keterangan'     => $pemeriksaan->hasil_flag_kode ?? '',
+                                        'bagian_rs'      => $p->pemeriksaan_jasa_sarana,
+                                        'bhp'            => $p->pemeriksaan_bhp,
+                                        'bagian_perujuk' => $p->pemeriksaan_jasa_perujuk,
+                                        'bagian_dokter'  => $p->pemeriksaan_jasa_medis_dokter,
+                                        'bagian_laborat' => $p->pemeriksaan_jasa_medis_petugas,
+                                        'kso'            => $p->pemeriksaan_kso,
+                                        'menejemen'      => $p->pemeriksaan_manajemen,
+                                        'biaya_item'     => $p->pemeriksaan_pendapatan,
+                                    ]);
+                                    tracker_end('mysql_sik', $this->username);
 
-                    $this->catatJurnal();
-                });
-        } catch (Throwable $e) {
-            tracker_start('mysql');
-            Pemeriksaan::query()
-                ->where('no_registrasi', $this->noRegistrasi)
-                ->where('no_laboratorium', $this->noLaboratorium)
-                ->where('status_bridging', false)
-                ->delete();
-            tracker_end('mysql', $this->username);
+                                    $this->totalJasaSarana       += $p->pemeriksaan_jasa_sarana;
+                                    $this->totalBHP              += $p->pemeriksaan_bhp;
+                                    $this->totalJasaPerujuk      += $p->pemeriksaan_jasa_perujuk;
+                                    $this->totalJasaMedisDokter  += $p->pemeriksaan_jasa_medis_dokter;
+                                    $this->totalJasaMedisPetugas += $p->pemeriksaan_jasa_medis_petugas;
+                                    $this->totalKSO              += $p->pemeriksaan_kso;
+                                    $this->totalManajemen        += $p->pemeriksaan_manajemen;
+                                    $this->totalPendapatan       += $p->pemeriksaan_pendapatan;
+                                }
+                            });
 
-            if (Pemeriksaan::query()
-                ->where('no_registrasi', $this->noRegistrasi)
-                ->where('no_laboratorium', $this->noLaboratorium)
-                ->count() === 0
-            ) {
-                tracker_start('mysql');
-                Registrasi::query()
-                    ->where('no_registrasi', $this->noRegistrasi)
-                    ->where('no_laboratorium', $this->noLaboratorium)
-                    ->delete();
-                tracker_end('mysql', $this->username);
+                        $this->isiCatatanPemeriksaan($registrasi);
+
+                        $this->catatJurnal();
+                    });
+
+                return;
+
+            } catch (Throwable $e) {
+                Log::error(get_class($e), $e);
+                if ($i == 5 || $e instanceof RegistrationClosedException) {
+                    tracker_start('mysql');
+                    Pemeriksaan::query()
+                        ->where('no_registrasi', $this->noRegistrasi)
+                        ->where('no_laboratorium', $this->noLaboratorium)
+                        ->where('status_bridging', false)
+                        ->delete();
+                    tracker_end('mysql', $this->username);
+
+                    if (Pemeriksaan::query()
+                        ->where('no_registrasi', $this->noRegistrasi)
+                        ->where('no_laboratorium', $this->noLaboratorium)
+                        ->count() === 0
+                    ) {
+                        tracker_start('mysql');
+                        Registrasi::query()
+                            ->where('no_registrasi', $this->noRegistrasi)
+                            ->where('no_laboratorium', $this->noLaboratorium)
+                            ->delete();
+                        tracker_end('mysql', $this->username);
+                    }
+
+                    throw $e;
+                }
             }
-
-            throw $e;
         }
     }
 

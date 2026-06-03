@@ -444,8 +444,8 @@ public final class DlgKepatuhanKelengkapanKeselamatanBedah extends javax.swing.J
                 );
                 bg.close();
 
-                File f;
-                BufferedWriter bw;
+                    File f;
+                    BufferedWriter bw;
 
                 pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)"},"Laporan 1 (HTML)");
                 switch (pilihan) {

@@ -76,7 +76,7 @@
                 <Property name="name" type="java.lang.String" value="tbSpesialis" noResource="true"/>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbSpesialisMouseClicked"/>
+                <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tbSpesialisMouseReleased"/>
                 <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="tbSpesialisKeyPressed"/>
               </Events>
             </Component>

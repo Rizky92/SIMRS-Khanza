@@ -69,7 +69,7 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
 
         this.setLocation(10,2);
         setSize(628,674);
-        tabMode=new DefaultTableModel(null,new String[]{"No.","Kode ICD X","Nama Penyakit"}){
+        tabMode=new DefaultTableModel(null,new String[]{"No.","Kode ICD X","Nama Penyakit","Non Spesialis"}){
               @Override public boolean isCellEditable(int rowIndex, int colIndex){return false;}
         };
         tbKamar.setModel(tabMode);
@@ -78,14 +78,16 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
         tbKamar.setPreferredScrollableViewportSize(new Dimension(500,500));
         tbKamar.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-        for (int i = 0; i < 3; i++) {
+        for (int i = 0; i < 4; i++) {
             TableColumn column = tbKamar.getColumnModel().getColumn(i);
             if(i==0){
                 column.setPreferredWidth(40);
             }else if(i==1){
                 column.setPreferredWidth(140);
             }else if(i==2){
-                column.setPreferredWidth(470);
+                column.setPreferredWidth(400);
+            }else if(i==3){
+                column.setPreferredWidth(80);
             }
         }
         tbKamar.setDefaultRenderer(Object.class, new WarnaTable());
@@ -389,7 +391,7 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
                     i=1;
                     for(JsonNode list:response.path("list")){
                         tabMode.addRow(new Object[]{
-                            i+".",list.path("kdDiag").asText(),list.path("nmDiag").asText()
+                            i+".",list.path("kdDiag").asText(),list.path("nmDiag").asText(),list.path("nonSpesialis").asText()
                         });
                         i++;
                     }
@@ -420,5 +422,4 @@ public final class PCareCekReferensiPenyakit extends javax.swing.JDialog {
     public JTable getTable(){
         return tbKamar;
     }
-
 }

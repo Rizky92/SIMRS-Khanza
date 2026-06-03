@@ -652,8 +652,8 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
             );
             bg.close();
 
-            File f;
-            BufferedWriter bw;
+                File f;
+                BufferedWriter bw;
 
             pilihan = (String)JOptionPane.showInputDialog(null,"Silahkan pilih laporan..!","Pilihan Cetak",JOptionPane.QUESTION_MESSAGE,null,new Object[]{"Laporan 1 (HTML)","Laporan 2 (WPS)","Laporan 3 (CSV)","Laporan 4 (XLSX)","Laporan 5 (Jasper)"},"Laporan 1 (HTML)");
             switch (pilihan) {
@@ -709,129 +709,129 @@ public final class DlgKunjunganRalan extends javax.swing.JDialog {
                             }
                         }
 
-                        f = new File("KunjunganRalan.html");
-                        bw = new BufferedWriter(new FileWriter(f));
-                        bw.write("<html>"+
-                                    "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                    "<body>"+
-                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td valign='top' align='center'>"+
-                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>LAPORAN KUNJUNGAN RAWAT JALAN PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                                "</td>"+
-                                           "</tr>"+
-                                        "</table>"+
-                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            htmlContent.toString()+
-                                        "</table>"+
-                                    "</body>"+
-                                 "</html>"
-                        );
+                            f = new File("KunjunganRalan.html");
+                            bw = new BufferedWriter(new FileWriter(f));
+                            bw.write("<html>"+
+                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
+                                        "<body>"+
+                                            "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                                "<tr class='isi2'>"+
+                                                    "<td valign='top' align='center'>"+
+                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                        "<font size='2' face='Tahoma'>LAPORAN KUNJUNGAN RAWAT JALAN PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                                    "</td>"+
+                                               "</tr>"+
+                                            "</table>"+
+                                            "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                                htmlContent.toString()+
+                                            "</table>"+
+                                        "</body>"+
+                                     "</html>"
+                            );
 
-                        bw.close();
-                        Desktop.getDesktop().browse(f.toURI());
-                    break;
-                case "Laporan 2 (WPS)":
-                        htmlContent = new StringBuilder();
-                        htmlContent.append(
-                            "<tr class='isi'>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lama</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Baru</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>L</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>P</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alamat</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kode</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Diagnosa</b></td>"+
-                                "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Dokter Jaga</b></td>"+
-                            "</tr>"
-                        );
-                        if(TabRawat.getSelectedIndex()==0){
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,8)+"</td>"+
-                                        "<td valign='top'>"+tabMode.getValueAt(i,9)+"</td>"+
-                                    "</tr>"
-                                );
+                            bw.close();
+                            Desktop.getDesktop().browse(f.toURI());
+                        break;
+                    case "Laporan 2 (WPS)":
+                            htmlContent = new StringBuilder();
+                            htmlContent.append(
+                                "<tr class='isi'>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>No.</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Lama</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Baru</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Nama Pasien</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>L</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>P</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Alamat</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Kode</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Diagnosa</b></td>"+
+                                    "<td valign='middle' bgcolor='#FFFAFA' align='center'><b>Dokter Jaga</b></td>"+
+                                "</tr>"
+                            );
+                            if(TabRawat.getSelectedIndex()==0){
+                                for(i=0;i<tabMode.getRowCount();i++){
+                                    htmlContent.append(
+                                        "<tr class='isi'>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,0)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode.getValueAt(i,1)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode.getValueAt(i,2)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,3)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode.getValueAt(i,4)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode.getValueAt(i,5)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,6)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode.getValueAt(i,7)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,8)+"</td>"+
+                                            "<td valign='top'>"+tabMode.getValueAt(i,9)+"</td>"+
+                                        "</tr>"
+                                    );
+                                }
+                            }else{
+                                for(i=0;i<tabMode2.getRowCount();i++){
+                                    htmlContent.append(
+                                        "<tr class='isi'>"+
+                                            "<td valign='top'>"+tabMode2.getValueAt(i,0)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode2.getValueAt(i,1)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode2.getValueAt(i,2)+"</td>"+
+                                            "<td valign='top'>"+tabMode2.getValueAt(i,3)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode2.getValueAt(i,4)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode2.getValueAt(i,5)+"</td>"+
+                                            "<td valign='top'>"+tabMode2.getValueAt(i,6)+"</td>"+
+                                            "<td valign='top' align='center'>"+tabMode2.getValueAt(i,7)+"</td>"+
+                                            "<td valign='top'>"+tabMode2.getValueAt(i,8)+"</td>"+
+                                            "<td valign='top'>"+tabMode2.getValueAt(i,9)+"</td>"+
+                                        "</tr>"
+                                    );
+                                }
                             }
-                        }else{
-                            for(i=0;i<tabMode2.getRowCount();i++){
-                                htmlContent.append(
-                                    "<tr class='isi'>"+
-                                        "<td valign='top'>"+tabMode2.getValueAt(i,0)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode2.getValueAt(i,1)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode2.getValueAt(i,2)+"</td>"+
-                                        "<td valign='top'>"+tabMode2.getValueAt(i,3)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode2.getValueAt(i,4)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode2.getValueAt(i,5)+"</td>"+
-                                        "<td valign='top'>"+tabMode2.getValueAt(i,6)+"</td>"+
-                                        "<td valign='top' align='center'>"+tabMode2.getValueAt(i,7)+"</td>"+
-                                        "<td valign='top'>"+tabMode2.getValueAt(i,8)+"</td>"+
-                                        "<td valign='top'>"+tabMode2.getValueAt(i,9)+"</td>"+
-                                    "</tr>"
-                                );
-                            }
-                        }
-                        f = new File("KunjunganRalan.wps");
-                        bw = new BufferedWriter(new FileWriter(f));
-                        bw.write("<html>"+
-                                    "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
-                                    "<body>"+
-                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            "<tr class='isi2'>"+
-                                                "<td valign='top' align='center'>"+
-                                                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                                                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                                                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                                                    "<font size='2' face='Tahoma'>LAPORAN KUNJUNGAN RAWAT JALAN PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
-                                                "</td>"+
-                                           "</tr>"+
-                                        "</table>"+
-                                        "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                                            htmlContent.toString()+
-                                        "</table>"+
-                                    "</body>"+
-                                 "</html>"
-                        );
+                            f = new File("KunjunganRalan.wps");
+                            bw = new BufferedWriter(new FileWriter(f));
+                            bw.write("<html>"+
+                                        "<head><link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" /></head>"+
+                                        "<body>"+
+                                            "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                                "<tr class='isi2'>"+
+                                                    "<td valign='top' align='center'>"+
+                                                        "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                                                        akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                                                        akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                                                        "<font size='2' face='Tahoma'>LAPORAN KUNJUNGAN RAWAT JALAN PERIODE "+Tgl1.getSelectedItem()+" s.d. "+Tgl2.getSelectedItem()+"<br><br></font>"+
+                                                    "</td>"+
+                                               "</tr>"+
+                                            "</table>"+
+                                            "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                                                htmlContent.toString()+
+                                            "</table>"+
+                                        "</body>"+
+                                     "</html>"
+                            );
 
-                        bw.close();
-                        Desktop.getDesktop().browse(f.toURI());
-                    break;
-                case "Laporan 3 (CSV)":
-                        htmlContent = new StringBuilder();
-                        htmlContent.append(
-                            "\"No.\";\"Lama\";\"Baru\";\"Nama Pasien\";\"L\";\"P\";\"Alamat\";\"Kode\";\"Diagnosa\";\"Dokter Jaga\"\n"
-                        );
-                        if(TabRawat.getSelectedIndex()==0){
-                            for(i=0;i<tabMode.getRowCount();i++){
-                                htmlContent.append(
-                                    "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\"\n"
-                                );
+                            bw.close();
+                            Desktop.getDesktop().browse(f.toURI());
+                        break;
+                    case "Laporan 3 (CSV)":
+                            htmlContent = new StringBuilder();
+                            htmlContent.append(
+                                "\"No.\";\"Lama\";\"Baru\";\"Nama Pasien\";\"L\";\"P\";\"Alamat\";\"Kode\";\"Diagnosa\";\"Dokter Jaga\"\n"
+                            );
+                            if(TabRawat.getSelectedIndex()==0){
+                                for(i=0;i<tabMode.getRowCount();i++){
+                                    htmlContent.append(
+                                        "\""+tabMode.getValueAt(i,0)+"\";\""+tabMode.getValueAt(i,1)+"\";\""+tabMode.getValueAt(i,2)+"\";\""+tabMode.getValueAt(i,3)+"\";\""+tabMode.getValueAt(i,4)+"\";\""+tabMode.getValueAt(i,5)+"\";\""+tabMode.getValueAt(i,6)+"\";\""+tabMode.getValueAt(i,7)+"\";\""+tabMode.getValueAt(i,8)+"\";\""+tabMode.getValueAt(i,9)+"\"\n"
+                                    );
+                                }
+                            }else{
+                                for(i=0;i<tabMode2.getRowCount();i++){
+                                    htmlContent.append(
+                                        "\""+tabMode2.getValueAt(i,0)+"\";\""+tabMode2.getValueAt(i,1)+"\";\""+tabMode2.getValueAt(i,2)+"\";\""+tabMode2.getValueAt(i,3)+"\";\""+tabMode2.getValueAt(i,4)+"\";\""+tabMode2.getValueAt(i,5)+"\";\""+tabMode2.getValueAt(i,6)+"\";\""+tabMode2.getValueAt(i,7)+"\";\""+tabMode2.getValueAt(i,8)+"\";\""+tabMode2.getValueAt(i,9)+"\"\n"
+                                    );
+                                }
                             }
-                        }else{
-                            for(i=0;i<tabMode2.getRowCount();i++){
-                                htmlContent.append(
-                                    "\""+tabMode2.getValueAt(i,0)+"\";\""+tabMode2.getValueAt(i,1)+"\";\""+tabMode2.getValueAt(i,2)+"\";\""+tabMode2.getValueAt(i,3)+"\";\""+tabMode2.getValueAt(i,4)+"\";\""+tabMode2.getValueAt(i,5)+"\";\""+tabMode2.getValueAt(i,6)+"\";\""+tabMode2.getValueAt(i,7)+"\";\""+tabMode2.getValueAt(i,8)+"\";\""+tabMode2.getValueAt(i,9)+"\"\n"
-                                );
-                            }
-                        }
 
-                        f = new File("KunjunganRalan.csv");
-                        bw = new BufferedWriter(new FileWriter(f));
-                        bw.write(htmlContent.toString());
+                            f = new File("KunjunganRalan.csv");
+                            bw = new BufferedWriter(new FileWriter(f));
+                            bw.write(htmlContent.toString());
 
                         bw.close();
                         Desktop.getDesktop().browse(f.toURI());

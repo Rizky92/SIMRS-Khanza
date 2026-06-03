@@ -693,7 +693,7 @@ public final class InventoryCariResepLuar extends javax.swing.JDialog {
             }
             this.setCursor(Cursor.getDefaultCursor());
         }
-    }//GEN-LAST:event_BtnPrintActionPerformed
+}//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){

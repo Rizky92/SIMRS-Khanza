@@ -513,7 +513,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         NmPtg.setBounds(546, 42, 249, 23);
 
         Tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11-12-2025" }));
+        Tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "17-03-2026" }));
         Tanggal.setDisplayFormat("dd-MM-yyyy");
         Tanggal.setName("Tanggal"); // NOI18N
         Tanggal.setOpaque(false);
@@ -867,6 +867,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         panelisi8.add(jLabel6);
         jLabel6.setBounds(0, 40, 120, 23);
 
+        DiagnosisKlinis.setEditable(false);
         DiagnosisKlinis.setName("DiagnosisKlinis"); // NOI18N
         panelisi8.add(DiagnosisKlinis);
         DiagnosisKlinis.setBounds(124, 40, 220, 23);
@@ -2173,6 +2174,7 @@ public final class DlgPeriksaRadiologi extends javax.swing.JDialog {
         isRawat();
         isPsien();
         runBackground(() -> tampil(order));
+        DiagnosisKlinis.setEditable(akses.getpermintaan_radiologi() && !Sequel.CariPetugas(akses.getkode()).isBlank());
     }
 
     public void setOrderFuji(String order,String norawat,String posisi){

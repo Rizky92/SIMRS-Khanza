@@ -1,9 +1,6 @@
 package simrskhanza;
-import AESsecurity.EnkripsiAES;
 import bridging.DUKCAPILJakartaCekNik;
 import bridging.DUKCAPILJakartaPostLahir;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ObjectNode;
 import fungsi.WarnaTable;
 import fungsi.WarnaTable5;
 import fungsi.akses;
@@ -27,12 +24,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
-import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -310,8 +305,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         bulan=Sequel.cariIsi("select set_urut_no_rkm_medis.bulan from set_urut_no_rkm_medis");
         posisitahun=Sequel.cariIsi("select set_urut_no_rkm_medis.posisi_tahun_bulan from set_urut_no_rkm_medis");
 
-        isPhoto();
-
         HTMLEditorKit kit = new HTMLEditorKit();
         LoadHTML2.setEditable(false);
         LoadHTML2.addHyperlinkListener(e -> {
@@ -320,7 +313,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
                 try {
                     desktop.browse(e.getURL().toURI());
                 } catch (Exception ex) {
-                    ex.printStackTrace();
+                    System.out.println("Notif : " + e);
                 }
             }
         });
@@ -1528,7 +1521,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         WindowPilihDPJPAnak.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowPilihDPJPAnak.setName("WindowPilihDPJPAnak"); // NOI18N
         WindowPilihDPJPAnak.setUndecorated(true);
-        WindowPilihDPJPAnak.setPreferredSize(new java.awt.Dimension(400, 130));
         WindowPilihDPJPAnak.setResizable(false);
         WindowPilihDPJPAnak.addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowActivated(java.awt.event.WindowEvent evt) {
@@ -2567,7 +2559,6 @@ public class DlgIKBBayi extends javax.swing.JDialog {
 
         ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
         ChkAccor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/kiri.png"))); // NOI18N
-        ChkAccor.setSelected(true);
         ChkAccor.setFocusable(false);
         ChkAccor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         ChkAccor.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -2820,7 +2811,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnKeluarKeyPressed
 
     private void LingkarKepalaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LingkarKepalaKeyPressed
-         Valid.pindah(evt,LingkarDada,LingkarPerut);
+        Valid.pindah(evt,LingkarDada,LingkarPerut);
     }//GEN-LAST:event_LingkarKepalaKeyPressed
 
     private void JKelKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_JKelKeyPressed
@@ -2832,271 +2823,271 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     }//GEN-LAST:event_DiagnosaKeyPressed
 
     private void NoRmKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NoRmKeyPressed
-    Valid.pindah(evt,TCari,NmBayi);
+        Valid.pindah(evt,TCari,NmBayi);
     }//GEN-LAST:event_NoRmKeyPressed
 
     private void LahirKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_LahirKeyPressed
-   Valid.pindah2(evt,LingkarPerut,jam);
+        Valid.pindah2(evt,LingkarPerut,jam);
     }//GEN-LAST:event_LahirKeyPressed
 
     private void cmbCrJkKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_cmbCrJkKeyPressed
-   Valid.pindah(evt,BtnAll, DTPCari1);
+        Valid.pindah(evt,BtnAll, DTPCari1);
     }//GEN-LAST:event_cmbCrJkKeyPressed
 
     private void DTPCari1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari1KeyPressed
-   Valid.pindah(evt,Proses,Diagnosa);
+        Valid.pindah(evt,Proses,Diagnosa);
     }//GEN-LAST:event_DTPCari1KeyPressed
 
     private void DTPCari2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DTPCari2KeyPressed
-// TODO add your handling code here:
+        // TODO add your handling code here:
     }//GEN-LAST:event_DTPCari2KeyPressed
 
     private void jamKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jamKeyPressed
-   Valid.pindah(evt,Lahir, menit);
+        Valid.pindah(evt,Lahir, menit);
     }//GEN-LAST:event_jamKeyPressed
 
     private void menitKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_menitKeyPressed
-   Valid.pindah(evt,jam,detik);
+        Valid.pindah(evt,jam,detik);
     }//GEN-LAST:event_menitKeyPressed
 
     private void detikKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_detikKeyPressed
-   Valid.pindah(evt,menit,UmurBayi);
+        Valid.pindah(evt,menit,UmurBayi);
     }//GEN-LAST:event_detikKeyPressed
 
     private void BeratKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BeratKeyPressed
-   Valid.pindah(evt,Panjang,LingkarDada);
+        Valid.pindah(evt,Panjang,LingkarDada);
     }//GEN-LAST:event_BeratKeyPressed
 
     private void PanjangKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_PanjangKeyPressed
-   Valid.pindah(evt,JKel,Berat);
+        Valid.pindah(evt,JKel,Berat);
     }//GEN-LAST:event_PanjangKeyPressed
 
     private void DaftarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_DaftarKeyPressed
-   Valid.pindah2(evt,NoSKL,BtnPenjab);
+        Valid.pindah2(evt,NoSKL,BtnPenjab);
     }//GEN-LAST:event_DaftarKeyPressed
 
     private void KeteranganKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KeteranganKeyPressed
-   Valid.pindah(evt,BtnPenjab,Diagnosa);
+        Valid.pindah(evt,BtnPenjab,Diagnosa);
     }//GEN-LAST:event_KeteranganKeyPressed
 
     private void LahirItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_LahirItemStateChanged
-    lahir = Lahir.getDate();
-    birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-    p = Period.between(birthday,today);
-    p2 =ChronoUnit.DAYS.between(birthday,today);
-    UmurBayi.setText(String.valueOf(p.getYears())+" Th "+String.valueOf(p.getMonths())+" Bl "+String.valueOf(p.getDays())+" Hr");
+        lahir = Lahir.getDate();
+        birthday = lahir.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+        p = Period.between(birthday,today);
+        p2 =ChronoUnit.DAYS.between(birthday,today);
+        UmurBayi.setText(String.valueOf(p.getYears())+" Th "+String.valueOf(p.getMonths())+" Bl "+String.valueOf(p.getDays())+" Hr");
     }//GEN-LAST:event_LahirItemStateChanged
 
     private void ppGrafikberatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say="inner join pasien on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikberat kas=new grafikberat("Grafik Berat Badan Bayi "+tgl,say+" ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say="inner join pasien on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikberat kas=new grafikberat("Grafik Berat Badan Bayi "+tgl,say+" ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikberatActionPerformed
 
     private void ppGrafikberatlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatlakiActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikberat kas=new grafikberat("Grafik Berat Badan Bayi Laki-Laki "+tgl,"inner join pasien "+
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikberat kas=new grafikberat("Grafik Berat Badan Bayi Laki-Laki "+tgl,"inner join pasien "+
                         "on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis where "+say+" pasien.jk='L' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikberatlakiActionPerformed
 
     private void ppGrafikberatwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikberatwnActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikberat kas=new grafikberat("Grafik Berat Badan Bayi Perempuan "+tgl,"inner join pasien "+
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikberat kas=new grafikberat("Grafik Berat Badan Bayi Perempuan "+tgl,"inner join pasien "+
                         "on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis where "+say+" pasien.jk='P' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikberatwnActionPerformed
 
     private void ppGrafikjkbayiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikjkbayiActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikjkelbayi kas=new grafikjkelbayi("Grafik Jenis Kelamin Bayi "+tgl,say+" ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikjkelbayi kas=new grafikjkelbayi("Grafik Jenis Kelamin Bayi "+tgl,say+" ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikjkbayiActionPerformed
 
     private void ppGrafikpanjangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjangActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say="inner join pasien on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikpanjang kas=new grafikpanjang("Grafik Panjang Badan Bayi "+tgl,say+" ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say="inner join pasien on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikpanjang kas=new grafikpanjang("Grafik Panjang Badan Bayi "+tgl,say+" ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikpanjangActionPerformed
 
     private void ppGrafikpanjanglakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjanglakiActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikpanjang kas=new grafikpanjang("Grafik Panjang Badan Bayi Laki-Laki "+tgl,"inner join pasien "+
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikpanjang kas=new grafikpanjang("Grafik Panjang Badan Bayi Laki-Laki "+tgl,"inner join pasien "+
                         "on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis where "+say+" jk='L' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikpanjanglakiActionPerformed
 
     private void ppGrafikpanjangwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikpanjangwnActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikpanjang kas=new grafikpanjang("Grafik Panjang Badan Bayi Perempuan "+tgl,"inner join pasien "+
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikpanjang kas=new grafikpanjang("Grafik Panjang Badan Bayi Perempuan "+tgl,"inner join pasien "+
                         "on pasien.no_rkm_medis=pasien_bayi.no_rkm_medis where "+say+" jk='P' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikpanjangwnActionPerformed
 
     private void ppGrafiklahirtahunActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafiklahirtahun kas=new grafiklahirtahun("Grafik Kelahiran Pertahun Bayi "+tgl,say+" ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafiklahirtahun kas=new grafiklahirtahun("Grafik Kelahiran Pertahun Bayi "+tgl,say+" ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafiklahirtahunActionPerformed
 
     private void ppGrafiklahirtahunlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunlakiActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafiklahirtahun kas=new grafiklahirtahun("Grafik Kelahiran Pertahun Bayi Laki-Laki "+tgl," where "+say+" jk='L' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafiklahirtahun kas=new grafiklahirtahun("Grafik Kelahiran Pertahun Bayi Laki-Laki "+tgl," where "+say+" jk='L' ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafiklahirtahunlakiActionPerformed
 
     private void ppGrafiklahirtahunwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirtahunwnActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafiklahirtahun kas=new grafiklahirtahun("Grafik Kelahiran Pertahun Bayi Perempuan "+tgl,"  where "+say+" jk='P' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafiklahirtahun kas=new grafiklahirtahun("Grafik Kelahiran Pertahun Bayi Perempuan "+tgl,"  where "+say+" jk='P' ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafiklahirtahunwnActionPerformed
 
     private void ppGrafiklahirbulanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafiklahirbulan kas=new grafiklahirbulan("Grafik Kelahiran Perbulan Bayi "+tgl,say+" ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafiklahirbulan kas=new grafiklahirbulan("Grafik Kelahiran Perbulan Bayi "+tgl,say+" ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafiklahirbulanActionPerformed
 
     private void ppGrafiklahirbulanlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanlakiActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafiklahirbulan kas=new grafiklahirbulan("Grafik Kelahiran Perbulan Bayi Laki-Laki "+tgl," where "+say+" jk='L' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafiklahirbulan kas=new grafiklahirbulan("Grafik Kelahiran Perbulan Bayi Laki-Laki "+tgl," where "+say+" jk='L' ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafiklahirbulanlakiActionPerformed
 
     private void ppGrafiklahirbulanwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafiklahirbulanwnActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafiklahirbulan kas=new grafiklahirbulan("Grafik Kelahiran Perbulan Bayi Perempuan "+tgl," where "+say+" jk='P' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafiklahirbulan kas=new grafiklahirbulan("Grafik Kelahiran Perbulan Bayi Perempuan "+tgl," where "+say+" jk='P' ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafiklahirbulanwnActionPerformed
 
     private void ppGrafikproseslahirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikproses kas=new grafikproses("Grafik Proses Lahir Bayi "+tgl,say+" ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" where tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikproses kas=new grafikproses("Grafik Proses Lahir Bayi "+tgl,say+" ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikproseslahirActionPerformed
 
     private void ppGrafikproseslahirlakiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirlakiActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikproses kas=new grafikproses("Grafik Proses Lahir Bayi Laki-Laki "+tgl," where "+say+" jk='L' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikproses kas=new grafikproses("Grafik Proses Lahir Bayi Laki-Laki "+tgl," where "+say+" jk='L' ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikproseslahirlakiActionPerformed
 
     private void ppGrafikproseslahirwnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppGrafikproseslahirwnActionPerformed
-       String say="";
-       String tgl="";
-       if(ckTglCari.isSelected()==true){
-           say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
-           tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
-       }
-       grafikproses kas=new grafikproses("Grafik Proses Lahir Bayi Perempuan "+tgl," where "+say+" jk='P' ");
-       kas.setSize(this.getWidth(), this.getHeight());
-       kas.setLocationRelativeTo(this);
-       kas.setVisible(true);
+        String say="";
+        String tgl="";
+        if(ckTglCari.isSelected()==true){
+            say=" tgl_lahir between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+"' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+"' and ";
+            tgl=" Antara Tanggal "+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" s.d. "+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" ";
+        }
+        grafikproses kas=new grafikproses("Grafik Proses Lahir Bayi Perempuan "+tgl," where "+say+" jk='P' ");
+        kas.setSize(this.getWidth(), this.getHeight());
+        kas.setLocationRelativeTo(this);
+        kas.setVisible(true);
     }//GEN-LAST:event_ppGrafikproseslahirwnActionPerformed
 
     private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnSimpanActionPerformed
@@ -3350,7 +3341,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnEditActionPerformed1
 
     private void BtnEditKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnEditKeyPressed
-       if(evt.getKeyCode()==KeyEvent.VK_SPACE){
+        if(evt.getKeyCode()==KeyEvent.VK_SPACE){
            BtnEditActionPerformed1(null);
         }else{
             Valid.pindah(evt, BtnHapus, BtnPrint);
@@ -3372,27 +3363,27 @@ public class DlgIKBBayi extends javax.swing.JDialog {
     }//GEN-LAST:event_BtnHapusKeyPressed
 
     private void NmBayiKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmBayiKeyPressed
-   Valid.pindah(evt, NoRm,Nmibu);
+        Valid.pindah(evt, NoRm,Nmibu);
     }//GEN-LAST:event_NmBayiKeyPressed
 
     private void NmibuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmibuKeyPressed
-   Valid.pindah(evt, NmBayi,UmurIbu);
+        Valid.pindah(evt, NmBayi,UmurIbu);
     }//GEN-LAST:event_NmibuKeyPressed
 
     private void UmurIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurIbuKeyPressed
-   Valid.pindah(evt, Nmibu,NmAyah);
+        Valid.pindah(evt, Nmibu,NmAyah);
     }//GEN-LAST:event_UmurIbuKeyPressed
 
     private void NmAyahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_NmAyahKeyPressed
-   Valid.pindah(evt, Nmibu,UmurAyah);
+        Valid.pindah(evt, Nmibu,UmurAyah);
     }//GEN-LAST:event_NmAyahKeyPressed
 
     private void UmurAyahKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_UmurAyahKeyPressed
-    Valid.pindah(evt, NmAyah,AlamatIbu);
+        Valid.pindah(evt, NmAyah,AlamatIbu);
     }//GEN-LAST:event_UmurAyahKeyPressed
 
     private void AlamatIbuKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_AlamatIbuKeyPressed
-    Valid.pindah(evt, UmurAyah,JKel);
+        Valid.pindah(evt, UmurAyah,JKel);
     }//GEN-LAST:event_AlamatIbuKeyPressed
 
     private void MnKartuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MnKartuActionPerformed
@@ -4157,6 +4148,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
                 }
             });
         }
+        isPhoto();
     }//GEN-LAST:event_formWindowOpened
 
     private void ChkAccorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkAccorActionPerformed
@@ -4176,13 +4168,10 @@ public class DlgIKBBayi extends javax.swing.JDialog {
         }else{
             if(tbDokter.getSelectedRow()>-1){
                 this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-                Sequel.menghapusSmc("antrifotokelahiranbayismc");
-                Sequel.menyimpanSmc("antrifotokelahiranbayismc", "", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
-                Sequel.menghapusSmc("pasien_bayi_gambar_smc", "no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
-                ObjectNode node = new ObjectMapper().createObjectNode();
-                node.put("usere", koneksiDB.USERHYBRIDWEB());
-                node.put("passwordte", koneksiDB.PASHYBRIDWEB());
-                Valid.panggilUrl("fotokelahiranbayismc/login.php?iyem=" + EnkripsiAES.encrypt(node.toString()));
+                Sequel.menghapustfSmc("antrifotokelahiranbayismc");
+                Sequel.menyimpantfSmc("antrifotokelahiranbayismc", "", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+                // Sequel.menghapustfSmc("pasien_bayi_gambar_smc", "no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
+                Valid.panggilUrl("fotokelahiranbayismc/login.php?act=login&usere=" + koneksiDB.USERHYBRIDWEB() + "&passwordte=" + koneksiDB.PASHYBRIDWEB());
                 this.setCursor(Cursor.getDefaultCursor());
             }else{
                 JOptionPane.showMessageDialog(rootPane,"Silahkan anda pilih No.Rawat terlebih dahulu..!!");
@@ -4934,7 +4923,7 @@ public class DlgIKBBayi extends javax.swing.JDialog {
             String path = Sequel.cariIsiSmc("select pasien_bayi_gambar_smc.photo from pasien_bayi_gambar_smc where pasien_bayi_gambar_smc.no_rkm_medis = ?", tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString());
             if (path != null && !path.isBlank() && !path.trim().equals("-")) {
                 String fullpath = "http://" + koneksiDB.HOSTHYBRIDWEB() + ":" + koneksiDB.PORTWEB() + "/" + koneksiDB.HYBRIDWEB() + "/fotokelahiranbayismc/" + path;
-                LoadHTML2.setText(String.format("<html><body><center><a href=\"%s\"><img src=\"%s\" alt=\"photo\" width=\"550\" height=\"550\" /></a></center></body></html>", fullpath, fullpath));
+                LoadHTML2.setText(String.format("<html><body><center><a href=\"%s\"><img src=\"%s\" alt=\"photo\" width=\"640\" height=\"360\" /></a></center></body></html>", fullpath, fullpath));
             } else {
                 LoadHTML2.setText("<html><body><center><br><br><font face=\"tahoma\" size=\"2\" color=\"#434343\">Kosong</font></center></body></html>");
             }

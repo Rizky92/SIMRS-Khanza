@@ -763,11 +763,4 @@ public final class InhealthTindakanLaborat extends javax.swing.JDialog {
     public JTable getTable(){
         return tbJnsPerawatan;
     }
-
-
-
-
-
-
-
 }

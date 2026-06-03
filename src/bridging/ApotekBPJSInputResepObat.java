@@ -1133,7 +1133,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                                         }
                                     }
                                 }
-                                Sequel.meghapus2("antrianiterasi","no_resep",NoResep.getText());
+                                Sequel.meghapus3("antrianiterasi","no_resep",NoResep.getText());
                             }else{
                                 sukses=false;
                                 JOptionPane.showMessageDialog(rootPane,"Gagal menyimpan data resep apotek BPJS ke server lokal..!!!!!");
@@ -1543,7 +1543,7 @@ private void BtnSimpanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                     tabModeobat.removeRow(tbObat.getSelectedRow());
                 }
             }
-}else if(TabRawat.getSelectedIndex()==1){
+        }else if(TabRawat.getSelectedIndex()==1){
             if(tbDetailObatRacikan.getSelectedRow()!=-1){
                 int reply = JOptionPane.showConfirmDialog(rootPane,"Yakin mau dihapus obat "+tbDetailObatRacikan.getValueAt(tbDetailObatRacikan.getSelectedRow(), 3)+"...?","Konfirmasi",JOptionPane.YES_NO_OPTION);
                 if (reply == JOptionPane.YES_OPTION) {

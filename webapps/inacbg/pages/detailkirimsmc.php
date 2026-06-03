@@ -332,7 +332,7 @@
                                     }
 
                                     if ($saved_klaim) {
-                                        $cara_masuk_val      = $saved_klaim['cara_masuk'];
+                                        $cara_masuk_val      = !empty($saved_klaim['cara_masuk']) ? $saved_klaim['cara_masuk'] : $cara_masuk_val;
                                         $sistole             = $saved_klaim['sistole'];
                                         $diastole            = $saved_klaim['diastole'];
                                         $discharge_status    = $saved_klaim['discharge_status'];
@@ -383,7 +383,6 @@
                                         }
                                     }
 
-                                    // Delivery (persalinan) — build payload array and display rows together
                                     $delivery       = [];
                                     $kelahiran_rows = [];
                                     $querykelahiran = bukaquery("select * from inacbg_data_klaim_persalinan_smc where no_sep = '$nosep' order by delivery_sequence asc");
@@ -556,17 +555,17 @@
                                     <td width="1%">:</td>
                                     <td width="70%">
                                         <select name="cara_masuk" class="text" style="font-family: Tahoma; width: 95%">
-                                            <option <?= $cara_masuk_val === 'gp' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
-                                            <option <?= $cara_masuk_val === 'hosp-trans' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
-                                            <option <?= $cara_masuk_val === 'mp' ? 'selected' : '' ?> value="mp">Rujukan Spesialis</option>
-                                            <option <?= $cara_masuk_val === 'outp' ? 'selected' : '' ?> value="outp">Dari Rawat Jalan</option>
-                                            <option <?= $cara_masuk_val === 'inp' ? 'selected' : '' ?> value="inp">Dari Rawat Inap</option>
-                                            <option <?= $cara_masuk_val === 'emd' ? 'selected' : '' ?> value="emd">Dari Rawat Darurat</option>
-                                            <option <?= $cara_masuk_val === 'born' ? 'selected' : '' ?> value="born">Lahir di RS</option>
-                                            <option <?= $cara_masuk_val === 'nursing' ? 'selected' : '' ?> value="nursing">Rujukan Panti Jompo</option>
-                                            <option <?= $cara_masuk_val === 'psych' ? 'selected' : '' ?> value="psych">Rujukan dari RS Jiwa</option>
-                                            <option <?= $cara_masuk_val === 'rehab' ? 'selected' : '' ?> value="rehab">Rujukan Fasilitas Rehab</option>
-                                            <option <?= $cara_masuk_val === 'other' ? 'selected' : '' ?> value="other">Lain-lain</option>
+                                            <option <?= $cara_masuk_val == 'gp' ? 'selected' : '' ?> value="gp">Rujukan FKTP</option>
+                                            <option <?= $cara_masuk_val == 'hosp-trans' ? 'selected' : '' ?> value="hosp-trans">Rujukan FKRTL</option>
+                                            <option <?= $cara_masuk_val == 'mp' ? 'selected' : '' ?> value="mp">Rujukan Spesialis</option>
+                                            <option <?= $cara_masuk_val == 'outp' ? 'selected' : '' ?> value="outp">Dari Rawat Jalan</option>
+                                            <option <?= $cara_masuk_val == 'inp' ? 'selected' : '' ?> value="inp">Dari Rawat Inap</option>
+                                            <option <?= $cara_masuk_val == 'emd' ? 'selected' : '' ?> value="emd">Dari Rawat Darurat</option>
+                                            <option <?= $cara_masuk_val == 'born' ? 'selected' : '' ?> value="born">Lahir di RS</option>
+                                            <option <?= $cara_masuk_val == 'nursing' ? 'selected' : '' ?> value="nursing">Rujukan Panti Jompo</option>
+                                            <option <?= $cara_masuk_val == 'psych' ? 'selected' : '' ?> value="psych">Rujukan dari RS Jiwa</option>
+                                            <option <?= $cara_masuk_val == 'rehab' ? 'selected' : '' ?> value="rehab">Rujukan Fasilitas Rehab</option>
+                                            <option <?= $cara_masuk_val == 'other' ? 'selected' : '' ?> value="other">Lain-lain</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -875,9 +874,9 @@
                                     <td width="70%">
                                         <select name="onset_kontraksi" class="text2" style="font-family: Tahoma; width: 95%">
                                             <option <?= $onset_kontraksi === '' ? 'selected ' : '' ?>value=""></option>
-                                            <option <?= $onset_kontraksi === 'spontan' ? 'selected ' : '' ?>value="spontan">Spontan</option>
-                                            <option <?= $onset_kontraksi === 'non_spontan' ? 'selected ' : '' ?>value="non_spontan">Non spontan</option>
-                                            <option <?= $onset_kontraksi === 'non_spontan_non_induksi' ? 'selected ' : '' ?>value="non_spontan_non_induksi">Non Spontan Non Induksi</option>
+                                            <option <?= $onset_kontraksi === 'spontan' ? 'selected ' : '' ?>value="spontan">Timbul Spontan</option>
+                                            <option <?= $onset_kontraksi === 'induksi' ? 'selected ' : '' ?>value="induksi">Dengan Induksi</option>
+                                            <option <?= $onset_kontraksi === 'non_spontan_non_induksi' ? 'selected ' : '' ?>value="non_spontan_non_induksi">SC Tanpa Kontraksi/Induksi</option>
                                         </select>
                                     </td>
                                 </tr>
@@ -931,7 +930,7 @@
                                         <td width="1%">:</td>
                                         <td width="70%"><?= $bariskelahiran['shk_spesimen_ambil'] ?></td>
                                     </tr>
-                                    <?php if ($bariskelahiran['shk_spesimen_ambil'] === 'ya'): ?>
+                                    <?php if ($bariskelahiran['shk_spesimen_ambil'] === 'Ya'): ?>
                                         <tr class="head">
                                             <td width="28%"><span>&nbsp;&nbsp;&nbsp;&nbsp;</span>Waktu Sampel</td>
                                             <td width="1%">:</td>
@@ -1478,7 +1477,7 @@
                                 </script>
                                 <?php $judul = 'SIMPAN DATA KLAIM & GROUPING IDRG'; ?>
                             <?php endif; ?>
-                        <?php elseif ($grouper === 'idrg_final'): ?>
+                        <?php elseif ($grouper === 'idrg_stage2'): ?>
                             <tr class="head">
                                 <td width="28%">No. SEP</td>
                                 <td width="1%">:</td>
@@ -1560,6 +1559,27 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['drg_description'] ?></span></td>
                                 </tr>
+                                <?php
+                                    $topup_index = 1;
+                                    $querytopup_idrg = bukaquery2("select tempinacbg.cmg_type from tempinacbg where tempinacbg.coder_nik = '$codernik' group by tempinacbg.cmg_type");
+                                    while ($hasilquerytopup_idrg = mysqli_fetch_array($querytopup_idrg)):
+                                ?>
+                                    <tr class="head">
+                                        <td width="28%">Top Up <?= ucwords($hasilquerytopup_idrg['cmg_type']) ?></td>
+                                        <td width="1%">:</td>
+                                        <td width="70%">
+                                            <select name="topup_index_<?= $topup_index++ ?>" class="text" style="font-family: Tahoma; width: 95%">
+                                                <?php
+                                                    $querytopup_pilihan = bukaquery2("select tempinacbg.cmg_code, tempinacbg.cmg_description from tempinacbg where tempinacbg.coder_nik = '$codernik' and tempinacbg.cmg_type = '$hasilquerytopup_idrg[cmg_type]'");
+                                                    while ($hasilquerytopup_pilihan = mysqli_fetch_array($querytopup_pilihan)):
+                                                ?>
+                                                    <option value="<?= $hasilquerytopup_pilihan['cmg_code'] ?>"><?= $hasilquerytopup_pilihan['cmg_code'].' - '.$hasilquerytopup_pilihan['cmg_description'] ?></option>
+                                                <?php endwhile; ?>
+                                                <option value=""></option>
+                                            </select>
+                                        </td>
+                                    </tr>
+                                <?php endwhile; ?>
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
@@ -1589,6 +1609,149 @@
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
+                                </tr>
+                                <tr class="head">
+                                    <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
+                                </tr>
+                                <tr class="head">
+                                    <td colspan="3" style="color: blue">**) Nilai klaim masih menggunakan total tarif INACBG</td>
+                                </tr>
+                                <tr class="head">
+                                    <td colspan="3" width="99%"><a href="<?= "?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&action=edit&grouper=idrg" ?>">[Batal]</a></td>
+                                </tr>
+                            <?php endif; ?>
+                            <?php $judul = 'GROUPING TOPUP IDRG'; ?>
+                        <?php elseif ($grouper === 'idrg_final'): ?>
+                            <tr class="head">
+                                <td width="28%">No. SEP</td>
+                                <td width="1%">:</td>
+                                <td width="70%"><?= $nosep ?></td>
+                            </tr>
+                            <tr class="head"><td colspan="3" width="98%"><hr style="color: #909090; border-color: inherit"></td></tr>
+                            <tr class="head">
+                                <td colspan="3">
+                                    <span style="font-family: Tahoma; font-size: 10pt; font-weight: 700; color: #0c684cff; margin-top: 0.5rem">
+                                        Status Grouping IDRG
+                                    </span>
+                                </td>
+                            </tr>
+                            <?php
+                                $diagnosa_idrg = '';
+                                $querydiagnosa_idrg = bukaquery("select i.kode_icd10, r.deskripsi, i.urut from idrg_diagnosa_pasien_smc i join idrg_referensi_icd10_smc r on i.kode_icd10 = r.code1 where i.no_sep = '$nosep' order by i.urut asc");
+                            ?>
+                            <?php while ($barisdiagnosa_idrg = mysqli_fetch_array($querydiagnosa_idrg)): ?>
+                                <?php if ($barisdiagnosa_idrg['urut'] == '1'): ?>
+                                    <?php $diagnosa_idrg = $barisdiagnosa_idrg['kode_icd10']; ?>
+                                    <tr class="head">
+                                        <td width="28%">Diagnosa</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?> (UTAMA)<br /><?= $barisdiagnosa_idrg['deskripsi'] ?></td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php $diagnosa_idrg .= '#'.$barisdiagnosa_idrg['kode_icd10']; ?>
+                                    <tr class="head">
+                                        <td colspan="2" width="29%"></td>
+                                        <td width="70%"><?= $barisdiagnosa_idrg['kode_icd10'] ?><br /><?= $barisdiagnosa_idrg['deskripsi'] ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
+                            <?php
+                                $prosedur_idrg = '';
+                                $queryprosedur_idrg = bukaquery("select i.kode_icd9, r.deskripsi, i.multiplicity, i.urut from idrg_prosedur_pasien_smc i join idrg_referensi_icd9cm_smc r on i.kode_icd9 = r.code1 where i.no_sep = '$nosep' order by i.urut asc");
+                            ?>
+                            <?php while ($barisprosedur_idrg = mysqli_fetch_array($queryprosedur_idrg)): ?>
+                                <?php if ($barisprosedur_idrg['urut'] == '1'): ?>
+                                    <?php $prosedur_idrg = $barisprosedur_idrg['kode_icd9'].'+'.$barisprosedur_idrg['multiplicity']; ?>
+                                    <tr class="head">
+                                        <td width="28%">Prosedur</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?> (UTAMA)<br /><?= $barisprosedur_idrg['deskripsi'] ?></td>
+                                    </tr>
+                                <?php else: ?>
+                                    <?php $prosedur_idrg .= '#'.$barisprosedur_idrg['kode_icd9'].'+'.$barisprosedur_idrg['multiplicity']; ?>
+                                    <tr class="head">
+                                        <td colspan="2" width="28%"></td>
+                                        <td width="70%"><?= $barisprosedur_idrg['kode_icd9'] ?> x <?= $barisprosedur_idrg['multiplicity'] ?><br /><?= $barisprosedur_idrg['deskripsi'] ?></td>
+                                    </tr>
+                                <?php endif; ?>
+                            <?php endwhile; ?>
+                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery(<<<SQL
+                                select i.mdc_number, i.mdc_description, i.drg_code, i.drg_description, i.kelas_rs, i.cost_weight, i.sub_acute_weight,
+                                i.chronic_weight, i.total_cost_weight, i.nbr, i.topup_weight from idrg_grouping_smc i where i.no_sep = '$nosep'
+                                SQL)); ?>
+                            <?php if ($hasilgroupingidrg): ?>
+                                <?php
+                                    $style = '';
+                                    if ($hasilgroupingidrg['mdc_number'] == '36') {
+                                        $style = 'font-weight: 700; color: #ff1000';
+                                    }
+                                ?>
+                                <tr class="head">
+                                    <td width="28%">MDC Number</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['mdc_number'] ?></span></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">MDC Description</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['mdc_description'] ?></span></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">DRG Code</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['drg_code'] ?></span></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">DRG Description</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['drg_description'] ?></span></td>
+                                </tr>
+                                <?php
+                                    $querygrouping_topup_idrg = bukaquery2("select g.code, g.description, g.type from idrg_grouping_topup_smc g where g.no_sep = '$nosep' order by g.code");
+                                    while ($hasilquerygrouping_topup_idrg = mysqli_fetch_array($querygrouping_topup_idrg)):
+                                ?>
+                                    <tr class="head">
+                                        <td width="28%">Top Up <?= ucwords($hasilquerygrouping_topup_idrg['type']) ?></td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $hasilquerygrouping_topup_idrg['code'] ?> - <?= $hasilquerygrouping_topup_idrg['description'] ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
+                                <tr class="head">
+                                    <td width="28%">NBR**</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc($hasilgroupingidrg['nbr']) ?></span></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">DRG Cost Weight</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['cost_weight'] ?></span></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Sub Acute Weight</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['sub_acute_weight'] ?></span></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Chronic Weight</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['chronic_weight'] ?></span></td>
+                                </tr>
+                                <?php if ($hasilgroupingidrg['topup_weight'] > 0): ?>
+                                    <tr class="head">
+                                        <td width="28%">Topup Weight</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['topup_weight'] ?></span></td>
+                                    </tr>
+                                <?php endif; ?>
+                                <tr class="head">
+                                    <td width="28%">Total Cost Weight</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight'] ?></span></td>
+                                </tr>
+                                <tr class="head">
+                                    <td width="28%">Adjusted NBR**</td>
+                                    <td width="1%">:</td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
@@ -1662,7 +1825,10 @@
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
-                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery("select * from idrg_grouping_smc where no_sep = '$nosep'")); ?>
+                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery(<<<SQL
+                                select i.mdc_number, i.mdc_description, i.drg_code, i.drg_description, i.kelas_rs, i.cost_weight, i.sub_acute_weight,
+                                i.chronic_weight, i.total_cost_weight, i.nbr, i.topup_weight from idrg_grouping_smc i where i.no_sep = '$nosep'
+                                SQL)); ?>
                             <?php if ($hasilgroupingidrg): ?>
                                 <?php
                                     $style = '';
@@ -1690,6 +1856,16 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['drg_description'] ?></span></td>
                                 </tr>
+                                <?php
+                                    $querygrouping_topup_idrg = bukaquery2("select g.code, g.description, g.type from idrg_grouping_topup_smc g where g.no_sep = '$nosep' order by g.code");
+                                    while ($hasilquerygrouping_topup_idrg = mysqli_fetch_array($querygrouping_topup_idrg)):
+                                ?>
+                                    <tr class="head">
+                                        <td width="28%">Top Up <?= ucwords($hasilquerygrouping_topup_idrg['type']) ?></td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $hasilquerygrouping_topup_idrg['code'] ?> - <?= $hasilquerygrouping_topup_idrg['description'] ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
@@ -1710,15 +1886,22 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['chronic_weight'] ?></span></td>
                                 </tr>
+                                <?php if ($hasilgroupingidrg['topup_weight'] > 0): ?>
+                                    <tr class="head">
+                                        <td width="28%">Topup Weight</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['topup_weight'] ?></span></td>
+                                    </tr>
+                                <?php endif; ?>
                                 <tr class="head">
                                     <td width="28%">Total Cost Weight</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight'] ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
@@ -1850,7 +2033,10 @@
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
-                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery("select * from idrg_grouping_smc where no_sep = '$nosep'")); ?>
+                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery(<<<SQL
+                                select i.mdc_number, i.mdc_description, i.drg_code, i.drg_description, i.kelas_rs, i.cost_weight, i.sub_acute_weight,
+                                i.chronic_weight, i.total_cost_weight, i.nbr, i.topup_weight from idrg_grouping_smc i where i.no_sep = '$nosep'
+                                SQL)); ?>
                             <?php if ($hasilgroupingidrg): ?>
                                 <?php
                                     $style = '';
@@ -1878,6 +2064,16 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['drg_description'] ?></span></td>
                                 </tr>
+                                <?php
+                                    $querygrouping_topup_idrg = bukaquery2("select g.code, g.description, g.type from idrg_grouping_topup_smc g where g.no_sep = '$nosep' order by g.code");
+                                    while ($hasilquerygrouping_topup_idrg = mysqli_fetch_array($querygrouping_topup_idrg)):
+                                ?>
+                                    <tr class="head">
+                                        <td width="28%">Top Up <?= ucwords($hasilquerygrouping_topup_idrg['type']) ?></td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $hasilquerygrouping_topup_idrg['code'] ?> - <?= $hasilquerygrouping_topup_idrg['description'] ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
@@ -1898,15 +2094,22 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['chronic_weight'] ?></span></td>
                                 </tr>
+                                <?php if ($hasilgroupingidrg['topup_weight'] > 0): ?>
+                                    <tr class="head">
+                                        <td width="28%">Topup Weight</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['topup_weight'] ?></span></td>
+                                    </tr>
+                                <?php endif; ?>
                                 <tr class="head">
                                     <td width="28%">Total Cost Weight</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight'] ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
@@ -2100,7 +2303,10 @@
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
-                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery("select * from idrg_grouping_smc where no_sep = '$nosep'")); ?>
+                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery(<<<SQL
+                                select i.mdc_number, i.mdc_description, i.drg_code, i.drg_description, i.kelas_rs, i.cost_weight, i.sub_acute_weight,
+                                i.chronic_weight, i.total_cost_weight, i.nbr, i.topup_weight from idrg_grouping_smc i where i.no_sep = '$nosep'
+                                SQL)); ?>
                             <?php if ($hasilgroupingidrg): ?>
                                 <?php
                                     $style = '';
@@ -2128,6 +2334,16 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['drg_description'] ?></span></td>
                                 </tr>
+                                <?php
+                                    $querygrouping_topup_idrg = bukaquery2("select g.code, g.description, g.type from idrg_grouping_topup_smc g where g.no_sep = '$nosep' order by g.code");
+                                    while ($hasilquerygrouping_topup_idrg = mysqli_fetch_array($querygrouping_topup_idrg)):
+                                ?>
+                                    <tr class="head">
+                                        <td width="28%">Top Up <?= ucwords($hasilquerygrouping_topup_idrg['type']) ?></td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $hasilquerygrouping_topup_idrg['code'] ?> - <?= $hasilquerygrouping_topup_idrg['description'] ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
@@ -2148,15 +2364,22 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['chronic_weight'] ?></span></td>
                                 </tr>
+                                <?php if ($hasilgroupingidrg['topup_weight'] > 0): ?>
+                                    <tr class="head">
+                                        <td width="28%">Topup Weight</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['topup_weight'] ?></span></td>
+                                    </tr>
+                                <?php endif; ?>
                                 <tr class="head">
                                     <td width="28%">Total Cost Weight</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight'] ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
@@ -2351,7 +2574,10 @@
                                     </tr>
                                 <?php endif; ?>
                             <?php endwhile; ?>
-                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery("select * from idrg_grouping_smc where no_sep = '$nosep'")); ?>
+                            <?php $hasilgroupingidrg = mysqli_fetch_assoc(bukaquery(<<<SQL
+                                select i.mdc_number, i.mdc_description, i.drg_code, i.drg_description, i.kelas_rs, i.cost_weight, i.sub_acute_weight,
+                                i.chronic_weight, i.total_cost_weight, i.nbr, i.topup_weight from idrg_grouping_smc i where i.no_sep = '$nosep'
+                                SQL)); ?>
                             <?php if ($hasilgroupingidrg): ?>
                                 <?php
                                     $style = '';
@@ -2379,6 +2605,16 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['drg_description'] ?></span></td>
                                 </tr>
+                                <?php
+                                    $querygrouping_topup_idrg = bukaquery2("select g.code, g.description, g.type from idrg_grouping_topup_smc g where g.no_sep = '$nosep' order by g.code");
+                                    while ($hasilquerygrouping_topup_idrg = mysqli_fetch_array($querygrouping_topup_idrg)):
+                                ?>
+                                    <tr class="head">
+                                        <td width="28%">Top Up <?= ucwords($hasilquerygrouping_topup_idrg['type']) ?></td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><?= $hasilquerygrouping_topup_idrg['code'] ?> - <?= $hasilquerygrouping_topup_idrg['description'] ?></td>
+                                    </tr>
+                                <?php endwhile; ?>
                                 <tr class="head">
                                     <td width="28%">NBR**</td>
                                     <td width="1%">:</td>
@@ -2399,15 +2635,22 @@
                                     <td width="1%">:</td>
                                     <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['chronic_weight'] ?></span></td>
                                 </tr>
+                                <?php if ($hasilgroupingidrg['topup_weight'] > 0): ?>
+                                    <tr class="head">
+                                        <td width="28%">Topup Weight</td>
+                                        <td width="1%">:</td>
+                                        <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['topup_weight'] ?></span></td>
+                                    </tr>
+                                <?php endif; ?>
                                 <tr class="head">
                                     <td width="28%">Total Cost Weight</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>"><?= $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight'] ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td width="28%">Adjusted NBR**</td>
                                     <td width="1%">:</td>
-                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
+                                    <td width="70%"><span style="<?= $style ?>">Rp. <?= formatDuitSmc(round(((float) $hasilgroupingidrg['total_cost_weight'] + $hasilgroupingidrg['topup_weight']) * ((float) $hasilgroupingidrg['nbr']))) ?></span></td>
                                 </tr>
                                 <tr class="head">
                                     <td colspan="3" style="color: blue">**) Nilai belum final, dapat berubah sewaktu-waktu</td>
@@ -2720,9 +2963,15 @@
                                     }
 
                                     if ($success === true) {
-                                        echo <<<HTML
-                                            <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg_final">
-                                            HTML;
+                                        if ($response === 'idrg_stage2') {
+                                            echo <<<HTML
+                                                <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg_stage2">
+                                                HTML;
+                                        } else {
+                                            echo <<<HTML
+                                                <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg_final">
+                                                HTML;
+                                        }
                                     } else {
                                         echo $error;
                                         echo <<<HTML
@@ -2735,6 +2984,26 @@
                             }
                         } else {
                             echo 'Total billing tidak sesuai dengan billing pasien!';
+                        }
+                    } else if ($grouper === 'idrg_stage2') {
+                        $topup_choices = [];
+                        for ($i = $topup_index; $i >= 1; $i--) {
+                            $topup_choices[] = isset($_POST['topup_index_'.$i]) ? validTeks(trim($_POST['topup_index_'.$i])) : null;
+                        }
+
+                        $topup_codes = implode('#', array_filter($topup_choices));
+
+                        ['success' => $success, 'data' => $response, 'error' => $error] = GroupingStage2IdrgSmc($nosep, $codernik, $topup_codes);
+
+                        if ($success === true) {
+                            echo <<<HTML
+                                <meta http-equiv="refresh" content="1;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=true&action=grouper&grouper=idrg_final">
+                                HTML;
+                        } else {
+                            echo $error;
+                            echo <<<HTML
+                                <meta http-equiv="refresh" content="5;URL=?act=DetailKirimSmc&codernik={$codernik}&nosep={$nosep}&carabayar={$carabayar}&corona={$corona}&sukses=false&action=grouper&grouper=idrg_stage2">
+                                HTML;
                         }
                     } else if ($grouper === 'idrg_final') {
                         ['success' => $success, 'data' => $response, 'error' => $error] = FinalIdrgSmc($nosep, $codernik);

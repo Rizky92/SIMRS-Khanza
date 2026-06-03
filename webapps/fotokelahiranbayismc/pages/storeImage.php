@@ -26,20 +26,12 @@ bukainput(sprintf("insert ignore into pasien_bayi_gambar_smc values ('%s', 'page
 <head>
     <title>SIMKES Khanza</title>
     <link rel="stylesheet" href="../css/bootstrap.min.css" />
-    <style type="text/css">
-        #results {
-            padding: 0px;
-            background: #EEFFEE;
-            width: 490;
-            height: 390
-        }
-    </style>
 </head>
 <body>
     <center>
         Proses Pengambilan Foto Bayi Telah Selesai ..!!
         <br />
-        <a href="../login.php?iyem=<?= encrypt(json_encode(['usere' => USERHYBRIDWEB, 'passwordte' => PASHYBRIDWEB])) ?>" class="btn btn-secondary">Kembali</a>
+        <a href="../index.php" class="btn btn-secondary">Kembali</a>
     </center>
 </body>
 </html>

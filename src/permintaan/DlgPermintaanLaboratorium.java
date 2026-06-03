@@ -2521,6 +2521,7 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
         int reply = JOptionPane.showConfirmDialog(rootPane,"Eeiiiiiits, udah bener belum data yang mau disimpan..??","Konfirmasi",JOptionPane.YES_NO_OPTION);
         if (reply == JOptionPane.YES_OPTION) {
             ChkJln.setSelected(false);
+            /*
             try {
                 Sequel.AutoComitFalse();
                 sukses=true;
@@ -2668,7 +2669,6 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
                     Sequel.RollBack();
                 }
                 Sequel.AutoComitTrue();
-
                 if (sukses) {
                     JOptionPane.showMessageDialog(null,"Proses simpan selesai...!");
                 } else {
@@ -2677,20 +2677,127 @@ public final class DlgPermintaanLaboratorium extends javax.swing.JDialog {
             } catch (Exception e) {
                 System.out.println(e);
             }
+            */
+            try {
+                Sequel.AutoComitFalse();
+                sukses = true;
+                if (jml > 0) {
+                    int coba = 0;
+                    Valid.autonomor1Smc(TNoPermintaanPK, "PK", "permintaan_lab", "noorder", 4, "0", Tanggal);
+                    do {
+                        sukses = Sequel.menyimpantfSmc("permintaan_lab", "", TNoPermintaanPK.getText(), TNoRw.getText(),
+                            Valid.getTglSmc(Tanggal), Valid.getJamSmc(CmbJam, CmbMenit, CmbDetik), "0000-00-00", "00:00:00",
+                            "0000-00-00", "00:00:00", KodePerujuk.getText(), status.replaceAll("R", "r"),
+                            InformasiTambahan.getText(), DiagnosisKlinis.getText());
+
+                        if (!sukses) {
+                            Valid.renomorSmc(TNoPermintaanPK, 4, "0");
+                        }
+                    } while (coba++ < 10 && !sukses);
+
+                    if (sukses) {
+                        for (int i = 0; i < tbTarifPK.getRowCount(); i++) {
+                            if ((Boolean) tbTarifPK.getValueAt(i, 0)) {
+                                Sequel.menyimpanSmc("permintaan_pemeriksaan_lab", "", TNoPermintaanPK.getText(), tbTarifPK.getValueAt(i, 1).toString(), "Belum");
+                            }
+                        }
+
+                        for (int i = 0; i < tbDetailPK.getRowCount(); i++) {
+                            if (!"".equals(tbDetailPK.getValueAt(i, 4).toString()) && (Boolean) tbDetailPK.getValueAt(i, 0)) {
+                                Sequel.menyimpanSmc("permintaan_detail_permintaan_lab", "", TNoPermintaanPK.getText(), tbDetailPK.getValueAt(i, 5).toString(), tbDetailPK.getValueAt(i, 4).toString(), "Belum");
+                            }
+                        }
+                    }
+                }
+
+                if (jml2 > 0) {
+                    int coba = 0;
+                    Valid.autonomor1Smc(TNoPermintaanPA, "PA", "permintaan_labpa", "noorder", 4, "0", Tanggal);
+                    do {
+                        sukses = Sequel.menyimpantfSmc("permintaan_labpa", "", TNoPermintaanPA.getText(), TNoRw.getText(), Valid.getTglSmc(Tanggal),
+                            Valid.getJamSmc(CmbJam, CmbMenit, CmbDetik), "0000-00-00", "00:00:00", "0000-00-00", "00:00:00", KodePerujuk.getText(),
+                            status.replaceAll("R", "r"), InformasiTambahan.getText(), DiagnosisKlinis.getText(), Valid.getTglSmc(TanggalBahan),
+                            DiperolehDengan.getText(), LokasiPengambilan.getText(), Diawetkan.getText(), DilakukanPA.getText(),
+                            (DilakukanPA.getText().isBlank() ? "0000-00-00" : Valid.getTglSmc(TanggalPA)), NomorPA.getText(), DiagnosaPA.getText());
+
+                        if (!sukses) {
+                            Valid.renomorSmc(TNoPermintaanPA, 4, "0");
+                        }
+                    } while (coba++ < 10 && !sukses);
+
+                    if (sukses) {
+                        for (int i = 0; i < tbTarifPA.getRowCount(); i++) {
+                            if ((Boolean) tbTarifPA.getValueAt(i, 0)) {
+                                Sequel.menyimpanSmc("permintaan_pemeriksaan_labpa", "", TNoPermintaanPA.getText(), tbTarifPA.getValueAt(i, 1).toString(), "Belum");
+                            }
+                        }
+                    }
+                }
+
+                if (jml3 > 0) {
+                    int coba = 0;
+                    Valid.autonomor1Smc(TNoPermintaanMB, "MB", "permintaan_labmb", "noorder", 4, "0", Tanggal);
+                    do {
+                        sukses = Sequel.menyimpantfSmc("permintaan_labmb", "", TNoPermintaanMB.getText(), TNoRw.getText(), Valid.getTglSmc(Tanggal),
+                            Valid.getJamSmc(CmbJam, CmbMenit, CmbDetik), "0000-00-00", "00:00:00", "0000-00-00", "00:00:00", KodePerujuk.getText(),
+                            status.replaceAll("R", "r"), InformasiTambahan.getText(), DiagnosisKlinis.getText());
+
+                        if (!sukses) {
+                            Valid.renomorSmc(TNoPermintaanMB, 4, "0");
+                        }
+                    } while (coba++ < 10 && !sukses);
+
+                    if (sukses) {
+                        for (int i = 0; i < tbTarifMB.getRowCount(); i++) {
+                            if ((Boolean) tbTarifMB.getValueAt(i, 0)) {
+                                Sequel.menyimpanSmc("permintaan_pemeriksaan_labmb", "", TNoPermintaanMB.getText(), tbTarifMB.getValueAt(i, 1).toString(), "Belum");
+                            }
+                        }
+
+                        for (int i = 0; i < tbDetailMB.getRowCount(); i++) {
+                            if (!"".equals(tbDetailMB.getValueAt(i, 4).toString()) && (Boolean) tbDetailMB.getValueAt(i, 0)) {
+                                Sequel.menyimpanSmc("permintaan_detail_permintaan_labmb", "", TNoPermintaanMB.getText(), tbDetailMB.getValueAt(i, 5).toString(), tbDetailMB.getValueAt(i, 4).toString(), "Belum");
+                            }
+                        }
+                    }
+                }
+
+                // Jaga-jaga, commit / rollback segera sebelum autoCommit dinyalakan
+                if (sukses) {
+                    Sequel.Commit();
+                    isReset();
+                    emptTeks();
+                } else {
+                    Sequel.RollBack();
+                }
+
+                Sequel.AutoComitTrue();
+
+                if (sukses) {
+                    JOptionPane.showMessageDialog(null, "Proses simpan selesai!");
+                } else {
+                    JOptionPane.showMessageDialog(null, "Proses simpan gagal...!!!", "Gagal", JOptionPane.WARNING_MESSAGE);
+                }
+            } catch (Exception e) {
+                System.out.println("Notif : " + e);
+            }
             ChkJln.setSelected(true);
         }
     }
 
     private void autoNomor() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_lab.noorder,4),signed)),0) from permintaan_lab where permintaan_lab.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","PK"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaanPK);
+        // Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_lab.noorder,4),signed)),0) from permintaan_lab where permintaan_lab.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","PK"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaanPK);
+        Valid.autonomor1Smc(TNoPermintaanPK, "PK", "permintaan_lab", "noorder", 4, "0", Tanggal);
     }
 
     private void autoNomor2() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_labpa.noorder,4),signed)),0) from permintaan_labpa where permintaan_labpa.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","PA"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaanPA);
+        // Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_labpa.noorder,4),signed)),0) from permintaan_labpa where permintaan_labpa.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","PA"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaanPA);
+        Valid.autonomor1Smc(TNoPermintaanPA, "PA", "permintaan_labpa", "noorder", 4, "0", Tanggal);
     }
 
     private void autoNomor3() {
-        Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_labmb.noorder,4),signed)),0) from permintaan_labmb where permintaan_labmb.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","MB"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaanMB);
+        // Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(permintaan_labmb.noorder,4),signed)),0) from permintaan_labmb where permintaan_labmb.tgl_permintaan='"+Valid.SetTgl(Tanggal.getSelectedItem()+"")+"' ","MB"+Valid.SetTgl(Tanggal.getSelectedItem()+"").replaceAll("-",""),4,TNoPermintaanMB);
+        Valid.autonomor1Smc(TNoPermintaanMB, "MB", "permintaan_labmb", "noorder", 4, "0", Tanggal);
     }
 
     private void tampiltarif2() {

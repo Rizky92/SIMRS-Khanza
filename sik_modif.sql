@@ -1,29 +1,6 @@
 SET FOREIGN_KEY_CHECKS=0;
 
-CREATE TABLE IF NOT EXISTS `adamlabs_orderlab`  (
-  `noorder` varchar(20) NOT NULL,
-  `no_laboratorium` varchar(30) NOT NULL,
-  PRIMARY KEY (`noorder`, `no_laboratorium`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
-CREATE TABLE IF NOT EXISTS `adamlabs_request_response`  (
-  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
-  `noorder` varchar(20) NULL DEFAULT NULL,
-  `url` varchar(255) NULL DEFAULT NULL,
-  `method` varchar(5) NULL DEFAULT NULL,
-  `request` text NULL DEFAULT NULL,
-  `code` varchar(5) NULL DEFAULT NULL,
-  `response` text NULL DEFAULT NULL,
-  `pengirim` varchar(20) NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE,
-  INDEX `noorder`(`noorder`) USING BTREE,
-  INDEX `url`(`url`) USING BTREE,
-  INDEX `method`(`method`) USING BTREE,
-  INDEX `code`(`code`) USING BTREE,
-  INDEX `pengirim`(`pengirim`) USING BTREE
-) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
-
-CREATE TABLE `antrifotokelahiranbayismc`  (
+CREATE TABLE IF NOT EXISTS `antrifotokelahiranbayismc`  (
   `no_rkm_medis` varchar(15) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`) USING BTREE
 ) ENGINE = InnoDB DEFAULT CHARSET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
@@ -227,7 +204,7 @@ ALTER TABLE `detail_penagihan_piutang` ADD COLUMN IF NOT EXISTS `diskon` double 
 
 ALTER TABLE `detail_periksa_lab` DROP INDEX IF EXISTS `nilai`;
 
-ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` text NOT NULL DEFAULT '' AFTER `id_template`;
+ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai` varchar(700) NOT NULL AFTER `id_template`;
 
 ALTER TABLE `detail_periksa_lab` MODIFY COLUMN IF EXISTS `nilai_rujukan` varchar(700) NOT NULL AFTER `nilai`;
 
@@ -270,8 +247,20 @@ CREATE TABLE IF NOT EXISTS `idrg_grouping_smc`  (
   `chronic_weight` double DEFAULT NULL,
   `total_cost_weight` double DEFAULT NULL,
   `nbr` double DEFAULT NULL,
+  `topup_weight` double DEFAULT NULL,
+  `top_up` enum('Tidak Ada','Belum','Sudah') NOT NULL DEFAULT 'Tidak Ada',
   PRIMARY KEY (`no_sep`) USING BTREE,
   CONSTRAINT `idrg_grouping_smc_bridging_sep_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `inacbg_klaim_baru2` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `idrg_grouping_topup_smc`  (
+  `no_sep` varchar(40) NOT NULL,
+  `code` varchar(10) NOT NULL,
+  `description` varchar(100) NULL DEFAULT NULL,
+  `type` varchar(50) NULL DEFAULT NULL,
+  `weight` double NOT NULL DEFAULT 0,
+  PRIMARY KEY (`no_sep`, `code`) USING BTREE,
+  CONSTRAINT `idrg_grouping_topup_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `idrg_grouping_smc` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `idrg_klaim_final_smc`  (
@@ -396,7 +385,7 @@ CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_persalinan_smc`  (
   CONSTRAINT `inacbg_data_klaim_persalinan_smc_ibfk_1` FOREIGN KEY (`no_sep`) REFERENCES `bridging_sep` (`no_sep`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
-CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_tarif_smc` (
+CREATE TABLE IF NOT EXISTS `inacbg_data_klaim_tarif_smc`  (
   `no_sep` varchar(40) NOT NULL,
   `tarif_rs` varchar(30) NOT NULL,
   `nilai` double NOT NULL DEFAULT 0,
@@ -494,6 +483,27 @@ ALTER TABLE `jns_perawatan_inap` MODIFY COLUMN IF EXISTS `nm_perawatan` varchar(
 
 ALTER TABLE `jurnal` DROP INDEX IF EXISTS `no_jurnal`;
 
+CREATE TABLE IF NOT EXISTS `lis_orderlab`  (
+  `vendor` varchar(20) NOT NULL,
+  `noorder` varchar(20) NOT NULL,
+  `nolab` varchar(50) NOT NULL DEFAULT '',
+  PRIMARY KEY (`vendor`, `noorder`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
+CREATE TABLE IF NOT EXISTS `lis_request_response`  (
+  `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT,
+  `vendor` varchar(20) NOT NULL DEFAULT '',
+  `noorder` varchar(20) NULL DEFAULT NULL,
+  `url` varchar(255) NULL DEFAULT NULL,
+  `method` varchar(15) NULL DEFAULT NULL,
+  `request` text NULL DEFAULT NULL,
+  `code` varchar(5) NULL DEFAULT NULL,
+  `response` text NULL DEFAULT NULL,
+  `pengirim` varchar(20) NULL DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  INDEX `vendor_noorder`(`vendor`, `noorder`) USING BTREE
+) ENGINE = InnoDB CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
+
 ALTER TABLE `maping_dokter_dpjpvclaim` MODIFY COLUMN IF EXISTS `nm_dokter_bpjs` varchar(100) NULL DEFAULT NULL AFTER `kd_dokter_bpjs`;
 
 ALTER TABLE `maping_dokter_dpjpvclaim` ADD UNIQUE INDEX IF NOT EXISTS `maping_dokter_dpjpvclaim_unique`(`kd_dokter_bpjs`) USING BTREE;
@@ -533,7 +543,7 @@ ALTER TABLE `pasien` ADD INDEX IF NOT EXISTS `tgl_daftar`(`tgl_daftar`) USING BT
 
 ALTER TABLE `pasien` ADD INDEX IF NOT EXISTS `tgl_lahir`(`tgl_lahir`) USING BTREE;
 
-CREATE TABLE `pasien_bayi_gambar_smc`  (
+CREATE TABLE IF NOT EXISTS `pasien_bayi_gambar_smc`  (
   `no_rkm_medis` varchar(15) NOT NULL,
   `photo` varchar(500) NOT NULL,
   PRIMARY KEY (`no_rkm_medis`) USING BTREE,
@@ -1518,20 +1528,16 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_lab_loinc`  (
   `code` varchar(30) NOT NULL,
   `system` varchar(100) NOT NULL,
   `display` varchar(300) NULL DEFAULT NULL,
-  `display_ind` varchar(300) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
-  INDEX `display`(`display`) USING BTREE,
-  INDEX `display_ind`(`display_ind`) USING BTREE
+  INDEX `display`(`display`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_lab_snomed`  (
   `code` varchar(40) NOT NULL,
   `system` varchar(100) NOT NULL,
   `display` varchar(600) NULL DEFAULT NULL,
-  `display_ind` varchar(600) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
-  INDEX `display`(`display`) USING BTREE,
-  INDEX `display_ind`(`display_ind`) USING BTREE
+  INDEX `display`(`display`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_numerator`  (
@@ -1558,20 +1564,16 @@ CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_radiologi_loinc`  (
   `code` varchar(30) NOT NULL,
   `system` varchar(100) NOT NULL,
   `display` varchar(300) NULL DEFAULT NULL,
-  `display_ind` varchar(300) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
-  INDEX `display`(`display`) USING BTREE,
-  INDEX `display_ind`(`display_ind`) USING BTREE
+  INDEX `display`(`display`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_radiologi_snomed`  (
   `code` varchar(30) NOT NULL,
   `system` varchar(100) NOT NULL,
   `display` varchar(300) NULL DEFAULT NULL,
-  `display_ind` varchar(300) NULL DEFAULT NULL,
   PRIMARY KEY (`code`, `system`) USING BTREE,
-  INDEX `display`(`display`) USING BTREE,
-  INDEX `display_ind`(`display_ind`) USING BTREE
+  INDEX `display`(`display`) USING BTREE
 ) ENGINE = MyISAM CHARACTER SET = latin1 COLLATE = latin1_swedish_ci ROW_FORMAT = Dynamic;
 
 CREATE TABLE IF NOT EXISTS `satu_sehat_referensi_route`  (
@@ -1805,9 +1807,7 @@ ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_edit_kirim_obat_smc` enum('tru
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_edit_kirim_obat_smc`;
 
-ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_obat_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_riwayat_obat_smc`;
-
-ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_resep_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_riwayat_pelayanan_obat_smc`;
+ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `bpjs_riwayat_pelayanan_resep_smc` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_riwayat_obat_smc`;
 
 ALTER TABLE `user` ADD COLUMN IF NOT EXISTS `pintu_poli` enum('true','false') NULL DEFAULT NULL AFTER `bpjs_potensi_prb`;
 

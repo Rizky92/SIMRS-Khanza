@@ -680,7 +680,6 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             JOptionPane.showMessageDialog(null,"Proses loading data belum selesai, silahkan tunggu hingga proses loading selesai...!!!!");
             return;
         }
-        // BtnCariActionPerformed(evt);
         if(tabMode.getRowCount()==0){
             JOptionPane.showMessageDialog(null,"Maaf, data sudah habis. Tidak ada data yang bisa anda print...!!!!");
             TCari.requestFocus();

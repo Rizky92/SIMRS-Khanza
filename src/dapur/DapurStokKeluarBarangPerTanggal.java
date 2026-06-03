@@ -528,27 +528,27 @@ public class DapurStokKeluarBarangPerTanggal extends javax.swing.JDialog {
             "Total"
         };
         tabMode=new DefaultTableModel(null,row){
-             @Override public boolean isCellEditable(int rowIndex, int colIndex){
+            @Override public boolean isCellEditable(int rowIndex, int colIndex){
                 boolean a = false;
                 if (colIndex==0) {
                     a=true;
                 }
                 return a;
-             }
-             Class[] types = new Class[] {
-                 java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
-                 java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
-             };
-             @Override
-             public Class getColumnClass(int columnIndex) {
+            }
+            Class[] types = new Class[] {
+                java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class,
+                java.lang.Double.class, java.lang.Double.class, java.lang.Double.class, java.lang.Double.class
+            };
+            @Override
+            public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
-             }
+            }
         };
         tbJadwal.setModel(tabMode);
 
@@ -638,7 +638,6 @@ public class DapurStokKeluarBarangPerTanggal extends javax.swing.JDialog {
         LCount.setText(""+tabMode.getRowCount());
         this.setCursor(Cursor.getDefaultCursor());
     }
-
 
     String konversi(int year, int month, int day){
         dateString = String.format("%d-%d-%d", year, month, day);

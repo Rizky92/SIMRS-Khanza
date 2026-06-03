@@ -757,7 +757,6 @@ public final class InhealthTindakanRanap extends javax.swing.JDialog {
         }
     }
 
-
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_tindakan_ranap());
         BtnHapus.setEnabled(akses.getinhealth_mapping_tindakan_ranap());

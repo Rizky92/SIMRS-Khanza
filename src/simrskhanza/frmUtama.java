@@ -31,7 +31,7 @@ import bridging.ApotekBPJSDaftarResepObat;
 import bridging.ApotekBPJSEditResepObatSMC;
 import bridging.ApotekBPJSKirimResepObatSMC;
 import bridging.ApotekBPJSKunjunganSEP;
-import bridging.ApotekBPJSMapingObat;
+import bridging.ApotekBPJSMapingObatSMC;
 import bridging.ApotekBPJSMonitoringKlaim;
 import bridging.ApotekBPJSRekapPesertaPRB;
 import bridging.ApotekBPJSResepObat;
@@ -191,6 +191,9 @@ import bridging.SisruteCekReferensiDiagnosa;
 import bridging.SisruteCekReferensiFaskes;
 import bridging.SisruteRujukanKeluar;
 import bridging.SisruteRujukanMasukan;
+import bridging.SmartKlaimBPJSKirimFHIR;
+import bridging.SmartKlaimBPJSMappingPenyakit;
+import bridging.SmartKlaimBPJSMappingProsedur;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
@@ -842,6 +845,7 @@ import permintaan.DlgCariPermintaanLabPA;
 import permintaan.DlgCariPermintaanLayananProgramKFR;
 import permintaan.DlgCariPermintaanRadiologi;
 import permintaan.DlgPermintaanKonsultasiMedik;
+import permintaan.DlgPermintaanKonsultasiPerawat;
 import permintaan.DlgPermintaanPelayananInformasiObat;
 import permintaan.DlgPermintaanRanap;
 import perpustakaan.PerpustakaanAnggota;
@@ -1121,6 +1125,7 @@ import surat.SuratCutiHamil;
 import surat.SuratIndeks;
 import surat.SuratKeluar;
 import surat.SuratKeteranganBebasTBC;
+import surat.SuratKeteranganBerobat;
 import surat.SuratKeteranganCovid;
 import surat.SuratKeteranganLayakTerbang;
 import surat.SuratKeteranganRawatInap;
@@ -1131,6 +1136,11 @@ import surat.SuratKontrol;
 import surat.SuratMap;
 import surat.SuratMasuk;
 import surat.SuratPenolakanAnjuranMedis;
+import surat.SuratPenolakanResusitasi;
+import surat.SuratPermintaanBinrohtal;
+import surat.SuratPermintaanPerlindunganDariKekerasan;
+import surat.SuratPermintaanSecondOpinion;
+import surat.SuratPermohonanPrivasi;
 import surat.SuratPernyataanMemilihDPJP;
 import surat.SuratPernyataanPasienUmum;
 import surat.SuratPersetujuanPemeriksaanHIV;
@@ -2077,7 +2087,7 @@ public class frmUtama extends javax.swing.JFrame {
 
         tanggal.setEditable(false);
         tanggal.setForeground(new java.awt.Color(50, 70, 50));
-        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "11/03/2026" }));
+        tanggal.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "14/05/2026" }));
         tanggal.setDisplayFormat("dd/MM/yyyy");
         tanggal.setName("tanggal"); // NOI18N
         tanggal.setOpaque(false);
@@ -8369,7 +8379,6 @@ public class frmUtama extends javax.swing.JFrame {
 
     private void BtnLogActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnLogActionPerformed
         FlayMenu.setVisible(false);
-
         switch (BtnLog.getText().trim()) {
             case "Log Out":
                 BtnToolReg.setEnabled(false);
@@ -21125,7 +21134,7 @@ public class frmUtama extends javax.swing.JFrame {
         isTutup();
         DlgHome.dispose();
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        ApotekBPJSMapingObat form=new ApotekBPJSMapingObat(this,false);
+        ApotekBPJSMapingObatSMC form=new ApotekBPJSMapingObatSMC(this,false);
         form.isCek();
         form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
@@ -23631,7 +23640,7 @@ public class frmUtama extends javax.swing.JFrame {
         this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
         isTutup();
         PCRAICRAPengkajianRisikoPraKonstruksi form=new PCRAICRAPengkajianRisikoPraKonstruksi(this,false);
-        form.emptTeks();
+        form.setTampil();
         form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
         form.setLocationRelativeTo(PanelUtama);
         form.setVisible(true);
@@ -23672,6 +23681,123 @@ public class frmUtama extends javax.swing.JFrame {
         aplikasi.setLocationRelativeTo(PanelUtama);
         aplikasi.setVisible(true);
         aplikasi.isCek();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnKonsultasiPerawatActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        DlgPermintaanKonsultasiPerawat form=new DlgPermintaanKonsultasiPerawat(this,false);
+        form.isCek();
+        form.setSize(PanelUtama.getWidth(),PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        DlgHome.dispose();
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnMappingProsedurSmartKlaimBPJSActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SmartKlaimBPJSMappingProsedur form=new SmartKlaimBPJSMappingProsedur(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnMappingPenyakitSmartKlaimBPJSActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SmartKlaimBPJSMappingPenyakit form=new SmartKlaimBPJSMappingPenyakit(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnKirimFHIRSmartKlaimBPJSActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SmartKlaimBPJSKirimFHIR form=new SmartKlaimBPJSKirimFHIR(this,false);
+        form.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        form.setLocationRelativeTo(PanelUtama);
+        form.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSuratPermintaanBinrohtalActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratPermintaanBinrohtal aplikasi=new SuratPermintaanBinrohtal(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSuratPermintaanPerlindunganDariKekerasanActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratPermintaanPerlindunganDariKekerasan aplikasi=new SuratPermintaanPerlindunganDariKekerasan(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSuratPermohonanPrivasiActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratPermohonanPrivasi aplikasi=new SuratPermohonanPrivasi(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSuratPermintaanSecondOpinionActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratPermintaanSecondOpinion aplikasi=new SuratPermintaanSecondOpinion(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSuratKeteranganBerobatActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratKeteranganBerobat aplikasi=new SuratKeteranganBerobat(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
+        this.setCursor(Cursor.getDefaultCursor());
+    }
+
+    private void btnSuratPenolakanResusitasiActionPerformed(java.awt.event.ActionEvent evt) {
+        isTutup();
+        DlgHome.dispose();
+        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+        SuratPenolakanResusitasi aplikasi=new SuratPenolakanResusitasi(this,false);
+        aplikasi.isCek();
+        aplikasi.setSize(PanelUtama.getWidth(), PanelUtama.getHeight());
+        aplikasi.setLocationRelativeTo(PanelUtama);
+        aplikasi.setVisible(true);
         this.setCursor(Cursor.getDefaultCursor());
     }
 
@@ -24395,11 +24521,12 @@ public class frmUtama extends javax.swing.JFrame {
             btnSkriningCURB65,btnBPJSPotensiPRB,btnBPJSRiwayatPelayananObatApotek,btnSkriningGiziKehamilan,btnBPJSRekapPesertaPRBObatApotek,btnSuratSerahTerimaBarangAnggotaTubuh,btnPCRAICRAJenisAktivitasProyek,
             btnPCRAICRALokasiKelompokRisiko,btnPCRAICRAKelasRisikoPencegahan,btnPCRAICRATindakanPengendalian,btnPCRAICRAIdentifikasiRisikoInfeksi,btnPCRAICRAIdentifikasiRisikoKeselamatan,
             btnPCRAICRAIdentifikasiRisikoKebakaran,btnPCRAICRAIdentifikasiRisikoUtilitas,btnBPJSResepObatApotek,btnObatApolApotekBPJS,btnPermintaanResepIterasiApotekBPJS,btnPCRAICRAPengkajianRisikoPraKonstruksi,
-            btnPCRAICRAPersyaratanHarusDipenuhi,btnKirimQRTelaahFarmasiSatuSehat,btnKirimAllergiSatuSehat;
+            btnPCRAICRAPersyaratanHarusDipenuhi,btnKirimQRTelaahFarmasiSatuSehat,btnKirimAllergiSatuSehat,btnKonsultasiPerawat,btnMappingProsedurSmartKlaimBPJS,btnMappingPenyakitSmartKlaimBPJS,btnKirimFHIRSmartKlaimBPJS,
+            btnSuratPermintaanBinrohtal,btnSuratPermintaanPerlindunganDariKekerasan,btnSuratPermohonanPrivasi,btnSuratPermintaanSecondOpinion,btnSuratKeteranganBerobat,btnSuratPenolakanResusitasi;
 
     public void isWall(){
         try{
-            ps=koneksi.prepareStatement("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.aktifkan,setting.wallpaper,setting.kontak,setting.email,setting.logo,setting.kode_ppk from setting");
+            ps=koneksi.prepareStatement("select setting.nama_instansi,setting.alamat_instansi,setting.kabupaten,setting.propinsi,setting.aktifkan,setting.wallpaper,setting.kontak,setting.email,setting.logo,setting.kode_ppk,setting.kode_ppkkemenkes from setting");
             try {
                 rs=ps.executeQuery();
                 while(rs.next()){
@@ -24413,6 +24540,7 @@ public class frmUtama extends javax.swing.JFrame {
                     akses.setkontakrs(rs.getString("kontak"));
                     akses.setemailrs(rs.getString("email"));
                     akses.setkodeppkbpjs(rs.getString("kode_ppk"));
+                    akses.setkodeppkkemenkes(rs.getString("kode_ppkkemenkes"));
                     if(rs.getString(5).equals("Yes")){
                         Blob blob = rs.getBlob(6);
                         PanelWall.setBackgroundImage(new javax.swing.ImageIcon(blob.getBytes(1, (int) (blob.length()))));
@@ -27410,6 +27538,21 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
+            if(akses.getmapping_prosedur_smart_klaim_bpjs()==true){
+                Panelmenu.add(btnMappingProsedurSmartKlaimBPJS);
+                jmlmenu++;
+            }
+
+            if(akses.getmapping_penyakit_smart_klaim_bpjs()==true){
+                Panelmenu.add(btnMappingPenyakitSmartKlaimBPJS);
+                jmlmenu++;
+            }
+
+            if(akses.getbridging_smart_klaim_bpjs()==true){
+                Panelmenu.add(btnKirimFHIRSmartKlaimBPJS);
+                jmlmenu++;
+            }
+
             if(akses.getriwayat_perawatan_icare_bpjs()==true){
                 Panelmenu.add(btnRiwayatPerawatanICare);
                 jmlmenu++;
@@ -28972,6 +29115,11 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
+            if(akses.getkonsultasi_perawat()==true){
+                Panelmenu.add(btnKonsultasiPerawat);
+                jmlmenu++;
+            }
+
             if(akses.gettransfer_pasien_antar_ruang()==true){
                 Panelmenu.add(btnTransferPasienAntarRuang);
                 jmlmenu++;
@@ -29909,6 +30057,11 @@ public class frmUtama extends javax.swing.JFrame {
                 jmlmenu++;
             }
 
+            if(akses.getsurat_keterangan_berobat()==true){
+                Panelmenu.add(btnSuratKeteranganBerobat);
+                jmlmenu++;
+            }
+
             if(akses.getsurat_kewaspadaan_kesehatan()==true){
                 Panelmenu.add(btnSuratKewaspadaanKesehatan);
                 jmlmenu++;
@@ -29981,6 +30134,31 @@ public class frmUtama extends javax.swing.JFrame {
 
             if(akses.getserah_terima_anggota_tubuh_barang()==true){
                 Panelmenu.add(btnSuratSerahTerimaBarangAnggotaTubuh);
+                jmlmenu++;
+            }
+
+            if(akses.getpermintaan_binrohtal()==true){
+                Panelmenu.add(btnSuratPermintaanBinrohtal);
+                jmlmenu++;
+            }
+
+            if(akses.getsurat_permintaan_perlindungan_dari_kekerasan()==true){
+                Panelmenu.add(btnSuratPermintaanPerlindunganDariKekerasan);
+                jmlmenu++;
+            }
+
+            if(akses.getsurat_permohonan_privasi()==true){
+                Panelmenu.add(btnSuratPermohonanPrivasi);
+                jmlmenu++;
+            }
+
+            if(akses.getsurat_permintaan_second_opinion()==true){
+                Panelmenu.add(btnSuratPermintaanSecondOpinion);
+                jmlmenu++;
+            }
+
+            if(akses.getsurat_penolakan_resusitasi()==true){
+                Panelmenu.add(btnSuratPenolakanResusitasi);
                 jmlmenu++;
             }
         }else if(cmbMenu.getSelectedIndex()==16){
@@ -33333,6 +33511,21 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
+        if(akses.getmapping_prosedur_smart_klaim_bpjs()==true){
+            Panelmenu.add(btnMappingProsedurSmartKlaimBPJS);
+            jmlmenu++;
+        }
+
+        if(akses.getmapping_penyakit_smart_klaim_bpjs()==true){
+            Panelmenu.add(btnMappingPenyakitSmartKlaimBPJS);
+            jmlmenu++;
+        }
+
+        if(akses.getbridging_smart_klaim_bpjs()==true){
+            Panelmenu.add(btnKirimFHIRSmartKlaimBPJS);
+            jmlmenu++;
+        }
+
         if(akses.getriwayat_perawatan_icare_bpjs()==true){
             Panelmenu.add(btnRiwayatPerawatanICare);
             jmlmenu++;
@@ -34884,6 +35077,11 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
+        if(akses.getkonsultasi_perawat()==true){
+            Panelmenu.add(btnKonsultasiPerawat);
+            jmlmenu++;
+        }
+
         if(akses.gettransfer_pasien_antar_ruang()==true){
             Panelmenu.add(btnTransferPasienAntarRuang);
             jmlmenu++;
@@ -35818,6 +36016,11 @@ public class frmUtama extends javax.swing.JFrame {
             jmlmenu++;
         }
 
+        if(akses.getsurat_keterangan_berobat()==true){
+            Panelmenu.add(btnSuratKeteranganBerobat);
+            jmlmenu++;
+        }
+
         if(akses.getsurat_kewaspadaan_kesehatan()==true){
             Panelmenu.add(btnSuratKewaspadaanKesehatan);
             jmlmenu++;
@@ -35885,6 +36088,31 @@ public class frmUtama extends javax.swing.JFrame {
 
         if(akses.getserah_terima_anggota_tubuh_barang()==true){
             Panelmenu.add(btnSuratSerahTerimaBarangAnggotaTubuh);
+            jmlmenu++;
+        }
+
+        if(akses.getpermintaan_binrohtal()==true){
+            Panelmenu.add(btnSuratPermintaanBinrohtal);
+            jmlmenu++;
+        }
+
+        if(akses.getsurat_permintaan_perlindungan_dari_kekerasan()==true){
+            Panelmenu.add(btnSuratPermintaanPerlindunganDariKekerasan);
+            jmlmenu++;
+        }
+
+        if(akses.getsurat_permohonan_privasi()==true){
+            Panelmenu.add(btnSuratPermohonanPrivasi);
+            jmlmenu++;
+        }
+
+        if(akses.getsurat_permintaan_second_opinion()==true){
+            Panelmenu.add(btnSuratPermintaanSecondOpinion);
+            jmlmenu++;
+        }
+
+        if(akses.getsurat_penolakan_resusitasi()==true){
+            Panelmenu.add(btnSuratPenolakanResusitasi);
             jmlmenu++;
         }
 
@@ -40386,6 +40614,27 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
+        if(akses.getmapping_prosedur_smart_klaim_bpjs()==true){
+            if(btnMappingProsedurSmartKlaimBPJS.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnMappingProsedurSmartKlaimBPJS);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getmapping_penyakit_smart_klaim_bpjs()==true){
+            if(btnMappingPenyakitSmartKlaimBPJS.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnMappingPenyakitSmartKlaimBPJS);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getbridging_smart_klaim_bpjs()==true){
+            if(btnKirimFHIRSmartKlaimBPJS.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnKirimFHIRSmartKlaimBPJS);
+                jmlmenu++;
+            }
+        }
+
         if(akses.getriwayat_perawatan_icare_bpjs()==true){
             if(btnRiwayatPerawatanICare.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnRiwayatPerawatanICare);
@@ -42562,6 +42811,13 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
+        if(akses.getkonsultasi_perawat()==true){
+            if(btnKonsultasiPerawat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnKonsultasiPerawat);
+                jmlmenu++;
+            }
+        }
+
         if(akses.gettransfer_pasien_antar_ruang()==true){
             if(btnTransferPasienAntarRuang.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnTransferPasienAntarRuang);
@@ -43874,6 +44130,13 @@ public class frmUtama extends javax.swing.JFrame {
             }
         }
 
+        if(akses.getsurat_keterangan_berobat()==true){
+            if(btnSuratKeteranganBerobat.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratKeteranganBerobat);
+                jmlmenu++;
+            }
+        }
+
         if(akses.getsurat_kewaspadaan_kesehatan()==true){
             if(btnSuratKewaspadaanKesehatan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSuratKewaspadaanKesehatan);
@@ -43968,6 +44231,41 @@ public class frmUtama extends javax.swing.JFrame {
         if(akses.getserah_terima_anggota_tubuh_barang()==true){
             if(btnSuratSerahTerimaBarangAnggotaTubuh.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
                 Panelmenu.add(btnSuratSerahTerimaBarangAnggotaTubuh);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getpermintaan_binrohtal()==true){
+            if(btnSuratPermintaanBinrohtal.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratPermintaanBinrohtal);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getsurat_permintaan_perlindungan_dari_kekerasan()==true){
+            if(btnSuratPermintaanPerlindunganDariKekerasan.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratPermintaanPerlindunganDariKekerasan);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getsurat_permohonan_privasi()==true){
+            if(btnSuratPermohonanPrivasi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratPermohonanPrivasi);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getsurat_permintaan_second_opinion()==true){
+            if(btnSuratPermintaanSecondOpinion.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratPermintaanSecondOpinion);
+                jmlmenu++;
+            }
+        }
+
+        if(akses.getsurat_penolakan_resusitasi()==true){
+            if(btnSuratPenolakanResusitasi.getText().toLowerCase().trim().contains(TCari.getText().toLowerCase().trim())){
+                Panelmenu.add(btnSuratPenolakanResusitasi);
                 jmlmenu++;
             }
         }
@@ -50325,6 +50623,46 @@ public class frmUtama extends javax.swing.JFrame {
         btnSuratSerahTerimaBarangAnggotaTubuh.setPreferredSize(new java.awt.Dimension(200, 90));
         btnSuratSerahTerimaBarangAnggotaTubuh.addActionListener(this::btnSuratSerahTerimaBarangAnggotaTubuhActionPerformed);
 
+        btnSuratPermintaanBinrohtal = new widget.ButtonBig();
+        btnSuratPermintaanBinrohtal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/mental-health_18376031-2.png")));
+        btnSuratPermintaanBinrohtal.setText("Persetujuan Bimbingan Rohani & Mental");
+        btnSuratPermintaanBinrohtal.setIconTextGap(0);
+        btnSuratPermintaanBinrohtal.setName("btnSuratPermintaanBinrohtal");
+        btnSuratPermintaanBinrohtal.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPermintaanBinrohtal.addActionListener(this::btnSuratPermintaanBinrohtalActionPerformed);
+
+        btnSuratPermintaanPerlindunganDariKekerasan = new widget.ButtonBig();
+        btnSuratPermintaanPerlindunganDariKekerasan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/boxing_2043124.png")));
+        btnSuratPermintaanPerlindunganDariKekerasan.setText("Permintaan Perlindungan Diri Dari Kekerasan");
+        btnSuratPermintaanPerlindunganDariKekerasan.setIconTextGap(0);
+        btnSuratPermintaanPerlindunganDariKekerasan.setName("btnSuratPermintaanPerlindunganDariKekerasan");
+        btnSuratPermintaanPerlindunganDariKekerasan.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPermintaanPerlindunganDariKekerasan.addActionListener(this::btnSuratPermintaanPerlindunganDariKekerasanActionPerformed);
+
+        btnSuratPermohonanPrivasi = new widget.ButtonBig();
+        btnSuratPermohonanPrivasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/compliant_4252354.png")));
+        btnSuratPermohonanPrivasi.setText("Surat Permohonan Privasi");
+        btnSuratPermohonanPrivasi.setIconTextGap(0);
+        btnSuratPermohonanPrivasi.setName("btnSuratPermohonanPrivasi");
+        btnSuratPermohonanPrivasi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPermohonanPrivasi.addActionListener(this::btnSuratPermohonanPrivasiActionPerformed);
+
+        btnSuratPermintaanSecondOpinion = new widget.ButtonBig();
+        btnSuratPermintaanSecondOpinion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/conversation_3601377.png")));
+        btnSuratPermintaanSecondOpinion.setText("Surat Permintaan Second Opinion");
+        btnSuratPermintaanSecondOpinion.setIconTextGap(0);
+        btnSuratPermintaanSecondOpinion.setName("btnSuratPermintaanSecondOpinion");
+        btnSuratPermintaanSecondOpinion.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPermintaanSecondOpinion.addActionListener(this::btnSuratPermintaanSecondOpinionActionPerformed);
+
+        btnSuratPenolakanResusitasi = new widget.ButtonBig();
+        btnSuratPenolakanResusitasi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/services_6007742.png")));
+        btnSuratPenolakanResusitasi.setText("Surat Penolakan Resusitasi");
+        btnSuratPenolakanResusitasi.setIconTextGap(0);
+        btnSuratPenolakanResusitasi.setName("btnSuratPenolakanResusitasi");
+        btnSuratPenolakanResusitasi.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratPenolakanResusitasi.addActionListener(this::btnSuratPenolakanResusitasiActionPerformed);
+
         btnPCRAICRAJenisAktivitasProyek = new widget.ButtonBig();
         btnPCRAICRAJenisAktivitasProyek.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/construction_12539761.png")));
         btnPCRAICRAJenisAktivitasProyek.setText("Jenis Aktivitas Proyek PCRA");
@@ -50413,6 +50751,30 @@ public class frmUtama extends javax.swing.JFrame {
         btnPermintaanResepIterasiApotekBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
         btnPermintaanResepIterasiApotekBPJS.addActionListener(this::btnPermintaanResepIterasiApotekBPJSActionPerformed);
 
+        btnMappingProsedurSmartKlaimBPJS = new widget.ButtonBig();
+        btnMappingProsedurSmartKlaimBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png")));
+        btnMappingProsedurSmartKlaimBPJS.setText("Mapping Prosedur Smart Klaim BPJS");
+        btnMappingProsedurSmartKlaimBPJS.setIconTextGap(0);
+        btnMappingProsedurSmartKlaimBPJS.setName("btnMappingProsedurSmartKlaimBPJS");
+        btnMappingProsedurSmartKlaimBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnMappingProsedurSmartKlaimBPJS.addActionListener(this::btnMappingProsedurSmartKlaimBPJSActionPerformed);
+
+        btnMappingPenyakitSmartKlaimBPJS = new widget.ButtonBig();
+        btnMappingPenyakitSmartKlaimBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png")));
+        btnMappingPenyakitSmartKlaimBPJS.setText("Mapping Penyakit Smart Klaim BPJS");
+        btnMappingPenyakitSmartKlaimBPJS.setIconTextGap(0);
+        btnMappingPenyakitSmartKlaimBPJS.setName("btnMappingPenyakitSmartKlaimBPJS");
+        btnMappingPenyakitSmartKlaimBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnMappingPenyakitSmartKlaimBPJS.addActionListener(this::btnMappingPenyakitSmartKlaimBPJSActionPerformed);
+
+        btnKirimFHIRSmartKlaimBPJS = new widget.ButtonBig();
+        btnKirimFHIRSmartKlaimBPJS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/bpjs.png")));
+        btnKirimFHIRSmartKlaimBPJS.setText("Kirim FHIR Smart Klaim BPJS");
+        btnKirimFHIRSmartKlaimBPJS.setIconTextGap(0);
+        btnKirimFHIRSmartKlaimBPJS.setName("btnKirimFHIRSmartKlaimBPJS");
+        btnKirimFHIRSmartKlaimBPJS.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKirimFHIRSmartKlaimBPJS.addActionListener(this::btnKirimFHIRSmartKlaimBPJSActionPerformed);
+
         btnPCRAICRAPengkajianRisikoPraKonstruksi = new widget.ButtonBig();
         btnPCRAICRAPengkajianRisikoPraKonstruksi.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/crane_2515356.png")));
         btnPCRAICRAPengkajianRisikoPraKonstruksi.setText("Pengkajian Risiko Pra Konstruksi/PCRA");
@@ -50444,6 +50806,22 @@ public class frmUtama extends javax.swing.JFrame {
         btnKirimAllergiSatuSehat.setName("btnKirimAllergiSatuSehat");
         btnKirimAllergiSatuSehat.setPreferredSize(new java.awt.Dimension(200, 90));
         btnKirimAllergiSatuSehat.addActionListener(this::btnKirimAllergiSatuSehatActionPerformed);
+
+        btnKonsultasiPerawat = new widget.ButtonBig();
+        btnKonsultasiPerawat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/discuss_12922995.png")));
+        btnKonsultasiPerawat.setText("Konsultasi Perawat");
+        btnKonsultasiPerawat.setIconTextGap(0);
+        btnKonsultasiPerawat.setName("btnKonsultasiPerawat");
+        btnKonsultasiPerawat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnKonsultasiPerawat.addActionListener(this::btnKonsultasiPerawatActionPerformed);
+
+        btnSuratKeteranganBerobat = new widget.ButtonBig();
+        btnSuratKeteranganBerobat.setIcon(new javax.swing.ImageIcon(getClass().getResource("/48x48/register_11421976.png")));
+        btnSuratKeteranganBerobat.setText("Surat Keterangan Berobat");
+        btnSuratKeteranganBerobat.setIconTextGap(0);
+        btnSuratKeteranganBerobat.setName("btnSuratKeteranganBerobat");
+        btnSuratKeteranganBerobat.setPreferredSize(new java.awt.Dimension(200, 90));
+        btnSuratKeteranganBerobat.addActionListener(this::btnSuratKeteranganBerobatActionPerformed);
     }
 
     private widget.ButtonBig btnBPJSKompilasiBerkasKlaim, btnUserSmc, btnSetAksesEditSementara, btnBPJSAntreanPerKodebookingMobileJKN, btnSetTampilJenisObatResep, btnSetPintuPoliSmc,

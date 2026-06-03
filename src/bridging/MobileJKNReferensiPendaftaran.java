@@ -62,12 +62,11 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
         this.setLocation(8,1);
         setSize(628,674);
 
-        tabMode = new DefaultTableModel(null, new Object[] {
-            "P", "No.Rawat", "No.RM", "Nama Pasien", "No.HP", "No.Kartu", "NIK", "Tanggal", "Poliklinik", "Dokter",
-            "Jam Praktek", "Jenis Kunjungan", "Nomor Referensi", "Status", "Validasi Checkin", "No.Booking"
-        }) {
+        tabMode=new DefaultTableModel(null,new Object[]{
+                "P", "No.Rawat","No.RM","Nama Pasien","No.HP","No.Kartu","NIK","Tanggal","Poliklinik","Dokter","Jam Praktek","Jenis Kunjungan","Nomor Referensi","Status","Validasi Checkin","No.Booking"
+            }){
             @Override
-            public boolean isCellEditable(int rowIndex, int colIndex) {
+            public boolean isCellEditable(int rowIndex, int colIndex){
                 return colIndex == 0;
             }
 
@@ -545,7 +544,7 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                 }
             }
             if (adaTask99) {
-                JOptionPane.showMessageDialog(null, "<html><body>Antrian berhasil dibatalkan.<br>Beberapa data tidak dapat dibatalkan karena pasien sudah Checkin di BPJS (task 99 telah dikirim).</body></html>");
+                JOptionPane.showMessageDialog(null, "<html><body>Antrian berhasil dibatalkan.<br>Beberapa antrian tidak dapat dibatalkan karena pasien sudah Checkin di BPJS (task 99 telah dikirim).</body></html>");
             }
             runBackground(() ->tampil());
         }
@@ -689,25 +688,24 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
 
     private void tampil() {
         Valid.tabelKosong(tabMode);
-        String sql = "select " +
-                "no_rawat, norm, pasien.nm_pasien, nohp, nomorkartu, nik, tanggalperiksa, jampraktek, jeniskunjungan, nomorreferensi, " +
-                "validasi, nobooking, referensi_mobilejkn_bpjs.kodepoli, referensi_mobilejkn_bpjs.kodedokter, referensi_mobilejkn_bpjs.status, " +
-                "ifnull(nm_dokter_bpjs, '') as nm_dokter_bpjs, ifnull(nm_poli_bpjs, '') as nm_poli_bpjs  " +
-            "from referensi_mobilejkn_bpjs " +
-            "join pasien on referensi_mobilejkn_bpjs.norm = pasien.no_rkm_medis " +
-            "left join maping_dokter_dpjpvclaim on referensi_mobilejkn_bpjs.kodedokter = maping_dokter_dpjpvclaim.kd_dokter_bpjs " +
-            "left join maping_poli_bpjs on referensi_mobilejkn_bpjs.kodepoli = maping_poli_bpjs.kd_poli_bpjs " +
-            "where referensi_mobilejkn_bpjs.tanggalperiksa between ? and ? " +
-            (TCari.getText().isBlank() ? ""
-                : "and (no_rawat like ? or norm like ? or pasien.nm_pasien like ? or nohp like ? or nomorkartu like ? or nik like ? or jeniskunjungan like ? or nomorreferensi like ? or status like ? or referensi_mobilejkn_bpjs.kodedokter like ? or referensi_mobilejkn_bpjs.kodepoli like ? or ifnull(nm_dokter_bpjs, '') like ? or ifnull(nm_poli_bpjs, '') like ?) "
-            ) + "order by tanggalperiksa";
-
         try{
-            ps=koneksi.prepareStatement(sql);
+            ps=koneksi.prepareStatement(
+                    "SELECT referensi_mobilejkn_bpjs.no_rawat,referensi_mobilejkn_bpjs.norm,pasien.nm_pasien,referensi_mobilejkn_bpjs.nohp,referensi_mobilejkn_bpjs.nomorkartu,"+
+                    "referensi_mobilejkn_bpjs.nik,referensi_mobilejkn_bpjs.tanggalperiksa,referensi_mobilejkn_bpjs.kodepoli,referensi_mobilejkn_bpjs.kodedokter,referensi_mobilejkn_bpjs.jampraktek,"+
+                    "referensi_mobilejkn_bpjs.jeniskunjungan,referensi_mobilejkn_bpjs.nomorreferensi,referensi_mobilejkn_bpjs.status,referensi_mobilejkn_bpjs.validasi,"+
+                    "ifnull(maping_dokter_dpjpvclaim.nm_dokter_bpjs, '') as nm_dokter_bpjs, ifnull(maping_poli_bpjs..nm_poli_bpjs, '') as nm_poli_bpjs, " +
+                    "referensi_mobilejkn_bpjs.nobooking FROM referensi_mobilejkn_bpjs INNER JOIN pasien on referensi_mobilejkn_bpjs.norm=pasien.no_rkm_medis "+
+                    "left join maping_dokter_dpjpvclaim on referensi_mobilejkn_bpjs.kodedokter = maping_dokter_dpjpvclaim.kd_dokter_bpjs " +
+                    "left join maping_poli_bpjs on referensi_mobilejkn_bpjs.kodepoli = maping_poli_bpjs.kd_poli_bpjs " +
+                    "WHERE referensi_mobilejkn_bpjs.tanggalperiksa BETWEEN ? AND ? "+(TCari.getText().isBlank()?"":
+                    "and (referensi_mobilejkn_bpjs.no_rawat LIKE ? OR referensi_mobilejkn_bpjs.norm LIKE ? OR pasien.nm_pasien LIKE ? OR "+
+                    "referensi_mobilejkn_bpjs.nohp LIKE ? OR referensi_mobilejkn_bpjs.nomorkartu LIKE ? OR referensi_mobilejkn_bpjs.nik LIKE ? OR "+
+                    "referensi_mobilejkn_bpjs.jeniskunjungan LIKE ? OR referensi_mobilejkn_bpjs.nomorreferensi LIKE ? OR referensi_mobilejkn_bpjs.status LIKE ? OR referensi_mobilejkn_bpjs.kodedokter LIKE ? OR referensi_mobilejkn_bpjs.kodepoli LIKE ? OR maping_dokter_dpjpvclaim.nm_dokter_bpjs LIKE ? OR maping_poli_bpjsnm_poli_bpjs LIKE ?) ")+
+                    "order by referensi_mobilejkn_bpjs.tanggalperiksa");
             try {
                 ps.setString(1,Valid.SetTgl(DTPCari1.getSelectedItem()+""));
                 ps.setString(2,Valid.SetTgl(DTPCari2.getSelectedItem()+""));
-                if(! TCari.getText().isBlank()){
+                if(!TCari.getText().isBlank()){
                     ps.setString(3,"%"+TCari.getText()+"%");
                     ps.setString(4,"%"+TCari.getText()+"%");
                     ps.setString(5,"%"+TCari.getText()+"%");
@@ -726,22 +724,11 @@ public final class MobileJKNReferensiPendaftaran extends javax.swing.JDialog {
                 rs=ps.executeQuery();
                 while(rs.next()){
                     tabMode.addRow(new Object[]{
-                        false,
-                        rs.getString("no_rawat"),
-                        rs.getString("norm"),
-                        rs.getString("nm_pasien"),
-                        rs.getString("nohp"),
-                        rs.getString("nomorkartu"),
-                        rs.getString("nik"),
-                        rs.getString("tanggalperiksa"),
-                        rs.getString("nm_poli_bpjs"),
-                        rs.getString("nm_dokter_bpjs"),
-                        rs.getString("jampraktek"),
-                        rs.getString("jeniskunjungan"),
-                        rs.getString("nomorreferensi"),
-                        rs.getString("status"),
-                        rs.getString("validasi"),
-                        rs.getString("nobooking")
+                        false,rs.getString("no_rawat"),rs.getString("norm"),rs.getString("nm_pasien"),
+                        rs.getString("nohp"),rs.getString("nomorkartu"),rs.getString("nik"),
+                        rs.getString("tanggalperiksa"),rs.getString("nm_poli_bpjs"),rs.getString("nm_dokter_bpjs"),
+                        rs.getString("jampraktek"),rs.getString("jeniskunjungan"),rs.getString("nomorreferensi"),
+                        rs.getString("status"),rs.getString("validasi"),rs.getString("nobooking")
                     });
                 }
             } catch (Exception e) {

@@ -524,7 +524,7 @@ public class BPJSMonitoringKlaim extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -992,8 +992,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-Timestamp",utc);
-	    headers.add("X-Signature",api.getHmac(utc));
+            headers.add("X-Timestamp",utc);
+            headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());
@@ -1006,7 +1006,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 if(response.path("klaim").isArray()){
                     if(TCari.getText().trim().equals("")){
                         for(JsonNode list:response.path("klaim")){
-                            pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep = ?");
+                            pssep=koneksi.prepareStatement("select * from bridging_sep where bridging_sep.no_sep=?");
                             try {
                                 pssep.setString(1,list.path("noSEP").asText());
                                 rssep=pssep.executeQuery();
@@ -1088,8 +1088,8 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             headers.setContentType(MediaType.APPLICATION_FORM_URLENCODED);
             headers.add("X-Cons-ID",koneksiDB.CONSIDAPIBPJS());
             utc=String.valueOf(api.GetUTCdatetimeAsString());
-	    headers.add("X-Timestamp",utc);
-	    headers.add("X-Signature",api.getHmac(utc));
+            headers.add("X-Timestamp",utc);
+            headers.add("X-Signature",api.getHmac(utc));
             headers.add("user_key",koneksiDB.USERKEYAPIBPJS());
             requestEntity = new HttpEntity(headers);
             root = mapper.readTree(api.getRest().exchange(URL, HttpMethod.GET, requestEntity, String.class).getBody());

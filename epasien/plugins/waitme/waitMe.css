@@ -117,14 +117,14 @@ body.waitMe_body .waitMe_container.text > div {width:100%;top:45%;text-align:cen
 .waitMe_container .waitMe_progress.win8 .waitMe_progress_elem4 {animation-delay:.72s}
 .waitMe_container .waitMe_progress.win8 .waitMe_progress_elem5 {animation-delay:.96s}
 @keyframes win8 {
-  0% {transform:rotate(225deg);animation-timing-function:ease-out} 
+  0% {transform:rotate(225deg);animation-timing-function:ease-out}
   7% {opacity:1;transform:rotate(345deg);animation-timing-function:linear}
   30% {transform:rotate(455deg);animation-timing-function:ease-in-out}
   39% {transform:rotate(690deg);animation-timing-function:linear}
   70% {opacity:1;transform:rotate(815deg);animation-timing-function:ease-out}
   75% {transform:rotate(945deg);animation-timing-function:ease-out}
   76% {opacity:0;transform:rotate(945deg)}
-  100% {opacity:0;transform:rotate(945deg)} 
+  100% {opacity:0;transform:rotate(945deg)}
 }
 
 
@@ -137,7 +137,7 @@ body.waitMe_body .waitMe_container.text > div {width:100%;top:45%;text-align:cen
 .waitMe_container .waitMe_progress.win8_linear .waitMe_progress_elem4 {animation-delay:.9s}
 .waitMe_container .waitMe_progress.win8_linear .waitMe_progress_elem5 {animation-delay:1.2s}
 @keyframes win8_linear {
-  0% {transform:translateX(0);animation-timing-function:ease-out} 
+  0% {transform:translateX(0);animation-timing-function:ease-out}
   10% {opacity:1;transform:translateX(33.333%);animation-timing-function:linear}
   50% {opacity:1;transform:translateX(53.333%);animation-timing-function:ease-in-out}
   60% {opacity:0;transform:translateX(86.666%)}

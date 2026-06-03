@@ -363,5 +363,4 @@ public final class InformasiTarifRadiologi extends javax.swing.JDialog {
         executor.shutdownNow();
         super.dispose();
     }
-
 }

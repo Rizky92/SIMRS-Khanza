@@ -227,8 +227,8 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
         tbJnsPerawatan.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbJnsPerawatan.setName("tbJnsPerawatan"); // NOI18N
         tbJnsPerawatan.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                tbJnsPerawatanMouseClicked(evt);
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                tbJnsPerawatanMouseReleased(evt);
             }
         });
         tbJnsPerawatan.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -996,17 +996,17 @@ public final class AplicareKetersediaanKamar extends javax.swing.JDialog {
         }
     }//GEN-LAST:event_BtnAllKeyPressed
 
-    private void tbJnsPerawatanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseClicked
+    private void tbJnsPerawatanMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbJnsPerawatanMouseReleased
         if(tabMode.getRowCount()!=0){
             try {
                 getData();
             } catch (java.lang.NullPointerException e) {
             }
         }
-    }//GEN-LAST:event_tbJnsPerawatanMouseClicked
+    }//GEN-LAST:event_tbJnsPerawatanMouseReleased
 
     private void ChkInputActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ChkInputActionPerformed
-  isForm();
+        isForm();
     }//GEN-LAST:event_ChkInputActionPerformed
 
     private void KdKamarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_KdKamarKeyPressed

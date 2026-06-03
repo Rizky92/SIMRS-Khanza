@@ -1,5 +1,6 @@
 package permintaan;
 import bridging.ApiADAMLABS;
+import bridging.ApiBIOSYS;
 import bridging.ApiLICA;
 import bridging.ApiMEDQLAB;
 import bridging.ApiSOFTMEDIX;
@@ -85,6 +86,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
     private ObjectMapper mapper = new ObjectMapper();
     private ApiMEDQLAB medqlab=new ApiMEDQLAB();
     private final ApiADAMLABS apiAdamlabs = new ApiADAMLABS();
+    private final ApiBIOSYS apiBioSysSmc = new ApiBIOSYS();
     private WebEngine engine;
     private JsonNode root;
     private JsonNode response;
@@ -358,6 +360,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnAmbilVanslab.setVisible(false);
         BtnKirimLISSLIMS.setVisible(false);
         BtnAmbilLISSLIMS.setVisible(false);
+        BtnKirimAdamLabs.setVisible(false);
         BtnAmbilAdamLabs.setVisible(false);
     }
 
@@ -460,6 +463,9 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         BtnAmbilLISSLIMS = new widget.Button();
         BtnKirimAdamLabs = new widget.Button();
         BtnAmbilAdamLabs = new widget.Button();
+        BtnKirimBIOSYS = new widget.Button();
+        BtnUpdatePasienBIOSYS = new widget.Button();
+        BtnAmbilBIOSYS = new widget.Button();
 
         WindowAmbilSampel.setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         WindowAmbilSampel.setName("WindowAmbilSampel"); // NOI18N
@@ -501,7 +507,7 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         internalFrame5.add(jLabel26);
         jLabel26.setBounds(6, 32, 100, 23);
 
-        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "08-02-2026 11:58:27" }));
+        TanggalPulang.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "23-04-2026 13:20:23" }));
         TanggalPulang.setDisplayFormat("dd-MM-yyyy HH:mm:ss");
         TanggalPulang.setName("TanggalPulang"); // NOI18N
         TanggalPulang.setOpaque(false);
@@ -1508,6 +1514,58 @@ public class DlgCariPermintaanLab extends javax.swing.JDialog {
         });
         FormMenu.add(BtnAmbilAdamLabs);
 
+        BtnKirimBIOSYS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnKirimBIOSYS.setText("Kirim Permintaan ke BIOSYS");
+        BtnKirimBIOSYS.setFocusPainted(false);
+        BtnKirimBIOSYS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnKirimBIOSYS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnKirimBIOSYS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnKirimBIOSYS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnKirimBIOSYS.setName("BtnKirimBIOSYS"); // NOI18N
+        BtnKirimBIOSYS.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnKirimBIOSYS.setRoundRect(false);
+        BtnKirimBIOSYS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnKirimBIOSYSActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnKirimBIOSYS);
+
+        BtnUpdatePasienBIOSYS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnUpdatePasienBIOSYS.setText("Update Data Pasien ke BIOSYS");
+        BtnUpdatePasienBIOSYS.setToolTipText("");
+        BtnUpdatePasienBIOSYS.setFocusPainted(false);
+        BtnUpdatePasienBIOSYS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnUpdatePasienBIOSYS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnUpdatePasienBIOSYS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnUpdatePasienBIOSYS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnUpdatePasienBIOSYS.setName("BtnUpdatePasienBIOSYS"); // NOI18N
+        BtnUpdatePasienBIOSYS.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnUpdatePasienBIOSYS.setRoundRect(false);
+        BtnUpdatePasienBIOSYS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnUpdatePasienBIOSYSActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnUpdatePasienBIOSYS);
+
+        BtnAmbilBIOSYS.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
+        BtnAmbilBIOSYS.setText("Ambil Hasil dari BIOSYS");
+        BtnAmbilBIOSYS.setFocusPainted(false);
+        BtnAmbilBIOSYS.setFont(new java.awt.Font("Tahoma", 0, 11)); // NOI18N
+        BtnAmbilBIOSYS.setGlassColor(new java.awt.Color(255, 255, 255));
+        BtnAmbilBIOSYS.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        BtnAmbilBIOSYS.setMargin(new java.awt.Insets(1, 1, 1, 1));
+        BtnAmbilBIOSYS.setName("BtnAmbilBIOSYS"); // NOI18N
+        BtnAmbilBIOSYS.setPreferredSize(new java.awt.Dimension(190, 23));
+        BtnAmbilBIOSYS.setRoundRect(false);
+        BtnAmbilBIOSYS.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                BtnAmbilBIOSYSActionPerformed(evt);
+            }
+        });
+        FormMenu.add(BtnAmbilBIOSYS);
+
         ScrollMenu.setViewportView(FormMenu);
 
         PanelAccor.add(ScrollMenu, java.awt.BorderLayout.CENTER);
@@ -1930,6 +1988,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                             }else{
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
+                                if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
+                                    try {
+                                        apiBioSysSmc.hapusOrder(NoPermintaan);
+                                    } catch (ApiBIOSYS.BiosysException e) {
+                                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                }
                                 TeksKosong();
                                 runBackground(() -> tampil());
                             }
@@ -1958,6 +2023,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 JOptionPane.showMessageDialog(null,"Maaf, Tidak boleh dihapus karena sudah ada tindakan yang sudah dibayar.\nSilahkan hubungi kasir...!!!!");
                             }else{
                                 Sequel.meghapus("permintaan_lab","noorder",NoPermintaan);
+                                if (LABORATORIUMKIRIMHASIL.equals("biosys")) {
+                                    try {
+                                        apiBioSysSmc.hapusOrder(NoPermintaan);
+                                    } catch (ApiBIOSYS.BiosysException e) {
+                                        JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                                    }
+                                }
                                 TeksKosong();
                                 runBackground(() -> tampil3());
                             }
@@ -2036,7 +2108,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     dlgro.setLocationRelativeTo(internalFrame1);
                                     dlgro.emptTeks();
                                     dlgro.isCek();
-                                    dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
+                                    dlgro.setOrderBridgingSmc(NoPermintaan,NoRawat,"Ralan", LABORATORIUMKIRIMHASIL);
                                     dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
                                     TeksKosong();
                                     dlgro.setVisible(true);
@@ -2051,7 +2123,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                 dlgro.setLocationRelativeTo(internalFrame1);
                                 dlgro.emptTeks();
                                 dlgro.isCek();
-                                dlgro.setOrder(NoPermintaan,NoRawat,"Ralan");
+                                dlgro.setOrderBridgingSmc(NoPermintaan,NoRawat,"Ralan", LABORATORIUMKIRIMHASIL);
                                 dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
                                 TeksKosong();
                                 dlgro.setVisible(true);
@@ -2085,7 +2157,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     dlgro.setLocationRelativeTo(internalFrame1);
                                     dlgro.emptTeks();
                                     dlgro.isCek();
-                                    dlgro.setOrder(NoPermintaan,NoRawat,"Ranap");
+                                    dlgro.setOrderBridgingSmc(NoPermintaan,NoRawat,"Ranap", LABORATORIUMKIRIMHASIL);
                                     dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
                                     TeksKosong();
                                     dlgro.setVisible(true);
@@ -2094,7 +2166,17 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                                     JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
                                 }
                             } else {
-                                JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
+                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                DlgPeriksaLaboratorium dlgro=new DlgPeriksaLaboratorium(null,false);
+                                dlgro.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+                                dlgro.setLocationRelativeTo(internalFrame1);
+                                dlgro.emptTeks();
+                                dlgro.isCek();
+                                dlgro.setOrderBridgingSmc(NoPermintaan,NoRawat,"Ranap", LABORATORIUMKIRIMHASIL);
+                                dlgro.setDokterPerujuk(KodeDokter,DokterPerujuk);
+                                TeksKosong();
+                                dlgro.setVisible(true);
+                                this.setCursor(Cursor.getDefaultCursor());
                             }
                         }
                     }
@@ -4584,6 +4666,184 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         // TODO add your handling code here:
     }//GEN-LAST:event_JnsRegistrasiActionPerformed
 
+    private void BtnKirimBIOSYSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKirimBIOSYSActionPerformed
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (tbLabRalan.getSelectedRow() != -1) {
+                    if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0) != null && !tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString().isBlank()) {
+                        try {
+                            int status = apiBioSysSmc.kirimOrder(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
+                            if (status == 200) {
+                                JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS..!!");
+                            } else if (status == 406) {
+                                JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS,\nSilahkan cek mapping tindakan/pemeriksaan sebelum dlakukan pengambilan hasil..!!");
+                            }
+                        } catch (ApiBIOSYS.BiosysException e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }
+        } else if (TabPilihRawat.getSelectedIndex() == 1) {
+            if (TabRawatInap.getSelectedIndex() == 0) {
+                if (tbLabRanap.getSelectedRow() != -1) {
+                    if (tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0) != null || !tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString().isBlank()) {
+                        try {
+                            int status = apiBioSysSmc.kirimOrder(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString());
+                            if (status == 200) {
+                                JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS..!!");
+                            } else if (status == 406) {
+                                JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS,\nSilahkan cek mapping tindakan/pemeriksaan sebelum dlakukan pengambilan hasil..!!");
+                            }
+                        } catch (ApiBIOSYS.BiosysException e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnKirimBIOSYSActionPerformed
+
+    private void BtnAmbilBIOSYSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnAmbilBIOSYSActionPerformed
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (!NoRawat.equals("")) {
+                    if (NoPermintaan.trim().equals("") || DiagnosaKlinis.trim().equals("")) {
+                        Valid.textKosong(TCari, "No.Permintaan");
+                    } else {
+                        if (Sampel.equals("")) {
+                            JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan ambil sampel terlebih dahulu..!!");
+                        } else {
+                            if (VALIDASIULANGHASILPERMINTAANLABPK) {
+                                if (Hasil.isBlank() || akses.getadmin()) {
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                    DlgPeriksaLaboratorium dlgro = new DlgPeriksaLaboratorium(null, false);
+                                    dlgro.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                                    dlgro.setLocationRelativeTo(internalFrame1);
+                                    dlgro.emptTeks();
+                                    dlgro.isCek();
+                                    dlgro.setOrderBridgingSmc(NoPermintaan, NoRawat, "Ralan", "biosys");
+                                    dlgro.setDokterPerujuk(KodeDokter, DokterPerujuk);
+                                    TeksKosong();
+                                    dlgro.setVisible(true);
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
+                                }
+                            } else {
+                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                DlgPeriksaLaboratorium dlgro = new DlgPeriksaLaboratorium(null, false);
+                                dlgro.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                                dlgro.setLocationRelativeTo(internalFrame1);
+                                dlgro.emptTeks();
+                                dlgro.isCek();
+                                dlgro.setOrderBridgingSmc(NoPermintaan, NoRawat, "Ralan", "biosys");
+                                dlgro.setDokterPerujuk(KodeDokter, DokterPerujuk);
+                                TeksKosong();
+                                dlgro.setVisible(true);
+                                this.setCursor(Cursor.getDefaultCursor());
+                            }
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data permintaan...!!!!");
+                    TCari.requestFocus();
+                }
+            } else if (TabRawatJalan.getSelectedIndex() == 1) {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih Data Permintaan...!!!!");
+                TabRawatJalan.setSelectedIndex(0);
+                TCari.requestFocus();
+            }
+        } else if (TabPilihRawat.getSelectedIndex() == 1) {
+            if (TabRawatInap.getSelectedIndex() == 0) {
+                if (!NoRawat.equals("")) {
+                    if (NoPermintaan.trim().equals("") || DiagnosaKlinis.trim().equals("")) {
+                        Valid.textKosong(TCari, "No.Permintaan");
+                    } else {
+                        if (Sampel.equals("")) {
+                            JOptionPane.showMessageDialog(rootPane, "Maaf, silahkan ambil sampel terlebih dahulu..!!");
+                        } else {
+                            if (VALIDASIULANGHASILPERMINTAANLABPK) {
+                                if (Hasil.isBlank() || akses.getadmin()) {
+                                    this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                    DlgPeriksaLaboratorium dlgro = new DlgPeriksaLaboratorium(null, false);
+                                    dlgro.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                                    dlgro.setLocationRelativeTo(internalFrame1);
+                                    dlgro.emptTeks();
+                                    dlgro.isCek();
+                                    dlgro.setOrderBridgingSmc(NoPermintaan, NoRawat, "Ranap", "biosys");
+                                    dlgro.setDokterPerujuk(KodeDokter, DokterPerujuk);
+                                    TeksKosong();
+                                    dlgro.setVisible(true);
+                                    this.setCursor(Cursor.getDefaultCursor());
+                                } else {
+                                    JOptionPane.showMessageDialog(null, "Maaf, hasil permintaan lab sudah ada...!!!");
+                                }
+                            } else {
+                                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                                DlgPeriksaLaboratorium dlgro = new DlgPeriksaLaboratorium(null, false);
+                                dlgro.setSize(internalFrame1.getWidth() - 20, internalFrame1.getHeight() - 20);
+                                dlgro.setLocationRelativeTo(internalFrame1);
+                                dlgro.emptTeks();
+                                dlgro.isCek();
+                                dlgro.setOrderBridgingSmc(NoPermintaan, NoRawat, "Ranap", "biosys");
+                                dlgro.setDokterPerujuk(KodeDokter, DokterPerujuk);
+                                TeksKosong();
+                                dlgro.setVisible(true);
+                                this.setCursor(Cursor.getDefaultCursor());
+                            }
+                        }
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih data permintaan...!!!!");
+                    TCari.requestFocus();
+                }
+            } else if (TabRawatInap.getSelectedIndex() == 1) {
+                JOptionPane.showMessageDialog(null, "Maaf, silahkan pilih Data Permintaan...!!!!");
+                TabRawatInap.setSelectedIndex(0);
+                TCari.requestFocus();
+            }
+        }
+    }//GEN-LAST:event_BtnAmbilBIOSYSActionPerformed
+
+    private void BtnUpdatePasienBIOSYSActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnUpdatePasienBIOSYSActionPerformed
+        if (TabPilihRawat.getSelectedIndex() == 0) {
+            if (TabRawatJalan.getSelectedIndex() == 0) {
+                if (tbLabRalan.getSelectedRow() != -1) {
+                    if (tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0) != null && !tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString().isBlank()) {
+                        try {
+                            int status = apiBioSysSmc.updateOrder(tbLabRalan.getValueAt(tbLabRalan.getSelectedRow(), 0).toString());
+                            if (status == 200) {
+                                JOptionPane.showMessageDialog(null, "Update data pasien selesai LIS BIOSYS..!!");
+                            } else if (status == 204) {
+                                JOptionPane.showMessageDialog(null, "Order lab tidak ditemukan di LIS BIOSYS..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                            }
+                        } catch (ApiBIOSYS.BiosysException e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }
+        } else if (TabPilihRawat.getSelectedIndex() == 1) {
+            if (TabRawatInap.getSelectedIndex() == 0) {
+                if (tbLabRanap.getSelectedRow() != -1) {
+                    if (tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0) != null || !tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString().isBlank()) {
+                        try {
+                            int status = apiBioSysSmc.updateOrder(tbLabRanap.getValueAt(tbLabRanap.getSelectedRow(), 0).toString());
+                            if (status == 200) {
+                                JOptionPane.showMessageDialog(null, "Update data pasien selesai LIS BIOSYS..!!");
+                            } else if (status == 204) {
+                                JOptionPane.showMessageDialog(null, "Order lab tidak ditemukan di LIS BIOSYS..!!", "Peringatan", JOptionPane.WARNING_MESSAGE);
+                            }
+                        } catch (ApiBIOSYS.BiosysException e) {
+                            JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                }
+            }
+        }
+    }//GEN-LAST:event_BtnUpdatePasienBIOSYSActionPerformed
+
     /**
     * @param args the command line arguments
     */
@@ -4603,6 +4863,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private widget.Button BtnAll;
     private widget.Button BtnAmbilAdamLabs;
+    private widget.Button BtnAmbilBIOSYS;
     private widget.Button BtnAmbilLISELIMS;
     private widget.Button BtnAmbilLISMADQLAB;
     private widget.Button BtnAmbilLISSLIMS;
@@ -4623,6 +4884,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button BtnKeluar;
     private widget.Button BtnKirim;
     private widget.Button BtnKirimAdamLabs;
+    private widget.Button BtnKirimBIOSYS;
     private widget.Button BtnKirimLISELIMS;
     private widget.Button BtnKirimLISMADQLAB;
     private widget.Button BtnKirimLISSLIMS;
@@ -4639,6 +4901,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button BtnSeek5;
     private widget.Button BtnSeek6;
     private widget.Button BtnSimpan4;
+    private widget.Button BtnUpdatePasienBIOSYS;
     private widget.CekBox ChkAccor;
     private widget.TextBox CrDokter;
     private widget.TextBox CrDokter2;
@@ -4998,38 +5261,48 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     "if(permintaan_lab.jam_permintaan='00:00:00','',permintaan_lab.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                     "if(permintaan_lab.tgl_sampel='0000-00-00','',permintaan_lab.tgl_sampel) as tgl_sampel,if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel,"+
                     "if(permintaan_lab.tgl_hasil='0000-00-00','',permintaan_lab.tgl_hasil) as tgl_hasil,if(permintaan_lab.jam_hasil='00:00:00','',permintaan_lab.jam_hasil) as jam_hasil,"+
-                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
+                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,concat(ifnull(ki_last.kd_kamar,''),' ',ifnull(bangsal.nm_bangsal,'Ranap Gabung')) as nm_bangsal,"+
+                    "permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
                     "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
-                    "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                    "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                    "left join (select kamar_inap.no_rawat,kamar_inap.kd_kamar from kamar_inap "+
+                    "inner join (select no_rawat,max(concat(tgl_masuk,' ',jam_masuk)) as max_masuk from kamar_inap group by no_rawat) latest "+
+                    "on kamar_inap.no_rawat=latest.no_rawat and concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk)=latest.max_masuk) ki_last "+
+                    "on reg_periksa.no_rawat=ki_last.no_rawat "+
+                    "left join kamar on ki_last.kd_kamar=kamar.kd_kamar "+
                     "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
                     "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                     "where permintaan_lab.status='ranap' and permintaan_lab.tgl_permintaan between ? and ? "+
                     (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                     "(permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                     "pasien.nm_pasien like ? or permintaan_lab.diagnosa_klinis like ? or penjab.png_jawab like ? )")+
-                    "group by permintaan_lab.noorder order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc,kamar_inap.tgl_masuk desc,kamar_inap.jam_masuk desc");
+                    "group by permintaan_lab.noorder order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc"
+                );
             }else{
                 ps=koneksi.prepareStatement(
                     "select permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,pasien.nm_pasien,permintaan_lab.tgl_permintaan,"+
                     "if(permintaan_lab.jam_permintaan='00:00:00','',permintaan_lab.jam_permintaan) as jam_permintaan,reg_periksa.kd_pj,penjab.png_jawab,"+
                     "if(permintaan_lab.tgl_sampel='0000-00-00','',permintaan_lab.tgl_sampel) as tgl_sampel,if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel,"+
                     "if(permintaan_lab.tgl_hasil='0000-00-00','',permintaan_lab.tgl_hasil) as tgl_hasil,if(permintaan_lab.jam_hasil='00:00:00','',permintaan_lab.jam_hasil) as jam_hasil,"+
-                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
+                    "permintaan_lab.dokter_perujuk,dokter.nm_dokter,concat(ifnull(ki_last.kd_kamar,''),' ',ifnull(bangsal.nm_bangsal,'Ranap Gabung')) as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
                     "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                     "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                     "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
-                    "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                    "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                    "left join (select kamar_inap.no_rawat,kamar_inap.kd_kamar from kamar_inap "+
+                    "inner join (select no_rawat,max(concat(tgl_masuk,' ',jam_masuk)) as max_masuk from kamar_inap where stts_pulang='-' group by no_rawat) latest "+
+                    "on kamar_inap.no_rawat=latest.no_rawat and concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk)=latest.max_masuk "+
+                    "where kamar_inap.stts_pulang='-') ki_last "+
+                    "on reg_periksa.no_rawat=ki_last.no_rawat "+
+                    "left join kamar on ki_last.kd_kamar=kamar.kd_kamar "+
                     "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
                     "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                    "where permintaan_lab.status='ranap' and kamar_inap.stts_pulang='-' and permintaan_lab.tgl_permintaan between ? and ? "+
+                    "where permintaan_lab.status='ranap' and permintaan_lab.tgl_permintaan between ? and ? "+
                     (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                     "(permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                     "pasien.nm_pasien like ? or permintaan_lab.diagnosa_klinis like ? or penjab.png_jawab like ? )")+
-                    "group by permintaan_lab.noorder order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc,kamar_inap.tgl_masuk desc,kamar_inap.jam_masuk desc");
+                    "group by permintaan_lab.noorder order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc"
+                );
             }
 
             try {
@@ -5135,26 +5408,31 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,"+
                         "template_laboratorium.nilai_rujukan_pa,permintaan_lab.tgl_permintaan,penjab.png_jawab,"+
                         "if(permintaan_lab.jam_permintaan='00:00:00','',permintaan_lab.jam_permintaan) as jam_permintaan,permintaan_lab.tgl_sampel,"+
-                        "if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel, permintaan_lab.tgl_hasil,"+
+                        "if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel,permintaan_lab.tgl_hasil,"+
                         "if(permintaan_lab.jam_hasil='00:00:00','',permintaan_lab.jam_hasil) as jam_hasil,"+
-                        "permintaan_lab.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
+                        "permintaan_lab.dokter_perujuk,dokter.nm_dokter,concat(ifnull(ki_last.kd_kamar,''),' ',ifnull(bangsal.nm_bangsal,'Ranap Gabung')) as nm_bangsal,"+
+                        "permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
                         "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                         "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join permintaan_pemeriksaan_lab on permintaan_lab.noorder=permintaan_pemeriksaan_lab.noorder "+
-                        "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                        "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                        "left join (select kamar_inap.no_rawat,kamar_inap.kd_kamar from kamar_inap "+
+                        "inner join (select no_rawat,max(concat(tgl_masuk,' ',jam_masuk)) as max_masuk from kamar_inap group by no_rawat) latest "+
+                        "on kamar_inap.no_rawat=latest.no_rawat and concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk)=latest.max_masuk) ki_last "+
+                        "on reg_periksa.no_rawat=ki_last.no_rawat "+
+                        "left join kamar on ki_last.kd_kamar=kamar.kd_kamar "+
                         "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
                         "inner join jns_perawatan_lab on jns_perawatan_lab.kd_jenis_prw=permintaan_pemeriksaan_lab.kd_jenis_prw "+
-                        "inner join permintaan_detail_permintaan_lab on permintaan_lab.noorder=permintaan_detail_permintaan_lab.noorder and permintaan_detail_permintaan_lab.kd_jenis_prw=permintaan_pemeriksaan_lab.kd_jenis_prw  "+
+                        "inner join permintaan_detail_permintaan_lab on permintaan_lab.noorder=permintaan_detail_permintaan_lab.noorder and permintaan_detail_permintaan_lab.kd_jenis_prw=permintaan_pemeriksaan_lab.kd_jenis_prw "+
                         "inner join template_laboratorium on template_laboratorium.id_template=permintaan_detail_permintaan_lab.id_template "+
-                        "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter  "+
+                        "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
                         "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
                         "where permintaan_lab.status='ranap' and permintaan_lab.tgl_permintaan between ? and ? "+
                         (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                         "(permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                         "pasien.nm_pasien like ? or jns_perawatan_lab.nm_perawatan like ? or template_laboratorium.Pemeriksaan like ? or "+
                         "permintaan_lab.diagnosa_klinis like ? or penjab.png_jawab like ?)")+
-                        "group by permintaan_lab.noorder,permintaan_detail_permintaan_lab.id_template order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc,kamar_inap.tgl_masuk desc,kamar_inap.jam_masuk desc");
+                        "group by permintaan_lab.noorder,permintaan_detail_permintaan_lab.id_template order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc"
+                );
             }else{
                 ps=koneksi.prepareStatement(
                         "select distinct permintaan_lab.noorder,permintaan_lab.no_rawat,reg_periksa.no_rkm_medis,"+
@@ -5163,26 +5441,32 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                         "template_laboratorium.nilai_rujukan_la,template_laboratorium.nilai_rujukan_pd,"+
                         "template_laboratorium.nilai_rujukan_pa,permintaan_lab.tgl_permintaan,penjab.png_jawab,"+
                         "if(permintaan_lab.jam_permintaan='00:00:00','',permintaan_lab.jam_permintaan) as jam_permintaan,permintaan_lab.tgl_sampel,"+
-                        "if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel, permintaan_lab.tgl_hasil,"+
+                        "if(permintaan_lab.jam_sampel='00:00:00','',permintaan_lab.jam_sampel) as jam_sampel,permintaan_lab.tgl_hasil,"+
                         "if(permintaan_lab.jam_hasil='00:00:00','',permintaan_lab.jam_hasil) as jam_hasil,"+
-                        "permintaan_lab.dokter_perujuk,dokter.nm_dokter,ifnull(bangsal.nm_bangsal,'Ranap Gabung') as nm_bangsal,permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
+                        "permintaan_lab.dokter_perujuk,dokter.nm_dokter,concat(ifnull(ki_last.kd_kamar,''),' ',ifnull(bangsal.nm_bangsal,'Ranap Gabung')) as nm_bangsal,"+
+                        "permintaan_lab.informasi_tambahan,permintaan_lab.diagnosa_klinis "+
                         "from permintaan_lab inner join reg_periksa on permintaan_lab.no_rawat=reg_periksa.no_rawat "+
                         "inner join pasien on reg_periksa.no_rkm_medis=pasien.no_rkm_medis "+
                         "inner join permintaan_pemeriksaan_lab on permintaan_lab.noorder=permintaan_pemeriksaan_lab.noorder "+
-                        "left join kamar_inap on reg_periksa.no_rawat=kamar_inap.no_rawat "+
-                        "left join kamar on kamar_inap.kd_kamar=kamar.kd_kamar "+
+                        "left join (select kamar_inap.no_rawat,kamar_inap.kd_kamar from kamar_inap "+
+                        "inner join (select no_rawat,max(concat(tgl_masuk,' ',jam_masuk)) as max_masuk from kamar_inap where stts_pulang='-' group by no_rawat) latest "+
+                        "on kamar_inap.no_rawat=latest.no_rawat and concat(kamar_inap.tgl_masuk,' ',kamar_inap.jam_masuk)=latest.max_masuk "+
+                        "where kamar_inap.stts_pulang='-') ki_last "+
+                        "on reg_periksa.no_rawat=ki_last.no_rawat "+
+                        "left join kamar on ki_last.kd_kamar=kamar.kd_kamar "+
                         "left join bangsal on kamar.kd_bangsal=bangsal.kd_bangsal "+
                         "inner join jns_perawatan_lab on jns_perawatan_lab.kd_jenis_prw=permintaan_pemeriksaan_lab.kd_jenis_prw "+
-                        "inner join permintaan_detail_permintaan_lab on permintaan_lab.noorder=permintaan_detail_permintaan_lab.noorder and permintaan_detail_permintaan_lab.kd_jenis_prw=permintaan_pemeriksaan_lab.kd_jenis_prw  "+
+                        "inner join permintaan_detail_permintaan_lab on permintaan_lab.noorder=permintaan_detail_permintaan_lab.noorder and permintaan_detail_permintaan_lab.kd_jenis_prw=permintaan_pemeriksaan_lab.kd_jenis_prw "+
                         "inner join template_laboratorium on template_laboratorium.id_template=permintaan_detail_permintaan_lab.id_template "+
-                        "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter  "+
+                        "inner join dokter on permintaan_lab.dokter_perujuk=dokter.kd_dokter "+
                         "inner join penjab on reg_periksa.kd_pj=penjab.kd_pj "+
-                        "where permintaan_lab.status='ranap' and kamar_inap.stts_pulang='-' and permintaan_lab.tgl_permintaan between ? and ? "+
+                        "where permintaan_lab.status='ranap' and permintaan_lab.tgl_permintaan between ? and ? "+
                         (semua?"":"and dokter.nm_dokter like ? and bangsal.nm_bangsal like ? and "+
                         "(permintaan_lab.noorder like ? or permintaan_lab.no_rawat like ? or reg_periksa.no_rkm_medis like ? or "+
                         "pasien.nm_pasien like ? or jns_perawatan_lab.nm_perawatan like ? or template_laboratorium.Pemeriksaan like ? or "+
                         "permintaan_lab.diagnosa_klinis like ? or penjab.png_jawab like ?)")+
-                        "group by permintaan_lab.noorder,permintaan_detail_permintaan_lab.id_template order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc,kamar_inap.tgl_masuk desc,kamar_inap.jam_masuk desc");
+                        "group by permintaan_lab.noorder,permintaan_detail_permintaan_lab.id_template order by permintaan_lab.tgl_permintaan,permintaan_lab.jam_permintaan desc"
+                );
             }
 
             try {
@@ -5444,6 +5728,18 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         switch (LABORATORIUMKIRIMHASIL) {
             case "adamlabs":
                 apiAdamlabs.registrasi(noorder);
+                break;
+            case "biosys":
+                try {
+                    int status = apiBioSysSmc.kirimOrder(noorder);
+                    if (status == 200) {
+                        JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS..!!");
+                    } else if (status == 406) {
+                        JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS BIOSYS,\nSilahkan cek mapping tindakan/pemeriksaan sebelum dlakukan pengambilan hasil..!!");
+                    }
+                } catch (ApiBIOSYS.BiosysException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                }
                 break;
             default:
                 return;

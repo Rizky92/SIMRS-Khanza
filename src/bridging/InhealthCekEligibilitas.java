@@ -5003,9 +5003,9 @@ public final class InhealthCekEligibilitas extends javax.swing.JDialog {
     private void insertSJP(){
         try{
             String URL = koneksiDB.URLAPIINHEALTH()+"/api/SimpanSJP";
-	    HttpHeaders headers = new HttpHeaders();
+	        HttpHeaders headers = new HttpHeaders();
             headers.add("Content-Type","application/json");
-	    requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
+	        requestJson ="{ \"token\": \""+koneksiDB.TOKENINHEALTH()+"\"," +
                             "\"kodeprovider\": \""+KdPPK.getText()+"\"," +
                             "\"tanggalpelayanan\": \""+Valid.SetTgl(TanggalSEP.getSelectedItem()+"")+"\","+
                             "\"jenispelayanan\": \""+JenisPelayanan.getSelectedItem().toString().substring(0,1)+"\","+

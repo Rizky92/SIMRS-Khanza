@@ -146,12 +146,12 @@ public class ApiADAMLABS
             response = mapper.readTree(responseEntity.getBody());
             System.out.println(responseEntity.getStatusCode() + " " + response.path("message").asText());
             Sequel.menyimpanSmc(
-                "adamlabs_request_response",
-                "noorder, url, method, request, code, response, pengirim",
-                kodeRegistrasi, url, "POST", root.toString(), String.valueOf(responseEntity.getStatusCode()), responseEntity.getBody(), akses.getkode()
+                "lis_request_response",
+                "vendor, noorder, url, method, request, code, response, pengirim",
+                "adamlabs", kodeRegistrasi, url, "POST", root.toString(), String.valueOf(responseEntity.getStatusCode()), responseEntity.getBody(), akses.getkode()
             );
             if (response.path("status").asText().equals("200")) {
-                Sequel.menyimpanSmc("adamlabs_orderlab", null, kodeRegistrasi, response.path("payload").path("registrasi").path("no_lab").asText());
+                Sequel.menyimpanSmc("lis_orderlab", "vendor, noorder, nolab", "adamlabs", kodeRegistrasi, response.path("payload").path("registrasi").path("no_lab").asText());
                 JOptionPane.showMessageDialog(null, "Order lab berhasil dikirim ke LIS ADAMLABS...!!!");
             } else {
                 ArrayList<String> messages = new ArrayList<>();

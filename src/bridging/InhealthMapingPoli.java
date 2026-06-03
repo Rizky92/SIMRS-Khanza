@@ -660,45 +660,45 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
     }//GEN-LAST:event_tbJnsPerawatanMouseClicked
 
     private void btnPoliInhealthActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPoliInhealthActionPerformed
-    InhealthCekReferensiPoli poliinhealth=new InhealthCekReferensiPoli(null,false);
-    poliinhealth.addWindowListener(new WindowListener() {
-        @Override
-        public void windowOpened(WindowEvent e) {}
-        @Override
-        public void windowClosing(WindowEvent e) {}
-        @Override
-        public void windowClosed(WindowEvent e) {
-            if(poliinhealth.getTable().getSelectedRow()!= -1){
-                KdPoliInhealth.setText(poliinhealth.getTable().getValueAt(poliinhealth.getTable().getSelectedRow(),1).toString());
-                NmPoliInhealth.setText(poliinhealth.getTable().getValueAt(poliinhealth.getTable().getSelectedRow(),2).toString());
-                KdPoliInhealth.requestFocus();
+        InhealthCekReferensiPoli poliinhealth=new InhealthCekReferensiPoli(null,false);
+        poliinhealth.addWindowListener(new WindowListener() {
+            @Override
+            public void windowOpened(WindowEvent e) {}
+            @Override
+            public void windowClosing(WindowEvent e) {}
+            @Override
+            public void windowClosed(WindowEvent e) {
+                if(poliinhealth.getTable().getSelectedRow()!= -1){
+                    KdPoliInhealth.setText(poliinhealth.getTable().getValueAt(poliinhealth.getTable().getSelectedRow(),1).toString());
+                    NmPoliInhealth.setText(poliinhealth.getTable().getValueAt(poliinhealth.getTable().getSelectedRow(),2).toString());
+                    KdPoliInhealth.requestFocus();
+                }
             }
-        }
-        @Override
-        public void windowIconified(WindowEvent e) {}
-        @Override
-        public void windowDeiconified(WindowEvent e) {}
-        @Override
-        public void windowActivated(WindowEvent e) {}
-        @Override
-        public void windowDeactivated(WindowEvent e) {}
-    });
+            @Override
+            public void windowIconified(WindowEvent e) {}
+            @Override
+            public void windowDeiconified(WindowEvent e) {}
+            @Override
+            public void windowActivated(WindowEvent e) {}
+            @Override
+            public void windowDeactivated(WindowEvent e) {}
+        });
 
-    poliinhealth.getTable().addKeyListener(new KeyListener() {
-        @Override
-        public void keyTyped(KeyEvent e) {}
-        @Override
-        public void keyPressed(KeyEvent e) {
-            if(e.getKeyCode()==KeyEvent.VK_SPACE){
-                poliinhealth.dispose();
+        poliinhealth.getTable().addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {}
+            @Override
+            public void keyPressed(KeyEvent e) {
+                if(e.getKeyCode()==KeyEvent.VK_SPACE){
+                    poliinhealth.dispose();
+                }
             }
-        }
-        @Override
-        public void keyReleased(KeyEvent e) {}
-    });
-    poliinhealth.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
-    poliinhealth.setLocationRelativeTo(internalFrame1);
-    poliinhealth.setVisible(true);
+            @Override
+            public void keyReleased(KeyEvent e) {}
+        });
+        poliinhealth.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        poliinhealth.setLocationRelativeTo(internalFrame1);
+        poliinhealth.setVisible(true);
     }//GEN-LAST:event_btnPoliInhealthActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -814,10 +814,6 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
         }
     }
 
-
-
-
-
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_poli());
         BtnHapus.setEnabled(akses.getinhealth_mapping_poli());
@@ -829,10 +825,10 @@ public final class InhealthMapingPoli extends javax.swing.JDialog {
         return tbJnsPerawatan;
     }
 
- private void runBackground(Runnable task) {
-    if (ceksukses) return;
-    if (executor.isShutdown() || executor.isTerminated()) return;
-    if (!isDisplayable()) return;
+    private void runBackground(Runnable task) {
+        if (ceksukses) return;
+        if (executor.isShutdown() || executor.isTerminated()) return;
+        if (!isDisplayable()) return;
 
         ceksukses = true;
         setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));

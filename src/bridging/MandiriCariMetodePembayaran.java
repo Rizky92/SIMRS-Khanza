@@ -448,7 +448,6 @@ public final class MandiriCariMetodePembayaran extends javax.swing.JDialog {
         TCari.requestFocus();
     }
 
-
     public JTable getTable(){
         return tbKamar;
     }

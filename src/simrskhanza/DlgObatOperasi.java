@@ -11,7 +11,6 @@
 
 package simrskhanza;
 import fungsi.WarnaTable;
-import fungsi.akses;
 import fungsi.batasInput;
 import fungsi.koneksiDB;
 import fungsi.sekuel;

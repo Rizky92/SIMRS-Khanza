@@ -352,7 +352,7 @@ public final class ICareRiwayatPerawatan extends javax.swing.JDialog {
                             "\"kodedokter\": "+KdDPJPLayanan.getText().trim()+""+
                         "}";
             System.out.println("JSON : "+requestJson+"\n");
-	    requestEntity = new HttpEntity(requestJson,headers);
+	        requestEntity = new HttpEntity(requestJson,headers);
             requestJson= new String(api.getRest().exchange(link+"/api/rs/validate", HttpMethod.POST, requestEntity,String.class).getBody().getBytes(StandardCharsets.UTF_16BE), StandardCharsets.UTF_8).replace("\0", "").trim();
             System.out.println("URL:"+link+"/api/rs/validate");
             System.out.println("JSON : "+requestJson);

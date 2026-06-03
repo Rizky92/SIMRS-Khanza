@@ -1669,7 +1669,9 @@ public final class DlgPeresepanDokter extends javax.swing.JDialog {
 
     private void DTPBeriItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_DTPBeriItemStateChanged
         if(this.isActive()==true){
-            emptTeksobat();
+            try {
+                emptTeksobat();
+            }catch (Exception e) {}
         }
     }//GEN-LAST:event_DTPBeriItemStateChanged
 

@@ -229,7 +229,7 @@ public class InformasiAnalisaKamin extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
@@ -318,7 +318,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_btnBangsalActionPerformed
 
     private void btnBangsalKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnBangsalKeyPressed
-   //Valid.pindah(evt,DTPCari2,TCari);
+        //Valid.pindah(evt,DTPCari2,TCari);
     }//GEN-LAST:event_btnBangsalKeyPressed
 
     private void BtnCariActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCariActionPerformed
@@ -372,69 +372,69 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void prosesCari() {
-       Valid.tabelKosong(tabMode);
-       try{
-           ps=koneksi.prepareStatement("select bangsal.kd_bangsal,bangsal.nm_bangsal from bangsal where bangsal.status='1' and bangsal.kd_bangsal in (select kamar.kd_bangsal from kamar group by kamar.kd_bangsal) and bangsal.kd_bangsal like ? order by bangsal.nm_bangsal");
-           try {
+        Valid.tabelKosong(tabMode);
+        try{
+            ps=koneksi.prepareStatement("select bangsal.kd_bangsal,bangsal.nm_bangsal from bangsal where bangsal.status='1' and bangsal.kd_bangsal in (select kamar.kd_bangsal from kamar group by kamar.kd_bangsal) and bangsal.kd_bangsal like ? order by bangsal.nm_bangsal");
+            try {
                 ps.setString(1,"%"+kdbangsal.getText()+"%");
                 rs=ps.executeQuery();
                 i=1;
                 tabMode.addRow(new Object[]{"Kondisi kamar saat ini : ","Isi : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.status='ISI'"),"Kosong : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.status='KOSONG'")});
                 tabMode.addRow(new Object[]{"","",""});
                 while(rs.next()){
-                   tabMode.addRow(new Object[]{i+". Kamar : "+rs.getString("nm_bangsal"),"",""});
-                   tabMode.addRow(new Object[]{"","Isi : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='ISI' ",rs.getString("kd_bangsal"))});
+                    tabMode.addRow(new Object[]{i+". Kamar : "+rs.getString("nm_bangsal"),"",""});
+                    tabMode.addRow(new Object[]{"","Isi : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='ISI' ",rs.getString("kd_bangsal"))});
 
-                   ps2=koneksi.prepareStatement("select kamar.kd_kamar,kamar.trf_kamar,kamar.kelas from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='ISI'");
-                   try {
+                    ps2=koneksi.prepareStatement("select kamar.kd_kamar,kamar.trf_kamar,kamar.kelas from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='ISI'");
+                    try {
                         ps2.setString(1,rs.getString("kd_bangsal"));
                         rs2=ps2.executeQuery();
                         while(rs2.next()){
                             tabMode.addRow(new Object[]{"",rs2.getString("kd_kamar")+" "+rs2.getString("kelas"),Valid.SetAngka(rs2.getDouble("trf_kamar"))});
                         }
-                   } catch (Exception e) {
-                       System.out.println("Notifikasi : "+e);
-                   } finally{
-                       if(rs2!=null){
-                           rs2.close();
-                       }
-                       if(ps2!=null){
-                           ps2.close();
-                       }
-                   }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    } finally{
+                        if(rs2!=null){
+                            rs2.close();
+                        }
+                        if(ps2!=null){
+                            ps2.close();
+                        }
+                    }
 
-                   tabMode.addRow(new Object[]{"","Kosong : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='KOSONG' ",rs.getString("kd_bangsal")),""});
+                    tabMode.addRow(new Object[]{"","Kosong : "+Sequel.cariInteger("select count(kamar.kd_bangsal) from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='KOSONG' ",rs.getString("kd_bangsal")),""});
 
-                   ps3=koneksi.prepareStatement("select kamar.kd_kamar,kamar.trf_kamar from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='KOSONG'");
-                   try {
+                    ps3=koneksi.prepareStatement("select kamar.kd_kamar,kamar.trf_kamar from kamar where kamar.statusdata='1' and kamar.kd_bangsal=? and kamar.status='KOSONG'");
+                    try {
                         ps3.setString(1,rs.getString("kd_bangsal"));
                         rs2=ps3.executeQuery();
                         while(rs2.next()){
                             tabMode.addRow(new Object[]{"",rs2.getString("kd_kamar"),Valid.SetAngka(rs2.getDouble("trf_kamar"))});
                         }
-                   } catch (Exception e) {
-                       System.out.println("Notifikasi : "+e);
-                   } finally{
-                       if(rs2!=null){
-                           rs2.close();
-                       }
-                       if(ps3!=null){
-                           ps3.close();
-                       }
-                   }
+                    } catch (Exception e) {
+                        System.out.println("Notifikasi : "+e);
+                    } finally{
+                        if(rs2!=null){
+                            rs2.close();
+                        }
+                        if(ps3!=null){
+                            ps3.close();
+                        }
+                    }
 
-                   i++;
+                    i++;
                 }
             } catch (Exception e) {
                 System.out.println(e);
             } finally{
-               if(rs!=null){
-                   rs.close();
-               }
-               if(ps!=null){
-                   ps.close();
-               }
-           }
+                if(rs!=null){
+                    rs.close();
+                }
+                if(ps!=null){
+                    ps.close();
+                }
+            }
         }catch(Exception e){
             System.out.println("Notifikasi : "+e);
         }

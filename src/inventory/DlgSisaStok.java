@@ -18,6 +18,7 @@ import java.sql.ResultSet;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.RejectedExecutionException;
+import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 import javax.swing.event.DocumentEvent;
 import javax.swing.text.Document;
@@ -367,41 +368,45 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void BtnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnPrintActionPerformed
-        this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
-        try {
+        if(ceksukses==false){
+            this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+            try {
 
-            File g = new File("file2.css");
-            BufferedWriter bg = new BufferedWriter(new FileWriter(g));
-            bg.write(
-                ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                ".isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}"+
-                ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
-                ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
-            );
-            bg.close();
+                File g = new File("file2.css");
+                BufferedWriter bg = new BufferedWriter(new FileWriter(g));
+                bg.write(
+                    ".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                    ".isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}"+
+                    ".isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"+
+                    ".isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}"
+                );
+                bg.close();
 
-            File f = new File("sisastok.html");
-            BufferedWriter bw = new BufferedWriter(new FileWriter(f));
-            bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
-                "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
-                "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
-                "<tr class='isi2'>"+
-                "<td valign='top' align='center'>"+
-                "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
-                akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
-                akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
-                "<font size='2' face='Tahoma'>DATA SISA STOK TERAKHIR</font>"+
-                "</td>"+
-                "</tr>"+
-                "</table>")
-        );
-        bw.close();
-        Desktop.getDesktop().browse(f.toURI());
-        } catch (Exception e) {
-            System.out.println("Notifikasi : "+e);
+                File f = new File("sisastok.html");
+                BufferedWriter bw = new BufferedWriter(new FileWriter(f));
+                bw.write(LoadHTML.getText().replaceAll("<head>","<head>"+
+                    "<link href=\"file2.css\" rel=\"stylesheet\" type=\"text/css\" />"+
+                    "<table width='100%' border='0' align='center' cellpadding='3px' cellspacing='0' class='tbl_form'>"+
+                    "<tr class='isi2'>"+
+                    "<td valign='top' align='center'>"+
+                    "<font size='4' face='Tahoma'>"+akses.getnamars()+"</font><br>"+
+                    akses.getalamatrs()+", "+akses.getkabupatenrs()+", "+akses.getpropinsirs()+"<br>"+
+                    akses.getkontakrs()+", E-mail : "+akses.getemailrs()+"<br><br>"+
+                    "<font size='2' face='Tahoma'>DATA SISA STOK TERAKHIR</font>"+
+                    "</td>"+
+                    "</tr>"+
+                    "</table>")
+                );
+                bw.close();
+                Desktop.getDesktop().browse(f.toURI());
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }
+
+            this.setCursor(Cursor.getDefaultCursor());
+        }else{
+            JOptionPane.showMessageDialog(null,"Masih proses menampilkan data, harap tunggu terlebih dahulu...!");
         }
-
-        this.setCursor(Cursor.getDefaultCursor());
     }//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnJenisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnJenisActionPerformed
@@ -652,21 +657,34 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                 qrystok="select sum(gudangbarang.stok) from gudangbarang where gudangbarang.kode_brng=? and gudangbarang.kd_bangsal=? and gudangbarang.no_batch='' and gudangbarang.no_faktur=''";
             }
 
-            ps= koneksi.prepareStatement(
-                    "select kode_brng,nama_brng,kode_sat,"+hppfarmasi+" as dasar from databarang "+
+            ps = koneksi.prepareStatement(
+                    "select databarang.kode_brng,databarang.nama_brng,databarang.kode_sat,databarang."+hppfarmasi+" as dasar from databarang "+
                     "inner join jenis on databarang.kdjns=jenis.kdjns "+
                     "inner join golongan_barang on databarang.kode_golongan=golongan_barang.kode "+
                     "inner join kategori_barang on databarang.kode_kategori=kategori_barang.kode where "+
-                    "jenis.nama like ? and kategori_barang.nama like ? and golongan_barang.nama like ? "+
-                    (TCari.getText().trim().equals("")?"":"and (kode_brng like ? or nama_brng like ?)")+
-                    " order by kode_brng");
+                    "databarang.status='1' "+(nmjns.getText().trim().equals("")?"":"and jenis.nama=? ")+
+                    (nmkategori.getText().trim().equals("")?"":"and kategori_barang.nama=? ")+
+                    (nmgolongan.getText().trim().equals("")?"":"and golongan_barang.nama=? ")+
+                    (TCari.getText().trim().equals("")?"":"and (databarang.kode_brng like ? or databarang.nama_brng like ?)")+
+                    " order by databarang.kode_brng");
             try {
-                ps.setString(1,"%"+nmjns.getText().trim()+"%");
-                ps.setString(2,"%"+nmkategori.getText().trim()+"%");
-                ps.setString(3,"%"+nmgolongan.getText().trim()+"%");
+                i=1;
+                if(!nmjns.getText().trim().equals("")){
+                    ps.setString(i,nmjns.getText().trim());
+                    i++;
+                }
+                if(!nmkategori.getText().trim().equals("")){
+                    ps.setString(i,nmkategori.getText().trim());
+                    i++;
+                }
+                if(!nmgolongan.getText().trim().equals("")){
+                    ps.setString(i,nmgolongan.getText().trim());
+                    i++;
+                }
                 if(!TCari.getText().trim().equals("")){
-                    ps.setString(4,"%"+TCari.getText().trim()+"%");
-                    ps.setString(5,"%"+TCari.getText().trim()+"%");
+                    ps.setString(i,"%"+TCari.getText().trim()+"%");
+                    i++;
+                    ps.setString(i,"%"+TCari.getText().trim()+"%");
                 }
                 rs=ps.executeQuery();
                 while(rs.next()){

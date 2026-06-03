@@ -12,7 +12,7 @@
             else {
                 $(this).removeClass('has-val');
             }
-        })    
+        })
     })
 
     /*==================================================================
@@ -63,6 +63,6 @@
 
         $(thisAlert).removeClass('alert-validate');
     }
-    
+
 
 })(jQuery);

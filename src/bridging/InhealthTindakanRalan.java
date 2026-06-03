@@ -757,7 +757,6 @@ public final class InhealthTindakanRalan extends javax.swing.JDialog {
         }
     }
 
-
     public void isCek(){
         BtnSimpan.setEnabled(akses.getinhealth_mapping_tindakan_ralan());
         BtnHapus.setEnabled(akses.getinhealth_mapping_tindakan_ralan());

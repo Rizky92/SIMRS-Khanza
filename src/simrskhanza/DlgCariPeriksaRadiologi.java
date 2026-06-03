@@ -2,6 +2,7 @@ package simrskhanza;
 import bridging.ApiOrthanc;
 import bridging.OrthancDICOM;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import fungsi.WarnaTable;
 import fungsi.akses;
 import fungsi.akuntindakanradiologi;
@@ -17,12 +18,16 @@ import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -43,6 +48,12 @@ import kepegawaian.DlgCariDokter;
 import kepegawaian.DlgCariPetugas;
 import keuangan.Jurnal;
 import laporan.DlgBerkasRawat;
+import org.apache.hc.client5.http.classic.methods.HttpPost;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpClient;
+import org.apache.hc.client5.http.impl.classic.CloseableHttpResponse;
+import org.apache.hc.client5.http.impl.classic.HttpClients;
+import org.apache.hc.core5.http.io.entity.EntityUtils;
+import org.apache.hc.core5.http.io.entity.StringEntity;
 import rekammedis.MasterCariTemplateHasilRadiologi;
 import rekammedis.RMRiwayatPerawatan;
 
@@ -67,6 +78,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
     private double ttl=0,item=0;
     private double ttljmdokter=0,ttljmpetugas=0,ttlkso=0,ttlpendapatan=0,ttlbhp=0,ttljasasarana=0,ttljmperujuk=0,ttlmenejemen=0;;
     private String kdpetugas="",kdpenjab="";
+    private ObjectMapper mapper= new ObjectMapper();
 
     /** Creates new form DlgProgramStudi
      * @param parent
@@ -255,6 +267,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         tbListDicom = new widget.Table();
         panelGlass7 = new widget.panelisi();
         btnDicom = new widget.Button();
+        btnUploud = new widget.Button();
         btnDicomRouter = new widget.Button();
         PanelDataDicari = new widget.panelisi();
         label17 = new widget.Label();
@@ -376,11 +389,9 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         Jk.setName("Jk"); // NOI18N
 
         Umur.setEditable(false);
-        Umur.setHighlighter(null);
         Umur.setName("Umur"); // NOI18N
 
         Alamat.setEditable(false);
-        Alamat.setHighlighter(null);
         Alamat.setName("Alamat"); // NOI18N
 
         NoRM.setName("NoRM"); // NOI18N
@@ -436,7 +447,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         KodePj.setBounds(95, 12, 113, 23);
 
         NmDokterPj.setEditable(false);
-        NmDokterPj.setHighlighter(null);
         NmDokterPj.setName("NmDokterPj"); // NOI18N
         FormInput.add(NmDokterPj);
         NmDokterPj.setBounds(210, 12, 208, 23);
@@ -466,7 +476,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         btnDokter.setBounds(420, 42, 28, 23);
 
         NmPerujuk.setEditable(false);
-        NmPerujuk.setHighlighter(null);
         NmPerujuk.setName("NmPerujuk"); // NOI18N
         FormInput.add(NmPerujuk);
         NmPerujuk.setBounds(210, 42, 208, 23);
@@ -521,7 +530,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         WindowGantiDokterParamedis.getContentPane().add(internalFrame5, java.awt.BorderLayout.CENTER);
 
         Petugas.setEditable(false);
-        Petugas.setHighlighter(null);
         Petugas.setName("Petugas"); // NOI18N
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -808,7 +816,7 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
         PanelAccor.setBackground(new java.awt.Color(255, 255, 255));
         PanelAccor.setName("PanelAccor"); // NOI18N
-        PanelAccor.setPreferredSize(new java.awt.Dimension(445, 43));
+        PanelAccor.setPreferredSize(new java.awt.Dimension(545, 43));
         PanelAccor.setLayout(new java.awt.BorderLayout(1, 1));
 
         ChkAccor.setBackground(new java.awt.Color(255, 250, 250));
@@ -970,7 +978,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         panelisi8.setLayout(null);
 
         InformasiTambahan.setEditable(false);
-        InformasiTambahan.setHighlighter(null);
         InformasiTambahan.setName("InformasiTambahan"); // NOI18N
         panelisi8.add(InformasiTambahan);
         InformasiTambahan.setBounds(124, 10, 220, 23);
@@ -986,7 +993,6 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
         jLabel6.setBounds(0, 40, 120, 23);
 
         DiagnosisKlinis.setEditable(false);
-        DiagnosisKlinis.setHighlighter(null);
         DiagnosisKlinis.setName("DiagnosisKlinis"); // NOI18N
         panelisi8.add(DiagnosisKlinis);
         DiagnosisKlinis.setBounds(124, 40, 220, 23);
@@ -1026,16 +1032,29 @@ public class DlgCariPeriksaRadiologi extends javax.swing.JDialog {
 
         btnDicom.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/item.png"))); // NOI18N
         btnDicom.setMnemonic('T');
-        btnDicom.setText("Tampilkan DICOM");
+        btnDicom.setText("Tampilkan");
         btnDicom.setToolTipText("Alt+T");
         btnDicom.setName("btnDicom"); // NOI18N
-        btnDicom.setPreferredSize(new java.awt.Dimension(150, 30));
+        btnDicom.setPreferredSize(new java.awt.Dimension(110, 30));
         btnDicom.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDicomActionPerformed(evt);
             }
         });
         panelGlass7.add(btnDicom);
+
+        btnUploud.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/2276087_document_extension_format_jpg_paper_icon.png"))); // NOI18N
+        btnUploud.setMnemonic('T');
+        btnUploud.setText("Uploud Photo");
+        btnUploud.setToolTipText("Alt+T");
+        btnUploud.setName("btnUploud"); // NOI18N
+        btnUploud.setPreferredSize(new java.awt.Dimension(127, 30));
+        btnUploud.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUploudActionPerformed(evt);
+            }
+        });
+        panelGlass7.add(btnUploud);
 
         btnDicomRouter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/picture/save-16x16.png"))); // NOI18N
         btnDicomRouter.setMnemonic('T');
@@ -1812,11 +1831,13 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
             if(Kd2.getText().equals("")){
                 JOptionPane.showMessageDialog(null,"Maaf, silahkan pilih data terlebih dahulu...!!!!");
             }else{
-                if (akses.getpermintaan_radiologi() && !Sequel.CariPetugas(akses.getkode()).isBlank()) {
-                    Sequel.mengupdateSmc("permintaan_radiologi", "diagnosa_klinis = ?", "no_rawat = ? and tgl_hasil = ? and jam_hasil = ?",
+                if (akses.getpermintaan_radiologi() && !Sequel.CariPetugas(akses.getkode()).isBlank() && !DiagnosisKlinis.getText().isBlank()) {
+                    if (!Sequel.mengupdatetfSmc("permintaan_radiologi", "diagnosa_klinis = ?", "no_rawat = ? and tgl_hasil = ? and jam_hasil = ?",
                         DiagnosisKlinis.getText().trim(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 0).toString(),
                         tbDokter.getValueAt(tbDokter.getSelectedRow(), 3).toString(), tbDokter.getValueAt(tbDokter.getSelectedRow(), 4).toString()
-                    );
+                    )) {
+                        JOptionPane.showMessageDialog(null, "Tidak dapat mengubah diagnosa klinis,\nKemungkinan permintaan radiologi tidak ada..!!");
+                    }
                 }
                 if(HasilPeriksa.getText().equals("")){
                     Sequel.queryu2("delete from hasil_radiologi where no_rawat=? and tgl_periksa=? and jam=?",3,new String[]{
@@ -2227,6 +2248,52 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
         }
     }//GEN-LAST:event_btnDicomRouterActionPerformed
 
+    private void btnUploudActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUploudActionPerformed
+        if(tabModeDicom.getRowCount()==0){
+            JOptionPane.showMessageDialog(null,"Maaf, data sudah habis...!!!!");
+            TCari.requestFocus();
+        }else {
+            if(tbListDicom.getSelectedRow()!= -1){
+                this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
+                Sequel.queryu2("delete from gambar_radiologi where no_rawat=? and tgl_periksa=? and jam=?",3,new String[]{NoRawatDicari.getText(),TglDicari.getText(),JamDicari.getText()});
+                ApiOrthanc orthanc=new ApiOrthanc();
+                orthanc.AmbilJpg2(tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString());
+                try {
+                    CloseableHttpClient httpClient = HttpClients.createDefault();
+                    HttpPost post = new HttpPost("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/pages/upload/service.php");
+                    System.out.println("http://"+koneksiDB.HOSTHYBRIDWEB()+":"+koneksiDB.PORTWEB()+"/"+koneksiDB.HYBRIDWEB()+"/radiologi/pages/upload/service.php");
+                    post.setHeader("Content-Type", "application/json");
+                    post.addHeader("username", koneksiDB.USERHYBRIDWEB());
+                    post.addHeader("password", koneksiDB.PASHYBRIDWEB());
+                    File f = new File("./gambarradiologi/"+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+".jpg");
+                    byte[] fileContent = Files.readAllBytes(f.toPath());
+                    String json="{" +
+                                    "\"file\":\""+Base64.getEncoder().encodeToString(fileContent)+"\"," +
+                                    "\"namafile\":\""+tbListDicom.getValueAt(tbListDicom.getSelectedRow(),2).toString()+".jpg\"," +
+                                    "\"norawat\":\""+NoRawatDicari.getText()+"\"," +
+                                    "\"tanggal\":\""+TglDicari.getText()+"\"," +
+                                    "\"jam\":\""+JamDicari.getText()+"\"" +
+                                "}";
+                    post.setEntity(new StringEntity(json));
+                    try (CloseableHttpResponse response = httpClient.execute(post)) {
+                        json=EntityUtils.toString(response.getEntity());
+                        root = mapper.readTree(json);
+                        JOptionPane.showMessageDialog(null,root.path("metadata").path("message").asText());
+                    } catch (IOException a) {
+                        System.out.println("Notifikasi : " + a);
+                        JOptionPane.showMessageDialog(null,""+a);
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notifikasi : " + e);
+                    JOptionPane.showMessageDialog(null,""+e);
+                }
+                this.setCursor(Cursor.getDefaultCursor());
+            }else{
+                JOptionPane.showMessageDialog(null,"Maaf, Silahkan pilih data..!!");
+            }
+        }
+    }//GEN-LAST:event_btnUploudActionPerformed
+
     private void tbDokterMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tbDokterMouseReleased
         if(tabMode.getRowCount()!=0){
             int row = tbDokter.rowAtPoint(evt.getPoint());
@@ -2237,6 +2304,10 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
                     isPhoto();
                     panggilPhoto();
                     tampilOrthanc();
+                    DiagnosisKlinis.setEditable(Sequel.cariExistsSmc(
+                        "select * from permintaan_radiologi where permintaan_radiologi.no_rawat = ? and permintaan_radiologi.tgl_hasil = ? and permintaan_radiologi.jam_hasil = ?",
+                        tbDokter.getValueAt(row, 0).toString(), tbDokter.getValueAt(row, 3).toString(), tbDokter.getValueAt(row, 4).toString()
+                    ));
                 } catch (java.lang.NullPointerException e) {
                 }
             }
@@ -2319,6 +2390,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     private widget.Button btnPasien;
     private widget.Button btnPetugas;
     private widget.Button btnPetugas1;
+    private widget.Button btnUploud;
     private widget.InternalFrame internalFrame1;
     private widget.InternalFrame internalFrame5;
     private widget.Label jLabel12;

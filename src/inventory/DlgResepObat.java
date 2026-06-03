@@ -1354,7 +1354,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
             }
             this.setCursor(Cursor.getDefaultCursor());
         }
-    }//GEN-LAST:event_BtnPrintActionPerformed
+}//GEN-LAST:event_BtnPrintActionPerformed
 
     private void BtnPrintKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnPrintKeyPressed
         if(evt.getKeyCode()==KeyEvent.VK_SPACE){
@@ -2820,8 +2820,7 @@ public final class DlgResepObat extends javax.swing.JDialog {
 
     private void autoresep2() {
         if(ChkRM.isSelected()==true){
-            Valid.autoNomer3("select ifnull(MAX(CONVERT(RIGHT(resep_obat.no_resep,4),signed)),0) from resep_obat where resep_obat.tgl_peresepan='"+Valid.SetTgl(DTPBeri.getSelectedItem()+"")+"' or resep_obat.tgl_perawatan='"+Valid.SetTgl(DTPBeri.getSelectedItem()+"")+"'",
-                DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),4,NoResep);
+            Valid.autoNomer7(NoResep.getText().substring(NoResep.getText().length()-4),DTPBeri.getSelectedItem().toString().substring(6,10)+DTPBeri.getSelectedItem().toString().substring(3,5)+DTPBeri.getSelectedItem().toString().substring(0,2),4,NoResep);
         }
     }
 

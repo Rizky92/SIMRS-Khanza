@@ -965,6 +965,11 @@ public final class DlgKunjunganRanap extends javax.swing.JDialog {
             @Override
             public void windowDeactivated(WindowEvent e) {}
         });
+        kamar.isCek();
+        kamar.setSize(internalFrame1.getWidth()-20,internalFrame1.getHeight()-20);
+        kamar.setLocationRelativeTo(internalFrame1);
+        kamar.setAlwaysOnTop(false);
+        kamar.setVisible(true);
     }//GEN-LAST:event_BtnSeek2ActionPerformed
 
     private void BtnSeek2KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnSeek2KeyPressed

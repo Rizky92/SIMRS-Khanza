@@ -469,7 +469,7 @@ public class DapurCariHibah extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void BtnKeluarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnKeluarActionPerformed
-            dispose();
+        dispose();
     }//GEN-LAST:event_BtnKeluarActionPerformed
 
     private void BtnKeluarKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_BtnKeluarKeyPressed
@@ -734,79 +734,79 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     }//GEN-LAST:event_BtnPrintKeyPressed
 
     private void ppHapusActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ppHapusActionPerformed
-    if(tbDokter.getSelectedRow()>-1){
-        if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
-            Valid.textKosong(TCari,"No.Faktur");
+        if(tbDokter.getSelectedRow()>-1){
+            if(tbDokter.getValueAt(tbDokter.getSelectedRow(),0).toString().trim().equals("")){
+                Valid.textKosong(TCari,"No.Faktur");
+            }else{
+            try {
+                pscaribeli=koneksi.prepareStatement("select no_hibah,totalhibah,tgl_hibah from dapur_hibah where no_hibah=?");
+                try {
+                    pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
+                    rs=pscaribeli.executeQuery();
+                    if(rs.next()){
+                        Sequel.AutoComitFalse();
+                        sukses=true;
+
+                        ps2=koneksi.prepareStatement("select kode_brng,jumlah from dapur_detail_hibah where no_hibah=? ");
+                        try {
+                            ps2.setString(1,rs.getString(1));
+                            rs2=ps2.executeQuery();
+                            while(rs2.next()){
+                                Trackbarang.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah"),"Hibah", akses.getkode(),"Hapus");
+                                Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok-?",2,new String[]{
+                                        rs2.getString("jumlah"),rs2.getString("kode_brng")
+                                });
+                            }
+                        } catch (Exception e) {
+                            System.out.println("Notif : "+e);
+                        } finally{
+                            if(rs2!=null){
+                                rs2.close();
+                            }
+                            if(ps2!=null){
+                                ps2.close();
+                            }
+                        }
+
+                        Sequel.deleteTampJurnal();
+                        if(Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Dapur from set_akun2"), "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("totalhibah"))==false){
+                            sukses=false;
+                        }
+                        if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Dapur from set_akun2"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0)==false){
+                            sukses=false;
+                        }
+                        if(sukses==true){
+                            sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG DAPUR, OLEH "+akses.getkode());
+                        }
+
+                        if(sukses==true){
+                            Sequel.queryu2("delete from dapur_hibah where no_hibah=?",1,new String[]{rs.getString("no_hibah")});
+                            Sequel.Commit();
+                            runBackground(() ->tampil());
+                        }else{
+                            JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
+                            Sequel.RollBack();
+                        }
+
+                        Sequel.AutoComitTrue();
+                    }
+                } catch (Exception e) {
+                    System.out.println("Notif : "+e);
+                } finally{
+                    if(rs!=null){
+                        rs.close();
+                    }
+                    if(pscaribeli!=null){
+                        pscaribeli.close();
+                    }
+                }
+            } catch (Exception ex) {
+                System.out.println(ex);
+            }
+            }
         }else{
-           try {
-               pscaribeli=koneksi.prepareStatement("select no_hibah,totalhibah,tgl_hibah from dapur_hibah where no_hibah=?");
-               try {
-                  pscaribeli.setString(1,tbDokter.getValueAt(tbDokter.getSelectedRow(),1).toString());
-                  rs=pscaribeli.executeQuery();
-                  if(rs.next()){
-                      Sequel.AutoComitFalse();
-                      sukses=true;
-
-                      ps2=koneksi.prepareStatement("select kode_brng,jumlah from dapur_detail_hibah where no_hibah=? ");
-                      try {
-                          ps2.setString(1,rs.getString(1));
-                          rs2=ps2.executeQuery();
-                          while(rs2.next()){
-                              Trackbarang.catatRiwayat(rs2.getString("kode_brng"),0,rs2.getDouble("jumlah"),"Hibah", akses.getkode(),"Hapus");
-                              Sequel.mengedit("dapurbarang","kode_brng=?","stok=stok-?",2,new String[]{
-                                     rs2.getString("jumlah"),rs2.getString("kode_brng")
-                              });
-                          }
-                      } catch (Exception e) {
-                          System.out.println("Notif : "+e);
-                      } finally{
-                          if(rs2!=null){
-                              rs2.close();
-                          }
-                          if(ps2!=null){
-                              ps2.close();
-                          }
-                      }
-
-                      Sequel.deleteTampJurnal();
-                      if(Sequel.insertTampJurnal(Sequel.cariIsi("select Hibah_Dapur from set_akun2"), "PERSEDIAAN BARANG DAPUR", 0, rs.getDouble("totalhibah"))==false){
-                          sukses=false;
-                      }
-                      if(Sequel.insertTampJurnal(Sequel.cariIsi("select Kontra_Hibah_Dapur from set_akun2"), "PENDAPATAN HIBAH", rs.getDouble("totalhibah"), 0)==false){
-                          sukses=false;
-                      }
-                      if(sukses==true){
-                          sukses=jur.simpanJurnal(NoFaktur.getText(),"U","PEMBATALAN HIBAH BARANG DAPUR, OLEH "+akses.getkode());
-                      }
-
-                      if(sukses==true){
-                          Sequel.queryu2("delete from dapur_hibah where no_hibah=?",1,new String[]{rs.getString("no_hibah")});
-                          Sequel.Commit();
-                          runBackground(() ->tampil());
-                      }else{
-                          JOptionPane.showMessageDialog(null,"Terjadi kesalahan saat pemrosesan data, transaksi dibatalkan.\nPeriksa kembali data sebelum melanjutkan menyimpan..!!");
-                          Sequel.RollBack();
-                      }
-
-                      Sequel.AutoComitTrue();
-                  }
-               } catch (Exception e) {
-                   System.out.println("Notif : "+e);
-               } finally{
-                   if(rs!=null){
-                       rs.close();
-                   }
-                   if(pscaribeli!=null){
-                       pscaribeli.close();
-                   }
-               }
-           } catch (Exception ex) {
-               System.out.println(ex);
-           }
+            JOptionPane.showMessageDialog(null,"Silahkan pilih hibah yang mau dihapus..!");
         }
-    }else{
-        JOptionPane.showMessageDialog(null,"Silahkan pilih hibah yang mau dihapus..!");
-    }
     }//GEN-LAST:event_ppHapusActionPerformed
 
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
@@ -891,7 +891,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-       Valid.tabelKosong(tabMode);
+        Valid.tabelKosong(tabMode);
         try{
             ps=koneksi.prepareStatement("select dapur_hibah.tgl_hibah,dapur_hibah.no_hibah, "+
                     "dapur_hibah.kode_pemberi,pemberihibah.nama_pemberi, "+

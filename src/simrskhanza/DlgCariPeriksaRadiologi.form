@@ -193,18 +193,12 @@
     <Component class="widget.TextBox" name="Umur">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="Umur" noResource="true"/>
       </Properties>
     </Component>
     <Component class="widget.TextBox" name="Alamat">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="Alamat" noResource="true"/>
       </Properties>
     </Component>
@@ -334,9 +328,6 @@
                 <Component class="widget.TextBox" name="NmDokterPj">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NmDokterPj" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -384,9 +375,6 @@
                 <Component class="widget.TextBox" name="NmPerujuk">
                   <Properties>
                     <Property name="editable" type="boolean" value="false"/>
-                    <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="null"/>
-                    </Property>
                     <Property name="name" type="java.lang.String" value="NmPerujuk" noResource="true"/>
                   </Properties>
                   <Constraints>
@@ -481,9 +469,6 @@
     <Component class="widget.TextBox" name="Petugas">
       <Properties>
         <Property name="editable" type="boolean" value="false"/>
-        <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-          <ComponentRef name="null"/>
-        </Property>
         <Property name="name" type="java.lang.String" value="Petugas" noResource="true"/>
       </Properties>
     </Component>
@@ -510,7 +495,7 @@
     <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
     <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
     <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
-    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-67,0,0,3,-127"/>
+    <AuxValue name="designerSize" type="java.awt.Dimension" value="-84,-19,0,5,115,114,0,18,106,97,118,97,46,97,119,116,46,68,105,109,101,110,115,105,111,110,65,-114,-39,-41,-84,95,68,20,2,0,2,73,0,6,104,101,105,103,104,116,73,0,5,119,105,100,116,104,120,112,0,0,2,-67,0,0,3,55"/>
   </AuxValues>
 
   <Layout class="org.netbeans.modules.form.compat2.layouts.DesignBorderLayout"/>
@@ -959,7 +944,7 @@
             </Property>
             <Property name="name" type="java.lang.String" value="PanelAccor" noResource="true"/>
             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-              <Dimension value="[445, 43]"/>
+              <Dimension value="[545, 43]"/>
             </Property>
           </Properties>
           <Constraints>
@@ -1303,9 +1288,6 @@
                         <Component class="widget.TextBox" name="InformasiTambahan">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="InformasiTambahan" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1339,9 +1321,6 @@
                         <Component class="widget.TextBox" name="DiagnosisKlinis">
                           <Properties>
                             <Property name="editable" type="boolean" value="false"/>
-                            <Property name="highlighter" type="javax.swing.text.Highlighter" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                              <ComponentRef name="null"/>
-                            </Property>
                             <Property name="name" type="java.lang.String" value="DiagnosisKlinis" noResource="true"/>
                           </Properties>
                           <Constraints>
@@ -1435,15 +1414,32 @@
                               <Image iconType="3" name="/picture/item.png"/>
                             </Property>
                             <Property name="mnemonic" type="int" value="84"/>
-                            <Property name="text" type="java.lang.String" value="Tampilkan DICOM"/>
+                            <Property name="text" type="java.lang.String" value="Tampilkan"/>
                             <Property name="toolTipText" type="java.lang.String" value="Alt+T"/>
                             <Property name="name" type="java.lang.String" value="btnDicom" noResource="true"/>
                             <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
-                              <Dimension value="[150, 30]"/>
+                              <Dimension value="[110, 30]"/>
                             </Property>
                           </Properties>
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDicomActionPerformed"/>
+                          </Events>
+                        </Component>
+                        <Component class="widget.Button" name="btnUploud">
+                          <Properties>
+                            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                              <Image iconType="3" name="/picture/2276087_document_extension_format_jpg_paper_icon.png"/>
+                            </Property>
+                            <Property name="mnemonic" type="int" value="84"/>
+                            <Property name="text" type="java.lang.String" value="Uploud Photo"/>
+                            <Property name="toolTipText" type="java.lang.String" value="Alt+T"/>
+                            <Property name="name" type="java.lang.String" value="btnUploud" noResource="true"/>
+                            <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
+                              <Dimension value="[127, 30]"/>
+                            </Property>
+                          </Properties>
+                          <Events>
+                            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUploudActionPerformed"/>
                           </Events>
                         </Component>
                         <Component class="widget.Button" name="btnDicomRouter">

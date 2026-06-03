@@ -679,7 +679,7 @@ public class DapurRingkasanPengadaanBarang extends javax.swing.JDialog {
 /*
 private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKeyPressed
     Valid.pindah(evt,BtnCari,Nm);
-    }//GEN-LAST:event_TKdKeyPressed
+}//GEN-LAST:event_TKdKeyPressed
 */
 
     private void btnSuplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSuplierActionPerformed
@@ -1078,7 +1078,7 @@ private void KdKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_TKdKey
     // End of variables declaration//GEN-END:variables
 
     private void tampil() {
-       Valid.tabelKosong(tabMode);
+        Valid.tabelKosong(tabMode);
         try{
             tagihan=0;
             ps=koneksi.prepareStatement("select dapurdetailbeli.kode_brng,dapurbarang.nama_brng,dapurbarang.jenis as namajenis, "+

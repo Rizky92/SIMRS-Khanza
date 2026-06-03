@@ -44,6 +44,9 @@
                 @$status_lanjut= $baris["status_lanjut"];
                 @$png_jawab    = $baris["png_jawab"];
 
+                $dokumen       = "";
+                $urlDetail     = "?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks($no_rawat)."\"}","e");
+
                 echo "<input type=hidden name=no_rawat  value=$no_rawat>
                       <input type=hidden name=action value=$action>";
             ?>
@@ -57,7 +60,7 @@
                     <td width="25%" valign="top">No.RM</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top"><?php echo $no_rkm_medis;?></td>
                 </tr>
-		        <tr class="isi2">
+		<tr class="isi2">
                     <td width="25%" valign="top">Nama Pasien</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top"><?php echo $nm_pasien.", ".$umurdaftar." ".$sttsumur;?></td>
                 </tr>
@@ -65,10 +68,14 @@
                     <td width="25%" valign="top">Berkas Digital</td><td width="" valign="top">:</td>
                     <td width="75%" valign="top">
                         <select name="kode" class="text2" onkeydown="setDefault(this, document.getElementById('MsgIsi1'));" id="TxtIsi1">
-                            <?php $hasil = bukaquery('select master_berkas_digital.kode, master_berkas_digital.nama from master_berkas_digital order by master_berkas_digital.nama'); ?>
-                            <?php while ($baris = mysqli_fetch_array($hasil)): ?>
-                                <option value="<?= $baris[0] ?>" <?= $baris[0] === $kodeberkas ? 'selected' : '' ?>><?= $baris[1] ?></option>
-                            <?php endwhile;?>
+                            <?php
+                                $_sql = "SELECT master_berkas_digital.kode,master_berkas_digital.nama FROM master_berkas_digital ORDER BY master_berkas_digital.nama";
+                                $hasil=bukaquery($_sql);
+
+                                while($baris = mysqli_fetch_array($hasil)) {
+                                    echo "<option id='TxtIsi1' value='$baris[0]'>$baris[1]</option>";
+                                }
+                            ?>
                         </select>
                         <span id="MsgIsi1" style="color:#CC0000; font-size:10px;"></span>
                     </td>
@@ -81,6 +88,7 @@
             </table>
             </div>
             <div align="center">
+
                 <input name="BtnSimpan" type="submit" style="padding: 0.5rem 1rem; font-family: Tahoma; font-size: 0.75rem; font-weight: 500; cursor: pointer" value="SIMPAN">
                 <span>&nbsp;</span>
                 <input name="BtnKosong" type="reset" style="padding: 0.5rem 1rem; font-family: Tahoma; font-size: 0.75rem; cursor: pointer"  value="Reset">
@@ -97,14 +105,17 @@
                                 if ((!empty($no_rawat))&&(!empty($kode))&&(!empty($dokumen))) {
                                     switch($action) {
                                         case "TAMBAH":
-                                            if(Tambah(" berkas_digital_perawatan "," '$no_rawat','$kode','$dokumen'", " Berkas Digital Perawatan " )){
-                                                move_uploaded_file($_FILES['dokumen']['tmp_name'],$dokumen);
+                                            try {
+                                                if(Tambah3(" berkas_digital_perawatan "," '$no_rawat','$kode','$dokumen' "," Berkas Digital Perawatan ")){
+                                                    move_uploaded_file($_FILES['dokumen']['tmp_name'],$dokumen);
+                                                }
+                                                echo "<meta http-equiv='refresh' content='1;URL=$urlDetail'>";
+                                            } catch(mysqli_sql_exception $e) {
+                                                if($e->getCode()==1062)
+                                                    echo "<b style='color:red'>Data berkas digital sudah ada..!!!</b>";
+                                                else
+                                                    echo "<b style='color:red'>Gagal menyimpan</b>";
                                             }
-                                            echo"<meta http-equiv='refresh' content='1;URL=?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt(json_encode([
-                                                'no_rawat' => validTeks($no_rawat),
-                                                'noexit' => $noexit,
-                                                'kodeberkas' => validTeks($kodeberkas),
-                                            ]), "e")."'>";
                                             break;
                                     }
                                 }else if ((empty($no_rawat))||(empty($kode))||(empty($dokumen))){
@@ -164,21 +175,23 @@
         </div>
         <?php
             if ($action=="HAPUS") {
-                unlink($norawat["lokasi_file"]);
-                Hapus(" berkas_digital_perawatan "," no_rawat ='".validTeks($norawat["no_rawat"])."' and kode ='".validTeks($norawat["kode"])."' and lokasi_file='".validTeks($norawat["lokasi_file"])."' ","?act=Detail2&action=TAMBAH&iyem=".encrypt_decrypt("{\"no_rawat\":\"".validTeks($no_rawat)."\"}","e"));
+                try {
+                    unlink($norawat["lokasi_file"]);
+                    Hapus(" berkas_digital_perawatan "," no_rawat ='".validTeks($norawat["no_rawat"])."' and kode ='".validTeks($norawat["kode"])."' and lokasi_file='".validTeks($norawat["lokasi_file"])."' ",$urlDetail);
+                } catch(mysqli_sql_exception $e) {
+                    echo "<b style='color:red'>Gagal menghapus</b>";
+                }
             }
 
-            if ($noexit !== '1') {
-                echo <<<HTML
-                    <table width="99.6%" border="0" align="center" cellpadding="0" cellspacing="0" class="tbl_form">
-                        <tr class="head">
-                            <td><div align="left">Data : $jumlah</div></td>
-                            <td>
-                                <a href="?act=List&action=Keluar" class="button">&nbsp;&nbsp;&nbsp;Keluar&nbsp;&nbsp;&nbsp;</a>
-                            </td>
-                        </tr>
-                    </table>
-                HTML;
+            echo("<table width='99.6%' border='0' align='center' cellpadding='0' cellspacing='0' class='tbl_form'>
+                    <tr class='head'>
+                        <td><div align='left'>Data : $jumlah</div></td><td><input name='BtnKeluar' type='submit' class='button' value='&nbsp;&nbsp;&nbsp;Keluar&nbsp;&nbsp;&nbsp;' /></td>
+                    </tr>
+                 </table>");
+
+            $BtnKeluar=isset($_POST['BtnKeluar'])?$_POST['BtnKeluar']:NULL;
+            if (isset($BtnKeluar)) {
+                echo"<meta http-equiv='refresh' content='1;URL=?act=List&action=Keluar'>";
             }
         ?>
         </form>

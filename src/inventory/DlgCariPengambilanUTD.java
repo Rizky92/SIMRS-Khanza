@@ -486,48 +486,48 @@ public final class DlgCariPengambilanUTD extends javax.swing.JDialog {
         }else {
             this.setCursor(Cursor.getPredefinedCursor(Cursor.WAIT_CURSOR));
             try {
-                    try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
-                        bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
-                        bw.flush();
-                    }
-                    String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
-                    switch (pilihan) {
-                        case "Laporan 1 (HTML)":
-                            Valid.exportHtmlSmc("PengambilanUTD.html", "Transaksi Pengambilan BHP Medis UTD", tbKamar);
-                            break;
-                        case "Laporan 2 (WPS)":
-                            Valid.exportWPSSmc("PengambilanUTD.wps", "Transaksi Pengambilan BHP Medis UTD", tbKamar);
-                            break;
-                        case "Laporan 3 (CSV)":
-                            Valid.exportCSVSmc("PengambilanUTD.csv", tbKamar);
-                            break;
-                        case "Laporan 4 (XLSX)":
-                            Valid.exportXlsxSmc("PengambilanUTD.xlsx", tbKamar);
-                            break;
-                        case "Laporan 5 (Jasper)":
-                            Map<String, Object> param = new HashMap<>();
-                            param.put("namars",akses.getnamars());
-                            param.put("alamatrs",akses.getalamatrs());
-                            param.put("kotars",akses.getkabupatenrs());
-                            param.put("propinsirs",akses.getpropinsirs());
-                            param.put("kontakrs",akses.getkontakrs());
-                            param.put("emailrs",akses.getemailrs());
-                            param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
-                            Valid.MyReportqry("rptPengambilanUTD.jasper","report","::[ Transaksi Pengambilan BHP Medis UTD ]::",
-                                    "select utd_pengambilan_medis.kode_brng,databarang.nama_brng,utd_pengambilan_medis.jml,utd_pengambilan_medis.hargabeli,"+
-                                    "utd_pengambilan_medis.total,utd_pengambilan_medis.kd_bangsal_dr,bangsal.nm_bangsal,utd_pengambilan_medis.tanggal,"+
-                                    "utd_pengambilan_medis.keterangan,databarang.kode_sat from utd_pengambilan_medis inner join databarang inner join bangsal "+
-                                    "on utd_pengambilan_medis.kode_brng=databarang.kode_brng and utd_pengambilan_medis.kd_bangsal_dr=bangsal.kd_bangsal "+
-                                    "where utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_medis.kode_brng like '%"+TCari.getText().trim()+"%' or "+
-                                    "utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
-                                    "utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_medis.kd_bangsal_dr like '%"+TCari.getText().trim()+"%' or "+
-                                    "utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and bangsal.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
-                                    "utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_medis.keterangan like '%"+TCari.getText().trim()+"%' order by utd_pengambilan_medis.tanggal",param);
-                            break;
-                    }
-                } catch (Exception e) {
-                    System.out.println("Notifikasi : "+e);
+                try (BufferedWriter bw = new BufferedWriter(new FileWriter(new File("file2.css")))) {
+                    bw.write(".isi td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.head td{border-right: 1px solid #777777;font: 8.5px tahoma;height:10px;border-bottom: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi a{text-decoration:none;color:#8b9b95;padding:0 0 0 0px;font-family: Tahoma;font-size: 8.5px;}.isi2 td{font: 8.5px tahoma;height:12px;background: #ffffff;color:#323232;}.isi3 td{border-right: 1px solid #e2e7dd;font: 8.5px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}.isi4 td{font: 11px tahoma;height:12px;border-top: 1px solid #e2e7dd;background: #ffffff;color:#323232;}");
+                    bw.flush();
                 }
+                String pilihan = (String) JOptionPane.showInputDialog(null, "Silahkan pilih laporan..!", "Pilihan Cetak", JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Laporan 1 (HTML)", "Laporan 2 (WPS)", "Laporan 3 (CSV)", "Laporan 4 (XLSX)", "Laporan 5 (Jasper)"}, "Laporan 5 (Jasper)");
+                switch (pilihan) {
+                    case "Laporan 1 (HTML)":
+                        Valid.exportHtmlSmc("PengambilanUTD.html", "Transaksi Pengambilan BHP Medis UTD", tbKamar);
+                        break;
+                    case "Laporan 2 (WPS)":
+                        Valid.exportWPSSmc("PengambilanUTD.wps", "Transaksi Pengambilan BHP Medis UTD", tbKamar);
+                        break;
+                    case "Laporan 3 (CSV)":
+                        Valid.exportCSVSmc("PengambilanUTD.csv", tbKamar);
+                        break;
+                    case "Laporan 4 (XLSX)":
+                        Valid.exportXlsxSmc("PengambilanUTD.xlsx", tbKamar);
+                        break;
+                    case "Laporan 5 (Jasper)":
+                        Map<String, Object> param = new HashMap<>();
+                        param.put("namars",akses.getnamars());
+                        param.put("alamatrs",akses.getalamatrs());
+                        param.put("kotars",akses.getkabupatenrs());
+                        param.put("propinsirs",akses.getpropinsirs());
+                        param.put("kontakrs",akses.getkontakrs());
+                        param.put("emailrs",akses.getemailrs());
+                        param.put("logo",Sequel.cariGambar("select setting.logo from setting"));
+                        Valid.MyReportqry("rptPengambilanUTD.jasper","report","::[ Transaksi Pengambilan BHP Medis UTD ]::",
+                                "select utd_pengambilan_medis.kode_brng,databarang.nama_brng,utd_pengambilan_medis.jml,utd_pengambilan_medis.hargabeli,"+
+                                "utd_pengambilan_medis.total,utd_pengambilan_medis.kd_bangsal_dr,bangsal.nm_bangsal,utd_pengambilan_medis.tanggal,"+
+                                "utd_pengambilan_medis.keterangan,databarang.kode_sat from utd_pengambilan_medis inner join databarang inner join bangsal "+
+                                "on utd_pengambilan_medis.kode_brng=databarang.kode_brng and utd_pengambilan_medis.kd_bangsal_dr=bangsal.kd_bangsal "+
+                                "where utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_medis.kode_brng like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and databarang.nama_brng like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_medis.kd_bangsal_dr like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and bangsal.nm_bangsal like '%"+TCari.getText().trim()+"%' or "+
+                                "utd_pengambilan_medis.tanggal between '"+Valid.SetTgl(DTPCari1.getSelectedItem()+"")+" 00:00:00' and '"+Valid.SetTgl(DTPCari2.getSelectedItem()+"")+" 23:59:59' and utd_pengambilan_medis.keterangan like '%"+TCari.getText().trim()+"%' order by utd_pengambilan_medis.tanggal",param);
+                        break;
+                }
+            } catch (Exception e) {
+                System.out.println("Notifikasi : "+e);
+            }
             this.setCursor(Cursor.getDefaultCursor());
         }
     }//GEN-LAST:event_BtnCetakActionPerformed

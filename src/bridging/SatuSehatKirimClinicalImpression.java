@@ -678,7 +678,7 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                         }
                     } catch (HttpClientErrorException | HttpServerErrorException e) {
                         System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    } catch (Exception e) {
+                    }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
@@ -773,7 +773,7 @@ public final class SatuSehatKirimClinicalImpression extends javax.swing.JDialog 
                         tbObat.setValueAt(false,i,0);
                     } catch (HttpClientErrorException | HttpServerErrorException e) {
                         System.out.println("ERROR JSON : " + e.getResponseBodyAsString());
-                    } catch (Exception e) {
+                    }catch(Exception e){
                         System.out.println("Notifikasi Bridging : "+e);
                     }
                 } catch (Exception e) {
