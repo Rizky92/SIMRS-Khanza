@@ -191,7 +191,6 @@ public final class INACBGDataPersalinanIbuSMC extends javax.swing.JDialog {
         Scroll.setName("Scroll"); // NOI18N
         Scroll.setOpaque(true);
 
-        tbKelahiran.setAutoCreateColumnsFromModel(false);
         tbKelahiran.setToolTipText("Silahkan klik untuk memilih data yang mau diedit ataupun dihapus");
         tbKelahiran.setName("tbKelahiran"); // NOI18N
         tbKelahiran.addMouseListener(new java.awt.event.MouseAdapter() {
